@@ -41,11 +41,19 @@ Version History
 (all .cmd files are available for download and remarks added to script to explain how it works)
 
 -Updated notes in script on updated naming systems via NMS Next updates on july 24, 2018. Other tags also updated for NEXT for wiki.
+
 -This is just version 1.0 and i hope to add in a planet and ship template option and also a multitool one later this month.
+
 -Updated version 2.0: added Planet template (see preview below, be sure to download v2 file)
+
 -Updated version 3.0: added Ship template (see preview below, be sure to download v3 file)
+
 -Updated version 4.0 (7/21/17) reworked advanced tables in the star system template for planets in system; much more readable on mobile devices and easier to edit on wiki source!
+
 -Updated version 5.0 (7/23/17) reworked flora and fauna tables in planet template to be friendlier looking on mobile browsers. probably last update for a while unless requests/bugs in script are found. :)
+
 -NOTE: v6.0 is up (8/6/17)!  Very minor updates to tables based on some feedback from gamepedia admins on some changes. Close as I can get to making mobile browser friendly for now. Enjoy!
+
 -v7.0 is live and updated for the Atlas Rises 1.30+ updates and new Hub templates! 8/20/17 
+
 -v7a has been updated w/the new gamepedia version tags to mark if atlas rising based template vs legacy/pre 1.30 (9/4/2017)
