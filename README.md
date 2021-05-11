@@ -28,7 +28,7 @@ Example of gamepedia outputs found here:
     Fauna page
 
 
-NOTES: 
+# NOTES: 
 
 -some escapable characters may cause funkiness in formatting, the pipe command def does cause issues but i think i've fixed this in v4.0
 -once variables are entered, notepad is called to open the text file that gets saved to your desktop. you should be able to then create a new gamepedia wiki page and just insert this code to have a very quick initial wiki page.  
@@ -37,7 +37,7 @@ NOTES:
 -text file are created on your desktop and then opened in notepad once created
 
 
-Version History
+# Version History
 (all .cmd files are available for download and remarks added to script to explain how it works)
 
 -Updated notes in script on updated naming systems via NMS Next updates on july 24, 2018. Other tags also updated for NEXT for wiki.
