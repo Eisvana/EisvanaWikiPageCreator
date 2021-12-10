@@ -1,0 +1,49 @@
+{{Version|Frontiers}}
+{{GHub Eissentam}}
+{{Starship infobox
+| name = Iobay Singer V
+| image = INSERT FRONT VIEW IMAGE
+| galaxy = Euclid
+| region = Riwala
+| system = HUB1-1 Tepper
+| planet = Albafungia
+| coordinates = 0000:1234:8764:0012
+| type = Explorer
+| class = S
+| inventory = Small
+| slots = 12
+| damage = 23
+| shield = 12
+| warp = 1
+| pilot = Sosiyiski
+| cost = 99999 Units
+| discoveredlink = Lenni009
+| discovered = {{reddit|Lenni009|Lenni}}
+| release = Frontiers
+}} 
+'''Iobay Singer V''' is a starship.
+ 
+==Summary== 
+'''Iobay Singer V''' is a [[Starship Catalogue - Explorer|Explorer]]-type [[starship]] in the [[No Man's Sky]] [[universe]].
+
+if Explorer==Exotic OR Explorer==Living Ship (This starship always spawns in S-class.) ELSE (This starship has a 0/1/2 chance to spawn in S-class.)
+
+==Appearance==
+Describe Appearance
+
+==Stats==
+{{LivingShipStats}}
+{{ExoticShipStats}}
+{{ShuttleShipStats}}
+{{FighterShipStats}}
+{{HaulerShipStats}}
+{{ExplorerShipStats}}
+
+==Location== 
+This starship was discovered in the [[HUB1-1 Tepper]] [[star system]] in the [[Riwala]] [[region]] (HUBx) of the [[Galactic Hub Eissentam]], in the [[Eissentam]] [[galaxy]]. 
+
+It can be found at either the [[Space Station]] or any [[Trade Outpost]]s available in the star system. 
+==Additional information== 
+Featured in the [[Galactic Hub Eissentam Starship Catalog - Explorer]] album and documented by the [[Galactic Hub Ship Hunters]]. 
+
+==Gallery== 
