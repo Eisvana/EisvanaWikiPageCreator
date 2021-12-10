@@ -5,10 +5,10 @@ REM creates text files of wiki source for systems or bases
 REM Initial build: 7/18/17
 REM Version 8.0, 8/17/2018
 REM Star, Planet, Base and Ship templates
-REM Modified based on gamepedia mods sugggestions. 
+REM Modified based on fandom mods sugggestions. 
 REM Mobile tables implemented for star system, planet table
 REM also updated flora and fauna tables for mobiles. 
-REM Format updates per gamepedia admins. 
+REM Format updates per fandom admins. 
 REM Updated for NEXT version w/updated system and planet templates
 REM -----------------------------------------------------
 
@@ -23,7 +23,8 @@ ECHO 1 Star System
 ECHO 2 Planet
 ECHO 3 Base
 ECHO 4 Starship
-ECHO 5 Creature
+ECHO 5 Multi-tool
+ECHO 6 Creature
 ECHO.
 ECHO 9 Exit Menu
 ECHO _________________________________________
@@ -35,7 +36,8 @@ if %wikiType% == 1 GOTO STARSYSTEM
 if %wikiType% == 2 GOTO PLANET
 if %wikiType% == 3 GOTO BASE
 if %wikiType% == 4 GOTO SHIP
-if %wikiType% == 5 GOTO FAUNA
+if %wikiType% == 5 GOTO TOOL
+if %wikiType% == 6 GOTO FAUNA
 if %wikiType% == 9 GOTO EXITMENU
 CLS
 
@@ -229,7 +231,7 @@ GOTO MAIN
 :PLANET
 ECHO This script will ask you several questions about a planet
 ECHO and then create sourcetext for a wiki page over at:
-ECHO https://nomanssky.gamepedia.com
+ECHO https://nomanssky.fandom.com
 ECHO.
 ECHO NOTE: Photos will need to be uploaded at wiki and linked in source. 
 ECHO.
@@ -296,9 +298,9 @@ ECHO INSERT PLANET SUMMARY HERE. INFO ABOUT, NAME INSPIRATION, LANDMARKS/PORTALS
 ECHO. >> %userprofile%\Desktop\GeneratedPlanet.txt
 
 ECHO ==Resources==>> %userprofile%\Desktop\GeneratedPlanet.txt
-ECHO * “Form” refers to, for example: crystal form, resource deposit form, Pedestal Form ^(Vortex Cube^), “Stem” Form ^(Gravitino Balls^), etc* “Form” refers to, for example: crystal form, resource deposit form, Pedestal Form ^(Vortex Cube^), “Stem” Form ^(Gravitino Balls^), etc>> %userprofile%\Desktop\GeneratedPlanet.txt
-ECHO * “Rarity” refers to how often the resource appears on the planet, and is just an estimate ^(there’s no in-game value to measure it by^).>> %userprofile%\Desktop\GeneratedPlanet.txt
-ECHO * “Standard resources like [[Carbon]], [[Condensed Carbon]], [[Sodium]], etc. may be included or omitted at the editor’s discretion.>> %userprofile%\Desktop\GeneratedPlanet.txt
+ECHO * "Form" refers to, for example: crystal form, resource deposit form, Pedestal Form ^(Vortex Cube^), "Stem" Form ^(Gravitino Balls^), etc* "Form" refers to, for example: crystal form, resource deposit form, Pedestal Form ^(Vortex Cube^), “Stem” Form ^(Gravitino Balls^), etc>> %userprofile%\Desktop\GeneratedPlanet.txt
+ECHO * "Rarity" refers to how often the resource appears on the planet, and is just an estimate ^(there's no in-game value to measure it by^).>> %userprofile%\Desktop\GeneratedPlanet.txt
+ECHO * "Standard resources like [[Carbon]], [[Condensed Carbon]], [[Sodium]], etc. may be included or omitted at the editor's discretion.>> %userprofile%\Desktop\GeneratedPlanet.txt
 
 ECHO {^| class="wikitable">> %userprofile%\Desktop\GeneratedPlanet.txt
 ECHO ^^! style="background-color:#1A211E;"^|Image ^^!^^! style="background-color:#384640;"^|Resource ^^!^^! style="background-color:#384640;"^|Form ^^!^^! style="background-color:#384640;"^|Rarity>> %userprofile%\Desktop\GeneratedPlanet.txt
@@ -411,7 +413,7 @@ GOTO MAIN
 ECHO.
 ECHO This script will ask you several questions about your base
 ECHO and then create sourcetext for a wiki page over at:
-ECHO https://nomanssky.gamepedia.com
+ECHO https://nomanssky.fandom.com
 ECHO.
 ECHO NOTE: Photos will need to be uploaded at wiki and linked in source. 
 ECHO.
@@ -541,8 +543,8 @@ cls
 ECHO -----------------------------------------------------------
 ECHO.
 ECHO --SHIP TEMPLATE SCRIPT--
+SET /P "version=Enter current version: "
 SET /P "wikiTypeShipName=Enter Original ship name: "
-SET /P "wikiTypeGalaxy=Enter Galaxy (Euclid, Hilbert, Calypso, Budullangr, Eissentam): "
 SET /P "wikiTypeRegion=Enter Galactic region where ship was found/purchased: "
 SET /P "wikiTypeSystemName=Enter System name where ship Was found/purchased: "
 SET /P "wikiTypePlanet=Enter Planet name where ship was found/purchased: "
@@ -560,14 +562,190 @@ SET /P "wikiTypeDiscoveredlink=Discovered by wiki name (will automatically conve
 SET /P "wikiTypeDiscovered=Discovered by name or userid (templates supported): "
 SET LS=Living Ship
 
+
+2>NUL CALL :REGION_%wikiTypeRegion%
+IF ERRORLEVEL 1 CALL :DEFAULT_CASE
+
+:REGION_Riwala
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB1)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Omskio Instability
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB2)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Marcki
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB3)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Anolamga Spur
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB4)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Sea of Zonyayp
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB5)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Rayuyar Band
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB6)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Umaton Instability
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB7)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Exramb Adjunct
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB8)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Ologowe Fringe
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB9)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Yatrifex
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB10)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Yeiada Sector
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB11)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+		
+:REGION_Iptrevs Fringe
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB12)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+
+:REGION_Yamiraith Sector
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB13)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Wedragi Spur
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB14)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Rezhensk
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB15)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Sobert Cloud
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB16)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Umtats Anomaly
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB17)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Tavill
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB18)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Qangew Expanse
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB19)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Nijhwal Boundary
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB20)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Usband Cluster
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB21)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+
+:REGION_Ejongaa Anomaly
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB22)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Zahrel Expanse
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB23)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_The Arm of Fupand
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB24)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Cuculta
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB25)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Etmarao
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB26)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Otreie Void
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB27)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:DEFAULT_CASE
+	SET HUB=GHub
+	SET Num=Huburb
+	SET wikiTypeGalaxy=Euclid
+	GOTO END_CASE
+:END_CASE
+  VER > NUL # reset ERRORLEVEL
+REM  GOTO :EOF # return from CALL
+
 REM Checking system name code for bad characters
 ECHO .!wikiTypeBasePlanet!.
 ECHO strip quotes: .!wikiTypePlanet:"=!.
 ECHO .!wikiTypeSystemName!.
 ECHO strip quotes: .!wikiTypeSystemName:"=!.
 
-ECHO {{Version^|Frontiers}}> !wikiTypeShipName!.txt
-ECHO {{GHub Eissentam}}>> !wikiTypeShipName!.txt
+ECHO {{Version^|!version!}}> !wikiTypeShipName!.txt
+if %HUB%==GHub (ECHO {{GHub}}) ELSE (if %HUB%==EHUB (ECHO {{GHub Eissentam}}) ELSE (if %HUB%==CHUB (ECHO {{GHub Calypso}})))>> !wikiTypeShipName!.txt
 ECHO {{Starship infobox>> "!wikiTypeShipName!.txt"
 ECHO ^| name = !wikiTypeShipName!>> "!wikiTypeShipName!.txt"
 ECHO ^| image = INSERT FRONT VIEW IMAGE>> "!wikiTypeShipName!.txt"
@@ -593,7 +771,7 @@ ECHO ^| civilized = >> "!wikiTypeShipName!.txt"
 ECHO ^| researchteam = >> "!wikiTypeShipName!.txt"
 ECHO ^| discoveredlink = !wikiTypeDiscoveredlink!>> "!wikiTypeShipName!.txt"
 ECHO ^| discovered = !wikiTypeDiscovered!>> "!wikiTypeShipName!.txt"
-ECHO ^| release = Frontiers>> "!wikiTypeShipName!.txt"
+ECHO ^| release = !version!>> "!wikiTypeShipName!.txt"
 ECHO }} >> "!wikiTypeShipName!.txt"
 ECHO '''!wikiTypeShipName!''' is a starship.>> "!wikiTypeShipName!.txt"
 ECHO. >> "!wikiTypeShipName!.txt"
@@ -618,7 +796,7 @@ if !wikiTypeType!==Explorer ECHO {{ExplorerShipStats}}>> "!wikiTypeShipName!.txt
 ECHO.>> "!wikiTypeShipName!.txt"
 
 ECHO ==Location== >> "!wikiTypeShipName!.txt"
-ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[star system]] in the [[!wikiTypeRegion!]] [[region]] (HUBx) of the [[Galactic Hub Eissentam]], in the [[Eissentam]] [[galaxy]]. >> "!wikiTypeShipName!.txt"
+ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[star system]] in the [[!wikiTypeRegion!]] %Num% of the [[Galactic Hub Eissentam]], in the [[Eissentam]] [[galaxy]]. >> "!wikiTypeShipName!.txt"
 ECHO.>> "!wikiTypeShipName!.txt"
 ECHO It can be found at either the [[Space Station]] or any [[Trade Outpost]]s available in the star system. >> "!wikiTypeShipName!.txt"
 ECHO.>> "!wikiTypeShipName!.txt"
@@ -658,7 +836,7 @@ GOTO MAIN
 ECHO.
 ECHO This script will ask you several questions about a fauna/animal
 ECHO and then create sourcetext for a wiki page over at:
-ECHO https://nomanssky.gamepedia.com
+ECHO https://nomanssky.fandom.com
 ECHO.
 ECHO NOTE: Photos will need to be uploaded at wiki and linked in source. 
 ECHO.
