@@ -1,5 +1,5 @@
 @echo off
-
+GOTO :MAIN
 REM seamonkey420's wiki template generator script
 REM creates text files of wiki source for systems or bases
 REM Initial build: 7/18/17
@@ -11,6 +11,182 @@ REM also updated flora and fauna tables for mobiles.
 REM Format updates per fandom admins. 
 REM Updated for NEXT version w/updated system and planet templates
 REM -----------------------------------------------------
+
+:REGION_Riwala
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB1)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Omskio Instability
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB2)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Marcki
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB3)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Anolamga Spur
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB4)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Sea of Zonyayp
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB5)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Rayuyar Band
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB6)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Umaton Instability
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB7)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Exramb Adjunct
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB8)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Ologowe Fringe
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB9)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Yatrifex
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB10)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Yeiada Sector
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB11)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+		
+:REGION_Iptrevs Fringe
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB12)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Yamiraith Sector
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB13)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Wedragi Spur
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB14)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Rezhensk
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB15)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Sobert Cloud
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB16)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Umtats Anomaly
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB17)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Tavill
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB18)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Qangew Expanse
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB19)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Nijhwal Boundary
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB20)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Usband Cluster
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB21)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+
+:REGION_Ejongaa Anomaly
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB22)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Zahrel Expanse
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB23)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_The Arm of Fupand
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB24)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Cuculta
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB25)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Etmarao
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB26)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:REGION_Otreie Void
+	SET HUB=EHUB
+	SET Num=[[region]] (HUB27)
+	SET wikiTypeGalaxy=Eissentam
+	GOTO END_CASE
+	
+:DEFAULT_CASE
+	SET HUB=GHub
+	SET Num=Huburb
+	SET wikiTypeGalaxy=Euclid
+	GOTO END_CASE
+:END_CASE
+  VER > NUL # reset ERRORLEVEL
+  if %wikiType% == 1 GOTO STARSYSTEMcont # return from CALL
+  if %wikiType% == 2 GOTO PLANETcont # return from CALL
+  if %wikiType% == 3 GOTO BASEcont # return from CALL
+  if %wikiType% == 4 GOTO SHIPcont # return from CALL
+  if %wikiType% == 5 GOTO TOOLcont # return from CALL
+  if %wikiType% == 6 GOTO FAUNAcont # return from CALL
 
 :MAIN
 ECHO _________________________________________
@@ -69,6 +245,10 @@ SET /P "wikiTypeDiscoveredlink=Enter Discover name/id: "
 SET /P "wikiTypeDiscovered=Enter Discover name/id: "
 SET /P "wikiGameMode=Game Mode Played (normal creative survival permadeath): "
 
+2>NUL CALL :REGION_%wikiTypeRegion%
+IF ERRORLEVEL 1 CALL :DEFAULT_CASE
+
+:STARSYSTEMcont
 REM Checking system name code for bad characters
 ECHO .!wikiTypeSystemName!.
 ECHO strip quotes: .!wikiTypeSystemName:"=!.
@@ -263,6 +443,10 @@ SET /P "wikiTypeDiscoveredBy=Enter discoverer name/id: "
 SET /P "wikiTypeMode=Game Mode (normal survival permadeath creative)?: "
 SET /P "wikiTypePlayedOn=Enter PC PS4 XBox: "
 
+2>NUL CALL :REGION_%wikiTypeRegion%
+IF ERRORLEVEL 1 CALL :DEFAULT_CASE
+
+:PLANETcont
 REM Checking planet  and system name code for bad characters
 ECHO .!wikiTypePlanetName!.
 ECHO strip quotes: .!wikiTypePlanetName:"=!.
@@ -438,6 +622,11 @@ SET /P wikiTypeGeoBay=Geobay Type (Colossus Roamer Nomad or none):
 SET /P "wikiTypeBuilder=Enter builder name/id: "
 SET /P wikiTypeMode=Game Mode (normal survival permadeath creative)?: 
 SET /P wikiTypePlayedOn=Enter PC PS4 XBox: 
+
+2>NUL CALL :REGION_%wikiTypeRegion%
+IF ERRORLEVEL 1 CALL :DEFAULT_CASE
+
+:BASEcont
 REM Checking system name code for bad characters
 REM Replacing text to meet wiki standards for landing pads
 ECHO .!wikiTypeBaseName!.
@@ -458,6 +647,7 @@ if "%wikiTypeLandingPadNum%" GEQ "2" (
 set /a wikiTypeLanding=%wikiTypeLandingPadNum%
 goto MOVEON
 )
+
 
 :MOVEON
 ECHO {{Version^|NEXT}}> %userprofile%\Desktop\GeneratedBase.txt
@@ -562,182 +752,10 @@ SET /P "wikiTypeDiscoveredlink=Discovered by wiki name (will automatically conve
 SET /P "wikiTypeDiscovered=Discovered by name or userid (templates supported): "
 SET LS=Living Ship
 
-
 2>NUL CALL :REGION_%wikiTypeRegion%
 IF ERRORLEVEL 1 CALL :DEFAULT_CASE
 
-:REGION_Riwala
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB1)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Omskio Instability
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB2)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Marcki
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB3)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Anolamga Spur
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB4)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Sea of Zonyayp
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB5)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Rayuyar Band
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB6)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Umaton Instability
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB7)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Exramb Adjunct
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB8)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Ologowe Fringe
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB9)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Yatrifex
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB10)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Yeiada Sector
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB11)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-		
-:REGION_Iptrevs Fringe
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB12)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-
-:REGION_Yamiraith Sector
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB13)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Wedragi Spur
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB14)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Rezhensk
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB15)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Sobert Cloud
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB16)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Umtats Anomaly
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB17)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Tavill
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB18)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Qangew Expanse
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB19)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Nijhwal Boundary
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB20)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Usband Cluster
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB21)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-
-:REGION_Ejongaa Anomaly
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB22)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Zahrel Expanse
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB23)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_The Arm of Fupand
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB24)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Cuculta
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB25)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Etmarao
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB26)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:REGION_Otreie Void
-	SET HUB=EHUB
-	SET Num=[[region]] (HUB27)
-	SET wikiTypeGalaxy=Eissentam
-	GOTO END_CASE
-	
-:DEFAULT_CASE
-	SET HUB=GHub
-	SET Num=Huburb
-	SET wikiTypeGalaxy=Euclid
-	GOTO END_CASE
-:END_CASE
-  VER > NUL # reset ERRORLEVEL
-REM  GOTO :EOF # return from CALL
-
+:SHIPcont
 REM Checking system name code for bad characters
 ECHO .!wikiTypeBasePlanet!.
 ECHO strip quotes: .!wikiTypePlanet:"=!.
@@ -858,6 +876,10 @@ SET /P "wikiTypeTemperament=Enter fauna temperament: "
 SET /P "wikiTypeDiet=Enter fauna diet: "
 SET /P "wikiTypeDiscovered=Discovered by name or userid (ie seamonkey420): "
 
+2>NUL CALL :REGION_%wikiTypeRegion%
+IF ERRORLEVEL 1 CALL :DEFAULT_CASE
+
+:FAUNAcont
 REM Checking code for bad characters
 ECHO .!wikiTypeGenus!.
 ECHO strip quotes: .!wikiTypeGenus:"=!.
