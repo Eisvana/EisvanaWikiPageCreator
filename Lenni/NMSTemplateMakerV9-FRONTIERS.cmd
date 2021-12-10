@@ -1,5 +1,5 @@
 @echo off
-GOTO :MAIN
+GOTO MAIN
 REM seamonkey420's wiki template generator script
 REM creates text files of wiki source for systems or bases
 REM Initial build: 7/18/17
@@ -403,9 +403,9 @@ ECHO [[Category:Star systems]]>> %userprofile%\Desktop\GeneratedStarSystem.txt
 ECHO [[Category:NEXT]]>> %userprofile%\Desktop\GeneratedStarSystem.txt
 endlocal
 
-start "" notepad.exe "%userprofile%\Desktop\GeneratedStarSystem.txt"
-CLS
-GOTO MAIN
+rem start "" notepad.exe "%userprofile%\Desktop\GeneratedStarSystem.txt"
+GOTO EXITMENU
+
 
 
 :PLANET
@@ -587,9 +587,8 @@ ECHO [[Category:NEXT]]>> %userprofile%\Desktop\GeneratedPlanet.txt
 
 endlocal
 
-start "" notepad.exe "%userprofile%\Desktop\GeneratedPlanet.txt"
-CLS
-GOTO MAIN
+rem start "" notepad.exe "%userprofile%\Desktop\GeneratedPlanet.txt"
+GOTO EXITMENU
 
 
 
@@ -715,9 +714,9 @@ ECHO [[Category:!wikiTypeBaseName!]]  >> %userprofile%\Desktop\GeneratedBase.txt
 ECHO [[Category:!wikiTypeSystemName!]]  >> %userprofile%\Desktop\GeneratedBase.txt
 
 endlocal
-start "" notepad.exe "%userprofile%\Desktop\GeneratedBase.txt"
-CLS
-GOTO MAIN
+rem start "" notepad.exe "%userprofile%\Desktop\GeneratedBase.txt"
+GOTO EXITMENU
+
 
 :SHIP
 ECHO.
@@ -814,7 +813,10 @@ if !wikiTypeType!==Explorer ECHO {{ExplorerShipStats}}>> "!wikiTypeShipName!.txt
 ECHO.>> "!wikiTypeShipName!.txt"
 
 ECHO ==Location== >> "!wikiTypeShipName!.txt"
-ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[star system]] in the [[!wikiTypeRegion!]] %Num% of the [[Galactic Hub Eissentam]], in the [[Eissentam]] [[galaxy]]. >> "!wikiTypeShipName!.txt"
+if %HUB%==GHub if %Num%==Huburb ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[star system]] in the [[!wikiTypeRegion!]] [[region]], %Num% of the [[Galactic Hub]]. >> "!wikiTypeShipName!.txt"
+if %HUB%==GHub if NOT %Num%==Huburb ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[star system]] in the [[!wikiTypeRegion!]] %Num% of the [[Galactic Hub]]. >> "!wikiTypeShipName!.txt"
+if %HUB%==CHUB ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[star system]] in the [[!wikiTypeRegion!]] %Num% of the [[Galactic Hub Calypso]], in the [[Calypso]] [[galaxy]]. >> "!wikiTypeShipName!.txt"
+if %HUB%==EHUB ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[Star system]] in the [[!wikiTypeRegion!]] [[region]] %Num% of the [[Galactic Hub Eissentam]], in the [[Eissentam]] [[galaxy]]. >> "!wikiTypeShipName!.txt"
 ECHO.>> "!wikiTypeShipName!.txt"
 ECHO It can be found at either the [[Space Station]] or any [[Trade Outpost]]s available in the star system. >> "!wikiTypeShipName!.txt"
 ECHO.>> "!wikiTypeShipName!.txt"
@@ -840,15 +842,15 @@ if !wikiTypeType!==Explorer ECHO * [[Explorer Parts Catalogue]] >> "!wikiTypeShi
 if !wikiTypeType!==Fighter ECHO * [[Fighter Parts Catalogue]] >> "!wikiTypeShipName!.txt"
 if !wikiTypeType!==Hauler ECHO * [[Hauler Parts Catalogue]] >> "!wikiTypeShipName!.txt"
 if !wikiTypeType!==Shuttle ECHO * [[Shuttle Parts Catalogue]] >> "!wikiTypeShipName!.txt"
-ECHO * [[Starship#Starship_Archetypes^|Inventory/Tech slot tables]] >> "!wikiTypeShipName!.txt"
+if !wikiTypeType!==Freighter (ECHO * [[Freighter#Varieties^|Freighter Inventory Table]]) ELSE (ECHO * [[Starship#Starship_Archetypes^|Inventory/Tech slot tables]]) >> "!wikiTypeShipName!.txt"
 ECHO * [[Economy#Economy_Strength^|Economy wealth]] >> "!wikiTypeShipName!.txt"
 ECHO * [[Price Catalogue - Starship]] >> "!wikiTypeShipName!.txt"
 
 
 endlocal
 rem start "" "C:\Program Files\Notepad++\notepad++.exe" "%wikiTypeShipName%.txt"
-CLS
-GOTO MAIN
+GOTO EXITMENU
+
 
 :FAUNA
 ECHO.
@@ -920,10 +922,7 @@ ECHO [[Category: Galactic Hub Project]]>> %userprofile%\Desktop\GeneratedFauna.t
 ECHO [[Category: NEXT]]>> %userprofile%\Desktop\GeneratedFauna.txt
 
 endlocal
-start "" notepad.exe "%userprofile%\Desktop\GeneratedFauna.txt"
-CLS
-GOTO MAIN
-
+rem start "" notepad.exe "%userprofile%\Desktop\GeneratedFauna.txt"
 
 :EXITMENU
 ECHO Thanks for using^^! seamonkey420
