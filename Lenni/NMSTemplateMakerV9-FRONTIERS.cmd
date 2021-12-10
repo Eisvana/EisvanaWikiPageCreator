@@ -558,7 +558,7 @@ SET /P "wikiTypePilot=Name of trader who ship was purchased from: "
 SET /P "wikiTypeCost=Ship cost in unites: "
 SET /P "wikiTypeDiscoveredlink=Discovered by wiki name (will automatically convert to profile link): "
 SET /P "wikiTypeDiscovered=Discovered by name or userid (templates supported): "
-
+SET LS=Living Ship
 
 REM Checking system name code for bad characters
 ECHO .!wikiTypeBasePlanet!.
@@ -595,7 +595,7 @@ ECHO. >> "!wikiTypeShipName!.txt"
 ECHO ==Summary== >> "!wikiTypeShipName!.txt"
 ECHO '''!wikiTypeShipName!''' is a [[Starship Catalogue - !wikiTypeType!^|!wikiTypeType!]]-type [[starship]] in the [[No Man's Sky]] [[universe]].>> "!wikiTypeShipName!.txt"
 ECHO.>> "!wikiTypeShipName!.txt"
-if !wikiTypeType!==Exotic OR !wikiTypeType!==Living^Ship ECHO (This starship always spawns in S-class.) ELSE  ECHO (This starship has a 0/1/2% chance to spawn in S-class.)>> "!wikiTypeShipName!.txt"
+if !wikiTypeType!==Exotic (ECHO This starship always spawns in S-class.) ELSE (if "!wikiTypeType!"=="Living Ship" (ECHO This starship always spawns in S-class.) ELSE (ECHO This starship has a 0/1/2% chance to spawn in S-class.))>> "!wikiTypeShipName!.txt"
 ECHO.>> "!wikiTypeShipName!.txt"
 
 ECHO ==Appearance==>> "!wikiTypeShipName!.txt"
@@ -603,7 +603,7 @@ ECHO Describe Appearance>> "!wikiTypeShipName!.txt"
 ECHO.>> "!wikiTypeShipName!.txt"
 
 ECHO ==Stats==>> "!wikiTypeShipName!.txt"
-if !wikiTypeType!==Living^Ship ECHO {{LivingShipStats}}>> "!wikiTypeShipName!.txt"
+if "!wikiTypeType!"=="Living Ship" ECHO {{LivingShipStats}}>> "!wikiTypeShipName!.txt"
 if !wikiTypeType!==Exotic ECHO {{ExoticShipStats}}>> "!wikiTypeShipName!.txt"
 if !wikiTypeType!==Shuttle ECHO {{ShuttleShipStats}}>> "!wikiTypeShipName!.txt"
 if !wikiTypeType!==Fighter ECHO {{FighterShipStats}}>> "!wikiTypeShipName!.txt"
@@ -632,19 +632,19 @@ ECHO ^</gallery^> >> "!wikiTypeShipName!.txt"
 ECHO.>> "!wikiTypeShipName!.txt"
 
 ECHO ==Reference links== >> "!wikiTypeShipName!.txt"
-if !wikiTypeType!==Living^Ship ECHO * [[Living Ship (Starship)#Part Names|Living Ship Parts Catalogue]] >> "!wikiTypeShipName!.txt"
+if "!wikiTypeType!"=="Living Ship" ECHO * [[Living Ship (Starship)#Part Names^|Living Ship Parts Catalogue]] >> "!wikiTypeShipName!.txt"
 if !wikiTypeType!==Exotic ECHO * [https://www.reddit.com/r/NMSCoordinateExchange/comments/k2srjr/exotic_parts_naming_conventions_and_part_combo/ Exotic Parts Catalogue] >> "!wikiTypeShipName!.txt"
 if !wikiTypeType!==Explorer ECHO * [[Explorer Parts Catalogue]] >> "!wikiTypeShipName!.txt"
 if !wikiTypeType!==Fighter ECHO * [[Fighter Parts Catalogue]] >> "!wikiTypeShipName!.txt"
 if !wikiTypeType!==Hauler ECHO * [[Hauler Parts Catalogue]] >> "!wikiTypeShipName!.txt"
 if !wikiTypeType!==Shuttle ECHO * [[Shuttle Parts Catalogue]] >> "!wikiTypeShipName!.txt"
-ECHO * [[Starship#Starship_Archetypes|Inventory/Tech slot tables]] >> "!wikiTypeShipName!.txt"
-ECHO * [[Economy#Economy_Strength|Economy wealth]] >> "!wikiTypeShipName!.txt"
+ECHO * [[Starship#Starship_Archetypes^|Inventory/Tech slot tables]] >> "!wikiTypeShipName!.txt"
+ECHO * [[Economy#Economy_Strength^|Economy wealth]] >> "!wikiTypeShipName!.txt"
 ECHO * [[Price Catalogue - Starship]] >> "!wikiTypeShipName!.txt"
 
 
 endlocal
-start "" notepad.exe "!wikiTypeShipName!.txt"
+rem start "" "C:\Program Files\Notepad++\notepad++.exe" "%wikiTypeShipName%.txt"
 CLS
 GOTO MAIN
 

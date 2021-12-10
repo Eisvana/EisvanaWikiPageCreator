@@ -3,47 +3,51 @@
 {{Starship infobox
 | name = Iobay Singer V
 | image = INSERT FRONT VIEW IMAGE
-| galaxy = Euclid
+| galaxy = Eissentam
 | region = Riwala
 | system = HUB1-1 Tepper
 | planet = Albafungia
-| coordinates = 0000:1234:8764:0012
-| type = Explorer
-| class = S
-| inventory = Small
-| slots = 12
-| damage = 23
-| shield = 12
-| warp = 1
-| pilot = Sosiyiski
-| cost = 99999 Units
-| discoveredlink = Lenni009
+| coordinates = 0000:0000:0000:0010
+| type = Fighter
+| class = 
+| inventory = Medium
+| slots = 15-20
+| damage = 
+| shield = 
+| warp = 
+| pilot = 
+| cost = 12-15
+| discoveredlink = 
 | discovered = {{reddit|Lenni009|Lenni}}
 | release = Frontiers
 }} 
 '''Iobay Singer V''' is a starship.
  
 ==Summary== 
-'''Iobay Singer V''' is a [[Starship Catalogue - Explorer|Explorer]]-type [[starship]] in the [[No Man's Sky]] [[universe]].
+'''Iobay Singer V''' is a [[Starship Catalogue - Fighter|Fighter]]-type [[starship]] in the [[No Man's Sky]] [[universe]].
 
-if Explorer==Exotic OR Explorer==Living Ship (This starship always spawns in S-class.) ELSE (This starship has a 0/1/2 chance to spawn in S-class.)
+This starship has a 0/1/2 chance to spawn in S-class.
 
 ==Appearance==
 Describe Appearance
 
 ==Stats==
-{{LivingShipStats}}
-{{ExoticShipStats}}
-{{ShuttleShipStats}}
 {{FighterShipStats}}
-{{HaulerShipStats}}
-{{ExplorerShipStats}}
 
 ==Location== 
 This starship was discovered in the [[HUB1-1 Tepper]] [[star system]] in the [[Riwala]] [[region]] (HUBx) of the [[Galactic Hub Eissentam]], in the [[Eissentam]] [[galaxy]]. 
 
 It can be found at either the [[Space Station]] or any [[Trade Outpost]]s available in the star system. 
+
 ==Additional information== 
-Featured in the [[Galactic Hub Eissentam Starship Catalog - Explorer]] album and documented by the [[Galactic Hub Ship Hunters]]. 
+Featured in the [[Galactic Hub Eissentam Starship Catalog - Fighter]] album and documented by the [[Galactic Hub Ship Hunters]]. 
 
 ==Gallery== 
+<gallery> 
+</gallery> 
+
+==Reference links== 
+* [[Fighter Parts Catalogue]] 
+* [[Starship#Starship_Archetypes|Inventory/Tech slot tables]] 
+* [[Economy#Economy_Strength|Economy wealth]] 
+* [[Price Catalogue - Starship]] 
