@@ -813,8 +813,8 @@ if !wikiTypeType!==Explorer ECHO {{ExplorerShipStats}}>> "!wikiTypeShipName!.txt
 ECHO.>> "!wikiTypeShipName!.txt"
 
 ECHO ==Location== >> "!wikiTypeShipName!.txt"
-if %HUB%==GHub if %Num%==Huburb ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[star system]] in the [[!wikiTypeRegion!]] [[region]], %Num% of the [[Galactic Hub]]. >> "!wikiTypeShipName!.txt"
-if %HUB%==GHub if NOT %Num%==Huburb ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[star system]] in the [[!wikiTypeRegion!]] %Num% of the [[Galactic Hub]]. >> "!wikiTypeShipName!.txt"
+if %HUB%==GHUB if %Num%==Huburb ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[star system]] in the [[!wikiTypeRegion!]] [[region]], %Num% of the [[Galactic Hub]]. >> "!wikiTypeShipName!.txt"
+if %HUB%==GHUB if NOT %Num%==Huburb ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[star system]] in the [[!wikiTypeRegion!]] %Num% of the [[Galactic Hub]]. >> "!wikiTypeShipName!.txt"
 if %HUB%==CHUB ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[star system]] in the [[!wikiTypeRegion!]] %Num% of the [[Galactic Hub Calypso]], in the [[Calypso]] [[galaxy]]. >> "!wikiTypeShipName!.txt"
 if %HUB%==EHUB ECHO This starship was discovered in the [[!wikiTypeSystemName!]] [[Star system]] in the [[!wikiTypeRegion!]] [[region]] %Num% of the [[Galactic Hub Eissentam]], in the [[Eissentam]] [[galaxy]]. >> "!wikiTypeShipName!.txt"
 ECHO.>> "!wikiTypeShipName!.txt"
