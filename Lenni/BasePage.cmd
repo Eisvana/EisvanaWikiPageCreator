@@ -695,15 +695,15 @@ ECHO '''!wikiTypeBaseName!''' is a [[Habitable Base^|player base]] located on [[
 ECHO.  >> .\!wikiTypeBaseName!.txt
 
 ECHO ===Layout===  >> .\!wikiTypeBaseName!.txt
-ECHO !BaseLayout!  >> .\!wikiTypeBaseName!.txt
+if not "%BaseLayout%"=="" ECHO !BaseLayout!  >> .\!wikiTypeBaseName!.txt
 ECHO.  >> .\!wikiTypeBaseName!.txt
 
 ECHO ==Features==  >> .\!wikiTypeBaseName!.txt
-ECHO !BaseFeatures!	>> .\!wikiTypeBaseName!.txt
+if not "%BaseFeatures%"=="" ECHO !BaseFeatures!	>> .\!wikiTypeBaseName!.txt
 ECHO.  >> .\!wikiTypeBaseName!.txt
 
 ECHO ==Additional information==  >> .\!wikiTypeBaseName!.txt
-ECHO !AdditionalInformation!  >> .\!wikiTypeBaseName!.txt
+if not "%AdditionalInformation%"=="" ECHO !AdditionalInformation!  >> .\!wikiTypeBaseName!.txt
 ECHO.  >> .\!wikiTypeBaseName!.txt
 
 ECHO ==Gallery==  >> .\!wikiTypeBaseName!.txt
