@@ -4,12 +4,18 @@
   <meta charset="UTF-8">
   <script language="JavaScript">
     function showInput() {
-        document.getElementById('version').innerHTML = 
+        document.getElementById('release').innerHTML = 
                     document.getElementById("version_input").value;
+					
         document.getElementById('civStub').innerHTML = 
                     document.getElementById("civStub_input").value;
+					
         document.getElementById('base').innerHTML = 
                     document.getElementById("baseName_input").value;
+					
+        document.getElementById('name').innerHTML = 
+                    document.getElementById("baseName_input").value;
+					
     }
   </script>
 
@@ -25,7 +31,29 @@
 			<option value="GHub">GHub</option>
 			<option value="GHub Calypso">CalHub</option>
 			<option value="GHub Eissentam">EisHub</option>
-		</select> 	
+		</select>
+		
+		<label><b>Enter the name of the base:</b></label>
+		<input type="text" name="Base" id="baseName_input">
+	
+		<label><b>Enter the name of the image, including file extension:</b></label>
+		<input type="text" name="Image" id="image_input">
+	
+		<label><b>Enter the name of the base:</b></label>
+		<input type="text" name="Base" id="baseName_input">
+	
+		<label><b>Enter the name of the base:</b></label>
+		<input type="text" name="Base" id="baseName_input">
+	
+		<label><b>Enter the name of the base:</b></label>
+		<input type="text" name="Base" id="baseName_input">
+	
+		<label><b>Enter the name of the base:</b></label>
+		<input type="text" name="Base" id="baseName_input">
+	
+		<label><b>Enter the name of the base:</b></label>
+		<input type="text" name="Base" id="baseName_input">
+	
 		<label><b>Enter the name of the base:</b></label>
 		<input type="text" name="Base" id="baseName_input">
 	
@@ -34,10 +62,62 @@
 	<input type="submit" onclick="showInput();"><br/>
 	<label>Your input: </label>
 	<p>
-		<div>{{Version|<span id='version'></span>}}</div>
+		<div>{{Version|<span id='release'></span>}}</div>
 		<div>{{<span id='civStub'></span>}}</div>
 		<div>{{Base infobox</div>
-		<div>| name = <span id='base'></span></div>
+		<div>| name = <span id='name'></span></div>
+		<div>| image = <span id='image'></span></div>
+		<div>| civilized = <span id='civ'></span></div>
+		<div>| builder = <span id='builder'></span></div>
+		<div>| builderlink = <span id='builderlink'></span></div>
+		<div>| galaxy = <span id='galaxy'></span></div>
+		<div>| region = <span id='region'></span></div>
+		<div>| system = <span id='system'></span></div>
+		<div>| planet = <span id='planet'></span></div>
+		<div>| moon = <span id='moon'></span></div>
+		<div>| axes = <span id='axes'></span></div>
+		<div>| coordinates = {{Glyphs2Coords|<span id='coordinates'></span>}}</div>
+		<div>| portalglyphs = {{Gl/Small|<span id='portalglyphs'></span>}}</div>
+		<div>| type = <span id='type'></span></div>
+		<div>| mode = <span id='mode'></span></div>
+		<div>| platform = <span id='platform'></span></div>
+		<div>| release = <span id='release'></span></div>
+		<div>| farm = <span id='farm'></span></div>
+		<div>| geobay = <span id='geobay'></span></div>
+		<div>| arena = <span id='arena'></span></div>
+		<div>| landingpad = <span id='landingpad'></span></div>
+		<div>| racetrack = <span id='racetrack'></span></div>
+		<div>| terminal = <span id='terminal'></span></div>
+		<div>| censusplayer = <span id='censusplayer'></span></div>
+		<div>| censusreddit = <span id='censusreddit'></span></div>
+		<div>| censusdiscord = <span id='censusdiscord'></span></div>
+		<div>| censusfriend = <span id='censusfriend'></span></div>
+		<div>| censusarrival = <span id='censusarrival'></span></div>
+		<div>| censusrenewal = <span id='censusrenewal'></span></div>
+		<div>| censusshow = Y</span></div>
+		<div>}}</div>
+		<div>'''<span id='base'></span>''' is a player base.</div>
+		<br>
+		
+		<div>==Summary==</div>
+		<div>'''<span id='base'></span>''' is a [[Habitable Base|player base]], located on the planet [[<span id='planet'></span>]] in the [[<span id='system'></span>]] system.</div>
+		<br>
+
+		<div>==Layout==</div>
+		<div><span id='layout'></span></div>
+		<br>
+		
+		<div>==Features==</div>
+		<div><span id='features'></span></div>
+		<br>
+
+		<div>==Additional information==</div>
+		<div><span id='addInfo'></span></div>
+		<br>
+
+		<div>==Gallery==</div>
+		<div><gallery></div>
+		<div></gallery></div>
 	</p>
 </body>
 </html>
