@@ -672,7 +672,7 @@ ECHO ^| portalglyphs = {{Gl/Small^|!wikiTypeGlyphs!}}>> .\!wikiTypeBaseName!.txt
 ECHO ^| type = !wikiTypeBaseType!>> .\!wikiTypeBaseName!.txt
 ECHO ^| mode = !wikiTypeMode!>> .\!wikiTypeBaseName!.txt
 ECHO ^| platform = !wikiTypePlayedOn!>> .\!wikiTypeBaseName!.txt
-ECHO ^| release= !Version!>> .\!wikiTypeBaseName!.txt
+ECHO ^| release = !Version!>> .\!wikiTypeBaseName!.txt
 ECHO ^| farm = !wikiTypeFarm!>> .\!wikiTypeBaseName!.txt
 ECHO ^| geobay = !wikiTypeGeoBay!>> .\!wikiTypeBaseName!.txt
 ECHO ^| arena = !wikiTypeArena!>> .\!wikiTypeBaseName!.txt
@@ -694,7 +694,7 @@ ECHO ==Summary== >> .\!wikiTypeBaseName!.txt
 ECHO '''!wikiTypeBaseName!''' is a [[Habitable Base^|player base]] located on [[!wikiTypeBasePlanet!]] in the [[!wikiTypeSystemName!]] system.	>> .\!wikiTypeBaseName!.txt
 ECHO.  >> .\!wikiTypeBaseName!.txt
 
-ECHO ===Layout===  >> .\!wikiTypeBaseName!.txt
+ECHO ==Layout==  >> .\!wikiTypeBaseName!.txt
 if not "%BaseLayout%"=="" ECHO !BaseLayout!  >> .\!wikiTypeBaseName!.txt
 ECHO.  >> .\!wikiTypeBaseName!.txt
 
