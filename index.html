@@ -1,123 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head lang="en">
-  <meta charset="UTF-8">
-  <script language="JavaScript">
-    function showInput() {
-        document.getElementById('release').innerHTML = 
-                    document.getElementById("version_input").value;
-					
-        document.getElementById('civStub').innerHTML = 
-                    document.getElementById("civStub_input").value;
-					
-        document.getElementById('base').innerHTML = 
-                    document.getElementById("baseName_input").value;
-					
-        document.getElementById('name').innerHTML = 
-                    document.getElementById("baseName_input").value;
-					
-    }
-  </script>
-
-  </head>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<style>
+		ul * {
+		  padding-top: 7px;
+		}
+		</style>
+	</head>
 <body>
-
-	<form>
-		<label><b>Enter the current release:</b></label>
-		<input type="text" name="Version" id="version_input">
-	
-		<label><b>Enter the civ macro:</b></label>
-		<select id="civStub_input" name="Civ Stub">
-			<option value="GHub">GHub</option>
-			<option value="GHub Calypso">CalHub</option>
-			<option value="GHub Eissentam">EisHub</option>
-		</select>
-		
-		<label><b>Enter the name of the base:</b></label>
-		<input type="text" name="Base" id="baseName_input">
-	
-		<label><b>Enter the name of the image, including file extension:</b></label>
-		<input type="text" name="Image" id="image_input">
-	
-		<label><b>Enter the name of the base:</b></label>
-		<input type="text" name="Base" id="baseName_input">
-	
-		<label><b>Enter the name of the base:</b></label>
-		<input type="text" name="Base" id="baseName_input">
-	
-		<label><b>Enter the name of the base:</b></label>
-		<input type="text" name="Base" id="baseName_input">
-	
-		<label><b>Enter the name of the base:</b></label>
-		<input type="text" name="Base" id="baseName_input">
-	
-		<label><b>Enter the name of the base:</b></label>
-		<input type="text" name="Base" id="baseName_input">
-	
-		<label><b>Enter the name of the base:</b></label>
-		<input type="text" name="Base" id="baseName_input">
-	
-	</form>
-
-	<input type="submit" onclick="showInput();"><br/>
-	<label>Your input: </label>
-	<p>
-		<div>{{Version|<span id='release'></span>}}</div>
-		<div>{{<span id='civStub'></span>}}</div>
-		<div>{{Base infobox</div>
-		<div>| name = <span id='name'></span></div>
-		<div>| image = <span id='image'></span></div>
-		<div>| civilized = <span id='civ'></span></div>
-		<div>| builder = <span id='builder'></span></div>
-		<div>| builderlink = <span id='builderlink'></span></div>
-		<div>| galaxy = <span id='galaxy'></span></div>
-		<div>| region = <span id='region'></span></div>
-		<div>| system = <span id='system'></span></div>
-		<div>| planet = <span id='planet'></span></div>
-		<div>| moon = <span id='moon'></span></div>
-		<div>| axes = <span id='axes'></span></div>
-		<div>| coordinates = {{Glyphs2Coords|<span id='coordinates'></span>}}</div>
-		<div>| portalglyphs = {{Gl/Small|<span id='portalglyphs'></span>}}</div>
-		<div>| type = <span id='type'></span></div>
-		<div>| mode = <span id='mode'></span></div>
-		<div>| platform = <span id='platform'></span></div>
-		<div>| release = <span id='release'></span></div>
-		<div>| farm = <span id='farm'></span></div>
-		<div>| geobay = <span id='geobay'></span></div>
-		<div>| arena = <span id='arena'></span></div>
-		<div>| landingpad = <span id='landingpad'></span></div>
-		<div>| racetrack = <span id='racetrack'></span></div>
-		<div>| terminal = <span id='terminal'></span></div>
-		<div>| censusplayer = <span id='censusplayer'></span></div>
-		<div>| censusreddit = <span id='censusreddit'></span></div>
-		<div>| censusdiscord = <span id='censusdiscord'></span></div>
-		<div>| censusfriend = <span id='censusfriend'></span></div>
-		<div>| censusarrival = <span id='censusarrival'></span></div>
-		<div>| censusrenewal = <span id='censusrenewal'></span></div>
-		<div>| censusshow = Y</span></div>
-		<div>}}</div>
-		<div>'''<span id='base'></span>''' is a player base.</div>
-		<br>
-		
-		<div>==Summary==</div>
-		<div>'''<span id='base'></span>''' is a [[Habitable Base|player base]], located on the planet [[<span id='planet'></span>]] in the [[<span id='system'></span>]] system.</div>
-		<br>
-
-		<div>==Layout==</div>
-		<div><span id='layout'></span></div>
-		<br>
-		
-		<div>==Features==</div>
-		<div><span id='features'></span></div>
-		<br>
-
-		<div>==Additional information==</div>
-		<div><span id='addInfo'></span></div>
-		<br>
-
-		<div>==Gallery==</div>
-		<div><gallery></div>
-		<div></gallery></div>
-	</p>
+	<h1>Hub Wiki Page Creator</h1>
+	<h2>Choose what page you want to create:</h2>
+	<ul>
+		<li><a href="./base.html" title="Base">Base</a>
+		<li><a href="./fauna.html" title="Fauna">Fauna</a>
+		<li><a href="./flora.html" title="Flora">Flora</a>
+		<li><a href="./mineral.html" title="Mineral">Mineral</a>
+		<li><a href="./moon.html" title="Moon">Moon</a>
+		<li><a href="./multitool.html" title="Multitool">Multitool</a>
+		<li><a href="./planet.html" title="Planet">Planet</a>
+		<li><a href="./starship.html" title="Starship">Starship</a>
+		<li><a href="./system.html" title="System">System</a>
+	</ul>
+	<p><small>Brought to you by the <a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes" title="Galactic Hub Eissentam Scribes">Galactic Hub Eissentam Scribes</a>.&nbsp;<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes"><img style="vertical-align:middle" src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/e/ea/EisHub_Scribe_logo.png/revision/latest?cb=20211106001321&format=original" width="50"></a></small></p>
+	<div>
+		<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Project"><img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/7/75/Galactic_Hub_Emblem.png/revision/latest?cb=20170409231732&format=original" width="207"></a>
+		<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Calypso"><img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/c/cb/Galactic_Hub_Calypso.png/revision/latest?cb=20211030042110&format=original" width="200"></a>
+		<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam"><img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/6/60/Galactic_Hub_Eissentam_Emblem.png/revision/latest?cb=20220514155908&format=original" width="205"></a>
+	</div>
 </body>
 </html>
