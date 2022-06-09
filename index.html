@@ -3,29 +3,45 @@
   <head lang="en">
   <meta charset="UTF-8">
   <script language="JavaScript">
-    function showInput() {
-        document.getElementById('display').innerHTML = 
-                    document.getElementById("user_input").value;
+    function showVersion() {
+        document.getElementById('version').innerHTML = 
+                    document.getElementById("version_input").value;
     }
-    function showInput2() {
-        document.getElementById('display2').innerHTML = 
-                    document.getElementById("user_input2").value;
+    function showCiv() {
+        document.getElementById('civStub').innerHTML = 
+                    document.getElementById("civStub_input").value;
+    }
+    function showBaseName() {
+        document.getElementById('base').innerHTML = 
+                    document.getElementById("baseName_input").value;
     }
   </script>
 
   </head>
 <body>
 
-  <form>
-    <label><b>Enter a Message</b></label>
-    <input type="text" name="message" id="user_input">
-    <label><b>Enter a Message2</b></label>
-    <input type="text" name="message2" id="user_input2">
-  </form>
+	<form>
+		<label><b>Enter the current release:</b></label>
+		<input type="text" name="Version" id="version_input">
+	
+		<label><b>Enter the civ macro:</b></label>
+		<select id="civStub_input" name="Civ Stub">
+			<option value="GHub">GHub</option>
+			<option value="GHub Calypso">CalHub</option>
+			<option value="GHub Eissentam">EisHub</option>
+		</select> 	
+		<label><b>Enter the name of the base:</b></label>
+		<input type="text" name="Base" id="baseName_input">
+	
+	</form>
 
-  <input type="submit" onclick="showInput(); showInput2()"><br/>
-  <label>Your input: </label>
-  <p>'''<span id='display'></span>'''</p>
-<p>'''<span id='display2'></span>'''</p>
+	<input type="submit" onclick="showVersion(); showCiv(); showBaseName();"><br/>
+	<label>Your input: </label>
+	<p>
+		<div>{{Version|<span id='version'></span>}}</div>
+		<div>{{<span id='civStub'></span>}}</div>
+		<div>{{Base infobox</div>
+		<div>| name = <span id='base'></span></div>
+	</p>
 </body>
 </html>
