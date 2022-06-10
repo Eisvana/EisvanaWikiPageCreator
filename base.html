@@ -1,17 +1,46 @@
 <html>
   <script>
     function showInput() {
-        document.getElementById('release').innerHTML = 
+        document.getElementById('release').innerHTML =
 			document.getElementById("version_input").value;
-					
-        document.getElementById('civStub').innerHTML = 
+
+        document.getElementById('civStub').innerHTML =
 			document.getElementById("civStub_input").value;
-					
-        document.getElementById('base').innerHTML = 
+
+        document.getElementById('base').innerHTML =
 			document.getElementById("baseName_input").value;
-					
+
+		//Catching textareas
+        document.getElementById('layout').innerHTML =
+			document.getElementById("layout_input").value;
+
+        document.getElementById('features').innerHTML =
+			document.getElementById("features_input").value;
+
+        document.getElementById('addInfo').innerHTML =
+			document.getElementById("addInfo_input").value;
+
+		//this is for the radio inputs
 		document.getElementById('farm').innerHTML =
 			document.querySelector("[id^='farm_input']:checked").value;
+
+		document.getElementById('geobay').innerHTML =
+			document.querySelector("[id^='geobay_input']:checked").value;
+
+		document.getElementById('arena').innerHTML =
+			document.querySelector("[id^='arena_input']:checked").value;
+
+		document.getElementById('landingpad').innerHTML =
+			document.querySelector("[id^='landingPad_input']:checked").value;
+
+		document.getElementById('racetrack').innerHTML =
+			document.querySelector("[id^='racetrack_input']:checked").value;
+
+		document.getElementById('terminal').innerHTML =
+			document.querySelector("[id^='terminal_input']:checked").value;
+
+		document.getElementById('censusshow').innerHTML =
+			document.querySelector("[id^='censusShow_input']:checked").value;
 
     }
 
@@ -20,10 +49,10 @@
 		navigator.clipboard.writeText(copyTextContent);
 		console.log(copyTextContent);
 
-		document.getElementById('btn').innerHTML = 'Copied!!';
+		document.getElementById('btn').innerHTML = 'Copied!';
 		setTimeout(() => {
 		  document.getElementById('btn').innerHTML = 'Copy wikicode';
-		}, 3000);
+		}, 1500);
 	}
   </script>
 
@@ -124,42 +153,42 @@
 			<label><b>Is the base a farm?</b></label>
 			<input type="radio" id="farm_inputY" name="farm" value="Yes">
 			<label for="farm_inputY">Yes</label>
-			<input type="radio" id="farm_inputN" name="farm" value="No">
+			<input type="radio" id="farm_inputN" name="farm" value="No" checked>
 			<label for="farm_inputN">No</label>
 		</div>
 		<div>
 			<label><b>Does the base have a geobay?</b></label>
 			<input type="radio" id="geobay_inputY" name="geobay" value="Yes">
 			<label for="geobay_inputY">Yes</label>
-			<input type="radio" id="geobay_inputN" name="geobay" value="No">
+			<input type="radio" id="geobay_inputN" name="geobay" value="No" checked>
 			<label for="geobay_inputN">No</label>
 		</div>
 		<div>
 			<label><b>Is the base an arena?</b></label>
 			<input type="radio" id="arena_inputY" name="arena" value="Yes">
 			<label for="arena_inputY">Yes</label>
-			<input type="radio" id="arena_inputN" name="arena" value="No">
+			<input type="radio" id="arena_inputN" name="arena" value="No" checked>
 			<label for="arena_inputN">No</label>
 		</div>
 		<div>
 			<label><b>Does the base have a landing pad?</b></label>
 			<input type="radio" id="landingPad_inputY" name="landingPad" value="Yes">
 			<label for="landingPad_inputY">Yes</label>
-			<input type="radio" id="landingPad_inputN" name="landingPad" value="No">
+			<input type="radio" id="landingPad_inputN" name="landingPad" value="No" checked>
 			<label for="landingPad_inputN">No</label>
 		</div>
 		<div>
 			<label><b>Is your base a racetrack?</b></label>
 			<input type="radio" id="racetrack_inputY" name="racetrack" value="Yes">
 			<label for="racetrack_inputY">Yes</label>
-			<input type="radio" id="racetrack_inputN" name="racetrack" value="No">
+			<input type="radio" id="racetrack_inputN" name="racetrack" value="No" checked>
 			<label for="racetrack_inputN">No</label>
 		</div>
 		<div>
 			<label><b>Does your base have a trade terminal?</b></label>
 			<input type="radio" id="terminal_inputY" name="terminal" value="Yes">
 			<label for="terminal_inputY">Yes</label>
-			<input type="radio" id="terminal_inputN" name="terminal" value="No">
+			<input type="radio" id="terminal_inputN" name="terminal" value="No" checked>
 			<label for="terminal_inputN">No</label>
 		</div>
 		<div>
@@ -186,12 +215,34 @@
 			<label><b>Enter the portalglyphs:</b></label>
 			<input type="text" name="Glyphs" id="portalglyphs_input">
 		</div>
-		<input type="reset" value="reset">
+		<div>
+			<label><b>Should this player be listed on the census?</b></label>
+			<input type="radio" id="censusShow_inputY" name="censusshow" value="Y" checked>
+			<label for="censusShow_inputY">Yes</label>
+			<input type="radio" id="censusShow_inputN" name="censusshow" value="">
+			<label for="censusShow_inputN">No</label>
+		</div>
+		<p>
+			Note: You can drag on the bottom right corner to expand the text area
+		</p>
+		<div>
+			<label style="vertical-align:top"><b>Base Layout:</b></label>
+			<textarea name="Layout" id="layout_input"></textarea>
+		</div>
+		<div>
+			<label style="vertical-align:top"><b>Base Features:</b></label>
+			<textarea name="Features" id="features_input"></textarea>
+		</div>
+		<div>
+			<label style="vertical-align:top"><b>Additional information:</b></label>
+			<textarea name="AdditionalInformation" id="addInfo_input"></textarea>
+		</div>
+		<input type="reset" value="Reset inputs">
 	</form>
 
 	<input type="submit" onclick="showInput();">
-	<button onclick="copyText()" id="btn">Copy wikicode</button> 
-	<!-- <label>Your input: </label> -->
+	<button onclick="copyText()" id="btn">Copy wikicode</button>
+	<br><br>
 	<div id="wikiText">
 		<div>{{Version|<span id='release'></span>}}</div>
 		<div>{{<span id='civStub'></span>}}</div>
@@ -225,11 +276,11 @@
 		<div>| censusfriend = <span id='censusfriend'></span></div>
 		<div>| censusarrival = <span id='censusarrival'></span></div>
 		<div>| censusrenewal = <span id='censusrenewal'></span></div>
-		<div>| censusshow = Y</span></div>
+		<div>| censusshow = <span id="censusshow"></span></div>
 		<div>}}</div>
 		<div>'''<span id='base'></span>''' is a player base.</div>
 		<br>
-		
+
 		<div>==Summary==</div>
 		<div>'''<span id='base'></span>''' is a [[Habitable Base|player base]], located on the planet [[<span id='planet'></span>]] in the [[<span id='system'></span>]] system.</div>
 		<br>
@@ -237,7 +288,7 @@
 		<div>==Layout==</div>
 		<div id='layout'></div>
 		<br>
-		
+
 		<div>==Features==</div>
 		<div id='features'></div>
 		<br>
@@ -249,6 +300,6 @@
 		<div>==Gallery==</div>
 		<div>&lt;gallery&gt;</div>
 		<div>&lt;/gallery&gt;</div>
-	</p>
+	</div>
 </body>
 </html>
