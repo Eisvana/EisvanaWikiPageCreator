@@ -9,7 +9,17 @@
 					
         document.getElementById('base').innerHTML = 
 			document.getElementById("baseName_input").value;
-					
+			
+        document.getElementById('layout').innerHTML = 
+			document.getElementById("layout_input").value;
+			
+        document.getElementById('features').innerHTML = 
+			document.getElementById("features_input").value;
+			
+        document.getElementById('addInfo').innerHTML = 
+			document.getElementById("addInfo_input").value;
+
+		//this is for the radio inputs
 		document.getElementById('farm').innerHTML =
 			document.querySelector("[id^='farm_input']:checked").value;
 
@@ -183,8 +193,16 @@
 			<input type="text" name="Glyphs" id="portalglyphs_input">
 		</div>
 		<div>
-			<label><b>Enter the portalglyphs:</b></label>
-			<input type="text" name="Glyphs" id="portalglyphs_input">
+			<label style="vertical-align:top"><b>Base Layout:</b></label>
+			<textarea name="Layout" id="layout_input"></textarea>
+		</div>
+		<div>
+			<label style="vertical-align:top"><b>Base Features:</b></label>
+			<textarea name="Features" id="features_input"></textarea>
+		</div>
+		<div>
+			<label style="vertical-align:top"><b>Additional information:</b></label>
+			<textarea name="AdditionalInformation" id="addInfo_input"></textarea>
 		</div>
 		<input type="reset" value="reset">
 	</form>
