@@ -30,10 +30,10 @@
 		navigator.clipboard.writeText(copyTextContent);
 		console.log(copyTextContent);
 
-		document.getElementById('btn').innerHTML = 'Copied!!';
+		document.getElementById('btn').innerHTML = 'Copied!';
 		setTimeout(() => {
 		  document.getElementById('btn').innerHTML = 'Copy wikicode';
-		}, 3000);
+		}, 1500);
 	}
   </script>
 
@@ -192,6 +192,9 @@
 			<label><b>Enter the portalglyphs:</b></label>
 			<input type="text" name="Glyphs" id="portalglyphs_input">
 		</div>
+		<p>
+			Note: You can drag on the bottom right corner to expand the text area
+		</p>
 		<div>
 			<label style="vertical-align:top"><b>Base Layout:</b></label>
 			<textarea name="Layout" id="layout_input"></textarea>
@@ -204,12 +207,12 @@
 			<label style="vertical-align:top"><b>Additional information:</b></label>
 			<textarea name="AdditionalInformation" id="addInfo_input"></textarea>
 		</div>
-		<input type="reset" value="reset">
+		<input type="reset" value="Reset inputs">
 	</form>
 
 	<input type="submit" onclick="showInput();">
-	<button onclick="copyText()" id="btn">Copy wikicode</button> 
-	<!-- <label>Your input: </label> -->
+	<button onclick="copyText()" id="btn">Copy wikicode</button>
+	<br><br>
 	<div id="wikiText">
 		<div>{{Version|<span id='release'></span>}}</div>
 		<div>{{<span id='civStub'></span>}}</div>
@@ -247,7 +250,7 @@
 		<div>}}</div>
 		<div>'''<span id='base'></span>''' is a player base.</div>
 		<br>
-		
+
 		<div>==Summary==</div>
 		<div>'''<span id='base'></span>''' is a [[Habitable Base|player base]], located on the planet [[<span id='planet'></span>]] in the [[<span id='system'></span>]] system.</div>
 		<br>
@@ -255,7 +258,7 @@
 		<div>==Layout==</div>
 		<div id='layout'></div>
 		<br>
-		
+
 		<div>==Features==</div>
 		<div id='features'></div>
 		<br>
