@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head lang="en">
-  <meta charset="UTF-8">
-  <script language="JavaScript">
-    function showInput() {
-        document.getElementById('display').innerHTML = 
-                    document.getElementById("user_input").value;
-    }
-    function showInput2() {
-        document.getElementById('display2').innerHTML = 
-                    document.getElementById("user_input2").value;
-    }
-  </script>
-
-  </head>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<style>
+			ul * {
+			  padding-top: 7px;
+			}
+			
+			img {
+				vertical-align:middle;
+			}
+		</style>
+	</head>
 <body>
-
-  <form>
-    <label><b>Enter a Message</b></label>
-    <input type="text" name="message" id="user_input">
-    <label><b>Enter a Message2</b></label>
-    <input type="text" name="message2" id="user_input2">
-  </form>
-
-  <input type="submit" onclick="showInput(); showInput2()"><br/>
-  <label>Your input: </label>
-  <p>'''<span id='display'></span>'''</p>
-<p>'''<span id='display2'></span>'''</p>
+	<h1>Hub Wiki Page Creator</h1>
+	<h2>Choose what page you want to create:</h2>
+	<ul>
+		<li><a href="./base.html" title="Base">Base</a>
+		<li><a href="./fauna.html" title="Fauna">Fauna</a>
+		<li><a href="./flora.html" title="Flora">Flora</a>
+		<li><a href="./mineral.html" title="Mineral">Mineral</a>
+		<li><a href="./moon.html" title="Moon">Moon</a>
+		<li><a href="./multitool.html" title="Multitool">Multitool</a>
+		<li><a href="./planet.html" title="Planet">Planet</a>
+		<li><a href="./starship.html" title="Starship">Starship</a>
+		<li><a href="./system.html" title="System">System</a>
+	</ul>
+	<p><small>Brought to you by the <a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes" title="Galactic Hub Eissentam Scribes">Galactic Hub Eissentam Scribes</a>.&nbsp;<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes"><img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/e/ea/EisHub_Scribe_logo.png" width="50"></a></small></p>
+	<div>
+		<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Project"><img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/7/75/Galactic_Hub_Emblem.png" width="207"></a>
+		<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Calypso"><img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/c/cb/Galactic_Hub_Calypso.png" width="200"></a>
+		<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam"><img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/6/60/Galactic_Hub_Eissentam_Emblem.png" width="205"></a>
+	</div>
 </body>
 </html>

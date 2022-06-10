@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+  <meta charset="UTF-8">
+  <script language="JavaScript">
+    function showInput() {
+        document.getElementById('release').innerHTML = 
+                    document.getElementById("version_input").value;
+					
+        document.getElementById('civStub').innerHTML = 
+                    document.getElementById("civStub_input").value;
+					
+        document.getElementById('base').innerHTML = 
+                    document.getElementById("baseName_input").value;
+					
+        document.getElementById('farmY').innerHTML = 
+                    document.getElementById("farm_inputY").value;
+        document.getElementById('farmN').innerHTML = 
+                    document.getElementById("farm_inputN").value;
+					
+    }
+  </script>
+
+  </head>
+<body>
+
+	<form>
+		<div>
+			<label><b>Enter the current release:</b></label>
+			<input type="text" name="Version" id="version_input">
+		</div>
+		<div>
+			<label><b>Enter the civ macro:</b></label>
+			<select id="civStub_input" name="Civ Stub">
+				<option value="GHub">GHub</option>
+				<option value="GHub Calypso">CalHub</option>
+				<option value="GHub Eissentam">EisHub</option>
+			</select>
+		</div>
+		<div>
+			<label><b>Enter the name of the base:</b></label>
+			<input type="text" name="Base" id="baseName_input">
+		</div>
+		<div>
+			<label><b>Enter the name of the image, including file extension:</b></label>
+			<input type="text" name="Image" id="image_input">
+		</div>
+		<div>
+			<label><b>Enter the civ:</b></label>
+			<select id="civilized_input" name="Civilization">
+				<option value="Galactic Hub Project">GHub</option>
+				<option value="Galactic Hub Calypso">CalHub</option>
+				<option value="Galactic Hub Eissentam">EisHub</option>
+			</select>
+		</div>
+		<div>
+			<label><b>Enter the name of the base:</b></label>
+			<input type="text" name="Builder" id="builder_input">
+		</div>
+		<div>
+			<label><b>Enter the name of the base:</b></label>
+			<input type="text" name="Builderlink" id="builderlink_input">
+		</div>
+		<div>
+			<label><b>Enter the galaxy:</b></label>
+			<select id="galaxy_input" name="Galaxy">
+				<option value="Euclid">Euclid</option>
+				<option value="Calypso">Calypso</option>
+				<option value="Eissentam">Eissentam</option>
+			</select>
+		</div>
+		<div>
+			<label><b>Enter the name of the region:</b></label>
+			<input type="text" name="Region" id="region_input">
+		</div>
+		<div>
+			<label><b>Enter the name of the system:</b></label>
+			<input type="text" name="System" id="system_input">
+		</div>
+		<div>
+			<label><b>Enter the name of the planet:</b></label>
+			<input type="text" name="Planet" id="planet_input">
+		</div>
+		<div>
+			<label><b>Enter the name of the moon (if applicable):</b></label>
+			<input type="text" name="Moon" id="moon_input">
+		</div>
+		<div>
+			<label><b>Enter the axes:</b></label>
+			<input type="text" name="Axes" id="axes_input">
+		</div>
+		<div>
+			<label><b>Enter the portalglyphs:</b></label>
+			<input type="text" name="Glyphs" id="portalglyphs_input">
+		</div>
+		<div>
+			<label><b>Enter the type of the base:</b></label>
+			<input type="text" name="Type" id="type_input">
+		</div>
+		<div>
+			<label><b>Enter the gamemode:</b></label>
+			<input type="text" name="Mode" id="mode_input">
+		</div>
+		<div>
+			<label><b>Enter the platform:</b></label>
+			<input type="text" name="Platform" id="platform_input">
+		</div>
+		<div>
+			<label><b>Is your base a farm?</b></label>
+			<input type="radio" id="farm_inputY" name="farm" value="Yes">
+			<label for="farm_inputY">Yes</label>
+			<input type="radio" id="farm_inputN" name="farm" value="No">
+			<label for="farm_inputN">No</label>
+		</div>
+		<div>
+			<label><b>Enter the gamemode:</b></label>
+			<input type="text" name="Mode" id="mode_input">
+		</div>
+		<div>
+			<label><b>Enter the gamemode:</b></label>
+			<input type="text" name="Mode" id="mode_input">
+		</div>
+		<div>
+			<label><b>Enter the gamemode:</b></label>
+			<input type="text" name="Mode" id="mode_input">
+		</div>
+		<div>
+			<label><b>Enter the gamemode:</b></label>
+			<input type="text" name="Mode" id="mode_input">
+		</div>
+	</form>
+
+	<input type="submit" onclick="showInput();"><br/>
+	<label>Your input: </label>
+	<p>
+		<div>{{Version|<span id='release'></span>}}</div>
+		<div>{{<span id='civStub'></span>}}</div>
+		<div>{{Base infobox</div>
+		<div>| name = <span id='name'></span></div>
+		<div>| image = <span id='image'></span></div>
+		<div>| civilized = <span id='civilized'></span></div>
+		<div>| builder = <span id='builder'></span></div>
+		<div>| builderlink = <span id='builderlink'></span></div>
+		<div>| galaxy = <span id='galaxy'></span></div>
+		<div>| region = <span id='region'></span></div>
+		<div>| system = <span id='system'></span></div>
+		<div>| planet = <span id='planet'></span></div>
+		<div>| moon = <span id='moon'></span></div>
+		<div>| axes = <span id='axes'></span></div>
+		<div>| coordinates = {{Glyphs2Coords|<span id='portalglyphs'></span>}}</div>
+		<div>| portalglyphs = {{Gl/Small|<span id='portalglyphs'></span>}}</div>
+		<div>| type = <span id='type'></span></div>
+		<div>| mode = <span id='mode'></span></div>
+		<div>| platform = <span id='platform'></span></div>
+		<div>| release = <span id='release'></span></div>
+		<div>| farm = <span id='farmY'><span id='farmN'></span></div>
+		<div>| geobay = <span id='geobay'></span></div>
+		<div>| arena = <span id='arena'></span></div>
+		<div>| landingpad = <span id='landingpad'></span></div>
+		<div>| racetrack = <span id='racetrack'></span></div>
+		<div>| terminal = <span id='terminal'></span></div>
+		<div>| censusplayer = <span id='censusplayer'></span></div>
+		<div>| censusreddit = <span id='censusreddit'></span></div>
+		<div>| censusdiscord = <span id='censusdiscord'></span></div>
+		<div>| censusfriend = <span id='censusfriend'></span></div>
+		<div>| censusarrival = <span id='censusarrival'></span></div>
+		<div>| censusrenewal = <span id='censusrenewal'></span></div>
+		<div>| censusshow = Y</span></div>
+		<div>}}</div>
+		<div>'''<span id='base'></span>''' is a player base.</div>
+		<br>
+		
+		<div>==Summary==</div>
+		<div>'''<span id='base'></span>''' is a [[Habitable Base|player base]], located on the planet [[<span id='planet'></span>]] in the [[<span id='system'></span>]] system.</div>
+		<br>
+
+		<div>==Layout==</div>
+		<div><span id='layout'></span></div>
+		<br>
+		
+		<div>==Features==</div>
+		<div><span id='features'></span></div>
+		<br>
+
+		<div>==Additional information==</div>
+		<div><span id='addInfo'></span></div>
+		<br>
+
+		<div>==Gallery==</div>
+		<div><gallery></div>
+		<div></gallery></div>
+	</p>
+</body>
+</html>
