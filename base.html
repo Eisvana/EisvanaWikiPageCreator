@@ -9,7 +9,8 @@
 					
         document.getElementById('base').innerHTML = 
 			document.getElementById("baseName_input").value;
-			
+		
+		//Catching textareas
         document.getElementById('layout').innerHTML = 
 			document.getElementById("layout_input").value;
 			
@@ -22,6 +23,24 @@
 		//this is for the radio inputs
 		document.getElementById('farm').innerHTML =
 			document.querySelector("[id^='farm_input']:checked").value;
+
+		document.getElementById('geobay').innerHTML =
+			document.querySelector("[id^='geobay_input']:checked").value;
+
+		document.getElementById('arena').innerHTML =
+			document.querySelector("[id^='arena_input']:checked").value;
+
+		document.getElementById('landingpad').innerHTML =
+			document.querySelector("[id^='landingPad_input']:checked").value;
+
+		document.getElementById('racetrack').innerHTML =
+			document.querySelector("[id^='racetrack_input']:checked").value;
+
+		document.getElementById('terminal').innerHTML =
+			document.querySelector("[id^='terminal_input']:checked").value;
+
+		document.getElementById('censusshow').innerHTML =
+			document.querySelector("[id^='censusShow_input']:checked").value;
 
     }
 
@@ -192,6 +211,17 @@
 			<label><b>Enter the portalglyphs:</b></label>
 			<input type="text" name="Glyphs" id="portalglyphs_input">
 		</div>
+		<div>
+			<label><b>Enter the portalglyphs:</b></label>
+			<input type="text" name="Glyphs" id="portalglyphs_input">
+		</div>
+		<div>
+			<label><b>Should this player be listed on the census?</b></label>
+			<input type="radio" id="censusShow_inputY" name="censusshow" value="Y" checked>
+			<label for="censusShow_inputY">Yes</label>
+			<input type="radio" id="censusShow_inputN" name="censusshow" value="">
+			<label for="censusShow_inputN">No</label>
+		</div>
 		<p>
 			Note: You can drag on the bottom right corner to expand the text area
 		</p>
@@ -246,7 +276,7 @@
 		<div>| censusfriend = <span id='censusfriend'></span></div>
 		<div>| censusarrival = <span id='censusarrival'></span></div>
 		<div>| censusrenewal = <span id='censusrenewal'></span></div>
-		<div>| censusshow = Y</span></div>
+		<div>| censusshow = <span id="censusshow"></span></div>
 		<div>}}</div>
 		<div>'''<span id='base'></span>''' is a player base.</div>
 		<br>
