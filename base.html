@@ -1,23 +1,18 @@
-<!DOCTYPE html>
 <html>
-  <head lang="en">
-  <meta charset="UTF-8">
-  <script language="JavaScript">
+  <script>
     function showInput() {
         document.getElementById('release').innerHTML = 
-                    document.getElementById("version_input").value;
+			document.getElementById("version_input").value;
 					
         document.getElementById('civStub').innerHTML = 
-                    document.getElementById("civStub_input").value;
+			document.getElementById("civStub_input").value;
 					
         document.getElementById('base').innerHTML = 
-                    document.getElementById("baseName_input").value;
+			document.getElementById("baseName_input").value;
 					
-        document.getElementById('farmY').innerHTML = 
-                    document.getElementById("farm_inputY").value;
-        document.getElementById('farmN').innerHTML = 
-                    document.getElementById("farm_inputN").value;
-					
+		document.getElementById('farm').innerHTML =
+			document.querySelector("[id^='farm_input']:checked").value;
+
     }
   </script>
 
@@ -153,7 +148,7 @@
 		<div>| mode = <span id='mode'></span></div>
 		<div>| platform = <span id='platform'></span></div>
 		<div>| release = <span id='release'></span></div>
-		<div>| farm = <span id='farmY'><span id='farmN'></span></div>
+		<div>| farm = <span id='farm'></span></div>
 		<div>| geobay = <span id='geobay'></span></div>
 		<div>| arena = <span id='arena'></span></div>
 		<div>| landingpad = <span id='landingpad'></span></div>
