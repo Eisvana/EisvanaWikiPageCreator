@@ -1,4 +1,4 @@
-**Note: This is the legacy batch script, which has been abandoned in favour of the web script which can be found under [https://Lenni009.github.io](Lenni009.github.io)**
+**Note: This is the legacy batch script, which has been abandoned in favour of the web script which can be found under [Lenni009.github.io](https://Lenni009.github.io)**
 # seamonkey420.github.io
 # No Man's Sky - My wiki creating script!! v8 updated for new NEXT Hub templates!
 
