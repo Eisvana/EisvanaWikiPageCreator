@@ -47,6 +47,7 @@
 		textFunction("layout", "layout_input")
 		textFunction("features", "features_input")
 		textFunction("addInfo", "addInfo_input")
+		wikiLink("link", "baseName_input")
 	}
   </script>
 </head>
@@ -262,7 +263,8 @@
 	
 	<input type="submit" onclick="showInput();">
 	<button onclick="copyText()" id="btn">Copy wikicode</button>
-	<br><br>
+	<p>Create your page here: <a id="link"></a></p>
+	<br>
 	<div id="wikiText">
 		<div>{{Version|<span id='release'></span>}}</div>
 		<div>{{<span id='civStub'></span>}}</div>
