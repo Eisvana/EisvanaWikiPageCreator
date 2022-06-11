@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
 	<title>Hub Wiki Page Creator - Base</title>
 	<script src="./lib/wikiscript.js"></script>
 	<script>
@@ -53,22 +54,45 @@
   </script>
 </head>
 <body>
-	<big><a href="./" title="Main page">&larr; Return to main page</a></big>
+	<div style="font-size:larger"><a href="./" title="Main page">&larr; Return to main page</a></div>
 	<br><br>
 
 	<form>
 		<table style="text-align:left">
 			<tr>
 				<th><label>Current release:</label>
-				<td><input type="text" name="Version" id="version_input">
+				<td>
+					<select id="version_input" name="Release">
+						<option value="Outlaws">Outlaws
+						<option value="SentinelUp">SentinelUp
+						<option value="Prisms">Prisms
+						<option value="Expeditions">Expeditions
+						<option value="Companions">Companions
+						<option value="NextGen">NextGen
+						<option value="Origins">Origins
+						<option value="Desolation">Desolation
+						<option value="Crossplay">Crossplay
+						<option value="ExoMech">ExoMech
+						<option value="Living Ship">Living Ship
+						<option value="Synthesis">Synthesis
+						<option value="Beyond">Beyond
+						<option value="Visions">Visions
+						<option value="Abyss">Abyss
+						<option value="NEXT">NEXT
+						<option value="Atlas Rises">Atlas Rises
+						<option value="Pathfinder">Pathfinder
+						<option value="Foundation">Foundation
+						<option value="Release">Release
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<th><label>Civ macro:</label>
 				<td>
 					<select id="civStub_input" name="Civ Stub">
-						<option value="GHub">GHub</option>
-						<option value="GHub Calypso">CalHub</option>
-						<option value="GHub Eissentam">EisHub</option>
+						<option value="GHub">GHub
+						<option value="GHub Calypso">CalHub
+						<option value="GHub Eissentam">EisHub
 					</select>
 				</td>
 			</tr>
@@ -84,9 +108,9 @@
 				<th><label>Civ:</label>
 				<td>
 					<select id="civilized_input" name="Civilization">
-						<option value="Galactic Hub Project">GHub</option>
-						<option value="Galactic Hub Calypso">CalHub</option>
-						<option value="Galactic Hub Eissentam">EisHub</option>
+						<option value="Galactic Hub Project">GHub
+						<option value="Galactic Hub Calypso">CalHub
+						<option value="Galactic Hub Eissentam">EisHub
 					</select>
 				</td>
 			</tr>
