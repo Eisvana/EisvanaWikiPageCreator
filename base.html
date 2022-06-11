@@ -57,206 +57,232 @@
 	<br><br>
 
 	<form>
-		<div>
-			<label><b>Current release:</b></label>
-			<input type="text" name="Version" id="version_input">
-		</div>
-		<div>
-			<label><b>Civ macro:</b></label>
-			<select id="civStub_input" name="Civ Stub">
-				<option value="GHub">GHub</option>
-				<option value="GHub Calypso">CalHub</option>
-				<option value="GHub Eissentam">EisHub</option>
-			</select>
-		</div>
-		<div>
-			<label><b>Name of the base:</b></label>
-			<input type="text" name="Base" id="baseName_input">
-		</div>
-		<div>
-			<label><b>Name of the image, including file extension:</b></label>
-			<input type="text" name="Image" id="image_input">
-		</div>
-		<div>
-			<label><b>Civ:</b></label>
-			<select id="civilized_input" name="Civilization">
-				<option value="Galactic Hub Project">GHub</option>
-				<option value="Galactic Hub Calypso">CalHub</option>
-				<option value="Galactic Hub Eissentam">EisHub</option>
-			</select>
-		</div>
-		<div>
-			<label><b>Name of the builder if builder doesn't have wiki account:</b></label>
-			<input type="text" name="Builder" id="builder_input">
-		</div>
-		<div>
-			<label><b>Wiki account of the builder OR leave empty:</b></label>
-			<input type="text" name="Builderlink" id="builderlink_input">
-		</div>
-		<div>
-			<label><b>Galaxy:</b></label>
-			<select id="galaxy_input" name="Galaxy">
-				<option value="Euclid">Euclid</option>
-				<option value="Calypso">Calypso</option>
-				<option value="Eissentam">Eissentam</option>
-			</select>
-		</div>
-		<div>
-			<label><b>Name of the region:</b></label>
-			<input type="text" name="Region" id="region_input">
-		</div>
-		<div>
-			<label><b>Name of the system:</b></label>
-			<input type="text" name="System" id="system_input">
-		</div>
-		<div>
-			<label><b>Name of the planet:</b></label>
-			<input type="text" name="Planet" id="planet_input">
-		</div>
-		<div>
-			<label><b>Name of the moon (if applicable):</b></label>
-			<input type="text" name="Moon" id="moon_input">
-		</div>
-		<div>
-			<label><b>Planetary coords:</b></label>
-			<input type="text" name="Axes" id="axes_input">
-		</div>
-		<div>
-			<label><b>Portalglyphs:</b></label>
-			<input type="text" name="Glyphs" id="portalglyphs_input">
-		</div>
-		<div>
-			<label><b>Type of the base:</b></label>
-			<input type="text" name="Type" id="type_input">
-		</div>
-		<div>
-			<label><b>Gamemode:</b></label>
-			<select id="mode_input" name="Mode">
-				<option value="Normal">Normal</option>
-				<option value="Survival">Survival</option>
-				<option value="Permadeath">Permadeath</option>
-				<option value="Creative">Creative</option>
-			</select>
-		</div>
-		<div>
-			<label><b>Platform:</b></label>
-			<select id="platform_input" name="Platform">
-				<option value="PC">PC</option>
-				<option value="PS">PS</option>
-				<option value="XB">XB</option>
-			</select>
-		</div>
-		<div>
-			<label><b>Is the base a farm?</b></label>
-			<input type="radio" id="farm_inputY" name="farm" value="Yes">
-			<label for="farm_inputY">Yes</label>
-			<input type="radio" id="farm_inputN" name="farm" value="No">
-			<label for="farm_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="farm_inputA" name="farm" value="" checked>
-				<label for="farm_inputA">None</label>
-			</span>
-		</div>
-		<div>
-			<label><b>Does the base have a geobay?</b></label>
-			<input type="radio" id="geobay_inputY" name="geobay" value="Yes">
-			<label for="geobay_inputY">Yes</label>
-			<input type="radio" id="geobay_inputN" name="geobay" value="No">
-			<label for="geobay_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="geobay_inputA" name="geobay" value="" checked>
-				<label for="geobay_inputA">None</label>
-			</span>
-		</div>
-		<div>
-			<label><b>Is the base an arena?</b></label>
-			<input type="radio" id="arena_inputY" name="arena" value="Yes">
-			<label for="arena_inputY">Yes</label>
-			<input type="radio" id="arena_inputN" name="arena" value="No">
-			<label for="arena_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="arena_inputA" name="arena" value="" checked>
-				<label for="arena_inputA">None</label>
-			</span>
-		</div>
-		<div>
-			<label><b>Does the base have a landing pad?</b></label>
-			<input type="radio" id="landingPad_inputY" name="landingPad" value="Yes">
-			<label for="landingPad_inputY">Yes</label>
-			<input type="radio" id="landingPad_inputN" name="landingPad" value="No">
-			<label for="landingPad_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="landingPad_inputA" name="landingPad" value="" checked>
-				<label for="landingPad_inputA">None</label>
-			</span>
-		</div>
-		<div>
-			<label><b>Is the base a racetrack?</b></label>
-			<input type="radio" id="racetrack_inputY" name="racetrack" value="Yes">
-			<label for="racetrack_inputY">Yes</label>
-			<input type="radio" id="racetrack_inputN" name="racetrack" value="No">
-			<label for="racetrack_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="racetrack_inputA" name="racetrack" value="" checked>
-				<label for="racetrack_inputA">None</label>
-			</span>
-		</div>
-		<div>
-			<label><b>Does the base have a trade terminal?</b></label>
-			<input type="radio" id="terminal_inputY" name="terminal" value="Yes">
-			<label for="terminal_inputY">Yes</label>
-			<input type="radio" id="terminal_inputN" name="terminal" value="No">
-			<label for="terminal_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="terminal_inputA" name="terminal" value="" checked>
-				<label for="terminal_inputA">None</label>
-			</span>
-		</div>
-		<p>Census:</p>
-		<div>
-			<label><b>What is the name of the player?</b></label>
-			<input type="text" name="CensusPlayer" id="censusPlayer_input">
-		</div>
-		<div>
-			<label><b>What is the Reddit name of the player?</b></label>
-			<input type="text" name="CensusReddit" id="censusReddit_input">
-		</div>
-		<div>
-			<label><b>What is the Discord name of the player?</b></label>
-			<input type="text" name="CensusDiscord" id="censusDiscord_input">
-		</div>
-		<div>
-			<label><b>What is the NMS friend code of the player?</b></label>
-			<input type="text" name="CensusFriend" id="censusFriend_input">
-		</div>
-		<div>
-			<label><b>When did the player arrive in Hub space?</b></label>
-			<input type="date" name="CensusArrival" id="censusArrival_input">
-		</div>
-<!-- 		<div>
-			<label><b>In what year has the census been renewed?</b></label>
-			<input type="text" name="CensusRenewal" id="censusRenewal_input">
-		</div>-->
- 		<div>
-			<label><b>Should this player be listed on the census?</b></label>
-			<input type="radio" id="censusShow_inputY" name="censusshow" value="Y" checked>
-			<label for="censusShow_inputY">Yes</label>
-			<input type="radio" id="censusShow_inputN" name="censusshow" value="">
-			<label for="censusShow_inputN">No</label>
-		</div>
-		<p>Note: You can drag on the bottom right corner to expand the text area</p>
-		<div>
-			<label style="vertical-align:top"><b>Base Layout:</b></label>
-			<textarea name="Layout" id="layout_input"></textarea>
-		</div>
-		<div>
-			<label style="vertical-align:top"><b>Base Features:</b></label>
-			<textarea name="Features" id="features_input"></textarea>
-		</div>
-		<div>
-			<label style="vertical-align:top"><b>Additional information:</b></label>
-			<textarea name="AdditionalInformation" id="addInfo_input"></textarea>
-		</div>
+		<table style="text-align:left">
+			<tr>
+				<th><label>Current release:</label>
+				<td><input type="text" name="Version" id="version_input">
+			</tr>
+			<tr>
+				<th><label>Civ macro:</label>
+				<td>
+					<select id="civStub_input" name="Civ Stub">
+						<option value="GHub">GHub</option>
+						<option value="GHub Calypso">CalHub</option>
+						<option value="GHub Eissentam">EisHub</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th><label>Name of the base:</label>
+				<td><input type="text" name="Base" id="baseName_input">
+			</tr>
+			<tr>
+				<th><label>Name of the image, including file extension:</label>
+				<td><input type="text" name="Image" id="image_input">
+			</tr>
+			<tr>
+				<th><label>Civ:</label>
+				<td>
+					<select id="civilized_input" name="Civilization">
+						<option value="Galactic Hub Project">GHub</option>
+						<option value="Galactic Hub Calypso">CalHub</option>
+						<option value="Galactic Hub Eissentam">EisHub</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th><label>Name of the builder if builder doesn't have wiki account:</label>
+				<td><input type="text" name="Builder" id="builder_input">
+			</tr>
+			<tr>
+				<th><label>Wiki account of the builder OR leave empty:</label>
+				<td><input type="text" name="Builderlink" id="builderlink_input">
+			</tr>
+			<tr>
+				<th><label>Galaxy:</label>
+				<td>
+					<select id="galaxy_input" name="Galaxy">
+						<option value="Euclid">Euclid</option>
+						<option value="Calypso">Calypso</option>
+						<option value="Eissentam">Eissentam</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th><label>Name of the region:</label>
+				<td><input type="text" name="Region" id="region_input">
+			</tr>
+			<tr>
+				<th><label>Name of the system:</label>
+				<td><input type="text" name="System" id="system_input">
+			</tr>
+			<tr>
+				<th><label>Name of the planet:</label>
+				<td><input type="text" name="Planet" id="planet_input">
+			</tr>
+			<tr>
+				<th><label>Name of the moon (if applicable):</label>
+				<td><input type="text" name="Moon" id="moon_input">
+			</tr>
+			<tr>
+				<th><label>Planetary coords:</label>
+				<td><input type="text" name="Axes" id="axes_input">
+			</tr>
+			<tr>
+				<th><label>Portalglyphs:</label>
+				<td><input type="text" name="Glyphs" id="portalglyphs_input">
+			</tr>
+			<tr>
+				<th><label>Type of the base:</label>
+				<td><input type="text" name="Type" id="type_input">
+			</tr>
+			<tr>
+				<th><label>Gamemode:</label>
+				<td>
+					<select id="mode_input" name="Mode">
+						<option value="Normal">Normal</option>
+						<option value="Survival">Survival</option>
+						<option value="Permadeath">Permadeath</option>
+						<option value="Creative">Creative</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th><label>Platform:</label>
+				<td>
+					<select id="platform_input" name="Platform">
+						<option value="PC">PC</option>
+						<option value="PS">PS</option>
+						<option value="XB">XB</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th><label>Farm?</label>
+				<td>
+					<input type="radio" id="farm_inputY" name="farm" value="Yes">
+					<label for="farm_inputY">Yes</label>
+					<input type="radio" id="farm_inputN" name="farm" value="No">
+					<label for="farm_inputN">No</label>
+					<span style="display:none">
+						<input type="radio" id="farm_inputA" name="farm" value="" checked>
+						<label for="farm_inputA">None</label>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<th><label>Geobay?</label>
+				<td>
+					<input type="radio" id="geobay_inputY" name="geobay" value="Yes">
+					<label for="geobay_inputY">Yes</label>
+					<input type="radio" id="geobay_inputN" name="geobay" value="No">
+					<label for="geobay_inputN">No</label>
+					<span style="display:none">
+						<input type="radio" id="geobay_inputA" name="geobay" value="" checked>
+						<label for="geobay_inputA">None</label>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<th><label>Arena?</label>
+				<td>
+					<input type="radio" id="arena_inputY" name="arena" value="Yes">
+					<label for="arena_inputY">Yes</label>
+					<input type="radio" id="arena_inputN" name="arena" value="No">
+					<label for="arena_inputN">No</label>
+					<span style="display:none">
+						<input type="radio" id="arena_inputA" name="arena" value="" checked>
+						<label for="arena_inputA">None</label>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<th><label>Landing pad?</label>
+				<td>
+					<input type="radio" id="landingPad_inputY" name="landingPad" value="Yes">
+					<label for="landingPad_inputY">Yes</label>
+					<input type="radio" id="landingPad_inputN" name="landingPad" value="No">
+					<label for="landingPad_inputN">No</label>
+					<span style="display:none">
+						<input type="radio" id="landingPad_inputA" name="landingPad" value="" checked>
+						<label for="landingPad_inputA">None</label>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<th><label>Racetrack?</label>
+				<td>
+					<input type="radio" id="racetrack_inputY" name="racetrack" value="Yes">
+					<label for="racetrack_inputY">Yes</label>
+					<input type="radio" id="racetrack_inputN" name="racetrack" value="No">
+					<label for="racetrack_inputN">No</label>
+					<span style="display:none">
+						<input type="radio" id="racetrack_inputA" name="racetrack" value="" checked>
+						<label for="racetrack_inputA">None</label>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<th><label>Trade terminal?</label>
+				<td>
+					<input type="radio" id="terminal_inputY" name="terminal" value="Yes">
+					<label for="terminal_inputY">Yes</label>
+					<input type="radio" id="terminal_inputN" name="terminal" value="No">
+					<label for="terminal_inputN">No</label>
+					<span style="display:none">
+						<input type="radio" id="terminal_inputA" name="terminal" value="" checked>
+						<label for="terminal_inputA">None</label>
+					</span>
+				</td>	
+			</tr>
+			<tr><th style="text-align:center" colspan="2">Census:</tr>
+			<tr>
+				<th><label>What is the name of the player?</label>
+				<td><input type="text" name="CensusPlayer" id="censusPlayer_input">
+			</tr>
+			<tr>
+				<th><label>What is the Reddit name of the player?</label>
+				<td><input type="text" name="CensusReddit" id="censusReddit_input">
+			</tr>
+			<tr>
+				<th><label>What is the Discord name of the player?</label>
+				<td><input type="text" name="CensusDiscord" id="censusDiscord_input">
+			</tr>
+			<tr>
+				<th><label>What is the NMS friend code of the player?</label>
+				<td><input type="text" name="CensusFriend" id="censusFriend_input">
+			</tr>
+			<tr>
+				<th><label>When did the player arrive in Hub space?</label>
+				<td><input type="date" name="CensusArrival" id="censusArrival_input">
+			</tr>
+<!-- 		<tr>
+			<th><label>In what year has the census been renewed?</label>
+			<td><input type="text" name="CensusRenewal" id="censusRenewal_input">
+		</tr>-->
+			<tr>
+				<th><label>Are you already listed on the census?</label>
+				<td>
+					<input type="radio" id="censusShow_inputY" name="censusshow" value="">
+					<label for="censusShow_inputY">Yes</label>
+					<input type="radio" id="censusShow_inputN" name="censusshow" value="Y" checked>
+					<label for="censusShow_inputN">No</label>
+				</td>
+			</tr>
+			<tr><th style="text-align:center" colspan="2">Note: You can drag on the bottom right corner to expand the text area</tr>
+			<tr>
+				<th><label style="vertical-align:top">Base Layout:</label>
+				<td><textarea name="Layout" id="layout_input"></textarea>
+			</tr>
+			<tr>
+				<th><label style="vertical-align:top">Base Features:</label>
+				<td><textarea name="Features" id="features_input"></textarea>
+			</tr>
+			<tr>
+				<th><label style="vertical-align:top">Additional information:</label>
+				<td><textarea name="AdditionalInformation" id="addInfo_input"></textarea>
+			</tr>
+		</table>
 		<input type="reset" value="Reset inputs">
 	</form>
 	<br>
