@@ -1,23 +1,53 @@
 <html>
-	<head>
-		<script src="./lib/wikiscript.js"></script>
-		<script>
-		function showInput() {
-			textFunction("civStub", "civStub_input")
-			textFunction("name", "baseName_input")
-			textFunction("layout", "layout_input")
-			textFunction("features", "features_input")
-			textFunction("addInfo", "addInfo_input")
-			radioFunction("farm", "farm_input")
-			radioFunction("geobay", "geobay_input")
-			radioFunction("arena", "arena_input")
-			radioFunction("landingpad", "landingPad_input")
-			radioFunction("racetrack", "racetrack_input")
-			radioFunction("censusshow", "censusShow_input")
-		}
-	  </script>
+<head>
+	<script src="./lib/wikiscript.js"></script>
+	<script>
+	// 1. param	= id in div and spans in wikicode
+	// 2. param	= id in input tags
+	function showInput() {
+		textFunction("release", "version_input")
+		textFunction("release1", "version_input") //duplicates due to IDs needing to be unique across document
+		textFunction("civStub", "civStub_input")
+		textFunction("name", "baseName_input")
+		textFunction("name1", "baseName_input") //duplicates due to IDs needing to be unique across document
+		textFunction("name2", "baseName_input") //duplicates due to IDs needing to be unique across document
+		textFunction("image", "image_input")
+		textFunction("civilized", "civilized_input")
+		textFunction("builder", "builder_input")
+		textFunction("builderlink", "builderlink_input")
+		textFunction("galaxy", "galaxy_input")
+		textFunction("region", "region_input")
+		textFunction("system", "system_input")
+		textFunction("system1", "system_input") //duplicates due to IDs needing to be unique across document
+		textFunction("planet", "planet_input")
+		textFunction("planet1", "planet_input") //duplicates due to IDs needing to be unique across document
+		textFunction("moon", "moon_input")
+		textFunction("axes", "axes_input")
+		textFunction("portalglyphs", "portalglyphs_input")
+		textFunction("portalglyphs1", "portalglyphs_input") //duplicates due to IDs needing to be unique across document
+		textFunction("type", "type_input")
+		textFunction("mode", "mode_input")
+		textFunction("platform", "platform_input")
+		radioFunction("farm", "farm_input")
+		radioFunction("geobay", "geobay_input")
+		radioFunction("arena", "arena_input")
+		radioFunction("landingpad", "landingPad_input")
+		radioFunction("racetrack", "racetrack_input")
+		radioFunction("terminal", "terminal_input")
+		textFunction("censusplayer", "censusPlayer_input")
+		textFunction("censusreddit", "censusReddit_input")
+		textFunction("censusdiscord", "censusDiscord_input")
+		textFunction("censusfriend", "censusFriend_input")
+		textFunction("censusarrival", "censusArrival_input")
+		textFunction("censusrenewal", "censusRenewal_input")
+		radioFunction("censusshow", "censusShow_input")
+		textFunction("layout", "layout_input")
+		textFunction("features", "features_input")
+		textFunction("addInfo", "addInfo_input")
+	}
+  </script>
 
-  </head>
+</head>
 <body>
 
 	<form>
@@ -50,11 +80,11 @@
 			</select>
 		</div>
 		<div>
-			<label><b>Enter the name of the base:</b></label>
+			<label><b>Enter the name of the builder if builder doesn't have wiki account:</b></label>
 			<input type="text" name="Builder" id="builder_input">
 		</div>
 		<div>
-			<label><b>Enter the name of the base:</b></label>
+			<label><b>Enter the wiki account of the builder OR leave empty:</b></label>
 			<input type="text" name="Builderlink" id="builderlink_input">
 		</div>
 		<div>
@@ -181,24 +211,24 @@
 			<input type="text" name="CensusPlayer" id="censusPlayer_input">
 		</div>
 		<div>
-			<label><b>Census: What is the name of the player?</b></label>
-			<input type="text" name="Glyphs" id="portalglyphs_input">
+			<label><b>Census: What is the Reddit name of the player?</b></label>
+			<input type="text" name="CensusReddit" id="censusReddit_input">
 		</div>
 		<div>
-			<label><b>Census: What is the name of the player?</b></label>
-			<input type="text" name="Glyphs" id="portalglyphs_input">
+			<label><b>Census: What is the Discord name of the player?</b></label>
+			<input type="text" name="CensusDiscord" id="censusDiscord_input">
 		</div>
 		<div>
-			<label><b>Enter the portalglyphs:</b></label>
-			<input type="text" name="Glyphs" id="portalglyphs_input">
+			<label><b>Census: What is the NMS friend code of the player?</b></label>
+			<input type="text" name="CensusFriend" id="censusFriend_input">
 		</div>
 		<div>
-			<label><b>Enter the portalglyphs:</b></label>
-			<input type="text" name="Glyphs" id="portalglyphs_input">
+			<label><b>Census: When did the player arrive in Hub space (use YYYY/MM/DD format)?</b></label>
+			<input type="text" name="CensusArrival" id="censusArrival_input">
 		</div>
 		<div>
-			<label><b>Enter the portalglyphs:</b></label>
-			<input type="text" name="Glyphs" id="portalglyphs_input">
+			<label><b>Census: In what year has the census been renewed?</b></label>
+			<input type="text" name="CensusRenewal" id="censusRenewal_input">
 		</div>
 		<div>
 			<label><b>Should this player be listed on the census?</b></label>
@@ -244,11 +274,11 @@
 		<div>| moon = <span id='moon'></span></div>
 		<div>| axes = <span id='axes'></span></div>
 		<div>| coordinates = {{Glyphs2Coords|<span id='portalglyphs'></span>}}</div>
-		<div>| portalglyphs = {{Gl/Small|<span id='portalglyphs'></span>}}</div>
+		<div>| portalglyphs = {{Gl/Small|<span id='portalglyphs1'></span>}}</div>
 		<div>| type = <span id='type'></span></div>
 		<div>| mode = <span id='mode'></span></div>
 		<div>| platform = <span id='platform'></span></div>
-		<div>| release = <span id='release'></span></div>
+		<div>| release = <span id='release1'></span></div>
 		<div>| farm = <span id='farm'></span></div>
 		<div>| geobay = <span id='geobay'></span></div>
 		<div>| arena = <span id='arena'></span></div>
@@ -263,11 +293,11 @@
 		<div>| censusrenewal = <span id='censusrenewal'></span></div>
 		<div>| censusshow = <span id="censusshow"></span></div>
 		<div>}}</div>
-		<div>'''<span id='name'></span>''' is a player base.</div>
+		<div>'''<span id='name1'></span>''' is a player base.</div>
 		<br>
 
 		<div>==Summary==</div>
-		<div>'''<span id='name'></span>''' is a [[Habitable Base|player base]], located on the planet [[<span id='planet'></span>]] in the [[<span id='system'></span>]] system.</div>
+		<div>'''<span id='name2'></span>''' is a [[Habitable Base|player base]], located on the planet [[<span id='planet1'></span>]] in the [[<span id='system1'></span>]] system.</div>
 		<br>
 
 		<div>==Layout==</div>
