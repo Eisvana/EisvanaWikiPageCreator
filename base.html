@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<script src="./lib/wikiscript.js"></script>
@@ -38,7 +39,8 @@
 		textFunction("censusreddit", "censusReddit_input")
 		textFunction("censusdiscord", "censusDiscord_input")
 		textFunction("censusfriend", "censusFriend_input")
-		textFunction("censusarrival", "censusArrival_input")
+		textFunction("censusarrival", "censusArrival_input") //WIP!!
+		dateConvert("censusarrival")
 		textFunction("censusrenewal", "censusRenewal_input")
 		radioFunction("censusshow", "censusShow_input")
 		textFunction("layout", "layout_input")
@@ -223,8 +225,8 @@
 			<input type="text" name="CensusFriend" id="censusFriend_input">
 		</div>
 		<div>
-			<label><b>Census: When did the player arrive in Hub space (use YYYY/MM/DD format)?</b></label>
-			<input type="text" name="CensusArrival" id="censusArrival_input">
+			<label><b>Census: When did the player arrive in Hub space?</b></label>
+			<input type="date" name="CensusArrival" id="censusArrival_input">
 		</div>
 		<div>
 			<label><b>Census: In what year has the census been renewed?</b></label>
