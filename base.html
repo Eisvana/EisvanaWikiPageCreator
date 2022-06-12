@@ -41,16 +41,16 @@
 			textFunction("censusdiscord", "censusDiscord_input");
 			textFunction("censusfriend", "censusFriend_input");
 			textFunction("censusarrival", "censusArrival_input");
-			dateConvert("censusarrival")
+			dateConvert("censusarrival");
 			radioFunction("censusshow", "censusShow_input");
 			textFunction("layout", "layout_input");
 			textFunction("features", "features_input");
 			textFunction("addInfo", "addInfo_input");
 			wikiLink("link", "baseName_input");
 			currentYear("censusrenewal");
+			civGalaxy("civ");
 		}
 		window.onload = () => {
-			civGalaxy("civ");
 			civRegDropdown();
 			autoRefresh();
 		}
