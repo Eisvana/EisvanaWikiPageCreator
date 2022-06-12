@@ -42,7 +42,7 @@
 			textFunction("censusfriend", "censusFriend_input");
 			textFunction("censusarrival", "censusArrival_input");
 			dateConvert("censusarrival")
-			radioFunction(";censusshow", "censusShow_input");
+			radioFunction("censusshow", "censusShow_input");
 			textFunction("layout", "layout_input");
 			textFunction("features", "features_input");
 			textFunction("addInfo", "addInfo_input");
@@ -154,7 +154,9 @@
 							<td><input type="text" name="Axes" id="axes_input">
 						</tr>
 						<tr>
-							<th><label>Portalglyphs:</label>
+							<th><label>Portalglyphs:</label><br><small><a target="_blank" rel="noopener noreferrer"
+										href="https://nmsportals.github.io/" title="Portal decoder">Portal
+										decoder</a></small>
 							<td><input maxlength="12" type="text" name="Glyphs" id="portalglyphs_input">
 						</tr>
 						<tr>
@@ -294,8 +296,7 @@
 						<tr>
 							<td colspan="2">
 								<p style="text-align:center">Note: You can drag on the bottom right corner to expand the
-									text
-									area
+									text area
 								</p>
 						</tr>
 						<tr>
@@ -324,47 +325,50 @@
 			<div class="column is-full-mobile">
 				<div class="output">
 					<p>Create your page here: <a id="link"></a></p>
-					<output id="wikiText">
-						<div>{{Version|<span id='release'></span>}}</div>
-						<div>{{<span id='civStub'></span>}}</div>
+					<br>
+
+					<div id="wikiText">
+						<div>{{Version|<output id='release'></output>}}</div>
+						<div>{{<output id='civStub'></output>}}</div>
 						<div>{{Base infobox</div>
-						<div>| name = <span id='name'></span></div>
-						<div>| image = <span id='image'></span></div>
-						<div>| civilized = <span id='civilized'></span></div>
-						<div>| builder = <span id='builder'></span></div>
-						<div>| builderlink = <span id='builderlink'></span></div>
-						<div>| galaxy = <span id='galaxy'></span></div>
-						<div>| region = <span id='region'></span></div>
-						<div>| system = <span id='system'></span></div>
-						<div>| planet = <span id='planet'></span></div>
-						<div>| moon = <span id='moon'></span></div>
-						<div>| axes = <span id='axes'></span></div>
-						<div>| coordinates = {{Glyphs2Coords|<span id='portalglyphs'></span>}}</div>
-						<div>| portalglyphs = {{Gl/Small|<span id='portalglyphs1'></span>}}</div>
-						<div>| type = <span id='type'></span></div>
-						<div>| mode = <span id='mode'></span></div>
-						<div>| platform = <span id='platform'></span></div>
-						<div>| release = <span id='release1'></span></div>
-						<div>| farm = <span id='farm'></span></div>
-						<div>| geobay = <span id='geobay'></span></div>
-						<div>| arena = <span id='arena'></span></div>
-						<div>| landingpad = <span id='landingpad'></span></div>
-						<div>| racetrack = <span id='racetrack'></span></div>
-						<div>| terminal = <span id='terminal'></span></div>
-						<div>| censusplayer = <span id='censusplayer'></span></div>
-						<div>| censusreddit = <span id='censusreddit'></span></div>
-						<div>| censusdiscord = <span id='censusdiscord'></span></div>
-						<div>| censusfriend = <span id='censusfriend'></span></div>
-						<div>| censusarrival = <span id='censusarrival'></span></div>
-						<div>| censusrenewal = <span id='censusrenewal'></span></div>
-						<div>| censusshow = <span id="censusshow"></span></div>
+						<div>| name = <output id='name'></output></div>
+						<div>| image = <output id='image'></output></div>
+						<div>| civilized = <output id='civilized'></output></div>
+						<div>| builder = <output id='builder'></output></div>
+						<div>| builderlink = <output id='builderlink'></output></div>
+						<div>| galaxy = <output id='galaxy'></output></div>
+						<div>| region = <output id='region'></output></div>
+						<div>| system = <output id='system'></output></div>
+						<div>| planet = <output id='planet'></output></div>
+						<div>| moon = <output id='moon'></output></div>
+						<div>| axes = <output id='axes'></output></div>
+						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs'></output>}}</div>
+						<div>| portalglyphs = {{Gl/Small|<output id='portalglyphs1'></output>}}</div>
+						<div>| type = <output id='type'></output></div>
+						<div>| mode = <output id='mode'></output></div>
+						<div>| platform = <output id='platform'></output></div>
+						<div>| release = <output id='release1'></output></div>
+						<div>| farm = <output id='farm'></output></div>
+						<div>| geobay = <output id='geobay'></output></div>
+						<div>| arena = <output id='arena'></output></div>
+						<div>| landingpad = <output id='landingpad'></output></div>
+						<div>| racetrack = <output id='racetrack'></output></div>
+						<div>| terminal = <output id='terminal'></output></div>
+						<div>| censusplayer = <output id='censusplayer'></output></div>
+						<div>| censusreddit = <output id='censusreddit'></output></div>
+						<div>| censusdiscord = <output id='censusdiscord'></output></div>
+						<div>| censusfriend = <output id='censusfriend'></output></div>
+						<div>| censusarrival = <output id='censusarrival'></output></div>
+						<div>| censusrenewal = <output id='censusrenewal'></output></div>
+						<div>| censusshow = <output id="censusshow"></output></div>
 						<div>}}</div>
-						<div>'''<span id='name1'></span>''' is a player base.</div>
+						<div>'''<output id='name1'></output>''' is a player base.</div>
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''<span id='name2'></span>''' is a [[Habitable Base|player base]], located on the planet
-							[[<span id='planet1'></span>]] in the [[<span id='system1'></span>]] system.</div>
+						<div>'''<output id='name2'></output>''' is a [[Habitable Base|player base]], located on the
+							planet
+							[[<output id='planet1'></output>]] in the [[<output id='system1'></output>]] system.</div>
 						<br>
 
 						<div>==Layout==</div>
@@ -372,17 +376,18 @@
 						<br>
 
 						<div>==Features==</div>
-						<div id='features'></div>
+						<output id='features'></output>
 						<br>
 
 						<div>==Additional information==</div>
-						<div id='addInfo'></div>
+						<output id='addInfo'></output>
 						<br>
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
 						<div>&lt;/gallery&gt;</div>
-					</output>
+						</output>
+					</div>
 				</div>
 			</div>
 		</div>
