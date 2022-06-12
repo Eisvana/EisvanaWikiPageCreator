@@ -55,7 +55,7 @@
 	<nav style="font-size:larger"><a href="./" title="Main page">&larr; Return to main page</a></nav>
 	<br><br>
 
-	<form>
+	<form id="form">
 		<table style="text-align:left">
 			<tr>
 				<th><label>Current release:</label>
@@ -285,7 +285,7 @@
 		<input type="reset" value="Reset inputs">
 	</form>
 	<br>
-	<script>civRegDropdown("region_input", "civ")</script>
+	<script>civRegDropdown("region_input", "civ"), autoRefresh()</script>
 	<input type="submit" onclick="showInput();">
 	<button onclick="copyText('wikiText', 'btn')" id="btn">Copy wikicode</button>
 	<p>Create your page here: <a id="link"></a></p>
