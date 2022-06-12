@@ -53,6 +53,12 @@ input[type="date"] {
 	min-width: 200px;
 }
 
+tr textarea {
+	width: 100%;
+	max-width: 600px;
+	min-height: 75px;
+}
+
 input[type=checkbox], input[type=radio] {
 	vertical-align: middle;
 }
@@ -85,6 +91,10 @@ table {
 
 tr {
 	border-bottom: 1px dashed rgba(50, 50, 50, 0.1);
+}
+
+tr.no-border {
+	border: none;
 }
 
 tr * {
