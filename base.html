@@ -52,6 +52,8 @@
 		wikiLink("link", "baseName_input")
 		currentYear("censusrenewal")
 	}
+	
+	
   </script>
 </head>
 <body>
@@ -91,9 +93,9 @@
 				<th><label>Civ macro:</label>
 				<td>
 					<select id="civStub_input" name="Civ Stub">
-						<option value="GHub">GHub
-						<option value="GHub Calypso">CalHub
-						<option value="GHub Eissentam">EisHub
+						<option value="GHub" id="GHub">GHub
+						<option value="GHub Calypso" id="CalHub">CalHub
+						<option value="GHub Eissentam" id="EisHub">EisHub
 					</select>
 				</td>
 			</tr>
@@ -135,7 +137,19 @@
 			</tr>
 			<tr>
 				<th><label>Name of the region:</label>
-				<td><input type="text" name="Region" id="region_input">
+				<td><select name="Region" id="region_input">
+					<option value="The Arm of Vezitinen" id="The Arm of Vezitinen">The Arm of Vezitinen
+					<option value="Canthian" id="Canthian">Canthian
+					<option value="Dexterf Sector" id="Dexterf Sector">Dexterf Sector
+					<option value="The Arm of Katteus" id="The Arm of Katteus">The Arm of Katteus
+					<option value="Nugsdor Adjunct" id="Nugsdor Adjunct">Nugsdor Adjunct
+					<option value="Uefert Nebula" id="Uefert Nebula">Uefert Nebula
+					<option value="Widraik" id="Widraik">Widraik
+					<option value="Airnaka Conflux" id="Airnaka Conflux">Airnaka Conflux
+					<option value="Sivess Instability" id="Sivess Instability">Sivess Instability
+					<option value="Savenix Instability" id="Savenix Instability">Savenix Instability
+					<option value="Nonlopsi Instability" id="Nonlopsi Instability">Nonlopsi Instability
+				</select>
 			</tr>
 			<tr>
 				<th><label>Name of the system:</label>
@@ -305,7 +319,7 @@
 		<input type="reset" value="Reset inputs">
 	</form>
 	<br>
-	
+	<script>civRegDropdown("region_input")</script>
 	<input type="submit" onclick="showInput();">
 	<button onclick="copyText("wikiText", "btn")" id="btn">Copy wikicode</button>
 	<p>Create your page here: <a id="link"></a></p>
