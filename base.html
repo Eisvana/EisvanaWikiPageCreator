@@ -11,16 +11,13 @@
 	function showInput() {
 		textFunction("release", "version_input")
 		textFunction("release1", "version_input") //duplicates due to IDs needing to be unique across document
-		textFunction("civStub", "civStub_input")
-		textFunction("name", "baseName_input")
+ 		textFunction("name", "baseName_input")
 		textFunction("name1", "baseName_input") //duplicates due to IDs needing to be unique across document
 		textFunction("name2", "baseName_input") //duplicates due to IDs needing to be unique across document
 		textFunction("image", "image_input")
-		textFunction("civilized", "civilized_input")
-		textFunction("builder", "builder_input")
+ 		textFunction("builder", "builder_input")
 		textFunction("builderlink", "builderlink_input")
-		textFunction("galaxy", "galaxy_input")
-		textFunction("region", "region_input")
+ 		textFunction("region", "region_input")
 		textFunction("system", "system_input")
 		textFunction("system1", "system_input") //duplicates due to IDs needing to be unique across document
 		textFunction("planet", "planet_input")
@@ -44,13 +41,13 @@
 		textFunction("censusfriend", "censusFriend_input")
 		textFunction("censusarrival", "censusArrival_input")
 		dateConvert("censusarrival")
-<!-- 		textFunction("censusrenewal", "censusRenewal_input")-->
  		radioFunction("censusshow", "censusShow_input")
 		textFunction("layout", "layout_input")
 		textFunction("features", "features_input")
 		textFunction("addInfo", "addInfo_input")
 		wikiLink("link", "baseName_input")
 		currentYear("censusrenewal")
+		civGalaxy("civ")
 	}
   </script>
 </head>
@@ -88,12 +85,12 @@
 				</td>
 			</tr>
 			<tr>
-				<th><label>Civ macro:</label>
+				<th><label>To which civ does this base belong?</label>
 				<td>
-					<select id="civStub_input" name="Civ Stub">
+					<select id="civ" name="Civ">
 						<option value="GHub" id="GHub">GHub
-						<option value="GHub Calypso" id="CalHub">CalHub
-						<option value="GHub Eissentam" id="EisHub">EisHub
+						<option value="CalHub" id="CalHub">CalHub
+						<option value="EisHub" id="EisHub">EisHub
 					</select>
 				</td>
 			</tr>
@@ -106,38 +103,18 @@
 				<td><input type="text" name="Image" id="image_input">
 			</tr>
 			<tr>
-				<th><label>Civ:</label>
-				<td>
-					<select id="civilized_input" name="Civilization">
-						<option value="Galactic Hub Project">GHub
-						<option value="Galactic Hub Calypso">CalHub
-						<option value="Galactic Hub Eissentam">EisHub
-					</select>
-				</td>
+				<th><label>Wiki account of the builder OR leave empty:</label>
+				<td><input type="text" name="Builderlink" id="builderlink_input">
 			</tr>
 			<tr>
 				<th><label>Name of the builder if builder doesn't have wiki account:</label>
 				<td><input type="text" name="Builder" id="builder_input">
 			</tr>
 			<tr>
-				<th><label>Wiki account of the builder OR leave empty:</label>
-				<td><input type="text" name="Builderlink" id="builderlink_input">
-			</tr>
-			<tr>
-				<th><label>Galaxy:</label>
-				<td>
-					<select id="galaxy_input" name="Galaxy">
-						<option value="Euclid">Euclid
-						<option value="Calypso">Calypso
-						<option value="Eissentam">Eissentam
-					</select>
-				</td>
-			</tr>
-			<tr>
 				<th><label>Name of the region:</label>
 				<td>
 					<select name="Region" id="region_input">
-						<option value="The Arm of Vezitinen" id="The Arm of Vezitinen">The Arm of Vezitinen
+<!-- 						<option value="The Arm of Vezitinen" id="The Arm of Vezitinen">The Arm of Vezitinen
 						<option value="Canthian" id="Canthian">Canthian
 						<option value="Dexterf Sector" id="Dexterf Sector">Dexterf Sector
 						<option value="The Arm of Katteus" id="The Arm of Katteus">The Arm of Katteus
@@ -148,7 +125,7 @@
 						<option value="Sivess Instability" id="Sivess Instability">Sivess Instability
 						<option value="Savenix Instability" id="Savenix Instability">Savenix Instability
 						<option value="Nonlopsi Instability" id="Nonlopsi Instability">Nonlopsi Instability
-					</select>
+ -->					</select>
 				<td>
 			</tr>
 			<tr>
@@ -283,7 +260,7 @@
 			</tr>
 			<tr>
 				<th><label>NMS friend code of the player?</label>
-				<td><input type="text" name="CensusFriend" id="censusFriend_input">
+				<td><input maxlength="15" type="text" name="CensusFriend" id="censusFriend_input">
 			</tr>
 			<tr>
 				<th><label>When did the player arrive in Hub space?</label>
@@ -319,9 +296,9 @@
 		<input type="reset" value="Reset inputs">
 	</form>
 	<br>
-	<script>civRegDropdown("region_input")</script>
+	<script>civRegDropdown("region_input", "civ")</script>
 	<input type="submit" onclick="showInput();">
-	<button onclick="copyText("wikiText", "btn")" id="btn">Copy wikicode</button>
+	<button onclick="copyText('wikiText', 'btn')" id="btn">Copy wikicode</button>
 	<p>Create your page here: <a id="link"></a></p>
 	<br>
 	<output id="wikiText">
