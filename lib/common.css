@@ -1,3 +1,7 @@
 tr * {
-	min-height: 20px
+	min-height: 21px
+}
+
+input {
+	vertical-align: sub
 }
