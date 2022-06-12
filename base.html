@@ -52,6 +52,7 @@
 		window.onload = () => {
 			civGalaxy("civ");
 			civRegDropdown();
+			autoRefresh();
 		}
 	</script>
 </head>
@@ -63,7 +64,7 @@
 
 		<div class="columns is-desktop">
 			<div class="column is-full-mobile">
-				<form>
+				<form id="form">
 					<table style="text-align:left">
 						<tr>
 							<th><label>Current release:</label>
@@ -122,18 +123,6 @@
 							<th><label>Name of the region:</label>
 							<td>
 								<select name="Region" id="region_input">
-									<!-- 						<option value="The Arm of Vezitinen" id="The Arm of Vezitinen">The Arm of Vezitinen
-						<option value="Canthian" id="Canthian">Canthian
-						<option value="Dexterf Sector" id="Dexterf Sector">Dexterf Sector
-						<option value="The Arm of Katteus" id="The Arm of Katteus">The Arm of Katteus
-						<option value="Nugsdor Adjunct" id="Nugsdor Adjunct">Nugsdor Adjunct
-						<option value="Uefert Nebula" id="Uefert Nebula">Uefert Nebula
-						<option value="Widraik" id="Widraik">Widraik
-						<option value="Airnaka Conflux" id="Airnaka Conflux">Airnaka Conflux
-						<option value="Sivess Instability" id="Sivess Instability">Sivess Instability
-						<option value="Savenix Instability" id="Savenix Instability">Savenix Instability
-						<option value="Nonlopsi Instability" id="Nonlopsi Instability">Nonlopsi Instability
- -->
 								</select>
 							<td>
 						</tr>
@@ -280,10 +269,6 @@
 							<th><label>When did the player arrive in Hub space?</label>
 							<td><input type="date" name="CensusArrival" id="censusArrival_input">
 						</tr>
-						<!-- 		<tr>
-			<th><label>In what year has the census been renewed?</label>
-			<td><input type="text" name="CensusRenewal" id="censusRenewal_input">
-		</tr>-->
 						<tr>
 							<th><label>Are you already listed on the census?</label>
 							<td>
@@ -325,7 +310,7 @@
 							</td>
 						</tr>
 					</table>
-					<br />
+					<br>
 				</form>
 				<div class="actions">
 					<input class="button is-primary" type="submit" onclick="showInput();">
@@ -333,7 +318,7 @@
 					<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy
 						wikicode</button>
 				</div>
-				<br />
+				<br>
 			</div>
 			<div class="column is-full-mobile">
 				<div class="output">
