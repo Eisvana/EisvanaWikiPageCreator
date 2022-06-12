@@ -52,12 +52,10 @@
 		wikiLink("link", "baseName_input")
 		currentYear("censusrenewal")
 	}
-	
-	
   </script>
 </head>
 <body>
-	<div style="font-size:larger"><a href="./" title="Main page">&larr; Return to main page</a></div>
+	<nav style="font-size:larger"><a href="./" title="Main page">&larr; Return to main page</a></nav>
 	<br><br>
 
 	<form>
@@ -137,19 +135,21 @@
 			</tr>
 			<tr>
 				<th><label>Name of the region:</label>
-				<td><select name="Region" id="region_input">
-					<option value="The Arm of Vezitinen" id="The Arm of Vezitinen">The Arm of Vezitinen
-					<option value="Canthian" id="Canthian">Canthian
-					<option value="Dexterf Sector" id="Dexterf Sector">Dexterf Sector
-					<option value="The Arm of Katteus" id="The Arm of Katteus">The Arm of Katteus
-					<option value="Nugsdor Adjunct" id="Nugsdor Adjunct">Nugsdor Adjunct
-					<option value="Uefert Nebula" id="Uefert Nebula">Uefert Nebula
-					<option value="Widraik" id="Widraik">Widraik
-					<option value="Airnaka Conflux" id="Airnaka Conflux">Airnaka Conflux
-					<option value="Sivess Instability" id="Sivess Instability">Sivess Instability
-					<option value="Savenix Instability" id="Savenix Instability">Savenix Instability
-					<option value="Nonlopsi Instability" id="Nonlopsi Instability">Nonlopsi Instability
-				</select>
+				<td>
+					<select name="Region" id="region_input">
+						<option value="The Arm of Vezitinen" id="The Arm of Vezitinen">The Arm of Vezitinen
+						<option value="Canthian" id="Canthian">Canthian
+						<option value="Dexterf Sector" id="Dexterf Sector">Dexterf Sector
+						<option value="The Arm of Katteus" id="The Arm of Katteus">The Arm of Katteus
+						<option value="Nugsdor Adjunct" id="Nugsdor Adjunct">Nugsdor Adjunct
+						<option value="Uefert Nebula" id="Uefert Nebula">Uefert Nebula
+						<option value="Widraik" id="Widraik">Widraik
+						<option value="Airnaka Conflux" id="Airnaka Conflux">Airnaka Conflux
+						<option value="Sivess Instability" id="Sivess Instability">Sivess Instability
+						<option value="Savenix Instability" id="Savenix Instability">Savenix Instability
+						<option value="Nonlopsi Instability" id="Nonlopsi Instability">Nonlopsi Instability
+					</select>
+				<td>
 			</tr>
 			<tr>
 				<th><label>Name of the system:</label>
@@ -324,7 +324,7 @@
 	<button onclick="copyText("wikiText", "btn")" id="btn">Copy wikicode</button>
 	<p>Create your page here: <a id="link"></a></p>
 	<br>
-	<div id="wikiText">
+	<output id="wikiText">
 		<div>{{Version|<span id='release'></span>}}</div>
 		<div>{{<span id='civStub'></span>}}</div>
 		<div>{{Base infobox</div>
@@ -381,6 +381,6 @@
 		<div>==Gallery==</div>
 		<div>&lt;gallery&gt;</div>
 		<div>&lt;/gallery&gt;</div>
-	</div>
+	</output>
 </body>
 </html>
