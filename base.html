@@ -260,7 +260,7 @@
 			</tr>
 			<tr>
 				<th><label>NMS friend code of the player?</label>
-				<td><input type="text" name="CensusFriend" id="censusFriend_input">
+				<td><input maxlength="15" type="text" name="CensusFriend" id="censusFriend_input">
 			</tr>
 			<tr>
 				<th><label>When did the player arrive in Hub space?</label>
@@ -296,7 +296,7 @@
 		<input type="reset" value="Reset inputs">
 	</form>
 	<br>
-	<script>civRegDropdown("region_input")</script>
+	<script>civRegDropdown("region_input", "civ")</script>
 	<input type="submit" onclick="showInput();">
 	<button onclick="copyText('wikiText', 'btn')" id="btn">Copy wikicode</button>
 	<p>Create your page here: <a id="link"></a></p>
