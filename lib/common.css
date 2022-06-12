@@ -1,3 +1,96 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+.home {
+	margin-top: 2em;
+	text-align: center;
+}
+
+.page-options {
+	max-width: 500px;
+	margin: 1em auto;
+}
+
+.page-options li {
+	display: inline-block;
+	margin: 0.5em;
+}
+
+.page-options li a {
+	font-size: 1.5rem;
+}
+
+.built-by {
+	margin: 2em;
+	font-size: 1.25rem;
+}
+
+.built-by img {
+	max-height: 2rem;
+}
+
+.hub-images a {
+	margin: 0 1em;
+	max-width: 200px;
+	display: inline-block;
+}
+
+nav {
+	margin-top: 1em;
+}
+
+.container {
+	margin-bottom: 10em;
+}
+
+select,
+input[type="text"],
+input[type="date"] {
+	margin-top: 5px;
+	border: 1px solid black;
+	border-radius: 4px;
+	background-color: rgb(242, 242, 242);
+	min-width: 200px;
+}
+
+input[type=checkbox], input[type=radio] {
+	vertical-align: middle;
+}
+
+table {
+	margin: 0 auto;
+}
+
+.output {
+	border-left: 1px dashed rgb(210, 210, 210);
+	padding-left: 2em;
+}
+
+@media only screen and (max-width: 1024px) {
+	form {
+		text-align: center;
+	}
+
+	.output {
+		display: block;
+		margin: 0 auto;
+		max-width: 500px;
+	}
+}
+
+.actions {
+	display: inline-block;
+	margin: 0 auto;
+}
+
+tr {
+	border-bottom: 1px dashed rgba(50, 50, 50, 0.1);
+}
+
 tr * {
-	min-height: 20px
+	min-height: 23px;
+}
+
+tr label {
+	margin-right: 1em;
 }
