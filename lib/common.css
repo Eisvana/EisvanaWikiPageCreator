@@ -52,12 +52,6 @@ input[type="date"] {
 	min-width: 200px;
 }
 
-input[type="text"],
-input[type="date"],
-select * {
-  background-color: rgb(242, 242, 242);
-}
-
 tr textarea {
 	width: 100%;
 	max-width: 600px;
@@ -76,7 +70,6 @@ table {
 	border-left: 1px dashed rgb(210, 210, 210);
 	padding-left: 2em;
 }
-
 
 .actions {
 	display: inline-block;
@@ -100,7 +93,6 @@ table {
 	    margin: 0 5px;
 	}
 }
-
 
 tr {
 	border-bottom: 1px dashed rgba(50, 50, 50, 0.1);
