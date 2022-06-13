@@ -124,7 +124,7 @@
 							<td>
 								<select name="Region" id="region_input">
 								</select>
-							<td>
+							</td>
 						</tr>
 						<tr>
 							<th><label>Name of the system:</label>
@@ -286,7 +286,7 @@
 							</td>
 						</tr>
 						<tr class="no-border">
-							<th style="vertical-align:top"><label>Base Layout:</label>
+							<th style="vertical-align:top" colspan="2"><label>Base Layout:</label>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -294,7 +294,7 @@
 							</td>
 						</tr>
 						<tr class="no-border">
-							<th style="vertical-align:top"><label>Base Features:</label>
+							<th style="vertical-align:top" colspan="2"><label>Base Features:</label>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -302,7 +302,7 @@
 							</td>
 						</tr>
 						<tr class="no-border">
-							<th style="vertical-align:top"><label>Additional information:</label>
+							<th style="vertical-align:top" colspan="2"><label>Additional information:</label>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -316,9 +316,7 @@
 					<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>
 					<button class="button is-warning" type="reset" form="form">Reset inputs</button>
 					<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
-					<a id="downloadbtn">
-						<button class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'baseName_input')">Download file</button>
-					</a>
+					<a id="downloadbtn" class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'baseName_input')">Download file</a>
 				</div>
 				<br>
 			</div>
@@ -384,11 +382,11 @@
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
 						<div>&lt;/gallery&gt;</div>
-						</output>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 
 </html>
