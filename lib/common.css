@@ -49,8 +49,13 @@ input[type="date"] {
 	margin-top: 5px;
 	border: 1px solid black;
 	border-radius: 4px;
-	background-color: rgb(242, 242, 242);
 	min-width: 200px;
+}
+
+input[type="text"],
+input[type="date"],
+select * {
+  background-color: rgb(242, 242, 242);
 }
 
 tr textarea {
