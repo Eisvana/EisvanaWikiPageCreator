@@ -49,8 +49,13 @@ input[type="date"] {
 	margin-top: 5px;
 	border: 1px solid black;
 	border-radius: 4px;
-	background-color: rgb(242, 242, 242);
 	min-width: 200px;
+}
+
+input[type="text"],
+input[type="date"],
+select * {
+  background-color: rgb(242, 242, 242);
 }
 
 tr textarea {
@@ -72,22 +77,30 @@ table {
 	padding-left: 2em;
 }
 
-@media only screen and (max-width: 1024px) {
-	form {
-		text-align: center;
-	}
-
-	.output {
-		display: block;
-		margin: 0 auto;
-		max-width: 500px;
-	}
-}
 
 .actions {
 	display: inline-block;
 	margin: 0 auto;
 }
+
+@media only screen and (max-width: 1024px) {
+	.output {
+		display: block;
+		margin: 0 auto;
+		max-width: 500px;
+	}
+	
+	.actions {
+	    display: flex;
+	    margin: 0 auto;
+	    justify-content: center;
+	}
+
+	.actions * {
+	    margin: 0 5px;
+	}
+}
+
 
 tr {
 	border-bottom: 1px dashed rgba(50, 50, 50, 0.1);

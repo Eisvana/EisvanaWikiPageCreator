@@ -64,7 +64,7 @@
 
 		<div class="columns is-desktop">
 			<div class="column is-full-mobile">
-				<form id="form">
+				<form id="form" onreset="textReset()">
 					<table style="text-align:left">
 						<tr>
 							<th><label>Current release:</label>
@@ -313,10 +313,12 @@
 					<br>
 				</form>
 				<div class="actions">
-					<input class="button is-primary" type="submit" onclick="showInput();">
-					<input class="button is-warning" type="reset" value="Reset inputs">
-					<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy
-						wikicode</button>
+					<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>
+					<button class="button is-warning" type="reset" form="form">Reset inputs</button>
+					<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
+					<a id="downloadbtn">
+						<button class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'baseName_input')">Download file</button>
+					</a>
 				</div>
 				<br>
 			</div>
@@ -364,21 +366,19 @@
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''<output id='name2'></output>''' is a [[Habitable Base|player base]], located on the
-							planet
-							[[<output id='planet1'></output>]] in the [[<output id='system1'></output>]] system.</div>
+						<div>'''<output id='name2'></output>''' is a [[Habitable Base|player base]], located on the	planet [[<output id='planet1'></output>]] in the [[<output id='system1'></output>]] system.</div>
 						<br>
 
 						<div>==Layout==</div>
-						<div id='layout'></div>
+						<div><output id='layout'></output></div>
 						<br>
 
 						<div>==Features==</div>
-						<output id='features'></output>
+						<div><output id='features'></output></div>
 						<br>
 
 						<div>==Additional information==</div>
-						<output id='addInfo'></output>
+						<div><output id='addInfo'></output></div>
 						<br>
 
 						<div>==Gallery==</div>
