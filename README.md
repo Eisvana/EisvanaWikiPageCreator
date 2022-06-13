@@ -13,4 +13,4 @@ It's also open for other civs/companies/players to contribute and add their own 
 
 Special thanks:
 * [ItalicInterloper](https://nomanssky.fandom.com/wiki/User:ItalicInterloper) (GHub): Design and feature feedback, as well as the initial idea to bring this to the web
-* KhaozTopsy (Assistant for No Man's Sky; NMSCD): JavaScript help and page styling
+* [KhaozTopsy](https://github.com/Khaoz-Topsy) (Assistant for No Man's Sky; NMSCD): JavaScript help and page styling
