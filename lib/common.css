@@ -72,7 +72,6 @@ table {
 }
 
 .actions {
-	display: inline-block;
 	margin: 0 auto;
 }
 
@@ -82,15 +81,17 @@ table {
 		margin: 0 auto;
 		max-width: 500px;
 	}
-	
+
 	.actions {
-	    display: flex;
-	    margin: 0 auto;
-	    justify-content: center;
+		margin: 0 auto;
+		display: flex;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
 	}
 
-	.actions * {
-	    margin: 0 5px;
+	.actions .button {
+		margin: 4px;
 	}
 }
 
