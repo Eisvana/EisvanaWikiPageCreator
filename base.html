@@ -313,13 +313,15 @@
 					</table>
 					<br>
 				</form>
-				<div class="actions">
-					<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>
-					<button class="button is-warning" type="reset" form="form">Reset inputs</button>
-					<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy
-						wikicode</button>
-					<a id="downloadbtn" class="button is-outlined is-primary"
-						onclick="downloadFile('downloadbtn', 'wikiText', 'baseName_input')">Download file</a>
+				<div>
+					<span class="actions" style="white-space: nowrap">
+						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>
+						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
+					</span>
+					<span class="actions" style="white-space: nowrap">
+						<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
+						<a id="downloadbtn" class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'baseName_input')">Download file</a>
+					</span>
 				</div>
 				<br>
 			</div>

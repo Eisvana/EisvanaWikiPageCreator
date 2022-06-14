@@ -47,8 +47,6 @@ select,
 input[type="text"],
 input[type="date"] {
 	margin-top: 5px;
-	border: 1px solid black;
-	border-radius: 4px;
 	min-width: 200px;
 }
 
@@ -58,7 +56,8 @@ tr textarea {
 	min-height: 75px;
 }
 
-input[type=checkbox], input[type=radio] {
+input[type=checkbox],
+input[type=radio] {
 	vertical-align: middle;
 }
 
@@ -75,16 +74,67 @@ table {
 	margin: 0 auto;
 }
 
-@media only screen and (max-width: 1024px) {
+
+@media only screen and (max-width: 1215px) {
+	.actions {
+		margin: 0 auto;
+		display: table-cell;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
+	}
+
+	.actions .button {
+		margin: 4px;
+	}
+}
+
+@media only screen and (max-width: 1023px) {
 	.output {
 		display: block;
 		margin: 0 auto;
 		max-width: 500px;
+		border-left: unset;
 	}
 
 	.actions {
 		margin: 0 auto;
 		display: flex;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
+	}
+
+	.actions .button {
+		margin: 4px;
+	}
+	
+	form,
+	nav,
+	.actions	{
+		padding: 5px 10px;
+	}
+
+}
+
+@media only screen and (max-width: 310px) {
+	.actions {
+		margin: 0 auto;
+		display: grid;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
+	}
+
+	.actions .button {
+		margin: 4px;
+	}
+}
+
+@media only screen and (max-width: 220px) {
+	.actions {
+		margin: 0 auto;
+		display: inline-grid;
 		flex-wrap: wrap;
 		align-content: center;
 		justify-content: center;
