@@ -1,6 +1,17 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
+/* glyph fonts */
+@font-face {
+    font-family: 'NMS-Glyphs-Mono';
+    src: local('NMS-Glyphs-Mono'), local('NMS-Glyphs-Mono'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Mono.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'NMS-Glyphs-Tight';
+    src: local('NMS-Glyphs-Tight'), local('NMS-Glyphs-Tight'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Tight.ttf) format('truetype');
+}
+
 .home {
 	margin-top: 2em;
 	text-align: center;
@@ -40,15 +51,13 @@ nav {
 }
 
 .container {
-	margin-bottom: 10em;
+	margin-bottom: 5em;
 }
 
 select,
 input[type="text"],
 input[type="date"] {
 	margin-top: 5px;
-	border: 1px solid black;
-	border-radius: 4px;
 	min-width: 200px;
 }
 
@@ -56,9 +65,11 @@ tr textarea {
 	width: 100%;
 	max-width: 600px;
 	min-height: 75px;
+	resize: vertical;
 }
 
-input[type=checkbox], input[type=radio] {
+input[type=checkbox],
+input[type=radio] {
 	vertical-align: middle;
 }
 
@@ -72,25 +83,77 @@ table {
 }
 
 .actions {
-	display: inline-block;
 	margin: 0 auto;
 }
 
-@media only screen and (max-width: 1024px) {
+
+@media only screen and (max-width: 1215px) {
+	.actions {
+		margin: 0 auto;
+		display: table-cell;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
+	}
+
+	.actions .button {
+		margin: 4px;
+	}
+}
+
+@media only screen and (max-width: 1023px) {
 	.output {
 		display: block;
 		margin: 0 auto;
 		max-width: 500px;
-	}
-	
-	.actions {
-	    display: flex;
-	    margin: 0 auto;
-	    justify-content: center;
+		border-left: unset;
 	}
 
-	.actions * {
-	    margin: 0 5px;
+	.actions {
+		margin: 0 auto;
+		display: flex;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
+	}
+
+	.actions .button {
+		margin: 4px;
+	}
+	
+	form,
+	nav,
+	.actions	{
+		padding: 5px 10px;
+	}
+
+}
+
+@media only screen and (max-width: 310px) {
+	.actions {
+		margin: 0 auto;
+		display: grid;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
+	}
+
+	.actions .button {
+		margin: 4px;
+	}
+}
+
+@media only screen and (max-width: 220px) {
+	.actions {
+		margin: 0 auto;
+		display: inline-grid;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: center;
+	}
+
+	.actions .button {
+		margin: 4px;
 	}
 }
 
@@ -103,9 +166,14 @@ tr.no-border {
 }
 
 tr * {
-	min-height: 23px;
+	min-height: 25px;
 }
 
 tr label {
 	margin-right: 1em;
+}
+
+.glyphs {
+	font-family: NMS-Glyphs-Mono;
+	font-size: 40px;
 }

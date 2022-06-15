@@ -28,6 +28,7 @@
 			textFunction("axes", "axes_input");
 			textFunction("portalglyphs", "portalglyphs_input");
 			textFunction("portalglyphs1", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("glyph_display", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("type", "type_input");
 			textFunction("mode", "mode_input");
 			textFunction("platform", "platform_input");
@@ -54,6 +55,7 @@
 		window.onload = () => {
 			civRegDropdown();
 			autoRefresh();
+			textFunction("glyph_display", "portalglyphs_input"); //syncs input glyphs and glyph display on page reload
 		}
 	</script>
 </head>
@@ -65,7 +67,7 @@
 
 		<div class="columns is-desktop">
 			<div class="column is-full-mobile">
-				<form id="form" onreset="textReset()">
+				<form id="form" onreset="resetAll()">
 					<table style="text-align:left">
 						<tr>
 							<th><label>Current release:</label>
@@ -144,10 +146,34 @@
 							<td><input type="text" name="Axes" id="axes_input">
 						</tr>
 						<tr>
-							<th><label>Portalglyphs:</label><br><small><a target="_blank" rel="noopener noreferrer"
-										href="https://nmsportals.github.io/" title="Portal decoder">Portal
-										decoder</a></small>
+							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button" onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
+
 							<td><input maxlength="12" type="text" name="Glyphs" id="portalglyphs_input">
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div>
+									<button class="button" type="button" id="glyph0" onclick="glyph('glyph0', 'portalglyphs_input')" value="0"><span class="glyphs icon is-small">0</span></button>
+									<button class="button" type="button" id="glyph1" onclick="glyph('glyph1', 'portalglyphs_input')" value="1"><span class="glyphs icon is-small">1</span></button>
+									<button class="button" type="button" id="glyph2" onclick="glyph('glyph2', 'portalglyphs_input')" value="2"><span class="glyphs icon is-small">2</span></button>
+									<button class="button" type="button" id="glyph3" onclick="glyph('glyph3', 'portalglyphs_input')" value="3"><span class="glyphs icon is-small">3</span></button>
+									<button class="button" type="button" id="glyph4" onclick="glyph('glyph4', 'portalglyphs_input')" value="4"><span class="glyphs icon is-small">4</span></button>
+									<button class="button" type="button" id="glyph5" onclick="glyph('glyph5', 'portalglyphs_input')" value="5"><span class="glyphs icon is-small">5</span></button>
+									<button class="button" type="button" id="glyph6" onclick="glyph('glyph6', 'portalglyphs_input')" value="6"><span class="glyphs icon is-small">6</span></button>
+									<button class="button" type="button" id="glyph7" onclick="glyph('glyph7', 'portalglyphs_input')" value="7"><span class="glyphs icon is-small">7</span></button>
+								</div>
+								<div>
+									<button class="button" type="button" id="glyph8" onclick="glyph('glyph8', 'portalglyphs_input')" value="8"><span class="glyphs icon is-small">8</span></button>
+									<button class="button" type="button" id="glyph9" onclick="glyph('glyph9', 'portalglyphs_input')" value="9"><span class="glyphs icon is-small">9</span></button>
+									<button class="button" type="button" id="glyphA" onclick="glyph('glyphA', 'portalglyphs_input')" value="A"><span class="glyphs icon is-small">A</span></button>
+									<button class="button" type="button" id="glyphB" onclick="glyph('glyphB', 'portalglyphs_input')" value="B"><span class="glyphs icon is-small">B</span></button>
+									<button class="button" type="button" id="glyphC" onclick="glyph('glyphC', 'portalglyphs_input')" value="C"><span class="glyphs icon is-small">C</span></button>
+									<button class="button" type="button" id="glyphD" onclick="glyph('glyphD', 'portalglyphs_input')" value="D"><span class="glyphs icon is-small">D</span></button>
+									<button class="button" type="button" id="glyphE" onclick="glyph('glyphE', 'portalglyphs_input')" value="E"><span class="glyphs icon is-small">E</span></button>
+									<button class="button" type="button" id="glyphF" onclick="glyph('glyphF', 'portalglyphs_input')" value="F"><span class="glyphs icon is-small">F</span></button>
+								</div>
+								<div class="glyphs" style="word-break: break-word" id="glyph_display"></div>
+							</td>
 						</tr>
 						<tr>
 							<th><label>Type of the base:</label>
@@ -313,11 +339,15 @@
 					</table>
 					<br>
 				</form>
-				<div class="actions">
-					<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>
-					<button class="button is-warning" type="reset" form="form">Reset inputs</button>
-					<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
-					<a id="downloadbtn" class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'baseName_input')">Download file</a>
+				<div>
+					<span class="actions" style="white-space: nowrap">
+						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>
+						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
+					</span>
+					<span class="actions" style="white-space: nowrap">
+						<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
+						<a id="downloadbtn" class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'baseName_input')">Download file</a>
+					</span>
 				</div>
 				<br>
 			</div>
@@ -365,7 +395,9 @@
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''<output id='name2'></output>''' is a [[Habitable Base|player base]], located on the	planet [[<output id='planet1'></output>]] in the [[<output id='system1'></output>]] system.</div>
+						<div>'''<output id='name2'></output>''' is a [[Habitable Base|player base]], located on the
+							planet [[<output id='planet1'></output>]] in the [[<output id='system1'></output>]] system.
+						</div>
 						<br>
 
 						<div>==Layout==</div>
