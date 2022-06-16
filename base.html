@@ -148,27 +148,27 @@
 						<tr>
 							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button" onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
 
-							<td><input maxlength="12" type="text" name="Glyphs" id="portalglyphs_input">
+							<td><input type="text" name="Glyphs" id="portalglyphs_input" oninput="glyphInputOnChange(this)">
 						</tr>
 						<tr>
 							<td colspan="2">
 								<div class="portal-buttons">
-									<button class="button" type="button" id="glyph0" onclick="glyph('glyph0', 'portalglyphs_input')" value="0"><span class="glyphs icon is-small">0</span></button>
-									<button class="button" type="button" id="glyph1" onclick="glyph('glyph1', 'portalglyphs_input')" value="1"><span class="glyphs icon is-small">1</span></button>
-									<button class="button" type="button" id="glyph2" onclick="glyph('glyph2', 'portalglyphs_input')" value="2"><span class="glyphs icon is-small">2</span></button>
-									<button class="button" type="button" id="glyph3" onclick="glyph('glyph3', 'portalglyphs_input')" value="3"><span class="glyphs icon is-small">3</span></button>
-									<button class="button" type="button" id="glyph4" onclick="glyph('glyph4', 'portalglyphs_input')" value="4"><span class="glyphs icon is-small">4</span></button>
-									<button class="button" type="button" id="glyph5" onclick="glyph('glyph5', 'portalglyphs_input')" value="5"><span class="glyphs icon is-small">5</span></button>
-									<button class="button" type="button" id="glyph6" onclick="glyph('glyph6', 'portalglyphs_input')" value="6"><span class="glyphs icon is-small">6</span></button>
-									<button class="button" type="button" id="glyph7" onclick="glyph('glyph7', 'portalglyphs_input')" value="7"><span class="glyphs icon is-small">7</span></button>
-									<button class="button" type="button" id="glyph8" onclick="glyph('glyph8', 'portalglyphs_input')" value="8"><span class="glyphs icon is-small">8</span></button>
-									<button class="button" type="button" id="glyph9" onclick="glyph('glyph9', 'portalglyphs_input')" value="9"><span class="glyphs icon is-small">9</span></button>
-									<button class="button" type="button" id="glyphA" onclick="glyph('glyphA', 'portalglyphs_input')" value="A"><span class="glyphs icon is-small">A</span></button>
-									<button class="button" type="button" id="glyphB" onclick="glyph('glyphB', 'portalglyphs_input')" value="B"><span class="glyphs icon is-small">B</span></button>
-									<button class="button" type="button" id="glyphC" onclick="glyph('glyphC', 'portalglyphs_input')" value="C"><span class="glyphs icon is-small">C</span></button>
-									<button class="button" type="button" id="glyphD" onclick="glyph('glyphD', 'portalglyphs_input')" value="D"><span class="glyphs icon is-small">D</span></button>
-									<button class="button" type="button" id="glyphE" onclick="glyph('glyphE', 'portalglyphs_input')" value="E"><span class="glyphs icon is-small">E</span></button>
-									<button class="button" type="button" id="glyphF" onclick="glyph('glyphF', 'portalglyphs_input')" value="F"><span class="glyphs icon is-small">F</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="0"><span class="glyphs icon is-small">0</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="1"><span class="glyphs icon is-small">1</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="2"><span class="glyphs icon is-small">2</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="3"><span class="glyphs icon is-small">3</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="4"><span class="glyphs icon is-small">4</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="5"><span class="glyphs icon is-small">5</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="6"><span class="glyphs icon is-small">6</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="7"><span class="glyphs icon is-small">7</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="8"><span class="glyphs icon is-small">8</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="9"><span class="glyphs icon is-small">9</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="A"><span class="glyphs icon is-small">A</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="B"><span class="glyphs icon is-small">B</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="C"><span class="glyphs icon is-small">C</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="D"><span class="glyphs icon is-small">D</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="E"><span class="glyphs icon is-small">E</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="F"><span class="glyphs icon is-small">F</span></button>
 								</div>
 								<output class="glyphs" style="word-break: break-word" id="glyph_display"></output>
 							</td>
