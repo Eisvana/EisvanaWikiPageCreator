@@ -48,7 +48,6 @@
 			textFunction("layout", "layout_input");
 			textFunction("features", "features_input");
 			textFunction("addInfo", "addInfo_input");
-			wikiLink("link", "baseName_input");
 			currentYear("censusrenewal");
 			civGalaxy("civ");
 		}
@@ -345,15 +344,13 @@
 					<span class="actions" style="white-space: nowrap">
 						<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
 						<a id="downloadbtn" class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'baseName_input')">Download file</a>
+						<a class="button is-outlined is-primary" id="link" onclick="wikiLink('link', 'baseName_input');">Create page</a>
 					</span>
 				</div>
 				<br>
 			</div>
 			<div class="column is-full-mobile">
 				<div class="output">
-					<p>Create your page here: <a id="link"></a></p>
-					<br>
-
 					<div id="wikiText">
 						<div>{{Version|<output id='release'></output>}}</div>
 						<div>{{<output id='civStub'></output>}}</div>

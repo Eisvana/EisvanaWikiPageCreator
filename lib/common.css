@@ -86,8 +86,7 @@ table {
 	margin: 0 auto;
 }
 
-
-@media only screen and (max-width: 1215px) {
+@media only screen and (max-width: 1407px) {
 	.actions {
 		margin: 0 auto;
 		display: table-cell;
