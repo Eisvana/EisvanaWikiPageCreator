@@ -157,6 +157,18 @@ table {
 	}
 }
 
+.portal-buttons {
+	display: grid;
+	grid-template-columns: repeat(8, 60px);
+}
+
+@media only screen and (max-width: 500px) {
+	.portal-buttons {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+
 tr {
 	border-bottom: 1px dashed rgba(50, 50, 50, 0.1);
 }
