@@ -116,7 +116,6 @@
 								<input type="text" name="Image" id="image_input">
 								<br>
 								<input type="file" id="image_upload" name="Image_upload" accept="image/*">
-
 							</td>
 						</tr>
 						<tr>
@@ -338,6 +337,13 @@
 							<td colspan="2">
 								<textarea name="AdditionalInformation" id="addInfo_input"></textarea>
 							</td>
+						</tr>
+						<tr>
+							<th><label>Gallery files</label>
+							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple onchange="galleryUpload('gallery_upload');">
+						</tr>
+						<tr id="gallery_descs">
+						
 						</tr>
 					</table>
 					<br>
