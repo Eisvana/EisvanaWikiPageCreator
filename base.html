@@ -17,7 +17,6 @@
 			textFunction("name1", "baseName_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("name2", "baseName_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("image", "image_input");
-			imgUpload("image", "image_upload", "image_input");
 			textFunction("builder", "builder_input");
 			textFunction("builderlink", "builderlink_input");
 			textFunction("region", "region_input");
@@ -115,7 +114,7 @@
 							<td>
 								<input type="text" name="Image" id="image_input">
 								<br>
-								<input type="file" id="image_upload" name="Image_upload" accept="image/*">
+								<input type="file" id="image_upload" name="Image_upload" accept="image/*" onchange="imgUpload('image', 'image_upload', 'image_input')">
 							</td>
 						</tr>
 						<tr>

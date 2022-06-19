@@ -59,11 +59,11 @@ input[type="text"],
 input[type="date"] {
 	margin-top: 5px;
 	min-width: 200px;
+	width:100%
 }
 
 tr textarea {
 	width: 100%;
-	max-width: 600px;
 	min-height: 75px;
 	resize: vertical;
 }
@@ -200,4 +200,18 @@ span[id^='span']:hover {
 
 #gallery_descs * {
 	vertical-align:middle;
+}
+
+textarea,
+input[type="text"],
+input[type="date"] {
+	border-radius: 5px;
+	border: 1px solid #2F4F4FB0;
+	padding: 0px 5px;
+}
+
+textarea:hover,
+input[type="text"]:hover,
+input[type="date"]:hover {
+	border: 1px solid #000;
 }
