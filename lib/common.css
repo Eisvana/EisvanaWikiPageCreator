@@ -182,7 +182,6 @@ tr * {
 
 tr label {
 	margin-right: 1em;
-	vertical-align: middle;
 }
 
 .glyphs {
@@ -201,8 +200,4 @@ span[id^='span']:hover {
 
 #gallery_descs * {
 	vertical-align:middle;
-}
-
-select {
-	width:100%;
 }
