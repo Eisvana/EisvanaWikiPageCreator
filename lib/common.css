@@ -188,3 +188,11 @@ tr label {
 	font-family: NMS-Glyphs-Mono;
 	font-size: 40px;
 }
+
+span[id^='span'] {
+	opacity: 0.6;
+}
+
+span[id^='span']:hover {
+	opacity: 1.0;
+}
