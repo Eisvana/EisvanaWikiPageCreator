@@ -196,3 +196,7 @@ span[id^='span'] {
 span[id^='span']:hover {
 	opacity: 1.0;
 }
+
+#gallery_descs * {
+	vertical-align:middle;
+}
