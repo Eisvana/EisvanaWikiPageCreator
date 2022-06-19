@@ -195,6 +195,7 @@ span[id^='span'] {
 
 span[id^='span']:hover {
 	opacity: 1.0;
+	cursor:pointer;
 }
 
 #gallery_descs * {
