@@ -86,8 +86,7 @@ table {
 	margin: 0 auto;
 }
 
-
-@media only screen and (max-width: 1215px) {
+@media only screen and (max-width: 1407px) {
 	.actions {
 		margin: 0 auto;
 		display: table-cell;
@@ -157,6 +156,18 @@ table {
 	}
 }
 
+.portal-buttons {
+	display: grid;
+	grid-template-columns: repeat(8, 60px);
+}
+
+@media only screen and (max-width: 500px) {
+	.portal-buttons {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+
 tr {
 	border-bottom: 1px dashed rgba(50, 50, 50, 0.1);
 }
@@ -176,4 +187,12 @@ tr label {
 .glyphs {
 	font-family: NMS-Glyphs-Mono;
 	font-size: 40px;
+}
+
+span[id^='span'] {
+	opacity: 0.6;
+}
+
+span[id^='span']:hover {
+	opacity: 1.0;
 }
