@@ -1,331 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Starship</title>
-	<script src="./lib/wikiscript.js"></script>
+	<link rel="stylesheet" href="./lib/common.css">
+	<script src="./lib/common.js"></script>
 	<script>
-	// 1. param	= id in div and spans in wikicode
-	// 2. param	= id in input tags
-	function showInput() {
-		textFunction("release", "version_input")
-		textFunction("release1", "version_input") //duplicates due to IDs needing to be unique across document
-		textFunction("civStub", "civStub_input")
-		textFunction("name", "baseName_input")
-		textFunction("name1", "baseName_input") //duplicates due to IDs needing to be unique across document
-		textFunction("name2", "baseName_input") //duplicates due to IDs needing to be unique across document
-		textFunction("image", "image_input")
-		textFunction("civilized", "civilized_input")
-		textFunction("builder", "builder_input")
-		textFunction("builderlink", "builderlink_input")
-		textFunction("galaxy", "galaxy_input")
-		textFunction("region", "region_input")
-		textFunction("system", "system_input")
-		textFunction("system1", "system_input") //duplicates due to IDs needing to be unique across document
-		textFunction("planet", "planet_input")
-		textFunction("planet1", "planet_input") //duplicates due to IDs needing to be unique across document
-		textFunction("moon", "moon_input")
-		textFunction("axes", "axes_input")
-		textFunction("portalglyphs", "portalglyphs_input")
-		textFunction("portalglyphs1", "portalglyphs_input") //duplicates due to IDs needing to be unique across document
-		textFunction("type", "type_input")
-		textFunction("mode", "mode_input")
-		textFunction("platform", "platform_input")
-		radioFunction("farm", "farm_input")
-		radioFunction("geobay", "geobay_input")
-		radioFunction("arena", "arena_input")
-		radioFunction("landingpad", "landingPad_input")
-		radioFunction("racetrack", "racetrack_input")
-		radioFunction("terminal", "terminal_input")
-		textFunction("censusplayer", "censusPlayer_input")
-		textFunction("censusreddit", "censusReddit_input")
-		textFunction("censusdiscord", "censusDiscord_input")
-		textFunction("censusfriend", "censusFriend_input")
-		textFunction("censusarrival", "censusArrival_input")
-		dateConvert("censusarrival")
-		textFunction("censusrenewal", "censusRenewal_input")
-		radioFunction("censusshow", "censusShow_input")
-		textFunction("layout", "layout_input")
-		textFunction("features", "features_input")
-		textFunction("addInfo", "addInfo_input")
-	}
-  </script>
+		// 1. param	= id in div and spans in wikicode
+		// 2. param	= id in input tags
+		function showInput() {
+			textFunction("release", "version_input");
+			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("name", "baseName_input");
+			textFunction("name1", "baseName_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("name2", "baseName_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("image", "image_input");
+			textFunction("builder", "builder_input");
+			textFunction("builderlink", "builderlink_input");
+			textFunction("region", "region_input");
+			textFunction("system", "system_input");
+			textFunction("system1", "system_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("planet", "planet_input");
+			textFunction("planet1", "planet_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("moon", "moon_input");
+			textFunction("axes", "axes_input");
+			textFunction("portalglyphs", "portalglyphs_input");
+			textFunction("portalglyphs1", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("glyph_display", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("type", "type_input");
+			textFunction("mode", "mode_input");
+			textFunction("platform", "platform_input");
+			radioFunction("farm", "farm_input");
+			radioFunction("geobay", "geobay_input");
+			radioFunction("arena", "arena_input");
+			radioFunction("landingpad", "landingPad_input");
+			radioFunction("racetrack", "racetrack_input");
+			radioFunction("terminal", "terminal_input");
+			textFunction("censusplayer", "censusPlayer_input");
+			textFunction("censusreddit", "censusReddit_input");
+			textFunction("censusdiscord", "censusDiscord_input");
+			textFunction("censusfriend", "censusFriend_input");
+			textFunction("censusarrival", "censusArrival_input");
+			dateConvert("censusarrival");
+			radioFunction("censusshow", "censusShow_input");
+			textFunction("layout", "layout_input");
+			textFunction("features", "features_input");
+			textFunction("addInfo", "addInfo_input");
+			currentYear("censusrenewal");
+			civGalaxy("civ");
+		}
+		window.onload = () => {
+			civRegDropdown();
+			autoRefresh();
+			textFunction("glyph_display", "portalglyphs_input"); //syncs input glyphs and glyph display on page reload
+		}
+	</script>
 </head>
+
 <body>
-	<big><a href="./" title="Main page">&larr; Return to main page</a></big>
-	<br><br>
+	<div class="container">
+		<nav style="font-size:larger"><a href="./" title="Main page">&larr; Return to main page</a></nav>
+		<br><br>
 
-	<form>
-		<div>
-			<label><b>Enter the current release:</b></label>
-			<input type="text" name="Version" id="version_input">
-		</div>
-		<div>
-			<label><b>Enter the civ macro:</b></label>
-			<select id="civStub_input" name="Civ Stub">
-				<option value="GHub">GHub</option>
-				<option value="GHub Calypso">CalHub</option>
-				<option value="GHub Eissentam">EisHub</option>
-			</select>
-		</div>
-		<div>
-			<label><b>Enter the name of the base:</b></label>
-			<input type="text" name="Base" id="baseName_input">
-		</div>
-		<div>
-			<label><b>Enter the name of the image, including file extension:</b></label>
-			<input type="text" name="Image" id="image_input">
-		</div>
-		<div>
-			<label><b>Enter the civ:</b></label>
-			<select id="civilized_input" name="Civilization">
-				<option value="Galactic Hub Project">GHub</option>
-				<option value="Galactic Hub Calypso">CalHub</option>
-				<option value="Galactic Hub Eissentam">EisHub</option>
-			</select>
-		</div>
-		<div>
-			<label><b>Enter the name of the builder if builder doesn't have wiki account:</b></label>
-			<input type="text" name="Builder" id="builder_input">
-		</div>
-		<div>
-			<label><b>Enter the wiki account of the builder OR leave empty:</b></label>
-			<input type="text" name="Builderlink" id="builderlink_input">
-		</div>
-		<div>
-			<label><b>Enter the galaxy:</b></label>
-			<select id="galaxy_input" name="Galaxy">
-				<option value="Euclid">Euclid</option>
-				<option value="Calypso">Calypso</option>
-				<option value="Eissentam">Eissentam</option>
-			</select>
-		</div>
-		<div>
-			<label><b>Enter the name of the region:</b></label>
-			<input type="text" name="Region" id="region_input">
-		</div>
-		<div>
-			<label><b>Enter the name of the system:</b></label>
-			<input type="text" name="System" id="system_input">
-		</div>
-		<div>
-			<label><b>Enter the name of the planet:</b></label>
-			<input type="text" name="Planet" id="planet_input">
-		</div>
-		<div>
-			<label><b>Enter the name of the moon (if applicable):</b></label>
-			<input type="text" name="Moon" id="moon_input">
-		</div>
-		<div>
-			<label><b>Enter the axes:</b></label>
-			<input type="text" name="Axes" id="axes_input">
-		</div>
-		<div>
-			<label><b>Enter the portalglyphs:</b></label>
-			<input type="text" name="Glyphs" id="portalglyphs_input">
-		</div>
-		<div>
-			<label><b>Enter the type of the base:</b></label>
-			<input type="text" name="Type" id="type_input">
-		</div>
-		<div>
-			<label><b>Enter the gamemode:</b></label>
-			<select id="mode_input" name="Mode">
-				<option value="Normal">Normal</option>
-				<option value="Survival">Survival</option>
-				<option value="Permadeath">Permadeath</option>
-				<option value="Creative">Creative</option>
-			</select>
-		</div>
-		<div>
-			<label><b>Enter the platform:</b></label>
-			<select id="platform_input" name="Platform">
-				<option value="PC">PC</option>
-				<option value="PS">PS</option>
-				<option value="XB">XB</option>
-			</select>
-		</div>
-		<div>
-			<label><b>Is the base a farm?</b></label>
-			<input type="radio" id="farm_inputY" name="farm" value="Yes">
-			<label for="farm_inputY">Yes</label>
-			<input type="radio" id="farm_inputN" name="farm" value="No">
-			<label for="farm_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="farm_inputA" name="farm" value="" checked>
-				<label for="farm_inputA">None</label>
-			</span>
-		</div>
-		<div>
-			<label><b>Does the base have a geobay?</b></label>
-			<input type="radio" id="geobay_inputY" name="geobay" value="Yes">
-			<label for="geobay_inputY">Yes</label>
-			<input type="radio" id="geobay_inputN" name="geobay" value="No">
-			<label for="geobay_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="geobay_inputA" name="geobay" value="" checked>
-				<label for="geobay_inputA">None</label>
-			</span>
-		</div>
-		<div>
-			<label><b>Is the base an arena?</b></label>
-			<input type="radio" id="arena_inputY" name="arena" value="Yes">
-			<label for="arena_inputY">Yes</label>
-			<input type="radio" id="arena_inputN" name="arena" value="No">
-			<label for="arena_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="arena_inputA" name="arena" value="" checked>
-				<label for="arena_inputA">None</label>
-			</span>
-		</div>
-		<div>
-			<label><b>Does the base have a landing pad?</b></label>
-			<input type="radio" id="landingPad_inputY" name="landingPad" value="Yes">
-			<label for="landingPad_inputY">Yes</label>
-			<input type="radio" id="landingPad_inputN" name="landingPad" value="No">
-			<label for="landingPad_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="landingPad_inputA" name="landingPad" value="" checked>
-				<label for="landingPad_inputA">None</label>
-			</span>
-		</div>
-		<div>
-			<label><b>Is your base a racetrack?</b></label>
-			<input type="radio" id="racetrack_inputY" name="racetrack" value="Yes">
-			<label for="racetrack_inputY">Yes</label>
-			<input type="radio" id="racetrack_inputN" name="racetrack" value="No">
-			<label for="racetrack_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="racetrack_inputA" name="racetrack" value="" checked>
-				<label for="racetrack_inputA">None</label>
-			</span>
-		</div>
-		<div>
-			<label><b>Does your base have a trade terminal?</b></label>
-			<input type="radio" id="terminal_inputY" name="terminal" value="Yes">
-			<label for="terminal_inputY">Yes</label>
-			<input type="radio" id="terminal_inputN" name="terminal" value="No">
-			<label for="terminal_inputN">No</label>
-			<span style="display:none">
-				<input type="radio" id="terminal_inputA" name="terminal" value="" checked>
-				<label for="terminal_inputA">None</label>
-			</span>
-		</div>
-		<div>
-			<label><b>Census: What is the name of the player?</b></label>
-			<input type="text" name="CensusPlayer" id="censusPlayer_input">
-		</div>
-		<div>
-			<label><b>Census: What is the Reddit name of the player?</b></label>
-			<input type="text" name="CensusReddit" id="censusReddit_input">
-		</div>
-		<div>
-			<label><b>Census: What is the Discord name of the player?</b></label>
-			<input type="text" name="CensusDiscord" id="censusDiscord_input">
-		</div>
-		<div>
-			<label><b>Census: What is the NMS friend code of the player?</b></label>
-			<input type="text" name="CensusFriend" id="censusFriend_input">
-		</div>
-		<div>
-			<label><b>Census: When did the player arrive in Hub space?</b></label>
-			<input type="date" name="CensusArrival" id="censusArrival_input">
-		</div>
-		<div>
-			<label><b>Census: In what year has the census been renewed?</b></label>
-			<input type="text" name="CensusRenewal" id="censusRenewal_input">
-		</div>
-		<div>
-			<label><b>Should this player be listed on the census?</b></label>
-			<input type="radio" id="censusShow_inputY" name="censusshow" value="Y" checked>
-			<label for="censusShow_inputY">Yes</label>
-			<input type="radio" id="censusShow_inputN" name="censusshow" value="">
-			<label for="censusShow_inputN">No</label>
-		</div>
-		<p>
-			Note: You can drag on the bottom right corner to expand the text area
-		</p>
-		<div>
-			<label style="vertical-align:top"><b>Base Layout:</b></label>
-			<textarea name="Layout" id="layout_input"></textarea>
-		</div>
-		<div>
-			<label style="vertical-align:top"><b>Base Features:</b></label>
-			<textarea name="Features" id="features_input"></textarea>
-		</div>
-		<div>
-			<label style="vertical-align:top"><b>Additional information:</b></label>
-			<textarea name="AdditionalInformation" id="addInfo_input"></textarea>
-		</div>
-		<input type="reset" value="Reset inputs">
-	</form>
-	<br>
-	
-	<input type="submit" onclick="showInput();">
-	<button onclick="copyText()" id="btn">Copy wikicode</button>
-	<br><br>
-	<div id="wikiText">
-		<div>{{Version|<span id='release'></span>}}</div>
-		<div>{{<span id='civStub'></span>}}</div>
-		<div>{{Starship infobox</div>
-		<div>| name = <span id='name'></span></div>
-		<div>| image = <span id='image'></span></div>
-		<div>| galaxy = <span id='galaxy'></span></div>
-		<div>| region = <span id='region'></span></div>
-		<div>| system = <span id='system'></span></div>
-		<div>| planet = <span id='planet'></span></div>
-		<div>| moon = <span id='moon'></span></div>
-		<div>| axes = <span id='axes'></span></div>
-		<div>| coordinates = {{Glyphs2Coords|<span id='portalglyphs'></span>}}</div>
-		<div>| portalglyphs = {{Gl/Small|<span id='portalglyphs1'></span>}}</div>
-		<div>| type = <span id='type'></span></div>
-		<div>| exotic = <span id='exotic'></span></div>
-		<div>| inventory = <span id='inventory'></span></div>
-		<div>| slots = <span id='slots'></span></div>
-		<div>| techslots = <span id='techslots'></span></div>
-		<div>| cargoslots = <span id='cargoslots'></span></div>
-		<div>| cost = <span id='cost'></span></div>
-		<div>| civilized = <span id='civilized'></span></div>
-		<div>| mode = <span id='mode'></span></div>
-		<div>| platform = <span id='platform'></span></div>
-		<div>| release = <span id='release1'></span></div>
-		<div>| farm = <span id='farm'></span></div>
-		<div>| geobay = <span id='geobay'></span></div>
-		<div>| arena = <span id='arena'></span></div>
-		<div>| landingpad = <span id='landingpad'></span></div>
-		<div>| racetrack = <span id='racetrack'></span></div>
-		<div>| terminal = <span id='terminal'></span></div>
-		<div>| censusplayer = <span id='censusplayer'></span></div>
-		<div>| censusreddit = <span id='censusreddit'></span></div>
-		<div>| censusdiscord = <span id='censusdiscord'></span></div>
-		<div>| censusfriend = <span id='censusfriend'></span></div>
-		<div>| censusarrival = <span id='censusarrival'></span></div>
-		<div>| censusrenewal = <span id='censusrenewal'></span></div>
-		<div>| censusshow = <span id="censusshow"></span></div>
-		<div>}}</div>
-		<div>'''<span id='name1'></span>''' is a player base.</div>
-		<br>
+		<div class="columns is-desktop">
+			<div class="column is-full-mobile">
+				<form id="form" onreset="resetAll('gallery_descs')">
+					<table style="text-align:left">
+						<tr>
+							<th><label>Current release:</label>
+							<td>
+								<select id="version_input" name="Release">
+									<option value="Outlaws">Outlaws
+									<option value="SentinelUp">SentinelUp
+									<option value="Prisms">Prisms
+									<option value="Expeditions">Expeditions
+									<option value="Companions">Companions
+									<option value="NextGen">NextGen
+									<option value="Origins">Origins
+									<option value="Desolation">Desolation
+									<option value="Crossplay">Crossplay
+									<option value="ExoMech">ExoMech
+									<option value="Living Ship">Living Ship
+									<option value="Synthesis">Synthesis
+									<option value="Beyond">Beyond
+									<option value="Visions">Visions
+									<option value="Abyss">Abyss
+									<option value="NEXT">NEXT
+									<option value="Atlas Rises">Atlas Rises
+									<option value="Pathfinder">Pathfinder
+									<option value="Foundation">Foundation
+									<option value="Release">Release
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>To which civ does this ship belong?</label>
+							<td>
+								<select id="civ" name="Civ" onchange="civRegDropdown()">
+									<option value="GHub" id="GHub">GHub
+									<option value="CalHub" id="CalHub">CalHub
+									<option value="EisHub" id="EisHub">EisHub
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Name of the starship:</label>
+							<td><input type="text" name="Base" id="baseName_input">
+						</tr>
+						<tr>
+							<th><label>Name of the image, including file extension:</label>
+							<td>
+								<input type="text" name="Image" id="image_input">
+								<br>
+								<input type="file" id="image_upload" name="Image_upload" accept="image/*" onchange="imgUpload('image', 'image_upload', 'image_input')">
+							</td>
+						</tr>
+						<tr>
+							<th><label>Wiki account of the builder OR leave empty:</label>
+							<td><input type="text" name="Builderlink" id="builderlink_input">
+						</tr>
+						<tr>
+							<th><label>Name of the builder if builder doesn't have wiki account:</label>
+							<td><input type="text" name="Builder" id="builder_input">
+						</tr>
+						<tr>
+							<th><label>Name of the region:</label>
+							<td>
+								<select name="Region" id="region_input">
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Name of the system:</label>
+							<td><input type="text" name="System" id="system_input">
+						</tr>
+						<tr>
+							<th><label>Name of the planet:</label>
+							<td><input type="text" name="Planet" id="planet_input">
+						</tr>
+						<tr>
+							<th><label>Name of the moon (if applicable):</label>
+							<td><input type="text" name="Moon" id="moon_input">
+						</tr>
+						<tr>
+							<th><label>Planetary coords:</label>
+							<td><input type="text" name="Axes" id="axes_input">
+						</tr>
+						<tr>
+							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button" onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
 
-		<div>==Summary==</div>
-		<div>'''<span id='name2'></span>''' is a [[Habitable Base|player base]], located on the planet [[<span id='planet1'></span>]] in the [[<span id='system1'></span>]] system.</div>
-		<br>
+							<td><input type="text" name="Glyphs" id="portalglyphs_input" oninput="glyphInputOnChange(this)">
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="portal-buttons">
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="0"><span class="glyphs icon is-small">0</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="1"><span class="glyphs icon is-small">1</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="2"><span class="glyphs icon is-small">2</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="3"><span class="glyphs icon is-small">3</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="4"><span class="glyphs icon is-small">4</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="5"><span class="glyphs icon is-small">5</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="6"><span class="glyphs icon is-small">6</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="7"><span class="glyphs icon is-small">7</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="8"><span class="glyphs icon is-small">8</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="9"><span class="glyphs icon is-small">9</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="A"><span class="glyphs icon is-small">A</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="B"><span class="glyphs icon is-small">B</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="C"><span class="glyphs icon is-small">C</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="D"><span class="glyphs icon is-small">D</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="E"><span class="glyphs icon is-small">E</span></button>
+									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="F"><span class="glyphs icon is-small">F</span></button>
+								</div>
+								<output class="glyphs" style="word-break: break-word" id="glyph_display"></output>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Type of the starship:</label>
+							<td><input type="text" name="Type" id="type_input">
+						</tr>
+						<tr>
+							<th><label>Gamemode:</label>
+							<td>
+								<select id="mode_input" name="Mode">
+									<option value="Normal">Normal
+									<option value="Survival">Survival
+									<option value="Permadeath">Permadeath
+									<option value="Creative">Creative
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Platform:</label>
+							<td>
+								<select id="platform_input" name="Platform">
+									<option value="PC">PC
+									<option value="PS">PS
+									<option value="XB">XB
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Farm?</label>
+							<td>
+								<input type="radio" id="farm_inputY" name="farm" value="Yes">
+								<label for="farm_inputY">Yes</label>
+								<input type="radio" id="farm_inputN" name="farm" value="No">
+								<label for="farm_inputN">No</label>
+								<span style="display:none">
+									<input type="radio" id="farm_inputA" name="farm" value="" checked>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Geobay?</label>
+							<td>
+								<input type="radio" id="geobay_inputY" name="geobay" value="Yes">
+								<label for="geobay_inputY">Yes</label>
+								<input type="radio" id="geobay_inputN" name="geobay" value="No">
+								<label for="geobay_inputN">No</label>
+								<span style="display:none">
+									<input type="radio" id="geobay_inputA" name="geobay" value="" checked>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Arena?</label>
+							<td>
+								<input type="radio" id="arena_inputY" name="arena" value="Yes">
+								<label for="arena_inputY">Yes</label>
+								<input type="radio" id="arena_inputN" name="arena" value="No">
+								<label for="arena_inputN">No</label>
+								<span style="display:none">
+									<input type="radio" id="arena_inputA" name="arena" value="" checked>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Landing pad?</label>
+							<td>
+								<input type="radio" id="landingPad_inputY" name="landingPad" value="Yes">
+								<label for="landingPad_inputY">Yes</label>
+								<input type="radio" id="landingPad_inputN" name="landingPad" value="No">
+								<label for="landingPad_inputN">No</label>
+								<span style="display:none">
+									<input type="radio" id="landingPad_inputA" name="landingPad" value="" checked>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Racetrack?</label>
+							<td>
+								<input type="radio" id="racetrack_inputY" name="racetrack" value="Yes">
+								<label for="racetrack_inputY">Yes</label>
+								<input type="radio" id="racetrack_inputN" name="racetrack" value="No">
+								<label for="racetrack_inputN">No</label>
+								<span style="display:none">
+									<input type="radio" id="racetrack_inputA" name="racetrack" value="" checked>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Trade terminal?</label>
+							<td>
+								<input type="radio" id="terminal_inputY" name="terminal" value="Yes">
+								<label for="terminal_inputY">Yes</label>
+								<input type="radio" id="terminal_inputN" name="terminal" value="No">
+								<label for="terminal_inputN">No</label>
+								<span style="display:none">
+									<input type="radio" id="terminal_inputA" name="terminal" value="" checked>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p style="text-align:center">Census:</p>
+						</tr>
+						<tr>
+							<th><label>Ingame name of the player?</label>
+							<td><input type="text" name="CensusPlayer" id="censusPlayer_input">
+						</tr>
+						<tr>
+							<th><label>Reddit name of the player?</label>
+							<td><input type="text" name="CensusReddit" id="censusReddit_input">
+						</tr>
+						<tr>
+							<th><label>Discord name of the player?</label>
+							<td><input type="text" name="CensusDiscord" id="censusDiscord_input">
+						</tr>
+						<tr>
+							<th><label>NMS friend code of the player?</label>
+							<td><input maxlength="15" type="text" name="CensusFriend" id="censusFriend_input">
+						</tr>
+						<tr>
+							<th><label>When did the player arrive in Hub space?</label>
+							<td><input type="date" name="CensusArrival" id="censusArrival_input">
+						</tr>
+						<tr>
+							<th><label>Are you already listed on the census?</label>
+							<td>
+								<input type="radio" id="censusShow_inputY" name="censusshow" value="">
+								<label for="censusShow_inputY">Yes</label>
+								<input type="radio" id="censusShow_inputN" name="censusshow" value="Y" checked>
+								<label for="censusShow_inputN">No</label>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p style="text-align:center">Note: You can drag on the bottom right corner to expand the
+									text area
+								</p>
+							</td>
+						</tr>
+						<tr class="no-border">
+							<th style="vertical-align:top" colspan="2"><label>Base Layout:</label>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="Layout" id="layout_input"></textarea>
+							</td>
+						</tr>
+						<tr class="no-border">
+							<th style="vertical-align:top" colspan="2"><label>Base Features:</label>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="Features" id="features_input"></textarea>
+							</td>
+						</tr>
+						<tr class="no-border">
+							<th style="vertical-align:top" colspan="2"><label>Additional information:</label>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="AdditionalInformation" id="addInfo_input"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Gallery files</label>
+							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
+						</tr>
+						<tr>
+							<table id="gallery_descs">
+							</table>
+						</tr>
+					</table>
+					<br>
+				</form>
+				<div>
+					<span class="actions" style="white-space: nowrap">
+<!--						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>-->
+						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
+					</span>
+					<span class="actions" style="white-space: nowrap">
+						<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
+						<a id="downloadbtn" class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'baseName_input')">Download file</a>
+						<a class="button is-outlined is-primary" id="link" onclick="wikiLink('link', 'baseName_input');">Create page</a>
+					</span>
+				</div>
+				<br>
+			</div>
+			<div class="column is-full-mobile">
+				<div class="output">
+					<div id="wikiText">
+						<div>{{Version|<output id='release'></output>}}</div>
+						<div>{{<output id='civStub'></output>}}</div>
+						<div>{{Starship infobox</div>
+						<div>| name = <output id='name'></output></div>
+						<div>| image = <output id='image'></output></div>
+						<div>| civilized = <output id='civilized'></output></div>
+						<div>| builderlink = <output id='builderlink'></output></div>
+						<div>| builder = <output id='builder'></output></div>
+						<div>| galaxy = <output id='galaxy'></output></div>
+						<div>| region = <output id='region'></output></div>
+						<div>| system = <output id='system'></output></div>
+						<div>| planet = <output id='planet'></output></div>
+						<div>| moon = <output id='moon'></output></div>
+						<div>| axes = <output id='axes'></output></div>
+						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs'></output>}}</div>
+						<div>| portalglyphs = {{Gl/Small|<output id='portalglyphs1'></output>}}</div>
+						<div>| type = <output id='type'></output></div>
+						<div>| mode = <output id='mode'></output></div>
+						<div>| platform = <output id='platform'></output></div>
+						<div>| release = <output id='release1'></output></div>
+						<div>| farm = <output id='farm'></output></div>
+						<div>| geobay = <output id='geobay'></output></div>
+						<div>| arena = <output id='arena'></output></div>
+						<div>| landingpad = <output id='landingpad'></output></div>
+						<div>| racetrack = <output id='racetrack'></output></div>
+						<div>| terminal = <output id='terminal'></output></div>
+						<div>| censusplayer = <output id='censusplayer'></output></div>
+						<div>| censusreddit = <output id='censusreddit'></output></div>
+						<div>| censusdiscord = <output id='censusdiscord'></output></div>
+						<div>| censusfriend = <output id='censusfriend'></output></div>
+						<div>| censusarrival = <output id='censusarrival'></output></div>
+						<div>| censusrenewal = <output id='censusrenewal'></output></div>
+						<div>| censusshow = <output id="censusshow"></output></div>
+						<div>}}</div>
+						<div>'''<output id='name1'></output>''' is a starship.</div>
+						<br>
 
-		<div>==Layout==</div>
-		<div id='layout'></div>
-		<br>
+						<div>==Summary==</div>
+						<div>'''<output id='name2'></output>''' is a [[Starship Catalogue - <output>TYPE</output>|<output>TYPE</output>]]-type [[starship]].
+						</div>
+						<br>
 
-		<div>==Features==</div>
-		<div id='features'></div>
-		<br>
+						<div>==Appearance==</div>
+						<div><output id='layout'></output></div>
+						<br>
 
-		<div>==Additional information==</div>
-		<div id='addInfo'></div>
-		<br>
+						<div>==Stats==</div>
+						<div><output id='features'></output></div>
+						<br>
 
-		<div>==Gallery==</div>
-		<div>&lt;gallery&gt;</div>
-		<div>&lt;/gallery&gt;</div>
+						<div>==Location==</div>
+						<div><output id='addInfo'></output></div>
+						<br>
+						
+						<div>==Additional information==</div>
+						<div><output id='addInfo'></output></div>
+						<br>
+
+						<div>==Gallery==</div>
+						<div>&lt;gallery&gt;</div>
+						<div id="galleryCode"></div>
+						<div>&lt;/gallery&gt;</div>
+						<br>
+						
+						<div>==Reference links==</div>
+						<div><output id='addInfo'></output></div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
+
 </html>
