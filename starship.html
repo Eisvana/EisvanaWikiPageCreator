@@ -276,39 +276,6 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<p style="text-align:center">Census:</p>
-						</tr>
-						<tr>
-							<th><label>Ingame name of the player?</label>
-							<td><input type="text" name="CensusPlayer" id="censusPlayer_input">
-						</tr>
-						<tr>
-							<th><label>Reddit name of the player?</label>
-							<td><input type="text" name="CensusReddit" id="censusReddit_input">
-						</tr>
-						<tr>
-							<th><label>Discord name of the player?</label>
-							<td><input type="text" name="CensusDiscord" id="censusDiscord_input">
-						</tr>
-						<tr>
-							<th><label>NMS friend code of the player?</label>
-							<td><input maxlength="15" type="text" name="CensusFriend" id="censusFriend_input">
-						</tr>
-						<tr>
-							<th><label>When did the player arrive in Hub space?</label>
-							<td><input type="date" name="CensusArrival" id="censusArrival_input">
-						</tr>
-						<tr>
-							<th><label>Are you already listed on the census?</label>
-							<td>
-								<input type="radio" id="censusShow_inputY" name="censusshow" value="">
-								<label for="censusShow_inputY">Yes</label>
-								<input type="radio" id="censusShow_inputN" name="censusshow" value="Y" checked>
-								<label for="censusShow_inputN">No</label>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
 								<p style="text-align:center">Note: You can drag on the bottom right corner to expand the
 									text area
 								</p>
@@ -342,13 +309,11 @@
 							<th><label>Gallery files</label>
 							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
 						</tr>
-						<tr>
-							<table id="gallery_descs">
-							</table>
-						</tr>
 					</table>
 					<br>
 				</form>
+				<div id="gallery_descs">
+				</div>
 				<div>
 					<span class="actions" style="white-space: nowrap">
 						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>
