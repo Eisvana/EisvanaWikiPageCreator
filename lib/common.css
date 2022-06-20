@@ -3,13 +3,13 @@
 
 /* glyph fonts */
 @font-face {
-    font-family: 'NMS-Glyphs-Mono';
-    src: local('NMS-Glyphs-Mono'), local('NMS-Glyphs-Mono'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Mono.ttf) format('truetype');
+	font-family: 'NMS-Glyphs-Mono';
+	src: local('NMS-Glyphs-Mono'), local('NMS-Glyphs-Mono'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Mono.ttf) format('truetype');
 }
 
 @font-face {
-    font-family: 'NMS-Glyphs-Tight';
-    src: local('NMS-Glyphs-Tight'), local('NMS-Glyphs-Tight'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Tight.ttf) format('truetype');
+	font-family: 'NMS-Glyphs-Tight';
+	src: local('NMS-Glyphs-Tight'), local('NMS-Glyphs-Tight'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Tight.ttf) format('truetype');
 }
 
 .home {
@@ -59,7 +59,7 @@ input[type="text"],
 input[type="date"] {
 	margin-top: 5px;
 	min-width: 200px;
-	width:100%
+	width: 100%
 }
 
 tr textarea {
@@ -119,10 +119,10 @@ table {
 	.actions .button {
 		margin: 4px;
 	}
-	
+
 	form,
 	nav,
-	.actions	{
+	.actions {
 		padding: 5px 10px;
 	}
 
@@ -168,6 +168,59 @@ table {
 	}
 }
 
+#gallery_descs {
+	display: flex;
+	flex-direction: column;
+}
+
+@media only screen and (max-width: 1024px) {
+	#gallery_descs {
+		margin: 0 0.65em;
+	}
+}
+
+.gallery-item {
+	display: flex;
+	width: 100%;
+	max-width: 700px;
+	margin: 0 auto 0.5em auto;
+	background-color: rgba(150, 150, 150, 0.1);
+	border-radius: 0.5em;
+}
+
+.gallery-item .gallery-media {
+	display: flex;
+	justify-content: center;
+	width: 200px;
+}
+
+.gallery-item .gallery-media img {
+	max-height: 150px;
+	margin: 0 auto;
+	border-radius: 0.5em;
+}
+
+.gallery-item .gallery-meta {
+	flex-grow: 1;
+	padding: 0.5em;
+	position: relative;
+}
+
+.gallery-item .gallery-meta p {
+	padding-right: 1.5em;
+}
+
+.gallery-item .gallery-meta .delete-icon {
+	position: absolute;
+	top: 0.5em;
+	right: 0.5em;
+	cursor: pointer;
+}
+
+.gallery-item .gallery-meta input {
+	min-height: 25px;
+}
+
 tr {
 	border-bottom: 1px dashed rgba(50, 50, 50, 0.1);
 }
@@ -187,19 +240,6 @@ tr label {
 .glyphs {
 	font-family: NMS-Glyphs-Mono;
 	font-size: 40px;
-}
-
-span[id^='span'] {
-	opacity: 0.6;
-}
-
-span[id^='span']:hover {
-	opacity: 1.0;
-	cursor:pointer;
-}
-
-#gallery_descs * {
-	vertical-align:middle;
 }
 
 textarea,
