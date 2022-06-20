@@ -11,7 +11,7 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
-			textFunction("release", "version_input");
+/* 			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("name", "baseName_input");
 			textFunction("name1", "baseName_input"); //duplicates due to IDs needing to be unique across document
@@ -50,6 +50,7 @@
 			textFunction("addInfo", "addInfo_input");
 			currentYear("censusrenewal");
 			civGalaxy("civ");
+ */			getHubNumber("region_input", "hub_nr");
 		}
 		window.onload = () => {
 			civRegDropdown();
@@ -350,7 +351,7 @@
 				</form>
 				<div>
 					<span class="actions" style="white-space: nowrap">
-<!--						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>-->
+						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>
 						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
 					</span>
 					<span class="actions" style="white-space: nowrap">
@@ -370,33 +371,32 @@
 						<div>| name = <output id='name'></output></div>
 						<div>| image = <output id='image'></output></div>
 						<div>| civilized = <output id='civilized'></output></div>
-						<div>| builderlink = <output id='builderlink'></output></div>
-						<div>| builder = <output id='builder'></output></div>
-						<div>| galaxy = <output id='galaxy'></output></div>
 						<div>| region = <output id='region'></output></div>
 						<div>| system = <output id='system'></output></div>
 						<div>| planet = <output id='planet'></output></div>
 						<div>| moon = <output id='moon'></output></div>
 						<div>| axes = <output id='axes'></output></div>
-						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs'></output>}}</div>
-						<div>| portalglyphs = {{Gl/Small|<output id='portalglyphs1'></output>}}</div>
+						<div>| economy = <output id='economy'></output></div>
+						<div>| pilot = <output id='pilot'></output></div>
+						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs1'></output>}}</div>
+						<div>| portalglyphs = <output id='portalglyphs'></output></div>
 						<div>| type = <output id='type'></output></div>
-						<div>| mode = <output id='mode'></output></div>
-						<div>| platform = <output id='platform'></output></div>
+						<div>| subtype = <output id='subtype'></output></div>
+						<div>| exotic = <output id='exotic'></output></div>
+						<div>| class = <output id='class'></output></div>
+						<div>| inventory = <output id='inventory'></output></div>
+						<div>| slots = <output id='slots'></output></div>
+						<div>| techslots = <output id='techslots'></output></div>
+						<div>| cargoslots = <output id='cargoslots'></output></div>
+						<div>| cost = <output id='cost'></output></div>
+						<div>| discovered = <output id='discovered'></output></div>
+						<div>| discoveredlink = <output id='discoveredlink'></output></div>
+						<div>| researchteam = <output id='researchteam'></output></div>
 						<div>| release = <output id='release1'></output></div>
-						<div>| farm = <output id='farm'></output></div>
-						<div>| geobay = <output id='geobay'></output></div>
-						<div>| arena = <output id='arena'></output></div>
-						<div>| landingpad = <output id='landingpad'></output></div>
-						<div>| racetrack = <output id='racetrack'></output></div>
-						<div>| terminal = <output id='terminal'></output></div>
-						<div>| censusplayer = <output id='censusplayer'></output></div>
-						<div>| censusreddit = <output id='censusreddit'></output></div>
-						<div>| censusdiscord = <output id='censusdiscord'></output></div>
-						<div>| censusfriend = <output id='censusfriend'></output></div>
-						<div>| censusarrival = <output id='censusarrival'></output></div>
-						<div>| censusrenewal = <output id='censusrenewal'></output></div>
-						<div>| censusshow = <output id="censusshow"></output></div>
+						<div>| maneuverB = <output id='maneuverB'></output></div>
+						<div>| damageB = <output id='damageB'></output></div>
+						<div>| shieldB = <output id='shieldB'></output></div>
+						<div>| warpB = <output id='warpB'></output></div>
 						<div>}}</div>
 						<div>'''<output id='name1'></output>''' is a starship.</div>
 						<br>
@@ -415,7 +415,7 @@
 						<br>
 
 						<div>==Location==</div>
-						<div><output id='addInfo'></output></div>
+						<div><output id='hub_nr'></output></div>
 						<br>
 						
 						<div>==Additional information==</div>
