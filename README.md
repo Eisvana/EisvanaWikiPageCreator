@@ -1,7 +1,7 @@
 # Lenni009.github.io
 # No Man's Sky - Wiki page creation script!
 
-[![badge](https://badgen.net/badge/Contribute/now!/green?icon=visualstudio)](https://vscode.dev/github/Lenni009/NMSWikiPageCreator)
+[![badge](https://badgen.net/badge/Contribute/now!/green?icon=visualstudio)](https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev)
 
 This is a website intended for making wiki page creation in the [No Man's Sky Wiki](https://nomanssky.fandom.com) easier.
 
