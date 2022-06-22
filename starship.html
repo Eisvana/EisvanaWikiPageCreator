@@ -119,11 +119,11 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Wiki account of the builder OR leave empty:</label>
+							<th><label>Wiki account of the discoverer OR leave empty:</label>
 							<td><input type="text" name="Builderlink" id="builderlink_input">
 						</tr>
 						<tr>
-							<th><label>Name of the builder if builder doesn't have wiki account:</label>
+							<th><label>Name of the discoverer if discoverer doesn't have wiki account:</label>
 							<td><input type="text" name="Builder" id="builder_input">
 						</tr>
 						<tr>
@@ -200,78 +200,6 @@
 									<option value="PS">PS
 									<option value="XB">XB
 								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Farm?</label>
-							<td>
-								<input type="radio" id="farm_inputY" name="farm" value="Yes">
-								<label for="farm_inputY">Yes</label>
-								<input type="radio" id="farm_inputN" name="farm" value="No">
-								<label for="farm_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="farm_inputA" name="farm" value="" checked>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Geobay?</label>
-							<td>
-								<input type="radio" id="geobay_inputY" name="geobay" value="Yes">
-								<label for="geobay_inputY">Yes</label>
-								<input type="radio" id="geobay_inputN" name="geobay" value="No">
-								<label for="geobay_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="geobay_inputA" name="geobay" value="" checked>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Arena?</label>
-							<td>
-								<input type="radio" id="arena_inputY" name="arena" value="Yes">
-								<label for="arena_inputY">Yes</label>
-								<input type="radio" id="arena_inputN" name="arena" value="No">
-								<label for="arena_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="arena_inputA" name="arena" value="" checked>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Landing pad?</label>
-							<td>
-								<input type="radio" id="landingPad_inputY" name="landingPad" value="Yes">
-								<label for="landingPad_inputY">Yes</label>
-								<input type="radio" id="landingPad_inputN" name="landingPad" value="No">
-								<label for="landingPad_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="landingPad_inputA" name="landingPad" value="" checked>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Racetrack?</label>
-							<td>
-								<input type="radio" id="racetrack_inputY" name="racetrack" value="Yes">
-								<label for="racetrack_inputY">Yes</label>
-								<input type="radio" id="racetrack_inputN" name="racetrack" value="No">
-								<label for="racetrack_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="racetrack_inputA" name="racetrack" value="" checked>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Trade terminal?</label>
-							<td>
-								<input type="radio" id="terminal_inputY" name="terminal" value="Yes">
-								<label for="terminal_inputY">Yes</label>
-								<input type="radio" id="terminal_inputN" name="terminal" value="No">
-								<label for="terminal_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="terminal_inputA" name="terminal" value="" checked>
-								</span>
 							</td>
 						</tr>
 						<tr>
@@ -360,7 +288,7 @@
 						<br>
 
 						<div>==Stats==</div>
-						<div><output id='features'></output></div>
+						<div>{{<output id='stats'></output>Stats}}</div>
 						<br>
 
 						<div>==Location==</div>
