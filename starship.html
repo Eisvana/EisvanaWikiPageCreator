@@ -11,46 +11,38 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
-/* 			textFunction("release", "version_input");
+ 			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name", "baseName_input");
-			textFunction("name1", "baseName_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name2", "baseName_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("name", "shipName_input");
+			textFunction("name1", "shipName_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("name2", "shipName_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("image", "image_input");
-			textFunction("builder", "builder_input");
-			textFunction("builderlink", "builderlink_input");
 			textFunction("region", "region_input");
 			textFunction("system", "system_input");
-			textFunction("system1", "system_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("planet", "planet_input");
-			textFunction("planet1", "planet_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("moon", "moon_input");
 			textFunction("axes", "axes_input");
+ 			textFunction("economy", "economy_input");
 			textFunction("portalglyphs", "portalglyphs_input");
 			textFunction("portalglyphs1", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("glyph_display", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("type", "type_input");
-			textFunction("mode", "mode_input");
-			textFunction("platform", "platform_input");
-			radioFunction("farm", "farm_input");
-			radioFunction("geobay", "geobay_input");
-			radioFunction("arena", "arena_input");
-			radioFunction("landingpad", "landingPad_input");
-			radioFunction("racetrack", "racetrack_input");
-			radioFunction("terminal", "terminal_input");
-			textFunction("censusplayer", "censusPlayer_input");
-			textFunction("censusreddit", "censusReddit_input");
-			textFunction("censusdiscord", "censusDiscord_input");
-			textFunction("censusfriend", "censusFriend_input");
-			textFunction("censusarrival", "censusArrival_input");
-			dateConvert("censusarrival");
-			radioFunction("censusshow", "censusShow_input");
-			textFunction("layout", "layout_input");
-			textFunction("features", "features_input");
-			textFunction("addInfo", "addInfo_input");
-			currentYear("censusrenewal");
+			textFunction("type1", "type_input");
+			textFunction("type2", "type_input");
+			textFunction("subtype", "subtype_input");
+			textFunction("exotic", "exotic_input");
+			textFunction("pilot", "pilot_input");
+			textFunction("inventory", "inventory_input");
+			textFunction("maneuverB", "maneuverB_input");
+			textFunction("damageB", "damageB_input");
+			textFunction("shieldB", "shieldB_input");
+			textFunction("warpB", "warpB_input");
+			textFunction("discovered", "discovered_input");
+			textFunction("discoveredlink", "discoveredlink_input");
+			radioFunction("researchteam" ,"GHSH")
+			textFunction("appearance", "appearance_input");
 			civGalaxy("civ");
- */			getHubNumber("region_input", "hub_nr");
+ 			getHubNumber("region_input", "hub_nr");
 		}
 		window.onload = () => {
 			civRegDropdown();
@@ -97,7 +89,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>To which civ does this ship belong?</label>
+							<th><label>To which civ does this base belong?</label>
 							<td>
 								<select id="civ" name="Civ" onchange="civRegDropdown()">
 									<option value="GHub" id="GHub">GHub
@@ -108,7 +100,7 @@
 						</tr>
 						<tr>
 							<th><label>Name of the starship:</label>
-							<td><input type="text" name="Base" id="baseName_input">
+							<td><input type="text" name="Ship" id="shipName_input">
 						</tr>
 						<tr>
 							<th><label>Name of the image, including file extension:</label>
@@ -117,14 +109,6 @@
 								<br>
 								<input type="file" id="image_upload" name="Image_upload" accept="image/*" onchange="imgUpload('image', 'image_upload', 'image_input')">
 							</td>
-						</tr>
-						<tr>
-							<th><label>Wiki account of the discoverer OR leave empty:</label>
-							<td><input type="text" name="Builderlink" id="builderlink_input">
-						</tr>
-						<tr>
-							<th><label>Name of the discoverer if discoverer doesn't have wiki account:</label>
-							<td><input type="text" name="Builder" id="builder_input">
 						</tr>
 						<tr>
 							<th><label>Name of the region:</label>
@@ -150,6 +134,37 @@
 							<td><input type="text" name="Axes" id="axes_input">
 						</tr>
 						<tr>
+							<th><label>System economy:</label>
+							<td>
+								<select id="economy_input" name="Economy">
+									<option value="Advanced">Advanced
+									<option value="Affluent">Affluent
+									<option value="Booming">Booming
+									<option value="Flourishing">Flourishing
+									<option value="High Supply">High Supply
+									<option value="Opulent">Opulent
+									<option value="Prosperous">Prosperous
+									<option value="Wealthy">Wealthy <!-- here ends T3-->
+									<option value="Adequate">Adequate <!--here begins T2-->
+									<option value="Balanced">Balanced
+									<option value="Comfortable">Comfortable
+									<option value="Developing">Developing
+									<option value="Medium Supply">Medium Supply
+									<option value="Promising">Promising
+									<option value="Satisfactory">Satisfactory
+									<option value="Sustainable">Sustainable <!-- here ends T2-->
+									<option value="Declining">Declining <!--here begins T1-->
+									<option value="Destitute">Destitute
+									<option value="Failing">Failing
+									<option value="Fledgling">Fledgling
+									<option value="Low Supply">Low Supply
+									<option value="Struggling">Struggling
+									<option value="Unsuccessfu">Unsuccessfu
+									<option value="Unpromising">Unpromising
+								</select>
+							</td>
+						</tr>
+						<tr>
 							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button" onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
 
 							<td><input type="text" name="Glyphs" id="portalglyphs_input" oninput="glyphInputOnChange(this)">
@@ -157,49 +172,161 @@
 						<tr>
 							<td colspan="2">
 								<div class="portal-buttons">
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="0"><span class="glyphs icon is-small">0</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="1"><span class="glyphs icon is-small">1</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="2"><span class="glyphs icon is-small">2</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="3"><span class="glyphs icon is-small">3</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="4"><span class="glyphs icon is-small">4</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="5"><span class="glyphs icon is-small">5</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="6"><span class="glyphs icon is-small">6</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="7"><span class="glyphs icon is-small">7</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="8"><span class="glyphs icon is-small">8</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="9"><span class="glyphs icon is-small">9</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="A"><span class="glyphs icon is-small">A</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="B"><span class="glyphs icon is-small">B</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="C"><span class="glyphs icon is-small">C</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="D"><span class="glyphs icon is-small">D</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="E"><span class="glyphs icon is-small">E</span></button>
-									<button class="button" type="button" onclick="glyphOnClick(this, 'portalglyphs_input')" value="F"><span class="glyphs icon is-small">F</span></button>
+									<button class="button" type="button" value="0"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">0</span>
+									</button>
+									<button class="button" type="button" value="1"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">1</span>
+									</button>
+									<button class="button" type="button" value="2"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">2</span>
+									</button>
+									<button class="button" type="button" value="3"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">3</span>
+									</button>
+									<button class="button" type="button" value="4"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">4</span>
+									</button>
+									<button class="button" type="button" value="5"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">5</span>
+									</button>
+									<button class="button" type="button" value="6"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">6</span>
+									</button>
+									<button class="button" type="button" value="7"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">7</span>
+									</button>
+									<button class="button" type="button" value="8"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">8</span>
+									</button>
+									<button class="button" type="button" value="9"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">9</span>
+									</button>
+									<button class="button" type="button" value="A"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">A</span>
+									</button>
+									<button class="button" type="button" value="B"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">B</span>
+									</button>
+									<button class="button" type="button" value="C"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">C</span>
+									</button>
+									<button class="button" type="button" value="D"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">D</span>
+									</button>
+									<button class="button" type="button" value="E"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">E</span>
+									</button>
+									<button class="button" type="button" value="F"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">F</span>
+									</button>
 								</div>
 								<output class="glyphs" style="word-break: break-word" id="glyph_display"></output>
 							</td>
 						</tr>
 						<tr>
 							<th><label>Type of the starship:</label>
-							<td><input type="text" name="Type" id="type_input">
-						</tr>
-						<tr>
-							<th><label>Gamemode:</label>
 							<td>
-								<select id="mode_input" name="Mode">
-									<option value="Normal">Normal
-									<option value="Survival">Survival
-									<option value="Permadeath">Permadeath
-									<option value="Creative">Creative
+								<select name="Type" id="type_input">
+									<option value="Fighter">Fighter
+									<option value="Explorer">Explorer
+									<option value="Hauler">Hauler
+									<option value="Shuttle">Shuttle
+									<option value="Solar">Solar
+									<option value="Exotic">Exotic
+									<option value="Freighter">Freighter
+									<option value="Living Ship">Living Ship
+								</select>
+							</td>
+						</tr>
+						<tr id="subtypetr" style="">
+							<th><label>Subtype:</label>
+							<td>
+								<select name="Subtype" id="subtype_input">
+								</select>
+							</td>
+						</tr>
+						<tr id="exotictr" style="">
+							<th><label>Exotic type:</label>
+							<td>
+								<select name="exotic" id="exotic_input">
+									<option value="Squid">Squid
+									<option value="Guppy">Guppy
+									<option value="Royal">Royal
+									<option value="Mosquito">Mosquito
+								</select>
+							</td>
+						</tr>
+						<tr id="pilottr" style="">
+							<th><label>Pilot race:</label>
+							<td>
+								<select name="Pilot" id="pilot_input">
+									<option value="Gek">Gek
+									<option value="Korvax">Korvax
+									<option value="Vy'keen">Vy'keen
 								</select>
 							</td>
 						</tr>
 						<tr>
-							<th><label>Platform:</label>
+							<th><label>Inventory:</label>
 							<td>
-								<select id="platform_input" name="Platform">
-									<option value="PC">PC
-									<option value="PS">PS
-									<option value="XB">XB
+								<select name="Inventory" id="inventory_input">
+									<option value="Small">Small
+									<option value="Medium">Medium
+									<option value="Large">Large
 								</select>
+							</td>
+						</tr>
+						<tr id="maneuvertr" style="">
+							<th><label>Maneuverability:</label>
+							<td><input type="text" name="ManeuverB" id="maneuverB_input">
+						</tr>
+						<tr id="damagetr" style="">
+							<th><label>Damage:</label>
+							<td><input type="text" name="DamageB" id="damageB_input">
+						</tr>
+						<tr id="shieldtr" style="">
+							<th><label>Shield:</label>
+							<td><input type="text" name="shieldB" id="shieldB_input">
+						</tr>
+						<tr id="warptr" style="">
+							<th><label>Warp:</label>
+							<td><input type="text" name="WarpB" id="warpB_input">
+						</tr>
+						<tr>
+							<th><label>Wiki account of the discoverer OR leave empty:</label>
+							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
+						</tr>
+						<tr>
+							<th><label>Name of the discoverer if discoverer doesn't have a wiki account:</label>
+							<td><input type="text" name="Discovered" id="discovered_input">
+						</tr>
+						<tr>
+							<th><label>Are you part of the GHSH?</label>
+							<td>
+								<input type="radio" id="GHSHY" name="GHSH" value="GHSH">
+								<label for="GHSHY">Yes</label>
+								<input type="radio" id="GHSHN" name="GHSH" value="">
+								<label for="GHSHN">No</label>
+								<span style="display:none">
+									<input type="radio" id="GHSHA" name="GHSH" value="" checked>
+								</span>
 							</td>
 						</tr>
 						<tr>
@@ -233,8 +360,8 @@
 					</span>
 					<span class="actions" style="white-space: nowrap">
 						<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
-						<a id="downloadbtn" class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'baseName_input')">Download file</a>
-						<a class="button is-outlined is-primary" id="link" onclick="wikiLink('link', 'baseName_input');">Create page</a>
+						<a id="downloadbtn" class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'shipName_input')">Download file</a>
+						<a class="button is-outlined is-primary" id="link" onclick="wikiLink('link', 'shipName_input');">Create page</a>
 					</span>
 				</div>
 				<br>
@@ -248,6 +375,7 @@
 						<div>| name = <output id='name'></output></div>
 						<div>| image = <output id='image'></output></div>
 						<div>| civilized = <output id='civilized'></output></div>
+						<div>| galaxy = <output id='galaxy'></output></div>
 						<div>| region = <output id='region'></output></div>
 						<div>| system = <output id='system'></output></div>
 						<div>| planet = <output id='planet'></output></div>
@@ -279,12 +407,12 @@
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''<output id='name2'></output>''' is a [[Starship Catalogue - <output>TYPE</output>|<output>TYPE</output>]]-type [[starship]].
+						<div>'''<output id='name2'></output>''' is <output id='enPrefix'></output> [[Starship Catalogue - <output id='type1'></output>|<output id='type2'></output>]]-type [[starship]].
 						</div>
 						<br>
 
 						<div>==Appearance==</div>
-						<div><output id='layout'></output></div>
+						<div><output id='appearance'></output></div>
 						<br>
 
 						<div>==Stats==</div>
@@ -306,7 +434,7 @@
 						<br>
 						
 						<div>==Reference links==</div>
-						<div><output id='addInfo'></output></div>
+						<div><output id='refLinks'></output></div>
 					</div>
 				</div>
 			</div>
