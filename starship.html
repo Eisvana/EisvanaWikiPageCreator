@@ -13,9 +13,9 @@
 		function showInput() {
  			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name", "shipName_input");
-			textFunction("name1", "shipName_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name2", "shipName_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("name", "name_input");
+			textFunction("name1", "name_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("image", "image_input");
 			textFunction("region", "region_input");
 			textFunction("system", "system_input");
@@ -101,7 +101,7 @@
 						</tr>
 						<tr>
 							<th><label>Name of the starship:</label>
-							<td><input type="text" name="Ship" id="shipName_input">
+							<td><input type="text" name="Ship" id="name_input">
 						</tr>
 						<tr>
 							<th><label>Name of the image, including file extension:</label>
@@ -361,8 +361,8 @@
 					</span>
 					<span class="actions" style="white-space: nowrap">
 						<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
-						<a id="downloadbtn" class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'shipName_input')">Download file</a>
-						<a class="button is-outlined is-primary" id="link" onclick="wikiLink('link', 'shipName_input');">Create page</a>
+						<a id="downloadbtn" class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'name_input')">Download file</a>
+						<a class="button is-outlined is-primary" id="link" onclick="wikiLink('link', 'name_input');">Create page</a>
 					</span>
 				</div>
 				<br>
