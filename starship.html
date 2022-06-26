@@ -43,11 +43,12 @@
 			textFunction("appearance", "appearance_input");
 			civGalaxy("civ");
  			getHubNumber("region_input", "hub_nr");
+			discoverer("discovered_input", "discoveredlink_input");
 		}
 		window.onload = () => {
 			civRegDropdown();
 			autoRefresh();
-			textFunction("glyph_display", "portalglyphs_input"); //syncs input glyphs and glyph display on page reload
+			showInput();
 		}
 	</script>
 </head>
