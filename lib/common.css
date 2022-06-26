@@ -255,3 +255,7 @@ input[type="text"]:hover,
 input[type="date"]:hover {
 	border: 1px solid #000;
 }
+
+.glyphs.icon.is-small {
+	height: inherit;
+}
