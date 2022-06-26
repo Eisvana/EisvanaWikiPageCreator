@@ -53,7 +53,7 @@
 			discoverer("builder_input", "builderlink_input");
 		}
 		window.onload = () => {
-			civRegDropdown();
+			civRegDropdown('civ', 'region_input');
 			autoRefresh();
 			showInput();
 		}
@@ -99,7 +99,7 @@
 						<tr>
 							<th><label>To which civ does this base belong?</label>
 							<td>
-								<select id="civ" name="Civ" onchange="civRegDropdown()">
+								<select id="civ" name="Civ" onchange="civRegDropdown('civ', 'region_input')">
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
 									<option value="EisHub" id="EisHub">EisHub
