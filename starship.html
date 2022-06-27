@@ -45,7 +45,7 @@
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			enPrefix("type_input", "enPrefix");
-			calcS("economy_input", "sChance")
+			calcS("economy_input", "sChance", "type_input")
 		}
 		window.onload = () => {
 			civRegDropdown('civ', 'region_input');
@@ -414,7 +414,7 @@
 						<div>==Summary==</div>
 						<div>'''<output id='name2'></output>''' is <output id='enPrefix'></output> [[Starship Catalogue - <output id='type1'></output>|<output id='type2'></output>]]-type [[starship]].</div>
 						<br>
-						<div>This ship has a <output id="sChance"></output> to spawn in S-class</div>
+						<div><output id="sChance"></output></div>
 						<br>
 
 						<div>==Appearance==</div>
