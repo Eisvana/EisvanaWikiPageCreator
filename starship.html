@@ -43,6 +43,7 @@
 			radioFunction("researchteam" ,"GHSH")
 			textFunction("appearance", "appearance_input");
 			civGalaxy("civ");
+			enPrefix("type_input", "enPrefix");
 		}
 		window.onload = () => {
 			civRegDropdown('civ', 'region_input');
@@ -312,11 +313,11 @@
 						</tr>
 						<tr>
 							<th><label>Wiki account of the discoverer OR leave empty:</label>
-							<td><input type="text" name="Discoveredlink" id="discoveredlink_input" onfocusout="hideDiscoverer('discovered_input', 'discoveredlink_input');">
+							<td><input type="text" name="Discoveredlink" id="discoveredlink_input" onchange="hideDiscoverer('discovered_input', 'discoveredlink_input');">
 						</tr>
 						<tr>
 							<th><label>Name of the discoverer if discoverer doesn't have a wiki account:</label>
-							<td><input type="text" name="Discovered" id="discovered_input" onfocusout="hideDiscoverer('discovered_input', 'discoveredlink_input');">
+							<td><input type="text" name="Discovered" id="discovered_input" onchange="hideDiscoverer('discovered_input', 'discoveredlink_input');">
 						</tr>
 						<tr>
 							<th><label>Are you part of the GHSH?</label>
