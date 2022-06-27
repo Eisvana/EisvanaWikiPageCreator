@@ -50,7 +50,7 @@
 			textFunction("addInfo", "addInfo_input");
 			currentYear("censusrenewal");
 			civGalaxy("civ");
-			
+			hideDiscoverer("builder_input", "builderlink_input");
 		}
 		window.onload = () => {
 			civRegDropdown('civ', 'region_input');
@@ -121,11 +121,11 @@
 						</tr>
 						<tr>
 							<th><label>Builder wiki account:</label>
-							<td><input type="text" name="Builderlink" id="builderlink_input" onchange="hideDiscoverer('builder_input', 'builderlink_input');">
+							<td><input type="text" name="Builderlink" id="builderlink_input">
 						</tr>
 						<tr>
 							<th><label>Alias if no wiki:</label>
-							<td><input type="text" name="Builder" id="builder_input" onchange="hideDiscoverer('builder_input', 'builderlink_input');">
+							<td><input type="text" name="Builder" id="builder_input">
 						</tr>
 						<tr>
 							<th><label>Name of the region:</label>
