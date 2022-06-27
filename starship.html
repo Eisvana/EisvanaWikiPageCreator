@@ -43,6 +43,8 @@
 			radioFunction("researchteam" ,"GHSH")
 			textFunction("appearance", "appearance_input");
 			civGalaxy("civ");
+			hideDiscoverer('discovered_input', 'discoveredlink_input');
+			enPrefix("type_input", "enPrefix");
 		}
 		window.onload = () => {
 			civRegDropdown('civ', 'region_input');
@@ -104,7 +106,7 @@
 							<td><input type="text" name="Ship" id="name_input">
 						</tr>
 						<tr>
-							<th><label>Name of the image, including file extension:</label>
+							<th><label>Main image name, including file extension:</label>
 							<td>
 								<input type="text" name="Image" id="image_input">
 								<br>
@@ -311,12 +313,12 @@
 							<td><input type="text" name="WarpB" id="warpB_input">
 						</tr>
 						<tr>
-							<th><label>Wiki account of the discoverer OR leave empty:</label>
-							<td><input type="text" name="Discoveredlink" id="discoveredlink_input" onfocusout="hideDiscoverer('discovered_input', 'discoveredlink_input');">
+							<th><label>Discoverer wiki account:</label>
+							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
 						</tr>
 						<tr>
-							<th><label>Name of the discoverer if discoverer doesn't have a wiki account:</label>
-							<td><input type="text" name="Discovered" id="discovered_input" onfocusout="hideDiscoverer('discovered_input', 'discoveredlink_input');">
+							<th><label>Discoverer alias if no wiki:</label>
+							<td><input type="text" name="Discovered" id="discovered_input">
 						</tr>
 						<tr>
 							<th><label>Are you part of the GHSH?</label>

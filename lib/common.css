@@ -101,6 +101,10 @@ table {
 }
 
 @media only screen and (max-width: 1023px) {
+	label {
+		font-size: small;
+	}
+	
 	.output {
 		display: block;
 		margin: 0 auto;
