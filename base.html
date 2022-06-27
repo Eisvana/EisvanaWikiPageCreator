@@ -13,9 +13,9 @@
 		function showInput() {
 			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name", "baseName_input");
-			textFunction("name1", "baseName_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name2", "baseName_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("name", "name_input");
+			textFunction("name1", "name_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("image", "image_input");
 			textFunction("builder", "builder_input");
 			textFunction("builderlink", "builderlink_input");
@@ -50,11 +50,12 @@
 			textFunction("addInfo", "addInfo_input");
 			currentYear("censusrenewal");
 			civGalaxy("civ");
+			
 		}
 		window.onload = () => {
-			civRegDropdown();
+			civRegDropdown('civ', 'region_input');
 			autoRefresh();
-			textFunction("glyph_display", "portalglyphs_input"); //syncs input glyphs and glyph display on page reload
+			showInput();
 		}
 	</script>
 </head>
@@ -98,7 +99,7 @@
 						<tr>
 							<th><label>To which civ does this base belong?</label>
 							<td>
-								<select id="civ" name="Civ" onchange="civRegDropdown()">
+								<select id="civ" name="Civ" onchange="civRegDropdown('civ', 'region_input')">
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
 									<option value="EisHub" id="EisHub">EisHub
@@ -107,7 +108,7 @@
 						</tr>
 						<tr>
 							<th><label>Name of the base:</label>
-							<td><input type="text" name="Base" id="baseName_input">
+							<td><input type="text" name="Base" id="name_input">
 						</tr>
 						<tr>
 							<th><label>Name of the image, including file extension:</label>
@@ -119,12 +120,12 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Wiki account of the builder OR leave empty:</label>
-							<td><input type="text" name="Builderlink" id="builderlink_input">
+							<th><label>Builder wiki account:</label>
+							<td><input type="text" name="Builderlink" id="builderlink_input" onfocusout="hideDiscoverer('builder_input', 'builderlink_input');">
 						</tr>
 						<tr>
-							<th><label>Name of the builder if builder doesn't have wiki account:</label>
-							<td><input type="text" name="Builder" id="builder_input">
+							<th><label>Alias if no wiki:</label>
+							<td><input type="text" name="Builder" id="builder_input" onfocusout="hideDiscoverer('builder_input', 'builderlink_input');">
 						</tr>
 						<tr>
 							<th><label>Name of the region:</label>
@@ -407,9 +408,9 @@
 						<button id="btn" class="button is-outlined is-primary"
 							onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
 						<a id="downloadbtn" class="button is-outlined is-primary"
-							onclick="downloadFile('downloadbtn', 'wikiText', 'baseName_input')">Download file</a>
+							onclick="downloadFile('downloadbtn', 'wikiText', 'name_input')">Download file</a>
 						<a class="button is-outlined is-primary" id="link"
-							onclick="wikiLink('link', 'baseName_input');">Create page</a>
+							onclick="wikiLink('link', 'name_input');">Create page</a>
 					</span>
 				</div>
 				<br>
