@@ -12,6 +12,10 @@
 	src: local('NMS-Glyphs-Tight'), local('NMS-Glyphs-Tight'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Tight.ttf) format('truetype');
 }
 
+#wikiText {
+	font-family: Consolas;
+}
+
 .home {
 	margin-top: 2em;
 	text-align: center;
