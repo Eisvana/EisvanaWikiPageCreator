@@ -46,6 +46,8 @@
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			enPrefix("type_input", "enPrefix");
 			calcS("economy_input", "sChance", "type_input")
+			shipStats("type_input", "stats")
+			textFunction("refLinks", "type_input");
 		}
 		window.onload = () => {
 			civRegDropdown('civ', 'region_input');
@@ -435,12 +437,12 @@
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
-						<div id="galleryCode"></div>
+						<div><output id="galleryCode"></output></div>
 						<div>&lt;/gallery&gt;</div>
 						<br>
 						
 						<div>==Reference links==</div>
-						<div><output id='refLinks'></output></div>
+						<div>{{StarshipRefLinks|type=<output id='refLinks'></output>}}</div>
 					</div>
 				</div>
 			</div>
