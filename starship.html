@@ -48,12 +48,12 @@
 			calcS("economy_input", "sChance", "type_input")
 			shipStats("type_input", "stats")
 			textFunction("refLinks", "type_input");
-			showHide("type_input", "subtypetr", "exotictr", "pilottr", "maneuvertr", "damagetr", "shieldtr", "warptr")
 		}
 		window.onload = () => {
 			civRegDropdown('civ', 'region_input');
 			subtypeDropdown('type_input', 'subtype_input');
 			autoRefresh();
+			showHide("type_input", "subtype_input", "exotic_input", "pilot_input", "maneuverB_input", "damageB_input", "shieldB_input", "warpB_input", "inventory_input")
 			showInput();
 		}
 	</script>
@@ -168,7 +168,7 @@
 									<option value="★ (Struggling)">Struggling
 									<option value="★ (Unsuccessful)">Unsuccessful
 									<option value="★ (Unpromising)">Unpromising
-									<option value="{{BlackMarket}}">Pirate
+									<option value="💀 (Black Market)">Pirate
 								</select>
 							</td>
 						</tr>
@@ -251,15 +251,15 @@
 						<tr>
 							<th><label>Type of the starship:</label>
 							<td>
-								<select name="Type" id="type_input" onchange="subtypeDropdown('type_input', 'subtype_input');">
+								<select name="Type" id="type_input" onchange="subtypeDropdown('type_input', 'subtype_input'); showHide('type_input', 'subtype_input', 'exotic_input', 'pilot_input', 'maneuverB_input', 'damageB_input', 'shieldB_input', 'warpB_input', 'inventory_input')">
 									<option value="Fighter">Fighter
 									<option value="Explorer">Explorer
 									<option value="Hauler">Hauler
 									<option value="Shuttle">Shuttle
 									<option value="Solar">Solar
 									<option value="Exotic">Exotic
-									<option value="Freighter">Freighter
 									<option value="Living Ship">Living Ship
+									<option value="Freighter">Freighter
 								</select>
 							</td>
 						</tr>
@@ -291,7 +291,7 @@
 								</select>
 							</td>
 						</tr>
-						<tr>
+						<tr id="inventorytr">
 							<th><label>Inventory:</label>
 							<td>
 								<select name="Inventory" id="inventory_input">
