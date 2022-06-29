@@ -53,7 +53,7 @@
 			civRegDropdown('civ', 'region_input');
 			subtypeDropdown('type_input', 'subtype_input');
 			autoRefresh();
-			showHide("type_input", "subtype_input", "exotic_input", "pilot_input", "maneuverB_input", "damageB_input", "shieldB_input", "warpB_input", "inventory_input")
+			showHide("type_input", "subtype_input", "exotic_input", "pilot_input", "maneuverB_input", "damageB_input", "shieldB_input", "warpB_input", "inventory_input", "planet_input", "moon_input", "axes_input", "economy_input")
 			showInput();
 		}
 	</script>
@@ -66,7 +66,7 @@
 
 		<div class="columns is-desktop">
 			<div class="column is-full-mobile">
-				<form id="form" onreset="resetShip('gallery_descs', 'type_input', 'subtype_input', 'exotic_input', 'pilot_input', 'maneuverB_input', 'damageB_input', 'shieldB_input', 'warpB_input', 'inventory_input');">
+				<form id="form" onreset="resetShip('gallery_descs', 'type_input', 'subtype_input', 'exotic_input', 'pilot_input', 'maneuverB_input', 'damageB_input', 'shieldB_input', 'warpB_input', 'inventory_input', 'planet_input', 'moon_input', 'axes_input', 'economy_input');">
 					<table style="text-align:left">
 						<tr>
 							<th><label>Current release:</label>
@@ -115,6 +115,21 @@
 								<input type="text" name="Image" id="image_input">
 								<br>
 								<input type="file" id="image_upload" name="Image_upload" accept="image/*" onchange="imgUpload('image', 'image_upload', 'image_input')">
+							</td>
+						</tr>
+						<tr>
+							<th><label>Type of the starship:</label>
+							<td>
+								<select name="Type" id="type_input" onchange="subtypeDropdown('type_input', 'subtype_input'); showHide('type_input', 'subtype_input', 'exotic_input', 'pilot_input', 'maneuverB_input', 'damageB_input', 'shieldB_input', 'warpB_input', 'inventory_input', 'planet_input', 'moon_input', 'axes_input', 'economy_input')">
+									<option value="Fighter">Fighter
+									<option value="Explorer">Explorer
+									<option value="Hauler">Hauler
+									<option value="Shuttle">Shuttle
+									<option value="Solar">Solar
+									<option value="Exotic">Exotic
+									<option value="Living Ship">Living Ship
+									<option value="Freighter">Freighter
+								</select>
 							</td>
 						</tr>
 						<tr>
@@ -249,28 +264,13 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Type of the starship:</label>
-							<td>
-								<select name="Type" id="type_input" onchange="subtypeDropdown('type_input', 'subtype_input'); showHide('type_input', 'subtype_input', 'exotic_input', 'pilot_input', 'maneuverB_input', 'damageB_input', 'shieldB_input', 'warpB_input', 'inventory_input')">
-									<option value="Fighter">Fighter
-									<option value="Explorer">Explorer
-									<option value="Hauler">Hauler
-									<option value="Shuttle">Shuttle
-									<option value="Solar">Solar
-									<option value="Exotic">Exotic
-									<option value="Living Ship">Living Ship
-									<option value="Freighter">Freighter
-								</select>
-							</td>
-						</tr>
-						<tr id="subtypetr" style="">
 							<th><label>Subtype:</label>
 							<td>
 								<select name="Subtype" id="subtype_input">
 								</select>
 							</td>
 						</tr>
-						<tr id="exotictr" style="">
+						<tr>
 							<th><label>Exotic type:</label>
 							<td>
 								<select name="exotic" id="exotic_input">
@@ -281,7 +281,7 @@
 								</select>
 							</td>
 						</tr>
-						<tr id="pilottr" style="">
+						<tr>
 							<th><label>Pilot race:</label>
 							<td>
 								<select name="Pilot" id="pilot_input">
@@ -291,7 +291,7 @@
 								</select>
 							</td>
 						</tr>
-						<tr id="inventorytr">
+						<tr>
 							<th><label>Inventory:</label>
 							<td>
 								<select name="Inventory" id="inventory_input">
@@ -301,19 +301,19 @@
 								</select>
 							</td>
 						</tr>
-						<tr id="maneuvertr" style="">
+						<tr>
 							<th><label>Maneuverability:</label>
 							<td><input type="text" name="ManeuverB" id="maneuverB_input">
 						</tr>
-						<tr id="damagetr" style="">
+						<tr>
 							<th><label>Damage:</label>
 							<td><input type="text" name="DamageB" id="damageB_input">
 						</tr>
-						<tr id="shieldtr" style="">
+						<tr>
 							<th><label>Shield:</label>
 							<td><input type="text" name="shieldB" id="shieldB_input">
 						</tr>
-						<tr id="warptr" style="">
+						<tr>
 							<th><label>Warp:</label>
 							<td><input type="text" name="WarpB" id="warpB_input">
 						</tr>
