@@ -12,6 +12,7 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
+			calcInv("type_input", "subtype_input", "inventory_input");
 			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("name", "name_input");
