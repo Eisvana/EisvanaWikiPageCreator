@@ -51,9 +51,9 @@
 			currentYear("censusrenewal");
 			civGalaxy("civ");
 			hideDiscoverer("builder_input", "builderlink_input");
+			glyphRegion("portalglyphs_input", "civ", "region");
 		}
 		window.onload = () => {
-			civRegDropdown('civ', 'region_input');
 			autoRefresh();
 			showInput();
 		}
@@ -99,7 +99,7 @@
 						<tr>
 							<th><label>Which civ does this base belong to?</label>
 							<td>
-								<select id="civ" name="Civ" onchange="civRegDropdown('civ', 'region_input')">
+								<select id="civ" name="Civ">
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
 									<option value="EisHub" id="EisHub">EisHub
