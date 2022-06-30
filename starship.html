@@ -51,7 +51,7 @@
 			textFunction("refLinks", "type_input");
 		}
 		window.onload = () => {
-			civRegDropdown('civ', 'region_input');
+		//	civRegDropdown('civ', 'region_input');
 			subtypeDropdown('type_input', 'subtype_input');
 			autoRefresh();
 			showHideStarshipSelects("type_input", "subtype_input", "exotic_input", "pilot_input", "maneuverB_input", "damageB_input", "shieldB_input", "warpB_input", "inventory_input", "planet_input", "moon_input", "axes_input", "economy_input")
@@ -99,7 +99,7 @@
 						<tr>
 							<th><label>Which civ does this ship belong to?</label>
 							<td>
-								<select id="civ" name="Civ" onchange="civRegDropdown('civ', 'region_input')">
+								<select id="civ" name="Civ" <!--onchange="civRegDropdown('civ', 'region_input')"-->>
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
 									<option value="EisHub" id="EisHub">EisHub
