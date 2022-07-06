@@ -58,8 +58,8 @@
 		window.onload = () => {
 			subtypeDropdown('type_input', 'subtype_input');
 			autoRefresh();
-			showHideStarshipSelects("type_input", "subtype_input", "exotic_input", "pilot_input", "maneuverB_input", "damageB_input", "shieldB_input", "warpB_input", "inventory_input", "planet_input", "moon_input", "axes_input", "economy_input")
-			//invDropdown("type_input", "inventory_input", "subtype_input");
+			showHideStarshipSelects("type_input", "subtype_input", "exotic_input", "pilot_input", "maneuverB_input", "damageB_input", "shieldB_input", "warpB_input", "inventory_input", "planet_input", "moon_input", "axes_input", "economy_input");
+			shipAppearance("name_input", "type_input", "mainColour_input", "secColour_input", "secParts_input", "accessories_input", "miscParts_input", "appearance_input");
 			showInput();
 		}
 	</script>
@@ -113,7 +113,7 @@
 						</tr>
 						<tr>
 							<th><label>Name of the starship:</label>
-							<td><input type="text" name="Ship" id="name_input">
+							<td><input type="text" name="Ship" id="name_input" onchange="shipAppearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
 						</tr>
 						<tr>
 							<th><label>Main image name, including file extension:</label>
@@ -128,7 +128,7 @@
 							<th><label>Type of the starship:</label>
 							<td>
 								<select name="Type" id="type_input"
-									onchange="subtypeDropdown('type_input', 'subtype_input'); showHideStarshipSelects('type_input', 'subtype_input', 'exotic_input', 'pilot_input', 'maneuverB_input', 'damageB_input', 'shieldB_input', 'warpB_input', 'inventory_input', 'planet_input', 'moon_input', 'axes_input', 'economy_input')">
+									onchange="subtypeDropdown('type_input', 'subtype_input'); showHideStarshipSelects('type_input', 'subtype_input', 'exotic_input', 'pilot_input', 'maneuverB_input', 'damageB_input', 'shieldB_input', 'warpB_input', 'inventory_input', 'planet_input', 'moon_input', 'axes_input', 'economy_input'); shipAppearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
 									<option value="Fighter">Fighter
 									<option value="Explorer">Explorer
 									<option value="Hauler">Hauler
@@ -274,7 +274,7 @@
 						<tr>
 							<th><label>Subtype:</label>
 							<td>
-								<select name="Subtype" id="subtype_input" onchange="invDropdown('type_input',  'subtype_input', 'inventory_input');">
+								<select name="Subtype" id="subtype_input" onchange="invDropdown('type_input',  'subtype_input', 'inventory_input'); shipAppearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
 								</select>
 							</td>
 						</tr>
@@ -344,6 +344,70 @@
 								<span style="display:none">
 									<input type="radio" id="GHSHA" name="GHSH" value="" checked>
 								</span>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Main Colour:</label>
+							<td>
+								<select name="mainColour" id="mainColour_input" onchange="shipAppearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
+									<option value="Blue">Blue
+									<option value="Chrome">Chrome
+									<option value="Cream">Cream
+									<option value="Green">Green
+									<option value="Grey">Grey
+									<option value="Orange">Orange
+									<option value="Pink">Pink
+									<option value="Purple">Purple
+									<option value="Red">Red
+									<option value="Tan">Tan
+									<option value="Teal">Teal
+									<option value="White">White
+									<option value="Yellow">Yellow
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Secondary Colour:</label>
+							<td>
+								<select name="secColour" id="secColour_input" onchange="shipAppearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
+									<option value="Black">Black
+									<option value="Blue">Blue
+									<option value="Chrome">Chrome
+									<option value="Cream">Cream
+									<option value="Gold">Gold
+									<option value="Green">Green
+									<option value="Grey">Grey
+									<option value="Orange">Orange
+									<option value="Pink">Pink
+									<option value="Purple">Purple
+									<option value="Red">Red
+									<option value="Silver">Silver
+									<option value="Tan">Tan
+									<option value="Teal">Teal
+									<option value="White">White
+									<option value="Yellow">Yellow
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Secondary parts:</label>
+							<td>
+								<select name="SecParts" id="secParts_input" onchange="shipAppearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Accessories:</label>
+							<td>
+								<select name="Accessories" id="accessories_input" onchange="shipAppearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Misc part:</label>
+							<td>
+								<select name="MiscParts" id="miscParts_input" onchange="shipAppearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
+								</select>
 							</td>
 						</tr>
 						<tr>
