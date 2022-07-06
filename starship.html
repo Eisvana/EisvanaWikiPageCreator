@@ -12,6 +12,7 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
+			radioFunction("researchteam", "GHSH")
 			calcInv("type_input", "subtype_input", "inventory_input");
 			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
@@ -40,17 +41,18 @@
 			textFunction("warpB", "warpB_input");
 			textFunction("discovered", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
-			radioFunction("researchteam", "GHSH")
 			textFunction("appearance", "appearance_input");
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			enPrefix("type_input", "enPrefix");
+			researchTeam("researchteam", "civilized");
 			calcS("economy_input", "sChance", "type_input")
 			shipStats("type_input", "stats")
 			textFunction("refLinks", "type_input");
 			glyphRegion("portalglyphs_input", "civ", "region");
 			costSlotCalc("type_input", "inventory", "cost", "slots", "techslots", "cargoslots");
 			loc("system_input", "type_input", "civ", "moon_input", "planet_input", "axes_input", "region", "inventory", "location");
+			docBy("docby", "docby_input", "researchteam");
 		}
 		window.onload = () => {
 			subtypeDropdown('type_input', 'subtype_input');
@@ -330,6 +332,10 @@
 							<td><input type="text" name="Discovered" id="discovered_input">
 						</tr>
 						<tr>
+							<th><label>Documenter alias if not discoverer:</label>
+							<td><input type="text" name="DocBy" id="docby_input">
+						</tr>
+						<tr>
 							<th><label>Are you part of the GHSH?</label>
 							<td>
 								<input type="radio" id="GHSHY" name="GHSH" value="GHSH">
@@ -442,7 +448,9 @@
 						<br>
 
 						<div>==Additional information==</div>
-						<div>Featured in the <output id='addInfo'></output> Catalog<output id="docby"></output>.</div>
+						<div>Featured in the <output id='addInfo'></output> Catalog.</div><div>
+						<br>
+						<div><output id="docby"></output></div></div>
 						<br>
 
 						<div>==Gallery==</div>
