@@ -53,6 +53,7 @@
 			costSlotCalc("type_input", "inventory", "cost", "slots", "techslots", "cargoslots");
 			loc("system_input", "type_input", "civ", "moon_input", "planet_input", "axes_input", "region", "inventory", "location");
 			docBy("docby", "docby_input", "researchteam");
+			addInfo("type_input", "civ", "researchteam", "addInfo")
 		}
 		window.onload = () => {
 			subtypeDropdown('type_input', 'subtype_input');
@@ -448,10 +449,10 @@
 						<br>
 
 						<div>==Additional information==</div>
-						<div>Featured in the <output id='addInfo'></output> Catalog.</div><div>
+						<div>Featured in the <output id='addInfo'></output>.</div>
 						<br>
-						<div><output id="docby"></output></div></div>
-						<br>
+						<div><div><output id="docby"></output></div>
+						<br></div>
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
