@@ -59,6 +59,7 @@
 			subtypeDropdown('type_input', 'subtype_input');
 			autoRefresh();
 			showHideStarshipSelects("type_input", "subtype_input", "exotic_input", "pilot_input", "maneuverB_input", "damageB_input", "shieldB_input", "warpB_input", "inventory_input", "planet_input", "moon_input", "axes_input", "economy_input")
+			//invDropdown("type_input", "inventory_input", "subtype_input");
 			showInput();
 		}
 	</script>
@@ -273,7 +274,7 @@
 						<tr>
 							<th><label>Subtype:</label>
 							<td>
-								<select name="Subtype" id="subtype_input">
+								<select name="Subtype" id="subtype_input" onchange="invDropdown('type_input',  'subtype_input', 'inventory_input');">
 								</select>
 							</td>
 						</tr>
@@ -302,9 +303,6 @@
 							<th><label>Inventory:</label>
 							<td>
 								<select name="Inventory" id="inventory_input">
-									<option value="Small">Small
-									<option value="Medium">Medium
-									<option value="Large">Large
 								</select>
 							</td>
 						</tr>
