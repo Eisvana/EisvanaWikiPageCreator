@@ -19,7 +19,6 @@
 			textFunction("image", "image_input");
 			textFunction("builder", "builder_input");
 			textFunction("builderlink", "builderlink_input");
-			textFunction("region", "region_input");
 			textFunction("system", "system_input");
 			textFunction("system1", "system_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("planet", "planet_input");
@@ -51,9 +50,9 @@
 			currentYear("censusrenewal");
 			civGalaxy("civ");
 			hideDiscoverer("builder_input", "builderlink_input");
+			glyphRegion("portalglyphs_input", "civ", "region");
 		}
 		window.onload = () => {
-			civRegDropdown('civ', 'region_input');
 			autoRefresh();
 			showInput();
 		}
@@ -97,9 +96,9 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>To which civ does this base belong?</label>
+							<th><label>Which civ does this base belong to?</label>
 							<td>
-								<select id="civ" name="Civ" onchange="civRegDropdown('civ', 'region_input')">
+								<select id="civ" name="Civ">
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
 									<option value="EisHub" id="EisHub">EisHub
@@ -126,13 +125,6 @@
 						<tr>
 							<th><label>Builder alias if no wiki:</label>
 							<td><input type="text" name="Builder" id="builder_input">
-						</tr>
-						<tr>
-							<th><label>Name of the region:</label>
-							<td>
-								<select name="Region" id="region_input">
-								</select>
-							</td>
 						</tr>
 						<tr>
 							<th><label>Name of the system:</label>
@@ -456,8 +448,7 @@
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''<output id='name2'></output>''' is a [[Habitable Base|player base]], located on the
-							planet [[<output id='planet1'></output>]] in the [[<output id='system1'></output>]] system.
+						<div>'''<output id='name2'></output>''' is a [[Habitable Base|player base]], located on the	planet [[<output id='planet1'></output>]] in the [[<output id='system1'></output>]] system.
 						</div>
 						<br>
 
@@ -475,7 +466,7 @@
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
-						<div id="galleryCode"></div>
+						<div><output id="galleryCode"></output></div>
 						<div>&lt;/gallery&gt;</div>
 					</div>
 				</div>

@@ -12,18 +12,19 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
- 			textFunction("release", "version_input");
+			radioFunction("researchteam", "GHSH")
+			calcInv("type_input", "subtype_input", "inventory_input");
+			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("name", "name_input");
 			textFunction("name1", "name_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("image", "image_input");
-			textFunction("region", "region_input");
 			textFunction("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
 			textFunction("axes", "axes_input");
- 			textFunction("economy", "economy_input");
+			textFunction("economy", "economy_input");
 			textFunction("portalglyphs", "portalglyphs_input");
 			textFunction("portalglyphs1", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("glyph_display", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
@@ -40,16 +41,24 @@
 			textFunction("warpB", "warpB_input");
 			textFunction("discovered", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
-			radioFunction("researchteam" ,"GHSH")
 			textFunction("appearance", "appearance_input");
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			enPrefix("type_input", "enPrefix");
+			researchTeam("researchteam", "civilized");
+			calcS("economy_input", "sChance", "type_input")
+			shipStats("type_input", "stats")
+			textFunction("refLinks", "type_input");
+			glyphRegion("portalglyphs_input", "civ", "region");
+			costSlotCalc("type_input", "inventory", "cost", "slots", "techslots", "cargoslots");
+			loc("system_input", "type_input", "civ", "moon_input", "planet_input", "axes_input", "region", "inventory", "location");
+			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam");
+			addInfo("type_input", "civ", "researchteam", "addInfo")
 		}
 		window.onload = () => {
-			civRegDropdown('civ', 'region_input');
 			subtypeDropdown('type_input', 'subtype_input');
 			autoRefresh();
+			showHideStarshipSelects("type_input", "subtype_input", "exotic_input", "pilot_input", "maneuverB_input", "damageB_input", "shieldB_input", "warpB_input", "inventory_input", "planet_input", "moon_input", "axes_input", "economy_input")
 			showInput();
 		}
 	</script>
@@ -62,7 +71,7 @@
 
 		<div class="columns is-desktop">
 			<div class="column is-full-mobile">
-				<form id="form" onreset="resetAll('gallery_descs')">
+				<form id="form">
 					<table style="text-align:left">
 						<tr>
 							<th><label>Current release:</label>
@@ -92,9 +101,9 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>To which civ does this base belong?</label>
+							<th><label>Which civ does this ship belong to?</label>
 							<td>
-								<select id="civ" name="Civ" onchange="civRegDropdown('civ', 'region_input')">
+								<select id="civ" name="Civ">
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
 									<option value="EisHub" id="EisHub">EisHub
@@ -110,13 +119,23 @@
 							<td>
 								<input type="text" name="Image" id="image_input">
 								<br>
-								<input type="file" id="image_upload" name="Image_upload" accept="image/*" onchange="imgUpload('image', 'image_upload', 'image_input')">
+								<input type="file" id="image_upload" name="Image_upload" accept="image/*"
+									onchange="imgUpload('image', 'image_upload', 'image_input')">
 							</td>
 						</tr>
 						<tr>
-							<th><label>Name of the region:</label>
+							<th><label>Type of the starship:</label>
 							<td>
-								<select name="Region" id="region_input">
+								<select name="Type" id="type_input"
+									onchange="subtypeDropdown('type_input', 'subtype_input'); showHideStarshipSelects('type_input', 'subtype_input', 'exotic_input', 'pilot_input', 'maneuverB_input', 'damageB_input', 'shieldB_input', 'warpB_input', 'inventory_input', 'planet_input', 'moon_input', 'axes_input', 'economy_input')">
+									<option value="Fighter">Fighter
+									<option value="Explorer">Explorer
+									<option value="Hauler">Hauler
+									<option value="Shuttle">Shuttle
+									<option value="Solar">Solar
+									<option value="Exotic">Exotic
+									<option value="Living Ship">Living Ship
+									<option value="Freighter">Freighter
 								</select>
 							</td>
 						</tr>
@@ -140,37 +159,45 @@
 							<th><label>System economy:</label>
 							<td>
 								<select id="economy_input" name="Economy">
-									<option value="Advanced">Advanced
-									<option value="Affluent">Affluent
-									<option value="Booming">Booming
-									<option value="Flourishing">Flourishing
-									<option value="High Supply">High Supply
-									<option value="Opulent">Opulent
-									<option value="Prosperous">Prosperous
-									<option value="Wealthy">Wealthy <!-- here ends T3-->
-									<option value="Adequate">Adequate <!--here begins T2-->
-									<option value="Balanced">Balanced
-									<option value="Comfortable">Comfortable
-									<option value="Developing">Developing
-									<option value="Medium Supply">Medium Supply
-									<option value="Promising">Promising
-									<option value="Satisfactory">Satisfactory
-									<option value="Sustainable">Sustainable <!-- here ends T2-->
-									<option value="Declining">Declining <!--here begins T1-->
-									<option value="Destitute">Destitute
-									<option value="Failing">Failing
-									<option value="Fledgling">Fledgling
-									<option value="Low Supply">Low Supply
-									<option value="Struggling">Struggling
-									<option value="Unsuccessful">Unsuccessful
-									<option value="Unpromising">Unpromising
+									<option value="★★★ (Advanced)">Advanced
+									<option value="★★★ (Affluent)">Affluent
+									<option value="★★★ (Booming)">Booming
+									<option value="★★★ (Flourishing)">Flourishing
+									<option value="★★★ (High Supply)">High Supply
+									<option value="★★★ (Opulent)">Opulent
+									<option value="★★★ (Prosperous)">Prosperous
+									<option value="★★★ (Wealthy)">Wealthy
+										<!-- here ends T3-->
+									<option value="★★ (Adequate)">Adequate
+										<!--here begins T2-->
+									<option value="★★ (Balanced)">Balanced
+									<option value="★★ (Comfortable)">Comfortable
+									<option value="★★ (Developing)">Developing
+									<option value="★★ (Medium Supply)">Medium Supply
+									<option value="★★ (Promising)">Promising
+									<option value="★★ (Satisfactory)">Satisfactory
+									<option value="★★ (Sustainable)">Sustainable
+										<!-- here ends T2-->
+									<option value="★ (Declining)">Declining
+										<!--here begins T1-->
+									<option value="★ (Destitute)">Destitute
+									<option value="★ (Failing)">Failing
+									<option value="★ (Fledgling)">Fledgling
+									<option value="★ (Low Supply)">Low Supply
+									<option value="★ (Struggling)">Struggling
+									<option value="★ (Unsuccessful)">Unsuccessful
+									<option value="★ (Unpromising)">Unpromising
+										<!--here ends T1-->
+									<option value="💀 (Black Market)">Pirate
 								</select>
 							</td>
 						</tr>
 						<tr>
-							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button" onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
+							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button"
+									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
 
-							<td><input type="text" name="Glyphs" id="portalglyphs_input" oninput="glyphInputOnChange(this)">
+							<td><input type="text" name="Glyphs" id="portalglyphs_input"
+									oninput="glyphInputOnChange(this)">
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -244,28 +271,13 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Type of the starship:</label>
-							<td>
-								<select name="Type" id="type_input" onchange="subtypeDropdown('type_input', 'subtype_input');">
-									<option value="Fighter">Fighter
-									<option value="Explorer">Explorer
-									<option value="Hauler">Hauler
-									<option value="Shuttle">Shuttle
-									<option value="Solar">Solar
-									<option value="Exotic">Exotic
-									<option value="Freighter">Freighter
-									<option value="Living Ship">Living Ship
-								</select>
-							</td>
-						</tr>
-						<tr id="subtypetr" style="">
 							<th><label>Subtype:</label>
 							<td>
 								<select name="Subtype" id="subtype_input">
 								</select>
 							</td>
 						</tr>
-						<tr id="exotictr" style="">
+						<tr>
 							<th><label>Exotic type:</label>
 							<td>
 								<select name="exotic" id="exotic_input">
@@ -276,7 +288,7 @@
 								</select>
 							</td>
 						</tr>
-						<tr id="pilottr" style="">
+						<tr>
 							<th><label>Pilot race:</label>
 							<td>
 								<select name="Pilot" id="pilot_input">
@@ -296,19 +308,19 @@
 								</select>
 							</td>
 						</tr>
-						<tr id="maneuvertr" style="">
+						<tr>
 							<th><label>Maneuverability:</label>
 							<td><input type="text" name="ManeuverB" id="maneuverB_input">
 						</tr>
-						<tr id="damagetr" style="">
+						<tr>
 							<th><label>Damage:</label>
 							<td><input type="text" name="DamageB" id="damageB_input">
 						</tr>
-						<tr id="shieldtr" style="">
+						<tr>
 							<th><label>Shield:</label>
 							<td><input type="text" name="shieldB" id="shieldB_input">
 						</tr>
-						<tr id="warptr" style="">
+						<tr>
 							<th><label>Warp:</label>
 							<td><input type="text" name="WarpB" id="warpB_input">
 						</tr>
@@ -319,6 +331,10 @@
 						<tr>
 							<th><label>Discoverer alias if no wiki:</label>
 							<td><input type="text" name="Discovered" id="discovered_input">
+						</tr>
+						<tr>
+							<th><label>Documenter alias if not discoverer:</label>
+							<td><input type="text" name="DocBy" id="docby_input">
 						</tr>
 						<tr>
 							<th><label>Are you part of the GHSH?</label>
@@ -349,7 +365,8 @@
 						</tr>
 						<tr>
 							<th><label>Gallery files</label>
-							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
+							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
+									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
 						</tr>
 					</table>
 					<br>
@@ -359,12 +376,15 @@
 				<div>
 					<span class="actions" style="white-space: nowrap">
 						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>
-						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
+						<button class="button is-warning" onclick="resetShip('gallery_descs', 'type_input', 'subtype_input', 'exotic_input', 'pilot_input', 'maneuverB_input', 'damageB_input', 'shieldB_input', 'warpB_input', 'inventory_input', 'planet_input', 'moon_input', 'axes_input', 'economy_input');">Reset inputs</button>
 					</span>
 					<span class="actions" style="white-space: nowrap">
-						<button id="btn" class="button is-outlined is-primary" onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
-						<a id="downloadbtn" class="button is-outlined is-primary" onclick="downloadFile('downloadbtn', 'wikiText', 'name_input')">Download file</a>
-						<a class="button is-outlined is-primary" id="link" onclick="wikiLink('link', 'name_input');">Create page</a>
+						<button id="btn" class="button is-outlined is-primary"
+							onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
+						<a id="downloadbtn" class="button is-outlined is-primary"
+							onclick="downloadFile('downloadbtn', 'wikiText', 'name_input')">Download file</a>
+						<a class="button is-outlined is-primary" id="link"
+							onclick="wikiLink('link', 'name_input');">Create page</a>
 					</span>
 				</div>
 				<br>
@@ -410,8 +430,10 @@
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''<output id='name2'></output>''' is <output id='enPrefix'></output> [[Starship Catalogue - <output id='type1'></output>|<output id='type2'></output>]]-type [[starship]].
-						</div>
+						<div>'''<output id='name2'></output>''' is <output id='enPrefix'></output> [[Starship Catalogue
+							- <output id='type1'></output>|<output id='type2'></output>]]-type [[starship]].</div>
+						<br>
+						<div><output id="sChance"></output></div>
 						<br>
 
 						<div>==Appearance==</div>
@@ -425,19 +447,21 @@
 						<div>==Location==</div>
 						<div><output id='location'></output></div>
 						<br>
-						
+
 						<div>==Additional information==</div>
-						<div>Featured in the <output id='addInfo'></output></div>
+						<div>Featured in the <output id='addInfo'></output>.</div>
 						<br>
+						<div><div><output id="docby"></output></div>
+						<br></div>
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
-						<div id="galleryCode"></div>
+						<div><output id="galleryCode"></output></div>
 						<div>&lt;/gallery&gt;</div>
 						<br>
-						
+
 						<div>==Reference links==</div>
-						<div><output id='refLinks'></output></div>
+						<div>{{StarshipRefLinks|type=<output id='refLinks'></output>}}</div>
 					</div>
 				</div>
 			</div>
