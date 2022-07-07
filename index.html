@@ -15,6 +15,18 @@
 			vertical-align: middle;
 		}
 	</style>
+	<script>
+		// making all external links open in a new tab
+		window.onload = () => {
+			const a = document.querySelectorAll("a");
+			for (const link of a) {
+				if (!link.href.match("http") == "") {
+					link.setAttribute("target", "_blank");
+					link.setAttribute("rel", "noopener noreferrer");
+				} 
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -55,24 +67,24 @@
 		<p class="built-by">
 			Brought to you by:
 			<br>
-			<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes" target="_blank" rel="noopener noreferrer"
+			<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes"
 				title="Galactic Hub Eissentam Scribes">Galactic Hub Eissentam Scribes</a>&nbsp;<a
-				href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes" target="_blank" rel="noopener noreferrer"><img
+				href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes"><img
 					src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/e/ea/EisHub_Scribe_logo.png"
 					alt="Galactic Hub Eissentam Scribes logo"></a>
 			<br>
-			<a href="https://nmsassistant.com/"  target="_blank" rel="noopener noreferrer" title="Assistant for No Man's Sky">Assistant for No Man's Sky</a>&nbsp;<a href="https://nmsassistant.com/" target="_blank" rel="noopener noreferrer"><img src="https://cdn.assistantapps.com/assistantNMS.png" alt="Assistant for NMS logo"></a>
+			<a href="https://nmsassistant.com/" title="Assistant for No Man's Sky">Assistant for No Man's Sky</a>&nbsp;<a href="https://nmsassistant.com/"><img src="https://cdn.assistantapps.com/assistantNMS.png" alt="Assistant for NMS logo"></a>
 		</p>
 		<div class="hub-images">
-			<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Project" target="_blank" rel="noopener noreferrer">
+			<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Project">
 				<img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/7/75/Galactic_Hub_Emblem.png"
 					alt="Galactic Hub logo">
 			</a>
-			<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Calypso" target="_blank" rel="noopener noreferrer">
+			<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Calypso">
 				<img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/c/cb/Galactic_Hub_Calypso.png"
 					alt="Galactic Hub Calypso logo">
 			</a>
-			<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam" target="_blank" rel="noopener noreferrer">
+			<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam">
 				<img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/6/60/Galactic_Hub_Eissentam_Emblem.png"
 					alt="Galactic Hub Eissentam logo">
 			</a>
@@ -81,8 +93,8 @@
 			<div>
 				Please consider supporting the project:
 				<ul>
-					<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank" rel="noopener noreferrer" title="GitHub repository">GitHub repository</a></li>
-					<li><a href="https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev" target="_blank" rel="noopener noreferrer" title="VSCode">VSCode online editor</a></li>
+					<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" title="GitHub repository">GitHub repository</a></li>
+					<li><a href="https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev" title="VSCode">VSCode online editor</a></li>
 				</ul>
 			</div>
 			<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
