@@ -267,3 +267,12 @@ input[type="date"]:hover {
 .glyphs.icon.is-small {
 	height: inherit;
 }
+
+footer {
+	text-align: center;
+}
+
+footer > div {
+	padding: 20px;
+	font-size: large;
+}
