@@ -20,11 +20,11 @@
 		window.onload = () => {
 			const a = document.querySelectorAll("a");
 			for (const link of a) {
-				if (link.href.substring(0, 4) == "http") {
+				if (link.href.substring(link.href.length - 4) != "html") {
 					link.setAttribute("target", "_blank");
 					link.setAttribute("rel", "noopener noreferrer");
 				}
-				console.log(link.href.substring(0, 4))
+				console.log(link.href.substring(link.href.length - 4))
 			}
 		}
 	</script>
