@@ -19,12 +19,11 @@
 		// making all external links open in a new tab
 		window.onload = () => {
 			const a = document.querySelectorAll("a");
-			for (const link of a) {
 				if (link.href.substring(link.href.length - 4) != "html") {
+			for (const link of a) {
 					link.setAttribute("target", "_blank");
 					link.setAttribute("rel", "noopener noreferrer");
 				}
-				console.log(link.href.substring(link.href.length - 4))
 			}
 		}
 	</script>
