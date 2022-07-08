@@ -9,6 +9,8 @@
 	<script src="./lib/common.js"></script>
 	<script src="./lib/starshiplogic.js"></script>
 	<script>
+		galleryArray = ['', 'Rear view of ship/freighter', 'Inventory screen', 'NPC freighter captain', 'NPC ship pilot', 'Analysis Visor Scan', 'Crash site', 'System Page', 'Planet/Moon Page', 'Galaxy Map'];
+	
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
@@ -496,7 +498,7 @@
 						<div>'''<output id='name2'></output>''' is <output id='enPrefix'></output> [[Starship Catalogue
 							- <output id='type1'></output>|<output id='type2'></output>]]-type [[starship]].</div>
 						<br>
-						<div><output id="sChance"></output></div>
+						<div>This starship <output id="sChance"></output> in S-class.</div>
 						<br>
 
 						<div>==Appearance==</div>

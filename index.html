@@ -15,6 +15,18 @@
 			vertical-align: middle;
 		}
 	</style>
+	<script>
+		// making all external links open in a new tab
+		window.onload = () => {
+			const a = document.querySelectorAll("a");
+			for (const link of a) {
+				if (link.href.substring(0, 4) == "http") {
+					link.setAttribute("target", "_blank");
+					link.setAttribute("rel", "noopener noreferrer");
+				} 
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -81,8 +93,8 @@
 			<div>
 				Please consider supporting the project:
 				<ul>
-					<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank" rel="noopener noreferrer">GitHub repository</a></li>
-					<li><a href="https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev" target="_blank" rel="noopener noreferrer">VSCode online editor</a></li>
+					<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" title="GitHub repository">GitHub repository</a></li>
+					<li><a href="https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev" title="VSCode">VSCode online editor</a></li>
 				</ul>
 			</div>
 			<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
