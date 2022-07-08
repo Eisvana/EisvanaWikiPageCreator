@@ -1,13 +1,491 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Fauna</title>
+	<link rel="stylesheet" href="./lib/common.css">
+	<script src="./lib/common.js"></script>
+	<script src="./lib/creaturelogic.js"></script>
+	<script>
+		galleryArray = ['', 'x gender', 'x gender scan', 'Creature scan', 'Discovery Menu', 'Planet/Moon Page', 'System Page', 'Galaxy Map', 'System Page'];
+
+		// 1. param	= id in div and spans in wikicode
+		// 2. param	= id in input tags
+		function showInput() {
+			radioFunction("researchteam", "GHEC")
+			textFunction("release", "version_input");
+			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("name", "name_input");
+			textFunction("name1", "name_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("newName", "name_input"); //duplicates due to IDs needing to be unique across document
+			console.log("names done")
+			textFunction("image", "image_input");
+			textFunction("system", "system_input");
+			textFunction("planet", "planet_input");
+			textFunction("moon", "moon_input");
+			textFunction("portalglyphs", "portalglyphs_input");
+			textFunction("portalglyphs1", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("glyph_display", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("discovered", "discovered_input");
+			textFunction("discoveredlink", "discoveredlink_input");
+			textFunction("appearance", "appearance_input");
+			civGalaxy("civ");
+			hideDiscoverer('discovered_input', 'discoveredlink_input');
+			researchTeam("researchteam", "civilized");
+			glyphRegion("portalglyphs_input", "civ", "region");
+			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam");
+			addInfo("type_input", "civ", "researchteam", "addInfo")
+		}
+		window.onload = () => {
+			autoRefresh();
+			genusDropdown("ecosystem_input", "genus_input")
+			showInput();
+		}
+	</script>
 </head>
 
 <body>
-	<p><strong><big>This script does currently not exist, please check back at a later date or consider contributing yourself!</big></strong></p>
-	<p><a href="./index.html" title="Back to main page">Back to main page</a></p>
+	<div class="container">
+		<nav style="font-size:larger"><div><a href="./" title="Main page">&larr; Return to main page</a></div>
+		<div><a href="./sandworm.html" title="Sandworm">&#8627; Sandworm</a></div></nav>
+		<br><br>
+
+		<div class="columns is-desktop">
+			<div class="column is-full-mobile">
+				<form id="form" onreset="resetAll('gallery_descs')">
+					<table style="text-align:left">
+						<tr>
+							<th><label>Current release:</label>
+							<td>
+								<select id="version_input" name="Release">
+									<option value="Outlaws">Outlaws
+									<option value="SentinelUp">SentinelUp
+									<option value="Prisms">Prisms
+									<option value="Expeditions">Expeditions
+									<option value="Companions">Companions
+									<option value="NextGen">NextGen
+									<option value="Origins">Origins
+									<option value="Desolation">Desolation
+									<option value="Crossplay">Crossplay
+									<option value="ExoMech">ExoMech
+									<option value="Living Ship">Living Ship
+									<option value="Synthesis">Synthesis
+									<option value="Beyond">Beyond
+									<option value="Visions">Visions
+									<option value="Abyss">Abyss
+									<option value="NEXT">NEXT
+									<option value="Atlas Rises">Atlas Rises
+									<option value="Pathfinder">Pathfinder
+									<option value="Foundation">Foundation
+									<option value="Release">Release
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Which civ does this creature belong to?</label>
+							<td>
+								<select id="civ" name="Civ">
+									<option value="GHub" id="GHub">GHub
+									<option value="CalHub" id="CalHub">CalHub
+									<option value="EisHub" id="EisHub">EisHub
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Name of the creature:</label>
+							<td><input type="text" name="Name" id="name_input">
+						</tr>
+						<tr>
+							<th><label>Original name before uploading if available:</label>
+							<td><input type="text" name="OldName" id="oldName_input">
+						</tr>
+						<tr>
+							<th><label>Main image name, including file extension:</label>
+							<td>
+								<input type="text" name="Image" id="image_input">
+								<br>
+								<input type="file" id="image_upload" name="Image_upload" accept="image/*"
+									onchange="imgUpload('image', 'image_upload', 'image_input')">
+							</td>
+						</tr>
+						<tr>
+							<th><label>Name of the system:</label>
+							<td><input type="text" name="System" id="system_input">
+						</tr>
+						<tr>
+							<th><label>Name of the planet:</label>
+							<td><input type="text" name="Planet" id="planet_input">
+						</tr>
+						<tr>
+							<th><label>Name of the moon (if applicable):</label>
+							<td><input type="text" name="Moon" id="moon_input">
+						</tr>
+						<tr>
+							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button"
+									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
+
+							<td><input type="text" name="Glyphs" id="portalglyphs_input"
+									oninput="glyphInputOnChange(this)">
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="portal-buttons">
+									<button class="button" type="button" value="0"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">0</span>
+									</button>
+									<button class="button" type="button" value="1"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">1</span>
+									</button>
+									<button class="button" type="button" value="2"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">2</span>
+									</button>
+									<button class="button" type="button" value="3"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">3</span>
+									</button>
+									<button class="button" type="button" value="4"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">4</span>
+									</button>
+									<button class="button" type="button" value="5"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">5</span>
+									</button>
+									<button class="button" type="button" value="6"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">6</span>
+									</button>
+									<button class="button" type="button" value="7"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">7</span>
+									</button>
+									<button class="button" type="button" value="8"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">8</span>
+									</button>
+									<button class="button" type="button" value="9"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">9</span>
+									</button>
+									<button class="button" type="button" value="A"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">A</span>
+									</button>
+									<button class="button" type="button" value="B"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">B</span>
+									</button>
+									<button class="button" type="button" value="C"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">C</span>
+									</button>
+									<button class="button" type="button" value="D"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">D</span>
+									</button>
+									<button class="button" type="button" value="E"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">E</span>
+									</button>
+									<button class="button" type="button" value="F"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">F</span>
+									</button>
+								</div>
+								<output class="glyphs" style="word-break: break-word" id="glyph_display"></output>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Hemisphere:</label>
+							<td>
+								<select id="hemisphere_input" name="Hemisphere">
+									<option value="">
+									<option value="Found in the North">North
+									<option value="Found in the South">South
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Rarity:</label>
+							<td>
+								<select id="rarity_input" name="Rarity">
+									<option value="Common">Common
+									<option value="Uncommon">Uncommon
+									<option value="Rare">Rare
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Ecosystem:</label>
+							<td>
+								<select id="ecosystem_input" name="Ecosystem" onchange="genusDropdown('ecosystem_input', 'genus_input')">
+									<option value="Ground">Ground
+									<option value="Flying">Flying
+									<option value="Underwater">Underwater
+									<option value="Underground">Underground
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Activity:</label>
+							<td>
+								<select id="activity_input" name="Activity">
+									<option value="Always Active">Always Active
+									<option value="Diurnal">Diurnal
+									<option value="Nocturnal">Nocturnal
+									<option value="Mostly Diurnal">Mostly Diurnal
+									<option value="Mostly Nocturnal">Mostly Nocturnal
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Genus:</label>
+							<td>
+								<select id="genus_input" name="Genus">
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Gender:</label>
+							<td>
+								<select id="gender_input" name="Gender">
+									<option value="Male">Male
+									<option value="Female">Female
+									<option value="Exotic">Exotic
+									<option value="Unknown">Unknown
+									<option value="Indeterminate">Indeterminate
+									<option value="Asymmetric">Asymmetric
+									<option value="Non-uniform">Non-uniform
+									<option value="Symmetric">Symmetric
+									<option value="Vectorised">Vectorised
+									<option value="Prime">Prime
+									<option value="Alpha">Alpha
+									<option value="Radical">Radical
+									<option value="Asymptotic">Asymptotic
+									<option value="Orthogonal">Orthogonal
+									<option value="None">None
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Second Gender:</label>
+							<td>
+								<select id="gender2_input" name="Gender2">
+									<option value="">
+									<option value="Male">Male
+									<option value="Female">Female
+									<option value="Exotic">Exotic
+									<option value="Unknown">Unknown
+									<option value="Indeterminate">Indeterminate
+									<option value="Asymmetric">Asymmetric
+									<option value="Non-uniform">Non-uniform
+									<option value="Symmetric">Symmetric
+									<option value="Vectorised">Vectorised
+									<option value="Prime">Prime
+									<option value="Alpha">Alpha
+									<option value="Radical">Radical
+									<option value="Asymptotic">Asymptotic
+									<option value="Orthogonal">Orthogonal
+									<option value="None">None
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Behaviour:</label>
+							<td><input type="text" name="Behaviour" id="behaviour_input">
+						</tr>
+						<tr>
+							<th><label>Diet:</label>
+							<td><input type="text" name="Diet" id="diet_input">
+						</tr>
+						<tr>
+							<th><label>Weight:</label>
+							<td><input type="text" name="Weight" id="weight_input">
+						</tr>
+						<tr style="display:none">
+							<th><label>Gender 2 Weight:</label>
+							<td><input type="text" name="Weight2" id="weight2_input">
+						</tr>
+						<tr>
+							<th><label>Height:</label>
+							<td><input type="text" name="Height" id="height_input">
+						</tr>
+						<tr style="display:none">
+							<th><label>Gender 2 Height:</label>
+							<td><input type="text" name="Height" id="height2_input">
+						</tr>
+						<tr>
+							<th><label>Notes:</label>
+							<td><input type="text" name="Notes" id="notes_input">
+						</tr>
+						<tr>
+							<th><label>Gamemode:</label>
+							<td>
+								<select id="mode_input" name="Mode">
+									<option value="Normal">Normal
+									<option value="Survival">Survival
+									<option value="Permadeath">Permadeath
+									<option value="Creative">Creative
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Discoverer wiki account:</label>
+							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
+						</tr>
+						<tr>
+							<th><label>Discoverer alias if no wiki:</label>
+							<td><input type="text" name="Discovered" id="discovered_input">
+						</tr>
+						<tr>
+							<th><label>Documenter alias if not discoverer:</label>
+							<td><input type="text" name="DocBy" id="docby_input">
+						</tr>
+						<tr>
+							<th><label>Are you part of the GHEC?</label>
+							<td>
+								<input type="radio" id="GHECY" name="GHEC" value="GHEC">
+								<label for="GHECY">Yes</label>
+								<input type="radio" id="GHSHN" name="GHEC" value="">
+								<label for="GHECN">No</label>
+								<span style="display:none">
+									<input type="radio" id="GHECA" name="GHEC" value="" checked>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p style="text-align:center">Note: You can drag on the bottom right corner to expand the
+									text area
+								</p>
+							</td>
+						</tr>
+						<tr class="no-border">
+							<th style="vertical-align:top" colspan="2"><label>Appearance</label>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="Appearance" id="appearance_input"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Gallery files</label>
+							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
+									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
+						</tr>
+					</table>
+					<br>
+				</form>
+				<div id="gallery_descs">
+				</div>
+				<div>
+					<span class="actions" style="white-space: nowrap">
+						<!--						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>-->
+						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
+					</span>
+					<span class="actions" style="white-space: nowrap">
+						<button id="btn" class="button is-outlined is-primary"
+							onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
+						<a id="downloadbtn" class="button is-outlined is-primary"
+							onclick="downloadFile('downloadbtn', 'wikiText', 'name_input')">Download file</a>
+						<a class="button is-outlined is-primary" id="link"
+							onclick="wikiLink('link', 'region', 'name_input');">Create page</a>
+					</span>
+				</div>
+				<br>
+			</div>
+			<div class="column is-full-mobile">
+				<div class="output">
+					<div id="wikiText">
+						<div>{{Version|<output id='release'></output>}}</div>
+						<div>{{<output id='civStub'></output>}}</div>
+						<div>{{Base infobox</div>
+						<div>| name = <output id='name'></output></div>
+						<div>| image = <output id='image'></output></div>
+						<div>| galaxy = <output id='galaxy'></output></div>
+						<div>| region = <output id='region'></output></div>
+						<div>| system = <output id='system'></output></div>
+						<div>| planet = <output id='planet'></output></div>
+						<div>| moon = <output id='moon'></output></div>
+						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs'></output>}}</div>
+						<div>| hemisphere = <output id='hemisphere'></output></div>
+						<div>| rarity = <output id='rarity'></output></div>
+						<div>| ecosystem = <output id='ecosystem'></output></div>
+						<div>| activity = <output id='activity'></output></div>
+						<div>| gender = <output id='gender'></output></div>
+						<div>| behaviour = <output id='behaviour'></output></div>
+						<div>| diet = <output id='diet'></output></div>
+						<div>| weight = <output id='weight'></output></div>
+						<div>| height = <output id='height'></output></div>
+						<div>| notes = <output id='notes'></output></div>
+						<div>| produces = <output id='produces'></output></div>
+						<div>| genus = <output id='genus'></output></div>
+						<div>| civilized = <output id='civilized'></output></div>
+						<div>| discovered = <output id='discovered'></output></div>
+						<div>| discoveredlink = <output id='discoveredlink'></output></div>
+						<div>| researchteam = <output id='researchteam'></output></div>
+						<div>| mode = <output id='mode'></output></div>
+						<div>| release = <output id="release1"></output></div>
+						<div>}}</div>
+						<div>'''<output id='name1'></output>''' is a creature.</div>
+						<br>
+
+						<div>==Summary==</div>
+						<div>'''<output id='name2'></output>''' is a [[creature]], a member of the [[<output id='genus1'></output>]] [[genus]].
+						</div>
+						<br>
+
+						<div>==Appearance==</div>
+						<div><output id='appearance'></output></div>
+						<br>
+
+						<div>==Alias Names==</div>
+						<div>{{aliasc|text=Original|name=<output id='oldName'></output>}}</div>
+						<div>{{aliasc|text=Current|name=<output id='newName'></output>}}</div>
+						<br>
+
+						<div>==Discovery Menu==</div>
+						<div><output id='DM'></output></div>
+						<br>
+						<div>'''Additional Observations''': <output id='addObservation'></output></div>
+						<br>
+
+						<div>==Location==</div>
+						<div>It can be found on the <output id='locPlanet'></output> in the [[<output id='locSystem'></output>]] [[star system]].</div>
+						<div>{{CoordGlyphConvert|<output id='portalglyphs1'></output>}}</div>
+						<br>
+
+						<div>==Additional information==</div>
+						<div>Featured in the <output id='addInfo'></output>.</div>
+						<br>
+						<div><div><output id="docby"></output></div>
+						<br></div>
+
+						<div>==Gallery==</div>
+						<div>&lt;gallery&gt;</div>
+						<div><output id="galleryCode"></output></div>
+						<div>&lt;/gallery&gt;</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div>
+				Please consider supporting the project:
+				<ul>
+					<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank" rel="noopener noreferrer">GitHub repository</a></li>
+					<li><a href="https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev" target="_blank" rel="noopener noreferrer">VSCode online editor</a></li>
+				</ul>
+			</div>
+			<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
+		</footer>
+	</div>
 </body>
+
 </html>
