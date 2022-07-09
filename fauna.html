@@ -14,12 +14,12 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
-			//radioFunction("researchteam", "GHEC")
+			radioFunction("researchteam", "GHEC")
 			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("name", "name_input");
-			textFunction("name1", "name_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
+			textFunction("name1", pageName('oldName_input', 'name_input')); //duplicates due to IDs needing to be unique across document
+			textFunction("name2", pageName('oldName_input', 'name_input')); //duplicates due to IDs needing to be unique across document
 			textFunction("newName", "name_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("image", "image_input");
 			textFunction("system", "system_input");
@@ -33,6 +33,14 @@
 			textFunction("appearance", "appearance_input");
 			textFunction("genus", "genus_input");
 			textFunction("genus1", "genus_input");
+			textFunction("hemisphere", "hemisphere_input");
+			textFunction("rarity", "rarity_input");
+			textFunction("ecosystem", "ecosystem_input");
+			textFunction("activity", "activity_input");
+			textFunction("behaviour", "behaviour_input");
+			textFunction("diet", "diet_input");
+			textFunction("notes", "notes_input");
+			//textFunction("addObservation", "specialNotes_input");
 			textFunction("produces", "produces_input");
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
@@ -40,11 +48,15 @@
 			glyphRegion("portalglyphs_input", "civ", "region");
 			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam");
 			addInfo("genus_input", "civ", "researchteam", "addInfo");
+			hideOrgName('oldName_input', 'oldName');
+			hideSecGenderProps("gender2_input", "weight2_input", "height2_input");
+			specialNotesTextFunc("notes_input", "specialNotes_input", "addObservation");
 		}
 		window.onload = () => {
 			autoRefresh();
-			genusDropdown("ecosystem_input", "genus_input")
+			genusDropdown("ecosystem_input", "genus_input");
 			genusProduces("genus_input", "produces_input");
+			specialNotes("notes_input", "specialNotes_input");
 			showInput();
 		}
 	</script>
@@ -301,17 +313,17 @@
 						</tr>
 						<tr>
 							<th><label>Behaviour:</label>
-							<td><input type="text" name="Behaviour" id="behaviour_input">
+							<td><input type="text" list="behaviourData" name="Behaviour" id="behaviour_input">
 						</tr>
 						<tr>
 							<th><label>Diet:</label>
-							<td><input type="text" name="Diet" id="diet_input">
+							<td><input type="text" list="dietData" name="Diet" id="diet_input">
 						</tr>
 						<tr>
 							<th><label>Weight:</label>
 							<td><input type="text" name="Weight" id="weight_input">
 						</tr>
-						<tr style="display:none">
+						<tr>
 							<th><label>Gender 2 Weight:</label>
 							<td><input type="text" name="Weight2" id="weight2_input">
 						</tr>
@@ -319,13 +331,17 @@
 							<th><label>Height:</label>
 							<td><input type="text" name="Height" id="height_input">
 						</tr>
-						<tr style="display:none">
+						<tr>
 							<th><label>Gender 2 Height:</label>
 							<td><input type="text" name="Height" id="height2_input">
 						</tr>
 						<tr>
 							<th><label>Notes:</label>
-							<td><input type="text" name="Notes" id="notes_input">
+							<td><input type="text" list="notesData" name="Notes" id="notes_input" oninput="specialNotes('notes_input', 'specialNotes_input')">
+						</tr>
+						<tr style="display: none;">
+							<th><label>Notes for discovery menu:</label>
+							<td><input type="text" list="specialNotesData" name="SpecialNotes" id="specialNotes_input">
 						</tr>
 						<tr>
 							<th><label>Produces:</label>
@@ -362,7 +378,7 @@
 							<td>
 								<input type="radio" id="GHECY" name="GHEC" value="GHEC">
 								<label for="GHECY">Yes</label>
-								<input type="radio" id="GHSHN" name="GHEC" value="">
+								<input type="radio" id="GHECN" name="GHEC" value="">
 								<label for="GHECN">No</label>
 								<span style="display:none">
 									<input type="radio" id="GHECA" name="GHEC" value="" checked>
@@ -396,16 +412,15 @@
 				</div>
 				<div>
 					<span class="actions" style="white-space: nowrap">
-						<!--						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>-->
 						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
 					</span>
 					<span class="actions" style="white-space: nowrap">
 						<button id="btn" class="button is-outlined is-primary"
 							onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
 						<a id="downloadbtn" class="button is-outlined is-primary"
-							onclick="downloadFile('downloadbtn', 'wikiText', 'name_input')">Download file</a>
+							onclick="downloadFile('downloadbtn', 'wikiText', pageName('oldName_input', 'name_input'))">Download file</a>
 						<a class="button is-outlined is-primary" id="link"
-							onclick="wikiLink('link', 'region', 'name_input');">Create page</a>
+							onclick="wikiLink('link', 'region', pageName('oldName_input', 'name_input'));">Create page</a>
 					</span>
 				</div>
 				<br>
@@ -463,7 +478,7 @@
 						<div>==Discovery Menu==</div>
 						<div><output id='DM'></output></div>
 						<br>
-						<div>'''Additional Observations''': <output id='addObservation'></output></div>
+						<div><output id='addObservation'></output></div>
 						<br>
 
 						<div>==Location==</div>
@@ -496,6 +511,412 @@
 			<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
 		</footer>
 	</div>
+	<datalist id="notesData">
+		<option value="Many hidden toes">
+		<option value="Builds metal nest">
+		<option value="Dislikes bright colours">
+		<option value="Moon Baby">
+		<option value="Lays beautiful eggs">
+		<option value="Waxy all-over">
+		<option value="Secretes venom">
+		<option value="Compound eyes">
+		<option value="Inverted organ sacs">
+		<option value="Good pollinator">
+		<option value="Ultrasonic roar">
+		<option value="Retractable appendages">
+		<option value="Has no bones">
+		<option value="Not carbon based">
+		<option value="Evil">
+		<option value="Nutritious faeces">
+		<option value="Asexual reproduction">
+		<option value="Changes gender when cold">
+		<option value="Can dislocate jawbones">
+		<option value="Powerful mandibles">
+		<option value="Autonomous regeneration">
+		<option value="Technically immortal">
+		<option value="Blue blood">
+		<option value="Green blood">
+		<option value="Yellow blood">
+		<option value="Excess of bile">
+		<option value="Creates beautiful webs">
+		<option value="Strong burrower">
+		<option value="Hibernates">
+		<option value="Mates for life">
+		<option value="Carries symbiotic fungus">
+		<option value="Stomach inside skull">
+		<option value="Nine additional senses">
+		<option value="Sense organs in feet">
+		<option value="Excellent sense of smell">
+		<option value="Poor hearing">
+		<option value="Ticklish">
+		<option value="Highly intelligent">
+		<option value="Cannot see colour">
+		<option value="Sprays ink when scared">
+		<option value="Produces vile stench">
+		<option value="Unpleasant to eat">
+		<option value="Gelatinous bones">
+		<option value="Can change colour">
+		<option value="Chromatophore">
+		<option value="Rapid self-healing">
+		<option value="Valuable blood">
+		<option value="Absorbs moisture from air">
+		<option value="Mildly radioactive">
+		<option value="Strongly radioactive">
+		<option value="Hybrid species">
+		<option value="Genetically unstable">
+		<option value="Partially domesticated">
+		<option value="Gentle soul">
+		<option value="Hidden extra skull">
+		<option value="Secondary skin">
+		<option value="Hidden extra tongue">
+		<option value="Redundant internal organs">
+		<option value="Rigid bones">
+		<option value="Hidden extra claws">
+		<option value="Six stomachs">
+		<option value="Powerful digestive enzymes">
+		<option value="Saliva pH 14">
+		<option value="Flexible joints">
+		<option value="Hidden stinger">
+		<option value="Covered in tiny hairs">
+		<option value="Untameable">
+		<option value="Fragile skull">
+		<option value="Fragile skin">
+		<option value="Detachable tongue">
+		<option value="Bruisable organs">
+		<option value="Brittle bones">
+		<option value="Calcified claws">
+		<option value="Translucent teeth">
+		<option value="Caustic skin">
+		<option value="Toxic tongue">
+		<option value="Covered in toxic bristles">
+		<option value="Venom-laden claws">
+		<option value="Armoured skull">
+		<option value="Regularly sheds skin">
+		<option value="Monstrous tongue">
+		<option value="Tiny organs">
+		<option value="Metal bones">
+		<option value="Bioluminescent teeth">
+		<option value="Thick skull">
+		<option value="Toughened skin">
+		<option value="Massive tongue">
+		<option value="Stores water in hidden sacs">
+		<option value="Sheds and regrows bones">
+		<option value="Sharp claws">
+		<option value="Rubber skull">
+		<option value="Porous skin">
+		<option value="Regrows teeth each day">
+		<option value="Grows lungs after birth">
+		<option value="Carbon-based skeleton">
+		<option value="Decentralised nervous system">
+		<option value="Skull full of holes">
+		<option value="Skin parasites">
+		<option value="Tongue parasites">
+		<option value="Extensive gut bacteria">
+		<option value="Digests via symbionts">
+		<option value="Claws harbour disease">
+		<option value="Spawns in water">
+		<option value="Goes underground to die">
+		<option value="Tapeworm host">
+		<option value="Delicious">
+		<option value="Easily trained">
+		<option value="Inflates when stressed">
+		<option value="Poor sense of direction">
+		<option value="Excellent navigator">
+		<option value="Can sense magnetic fields">
+		<option value="Easily confused">
+		<option value="Frequently lost">
+		<option value="Hears ground vibrations">
+		<option value="Scared of fire">
+		<option value="Hydrophobic">
+		<option value="Vestigial udders">
+		<option value="Makes art with sticks">
+		<option value="Recognises other species">
+		<option value="Beloved by the [[Gek]]">
+		<option value="Bonds with [[Vy'keen]]">
+		<option value="Hunts [[Sentinel]]s">
+		<option value="Matriarchal society">
+		<option value="Digs underground nests">
+		<option value="One extendible finger">
+		<option value="Grows wings before death">
+		<option value="Alluring pheromones">
+		<option value="Sings beautifully">
+		<option value="Deceptively fast">
+		<option value="Lacks gallbladder">
+		<option value="Both gills and lungs">
+		<option value="Respires inorganically">
+		<option value="Has chlorophyll glands">
+		<option value="Sleeps standing up">
+		<option value="Never blinks">
+		<option value="Frequently regurgitates">
+		<option value="Irritable">
+		<option value="Highly social">
+		<option value="Dislikes being scanned">
+		<option value="Telepathic">
+		<option value="Burns in the sun">
+		<option value="Well insulated">
+		<option value="Photosensitive">
+		<option value="Secretes phytotoxins">
+		<option value="Lovely eyes">
+		<option value="Good parent">
+		<option value="Can feel love">
+		<option value="Screams when upset">
+		<option value="Forms colonies">
+		<option value="Hatched from cocoons">
+		<option value="Fragrant">
+		<option value="Particularly oily">
+		<option value="Gets cold easily">
+		<option value="Drinks blood">
+		<option value="Does not age">
+		<option value="Always waiting">
+		<option value="Always watching">
+		<option value="Aware of its fate">
+		<option value="Senses ATLAS">
+		<option value="Limited sentience">
+		<option value="Born on meteors">
+		<option value="Laden with nectar">
+		<option value="Occasionally eats rocks">
+		<option value="Scared of mirrors">
+		<option value="Self-aware">
+		<option value="Eyes regrow after damage">
+		<option value="Superheated stomach">
+		<option value="Three hearts">
+		<option value="Two livers">
+		<option value="Acidic blood">
+		<option value="Respires anaerobically">
+		<option value="Carries symbiotic worms">
+		<option value="Riddled with pests">
+		<option value="Carries babies in pouch">
+		<option value="Promiscuous">
+		<option value="Symmetrical insides">
+		<option value="Occasionally invisible">
+		<option value="Limited mind control">
+		<option value="Buries food supplies">
+		<option value="Cannot sweat">
+		<option value="Weak lungs">^
+		<option value="Strong swimmer">
+		<option value="Made of stardust">
+		<option value="Requires dietary iron">
+		<option value="Magnetic teeth">
+		<option value="Retractable eyestalks">
+		<option value="Breathes through mouth">
+		<option value="Smells with tongue">
+		<option value="Cannot drown">
+		<option value="Highly fertile">
+		<option value="Nitrogen-rich blood">
+		<option value="Bioluminescent blood">
+		<option value="Fears the rain">
+		<option value="Echolocation glands">
+		<option value="Possesses language">
+		<option value="Varied phenotype">
+		<option value="Tiny brain">
+		<option value="Cannot digest starch">
+		<option value="Seeks red flowers">
+		<option value="Nests in blue foliage">
+		<option value="Elaborate mating displays">
+		<option value="Brain hemispheres not linked">
+		<option value="Sweats milk for infants">
+		<option value="No stomach">
+		<option value="Double-coned eyes">
+		<option value="Cutaneous respiration">
+		<option value="Barbed feet">
+		<option value="Extremely homozygous">
+		<option value="Extremely heterozygous">
+		<option value="Parasites in brain">
+		<option value="Night vision">
+	</datalist>
+
+	<datalist id="specialNotesData">
+		<option value="Evil">
+		<option value="Sheds and regrows bones">
+		<option value="But there is something particularly unsettling about this creature, some deep shadow hanging over them. They are to be treated with extreme caution.">
+		<option value="Skeletal analysis reveals unusually supple bones, as if they had only recently grown: possible defense mechanism to shed and rapidly regrow body parts?">
+	</datalist>
+
+	<datalist id="behaviourData">
+		<option value="Careful hunter">
+		<option value="Patient hunter">
+		<option value="Cautious">
+		<option value="Impulsive">
+		<option value="Reckless">
+		<option value="Aggressive">
+		<option value="Unafraid">
+		<option value="Cold-blooded">
+		<option value="Does not fear death">
+		<option value="Intelligent">
+		<option value="Calm">
+		<option value="Enjoys the hunt">
+		<option value="Bold">
+		<option value="Stalks prey for days">
+		<option value="Unpredictable">
+		<option value="Dangerous">
+		<option value="Wildly aggressive">
+		<option value="Vicious">
+		<option value="Cruel">
+		<option value="Hyperviolent">
+		<option value="Excited by violence">
+		<option value="Angry">
+		<option value="Easily enraged">
+		<option value="Warlike">
+		<option value="Apex predator">
+		<option value="Watchful">
+		<option value="Nervous">
+		<option value="Skittish">
+		<option value="Timid">
+		<option value="Shy">
+		<option value="Highly observant">
+		<option value="Slow grazer">
+		<option value="Tends plants">
+		<option value="Seeks company">
+		<option value="Wary">
+		<option value="Easily startled">
+		<option value="Vigilant">
+		<option value="Inattentive">
+		<option value="Constantly moving">
+		<option value="Hasty">
+		<option value="Fidgety">
+		<option value="Anxious">
+		<option value="Long-distance migration">
+		<option value="Nomadic">
+		<option value="Remembers faces">
+		<option value="Submissive">
+		<option value="Highly intelligent">
+		<option value="Passive">
+		<option value="Docile">
+		<option value="Wise">
+		<option value="Prudent">
+		<option value="Far-sighted">
+		<option value="Always foraging">
+		<option value="Methodical">
+		<option value="Friendly">
+		<option value="Cheerful">
+		<option value="Gentle">
+		<option value="Peaceful">
+		<option value="Flighty">
+		<option value="Collects shiny objects">
+		<option value="Builds large nests">
+		<option value="Easily scared">
+		<option value="Migratory">
+		<option value="Very cautious">
+		<option value="Sings at dusk">
+		<option value="Long-sighted">
+		<option value="Ever-moving">
+		<option value="Instinctive">
+		<option value="Desperate">
+		<option value="Food-seeking">
+		<option value="Mate-seeking">
+		<option value="Never sleeps">
+		<option value="Melancholy">
+		<option value="Lonely">
+		<option value="Observant">
+		<option value="Drifts on currents">
+		<option value="Deep-diving">
+		<option value="Seeks cold">
+		<option value="Seeks warmth">
+		<option value="Bioelectric Defenses">
+		<option value="Can inflate quickly">
+		<option value="Lost">
+		<option value="Haunted by unheard sound">
+		<option value="Uses sonar">
+		<option value="Effectively blind">
+		<option value="Pressure sensitive">
+		<option value="Photophobic">
+		<option value="Only sees up">
+		<option value="Chromatophoric">
+		<option value="Forms schools">
+		<option value="Frequent shoaling">
+		<option value="Smells blood">
+		<option value="Silent stalker">
+		<option value="Hostile">
+		<option value="Ambush predation">
+		<option value="Shoots neurotoxic spines">
+		<option value="Strikes from below">
+		<option value="Pack hunter">
+		<option value="Lone predator">
+		<option value="Threatening">
+		<option value="Transcendent">
+		<option value="Self-aware">
+		<option value="Hungry">
+		<option value="Afraid">
+	</datalist>
+	
+	<datalist id="dietData">
+		<option value="Vegetation">
+		<option value="Foliage">
+		<option value="Small trees">
+		<option value="Rotting fruit">
+		<option value="Fresh leaves">
+		<option value="Plant roots">
+		<option value="Digs for tubers">
+		<option value="Grass">
+		<option value="Foraged nuts">
+		<option value="Collects seeds">
+		<option value="Nibbles at shoots">
+		<option value="Tall grasses">
+		<option value="Cave marrow">
+		<option value="Mordite roots">
+		<option value="[[Faecium]]">
+		<option value="[[Coprite]]">
+		<option value="Well-Matured Dung">
+		<option value="Mostly rocks">
+		<option value="[[Di-hydrogen]] crystals">
+		<option value="Processes dirt">
+		<option value="Oxide elements">
+		<option value="Absorbed nutrients">
+		<option value="[[NipNip Buds|NipNip buds]]">
+		<option value="[[Gravitino Ball|Gravitino balls]]">
+		<option value="Stinging leaves">
+		<option value="Algae">
+		<option value="Flowers">
+		<option value="Petals">
+		<option value="Nectar">
+		<option value="Pollen">
+		<option value="Scavenged scraps">
+		<option value="Insects and grubs">
+		<option value="Worms">
+		<option value="Anything">
+		<option value="Faeces">
+		<option value="Birds">
+		<option value="Scavenged remains">
+		<option value="Partially-digested meat">
+		<option value="Eggs">
+		<option value="Steals from others">
+		<option value="[[Venom Urchin]]s">
+		<option value="Foraged leftovers">
+		<option value="Small animals">
+		<option value="Old bones">
+		<option value="[[Mordite]]">
+		<option value="Carnivorous">
+		<option value="Meat-eater">
+		<option value="Hypnotises prey">
+		<option value="Crunches bones">
+		<option value="Blood-drinker">
+		<option value="Liquidised organs">
+		<option value="Extracts bone marrow">
+		<option value="Organs">
+		<option value="Raw meat">
+		<option value="Flesh-eater">
+		<option value="Hypercarnivore">
+		<option value="Brain matter">
+		<option value="Sinew">
+		<option value="Fresh meat">
+		<option value="Corpses">
+		<option value="Putrefied meat">
+		<option value="Cannibal">
+		<option value="Offal">
+		<option value="Removed hearts">
+		<option value="Small animals">
+		<option value="Other carnivores">
+		<option value="Large mammals">
+		<option value="Flesh chunks">
+		<option value="Meat chunks">
+		<option value="Coagulated blood">
+		<option value="Frozen meat">
+		<option value="Boiled meat">
+		<option value="Radioactive meat">
+		<option value="Toxic meat">
+		<option value="Rotten meat">
+		<option value="Preserved meat">
+	</datalist>
 </body>
 
 </html>
