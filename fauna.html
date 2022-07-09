@@ -14,14 +14,13 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
-			radioFunction("researchteam", "GHEC")
+			//radioFunction("researchteam", "GHEC")
 			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("name", "name_input");
 			textFunction("name1", "name_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("newName", "name_input"); //duplicates due to IDs needing to be unique across document
-			console.log("names done")
 			textFunction("image", "image_input");
 			textFunction("system", "system_input");
 			textFunction("planet", "planet_input");
@@ -32,16 +31,20 @@
 			textFunction("discovered", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
 			textFunction("appearance", "appearance_input");
+			textFunction("genus", "genus_input");
+			textFunction("genus1", "genus_input");
+			textFunction("produces", "produces_input");
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			researchTeam("researchteam", "civilized");
 			glyphRegion("portalglyphs_input", "civ", "region");
 			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam");
-			addInfo("type_input", "civ", "researchteam", "addInfo")
+			addInfo("genus_input", "civ", "researchteam", "addInfo");
 		}
 		window.onload = () => {
 			autoRefresh();
 			genusDropdown("ecosystem_input", "genus_input")
+			genusProduces("genus_input", "produces_input");
 			showInput();
 		}
 	</script>
@@ -224,7 +227,7 @@
 						<tr>
 							<th><label>Ecosystem:</label>
 							<td>
-								<select id="ecosystem_input" name="Ecosystem" onchange="genusDropdown('ecosystem_input', 'genus_input')">
+								<select id="ecosystem_input" name="Ecosystem" onchange="genusDropdown('ecosystem_input', 'genus_input'); genusProduces('genus_input', 'produces_input');">
 									<option value="Ground">Ground
 									<option value="Flying">Flying
 									<option value="Underwater">Underwater
@@ -247,7 +250,7 @@
 						<tr>
 							<th><label>Genus:</label>
 							<td>
-								<select id="genus_input" name="Genus">
+								<select id="genus_input" name="Genus" onchange="genusProduces('genus_input', 'produces_input');">
 								</select>
 							</td>
 						</tr>
@@ -323,6 +326,13 @@
 						<tr>
 							<th><label>Notes:</label>
 							<td><input type="text" name="Notes" id="notes_input">
+						</tr>
+						<tr>
+							<th><label>Produces:</label>
+							<td>
+								<select id="produces_input" name="Produces">
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<th><label>Gamemode:</label>
