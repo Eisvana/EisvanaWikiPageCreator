@@ -25,6 +25,8 @@
 			textFunction("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
+			planetMoon("planet_input", "moon_input", "locPlanet");
+			textFunction("locSystem", "system_input");
 			textFunction("portalglyphs", "portalglyphs_input");
 			textFunction("portalglyphs1", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("glyph_display", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
@@ -39,6 +41,8 @@
 			textFunction("activity", "activity_input");
 			textFunction("behaviour", "behaviour_input");
 			textFunction("diet", "diet_input");
+			genderTwoProps("gender2_input", "weight_input", "weight2_input", "weight")
+			genderTwoProps("gender2_input", "height_input", "height2_input", "height")
 			textFunction("notes", "notes_input");
 			textFunction("produces", "produces_input");
 			civGalaxy("civ");
@@ -319,20 +323,20 @@
 							<td><input type="text" list="dietData" name="Diet" id="diet_input">
 						</tr>
 						<tr>
-							<th><label>Weight:</label>
-							<td><input type="text" name="Weight" id="weight_input">
+							<th><label>Weight in kg (only number):</label>
+							<td><input type="text" name="Weight" id="weight_input" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
-							<th><label>Gender 2 Weight:</label>
-							<td><input type="text" name="Weight2" id="weight2_input">
+							<th><label>Gender 2 Weight in kg (only number):</label>
+							<td><input type="text" name="Weight2" id="weight2_input" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
-							<th><label>Height:</label>
-							<td><input type="text" name="Height" id="height_input">
+							<th><label>Height in m (only number):</label>
+							<td><input type="text" name="Height" id="height_input" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
-							<th><label>Gender 2 Height:</label>
-							<td><input type="text" name="Height" id="height2_input">
+							<th><label>Gender 2 Height in m (only number):</label>
+							<td><input type="text" name="Height" id="height2_input" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
 							<th><label>Notes:</label>
