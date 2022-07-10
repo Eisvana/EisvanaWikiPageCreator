@@ -18,10 +18,12 @@
 			textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("name3", "name_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("image", "image_input");
+			textFunction("navImage", "navImage_input");
 			textFunction("discovered", "discovered_input");
 			textFunction("discovered1", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
 			textFunction("documentedlink", "documentedlink_input");
+			textFunction("documentedlink1", "documentedlink_input");
 			textFunction("portalglyphs", "portalglyphs_input");
 			textFunction("portalglyphs1", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("glyph_display", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
@@ -43,17 +45,19 @@
 			textFunction("researchteam", "researchteam_input");
 			textFunction("researchteam1", "researchteam_input");
 			textFunction("rank", "rank_input");
+			textFunction("stationname", "stationname_input");
 			textFunction("docDate", "docDate_input");
 			dateConvert("docDate");
 			textFunction("originalname", "originalname_input");
-			textFunction("layout", "layout_input");
-			textFunction("features", "features_input");
+			textFunction("location", "location_input");
 			textFunction("addInfo", "addInfo_input");
 			civGalaxy("civ");
 			hideDiscoverer("discovered_input", "discoveredlink_input");
 			glyphRegion("portalglyphs_input", "civ", "region");
 			textFunction("region1", "region");
 			textFunction("galaxy1", "galaxy");
+			textFunction("region2", "region");
+			textFunction("galaxy2", "galaxy");
 		}
 		window.onload = () => {
 			autoRefresh();
@@ -66,7 +70,6 @@
 	<div class="container">
 		<nav style="font-size:larger"><a href="./" title="Main page">&larr; Return to main page</a></nav>
 		<br><br>
-
 		<div class="columns is-desktop">
 			<div class="column is-full-mobile">
 				<form id="form" onreset="resetAll('gallery_descs')">
@@ -111,7 +114,7 @@
 						<tr>
 							<th><label>Which research team discovered this system?</label>
 							<td>
-								<select id="researchteam_input" name="Researchteem">
+								<select id="researchteam_input" name="Researchteam">
 									<option value="GHDF">GHDF
 									<option value="GHSH">GHSH
 									<option value="GHEC">GHEC
@@ -129,12 +132,25 @@
 							<td><input type="text" name="Name" id="name_input">
 						</tr>
 						<tr>
+							<th><label>Name of the space station:</label>
+							<td><input type="text" name="Stationname" id="stationname_input">
+						</tr>
+						<tr>
 							<th><label>Main image name, including file extension:</label>
 							<td>
 								<input type="text" name="Image" id="image_input">
 								<br>
 								<input type="file" id="image_upload" name="Image_upload" accept="image/*"
 									onchange="imgUpload('image', 'image_upload', 'image_input')">
+							</td>
+						</tr>
+						<tr>
+							<th><label>Navigation image name, including file extension:</label>
+							<td>
+								<input type="text" name="NavImage" id="navImage_input">
+								<br>
+								<input type="file" id="navImage_upload" name="NavImage_upload" accept="navImage/*"
+									onchange="imgUpload('navImage', 'navImage_upload', 'navImage_input')">
 							</td>
 						</tr>
 						<tr>
@@ -149,7 +165,6 @@
 							<th><label>Your wiki account:</label>
 							<td><input type="text" name="Documentedlink" id="documentedlink_input">
 						</tr>
-						
 						<tr>
 							<th><label>Your chapter rank:</label>
 							<td><input type="text" name="Rank" id="rank_input">
@@ -254,7 +269,7 @@
 						</tr>
 						<tr>
 							<th><label># of moons:</label>
-							<td><input type="text" name="Distance" id="distance_input">
+							<td><input type="text" name="Moon" id="moon_input">
 						</tr>
 						<tr>
 							<th><label>Water?</label>
@@ -325,19 +340,11 @@
 							</td>
 						</tr>
 						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label>Base Layout:</label>
+							<th style="vertical-align:top" colspan="2"><label>System Location:</label>
 						</tr>
 						<tr>
 							<td colspan="2">
-								<textarea name="Layout" id="layout_input"></textarea>
-							</td>
-						</tr>
-						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label>Base Features:</label>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<textarea name="Features" id="features_input"></textarea>
+								<textarea name="Location" id="location_input"></textarea>
 							</td>
 						</tr>
 						<tr class="no-border">
@@ -385,7 +392,7 @@
 						<div>| region = <output id='region'></output></div>
 						<div>| galaxy = <output id='galaxy'></output></div>
 						<div>| multiplestars = <output id='multiplestars'></output></div>
-						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs'></output>}}</div>
+						<div>| coordinates = [[Glyphs2Coords|<output id='portalglyphs'></output>}}</div>
 						<div>| color = <output id='color'></output></div>
 						<div>| class = <output id='class'></output></div>
 						<div>| distance = <output id='distance'></output></div>
@@ -408,34 +415,135 @@
 						<div>}}</div>
 						<div>'''<output id='name1'></output>''' is a player base.</div>
 						<br>
-
 						<div>==Summary==</div>
 						<div>'''<output id='name2'></output>''' is a [[star system]], located in the [[<output id='region1'></output>]] region in the [[<output id='galaxy1'></output>]] galaxy.
 						</div>
 						<br>
-						
 						<div>==Alias Names==</div>
 						<div>{{aliasc|text=Original|name=<output id='originalname'></output>}}
 						</div>
 						<div>{{aliasc|text=Current|name=<output id='name3'></output>}}
 						</div>
 						<br>
-
 						<div>==Discovered==</div>
 						<div>Discovered and uploaded by ''<output id='discovered1'></output>''</div>
-						<div>Explored and documented by <output id='researchteam1'></output> <output id='rank'></output> ''<output id='documentedlink'></output>''</div> on <output id='docDate'></output>
+						<div>Explored and documented by <output id='researchteam1'></output> <output id='rank'></output> {{UserProfile:<output id='documentedlink'></output>|<output id='documentedlink1'></output>}} on <output id='docDate'></output></div>
 						<br>
-
-						<div>==Features==</div>
-						<div><output id='features'></output></div>
-						
-						<div>| portalglyphs = {{Gl/Small|<output id='portalglyphs1'></output>}}</div>
+						<div>==Planets & Moons==</div>
+						<div>{	| class="wikitable" style="text-align:center; width:100%; max-width:1250px;"</div>
+						<div>|-</div>
+						<div>! width="150" style="background-color:#2f4f4f" |</div>
+						<div>! style="background-color:#2f4f4f" |PLANET NAME</div>
+						<div>! style="background-color:#2f4f4f" |PLANET TYPE</div>
+						<div>! style="background-color:#2f4f4f" |RESOURCES</div>
+						<div>! style="background-color:#2f4f4f" |WEATHER</div>
+						<div>! style="background-color:#2f4f4f" |SENTINELS</div>
+						<div>! style="background-color:#2f4f4f" |FLORA</div>
+						<div>! style="background-color:#2f4f4f" |FAUNA</div>
+						<div>|-</div>
+						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
+						<div>|name</div>
+						<div>type - biome</div>
+						<div>|resources</div>
+						<div>|weather</div>
+						<div>|sentinels</div>
+						<div>|flora</div>
+						<div>|fauna (#)</div>
+						<div>|-</div>
+						<div>! style="background-color:#2f4f4f" | NOTES:</div>
+						<div>| colspan="7" style="text-align:left" |Discovered by </div>
+						<div>|-</div>
+						<div>|-</div>
+						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
+						<div>|name</div>
+						<div>type - biome</div>
+						<div>|resources</div>
+						<div>|weather</div>
+						<div>|sentinels</div>
+						<div>|flora</div>
+						<div>|fauna (#)</div>
+						<div>|-</div>
+						<div>! style="background-color:#2f4f4f" | NOTES:</div>
+						<div>| colspan="7" style="text-align:left" |Discovered by </div>
+						<div>|-</div>
+						<div>|-</div>
+						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
+						<div>|name</div>
+						<div>type - biome</div>
+						<div>|resources</div>
+						<div>|weather</div>
+						<div>|sentinels</div>
+						<div>|flora</div>
+						<div>|fauna (#)</div>
+						<div>|-</div>
+						<div>! style="background-color:#2f4f4f" | NOTES:</div>
+						<div>| colspan="7" style="text-align:left" |Discovered by </div>
+						<div>|-</div>
+						<div>|-</div>
+						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
+						<div>|name</div>
+						<div>type - biome</div>
+						<div>|resources</div>
+						<div>|weather</div>
+						<div>|sentinels</div>
+						<div>|flora</div>
+						<div>|fauna (#)</div>
+						<div>|-</div>
+						<div>! style="background-color:#2f4f4f" | NOTES:</div>
+						<div>| colspan="7" style="text-align:left" |Discovered by </div>
+						<div>|-</div>
+						<div>|-</div>
+						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
+						<div>|name</div>
+						<div>type - biome</div>
+						<div>|resources</div>
+						<div>|weather</div>
+						<div>|sentinels</div>
+						<div>|flora</div>
+						<div>|fauna (#)</div>
+						<div>|-</div>
+						<div>! style="background-color:#2f4f4f" | NOTES:</div>
+						<div>| colspan="7" style="text-align:left" |Discovered by </div>
+						<div>|-</div>
+						<div>|-</div>
+						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
+						<div>|name</div>
+						<div>type - biome</div>
+						<div>|resources</div>
+						<div>|weather</div>
+						<div>|sentinels</div>
+						<div>|flora</div>
+						<div>|fauna (#)</div>
+						<div>|-</div>
+						<div>! style="background-color:#2f4f4f" | NOTES:</div>
+						<div>| colspan="7" style="text-align:left" |Discovered by </div>
+						<div>|}</div>
 						<br>
-
+						<div>==Navigation Images==</div>
+						<div>[[<output id='navImage'></output>|400px]]</div>
+						<br>
+						<div>==System Location==</div>
+						<div>Located in the [[<output id='region2'></output>]] [[region]] of the [[Galactic Hub Project]], in the [[<output id='galaxy2'></output>]] [[galaxy]]. <output id='location'></output></div>
+						<div>{{CoordGlyphConvert|<output id='portalglyphs1'></output>}}</div>
+						<br>
+						<div>==Space Station==</div>
+						<div>The [[Space Station|<output id='stationname'></output>]] merchants offer the following {{class|S}} class items for sale:</div>
+						<br>
+						<div>====Multi-tool Technology Merchant====</div>   
+						<div>*</div>
+						<br>
+						<div>==== Starship Technology Merchant====</div> 
+						<div>*</div>
+						<br>
+						<div>====Exosuit Technology Merchant====</div>
+						<div>*</div>
+						<br>
+						<div>====Vehicle Shop Merchant====</div>
+						<div>*</div>
+						<br>
 						<div>==Additional information==</div>
 						<div><output id='addInfo'></output></div>
 						<br>
-
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
 						<div><output id="galleryCode"></output></div>
