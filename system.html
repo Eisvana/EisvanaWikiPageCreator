@@ -49,6 +49,11 @@
 			textFunction("docDate", "docDate_input");
 			dateConvert("docDate");
 			textFunction("originalname", "originalname_input");
+			textFunction("mtMerchant", "mtMerchant_input");
+			textFunction("mtMerchant1", "mtMerchant_input");
+			textFunction("mtMerchant2", "mtMerchant_input");
+			textFunction("mtMerchant3", "mtMerchant_input");
+			textFunction("mtMerchant4", "mtMerchant_input");
 			textFunction("location", "location_input");
 			textFunction("addInfo", "addInfo_input");
 			civGalaxy("civ");
@@ -452,18 +457,18 @@
 						<tr>
 							<th><label>S-class multitool merchant upgrades:</label>
 							<td>
-								<form>
-									<input type="checkbox" name="MT" id="mt_input" value="Advanced Mining Laser">Advanced Mining Laser<br>
-									<input type="checkbox" name="MT" id="mt_input" value="Analysis Visor Upgrade">Analysis Visor Upgrade<br>
-									<input type="checkbox" name="MT" id="mt_input" value="Blaze Javelin Upgrade">Blaze Javelin Upgrade<br>
-									<input type="checkbox" name="MT" id="mt_input" value="Boltcaster Upgrade">Boltcaster Upgrade<br>
-									<input type="checkbox" name="MT" id="mt_input" value="Geology Cannon Upgrade">Geology Cannon Upgrade<br>
-									<input type="checkbox" name="MT" id="mt_input" value="Mining Beam Upgrade">Mining Beam Upgrade<br>
-									<input type="checkbox" name="MT" id="mt_input" value="Plasma Launcher Upgrade">Plasma Launcher Upgrade<br>
-									<input type="checkbox" name="MT" id="mt_input" value="Plasma Resonator">Plasma Resonator<br>
-									<input type="checkbox" name="MT" id="mt_input" value="Pulse Spitter Upgrade">Pulse Spitter Upgrade<br>
-									<input type="checkbox" name="MT" id="mt_input" value="Scatter Blaster Upgrade">Scatter Blaster Upgrade<br>
-								</form>
+								<select multiple id="mtMerchant_input" name="MTMerchant">
+									<option value="Advanced Mining Laser">Advanced Mining Laser<br>
+									<option value="Analysis Visor Upgrade">Analysis Visor Upgrade<br>
+									<option value="Blaze Javelin Upgrade">Blaze Javelin Upgrade<br>
+									<option value="Boltcaster Upgrade">Boltcaster Upgrade<br>
+									<option value="Geology Cannon Upgrade">Geology Cannon Upgrade<br>
+									<option value="Mining Beam Upgrade">Mining Beam Upgrade<br>
+									<option value="Plasma Launcher Upgrade">Plasma Launcher Upgrade<br>
+									<option value="Plasma Resonator">Plasma Resonator<br>
+									<option value="Pulse Spitter Upgrade">Pulse Spitter Upgrade<br>
+									<option value="Scatter Blaster Upgrade">Scatter Blaster Upgrade<br>
+								</select>
 							</td>
 						</tr>
 						<tr>
@@ -712,11 +717,11 @@
 						<br>
 						<div>{{SSMerchants</div>
 						<div>|MTupgrade=Y</div>
-						<div>|MT1=</div>
-						<div>|MT2=</div>
-						<div>|MT3=</div>
-						<div>|MT4=</div>
-						<div>|MT5=</div>
+						<div>|MT1=<output id='mtMerchant'></output></div>
+						<div>|MT2=<output id='mtMerchant1'></output></div>
+						<div>|MT3=<output id='mtMerchant2'></output></div>
+						<div>|MT4=<output id='mtMerchant3'></output></div>
+						<div>|MT5=<output id='mtMerchant4'></output></div>
 						<div>|SSupgrade=Y</div>
 						<div>|SS1=</div>
 						<div>|SS2=</div>
