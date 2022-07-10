@@ -41,10 +41,12 @@
 			textFunction("activity", "activity_input");
 			textFunction("behaviour", "behaviour_input");
 			textFunction("diet", "diet_input");
+			textFunction("DM", "dm_input");
 			genderTwoProps("gender2_input", "weight_input", "weight2_input", "weight")
 			genderTwoProps("gender2_input", "height_input", "height2_input", "height")
 			textFunction("notes", "notes_input");
 			textFunction("produces", "produces_input");
+			textFunction("mode", "mode_input");
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			researchTeam("researchteam", "civilized");
@@ -323,20 +325,20 @@
 							<td><input type="text" list="dietData" name="Diet" id="diet_input">
 						</tr>
 						<tr>
-							<th><label>Weight in kg (only number):</label>
-							<td><input type="text" name="Weight" id="weight_input" onkeypress="return isNumberKey(event)">
+							<th><label>Weight in kg:</label>
+							<td><input type="number" step="0.1" name="Weight" id="weight_input" placeholder="0.0" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
-							<th><label>Gender 2 Weight in kg (only number):</label>
-							<td><input type="text" name="Weight2" id="weight2_input" onkeypress="return isNumberKey(event)">
+							<th><label>Height in m:</label>
+							<td><input type="number" step="0.1" name="Height" id="height_input" placeholder="0.0" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
-							<th><label>Height in m (only number):</label>
-							<td><input type="text" name="Height" id="height_input" onkeypress="return isNumberKey(event)">
+							<th><label>Gender 2 Weight in kg:</label>
+							<td><input type="number" step="0.1" name="Weight2" id="weight2_input" placeholder="0.0" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
-							<th><label>Gender 2 Height in m (only number):</label>
-							<td><input type="text" name="Height" id="height2_input" onkeypress="return isNumberKey(event)">
+							<th><label>Gender 2 Height in m:</label>
+							<td><input type="number" step="0.1" name="Height" id="height2_input" placeholder="0.0" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
 							<th><label>Notes:</label>
@@ -393,6 +395,14 @@
 								<p style="text-align:center">Note: You can drag on the bottom right corner to expand the
 									text area
 								</p>
+							</td>
+						</tr>
+						<tr class="no-border">
+							<th style="vertical-align:top" colspan="2"><label>Discovery Menu</label>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="DM" id="dm_input"></textarea>
 							</td>
 						</tr>
 						<tr class="no-border">

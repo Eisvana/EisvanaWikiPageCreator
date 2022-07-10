@@ -60,6 +60,7 @@ nav {
 
 select,
 input[type="text"],
+input[type="number"],
 input[type="date"] {
 	margin-top: 5px;
 	min-width: 200px;
@@ -252,6 +253,7 @@ tr label {
 
 textarea,
 input[type="text"],
+input[type="number"],
 input[type="date"] {
 	border-radius: 5px;
 	border: 1px solid #2F4F4FB0;
@@ -260,6 +262,7 @@ input[type="date"] {
 
 textarea:hover,
 input[type="text"]:hover,
+input[type="number"]:hover,
 input[type="date"]:hover {
 	border: 1px solid #000;
 }
