@@ -54,13 +54,13 @@
 			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam");
 			addInfo("genus_input", "civ", "researchteam", "addInfo");
 			hideOrgName('oldName_input', 'oldName');
-			hideSecGenderProps("gender2_input", "weight2_input", "height2_input");
 			specialNotesTextFunc("notes_input", "specialNotes_input", "addObservation");
 		}
 		window.onload = () => {
 			autoRefresh();
 			genusDropdown("ecosystem_input", "genus_input");
 			genusProduces("genus_input", "produces_input");
+			hideSecGenderProps("gender_input", "gender2_input", "weight2_input", "height2_input");
 			specialNotes("notes_input", "specialNotes_input");
 			showInput();
 		}
@@ -296,7 +296,7 @@
 						<tr>
 							<th><label>Second Gender:</label>
 							<td>
-								<select id="gender2_input" name="Gender2">
+								<select id="gender2_input" name="Gender2" onchange="hideSecGenderProps('gender_input', 'gender2_input', 'weight2_input', 'height2_input');">
 									<option value="">
 									<option value="Male">Male
 									<option value="Female">Female
@@ -332,11 +332,11 @@
 							<th><label>Height in m:</label>
 							<td><input type="number" step="0.1" name="Height" id="height_input" placeholder="0.0" onkeypress="return isNumberKey(event)">
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<th><label>Gender 2 Weight in kg:</label>
 							<td><input type="number" step="0.1" name="Weight2" id="weight2_input" placeholder="0.0" onkeypress="return isNumberKey(event)">
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<th><label>Gender 2 Height in m:</label>
 							<td><input type="number" step="0.1" name="Height" id="height2_input" placeholder="0.0" onkeypress="return isNumberKey(event)">
 						</tr>
