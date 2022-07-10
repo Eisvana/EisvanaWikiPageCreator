@@ -42,6 +42,7 @@
 			textFunction("behaviour", "behaviour_input");
 			textFunction("diet", "diet_input");
 			textFunction("DM", "dm_input");
+			genderTwoProps("gender2_input", "gender_input", "gender2_input", "gender")
 			genderTwoProps("gender2_input", "weight_input", "weight2_input", "weight")
 			genderTwoProps("gender2_input", "height_input", "height2_input", "height")
 			textFunction("notes", "notes_input");
@@ -115,15 +116,15 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Name of the creature:</label>
+							<th><label for="name_input">Name of the creature:</label>
 							<td><input type="text" name="Name" id="name_input">
 						</tr>
 						<tr>
-							<th><label>Original name before uploading if available:</label>
+							<th><label for="oldName_input">Original name before uploading if available:</label>
 							<td><input type="text" name="OldName" id="oldName_input">
 						</tr>
 						<tr>
-							<th><label>Main image name, including file extension:</label>
+							<th><label for="image_input">Main image name, including file extension:</label>
 							<td>
 								<input type="text" name="Image" id="image_input">
 								<br>
@@ -132,19 +133,19 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Name of the system:</label>
+							<th><label for="system_input">Name of the system:</label>
 							<td><input type="text" name="System" id="system_input">
 						</tr>
 						<tr>
-							<th><label>Name of the planet:</label>
+							<th><label for="planet_input">Name of the planet:</label>
 							<td><input type="text" name="Planet" id="planet_input">
 						</tr>
 						<tr>
-							<th><label>Name of the moon (if applicable):</label>
+							<th><label for="moon_input">Name of the moon (if applicable):</label>
 							<td><input type="text" name="Moon" id="moon_input">
 						</tr>
 						<tr>
-							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button"
+							<th><label for="portalglyphs_input">Portalglyphs:</label><button class="button is-small is-danger" type="button"
 									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
 
 							<td><input type="text" name="Glyphs" id="portalglyphs_input"
@@ -272,6 +273,15 @@
 							</td>
 						</tr>
 						<tr>
+							<th><label>Which gender should be prioritised?</label>
+							<td>
+								<input type="radio" id="genderY" name="Gender" value="gender1" checked>
+								<label for="genderY">Gender 1</label>
+								<input type="radio" id="genderN" name="Gender" value="gender2">
+								<label for="genderN">Gender 2</label>
+							</td>
+						</tr>
+						<tr>
 							<th><label>Gender:</label>
 							<td>
 								<select id="gender_input" name="Gender">
@@ -317,35 +327,35 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Behaviour:</label>
+							<th><label for="behaviour_input">Behaviour:</label>
 							<td><input type="text" list="behaviourData" name="Behaviour" id="behaviour_input">
 						</tr>
 						<tr>
-							<th><label>Diet:</label>
+							<th><label for="diet_input">Diet:</label>
 							<td><input type="text" list="dietData" name="Diet" id="diet_input">
 						</tr>
 						<tr>
-							<th><label>Weight in kg:</label>
+							<th><label for="weight_input">Weight in kg:</label>
 							<td><input type="number" step="0.1" name="Weight" id="weight_input" placeholder="0.0" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
-							<th><label>Height in m:</label>
+							<th><label for="height_input">Height in m:</label>
 							<td><input type="number" step="0.1" name="Height" id="height_input" placeholder="0.0" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr style="display: none;">
-							<th><label>Gender 2 Weight in kg:</label>
+							<th><label for="weight2_input">Gender 2 Weight in kg:</label>
 							<td><input type="number" step="0.1" name="Weight2" id="weight2_input" placeholder="0.0" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr style="display: none;">
-							<th><label>Gender 2 Height in m:</label>
+							<th><label for="height2_input">Gender 2 Height in m:</label>
 							<td><input type="number" step="0.1" name="Height" id="height2_input" placeholder="0.0" onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
-							<th><label>Notes:</label>
+							<th><label for="notes_input">Notes:</label>
 							<td><input type="text" list="notesData" name="Notes" id="notes_input" oninput="specialNotes('notes_input', 'specialNotes_input')">
 						</tr>
 						<tr style="display: none;">
-							<th><label>Notes for discovery menu:</label>
+							<th><label for="specialNotes_input">Notes for discovery menu:</label>
 							<td><input type="text" list="specialNotesData" name="SpecialNotes" id="specialNotes_input">
 						</tr>
 						<tr>
@@ -367,15 +377,15 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Discoverer wiki account:</label>
+							<th><label for="discoveredlink_input">Discoverer wiki account:</label>
 							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
 						</tr>
 						<tr>
-							<th><label>Discoverer alias if no wiki:</label>
+							<th><label for="discovered_input">Discoverer alias if no wiki:</label>
 							<td><input type="text" name="Discovered" id="discovered_input">
 						</tr>
 						<tr>
-							<th><label>Documenter alias if not discoverer:</label>
+							<th><label for="docby_input">Documenter alias if not discoverer:</label>
 							<td><input type="text" name="DocBy" id="docby_input">
 						</tr>
 						<tr>
@@ -398,7 +408,7 @@
 							</td>
 						</tr>
 						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label>Discovery Menu</label>
+							<th style="vertical-align:top" colspan="2"><label for="dm_input">Discovery Menu</label>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -406,7 +416,7 @@
 							</td>
 						</tr>
 						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label>Appearance</label>
+							<th style="vertical-align:top" colspan="2"><label for="appearance_input">Appearance</label>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -414,7 +424,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Gallery files</label>
+							<th><label for="gallery_upload">Gallery files</label>
 							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
 									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
 						</tr>

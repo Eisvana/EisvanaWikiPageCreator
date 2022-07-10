@@ -106,11 +106,11 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Name of the base:</label>
+							<th><label for="name_input">Name of the base:</label>
 							<td><input type="text" name="Name" id="name_input">
 						</tr>
 						<tr>
-							<th><label>Main image name, including file extension:</label>
+							<th><label for="image_upload">Main image name, including file extension:</label>
 							<td>
 								<input type="text" name="Image" id="image_input">
 								<br>
@@ -119,31 +119,31 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Builder wiki account:</label>
+							<th><label for="builderlink_input">Builder wiki account:</label>
 							<td><input type="text" name="Builderlink" id="builderlink_input">
 						</tr>
 						<tr>
-							<th><label>Builder alias if no wiki:</label>
+							<th><label for="builder_input">Builder alias if no wiki:</label>
 							<td><input type="text" name="Builder" id="builder_input">
 						</tr>
 						<tr>
-							<th><label>Name of the system:</label>
+							<th><label for="system_input">Name of the system:</label>
 							<td><input type="text" name="System" id="system_input">
 						</tr>
 						<tr>
-							<th><label>Name of the planet:</label>
+							<th><label for="planet_input">Name of the planet:</label>
 							<td><input type="text" name="Planet" id="planet_input">
 						</tr>
 						<tr>
-							<th><label>Name of the moon (if applicable):</label>
+							<th><label for="moon_input">Name of the moon (if applicable):</label>
 							<td><input type="text" name="Moon" id="moon_input">
 						</tr>
 						<tr>
-							<th><label>Planetary coords:</label>
+							<th><label for="axes_input">Planetary coords:</label>
 							<td><input type="text" name="Axes" id="axes_input">
 						</tr>
 						<tr>
-							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button"
+							<th><label for="portalglyphs_input">Portalglyphs:</label><button class="button is-small is-danger" type="button"
 									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
 
 							<td><input type="text" name="Glyphs" id="portalglyphs_input"
@@ -221,7 +221,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Type of the base:</label>
+							<th><label for="type_input">Type of the base:</label>
 							<td><input type="text" name="Type" id="type_input">
 						</tr>
 						<tr>
@@ -322,23 +322,23 @@
 								<p style="text-align:center">Census:</p>
 						</tr>
 						<tr>
-							<th><label>Ingame name of the player?</label>
+							<th><label for="censusPlayer_input">Ingame name of the player?</label>
 							<td><input type="text" name="CensusPlayer" id="censusPlayer_input">
 						</tr>
 						<tr>
-							<th><label>Reddit name of the player?</label>
+							<th><label for="censusReddit_input">Reddit name of the player?</label>
 							<td><input type="text" name="CensusReddit" id="censusReddit_input">
 						</tr>
 						<tr>
-							<th><label>Discord name of the player?</label>
+							<th><label for="censusDiscord_input">Discord name of the player?</label>
 							<td><input type="text" name="CensusDiscord" id="censusDiscord_input">
 						</tr>
 						<tr>
-							<th><label>NMS friend code of the player?</label>
+							<th><label for="censusFriend_input">NMS friend code of the player?</label>
 							<td><input maxlength="15" type="text" name="CensusFriend" id="censusFriend_input">
 						</tr>
 						<tr>
-							<th><label>When did the player arrive in Hub space?</label>
+							<th><label for="censusArrival_input">When did the player arrive in Hub space?</label>
 							<td><input type="date" name="CensusArrival" id="censusArrival_input">
 						</tr>
 						<tr>
@@ -358,7 +358,7 @@
 							</td>
 						</tr>
 						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label>Base Layout:</label>
+							<th style="vertical-align:top" colspan="2"><label for="layout_input">Base Layout:</label>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -366,7 +366,7 @@
 							</td>
 						</tr>
 						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label>Base Features:</label>
+							<th style="vertical-align:top" colspan="2"><label for="features_input">Base Features:</label>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -374,7 +374,7 @@
 							</td>
 						</tr>
 						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label>Additional information:</label>
+							<th style="vertical-align:top" colspan="2"><label for="addInfo_input">Additional information:</label>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -382,7 +382,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Gallery files</label>
+							<th><label for="gallery_upload">Gallery files</label>
 							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
 									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
 						</tr>

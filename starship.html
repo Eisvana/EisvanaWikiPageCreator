@@ -114,11 +114,11 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Name of the starship:</label>
+							<th><label for="name_input">Name of the starship:</label>
 							<td><input type="text" name="Name" id="name_input" oninput="appearanceSentence('name_input', 'type_input', 'subtype_input', 'exotic_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
 						</tr>
 						<tr>
-							<th><label>Main image name, including file extension:</label>
+							<th><label for="image_upload">Main image name, including file extension:</label>
 							<td>
 								<input type="text" name="Image" id="image_input">
 								<br>
@@ -143,19 +143,19 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Name of the system:</label>
+							<th><label for="system_input">Name of the system:</label>
 							<td><input type="text" name="System" id="system_input">
 						</tr>
 						<tr>
-							<th><label>Name of the planet:</label>
+							<th><label for="planet_input">Name of the planet:</label>
 							<td><input type="text" name="Planet" id="planet_input">
 						</tr>
 						<tr>
-							<th><label>Name of the moon (if applicable):</label>
+							<th><label for="moon_input">Name of the moon (if applicable):</label>
 							<td><input type="text" name="Moon" id="moon_input">
 						</tr>
 						<tr>
-							<th><label>Planetary coords:</label>
+							<th><label for="axes_input">Planetary coords:</label>
 							<td><input type="text" name="Axes" id="axes_input">
 						</tr>
 						<tr>
@@ -196,7 +196,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button"
+							<th><label for="portalglyphs_input">Portalglyphs:</label><button class="button is-small is-danger" type="button"
 									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
 
 							<td><input type="text" name="Glyphs" id="portalglyphs_input"
@@ -309,31 +309,31 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Maneuverability:</label>
+							<th><label for="maneuverB_input">Maneuverability:</label>
 							<td><input type="text" name="ManeuverB" id="maneuverB_input">
 						</tr>
 						<tr>
-							<th><label>Damage:</label>
+							<th><label for="damageB_input">Damage:</label>
 							<td><input type="text" name="DamageB" id="damageB_input">
 						</tr>
 						<tr>
-							<th><label>Shield:</label>
+							<th><label for="shieldB_input">Shield:</label>
 							<td><input type="text" name="shieldB" id="shieldB_input">
 						</tr>
 						<tr>
-							<th><label>Warp:</label>
+							<th><label for="warpB_input">Warp:</label>
 							<td><input type="text" name="WarpB" id="warpB_input">
 						</tr>
 						<tr>
-							<th><label>Discoverer wiki account:</label>
+							<th><label for="discoveredlink_input">Discoverer wiki account:</label>
 							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
 						</tr>
 						<tr>
-							<th><label>Discoverer alias if no wiki:</label>
+							<th><label for="discovered_input">Discoverer alias if no wiki:</label>
 							<td><input type="text" name="Discovered" id="discovered_input">
 						</tr>
 						<tr>
-							<th><label>Documenter alias if not discoverer:</label>
+							<th><label for="docby_input">Documenter alias if not discoverer:</label>
 							<td><input type="text" name="DocBy" id="docby_input">
 						</tr>
 						<tr>
@@ -428,7 +428,7 @@
 							</td>
 						</tr>
 						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label>Appearance</label>
+							<th style="vertical-align:top" colspan="2"><label for="appearance_input">Appearance</label>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -436,7 +436,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Gallery files</label>
+							<th><label for="gallery_upload">Gallery files</label>
 							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
 									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
 						</tr>
