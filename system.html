@@ -132,10 +132,6 @@
 							<td><input type="text" name="Name" id="name_input">
 						</tr>
 						<tr>
-							<th><label>Name of the space station:</label>
-							<td><input type="text" name="Stationname" id="stationname_input">
-						</tr>
-						<tr>
 							<th><label>Main image name, including file extension:</label>
 							<td>
 								<input type="text" name="Image" id="image_input">
@@ -252,12 +248,29 @@
 							<td><input type="text" name="Multiplestars" id="multiplestars_input">
 						</tr>
 						<tr>
-							<th><label>Color of star:</label>
-							<td><input type="text" name="Color" id="color_input">
+							<th><label>Color of (primary) star:</label>
+							<td>
+								<select id="color_input" name="Color">
+									<option value="Yellow">Yellow
+									<option value="Red">Red
+									<option value="Green">Green
+									<option value="Blue">Blue
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<th><label>Stellar class:</label>
-							<td><input type="text" name="Class" id="class_input">
+							<td>
+								<select id="class_input" name="Class">
+									<option value="F">F
+									<option value="G">G
+									<option value="M">M
+									<option value="K">K
+									<option value="E">E
+									<option value="B">B
+									<option value="O">O
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<th><label>Distance to center:</label>
@@ -285,11 +298,51 @@
 						</tr>
 						<tr>
 							<th><label>System Faction:</label>
-							<td><input type="text" name="Faction" id="faction_input">
+							<td>
+								<select id="faction_input" name="Faction">
+									<option value="Gek">Gek
+									<option value="Korvax">Korvax
+									<option value="Vy'keen">Vy'keen
+									<option value="Abandoned">Abandoned
+									<option value="Uncharted">Uncharted
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<th><label>System economy:</label>
-							<td><input type="text" name="Economy" id="economy_input">
+							<td>
+								<select id="economy_input" name="Economy">
+									<option value="Alchemical">Alchemical
+									<option value="Commercial">Commercial
+									<option value="Construction">Construction
+									<option value="Energy Supply">Energy Supply
+									<option value="Engineering">Engineering
+									<option value="Experimental">Experimental
+									<option value="Fuel Generation">Fuel Generation
+									<option value="High Electric">High Electric
+									<option value="High Tech">High Tech
+									<option value="High Voltage">High Voltage
+									<option value="Industrial">Industrial
+									<option value="Manufacturing">Manufacturing
+									<option value="Mass Production">Mass Production
+									<option value="Material Fusion">Material Fusion
+									<option value="Mathematical">Mathematical
+									<option value="Mercantile">Mercantile
+									<option value="Metal Processing">Metal Processing
+									<option value="Minerals">Minerals
+									<option value="Mining">Mining
+									<option value="Nano-construction">Nano-construction
+									<option value="Ore Extraction">Ore Extraction
+									<option value="Ore Processing">Ore Processing
+									<option value="Power Generation">Power Generation
+									<option value="Prospecting">Prospecting
+									<option value="Research">Research
+									<option value="Scientific">Scientific
+									<option value="Shipping">Shipping
+									<option value="Technology">Technology
+									<option value="Trading">Trading
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<th><label>Economy sell:</label>
@@ -301,11 +354,71 @@
 						</tr>
 						<tr>
 							<th><label>System wealth:</label>
-							<td><input type="text" name="Wealth" id="wealth_input">
+							<td>
+								<select id="wealth_input" name="Wealth">
+									<option value="Declining">Declining
+									<option value="Destitute">Destitute
+									<option value="Failing">Failing
+									<option value="Fledgling">Fledgling
+									<option value="Low Supply">Low Supply
+									<option value="Struggling">Struggling
+									<option value="Unsuccessful">Unsuccessful
+									<option value="Unpromising">Unpromising
+									<option value="Adequate">Adequate
+									<option value="Balanced">Balanced
+									<option value="Comfortable">Comfortable
+									<option value="Developing">Developing
+									<option value="Medium Supply">Medium Supply
+									<option value="Promising">Promising
+									<option value="Satisfactory">Satisfactory
+									<option value="Sustainable">Sustainable
+									<option value="Advanced">Advanced
+									<option value="Affluent">Affluent
+									<option value="Booming">Booming
+									<option value="Flourishing">Flourishing
+									<option value="High Supply">High Supply
+									<option value="Opulent">Opulent
+									<option value="Prosperous">Prosperous
+									<option value="Wealthy">Wealthy
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<th><label>System conflict:</label>
-							<td><input type="text" name="Conflict" id="conflict_input">
+							<td>
+								<select id="conflict_input" name="Conflict">
+									<option value="Gentle">Gentle
+									<option value="Low">Low
+									<option value="Mild">Mild
+									<option value="Peaceful">Peaceful
+									<option value="Relaxed">Relaxed
+									<option value="Stable">Stable
+									<option value="Tranquil">Tranquil
+									<option value="Trivial">Trivial
+									<option value="Unthreatening">Unthreatening
+									<option value="Untroubled">Untroubled
+									<option value="Belligerent">Belligerent
+									<option value="Boisterous">Boisterous
+									<option value="Fractious">Fractious
+									<option value="Intermittent">Intermittent
+									<option value="Medium">Medium
+									<option value="Rowdy">Rowdy
+									<option value="Sporadic">Sporadic
+									<option value="Testy">Testy
+									<option value="Unruly">Unruly
+									<option value="Unstable">Unstable
+									<option value="Aggressive">Aggressive
+									<option value="Alarming">Alarming
+									<option value="At War">At War
+									<option value="Critical">Critical
+									<option value="Dangerous">Dangerous
+									<option value="Destructive">Destructive
+									<option value="Formidable">Formidable
+									<option value="High">High
+									<option value="Lawless">Lawless
+									<option value="Perilous">Perilous
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<th><label>Original name (if known):</label>
@@ -330,6 +443,74 @@
 									<option value="PS">PS
 									<option value="XB">XB
 								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Name of the space station:</label>
+							<td><input type="text" name="Stationname" id="stationname_input">
+						</tr>
+						<tr>
+							<th><label>S-class multitool merchant upgrades:</label>
+							<td>
+								<form>
+									<input type="checkbox" name="MT" id="mt_input" value="Advanced Mining Laser">Advanced Mining Laser<br>
+									<input type="checkbox" name="MT" id="mt_input" value="Analysis Visor Upgrade">Analysis Visor Upgrade<br>
+									<input type="checkbox" name="MT" id="mt_input" value="Blaze Javelin Upgrade">Blaze Javelin Upgrade<br>
+									<input type="checkbox" name="MT" id="mt_input" value="Boltcaster Upgrade">Boltcaster Upgrade<br>
+									<input type="checkbox" name="MT" id="mt_input" value="Geology Cannon Upgrade">Geology Cannon Upgrade<br>
+									<input type="checkbox" name="MT" id="mt_input" value="Mining Beam Upgrade">Mining Beam Upgrade<br>
+									<input type="checkbox" name="MT" id="mt_input" value="Plasma Launcher Upgrade">Plasma Launcher Upgrade<br>
+									<input type="checkbox" name="MT" id="mt_input" value="Plasma Resonator">Plasma Resonator<br>
+									<input type="checkbox" name="MT" id="mt_input" value="Pulse Spitter Upgrade">Pulse Spitter Upgrade<br>
+									<input type="checkbox" name="MT" id="mt_input" value="Scatter Blaster Upgrade">Scatter Blaster Upgrade<br>
+								</form>
+							</td>
+						</tr>
+						<tr>
+							<th><label>S-class starship merchant upgrades:</label>
+							<td>
+								<form>
+									<input type="checkbox" name="SS" id="ss_input" value="Cyclotron Ballista Upgrade">Cyclotron Ballista Upgrade<br>
+									<input type="checkbox" name="SS" id="ss_input" value="Deflector Shield Upgrade">Deflector Shield Upgrade<br>
+									<input type="checkbox" name="SS" id="ss_input" value="Hyperdrive Upgrade">Hyperdrive Upgrade<br>
+									<input type="checkbox" name="SS" id="ss_input" value="Infra-Knife Accelerator Upgrade">Infra-Knife Accelerator Upgrade<br>
+									<input type="checkbox" name="SS" id="ss_input" value="Launch Thruster Upgrade">Launch Thruster Upgrade<br>
+									<input type="checkbox" name="SS" id="ss_input" value="Phase Beam Upgrade">Phase Beam Upgrade<br>
+									<input type="checkbox" name="SS" id="ss_input" value="Photon Cannon Upgrade">Photon Cannon Upgrade<br>
+									<input type="checkbox" name="SS" id="ss_input" value="Positron Ejector Upgrade">Positron Ejector Upgrade<br>
+									<input type="checkbox" name="SS" id="ss_input" value="Pulse Engine Upgrade">Pulse Engine Upgrade<br>
+								</form>
+							</td>
+						</tr>
+						<tr>
+							<th><label>S-class exocraft merchant upgrades:</label>
+							<td>
+								<form>
+									<input type="checkbox" name="EC" id="ec_input" value="Exocraft Acceleration Module Upgrade">Exocraft Acceleration Module Upgrade<br>
+									<input type="checkbox" name="EC" id="ec_input" value="Exocraft Mining Laser Upgrade">Exocraft Mining Laser Upgrade<br>
+									<input type="checkbox" name="EC" id="ec_input" value="Exocraft Mounted Cannon Upgrade">Exocraft Mounted Cannon Upgrade<br>
+									<input type="checkbox" name="EC" id="ec_input" value="Fusion Engine Upgrade">Fusion Engine Upgrade<br>
+									<input type="checkbox" name="EC" id="ec_input" value="Humboldt Drive Upgrade">Humboldt Drive Upgrade<br>
+									<input type="checkbox" name="EC" id="ec_input" value="Minotaur Cannon Upgrade">Minotaur Cannon Upgrade<br>
+									<input type="checkbox" name="EC" id="ec_input" value="Minotaur Engine Upgrade">Minotaur Engine Upgrade<br>
+									<input type="checkbox" name="EC" id="ec_input" value="Minotaur Laser Upgrade">Minotaur Laser Upgrade<br>
+									<input type="checkbox" name="EC" id="ec_input" value="Nautilon Cannon Upgrade">Nautilon Cannon Upgrade<br>
+								</form>
+							</td>
+						</tr>
+						<tr>
+							<th><label>S-class exosuit merchant upgrades:</label>
+							<td>
+								<form>
+									<input type="checkbox" name="ES" id="es_input" value="Defence Systems Upgrade">Defence Systems Upgrade<br>
+									<input type="checkbox" name="ES" id="es_input" value="Life Support Upgrade">Life Support Upgrade<br>
+									<input type="checkbox" name="ES" id="es_input" value="Movement System Upgrade">Movement System Upgrade<br>
+									<input type="checkbox" name="ES" id="es_input" value="Radiation Protection Module">Radiation Protection Module<br>
+									<input type="checkbox" name="ES" id="es_input" value="Thermal Protection Module (Cold)">Thermal Protection Module (Cold)<br>
+									<input type="checkbox" name="ES" id="es_input" value="Thermal Protection Module (Heat)">Thermal Protection Module (Heat)<br>
+									<input type="checkbox" name="ES" id="es_input" value="Toxic Protection Module">Toxic Protection Module<br>
+									<input type="checkbox" name="ES" id="es_input" value="Underwater Protection Module">Underwater Protection Module<br>
+								</form>
 							</td>
 						</tr>
 						<tr>
@@ -529,17 +710,32 @@
 						<div>==Space Station==</div>
 						<div>The [[Space Station|<output id='stationname'></output>]] merchants offer the following {{class|S}} class items for sale:</div>
 						<br>
-						<div>====Multi-tool Technology Merchant====</div>   
-						<div>*</div>
-						<br>
-						<div>==== Starship Technology Merchant====</div> 
-						<div>*</div>
-						<br>
-						<div>====Exosuit Technology Merchant====</div>
-						<div>*</div>
-						<br>
-						<div>====Vehicle Shop Merchant====</div>
-						<div>*</div>
+						<div>{{SSMerchants</div>
+						<div>|MTupgrade=Y</div>
+						<div>|MT1=</div>
+						<div>|MT2=</div>
+						<div>|MT3=</div>
+						<div>|MT4=</div>
+						<div>|MT5=</div>
+						<div>|SSupgrade=Y</div>
+						<div>|SS1=</div>
+						<div>|SS2=</div>
+						<div>|SS3=</div>
+						<div>|SS4=</div>
+						<div>|SS5=</div>
+						<div>|ECupgrade=Y</div>
+						<div>|EC1=</div>
+						<div>|EC2=</div>
+						<div>|EC3=</div>
+						<div>|EC4=</div>
+						<div>|EC5=</div>
+						<div>|ESupgrade=Y</div>
+						<div>|ES1=</div>
+						<div>|ES2=</div>
+						<div>|ES3=</div>
+						<div>|ES4=</div>
+						<div>|ES5=</div>
+						<div>}}</div>
 						<br>
 						<div>==Additional information==</div>
 						<div><output id='addInfo'></output></div>
