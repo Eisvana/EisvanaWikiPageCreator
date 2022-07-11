@@ -42,9 +42,9 @@
 			textFunction("behaviour", "behaviour_input");
 			textFunction("diet", "diet_input");
 			textFunction("DM", "dm_input");
-			genderTwoProps("gender2_input", "gender_input", "gender2_input", "gender")
-			genderTwoProps("gender2_input", "weight_input", "weight2_input", "weight")
-			genderTwoProps("gender2_input", "height_input", "height2_input", "height")
+			genderProps("gender2_input", "gender_input", "gender2_input", "gender")
+			genderProps("gender2_input", "weight_input", "weight2_input", "weight")
+			genderProps("gender2_input", "height_input", "height2_input", "height")
 			textFunction("notes", "notes_input");
 			textFunction("produces", "produces_input");
 			textFunction("mode", "mode_input");
@@ -56,6 +56,7 @@
 			addInfo("genus_input", "civ", "researchteam", "addInfo");
 			hideOrgName('oldName_input', 'oldName');
 			specialNotesTextFunc("notes_input", "specialNotes_input", "addObservation");
+			creaPrioRadioName("gender_input", "gender2_input", "gender1_label", "gender2_label");
 		}
 		window.onload = () => {
 			autoRefresh();
@@ -63,6 +64,7 @@
 			genusProduces("genus_input", "produces_input");
 			hideSecGenderProps("gender_input", "gender2_input", "weight2_input", "height2_input");
 			specialNotes("notes_input", "specialNotes_input");
+			creaturePrio("gender")
 			showInput();
 		}
 	</script>
@@ -275,16 +277,16 @@
 						<tr>
 							<th><label>Which gender should be prioritised?</label>
 							<td>
-								<input type="radio" id="genderY" name="Gender" value="gender1" checked>
-								<label for="genderY">Gender 1</label>
-								<input type="radio" id="genderN" name="Gender" value="gender2">
-								<label for="genderN">Gender 2</label>
+								<input type="radio" id="gender1" name="Gender" value="gender1" checked onchange="creaturePrio('gender')">
+								<label id="gender1_label" for="gender1"></label>
+								<input type="radio" id="gender2" name="Gender" value="gender2" onchange="creaturePrio('gender')">
+								<label id="gender2_label" for="gender2"></label>
 							</td>
 						</tr>
 						<tr>
 							<th><label>Gender:</label>
 							<td>
-								<select id="gender_input" name="Gender">
+								<select id="gender_input" name="Gender" onchange="hideSecGenderProps('gender_input', 'gender2_input', 'weight2_input', 'height2_input');">
 									<option value="Male">Male
 									<option value="Female">Female
 									<option value="Exotic">Exotic
