@@ -72,8 +72,10 @@
 
 <body>
 	<div class="container">
-		<nav style="font-size:larger"><div><a href="./" title="Main page">&larr; Return to main page</a></div>
-		<div><a href="./sandworm.html" title="Sandworm">&#8627; Sandworm</a></div></nav>
+		<nav style="font-size:larger">
+			<div><a href="./" title="Main page">&larr; Return to main page</a></div>
+			<div><a href="./sandworm.html" title="Sandworm">&#8627; Sandworm</a></div>
+		</nav>
 		<br><br>
 
 		<div class="columns is-desktop">
@@ -147,7 +149,8 @@
 							<td><input type="text" name="Moon" id="moon_input">
 						</tr>
 						<tr>
-							<th><label for="portalglyphs_input">Portalglyphs:</label><button class="button is-small is-danger" type="button"
+							<th><label for="portalglyphs_input">Portalglyphs:</label><button
+									class="button is-small is-danger" type="button"
 									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
 
 							<td><input type="text" name="Glyphs" id="portalglyphs_input"
@@ -247,7 +250,8 @@
 						<tr>
 							<th><label>Ecosystem:</label>
 							<td>
-								<select id="ecosystem_input" name="Ecosystem" onchange="genusDropdown('ecosystem_input', 'genus_input'); genusProduces('genus_input', 'produces_input');">
+								<select id="ecosystem_input" name="Ecosystem"
+									onchange="genusDropdown('ecosystem_input', 'genus_input'); genusProduces('genus_input', 'produces_input');">
 									<option value="Ground">Ground
 									<option value="Flying">Flying
 									<option value="Underwater">Underwater
@@ -270,23 +274,27 @@
 						<tr>
 							<th><label>Genus:</label>
 							<td>
-								<select id="genus_input" name="Genus" onchange="genusProduces('genus_input', 'produces_input');">
+								<select id="genus_input" name="Genus"
+									onchange="genusProduces('genus_input', 'produces_input');">
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<th><label>Which gender should be prioritised?</label>
 							<td>
-								<input type="radio" id="gender1" name="Gender" value="gender1" checked onchange="creaturePrio('gender')">
+								<input type="radio" id="gender1" name="Gender" value="gender1" checked
+									onchange="creaturePrio('gender')">
 								<label id="gender1_label" for="gender1"></label>
-								<input type="radio" id="gender2" name="Gender" value="gender2" onchange="creaturePrio('gender')">
+								<input type="radio" id="gender2" name="Gender" value="gender2"
+									onchange="creaturePrio('gender')">
 								<label id="gender2_label" for="gender2"></label>
 							</td>
 						</tr>
 						<tr>
 							<th><label>Gender:</label>
 							<td>
-								<select id="gender_input" name="Gender" onchange="hideSecGenderProps('gender_input', 'gender2_input', 'weight2_input', 'height2_input');">
+								<select id="gender_input" name="Gender"
+									onchange="hideSecGenderProps('gender_input', 'gender2_input', 'weight2_input', 'height2_input');">
 									<option value="Male">Male
 									<option value="Female">Female
 									<option value="Exotic">Exotic
@@ -308,7 +316,8 @@
 						<tr>
 							<th><label>Second Gender:</label>
 							<td>
-								<select id="gender2_input" name="Gender2" onchange="hideSecGenderProps('gender_input', 'gender2_input', 'weight2_input', 'height2_input');">
+								<select id="gender2_input" name="Gender2"
+									onchange="hideSecGenderProps('gender_input', 'gender2_input', 'weight2_input', 'height2_input');">
 									<option value="">
 									<option value="Male">Male
 									<option value="Female">Female
@@ -338,23 +347,28 @@
 						</tr>
 						<tr>
 							<th><label for="weight_input">Weight in kg:</label>
-							<td><input type="number" step="0.1" name="Weight" id="weight_input" placeholder="0.0" oninput="return isNumberKey(this)">
+							<td><input type="number" step="0.1" name="Weight" id="weight_input" placeholder="0.0"
+									oninput="isNumberKey(this)">
 						</tr>
 						<tr>
 							<th><label for="height_input">Height in m:</label>
-							<td><input type="number" step="0.1" name="Height" id="height_input" placeholder="0.0" oninput="return isNumberKey(this)">
+							<td><input type="number" step="0.1" name="Height" id="height_input" placeholder="0.0"
+									oninput="isNumberKey(this)">
 						</tr>
 						<tr style="display: none;">
 							<th><label for="weight2_input">Gender 2 Weight in kg:</label>
-							<td><input type="number" step="0.1" name="Weight2" id="weight2_input" placeholder="0.0" oninput="return isNumberKey(this)">
+							<td><input type="number" step="0.1" name="Weight2" id="weight2_input" placeholder="0.0"
+									oninput="isNumberKey(this)">
 						</tr>
 						<tr style="display: none;">
 							<th><label for="height2_input">Gender 2 Height in m:</label>
-							<td><input type="number" step="0.1" name="Height" id="height2_input" placeholder="0.0" oninput="return isNumberKey(this)">
+							<td><input type="number" step="0.1" name="Height" id="height2_input" placeholder="0.0"
+									oninput="isNumberKey(this)">
 						</tr>
 						<tr>
 							<th><label for="notes_input">Notes:</label>
-							<td><input type="text" list="notesData" name="Notes" id="notes_input" oninput="specialNotes('notes_input', 'specialNotes_input')">
+							<td><input type="text" list="notesData" name="Notes" id="notes_input"
+									oninput="specialNotes('notes_input', 'specialNotes_input')">
 						</tr>
 						<tr style="display: none;">
 							<th><label for="specialNotes_input">Notes for discovery menu:</label>
@@ -443,9 +457,11 @@
 						<button id="btn" class="button is-outlined is-primary"
 							onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
 						<a id="downloadbtn" class="button is-outlined is-primary"
-							onclick="downloadFile('downloadbtn', 'wikiText', pageName('oldName_input', 'name_input'))">Download file</a>
+							onclick="downloadFile('downloadbtn', 'wikiText', pageName('oldName_input', 'name_input'))">Download
+							file</a>
 						<a class="button is-outlined is-primary" id="link"
-							onclick="wikiLink('link', 'region', pageName('oldName_input', 'name_input'));">Create page</a>
+							onclick="wikiLink('link', 'region', pageName('oldName_input', 'name_input'));">Create
+							page</a>
 					</span>
 				</div>
 				<br>
@@ -487,7 +503,8 @@
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''<output id='name2'></output>''' is a [[creature]], a member of the [[<output id='genus1'></output>]] [[genus]].
+						<div>'''<output id='name2'></output>''' is a [[creature]], a member of the [[<output
+								id='genus1'></output>]] [[genus]].
 						</div>
 						<br>
 
@@ -507,15 +524,18 @@
 						<br>
 
 						<div>==Location==</div>
-						<div>It can be found on the <output id='locPlanet'></output> in the [[<output id='locSystem'></output>]] [[star system]].</div>
+						<div>It can be found on the <output id='locPlanet'></output> in the [[<output
+								id='locSystem'></output>]] [[star system]].</div>
 						<div>{{CoordGlyphConvert|<output id='portalglyphs1'></output>}}</div>
 						<br>
 
 						<div>==Additional information==</div>
 						<div>Featured in the <output id='addInfo'></output>.</div>
 						<br>
-						<div><div><output id="docby"></output></div>
-						<br></div>
+						<div>
+							<div><output id="docby"></output></div>
+							<br>
+						</div>
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
@@ -529,8 +549,10 @@
 			<div>
 				Please consider contributing to the project:
 				<ul>
-					<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank" rel="noopener noreferrer">GitHub repository</a></li>
-					<li><a href="https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev" target="_blank" rel="noopener noreferrer">VSCode online editor</a></li>
+					<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank"
+							rel="noopener noreferrer">GitHub repository</a></li>
+					<li><a href="https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev" target="_blank"
+							rel="noopener noreferrer">VSCode online editor</a></li>
 				</ul>
 			</div>
 			<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
@@ -753,8 +775,10 @@
 	<datalist id="specialNotesData">
 		<option value="Evil">
 		<option value="Sheds and regrows bones">
-		<option value="But there is something particularly unsettling about this creature, some deep shadow hanging over them. They are to be treated with extreme caution.">
-		<option value="Skeletal analysis reveals unusually supple bones, as if they had only recently grown: possible defense mechanism to shed and rapidly regrow body parts?">
+		<option
+			value="But there is something particularly unsettling about this creature, some deep shadow hanging over them. They are to be treated with extreme caution.">
+		<option
+			value="Skeletal analysis reveals unusually supple bones, as if they had only recently grown: possible defense mechanism to shed and rapidly regrow body parts?">
 	</datalist>
 
 	<datalist id="behaviourData">
@@ -863,7 +887,7 @@
 		<option value="Hungry">
 		<option value="Afraid">
 	</datalist>
-	
+
 	<datalist id="dietData">
 		<option value="Vegetation">
 		<option value="Foliage">
