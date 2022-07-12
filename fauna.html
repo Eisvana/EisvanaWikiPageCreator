@@ -42,9 +42,9 @@
 			textFunction("behaviour", "behaviour_input");
 			textFunction("diet", "diet_input");
 			textFunction("DM", "dm_input");
-			genderProps("gender2_input", "gender_input", "gender2_input", "gender")
-			genderProps("gender2_input", "weight_input", "weight2_input", "weight")
-			genderProps("gender2_input", "height_input", "height2_input", "height")
+			genderProps("gender2_input", "gender_input", "gender2_input", "gender");
+			genderProps("gender2_input", "weight_input", "weight2_input", "weight");
+			genderProps("gender2_input", "height_input", "height2_input", "height");
 			textFunction("notes", "notes_input");
 			textFunction("produces", "produces_input");
 			textFunction("mode", "mode_input");
@@ -53,18 +53,20 @@
 			researchTeam("researchteam", "civilized");
 			glyphRegion("portalglyphs_input", "civ", "region");
 			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam");
-			addInfo("genus_input", "civ", "researchteam", "addInfo");
+			addInfo("catalog_input", "researchteam", "addInfo");
 			hideOrgName('oldName_input', 'oldName');
 			specialNotesTextFunc("notes_input", "specialNotes_input", "addObservation");
 			creaPrioRadioName("gender_input", "gender2_input", "gender1_label", "gender2_label");
+			whitespaceDetector("addInfoWrapper");
 		}
 		window.onload = () => {
 			autoRefresh();
 			genusDropdown("ecosystem_input", "genus_input");
 			genusProduces("genus_input", "produces_input");
 			hideSecGenderProps("gender_input", "gender2_input", "weight2_input", "height2_input");
+			albumDropdown("civ", "ecosystem_input", "catalog_input");
 			specialNotes("notes_input", "specialNotes_input");
-			creaturePrio("gender")
+			creaturePrio("gender");
 			showInput();
 		}
 	</script>
@@ -112,7 +114,7 @@
 						<tr>
 							<th><label>Which civ does this creature belong to?</label>
 							<td>
-								<select id="civ" name="Civ">
+								<select id="civ" name="Civ" onchange="albumDropdown('civ', 'ecosystem_input', 'catalog_input')">
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
 									<option value="EisHub" id="EisHub">EisHub
@@ -249,7 +251,7 @@
 						<tr>
 							<th><label>Ecosystem:</label>
 							<td>
-								<select id="ecosystem_input" name="Ecosystem" onchange="genusDropdown('ecosystem_input', 'genus_input'); genusProduces('genus_input', 'produces_input');">
+								<select id="ecosystem_input" name="Ecosystem" onchange="genusDropdown('ecosystem_input', 'genus_input'); genusProduces('genus_input', 'produces_input'); albumDropdown('civ', 'ecosystem_input', 'catalog_input')">
 									<option value="Ground">Ground
 									<option value="Flying">Flying
 									<option value="Underwater">Underwater
@@ -405,18 +407,16 @@
 							</td>
 						</tr>
 						<tr>
+							<th><label for="catalog_input">Into which catalog does this creature belong (if any)?</label>
+							<td>
+								<select id="catalog_input" name="Catalog">
+								</select>
+						</tr>
+						<tr>
 							<td colspan="2">
 								<p style="text-align:center">Note: You can drag on the bottom right corner to expand the
 									text area
 								</p>
-							</td>
-						</tr>
-						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label for="dm_input">Discovery Menu</label>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<textarea name="DM" id="dm_input"></textarea>
 							</td>
 						</tr>
 						<tr class="no-border">
@@ -425,6 +425,14 @@
 						<tr>
 							<td colspan="2">
 								<textarea name="Appearance" id="appearance_input"></textarea>
+							</td>
+						</tr>
+						<tr class="no-border">
+							<th style="vertical-align:top" colspan="2"><label for="dm_input">Discovery Menu</label>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="DM" id="dm_input"></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -514,10 +522,10 @@
 						<br>
 
 						<div>==Additional information==</div>
-						<div>Featured in the <output id='addInfo'></output>.</div>
-						<br>
-						<div><div><output id="docby"></output></div>
+						<div id="addInfoWrapper"><div><div>Featured in the <output id='addInfo'></output>.</div>
 						<br></div>
+						<div><div><output id="docby"></output></div>
+						<br></div></div>
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
