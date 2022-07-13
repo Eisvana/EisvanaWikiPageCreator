@@ -219,11 +219,16 @@ table {
 	padding-right: 1.5em;
 }
 
-.gallery-item .gallery-meta .delete-icon {
-	position: absolute;
-	top: 0.5em;
-	right: 0.5em;
+.gallery-item .controlButtons {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.gallery-item .controlButtons .delete-icon {
 	cursor: pointer;
+	padding: 5px 0px;
 }
 
 .gallery-item .gallery-meta input {
