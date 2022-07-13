@@ -50,6 +50,10 @@
 	display: inline-block;
 }
 
+img {
+	object-fit: contain;
+}
+
 nav {
 	margin-top: 1em;
 }
