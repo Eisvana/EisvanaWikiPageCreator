@@ -19,8 +19,8 @@
 		// making all external links open in a new tab
 		window.onload = () => {
 			const a = document.querySelectorAll("a");
-				if (link.href.substring(link.href.length - 4) != "html") {
 			for (const link of a) {
+				if (link.href.substring(link.href.length - 4) != "html") {
 					link.setAttribute("target", "_blank");
 					link.setAttribute("rel", "noopener noreferrer");
 				}
@@ -39,7 +39,10 @@
 					<a href="./base.html" title="Base" class="button is-link is-outlined">Base</a>
 				</li>
 				<li>
-					<a href="./fauna.html" title="Fauna" disabled class="button is-link is-outlined">Fauna</a>
+					<a href="./fauna.html" title="Fauna" class="button is-link is-outlined">Fauna</a>
+				</li>
+				<li>
+					<a href="./sandworm.html" title="Sandworm" disabled class="button is-link is-outlined">Sandworm</a>
 				</li>
 				<li>
 					<a href="./flora.html" title="Flora" disabled class="button is-link is-outlined">Flora</a>
@@ -91,7 +94,7 @@
 		</div>
 		<footer>
 			<div>
-				Please consider supporting the project:
+				Please consider contributing to the project:
 				<ul>
 					<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" title="GitHub repository">GitHub repository</a></li>
 					<li><a href="https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev" title="VSCode">VSCode online editor</a></li>
