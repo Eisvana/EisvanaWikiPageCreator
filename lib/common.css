@@ -207,6 +207,8 @@ table {
 	max-height: 150px;
 	margin: 0 auto;
 	border-radius: 0.5em;
+	object-fit: contain;
+	min-width: 100px;
 }
 
 .gallery-item .gallery-meta {
@@ -215,15 +217,17 @@ table {
 	position: relative;
 }
 
-.gallery-item .gallery-meta p {
-	padding-right: 1.5em;
+.gallery-item .controlButtons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-bottom: 10px;
+	padding-right: 5px;
 }
 
-.gallery-item .gallery-meta .delete-icon {
-	position: absolute;
-	top: 0.5em;
-	right: 0.5em;
+.gallery-item .controlButtons .delete-icon {
 	cursor: pointer;
+	padding: 0.5em 0px;
 }
 
 .gallery-item .gallery-meta input {
