@@ -50,10 +50,6 @@
 	display: inline-block;
 }
 
-img {
-	object-fit: contain;
-}
-
 nav {
 	margin-top: 1em;
 }
@@ -211,6 +207,8 @@ table {
 	max-height: 150px;
 	margin: 0 auto;
 	border-radius: 0.5em;
+	object-fit: contain;
+	min-width: 100px;
 }
 
 .gallery-item .gallery-meta {
