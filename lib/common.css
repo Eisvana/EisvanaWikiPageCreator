@@ -218,13 +218,12 @@ table {
 .gallery-item .controlButtons {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 }
 
 .gallery-item .controlButtons .delete-icon {
 	cursor: pointer;
-	padding: 5px 0px;
+	padding: 0.5em 0px;
 }
 
 .gallery-item .gallery-meta input {
