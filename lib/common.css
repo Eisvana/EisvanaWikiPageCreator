@@ -215,10 +215,6 @@ table {
 	position: relative;
 }
 
-.gallery-item .gallery-meta p {
-	padding-right: 1.5em;
-}
-
 .gallery-item .controlButtons {
 	display: flex;
 	flex-direction: column;
