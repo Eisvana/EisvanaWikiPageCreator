@@ -16,6 +16,10 @@
 	font-family: 'Consolas', monospace;
 }
 
+.title {
+	text-align: center;
+}
+
 .home {
 	margin-top: 2em;
 	text-align: center;
@@ -287,4 +291,9 @@ footer {
 footer > div {
 	padding: 20px;
 	font-size: large;
+}
+
+.merchantUpgrades {
+  display: grid;
+	grid-template-columns: repeat(4, max-content);
 }

@@ -70,7 +70,9 @@
 <body>
 	<div class="container">
 		<nav style="font-size:larger"><a href="./" title="Main page">&larr; Return to main page</a></nav>
-		<br><br>
+		<br>
+		<h1 class="title is-2">Hub Wiki Page Creator - System</h1>
+		<br>
 		<div class="columns is-desktop">
 			<div class="column is-full-mobile">
 				<form id="form" onreset="resetAll('gallery_descs')">
@@ -116,11 +118,9 @@
 							<th><label>Which research team discovered this system?</label>
 							<td>
 								<select id="researchteam_input" name="Researchteam">
-									<option value="GHDF">GHDF
-									<option value="GHSH">GHSH
-									<option value="GHEC">GHEC
 									<option value="GHGS">GHGS
-									<option value="GHBG">GHBG
+									<option value="GHEC">GHEC
+									<option value="GHSH">GHSH
 								</select>
 							</td>
 						</tr>
@@ -452,19 +452,19 @@
 						</tr>
 						<tr>
 							<th><label>S-class multitool merchant upgrades:</label>
-							<td>
-								<form>
-									<input type="checkbox" id="mtAML_input" name="MTAML" value="Advanced Mining Laser"><label for="mtAML_input">Advanced Mining Laser</label><br>
-									<input type="checkbox" id="mtAVU_input" name="MTAVU" value="Analysis Visor Upgrade"><label for="mtAVU_input">Analysis Visor Upgrade</label><br>
-									<input type="checkbox" id="mtBJU_input" name="MTBJU" value="Blaze Javelin Upgrade"><label for="mtBJU_input">Blaze Javelin Upgrade</label><br>
-									<input type="checkbox" id="mtBU_input" name="MTBU" value="Boltcaster Upgrade"><label for="mtBU_input">Boltcaster Upgrade</label><br>
-									<input type="checkbox" id="mtGCU_input" name="MTCGU" value="Geology Cannon Upgrade"><label for="mtGCU_input">Geology Cannon Upgrade</label><br>
-									<input type="checkbox" id="mtMBU_input" name="MTMBU" value="Mining Beam Upgrade"><label for="mtMBU_input">Mining Beam Upgrade</label><br>
-									<input type="checkbox" id="mtPLU_input" name="MTPLU" value="Plasma Launcher Upgrade"><label for="mtPLU_input">Plasma Launcher Upgrade</label><br>
-									<input type="checkbox" id="mtPR_input" name="MTPR" value="Plasma Resonator"><label for="mtPR_input">Plasma Resonator</label><br>
-									<input type="checkbox" id="mtPSU_input" name="MTPSU" value="Pulse Spitter Upgrade"><label for="mtPSU_input">Pulse Spitter Upgrade</label><br>
-									<input type="checkbox" id="mtSBU_input" name="MTSBU" value="Scatter Blaster Upgrade"><label for="mtSBU_input">Scatter Blaster Upgrade</label><br>
-								</form>
+						</tr>
+						<tr>
+							<td colspan="2" class="merchantUpgrades">
+									<input type="checkbox" id="mtAML_input" name="MTAML" value="Advanced Mining Laser"><label for="mtAML_input">&nbsp;Advanced Mining Laser</label>
+									<input type="checkbox" id="mtAVU_input" name="MTAVU" value="Analysis Visor Upgrade"><label for="mtAVU_input">&nbsp;Analysis Visor Upgrade</label>
+									<input type="checkbox" id="mtBJU_input" name="MTBJU" value="Blaze Javelin Upgrade"><label for="mtBJU_input">&nbsp;Blaze Javelin Upgrade</label>
+									<input type="checkbox" id="mtBU_input" name="MTBU" value="Boltcaster Upgrade"><label for="mtBU_input">&nbsp;Boltcaster Upgrade</label>
+									<input type="checkbox" id="mtGCU_input" name="MTCGU" value="Geology Cannon Upgrade"><label for="mtGCU_input">&nbsp;Geology Cannon Upgrade</label>
+									<input type="checkbox" id="mtMBU_input" name="MTMBU" value="Mining Beam Upgrade"><label for="mtMBU_input">&nbsp;Mining Beam Upgrade</label>
+									<input type="checkbox" id="mtPLU_input" name="MTPLU" value="Plasma Launcher Upgrade"><label for="mtPLU_input">&nbsp;Plasma Launcher Upgrade</label>
+									<input type="checkbox" id="mtPR_input" name="MTPR" value="Plasma Resonator"><label for="mtPR_input">&nbsp;Plasma Resonator</label>
+									<input type="checkbox" id="mtPSU_input" name="MTPSU" value="Pulse Spitter Upgrade"><label for="mtPSU_input">&nbsp;Pulse Spitter Upgrade</label>
+									<input type="checkbox" id="mtSBU_input" name="MTSBU" value="Scatter Blaster Upgrade"><label for="mtSBU_input">&nbsp;Scatter Blaster Upgrade</label>
 							</td>
 						</tr>
 						<tr>
@@ -749,17 +749,17 @@
 				</div>
 			</div>
 		</div>
-		<footer>
-			<div>
-				Please consider contributing to the project:
-				<ul>
-					<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank" rel="noopener noreferrer">GitHub repository</a></li>
-					<li><a href="https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev" target="_blank" rel="noopener noreferrer">VSCode online editor</a></li>
-				</ul>
-			</div>
-			<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
-		</footer>
 	</div>
+	<footer class="footer">
+		<div>
+			Please consider contributing to the project:
+			<ul>
+				<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank" rel="noopener noreferrer">GitHub repository</a></li>
+				<li><a href="https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev" target="_blank" rel="noopener noreferrer">VSCode online editor</a></li>
+			</ul>
+		</div>
+		<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
+	</footer>
 </body>
 
 </html>
