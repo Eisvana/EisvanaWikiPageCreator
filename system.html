@@ -7,7 +7,8 @@
 	<title>Hub Wiki Page Creator - System</title>
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js"></script>
-	<script src="./lib/starshiplogic.js"></script>
+	<script src="./lib/systemlogic.js"></script>
+	<script src="./lib/celestialobjectslogic.js"></script>
 	<script>
 		const galleryArray = ['', 'System Page', 'System Exploration Guide', 'Default SS Multitool'];
 
@@ -20,12 +21,11 @@
 			textFunction("image", "image_input");
 			textFunction("navImage", "navImage_input");
 			textFunction("discovered", "discovered_input");
-			textFunction("discovered1", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
-			textFunction("documentedlink", "documentedlink_input");
+			explorer("discovered_input", "discoveredlink_input", "discovered1");
+			textFunction("docby", "docby_input");
 			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunction("mode", "mode_input");
-			textFunction("platform", "platform_input");
 			textFunction("multiplestars", "multiplestars_input");
 			textFunction("color", "color_input");
 			textFunction("class", "class_input");
@@ -40,21 +40,18 @@
 			textFunction("wealth", "wealth_input");
 			textFunction("conflict", "conflict_input");
 			textFunctionMultiple("researchteam", "researchteam_input");
-			textFunction("rank", "rank_input");
-			textFunction("stationname", "stationname_input");
 			textFunction("docDate", "docDate_input");
 			dateConvert("docDate");
 			textFunction("originalname", "originalname_input");
-			radioFunction("mtAML", "mtAML_input");
+			// to do: Spaceship dealers
+			//radioFunction("mtAML", "mtAML_input");
 			textFunction("location", "location_input");
 			textFunction("addInfo", "addInfo_input");
 			civGalaxy("civ");
 			hideDiscoverer("discovered_input", "discoveredlink_input");
 			glyphRegion("portalglyphs_input", "civ", "region");
-			textFunction("region1", "region");
-			textFunction("galaxy1", "galaxy");
-			textFunction("region2", "region");
-			textFunction("galaxy2", "galaxy");
+			codeFunctionMultiple("region", "region");
+			codeFunctionMultiple("galaxy", "galaxy");
 		}
 		window.onload = () => {
 			autoRefresh();
@@ -548,15 +545,15 @@
 			<div class="column is-full-mobile">
 				<div class="output">
 					<div id="wikiText">
-						<div>{{Version|<output id='release'></output>}}</div>
+						<div>{{Version|<output id='release' name="release"></output>}}</div>
 						<div>{{<output id='civStub'></output>}}</div>
 						<div>{{System infobox</div>
 						<div>| name = <output id='name' name="name"></output></div>
 						<div>| image = <output id='image'></output></div>
 						<div>| region = <output id='region'></output></div>
-						<div>| galaxy = <output id='galaxy'></output></div>
+						<div>| galaxy = <output id='galaxy' name="galaxy"></output></div>
 						<div>| multiplestars = <output id='multiplestars'></output></div>
-						<div>| coordinates = [[Glyphs2Coords|<output id='portalglyphs'></output>}}</div>
+						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}</div>
 						<div>| color = <output id='color'></output></div>
 						<div>| class = <output id='class'></output></div>
 						<div>| distance = <output id='distance'></output></div>
@@ -573,14 +570,14 @@
 						<div>| civilized = <output id='civilized'></output></div>
 						<div>| researchteam = <output id='researchteam' name="researchteam"></output></div>
 						<div>| discoveredlink = <output id='discoveredlink'></output></div>
-						<div>| discovered = <output id='discovered'></output></div>
+						<div>| discovered = <output id='discovered' name="discovered"></output></div>
 						<div>| platform = <output id='platform'></output></div>
-						<div>| release = <output id='release1'></output></div>
+						<div>| release = <output id='release1' name="release"></output></div>
 						<div>}}</div>
 						<div>'''<output id='name1' name="name"></output>''' is a player base.</div>
 						<br>
 						<div>==Summary==</div>
-						<div>'''<output id='name2' name="name"></output>''' is a [[star system]], located in the [[<output id='region1'></output>]] region in the [[<output id='galaxy1'></output>]] galaxy.
+						<div>'''<output id='name2' name="name"></output>''' is a [[star system]], located in the [[<output id='region1' name="region"></output>]] region in the [[<output id='galaxy1' name="galaxy"></output>]] galaxy.
 						</div>
 						<br>
 						<div>==Alias Names==</div>
@@ -590,7 +587,7 @@
 						</div>
 						<br>
 						<div>==Discovered==</div>
-						<div>Discovered and uploaded by ''<output id='discovered1'></output>''</div>
+						<div>Discovered and uploaded by ''<output id='discovered1' name="discoverer"></output>''</div>
 						<div>Explored and documented by <output id='researchteam1' name="researchteam"></output> {{profile|<output id="docby"></output>}} on <output id='docDate'></output></div>
 						<br>
 						<div>==Planets & Moons==</div>
@@ -687,11 +684,11 @@
 						<div>[[<output id='navImage'></output>|400px]]</div>
 						<br>
 						<div>==System Location==</div>
-						<div>Located in the [[<output id='region2'></output>]] [[region]] of the [[Galactic Hub Project]], in the [[<output id='galaxy2'></output>]] [[galaxy]]. <output id='location'></output></div>
-						<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs" name="portalglyphs"></output>}}</div>
+						<div>Located in the [[<output id='region2' name="region"></output>]] [[region]] of the [[Galactic Hub Project]], in the [[<output id='galaxy2' name="galaxy"></output>]] [[galaxy]]. <output id='location'></output></div>
+						<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
 						<br>
 						<div>==Space Station==</div>
-						<div>The [[Space Station|<output id='stationname'></output>]] merchants offer the following {{class|S}} class items for sale:</div>
+						<div>The [[Space Station]] merchants offer the following {{class|S}} class items for sale:</div>
 						<br>
 						<div>{{SSMerchants</div>
 						<div>|MTupgrade=Y</div>
