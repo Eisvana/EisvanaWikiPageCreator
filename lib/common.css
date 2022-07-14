@@ -225,9 +225,13 @@ table {
 	padding-right: 5px;
 }
 
+.gallery-item .controlButtons .moveButton {
+	margin: 0.2em 0px;
+}
+
 .gallery-item .controlButtons .delete-icon {
 	cursor: pointer;
-	padding: 0.5em 0px;
+	padding: 0.5em 0px 0.3em;
 }
 
 .gallery-item .gallery-meta input {
