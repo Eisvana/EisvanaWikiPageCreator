@@ -16,20 +16,14 @@
 		function showInput() {
 			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name", "name_input");
-			textFunction("name1", "name_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name3", "name_input"); //duplicates due to IDs needing to be unique across document
+			textFunctionMultiple("name", "name_input");
 			textFunction("image", "image_input");
 			textFunction("navImage", "navImage_input");
 			textFunction("discovered", "discovered_input");
 			textFunction("discovered1", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
 			textFunction("documentedlink", "documentedlink_input");
-			textFunction("documentedlink1", "documentedlink_input");
-			textFunction("portalglyphs", "portalglyphs_input");
-			textFunction("portalglyphs1", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("glyph_display", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
+			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunction("mode", "mode_input");
 			textFunction("platform", "platform_input");
 			textFunction("multiplestars", "multiplestars_input");
@@ -45,8 +39,7 @@
 			textFunction("economysell", "economysell_input");
 			textFunction("wealth", "wealth_input");
 			textFunction("conflict", "conflict_input");
-			textFunction("researchteam", "researchteam_input");
-			textFunction("researchteam1", "researchteam_input");
+			textFunctionMultiple("researchteam", "researchteam_input");
 			textFunction("rank", "rank_input");
 			textFunction("stationname", "stationname_input");
 			textFunction("docDate", "docDate_input");
@@ -249,7 +242,7 @@
 										<span class="glyphs icon is-small">F</span>
 									</button>
 								</div>
-								<output class="glyphs" style="word-break: break-word" id="glyph_display"></output>
+								<output class="glyphs" style="word-break: break-word" id="glyph_display" name="portalglyphs"></output>
 							</td>
 						</tr>
 						<tr>
@@ -558,7 +551,7 @@
 						<div>{{Version|<output id='release'></output>}}</div>
 						<div>{{<output id='civStub'></output>}}</div>
 						<div>{{System infobox</div>
-						<div>| name = <output id='name'></output></div>
+						<div>| name = <output id='name' name="name"></output></div>
 						<div>| image = <output id='image'></output></div>
 						<div>| region = <output id='region'></output></div>
 						<div>| galaxy = <output id='galaxy'></output></div>
@@ -578,27 +571,27 @@
 						<div>| conflict = <output id='conflict'></output></div>
 						<div>| mode = <output id='mode'></output></div>
 						<div>| civilized = <output id='civilized'></output></div>
-						<div>| researchteam = <output id='researchteam'></output></div>
+						<div>| researchteam = <output id='researchteam' name="researchteam"></output></div>
 						<div>| discoveredlink = <output id='discoveredlink'></output></div>
 						<div>| discovered = <output id='discovered'></output></div>
 						<div>| platform = <output id='platform'></output></div>
 						<div>| release = <output id='release1'></output></div>
 						<div>}}</div>
-						<div>'''<output id='name1'></output>''' is a player base.</div>
+						<div>'''<output id='name1' name="name"></output>''' is a player base.</div>
 						<br>
 						<div>==Summary==</div>
-						<div>'''<output id='name2'></output>''' is a [[star system]], located in the [[<output id='region1'></output>]] region in the [[<output id='galaxy1'></output>]] galaxy.
+						<div>'''<output id='name2' name="name"></output>''' is a [[star system]], located in the [[<output id='region1'></output>]] region in the [[<output id='galaxy1'></output>]] galaxy.
 						</div>
 						<br>
 						<div>==Alias Names==</div>
 						<div>{{aliasc|text=Original|name=<output id='originalname'></output>}}
 						</div>
-						<div>{{aliasc|text=Current|name=<output id='name3'></output>}}
+						<div>{{aliasc|text=Current|name=<output id='name3' name="name"></output>}}
 						</div>
 						<br>
 						<div>==Discovered==</div>
 						<div>Discovered and uploaded by ''<output id='discovered1'></output>''</div>
-						<div>Explored and documented by <output id='researchteam1'></output> <output id='rank'></output> {{UserProfile:<output id='documentedlink'></output>|<output id='documentedlink1'></output>}} on <output id='docDate'></output></div>
+						<div>Explored and documented by <output id='researchteam1' name="researchteam"></output> {{profile|<output id="docby"></output>}} on <output id='docDate'></output></div>
 						<br>
 						<div>==Planets & Moons==</div>
 						<div>{	| class="wikitable" style="text-align:center; width:100%; max-width:1250px;"</div>
@@ -695,7 +688,7 @@
 						<br>
 						<div>==System Location==</div>
 						<div>Located in the [[<output id='region2'></output>]] [[region]] of the [[Galactic Hub Project]], in the [[<output id='galaxy2'></output>]] [[galaxy]]. <output id='location'></output></div>
-						<div>{{CoordGlyphConvert|<output id='portalglyphs1'></output>}}</div>
+						<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs" name="portalglyphs"></output>}}</div>
 						<br>
 						<div>==Space Station==</div>
 						<div>The [[Space Station|<output id='stationname'></output>]] merchants offer the following {{class|S}} class items for sale:</div>
