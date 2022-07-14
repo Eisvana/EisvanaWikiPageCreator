@@ -357,30 +357,36 @@
 							<th><label>System wealth:</label>
 							<td>
 								<select id="wealth_input" name="Wealth">
-									<option value="Declining">Declining
-									<option value="Destitute">Destitute
-									<option value="Failing">Failing
-									<option value="Fledgling">Fledgling
-									<option value="Low Supply">Low Supply
-									<option value="Struggling">Struggling
-									<option value="Unsuccessful">Unsuccessful
-									<option value="Unpromising">Unpromising
-									<option value="Adequate">Adequate
-									<option value="Balanced">Balanced
-									<option value="Comfortable">Comfortable
-									<option value="Developing">Developing
-									<option value="Medium Supply">Medium Supply
-									<option value="Promising">Promising
-									<option value="Satisfactory">Satisfactory
-									<option value="Sustainable">Sustainable
-									<option value="Advanced">Advanced
-									<option value="Affluent">Affluent
-									<option value="Booming">Booming
-									<option value="Flourishing">Flourishing
-									<option value="High Supply">High Supply
-									<option value="Opulent">Opulent
-									<option value="Prosperous">Prosperous
-									<option value="Wealthy">Wealthy
+									<option value="★★★ (Advanced)">Advanced
+									<option value="★★★ (Affluent)">Affluent
+									<option value="★★★ (Booming)">Booming
+									<option value="★★★ (Flourishing)">Flourishing
+									<option value="★★★ (High Supply)">High Supply
+									<option value="★★★ (Opulent)">Opulent
+									<option value="★★★ (Prosperous)">Prosperous
+									<option value="★★★ (Wealthy)">Wealthy
+										<!-- here ends T3-->
+									<option value="★★ (Adequate)">Adequate
+										<!--here begins T2-->
+									<option value="★★ (Balanced)">Balanced
+									<option value="★★ (Comfortable)">Comfortable
+									<option value="★★ (Developing)">Developing
+									<option value="★★ (Medium Supply)">Medium Supply
+									<option value="★★ (Promising)">Promising
+									<option value="★★ (Satisfactory)">Satisfactory
+									<option value="★★ (Sustainable)">Sustainable
+										<!-- here ends T2-->
+									<option value="★ (Declining)">Declining
+										<!--here begins T1-->
+									<option value="★ (Destitute)">Destitute
+									<option value="★ (Failing)">Failing
+									<option value="★ (Fledgling)">Fledgling
+									<option value="★ (Low Supply)">Low Supply
+									<option value="★ (Struggling)">Struggling
+									<option value="★ (Unsuccessful)">Unsuccessful
+									<option value="★ (Unpromising)">Unpromising
+										<!--here ends T1-->
+									<option value="💀 (Black Market)">Pirate
 								</select>
 							</td>
 						</tr>
@@ -447,71 +453,65 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Name of the space station:</label>
-							<td><input type="text" name="Stationname" id="stationname_input">
-						</tr>
-						<tr>
 							<th><label>S-class multitool merchant upgrades:</label>
 						</tr>
 						<tr>
 							<td colspan="2" class="merchantUpgrades">
-									<input type="checkbox" id="mtAML_input" name="MTAML" value="Advanced Mining Laser"><label for="mtAML_input">&nbsp;Advanced Mining Laser</label>
 									<input type="checkbox" id="mtAVU_input" name="MTAVU" value="Analysis Visor Upgrade"><label for="mtAVU_input">&nbsp;Analysis Visor Upgrade</label>
 									<input type="checkbox" id="mtBJU_input" name="MTBJU" value="Blaze Javelin Upgrade"><label for="mtBJU_input">&nbsp;Blaze Javelin Upgrade</label>
 									<input type="checkbox" id="mtBU_input" name="MTBU" value="Boltcaster Upgrade"><label for="mtBU_input">&nbsp;Boltcaster Upgrade</label>
 									<input type="checkbox" id="mtGCU_input" name="MTCGU" value="Geology Cannon Upgrade"><label for="mtGCU_input">&nbsp;Geology Cannon Upgrade</label>
 									<input type="checkbox" id="mtMBU_input" name="MTMBU" value="Mining Beam Upgrade"><label for="mtMBU_input">&nbsp;Mining Beam Upgrade</label>
 									<input type="checkbox" id="mtPLU_input" name="MTPLU" value="Plasma Launcher Upgrade"><label for="mtPLU_input">&nbsp;Plasma Launcher Upgrade</label>
-									<input type="checkbox" id="mtPR_input" name="MTPR" value="Plasma Resonator"><label for="mtPR_input">&nbsp;Plasma Resonator</label>
 									<input type="checkbox" id="mtPSU_input" name="MTPSU" value="Pulse Spitter Upgrade"><label for="mtPSU_input">&nbsp;Pulse Spitter Upgrade</label>
 									<input type="checkbox" id="mtSBU_input" name="MTSBU" value="Scatter Blaster Upgrade"><label for="mtSBU_input">&nbsp;Scatter Blaster Upgrade</label>
 							</td>
 						</tr>
 						<tr>
 							<th><label>S-class starship merchant upgrades:</label>
-							<td>
-								<form>
-									<input type="checkbox" id="advancedMiningLaser" name="SS" value="Cyclotron Ballista Upgrade">Cyclotron Ballista Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="SS" value="Deflector Shield Upgrade">Deflector Shield Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="SS" value="Hyperdrive Upgrade">Hyperdrive Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="SS" value="Infra-Knife Accelerator Upgrade">Infra-Knife Accelerator Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="SS" value="Launch Thruster Upgrade">Launch Thruster Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="SS" value="Phase Beam Upgrade">Phase Beam Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="SS" value="Photon Cannon Upgrade">Photon Cannon Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="SS" value="Positron Ejector Upgrade">Positron Ejector Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="SS" value="Pulse Engine Upgrade">Pulse Engine Upgrade<br>
-								</form>
+						</tr>
+						<tr>
+							<td colspan="2" class="merchantUpgrades">
+								<input type="checkbox" id="ssCBU" name="SSCBU" value="Cyclotron Ballista Upgrade"><label for="ssCBU">&nbsp;Cyclotron Ballista Upgrade</label>
+								<input type="checkbox" id="ssDSU" name="SSDSU" value="Deflector Shield Upgrade"><label for="ssDSU">&nbsp;Deflector Shield Upgrade</label>
+								<input type="checkbox" id="ssHU" name="SSHU" value="Hyperdrive Upgrade"><label for="ssHU">&nbsp;Hyperdrive Upgrade</label>
+								<input type="checkbox" id="ssIKAU" name="SSIKAU" value="Infra-Knife Accelerator Upgrade"><label for="ssIKAU">&nbsp;Infra-Knife Accelerator Upgrade</label>
+								<input type="checkbox" id="ssLTU" name="SSLTU" value="Launch Thruster Upgrade"><label for="ssLTU">&nbsp;Launch Thruster Upgrade</label>
+								<input type="checkbox" id="ssPBU" name="SSPBU" value="Phase Beam Upgrade"><label for="ssPBU">&nbsp;Phase Beam Upgrade</label>
+								<input type="checkbox" id="ssPCU" name="SSPCU" value="Photon Cannon Upgrade"><label for="ssPCU">&nbsp;Photon Cannon Upgrade</label>
+								<input type="checkbox" id="ssPEU" name="SSPEU" value="Positron Ejector Upgrade"><label for="ssPEU">&nbsp;Positron Ejector Upgrade</label>
+								<input type="checkbox" id="ssPuEU" name="SSPuEU" value="Pulse Engine Upgrade"><label for="ssPuEU">&nbsp;Pulse Engine Upgrade</label>
 							</td>
 						</tr>
 						<tr>
 							<th><label>S-class exocraft merchant upgrades:</label>
-							<td>
-								<form>
-									<input type="checkbox" id="advancedMiningLaser" name="EC" value="Exocraft Acceleration Module Upgrade">Exocraft Acceleration Module Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="EC" value="Exocraft Mining Laser Upgrade">Exocraft Mining Laser Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="EC" value="Exocraft Mounted Cannon Upgrade">Exocraft Mounted Cannon Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="EC" value="Fusion Engine Upgrade">Fusion Engine Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="EC" value="Humboldt Drive Upgrade">Humboldt Drive Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="EC" value="Minotaur Cannon Upgrade">Minotaur Cannon Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="EC" value="Minotaur Engine Upgrade">Minotaur Engine Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="EC" value="Minotaur Laser Upgrade">Minotaur Laser Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="EC" value="Nautilon Cannon Upgrade">Nautilon Cannon Upgrade<br>
-								</form>
+						</tr>
+						<tr>
+							<td colspan="2" class="merchantUpgrades">
+								<input type="checkbox" id="ecEAMU" name="ECEAMU" value="Exocraft Acceleration Module Upgrade"><label for="ecEAMU">&nbsp;Exocraft Acceleration Module Upgrade</label>
+								<input type="checkbox" id="ecEMLU" name="ECEMLU" value="Exocraft Mining Laser Upgrade"><label for="ecEMLU">&nbsp;Exocraft Mining Laser Upgrade</label>
+								<input type="checkbox" id="ecEMCU" name="ECEMCU" value="Exocraft Mounted Cannon Upgrade"><label for="ecEMCU">&nbsp;Exocraft Mounted Cannon Upgrade</label>
+								<input type="checkbox" id="ecFEU" name="ECFEU" value="Fusion Engine Upgrade"><label for="ecFEU">&nbsp;Fusion Engine Upgrade</label>
+								<input type="checkbox" id="ecHDU" name="ECHDU" value="Humboldt Drive Upgrade"><label for="ecHDU">&nbsp;Humboldt Drive Upgrade</label>
+								<input type="checkbox" id="ecMCU" name="ECMCU" value="Minotaur Cannon Upgrade"><label for="ecMCU">&nbsp;Minotaur Cannon Upgrade</label>
+								<input type="checkbox" id="ecMEU" name="ECMEU" value="Minotaur Engine Upgrade"><label for="ecMEU">&nbsp;Minotaur Engine Upgrade</label>
+								<input type="checkbox" id="ecMLU" name="ECMLU" value="Minotaur Laser Upgrade"><label for="ecMLU">&nbsp;Minotaur Laser Upgrade</label>
+								<input type="checkbox" id="ecNCU" name="ECNCU" value="Nautilon Cannon Upgrade"><label for="ecNCU">&nbsp;Nautilon Cannon Upgrade</label>
 							</td>
 						</tr>
 						<tr>
 							<th><label>S-class exosuit merchant upgrades:</label>
-							<td>
-								<form>
-									<input type="checkbox" id="advancedMiningLaser" name="ES" value="Defence Systems Upgrade">Defence Systems Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="ES" value="Life Support Upgrade">Life Support Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="ES" value="Movement System Upgrade">Movement System Upgrade<br>
-									<input type="checkbox" id="advancedMiningLaser" name="ES" value="Radiation Protection Module">Radiation Protection Module<br>
-									<input type="checkbox" id="advancedMiningLaser" name="ES" value="Thermal Protection Module (Cold)">Thermal Protection Module (Cold)<br>
-									<input type="checkbox" id="advancedMiningLaser" name="ES" value="Thermal Protection Module (Heat)">Thermal Protection Module (Heat)<br>
-									<input type="checkbox" id="advancedMiningLaser" name="ES" value="Toxic Protection Module">Toxic Protection Module<br>
-									<input type="checkbox" id="advancedMiningLaser" name="ES" value="Underwater Protection Module">Underwater Protection Module<br>
-								</form>
+						</tr>
+						<tr>
+							<td colspan="2" class="merchantUpgrades">
+								<input type="checkbox" id="esDSU" name="ESDSU" value="Defence Systems Upgrade"><label for="esDSU">&nbsp;Defence Systems Upgrade</label>
+								<input type="checkbox" id="esLSU" name="ESLSU" value="Life Support Upgrade"><label for="esLSU">&nbsp;Life Support Upgrade</label>
+								<input type="checkbox" id="esMSU" name="ESMSU" value="Movement System Upgrade"><label for="esMSU">&nbsp;Movement System Upgrade</label>
+								<input type="checkbox" id="esRPM" name="ESRPM" value="Radiation Protection Module"><label for="esRPM">&nbsp;Radiation Protection Module</label>
+								<input type="checkbox" id="esTPMC" name="ESTPMC" value="Thermal Protection Module (Cold)"><label for="esTPMC">&nbsp;Thermal Protection Module (Cold)</label>
+								<input type="checkbox" id="esTPMH" name="ESTPMH" value="Thermal Protection Module (Heat)"><label for="esTPMH">&nbsp;Thermal Protection Module (Heat)</label>
+								<input type="checkbox" id="esTPM" name="ESTPM" value="Toxic Protection Module"><label for="esTPM">&nbsp;Toxic Protection Module</label>
+								<input type="checkbox" id="esUPM" name="ESUPM" value="Underwater Protection Module"><label for="esUPM">&nbsp;Underwater Protection Module</label>
 							</td>
 						</tr>
 						<tr>
@@ -519,14 +519,6 @@
 								<p style="text-align:center">Note: You can drag on the bottom right corner to expand the
 									text area
 								</p>
-							</td>
-						</tr>
-						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label>System Location:</label>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<textarea name="Location" id="location_input"></textarea>
 							</td>
 						</tr>
 						<tr class="no-border">
