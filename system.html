@@ -7,7 +7,10 @@
 	<title>Hub Wiki Page Creator - System</title>
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js"></script>
+	<script src="./lib/starshiplogic.js"></script>
 	<script>
+		const galleryArray = ['', 'System Page', 'System Exploration Guide', 'Default SS Multitool'];
+
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
@@ -146,8 +149,17 @@
 							<td>
 								<input type="text" name="NavImage" id="navImage_input">
 								<br>
-								<input type="file" id="navImage_upload" name="NavImage_upload" accept="navImage/*"
+								<input type="file" id="navImage_upload" name="NavImage_upload" accept="image/*"
 									onchange="imgUpload('navImage', 'navImage_upload', 'navImage_input')">
+							</td>
+						</tr>
+						<tr>
+							<th><label>Space Station image name, including file extension:</label>
+							<td>
+								<input type="text" name="SSImage" id="ssImage_input">
+								<br>
+								<input type="file" id="ssImage_upload" name="SSImage_upload" accept="image/*"
+									onchange="imgUpload('ssImage', 'ssImage_upload', 'ssImage_input')">
 							</td>
 						</tr>
 						<tr>
@@ -160,7 +172,7 @@
 						</tr>
 						<tr>
 							<th><label>Your wiki account:</label>
-							<td><input type="text" name="Documentedlink" id="documentedlink_input">
+							<td><input type="text" name="DocBy" id="docby_input">
 						</tr>
 						<tr>
 							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button"
@@ -262,15 +274,15 @@
 						</tr>
 						<tr>
 							<th><label>Distance to center:</label>
-							<td><input type="text" name="Distance" id="distance_input">
+							<td><input type="number" name="Distance" id="distance_input">
 						</tr>
 						<tr>
-							<th><label># of planets:</label>
-							<td><input type="text" name="Planet" id="planet_input">
+							<th><label>Number of planets:</label>
+							<td><input type="number" min="1" max="6" name="Planet" id="planet_input">
 						</tr>
 						<tr>
-							<th><label># of moons:</label>
-							<td><input type="text" name="Moon" id="moon_input">
+							<th><label>Number of moons:</label>
+							<td><input type="number" min="0" max="4" name="Moon" id="moon_input">
 						</tr>
 						<tr>
 							<th><label>Water?</label>
@@ -291,7 +303,9 @@
 									<option value="Gek">Gek
 									<option value="Korvax">Korvax
 									<option value="Vy'keen">Vy'keen
-									<option value="Abandoned">Abandoned
+									<option value="Gek Abandoned">Gek Abandoned
+									<option value="Korvax Abandoned">Korvax Abandoned
+									<option value="Vy'keen Abandoned">Vy'keen Abandoned
 									<option value="Uncharted">Uncharted
 								</select>
 							</td>
@@ -334,11 +348,11 @@
 						</tr>
 						<tr>
 							<th><label>Economy sell:</label>
-							<td><input type="text" name="Economysell" id="economysell_input">
+							<td><input type="number" name="Economysell" id="economysell_input">
 						</tr>
 						<tr>
 							<th><label>Economy buy:</label>
-							<td><input type="text" name="Economybuy" id="economybuy_input">
+							<td><input type="number" name="Economybuy" id="economybuy_input">
 						</tr>
 						<tr>
 							<th><label>System wealth:</label>
@@ -432,16 +446,6 @@
 									<option value="Survival">Survival
 									<option value="Permadeath">Permadeath
 									<option value="Creative">Creative
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Platform:</label>
-							<td>
-								<select id="platform_input" name="Platform">
-									<option value="PC">PC
-									<option value="PS">PS
-									<option value="XB">XB
 								</select>
 							</td>
 						</tr>

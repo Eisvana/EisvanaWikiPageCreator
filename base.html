@@ -13,9 +13,9 @@
 		function showInput() {
 			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name", "name_input");
-			textFunction("name1", "name_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
+			//textFunction("name", "name_input");
+			textFunctionMultiple("name", "name_input"); //duplicates due to IDs needing to be unique across document
+			//textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
 			textFunction("image", "image_input");
 			textFunction("builder", "builder_input");
 			textFunction("builderlink", "builderlink_input");
@@ -415,7 +415,7 @@
 						<div>{{Version|<output id='release'></output>}}</div>
 						<div>{{<output id='civStub'></output>}}</div>
 						<div>{{Base infobox</div>
-						<div>| name = <output id='name'></output></div>
+						<div>| name = <output id='name' name="name"></output></div>
 						<div>| image = <output id='image'></output></div>
 						<div>| civilized = <output id='civilized'></output></div>
 						<div>| builderlink = <output id='builderlink'></output></div>
@@ -446,11 +446,11 @@
 						<div>| censusrenewal = <output id='censusrenewal'></output></div>
 						<div>| censusshow = <output id="censusshow"></output></div>
 						<div>}}</div>
-						<div>'''<output id='name1'></output>''' is a player base.</div>
+						<div>'''<output id='name1' name="name"></output>''' is a player base.</div>
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''<output id='name2'></output>''' is a [[Habitable Base|player base]], located on the	planet [[<output id='planet1'></output>]] in the [[<output id='system1'></output>]] system.
+						<div>'''<output id='name2' name="name"></output>''' is a [[Habitable Base|player base]], located on the	planet [[<output id='planet1'></output>]] in the [[<output id='system1'></output>]] system.
 						</div>
 						<br>
 
