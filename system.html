@@ -20,6 +20,7 @@
 			textFunctionMultiple("name", "name_input");
 			textFunction("image", "image_input");
 			textFunction("navImage", "navImage_input");
+			textFunction("ssImage", "ssImage_input");
 			textFunction("discovered", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
 			explorer("discovered_input", "discoveredlink_input", "discovered1");
@@ -32,7 +33,7 @@
 			textFunction("distance", "distance_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
-			radioFunction("farm", "farm_input");
+			radioFunction("water", "water_input");
 			textFunction("faction", "faction_input");
 			textFunction("economy", "economy_input");
 			textFunction("economybuy", "economybuy_input");
@@ -45,13 +46,11 @@
 			textFunction("originalname", "originalname_input");
 			// to do: Spaceship dealers
 			//radioFunction("mtAML", "mtAML_input");
-			textFunction("location", "location_input");
 			textFunction("addInfo", "addInfo_input");
 			civGalaxy("civ");
 			hideDiscoverer("discovered_input", "discoveredlink_input");
 			glyphRegion("portalglyphs_input", "civ", "region");
 			codeFunctionMultiple("region", "region");
-			codeFunctionMultiple("galaxy", "galaxy");
 		}
 		window.onload = () => {
 			autoRefresh();
@@ -118,12 +117,12 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>When was this system documented?</label>
-							<td><input type="date" name="DocDate" id="docDate_input">
-						</tr>
-						<tr>
 							<th><label>Name of the system:</label>
 							<td><input type="text" name="Name" id="name_input">
+						</tr>
+						<tr>
+							<th><label>Original name (if known):</label>
+							<td><input type="text" name="Originalname" id="originalname_input">
 						</tr>
 						<tr>
 							<th><label>Main image name, including file extension:</label>
@@ -151,18 +150,6 @@
 								<input type="file" id="ssImage_upload" name="SSImage_upload" accept="image/*"
 									onchange="imgUpload('ssImage', 'ssImage_upload', 'ssImage_input')">
 							</td>
-						</tr>
-						<tr>
-							<th><label>Discoverer wiki account:</label>
-							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
-						</tr>
-						<tr>
-							<th><label>Discoverer alias if no wiki:</label>
-							<td><input type="text" name="Discovered" id="discovered_input">
-						</tr>
-						<tr>
-							<th><label>Your wiki account:</label>
-							<td><input type="text" name="DocBy" id="docby_input">
 						</tr>
 						<tr>
 							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button"
@@ -277,12 +264,12 @@
 						<tr>
 							<th><label>Water?</label>
 							<td>
-								<input type="radio" id="farm_inputY" name="farm" value="Yes">
-								<label for="farm_inputY">Yes</label>
-								<input type="radio" id="farm_inputN" name="farm" value="No">
-								<label for="farm_inputN">No</label>
+								<input type="radio" id="water_inputY" name="water" value="Yes">
+								<label for="water_inputY">Yes</label>
+								<input type="radio" id="water_inputN" name="water" value="No">
+								<label for="water_inputN">No</label>
 								<span style="display:none">
-									<input type="radio" id="farm_inputA" name="farm" value="" checked>
+									<input type="radio" id="water_inputA" name="water" value="" checked>
 								</span>
 							</td>
 						</tr>
@@ -425,8 +412,12 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Original name (if known):</label>
-							<td><input type="text" name="Originalname" id="originalname_input">
+							<th><label>When was this system discovered?</label>
+							<td><input type="date" name="DiscDate" id="discDate_input">
+						</tr>
+						<tr>
+							<th><label>When was this system documented?</label>
+							<td><input type="date" name="DocDate" id="docDate_input">
 						</tr>
 						<tr>
 							<th><label>Gamemode:</label>
@@ -438,6 +429,18 @@
 									<option value="Creative">Creative
 								</select>
 							</td>
+						</tr>
+						<tr>
+							<th><label>Discoverer wiki account:</label>
+							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
+						</tr>
+						<tr>
+							<th><label>Discoverer alias if no wiki:</label>
+							<td><input type="text" name="Discovered" id="discovered_input">
+						</tr>
+						<tr>
+							<th><label>Documenter alias:</label>
+							<td><input type="text" name="DocBy" id="docby_input">
 						</tr>
 						<tr>
 							<th><label>S-class multitool merchant upgrades:</label>
@@ -559,7 +562,7 @@
 						<div>| distance = <output id='distance'></output></div>
 						<div>| planet = <output id='planet'></output></div>
 						<div>| moon = <output id='moon'></output></div>
-						<div>| water = <output id='farm'></output></div>
+						<div>| water = <output id='water'></output></div>
 						<div>| faction = <output id='faction'></output></div>
 						<div>| economy = <output id='economy'></output></div>
 						<div>| economybuy = <output id='economybuy'></output></div>
@@ -577,7 +580,7 @@
 						<div>'''<output id='name1' name="name"></output>''' is a player base.</div>
 						<br>
 						<div>==Summary==</div>
-						<div>'''<output id='name2' name="name"></output>''' is a [[star system]], located in the [[<output id='region1' name="region"></output>]] region in the [[<output id='galaxy1' name="galaxy"></output>]] galaxy.
+						<div>'''<output id='name2' name="name"></output>''' is a [[star system]], located in the [[<output id='region1' name="region"></output>]] region.
 						</div>
 						<br>
 						<div>==Alias Names==</div>
@@ -591,101 +594,26 @@
 						<div>==Planets & Moons==</div>
 						<div>{	| class="wikitable" style="text-align:center; width:100%; max-width:1250px;"</div>
 						<div>|-</div>
-						<div>! width="150" style="background-color:#2f4f4f" |</div>
-						<div>! style="background-color:#2f4f4f" |PLANET NAME</div>
-						<div>! style="background-color:#2f4f4f" |PLANET TYPE</div>
-						<div>! style="background-color:#2f4f4f" |RESOURCES</div>
-						<div>! style="background-color:#2f4f4f" |WEATHER</div>
-						<div>! style="background-color:#2f4f4f" |SENTINELS</div>
-						<div>! style="background-color:#2f4f4f" |FLORA</div>
-						<div>! style="background-color:#2f4f4f" |FAUNA</div>
-						<div>|-</div>
-						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
-						<div>|name</div>
-						<div>type - biome</div>
-						<div>|resources</div>
-						<div>|weather</div>
-						<div>|sentinels</div>
-						<div>|flora</div>
-						<div>|fauna (#)</div>
-						<div>|-</div>
-						<div>! style="background-color:#2f4f4f" | NOTES:</div>
-						<div>| colspan="7" style="text-align:left" |Discovered by </div>
-						<div>|-</div>
-						<div>|-</div>
-						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
-						<div>|name</div>
-						<div>type - biome</div>
-						<div>|resources</div>
-						<div>|weather</div>
-						<div>|sentinels</div>
-						<div>|flora</div>
-						<div>|fauna (#)</div>
-						<div>|-</div>
-						<div>! style="background-color:#2f4f4f" | NOTES:</div>
-						<div>| colspan="7" style="text-align:left" |Discovered by </div>
-						<div>|-</div>
-						<div>|-</div>
-						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
-						<div>|name</div>
-						<div>type - biome</div>
-						<div>|resources</div>
-						<div>|weather</div>
-						<div>|sentinels</div>
-						<div>|flora</div>
-						<div>|fauna (#)</div>
-						<div>|-</div>
-						<div>! style="background-color:#2f4f4f" | NOTES:</div>
-						<div>| colspan="7" style="text-align:left" |Discovered by </div>
-						<div>|-</div>
-						<div>|-</div>
-						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
-						<div>|name</div>
-						<div>type - biome</div>
-						<div>|resources</div>
-						<div>|weather</div>
-						<div>|sentinels</div>
-						<div>|flora</div>
-						<div>|fauna (#)</div>
-						<div>|-</div>
-						<div>! style="background-color:#2f4f4f" | NOTES:</div>
-						<div>| colspan="7" style="text-align:left" |Discovered by </div>
-						<div>|-</div>
-						<div>|-</div>
-						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
-						<div>|name</div>
-						<div>type - biome</div>
-						<div>|resources</div>
-						<div>|weather</div>
-						<div>|sentinels</div>
-						<div>|flora</div>
-						<div>|fauna (#)</div>
-						<div>|-</div>
-						<div>! style="background-color:#2f4f4f" | NOTES:</div>
-						<div>| colspan="7" style="text-align:left" |Discovered by </div>
-						<div>|-</div>
-						<div>|-</div>
-						<div>|[[nmsMisc_NotAvailable.png|150px]]</div>
-						<div>|name</div>
-						<div>type - biome</div>
-						<div>|resources</div>
-						<div>|weather</div>
-						<div>|sentinels</div>
-						<div>|flora</div>
-						<div>|fauna (#)</div>
-						<div>|-</div>
-						<div>! style="background-color:#2f4f4f" | NOTES:</div>
-						<div>| colspan="7" style="text-align:left" |Discovered by </div>
+						<div>!width=150 style="background-color:#2f4f4f"|Image</div>
+						<div>!width=150 style="background-color:#2f4f4f"|Landscape</div>
+						<div>!style="background-color:#2f4f4f"|Planet Name</div>
+						<div>!style="background-color:#2f4f4f"|Planet Type</div>
+						<div>!style="background-color:#2f4f4f"|Resources</div>
+						<div>!style="background-color:#2f4f4f"|Weather</div>
+						<div>!style="background-color:#2f4f4f"|Sentinels</div>
+						<div>!style="background-color:#2f4f4f"|Flora</div>
+						<div>!style="background-color:#2f4f4f"|Fauna</div>
+						<div><output id="planetmoons"></output></div>
 						<div>|}</div>
 						<br>
 						<div>==Starships==</div>
-
+						<div>&lt;!--All Starships discovered in the system can be found in the [[<output id="systemShipCatalog" name="name"></output> - Starship Catalog]] and the respective [[<output if="shipCatalogHub"></output> Starship Catalog]]s.--&gt;</div>
 						<br>
 						<div>===Documented Starships===</div>
-						<div>{{CARGOShipSys|<output id="shipcoords" name="portalglyphs"></output>|Eissentam}}</div>
+						<div>{{CARGOShipSys|{{Glyphs2Coords|<output id="shipcoords" name="portalglyphs"></output>}}|Eissentam}}</div>
 						<br>
 						<div>==Documented Multi-Tools==</div>
-						<div>{{CARGOMTCoord|<output id="mtcoords" name="portalglyphs"></output>|Eissentam}}</div>
+						<div>{{CARGOMTCoord|{{Glyphs2Coords|<output id="mtcoords" name="portalglyphs"></output>}}|Eissentam}}</div>
 						<br>
 						<div>==Location information==</div>
 						<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
@@ -697,6 +625,14 @@
 						<div><output id="loc"></output></div>
 						<br>
 						<div>==Space Station==</div>
+						<div>[[File:<output id=ssImage></output>|thumb|System space station]]</div>
+						<div>The [[Space Station]] [[Galactic Trade Terminal|terminal]] offers the following [[Trade Commodities]] for sale:</div>
+						<div>{| class="wikitable"</div>
+						<div>|-</div>
+						<div>! style="background-color:#2F4F4F; min-width:250px"| Item Name</div>
+						<div>! style="background-color:#2F4F4F; min-width:125px"| Price per Item</div>
+						<div><output id=tradeTerminal></output></div>
+						<div>|}</div>
 						<div>The [[Space Station]] merchants offer the following {{class|S}} class items for sale:</div>
 						<br>
 						<div>{{SSMerchants</div>
