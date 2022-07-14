@@ -163,10 +163,6 @@
 							<td><input type="text" name="Documentedlink" id="documentedlink_input">
 						</tr>
 						<tr>
-							<th><label>Your chapter rank:</label>
-							<td><input type="text" name="Rank" id="rank_input">
-						</tr>
-						<tr>
 							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button"
 									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
 
@@ -245,8 +241,8 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label># of stars (leave blank if 1):</label>
-							<td><input type="text" name="Multiplestars" id="multiplestars_input">
+							<th><label>Number of stars (leave blank if 1):</label>
+							<td><input type="number" min="2" max="3" name="Multiplestars" id="multiplestars_input">
 						</tr>
 						<tr>
 							<th><label>Color of (primary) star:</label>
@@ -256,22 +252,13 @@
 									<option value="Red">Red
 									<option value="Green">Green
 									<option value="Blue">Blue
+									<option value="Black Hole">Black Hole
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<th><label>Stellar class:</label>
-							<td>
-								<select id="class_input" name="Class">
-									<option value="F">F
-									<option value="G">G
-									<option value="M">M
-									<option value="K">K
-									<option value="E">E
-									<option value="B">B
-									<option value="O">O
-								</select>
-							</td>
+							<td><input type="text" name="Class" id="class_input">
 						</tr>
 						<tr>
 							<th><label>Distance to center:</label>
@@ -366,8 +353,8 @@
 									<option value="★★★ (Prosperous)">Prosperous
 									<option value="★★★ (Wealthy)">Wealthy
 										<!-- here ends T3-->
-									<option value="★★ (Adequate)">Adequate
 										<!--here begins T2-->
+									<option value="★★ (Adequate)">Adequate
 									<option value="★★ (Balanced)">Balanced
 									<option value="★★ (Comfortable)">Comfortable
 									<option value="★★ (Developing)">Developing
@@ -376,8 +363,8 @@
 									<option value="★★ (Satisfactory)">Satisfactory
 									<option value="★★ (Sustainable)">Sustainable
 										<!-- here ends T2-->
-									<option value="★ (Declining)">Declining
 										<!--here begins T1-->
+									<option value="★ (Declining)">Declining
 									<option value="★ (Destitute)">Destitute
 									<option value="★ (Failing)">Failing
 									<option value="★ (Fledgling)">Fledgling
@@ -394,36 +381,42 @@
 							<th><label>System conflict:</label>
 							<td>
 								<select id="conflict_input" name="Conflict">
-									<option value="Gentle">Gentle
-									<option value="Low">Low
-									<option value="Mild">Mild
-									<option value="Peaceful">Peaceful
-									<option value="Relaxed">Relaxed
-									<option value="Stable">Stable
-									<option value="Tranquil">Tranquil
-									<option value="Trivial">Trivial
-									<option value="Unthreatening">Unthreatening
-									<option value="Untroubled">Untroubled
-									<option value="Belligerent">Belligerent
-									<option value="Boisterous">Boisterous
-									<option value="Fractious">Fractious
-									<option value="Intermittent">Intermittent
-									<option value="Medium">Medium
-									<option value="Rowdy">Rowdy
-									<option value="Sporadic">Sporadic
-									<option value="Testy">Testy
-									<option value="Unruly">Unruly
-									<option value="Unstable">Unstable
-									<option value="Aggressive">Aggressive
-									<option value="Alarming">Alarming
-									<option value="At War">At War
-									<option value="Critical">Critical
-									<option value="Dangerous">Dangerous
-									<option value="Destructive">Destructive
-									<option value="Formidable">Formidable
-									<option value="High">High
-									<option value="Lawless">Lawless
-									<option value="Perilous">Perilous
+										<option value="★★★ (Aggressive)">Aggressive
+										<option value="★★★ (Alarming)">Alarming
+										<option value="★★★ (At War)">At War
+										<option value="★★★ (Critical)">Critical
+										<option value="★★★ (Dangerous)">Dangerous
+										<option value="★★★ (Destructive)">Destructive
+										<option value="★★★ (Formidable)">Formidable
+										<option value="★★★ (High)">High
+										<option value="★★★ (Lawless)">Lawless
+										<option value="★★★ (Perilous)">Perilous
+											<!-- here ends T3-->
+											<!--here begins T2-->
+										<option value="★★ (Belligerent)">Belligerent
+										<option value="★★ (Boisterous)">Boisterous
+										<option value="★★ (Fractious)">Fractious
+										<option value="★★ (Intermittent)">Intermittent
+										<option value="★★ (Medium)">Medium
+										<option value="★★ (Rowdy)">Rowdy
+										<option value="★★ (Sporadic)">Sporadic
+										<option value="★★ (Testy)">Testy
+										<option value="★★ (Unruly)">Unruly
+										<option value="★★ (Unstable)">Unstable
+											<!-- here ends T2-->
+											<!--here begins T1-->
+										<option value="★ (Gentle)">Gentle
+										<option value="★ (Low)">Low
+										<option value="★ (Mild)">Mild
+										<option value="★ (Peaceful)">Peaceful
+										<option value="★ (Relaxed)">Relaxed
+										<option value="★ (Stable)">Stable
+										<option value="★ (Tranquil)">Tranquil
+										<option value="★ (Trivial)">Trivial
+										<option value="★ (Unthreatening)">Unthreatening
+										<option value="★ (Untroubled)">Untroubled
+											<!--here ends T1-->
+										<option value="💀 (Pirate Controlled)">Pirate Controlled
 								</select>
 							</td>
 						</tr>
