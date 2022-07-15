@@ -21,6 +21,10 @@ body {
 	font-family: 'Consolas', monospace;
 }
 
+.title {
+	text-align: center;
+}
+
 .home {
 	margin-top: 2em;
 	text-align: center;
@@ -185,6 +189,7 @@ table {
 #gallery_descs {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -230,9 +235,13 @@ table {
 	padding-right: 5px;
 }
 
+.gallery-item .controlButtons .moveButton {
+	margin: 0.2em 0px;
+}
+
 .gallery-item .controlButtons .delete-icon {
 	cursor: pointer;
-	padding: 0.5em 0px;
+	padding: 0.5em 0px 0.3em;
 }
 
 .gallery-item .gallery-meta input {
@@ -287,4 +296,9 @@ footer {
 footer>div {
 	padding: 20px;
 	font-size: large;
+}
+
+.merchantUpgrades {
+  display: grid;
+	grid-template-columns: repeat(4, max-content);
 }
