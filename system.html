@@ -249,12 +249,559 @@
 						</tr>
 						<tr>
 							<th><label>Number of planets:</label>
-							<td><input type="number" min="1" max="6" name="Planet" id="planet_input">
+							<td><input type="number" min="1" max="6" name="Planet" id="planet_input" oninput="planetMoon('planet_input', 'moon_input', 'moon_input', 'planetmoons')">
 						</tr>
 						<tr>
 							<th><label>Number of moons:</label>
-							<td><input type="number" min="0" max="4" name="Moon" id="moon_input">
+							<td><input type="number" min="0" max="4" value="0" name="Moon" id="moon_input" oninput="planetMoon('planet_input', 'moon_input', 'moon_input', 'planetmoons')">
 						</tr>
+						<tr name="planet1">
+							<th><label for="planetName_input1">Planet name</label>
+							<td><input type="text" id="planetName_input1" oninput="document.getElementById('planetName1').innerHTML = this.value">
+						</tr>
+						<tr name="planet1">
+							<td colspan="2" style="text-align: center;">Planet 1</td>
+						</tr>
+						<tr name="planet1">
+							<th><label for="planetFile_input1">Planet file name</label>
+							<td>
+								<input type="text" id="planetFile_input1" oninput="document.getElementById('planetFile1').innerHTML = this.value">
+								<br>
+								<input type="file" id="mainFileUpl1" accept="image/*" onchange="imgUpload('planetFile1', 'mainFileUpl1', 'planetFile_input1')">
+							</td>
+						</tr>
+						<tr name="planet1">
+							<th><label for="landscapeFile_input1">Landscape file name</label>
+							<td>
+								<input type="text" id="landscapeFile_input1" oninput="document.getElementById('landscapeFile1').innerHTML = this.value">
+								<br>
+								<input type="file" id="secFileUpl1" accept="image/*" onchange="imgUpload('landscapeFile1', 'secFileUpl1', 'landscapeFile_input1')">
+							</td>
+						</tr>
+						<tr name="planet1">
+							<th><label>Biome</label>
+							<td>
+								<select id="biome_input1" onchange="document.getElementById('biome1').innerHTML = this.value">
+									<option value="Lush">Lush
+									<option value="Barren">Barren
+									<option value="Dead">Dead
+									<option value="Exotic">Exotic
+									<option value="Mega Exotic">Mega Exotic
+									<option value="Scorched">Scorched
+									<option value="Frozen">Frozen
+									<option value="Toxic">Toxic
+									<option value="Irradiated">Irradiated
+									<option value="Marsh">Marsh
+									<option value="Volcanic">Volcanic
+								</select>
+							</td>
+						</tr>
+						<tr name="planet1">
+							<th><label for="infested_input1">Is infested</label>
+							<td><input type="checkbox" id="infested_input1" onchange="if (this.checked) {this.value='([[Biome Subtype - Infested|Infested]]) '} else {this.value = ''}; document.getElementById('infested1').innerHTML = this.value">
+						</tr>
+						<tr name="planet1">
+							<th><label for="descriptor_input1">Planet description</label>
+							<td><input type="text" id="descriptor_input1" oninput="document.getElementById('descriptor1').innerHTML = this.value">
+						</tr>
+						<tr name="planet1">
+							<th><label for="resource_input11">Resource 1</label>
+							<td><input type="text" id="resource_input11" oninput="document.getElementById('resource11').innerHTML = this.value; hideResource(this, 'resource_input12')">
+						</tr>
+						<tr name="planet1" style="display:none">
+							<th><label for="resource_input12">Resource 2</label>
+							<td><input type="text" id="resource_input12" oninput="document.getElementById('resource12').innerHTML = this.value; hideResource(this, 'resource_input13')">
+						</tr>
+						<tr name="planet1" style="display:none">
+							<th><label for="resource_input13">Resource 3</label>
+							<td><input type="text" id="resource_input13" oninput="document.getElementById('resource13').innerHTML = this.value; hideResource(this, 'resource_input14')">
+						</tr>
+						<tr name="planet1" style="display:none">
+							<th><label for="resource_input14">Resource 4</label>
+							<td><input type="text" id="resource_input14" oninput="document.getElementById('resource14').innerHTML = this.value; hideResource(this, 'resource_input15')">
+						</tr>
+						<tr name="planet1" style="display:none">
+							<th><label for="resource_input15">Resource 5</label>
+							<td><input type="text" id="resource_input15" oninput="document.getElementById('resource15').innerHTML = this.value">
+						</tr>
+						<tr name="planet1">
+							<th><label for="weather_input1">Weather</label>
+							<td><input type="text" id="weather_input1" oninput="document.getElementById('weather1').innerHTML = this.value">
+						</tr>
+						<tr name="planet1">
+							<th><label for="sentinel_input1">Sentinels</label>
+							<td><input type="text" id="sentinel_input1" oninput="document.getElementById('sentinel1').innerHTML = this.value">
+						</tr>
+						<tr name="planet1">
+							<th><label for="flora_input1">Flora</label>
+							<td><input type="text" id="flora_input1" oninput="document.getElementById('flora1').innerHTML = this.value">
+						</tr>
+						<tr name="planet1">
+							<th><label for="fauna_input1">Fauna</label>
+							<td><input type="text" id="fauna_input1" oninput="document.getElementById('fauna1').innerHTML = this.value">
+						</tr>
+						<tr name="planet1">
+							<th><label for="faunatotal_input1">Number of Fauna</label>
+							<td><input type="number" id="faunatotal_input1" min="0" oninput="document.getElementById('faunatotal1').innerHTML = this.value">
+						</tr>
+
+
+						<tr name="planet2">
+							<td colspan="2" style="text-align: center;">Planet 2</td>
+						</tr>
+						<tr name="planet2">
+							<th><label for="planetName_input2">Planet name</label>
+							<td><input type="text" id="planetName_input2" oninput="document.getElementById('planetName2').innerHTML = this.value">
+						</tr>
+						<tr name="planet2">
+							<th><label for="planetFile_input2">Planet file name</label>
+							<td>
+								<input type="text" id="planetFile_input2" oninput="document.getElementById('planetFile2').innerHTML = this.value">
+								<br>
+								<input type="file" id="mainFileUpl2" accept="image/*" onchange="imgUpload('planetFile2', 'mainFileUpl2', 'planetFile_input2')">
+							</td>
+						</tr>
+						<tr name="planet2">
+							<th><label for="landscapeFile_input2">Landscape file name</label>
+							<td>
+								<input type="text" id="landscapeFile_input2" oninput="document.getElementById('landscapeFile2').innerHTML = this.value">
+								<br>
+								<input type="file" id="secFileUpl2" accept="image/*" onchange="imgUpload('landscapeFile2', 'secFileUpl2', 'landscapeFile_input2')">
+							</td>
+						</tr>
+						<tr name="planet2">
+							<th><label>Biome</label>
+							<td>
+								<select id="biome_input2" onchange="document.getElementById('biome2').innerHTML = this.value">
+									<option value="Lush">Lush
+									<option value="Barren">Barren
+									<option value="Dead">Dead
+									<option value="Exotic">Exotic
+									<option value="Mega Exotic">Mega Exotic
+									<option value="Scorched">Scorched
+									<option value="Frozen">Frozen
+									<option value="Toxic">Toxic
+									<option value="Irradiated">Irradiated
+									<option value="Marsh">Marsh
+									<option value="Volcanic">Volcanic
+								</select>
+							</td>
+						</tr>
+						<tr name="planet2">
+							<th><label for="infested_input2">Is infested</label>
+							<td><input type="checkbox" id="infested_input2" onchange="if (this.checked) {this.value='([[Biome Subtype - Infested|Infested]]) '} else {this.value = ''}; document.getElementById('infested2').innerHTML = this.value">
+						</tr>
+						<tr name="planet2">
+							<th><label for="descriptor_input2">Planet description</label>
+							<td><input type="text" id="descriptor_input2" oninput="document.getElementById('descriptor2').innerHTML = this.value">
+						</tr>
+						<tr name="planet2">
+							<th><label for="resource_input21">Resource 1</label>
+							<td><input type="text" id="resource_input21" oninput="document.getElementById('resource21').innerHTML = this.value; hideResource(this, 'resource_input22')">
+						</tr>
+						<tr name="planet2" style="display:none">
+							<th><label for="resource_input22">Resource 2</label>
+							<td><input type="text" id="resource_input22" oninput="document.getElementById('resource22').innerHTML = this.value; hideResource(this, 'resource_input23')">
+						</tr>
+						<tr name="planet2" style="display:none">
+							<th><label for="resource_input23">Resource 3</label>
+							<td><input type="text" id="resource_input23" oninput="document.getElementById('resource23').innerHTML = this.value; hideResource(this, 'resource_input24')">
+						</tr>
+						<tr name="planet2" style="display:none">
+							<th><label for="resource_input24">Resource 4</label>
+							<td><input type="text" id="resource_input24" oninput="document.getElementById('resource24').innerHTML = this.value; hideResource(this, 'resource_input25')">
+						</tr>
+						<tr name="planet2" style="display:none">
+							<th><label for="resource_input25">Resource 5</label>
+							<td><input type="text" id="resource_input25" oninput="document.getElementById('resource25').innerHTML = this.value">
+						</tr>
+						<tr name="planet2">
+							<th><label for="weather_input2">Weather</label>
+							<td><input type="text" id="weather_input2" oninput="document.getElementById('weather2').innerHTML = this.value">
+						</tr>
+						<tr name="planet2">
+							<th><label for="sentinel_input2">Sentinels</label>
+							<td><input type="text" id="sentinel_input2" oninput="document.getElementById('sentinel2').innerHTML = this.value">
+						</tr>
+						<tr name="planet2">
+							<th><label for="flora_input2">Flora</label>
+							<td><input type="text" id="flora_input2" oninput="document.getElementById('flora2').innerHTML = this.value">
+						</tr>
+						<tr name="planet2">
+							<th><label for="fauna_input2">Fauna</label>
+							<td><input type="text" id="fauna_input2" oninput="document.getElementById('fauna2').innerHTML = this.value">
+						</tr>
+						<tr name="planet2">
+							<th><label for="faunatotal_input2">Number of Fauna</label>
+							<td><input type="number" id="faunatotal_input2" min="0" oninput="document.getElementById('faunatotal2').innerHTML = this.value">
+						</tr>
+
+
+						<tr name="planet3">
+							<td colspan="2" style="text-align: center;">Planet 3</td>
+						</tr>
+						<tr name="planet3">
+							<th><label for="planetName_input3">Planet name</label>
+							<td><input type="text" id="planetName_input3" oninput="document.getElementById('planetName3').innerHTML = this.value">
+						</tr>
+						<tr name="planet3">
+							<th><label for="planetFile_input3">Planet file name</label>
+							<td>
+								<input type="text" id="planetFile_input3" oninput="document.getElementById('planetFile3').innerHTML = this.value">
+								<br>
+								<input type="file" id="mainFileUpl3" accept="image/*" onchange="imgUpload('planetFile3', 'mainFileUpl3', 'planetFile_input3')">
+							</td>
+						</tr>
+						<tr name="planet3">
+							<th><label for="landscapeFile_input3">Landscape file name</label>
+							<td>
+								<input type="text" id="landscapeFile_input3" oninput="document.getElementById('landscapeFile3').innerHTML = this.value">
+								<br>
+								<input type="file" id="secFileUpl3" accept="image/*" onchange="imgUpload('landscapeFile3', 'secFileUpl3', 'landscapeFile_input3')">
+							</td>
+						</tr>
+						<tr name="planet3">
+							<th><label>Biome</label>
+							<td>
+								<select id="biome_input3" onchange="document.getElementById('biome3').innerHTML = this.value">
+									<option value="Lush">Lush
+									<option value="Barren">Barren
+									<option value="Dead">Dead
+									<option value="Exotic">Exotic
+									<option value="Mega Exotic">Mega Exotic
+									<option value="Scorched">Scorched
+									<option value="Frozen">Frozen
+									<option value="Toxic">Toxic
+									<option value="Irradiated">Irradiated
+									<option value="Marsh">Marsh
+									<option value="Volcanic">Volcanic
+								</select>
+							</td>
+						</tr>
+						<tr name="planet3">
+							<th><label for="infested_input3">Is infested</label>
+							<td><input type="checkbox" id="infested_input3" onchange="if (this.checked) {this.value='([[Biome Subtype - Infested|Infested]]) '} else {this.value = ''}; document.getElementById('infested3').innerHTML = this.value">
+						</tr>
+						<tr name="planet3">
+							<th><label for="descriptor_input3">Planet description</label>
+							<td><input type="text" id="descriptor_input3" oninput="document.getElementById('descriptor3').innerHTML = this.value">
+						</tr>
+						<tr name="planet3">
+							<th><label for="resource_input31">Resource 1</label>
+							<td><input type="text" id="resource_input31" oninput="document.getElementById('resource31').innerHTML = this.value; hideResource(this, 'resource_input32')">
+						</tr>
+						<tr name="planet3" style="display:none">
+							<th><label for="resource_input32">Resource 2</label>
+							<td><input type="text" id="resource_input32" oninput="document.getElementById('resource32').innerHTML = this.value; hideResource(this, 'resource_input33')">
+						</tr>
+						<tr name="planet3" style="display:none">
+							<th><label for="resource_input33">Resource 3</label>
+							<td><input type="text" id="resource_input33" oninput="document.getElementById('resource33').innerHTML = this.value; hideResource(this, 'resource_input34')">
+						</tr>
+						<tr name="planet3" style="display:none">
+							<th><label for="resource_input34">Resource 4</label>
+							<td><input type="text" id="resource_input34" oninput="document.getElementById('resource34').innerHTML = this.value; hideResource(this, 'resource_input35')">
+						</tr>
+						<tr name="planet3" style="display:none">
+							<th><label for="resource_input35">Resource 5</label>
+							<td><input type="text" id="resource_input35" oninput="document.getElementById('resource35').innerHTML = this.value">
+						</tr>
+						<tr name="planet3">
+							<th><label for="weather_input3">Weather</label>
+							<td><input type="text" id="weather_input3" oninput="document.getElementById('weather3').innerHTML = this.value">
+						</tr>
+						<tr name="planet3">
+							<th><label for="sentinel_input3">Sentinels</label>
+							<td><input type="text" id="sentinel_input3" oninput="document.getElementById('sentinel3').innerHTML = this.value">
+						</tr>
+						<tr name="planet3">
+							<th><label for="flora_input3">Flora</label>
+							<td><input type="text" id="flora_input3" oninput="document.getElementById('flora3').innerHTML = this.value">
+						</tr>
+						<tr name="planet3">
+							<th><label for="fauna_input3">Fauna</label>
+							<td><input type="text" id="fauna_input3" oninput="document.getElementById('fauna3').innerHTML = this.value">
+						</tr>
+						<tr name="planet3">
+							<th><label for="faunatotal_input3">Number of Fauna</label>
+							<td><input type="number" id="faunatotal_input3" min="0" oninput="document.getElementById('faunatotal3').innerHTML = this.value">
+						</tr>
+
+
+						<tr name="planet4">
+							<td colspan="2" style="text-align: center;">Planet 4</td>
+						</tr>
+						<tr name="planet4">
+							<th><label for="planetName_input4">Planet name</label>
+							<td><input type="text" id="planetName_input4" oninput="document.getElementById('planetName4').innerHTML = this.value">
+						</tr>
+						<tr name="planet4">
+							<th><label for="planetFile_input4">Planet file name</label>
+							<td>
+								<input type="text" id="planetFile_input4" oninput="document.getElementById('planetFile4').innerHTML = this.value">
+								<br>
+								<input type="file" id="mainFileUpl4" accept="image/*" onchange="imgUpload('planetFile4', 'mainFileUpl4', 'planetFile_input4')">
+							</td>
+						</tr>
+						<tr name="planet4">
+							<th><label for="landscapeFile_input4">Landscape file name</label>
+							<td>
+								<input type="text" id="landscapeFile_input4" oninput="document.getElementById('landscapeFile4').innerHTML = this.value">
+								<br>
+								<input type="file" id="secFileUpl4" accept="image/*" onchange="imgUpload('landscapeFile4', 'secFileUpl4', 'landscapeFile_input4')">
+							</td>
+						</tr>
+						<tr name="planet4">
+							<th><label>Biome</label>
+							<td>
+								<select id="biome_input4" onchange="document.getElementById('biome4').innerHTML = this.value">
+									<option value="Lush">Lush
+									<option value="Barren">Barren
+									<option value="Dead">Dead
+									<option value="Exotic">Exotic
+									<option value="Mega Exotic">Mega Exotic
+									<option value="Scorched">Scorched
+									<option value="Frozen">Frozen
+									<option value="Toxic">Toxic
+									<option value="Irradiated">Irradiated
+									<option value="Marsh">Marsh
+									<option value="Volcanic">Volcanic
+								</select>
+							</td>
+						</tr>
+						<tr name="planet4">
+							<th><label for="infested_input4">Is infested</label>
+							<td><input type="checkbox" id="infested_input4" onchange="if (this.checked) {this.value='([[Biome Subtype - Infested|Infested]]) '} else {this.value = ''}; document.getElementById('infested4').innerHTML = this.value">
+						</tr>
+						<tr name="planet4">
+							<th><label for="descriptor_input4">Planet description</label>
+							<td><input type="text" id="descriptor_input4" oninput="document.getElementById('descriptor4').innerHTML = this.value">
+						</tr>
+						<tr name="planet4">
+							<th><label for="resource_input41">Resource 1</label>
+							<td><input type="text" id="resource_input41" oninput="document.getElementById('resource41').innerHTML = this.value; hideResource(this, 'resource_input42')">
+						</tr>
+						<tr name="planet4" style="display:none">
+							<th><label for="resource_input42">Resource 2</label>
+							<td><input type="text" id="resource_input42" oninput="document.getElementById('resource42').innerHTML = this.value; hideResource(this, 'resource_input43')">
+						</tr>
+						<tr name="planet4" style="display:none">
+							<th><label for="resource_input43">Resource 3</label>
+							<td><input type="text" id="resource_input43" oninput="document.getElementById('resource43').innerHTML = this.value; hideResource(this, 'resource_input44')">
+						</tr>
+						<tr name="planet4" style="display:none">
+							<th><label for="resource_input44">Resource 4</label>
+							<td><input type="text" id="resource_input44" oninput="document.getElementById('resource44').innerHTML = this.value; hideResource(this, 'resource_input45')">
+						</tr>
+						<tr name="planet4" style="display:none">
+							<th><label for="resource_input45">Resource 5</label>
+							<td><input type="text" id="resource_input45" oninput="document.getElementById('resource45').innerHTML = this.value">
+						</tr>
+						<tr name="planet4">
+							<th><label for="weather_input4">Weather</label>
+							<td><input type="text" id="weather_input4" oninput="document.getElementById('weather4').innerHTML = this.value">
+						</tr>
+						<tr name="planet4">
+							<th><label for="sentinel_input4">Sentinels</label>
+							<td><input type="text" id="sentinel_input4" oninput="document.getElementById('sentinel4').innerHTML = this.value">
+						</tr>
+						<tr name="planet4">
+							<th><label for="flora_input4">Flora</label>
+							<td><input type="text" id="flora_input4" oninput="document.getElementById('flora4').innerHTML = this.value">
+						</tr>
+						<tr name="planet4">
+							<th><label for="fauna_input4">Fauna</label>
+							<td><input type="text" id="fauna_input4" oninput="document.getElementById('fauna4').innerHTML = this.value">
+						</tr>
+						<tr name="planet4">
+							<th><label for="faunatotal_input4">Number of Fauna</label>
+							<td><input type="number" id="faunatotal_input4" min="0" oninput="document.getElementById('faunatotal4').innerHTML = this.value">
+						</tr>
+
+
+						<tr name="planet5">
+							<td colspan="2" style="text-align: center;">Planet 5</td>
+						</tr>
+						<tr name="planet5">
+							<th><label for="planetName_input5">Planet name</label>
+							<td><input type="text" id="planetName_input5" oninput="document.getElementById('planetName5').innerHTML = this.value">
+						</tr>
+						<tr name="planet5">
+							<th><label for="planetFile_input5">Planet file name</label>
+							<td>
+								<input type="text" id="planetFile_input5" oninput="document.getElementById('planetFile5').innerHTML = this.value">
+								<br>
+								<input type="file" id="mainFileUpl5" accept="image/*" onchange="imgUpload('planetFile5', 'mainFileUpl5', 'planetFile_input5')">
+							</td>
+						</tr>
+						<tr name="planet5">
+							<th><label for="landscapeFile_input5">Landscape file name</label>
+							<td>
+								<input type="text" id="landscapeFile_input5" oninput="document.getElementById('landscapeFile5').innerHTML = this.value">
+								<br>
+								<input type="file" id="secFileUpl5" accept="image/*" onchange="imgUpload('landscapeFile5', 'secFileUpl5', 'landscapeFile_input5')">
+							</td>
+						</tr>
+						<tr name="planet5">
+							<th><label>Biome</label>
+							<td>
+								<select id="biome_input5" onchange="document.getElementById('biome5').innerHTML = this.value">
+									<option value="Lush">Lush
+									<option value="Barren">Barren
+									<option value="Dead">Dead
+									<option value="Exotic">Exotic
+									<option value="Mega Exotic">Mega Exotic
+									<option value="Scorched">Scorched
+									<option value="Frozen">Frozen
+									<option value="Toxic">Toxic
+									<option value="Irradiated">Irradiated
+									<option value="Marsh">Marsh
+									<option value="Volcanic">Volcanic
+								</select>
+							</td>
+						</tr>
+						<tr name="planet5">
+							<th><label for="infested_input5">Is infested</label>
+							<td><input type="checkbox" id="infested_input5" onchange="if (this.checked) {this.value='([[Biome Subtype - Infested|Infested]]) '} else {this.value = ''}; document.getElementById('infested5').innerHTML = this.value">
+						</tr>
+						<tr name="planet5">
+							<th><label for="descriptor_input5">Planet description</label>
+							<td><input type="text" id="descriptor_input5" oninput="document.getElementById('descriptor5').innerHTML = this.value">
+						</tr>
+						<tr name="planet5">
+							<th><label for="resource_input51">Resource 1</label>
+							<td><input type="text" id="resource_input51" oninput="document.getElementById('resource51').innerHTML = this.value; hideResource(this, 'resource_input52')">
+						</tr>
+						<tr name="planet5" style="display:none">
+							<th><label for="resource_input52">Resource 2</label>
+							<td><input type="text" id="resource_input52" oninput="document.getElementById('resource52').innerHTML = this.value; hideResource(this, 'resource_input53')">
+						</tr>
+						<tr name="planet5" style="display:none">
+							<th><label for="resource_input53">Resource 3</label>
+							<td><input type="text" id="resource_input53" oninput="document.getElementById('resource53').innerHTML = this.value; hideResource(this, 'resource_input54')">
+						</tr>
+						<tr name="planet5" style="display:none">
+							<th><label for="resource_input54">Resource 4</label>
+							<td><input type="text" id="resource_input54" oninput="document.getElementById('resource54').innerHTML = this.value; hideResource(this, 'resource_input55')">
+						</tr>
+						<tr name="planet5" style="display:none">
+							<th><label for="resource_input55">Resource 5</label>
+							<td><input type="text" id="resource_input55" oninput="document.getElementById('resource55').innerHTML = this.value">
+						</tr>
+						<tr name="planet5">
+							<th><label for="weather_input5">Weather</label>
+							<td><input type="text" id="weather_input5" oninput="document.getElementById('weather5').innerHTML = this.value">
+						</tr>
+						<tr name="planet5">
+							<th><label for="sentinel_input5">Sentinels</label>
+							<td><input type="text" id="sentinel_input5" oninput="document.getElementById('sentinel5').innerHTML = this.value">
+						</tr>
+						<tr name="planet5">
+							<th><label for="flora_input5">Flora</label>
+							<td><input type="text" id="flora_input5" oninput="document.getElementById('flora5').innerHTML = this.value">
+						</tr>
+						<tr name="planet5">
+							<th><label for="fauna_input5">Fauna</label>
+							<td><input type="text" id="fauna_input5" oninput="document.getElementById('fauna5').innerHTML = this.value">
+						</tr>
+						<tr name="planet5">
+							<th><label for="faunatotal_input5">Number of Fauna</label>
+							<td><input type="number" id="faunatotal_input5" min="0" oninput="document.getElementById('faunatotal5').innerHTML = this.value">
+						</tr>
+
+
+						<tr name="planet6">
+							<td colspan="2" style="text-align: center;">Planet 6</td>
+						</tr>
+						<tr name="planet6">
+							<th><label for="planetName_input6">Planet name</label>
+							<td><input type="text" id="planetName_input6" oninput="document.getElementById('planetName6').innerHTML = this.value">
+						</tr>
+						<tr name="planet6">
+							<th><label for="planetFile_input6">Planet file name</label>
+							<td>
+								<input type="text" id="planetFile_input6" oninput="document.getElementById('planetFile6').innerHTML = this.value">
+								<br>
+								<input type="file" id="mainFileUpl6" accept="image/*" onchange="imgUpload('planetFile6', 'mainFileUpl6', 'planetFile_input6')">
+							</td>
+						</tr>
+						<tr name="planet6">
+							<th><label for="landscapeFile_input6">Landscape file name</label>
+							<td>
+								<input type="text" id="landscapeFile_input6" oninput="document.getElementById('landscapeFile6').innerHTML = this.value">
+								<br>
+								<input type="file" id="secFileUpl6" accept="image/*" onchange="imgUpload('landscapeFile6', 'secFileUpl6', 'landscapeFile_input6')">
+							</td>
+						</tr>
+						<tr name="planet6">
+							<th><label>Biome</label>
+							<td>
+								<select id="biome_input6" onchange="document.getElementById('biome6').innerHTML = this.value">
+									<option value="Lush">Lush
+									<option value="Barren">Barren
+									<option value="Dead">Dead
+									<option value="Exotic">Exotic
+									<option value="Mega Exotic">Mega Exotic
+									<option value="Scorched">Scorched
+									<option value="Frozen">Frozen
+									<option value="Toxic">Toxic
+									<option value="Irradiated">Irradiated
+									<option value="Marsh">Marsh
+									<option value="Volcanic">Volcanic
+								</select>
+							</td>
+						</tr>
+						<tr name="planet6">
+							<th><label for="infested_input6">Is infested</label>
+							<td><input type="checkbox" id="infested_input6" onchange="if (this.checked) {this.value='([[Biome Subtype - Infested|Infested]]) '} else {this.value = ''}; document.getElementById('infested6').innerHTML = this.value">
+						</tr>
+						<tr name="planet6">
+							<th><label for="descriptor_input6">Planet description</label>
+							<td><input type="text" id="descriptor_input6" oninput="document.getElementById('descriptor6').innerHTML = this.value">
+						</tr>
+						<tr name="planet6">
+							<th><label for="resource_input61">Resource 1</label>
+							<td><input type="text" id="resource_input61" oninput="document.getElementById('resource61').innerHTML = this.value; hideResource(this, 'resource_input62')">
+						</tr>
+						<tr name="planet6" style="display:none">
+							<th><label for="resource_input62">Resource 2</label>
+							<td><input type="text" id="resource_input62" oninput="document.getElementById('resource62').innerHTML = this.value; hideResource(this, 'resource_input63')">
+						</tr>
+						<tr name="planet6" style="display:none">
+							<th><label for="resource_input63">Resource 3</label>
+							<td><input type="text" id="resource_input63" oninput="document.getElementById('resource63').innerHTML = this.value; hideResource(this, 'resource_input64')">
+						</tr>
+						<tr name="planet6" style="display:none">
+							<th><label for="resource_input64">Resource 4</label>
+							<td><input type="text" id="resource_input64" oninput="document.getElementById('resource64').innerHTML = this.value; hideResource(this, 'resource_input65')">
+						</tr>
+						<tr name="planet6" style="display:none">
+							<th><label for="resource_input65">Resource 5</label>
+							<td><input type="text" id="resource_input65" oninput="document.getElementById('resource65').innerHTML = this.value">
+						</tr>
+						<tr name="planet6">
+							<th><label for="weather_input6">Weather</label>
+							<td><input type="text" id="weather_input6" oninput="document.getElementById('weather6').innerHTML = this.value">
+						</tr>
+						<tr name="planet6">
+							<th><label for="sentinel_input6">Sentinels</label>
+							<td><input type="text" id="sentinel_input6" oninput="document.getElementById('sentinel6').innerHTML = this.value">
+						</tr>
+						<tr name="planet6">
+							<th><label for="flora_input6">Flora</label>
+							<td><input type="text" id="flora_input6" oninput="document.getElementById('flora6').innerHTML = this.value">
+						</tr>
+						<tr name="planet6">
+							<th><label for="fauna_input6">Fauna</label>
+							<td><input type="text" id="fauna_input6" oninput="document.getElementById('fauna6').innerHTML = this.value">
+						</tr>
+						<tr name="planet6">
+							<th><label for="faunatotal_input6">Number of Fauna</label>
+							<td><input type="number" id="faunatotal_input6" min="0" oninput="document.getElementById('faunatotal6').innerHTML = this.value">
+						</tr>
+
+
+
 						<tr>
 							<th><label>Water?</label>
 							<td>
@@ -631,7 +1178,8 @@
 						<div>!style="background-color:#2f4f4f"|Sentinels</div>
 						<div>!style="background-color:#2f4f4f"|Flora</div>
 						<div>!style="background-color:#2f4f4f"|Fauna</div>
-						<div><output id="planetmoons"></output></div>
+						<div id="planetmoons">
+						</div>
 						<div>|}</div>
 						<br>
 						<div>==Starships==</div>
