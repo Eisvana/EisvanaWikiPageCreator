@@ -335,36 +335,44 @@
 							<th><label>System wealth:</label>
 							<td>
 								<select id="wealth_input" name="Wealth">
-									<option value="★★★ (Advanced)">Advanced
-									<option value="★★★ (Affluent)">Affluent
-									<option value="★★★ (Booming)">Booming
-									<option value="★★★ (Flourishing)">Flourishing
-									<option value="★★★ (High Supply)">High Supply
-									<option value="★★★ (Opulent)">Opulent
-									<option value="★★★ (Prosperous)">Prosperous
-									<option value="★★★ (Wealthy)">Wealthy
+									<optgroup label="T3">
+										<option value="★★★ (Advanced)">Advanced
+										<option value="★★★ (Affluent)">Affluent
+										<option value="★★★ (Booming)">Booming
+										<option value="★★★ (Flourishing)">Flourishing
+										<option value="★★★ (High Supply)">High Supply
+										<option value="★★★ (Opulent)">Opulent
+										<option value="★★★ (Prosperous)">Prosperous
+										<option value="★★★ (Wealthy)">Wealthy
+									</optgroup>
 										<!-- here ends T3-->
 										<!--here begins T2-->
-									<option value="★★ (Adequate)">Adequate
-									<option value="★★ (Balanced)">Balanced
-									<option value="★★ (Comfortable)">Comfortable
-									<option value="★★ (Developing)">Developing
-									<option value="★★ (Medium Supply)">Medium Supply
-									<option value="★★ (Promising)">Promising
-									<option value="★★ (Satisfactory)">Satisfactory
-									<option value="★★ (Sustainable)">Sustainable
+									<optgroup label="T2">
+										<option value="★★ (Adequate)">Adequate
+										<option value="★★ (Balanced)">Balanced
+										<option value="★★ (Comfortable)">Comfortable
+										<option value="★★ (Developing)">Developing
+										<option value="★★ (Medium Supply)">Medium Supply
+										<option value="★★ (Promising)">Promising
+										<option value="★★ (Satisfactory)">Satisfactory
+										<option value="★★ (Sustainable)">Sustainable
+									</optgroup>
 										<!-- here ends T2-->
 										<!--here begins T1-->
-									<option value="★ (Declining)">Declining
-									<option value="★ (Destitute)">Destitute
-									<option value="★ (Failing)">Failing
-									<option value="★ (Fledgling)">Fledgling
-									<option value="★ (Low Supply)">Low Supply
-									<option value="★ (Struggling)">Struggling
-									<option value="★ (Unsuccessful)">Unsuccessful
-									<option value="★ (Unpromising)">Unpromising
+									<optgroup label="T1">
+										<option value="★ (Declining)">Declining
+										<option value="★ (Destitute)">Destitute
+										<option value="★ (Failing)">Failing
+										<option value="★ (Fledgling)">Fledgling
+										<option value="★ (Low Supply)">Low Supply
+										<option value="★ (Struggling)">Struggling
+										<option value="★ (Unsuccessful)">Unsuccessful
+										<option value="★ (Unpromising)">Unpromising
+									</optgroup>
 										<!--here ends T1-->
-									<option value="💀 (Black Market)">Pirate
+									<optgroup label="Pirate">
+										<option value="💀 (Black Market)">Pirate
+									</optgroup>
 								</select>
 							</td>
 						</tr>
@@ -372,6 +380,7 @@
 							<th><label>System conflict:</label>
 							<td>
 								<select id="conflict_input" name="Conflict">
+									<optgroup label="T3">
 										<option value="★★★ (Aggressive)">Aggressive
 										<option value="★★★ (Alarming)">Alarming
 										<option value="★★★ (At War)">At War
@@ -382,8 +391,10 @@
 										<option value="★★★ (High)">High
 										<option value="★★★ (Lawless)">Lawless
 										<option value="★★★ (Perilous)">Perilous
-											<!-- here ends T3-->
-											<!--here begins T2-->
+									</optgroup>
+										<!-- here ends T3-->
+										<!--here begins T2-->
+									<optgroup label="T2">
 										<option value="★★ (Belligerent)">Belligerent
 										<option value="★★ (Boisterous)">Boisterous
 										<option value="★★ (Fractious)">Fractious
@@ -394,8 +405,10 @@
 										<option value="★★ (Testy)">Testy
 										<option value="★★ (Unruly)">Unruly
 										<option value="★★ (Unstable)">Unstable
-											<!-- here ends T2-->
-											<!--here begins T1-->
+									</optgroup>
+										<!-- here ends T2-->
+										<!--here begins T1-->
+									<optgroup label="T1">
 										<option value="★ (Gentle)">Gentle
 										<option value="★ (Low)">Low
 										<option value="★ (Mild)">Mild
@@ -406,8 +419,11 @@
 										<option value="★ (Trivial)">Trivial
 										<option value="★ (Unthreatening)">Unthreatening
 										<option value="★ (Untroubled)">Untroubled
-											<!--here ends T1-->
+									</optgroup>
+										<!--here ends T1-->
+									<optgroup label="Pirate">
 										<option value="💀 (Pirate Controlled)">Pirate Controlled
+									</optgroup>
 								</select>
 							</td>
 						</tr>
