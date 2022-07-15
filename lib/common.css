@@ -12,6 +12,11 @@
 	src: local('NMS-Glyphs-Tight'), local('NMS-Glyphs-Tight'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Tight.ttf) format('truetype');
 }
 
+html,
+body {
+	font-family: Nunito;
+}
+
 #wikiText {
 	font-family: 'Consolas', monospace;
 }
@@ -109,7 +114,7 @@ table {
 	label {
 		font-size: small;
 	}
-	
+
 	.output {
 		display: block;
 		margin: 0 auto;
@@ -279,7 +284,7 @@ footer {
 	text-align: center;
 }
 
-footer > div {
+footer>div {
 	padding: 20px;
 	font-size: large;
 }
