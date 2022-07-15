@@ -23,8 +23,7 @@
 			textFunction("ssImage", "ssImage_input");
 			textFunction("discovered", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
-			explorer("discovered_input", "discoveredlink_input", "discovered1");
-			textFunction("docby", "docby_input");
+			explorer("discovered_input", "discoveredlink_input", "docby_input", "researchteam_input", "platform_input", "docDate_input", "discDate_input", "docby");
 			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunction("mode", "mode_input");
 			textFunction("multiplestars", "multiplestars_input");
@@ -41,8 +40,6 @@
 			textFunction("wealth", "wealth_input");
 			textFunction("conflict", "conflict_input");
 			textFunctionMultiple("researchteam", "researchteam_input");
-			textFunction("docDate", "docDate_input");
-			dateConvert("docDate");
 			textFunction("originalname", "originalname_input");
 			// to do: Spaceship dealers
 			//radioFunction("mtAML", "mtAML_input");
@@ -53,6 +50,7 @@
 			codeFunctionMultiple("region", "region");
 		}
 		window.onload = () => {
+			researchTeamDropdown("civ", "researchteam_input")
 			autoRefresh();
 			showInput();
 		}
@@ -99,7 +97,7 @@
 						<tr>
 							<th><label>Which civ does this system belong to?</label>
 							<td>
-								<select id="civ" name="Civ">
+								<select id="civ" name="Civ" onchange="researchTeamDropdown('civ', 'researchteam_input')">
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
 									<option value="EisHub" id="EisHub">EisHub
@@ -110,9 +108,6 @@
 							<th><label>Which research team discovered this system?</label>
 							<td>
 								<select id="researchteam_input" name="Researchteam">
-									<option value="GHGS">GHGS
-									<option value="GHEC">GHEC
-									<option value="GHSH">GHSH
 								</select>
 							</td>
 						</tr>
@@ -437,6 +432,16 @@
 							</td>
 						</tr>
 						<tr>
+							<th><label>Discoverer platform:</label>
+							<td>
+								<select id="platform_input" name="Platform">
+									<option value="PC">PC
+									<option value="PS">PS
+									<option value="XB">XB
+								</select>
+							</td>
+						</tr>
+						<tr>
 							<th><label>Discoverer wiki account:</label>
 							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
 						</tr>
@@ -586,16 +591,14 @@
 						<div>'''<output id='name1' name="name"></output>''' is a star system.</div>
 						<br>
 						<div>==Summary==</div>
-						<div>'''<output id='name2' name="name"></output>''' is a [[star system]], located in the [[<output id='region1' name="region"></output>]] region.
-						</div>
+						<div>'''<output id='name2' name="name"></output>''' is a [[star system]], located in the [[<output id='region1' name="region"></output>]] region.</div>
 						<br>
 						<div>==Alias Names==</div>
 						<div>{{aliasc|text=Original|name=<output id='originalname'></output>}}</div>
 						<div>{{aliasc|text=Current|name=<output id='name3' name="name"></output>}}</div>
 						<br>
 						<div>==Discovered==</div>
-						<div>Discovered and uploaded by ''<output id='discovered1' name="discoverer"></output>''</div>
-						<div>Explored and documented by <output id='researchteam1' name="researchteam"></output> {{profile|<output id="docby"></output>}} on <output id='docDate'></output></div>
+						<div><output id="docby"></output></div>
 						<br>
 						<div>==Planets & Moons==</div>
 						<div>{| class="wikitable" style="text-align:center; width:100%; max-width:1250px;"</div>
