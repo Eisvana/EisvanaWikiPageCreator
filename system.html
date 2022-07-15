@@ -105,13 +105,6 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Which research team discovered this system?</label>
-							<td>
-								<select id="researchteam_input" name="Researchteam">
-								</select>
-							</td>
-						</tr>
-						<tr>
 							<th><label>Name of the system:</label>
 							<td><input type="text" name="Name" id="name_input">
 						</tr>
@@ -286,35 +279,48 @@
 							<th><label>System economy:</label>
 							<td>
 								<select id="economy_input" name="Economy">
-									<option value="Alchemical">Alchemical
-									<option value="Commercial">Commercial
-									<option value="Construction">Construction
-									<option value="Energy Supply">Energy Supply
-									<option value="Engineering">Engineering
-									<option value="Experimental">Experimental
-									<option value="Fuel Generation">Fuel Generation
-									<option value="High Electric">High Electric
-									<option value="High Tech">High Tech
-									<option value="High Voltage">High Voltage
-									<option value="Industrial">Industrial
-									<option value="Manufacturing">Manufacturing
-									<option value="Mass Production">Mass Production
-									<option value="Material Fusion">Material Fusion
-									<option value="Mathematical">Mathematical
-									<option value="Mercantile">Mercantile
-									<option value="Metal Processing">Metal Processing
-									<option value="Minerals">Minerals
-									<option value="Mining">Mining
-									<option value="Nano-construction">Nano-construction
-									<option value="Ore Extraction">Ore Extraction
-									<option value="Ore Processing">Ore Processing
-									<option value="Power Generation">Power Generation
-									<option value="Prospecting">Prospecting
-									<option value="Research">Research
-									<option value="Scientific">Scientific
-									<option value="Shipping">Shipping
-									<option value="Technology">Technology
-									<option value="Trading">Trading
+									<optgroup label="Advanced Materials">
+										<option value="Alchemical">Alchemical
+										<option value="Material Fusion">Material Fusion
+										<option value="Metal Processing">Metal Processing
+										<option value="Ore Processing">Ore Processing
+									</optgroup>
+									<optgroup label="Manufacturing">
+										<option value="Construction">Construction
+										<option value="Industrial">Industrial
+										<option value="Manufacturing">Manufacturing
+										<option value="Mass Production">Mass Production
+									</optgroup>
+									<optgroup label="Mining">
+										<option value="Minerals">Minerals
+										<option value="Mining">Mining
+										<option value="Ore Extraction">Ore Extraction
+										<option value="Prospecting">Prospecting
+									</optgroup>
+									<optgroup label="Power Generation">
+										<option value="Energy Supply">Energy Supply
+										<option value="Fuel Generation">Fuel Generation
+										<option value="High Voltage">High Voltage
+										<option value="Power Generation">Power Generation
+									</optgroup>
+									<optgroup label="Scientific">
+										<option value="Experimental">Experimental
+										<option value="Mathematical">Mathematical
+										<option value="Research">Research
+										<option value="Mathematical">Mathematical
+									</optgroup>
+									<optgroup label="Technology">
+										<option value="Engine">Engine
+										<option value="High Tech">High Tech
+										<option value="Nano-construction">Nano-construction
+										<option value="Technology">Technology
+									</optgroup>
+									<optgroup label="Trading">
+										<option value="Commercial">Commercial
+										<option value="Mercantile">Mercantile
+										<option value="Shipping">Shipping
+										<option value="Trading">Trading
+									</optgroup>
 								</select>
 							</td>
 						</tr>
@@ -419,6 +425,13 @@
 						<tr>
 							<th><label>When was this system documented?</label>
 							<td><input type="date" name="DocDate" id="docDate_input">
+						</tr>
+						<tr>
+							<th><label>To which Researchteam do you belong (if any)?</label>
+							<td>
+								<select id="researchteam_input" name="Researchteam">
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<th><label>Gamemode:</label>
