@@ -306,7 +306,7 @@
 						</tr>
 						<tr name="planet1" style="display: none;">
 							<th><label for="resource_input11">Resource 1</label>
-							<td><input type="text" id="resource_input11" oninput="hideResource(this, 'resource_input12'); displayResource(this, 'resource11')">
+							<td><input type="text" id="resource_input11" oninput="hideResource(this, 'resource_input12'); document.getElementById('resource11').innerHTML = this.value">
 						</tr>
 						<tr name="planet1" style="display:none">
 							<th><label for="resource_input12">Resource 2</label>
@@ -342,7 +342,7 @@
 						</tr>
 						<tr name="planet1" style="display: none;">
 							<th><label for="faunatotal_input1">Number of Fauna</label>
-							<td><input type="number" id="faunatotal_input1" min="0" oninput="document.getElementById('faunatotal1').innerHTML = this.value">
+							<td><input type="number" id="faunatotal_input1" min="0" oninput="textFunctionMultiple('FaunaTotal1', 'faunatotal_input1')">
 						</tr>
 
 
@@ -397,7 +397,7 @@
 						</tr>
 						<tr name="planet2" style="display: none;">
 							<th><label for="resource_input21">Resource 1</label>
-							<td><input type="text" id="resource_input21" oninput="hideResource(this, 'resource_input22'); displayResource(this, 'resource21')">
+							<td><input type="text" id="resource_input21" oninput="hideResource(this, 'resource_input22'); document.getElementById('resource21').innerHTML = this.value">
 						</tr>
 						<tr name="planet2" style="display:none">
 							<th><label for="resource_input22">Resource 2</label>
@@ -433,7 +433,7 @@
 						</tr>
 						<tr name="planet2" style="display: none;">
 							<th><label for="faunatotal_input2">Number of Fauna</label>
-							<td><input type="number" id="faunatotal_input2" min="0" oninput="document.getElementById('faunatotal2').innerHTML = this.value">
+							<td><input type="number" id="faunatotal_input2" min="0" oninput="textFunctionMultiple('FaunaTotal2', 'faunatotal_input2')">
 						</tr>
 
 
@@ -488,7 +488,7 @@
 						</tr>
 						<tr name="planet3" style="display: none;">
 							<th><label for="resource_input31">Resource 1</label>
-							<td><input type="text" id="resource_input31" oninput="hideResource(this, 'resource_input32'); displayResource(this, 'resource31')">
+							<td><input type="text" id="resource_input31" oninput="hideResource(this, 'resource_input32'); document.getElementById('resource31').innerHTML = this.value">
 						</tr>
 						<tr name="planet3" style="display:none">
 							<th><label for="resource_input32">Resource 2</label>
@@ -524,7 +524,7 @@
 						</tr>
 						<tr name="planet3" style="display: none;">
 							<th><label for="faunatotal_input3">Number of Fauna</label>
-							<td><input type="number" id="faunatotal_input3" min="0" oninput="document.getElementById('faunatotal3').innerHTML = this.value">
+							<td><input type="number" id="faunatotal_input3" min="0" oninput="textFunctionMultiple('FaunaTotal3', 'faunatotal_input3')">
 						</tr>
 
 
@@ -579,7 +579,7 @@
 						</tr>
 						<tr name="planet4" style="display: none;">
 							<th><label for="resource_input41">Resource 1</label>
-							<td><input type="text" id="resource_input41" oninput="hideResource(this, 'resource_input42'); displayResource(this, 'resource41')">
+							<td><input type="text" id="resource_input41" oninput="hideResource(this, 'resource_input42'); document.getElementById('resource41').innerHTML = this.value">
 						</tr>
 						<tr name="planet4" style="display:none">
 							<th><label for="resource_input42">Resource 2</label>
@@ -615,7 +615,7 @@
 						</tr>
 						<tr name="planet4" style="display: none;">
 							<th><label for="faunatotal_input4">Number of Fauna</label>
-							<td><input type="number" id="faunatotal_input4" min="0" oninput="document.getElementById('faunatotal4').innerHTML = this.value">
+							<td><input type="number" id="faunatotal_input4" min="0" oninput="textFunctionMultiple('FaunaTotal4', 'faunatotal_input4')">
 						</tr>
 
 
@@ -670,7 +670,7 @@
 						</tr>
 						<tr name="planet5" style="display: none;">
 							<th><label for="resource_input51">Resource 1</label>
-							<td><input type="text" id="resource_input51" oninput="hideResource(this, 'resource_input52'); displayResource(this, 'resource51')">
+							<td><input type="text" id="resource_input51" oninput="hideResource(this, 'resource_input52'); document.getElementById('resource51').innerHTML = this.value">
 						</tr>
 						<tr name="planet5" style="display:none">
 							<th><label for="resource_input52">Resource 2</label>
@@ -706,7 +706,7 @@
 						</tr>
 						<tr name="planet5" style="display: none;">
 							<th><label for="faunatotal_input5">Number of Fauna</label>
-							<td><input type="number" id="faunatotal_input5" min="0" oninput="document.getElementById('faunatotal5').innerHTML = this.value">
+							<td><input type="number" id="faunatotal_input5" min="0" oninput="textFunctionMultiple('FaunaTotal5', 'faunatotal_input5')">
 						</tr>
 
 
@@ -761,7 +761,7 @@
 						</tr>
 						<tr name="planet6" style="display: none;">
 							<th><label for="resource_input61">Resource 1</label>
-							<td><input type="text" id="resource_input61" oninput="hideResource(this, 'resource_input62'); displayResource(this, 'resource61')">
+							<td><input type="text" id="resource_input61" oninput="hideResource(this, 'resource_input62'); document.getElementById('resource61').innerHTML = this.value">
 						</tr>
 						<tr name="planet6" style="display:none">
 							<th><label for="resource_input62">Resource 2</label>
@@ -797,7 +797,7 @@
 						</tr>
 						<tr name="planet6" style="display: none;">
 							<th><label for="faunatotal_input6">Number of Fauna</label>
-							<td><input type="number" id="faunatotal_input6" min="0" oninput="document.getElementById('faunatotal6').innerHTML = this.value">
+							<td><input type="number" id="faunatotal_input6" min="0" oninput="textFunctionMultiple('FaunaTotal6', 'faunatotal_input6')">
 						</tr>
 
 
