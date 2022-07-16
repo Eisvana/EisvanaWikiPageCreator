@@ -11,23 +11,16 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
-			textFunction("release", "version_input");
-			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
-			//textFunction("name", "name_input");
-			textFunctionMultiple("name", "name_input"); //duplicates due to IDs needing to be unique across document
-			//textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
+			textFunctionMultiple("release", "version_input");
+			textFunctionMultiple("name", "name_input");
 			textFunction("image", "image_input");
 			textFunction("builder", "builder_input");
 			textFunction("builderlink", "builderlink_input");
-			textFunction("system", "system_input");
-			textFunction("system1", "system_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("planet", "planet_input");
-			textFunction("planet1", "planet_input"); //duplicates due to IDs needing to be unique across document
+			textFunctionMultiple("system", "system_input");
+			textFunctionMultiple("planet", "planet_input");
 			textFunction("moon", "moon_input");
 			textFunction("axes", "axes_input");
-			textFunction("portalglyphs", "portalglyphs_input");
-			textFunction("portalglyphs1", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("glyph_display", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
+			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunction("type", "type_input");
 			textFunction("mode", "mode_input");
 			textFunction("platform", "platform_input");
@@ -219,7 +212,7 @@
 										<span class="glyphs icon is-small">F</span>
 									</button>
 								</div>
-								<output class="glyphs" style="word-break: break-word" id="glyph_display"></output>
+								<output class="glyphs" style="word-break: break-word" id="glyph_display" name="portalglyphs"></output>
 							</td>
 						</tr>
 						<tr>
@@ -412,7 +405,7 @@
 			<div class="column is-full-mobile">
 				<div class="output">
 					<div id="wikiText">
-						<div>{{Version|<output id='release'></output>}}</div>
+						<div>{{Version|<output id='release' name="release"></output>}}</div>
 						<div>{{<output id='civStub'></output>}}</div>
 						<div>{{Base infobox</div>
 						<div>| name = <output id='name' name="name"></output></div>
@@ -426,12 +419,12 @@
 						<div>| planet = <output id='planet'></output></div>
 						<div>| moon = <output id='moon'></output></div>
 						<div>| axes = <output id='axes'></output></div>
-						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs'></output>}}</div>
-						<div>| portalglyphs = {{Gl/Small|<output id='portalglyphs1'></output>}}</div>
+						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}</div>
+						<div>| portalglyphs = {{Gl/Small|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
 						<div>| type = <output id='type'></output></div>
 						<div>| mode = <output id='mode'></output></div>
 						<div>| platform = <output id='platform'></output></div>
-						<div>| release = <output id='release1'></output></div>
+						<div>| release = <output id='release1' name="release"></output></div>
 						<div>| farm = <output id='farm'></output></div>
 						<div>| geobay = <output id='geobay'></output></div>
 						<div>| arena = <output id='arena'></output></div>
@@ -450,7 +443,7 @@
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''<output id='name2' name="name"></output>''' is a [[Habitable Base|player base]], located on the	planet [[<output id='planet1'></output>]] in the [[<output id='system1'></output>]] system.
+						<div>'''<output id='name2' name="name"></output>''' is a [[Habitable Base|player base]], located on the	planet [[<output id='planet1' name="planet"></output>]] in the [[<output id='system1' name="system"></output>]] system.
 						</div>
 						<br>
 
