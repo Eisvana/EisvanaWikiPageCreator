@@ -14,7 +14,7 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
-			radioFunction("researchteam", "GHSH")
+			textFunction("researchteam", "researchteam_input");
 			calcInv("type_input", "subtype_input", "inventory_input");
 			textFunction("release", "version_input");
 			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
@@ -54,11 +54,12 @@
 			glyphRegion("portalglyphs_input", "civ", "region");
 			costSlotCalc("type_input", "inventory", "cost", "slots", "techslots", "cargoslots");
 			loc("system_input", "type_input", "civ", "moon_input", "planet_input", "axes_input", "region", "inventory", "location");
-			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam");
+			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
 			addInfo("type_input", "civ", "researchteam", "addInfo")
 		}
 		window.onload = () => {
 			subtypeDropdown('type_input', 'subtype_input');
+			researchTeamDropdown("civ", "researchteam_input")
 			autoRefresh();
 			showHideStarshipSelects("type_input", "subtype_input", "exotic_input", "pilot_input", "maneuverB_input", "damageB_input", "shieldB_input", "warpB_input", "inventory_input", "planet_input", "moon_input", "axes_input", "economy_input");
 			appearanceDropdowns("name_input", "type_input", "secParts_input", "accessories_input", "miscParts_input", "appearance_input");
@@ -108,7 +109,7 @@
 						<tr>
 							<th><label>Which civ does this ship belong to?</label>
 							<td>
-								<select id="civ" name="Civ">
+								<select id="civ" name="Civ" onchange="researchTeamDropdown('civ', 'researchteam_input')">
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
 									<option value="EisHub" id="EisHub">EisHub
@@ -342,15 +343,10 @@
 							<td><input type="text" name="DocBy" id="docby_input">
 						</tr>
 						<tr>
-							<th><label>Are you part of the GHSH?</label>
+							<th><label>Do you belong to a chapter?</label>
 							<td>
-								<input type="radio" id="GHSHY" name="GHSH" value="GHSH">
-								<label for="GHSHY">Yes</label>
-								<input type="radio" id="GHSHN" name="GHSH" value="">
-								<label for="GHSHN">No</label>
-								<span style="display:none">
-									<input type="radio" id="GHSHA" name="GHSH" value="" checked>
-								</span>
+								<select id="researchteam_input" name="Researchteam">
+								</select>
 							</td>
 						</tr>
 						<tr>
