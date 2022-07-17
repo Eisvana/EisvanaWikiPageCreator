@@ -41,6 +41,7 @@
 			textFunction("conflict", "conflict_input");
 			textFunctionMultiple("researchteam", "researchteam_input");
 			textFunction("originalname", "originalname_input");
+			researchTeam("researchteam", "civilized");
 			// to do: Spaceship dealers
 			//radioFunction("mtAML", "mtAML_input");
 			textFunction("addInfo", "addInfo_input");
@@ -48,6 +49,7 @@
 			hideDiscoverer("discovered_input", "discoveredlink_input");
 			glyphRegion("portalglyphs_input", "civ", "region");
 			codeFunctionMultiple("region", "region");
+			codeFunctionMultiple("galaxy", "galaxy");
 		}
 		window.onload = () => {
 			placePlanetInputs("water_inputY");
@@ -586,7 +588,7 @@
 						<div>| name = <output id='name' name="name"></output></div>
 						<div>| image = <output id='image'></output></div>
 						<div>| region = <output id='region'></output></div>
-						<div>| galaxy = <output id='galaxy' name="galaxy"></output></div>
+						<div>| galaxy = <output id='galaxy'></output></div>
 						<div>| multiplestars = <output id='multiplestars'></output></div>
 						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}</div>
 						<div>| color = <output id='color'></output></div>
@@ -641,10 +643,10 @@
 						<div>&lt;!--All Starships discovered in the system can be found in the [[<output id="systemShipCatalog" name="name"></output> - Starship Catalog]] and the respective [[<output id="shipCatalogHub"></output> Starship Catalog]]s.--&gt;</div>
 						<br>
 						<div>===Documented Starships===</div>
-						<div>{{CARGOShipSys|{{Glyphs2Coords|<output id="shipcoords" name="portalglyphs"></output>}}|Eissentam}}</div>
+						<div>{{CARGOShipSys|{{Glyphs2Coords|<output id="shipcoords" name="portalglyphs"></output>}}|<output id="galaxy1" name="galaxy"></output>}}</div>
 						<br>
 						<div>==Documented Multi-Tools==</div>
-						<div>{{CARGOMTCoord|{{Glyphs2Coords|<output id="mtcoords" name="portalglyphs"></output>}}|Eissentam}}</div>
+						<div>{{CARGOMTCoord|{{Glyphs2Coords|<output id="mtcoords" name="portalglyphs"></output>}}|<output id="galaxy2" name="galaxy"></output>}}</div>
 						<br>
 						<div>==Location information==</div>
 						<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
