@@ -16,23 +16,16 @@
 		function showInput() {
 			textFunction("researchteam", "researchteam_input");
 			calcInv("type_input", "subtype_input", "inventory_input");
-			textFunction("release", "version_input");
-			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name", "name_input");
-			textFunction("name1", "name_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("name2", "name_input"); //duplicates due to IDs needing to be unique across document
+			textFunctionMultiple("release", "version_input");
+			textFunctionMultiple("name", "name_input");
 			textFunction("image", "image_input");
 			textFunction("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
 			textFunction("axes", "axes_input");
 			textFunction("economy", "economy_input");
-			textFunction("portalglyphs", "portalglyphs_input");
-			textFunction("portalglyphs1", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("glyph_display", "portalglyphs_input"); //duplicates due to IDs needing to be unique across document
-			textFunction("type", "type_input");
-			textFunction("type1", "type_input");
-			textFunction("type2", "type_input");
+			textFunctionMultiple("portalglyphs", "portalglyphs_input");
+			textFunctionMultiple("type", "type_input");
 			textFunction("subtype", "subtype_input");
 			textFunction("exotic", "exotic_input");
 			textFunction("pilot", "pilot_input");
@@ -276,7 +269,7 @@
 										<span class="glyphs icon is-small">F</span>
 									</button>
 								</div>
-								<output class="glyphs" style="word-break: break-word" id="glyph_display"></output>
+								<output class="glyphs" style="word-break: break-word" id="glyph_display" name="portalglyphs"></output>
 							</td>
 						</tr>
 						<tr>
@@ -464,10 +457,10 @@
 			<div class="column is-full-mobile">
 				<div class="output">
 					<div id="wikiText">
-						<div>{{Version|<output id='release'></output>}}</div>
+						<div>{{Version|<output id='release' name="release"></output>}}</div>
 						<div>{{<output id='civStub'></output>}}</div>
 						<div>{{Starship infobox</div>
-						<div>| name = <output id='name'></output></div>
+						<div>| name = <output id='name' name="type"></output></div>
 						<div>| image = <output id='image'></output></div>
 						<div>| civilized = <output id='civilized'></output></div>
 						<div>| galaxy = <output id='galaxy'></output></div>
@@ -478,9 +471,9 @@
 						<div>| axes = <output id='axes'></output></div>
 						<div>| economy = <output id='economy'></output></div>
 						<div>| pilot = <output id='pilot'></output></div>
-						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs1'></output>}}</div>
-						<div>| portalglyphs = <output id='portalglyphs'></output></div>
-						<div>| type = <output id='type'></output></div>
+						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
+						<div>| portalglyphs = <output id='portalglyphs' name="portalglyphs"></output></div>
+						<div>| type = <output id='type' name="type"></output></div>
 						<div>| subtype = <output id='subtype'></output></div>
 						<div>| exotic = <output id='exotic'></output></div>
 						<div>| class = <output id='class'></output></div>
@@ -492,18 +485,18 @@
 						<div>| discovered = <output id='discovered'></output></div>
 						<div>| discoveredlink = <output id='discoveredlink'></output></div>
 						<div>| researchteam = <output id='researchteam'></output></div>
-						<div>| release = <output id='release1'></output></div>
+						<div>| release = <output id='release1' name="release"></output></div>
 						<div>| maneuverB = <output id='maneuverB'></output></div>
 						<div>| damageB = <output id='damageB'></output></div>
 						<div>| shieldB = <output id='shieldB'></output></div>
 						<div>| warpB = <output id='warpB'></output></div>
 						<div>}}</div>
-						<div>'''<output id='name1'></output>''' is a starship.</div>
+						<div>'''<output id='name1' name="type"></output>''' is a starship.</div>
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''<output id='name2'></output>''' is <output id='enPrefix'></output> [[Starship Catalogue
-							- <output id='type1'></output>|<output id='type2'></output>]]-type [[starship]].</div>
+						<div>'''<output id='name2' name="type"></output>''' is <output id='enPrefix'></output> [[Starship Catalogue
+							- <output id='type1' name="type"></output>|<output id='type2' name="type"></output>]]-type [[starship]].</div>
 						<br>
 						<div>This starship <output id="sChance"></output> in S-class.</div>
 						<br>

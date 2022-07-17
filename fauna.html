@@ -18,11 +18,10 @@
 			textFunctionMultiple("newName", "name_input");
 			textFunctionMultiple("name", pageName('oldName_input', 'name_input'));
 			textFunction("image", "image_input");
-			textFunction("system", "system_input");
+			textFunctionMultiple("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
 			planetMoon("planet_input", "moon_input", "locPlanet");
-			textFunction("locSystem", "system_input");
 			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunction("discovered", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
@@ -480,7 +479,7 @@
 						<div>| image = <output id='image'></output></div>
 						<div>| galaxy = <output id='galaxy'></output></div>
 						<div>| region = <output id='region'></output></div>
-						<div>| system = <output id='system'></output></div>
+						<div>| system = <output id='system' name="system"></output></div>
 						<div>| planet = <output id='planet'></output></div>
 						<div>| moon = <output id='moon'></output></div>
 						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}</div>
@@ -529,7 +528,7 @@
 
 						<div>==Location==</div>
 						<div>It can be found on the <output id='locPlanet'></output> in the [[<output
-								id='locSystem'></output>]] [[star system]].</div>
+								id='locSystem' name="system"></output>]] [[star system]].</div>
 						<br>
 						<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
 						<br>
