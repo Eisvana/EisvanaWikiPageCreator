@@ -14,16 +14,14 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
-			radioFunction("researchteam", "GHEC")
 			textFunctionMultiple("release", "version_input");
 			textFunctionMultiple("newName", "name_input");
 			textFunctionMultiple("name", pageName('oldName_input', 'name_input'));
 			textFunction("image", "image_input");
-			textFunction("system", "system_input");
+			textFunctionMultiple("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
 			planetMoon("planet_input", "moon_input", "locPlanet");
-			textFunction("locSystem", "system_input");
 			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunction("discovered", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
@@ -43,11 +41,12 @@
 			textFunction("notes", "notes_input");
 			textFunction("produces", "produces_input");
 			textFunction("mode", "mode_input");
+			textFunction("researchteam", "researchteam_input");
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			researchTeam("researchteam", "civilized");
 			glyphRegion("portalglyphs_input", "civ", "region");
-			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam");
+			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
 			addInfo("catalog_input", "researchteam", "addInfo");
 			hideOrgName('oldName_input', 'oldName');
 			specialNotesTextFunc("notes_input", "specialNotes_input", "addObservation");
@@ -55,6 +54,7 @@
 			whitespaceDetector("addInfoWrapper");
 		}
 		window.onload = () => {
+			researchTeamDropdown("civ", "researchteam_input")
 			autoRefresh();
 			genusDropdown("ecosystem_input", "genus_input");
 			genusProduces("genus_input", "produces_input");
@@ -69,7 +69,7 @@
 
 <body>
 	<div class="container">
-		<nav style="font-size:larger">
+		<nav>
 			<div><a href="./" title="Main page">&larr; Return to main page</a></div>
 			<div><a href="./sandworm.html" title="Sandworm">&#8627; Sandworm</a></div>
 		</nav>
@@ -111,7 +111,7 @@
 						<tr>
 							<th><label>Which civ does this creature belong to?</label>
 							<td>
-								<select id="civ" name="Civ"
+								<select id="civ" name="Civ" onchange="researchTeamDropdown('civ', 'researchteam_input')">
 									onchange="albumDropdown('civ', 'ecosystem_input', 'catalog_input')">
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
@@ -349,22 +349,22 @@
 						<tr>
 							<th><label for="weight_input">Weight in kg:</label>
 							<td><input type="number" step="0.1" name="Weight" id="weight_input" placeholder="0.0"
-									onkeypress="isNumberKey(event)">
+									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
 							<th><label for="height_input">Height in m:</label>
 							<td><input type="number" step="0.1" name="Height" id="height_input" placeholder="0.0"
-									onkeypress="isNumberKey(event)">
+									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr style="display: none;">
 							<th><label for="weight2_input">Gender 2 Weight in kg:</label>
 							<td><input type="number" step="0.1" name="Weight2" id="weight2_input" placeholder="0.0"
-									onkeypress="isNumberKey(event)">
+									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr style="display: none;">
 							<th><label for="height2_input">Gender 2 Height in m:</label>
 							<td><input type="number" step="0.1" name="Height" id="height2_input" placeholder="0.0"
-									onkeypress="isNumberKey(event)">
+									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
 							<th><label for="notes_input">Notes:</label>
@@ -406,15 +406,10 @@
 							<td><input type="text" name="DocBy" id="docby_input">
 						</tr>
 						<tr>
-							<th><label>Are you part of the GHEC?</label>
+							<th><label>Do you belong to a chapter?</label>
 							<td>
-								<input type="radio" id="GHECY" name="GHEC" value="GHEC">
-								<label for="GHECY">Yes</label>
-								<input type="radio" id="GHECN" name="GHEC" value="">
-								<label for="GHECN">No</label>
-								<span style="display:none">
-									<input type="radio" id="GHECA" name="GHEC" value="" checked>
-								</span>
+								<select id="researchteam_input" name="Researchteam">
+								</select>
 							</td>
 						</tr>
 						<tr>
@@ -484,7 +479,7 @@
 						<div>| image = <output id='image'></output></div>
 						<div>| galaxy = <output id='galaxy'></output></div>
 						<div>| region = <output id='region'></output></div>
-						<div>| system = <output id='system'></output></div>
+						<div>| system = <output id='system' name="system"></output></div>
 						<div>| planet = <output id='planet'></output></div>
 						<div>| moon = <output id='moon'></output></div>
 						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}</div>
@@ -533,7 +528,7 @@
 
 						<div>==Location==</div>
 						<div>It can be found on the <output id='locPlanet'></output> in the [[<output
-								id='locSystem'></output>]] [[star system]].</div>
+								id='locSystem' name="system"></output>]] [[star system]].</div>
 						<br>
 						<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
 						<br>
@@ -900,6 +895,12 @@
 	</datalist>
 
 	<datalist id="dietData">
+		<option value="[[Star Bramble]]">
+		<option value="[[Echinocactus]]">
+		<option value="[[Solar Vine]]">
+		<option value="[[Frostwort]]">
+		<option value="[[Fungal Cluster]]">
+		<option value="[[Gamma Weed]]">
 		<option value="Vegetation">
 		<option value="Foliage">
 		<option value="Small trees">

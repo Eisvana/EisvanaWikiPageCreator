@@ -16,6 +16,8 @@
 			textFunction("image", "image_input");
 			textFunction("builder", "builder_input");
 			textFunction("builderlink", "builderlink_input");
+			docBy("docby", "docby_input", "builder_input", "builderlink_input", "researchteam_input");
+			textFunction("researchteam", "researchteam_input");
 			textFunctionMultiple("system", "system_input");
 			textFunctionMultiple("planet", "planet_input");
 			textFunction("moon", "moon_input");
@@ -44,8 +46,10 @@
 			civGalaxy("civ");
 			hideDiscoverer("builder_input", "builderlink_input");
 			glyphRegion("portalglyphs_input", "civ", "region");
+			whitespaceDetector("addInfoWrapper");
 		}
 		window.onload = () => {
+			researchTeamDropdown("civ", "researchteam_input")
 			autoRefresh();
 			showInput();
 		}
@@ -54,7 +58,7 @@
 
 <body>
 	<div class="container">
-		<nav style="font-size:larger"><a href="./" title="Main page">&larr; Return to main page</a></nav>
+		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
 		<br>
 		<h1 class="title is-2">Hub Wiki Page Creator - Base</h1>
 		<br>
@@ -93,7 +97,7 @@
 						<tr>
 							<th><label>Which civ does this base belong to?</label>
 							<td>
-								<select id="civ" name="Civ">
+								<select id="civ" name="Civ" onchange="researchTeamDropdown('civ', 'researchteam_input')">
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
 									<option value="EisHub" id="EisHub">EisHub
@@ -120,6 +124,10 @@
 						<tr>
 							<th><label for="builder_input">Builder alias if no wiki:</label>
 							<td><input type="text" name="Builder" id="builder_input">
+						</tr>
+						<tr>
+							<th><label for="docby_input">Documented by if not builder:</label>
+							<td><input type="text" name="DocBy" id="docby_input">
 						</tr>
 						<tr>
 							<th><label for="system_input">Name of the system:</label>
@@ -346,6 +354,13 @@
 							</td>
 						</tr>
 						<tr>
+							<th><label>Do you belong to a chapter?</label>
+							<td>
+								<select id="researchteam_input" name="Researchteam">
+								</select>
+							</td>
+						</tr>
+						<tr>
 							<td colspan="2">
 								<p style="text-align:center">Note: You can drag on the bottom right corner to expand the
 									text area
@@ -411,12 +426,13 @@
 						<div>| name = <output id='name' name="name"></output></div>
 						<div>| image = <output id='image'></output></div>
 						<div>| civilized = <output id='civilized'></output></div>
+						<div>| researchteam = <output id='researchteam'></output></div>
 						<div>| builderlink = <output id='builderlink'></output></div>
 						<div>| builder = <output id='builder'></output></div>
 						<div>| galaxy = <output id='galaxy'></output></div>
 						<div>| region = <output id='region'></output></div>
-						<div>| system = <output id='system'></output></div>
-						<div>| planet = <output id='planet'></output></div>
+						<div>| system = <output id='system' name="system"></output></div>
+						<div>| planet = <output id='planet' name="planet"></output></div>
 						<div>| moon = <output id='moon'></output></div>
 						<div>| axes = <output id='axes'></output></div>
 						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}</div>
@@ -456,8 +472,16 @@
 						<br>
 
 						<div>==Additional information==</div>
-						<div><output id='addInfo'></output></div>
-						<br>
+						<div id="addInfoWrapper">
+							<div>
+								<div><output id='addInfo'></output></div>
+								<br>
+							</div>
+							<div>
+								<div><output id="docby"></output></div>
+								<br>
+							</div>
+						</div>
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
