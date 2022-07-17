@@ -46,6 +46,7 @@
 			glyphRegion("portalglyphs_input", "civ", "region");
 		}
 		window.onload = () => {
+			researchTeamDropdown("civ", "researchteam_input")
 			autoRefresh();
 			showInput();
 		}
@@ -93,7 +94,7 @@
 						<tr>
 							<th><label>Which civ does this base belong to?</label>
 							<td>
-								<select id="civ" name="Civ">
+								<select id="civ" name="Civ" onchange="researchTeamDropdown('civ', 'researchteam_input')">
 									<option value="GHub" id="GHub">GHub
 									<option value="CalHub" id="CalHub">CalHub
 									<option value="EisHub" id="EisHub">EisHub
@@ -343,6 +344,13 @@
 								<label for="censusShow_inputY">Yes</label>
 								<input type="radio" id="censusShow_inputN" name="censusshow" value="Y" checked>
 								<label for="censusShow_inputN">No</label>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Do you belong to a chapter?</label>
+							<td>
+								<select id="researchteam_input" name="Researchteam">
+								</select>
 							</td>
 						</tr>
 						<tr>
