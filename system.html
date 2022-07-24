@@ -42,8 +42,12 @@
 			textFunctionMultiple("researchteam", "researchteam_input");
 			textFunction("originalname", "originalname_input");
 			researchTeam("researchteam", "civilized");
-			// to do: Spaceship dealers
-			//radioFunction("mtAML", "mtAML_input");
+			merchantUpgrades('MTMerchant', 'SSMerchant', 'ECMerchant', 'ESMerchant', 'ssmerchants');
+
+
+
+			// todo: Spaceship dealers
+			// radioFunction("mtAML", "mtAML_input");
 			textFunction("addInfo", "addInfo_input");
 			civGalaxy("civ");
 			hideDiscoverer("discovered_input", "discoveredlink_input");
@@ -492,26 +496,26 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="merchantUpgrades">
-								<input type="checkbox" id="mtAVU_input" name="MTAVU"
+								<input type="checkbox" id="mtAVU_input" name="MTMerchant"
 									value="Analysis Visor Upgrade"><label for="mtAVU_input">&nbsp;Analysis Visor
 									Upgrade</label>
-								<input type="checkbox" id="mtBJU_input" name="MTBJU"
+								<input type="checkbox" id="mtBJU_input" name="MTMerchant"
 									value="Blaze Javelin Upgrade"><label for="mtBJU_input">&nbsp;Blaze Javelin
 									Upgrade</label>
-								<input type="checkbox" id="mtBU_input" name="MTBU" value="Boltcaster Upgrade"><label
+								<input type="checkbox" id="mtBU_input" name="MTMerchant" value="Boltcaster Upgrade"><label
 									for="mtBU_input">&nbsp;Boltcaster Upgrade</label>
 								<input type="checkbox" id="mtGCU_input" name="MTCGU"
 									value="Geology Cannon Upgrade"><label for="mtGCU_input">&nbsp;Geology Cannon
 									Upgrade</label>
-								<input type="checkbox" id="mtMBU_input" name="MTMBU" value="Mining Beam Upgrade"><label
+								<input type="checkbox" id="mtMBU_input" name="MTMerchant" value="Mining Beam Upgrade"><label
 									for="mtMBU_input">&nbsp;Mining Beam Upgrade</label>
 								<input type="checkbox" id="mtPLU_input" name="MTPLU"
 									value="Plasma Launcher Upgrade"><label for="mtPLU_input">&nbsp;Plasma Launcher
 									Upgrade</label>
-								<input type="checkbox" id="mtPSU_input" name="MTPSU"
+								<input type="checkbox" id="mtPSU_input" name="MTMerchant"
 									value="Pulse Spitter Upgrade"><label for="mtPSU_input">&nbsp;Pulse Spitter
 									Upgrade</label>
-								<input type="checkbox" id="mtSBU_input" name="MTSBU"
+								<input type="checkbox" id="mtSBU_input" name="MTMerchant"
 									value="Scatter Blaster Upgrade"><label for="mtSBU_input">&nbsp;Scatter Blaster
 									Upgrade</label>
 							</td>
@@ -521,24 +525,24 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="merchantUpgrades">
-								<input type="checkbox" id="ssCBU" name="SSCBU" value="Cyclotron Ballista Upgrade"><label
+								<input type="checkbox" id="ssCBU" name="SSMerchant" value="Cyclotron Ballista Upgrade"><label
 									for="ssCBU">&nbsp;Cyclotron Ballista Upgrade</label>
-								<input type="checkbox" id="ssDSU" name="SSDSU" value="Deflector Shield Upgrade"><label
+								<input type="checkbox" id="ssDSU" name="SSMerchant" value="Deflector Shield Upgrade"><label
 									for="ssDSU">&nbsp;Deflector Shield Upgrade</label>
-								<input type="checkbox" id="ssHU" name="SSHU" value="Hyperdrive Upgrade"><label
+								<input type="checkbox" id="ssHU" name="SSMerchant" value="Hyperdrive Upgrade"><label
 									for="ssHU">&nbsp;Hyperdrive Upgrade</label>
-								<input type="checkbox" id="ssIKAU" name="SSIKAU"
+								<input type="checkbox" id="ssIKAU" name="SSMerchant"
 									value="Infra-Knife Accelerator Upgrade"><label for="ssIKAU">&nbsp;Infra-Knife
 									Accelerator Upgrade</label>
-								<input type="checkbox" id="ssLTU" name="SSLTU" value="Launch Thruster Upgrade"><label
+								<input type="checkbox" id="ssLTU" name="SSMerchant" value="Launch Thruster Upgrade"><label
 									for="ssLTU">&nbsp;Launch Thruster Upgrade</label>
-								<input type="checkbox" id="ssPBU" name="SSPBU" value="Phase Beam Upgrade"><label
+								<input type="checkbox" id="ssPBU" name="SSMerchant" value="Phase Beam Upgrade"><label
 									for="ssPBU">&nbsp;Phase Beam Upgrade</label>
-								<input type="checkbox" id="ssPCU" name="SSPCU" value="Photon Cannon Upgrade"><label
+								<input type="checkbox" id="ssPCU" name="SSMerchant" value="Photon Cannon Upgrade"><label
 									for="ssPCU">&nbsp;Photon Cannon Upgrade</label>
-								<input type="checkbox" id="ssPEU" name="SSPEU" value="Positron Ejector Upgrade"><label
+								<input type="checkbox" id="ssPEU" name="SSMerchant" value="Positron Ejector Upgrade"><label
 									for="ssPEU">&nbsp;Positron Ejector Upgrade</label>
-								<input type="checkbox" id="ssPuEU" name="SSPuEU" value="Pulse Engine Upgrade"><label
+								<input type="checkbox" id="ssPuEU" name="SSMerchant" value="Pulse Engine Upgrade"><label
 									for="ssPuEU">&nbsp;Pulse Engine Upgrade</label>
 							</td>
 						</tr>
@@ -547,26 +551,26 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="merchantUpgrades">
-								<input type="checkbox" id="ecEAMU" name="ECEAMU"
+								<input type="checkbox" id="ecEAMU" name="ECMerchant"
 									value="Exocraft Acceleration Module Upgrade"><label for="ecEAMU">&nbsp;Exocraft
 									Acceleration Module Upgrade</label>
-								<input type="checkbox" id="ecEMLU" name="ECEMLU"
+								<input type="checkbox" id="ecEMLU" name="ECMerchant"
 									value="Exocraft Mining Laser Upgrade"><label for="ecEMLU">&nbsp;Exocraft Mining
 									Laser Upgrade</label>
-								<input type="checkbox" id="ecEMCU" name="ECEMCU"
+								<input type="checkbox" id="ecEMCU" name="ECMerchant"
 									value="Exocraft Mounted Cannon Upgrade"><label for="ecEMCU">&nbsp;Exocraft Mounted
 									Cannon Upgrade</label>
-								<input type="checkbox" id="ecFEU" name="ECFEU" value="Fusion Engine Upgrade"><label
+								<input type="checkbox" id="ecFEU" name="ECMerchant" value="Fusion Engine Upgrade"><label
 									for="ecFEU">&nbsp;Fusion Engine Upgrade</label>
-								<input type="checkbox" id="ecHDU" name="ECHDU" value="Humboldt Drive Upgrade"><label
+								<input type="checkbox" id="ecHDU" name="ECMerchant" value="Humboldt Drive Upgrade"><label
 									for="ecHDU">&nbsp;Humboldt Drive Upgrade</label>
-								<input type="checkbox" id="ecMCU" name="ECMCU" value="Minotaur Cannon Upgrade"><label
+								<input type="checkbox" id="ecMCU" name="ECMerchant" value="Minotaur Cannon Upgrade"><label
 									for="ecMCU">&nbsp;Minotaur Cannon Upgrade</label>
-								<input type="checkbox" id="ecMEU" name="ECMEU" value="Minotaur Engine Upgrade"><label
+								<input type="checkbox" id="ecMEU" name="ECMerchant" value="Minotaur Engine Upgrade"><label
 									for="ecMEU">&nbsp;Minotaur Engine Upgrade</label>
-								<input type="checkbox" id="ecMLU" name="ECMLU" value="Minotaur Laser Upgrade"><label
+								<input type="checkbox" id="ecMLU" name="ECMerchant" value="Minotaur Laser Upgrade"><label
 									for="ecMLU">&nbsp;Minotaur Laser Upgrade</label>
-								<input type="checkbox" id="ecNCU" name="ECNCU" value="Nautilon Cannon Upgrade"><label
+								<input type="checkbox" id="ecNCU" name="ECMerchant" value="Nautilon Cannon Upgrade"><label
 									for="ecNCU">&nbsp;Nautilon Cannon Upgrade</label>
 							</td>
 						</tr>
@@ -575,24 +579,24 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="merchantUpgrades">
-								<input type="checkbox" id="esDSU" name="ESDSU" value="Defence Systems Upgrade"><label
+								<input type="checkbox" id="esDSU" name="ESMerchant" value="Defence Systems Upgrade"><label
 									for="esDSU">&nbsp;Defence Systems Upgrade</label>
-								<input type="checkbox" id="esLSU" name="ESLSU" value="Life Support Upgrade"><label
+								<input type="checkbox" id="esLSU" name="ESMerchant" value="Life Support Upgrade"><label
 									for="esLSU">&nbsp;Life Support Upgrade</label>
-								<input type="checkbox" id="esMSU" name="ESMSU" value="Movement System Upgrade"><label
+								<input type="checkbox" id="esMSU" name="ESMerchant" value="Movement System Upgrade"><label
 									for="esMSU">&nbsp;Movement System Upgrade</label>
-								<input type="checkbox" id="esRPM" name="ESRPM"
+								<input type="checkbox" id="esRPM" name="ESMerchant"
 									value="Radiation Protection Module"><label for="esRPM">&nbsp;Radiation Protection
 									Module</label>
-								<input type="checkbox" id="esTPMC" name="ESTPMC"
+								<input type="checkbox" id="esTPMC" name="ESMerchant"
 									value="Thermal Protection Module (Cold)"><label for="esTPMC">&nbsp;Thermal
 									Protection Module (Cold)</label>
-								<input type="checkbox" id="esTPMH" name="ESTPMH"
+								<input type="checkbox" id="esTPMH" name="ESMerchant"
 									value="Thermal Protection Module (Heat)"><label for="esTPMH">&nbsp;Thermal
 									Protection Module (Heat)</label>
-								<input type="checkbox" id="esTPM" name="ESTPM" value="Toxic Protection Module"><label
+								<input type="checkbox" id="esTPM" name="ESMerchant" value="Toxic Protection Module"><label
 									for="esTPM">&nbsp;Toxic Protection Module</label>
-								<input type="checkbox" id="esUPM" name="ESUPM"
+								<input type="checkbox" id="esUPM" name="ESMerchant"
 									value="Underwater Protection Module"><label for="esUPM">&nbsp;Underwater Protection
 									Module</label>
 							</td>
