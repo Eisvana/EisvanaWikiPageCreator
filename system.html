@@ -2,766 +2,764 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hub Wiki Page Creator - System</title>
-    <link rel="stylesheet" href="./lib/common.css">
-    <script src="./lib/common.js"></script>
-    <script src="./lib/systemlogic.js"></script>
-    <script src="./lib/celestialobjectslogic.js"></script>
-    <script>
-        const galleryArray = ['', 'System Page', 'System Exploration Guide', 'Default SS Multitool'];
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hub Wiki Page Creator - System</title>
+	<link rel="stylesheet" href="./lib/common.css">
+	<script src="./lib/common.js"></script>
+	<script src="./lib/systemlogic.js"></script>
+	<script src="./lib/celestialobjectslogic.js"></script>
+	<script>
+		const galleryArray = ['', 'System Page', 'System Exploration Guide', 'Default SS Multitool'];
 
-        // 1. param	= id in div and spans in wikicode
-        // 2. param	= id in input tags
-        function showInput() {
-            textFunction("release", "version_input");
-            textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
-            textFunctionMultiple("name", "name_input");
-            textFunction("image", "image_input");
-            textFunction("navImage", "navImage_input");
-            textFunction("ssImage", "ssImage_input");
-            textFunction("discovered", "discovered_input");
-            textFunction("discoveredlink", "discoveredlink_input");
-            explorer("discovered_input", "discoveredlink_input", "docby_input", "researchteam_input", "platform_input", "docDate_input", "discDate_input", "docby");
-            textFunctionMultiple("portalglyphs", "portalglyphs_input");
-            textFunction("mode", "mode_input");
-            textFunction("multiplestars", "multiplestars_input");
-            textFunction("color", "color_input");
-            textFunction("class", "class_input");
-            textFunction("distance", "distance_input");
-            textFunction("planet", "planet_input");
-            textFunction("moon", "moon_input");
-            radioFunction("water", "water_input");
-            textFunction("faction", "faction_input");
-            textFunction("economy", "economy_input");
-            textFunction("economybuy", "economybuy_input");
-            textFunction("economysell", "economysell_input");
-            textFunction("wealth", "wealth_input");
-            textFunction("conflict", "conflict_input");
-            textFunctionMultiple("researchteam", "researchteam_input");
-            textFunction("originalname", "originalname_input");
-            researchTeam("researchteam", "civilized");
-            // to do: Spaceship dealers
-            //radioFunction("mtAML", "mtAML_input");
-            textFunction("addInfo", "addInfo_input");
-            civGalaxy("civ");
-            hideDiscoverer("discovered_input", "discoveredlink_input");
-            glyphRegion("portalglyphs_input", "civ", "region");
-            codeFunctionMultiple("region", "region");
-            codeFunctionMultiple("galaxy", "galaxy");
-        }
-        window.onload = () => {
-            placePlanetInputs("water_inputY");
-            researchTeamDropdown("civ", "researchteam_input")
-            autoRefresh();
-            showInput();
-        }
-    </script>
+		// 1. param	= id in div and spans in wikicode
+		// 2. param	= id in input tags
+		function showInput() {
+			textFunction("release", "version_input");
+			textFunction("release1", "version_input"); //duplicates due to IDs needing to be unique across document
+			textFunctionMultiple("name", "name_input");
+			textFunction("image", "image_input");
+			textFunction("navImage", "navImage_input");
+			textFunction("ssImage", "ssImage_input");
+			textFunction("discovered", "discovered_input");
+			textFunction("discoveredlink", "discoveredlink_input");
+			explorer("discovered_input", "discoveredlink_input", "docby_input", "researchteam_input", "platform_input", "docDate_input", "discDate_input", "docby");
+			textFunctionMultiple("portalglyphs", "portalglyphs_input");
+			textFunction("mode", "mode_input");
+			textFunction("multiplestars", "multiplestars_input");
+			textFunction("color", "color_input");
+			textFunction("class", "class_input");
+			textFunction("distance", "distance_input");
+			textFunction("planet", "planet_input");
+			textFunction("moon", "moon_input");
+			radioFunction("water", "water_input");
+			textFunction("faction", "faction_input");
+			textFunction("economy", "economy_input");
+			textFunction("economybuy", "economybuy_input");
+			textFunction("economysell", "economysell_input");
+			textFunction("wealth", "wealth_input");
+			textFunction("conflict", "conflict_input");
+			textFunctionMultiple("researchteam", "researchteam_input");
+			textFunction("originalname", "originalname_input");
+			researchTeam("researchteam", "civilized");
+			// to do: Spaceship dealers
+			//radioFunction("mtAML", "mtAML_input");
+			textFunction("addInfo", "addInfo_input");
+			civGalaxy("civ");
+			hideDiscoverer("discovered_input", "discoveredlink_input");
+			glyphRegion("portalglyphs_input", "civ", "region");
+			codeFunctionMultiple("region", "region");
+			codeFunctionMultiple("galaxy", "galaxy");
+		}
+		window.onload = () => {
+			placePlanetInputs("water_inputY");
+			researchTeamDropdown("civ", "researchteam_input")
+			autoRefresh();
+			showInput();
+		}
+	</script>
 </head>
 
 <body>
-    <div class="container">
-        <nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
-        <br>
-        <h1 class="title is-2">Hub Wiki Page Creator - System</h1>
-        <br>
-        <div class="columns is-desktop">
-            <div class="column is-full-mobile">
-                <form id="form" onreset="resetAll('gallery_descs')">
-                    <table style="text-align:left">
-                        <tr>
-                            <th><label>Current release:</label>
-                            <td>
-                                <select id="version_input" name="Release">
-                                    <option value="Endurance">Endurance
-                                    <option value="Outlaws">Outlaws
-                                    <option value="SentinelUp">Sentinel
-                                    <option value="Prisms">Prisms
-                                    <option value="Expeditions">Expeditions
-                                    <option value="Companions">Companions
-                                    <option value="NextGen">NextGen
-                                    <option value="Origins">Origins
-                                    <option value="Desolation">Desolation
-                                    <option value="Crossplay">Crossplay
-                                    <option value="ExoMech">ExoMech
-                                    <option value="Living Ship">Living Ship
-                                    <option value="Synthesis">Synthesis
-                                    <option value="Beyond">Beyond
-                                    <option value="Visions">Visions
-                                    <option value="Abyss">Abyss
-                                    <option value="NEXT">NEXT
-                                    <option value="Atlas Rises">Atlas Rises
-                                    <option value="Pathfinder">Pathfinder
-                                    <option value="Foundation">Foundation
-                                    <option value="Release">Release
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Which civ does this system belong to?</label>
-                            <td>
-                                <select id="civ" name="Civ"
-                                    onchange="researchTeamDropdown('civ', 'researchteam_input')">
-                                    <option value="GHub" id="GHub">GHub
-                                    <option value="CalHub" id="CalHub">CalHub
-                                    <option value="EisHub" id="EisHub">EisHub
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Name of the system:</label>
-                            <td><input type="text" name="Name" id="name_input">
-                        </tr>
-                        <tr>
-                            <th><label>Original name (if known):</label>
-                            <td><input type="text" name="Originalname" id="originalname_input">
-                        </tr>
-                        <tr>
-                            <th><label>Main image name, including file extension:</label>
-                            <td>
-                                <input type="text" name="Image" id="image_input">
-                                <br>
-                                <input type="file" id="image_upload" name="Image_upload" accept="image/*"
-                                    onchange="imgUpload('image', 'image_upload', 'image_input')">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Navigation image name, including file extension:</label>
-                            <td>
-                                <input type="text" name="NavImage" id="navImage_input">
-                                <br>
-                                <input type="file" id="navImage_upload" name="NavImage_upload" accept="image/*"
-                                    onchange="imgUpload('navImage', 'navImage_upload', 'navImage_input')">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Space Station image name, including file extension:</label>
-                            <td>
-                                <input type="text" name="SSImage" id="ssImage_input">
-                                <br>
-                                <input type="file" id="ssImage_upload" name="SSImage_upload" accept="image/*"
-                                    onchange="imgUpload('ssImage', 'ssImage_upload', 'ssImage_input')">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button"
-                                    onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
+	<div class="container">
+		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
+		<br>
+		<h1 class="title is-2">Hub Wiki Page Creator - System</h1>
+		<br>
+		<div class="columns is-desktop">
+			<div class="column is-full-mobile">
+				<form id="form" onreset="resetAll('gallery_descs')">
+					<table style="text-align:left">
+						<tr>
+							<th><label>Current release:</label>
+							<td>
+								<select id="version_input" name="Release">
+									<option value="Endurance">Endurance
+									<option value="Outlaws">Outlaws
+									<option value="SentinelUp">Sentinel
+									<option value="Prisms">Prisms
+									<option value="Expeditions">Expeditions
+									<option value="Companions">Companions
+									<option value="NextGen">NextGen
+									<option value="Origins">Origins
+									<option value="Desolation">Desolation
+									<option value="Crossplay">Crossplay
+									<option value="ExoMech">ExoMech
+									<option value="Living Ship">Living Ship
+									<option value="Synthesis">Synthesis
+									<option value="Beyond">Beyond
+									<option value="Visions">Visions
+									<option value="Abyss">Abyss
+									<option value="NEXT">NEXT
+									<option value="Atlas Rises">Atlas Rises
+									<option value="Pathfinder">Pathfinder
+									<option value="Foundation">Foundation
+									<option value="Release">Release
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Which civ does this system belong to?</label>
+							<td>
+								<select id="civ" name="Civ"
+									onchange="researchTeamDropdown('civ', 'researchteam_input')">
+									<option value="GHub" id="GHub">GHub
+									<option value="CalHub" id="CalHub">CalHub
+									<option value="EisHub" id="EisHub">EisHub
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Name of the system:</label>
+							<td><input type="text" name="Name" id="name_input">
+						</tr>
+						<tr>
+							<th><label>Original name (if known):</label>
+							<td><input type="text" name="Originalname" id="originalname_input">
+						</tr>
+						<tr>
+							<th><label>Main image name, including file extension:</label>
+							<td>
+								<input type="text" name="Image" id="image_input">
+								<br>
+								<input type="file" id="image_upload" name="Image_upload" accept="image/*"
+									onchange="imgUpload('image', 'image_upload', 'image_input')">
+							</td>
+						</tr>
+						<tr>
+							<th><label>Navigation image name, including file extension:</label>
+							<td>
+								<input type="text" name="NavImage" id="navImage_input">
+								<br>
+								<input type="file" id="navImage_upload" name="NavImage_upload" accept="image/*"
+									onchange="imgUpload('navImage', 'navImage_upload', 'navImage_input')">
+							</td>
+						</tr>
+						<tr>
+							<th><label>Space Station image name, including file extension:</label>
+							<td>
+								<input type="text" name="SSImage" id="ssImage_input">
+								<br>
+								<input type="file" id="ssImage_upload" name="SSImage_upload" accept="image/*"
+									onchange="imgUpload('ssImage', 'ssImage_upload', 'ssImage_input')">
+							</td>
+						</tr>
+						<tr>
+							<th><label>Portalglyphs:</label><button class="button is-small is-danger" type="button"
+									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
 
-                            <td><input type="text" name="Glyphs" id="portalglyphs_input"
-                                    oninput="glyphInputOnChange(this)">
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <div class="portal-buttons">
-                                    <button class="button" type="button" value="0"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">0</span>
-                                    </button>
-                                    <button class="button" type="button" value="1"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">1</span>
-                                    </button>
-                                    <button class="button" type="button" value="2"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">2</span>
-                                    </button>
-                                    <button class="button" type="button" value="3"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">3</span>
-                                    </button>
-                                    <button class="button" type="button" value="4"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">4</span>
-                                    </button>
-                                    <button class="button" type="button" value="5"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">5</span>
-                                    </button>
-                                    <button class="button" type="button" value="6"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">6</span>
-                                    </button>
-                                    <button class="button" type="button" value="7"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">7</span>
-                                    </button>
-                                    <button class="button" type="button" value="8"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">8</span>
-                                    </button>
-                                    <button class="button" type="button" value="9"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">9</span>
-                                    </button>
-                                    <button class="button" type="button" value="A"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">A</span>
-                                    </button>
-                                    <button class="button" type="button" value="B"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">B</span>
-                                    </button>
-                                    <button class="button" type="button" value="C"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">C</span>
-                                    </button>
-                                    <button class="button" type="button" value="D"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">D</span>
-                                    </button>
-                                    <button class="button" type="button" value="E"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">E</span>
-                                    </button>
-                                    <button class="button" type="button" value="F"
-                                        onclick="glyphOnClick(this, 'portalglyphs_input')">
-                                        <span class="glyphs icon is-small">F</span>
-                                    </button>
-                                </div>
-                                <output class="glyphs" style="word-break: break-word" id="glyph_display"
-                                    name="portalglyphs"></output>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Number of stars:</label>
-                            <td>
-                                <select id="multiplestars_input" name="Multiplestars">
-                                    <option value="">1
-                                    <option value="2">2
-                                    <option value="3">3
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Color of (primary) star:</label>
-                            <td>
-                                <select id="color_input" name="Color">
-                                    <option value="Yellow">Yellow
-                                    <option value="Red">Red
-                                    <option value="Green">Green
-                                    <option value="Blue">Blue
-                                    <option value="Black Hole">Black Hole
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Stellar class:</label>
-                            <td><input type="text" name="Class" id="class_input">
-                        </tr>
-                        <tr>
-                            <th><label>Distance to center:</label>
-                            <td><input type="number" name="Distance" id="distance_input">
-                        </tr>
-                        <tr>
-                            <th><label>Number of planets:</label>
-                            <td><input type="number" min="1" max="6" value="1" name="Planet" id="planet_input"
-                                    oninput="planetMoon('planet_input', 'moon_input', 'planetmoons')">
-                        </tr>
-                        <tr>
-                            <th><label>Number of moons:</label>
-                            <td><input type="number" min="0" max="4" value="0" name="Moon" id="moon_input"
-                                    oninput="planetMoon('planet_input', 'moon_input', 'planetmoons')">
-                        </tr>
+							<td><input type="text" name="Glyphs" id="portalglyphs_input"
+									oninput="glyphInputOnChange(this)">
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="portal-buttons">
+									<button class="button" type="button" value="0"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">0</span>
+									</button>
+									<button class="button" type="button" value="1"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">1</span>
+									</button>
+									<button class="button" type="button" value="2"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">2</span>
+									</button>
+									<button class="button" type="button" value="3"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">3</span>
+									</button>
+									<button class="button" type="button" value="4"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">4</span>
+									</button>
+									<button class="button" type="button" value="5"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">5</span>
+									</button>
+									<button class="button" type="button" value="6"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">6</span>
+									</button>
+									<button class="button" type="button" value="7"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">7</span>
+									</button>
+									<button class="button" type="button" value="8"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">8</span>
+									</button>
+									<button class="button" type="button" value="9"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">9</span>
+									</button>
+									<button class="button" type="button" value="A"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">A</span>
+									</button>
+									<button class="button" type="button" value="B"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">B</span>
+									</button>
+									<button class="button" type="button" value="C"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">C</span>
+									</button>
+									<button class="button" type="button" value="D"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">D</span>
+									</button>
+									<button class="button" type="button" value="E"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">E</span>
+									</button>
+									<button class="button" type="button" value="F"
+										onclick="glyphOnClick(this, 'portalglyphs_input')">
+										<span class="glyphs icon is-small">F</span>
+									</button>
+								</div>
+								<output class="glyphs" style="word-break: break-word" id="glyph_display"
+									name="portalglyphs"></output>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Number of stars:</label>
+							<td>
+								<select id="multiplestars_input" name="Multiplestars">
+									<option value="">1
+									<option value="2">2
+									<option value="3">3
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Color of (primary) star:</label>
+							<td>
+								<select id="color_input" name="Color">
+									<option value="Yellow">Yellow
+									<option value="Red">Red
+									<option value="Green">Green
+									<option value="Blue">Blue
+									<option value="Black Hole">Black Hole
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Stellar class:</label>
+							<td><input type="text" name="Class" id="class_input">
+						</tr>
+						<tr>
+							<th><label>Distance to center:</label>
+							<td><input type="number" name="Distance" id="distance_input">
+						</tr>
+						<tr>
+							<th><label>Number of planets:</label>
+							<td><input type="number" min="1" max="6" value="1" name="Planet" id="planet_input"
+									oninput="planetMoon('planet_input', 'moon_input', 'planetmoons')">
+						</tr>
+						<tr>
+							<th><label>Number of moons:</label>
+							<td><input type="number" min="0" max="4" value="0" name="Moon" id="moon_input"
+									oninput="planetMoon('planet_input', 'moon_input', 'planetmoons')">
+						</tr>
 
-                        <tr>
-                            <th><label>Water in the system?</label>
-                            <td>
-                                <input type="radio" id="water_inputY" name="water" value="Yes">
-                                <label for="water_inputY">Yes</label>
-                                <input type="radio" id="water_inputN" name="water" value="No">
-                                <label for="water_inputN">No</label>
-                                <span style="display:none">
-                                    <input type="radio" id="water_inputA" name="water" value="" checked>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>System Faction:</label>
-                            <td>
-                                <select id="faction_input" name="Faction">
-                                    <option value="Gek">Gek
-                                    <option value="Korvax">Korvax
-                                    <option value="Vy'keen">Vy'keen
-                                    <option value="Gek Abandoned">Gek Abandoned
-                                    <option value="Korvax Abandoned">Korvax Abandoned
-                                    <option value="Vy'keen Abandoned">Vy'keen Abandoned
-                                    <option value="Uncharted">Uncharted
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>System economy:</label>
-                            <td>
-                                <select id="economy_input" name="Economy">
-                                    <optgroup label="Advanced Materials">
-                                        <option value="Alchemical">Alchemical
-                                        <option value="Material Fusion">Material Fusion
-                                        <option value="Metal Processing">Metal Processing
-                                        <option value="Ore Processing">Ore Processing
-                                    </optgroup>
-                                    <optgroup label="Manufacturing">
-                                        <option value="Construction">Construction
-                                        <option value="Industrial">Industrial
-                                        <option value="Manufacturing">Manufacturing
-                                        <option value="Mass Production">Mass Production
-                                    </optgroup>
-                                    <optgroup label="Mining">
-                                        <option value="Minerals">Minerals
-                                        <option value="Mining">Mining
-                                        <option value="Ore Extraction">Ore Extraction
-                                        <option value="Prospecting">Prospecting
-                                    </optgroup>
-                                    <optgroup label="Power Generation">
-                                        <option value="Energy Supply">Energy Supply
-                                        <option value="Fuel Generation">Fuel Generation
-                                        <option value="High Voltage">High Voltage
-                                        <option value="Power Generation">Power Generation
-                                    </optgroup>
-                                    <optgroup label="Scientific">
-                                        <option value="Experimental">Experimental
-                                        <option value="Mathematical">Mathematical
-                                        <option value="Research">Research
-                                        <option value="Mathematical">Mathematical
-                                    </optgroup>
-                                    <optgroup label="Technology">
-                                        <option value="Engine">Engine
-                                        <option value="High Tech">High Tech
-                                        <option value="Nano-construction">Nano-construction
-                                        <option value="Technology">Technology
-                                    </optgroup>
-                                    <optgroup label="Trading">
-                                        <option value="Commercial">Commercial
-                                        <option value="Mercantile">Mercantile
-                                        <option value="Shipping">Shipping
-                                        <option value="Trading">Trading
-                                    </optgroup>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Economy sell:</label>
-                            <td><input type="number" name="Economysell" id="economysell_input">
-                        </tr>
-                        <tr>
-                            <th><label>Economy buy:</label>
-                            <td><input type="number" name="Economybuy" id="economybuy_input">
-                        </tr>
-                        <tr>
-                            <th><label>System wealth:</label>
-                            <td>
-                                <select id="wealth_input" name="Wealth">
-                                    <optgroup label="T3">
-                                        <option value="★★★ (Advanced)">Advanced
-                                        <option value="★★★ (Affluent)">Affluent
-                                        <option value="★★★ (Booming)">Booming
-                                        <option value="★★★ (Flourishing)">Flourishing
-                                        <option value="★★★ (High Supply)">High Supply
-                                        <option value="★★★ (Opulent)">Opulent
-                                        <option value="★★★ (Prosperous)">Prosperous
-                                        <option value="★★★ (Wealthy)">Wealthy
-                                    </optgroup><!-- here ends T3-->
-                                    <optgroup label="T2">
-                                        <!--here begins T2-->
-                                        <option value="★★ (Adequate)">Adequate
-                                        <option value="★★ (Balanced)">Balanced
-                                        <option value="★★ (Comfortable)">Comfortable
-                                        <option value="★★ (Developing)">Developing
-                                        <option value="★★ (Medium Supply)">Medium Supply
-                                        <option value="★★ (Promising)">Promising
-                                        <option value="★★ (Satisfactory)">Satisfactory
-                                        <option value="★★ (Sustainable)">Sustainable
-                                    </optgroup><!-- here ends T2-->
-                                    <optgroup label="T1">
-                                        <!--here begins T1-->
-                                        <option value="★ (Declining)">Declining
-                                        <option value="★ (Destitute)">Destitute
-                                        <option value="★ (Failing)">Failing
-                                        <option value="★ (Fledgling)">Fledgling
-                                        <option value="★ (Low Supply)">Low Supply
-                                        <option value="★ (Struggling)">Struggling
-                                        <option value="★ (Unsuccessful)">Unsuccessful
-                                        <option value="★ (Unpromising)">Unpromising
-                                    </optgroup>
-                                    <!--here ends T1-->
-                                    <optgroup label="Pirate">
-                                        <option value="💀 (Black Market)">Black Market
-                                    </optgroup>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>System conflict:</label>
-                            <td>
-                                <select id="conflict_input" name="Conflict">
-                                    <optgroup label="T3">
-                                        <option value="★★★ (Aggressive)">Aggressive
-                                        <option value="★★★ (Alarming)">Alarming
-                                        <option value="★★★ (At War)">At War
-                                        <option value="★★★ (Critical)">Critical
-                                        <option value="★★★ (Dangerous)">Dangerous
-                                        <option value="★★★ (Destructive)">Destructive
-                                        <option value="★★★ (Formidable)">Formidable
-                                        <option value="★★★ (High)">High
-                                        <option value="★★★ (Lawless)">Lawless
-                                        <option value="★★★ (Perilous)">Perilous
-                                    </optgroup><!-- here ends T3-->
-                                    <optgroup label="T2">
-                                        <!--here begins T2-->
-                                        <option value="★★ (Belligerent)">Belligerent
-                                        <option value="★★ (Boisterous)">Boisterous
-                                        <option value="★★ (Fractious)">Fractious
-                                        <option value="★★ (Intermittent)">Intermittent
-                                        <option value="★★ (Medium)">Medium
-                                        <option value="★★ (Rowdy)">Rowdy
-                                        <option value="★★ (Sporadic)">Sporadic
-                                        <option value="★★ (Testy)">Testy
-                                        <option value="★★ (Unruly)">Unruly
-                                        <option value="★★ (Unstable)">Unstable
-                                    </optgroup><!-- here ends T2-->
-                                    <optgroup label="T1">
-                                        <!--here begins T1-->
-                                        <option value="★ (Gentle)">Gentle
-                                        <option value="★ (Low)">Low
-                                        <option value="★ (Mild)">Mild
-                                        <option value="★ (Peaceful)">Peaceful
-                                        <option value="★ (Relaxed)">Relaxed
-                                        <option value="★ (Stable)">Stable
-                                        <option value="★ (Tranquil)">Tranquil
-                                        <option value="★ (Trivial)">Trivial
-                                        <option value="★ (Unthreatening)">Unthreatening
-                                        <option value="★ (Untroubled)">Untroubled
-                                    </optgroup>
-                                    <!--here ends T1-->
-                                    <optgroup label="Pirate">
-                                        <option value="💀 (Pirate Controlled)">Pirate Controlled
-                                    </optgroup>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>When was this system discovered?</label>
-                            <td><input type="date" name="DiscDate" id="discDate_input">
-                        </tr>
-                        <tr>
-                            <th><label>When was this system documented?</label>
-                            <td><input type="date" name="DocDate" id="docDate_input">
-                        </tr>
-                        <tr>
-                            <th><label>Do you belong to a chapter?</label>
-                            <td>
-                                <select id="researchteam_input" name="Researchteam">
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Gamemode:</label>
-                            <td>
-                                <select id="mode_input" name="Mode">
-                                    <option value="Normal">Normal
-                                    <option value="Survival">Survival
-                                    <option value="Permadeath">Permadeath
-                                    <option value="Creative">Creative
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Discoverer platform:</label>
-                            <td>
-                                <select id="platform_input" name="Platform">
-                                    <option value="PC">PC
-                                    <option value="PS">PS
-                                    <option value="Xbox">XB
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Discoverer wiki account:</label>
-                            <td><input type="text" name="Discoveredlink" id="discoveredlink_input">
-                        </tr>
-                        <tr>
-                            <th><label>Discoverer alias if no wiki:</label>
-                            <td><input type="text" name="Discovered" id="discovered_input">
-                        </tr>
-                        <tr>
-                            <th><label>Documenter alias:</label>
-                            <td><input type="text" name="DocBy" id="docby_input">
-                        </tr>
-                        <tr>
-                            <th><label>S-class multitool merchant upgrades:</label>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="merchantUpgrades">
-                                <input type="checkbox" id="mtAVU_input" name="MTAVU"
-                                    value="Analysis Visor Upgrade"><label for="mtAVU_input">&nbsp;Analysis Visor
-                                    Upgrade</label>
-                                <input type="checkbox" id="mtBJU_input" name="MTBJU"
-                                    value="Blaze Javelin Upgrade"><label for="mtBJU_input">&nbsp;Blaze Javelin
-                                    Upgrade</label>
-                                <input type="checkbox" id="mtBU_input" name="MTBU" value="Boltcaster Upgrade"><label
-                                    for="mtBU_input">&nbsp;Boltcaster Upgrade</label>
-                                <input type="checkbox" id="mtGCU_input" name="MTCGU"
-                                    value="Geology Cannon Upgrade"><label for="mtGCU_input">&nbsp;Geology Cannon
-                                    Upgrade</label>
-                                <input type="checkbox" id="mtMBU_input" name="MTMBU" value="Mining Beam Upgrade"><label
-                                    for="mtMBU_input">&nbsp;Mining Beam Upgrade</label>
-                                <input type="checkbox" id="mtPLU_input" name="MTPLU"
-                                    value="Plasma Launcher Upgrade"><label for="mtPLU_input">&nbsp;Plasma Launcher
-                                    Upgrade</label>
-                                <input type="checkbox" id="mtPSU_input" name="MTPSU"
-                                    value="Pulse Spitter Upgrade"><label for="mtPSU_input">&nbsp;Pulse Spitter
-                                    Upgrade</label>
-                                <input type="checkbox" id="mtSBU_input" name="MTSBU"
-                                    value="Scatter Blaster Upgrade"><label for="mtSBU_input">&nbsp;Scatter Blaster
-                                    Upgrade</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>S-class starship merchant upgrades:</label>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="merchantUpgrades">
-                                <input type="checkbox" id="ssCBU" name="SSCBU" value="Cyclotron Ballista Upgrade"><label
-                                    for="ssCBU">&nbsp;Cyclotron Ballista Upgrade</label>
-                                <input type="checkbox" id="ssDSU" name="SSDSU" value="Deflector Shield Upgrade"><label
-                                    for="ssDSU">&nbsp;Deflector Shield Upgrade</label>
-                                <input type="checkbox" id="ssHU" name="SSHU" value="Hyperdrive Upgrade"><label
-                                    for="ssHU">&nbsp;Hyperdrive Upgrade</label>
-                                <input type="checkbox" id="ssIKAU" name="SSIKAU"
-                                    value="Infra-Knife Accelerator Upgrade"><label for="ssIKAU">&nbsp;Infra-Knife
-                                    Accelerator Upgrade</label>
-                                <input type="checkbox" id="ssLTU" name="SSLTU" value="Launch Thruster Upgrade"><label
-                                    for="ssLTU">&nbsp;Launch Thruster Upgrade</label>
-                                <input type="checkbox" id="ssPBU" name="SSPBU" value="Phase Beam Upgrade"><label
-                                    for="ssPBU">&nbsp;Phase Beam Upgrade</label>
-                                <input type="checkbox" id="ssPCU" name="SSPCU" value="Photon Cannon Upgrade"><label
-                                    for="ssPCU">&nbsp;Photon Cannon Upgrade</label>
-                                <input type="checkbox" id="ssPEU" name="SSPEU" value="Positron Ejector Upgrade"><label
-                                    for="ssPEU">&nbsp;Positron Ejector Upgrade</label>
-                                <input type="checkbox" id="ssPuEU" name="SSPuEU" value="Pulse Engine Upgrade"><label
-                                    for="ssPuEU">&nbsp;Pulse Engine Upgrade</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>S-class exocraft merchant upgrades:</label>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="merchantUpgrades">
-                                <input type="checkbox" id="ecEAMU" name="ECEAMU"
-                                    value="Exocraft Acceleration Module Upgrade"><label for="ecEAMU">&nbsp;Exocraft
-                                    Acceleration Module Upgrade</label>
-                                <input type="checkbox" id="ecEMLU" name="ECEMLU"
-                                    value="Exocraft Mining Laser Upgrade"><label for="ecEMLU">&nbsp;Exocraft Mining
-                                    Laser Upgrade</label>
-                                <input type="checkbox" id="ecEMCU" name="ECEMCU"
-                                    value="Exocraft Mounted Cannon Upgrade"><label for="ecEMCU">&nbsp;Exocraft Mounted
-                                    Cannon Upgrade</label>
-                                <input type="checkbox" id="ecFEU" name="ECFEU" value="Fusion Engine Upgrade"><label
-                                    for="ecFEU">&nbsp;Fusion Engine Upgrade</label>
-                                <input type="checkbox" id="ecHDU" name="ECHDU" value="Humboldt Drive Upgrade"><label
-                                    for="ecHDU">&nbsp;Humboldt Drive Upgrade</label>
-                                <input type="checkbox" id="ecMCU" name="ECMCU" value="Minotaur Cannon Upgrade"><label
-                                    for="ecMCU">&nbsp;Minotaur Cannon Upgrade</label>
-                                <input type="checkbox" id="ecMEU" name="ECMEU" value="Minotaur Engine Upgrade"><label
-                                    for="ecMEU">&nbsp;Minotaur Engine Upgrade</label>
-                                <input type="checkbox" id="ecMLU" name="ECMLU" value="Minotaur Laser Upgrade"><label
-                                    for="ecMLU">&nbsp;Minotaur Laser Upgrade</label>
-                                <input type="checkbox" id="ecNCU" name="ECNCU" value="Nautilon Cannon Upgrade"><label
-                                    for="ecNCU">&nbsp;Nautilon Cannon Upgrade</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>S-class exosuit merchant upgrades:</label>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="merchantUpgrades">
-                                <input type="checkbox" id="esDSU" name="ESDSU" value="Defence Systems Upgrade"><label
-                                    for="esDSU">&nbsp;Defence Systems Upgrade</label>
-                                <input type="checkbox" id="esLSU" name="ESLSU" value="Life Support Upgrade"><label
-                                    for="esLSU">&nbsp;Life Support Upgrade</label>
-                                <input type="checkbox" id="esMSU" name="ESMSU" value="Movement System Upgrade"><label
-                                    for="esMSU">&nbsp;Movement System Upgrade</label>
-                                <input type="checkbox" id="esRPM" name="ESRPM"
-                                    value="Radiation Protection Module"><label for="esRPM">&nbsp;Radiation Protection
-                                    Module</label>
-                                <input type="checkbox" id="esTPMC" name="ESTPMC"
-                                    value="Thermal Protection Module (Cold)"><label for="esTPMC">&nbsp;Thermal
-                                    Protection Module (Cold)</label>
-                                <input type="checkbox" id="esTPMH" name="ESTPMH"
-                                    value="Thermal Protection Module (Heat)"><label for="esTPMH">&nbsp;Thermal
-                                    Protection Module (Heat)</label>
-                                <input type="checkbox" id="esTPM" name="ESTPM" value="Toxic Protection Module"><label
-                                    for="esTPM">&nbsp;Toxic Protection Module</label>
-                                <input type="checkbox" id="esUPM" name="ESUPM"
-                                    value="Underwater Protection Module"><label for="esUPM">&nbsp;Underwater Protection
-                                    Module</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p style="text-align:center">Note: You can drag on the bottom right corner to expand the
-                                    text area
-                                </p>
-                            </td>
-                        </tr>
-                        <tr class="no-border">
-                            <th style="vertical-align:top" colspan="2"><label>Additional information:</label>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <textarea name="AdditionalInformation" id="addInfo_input"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label>Gallery files</label>
-                            <td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
-                                    onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
-                        </tr>
-                    </table>
-                    <br>
-                </form>
-                <div id="gallery_descs">
-                </div>
-                <div>
-                    <span class="actions" style="white-space: nowrap">
-                        <!--						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>-->
-                        <button class="button is-warning" type="reset" form="form">Reset inputs</button>
-                    </span>
-                    <span class="actions" style="white-space: nowrap">
-                        <button id="btn" class="button is-outlined is-primary"
-                            onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
-                        <a id="downloadbtn" class="button is-outlined is-primary"
-                            onclick="downloadFile('downloadbtn', 'wikiText', 'name_input')">Download file</a>
-                        <a class="button is-outlined is-primary" id="link"
-                            onclick="wikiLink('link', 'region', 'name_input');">Create page</a>
-                    </span>
-                </div>
-                <br>
-            </div>
-            <div class="column is-full-mobile">
-                <div class="output">
-                    <div id="wikiText">
-                        <div>{{Version|<output id='release' name="release"></output>}}</div>
-                        <div>{{<output id='civStub'></output>}}</div>
-                        <div>{{System infobox</div>
-                        <div>| name = <output id='name' name="name"></output></div>
-                        <div>| image = <output id='image'></output></div>
-                        <div>| region = <output id='region'></output></div>
-                        <div>| galaxy = <output id='galaxy'></output></div>
-                        <div>| multiplestars = <output id='multiplestars'></output></div>
-                        <div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}
-                        </div>
-                        <div>| color = <output id='color'></output></div>
-                        <div>| class = <output id='class'></output></div>
-                        <div>| distance = <output id='distance'></output></div>
-                        <div>| planet = <output id='planet'></output></div>
-                        <div>| moon = <output id='moon'></output></div>
-                        <div>| water = <output id='water'></output></div>
-                        <div>| faction = <output id='faction'></output></div>
-                        <div>| economy = <output id='economy'></output></div>
-                        <div>| economybuy = <output id='economybuy'></output></div>
-                        <div>| economysell = <output id='economysell'></output></div>
-                        <div>| wealth = <output id='wealth'></output></div>
-                        <div>| conflict = <output id='conflict'></output></div>
-                        <div>| mode = <output id='mode'></output></div>
-                        <div>| civilized = <output id='civilized'></output></div>
-                        <div>| researchteam = <output id='researchteam' name="researchteam"></output></div>
-                        <div>| discoveredlink = <output id='discoveredlink'></output></div>
-                        <div>| discovered = <output id='discovered' name="discovered"></output></div>
-                        <div>| platform = <output id='platform'></output></div>
-                        <div>| release = <output id='release1' name="release"></output></div>
-                        <div>}}</div>
-                        <div>'''<output id='name1' name="name"></output>''' is a star system.</div>
-                        <br>
-                        <div>==Summary==</div>
-                        <div>'''<output id='name2' name="name"></output>''' is a [[star system]], located in the
-                            [[<output id='region1' name="region"></output>]] region.</div>
-                        <br>
-                        <div>==Alias Names==</div>
-                        <div>{{aliasc|text=Original|name=<output id='originalname'></output>}}</div>
-                        <div>{{aliasc|text=Current|name=<output id='name3' name="name"></output>}}</div>
-                        <br>
-                        <div>==Discovered==</div>
-                        <div><output id="docby"></output></div>
-                        <br>
-                        <div>==Planets & Moons==</div>
-                        <div>{| class="wikitable" style="text-align:center; width:100%; max-width:1250px;"</div>
-                        <div>|-</div>
-                        <div>!width=150 style="background-color:#2f4f4f"|Image</div>
-                        <div>!width=150 style="background-color:#2f4f4f"|Landscape</div>
-                        <div>!style="background-color:#2f4f4f"|Planet Name</div>
-                        <div>!style="background-color:#2f4f4f"|Planet Type</div>
-                        <div>!style="background-color:#2f4f4f"|Resources</div>
-                        <div>!style="background-color:#2f4f4f"|Weather</div>
-                        <div>!style="background-color:#2f4f4f"|Sentinels</div>
-                        <div>!style="background-color:#2f4f4f"|Flora</div>
-                        <div>!style="background-color:#2f4f4f"|Fauna</div>
-                        <div id="planetmoons">
-                        </div>
-                        <div>|}</div>
-                        <br>
-                        <div>==Starships==</div>
-                        <div>&lt;!--All Starships discovered in the system can be found in the [[<output
-                                id="systemShipCatalog" name="name"></output> - Starship Catalog]] and the respective
-                            [[<output id="shipCatalogHub"></output> Starship Catalog]]s.--&gt;</div>
-                        <br>
-                        <div>===Documented Starships===</div>
-                        <div>{{CARGOShipSys|{{Glyphs2Coords|<output id="shipcoords"
-                                name="portalglyphs"></output>}}|<output id="galaxy1" name="galaxy"></output>}}</div>
-                        <br>
-                        <div>==Documented Multi-Tools==</div>
-                        <div>{{CARGOMTCoord|{{Glyphs2Coords|<output id="mtcoords"
-                                name="portalglyphs"></output>}}|<output id="galaxy2" name="galaxy"></output>}}</div>
-                        <br>
-                        <div>==Location information==</div>
-                        <div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
-                        <br>
-                        <div>===Navigation Image===</div>
-                        <div>[[File:<outut id="navImage"></outut>|400px]]</div>
-                        <br>
-                        <div>===System Location===</div>
-                        <div><output id="loc"></output></div>
-                        <br>
-                        <div>==Space Station==</div>
-                        <div>[[File:<output id=ssImage></output>|thumb|System space station]]</div>
-                        <div>The [[Space Station]] [[Galactic Trade Terminal|terminal]] offers the following [[Trade
-                            Commodities]] for sale:</div>
-                        <div>{| class="wikitable"</div>
-                        <div>|-</div>
-                        <div>! style="background-color:#2F4F4F; min-width:250px"| Item Name</div>
-                        <div>! style="background-color:#2F4F4F; min-width:125px"| Price per Item</div>
-                        <div><output id=tradeTerminal></output></div>
-                        <div>|}</div>
-                        <div>The [[Space Station]] merchants offer the following {{class|S}} class items for sale:</div>
-                        <br>
-                        <div>{{SSMerchants</div>
-                        <div><output id="ssmerchants"></output></div>
-                        <div>}}</div>
-                        <br>
-                        <div>==Additional information==</div>
-                        <div><output id='addInfo'></output></div>
-                        <br>
-                        <div>==Gallery==</div>
-                        <div>&lt;gallery&gt;</div>
-                        <div><output id="galleryCode"></output></div>
-                        <div>&lt;/gallery&gt;</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer class="footer">
-        <div>
-            Please consider contributing to the project:
-            <ul>
-                <li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank"
-                        rel="noopener noreferrer">GitHub repository</a></li>
-                <li><a href="https://vscode.dev/github/Lenni009/NMSWikiPageCreator/tree/web-dev" target="_blank"
-                        rel="noopener noreferrer">VSCode online editor</a></li>
-            </ul>
-        </div>
-        <p>If you encounter any issues contact Lenni#4423 on Discord.</p>
-    </footer>
+						<tr>
+							<th><label>Water in the system?</label>
+							<td>
+								<input type="radio" id="water_inputY" name="water" value="Yes">
+								<label for="water_inputY">Yes</label>
+								<input type="radio" id="water_inputN" name="water" value="No">
+								<label for="water_inputN">No</label>
+								<span style="display:none">
+									<input type="radio" id="water_inputA" name="water" value="" checked>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<th><label>System Faction:</label>
+							<td>
+								<select id="faction_input" name="Faction">
+									<option value="Gek">Gek
+									<option value="Korvax">Korvax
+									<option value="Vy'keen">Vy'keen
+									<option value="Gek Abandoned">Gek Abandoned
+									<option value="Korvax Abandoned">Korvax Abandoned
+									<option value="Vy'keen Abandoned">Vy'keen Abandoned
+									<option value="Uncharted">Uncharted
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>System economy:</label>
+							<td>
+								<select id="economy_input" name="Economy">
+									<optgroup label="Advanced Materials">
+										<option value="Alchemical">Alchemical
+										<option value="Material Fusion">Material Fusion
+										<option value="Metal Processing">Metal Processing
+										<option value="Ore Processing">Ore Processing
+									</optgroup>
+									<optgroup label="Manufacturing">
+										<option value="Construction">Construction
+										<option value="Industrial">Industrial
+										<option value="Manufacturing">Manufacturing
+										<option value="Mass Production">Mass Production
+									</optgroup>
+									<optgroup label="Mining">
+										<option value="Minerals">Minerals
+										<option value="Mining">Mining
+										<option value="Ore Extraction">Ore Extraction
+										<option value="Prospecting">Prospecting
+									</optgroup>
+									<optgroup label="Power Generation">
+										<option value="Energy Supply">Energy Supply
+										<option value="Fuel Generation">Fuel Generation
+										<option value="High Voltage">High Voltage
+										<option value="Power Generation">Power Generation
+									</optgroup>
+									<optgroup label="Scientific">
+										<option value="Experimental">Experimental
+										<option value="Mathematical">Mathematical
+										<option value="Research">Research
+										<option value="Mathematical">Mathematical
+									</optgroup>
+									<optgroup label="Technology">
+										<option value="Engine">Engine
+										<option value="High Tech">High Tech
+										<option value="Nano-construction">Nano-construction
+										<option value="Technology">Technology
+									</optgroup>
+									<optgroup label="Trading">
+										<option value="Commercial">Commercial
+										<option value="Mercantile">Mercantile
+										<option value="Shipping">Shipping
+										<option value="Trading">Trading
+									</optgroup>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Economy sell:</label>
+							<td><input type="number" name="Economysell" id="economysell_input">
+						</tr>
+						<tr>
+							<th><label>Economy buy:</label>
+							<td><input type="number" name="Economybuy" id="economybuy_input">
+						</tr>
+						<tr>
+							<th><label>System wealth:</label>
+							<td>
+								<select id="wealth_input" name="Wealth">
+									<optgroup label="T3">
+										<option value="★★★ (Advanced)">Advanced
+										<option value="★★★ (Affluent)">Affluent
+										<option value="★★★ (Booming)">Booming
+										<option value="★★★ (Flourishing)">Flourishing
+										<option value="★★★ (High Supply)">High Supply
+										<option value="★★★ (Opulent)">Opulent
+										<option value="★★★ (Prosperous)">Prosperous
+										<option value="★★★ (Wealthy)">Wealthy
+									</optgroup><!-- here ends T3-->
+									<optgroup label="T2">
+										<!--here begins T2-->
+										<option value="★★ (Adequate)">Adequate
+										<option value="★★ (Balanced)">Balanced
+										<option value="★★ (Comfortable)">Comfortable
+										<option value="★★ (Developing)">Developing
+										<option value="★★ (Medium Supply)">Medium Supply
+										<option value="★★ (Promising)">Promising
+										<option value="★★ (Satisfactory)">Satisfactory
+										<option value="★★ (Sustainable)">Sustainable
+									</optgroup><!-- here ends T2-->
+									<optgroup label="T1">
+										<!--here begins T1-->
+										<option value="★ (Declining)">Declining
+										<option value="★ (Destitute)">Destitute
+										<option value="★ (Failing)">Failing
+										<option value="★ (Fledgling)">Fledgling
+										<option value="★ (Low Supply)">Low Supply
+										<option value="★ (Struggling)">Struggling
+										<option value="★ (Unsuccessful)">Unsuccessful
+										<option value="★ (Unpromising)">Unpromising
+									</optgroup>
+									<!--here ends T1-->
+									<optgroup label="Pirate">
+										<option value="💀 (Black Market)">Black Market
+									</optgroup>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>System conflict:</label>
+							<td>
+								<select id="conflict_input" name="Conflict">
+									<optgroup label="T3">
+										<option value="★★★ (Aggressive)">Aggressive
+										<option value="★★★ (Alarming)">Alarming
+										<option value="★★★ (At War)">At War
+										<option value="★★★ (Critical)">Critical
+										<option value="★★★ (Dangerous)">Dangerous
+										<option value="★★★ (Destructive)">Destructive
+										<option value="★★★ (Formidable)">Formidable
+										<option value="★★★ (High)">High
+										<option value="★★★ (Lawless)">Lawless
+										<option value="★★★ (Perilous)">Perilous
+									</optgroup><!-- here ends T3-->
+									<optgroup label="T2">
+										<!--here begins T2-->
+										<option value="★★ (Belligerent)">Belligerent
+										<option value="★★ (Boisterous)">Boisterous
+										<option value="★★ (Fractious)">Fractious
+										<option value="★★ (Intermittent)">Intermittent
+										<option value="★★ (Medium)">Medium
+										<option value="★★ (Rowdy)">Rowdy
+										<option value="★★ (Sporadic)">Sporadic
+										<option value="★★ (Testy)">Testy
+										<option value="★★ (Unruly)">Unruly
+										<option value="★★ (Unstable)">Unstable
+									</optgroup><!-- here ends T2-->
+									<optgroup label="T1">
+										<!--here begins T1-->
+										<option value="★ (Gentle)">Gentle
+										<option value="★ (Low)">Low
+										<option value="★ (Mild)">Mild
+										<option value="★ (Peaceful)">Peaceful
+										<option value="★ (Relaxed)">Relaxed
+										<option value="★ (Stable)">Stable
+										<option value="★ (Tranquil)">Tranquil
+										<option value="★ (Trivial)">Trivial
+										<option value="★ (Unthreatening)">Unthreatening
+										<option value="★ (Untroubled)">Untroubled
+									</optgroup>
+									<!--here ends T1-->
+									<optgroup label="Pirate">
+										<option value="💀 (Pirate Controlled)">Pirate Controlled
+									</optgroup>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>When was this system discovered?</label>
+							<td><input type="date" name="DiscDate" id="discDate_input">
+						</tr>
+						<tr>
+							<th><label>When was this system documented?</label>
+							<td><input type="date" name="DocDate" id="docDate_input">
+						</tr>
+						<tr>
+							<th><label>Do you belong to a chapter?</label>
+							<td>
+								<select id="researchteam_input" name="Researchteam">
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Gamemode:</label>
+							<td>
+								<select id="mode_input" name="Mode">
+									<option value="Normal">Normal
+									<option value="Survival">Survival
+									<option value="Permadeath">Permadeath
+									<option value="Creative">Creative
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Discoverer platform:</label>
+							<td>
+								<select id="platform_input" name="Platform">
+									<option value="PC">PC
+									<option value="PS">PS
+									<option value="Xbox">XB
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Discoverer wiki account:</label>
+							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
+						</tr>
+						<tr>
+							<th><label>Discoverer alias if no wiki:</label>
+							<td><input type="text" name="Discovered" id="discovered_input">
+						</tr>
+						<tr>
+							<th><label>Documenter alias:</label>
+							<td><input type="text" name="DocBy" id="docby_input">
+						</tr>
+						<tr>
+							<th><label>S-class multitool merchant upgrades:</label>
+						</tr>
+						<tr>
+							<td colspan="2" class="merchantUpgrades">
+								<input type="checkbox" id="mtAVU_input" name="MTAVU"
+									value="Analysis Visor Upgrade"><label for="mtAVU_input">&nbsp;Analysis Visor
+									Upgrade</label>
+								<input type="checkbox" id="mtBJU_input" name="MTBJU"
+									value="Blaze Javelin Upgrade"><label for="mtBJU_input">&nbsp;Blaze Javelin
+									Upgrade</label>
+								<input type="checkbox" id="mtBU_input" name="MTBU" value="Boltcaster Upgrade"><label
+									for="mtBU_input">&nbsp;Boltcaster Upgrade</label>
+								<input type="checkbox" id="mtGCU_input" name="MTCGU"
+									value="Geology Cannon Upgrade"><label for="mtGCU_input">&nbsp;Geology Cannon
+									Upgrade</label>
+								<input type="checkbox" id="mtMBU_input" name="MTMBU" value="Mining Beam Upgrade"><label
+									for="mtMBU_input">&nbsp;Mining Beam Upgrade</label>
+								<input type="checkbox" id="mtPLU_input" name="MTPLU"
+									value="Plasma Launcher Upgrade"><label for="mtPLU_input">&nbsp;Plasma Launcher
+									Upgrade</label>
+								<input type="checkbox" id="mtPSU_input" name="MTPSU"
+									value="Pulse Spitter Upgrade"><label for="mtPSU_input">&nbsp;Pulse Spitter
+									Upgrade</label>
+								<input type="checkbox" id="mtSBU_input" name="MTSBU"
+									value="Scatter Blaster Upgrade"><label for="mtSBU_input">&nbsp;Scatter Blaster
+									Upgrade</label>
+							</td>
+						</tr>
+						<tr>
+							<th><label>S-class starship merchant upgrades:</label>
+						</tr>
+						<tr>
+							<td colspan="2" class="merchantUpgrades">
+								<input type="checkbox" id="ssCBU" name="SSCBU" value="Cyclotron Ballista Upgrade"><label
+									for="ssCBU">&nbsp;Cyclotron Ballista Upgrade</label>
+								<input type="checkbox" id="ssDSU" name="SSDSU" value="Deflector Shield Upgrade"><label
+									for="ssDSU">&nbsp;Deflector Shield Upgrade</label>
+								<input type="checkbox" id="ssHU" name="SSHU" value="Hyperdrive Upgrade"><label
+									for="ssHU">&nbsp;Hyperdrive Upgrade</label>
+								<input type="checkbox" id="ssIKAU" name="SSIKAU"
+									value="Infra-Knife Accelerator Upgrade"><label for="ssIKAU">&nbsp;Infra-Knife
+									Accelerator Upgrade</label>
+								<input type="checkbox" id="ssLTU" name="SSLTU" value="Launch Thruster Upgrade"><label
+									for="ssLTU">&nbsp;Launch Thruster Upgrade</label>
+								<input type="checkbox" id="ssPBU" name="SSPBU" value="Phase Beam Upgrade"><label
+									for="ssPBU">&nbsp;Phase Beam Upgrade</label>
+								<input type="checkbox" id="ssPCU" name="SSPCU" value="Photon Cannon Upgrade"><label
+									for="ssPCU">&nbsp;Photon Cannon Upgrade</label>
+								<input type="checkbox" id="ssPEU" name="SSPEU" value="Positron Ejector Upgrade"><label
+									for="ssPEU">&nbsp;Positron Ejector Upgrade</label>
+								<input type="checkbox" id="ssPuEU" name="SSPuEU" value="Pulse Engine Upgrade"><label
+									for="ssPuEU">&nbsp;Pulse Engine Upgrade</label>
+							</td>
+						</tr>
+						<tr>
+							<th><label>S-class exocraft merchant upgrades:</label>
+						</tr>
+						<tr>
+							<td colspan="2" class="merchantUpgrades">
+								<input type="checkbox" id="ecEAMU" name="ECEAMU"
+									value="Exocraft Acceleration Module Upgrade"><label for="ecEAMU">&nbsp;Exocraft
+									Acceleration Module Upgrade</label>
+								<input type="checkbox" id="ecEMLU" name="ECEMLU"
+									value="Exocraft Mining Laser Upgrade"><label for="ecEMLU">&nbsp;Exocraft Mining
+									Laser Upgrade</label>
+								<input type="checkbox" id="ecEMCU" name="ECEMCU"
+									value="Exocraft Mounted Cannon Upgrade"><label for="ecEMCU">&nbsp;Exocraft Mounted
+									Cannon Upgrade</label>
+								<input type="checkbox" id="ecFEU" name="ECFEU" value="Fusion Engine Upgrade"><label
+									for="ecFEU">&nbsp;Fusion Engine Upgrade</label>
+								<input type="checkbox" id="ecHDU" name="ECHDU" value="Humboldt Drive Upgrade"><label
+									for="ecHDU">&nbsp;Humboldt Drive Upgrade</label>
+								<input type="checkbox" id="ecMCU" name="ECMCU" value="Minotaur Cannon Upgrade"><label
+									for="ecMCU">&nbsp;Minotaur Cannon Upgrade</label>
+								<input type="checkbox" id="ecMEU" name="ECMEU" value="Minotaur Engine Upgrade"><label
+									for="ecMEU">&nbsp;Minotaur Engine Upgrade</label>
+								<input type="checkbox" id="ecMLU" name="ECMLU" value="Minotaur Laser Upgrade"><label
+									for="ecMLU">&nbsp;Minotaur Laser Upgrade</label>
+								<input type="checkbox" id="ecNCU" name="ECNCU" value="Nautilon Cannon Upgrade"><label
+									for="ecNCU">&nbsp;Nautilon Cannon Upgrade</label>
+							</td>
+						</tr>
+						<tr>
+							<th><label>S-class exosuit merchant upgrades:</label>
+						</tr>
+						<tr>
+							<td colspan="2" class="merchantUpgrades">
+								<input type="checkbox" id="esDSU" name="ESDSU" value="Defence Systems Upgrade"><label
+									for="esDSU">&nbsp;Defence Systems Upgrade</label>
+								<input type="checkbox" id="esLSU" name="ESLSU" value="Life Support Upgrade"><label
+									for="esLSU">&nbsp;Life Support Upgrade</label>
+								<input type="checkbox" id="esMSU" name="ESMSU" value="Movement System Upgrade"><label
+									for="esMSU">&nbsp;Movement System Upgrade</label>
+								<input type="checkbox" id="esRPM" name="ESRPM"
+									value="Radiation Protection Module"><label for="esRPM">&nbsp;Radiation Protection
+									Module</label>
+								<input type="checkbox" id="esTPMC" name="ESTPMC"
+									value="Thermal Protection Module (Cold)"><label for="esTPMC">&nbsp;Thermal
+									Protection Module (Cold)</label>
+								<input type="checkbox" id="esTPMH" name="ESTPMH"
+									value="Thermal Protection Module (Heat)"><label for="esTPMH">&nbsp;Thermal
+									Protection Module (Heat)</label>
+								<input type="checkbox" id="esTPM" name="ESTPM" value="Toxic Protection Module"><label
+									for="esTPM">&nbsp;Toxic Protection Module</label>
+								<input type="checkbox" id="esUPM" name="ESUPM"
+									value="Underwater Protection Module"><label for="esUPM">&nbsp;Underwater Protection
+									Module</label>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p style="text-align:center">Note: You can drag on the bottom right corner to expand the
+									text area
+								</p>
+							</td>
+						</tr>
+						<tr class="no-border">
+							<th style="vertical-align:top" colspan="2"><label>Additional information:</label>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="AdditionalInformation" id="addInfo_input"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Gallery files</label>
+							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
+									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
+						</tr>
+					</table>
+					<br>
+				</form>
+				<div id="gallery_descs">
+				</div>
+				<div>
+					<span class="actions" style="white-space: nowrap">
+						<!--						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>-->
+						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
+					</span>
+					<span class="actions" style="white-space: nowrap">
+						<button id="btn" class="button is-outlined is-primary"
+							onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
+						<a id="downloadbtn" class="button is-outlined is-primary"
+							onclick="downloadFile('downloadbtn', 'wikiText', 'name_input')">Download file</a>
+						<a class="button is-outlined is-primary" id="link"
+							onclick="wikiLink('link', 'region', 'name_input');">Create page</a>
+					</span>
+				</div>
+				<br>
+			</div>
+			<div class="column is-full-mobile">
+				<div class="output">
+					<div id="wikiText">
+						<div>{{Version|<output id='release' name="release"></output>}}</div>
+						<div>{{<output id='civStub'></output>}}</div>
+						<div>{{System infobox</div>
+						<div>| name = <output id='name' name="name"></output></div>
+						<div>| image = <output id='image'></output></div>
+						<div>| region = <output id='region'></output></div>
+						<div>| galaxy = <output id='galaxy'></output></div>
+						<div>| multiplestars = <output id='multiplestars'></output></div>
+						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}
+						</div>
+						<div>| color = <output id='color'></output></div>
+						<div>| class = <output id='class'></output></div>
+						<div>| distance = <output id='distance'></output></div>
+						<div>| planet = <output id='planet'></output></div>
+						<div>| moon = <output id='moon'></output></div>
+						<div>| water = <output id='water'></output></div>
+						<div>| faction = <output id='faction'></output></div>
+						<div>| economy = <output id='economy'></output></div>
+						<div>| economybuy = <output id='economybuy'></output></div>
+						<div>| economysell = <output id='economysell'></output></div>
+						<div>| wealth = <output id='wealth'></output></div>
+						<div>| conflict = <output id='conflict'></output></div>
+						<div>| mode = <output id='mode'></output></div>
+						<div>| civilized = <output id='civilized'></output></div>
+						<div>| researchteam = <output id='researchteam' name="researchteam"></output></div>
+						<div>| discoveredlink = <output id='discoveredlink'></output></div>
+						<div>| discovered = <output id='discovered' name="discovered"></output></div>
+						<div>| platform = <output id='platform'></output></div>
+						<div>| release = <output id='release1' name="release"></output></div>
+						<div>}}</div>
+						<div>'''<output id='name1' name="name"></output>''' is a star system.</div>
+						<br>
+						<div>==Summary==</div>
+						<div>'''<output id='name2' name="name"></output>''' is a [[star system]], located in the
+							[[<output id='region1' name="region"></output>]] region.</div>
+						<br>
+						<div>==Alias Names==</div>
+						<div>{{aliasc|text=Original|name=<output id='originalname'></output>}}</div>
+						<div>{{aliasc|text=Current|name=<output id='name3' name="name"></output>}}</div>
+						<br>
+						<div>==Discovered==</div>
+						<div><output id="docby"></output></div>
+						<br>
+						<div>==Planets & Moons==</div>
+						<div>{| class="wikitable" style="text-align:center; width:100%; max-width:1250px;"</div>
+						<div>|-</div>
+						<div>!width=150 style="background-color:#2f4f4f"|Image</div>
+						<div>!width=150 style="background-color:#2f4f4f"|Landscape</div>
+						<div>!style="background-color:#2f4f4f"|Planet Name</div>
+						<div>!style="background-color:#2f4f4f"|Planet Type</div>
+						<div>!style="background-color:#2f4f4f"|Resources</div>
+						<div>!style="background-color:#2f4f4f"|Weather</div>
+						<div>!style="background-color:#2f4f4f"|Sentinels</div>
+						<div>!style="background-color:#2f4f4f"|Flora</div>
+						<div>!style="background-color:#2f4f4f"|Fauna</div>
+						<div id="planetmoons">
+						</div>
+						<div>|}</div>
+						<br>
+						<div>==Starships==</div>
+						<div>&lt;!--All Starships discovered in the system can be found in the [[<output
+								id="systemShipCatalog" name="name"></output> - Starship Catalog]] and the respective
+							[[<output id="shipCatalogHub"></output> Starship Catalog]]s.--&gt;</div>
+						<br>
+						<div>===Documented Starships===</div>
+						<div>{{CARGOShipSys|{{Glyphs2Coords|<output id="shipcoords"
+								name="portalglyphs"></output>}}|<output id="galaxy1" name="galaxy"></output>}}</div>
+						<br>
+						<div>==Documented Multi-Tools==</div>
+						<div>{{CARGOMTCoord|{{Glyphs2Coords|<output id="mtcoords"
+								name="portalglyphs"></output>}}|<output id="galaxy2" name="galaxy"></output>}}</div>
+						<br>
+						<div>==Location information==</div>
+						<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
+						<br>
+						<div>===Navigation Image===</div>
+						<div>[[File:<outut id="navImage"></outut>|400px]]</div>
+						<br>
+						<div>===System Location===</div>
+						<div><output id="loc"></output></div>
+						<br>
+						<div>==Space Station==</div>
+						<div>[[File:<output id=ssImage></output>|thumb|System space station]]</div>
+						<div>The [[Space Station]] [[Galactic Trade Terminal|terminal]] offers the following [[Trade
+							Commodities]] for sale:</div>
+						<div>{| class="wikitable"</div>
+						<div>|-</div>
+						<div>! style="background-color:#2F4F4F; min-width:250px"| Item Name</div>
+						<div>! style="background-color:#2F4F4F; min-width:125px"| Price per Item</div>
+						<div><output id=tradeTerminal></output></div>
+						<div>|}</div>
+						<div>The [[Space Station]] merchants offer the following {{class|S}} class items for sale:</div>
+						<br>
+						<div>{{SSMerchants</div>
+						<div><output id="ssmerchants"></output></div>
+						<div>}}</div>
+						<br>
+						<div>==Additional information==</div>
+						<div><output id='addInfo'></output></div>
+						<br>
+						<div>==Gallery==</div>
+						<div>&lt;gallery&gt;</div>
+						<div><output id="galleryCode"></output></div>
+						<div>&lt;/gallery&gt;</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="footer">
+		<div>
+			Please consider contributing to the project:
+			<ul>
+				<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank"
+						rel="noopener noreferrer">GitHub repository</a></li>
+			</ul>
+		</div>
+		<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
+	</footer>
 </body>
 
 </html>

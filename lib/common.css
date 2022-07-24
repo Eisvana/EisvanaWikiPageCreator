@@ -301,6 +301,6 @@ footer>div {
 }
 
 .merchantUpgrades {
-  display: grid;
+	display: grid;
 	grid-template-columns: repeat(4, max-content);
 }
