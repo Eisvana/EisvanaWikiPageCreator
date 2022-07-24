@@ -178,6 +178,7 @@ table {
 .portal-buttons {
 	display: grid;
 	grid-template-columns: repeat(8, 60px);
+	margin-top: 5px;
 }
 
 @media only screen and (max-width: 500px) {
@@ -300,6 +301,6 @@ footer>div {
 }
 
 .merchantUpgrades {
-  display: grid;
+	display: grid;
 	grid-template-columns: repeat(4, max-content);
 }
