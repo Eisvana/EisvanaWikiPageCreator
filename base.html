@@ -49,14 +49,12 @@
 			glyphRegion("portalglyphs_input", "civ", "region");
 			researchTeam("researchteam", "civilized");
 			whitespaceDetector("addInfoWrapper");
-			
-			
 			if (document.getElementById("censusreddit").innerHTML.substring(0, 2) == 'u/') {
 				document.getElementById("censusreddit").innerHTML = document.getElementById("censusreddit").innerHTML.replace('u/', '')
 			};
 		}
 		window.onload = () => {
-			if (document.getElementById("censusDiscord_input").value != '') {discordValidation(document.getElementById("censusDiscord_input"), 'discordError')};
+			if (document.getElementById("censusDiscord_input").value != '') { discordValidation(document.getElementById("censusDiscord_input"), 'discordError') };
 			researchTeamDropdown("civ", "researchteam_input")
 			autoRefresh();
 			showInput();
@@ -346,7 +344,8 @@
 						</tr>
 						<tr>
 							<th><label for="censusDiscord_input">Discord name of the player?</label>
-							<td><input type="text" name="CensusDiscord" id="censusDiscord_input" onchange="discordValidation(this, 'discordError')">
+							<td><input type="text" name="CensusDiscord" id="censusDiscord_input"
+									onchange="discordValidation(this, 'discordError')">
 								<div id="discordError" style="display: none;">Please include the #xxxx ending</div>
 							</td>
 						</tr>
@@ -420,7 +419,9 @@
 				<div>
 					<span class="actions" style="white-space: nowrap">
 						<!--						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>-->
-						<button class="button is-warning" type="reset" form="form" onclick="document.getElementById('discordError').style.display = 'none'; document.getElementById('censusDiscord_input').style.backgroundColor = '';">Reset inputs</button>
+						<button class="button is-warning" type="reset" form="form"
+							onclick="document.getElementById('discordError').style.display = 'none'; document.getElementById('censusDiscord_input').style.backgroundColor = '';">Reset
+							inputs</button>
 					</span>
 					<span class="actions" style="white-space: nowrap">
 						<button id="btn" class="button is-outlined is-primary"
