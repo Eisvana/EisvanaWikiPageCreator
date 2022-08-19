@@ -36,6 +36,10 @@
 			textFunction("discovered", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
 			textFunction("appearance", "appearance_input");
+			acquirement("loc_input", "planet_input", "moon_input", "axes_input", "sr_input", "srloc_input", "acquirement");
+
+
+
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			enPrefix("type_input", "enPrefix");
@@ -159,6 +163,21 @@
 							<td><input type="text" name="Axes" id="axes_input">
 						</tr>
 						<tr>
+							<th><label>Save/reload location type:</label>
+							<td>
+								<select id="srloc_input" name="SRLoc">
+									<option value="Planet">Planet
+									<option value="Moon">Moon
+									<option value="Space Station">Space Station
+									<option value="Space Anomaly">Space Anomaly
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label for="sr_input">Save/reload location name:</label>
+							<td><input type="text" name="Sr" id="sr_input">
+						</tr>
+						<tr>
 							<th><label>Class:</label>
 							<td>
 								<select id="class_input" name="Class">
@@ -172,9 +191,12 @@
 						<tr>
 							<th><label>Add-ons:</label>
 							<td>
-								<div><input type="checkbox" id="crystals_input" value="Yes"> <label for="crystals_input">Crystals</label></div>
-								<div><input type="checkbox" id="horns_input" value="Yes"> <label for="horns_input">Horns</label></div>
-								<div><input type="checkbox" id="glowtubes_input" value="Yes"> <label for="glowtubes_input">Glowtubes</label></div>
+								<div><input type="checkbox" id="crystals_input" value="Yes"> <label
+										for="crystals_input">Crystals</label></div>
+								<div><input type="checkbox" id="horns_input" value="Yes"> <label
+										for="horns_input">Horns</label></div>
+								<div><input type="checkbox" id="glowtubes_input" value="Yes"> <label
+										for="glowtubes_input">Glowtubes</label></div>
 							</td>
 						</tr>
 						<tr>
