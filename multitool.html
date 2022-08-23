@@ -18,24 +18,38 @@
 			textFunctionMultiple("release", "version_input");
 			textFunctionMultiple("name", "name_input");
 			textFunction("image", "image_input");
-			textFunction("system", "system_input");
+			textFunctionMultiple("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
 			textFunction("axes", "axes_input");
+			textFunction("location", "loc_input");
 			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunctionMultiple("type", "type_input");
-			textFunction("inventory", "inventory_input");
+			textFunction("slots", "slots_input");
+			textFunction("cost", "cost_input");
+			floatFunction("dmg", "dmg_input", "1");
+			floatFunction("scanRange", "scan_input", "1");
+			checkBoxFunction("crystals", "crystals_input");
+			checkBoxFunction("horns", "horns_input");
+			checkBoxFunction("glowtubes", "glowtubes_input");
+			textFunctionMultiple("class", "class_input");
 			textFunction("discovered", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
 			textFunction("appearance", "appearance_input");
+			acquirement("loc_input", "planet_input", "moon_input", "axes_input", "sr_input", "srloc_input", "acquirement");
+
+
+
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			enPrefix("type_input", "enPrefix");
 			researchTeam("researchteam", "civilized");
 			glyphRegion("portalglyphs_input", "civ", "region");
-			//loc("system_input", "type_input", "civ", "moon_input", "planet_input", "axes_input", "region", "inventory", "location");
+			locGalaxy("civ", "locGalaxy");
 			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
 			//addInfo("type_input", "civ", "researchteam", "addInfo")
+			codeFunction("region1", "region");
+			document.getElementById("HubNr").innerHTML = regNr("region");
 		}
 		window.onload = () => {
 			researchTeamDropdown("civ", "researchteam_input")
@@ -113,6 +127,7 @@
 							<td>
 								<select name="Type" id="type_input">
 									<option value="Pistol">Pistol
+									<option value="Pistol">Starter Pistol
 									<option value="Rifle">Rifle
 									<option value="Experimental">Experimental
 									<option value="Alien">Alien
@@ -139,12 +154,28 @@
 									<option value="Minor Settlement">Minor Settlement
 									<option value="Space Station">Space Station
 									<option value="Sentinel Pillar">Sentinel Pillar
+									<option value="Space Anomaly">Space Anomaly
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<th><label for="axes_input">Planetary coords:</label>
 							<td><input type="text" name="Axes" id="axes_input">
+						</tr>
+						<tr>
+							<th><label>Save/reload location type:</label>
+							<td>
+								<select id="srloc_input" name="SRLoc">
+									<option value="Planet">Planet
+									<option value="Moon">Moon
+									<option value="Space Station">Space Station
+									<option value="Space Anomaly">Space Anomaly
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label for="sr_input">Save/reload location name:</label>
+							<td><input type="text" name="Sr" id="sr_input">
 						</tr>
 						<tr>
 							<th><label>Class:</label>
@@ -158,12 +189,35 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label for="inventory_input">Slot count:</label>
-							<td><input type="number" name="Inventory" id="inventory_input">
+							<th><label>Add-ons:</label>
+							<td>
+								<div><input type="checkbox" id="crystals_input" value="Yes"> <label
+										for="crystals_input">Crystals</label></div>
+								<div><input type="checkbox" id="horns_input" value="Yes"> <label
+										for="horns_input">Horns</label></div>
+								<div><input type="checkbox" id="glowtubes_input" value="Yes"> <label
+										for="glowtubes_input">Glowtubes</label></div>
+							</td>
+						</tr>
+						<tr>
+							<th><label for="slots_input">Slot count:</label>
+							<td><input type="number" name="Slots" id="slots_input" min="5" max="24" step="1"
+									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
 							<th><label for="cost_input">Cost:</label>
-							<td><input type="number" name="Cost" id="cost_input">
+							<td><input type="number" name="Cost" id="cost_input" min="45500" step="5"
+									onkeypress="return isNumberKey(event)">
+						</tr>
+						<tr>
+							<th><label for="dmg_input">Damage Potential:</label>
+							<td><input type="number" name="Damage" id="dmg_input" step="0.1" placeholder="0.0"
+									onkeypress="return isNumberKey(event)">
+						</tr>
+						<tr>
+							<th><label for="scan_input">Scanner Range:</label>
+							<td><input type="number" name="Scan" id="scan_input" step="0.1" placeholder="0.0"
+									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
 							<th><label for="portalglyphs_input">Portalglyphs:</label><button
@@ -358,15 +412,31 @@
 							</td>
 						</tr>
 						<tr>
+							<th><label for="acquirementGallery_upload">Location files</label>
+							<td><input type="file" id="acquirementGallery_upload" name="AcquirementGallery_upload"
+									accept="image/*" multiple
+									onchange="acquirementGalleryUpload('acquirementGallery_upload', 'acquirementGallery_descs', 'acquirementGalleryCode');">
+						</tr>
+						<tr colspan="2">
+							<td>
+								<div id="acquirementGallery_descs">
+								</div>
+							</td>
+						</tr>
+						<tr>
 							<th><label for="gallery_upload">Gallery files</label>
 							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
 									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
 						</tr>
+						<tr colspan="2">
+							<td>
+								<div id="gallery_descs">
+								</div>
+							</td>
+						</tr>
 					</table>
 					<br>
 				</form>
-				<div id="gallery_descs">
-				</div>
 				<div>
 					<span class="actions" style="white-space: nowrap">
 						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
@@ -387,61 +457,65 @@
 					<div id="wikiText">
 						<div>{{Version|<output id='release' name="release"></output>}}</div>
 						<div>{{<output id='civStub'></output>}}</div>
-						<div>{{Starship infobox</div>
-						<div>| name = <output id='name' name="type"></output></div>
+						<div>{{Multitool infobox</div>
+						<div>| name = <output id='name' name="name"></output></div>
 						<div>| image = <output id='image'></output></div>
 						<div>| civilized = <output id='civilized'></output></div>
 						<div>| galaxy = <output id='galaxy'></output></div>
-						<div>| region = <output id='region'></output></div>
-						<div>| system = <output id='system'></output></div>
+						<div>| region = <output id='region' name="region"></output></div>
+						<div>| system = <output id='system' name="system"></output></div>
 						<div>| planet = <output id='planet'></output></div>
 						<div>| moon = <output id='moon'></output></div>
+						<div>| location = <output id='location'></output></div>
 						<div>| axes = <output id='axes'></output></div>
-						<div>| economy = <output id='economy'></output></div>
-						<div>| pilot = <output id='pilot'></output></div>
 						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs1' name="portalglyphs"></output>}}
 						</div>
 						<div>| portalglyphs = <output id='portalglyphs' name="portalglyphs"></output></div>
 						<div>| type = <output id='type' name="type"></output></div>
-						<div>| subtype = <output id='subtype'></output></div>
-						<div>| exotic = <output id='exotic'></output></div>
-						<div>| class = <output id='class'></output></div>
-						<div>| inventory = <output id='inventory'></output></div>
+						<div>| crystals = <output id='crystals'></output></div>
+						<div>| horns = <output id='horns'></output></div>
+						<div>| glowtubes = <output id='glowtubes'></output></div>
+						<div>| class = <output id='class' name="class"></output></div>
 						<div>| slots = <output id='slots'></output></div>
-						<div>| techslots = <output id='techslots'></output></div>
-						<div>| cargoslots = <output id='cargoslots'></output></div>
-						<div>| cost = <output id='cost'></output></div>
+						<div>| cost = {{FormatNumber|<output id='cost'></output>}}</div>
 						<div>| discovered = <output id='discovered'></output></div>
 						<div>| discoveredlink = <output id='discoveredlink'></output></div>
 						<div>| researchteam = <output id='researchteam'></output></div>
 						<div>| release = <output id='release1' name="release"></output></div>
-						<div>| maneuverB = <output id='maneuverB'></output></div>
-						<div>| damageB = <output id='damageB'></output></div>
-						<div>| shieldB = <output id='shieldB'></output></div>
-						<div>| warpB = <output id='warpB'></output></div>
 						<div>}}</div>
-						<div>'''<output id='name1' name="name"></output>''' is a starship.</div>
+						<div>'''<output id='name1' name="name"></output>''' is a multi-tool.</div>
 						<br>
 
 						<div>==Summary==</div>
 						<div>'''<output id='name2' name="name"></output>''' is <output id='enPrefix'></output>
-							[[Starship Catalogue
-							- <output id='type1' name="type"></output>|<output id='type2' name="type"></output>]]-type
-							[[starship]].</div>
-						<br>
-						<div>This starship <output id="sChance"></output> in S-class.</div>
+							[[Multi-Tool Catalogue - <output id='type1' name="type"></output>|<output id='type2'
+								name="type"></output> Multi-Tool]].</div>
 						<br>
 
 						<div>==Appearance==</div>
 						<div><output id='appearance'></output></div>
 						<br>
 
-						<div>==Stats==</div>
-						<div>{{<output id='stats'></output>Stats}}</div>
+						<div>==Location==</div>
+						<div>This multi-tool is located in the [[<output id="system1" name="system"></output>]] [[star
+							system]] in the [[<output id="region1" name="region"></output>]] [[region]]<output
+								id='HubNr'></output> of the <output id="locGalaxy"></output>.</div>
+						<br>
+						<div>{{CoordGlyphConvert|<output id="portalglyphs2" name="portalglyphs"></output>}}</div>
 						<br>
 
-						<div>==Location==</div>
-						<div><output id='location'></output></div>
+						<div>==Stats==</div>
+						<div>The {{Class|<output id="class1" name="class"></output>}} class version of this weapon has
+							the following base stats:</div>
+						<div>* '''Damage Potential''': <output id="dmg"></output></div>
+						<div>* '''Scanner Range''': <output id="scanRange"></output></div>
+						<br>
+
+						<div>==Acquirement==</div>
+						<div><output id="acquirement"></output></div>
+						<div>&lt;gallery&gt;</div>
+						<div><output id="acquirementGalleryCode"></output></div>
+						<div>&lt;/gallery&gt;</div>
 						<br>
 
 						<div>==Additional information==</div>
@@ -458,7 +532,7 @@
 						<br>
 
 						<div>==Reference links==</div>
-						<div>{{StarshipRefLinks|type=<output id='refLinks'></output>}}</div>
+						<div>{{MTRefLinks}}</div>
 					</div>
 				</div>
 			</div>
