@@ -37,8 +37,8 @@
 			textFunction("discoveredlink", "discoveredlink_input");
 			textFunction("appearance", "appearance_input");
 			acquirement("loc_input", "planet_input", "moon_input", "axes_input", "sr_input", "srloc_input", "acquirement");
-
-
+			catalog("civ", "mtCatalog");
+			addInfoChapter("researchteam_input", "chapterResearch");
 
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
@@ -174,7 +174,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label for="sr_input">Save/reload location name:</label>
+							<th><label for="sr_input">Save/reload location name (if different):</label>
 							<td><input type="text" name="Sr" id="sr_input">
 						</tr>
 						<tr>
@@ -519,7 +519,7 @@
 						<br>
 
 						<div>==Additional information==</div>
-						<div>Featured in the <output id='addInfo'></output>.</div>
+						<div>Featured in the [[<output id='mtCatalog'></output> Multi-Tool Catalog]]<output id="chapterResearch"></output>.</div>
 						<br>
 						<div>
 							<div><output id="docby"></output></div>
