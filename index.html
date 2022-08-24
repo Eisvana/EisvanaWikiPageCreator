@@ -17,10 +17,11 @@
 	</style>
 	<script>
 		// making all external links open in a new tab
+		const isExternalURL = (url) => new URL(url).origin !== location.origin;
 		window.onload = () => {
 			const a = document.querySelectorAll("a");
 			for (const link of a) {
-				if (link.href.substring(0, 4) == "http") {
+				if (isExternalURL(link.href)) {
 					link.setAttribute("target", "_blank");
 					link.setAttribute("rel", "noopener noreferrer");
 				}
