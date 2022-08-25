@@ -39,7 +39,11 @@
 			acquirement("loc_input", "planet_input", "moon_input", "axes_input", "sr_input", "srloc_input", "acquirement");
 			catalog("civ", "mtCatalog");
 			addInfoChapter("researchteam_input", "chapterResearch");
-
+			imgName("sr_img_upload", "sr_img_input");
+			imgName("sys_img_upload", "sys_img_input");
+			imgName("cab_upload", "cab_input");
+			imgName("coords_upload", "coords_input");
+			acquirementGallery("sr_img_input", "sys_img_input", "cab_input", "coords_input", "loc_input", "srloc_input", "sr_input", "moon_input", "acquirementGallery");
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			enPrefix("type_input", "enPrefix");
@@ -301,6 +305,38 @@
 							</td>
 						</tr>
 						<tr>
+							<th><label for="sr_img_upload">Save/Reload Planet/Moon</label>
+							<td>
+								<input type="text" name="SRPlanet" id="sr_img_input">
+								<br>
+								<input type="file" id="sr_img_upload" name="SR_Img_Upload" accept="image/*">
+							</td>
+						</tr>
+						<tr>
+							<th><label for="sys_img_upload">System (Cabinet Planet/Moon highlighted)</label>
+							<td>
+								<input type="text" name="SysImage" id="sys_img_input">
+								<br>
+								<input type="file" id="sys_img_upload" name="Sys_Img_Upload" accept="image/*">
+							</td>
+						</tr>
+						<tr>
+							<th><label for="cab_upload">Cabinet Planet/Moon</label>
+							<td>
+								<input type="text" name="Image" id="cab_input">
+								<br>
+								<input type="file" id="cab_upload" name="Cab_Upload" accept="image/*">
+							</td>
+						</tr>
+						<tr>
+							<th><label for="coords_upload">Coordinates</label>
+							<td>
+								<input type="text" name="Image" id="coords_input">
+								<br>
+								<input type="file" id="coords_upload" name="Coords_Upload" accept="image/*">
+							</td>
+						</tr>
+						<tr>
 							<th><label for="discoveredlink_input">Discoverer wiki account:</label>
 							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
 						</tr>
@@ -386,18 +422,6 @@
 						<tr>
 							<td colspan="2">
 								<textarea name="Appearance" id="appearance_input"></textarea>
-							</td>
-						</tr>
-						<tr>
-							<th><label for="acquirementGallery_upload">Location files</label>
-							<td><input type="file" id="acquirementGallery_upload" name="AcquirementGallery_upload"
-									accept="image/*" multiple
-									onchange="acquirementGalleryUpload('acquirementGallery_upload', 'acquirementGallery_descs', 'acquirementGalleryCode');">
-						</tr>
-						<tr colspan="2">
-							<td>
-								<div id="acquirementGallery_descs">
-								</div>
 							</td>
 						</tr>
 						<tr>
@@ -491,7 +515,7 @@
 						<div>==Acquirement==</div>
 						<div><output id="acquirement"></output></div>
 						<div>&lt;gallery&gt;</div>
-						<div><output id="acquirementGalleryCode"></output></div>
+						<div><output id="acquirementGallery"></output></div>
 						<div>&lt;/gallery&gt;</div>
 						<br>
 
