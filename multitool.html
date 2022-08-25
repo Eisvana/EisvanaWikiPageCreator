@@ -9,7 +9,7 @@
 	<script src="./lib/common.js"></script>
 	<script src="./lib/mtlogic.js"></script>
 	<script>
-		const galleryArray = ['', 'Discovery Menu', 'Price Page', 'Minor Settlement', 'Tool in hand'];
+		const galleryArray = ['', 'Discovery Menu', 'Price Page', 'Minor Settlement', 'Sentinel Pillar', 'Tool in hand'];
 
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
@@ -37,8 +37,8 @@
 			textFunction("discoveredlink", "discoveredlink_input");
 			textFunction("appearance", "appearance_input");
 			acquirement("loc_input", "planet_input", "moon_input", "axes_input", "sr_input", "srloc_input", "acquirement");
-
-
+			catalog("civ", "mtCatalog");
+			addInfoChapter("researchteam_input", "chapterResearch");
 
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
@@ -125,13 +125,14 @@
 						<tr>
 							<th><label>Type of the multi-tool:</label>
 							<td>
-								<select name="Type" id="type_input">
-									<option value="Pistol">Pistol
-									<option value="Pistol">Starter Pistol
-									<option value="Rifle">Rifle
-									<option value="Experimental">Experimental
-									<option value="Alien">Alien
-									<option value="Royal">Royal
+								<select name="Type" id="type_input"
+									onchange="appearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'appearance_input')">
+									<option value="Pistol" data-type="pistol">Pistol
+									<option value="Pistol" data-type="starter pistol">Starter Pistol
+									<option value="Rifle" data-type="rifle">Rifle
+									<option value="Experimental" data-type="experimental">Experimental
+									<option value="Alien" data-type="alien">Alien
+									<option value="Royal" data-type="royal">Royal
 								</select>
 							</td>
 						</tr>
@@ -174,7 +175,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label for="sr_input">Save/reload location name:</label>
+							<th><label for="sr_input">Save/reload location name (if different):</label>
 							<td><input type="text" name="Sr" id="sr_input">
 						</tr>
 						<tr>
@@ -329,21 +330,21 @@
 							<th><label>Main Colour:</label>
 							<td>
 								<select name="mainColour" id="mainColour_input"
-									onchange="appearanceSentence('name_input', 'type_input', 'subtype_input', 'exotic_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
+									onchange="appearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'appearance_input')">
 									<option value="">
-									<option value="Blue">Blue
-									<option value="Chrome">Chrome
-									<option value="Cream">Cream
-									<option value="Green">Green
-									<option value="Grey">Grey
-									<option value="Orange">Orange
-									<option value="Pink">Pink
-									<option value="Purple">Purple
-									<option value="Red">Red
-									<option value="Tan">Tan
-									<option value="Teal">Teal
-									<option value="White">White
-									<option value="Yellow">Yellow
+									<option value="blue">Blue
+									<option value="chrome">Chrome
+									<option value="cream">Cream
+									<option value="green">Green
+									<option value="grey">Grey
+									<option value="orange">Orange
+									<option value="pink">Pink
+									<option value="purple">Purple
+									<option value="red">Red
+									<option value="tan">Tan
+									<option value="teal">Teal
+									<option value="white">White
+									<option value="yellow">Yellow
 								</select>
 							</td>
 						</tr>
@@ -351,48 +352,24 @@
 							<th><label>Secondary Colour:</label>
 							<td>
 								<select name="secColour" id="secColour_input"
-									onchange="appearanceSentence('name_input', 'type_input', 'subtype_input', 'exotic_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
+									onchange="appearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'appearance_input')">
 									<option value="">
-									<option value="Black">Black
-									<option value="Blue">Blue
-									<option value="Chrome">Chrome
-									<option value="Cream">Cream
-									<option value="Gold">Gold
-									<option value="Green">Green
-									<option value="Grey">Grey
-									<option value="Orange">Orange
-									<option value="Pink">Pink
-									<option value="Purple">Purple
-									<option value="Red">Red
-									<option value="Silver">Silver
-									<option value="Tan">Tan
-									<option value="Teal">Teal
-									<option value="White">White
-									<option value="Yellow">Yellow
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Secondary parts:</label>
-							<td>
-								<select name="SecParts" id="secParts_input"
-									onchange="appearanceSentence('name_input', 'type_input', 'subtype_input', 'exotic_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Accessories:</label>
-							<td>
-								<select name="Accessories" id="accessories_input"
-									onchange="appearanceSentence('name_input', 'type_input', 'subtype_input', 'exotic_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Misc part:</label>
-							<td>
-								<select name="MiscParts" id="miscParts_input"
-									onchange="appearanceSentence('name_input', 'type_input', 'subtype_input', 'exotic_input', 'mainColour_input', 'secColour_input', 'secParts_input', 'accessories_input', 'miscParts_input', 'appearance_input')">
+									<option value="black">Black
+									<option value="blue">Blue
+									<option value="chrome">Chrome
+									<option value="cream">Cream
+									<option value="gold">Gold
+									<option value="green">Green
+									<option value="grey">Grey
+									<option value="orange">Orange
+									<option value="pink">Pink
+									<option value="purple">Purple
+									<option value="red">Red
+									<option value="silver">Silver
+									<option value="tan">Tan
+									<option value="teal">Teal
+									<option value="white">White
+									<option value="yellow">Yellow
 								</select>
 							</td>
 						</tr>
@@ -519,7 +496,8 @@
 						<br>
 
 						<div>==Additional information==</div>
-						<div>Featured in the <output id='addInfo'></output>.</div>
+						<div>Featured in the [[<output id='mtCatalog'></output> Multi-Tool Catalog]]<output
+								id="chapterResearch"></output>.</div>
 						<br>
 						<div>
 							<div><output id="docby"></output></div>
