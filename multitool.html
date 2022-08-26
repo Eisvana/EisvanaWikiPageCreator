@@ -14,6 +14,7 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
+			autoRoyal("type_input", "loc_input");
 			textFunction("researchteam", "researchteam_input");
 			textFunctionMultiple("release", "version_input");
 			textFunctionMultiple("name", "name_input");
@@ -39,10 +40,6 @@
 			acquirement("loc_input", "planet_input", "moon_input", "axes_input", "sr_input", "srloc_input", "acquirement");
 			catalog("civ", "mtCatalog");
 			addInfoChapter("researchteam_input", "chapterResearch");
-			imgName("sr_img_upload", "sr_img_input");
-			imgName("sys_img_upload", "sys_img_input");
-			imgName("cab_upload", "cab_input");
-			imgName("coords_upload", "coords_input");
 			acquirementGallery("sr_img_input", "sys_img_input", "cab_input", "coords_input", "loc_input", "srloc_input", "sr_input", "moon_input", "acquirementGallery");
 			civGalaxy("civ");
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
@@ -50,8 +47,9 @@
 			researchTeam("researchteam", "civilized");
 			glyphRegion("portalglyphs_input", "civ", "region");
 			locGalaxy("civ", "locGalaxy");
+			hideInput("loc_input", "Space Station", "Space Anomaly", "axes_input", "planet_input", "moon_input", "coords_input", "cab_input");
+			hideInput("srloc_input", "Space Station", "Space Anomaly", "sr_input");
 			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
-			//addInfo("type_input", "civ", "researchteam", "addInfo")
 			codeFunction("region1", "region");
 			document.getElementById("HubNr").innerHTML = regNr("region");
 		}
@@ -145,14 +143,6 @@
 							<td><input type="text" name="System" id="system_input">
 						</tr>
 						<tr>
-							<th><label for="planet_input">Name of the planet:</label>
-							<td><input type="text" name="Planet" id="planet_input">
-						</tr>
-						<tr>
-							<th><label for="moon_input">Name of the moon (if applicable):</label>
-							<td><input type="text" name="Moon" id="moon_input">
-						</tr>
-						<tr>
 							<th><label>Location:</label>
 							<td>
 								<select name="Location" id="loc_input">
@@ -162,6 +152,14 @@
 									<option value="Space Anomaly">Space Anomaly
 								</select>
 							</td>
+						</tr>
+						<tr>
+							<th><label for="planet_input">Name of the planet:</label>
+							<td><input type="text" name="Planet" id="planet_input">
+						</tr>
+						<tr>
+							<th><label for="moon_input">Name of the moon (if applicable):</label>
+							<td><input type="text" name="Moon" id="moon_input">
 						</tr>
 						<tr>
 							<th><label for="axes_input">Planetary coords:</label>
@@ -305,19 +303,21 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label for="sr_img_upload">Save/Reload Planet/Moon</label>
+							<th><label for="sr_img_upload">Save/Reload Location</label>
 							<td>
 								<input type="text" name="SRPlanet" id="sr_img_input">
 								<br>
-								<input type="file" id="sr_img_upload" name="SR_Img_Upload" accept="image/*">
+								<input type="file" id="sr_img_upload" name="SR_Img_Upload" accept="image/*"
+									oninput="imgName('sr_img_upload', 'sr_img_input');">
 							</td>
 						</tr>
 						<tr>
-							<th><label for="sys_img_upload">System (Cabinet Planet/Moon highlighted)</label>
+							<th><label for="sys_img_upload">System (Cabinet location highlighted)</label>
 							<td>
 								<input type="text" name="SysImage" id="sys_img_input">
 								<br>
-								<input type="file" id="sys_img_upload" name="Sys_Img_Upload" accept="image/*">
+								<input type="file" id="sys_img_upload" name="Sys_Img_Upload" accept="image/*"
+									oninput="imgName('sys_img_upload', 'sys_img_input');">
 							</td>
 						</tr>
 						<tr>
@@ -325,7 +325,8 @@
 							<td>
 								<input type="text" name="Image" id="cab_input">
 								<br>
-								<input type="file" id="cab_upload" name="Cab_Upload" accept="image/*">
+								<input type="file" id="cab_upload" name="Cab_Upload" accept="image/*"
+									oninput="imgName('cab_upload', 'cab_input');">
 							</td>
 						</tr>
 						<tr>
@@ -333,7 +334,8 @@
 							<td>
 								<input type="text" name="Image" id="coords_input">
 								<br>
-								<input type="file" id="coords_upload" name="Coords_Upload" accept="image/*">
+								<input type="file" id="coords_upload" name="Coords_Upload" accept="image/*"
+									oninput="imgName('coords_upload', 'coords_input');">
 							</td>
 						</tr>
 						<tr>
