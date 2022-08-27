@@ -26,6 +26,12 @@ body {
 	left: -15px;
 }
 
+@media (pointer:none) {
+	tooltip {
+		width: 20px;
+	}
+}
+
 .tooltip .tooltiptext {
 	--width: 150px;
 	visibility: hidden;
