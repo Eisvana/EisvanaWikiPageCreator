@@ -376,8 +376,8 @@
 							onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
 						<a id="downloadbtn" class="button is-outlined is-primary"
 							onclick="downloadFile('downloadbtn', 'wikiText', 'system_input')">Download file</a>
-						<a class="button is-outlined is-primary" id="link"
-							onclick="wikiLink('link', 'region', 'system_input');">Create page</a>
+						<a class="button is-outlined is-primary" id="link" value="test"
+							onclick="wikiLink('link', 'region', (document.getElementById('moon_input').value ? 'moon_input' : 'planet_input'), 'Immortal Worm');">Create page</a>
 					</span>
 				</div>
 				<br>
