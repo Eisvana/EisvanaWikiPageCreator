@@ -26,8 +26,12 @@ body {
 	left: -15px;
 }
 
+.tooltip > img {
+	vertical-align: sub;
+}
+
 @media (pointer:none) {
-	tooltip {
+	.tooltip {
 		width: 20px;
 	}
 }
