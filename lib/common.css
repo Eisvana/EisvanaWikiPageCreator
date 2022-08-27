@@ -26,8 +26,9 @@ body {
 	left: -15px;
 }
 
-.tooltip > img {
+.tooltip>img {
 	vertical-align: sub;
+	user-select: none;
 }
 
 @media (pointer:none) {
