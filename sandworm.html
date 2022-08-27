@@ -7,13 +7,13 @@
 	<title>Hub Wiki Page Creator - Sandworm</title>
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js"></script>
-	<script src="./lib/creaturelogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Worm scan', 'Planet/Moon Page', 'System Page', 'Galaxy Map'];
 
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
+			civGalaxy("civ");
 			textFunctionMultiple("release", "version_input");
 			textFunction("image", "image_input");
 			textFunctionMultiple("system", "system_input");
@@ -28,17 +28,57 @@
 			textFunction("wormstomach", "wormstomach_input");
 			textFunction("mode", "mode_input");
 			textFunction("researchteam", "researchteam_input");
-			civGalaxy("civ");
-			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			researchTeam("researchteam", "civilized");
+			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			glyphRegion("portalglyphs_input", "civ", "region");
 			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
-			whitespaceDetector("addInfoWrapper");
 
+			function autoSpawn(inputId, codeId) {
+				const spawn = document.querySelector(`[id^=${inputId}]:checked`).value;
+				const output = `This creature ${spawn} automatically spawn on a game reload.<br><br>`;
+				if (spawn != '') {
+					document.getElementById(codeId).parentElement.style.display = '';
+					setOutput(codeId, output);
+				} else {
+					document.getElementById(codeId).parentElement.style.display = 'none';
+				}
+			}
 
+			autoSpawn("autoSpawn_input", "autoSpawn");
 
-			
+			function catalog(civ, researchTeam_codeId, codeId) {
+				const chapter = document.getElementById(researchTeam_codeId).innerHTML;
+				const hub = document.getElementById(civ).value;
+				document.getElementById(codeId).style.display = '';
+
+				let research = '';
+				if (chapter == 'GHEC') {
+					research = ' and documented by the [[Galactic Hub Exobiology Corps]]'
+				}
+
+				let album;
+				switch (hub) {
+					case "GHub":
+						album = "GHEC Sandworm";
+						break;
+
+					case "CalHub":
+						album = "CalHub Rare Fauna";
+						break;
+
+					case "EisHub":
+						album = "EisHub Shaihuluda";
+						break;
+				}
+
+				const output = `[[${album} Album]]${research}`;
+
+				setOutput(codeId, output);
+			}
+
+			catalog("civ", "researchteam", "addInfo");
 		}
+
 		window.onload = () => {
 			researchTeamDropdown("civ", "researchteam_input")
 			autoRefresh();
@@ -250,6 +290,18 @@
 							</td>
 						</tr>
 						<tr>
+							<th><label>Does this worm spawn on game reload?</label>
+							<td>
+								<input type="radio" id="autoSpawn_inputY" name="autoSpawn" value="will">
+								<label for="autoSpawn_inputY">Yes</label>
+								<input type="radio" id="autoSpawn_inputN" name="autoSpawn" value="will not">
+								<label for="autoSpawn_inputN">No</label>
+								<span style="display:none">
+									<input type="radio" id="autoSpawn_inputA" name="autoSpawn" value="" checked>
+								</span>
+							</td>
+						</tr>
+						<tr>
 							<th><label>Gamemode:</label>
 							<td>
 								<select id="mode_input" name="Mode">
@@ -349,7 +401,8 @@
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''Immortal Worm <output id='name2' name="bodyName"></output>''' is a [[creature]], a member
+						<div>'''Immortal Worm <output id='name2' name="bodyName"></output>''' is a [[creature]], a
+							member
 							of the [[Shaihuluda]] [[genus]].
 						</div>
 						<br>
@@ -366,19 +419,9 @@
 						<br>
 
 						<div>==Additional information==</div>
-						<div id="addInfoWrapper">
-							<div>
-								<div><output id='autoSpawn'></output></div>
-								<br>
-							</div>
-							<div>
-								<div><output id='addInfo'></output></div>
-								<br>
-							</div>
-							<div>
-								<div><output id="docby"></output></div>
-							</div>
-						</div>
+						<div><output id='autoSpawn'></output></div>
+						<div>Featured in the <output id='addInfo'></output>.<br><br></div>
+						<div><output id="docby"></output></div>
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
