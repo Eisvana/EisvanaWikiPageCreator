@@ -10,6 +10,60 @@
 	<script>
 		const galleryArray = ['', 'Worm scan', 'Planet/Moon Page', 'System Page', 'Galaxy Map'];
 
+		// assigns planet or moon name dynamically
+		function wormName(planet_inputId, moon_inputId, codeName) {
+			const planet = document.getElementById(planet_inputId).value;
+			const moon = document.getElementById(moon_inputId).value;
+
+			let body = planet_inputId;
+			if (moon != '') body = moon_inputId;
+
+			textFunctionMultiple(codeName, body)
+		}
+
+		// sets the autospawn value according to input
+		function autoSpawn(inputId, codeId) {
+			const spawn = document.querySelector(`[id^=${inputId}]:checked`).value;
+			const output = `This creature ${spawn} automatically spawn on a game reload.<br><br>`;
+			if (spawn != '') {
+				document.getElementById(codeId).parentElement.style.display = '';
+				setOutput(codeId, output);
+			} else {
+				document.getElementById(codeId).parentElement.style.display = 'none';
+			}
+		}
+
+		// assignes "documented by GHEC" sentence
+		function catalog(civ, researchTeam_codeId, codeId) {
+			const chapter = document.getElementById(researchTeam_codeId).innerHTML;
+			const hub = document.getElementById(civ).value;
+			document.getElementById(codeId).style.display = '';
+
+			let research = '';
+			if (chapter == 'GHEC') {
+				research = ' and documented by the [[Galactic Hub Exobiology Corps]]'
+			}
+
+			let album;
+			switch (hub) {
+				case "GHub":
+					album = "GHEC Sandworm";
+					break;
+
+				case "CalHub":
+					album = "CalHub Rare Fauna";
+					break;
+
+				case "EisHub":
+					album = "EisHub Shaihuluda";
+					break;
+			}
+
+			const output = `[[${album} Album]]${research}`;
+
+			setOutput(codeId, output);
+		}
+
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
@@ -19,6 +73,7 @@
 			textFunctionMultiple("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
+			wormName("planet_input", "moon_input", "bodyName");
 			planetMoon("planet_input", "moon_input", "locPlanet");
 			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunction("discovered", "discovered_input");
@@ -32,50 +87,7 @@
 			hideDiscoverer('discovered_input', 'discoveredlink_input');
 			glyphRegion("portalglyphs_input", "civ", "region");
 			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
-
-			function autoSpawn(inputId, codeId) {
-				const spawn = document.querySelector(`[id^=${inputId}]:checked`).value;
-				const output = `This creature ${spawn} automatically spawn on a game reload.<br><br>`;
-				if (spawn != '') {
-					document.getElementById(codeId).parentElement.style.display = '';
-					setOutput(codeId, output);
-				} else {
-					document.getElementById(codeId).parentElement.style.display = 'none';
-				}
-			}
-
 			autoSpawn("autoSpawn_input", "autoSpawn");
-
-			function catalog(civ, researchTeam_codeId, codeId) {
-				const chapter = document.getElementById(researchTeam_codeId).innerHTML;
-				const hub = document.getElementById(civ).value;
-				document.getElementById(codeId).style.display = '';
-
-				let research = '';
-				if (chapter == 'GHEC') {
-					research = ' and documented by the [[Galactic Hub Exobiology Corps]]'
-				}
-
-				let album;
-				switch (hub) {
-					case "GHub":
-						album = "GHEC Sandworm";
-						break;
-
-					case "CalHub":
-						album = "CalHub Rare Fauna";
-						break;
-
-					case "EisHub":
-						album = "EisHub Shaihuluda";
-						break;
-				}
-
-				const output = `[[${album} Album]]${research}`;
-
-				setOutput(codeId, output);
-			}
-
 			catalog("civ", "researchteam", "addInfo");
 		}
 
@@ -245,8 +257,8 @@
 							<th><label>Class:</label>
 							<td>
 								<select id="wormclass_input" name="WormClass">
-									<option value="Colossal Being">Colossal Being
 									<option value="Ceaseless Burrower">Ceaseless Burrower
+									<option value="Colossal Being">Colossal Being
 									<option value="Gargantuan">Gargantuan
 									<option value="Giant Parasite">Giant Parasite
 									<option value="Planetary Maggot">Planetary Maggot
@@ -260,8 +272,7 @@
 							<th><label for="wormmaxdepth_input">Max Depth:</label>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 										Found on the worm scan.<br>Give the full number, including the decimal.<br>No
-										"ku"
-										necessary.
+										"ku" necessary.
 									</span></span>
 							<td><input type="number" name="MaxDepth" id="wormmaxdepth_input" placeholder="0.0"
 									step="0.1" onkeypress="return isNumberKey(event)">
