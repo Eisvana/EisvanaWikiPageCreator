@@ -31,7 +31,7 @@ body {
 	user-select: none;
 }
 
-@media (pointer:none) {
+@media (pointer:coarse) {
 	.tooltip {
 		width: 20px;
 	}
