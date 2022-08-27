@@ -27,7 +27,7 @@ body {
 }
 
 .tooltip .tooltiptext {
-	--width: 190px;
+	--width: 150px;
 	visibility: hidden;
 	width: var(--width);
 	background-color: #555;
