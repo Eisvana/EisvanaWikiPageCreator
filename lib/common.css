@@ -17,6 +17,16 @@ body {
 	font-family: Nunito;
 }
 
+th {
+	display: flex;
+	justify-content: space-between;
+}
+
+tr:has(#portalglyphs_input)>th {
+	flex-wrap: wrap;
+	justify-content: unset;
+}
+
 .tooltip {
 	width: 15px;
 	height: auto;
