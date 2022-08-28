@@ -174,8 +174,11 @@
 							<td><input type="text" name="Moon" id="moon_input">
 						</tr>
 						<tr>
-							<th><label for="portalglyphs_input">Portalglyphs:</label><button
-									class="button is-small is-danger" type="button"
+							<th><label for="portalglyphs_input">Portalglyphs:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Found in Photo Mode. Glyphs are specific to each planet.
+									</span></span>
+								<button class="button is-small is-danger" type="button"
 									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
 
 							<td><input type="text" name="Glyphs" id="portalglyphs_input"
@@ -377,7 +380,8 @@
 						<a id="downloadbtn" class="button is-outlined is-primary"
 							onclick="downloadFile('downloadbtn', 'wikiText', 'system_input')">Download file</a>
 						<a class="button is-outlined is-primary" id="link" value="test"
-							onclick="wikiLink('link', 'region', (document.getElementById('moon_input').value ? 'moon_input' : 'planet_input'), 'Immortal Worm');">Create page</a>
+							onclick="wikiLink('link', 'region', (document.getElementById('moon_input').value ? 'moon_input' : 'planet_input'), 'Immortal Worm');">Create
+							page</a>
 					</span>
 				</div>
 				<br>
