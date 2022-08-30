@@ -47,6 +47,7 @@
 			textFunction("region", "region_input");
 			textFunction("content", "content_input");
 			textFunction("addInfo", "addInfo_input");
+			enPrefix("currency_input", "enPrefix");
 		}
 
 		window.onload = () => {
@@ -68,7 +69,7 @@
 
 		<div class="columns is-desktop">
 			<div class="column is-full-mobile">
-				<form id="form">
+				<form id="form" onreset="resetAll('gallery_descs')">
 					<table style="text-align:left">
 						<tr>
 							<th><label>Current release:</label>
@@ -226,15 +227,15 @@
 							</td>
 						</tr>-->
 						<tr>
-							<th><label>Description:</label>
+							<th><label for="description_input">Description:</label>
 							<td> <input type="text" name="Description" id="description_input">
 						</tr>
 						<tr>
-							<th><label>Currency:</label>
+							<th><label for="currency_input">Currency:</label>
 							<td> <input type="text" list="currencies" name="Currency" id="currency_input">
 						</tr>
 						<tr>
-							<th><label>Services:</label>
+							<th><label for="services_input">Services:</label>
 							<td> <input type="text" name="Services" id="services_input">
 						</tr>
 						<!--						<tr>
