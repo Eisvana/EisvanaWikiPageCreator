@@ -20,6 +20,7 @@ body {
 th {
 	display: flex;
 	justify-content: space-between;
+	min-width: 115px;
 }
 
 tr:has(#portalglyphs_input)>th {
@@ -32,13 +33,7 @@ tr:has(#portalglyphs_input)>th {
 	height: auto;
 	position: relative;
 	display: inline-block;
-	vertical-align: middle;
-	left: -15px;
-}
-
-.tooltip>img {
-	vertical-align: sub;
-	user-select: none;
+	left: -10px;
 }
 
 @media (pointer:coarse) {
@@ -139,8 +134,8 @@ input[type="text"],
 input[type="number"],
 input[type="date"] {
 	margin-top: 5px;
-	min-width: 200px;
-	width: 100%
+	min-width: 100px;
+	width: 100%;
 }
 
 tr textarea {
@@ -210,7 +205,6 @@ table {
 	.actions {
 		padding: 5px 10px;
 	}
-
 }
 
 @media only screen and (max-width: 310px) {
