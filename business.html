@@ -26,9 +26,17 @@
 			}
 		}
 
+		function fixHC(inputId) {
+			const input = document.getElementById(inputId).value.toLowerCase();
+			if (input === 'hubcoin') {
+				document.getElementById(inputId).value = '{{CurrencyHubCoin}}';
+			}
+		}
+
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
+			fixHC("currency_input");
 			civGalaxy("civ");
 			textFunctionMultiple("release", "version_input");
 			textFunction("image", "image_input");
@@ -40,7 +48,6 @@
 			textFunction("owner", "owner_input");
 			textFunction("ownerlink", "ownerlink_input");
 			textFunction("description", "description_input");
-			textFunctionMultiple("currency", "currency_input");
 			textFunction("services", "services_input");
 			textFunction("platform", "platform_input");
 			hideDiscoverer('owner_input', 'ownerlink_input');
@@ -48,6 +55,7 @@
 			textFunction("content", "content_input");
 			textFunction("addInfo", "addInfo_input");
 			enPrefix("currency_input", "enPrefix");
+			textFunctionMultiple("currency", "currency_input");
 		}
 
 		window.onload = () => {
