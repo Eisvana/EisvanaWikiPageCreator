@@ -23,6 +23,7 @@
 			//			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunction("owner", "owner_input");
 			textFunction("ownerlink", "ownerlink_input");
+			textFunction("headquarters", "headquarters_input");
 			textFunction("description", "description_input");
 			textFunction("services", "services_input");
 			textFunction("platform", "platform_input");
@@ -125,6 +126,10 @@
 							<tr>
 								<th><label for="moon_input">Name of the moon (if applicable):</label>
 								<td> <input type="text" name="Moon" id="moon_input">
+							</tr>
+							<tr>
+								<th><label for="headquarters_input">Name of the headquarter base:</label>
+								<td> <input type="text" name="Headquarters" id="headquarters_input">
 							</tr>
 							<!--						<tr>
 							<th><label for="portalglyphs_input">Portalglyphs:</label>
@@ -316,6 +321,7 @@
 						<div>| system = <output id='system'></output></div>
 						<div>| planet = <output id='planet'></output></div>
 						<div>| moon = <output id='moon'></output></div>
+						<div>| headquarters = <output id='headquarters'></output></div>
 						<div>| description = <output id="description"></output></div>
 						<div>| currency = <output id="currency" name="currency"></output></div>
 						<div>| services = <output id="services"></output></div>
