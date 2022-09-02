@@ -25,6 +25,7 @@
 			textFunction("ownerlink", "ownerlink_input");
 			textFunction("headquarters", "headquarters_input");
 			textFunction("description", "description_input");
+			textFunction("wallet", "wallet_input");
 			textFunction("services", "services_input");
 			textFunction("platform", "platform_input");
 			hideDiscoverer('owner_input', 'ownerlink_input');
@@ -221,6 +222,10 @@
 								<td> <input type="text" name="Description" id="description_input">
 							</tr>
 							<tr>
+								<th><label for="wallet_input">Wallet:</label>
+								<td> <input type="text" name="Wallet" id="wallet_input">
+							</tr>
+							<tr>
 								<th><label for="currency_input">Currency:</label>
 								<td> <input type="text" list="currencies" name="Currency" id="currency_input">
 							</tr>
@@ -323,6 +328,7 @@
 						<div>| moon = <output id='moon'></output></div>
 						<div>| headquarters = <output id='headquarters'></output></div>
 						<div>| description = <output id="description"></output></div>
+						<div>| wallet = <output id="wallet"></output></div>
 						<div>| currency = <output id="currency" name="currency"></output></div>
 						<div>| services = <output id="services"></output></div>
 						<div>| vanilla = </div>
