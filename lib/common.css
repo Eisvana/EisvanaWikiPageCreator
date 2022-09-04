@@ -46,6 +46,20 @@ tr:has(#portalglyphs_input)>th {
 	}
 }
 
+tr:has(#portalglyphs_input) button {
+	margin-right: 10px;
+}
+
+@media (max-width:500px) {
+	tr:has(#portalglyphs_input) button {
+		order: 3;
+	}
+
+	tr:has(#portalglyphs_input) .tooltip {
+		order: 2;
+	}
+}
+
 .tooltip .tooltiptext {
 	--width: 150px;
 	visibility: hidden;
