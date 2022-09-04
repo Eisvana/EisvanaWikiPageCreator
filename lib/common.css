@@ -30,15 +30,19 @@ tr:has(#portalglyphs_input)>th {
 
 .tooltip {
 	width: 15px;
+	min-width: 15px;
 	height: auto;
 	position: relative;
 	display: inline-block;
+	margin-left: auto;
 	left: -10px;
+	top: 3px;
 }
 
 @media (pointer:coarse) {
 	.tooltip {
 		width: 20px;
+		min-width: 20px;
 	}
 }
 

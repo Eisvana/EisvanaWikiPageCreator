@@ -168,19 +168,21 @@
 						</tr>
 						<tr>
 							<th><label for="planet_input">Name of the planet:</label>
-							<td>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 										Planet Name OR the planet circled by the moon where the worm can be found.
 									</span></span>
+							</th>
+							<td>
 								<input type="text" name="Planet" id="planet_input">
 							</td>
 						</tr>
 						<tr>
 							<th><label for="moon_input">Name of the moon (if applicable):</label>
-							<td>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 										If the base is located on a moon. Leave blank if the worm is on a planet.
 									</span></span>
+							</th>
+							<td>
 								<input type="text" name="Moon" id="moon_input">
 							</td>
 						</tr>
@@ -188,11 +190,11 @@
 							<th><label for="portalglyphs_input">Portalglyphs:</label>
 								<button class="button is-small is-danger" type="button"
 									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
-							</th>
-							<td>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+									<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 										Found in Photo Mode. Glyphs are specific to each planet.
 									</span></span>
+							</th>
+							<td>
 								<input type="text" name="Glyphs" id="portalglyphs_input"
 									oninput="glyphInputOnChange(this)">
 							</td>
@@ -271,10 +273,11 @@
 						</tr>
 						<tr>
 							<th><label>Class:</label>
-							<td>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 										Found on the worm scan.
 									</span></span>
+							</th>
+							<td>
 								<select id="wormclass_input" name="WormClass">
 									<option value="Ceaseless Burrower">Ceaseless Burrower
 									<option value="Colossal Being">Colossal Being
@@ -289,21 +292,23 @@
 						</tr>
 						<tr>
 							<th><label>Max Depth:</label>
-							<td>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 										Found on the worm scan.<br>Give the full number, including the decimal.<br>No
 										"ku" necessary.
 									</span></span>
+							</th>
+							<td>
 								<input type="number" name="MaxDepth" id="wormmaxdepth_input" placeholder="0.0"
 									step="0.1" onkeypress="return isNumberKey(event)">
 							</td>
 						</tr>
 						<tr>
 							<th><label>Stomach:</label>
-							<td>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 										Found on the worm scan.
 									</span></span>
+							</th>
+							<td>
 								<select id="wormstomach_input" name="WormClass">
 									<option value="Consumed waypoints">Consumed waypoints
 									<option value="Entire [[Trade Outpost|trade outpost]]">Entire trade outpost
