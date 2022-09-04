@@ -30,15 +30,33 @@ tr:has(#portalglyphs_input)>th {
 
 .tooltip {
 	width: 15px;
+	min-width: 15px;
 	height: auto;
 	position: relative;
 	display: inline-block;
+	margin-left: auto;
 	left: -10px;
+	top: 3px;
 }
 
 @media (pointer:coarse) {
 	.tooltip {
 		width: 20px;
+		min-width: 20px;
+	}
+}
+
+tr:has(#portalglyphs_input) button {
+	margin-right: 10px;
+}
+
+@media (max-width:500px) {
+	tr:has(#portalglyphs_input) button {
+		order: 3;
+	}
+
+	tr:has(#portalglyphs_input) .tooltip {
+		order: 2;
 	}
 }
 
