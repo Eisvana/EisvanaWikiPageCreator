@@ -118,6 +118,10 @@
 						</tr>
 						<tr>
 							<th><label for="image_upload">Main image name, including file extension:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Picture won't be uploaded to the wiki. This is only to autofill the image name.
+									</span></span>
+							</th>
 							<td>
 								<input type="text" name="Image" id="image_input">
 								<br>
@@ -143,21 +147,36 @@
 						</tr>
 						<tr>
 							<th><label for="planet_input">Name of the planet:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Planet Name OR the planet circled by the moon where the base can be found.
+									</span></span>
+							</th>
 							<td><input type="text" name="Planet" id="planet_input">
 						</tr>
 						<tr>
 							<th><label for="moon_input">Name of the moon (if applicable):</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										If the base is located on a moon. Leave blank if the base is on a planet.
+									</span></span>
+							</th>
 							<td><input type="text" name="Moon" id="moon_input">
 						</tr>
 						<tr>
 							<th><label for="axes_input">Planetary coords:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Found using your analysis visor OR on your ships dashboard
+									</span></span>
+							</th>
 							<td><input type="text" name="Axes" id="axes_input">
 						</tr>
 						<tr>
 							<th><label for="portalglyphs_input">Portalglyphs:</label><button
 									class="button is-small is-danger" type="button"
 									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
-
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Found in Photo Mode. Glyphs are specific to each planet.
+									</span></span>
+							</th>
 							<td><input type="text" name="Glyphs" id="portalglyphs_input"
 									oninput="glyphInputOnChange(this)">
 						</tr>
@@ -336,14 +355,26 @@
 						</tr>
 						<tr>
 							<th><label for="censusPlayer_input">Ingame name of the player?</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Your ingame name, as shown on the top left in the inventory.
+									</span></span>
+							</th>
 							<td><input type="text" name="CensusPlayer" id="censusPlayer_input">
 						</tr>
 						<tr>
 							<th><label for="censusReddit_input">Reddit name of the player?</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Your Reddit name. "u/" not necessary.
+									</span></span>
+							</th>
 							<td><input type="text" name="CensusReddit" id="censusReddit_input">
 						</tr>
 						<tr>
 							<th><label for="censusDiscord_input">Discord name of the player?</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Your Discord name. Include the #xxxx at the end.
+									</span></span>
+							</th>
 							<td><input type="text" name="CensusDiscord" id="censusDiscord_input"
 									onchange="discordValidation(this, 'discordError')">
 								<div id="discordError" style="display: none;">Please include the #xxxx ending</div>
@@ -385,7 +416,8 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<textarea name="Layout" id="layout_input"></textarea>
+								<textarea name="Layout" id="layout_input"
+									placeholder="Walk us through your base as if you were a realtor."></textarea>
 							</td>
 						</tr>
 						<tr class="no-border">
@@ -398,12 +430,14 @@
 							</td>
 						</tr>
 						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label for="addInfo_input">Additional
-									information:</label>
+							<th style="vertical-align:top" colspan="2">
+								<label for="addInfo_input">Additional information:</label>
+							</th>
 						</tr>
 						<tr>
 							<td colspan="2">
-								<textarea name="AdditionalInformation" id="addInfo_input"></textarea>
+								<textarea name="AdditionalInformation" id="addInfo_input"
+									placeholder="Any nearby resources, tourist traps or other bases."></textarea>
 							</td>
 						</tr>
 						<tr>

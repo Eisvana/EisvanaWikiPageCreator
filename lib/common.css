@@ -21,6 +21,7 @@ th {
 	display: flex;
 	justify-content: space-between;
 	min-width: 115px;
+	align-items: center;
 }
 
 tr:has(#portalglyphs_input)>th {
@@ -48,16 +49,6 @@ tr:has(#portalglyphs_input)>th {
 
 tr:has(#portalglyphs_input) button {
 	margin-right: 10px;
-}
-
-@media (max-width:500px) {
-	tr:has(#portalglyphs_input) button {
-		order: 3;
-	}
-
-	tr:has(#portalglyphs_input) .tooltip {
-		order: 2;
-	}
 }
 
 .tooltip .tooltiptext {
@@ -264,6 +255,14 @@ table {
 		display: flex;
 		flex-wrap: wrap;
 	}
+
+	tr:has(#portalglyphs_input) button {
+		order: 3;
+	}
+
+	tr:has(#portalglyphs_input) .tooltip {
+		order: 2;
+	}
 }
 
 #gallery_descs {
@@ -338,6 +337,11 @@ tr.no-border {
 
 tr * {
 	min-height: 25px;
+}
+
+table td,
+table th {
+	vertical-align: middle;
 }
 
 tr label {
