@@ -7,11 +7,6 @@
 	src: local('NMS-Glyphs-Mono'), local('NMS-Glyphs-Mono'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Mono.ttf) format('truetype');
 }
 
-@font-face {
-	font-family: 'NMS-Glyphs-Tight';
-	src: local('NMS-Glyphs-Tight'), local('NMS-Glyphs-Tight'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Tight.ttf) format('truetype');
-}
-
 html,
 body {
 	font-family: Nunito;
@@ -59,7 +54,7 @@ tr:has(#portalglyphs_input) button {
 	color: #fff;
 	text-align: center;
 	border-radius: 6px;
-	padding: 5px 0;
+	padding: 5px 1px;
 	position: absolute;
 	z-index: 1;
 	bottom: 110%;
@@ -85,6 +80,14 @@ tr:has(#portalglyphs_input) button {
 .tooltip:active .tooltiptext {
 	visibility: visible;
 	opacity: 1;
+}
+
+.tooltiptext a {
+	color: aqua;
+}
+
+.tooltiptext a:hover {
+	color: rgb(0, 170, 170);
 }
 
 #wikiText {
@@ -346,6 +349,12 @@ table th {
 
 tr label {
 	margin-right: 1em;
+}
+
+td>p,
+td>button {
+	margin: 2px 0;
+	text-align: center;
 }
 
 .glyphs {
