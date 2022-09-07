@@ -20,7 +20,7 @@
 			textFunction("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
-			//			textFunctionMultiple("portalglyphs", "portalglyphs_input");
+			//	textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunction("owner", "owner_input");
 			textFunction("ownerlink", "ownerlink_input");
 			textFunction("headquarters", "headquarters_input");
@@ -102,6 +102,11 @@
 							</tr>
 							<tr>
 								<th><label for="image_input">Main image name, including file extension:</label>
+									<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+											Picture won't be uploaded to the wiki. This is only to autofill the image
+											name.
+										</span></span>
+								</th>
 								<td>
 									<input type="text" name="Image" id="image_input">
 									<br>
@@ -122,10 +127,20 @@
 							</tr>
 							<tr>
 								<th><label for="planet_input">Name of the planet:</label>
+									<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+											Planet Name OR the planet circled by the moon where the business can be
+											found.
+										</span></span>
+								</th>
 								<td> <input type="text" name="Planet" id="planet_input">
 							</tr>
 							<tr>
 								<th><label for="moon_input">Name of the moon (if applicable):</label>
+									<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+											Planet Name OR the planet circled by the moon where the business can be
+											found.
+										</span></span>
+								</th>
 								<td> <input type="text" name="Moon" id="moon_input">
 							</tr>
 							<tr>
@@ -264,7 +279,7 @@
 							</tr>
 							<tr>
 								<td colspan="2">
-									<p style="text-align:center">Note: You can drag on the bottom right corner to expand
+									<p>Note: You can drag on the bottom right corner to expand
 										the text area
 									</p>
 								</td>
@@ -278,7 +293,7 @@
 										section</button></td>
 							</tr>
 							<tr class="no-border">
-								<th style="vertical-align:top" colspan="2"><label for="addInfo_input">Additional
+								<th colspan="2"><label for="addInfo_input">Additional
 										information:</label>
 							</tr>
 							<tr>

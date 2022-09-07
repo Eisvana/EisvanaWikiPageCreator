@@ -7,11 +7,6 @@
 	src: local('NMS-Glyphs-Mono'), local('NMS-Glyphs-Mono'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Mono.ttf) format('truetype');
 }
 
-@font-face {
-	font-family: 'NMS-Glyphs-Tight';
-	src: local('NMS-Glyphs-Tight'), local('NMS-Glyphs-Tight'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Tight.ttf) format('truetype');
-}
-
 html,
 body {
 	font-family: Nunito;
@@ -21,6 +16,7 @@ th {
 	display: flex;
 	justify-content: space-between;
 	min-width: 115px;
+	align-items: center;
 }
 
 tr:has(#portalglyphs_input)>th {
@@ -36,7 +32,6 @@ tr:has(#portalglyphs_input)>th {
 	display: inline-block;
 	margin-left: auto;
 	left: -10px;
-	top: 3px;
 }
 
 @media (pointer:coarse) {
@@ -50,16 +45,6 @@ tr:has(#portalglyphs_input) button {
 	margin-right: 10px;
 }
 
-@media (max-width:500px) {
-	tr:has(#portalglyphs_input) button {
-		order: 3;
-	}
-
-	tr:has(#portalglyphs_input) .tooltip {
-		order: 2;
-	}
-}
-
 .tooltip .tooltiptext {
 	--width: 150px;
 	visibility: hidden;
@@ -68,7 +53,7 @@ tr:has(#portalglyphs_input) button {
 	color: #fff;
 	text-align: center;
 	border-radius: 6px;
-	padding: 5px 0;
+	padding: 5px 3px;
 	position: absolute;
 	z-index: 1;
 	bottom: 110%;
@@ -94,6 +79,19 @@ tr:has(#portalglyphs_input) button {
 .tooltip:active .tooltiptext {
 	visibility: visible;
 	opacity: 1;
+}
+
+.tooltip>img {
+	position: relative;
+	top: 3px;
+}
+
+.tooltiptext a {
+	color: aqua;
+}
+
+.tooltiptext a:hover {
+	color: rgb(0, 170, 170);
 }
 
 #wikiText {
@@ -264,6 +262,14 @@ table {
 		display: flex;
 		flex-wrap: wrap;
 	}
+
+	tr:has(#portalglyphs_input) button {
+		order: 3;
+	}
+
+	tr:has(#portalglyphs_input) .tooltip {
+		order: 2;
+	}
 }
 
 #gallery_descs {
@@ -340,8 +346,20 @@ tr * {
 	min-height: 25px;
 }
 
+table td,
+table th {
+	vertical-align: middle;
+}
+
 tr label {
 	margin-right: 1em;
+}
+
+td>p,
+td>button {
+	margin: 2px 0;
+	margin-left: 10%;
+	text-align: left;
 }
 
 .glyphs {

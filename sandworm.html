@@ -155,6 +155,11 @@
 						</tr>
 						<tr>
 							<th><label for="image_input">Main image name, including file extension:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Picture won't be uploaded to the wiki. This is only to autofill the image
+										name.
+									</span></span>
+							</th>
 							<td>
 								<input type="text" name="Image" id="image_input">
 								<br>
@@ -164,6 +169,10 @@
 						</tr>
 						<tr>
 							<th><label for="system_input">Name of the system:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Enter exactly as seen in game. Watch out for 0 and O.
+									</span></span>
+							</th>
 							<td><input type="text" name="System" id="system_input">
 						</tr>
 						<tr>
@@ -179,7 +188,7 @@
 						<tr>
 							<th><label for="moon_input">Name of the moon (if applicable):</label>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										If the base is located on a moon. Leave blank if the worm is on a planet.
+										If the worm is located on a moon. Leave blank if the worm is on a planet.
 									</span></span>
 							</th>
 							<td>
@@ -190,7 +199,7 @@
 							<th><label for="portalglyphs_input">Portalglyphs:</label>
 								<button class="button is-small is-danger" type="button"
 									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
-									<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 										Found in Photo Mode. Glyphs are specific to each planet.
 									</span></span>
 							</th>
@@ -372,7 +381,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<p style="text-align:center">Note: You can drag on the bottom right corner to expand the
+								<p>Note: You can drag on the bottom right corner to expand the
 									text area
 								</p>
 							</td>
