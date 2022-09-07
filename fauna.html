@@ -151,10 +151,18 @@
 						</tr>
 						<tr>
 							<th><label for="planet_input">Name of the planet:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Planet Name OR the planet circled by the moon where the creature can be found.
+									</span></span>
+							</th>
 							<td><input type="text" name="Planet" id="planet_input">
 						</tr>
 						<tr>
 							<th><label for="moon_input">Name of the moon (if applicable):</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										If the worm is located on a moon. Leave blank if the creature is on a planet.
+									</span></span>
+							</th>
 							<td><input type="text" name="Moon" id="moon_input">
 						</tr>
 						<tr>
@@ -376,11 +384,19 @@
 						</tr>
 						<tr>
 							<th><label for="weight_input">Weight in kg:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Found on the creaure scan. No "kg" necessary.
+									</span></span>
+							</th>
 							<td><input type="number" step="0.1" name="Weight" id="weight_input" placeholder="0.0"
 									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
 							<th><label for="height_input">Height in m:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Found on the creaure scan. No "m" necessary.
+									</span></span>
+							</th>
 							<td><input type="number" step="0.1" name="Height" id="height_input" placeholder="0.0"
 									onkeypress="return isNumberKey(event)">
 						</tr>
@@ -401,6 +417,10 @@
 						</tr>
 						<tr style="display: none;">
 							<th><label for="specialNotes_input">Notes for discovery menu:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										This might differ from the scan. Please check in the discovery menu.
+									</span></span>
+							</th>
 							<td><input type="text" list="specialNotesData" name="SpecialNotes" id="specialNotes_input">
 						</tr>
 						<tr>
