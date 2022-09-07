@@ -358,8 +358,8 @@ tr label {
 td>p,
 td>button {
 	margin: 2px 0;
-	margin-left: 10%;
-	text-align: left;
+	/* margin-left: 10%; */
+	text-align: center;
 }
 
 .glyphs {
