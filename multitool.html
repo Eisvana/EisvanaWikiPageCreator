@@ -578,7 +578,7 @@
 					<div>
 						<div id="albumText">
 							| {{album | file=<output name="image" id="albumImage"></output> | name=[[<output
-								id="albumName" name="name"></output>]] |other=&lt;br&gt;<output id="albumClass"
+								id="albumName" name="name"></output>]] | other=&lt;br&gt;<output id="albumClass"
 								name="class"></output> - <output id="albumType"></output> <output id="albumSlots"
 								name="slots"></output> | glyph=<output id='albumGlyphs' name="portalglyphs"></output> |
 							<output id="albumDiscoverer"></output>}} <output id="albumDesc"></output>
@@ -590,7 +590,7 @@
 							Copy album wikicode
 						</button>
 						<a class="button is-outlined is-primary" id="albumLink"
-							onclick="wikiLink('albumLink', 'region', 'name_input'); this.href ? this.href = 'https://nomanssky.fandom.com/wiki/' + document.getElementById('mtCatalog').innerHTML + ' Multi-Tool Catalog' + (document.getElementById('civ').value != 'CalHub' ? ' - ' + document.getElementById('type_input').value : '') : this.removeAttribute('href')">
+							onclick="wikiLink('albumLink', 'region', 'name_input'); this.href ? this.href = 'https://nomanssky.fandom.com/wiki/' + document.getElementById('mtCatalog').innerHTML + ' Multi-Tool Catalog' + (document.getElementById('civ').value != 'CalHub' ? ' - ' + (document.getElementById('type_input').value == 'Rifle' || document.getElementById('type_input').value == 'Pistol' ? 'Standard Multi-Tool' : document.getElementById('type_input').value) : '') : this.removeAttribute('href')">
 							Open Album
 						</a>
 					</div>
