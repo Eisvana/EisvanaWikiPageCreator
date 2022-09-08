@@ -8,7 +8,9 @@
 }
 
 html,
-body {
+body,
+.actions button,
+.actions a {
 	font-family: Nunito;
 }
 
@@ -169,15 +171,11 @@ table {
 	border-left: 1px dashed rgb(210, 210, 210);
 	padding-left: 2em;
 	font-family: 'Consolas', monospace;
-	margin-bottom: 5em;
+	padding-bottom: 5em;
 }
 
 .actions {
 	margin: 0 auto;
-}
-.actions button,
-.actions a {
-	font-family: Nunito;
 }
 
 @media only screen and (max-width: 1407px) {

@@ -63,18 +63,6 @@
 			setOutput(codeId, output);
 		}
 
-		// fills in the correct discoverer parm in the album
-		function albumDiscoverer(discovered_inputId, discoveredlink_inputId, codeId) {
-			const discovered = document.getElementById(discovered_inputId).value;
-			const discoveredlink = document.getElementById(discoveredlink_inputId).value;
-
-			if (discoveredlink != '') {
-				setOutput(codeId, `wiki=${discoveredlink}`);
-			} else {
-				setOutput(codeId, `discoverer=${discovered}`);
-			}
-		}
-
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
@@ -498,8 +486,8 @@
 					</h3>
 					<div>
 						<div id="albumText">
-							| {{album | file=<output name="image" id="albumImage"></output> | name=[[Immortal
-							Worm <output id="albumName" name="bodyName"></output>|<output id="albumClass"
+							| {{album | file=<output name="image" id="albumImage"></output> | name=[[Immortal Worm
+							 <output id="albumName" name="bodyName"></output>|<output id="albumClass"
 								name="wormclass"></output>]] |other=(<output
 								id="albumDepth"></output>ku)&lt;br&gt;Stomach: <output id="albumStomach"
 								name="wormstomach"></output> | glyph=<output id='albumGlyphs'
