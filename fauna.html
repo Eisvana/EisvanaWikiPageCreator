@@ -57,6 +57,7 @@
 			albumHeight("height", "albumHeight");
 			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
 			hideInput("catalog_input", "albumText");
+			textFunction("album", "catalog_input");
 		}
 		window.onload = () => {
 			researchTeamDropdown("civ", "researchteam_input")
@@ -610,16 +611,27 @@
 					</div>
 				</div>
 				<div class="output" id="AlbumEntry">
-					<h3 class="subtitle is-5" style="margin-bottom:0.5rem">Creature album entry for <output
-							name="newName"></output>:<h3>
-							<div id="albumText">
-								<div>| {{album | file=<output name="image" id="albumImage"></output> | name=<output
-										id="albumName" name="newName"></output> |other=(<output name="height"
-										id="albumHeight"></output>m) | glyph=<output id='albumGlyphs'
-										name="portalglyphs"></output> | <output id="albumDiscoverer"></output>}}</div>
-							</div>
-							<button id="albumBtn" class="button is-outlined is-primary"
-								onclick="copyText('albumText', 'albumBtn')" style="margin-top:0.5rem">Copy album wikicode</button>
+					<h3 class="subtitle is-5" style="margin-bottom:0.5rem"><output id="album"></output> Album entry for
+						<output name="newName"></output>:
+					</h3>
+					<div>
+						<div id="albumText">
+							| {{album | file=<output name="image" id="albumImage"></output> | name=<output
+								id="albumName" name="newName"></output> |other=(<output name="height"
+								id="albumHeight"></output>m) | glyph=<output id='albumGlyphs'
+								name="portalglyphs"></output> | <output id="albumDiscoverer"></output>}}
+						</div>
+					</div>
+					<div class="actions" style="margin-top:0.5rem; font-family: revert;">
+						<button id="albumBtn" class="button is-outlined is-primary"
+							onclick="copyText('albumText', 'albumBtn')">
+							Copy album wikicode
+						</button>
+						<a class="button is-outlined is-primary" id="albumLink"
+							onclick="wikiLink('albumLink', 'region', 'catalog_input'); this.href ? this.href = this.href.replace('Special:EditPage/', '') + '_Album' : this.removeAttribute('href');">
+							Open Album
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

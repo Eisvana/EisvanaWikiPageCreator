@@ -175,6 +175,10 @@ table {
 .actions {
 	margin: 0 auto;
 }
+.actions button,
+.actions a {
+	font-family: Nunito;
+}
 
 @media only screen and (max-width: 1407px) {
 	.actions {

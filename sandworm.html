@@ -33,11 +33,10 @@
 			}
 		}
 
-		// assignes "documented by GHEC" sentence
+		// assigns "documented by GHEC" sentence
 		function catalog(civ, researchTeam_codeId, codeId) {
 			const chapter = document.getElementById(researchTeam_codeId).innerHTML;
 			const hub = document.getElementById(civ).value;
-			document.getElementById(codeId).style.display = '';
 
 			let research = '';
 			if (chapter == 'GHEC') {
@@ -64,12 +63,24 @@
 			setOutput(codeId, output);
 		}
 
+		// fills in the correct discoverer parm in the album
+		function albumDiscoverer(discovered_inputId, discoveredlink_inputId, codeId) {
+			const discovered = document.getElementById(discovered_inputId).value;
+			const discoveredlink = document.getElementById(discoveredlink_inputId).value;
+
+			if (discoveredlink != '') {
+				setOutput(codeId, `wiki=${discoveredlink}`);
+			} else {
+				setOutput(codeId, `discoverer=${discovered}`);
+			}
+		}
+
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
 			civGalaxy("civ");
 			textFunctionMultiple("release", "version_input");
-			textFunction("image", "image_input");
+			textFunctionMultiple("image", "image_input");
 			textFunctionMultiple("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
@@ -78,9 +89,9 @@
 			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunction("discovered", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
-			textFunction("wormclass", "wormclass_input");
+			textFunctionMultiple("wormclass", "wormclass_input");
 			floatFunction("wormmaxdepth", "wormmaxdepth_input", "1");
-			textFunction("wormstomach", "wormstomach_input");
+			textFunctionMultiple("wormstomach", "wormstomach_input");
 			textFunction("mode", "mode_input");
 			textFunction("researchteam", "researchteam_input");
 			researchTeam("researchteam", "civilized");
@@ -90,6 +101,9 @@
 			autoSpawn("autoSpawn_input", "autoSpawn");
 			catalog("civ", "researchteam", "addInfo");
 			textAreaFunction('appearance', 'appearance_input');
+			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
+			codeFunction("albumDepth", "wormmaxdepth")
+			document.getElementById("album").innerHTML = getCodeValue("addInfo").replace('[[', '').replace(']]', '');
 		}
 
 		window.onload = () => {
@@ -427,7 +441,7 @@
 						<div>{{<output id='civStub'></output>}}</div>
 						<div>{{Creature infobox</div>
 						<div>| name = Immortal Worm <output id='name' name="bodyName"></output></div>
-						<div>| image = <output id='image'></output></div>
+						<div>| image = <output id='image' name="image"></output></div>
 						<div>| galaxy = <output id='galaxy'></output></div>
 						<div>| region = <output id='region'></output></div>
 						<div>| system = <output id='system' name="system"></output></div>
@@ -436,9 +450,9 @@
 						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}
 						</div>
 						<div>| genus = Shaihuluda</div>
-						<div>| wormclass = <output id="wormclass"></output></div>
+						<div>| wormclass = <output id="wormclass" name="wormclass"></output></div>
 						<div>| wormmaxdepth = <output id="wormmaxdepth"></output></div>
-						<div>| wormstomach = <output id="wormstomach"></output></div>
+						<div>| wormstomach = <output id="wormstomach" name="wormstomach"></output></div>
 						<div>| civilized = <output id='civilized'></output></div>
 						<div>| discovered = <output id='discovered'></output></div>
 						<div>| discoveredlink = <output id='discoveredlink'></output></div>
@@ -476,6 +490,31 @@
 						<div>&lt;gallery&gt;</div>
 						<div><output id="galleryCode"></output></div>
 						<div>&lt;/gallery&gt;</div>
+					</div>
+				</div>
+				<div class="output" id="AlbumEntry">
+					<h3 class="subtitle is-5" style="margin-bottom:0.5rem"><output id="album"></output> entry for
+						<output name="bodyName"></output>:
+					</h3>
+					<div>
+						<div id="albumText">
+							| {{album | file=<output name="image" id="albumImage"></output> | name=[[Immortal
+							Worm <output id="albumName" name="bodyName"></output>|<output id="albumClass"
+								name="wormclass"></output>]] |other=(<output
+								id="albumDepth"></output>ku)&lt;br&gt;Stomach: <output id="albumStomach"
+								name="wormstomach"></output> | glyph=<output id='albumGlyphs'
+								name="portalglyphs"></output> | <output id="albumDiscoverer"></output>}}
+						</div>
+					</div>
+					<div class="actions" style="margin-top:0.5rem; font-family: revert;">
+						<button id="albumBtn" class="button is-outlined is-primary"
+							onclick="copyText('albumText', 'albumBtn')">
+							Copy album wikicode
+						</button>
+						<a class="button is-outlined is-primary" id="albumLink"
+							onclick="wikiLink('albumLink', 'region', (document.getElementById('moon_input').value ? 'moon_input' : 'planet_input')); this.href ? this.href = 'https://nomanssky.fandom.com/wiki/' + document.getElementById('addInfo').innerHTML.replace('[[', '').replace(']]', '') : this.removeAttribute('href')">
+							Open Album
+						</a>
 					</div>
 				</div>
 			</div>
