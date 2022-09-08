@@ -9,6 +9,7 @@
 
 html,
 body,
+h3,
 .actions button,
 .actions a {
 	font-family: Nunito;
@@ -360,6 +361,10 @@ td>button {
 	margin: 2px 0;
 	/* margin-left: 10%; */
 	text-align: center;
+}
+
+#AlbumEntry h3 {
+	font-weight: bolder;
 }
 
 .glyphs {
