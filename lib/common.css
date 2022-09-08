@@ -8,7 +8,10 @@
 }
 
 html,
-body {
+body,
+h3,
+.actions button,
+.actions a {
 	font-family: Nunito;
 }
 
@@ -94,10 +97,6 @@ tr:has(#portalglyphs_input) button {
 	color: rgb(0, 170, 170);
 }
 
-#wikiText {
-	font-family: 'Consolas', monospace;
-}
-
 .title {
 	text-align: center;
 }
@@ -172,6 +171,8 @@ table {
 .output {
 	border-left: 1px dashed rgb(210, 210, 210);
 	padding-left: 2em;
+	font-family: 'Consolas', monospace;
+	padding-bottom: 5em;
 }
 
 .actions {
@@ -358,8 +359,12 @@ tr label {
 td>p,
 td>button {
 	margin: 2px 0;
-	margin-left: 10%;
-	text-align: left;
+	/* margin-left: 10%; */
+	text-align: center;
+}
+
+#AlbumEntry h3 {
+	font-weight: bolder;
 }
 
 .glyphs {

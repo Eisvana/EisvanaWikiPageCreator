@@ -9,15 +9,17 @@
 	<script src="./lib/common.js"></script>
 	<script src="./lib/creaturelogic.js"></script>
 	<script>
-		const galleryArray = ['', 'x gender', 'x gender scan', 'Creature scan', 'Discovery Menu', 'Planet/Moon Page', 'System Page', 'Galaxy Map'];
+		const galleryArray = ['', 'x gender', 'x gender scan', 'Creature scan', 'Discovery Menu', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
 
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
+			document.getElementById("dm_input").value = document.getElementById("dm_input").value.replaceAll('\n', ' ').replaceAll('  ', ' ');
+			creaturePrio("gender");
 			textFunctionMultiple("release", "version_input");
 			textFunctionMultiple("newName", "name_input");
-			textFunctionMultiple("name", pageName('oldName_input', 'name_input'));
-			textFunction("image", "image_input");
+			textFunction("name", pageName('oldName_input', 'name_input'));
+			textFunctionMultiple("image", "image_input");
 			textFunctionMultiple("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
@@ -52,6 +54,10 @@
 			specialNotesTextFunc("notes_input", "specialNotes_input", "addObservation");
 			creaPrioRadioName("gender_input", "gender2_input", "gender1_label", "gender2_label");
 			whitespaceDetector("addInfoWrapper");
+			albumHeight("height", "albumHeight");
+			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
+			hideInput("catalog_input", "albumText");
+			textFunction("album", "catalog_input");
 		}
 		window.onload = () => {
 			researchTeamDropdown("civ", "researchteam_input")
@@ -61,7 +67,6 @@
 			hideSecGenderProps("gender_input", "gender2_input", "weight2_input", "height2_input");
 			albumDropdown("civ", "ecosystem_input", "catalog_input");
 			specialNotes("notes_input", "specialNotes_input");
-			creaturePrio("gender");
 			showInput();
 		}
 	</script>
@@ -530,7 +535,7 @@
 						<div>{{<output id='civStub'></output>}}</div>
 						<div>{{Creature infobox</div>
 						<div>| name = <output id='name' name="newName"></output></div>
-						<div>| image = <output id='image'></output></div>
+						<div>| image = <output id='image' name="image"></output></div>
 						<div>| galaxy = <output id='galaxy'></output></div>
 						<div>| region = <output id='region'></output></div>
 						<div>| system = <output id='system' name="system"></output></div>
@@ -546,7 +551,7 @@
 						<div>| behaviour = <output id='behaviour'></output></div>
 						<div>| diet = <output id='diet'></output></div>
 						<div>| weight = <output id='weight'></output></div>
-						<div>| height = <output id='height'></output></div>
+						<div>| height = <output id='height' name="height"></output></div>
 						<div>| notes = <output id='notes'></output></div>
 						<div>| produces = <output id='produces'></output></div>
 						<div>| genus = <output id='genus'></output></div>
@@ -603,6 +608,29 @@
 						<div>&lt;gallery&gt;</div>
 						<div><output id="galleryCode"></output></div>
 						<div>&lt;/gallery&gt;</div>
+					</div>
+				</div>
+				<div class="output" id="AlbumEntry">
+					<h3 class="subtitle is-5" style="margin-bottom:0.5rem"><output id="album"></output> Album entry for
+						<output name="newName"></output>:
+					</h3>
+					<div>
+						<div id="albumText">
+							| {{album | file=<output name="image" id="albumImage"></output> | name=[[<output
+								id="albumName" name="newName">]]</output> |other=(<output name="height"
+								id="albumHeight"></output>m) | glyph=<output id='albumGlyphs'
+								name="portalglyphs"></output> | <output id="albumDiscoverer"></output>}}
+						</div>
+					</div>
+					<div class="actions" style="margin-top:0.5rem;">
+						<button id="albumBtn" class="button is-outlined is-primary"
+							onclick="copyText('albumText', 'albumBtn')">
+							Copy album wikicode
+						</button>
+						<a class="button is-outlined is-primary" id="albumLink"
+							onclick="wikiLink('albumLink', 'region', 'catalog_input'); this.href ? this.href = this.href.replace('Special:EditPage/', '') + '_Album' : this.removeAttribute('href');">
+							Open Album
+						</a>
 					</div>
 				</div>
 			</div>

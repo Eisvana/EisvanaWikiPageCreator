@@ -18,7 +18,7 @@
 			textFunction("researchteam", "researchteam_input");
 			textFunctionMultiple("release", "version_input");
 			textFunctionMultiple("name", "name_input");
-			textFunction("image", "image_input");
+			textFunctionMultiple("image", "image_input");
 			textFunctionMultiple("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
@@ -26,7 +26,7 @@
 			textFunction("location", "loc_input");
 			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunctionMultiple("type", "type_input");
-			textFunction("slots", "slots_input");
+			textFunctionMultiple("slots", "slots_input");
 			textFunction("cost", "cost_input");
 			floatFunction("dmg", "dmg_input", "1");
 			floatFunction("scanRange", "scan_input", "1");
@@ -52,7 +52,12 @@
 			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
 			codeFunction("region1", "region");
 			document.getElementById("HubNr").innerHTML = regNr("region");
+			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
+			MTType("type_input", "slots_input", "albumType");
+			textFunction("albumCiv", "civ");
+			document.getElementById("albumDesc").innerHTML = document.getElementById("acquirement").innerHTML.replace('Save and reload', 'S/r')
 		}
+
 		window.onload = () => {
 			researchTeamDropdown("civ", "researchteam_input")
 			autoRefresh();
@@ -489,7 +494,7 @@
 						<div>{{<output id='civStub'></output>}}</div>
 						<div>{{Multitool infobox</div>
 						<div>| name = <output id='name' name="name"></output></div>
-						<div>| image = <output id='image'></output></div>
+						<div>| image = <output id='image' name="image"></output></div>
 						<div>| civilized = <output id='civilized'></output></div>
 						<div>| galaxy = <output id='galaxy'></output></div>
 						<div>| region = <output id='region' name="region"></output></div>
@@ -506,7 +511,7 @@
 						<div>| horns = <output id='horns'></output></div>
 						<div>| glowtubes = <output id='glowtubes'></output></div>
 						<div>| class = <output id='class' name="class"></output></div>
-						<div>| slots = <output id='slots'></output></div>
+						<div>| slots = <output id='slots' name="slots"></output></div>
 						<div>| cost = {{FormatNumber|<output id='cost'></output>}}</div>
 						<div>| discovered = <output id='discovered'></output></div>
 						<div>| discoveredlink = <output id='discoveredlink'></output></div>
@@ -564,6 +569,30 @@
 
 						<div>==Reference links==</div>
 						<div>{{MTRefLinks}}</div>
+					</div>
+				</div>
+				<div class="output" id="AlbumEntry">
+					<h3 class="subtitle is-5" style="margin-bottom:0.5rem"><output id="albumCiv" name="civ"></output>
+						<output id="album" name="type"></output> Catalog entry for <output name="name"></output>:
+					</h3>
+					<div>
+						<div id="albumText">
+							| {{album | file=<output name="image" id="albumImage"></output> | name=[[<output
+								id="albumName" name="name"></output>]] |other=&lt;br&gt;<output id="albumClass"
+								name="class"></output> - <output id="albumType"></output> <output id="albumSlots"
+								name="slots"></output> | glyph=<output id='albumGlyphs' name="portalglyphs"></output> |
+							<output id="albumDiscoverer"></output>}} <output id="albumDesc"></output>
+						</div>
+					</div>
+					<div class="actions" style="margin-top:0.5rem;">
+						<button id="albumBtn" class="button is-outlined is-primary"
+							onclick="copyText('albumText', 'albumBtn')">
+							Copy album wikicode
+						</button>
+						<a class="button is-outlined is-primary" id="albumLink"
+							onclick="wikiLink('albumLink', 'region', 'name_input'); this.href ? this.href = 'https://nomanssky.fandom.com/wiki/' + document.getElementById('mtCatalog').innerHTML + ' Multi-Tool Catalog' + (document.getElementById('civ').value != 'CalHub' ? ' - ' + document.getElementById('type_input').value : '') : this.removeAttribute('href')">
+							Open Album
+						</a>
 					</div>
 				</div>
 			</div>
