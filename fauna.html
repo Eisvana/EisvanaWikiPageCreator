@@ -14,7 +14,7 @@
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
-			document.getElementById("dm_input").value = document.getElementById("dm_input").value.replaceAll('\n', ' ');
+			document.getElementById("dm_input").value = document.getElementById("dm_input").value.replaceAll('\n', ' ').replaceAll('  ', ' ');
 			textFunctionMultiple("release", "version_input");
 			textFunctionMultiple("newName", "name_input");
 			textFunctionMultiple("name", pageName('oldName_input', 'name_input'));
