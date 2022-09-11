@@ -203,48 +203,6 @@
 							<td><input type="text" name="Sr" id="sr_input">
 						</tr>
 						<tr>
-							<th><label>Class:</label>
-							<td>
-								<select id="class_input" name="Class">
-									<option value="S">S
-									<option value="A">A
-									<option value="B">B
-									<option value="C">C
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Add-ons:</label>
-							<td>
-								<div><input type="checkbox" id="crystals_input" value="Yes"> <label
-										for="crystals_input">Crystals</label></div>
-								<div><input type="checkbox" id="horns_input" value="Yes"> <label
-										for="horns_input">Horns</label></div>
-								<div><input type="checkbox" id="glowtubes_input" value="Yes"> <label
-										for="glowtubes_input">Glowtubes</label></div>
-							</td>
-						</tr>
-						<tr>
-							<th><label for="slots_input">Slot count:</label>
-							<td><input type="number" name="Slots" id="slots_input" min="5" max="24" step="1"
-									onkeypress="return isNumberKey(event)">
-						</tr>
-						<tr>
-							<th><label for="cost_input">Cost:</label>
-							<td><input type="number" name="Cost" id="cost_input" min="45500" step="5"
-									onkeypress="return isNumberKey(event)">
-						</tr>
-						<tr>
-							<th><label for="dmg_input">Damage Potential:</label>
-							<td><input type="number" name="Damage" id="dmg_input" step="0.1" placeholder="0.0"
-									onkeypress="return isNumberKey(event)">
-						</tr>
-						<tr>
-							<th><label for="scan_input">Scanner Range:</label>
-							<td><input type="number" name="Scan" id="scan_input" step="0.1" placeholder="0.0"
-									onkeypress="return isNumberKey(event)">
-						</tr>
-						<tr>
 							<th><label for="portalglyphs_input">Portalglyphs:</label><button
 									class="button is-small is-danger" type="button"
 									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
@@ -326,6 +284,48 @@
 								<output class="glyphs" style="word-break: break-word" id="glyph_display"
 									name="portalglyphs"></output>
 							</td>
+						</tr>
+						<tr>
+							<th><label>Class:</label>
+							<td>
+								<select id="class_input" name="Class">
+									<option value="S">S
+									<option value="A">A
+									<option value="B">B
+									<option value="C">C
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label>Add-ons:</label>
+							<td>
+								<div><input type="checkbox" id="crystals_input" value="Yes"> <label
+										for="crystals_input">Crystals</label></div>
+								<div><input type="checkbox" id="horns_input" value="Yes"> <label
+										for="horns_input">Horns</label></div>
+								<div><input type="checkbox" id="glowtubes_input" value="Yes"> <label
+										for="glowtubes_input">Glowtubes</label></div>
+							</td>
+						</tr>
+						<tr>
+							<th><label for="slots_input">Slot count:</label>
+							<td><input type="number" name="Slots" id="slots_input" min="5" max="24" step="1"
+									onkeypress="return isNumberKey(event)">
+						</tr>
+						<tr>
+							<th><label for="cost_input">Cost:</label>
+							<td><input type="number" name="Cost" id="cost_input" min="45500" step="5"
+									onkeypress="return isNumberKey(event)">
+						</tr>
+						<tr>
+							<th><label for="dmg_input">Damage Potential:</label>
+							<td><input type="number" name="Damage" id="dmg_input" step="0.1" placeholder="0.0"
+									onkeypress="return isNumberKey(event)">
+						</tr>
+						<tr>
+							<th><label for="scan_input">Scanner Range:</label>
+							<td><input type="number" name="Scan" id="scan_input" step="0.1" placeholder="0.0"
+									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
 							<td colspan="2">
