@@ -27,7 +27,7 @@
 			textFunctionMultiple("portalglyphs", "portalglyphs_input");
 			textFunctionMultiple("type", "type_input");
 			textFunctionMultiple("slots", "slots_input");
-			textFunction("cost", "cost_input");
+			floatFunction("cost", "cost_input", "0");
 			floatFunction("dmg", "dmg_input", "1");
 			floatFunction("scanRange", "scan_input", "1");
 			checkBoxFunction("crystals", "crystals_input");
@@ -318,12 +318,22 @@
 									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
-							<th><label for="dmg_input">Damage Potential:</label>
+							<th><label for="dmg_input">Base Damage Potential:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Base damage. Every tech except for the Scanner and the Mining Beam needs to be
+										dismantled.
+									</span></span>
+							</th>
 							<td><input type="number" name="Damage" id="dmg_input" step="0.1" placeholder="0.0"
 									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
-							<th><label for="scan_input">Scanner Range:</label>
+							<th><label for="scan_input">Base Scanner Range:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Base range. Every tech except for the Scanner and the Mining Beam needs to be
+										dismantled.
+									</span></span>
+							</th>
 							<td><input type="number" name="Scan" id="scan_input" step="0.1" placeholder="0.0"
 									onkeypress="return isNumberKey(event)">
 						</tr>
@@ -512,7 +522,7 @@
 						<div>| glowtubes = <output id='glowtubes'></output></div>
 						<div>| class = <output id='class' name="class"></output></div>
 						<div>| slots = <output id='slots' name="slots"></output></div>
-						<div>| cost = {{FormatNumber|<output id='cost'></output>}}</div>
+						<div>| cost = <output id='cost'></output></div>
 						<div>| discovered = <output id='discovered'></output></div>
 						<div>| discoveredlink = <output id='discoveredlink'></output></div>
 						<div>| researchteam = <output id='researchteam'></output></div>
@@ -542,8 +552,8 @@
 						<div>==Stats==</div>
 						<div>The {{Class|<output id="class1" name="class"></output>}} class version of this weapon has
 							the following base stats:</div>
-						<div>* '''Damage Potential''': <output id="dmg"></output></div>
-						<div>* '''Scanner Range''': <output id="scanRange"></output></div>
+						<div>* '''Damage Potential''': {{subst:#replace:<output id="dmg"></output>|,}}</div>
+						<div>* '''Scanner Range''': {{subst:#replace:<output id="scanRange"></output>|,}}</div>
 						<br>
 
 						<div>==Acquirement==</div>
