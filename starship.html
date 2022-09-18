@@ -168,7 +168,7 @@
 						<tr>
 							<th><label for="moon_input">Name of the moon (if applicable):</label>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										If the worm is located on a moon. Leave blank if the starship is on a planet.
+										If the ship is located on a moon. Leave blank if the starship is on a planet.
 									</span></span>
 							</th>
 							<td><input type="text" name="Moon" id="moon_input">
@@ -179,6 +179,10 @@
 						</tr>
 						<tr>
 							<th><label>System economy:</label>
+								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+										Found in the exploration guide under "Economy".
+									</span></span>
+							</th>
 							<td>
 								<select id="economy_input" name="Economy">
 									<optgroup label="T3">
@@ -471,7 +475,6 @@
 									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
 						</tr>
 					</table>
-					<br>
 				</form>
 				<div id="gallery_descs">
 				</div>
