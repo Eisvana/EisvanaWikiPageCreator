@@ -178,7 +178,7 @@
 						<tr>
 							<th><label for="moon_input">Name of the moon (if applicable):</label>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										If the worm is located on a moon. Leave blank if the multi-tool is on a planet.
+										If the tool is located on a moon. Leave blank if the multi-tool is on a planet.
 									</span></span>
 							</th>
 							<td><input type="text" name="Moon" id="moon_input">
@@ -472,16 +472,10 @@
 							<th><label for="gallery_upload">Gallery files</label>
 							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
 									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
-						</tr>
-						<tr colspan="2">
-							<td>
-								<div id="gallery_descs">
-								</div>
-							</td>
-						</tr>
 					</table>
-					<br>
 				</form>
+				<div id="gallery_descs">
+				</div>
 				<div>
 					<span class="actions" style="white-space: nowrap">
 						<button class="button is-warning" type="reset" form="form">Reset inputs</button>

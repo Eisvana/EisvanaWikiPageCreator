@@ -66,7 +66,7 @@ tr:has(#portalglyphs_input) button {
 	opacity: 0;
 	transition: opacity 0.3s;
 	font-weight: normal;
-    font-family: Roboto, sans-serif;
+	font-family: Roboto, sans-serif;
 }
 
 .tooltip .tooltiptext::after {
@@ -406,4 +406,8 @@ footer>div {
 .merchantUpgrades {
 	display: grid;
 	grid-template-columns: repeat(4, max-content);
+}
+
+#gallery_descs {
+	margin-top: 2em;
 }
