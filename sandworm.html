@@ -24,12 +24,12 @@
 		// sets the autospawn value according to input
 		function autoSpawn(inputId, codeId) {
 			const spawn = document.querySelector(`[id^=${inputId}]:checked`).value;
-			const output = `This creature ${spawn} automatically spawn on a game reload.<br><br>`;
+			const output = `This creature ${spawn} automatically spawn on a game reload.`;
 			if (spawn != '') {
-				document.getElementById(codeId).parentElement.style.display = '';
+				document.getElementById(codeId).style.display = '';
 				setOutput(codeId, output);
 			} else {
-				document.getElementById(codeId).parentElement.style.display = 'none';
+				document.getElementById(codeId).style.display = 'none';
 			}
 		}
 
@@ -90,7 +90,8 @@
 			catalog("civ", "researchteam", "addInfo");
 			textAreaFunction('appearance', 'appearance_input');
 			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
-			codeFunction("albumDepth", "wormmaxdepth")
+			codeFunction("albumDepth", "wormmaxdepth");
+			addInfoBullet("bulletpoint");
 			document.getElementById("album").innerHTML = getCodeValue("addInfo").replace('[[', '').replace(']]', '');
 		}
 
@@ -469,9 +470,10 @@
 						<br>
 
 						<div>==Additional information==</div>
-						<div><output id='autoSpawn'></output></div>
-						<div>Featured in the <output id='addInfo'></output><br><br></div>
-						<div><output id="docby"></output></div>
+						<div><span name="bulletpoint"></span> <output id='autoSpawn'></output></div>
+						<div><span name="bulletpoint"></span> Featured in the <output id='addInfo'></output></div>
+						<div><span name="bulletpoint"></span> <output id="docby"></output></div>
+						<br>
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
