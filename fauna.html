@@ -53,7 +53,7 @@
 			hideOrgName('oldName_input', 'oldName');
 			specialNotesTextFunc("notes_input", "specialNotes_input", "addObservation");
 			creaPrioRadioName("gender_input", "gender2_input", "gender1_label", "gender2_label");
-			whitespaceDetector("addInfoWrapper");
+			addInfoBullet("bulletpoint");
 			albumHeight("height", "albumHeight");
 			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
 			hideInput("catalog_input", "albumText");
@@ -165,7 +165,8 @@
 						<tr>
 							<th><label for="moon_input">Name of the moon (if applicable):</label>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										If the creature is located on a moon. Leave blank if the creature is on a planet.
+										If the creature is located on a moon. Leave blank if the creature is on a
+										planet.
 									</span></span>
 							</th>
 							<td><input type="text" name="Moon" id="moon_input">
@@ -593,15 +594,9 @@
 						<br>
 
 						<div>==Additional information==</div>
-						<div id="addInfoWrapper">
-							<div>
-								<div><output id='addInfo'></output></div>
-								<br>
-							</div>
-							<div>
-								<div><output id="docby"></output></div>
-							</div>
-						</div>
+						<div><span name="bulletpoint"></span> <output id='addInfo'></output></div>
+						<div><span name="bulletpoint"></span> <output id="docby"></output></div>
+						<br>
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
