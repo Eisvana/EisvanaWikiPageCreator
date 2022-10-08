@@ -8,12 +8,15 @@
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js"></script>
 	<script>
+		const galleryArray = ['', 'Scanner view', 'Discovery Menu', 'Other image', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
+
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
 			textFunctionMultiple("release", "version_input");
-			textFunctionMultiple("name", "name_input");
-			textFunction("image", "image_input");
+			textFunctionMultiple("newName", "name_input");
+			textFunctionMultiple("name", pageName('oldName_input', 'name_input'));
+			textFunctionMultiple("image", "image_input");
 			textFunction("discovered", "discovered_input");
 			textFunction("discoveredlink", "discoveredlink_input");
 			docBy("docby", "docby_input", "builder_input", "builderlink_input", "researchteam_input");
@@ -21,20 +24,15 @@
 			textFunctionMultiple("system", "system_input");
 			textFunction("planet", "planet_input");
 			textFunction("moon", "moon_input");
-			textFunction("axes", "axes_input");
-			textFunctionMultiple("portalglyphs", "portalglyphs_input");
+			textFunction("portalglyphs", "portalglyphs_input");
 			textFunction("type", "type_input");
 			textFunction("mode", "mode_input");
 			textFunction("platform", "platform_input");
 			dateConvert("censusarrival");
-			textAreaFunction("layout", "layout_input");
-			textAreaFunction("features", "features_input");
-			textAreaFunction("addInfo", "addInfo_input");
 			civGalaxy("civ");
-			hideDiscoverer("builder_input", "builderlink_input");
+			hideDiscoverer("discovered_input", "discoveredlink_input");
 			glyphRegion("portalglyphs_input", "civ", "region");
-			whitespaceDetector("addInfoWrapper");
-			planetMoon("planet_input", "moon_input", "celestialBody", "noLink")
+			planetMoon("planet_input", "moon_input", "locPlanet");
 		}
 		window.onload = () => {
 			researchTeamDropdown("civ", "researchteam_input")
@@ -85,7 +83,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label>Which civ does this base belong to?</label>
+							<th><label>Which civ does this flora belong to?</label>
 							<td>
 								<select id="civ" name="Civ"
 									onchange="researchTeamDropdown('civ', 'researchteam_input')">
@@ -96,12 +94,16 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label for="name_input">Name of the base:</label>
+							<th><label for="name_input">Name of the flora:</label>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 										Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
 									</span></span>
 							</th>
 							<td><input type="text" name="Name" id="name_input">
+						</tr>
+						<tr>
+							<th><label for="oldName_input">Original name before uploading if available:</label>
+							<td><input type="text" name="OldName" id="oldName_input">
 						</tr>
 						<tr>
 							<th><label for="image_input">Main image name, including file extension:</label>
@@ -117,15 +119,15 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label for="builderlink_input">Builder wiki account:</label>
-							<td><input type="text" name="Builderlink" id="builderlink_input">
+							<th><label for="discoveredlink_input">Discoverer wiki account:</label>
+							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
 						</tr>
 						<tr>
-							<th><label for="builder_input">Builder alias if no wiki:</label>
-							<td><input type="text" name="Builder" id="builder_input">
+							<th><label for="discovered_input">Discoverer alias if no wiki:</label>
+							<td><input type="text" name="Discovered" id="discovered_input">
 						</tr>
 						<tr>
-							<th><label for="docby_input">Documented by if not builder:</label>
+							<th><label for="docby_input">Documented by if not discoverer:</label>
 							<td><input type="text" name="DocBy" id="docby_input">
 						</tr>
 						<tr>
@@ -135,7 +137,7 @@
 						<tr>
 							<th><label for="planet_input">Name of the planet:</label>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Planet Name OR the planet circled by the moon where the base can be found.
+										Planet Name OR the planet circled by the moon where the flora can be found.
 									</span></span>
 							</th>
 							<td><input type="text" name="Planet" id="planet_input">
@@ -143,18 +145,10 @@
 						<tr>
 							<th><label for="moon_input">Name of the moon (if applicable):</label>
 								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										If the base is located on a moon. Leave blank if the base is on a planet.
+										If the flora is located on a moon. Leave blank if the flora is on a planet.
 									</span></span>
 							</th>
 							<td><input type="text" name="Moon" id="moon_input">
-						</tr>
-						<tr>
-							<th><label for="axes_input">Planetary coords:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Found using your analysis visor OR on your ships dashboard
-									</span></span>
-							</th>
-							<td><input type="text" name="Axes" id="axes_input">
 						</tr>
 						<tr>
 							<th><label for="portalglyphs_input">Portalglyphs:</label><button
@@ -240,13 +234,19 @@
 							</td>
 						</tr>
 						<tr>
-							<th><label for="type_input">Type of the base:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Type and purpose of the base. Some examples are Artistic, Embassy, Farm,
-										Headquarters, Industrial, Memorial, and Residential.
-									</span></span>
-							</th>
-							<td><input type="text" name="Type" id="type_input">
+							<th><label>Type of the flora:</label>
+							<td>
+								<select name="Type" id="type_input">
+									<option value="Flower">Flower</option>
+									<option value="Mushroom">Mushroom</option>
+									<option value="Tree">Tree</option>
+									<option value="Leafy Plant">Leafy Plant</option>
+									<option value="Cactus">Cactus</option>
+									<option value="Coral">Coral</option>
+									<option value="Seaweed">Seaweed</option>
+									<option value="Infected">Infected</option>
+									<option value="Exotic">Exotic</option>
+								</select>
 						</tr>
 						<tr>
 							<th><label>Gamemode:</label>
@@ -266,127 +266,8 @@
 									<option value="PC">PC
 									<option value="PS">PS
 									<option value="XB">XB
+									<option value="NS">Switch
 								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Farm?</label>
-							<td>
-								<input type="radio" id="farm_inputY" name="farm" value="Yes">
-								<label for="farm_inputY">Yes</label>
-								<input type="radio" id="farm_inputN" name="farm" value="No">
-								<label for="farm_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="farm_inputA" name="farm" value="" checked>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Geobay?</label>
-							<td>
-								<input type="radio" id="geobay_inputY" name="geobay" value="Yes">
-								<label for="geobay_inputY">Yes</label>
-								<input type="radio" id="geobay_inputN" name="geobay" value="No">
-								<label for="geobay_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="geobay_inputA" name="geobay" value="" checked>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Arena?</label>
-							<td>
-								<input type="radio" id="arena_inputY" name="arena" value="Yes">
-								<label for="arena_inputY">Yes</label>
-								<input type="radio" id="arena_inputN" name="arena" value="No">
-								<label for="arena_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="arena_inputA" name="arena" value="" checked>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Landing pad?</label>
-							<td>
-								<input type="radio" id="landingPad_inputY" name="landingPad" value="Yes">
-								<label for="landingPad_inputY">Yes</label>
-								<input type="radio" id="landingPad_inputN" name="landingPad" value="No">
-								<label for="landingPad_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="landingPad_inputA" name="landingPad" value="" checked>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Racetrack?</label>
-							<td>
-								<input type="radio" id="racetrack_inputY" name="racetrack" value="Yes">
-								<label for="racetrack_inputY">Yes</label>
-								<input type="radio" id="racetrack_inputN" name="racetrack" value="No">
-								<label for="racetrack_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="racetrack_inputA" name="racetrack" value="" checked>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Trade terminal?</label>
-							<td>
-								<input type="radio" id="terminal_inputY" name="terminal" value="Yes">
-								<label for="terminal_inputY">Yes</label>
-								<input type="radio" id="terminal_inputN" name="terminal" value="No">
-								<label for="terminal_inputN">No</label>
-								<span style="display:none">
-									<input type="radio" id="terminal_inputA" name="terminal" value="" checked>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<p style="text-align:center">Census:</p>
-						</tr>
-						<tr>
-							<th><label for="censusPlayer_input">Ingame name of the player?</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Your ingame name, as shown on the top left in the inventory.
-									</span></span>
-							</th>
-							<td><input type="text" name="CensusPlayer" id="censusPlayer_input">
-						</tr>
-						<tr>
-							<th><label for="censusReddit_input">Reddit name of the player?</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Your Reddit name. "u/" not necessary.
-									</span></span>
-							</th>
-							<td><input type="text" name="CensusReddit" id="censusReddit_input">
-						</tr>
-						<tr>
-							<th><label for="censusDiscord_input">Discord name of the player?</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Your Discord name. Include the #xxxx at the end.
-									</span></span>
-							</th>
-							<td><input type="text" name="CensusDiscord" id="censusDiscord_input"
-									onchange="discordValidation(this, 'discordError')">
-								<div id="discordError" style="display: none;">Please include the #xxxx ending</div>
-							</td>
-						</tr>
-						<tr>
-							<th><label for="censusFriend_input">NMS friend code of the player?</label>
-							<td><input maxlength="15" type="text" name="CensusFriend" id="censusFriend_input">
-						</tr>
-						<tr>
-							<th><label for="censusArrival_input">When did the player arrive in Hub space?</label>
-							<td><input type="date" name="CensusArrival" id="censusArrival_input">
-						</tr>
-						<tr>
-							<th><label>Are you already listed on the census?</label>
-							<td>
-								<input type="radio" id="censusShow_inputY" name="censusshow" value="">
-								<label for="censusShow_inputY">Yes</label>
-								<input type="radio" id="censusShow_inputN" name="censusshow" value="Y" checked>
-								<label for="censusShow_inputN">No</label>
 							</td>
 						</tr>
 						<tr>
@@ -394,42 +275,6 @@
 							<td>
 								<select id="researchteam_input" name="Researchteam">
 								</select>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<p style="text-align:center">Note: You can drag on the bottom right corner to expand the
-									text area
-								</p>
-							</td>
-						</tr>
-						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label for="layout_input">Base Layout:</label>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<textarea name="Layout" id="layout_input"
-									placeholder="Walk us through your base as if you were a realtor."></textarea>
-							</td>
-						</tr>
-						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label for="features_input">Base
-									Features:</label>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<textarea name="Features" id="features_input"></textarea>
-							</td>
-						</tr>
-						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2">
-								<label for="addInfo_input">Additional information:</label>
-							</th>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<textarea name="AdditionalInformation" id="addInfo_input"
-									placeholder="Any nearby resources, tourist traps or other bases."></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -443,7 +288,6 @@
 				</div>
 				<div>
 					<span class="actions" style="white-space: nowrap">
-						<!--						<button class="button is-primary" type="submit" onclick="showInput()">Submit form</button>-->
 						<button class="button is-warning" type="reset" form="form"
 							onclick="document.getElementById('discordError').style.display = 'none'; document.getElementById('censusDiscord_input').style.backgroundColor = '';">Reset
 							inputs</button>
@@ -464,68 +308,60 @@
 					<div id="wikiText">
 						<div>{{Version|<output id='release' name="release"></output>}}</div>
 						<div>{{<output id='civStub'></output>}}</div>
-						<div>{{Base infobox</div>
+						<div>{{Flora infobox</div>
 						<div>| name = <output id='name' name="name"></output></div>
-						<div>| image = <output id='image'></output></div>
-						<div>| civilized = <output id='civilized'></output></div>
-						<div>| researchteam = <output id='researchteam'></output></div>
-						<div>| builderlink = <output id='builderlink'></output></div>
-						<div>| builder = <output id='builder'></output></div>
+						<div>| image = <output id='image' name="image"></output></div>
 						<div>| galaxy = <output id='galaxy'></output></div>
 						<div>| region = <output id='region'></output></div>
 						<div>| system = <output id='system' name="system"></output></div>
 						<div>| planet = <output id='planet' name="planet"></output></div>
 						<div>| moon = <output id='moon'></output></div>
-						<div>| axes = <output id='axes'></output></div>
-						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}
-						</div>
-						<div>| portalglyphs = <output id='portalglyphs1' name="portalglyphs"></output></div>
-						<div>| type = <output id='type'></output></div>
+						<div>| type = <output id='type' name="type"></output></div>
+						<div>| biome = <output id='biome'></output></div>
+						<div>| age = <output id='age'></output></div>
+						<div>| roots = <output id='roots'></output></div>
+						<div>| nut_source = <output id='nut_source'></output></div>
+						<div>| notes = <output id='notes'></output></div>
+						<div>| element_primary = <output id='element_primary'></output></div>
+						<div>| element_secondary = <output id='element_secondary'></output></div>
+						<div>| polymorphic = <output id='polymorphic'></output></div>
+						<div>| civilized = <output id='civilized'></output></div>
+						<div>| researchteam = <output id='researchteam'></output></div>
+						<div>| discoveredlink = <output id='discoveredlink'></output></div>
+						<div>| discovered = <output id='discovered'></output></div>
+						<div>| discovered_on = <output id='discovered_on'></output></div>
 						<div>| mode = <output id='mode'></output></div>
-						<div>| platform = <output id='platform'></output></div>
 						<div>| release = <output id='release1' name="release"></output></div>
-						<div>| farm = <output id='farm'></output></div>
-						<div>| geobay = <output id='geobay'></output></div>
-						<div>| arena = <output id='arena'></output></div>
-						<div>| landingpad = <output id='landingpad'></output></div>
-						<div>| racetrack = <output id='racetrack'></output></div>
-						<div>| terminal = <output id='terminal'></output></div>
-						<div>| censusplayer = <output id='censusplayer'></output></div>
-						<div>| censusreddit = <output id='censusreddit'></output></div>
-						<div>| censusdiscord = <output id='censusdiscord'></output></div>
-						<div>| censusfriend = <output id='censusfriend'></output></div>
-						<div>| censusarrival = <output id='censusarrival'></output></div>
-						<div>| censusrenewal = <output id='censusrenewal'></output></div>
-						<div>| censusshow = <output id="censusshow"></output></div>
 						<div>}}</div>
-						<div>'''<output id='name1' name="name"></output>''' is a player base.</div>
+						<div>'''<output id='name1' name="name"></output>''' is a species of flora.</div>
 						<br>
 
 						<div>==Summary==</div>
-						<div>'''<output id='name2' name="name"></output>''' is a [[Habitable Base|player base]], located
-							on the <output id='celestialBody'></output> in the [[<output id='system1'
-								name="system"></output>]] system.
+						<div>'''<output id='name2' name="name"></output>''' is a [[species]] of [[flora]], categorised
+							as <output id="type1" name="type"></output>.
 						</div>
 						<br>
 
-						<div>==Layout==</div>
-						<div><output id='layout'></output></div>
+						<div>==Alias Names==</div>
+						<div>{{aliasc|text=Original|name=<output id='oldName'></output>}}</div>
+						<div>{{aliasc|text=Current|name=<output id='newName' name="newName"></output>}}</div>
 						<br>
 
-						<div>==Features==</div>
-						<div><output id='features'></output></div>
+						<div>==Location==</div>
+						<div>It can be found on the <output id='locPlanet'></output> in the [[<output id='locSystem'
+								name="system"></output>]] [[star system]].</div>
 						<br>
+						<div>{{CoordGlyphConvert|<output id='portalglyphs'></output>}}</div>
+						<br>
+
+						<div> ==Usage==</div>
+						<div>This flora provides the resource [[ResourceName]] when harvested.</div>
+
 
 						<div>==Additional information==</div>
-						<div id="addInfoWrapper">
-							<div>
-								<div><output id='addInfo'></output></div>
-								<br>
-							</div>
-							<div>
-								<div><output id="docby"></output></div>
-							</div>
-						</div>
+						<div><span name="bulletpoint"></span> <output id='addInfo'></output></div>
+						<div><span name="bulletpoint"></span> <output id="docby"></output></div>
+						<br>
 
 						<div>==Gallery==</div>
 						<div>&lt;gallery&gt;</div>
