@@ -54,9 +54,12 @@
 			codeFunction("region1", "region");
 			document.getElementById("HubNr").innerHTML = regNr("region");
 			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
-			MTType("type_input", "slots_input", "albumType");
+			MTType("type_input", "albumType");
 			textFunction("albumCiv", "civ");
-			document.getElementById("albumDesc").innerHTML = document.getElementById("acquirement").innerHTML.replace('Save and reload', 'S/r')
+			document.getElementById("albumDesc").innerHTML = document.getElementById("acquirement").innerHTML.replace('Save and reload', 'S/r');
+			showSizeDropdown('type_input', 'size_input');
+			MTType('size_input', 'type_input', 'type');
+			catalogMTType('size_input', 'type_input', 'albumType');
 		}
 
 		window.onload = () => {
@@ -145,12 +148,21 @@
 							<td>
 								<select name="Type" id="type_input"
 									onchange="appearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'appearance_input')">
-									<option value="Pistol" data-type="pistol">Pistol
-									<option value="Pistol" data-type="starter pistol">Starter Pistol
-									<option value="Rifle" data-type="rifle">Rifle
-									<option value="Experimental" data-type="experimental">Experimental
-									<option value="Alien" data-type="alien">Alien
-									<option value="Royal" data-type="royal">Royal
+									<option value="Starter Pistol">Starter Pistol
+									<option value="Standard">Standard
+									<option value="Experimental">Experimental
+									<option value="Alien">Alien
+									<option value="Royal">Royal
+								</select>
+							</td>
+						</tr>
+						<tr style="display: none;">
+							<th><label>Inventory size of the multi-tool:</label>
+							<td>
+								<select name="Type" id="size_input">
+									<option value="Pistol">Pistol (Small)
+									<option value="SMG">SMG (Medium)
+									<option value="Rifle">Rifle (Large)
 								</select>
 							</td>
 						</tr>
@@ -311,12 +323,12 @@
 						</tr>
 						<tr>
 							<th><label for="slots_input">Slot count:</label>
-							<td><input type="number" name="Slots" id="slots_input" min="5" max="24" step="1"
+							<td><input type="number" name="Slots" id="slots_input" min="9" max="30" step="1"
 									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
 							<th><label for="cost_input">Cost:</label>
-							<td><input type="number" name="Cost" id="cost_input" min="45500" step="5"
+							<td><input type="number" name="Cost" id="cost_input" min="280000" step="5"
 									onkeypress="return isNumberKey(event)">
 						</tr>
 						<tr>
@@ -595,7 +607,7 @@
 							Copy album wikicode
 						</button>
 						<a class="button is-outlined is-primary" id="albumLink"
-							onclick="wikiLink('albumLink', 'region', 'name_input'); this.href ? this.href = 'https://nomanssky.fandom.com/wiki/' + document.getElementById('mtCatalog').innerHTML + ' Multi-Tool Catalog' + (document.getElementById('civ').value != 'CalHub' ? ' - ' + (document.getElementById('type_input').value == 'Rifle' || document.getElementById('type_input').value == 'Pistol' ? 'Standard Multi-Tool' : document.getElementById('type_input').value) : '') : this.removeAttribute('href')">
+							onclick="wikiLink('albumLink', 'region', 'name_input'); this.href ? this.href = 'https://nomanssky.fandom.com/wiki/' + document.getElementById('mtCatalog').innerHTML + ' Multi-Tool Catalog' + (document.getElementById('civ').value != 'CalHub' ? ' - ' + (document.getElementById('type_input').value == 'Rifle' || document.getElementById('type_input').value == 'SMG' || document.getElementById('type_input').value == 'Pistol' ? 'Standard Multi-Tool' : document.getElementById('type_input').value) : '') : this.removeAttribute('href')">
 							Open Album
 						</a>
 					</div>
