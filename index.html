@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator</title>
 	<link rel="stylesheet" href="./lib/common.css">
+	<script type="module" src="./modules/footer.js" defer></script>
 	<style>
 		nav {
 			text-align: center;
@@ -29,7 +30,6 @@
 				if (!isExternalURL(link.href)) continue;
 				link.setAttribute("target", "_blank");
 				link.setAttribute("rel", "noopener noreferrer");
-
 			}
 		}
 	</script>
@@ -109,14 +109,7 @@
 			</section>
 		</main>
 	</div>
-	<footer class="footer content">
-		<p class="github">
-			Please consider contributing to the project:
-			<a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank" rel="noopener noreferrer">GitHub
-				repository</a>
-		</p>
-		<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
-	</footer>
+	<footer id="footer" class="footer content"></footer>
 </body>
 
 </html>

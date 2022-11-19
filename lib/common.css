@@ -5,6 +5,16 @@ body {
 	font-family: Nunito, sans-serif;
 }
 
+.nms-font {
+	font-family: Roboto, sans-serif;
+}
+
+@media only screen and (max-width: 1023px) {
+	.container {
+		margin: 0 1em;
+	}
+}
+
 /* Homepage */
 .home {
 	text-align: center;
@@ -50,6 +60,34 @@ nav {
 	margin-top: 2em;
 }
 
+
+
+/* Help dialog */
+dialog {
+	text-align: center;
+	margin-top: 5vh !important;
+	border-radius: 7px;
+	box-shadow: 0 .5em 1em -.125em rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .02);
+	border: 1px solid lightgrey;
+}
+
+dialog form {
+	display: flex;
+	justify-content: space-around;
+}
+
+dialog img {
+	max-width: 450px;
+	max-height: 500px
+}
+
+dialog #explanationLink:after {
+	display: block;
+	content: 'Click to enlarge';
+	margin-bottom: 1em;
+}
+
+/* Input table */
 .table {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -69,6 +107,21 @@ nav {
 
 .tableHeader {
 	grid-column: 1 / span 2;
+	flex-wrap: wrap;
+}
+
+.tableHeader>* {
+	width: 100%;
+}
+
+#imageInput {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#imageInput>* {
+	width: 100%;
+	margin: 3px 0;
 }
 
 .glyph {
@@ -89,8 +142,10 @@ nav {
 	text-align: center;
 }
 
-.tableCell label {
+label {
 	font-weight: bold;
+	margin-bottom: 3px;
+	margin-right: 1em;
 }
 
 select,
@@ -167,7 +222,6 @@ tr:has(#portalglyphs_input) button {
 	opacity: 0;
 	transition: opacity 0.3s;
 	font-weight: normal;
-	font-family: Roboto, sans-serif;
 }
 
 .tooltip .tooltiptext::after {
@@ -181,8 +235,7 @@ tr:has(#portalglyphs_input) button {
 	border-color: #555 transparent transparent transparent;
 }
 
-.tooltip:hover .tooltiptext,
-.tooltip:active .tooltiptext {
+.tooltip:hover .tooltiptext {
 	visibility: visible;
 	opacity: 1;
 }
@@ -200,6 +253,11 @@ tr:has(#portalglyphs_input) button {
 	color: rgb(0, 170, 170);
 }
 
+.buttons {
+	justify-content: center;
+	margin-left: -1em;
+}
+
 /* Footer */
 footer {
 	text-align: center;
@@ -212,4 +270,20 @@ footer a {
 footer .github {
 	font-size: large;
 	line-height: 2rem;
+}
+
+.glyphs-label-button {
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: 1em;
+}
+
+#portalglyphButtons {
+	display:grid;
+	grid-template-columns: repeat(8, 60px);
+	margin-top: 5px;
+}
+
+#portalglyphButtons>* {
+	margin: .5px;
 }

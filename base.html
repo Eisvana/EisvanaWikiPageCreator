@@ -8,10 +8,13 @@
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js" defer></script>
 	<script src="./lib/base.js"></script>
+	<script src="./modules/portalglyphs.js" defer></script>
+	<script src="./modules/actions.js" defer></script>
+	<script src="./modules/footer.js" defer></script>
 	<script>
-
 		window.onload = () => {
-			startUp()
+			pageData.pageType = 'Base';
+			startUp();
 			civ();
 			autoShowAll();
 		}
@@ -22,6 +25,16 @@
 	<div class="container">
 		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
 		<h1 class="title is-3">Hub Wiki Page Creator - Base</h1>
+		<dialog id="explanation" class="modal-content content">
+			<h2 id="explanationHeading" class="title is-4"></h2>
+			<p id="explanationContent" class="nms-font"></p>
+			<a id="explanationLink" target='_blank' rel='noopener noreferrer'>
+				<img id="explanationImg" alt='Explainer Image' />
+			</a>
+			<form method="dialog">
+				<button class="button" autofocus>Close</button>
+			</form>
+		</dialog>
 		<main class="columns is-desktop">
 			<section id="input" class="column is-full-mobile">
 				<div class="table">
@@ -43,17 +56,129 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the base:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+						<span class="tooltip" onclick="explanation('Base Name', 
+						'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
+						'./helperimg/baseName.jpg'	
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
 							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
+					<div class="tableCell text">
+						<label for="fileInput">Main image name, including file extension:</label>
+						<span class="tooltip" onclick="explanation('File Upload', 
+						`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
+						You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Picture won't be uploaded to the wiki. This is only to autofill the image name.
+							</span></span>
+					</div>
+					<div class="tableCell data" id="imageInput">
+						<input type="text" id="fileInput" data-dest="image">
+						<input type="file" id="fileUpload" onchange="image(this)">
+					</div>
+
+					<div class="tableCell text">
+						<label for="builderlinkInput">Builder wiki account:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="builderlink" id="builderlinkInput">
+					</div>
+					<div class="tableCell text">
+						<label for="builderInput">Builder alias if no wiki:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="builder" id="builderInput">
+					</div>
+					<div class="tableCell text">
+						<label for="docbyInput">Documented by if not builder:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest-noauto="docby" id="docbyInput">
+					</div>
+					<div class="tableCell text">
+						<label for="systemInput">Name of the system:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="system" id="systemInput">
+					</div>
+					<div class="tableCell text">
+						<label for="planetInput">Name of the planet:</label>
+						<span class="tooltip" onclick="explanation('Planet Name', 
+						'Planet Name OR the planet circled by the moon where the base can be found.'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Planet Name OR the planet circled by the moon where the base can be found.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="planet" id="planetInput">
+					</div>
+					<div class="tableCell text">
+						<label for="moonInput">Name of the moon (if applicable):</label>
+						<span class="tooltip" onclick="explanation('Moon Name', 
+						'If the base is located on a moon. Leave blank if the base is on a planet.'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								If the base is located on a moon. Leave blank if the base is on a planet.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="moon" id="moonInput">
+					</div>
+					<div class="tableCell text">
+						<label for="axesInput">Planetary coords:</label>
+						<span class="tooltip" onclick="explanation('Planetary Coordinates', 
+						`Found using your analysis visor OR on your ship's dashboard.`,
+						'./helperimg/axes.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found using your analysis visor OR on your ship's dashboard.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" placeholder="+0.00, -0.00" data-dest="axes" id="axesInput">
+					</div>
+					<div class="tableCell text">
+						<div class="glyphs-label-button">
+							<label for="portalglyphsInput">Portalglyphs:</label>
+							<button class="button is-small is-danger" type="button"
+								onclick="deleteCharacter()">&larr; Delete</button>
+						</div>
+						<span class="tooltip" onclick="explanation('Portalglyphs', 
+						`Found in Photo Mode. Glyphs are specific to each planet.`,
+						'./helperimg/glyphs.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest-noauto="portalglyphs" id="portalglyphsInput" maxlength="12" oninput="glyphInputOnChange(this)">
+					</div>
+					<div class="tableHeader data">
+						<div id="portalglyphButtons"></div>
+						<output name="portalglyphs" class="glyph"></output>
+					</div>
+
+
+
+
+
+
+
+					<div class="tableHeader data">
+						<label for="layoutInput">Base Layout:</label>
+						<textarea id="layoutInput" data-dest="layout"></textarea>
+					</div>
+					<div class="tableHeader data">
+						<label for="featuresInput">Base Features:</label>
+						<textarea id="featuresInput" data-dest="features"></textarea>
+					</div>
+					<div class="tableHeader data">
+						<label for="addInfoInput">Additional Information:</label>
+						<textarea id="addInfoInput" data-dest="addInfo"></textarea>
+					</div>
 
 
 					<div id="galleryItems" class="tableHeader"></div>
 				</div>
+				<div id="actions" class="buttons"></div>
 			</section>
 			<section id="output" class="column is-full-mobile">
 				<div class="wikiText" id="fullArticle">
@@ -123,6 +248,7 @@
 			</section>
 		</main>
 	</div>
+	<footer id="footer" class="footer content"></footer>
 </body>
 
 </html>
