@@ -87,6 +87,10 @@ dialog #explanationLink:after {
 	margin-bottom: 1em;
 }
 
+.no-flex {
+	display: block !important;
+}
+
 /* Input table */
 .table {
 	display: grid;
@@ -142,10 +146,20 @@ dialog #explanationLink:after {
 	text-align: center;
 }
 
-label {
+label:not(.checkbox label) {
 	font-weight: bold;
 	margin-bottom: 3px;
 	margin-right: 1em;
+}
+
+.checkbox {
+	display: flex;
+	cursor: auto;
+	margin: 3px 0;
+}
+
+.checkbox label {
+	margin-left: 3px
 }
 
 select,
@@ -198,6 +212,10 @@ input[type="date"]:hover {
 	.tooltip {
 		width: 20px;
 		min-width: 20px;
+	}
+
+	.checkbox {
+		margin: 10px 0;
 	}
 }
 
@@ -279,11 +297,26 @@ footer .github {
 }
 
 #portalglyphButtons {
-	display:grid;
+	display: grid;
 	grid-template-columns: repeat(8, 60px);
 	margin-top: 5px;
 }
 
+@media only screen and (max-width: 550px) {
+	#portalglyphButtons {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+
 #portalglyphButtons>* {
 	margin: .5px;
+}
+
+.censustoggle {
+	justify-content: space-between;
+}
+
+.censustoggle>* {
+	width: unset !important;
 }

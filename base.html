@@ -7,8 +7,8 @@
 	<title>Hub Wiki Page Creator - Base</title>
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js" defer></script>
-	<script src="./lib/base.js"></script>
 	<script src="./modules/portalglyphs.js" defer></script>
+	<script src="./modules/dateLogic.js" defer></script>
 	<script src="./modules/actions.js" defer></script>
 	<script src="./modules/footer.js" defer></script>
 	<script>
@@ -16,6 +16,7 @@
 			pageData.pageType = 'Base';
 			startUp();
 			civ();
+			getCurrentYear('censusrenewal');
 			autoShowAll();
 		}
 	</script>
@@ -139,8 +140,8 @@
 					<div class="tableCell text">
 						<div class="glyphs-label-button">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button"
-								onclick="deleteCharacter()">&larr; Delete</button>
+							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+								Delete</button>
 						</div>
 						<span class="tooltip" onclick="explanation('Portalglyphs', 
 						`Found in Photo Mode. Glyphs are specific to each planet.`,
@@ -149,11 +150,130 @@
 								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="portalglyphs" id="portalglyphsInput" maxlength="12" oninput="glyphInputOnChange(this)">
+						<input type="text" id="portalglyphsInput" maxlength="12" oninput="glyphInputOnChange(this)">
 					</div>
 					<div class="tableHeader data">
 						<div id="portalglyphButtons"></div>
 						<output name="portalglyphs" class="glyph"></output>
+					</div>
+					<div class="tableCell text">
+						<label for="typeInput">Type of the base:</label>
+						<span class="tooltip" onclick="explanation('Portalglyphs', 
+						'Type and purpose of the base. Some examples are Artistic, Embassy, Farm, Headquarters, Industrial, Memorial, and Residential.'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Type and purpose of the base.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="type" id="typeInput">
+					</div>
+					<div class="tableCell text">
+						<label>Gamemode:</label>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="mode" id="modeInput">
+							<option value="Normal">Normal</option>
+							<option value="Relaxed">Relaxed</option>
+							<option value="Survival">Survival</option>
+							<option value="Permadeath">Permadeath</option>
+							<option value="Creative">Creative</option>
+							<option value="Custom">Custom</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label>Platform:</label>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="platform" id="platformInput">
+							<option value="PC">PC</option>
+							<option value="PS">PS</option>
+							<option value="XB">XB</option>
+							<option value="Switch">Switch</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label>Features:</label>
+					</div>
+					<div class="tableCell data no-flex">
+						<div class="checkbox">
+							<input type="checkbox" id="farmCheckbox" value="Yes" data-checkbox-unchecked="No"
+								data-dest-checkbox="farm">
+							<label for="farmCheckbox">Farm</label>
+						</div>
+						<div class="checkbox">
+							<input type="checkbox" id="geobayCheckbox" value="Yes" data-checkbox-unchecked="No"
+								data-dest-checkbox="geobay">
+							<label for="geobayCheckbox">Geobay</label>
+						</div>
+						<div class="checkbox">
+							<input type="checkbox" id="arenaCheckbox" value="Yes" data-checkbox-unchecked="No"
+								data-dest-checkbox="arena">
+							<label for="arenaCheckbox">Arena</label>
+						</div>
+						<div class="checkbox">
+							<input type="checkbox" id="landingPadCheckbox" value="Yes" data-checkbox-unchecked="No"
+								data-dest-checkbox="landingpad">
+							<label for="landingPadCheckbox">Landing Pad</label>
+						</div>
+						<div class="checkbox">
+							<input type="checkbox" id="racetrackCheckbox" value="Yes" data-checkbox-unchecked="No"
+								data-dest-checkbox="racetrack">
+							<label for="racetrackCheckbox">Racetrack</label>
+						</div>
+						<div class="checkbox">
+							<input type="checkbox" id="terminalCheckbox" value="Yes" data-checkbox-unchecked="No"
+								data-dest-checkbox="terminal">
+							<label for="terminalCheckbox">Trade Terminal</label>
+						</div>
+					</div>
+					<div class="tableCell text">
+						<label for="docbyInput">Documented by if not builder:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest-noauto="docby" id="docbyInput">
+					</div>
+
+
+
+					<div class="tableHeader text censustoggle">
+						<label>Census:</label>
+						<button class="button" onclick="toggleSection('census', this)">Hide</button>
+					</div>
+					<div name="census" class="tableCell text">
+						<label for="censusPlayerInput">Ingame name of the player?</label>
+					</div>
+					<div name="census" class="tableCell data">
+						<input type="text" data-dest="censusplayer" id="censusPlayerInput">
+					</div>
+					<div name="census" class="tableCell text">
+						<label for="censusRedditInput">Reddit name of the player?</label>
+					</div>
+					<div name="census" class="tableCell data">
+						<input type="text" data-dest="censusreddit" id="censusRedditInput">
+					</div>
+					<div name="census" class="tableCell text">
+						<label for="censusDiscordInput">Discord name of the player?</label>
+					</div>
+					<div name="census" class="tableCell data">
+						<input type="text" data-dest="censusdiscord" id="censusDiscordInput">
+					</div>
+					<div name="census" class="tableCell text">
+						<label for="censusFriendInput">NMS friend code of the player?</label>
+					</div>
+					<div name="census" class="tableCell data">
+						<input type="text" data-dest="censusfriend" id="censusFriendInput">
+					</div>
+					<div name="census" class="tableCell text">
+						<label for="censusArrivalInput">When did the player arrive in Hub space?</label>
+					</div>
+					<div name="census" class="tableCell data">
+						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput" onchange="processDate(this)">
+					</div>
+					<div name="census" class="tableCell text">
+						<label for="censusShowInput">Already on census, don't create another entry:</label>
+					</div>
+					<div name="census" class="tableCell text">
+						<input type="checkbox" id="censusShowInput" value="" data-checkbox-unchecked="Y"
+							data-dest-checkbox="censusshow">
 					</div>
 
 
@@ -164,15 +284,18 @@
 
 					<div class="tableHeader data">
 						<label for="layoutInput">Base Layout:</label>
-						<textarea id="layoutInput" data-dest="layout"></textarea>
+						<textarea id="layoutInput" data-dest="layout"
+							placeholder="What does the base look like?"></textarea>
 					</div>
 					<div class="tableHeader data">
 						<label for="featuresInput">Base Features:</label>
-						<textarea id="featuresInput" data-dest="features"></textarea>
+						<textarea id="featuresInput" data-dest="features"
+							placeholder="List the basic features, such as crops, biodomes, landing pads, exocraft bays, etc."></textarea>
 					</div>
 					<div class="tableHeader data">
 						<label for="addInfoInput">Additional Information:</label>
-						<textarea id="addInfoInput" data-dest="addInfo"></textarea>
+						<textarea id="addInfoInput" data-dest="addInfo"
+							placeholder="Any nearby resources, tourist traps, other bases."></textarea>
 					</div>
 
 
