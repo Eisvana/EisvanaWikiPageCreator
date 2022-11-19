@@ -1,31 +1,132 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700');
+@import "fonts.css";
 
-/* glyph fonts */
-@font-face {
-	font-family: 'NMS-Glyphs-Mono';
-	src: local('NMS-Glyphs-Mono'), local('NMS-Glyphs-Mono'), url(https://nomanssky.fandom.com/media/hydra/fonts/NMS-Glyphs-Mono.ttf) format('truetype');
+body {
+	font-family: Nunito, sans-serif;
 }
 
-html,
-body,
-h3,
-.actions button,
-.actions a {
-	font-family: Nunito;
+/* Homepage */
+.home {
+	text-align: center;
 }
 
-th {
+nav {
+	margin: 1em 0;
+	font-size: larger;
+}
+
+.page-options {
+	max-width: 500px;
+	margin: 1em auto;
+}
+
+.page-options li {
+	display: inline-block;
+	margin: 0.5em;
+}
+
+.page-options li a {
+	font-size: 1.5rem;
+}
+
+.built-by {
+	margin: 2em;
+	font-size: 1.25rem;
+}
+
+.built-by img {
+	max-height: 2rem;
+	border-radius: 50%;
+}
+
+.hub-images a {
+	margin: 0 1em;
+	max-width: 200px;
+	display: inline-block;
+}
+
+.container {
+	margin-bottom: 5em;
+	margin-top: 2em;
+}
+
+.table {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	margin-right: 2em;
+}
+
+.table>* {
+	padding: 5px 0;
+	border-bottom: 1px dashed rgba(50, 50, 50, 0.1);
 	display: flex;
-	justify-content: space-between;
-	min-width: 115px;
 	align-items: center;
 }
 
-tr:has(#portalglyphs_input)>th {
-	flex-wrap: wrap;
-	justify-content: unset;
+.tableHeader:empty {
+	display: none;
+}
+
+.tableHeader {
+	grid-column: 1 / span 2;
+}
+
+.glyph {
+	font-family: NMS-Glyphs-Mono;
+	font-size: 2.5em;
+}
+
+#output {
+	border-left: 1px dashed rgb(210, 210, 210);
+	padding-left: 2em;
+}
+
+.wikiText {
+	font-family: consolas, monospace;
+}
+
+.title {
+	text-align: center;
+}
+
+.tableCell label {
+	font-weight: bold;
+}
+
+select,
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+	min-width: 100px;
+	width: 100%;
+	min-height: 25px;
+}
+
+textarea {
+	width: 100%;
+	min-height: 75px;
+	resize: vertical;
+}
+
+input[type=checkbox],
+input[type=radio] {
+	vertical-align: middle;
+}
+
+textarea,
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+	border-radius: 5px;
+	border: 1px solid #2F4F4FB0;
+	padding: 0px 5px;
+}
+
+textarea:hover,
+input[type="text"]:hover,
+input[type="number"]:hover,
+input[type="date"]:hover {
+	border: 1px solid #000;
 }
 
 .tooltip {
@@ -99,312 +200,16 @@ tr:has(#portalglyphs_input) button {
 	color: rgb(0, 170, 170);
 }
 
-.title {
-	text-align: center;
-}
-
-.home {
-	margin-top: 2em;
-	text-align: center;
-}
-
-.page-options {
-	max-width: 500px;
-	margin: 1em auto;
-}
-
-.page-options li {
-	display: inline-block;
-	margin: 0.5em;
-}
-
-.page-options li a {
-	font-size: 1.5rem;
-}
-
-.built-by {
-	margin: 2em;
-	font-size: 1.25rem;
-}
-
-.built-by img {
-	max-height: 2rem;
-}
-
-.hub-images a {
-	margin: 0 1em;
-	max-width: 200px;
-	display: inline-block;
-}
-
-nav {
-	margin-top: 1em;
-	font-size: larger;
-}
-
-.container {
-	margin-bottom: 5em;
-}
-
-select,
-input[type="text"],
-input[type="number"],
-input[type="date"] {
-	margin-top: 5px;
-	min-width: 100px;
-	width: 100%;
-}
-
-tr textarea {
-	width: 100%;
-	min-height: 75px;
-	resize: vertical;
-}
-
-input[type=checkbox],
-input[type=radio] {
-	vertical-align: middle;
-}
-
-table {
-	margin: 0 auto;
-}
-
-.output {
-	border-left: 1px dashed rgb(210, 210, 210);
-	padding-left: 2em;
-	font-family: 'Consolas', monospace;
-	padding-bottom: 5em;
-}
-
-.actions {
-	margin: 0 auto;
-}
-
-@media only screen and (max-width: 1407px) {
-	.actions {
-		margin: 0 auto;
-		display: table-cell;
-		flex-wrap: wrap;
-		align-content: center;
-		justify-content: center;
-	}
-
-	.actions .button {
-		margin: 4px;
-	}
-}
-
-@media only screen and (max-width: 1023px) {
-	label {
-		font-size: small;
-	}
-
-	.output {
-		display: block;
-		margin: 0 auto;
-		max-width: 500px;
-		border-left: unset;
-	}
-
-	.actions {
-		margin: 0 auto;
-		display: flex;
-		flex-wrap: wrap;
-		align-content: center;
-		justify-content: center;
-	}
-
-	.actions .button {
-		margin: 4px;
-	}
-
-	form,
-	nav,
-	.actions {
-		padding: 5px 10px;
-	}
-}
-
-@media only screen and (max-width: 310px) {
-	.actions {
-		margin: 0 auto;
-		display: grid;
-		flex-wrap: wrap;
-		align-content: center;
-		justify-content: center;
-	}
-
-	.actions .button {
-		margin: 4px;
-	}
-}
-
-@media only screen and (max-width: 220px) {
-	.actions {
-		margin: 0 auto;
-		display: inline-grid;
-		flex-wrap: wrap;
-		align-content: center;
-		justify-content: center;
-	}
-
-	.actions .button {
-		margin: 4px;
-	}
-}
-
-.portal-buttons {
-	display: grid;
-	grid-template-columns: repeat(8, 60px);
-	margin-top: 5px;
-}
-
-@media only screen and (max-width: 500px) {
-	.portal-buttons {
-		display: flex;
-		flex-wrap: wrap;
-	}
-
-	tr:has(#portalglyphs_input) button {
-		order: 3;
-	}
-
-	tr:has(#portalglyphs_input) .tooltip {
-		order: 2;
-	}
-}
-
-#gallery_descs {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	margin-top: 2em;
-}
-
-@media only screen and (max-width: 1024px) {
-	#gallery_descs {
-		margin: 0 0.65em;
-	}
-}
-
-.gallery-item {
-	display: flex;
-	width: 100%;
-	max-width: 700px;
-	margin: 0 auto 0.5em auto;
-	background-color: rgba(150, 150, 150, 0.1);
-	border-radius: 0.5em;
-}
-
-.gallery-item .gallery-media {
-	display: flex;
-	justify-content: center;
-	width: 200px;
-}
-
-.gallery-item .gallery-media img {
-	max-height: 150px;
-	margin: 0 auto;
-	border-radius: 0.5em;
-	object-fit: contain;
-	min-width: 100px;
-}
-
-.gallery-item .gallery-meta {
-	flex-grow: 1;
-	padding: 0.5em;
-	position: relative;
-}
-
-.gallery-item .controlButtons {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding-bottom: 10px;
-	padding-right: 5px;
-}
-
-.gallery-item .controlButtons .moveButton {
-	margin: 0.2em 0px;
-}
-
-.gallery-item .controlButtons .delete-icon {
-	cursor: pointer;
-	padding: 0.5em 0px 0.3em;
-}
-
-.gallery-item .gallery-meta input {
-	min-height: 25px;
-}
-
-tr {
-	border-bottom: 1px dashed rgba(50, 50, 50, 0.1);
-}
-
-tr.no-border {
-	border: none;
-}
-
-tr * {
-	min-height: 25px;
-}
-
-table td,
-table th {
-	vertical-align: middle;
-}
-
-tr label {
-	margin-right: 1em;
-}
-
-td>p,
-td>button {
-	margin: 2px 0;
-	/* margin-left: 10%; */
-	text-align: center;
-}
-
-#AlbumEntry h3 {
-	font-weight: bolder;
-}
-
-.glyphs {
-	font-family: NMS-Glyphs-Mono;
-	font-size: 40px;
-}
-
-textarea,
-input[type="text"],
-input[type="number"],
-input[type="date"] {
-	border-radius: 5px;
-	border: 1px solid #2F4F4FB0;
-	padding: 0px 5px;
-}
-
-textarea:hover,
-input[type="text"]:hover,
-input[type="number"]:hover,
-input[type="date"]:hover {
-	border: 1px solid #000;
-}
-
-.glyphs.icon.is-small {
-	height: inherit;
-}
-
+/* Footer */
 footer {
 	text-align: center;
 }
 
-footer>div {
-	padding: 20px;
-	font-size: large;
+footer a {
+	display: block;
 }
 
-.merchantUpgrades {
-	display: grid;
-	grid-template-columns: repeat(4, max-content);
+footer .github {
+	font-size: large;
+	line-height: 2rem;
 }
