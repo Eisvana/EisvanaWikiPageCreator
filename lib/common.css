@@ -216,6 +216,14 @@ input[type="date"]:hover {
 	.checkbox {
 		margin: 10px 0;
 	}
+
+	.handle {
+		display: none;
+	}
+
+	.moveButton {
+		display: unset !important;
+	}
 }
 
 .tooltip .tooltiptext {

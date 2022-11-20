@@ -45,6 +45,12 @@ function galleryUpload(uploadId, descId, codeId) {
 			<div class="controlButtons">
 				<span class="delete-icon" onclick="rmGallery('${galleryId}', '${wikiCodeGalleryId}');">&#10060</span>
 				<img class="handle" src="./lib/arrow.svg">
+				<button style="display:none" class="moveButton" onclick="mobileMoveItem('${galleryId}', '${wikiCodeGalleryId}', 'up')">
+					<svg width="36" height="36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
+				</button>
+				<button style="display:none" class="moveButton" onclick="mobileMoveItem('${galleryId}', '${wikiCodeGalleryId}', 'down')">
+					<svg width="36" height="36"><path d="M2 11h32L18 27 2 11Z"></path></svg>
+				</button>
 			</div>
 		</div>`;
 
@@ -103,4 +109,20 @@ function moveItem(evt) {
 		HTML.push(code);
 	}
 	document.getElementById('galleryCode').innerHTML = HTML.join('')
+}
+
+// moves item in gallery and gallery wikicode up or down depending on user input
+function mobileMoveItem(elementId, codeId, direction) {
+	const galleryItem = document.getElementById(elementId)
+	const galleryCodeItem = document.getElementById(codeId)
+	const elements = [galleryItem, galleryCodeItem];
+	for (const element of elements) {
+		const wrapper = element.parentNode;
+
+		if (direction == 'up' && element.previousElementSibling) {
+			wrapper.insertBefore(element, element.previousElementSibling);
+		} else if (direction == 'down' && element.nextElementSibling) {
+			wrapper.insertBefore(element, element.nextElementSibling.nextElementSibling)
+		}
+	}
 }
