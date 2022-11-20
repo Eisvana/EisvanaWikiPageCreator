@@ -1,5 +1,5 @@
-const galleryElement = document.getElementById('galleryItems');
-const gallerySort = new Sortable(galleryElement, {
+const galleryWrapper = document.getElementById('galleryItems');
+const gallerySort = new Sortable(galleryWrapper, {
 	handle: '.handle',	// handle's class
 	animation: 250,
 	onUpdate: function (evt) { moveItem(evt) },
@@ -38,7 +38,7 @@ function galleryUpload(uploadId, descId, codeId) {
 				<img src="${imgUrlData}" alt="" />
 			</a>
 			<div class="gallery-meta">
-				<p><b>Name: </b>${name}</p>
+				<p><label>Name: </label>${name}</p>
 				<div><select id="${dropdownId}" onchange="galleryDesc(this,'${inputId}', '${wikiCodeGalleryValueId}')"></select></div>
 				<div><input id="${inputId}" type="text" placeholder="Description" oninput="galleryInput(this,'${wikiCodeGalleryValueId}')" /></div>
 			</div>
@@ -62,10 +62,11 @@ function galleryUpload(uploadId, descId, codeId) {
 
 		wikiCodeGalleryDiv.insertAdjacentHTML('beforeend', wikiCodeGalleryTemplate);
 
+		const galleryElement = document.getElementById(dropdownId);
 		if (typeof galleryArray == 'undefined') {
-			document.getElementById(dropdownId).parentElement.style.display = 'none';
+			galleryElement.parentElement.style.display = 'none';
 		} else {
-			setDropDownOptions(galleryArray, dropdownId);
+			setDropdownOptions(galleryElement, galleryArray);
 		}
 	}
 }
