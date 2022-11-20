@@ -17,7 +17,6 @@
 		window.onload = () => {
 			pageData.pageType = 'Base';
 			startUp();
-			civ();
 			getCurrentYear('censusrenewal');
 			autoShowAll();
 		}
@@ -32,7 +31,7 @@
 			<h2 id="explanationHeading" class="title is-4"></h2>
 			<p id="explanationContent" class="nms-font"></p>
 			<a id="explanationLink" target='_blank' rel='noopener noreferrer'>
-				<img id="explanationImg" alt='Explainer Image' />
+				<img id="explanationImg" alt='Explainer Image'>
 			</a>
 			<form method="dialog">
 				<button class="button" autofocus>Close</button>
@@ -51,7 +50,7 @@
 						<label>Which civ does this base belong to?</label>
 					</div>
 					<div class="tableCell data">
-						<select id="civInput" onchange="showAll()">
+						<select id="civInput" onchange="civ()">
 							<option value="GHub">GHub</option>
 							<option value="CalHub">CalHub</option>
 							<option value="EisHub">EisHub</option>
@@ -156,7 +155,7 @@
 					</div>
 					<div class="tableHeader data">
 						<div id="portalglyphButtons"></div>
-						<output name="portalglyphs" class="glyph"></output>
+						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
 					<div class="tableCell text">
 						<label for="typeInput">Type of the base:</label>
@@ -231,7 +230,7 @@
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
-						<select data-dest="researchteam" id="researchteamInput"></select>
+						<select data-dest-noauto="researchteam" id="researchteamInput" onchange="researchTeam()"></select>
 					</div>
 					<div class="tableHeader text censustoggle">
 						<label>Census:</label>

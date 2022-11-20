@@ -17,6 +17,7 @@ function glyphOnClick(button) {
 
 function displayGlyphs() {
 	const glyphString = globalElements.input.portalglyphsInput.value;
+	pageData.portalglyphs = glyphString;
 	for (const output of globalElements.output.portalglyphs) {
 		output.innerText = glyphString;
 	}
@@ -49,7 +50,7 @@ function glyphRegion(glyphs) {
 	const civ = globalElements.input.civ.value;
 	const regionList = regions[civ];
 	let region = '';
-	if (glyphs.length == 12) {
+	if (glyphs?.length == 12) {
 		const regionGlyphs = glyphs.substring(4);
 		region = regionList[regionGlyphs];
 	}
@@ -57,11 +58,11 @@ function glyphRegion(glyphs) {
 		regionOut.style.backgroundColor = 'red';
 		region = 'No valid Hub region'
 		glyphElement.style.backgroundColor = 'red'
-		pageData.portalglyphs = '';
+		pageData.region = '';
 	} else {
 		regionOut.style.backgroundColor = '';
 		glyphElement.style.backgroundColor = ''
-		pageData.portalglyphs = region;
+		pageData.region = region;
 	}
 	regionOut.innerText = region;
 }

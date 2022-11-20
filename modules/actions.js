@@ -9,16 +9,21 @@ globalElements.output.actions.innerHTML = actions;
 let copyButtonPress, createButtonPress;
 
 function reset() {
-	const inputs = document.querySelectorAll('.table .data > *');
+	const inputs = document.querySelectorAll('.table .data *:not(button)');
 	const outputs = document.getElementsByTagName('output');
 	for (const input of inputs) {
 		input.value = '';
+		input.checked = false;
 	}
 	for (const output of outputs) {
 		output.innerText = '';
 	}
 	globalElements.input.version.value = versions[0];
 	globalElements.input.civ.value = 'GHub'
+
+	for (const key in pageData) {
+		if (key != 'pageType') delete pageData[key];
+	}
 	showAll();
 }
 
@@ -26,7 +31,7 @@ function reset() {
 function copyCode(input) {
 	if (copyButtonPress) return;
 	copyButtonPress = true;
-	const buttonText = input.innerHTML;
+	const buttonText = input.innerText;
 	const dataIntegrity = checkDataIntegrity();
 	if (dataIntegrity) {
 		input.classList.remove('is-primary');
@@ -40,12 +45,12 @@ function copyCode(input) {
 		}, 1500);
 		return;
 	}
-	const copyTextContent = globalElements.output.fullArticle.innerText;
+	const copyTextContent = globalElements.output.fullArticle.innerText.replaceAll('\n\n\n', '\n\n');
 	navigator.clipboard.writeText(copyTextContent);
 
-	input.innerHTML = 'Copied!';
+	input.innerText = 'Copied!';
 	setTimeout(() => {
-		input.innerHTML = buttonText;
+		input.innerText = buttonText;
 		copyButtonPress = false;
 	}, 1500)
 }

@@ -323,6 +323,10 @@ footer .github {
 	margin: .5px;
 }
 
+#portalglyphsPreview {
+	word-break: break-all;
+}
+
 .censustoggle {
 	justify-content: space-between;
 }
