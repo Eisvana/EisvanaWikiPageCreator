@@ -20,6 +20,7 @@ function displayGlyphs() {
 	for (const output of globalElements.output.portalglyphs) {
 		output.innerText = glyphString;
 	}
+	glyphRegion(glyphString);
 }
 
 function deleteCharacter() {
@@ -40,4 +41,32 @@ function glyphInputOnChange(input) {
 		.join('')
 		.substr(0, 12);
 	displayGlyphs()
+}
+
+function glyphRegion(glyphs) {
+	const glyphElement = globalElements.input.portalglyphsInput;
+	const regionOut = globalElements.output.region;
+	const civ = globalElements.input.civ.value;
+	const regionList = regions[civ];
+	let region;
+	if (glyphs.length == 12) {
+		const regionGlyphs = glyphs.substring(4);
+		region = regionList[regionGlyphs];
+	} else {
+		regionOut.style.backgroundColor = 'red';
+		region = ''
+		glyphElement.style.backgroundColor = 'red'
+		pageData.portalglyphs = '';
+	}
+	if (!region) {
+		regionOut.style.backgroundColor = 'red';
+		region = 'No valid Hub region'
+		glyphElement.style.backgroundColor = 'red'
+		pageData.portalglyphs = '';
+	} else {
+		regionOut.style.backgroundColor = '';
+		glyphElement.style.backgroundColor = ''
+		pageData.portalglyphs = region;
+	}
+	regionOut.innerText = region;
 }

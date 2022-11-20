@@ -49,7 +49,7 @@
 						<label>Which civ does this base belong to?</label>
 					</div>
 					<div class="tableCell data">
-						<select id="civInput" onchange="civ()">
+						<select id="civInput" onchange="showAll()">
 							<option value="GHub">GHub</option>
 							<option value="CalHub">CalHub</option>
 							<option value="EisHub">EisHub</option>
@@ -159,7 +159,7 @@
 					<div class="tableCell text">
 						<label for="typeInput">Type of the base:</label>
 						<span class="tooltip" onclick="explanation('Portalglyphs', 
-						'Type and purpose of the base. Some examples are Artistic, Embassy, Farm, Headquarters, Industrial, Memorial, and Residential.'
+						'Type and purpose of the base. Some examples: <ul><li>Artistic</li><li>Embassy</li><li>Farm</li><li>Headquarters</li><li>Industrial</li><li>Memorial</li><li>Residential</li>'
 						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Type and purpose of the base.</span></span>
 					</div>
@@ -226,10 +226,10 @@
 						</div>
 					</div>
 					<div class="tableCell text">
-						<label for="docbyInput">Documented by if not builder:</label>
+						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="docby" id="docbyInput">
+						<select data-dest="researchteam" id="researchteamInput"></select>
 					</div>
 
 

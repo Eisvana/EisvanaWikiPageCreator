@@ -60,12 +60,11 @@ nav {
 	margin-top: 2em;
 }
 
-
-
 /* Help dialog */
 dialog {
-	text-align: center;
+	position: fixed !important;
 	margin-top: 5vh !important;
+	text-align: center;
 	border-radius: 7px;
 	box-shadow: 0 .5em 1em -.125em rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .02);
 	border: 1px solid lightgrey;
@@ -219,10 +218,6 @@ input[type="date"]:hover {
 	}
 }
 
-tr:has(#portalglyphs_input) button {
-	margin-right: 10px;
-}
-
 .tooltip .tooltiptext {
 	--width: 150px;
 	visibility: hidden;
@@ -299,7 +294,6 @@ footer .github {
 #portalglyphButtons {
 	display: grid;
 	grid-template-columns: repeat(8, 60px);
-	margin-top: 5px;
 }
 
 @media only screen and (max-width: 550px) {
@@ -319,4 +313,9 @@ footer .github {
 
 .censustoggle>* {
 	width: unset !important;
+}
+
+#explanationContent ul {
+	text-align: left;
+	margin-left: 30%;
 }
