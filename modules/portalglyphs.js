@@ -48,17 +48,12 @@ function glyphRegion(glyphs) {
 	const regionOut = globalElements.output.region;
 	const civ = globalElements.input.civ.value;
 	const regionList = regions[civ];
-	let region;
+	let region = '';
 	if (glyphs.length == 12) {
 		const regionGlyphs = glyphs.substring(4);
 		region = regionList[regionGlyphs];
-	} else {
-		regionOut.style.backgroundColor = 'red';
-		region = ''
-		glyphElement.style.backgroundColor = 'red'
-		pageData.portalglyphs = '';
 	}
-	if (!region) {
+	if (region == undefined) {
 		regionOut.style.backgroundColor = 'red';
 		region = 'No valid Hub region'
 		glyphElement.style.backgroundColor = 'red'

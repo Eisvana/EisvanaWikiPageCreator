@@ -21,7 +21,7 @@ body {
 }
 
 nav {
-	margin: 1em 0;
+	margin: 1rem 0;
 	font-size: larger;
 }
 
@@ -129,7 +129,7 @@ dialog #explanationLink:after {
 
 .glyph {
 	font-family: NMS-Glyphs-Mono;
-	font-size: 2.5em;
+	font-size: 2.5rem;
 }
 
 #output {
@@ -269,6 +269,7 @@ input[type="date"]:hover {
 .buttons {
 	justify-content: center;
 	margin-left: -1em;
+	margin-top: 2em
 }
 
 /* Footer */
@@ -318,4 +319,83 @@ footer .github {
 #explanationContent ul {
 	text-align: left;
 	margin-left: 30%;
+}
+
+
+/* Gallery styles */
+#gallery_descs {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 2em;
+}
+
+@media only screen and (max-width: 1024px) {
+	#gallery_descs {
+		margin: 0 0.65em;
+	}
+}
+
+.gallery-item {
+	display: flex;
+	width: 100%;
+	max-width: 700px;
+	margin: 0 auto 0.5em auto;
+	background-color: rgba(150, 150, 150, 0.1);
+	border-radius: 0.5em;
+}
+
+.gallery-item .gallery-media {
+	display: flex;
+	justify-content: center;
+	width: 200px;
+}
+
+.gallery-item .gallery-media img {
+	max-height: 150px;
+	margin: 0 auto;
+	border-radius: 0.5em;
+	object-fit: contain;
+	min-width: 100px;
+}
+
+.gallery-item .gallery-meta {
+	flex-grow: 1;
+	padding: 0.5em;
+	position: relative;
+}
+
+.gallery-item .controlButtons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 10px;
+	padding-right: 5px;
+}
+
+.gallery-item .controlButtons .moveButton {
+	margin: 0.2em 0px;
+}
+
+.gallery-item .controlButtons .delete-icon {
+	cursor: pointer;
+	padding: 0.5em 0px 0.3em;
+}
+
+.gallery-item .gallery-meta input {
+	min-height: 25px;
+}
+
+.handle {
+	width: 33px;
+	opacity: .7;
+}
+
+.handle:hover {
+	cursor: grab;
+}
+
+.handle:active {
+	cursor: grabbing;
 }

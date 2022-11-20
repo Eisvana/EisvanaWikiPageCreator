@@ -9,8 +9,10 @@
 	<script src="./lib/common.js" defer></script>
 	<script src="./modules/portalglyphs.js" defer></script>
 	<script src="./modules/dateLogic.js" defer></script>
+	<script src="./modules/gallery.js" defer></script>
 	<script src="./modules/actions.js" defer></script>
 	<script src="./modules/footer.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 	<script>
 		window.onload = () => {
 			pageData.pageType = 'Base';
@@ -78,7 +80,7 @@
 					</div>
 					<div class="tableCell data" id="imageInput">
 						<input type="text" id="fileInput" data-dest="image">
-						<input type="file" id="fileUpload" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
 					</div>
 
 					<div class="tableCell text">
@@ -231,9 +233,6 @@
 					<div class="tableCell data">
 						<select data-dest="researchteam" id="researchteamInput"></select>
 					</div>
-
-
-
 					<div class="tableHeader text censustoggle">
 						<label>Census:</label>
 						<button class="button" onclick="toggleSection('census', this)">Hide</button>
@@ -266,7 +265,8 @@
 						<label for="censusArrivalInput">When did the player arrive in Hub space?</label>
 					</div>
 					<div name="census" class="tableCell data">
-						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput" onchange="processDate(this)">
+						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput"
+							onchange="processDate(this)">
 					</div>
 					<div name="census" class="tableCell text">
 						<label for="censusShowInput">Already on census, don't create another entry:</label>
@@ -275,13 +275,6 @@
 						<input type="checkbox" id="censusShowInput" value="" data-checkbox-unchecked="Y"
 							data-dest-checkbox="censusshow">
 					</div>
-
-
-
-
-
-
-
 					<div class="tableHeader data">
 						<label for="layoutInput">Base Layout:</label>
 						<textarea id="layoutInput" data-dest="layout"
@@ -297,9 +290,15 @@
 						<textarea id="addInfoInput" data-dest="addInfo"
 							placeholder="Any nearby resources, tourist traps, other bases."></textarea>
 					</div>
-
-
-					<div id="galleryItems" class="tableHeader"></div>
+					<div class="tableCell text">
+						<label for="galleryUpload">Gallery files</label>
+					</div>
+					<div class="tableCell data">
+						<input type="file" multiple accept="image/*" id="galleryUpload"
+							onchange="galleryUpload('galleryUpload', 'galleryItems', 'galleryCode')">
+					</div>
+				</div>
+				<div id="galleryItems">
 				</div>
 				<div id="actions" class="buttons"></div>
 			</section>

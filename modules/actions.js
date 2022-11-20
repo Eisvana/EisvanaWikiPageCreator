@@ -94,8 +94,9 @@ function checkDataIntegrity() {
 	const name = pageData.name;
 	const glyphs = pageData.portalglyphs;
 	const region = pageData.region;
+	const pageType = pageData.pageType;
 
-	if (name && glyphs && region) {
+	if (name && (glyphs || pageType == 'Business') && region) {
 		return false;
 	} else if (name == '') {
 		return 'Missing name!';

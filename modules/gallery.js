@@ -1,0 +1,106 @@
+const galleryElement = document.getElementById('galleryItems');
+const gallerySort = new Sortable(galleryElement, {
+	handle: '.handle',	// handle's class
+	animation: 250,
+	onUpdate: function (evt) { moveItem(evt) },
+});
+
+// handles gallery images
+function galleryUpload(uploadId, descId, codeId) {
+
+	const inp = document.getElementById(uploadId);
+	const inputDiv = document.getElementById(descId);
+	const wikiCodeGalleryDiv = document.getElementById(codeId);
+
+	for (let fileIndex = 0; fileIndex < inp.files.length; ++fileIndex) {
+		const file = inp.files.item(fileIndex);
+		const name = file.name;
+		const imgUrlData = URL.createObjectURL(file);
+		const childtree = inputDiv.children;
+		const IDs = [0];	// dummy element to avoid if statement
+		for (const child of childtree) {
+			IDs.push(parseInt(child.id.substring(7)))
+		}
+		function compareNumbers(a, b) {
+			return a - b;
+		}
+		IDs.sort(compareNumbers);
+		const childIndex = IDs[IDs.length - 1] + 1
+		const inputId = 'pic' + childIndex;
+		const dropdownId = 'dropdown' + childIndex;
+		const galleryId = 'gallery' + childIndex;
+		const wikiCodeGalleryId = 'wikiCodeGallery' + childIndex;
+		const wikiCodeGalleryValueId = 'wikiCodeGalleryValue' + childIndex;
+
+		const galleryTemplate = `
+		<div id="${galleryId}" class="gallery-item">
+			<a class="gallery-media" href=${imgUrlData} target="_blank" rel="noopener noreferrer">
+				<img src="${imgUrlData}" alt="" />
+			</a>
+			<div class="gallery-meta">
+				<p><b>Name: </b>${name}</p>
+				<div><select id="${dropdownId}" onchange="galleryDesc(this,'${inputId}', '${wikiCodeGalleryValueId}')"></select></div>
+				<div><input id="${inputId}" type="text" placeholder="Description" oninput="galleryInput(this,'${wikiCodeGalleryValueId}')" /></div>
+			</div>
+			<div class="controlButtons">
+				<span class="delete-icon" onclick="rmGallery('${galleryId}', '${wikiCodeGalleryId}');">&#10060</span>
+				<img class="handle" src="./lib/arrow.svg">
+			</div>
+		</div>`;
+
+		inputDiv.insertAdjacentHTML('beforeend', galleryTemplate);
+
+		const wikiCodeGalleryTemplate = `<div id="${wikiCodeGalleryId}">
+			<span>${name}</span><output id="${wikiCodeGalleryValueId}"></output>
+		</div>`;
+
+		wikiCodeGalleryDiv.insertAdjacentHTML('beforeend', wikiCodeGalleryTemplate);
+
+		if (typeof galleryArray == 'undefined') {
+			document.getElementById(dropdownId).parentElement.style.display = 'none';
+		} else {
+			setDropDownOptions(galleryArray, dropdownId);
+		}
+	}
+}
+
+// takes description from gallery dropdown into input field
+function galleryDesc(dropdownId, inputId, codeId) {
+	let dropdown = dropdownId.value;
+	let input = document.getElementById(inputId);
+	input.value = dropdown;
+	galleryInput(input, codeId);
+}
+
+// adds or removes descriptions from the gallery
+function galleryInput(input, galleryId) {
+	if (sanitiseString(input.value) != '') {
+		document.getElementById(galleryId).innerText = '\|' + sanitiseString(input.value)
+	} else {
+		setOutput(galleryId, '')
+	}
+}
+
+// removes gallery row if X is clicked
+function rmGallery(galleryId, wikiCodeGalleryId) {
+	const galleryNode = document.getElementById(galleryId);
+	galleryNode.remove();
+
+	const wikiCodeGalleryNode = document.getElementById(wikiCodeGalleryId);
+	wikiCodeGalleryNode.remove();
+}
+
+// moves item in gallery and gallery wikicode up or down depending on user input
+function moveItem(evt) {
+	const oldIndex = evt.oldIndex;
+	const newIndex = evt.newIndex;
+	const galleryItems = Array.from(document.getElementById('galleryCode').children);
+	const extractedItem = galleryItems.splice(oldIndex, 1);
+	galleryItems.splice(newIndex, 0, extractedItem[0])
+	const HTML = new Array;
+	for (const item of galleryItems) {
+		const code = item.outerHTML;
+		HTML.push(code);
+	}
+	document.getElementById('galleryCode').innerHTML = HTML.join('')
+}
