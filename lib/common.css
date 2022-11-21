@@ -183,11 +183,6 @@ textarea {
 	resize: vertical;
 }
 
-input[type=checkbox],
-input[type=radio] {
-	vertical-align: middle;
-}
-
 textarea,
 input[type="text"],
 input[type="number"],
@@ -202,6 +197,10 @@ input[type="text"]:hover,
 input[type="number"]:hover,
 input[type="date"]:hover {
 	border: 1px solid #000;
+}
+
+[name="bulletpoint"] {
+	display: none;
 }
 
 .tooltip {

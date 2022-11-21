@@ -18,7 +18,6 @@
 			pageData.pageType = 'Base';
 			startUp();
 			getCurrentYear('censusrenewal');
-			autoShowAll();
 		}
 	</script>
 </head>
@@ -294,7 +293,7 @@
 					</div>
 					<div class="tableCell data">
 						<input type="file" multiple accept="image/*" id="galleryUpload"
-							onchange="galleryUpload('galleryUpload', 'galleryItems', 'galleryCode')">
+							onchange="galleryUpload()">
 					</div>
 				</div>
 				<div id="galleryItems">
@@ -357,8 +356,8 @@
 					<br>
 
 					<div>==Additional Information==</div>
-					<div><span name="bulletpoint">*</span> <output id='addInfo'></output></div>
-					<div><span name="bulletpoint">*</span> <output id="docby"></output></div>
+					<div><output id='addInfo'></output></div>
+					<div><span name="bulletpoint"><br></span> <output id="docby"></output></div>
 					<br>
 
 					<div>==Gallery==</div>

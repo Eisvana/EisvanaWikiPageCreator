@@ -9,24 +9,25 @@ globalElements.output.actions.innerHTML = actions;
 let copyButtonPress, createButtonPress;
 
 function reset() {
-	const inputs = document.querySelectorAll('.table .data *:not(button)');
+	const inputs = document.querySelectorAll('.table .data select, .table .data input');
 	const outputs = document.getElementsByTagName('output');
 	for (const input of inputs) {
-		input.value = '';
+		if (input.type != 'checkbox') input.value = '';
 		input.checked = false;
 	}
 	for (const output of outputs) {
 		output.innerText = '';
 	}
 	globalElements.input.version.value = versions[0];
-	globalElements.input.civ.value = 'GHub'
+	globalElements.input.civ.value = globalElements.input.civ.children[0].value;
+	
+	try { resetGallery() } catch(error) { console.error(error) };
 
 	for (const key in pageData) {
 		if (key != 'pageType') delete pageData[key];
 	}
 	showAll();
 }
-
 
 function copyCode(input) {
 	if (copyButtonPress) return;

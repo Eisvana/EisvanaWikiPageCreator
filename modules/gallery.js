@@ -1,4 +1,4 @@
-const galleryWrapper = document.getElementById('galleryItems');
+const galleryWrapper = globalElements.output.galleryItems;
 const gallerySort = new Sortable(galleryWrapper, {
 	handle: '.handle',	// handle's class
 	animation: 250,
@@ -6,13 +6,13 @@ const gallerySort = new Sortable(galleryWrapper, {
 });
 
 // handles gallery images
-function galleryUpload(uploadId, descId, codeId) {
+function galleryUpload() {
 
-	const inp = document.getElementById(uploadId);
-	const inputDiv = document.getElementById(descId);
-	const wikiCodeGalleryDiv = document.getElementById(codeId);
+	const inp = globalElements.input.galleryUpload;
+	const inputDiv = globalElements.output.galleryItems;
+	const wikiCodeGalleryDiv = globalElements.output.galleryCode;
 
-	for (let fileIndex = 0; fileIndex < inp.files.length; ++fileIndex) {
+	for (let fileIndex = 0; fileIndex < inp.files.length; fileIndex++) {
 		const file = inp.files.item(fileIndex);
 		const name = file.name;
 		const imgUrlData = URL.createObjectURL(file);
@@ -126,4 +126,8 @@ function mobileMoveItem(elementId, codeId, direction) {
 			wrapper.insertBefore(element, element.nextElementSibling.nextElementSibling)
 		}
 	}
+}
+
+function resetGallery() {
+	globalElements.output.galleryItems.innerHTML = '';
 }
