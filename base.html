@@ -107,9 +107,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
-						<span class="tooltip" onclick="explanation('Planet Name', 
-						'Planet Name OR the planet circled by the moon where the base can be found.'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Planet Name OR the planet circled by the moon where the base can be found.
 							</span></span>
 					</div>
@@ -118,9 +116,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if applicable):</label>
-						<span class="tooltip" onclick="explanation('Moon Name', 
-						'If the base is located on a moon. Leave blank if the base is on a planet.'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								If the base is located on a moon. Leave blank if the base is on a planet.</span></span>
 					</div>
 					<div class="tableCell data">
@@ -229,7 +225,8 @@
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
-						<select data-dest-noauto="researchteam" id="researchteamInput" onchange="researchTeam()"></select>
+						<select data-dest-noauto="researchteam" id="researchteamInput"
+							onchange="researchTeam()"></select>
 					</div>
 					<div class="tableHeader text censustoggle">
 						<label>Census:</label>
@@ -237,18 +234,30 @@
 					</div>
 					<div name="census" class="tableCell text">
 						<label for="censusPlayerInput">Ingame name of the player?</label>
+						<span class="tooltip" onclick="explanation('Player Name', 
+						`Your ingame name. Don't include any ingame titles.`,
+						'./helperimg/playerName.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Your ingame name.
+							</span></span>
 					</div>
 					<div name="census" class="tableCell data">
 						<input type="text" data-dest="censusplayer" id="censusPlayerInput">
 					</div>
 					<div name="census" class="tableCell text">
 						<label for="censusRedditInput">Reddit name of the player?</label>
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								Your Reddit name. "u/" not necessary.
+							</span></span>
 					</div>
 					<div name="census" class="tableCell data">
 						<input type="text" data-dest="censusreddit" id="censusRedditInput">
 					</div>
 					<div name="census" class="tableCell text">
 						<label for="censusDiscordInput">Discord name of the player?</label>
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								Your Discord name. Include the #xxxx at the end.
+							</span></span>
 					</div>
 					<div name="census" class="tableCell data">
 						<input type="text" data-dest="censusdiscord" id="censusDiscordInput">
@@ -292,8 +301,7 @@
 						<label for="galleryUpload">Gallery files</label>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload"
-							onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
 					</div>
 				</div>
 				<div id="galleryItems">

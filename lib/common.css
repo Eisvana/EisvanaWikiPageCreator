@@ -403,6 +403,11 @@ footer .github {
 .gallery-item .controlButtons .delete-icon {
 	cursor: pointer;
 	padding: 0.5em 0px 0.3em;
+	opacity: .7;
+}
+
+.gallery-item .controlButtons .delete-icon:hover {
+	opacity: 1;
 }
 
 .gallery-item .gallery-meta input {
