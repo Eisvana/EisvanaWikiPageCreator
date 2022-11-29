@@ -7,11 +7,13 @@
 	<title>Hub Wiki Page Creator - Base</title>
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js" defer></script>
+	<script src="./lib/pages/base.js" defer></script>
 	<script src="./modules/portalglyphs.js" defer></script>
 	<script src="./modules/dateLogic.js" defer></script>
 	<script src="./modules/gallery.js" defer></script>
 	<script src="./modules/actions.js" defer></script>
 	<script src="./modules/footer.js" defer></script>
+	<script src="./modules/locationLogic.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 	<script>
 		window.onload = () => {
@@ -260,7 +262,7 @@
 							</span></span>
 					</div>
 					<div name="census" class="tableCell data">
-						<input type="text" data-dest="censusdiscord" id="censusDiscordInput">
+						<input type="text" data-dest-noauto="censusdiscord" id="censusDiscordInput">
 					</div>
 					<div name="census" class="tableCell text">
 						<label for="censusFriendInput">NMS friend code of the player?</label>
@@ -322,7 +324,7 @@
 					<div>| galaxy = <output id="galaxy"></output></div>
 					<div>| region = <output id="region"></output></div>
 					<div>| system = <output id="system" name="system"></output></div>
-					<div>| planet = <output id="planet" name="planet"></output></div>
+					<div>| planet = <output id="planet"></output></div>
 					<div>| moon = <output id='moon'></output></div>
 					<div>| axes = <output id='axes'></output></div>
 					<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}</div>

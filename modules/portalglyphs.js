@@ -40,7 +40,7 @@ function glyphInputOnChange(input) {
 		.split('')
 		.filter(char => validPortalKeys.includes(char))
 		.join('')
-		.substr(0, 12);
+		.substring(0, 12);
 	displayGlyphs()
 }
 
