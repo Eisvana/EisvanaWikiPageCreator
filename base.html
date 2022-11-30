@@ -227,8 +227,7 @@
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
-						<select data-dest-noauto="researchteam" id="researchteamInput"
-							onchange="researchTeam()"></select>
+						<select data-dest-noauto="researchteam" id="researchteamInput"></select>
 					</div>
 					<div class="tableHeader text censustoggle">
 						<label>Census:</label>
@@ -253,7 +252,7 @@
 							</span></span>
 					</div>
 					<div name="census" class="tableCell data">
-						<input type="text" data-dest="censusreddit" id="censusRedditInput">
+						<input type="text" data-dest-noauto="censusreddit" id="censusRedditInput">
 					</div>
 					<div name="census" class="tableCell text">
 						<label for="censusDiscordInput">Discord name of the player?</label>
@@ -262,7 +261,7 @@
 							</span></span>
 					</div>
 					<div name="census" class="tableCell data">
-						<input type="text" data-dest-noauto="censusdiscord" id="censusDiscordInput">
+						<input type="text" data-dest="censusdiscord" id="censusDiscordInput">
 					</div>
 					<div name="census" class="tableCell text">
 						<label for="censusFriendInput">NMS friend code of the player?</label>

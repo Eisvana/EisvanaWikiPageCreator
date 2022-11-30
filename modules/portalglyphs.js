@@ -55,14 +55,10 @@ function glyphRegion(glyphs) {
 		region = regionList[regionGlyphs];
 	}
 	if (region == undefined) {
-		regionOut.style.backgroundColor = 'red';
-		region = 'No valid Hub region'
-		glyphElement.style.backgroundColor = 'red'
-		pageData.region = '';
+		errorMessage(glyphElement, 'No valid Hub region. See <a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Regions" target="_blank" rel="noopener noreferrer">Galactic Hub Regions</a> for a list of valid regions.');
 	} else {
-		regionOut.style.backgroundColor = '';
-		glyphElement.style.backgroundColor = ''
-		pageData.region = region;
+		errorMessage(glyphElement);
 	}
+	pageData.region = region;
 	regionOut.innerText = region;
 }

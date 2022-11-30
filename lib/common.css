@@ -119,7 +119,6 @@ dialog #explanationLink:after {
 .tableCell.data .error {
 	background-color: rgba(255, 0, 0, 0);
 	margin-top: 0.3rem;
-	padding: 1px 5px;
 }
 
 .tableHeader {
@@ -129,11 +128,6 @@ dialog #explanationLink:after {
 
 .tableHeader>* {
 	width: 100%;
-}
-
-#imageInput {
-	display: flex;
-	flex-wrap: wrap;
 }
 
 input[type="file"] {
@@ -164,7 +158,6 @@ input[type="file"] {
 
 label:not(.checkbox label) {
 	font-weight: bold;
-	margin-bottom: 3px;
 	margin-right: 1em;
 }
 
@@ -191,6 +184,7 @@ textarea {
 	width: 100%;
 	min-height: 75px;
 	resize: vertical;
+	margin-top: 3px;
 }
 
 textarea,
@@ -314,6 +308,7 @@ footer .github {
 	display: flex;
 	flex-wrap: wrap;
 	margin-right: 1em;
+	align-items: center;
 }
 
 #portalglyphButtons {

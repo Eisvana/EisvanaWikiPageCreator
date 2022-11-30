@@ -1,0 +1,1 @@
+This folder holds re-useable UI and logic components which are used on multiple, but not all pages.
