@@ -203,10 +203,6 @@ input[type="date"]:hover {
 	border: 1px solid #000;
 }
 
-[name="bulletpoint"] {
-	display: none;
-}
-
 .tooltip {
 	width: 15px;
 	min-width: 15px;
