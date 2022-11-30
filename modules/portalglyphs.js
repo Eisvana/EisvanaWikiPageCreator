@@ -16,9 +16,12 @@ function glyphOnClick(button) {
 }
 
 function displayGlyphs() {
-	const glyphString = globalElements.input.portalglyphsInput.value;
+	const input = globalElements.input.portalglyphsInput;
+	const glyphString = input.value;
 	pageData.portalglyphs = glyphString;
-	for (const output of globalElements.output.portalglyphs) {
+	const dest = input.getAttribute('dest-data-noauto');
+	const outputs = document.getElementsByName(dest);
+	for (const output of outputs) {
 		output.innerText = glyphString;
 	}
 	glyphRegion(glyphString);

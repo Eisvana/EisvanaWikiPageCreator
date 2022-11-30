@@ -51,7 +51,7 @@
 						<label>Which civ does this base belong to?</label>
 					</div>
 					<div class="tableCell data">
-						<select id="civInput" onchange="civ()">
+						<select id="civInput">
 							<option value="GHub">GHub</option>
 							<option value="CalHub">CalHub</option>
 							<option value="EisHub">EisHub</option>
@@ -148,7 +148,7 @@
 								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="portalglyphsInput" maxlength="12" oninput="glyphInputOnChange(this)">
+						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
 					</div>
 					<div class="tableHeader data">
 						<div id="portalglyphButtons"></div>

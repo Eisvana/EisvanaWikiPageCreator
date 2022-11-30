@@ -20,8 +20,8 @@ function reset() {
 	}
 	globalElements.input.version.value = versions[0];
 	globalElements.input.civ.value = globalElements.input.civ.children[0].value;
-	
-	try { resetGallery() } catch(error) { console.error(error) };
+
+	try { resetGallery() } catch (error) { console.error(error) };
 
 	for (const key in pageData) {
 		if (key != 'pageType') delete pageData[key];
