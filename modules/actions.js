@@ -9,18 +9,20 @@ globalElements.output.actions.innerHTML = actions;
 let copyButtonPress, createButtonPress;
 
 function reset() {
-	const inputs = document.querySelectorAll('.table .data select, .table .data input');
+	const inputs = document.querySelectorAll('.table .data input');
+	const selects = document.querySelectorAll('.table .data select');
 	const outputs = document.getElementsByTagName('output');
 	for (const input of inputs) {
 		if (input.type != 'checkbox') input.value = '';
 		input.checked = false;
 	}
+	for (const select of selects) {
+		select.value = select.children[0].value;
+	}
 	for (const output of outputs) {
 		output.innerText = '';
 	}
-	globalElements.input.version.value = versions[0];
-	globalElements.input.civ.value = globalElements.input.civ.children[0].value;
-
+	
 	try { resetGallery() } catch (error) { console.error(error) };
 
 	for (const key in pageData) {
