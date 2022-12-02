@@ -163,8 +163,11 @@ label:not(.checkbox label) {
 
 .checkbox {
 	display: flex;
-	cursor: auto;
 	margin: 3px 0;
+}
+
+.checkbox input {
+	cursor: default;
 }
 
 .checkbox label {
@@ -286,18 +289,8 @@ input[type="date"]:hover {
 	margin-top: 2em;
 }
 
-/* Footer */
 footer {
 	text-align: center;
-}
-
-footer a {
-	display: block;
-}
-
-footer .github {
-	font-size: large;
-	line-height: 2rem;
 }
 
 .glyphs-label-button {
