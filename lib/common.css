@@ -166,6 +166,7 @@ label:not(.checkbox label) {
 	margin: 3px 0;
 }
 
+.checkbox,
 .checkbox input {
 	cursor: default;
 }
@@ -214,6 +215,10 @@ input[type="date"]:hover {
 	display: inline-block;
 	margin-left: auto;
 	left: -10px;
+}
+
+.tooltip[onclick] {
+	cursor: pointer;
 }
 
 @media (pointer:coarse) {
