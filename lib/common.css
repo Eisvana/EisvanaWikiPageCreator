@@ -156,7 +156,8 @@ input[type="file"] {
 	text-align: center;
 }
 
-label:not(.checkbox label, .headerToggle label) {
+.tableCell>label, 
+.tableHeader>label {
 	font-weight: bold;
 	margin-right: 1em;
 }
@@ -325,11 +326,11 @@ footer {
 	word-break: break-all;
 }
 
-.headerToggle {
+.sectionToggle {
 	justify-content: space-between;
 }
 
-.headerToggle>* {
+.sectionToggle>* {
 	width: unset !important;
 }
 
