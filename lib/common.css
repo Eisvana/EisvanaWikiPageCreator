@@ -156,7 +156,7 @@ input[type="file"] {
 	text-align: center;
 }
 
-label:not(.checkbox label) {
+label:not(.checkbox label, .headerToggle label) {
 	font-weight: bold;
 	margin-right: 1em;
 }
@@ -325,11 +325,11 @@ footer {
 	word-break: break-all;
 }
 
-.censustoggle {
+.headerToggle {
 	justify-content: space-between;
 }
 
-.censustoggle>* {
+.headerToggle>* {
 	width: unset !important;
 }
 

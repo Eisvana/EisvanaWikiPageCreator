@@ -8,12 +8,12 @@
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js" defer></script>
 	<script src="./lib/pages/base.js" defer></script>
-	<script src="./modules/portalglyphs.js" defer></script>
-	<script src="./modules/dateLogic.js" defer></script>
-	<script src="./modules/gallery.js" defer></script>
-	<script src="./modules/actions.js" defer></script>
-	<script src="./modules/footer.js" defer></script>
-	<script src="./modules/locationLogic.js"></script>
+	<script src="./lib/modules/portalglyphs.js" defer></script>
+	<script src="./lib/misc_logic/dateLogic.js" defer></script>
+	<script src="./lib/modules/gallery.js" defer></script>
+	<script src="./lib/modules/actions.js" defer></script>
+	<script src="./lib/modules/footer.js" defer></script>
+	<script src="./lib/misc_logic/locationLogic.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 	<script>
 		window.onload = () => {
@@ -229,7 +229,7 @@
 					<div class="tableCell data">
 						<select data-dest-noauto="researchteam" id="researchteamInput"></select>
 					</div>
-					<div class="tableHeader text censustoggle">
+					<div class="tableHeader text headerToggle">
 						<label>Census:</label>
 						<button class="button" onclick="toggleSection('census', this)">Hide</button>
 					</div>
