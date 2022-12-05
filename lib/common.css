@@ -157,7 +157,8 @@ input[type="file"] {
 }
 
 .tableCell>label, 
-.tableHeader>label {
+.tableHeader>label,
+.glyphs-label-button>label {
 	font-weight: bold;
 	margin-right: 1em;
 }
@@ -320,6 +321,10 @@ footer {
 
 #portalglyphButtons>* {
 	margin: .5px;
+}
+
+#portalglyphButtons .glyph.icon.is-small {
+	height: 1em;
 }
 
 #portalglyphsPreview {

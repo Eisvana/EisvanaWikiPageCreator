@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js" defer></script>
 	<script src="./lib/pages/starship.js" defer></script>
+	<script src="./lib/misc_logic/huburbs.js" defer></script>
 	<script src="./lib/modules/portalglyphs.js" defer></script>
 	<script src="./lib/modules/gallery.js" defer></script>
 	<script src="./lib/modules/actions.js" defer></script>
@@ -17,48 +18,48 @@
 	<script>
 		const galleryArray = ['', 'Rear view of ship/freighter', 'Inventory screen', 'NPC freighter captain', 'NPC ship pilot', 'Analysis Visor Scan', 'Crash site', 'System Page', 'Moon Page', 'Planet Page', 'Galaxy Map'];
 
-		function showInput() {
-			textFunction("researchteam", "researchteam_input");
-			calcInv("type_input", "subtype_input", "inventory_input");
-			textFunctionMultiple("release", "version_input");
-			textFunctionMultiple("name", "name_input");
-			textFunctionMultiple("image", "image_input");
-			textFunction("system", "system_input");
-			textFunction("planet", "planet_input");
-			textFunction("moon", "moon_input");
-			textFunction("axes", "axes_input");
-			textFunction("economy", "economy_input");
-			textFunctionMultiple("portalglyphs", "portalglyphs_input");
-			textFunctionMultiple("type", "type_input");
-			textFunction("subtype", "subtype_input");
-			textFunction("exotic", "exotic_input");
-			textFunction("pilot", "pilot_input");
-			textFunction("inventory", "inventory_input");
-			textFunction("maneuverB", "maneuverB_input");
-			textFunction("damageB", "damageB_input");
-			textFunction("shieldB", "shieldB_input");
-			textFunction("warpB", "warpB_input");
-			textFunction("discovered", "discovered_input");
-			textFunction("discoveredlink", "discoveredlink_input");
-			textAreaFunction("appearance", "appearance_input");
-			civGalaxy("civ");
-			hideDiscoverer('discovered_input', 'discoveredlink_input');
-			enPrefix("type_input", "enPrefix");
-			researchTeam("researchteam", "civilized");
-			calcS("economy_input", "sChance", "type_input")
-			shipStats("type_input", "stats");
-			textFunction("refLinks", "type_input");
-			addInfoBullet("bulletpoint");
-			glyphRegion("portalglyphs_input", "civ", "region");
-			costSlotCalc("type_input", "inventory", "cost", "slots", "techslots", "cargoslots");
-			loc("system_input", "type_input", "civ", "moon_input", "planet_input", "axes_input", "region", "inventory", "location");
-			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
-			addInfo("type_input", "civ", "researchteam", "addInfo");
-			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
-			albumOther("economy_input", "pilot_input", "planet_input", "moon_input", "axes_input", "type_input", "albumProp1", "albumProp2");
-			textFunction("albumCiv", "civ");
-		}
-
+		/* 		function showInput() {
+					textFunction("researchteam", "researchteam_input");
+					calcInv("type_input", "subtype_input", "inventory_input");
+					textFunctionMultiple("release", "version_input");
+					textFunctionMultiple("name", "name_input");
+					textFunctionMultiple("image", "image_input");
+					textFunction("system", "system_input");
+					textFunction("planet", "planet_input");
+					textFunction("moon", "moon_input");
+					textFunction("axes", "axes_input");
+					textFunction("economy", "economy_input");
+					textFunctionMultiple("portalglyphs", "portalglyphs_input");
+					textFunctionMultiple("type", "type_input");
+					textFunction("subtype", "subtype_input");
+					textFunction("exotic", "exotic_input");
+					textFunction("pilot", "pilot_input");
+					textFunction("inventory", "inventory_input");
+					textFunction("maneuverB", "maneuverB_input");
+					textFunction("damageB", "damageB_input");
+					textFunction("shieldB", "shieldB_input");
+					textFunction("warpB", "warpB_input");
+					textFunction("discovered", "discovered_input");
+					textFunction("discoveredlink", "discoveredlink_input");
+					textAreaFunction("appearance", "appearance_input");
+					civGalaxy("civ");
+					hideDiscoverer('discovered_input', 'discoveredlink_input');
+					enPrefix("type_input", "enPrefix");
+					researchTeam("researchteam", "civilized");
+					calcS("economy_input", "sChance", "type_input")
+					shipStats("type_input", "stats");
+					textFunction("refLinks", "type_input");
+					addInfoBullet("bulletpoint");
+					glyphRegion("portalglyphs_input", "civ", "region");
+					costSlotCalc("type_input", "inventory", "cost", "slots", "techslots", "cargoslots");
+					loc("system_input", "type_input", "civ", "moon_input", "planet_input", "axes_input", "region", "inventory", "location");
+					docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
+					addInfo("type_input", "civ", "researchteam", "addInfo");
+					albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
+					albumOther("economy_input", "pilot_input", "planet_input", "moon_input", "axes_input", "type_input", "albumProp1", "albumProp2");
+					textFunction("albumCiv", "civ");
+				}
+		 */
 		window.onload = () => {
 			pageData.pageType = 'Starship';
 			startUp();
@@ -102,7 +103,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the starship:</label>
-						<span class="tooltip" onclick="explanation('Base Name', 
+						<span class="tooltip" onclick="explanation('Ship Name', 
 							'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
 							'./helperimg/baseName.jpg'	
 							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
@@ -125,13 +126,11 @@
 						<input type="text" id="fileInput" data-dest="image">
 						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
 					</div>
-
-
 					<div class="tableCell text">
 						<label>Type of the starship:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="typeInput">
+						<select data-dest="type" id="typeInput">
 							<option value="Fighter">Fighter
 							<option value="Explorer">Explorer
 							<option value="Hauler">Hauler
@@ -146,7 +145,7 @@
 						<label for="systemInput">Name of the system:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="systemInput">
+						<input type="text" data-dest="system" id="systemInput">
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
@@ -155,7 +154,7 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="planetInput">
+						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if applicable):</label>
@@ -165,13 +164,13 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="moonInput">
+						<input type="text" data-dest="moon" id="moonInput">
 					</div>
 					<div class="tableCell text">
 						<label for="axesInput">Planetary coords:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="axesInput" placeholder="+0.00, -0.00">
+						<input type="text" id="axesInput" data-dest="axes" placeholder="+0.00, -0.00">
 					</div>
 					<div class="tableCell text">
 						<label>System economy:</label>
@@ -180,7 +179,7 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<select id="economyInput">
+						<select data-dest="economy" id="economyInput">
 							<optgroup label="T3">
 								<option value="★★★ (Advanced)">Advanced
 								<option value="★★★ (Affluent)">Affluent
@@ -242,14 +241,14 @@
 						<label>Subtype:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="subtypeInput">
+						<select data-dest="subtype" id="subtypeInput">
 						</select>
 					</div>
 					<div class="tableCell text">
 						<label>Exotic type:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="exoticInput">
+						<select data-dest="exotic" id="exoticInput">
 							<option value="Squid">Squid
 							<option value="Guppy">Guppy
 							<option value="Royal">Royal
@@ -260,7 +259,7 @@
 						<label>Pilot faction:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="pilotInput">
+						<select data-dest="pilot" id="pilotInput">
 							<option value="Gek">Gek
 							<option value="Korvax">Korvax
 							<option value="Vy'keen">Vy'keen
@@ -270,44 +269,44 @@
 						<label>Inventory:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="inventoryInput">
+						<select data-dest="inventory" id="inventoryInput">
 						</select>
 					</div>
 					<div class="tableCell text">
 						<label for="maneuverBInput">Maneuverability:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="maneuverBInput">
+						<input type="text" data-dest="maneuverB" id="maneuverBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="damageBInput">Damage:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="damageBInput">
+						<input type="text" data-dest="damageB" id="damageBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="shieldBInput">Shield:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="shieldBInput">
+						<input type="text" data-dest="shieldB" id="shieldBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="warpBInput">Warp:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="warpBInput">
+						<input type="text" data-dest="warpB" id="warpBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="discoveredlinkInput">Discoverer wiki account:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="discoveredlinkInput">
+						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
 					</div>
 					<div class="tableCell text">
 						<label for="discoveredInput">Discoverer alias if no wiki:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="discoveredInput">
+						<input type="text" data-dest="discovered" id="discoveredInput">
 					</div>
 					<div class="tableCell text">
 						<label for="docbyInput">Documenter alias if not discoverer:</label>
@@ -315,20 +314,20 @@
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
-					<div class="tableCell.data">
+					<div class="tableCell data">
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
 						<select data-dest-noauto="researchteam" id="researchteamInput"></select>
 					</div>
 					<div class="tableHeader text sectionToggle">
-						<label>This section builds a predefined appearance sentence, it is not required.</label>
+						<p>This section builds a predefined appearance sentence, it is not required.</p>
 						<button class="button" onclick="toggleSection('appearance', this)">Hide</button>
 					</div>
-					<div name="appearance" class="tableCell text">
+					<div data-section="appearance" class="tableCell text">
 						<label>Main Colour:</label>
 					</div>
-					<div name="appearance" class="tableCell data">
+					<div data-section="appearance" class="tableCell data">
 						<select id="mainColourInput">
 							<option value=" ">
 							<option value="blue">Blue
@@ -346,10 +345,10 @@
 							<option value="yellow">Yellow
 						</select>
 					</div>
-					<div name="appearance" class="tableCell text">
+					<div data-section="appearance" class="tableCell text">
 						<label>Secondary Colour:</label>
 					</div>
-					<div name="appearance" class="tableCell data">
+					<div data-section="appearance" class="tableCell data">
 						<select id="secColourInput">
 							<option value=" ">
 							<option value="black">Black
@@ -370,30 +369,31 @@
 							<option value="yellow">Yellow
 						</select>
 					</div>
-					<div name="appearance" class="tableCell text">
+					<div data-section="appearance" class="tableCell text">
 						<label>Secondary parts:</label>
 					</div>
-					<div name="appearance" class="tableCell data">
+					<div data-section="appearance" class="tableCell data">
 						<select id="secPartsInput">
 						</select>
 					</div>
-					<div name="appearance" class="tableCell text">
+					<div data-section="appearance" class="tableCell text">
 						<label>Accessories:</label>
 					</div>
-					<div name="appearance" class="tableCell data">
+					<div data-section="appearance" class="tableCell data">
 						<select id="accessoriesInput">
 						</select>
 					</div>
-					<div name="appearance" class="tableCell text">
+					<div data-section="appearance" class="tableCell text">
 						<label>Misc part:</label>
 					</div>
-					<div name="appearance" class="tableCell data">
+					<div data-section="appearance" class="tableCell data">
 						<select id="miscPartsInput">
 						</select>
 					</div>
 					<div class="tableHeader data">
 						<label for="appearanceInput">Appearance:</label>
-						<textarea id="appearanceInput"></textarea>
+						<textarea data-dest="appearance" id="appearanceInput"
+							placeholder="What does the starship look like?"></textarea>
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
@@ -419,7 +419,7 @@
 					<div>| system = <output id='system'></output></div>
 					<div>| planet = <output id='planet'></output></div>
 					<div>| moon = <output id='moon'></output></div>
-					<div>| axes = <output id='axes'></output></div>
+					<div>| axes = <output id='axes' name="axes"></output></div>
 					<div>| economy = <output id='economy'></output></div>
 					<div>| pilot = <output id='pilot'></output></div>
 					<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs1' name="portalglyphs"></output>}}
@@ -467,8 +467,8 @@
 					<br>
 
 					<div>==Additional Information==</div>
-					<div><span name="bulletpoint">*</span> Featured in the <output id='addInfo'></output></div>
-					<div><span name="bulletpoint">*</span> <output id="docby"></output></div>
+					<div><span name="bulletpoint" style="display:none">*</span> Featured in the <output id='addInfo'></output></div>
+					<div><span name="bulletpoint" style="display:none">*</span> <output id="docby"></output></div>
 					<br>
 
 					<div>==Gallery==</div>

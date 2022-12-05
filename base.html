@@ -233,7 +233,7 @@
 						<p>Census:</p>
 						<button class="button" onclick="toggleSection('census', this)">Hide</button>
 					</div>
-					<div name="census" class="tableCell text">
+					<div data-section="census" class="tableCell text">
 						<label for="censusPlayerInput">Ingame name of the player?</label>
 						<span class="tooltip" onclick="explanation('Player Name', 
 						`Your ingame name. Don't include any ingame titles.`,
@@ -242,48 +242,48 @@
 								Your ingame name.
 							</span></span>
 					</div>
-					<div name="census" class="tableCell data">
+					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest="censusplayer" id="censusPlayerInput">
 					</div>
-					<div name="census" class="tableCell text">
+					<div data-section="census" class="tableCell text">
 						<label for="censusRedditInput">Reddit name of the player?</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 								Your Reddit name. "u/" not necessary.
 							</span></span>
 					</div>
-					<div name="census" class="tableCell data">
+					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest-noauto="censusreddit" id="censusRedditInput">
 					</div>
-					<div name="census" class="tableCell text">
+					<div data-section="census" class="tableCell text">
 						<label for="censusDiscordInput">Discord name of the player?</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 								Your Discord name. Include the #xxxx at the end.
 							</span></span>
 					</div>
-					<div name="census" class="tableCell data">
+					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest="censusdiscord" id="censusDiscordInput">
 					</div>
-					<div name="census" class="tableCell text">
+					<div data-section="census" class="tableCell text">
 						<label for="censusFriendInput">NMS friend code of the player?</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 								Can be found in the Options -> Network -> View No Man's Sky Friends List -> Show My No
 								Man's Sky Friend Code
 							</span></span>
 					</div>
-					<div name="census" class="tableCell data">
+					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest-noauto="censusfriend" id="censusFriendInput">
 					</div>
-					<div name="census" class="tableCell text">
+					<div data-section="census" class="tableCell text">
 						<label for="censusArrivalInput">When did the player arrive in Hub space?</label>
 					</div>
-					<div name="census" class="tableCell data">
+					<div data-section="census" class="tableCell data">
 						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput"
 							onchange="processDate(this)">
 					</div>
-					<div name="census" class="tableCell text">
+					<div data-section="census" class="tableCell text">
 						<label for="censusShowInput">Already on census, don't create another entry:</label>
 					</div>
-					<div name="census" class="tableCell text">
+					<div data-section="census" class="tableCell text">
 						<input type="checkbox" id="censusShowInput" value="" data-checkbox-unchecked="Y"
 							data-dest-checkbox="censusshow">
 					</div>
