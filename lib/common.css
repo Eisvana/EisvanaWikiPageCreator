@@ -187,6 +187,7 @@ input[type="date"] {
 }
 
 textarea {
+	display: block;
 	width: 100%;
 	min-height: 75px;
 	resize: vertical;
