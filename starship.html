@@ -467,8 +467,9 @@
 					<br>
 
 					<div>==Additional Information==</div>
-					<div><span name="bulletpoint" style="display:none">*</span> Featured in the <output id='addInfo'></output></div>
-					<div><span name="bulletpoint" style="display:none">*</span> <output id="docby"></output></div>
+					<div><span data-name="bulletpoint" style="display:none">*</span> Featured in the <output
+							id='addInfo'></output></div>
+					<div><span data-name="bulletpoint" style="display:none">*</span> <output id="docby"></output></div>
 					<br>
 
 					<div>==Gallery==</div>
@@ -479,6 +480,21 @@
 
 					<div>==Reference Links==</div>
 					<div>{{StarshipRefLinks|type=<output name="type" id='refLinks'></output>}}</div>
+				</div>
+				<div class="output" id="AlbumEntry">
+					<h3 class="subtitle is-5" style="margin-bottom:0.5rem"><output id="albumCiv" name="civ"></output>
+						<output id="album" name="type"></output> Catalog entry for <output name="name"></output>:
+					</h3>
+					<div>
+						<div id="albumText">
+							| {{album | file=<output name="image" id="albumImage"></output> | name=[[<output
+								id="albumName" name="name"></output>]] | other=&lt;br&gt;<output
+								id="albumProp1"></output> <output id="albumProp2"></output> | glyph=<output
+								id='albumGlyphs' name="portalglyphs"></output> | <output
+								id="albumDiscoverer"></output>}}
+						</div>
+					</div>
+					<div id="catalog" class="buttons" style="margin-top:0.5rem;"></div>
 				</div>
 			</section>
 		</main>

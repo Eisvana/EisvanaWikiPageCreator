@@ -156,7 +156,7 @@ input[type="file"] {
 	text-align: center;
 }
 
-.tableCell>label, 
+.tableCell>label,
 .tableHeader>label,
 .glyphs-label-button>label {
 	font-weight: bold;
