@@ -1,6 +1,44 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
 @import "fonts.css";
 
+/*dark mode*/
+:root {
+	--darkmode-background-color: #17181c;
+	--darkmode-color: #b5b5b5;
+}
+
+.darkmode input,
+.darkmode select,
+.darkmode button:not(.buttons button, .glyphs-label-button button),
+.darkmode textarea {
+	background-color: var(--darkmode-background-color);
+	color: var(--darkmode-color);
+	border-color: lightgrey !important;
+	border-radius: 5px !important;
+}
+
+.darkmode .table {
+	background-color: var(--darkmode-background-color);
+}
+
+.darkmode .tooltip img {
+	filter: invert();
+}
+
+.darkmode input:hover,
+.darkmode select:hover,
+.darkmode button:not(.buttons button, .glyphs-label-button button):hover,
+.darkmode textarea:hover {
+	border-color: white !important;
+}
+
+.darkmode dialog {
+	background-color: var(--darkmode-background-color);
+	color: var(--darkmode-color);
+}
+/*Dark mode end*/
+
+
 body {
 	font-family: Nunito, sans-serif;
 }
@@ -90,6 +128,10 @@ dialog #explanationLink:after {
 	margin-bottom: 1em;
 }
 
+.blur {
+	filter: blur(3px);
+}
+
 .no-flex {
 	display: block !important;
 }
@@ -146,10 +188,15 @@ input[type="file"] {
 #output {
 	border-left: 1px dashed rgb(210, 210, 210);
 	padding-left: 2em;
+	padding-bottom: 3rem;
 }
 
 .wikiText {
 	font-family: consolas, monospace;
+}
+
+#albumEntry {
+	margin-top: 5rem;
 }
 
 .title {
@@ -299,6 +346,10 @@ input[type="date"]:hover {
 
 footer {
 	text-align: center;
+}
+
+footer button {
+	margin: 1rem 0;
 }
 
 .glyphs-label-button {

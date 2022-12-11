@@ -35,7 +35,8 @@
 				<img id="explanationImg" alt='Explainer Image'>
 			</a>
 			<form method="dialog">
-				<button class="button" autofocus>Close</button>
+				<button class="button" onclick="blurPage()"
+					autofocus>Close</button>
 			</form>
 		</dialog>
 		<main class="columns is-desktop">
@@ -369,8 +370,8 @@
 					<br>
 
 					<div>==Additional Information==</div>
-					<div><span data-name="bulletpoint" style="display:none"></span><output id='addInfo'></output></div>
-					<div><span data-name="bulletpoint" style="display:none"><br></span><output id="docby"></output></div>
+					<div><span data-add-info=""></span><output id='addInfo'></output></div>
+					<div><span data-add-info="<br>"></span><output id="docby"></output></div>
 					<br>
 
 					<div>==Gallery==</div>
@@ -381,7 +382,7 @@
 			</section>
 		</main>
 	</div>
-	<footer id="footer" class="footer content"></footer>
+	<footer id="footer" class="footer"></footer>
 </body>
 
 </html>

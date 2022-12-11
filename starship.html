@@ -12,6 +12,7 @@
 	<script src="./lib/modules/portalglyphs.js" defer></script>
 	<script src="./lib/modules/gallery.js" defer></script>
 	<script src="./lib/modules/actions.js" defer></script>
+	<script src="./lib/modules/albumactions.js" defer></script>
 	<script src="./lib/modules/footer.js" defer></script>
 	<script src="./lib/misc_logic/locationLogic.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
@@ -78,7 +79,8 @@
 				<img id="explanationImg" alt='Explainer Image'>
 			</a>
 			<form method="dialog">
-				<button class="button" autofocus>Close</button>
+				<button class="button" onclick="blurPage()"
+					autofocus>Close</button>
 			</form>
 		</dialog>
 
@@ -405,6 +407,7 @@
 				<div id="galleryItems">
 				</div>
 				<div id="actions" class="buttons"></div>
+				<div id="albumActions" class="buttons"></div>
 			</section>
 			<section id="output" class="column is-full-mobile">
 				<div class="wikiText" id="fullArticle">
@@ -467,9 +470,8 @@
 					<br>
 
 					<div>==Additional Information==</div>
-					<div><span data-name="bulletpoint" style="display:none">*</span> Featured in the <output
-							id='addInfo'></output></div>
-					<div><span data-name="bulletpoint" style="display:none">*</span> <output id="docby"></output></div>
+					<div><span data-add-info="*"></span> Featured in the <output id='addInfo'></output></div>
+					<div><span data-add-info="*"></span> <output id="docby"></output></div>
 					<br>
 
 					<div>==Gallery==</div>
@@ -481,25 +483,11 @@
 					<div>==Reference Links==</div>
 					<div>{{StarshipRefLinks|type=<output name="type" id='refLinks'></output>}}</div>
 				</div>
-				<div class="output" id="AlbumEntry">
-					<h3 class="subtitle is-5" style="margin-bottom:0.5rem"><output id="albumCiv" name="civ"></output>
-						<output id="album" name="type"></output> Catalog entry for <output name="name"></output>:
-					</h3>
-					<div>
-						<div id="albumText">
-							| {{album | file=<output name="image" id="albumImage"></output> | name=[[<output
-								id="albumName" name="name"></output>]] | other=&lt;br&gt;<output
-								id="albumProp1"></output> <output id="albumProp2"></output> | glyph=<output
-								id='albumGlyphs' name="portalglyphs"></output> | <output
-								id="albumDiscoverer"></output>}}
-						</div>
-					</div>
-					<div id="catalog" class="buttons" style="margin-top:0.5rem;"></div>
-				</div>
+				<div id="albumEntry"></div>
 			</section>
 		</main>
 	</div>
-	<footer id="footer" class="footer content"></footer>
+	<footer id="footer" class="footer"></footer>
 </body>
 
 </html>
