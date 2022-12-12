@@ -1,12 +1,42 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
 @import "fonts.css";
 
-/*dark mode*/
+html,
+body,
+footer,
+footer *,
+select,
+button:not(.buttons button),
+.title,
+.tooltip img,
+label,
+p,
+.glyph,
+#output {
+	transition: background-color .3s, color .3s, border-radius .3s, border-color .3s, filter .3s;
+}
+
+body {
+	transition: filter .1.5s !important;
+}
+
+.buttons button {
+	transition: background-color .2s, color .2s;
+}
+
 :root {
 	--darkmode-background-color: #17181c;
 	--darkmode-color: #b5b5b5;
 }
 
+input,
+input[type="file"],
+textarea,
+.table {
+	background-color: transparent !important;
+}
+
+/*dark mode*/
 .darkmode input,
 .darkmode select,
 .darkmode button:not(.buttons button, .glyphs-label-button button),
@@ -15,10 +45,6 @@
 	color: var(--darkmode-color);
 	border-color: lightgrey !important;
 	border-radius: 5px !important;
-}
-
-.darkmode .table {
-	background-color: var(--darkmode-background-color);
 }
 
 .darkmode .tooltip img {
@@ -36,6 +62,19 @@
 	background-color: var(--darkmode-background-color);
 	color: var(--darkmode-color);
 }
+
+.darkmode .table>* {
+	border-color: rgba(205, 205, 205, 0.1);
+}
+
+.darkmode .handle {
+	filter: invert();
+}
+
+.darkmode #output {
+	border-color: rgb(45, 45, 45);
+}
+
 /*Dark mode end*/
 
 
@@ -54,6 +93,14 @@ img {
 @media only screen and (max-width: 1023px) {
 	.container {
 		margin: 0 1em;
+	}
+
+	#gallery_descs {
+		margin: 0 0.65em;
+	}
+
+	#output {
+		border-left: none !important;
 	}
 }
 
@@ -186,7 +233,8 @@ input[type="file"] {
 }
 
 #output {
-	border-left: 1px dashed rgb(210, 210, 210);
+	border-left: 1px dashed;
+	border-color: rgb(210, 210, 210);
 	padding-left: 2em;
 	padding-bottom: 3rem;
 }
@@ -344,6 +392,25 @@ input[type="date"]:hover {
 	margin-top: 2em;
 }
 
+.buttons button.button.is-warning {
+	background-color: hsl(44, 100%, 75%);
+}
+
+.buttons button.button.is-warning:hover {
+	background-color: hsl(44, 100%, 65%);
+}
+
+.actionTable {
+	display: grid;
+	grid-template-columns: 100px auto;
+	align-items: baseline;
+	gap: 1.5rem;
+}
+
+.actionTable>*:nth-child(odd) {
+	font-weight: bold;
+}
+
 footer {
 	text-align: center;
 }
@@ -364,7 +431,8 @@ footer button {
 	grid-template-columns: repeat(8, 60px);
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 550px),
+(1024px <=width <=1215px) {
 	#portalglyphButtons {
 		display: flex;
 		flex-wrap: wrap;
@@ -403,12 +471,6 @@ footer button {
 	flex-direction: column;
 	width: 100%;
 	margin-top: 2em;
-}
-
-@media only screen and (max-width: 1024px) {
-	#gallery_descs {
-		margin: 0 0.65em;
-	}
 }
 
 .gallery-item {
@@ -460,12 +522,7 @@ footer button {
 .gallery-item .controlButtons .delete-icon {
 	cursor: pointer;
 	padding: 0.5em 0px 0.3em;
-	opacity: .7;
 	user-select: none;
-}
-
-.gallery-item .controlButtons .delete-icon:hover {
-	opacity: 1;
 }
 
 .gallery-item .gallery-meta input {
@@ -474,7 +531,6 @@ footer button {
 
 .handle {
 	width: 33px;
-	opacity: .7;
 }
 
 .handle:hover {
@@ -483,4 +539,14 @@ footer button {
 
 .handle:active {
 	cursor: grabbing;
+}
+
+.gallery-item .controlButtons .delete-icon,
+.handle {
+	opacity: .7;
+}
+
+.gallery-item .controlButtons .delete-icon:hover,
+.handle:hover {
+	opacity: 1;
 }
