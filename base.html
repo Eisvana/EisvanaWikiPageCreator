@@ -35,8 +35,7 @@
 				<img id="explanationImg" alt='Explainer Image'>
 			</a>
 			<form method="dialog">
-				<button class="button" onclick="blurPage()"
-					autofocus>Close</button>
+				<button class="button" onclick="blurPage()" autofocus>Close</button>
 			</form>
 		</dialog>
 		<main class="columns is-desktop">
@@ -62,7 +61,7 @@
 						<label for="nameInput">Name of the base:</label>
 						<span class="tooltip" onclick="explanation('Base Name', 
 						'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-						'./helperimg/baseName.jpg'	
+						'./helperimg/base/baseName.jpg'	
 						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
 							</span></span>
@@ -129,7 +128,7 @@
 						<label for="axesInput">Planetary coords:</label>
 						<span class="tooltip" onclick="explanation('Planetary Coordinates', 
 						`Found using your analysis visor OR on your ship's dashboard.`,
-						'./helperimg/axes.jpg'
+						'./helperimg/shared/axes.jpg'
 						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Found using your analysis visor OR on your ship's dashboard.</span></span>
 					</div>
@@ -144,7 +143,7 @@
 						</div>
 						<span class="tooltip" onclick="explanation('Portalglyphs', 
 						`Found in Photo Mode. Glyphs are specific to each planet.`,
-						'./helperimg/glyphs.jpg'
+						'./helperimg/shared/glyphs.jpg'
 						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
 					</div>
@@ -167,6 +166,11 @@
 					</div>
 					<div class="tableCell text">
 						<label>Gamemode:</label>
+						<span class="tooltip" onclick="explanation('Gamemode', 
+						'Gamemode of the save on which this base was built.<br>Found in the main menu:',
+						'./helperimg/shared/gamemode.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Gamemode of the save on which this base was built.</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
@@ -238,7 +242,7 @@
 						<label for="censusPlayerInput">Ingame name of the player?</label>
 						<span class="tooltip" onclick="explanation('Player Name', 
 						`Your ingame name. Don't include any ingame titles.`,
-						'./helperimg/playerName.jpg'
+						'./helperimg/base/playerName.jpg'
 						)"><img src="./lib/help.svg"><span class="tooltiptext">
 								Your ingame name.
 							</span></span>
@@ -266,10 +270,11 @@
 					</div>
 					<div data-section="census" class="tableCell text">
 						<label for="censusFriendInput">NMS friend code of the player?</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Can be found in the Options -> Network -> View No Man's Sky Friends List -> Show My No
-								Man's Sky Friend Code
-							</span></span>
+						<span class="tooltip" onclick="explanation('NMS Friend Code',
+						`You can find your friend code in the Options -> Network -> View No Man's Sky Friends List -> Show My No
+								Man's Sky Friend Code`, './helperimg/base/friendCode.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Can be found in the Options.</span></span>
 					</div>
 					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest-noauto="censusfriend" id="censusFriendInput">

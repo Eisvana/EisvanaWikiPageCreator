@@ -4,9 +4,6 @@
 html,
 body,
 footer,
-footer *,
-select,
-button:not(.buttons button),
 .title,
 .tooltip img,
 label,
@@ -16,11 +13,17 @@ p,
 	transition: background-color .3s, color .3s, border-radius .3s, border-color .3s, filter .3s;
 }
 
-body {
-	transition: filter .1.5s !important;
+select,
+footer *,
+.darkmode input[type="file"]::file-selector-button {
+	transition: background-color .3s, color .3s;
 }
 
-.buttons button {
+body {
+	transition: filter .15s !important;
+}
+
+.buttons>* {
 	transition: background-color .2s, color .2s;
 }
 
@@ -32,29 +35,32 @@ body {
 input,
 input[type="file"],
 textarea,
+button:not(.buttons button, .glyphs-label-button button),
 .table {
 	background-color: transparent !important;
 }
 
 /*dark mode*/
+.darkmode .tooltip img {
+	filter: invert();
+}
+
 .darkmode input,
 .darkmode select,
 .darkmode button:not(.buttons button, .glyphs-label-button button),
-.darkmode textarea {
+.darkmode textarea,
+.darkmode input[type="file"]::file-selector-button {
 	background-color: var(--darkmode-background-color);
 	color: var(--darkmode-color);
 	border-color: lightgrey !important;
 	border-radius: 5px !important;
 }
 
-.darkmode .tooltip img {
-	filter: invert();
-}
-
 .darkmode input:hover,
 .darkmode select:hover,
 .darkmode button:not(.buttons button, .glyphs-label-button button):hover,
-.darkmode textarea:hover {
+.darkmode textarea:hover,
+.darkmode input[type="file"]::file-selector-button:hover {
 	border-color: white !important;
 }
 
@@ -73,6 +79,21 @@ textarea,
 
 .darkmode #output {
 	border-color: rgb(45, 45, 45);
+}
+
+.darkmode .button.is-link.is-outlined {
+	color: #4a80d9;
+	border-color: #4a80d9;
+}
+
+.darkmode .button.is-link.is-outlined:not([disabled]):hover {
+	color: white;
+}
+
+.darkmode input[type="file"]::file-selector-button {
+	color: inherit;
+	background-color: transparent;
+	border-radius: 5px;
 }
 
 /*Dark mode end*/
@@ -138,10 +159,10 @@ nav {
 	border-radius: 50%;
 }
 
-.hub-images a {
-	margin: 0 1em;
-	max-width: 200px;
-	display: inline-block;
+.hub-images {
+	display: flex;
+	justify-content: center;
+	gap: 2.5rem;
 }
 
 .container {

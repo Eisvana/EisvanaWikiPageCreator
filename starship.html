@@ -64,7 +64,7 @@
 						<label for="nameInput">Name of the starship:</label>
 						<span class="tooltip" onclick="explanation('Ship Name', 
 							'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-							'./helperimg/baseName.jpg'	
+							'./helperimg/ship/ship/shipName.jpg'	
 							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
 							</span></span>
@@ -87,11 +87,10 @@
 					</div>
 					<div class="tableCell text">
 						<label>Type of the starship:</label>
-						<span class="tooltip" onclick="explanation('Ship Type', 
-						`Starship types are defined by a starship's hull and stats.<br>
-						See the <a href='https://nomanssky.fandom.com/wiki/Starship' rel='noopener noreferrer' target='_blank'>starship wiki page</a> for details of the starship types.`
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Starship types are defined by a starship's hull and stats.</span></span>
+						<span class="tooltip" onclick='explanation("Ship Type", 
+						`The starship type can be seen on the ship scan. Living Ships are displayed as "Alien"`, "./helperimg/ship/shipType.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								The starship type can be seen on the ship scan.</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="type" id="typeInput">
@@ -132,6 +131,11 @@
 					</div>
 					<div class="tableCell text">
 						<label for="axesInput">Planetary coords:</label>
+						<span class="tooltip" onclick="explanation('Planetary Coordinates', 
+						`Found using your analysis visor OR on your ship's dashboard.`,
+						'./helperimg/shared/axes.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found using your analysis visor OR on your ship's dashboard.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="axesInput" data-dest="axes" placeholder="+0.00, -0.00">
@@ -140,7 +144,7 @@
 						<label>System economy:</label>
 						<span class="tooltip" onclick='explanation(`Economy`,
 						`Found in the exploration guide under "Economy".`,
-						`./helperimg/economy.jpg`)'><img src="./lib/help.svg"><span class="tooltiptext">
+						`./helperimg/shared/economy.jpg`)'><img src="./lib/help.svg"><span class="tooltiptext">
 								Found in the exploration guide under "Economy".
 							</span></span>
 					</div>
@@ -192,7 +196,7 @@
 						</div>
 						<span class="tooltip" onclick="explanation('Portalglyphs', 
 							`Found in Photo Mode. Glyphs are specific to each planet.`,
-							'./helperimg/glyphs.jpg'
+							'./helperimg/shared/glyphs.jpg'
 							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
 					</div>
@@ -265,24 +269,48 @@
 					</div>
 					<div class="tableCell text">
 						<label for="maneuverBInput">Maneuverability:</label>
+						<span class="tooltip" onclick='explanation("Maneuverability", 
+						`Enter the "Core" value exactly as seen in the scan of the ship.<br>
+						It is preferred to enter the values as seen after buying, as they might change.<br>
+						If there is no core value, use the regular one.`, "./helperimg/ship/maneuverability.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Enter the "Core" value as seen on the ship's scan.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="maneuverB" id="maneuverBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="damageBInput">Damage:</label>
+						<span class="tooltip" onclick='explanation("Maneuverability", 
+						`Enter the "Core" value exactly as seen in the scan of the ship.<br>
+						It is preferred to enter the values as seen after buying, as they might change.<br>
+						If there is no core value, use the regular one.`, "./helperimg/ship/damage.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Enter the "Core" value as seen on the ship's scan.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="damageB" id="damageBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="shieldBInput">Shield:</label>
+						<span class="tooltip" onclick='explanation("Maneuverability", 
+						`Enter the "Core" value exactly as seen in the scan of the ship.<br>
+						It is preferred to enter the values as seen after buying, as they might change.<br>
+						If there is no core value, use the regular one.`, "./helperimg/ship/shield.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Enter the "Core" value as seen on the ship's scan.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="shieldB" id="shieldBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="warpBInput">Warp:</label>
+						<span class="tooltip" onclick='explanation("Maneuverability", 
+						`Enter the "Core" value exactly as seen in the scan of the ship.<br>
+						It is preferred to enter the values as seen after buying, as they might change.<br>
+						If there is no core value, use the regular one.`, "./helperimg/ship/hyperdrive.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Enter the "Core" value as seen on the ship's scan.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="warpB" id="warpBInput">
