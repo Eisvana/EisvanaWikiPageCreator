@@ -35,7 +35,7 @@
 				<img id="explanationImg" alt='Explainer Image'>
 			</a>
 			<form method="dialog">
-				<button class="button" onclick="blurPage()" autofocus>Close</button>
+				<button class="button" autofocus>Close</button>
 			</form>
 		</dialog>
 		<main class="columns is-desktop">
@@ -74,7 +74,7 @@
 						<span class="tooltip" onclick="explanation('File Upload', 
 						`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
 						You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+						); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Picture won't be uploaded to the wiki. This is only to autofill the image name.
 							</span></span>
 					</div>

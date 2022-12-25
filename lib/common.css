@@ -65,6 +65,10 @@ body {
 	transition: filter .15s;
 }
 
+body:has(dialog[open]) {
+	filter: blur(3px);
+}
+
 h1,
 h2,
 h3,
@@ -269,10 +273,6 @@ dialog #explanationLink:after {
 	display: block;
 	content: 'Click to enlarge';
 	margin-bottom: 1em;
-}
-
-.blur {
-	filter: blur(3px);
 }
 
 .no-flex {

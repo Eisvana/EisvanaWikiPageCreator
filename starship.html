@@ -37,7 +37,7 @@
 				<img id="explanationImg" alt='Explainer Image'>
 			</a>
 			<form method="dialog">
-				<button class="button" onclick="blurPage()" autofocus>Close</button>
+				<button class="button" autofocus>Close</button>
 			</form>
 		</dialog>
 
@@ -64,7 +64,7 @@
 						<label for="nameInput">Name of the starship:</label>
 						<span class="tooltip" onclick="explanation('Ship Name', 
 							'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-							'./helperimg/ship/ship/shipName.jpg'	
+							'./helperimg/ship/shipName.jpg'	
 							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
 							</span></span>
@@ -450,7 +450,7 @@
 									<li>System Page</li>
 								</ol>
 							</div>
-						</div>`)">
+						</div>`); galleryUploadShown = true">
 							<img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								There is a preferred order of pictures.</span></span>
 					</div>
