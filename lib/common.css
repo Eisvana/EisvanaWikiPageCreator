@@ -29,7 +29,7 @@
 	--footer-backgroundcolor: hsl(0, 0%, 7%);
 	--tooltip-background: hsl(0, 0%, 30%);
 	--input-background: hsl(0, 0%, 10%);
-	--input-background-hover: hsl(0, 0%, 15%);
+	--input-background-hover: hsl(0, 0%, 20%);
 	--text-color: hsl(0, 0%, 85%);
 	--heading-color: hsl(0, 0%, 90%);
 	--code-color: hsl(0, 0%, 80%);
@@ -164,6 +164,10 @@ input[type="file"]::file-selector-button:focus {
 
 select option {
 	background-color: var(--input-background);
+}
+
+select optgroup {
+	background-color: var(--input-background-hover);
 }
 
 input[type="file"]::file-selector-button {
