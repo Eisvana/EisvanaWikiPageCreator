@@ -444,6 +444,10 @@ input[type="date"]:hover {
 	.moveButton {
 		display: flex !important;
 	}
+
+	.gallery-item .controlButtons .delete-icon {
+		align-self: end;
+	}
 }
 
 .tooltip .tooltiptext {
