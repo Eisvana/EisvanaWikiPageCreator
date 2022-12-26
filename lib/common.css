@@ -7,6 +7,7 @@
 	--tooltip-background: hsl(0, 0%, 85%);
 	--input-background: hsl(0, 0%, 100%);
 	--input-background-hover: hsl(0, 0%, 90%);
+	--outline-color: hsl(200, 100%, 50%);
 	--text-color: hsl(0, 0%, 15%);
 	--heading-color: hsl(0, 0%, 10%);
 	--code-color: hsl(0, 0%, 20%);
@@ -15,7 +16,8 @@
 	--link-hover-color: hsl(226, 77%, 57%);
 	--border-color: hsl(0, 0%, 60%);
 	--border-color-hover: hsl(0, 0%, 30%);
-	--border-color-focus: hsl(0, 0%, 0%);
+	--border-color-focus: hsl(0, 0%, 15%);
+	--border-color-focus-hover: hsl(0, 0%, 0%);
 	--table-border-color: hsla(0, 0%, 20%, 0.1);
 	--column-divider-color: hsl(0, 0%, 80%);
 	--border-radius: 5px;
@@ -38,7 +40,8 @@
 	--link-hover-color: hsl(217, 65%, 70%);
 	--border-color: hsl(0, 0%, 40%);
 	--border-color-hover: hsl(0, 0%, 70%);
-	--border-color-focus: hsl(0, 0%, 100%);
+	--border-color-focus: hsl(0, 0%, 85%);
+	--border-color-focus-hover: hsl(0, 0%, 100%);
 	--table-border-color: hsla(0, 0%, 80%, 0.1);
 	--column-divider-color: hsl(0, 0%, 20%);
 	--invert: 90%;
@@ -120,6 +123,14 @@ a:hover {
 	border-color: var(--border-color-focus);
 }
 
+.button:not([class*="is-"]):focus,
+textarea:focus,
+input:not([type="file"], [type="checkbox"]):focus {
+	outline: var(--outline-color);
+	outline-style: solid;
+	outline-width: 2px;
+}
+
 textarea,
 input {
 	background-color: var(--input-background);
@@ -135,6 +146,11 @@ input:hover {
 textarea:focus,
 input:focus {
 	border-color: var(--border-color-focus);
+}
+
+textarea:focus:hover,
+input:focus:hover {
+	border-color: var(--border-color-focus-hover);
 }
 
 textarea::placeholder,
@@ -447,7 +463,7 @@ input[type="date"]:hover {
 	position: relative;
 	display: inline-block;
 	margin-left: auto;
-	left: -10px;
+	margin-right: 10px;
 }
 
 .tooltip[onclick] {
@@ -506,7 +522,8 @@ input[type="date"]:hover {
 	border-top-color: var(--tooltip-background);
 }
 
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptext,
+.tooltip:active .tooltiptext {
 	visibility: visible;
 	opacity: 1;
 }
@@ -535,7 +552,7 @@ footer button {
 .glyphs-label-button {
 	display: flex;
 	flex-wrap: wrap;
-	margin-right: 1em;
+	margin-right: .5em;
 	align-items: center;
 }
 
