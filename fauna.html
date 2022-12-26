@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Fauna</title>
 	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js"></script>
-	<script src="./lib/pages/fauna.js"></script>
+	<script src="./lib/common.js" defer></script>
+	<script src="./lib/pages/fauna.js" defer></script>
 	<script src="./lib/modules/portalglyphs.js" defer></script>
 	<script src="./lib/modules/gallery.js" defer></script>
 	<script src="./lib/modules/actions.js" defer></script>
@@ -68,7 +68,10 @@
 			textFunction("album", "catalog_input");
 		}
 		window.onload = () => {
-			researchTeamDropdown("civ", "researchteam_input")
+			pageData.pageType = 'Creature';
+			startUp();
+
+/* 			researchTeamDropdown("civ", "researchteam_input")
 			autoRefresh();
 			genusDropdown("ecosystem_input", "genus_input");
 			genusProduces("genus_input", "produces_input");
@@ -76,7 +79,7 @@
 			albumDropdown("civ", "ecosystem_input", "catalog_input");
 			specialNotes("notes_input", "specialNotes_input");
 			showInput();
-		}
+ */		}
 	</script>
 </head>
 
@@ -127,13 +130,13 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Name" id="name_input">
+						<input data-dest="newName" type="text" id="nameInput">
 					</div>
 					<div class="tableCell text">
-						<label for="oldName_input">Original name before uploading if available:</label>
+						<label for="oldNameInput">Original name before uploading if available:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="OldName" id="oldName_input">
+						<input data-dest="oldName" type="text" id="oldNameInput">
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
@@ -199,9 +202,7 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<select id="genus_input" name="Genus"
-							onchange="genusProduces('genus_input', 'produces_input');">
-						</select>
+						<select data-dest="genus" id="genusInput"></select>
 					</div>
 					<div class="tableHeader text">
 						<p>The following information can be found in the creature discovery menu.</p>
@@ -210,7 +211,7 @@
 						<label>Hemisphere:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="hemisphere_input" name="Hemisphere">
+						<select data-dest="hemisphere" id="hemisphereInput">
 							<option value=""></option>
 							<option value="North">North</option>
 							<option value="South">South</option>
@@ -220,7 +221,7 @@
 						<label>Rarity:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="rarity_input" name="Rarity">
+						<select data-dest="rarity" id="rarityInput">
 							<option value="Common">Common</option>
 							<option value="Uncommon">Uncommon</option>
 							<option value="Rare">Rare</option>
@@ -230,8 +231,7 @@
 						<label>Ecosystem:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="ecosystem_input" name="Ecosystem"
-							onchange="genusDropdown('ecosystem_input', 'genus_input'); genusProduces('genus_input', 'produces_input'); albumDropdown('civ', 'ecosystem_input', 'catalog_input')">
+						<select data-dest="ecosystem" id="ecosystemInput">
 							<option value="Ground">Ground</option>
 							<option value="Flying">Flying</option>
 							<option value="Underwater">Underwater</option>
@@ -242,7 +242,7 @@
 						<label>Activity:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="activity_input" name="Activity">
+						<select data-dest="activity" id="activityInput">
 							<option value="Always Active">Always Active</option>
 							<option value="Diurnal">Diurnal</option>
 							<option value="Nocturnal">Nocturnal</option>
@@ -268,8 +268,7 @@
 						<label>Gender:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="gender_input" name="Gender"
-							onchange="hideSecGenderProps('gender_input', 'gender2_input', 'weight2_input', 'height2_input');">
+						<select data-dest-noauto="gender1" id="genderInput">
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
 							<option value="Exotic">Exotic</option>
@@ -292,8 +291,7 @@
 						<label>Second Gender:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="gender2_input" name="Gender2"
-							onchange="hideSecGenderProps('gender_input', 'gender2_input', 'weight2_input', 'height2_input');">
+						<select data-dest-noauto="gender2" id="gender2Input">
 							<option value=""></option>
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
@@ -314,68 +312,67 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label for="behaviour_input">Behaviour:</label>
+						<label for="behaviourInput">Behaviour:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" list="behaviourData" name="Behaviour" id="behaviour_input">
+						<input data-dest="behaviour" type="text" list="behaviourData" id="behaviourInput">
 					</div>
 					<div class="tableCell text">
-						<label for="diet_input">Diet:</label>
+						<label for="dietInput">Diet:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" list="dietData" name="Diet" id="diet_input">
+						<input data-dest="diet" type="text" list="dietData" id="dietInput">
 					</div>
 					<div class="tableCell text">
-						<label for="weight_input">Weight in kg:</label>
+						<label for="weightInput">Weight in kg:</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 								No "kg" necessary.
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" step="0.1" name="Weight" id="weight_input" placeholder="0.0">
+						<input data-dest-noauto="weight" type="text" id="weightInput" placeholder="0.0">
 					</div>
 					<div class="tableCell text">
-						<label for="height_input">Height in m:</label>
+						<label for="heightInput">Height in m:</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 								No "m" necessary.
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" step="0.1" name="Height" id="height_input" placeholder="0.0">
+						<input data-dest-noauto="height" type="text" id="heightInput" placeholder="0.0">
 					</div>
 					<div class="tableCell text" style="display: none;">
-						<label for="weight2_input">Gender 2 Weight in kg:</label>
+						<label for="weight2Input">Gender 2 Weight in kg:</label>
 					</div>
 					<div class="tableCell data" style="display: none;">
-						<input type="text" step="0.1" name="Weight2" id="weight2_input" placeholder="0.0">
+						<input type="text" data-dest-noauto="weight" id="weight2Input" placeholder="0.0">
 					</div>
 					<div class="tableCell text" style="display: none;">
-						<label for="height2_input">Gender 2 Height in m:</label>
+						<label for="height2Input">Gender 2 Height in m:</label>
 					</div>
 					<div class="tableCell data" style="display: none;">
-						<input type="text" step="0.1" name="Height" id="height2_input" placeholder="0.0">
+						<input type="text" data-dest-noauto="height" id="height2Input" placeholder="0.0">
 					</div>
 					<div class="tableCell text">
-						<label for="notes_input">Notes:</label>
+						<label for="notesInput">Notes:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" list="notesData" name="Notes" id="notes_input"
-							oninput="specialNotes('notes_input', 'specialNotes_input')">
+						<input data-dest-noauto="notes" type="text" list="notesData" id="notesInput">
 					</div>
 					<div class="tableCell text" style="display: none;">
-						<label for="specialNotes_input">Notes for discovery menu:</label>
+						<label for="specialNotesInput">Notes for discovery menu:</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 								This might differ from the scan. Please check in the discovery menu.
 							</span></span>
 					</div>
 					<div class="tableCell data" style="display: none;">
-						<input type="text" list="specialNotesData" name="SpecialNotes" id="specialNotes_input">
+						<input data-dest-noauto="addObservation" type="text" list="specialNotesData" id="specialNotesInput">
 					</div>
 					<div class="tableCell text">
 						<label>Produces:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="produces_input" name="Produces">
+						<select data-dest="produces" id="producesInput">
 						</select>
 					</div>
 					<div class="tableHeader text">
@@ -385,7 +382,7 @@
 						<label>Gamemode:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="mode_input" name="Mode">
+						<select data-dest="mode" id="modeInput">
 							<option value="Normal">Normal</option>
 							<option value="Survival">Survival</option>
 							<option value="Permadeath">Permadeath</option>
@@ -394,44 +391,43 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label for="discoveredlink_input">Discoverer wiki account:</label>
+						<label for="discoveredlinkInput">Discoverer wiki account:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Discoveredlink" id="discoveredlink_input">
+						<input type="text" id="discoveredlinkInput">
 					</div>
 					<div class="tableCell text">
-						<label for="discovered_input">Discoverer alias if no wiki:</label>
+						<label for="discoveredInput">Discoverer alias if no wiki:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Discovered" id="discovered_input">
+						<input type="text" id="discoveredInput">
 					</div>
 					<div class="tableCell text">
-						<label for="docby_input">Documenter alias if not discoverer:</label>
+						<label for="docbyInput">Documenter alias if not discoverer:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="DocBy" id="docby_input">
+						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
 					<div class="tableCell text">
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
-						<select id="researchteam_input" name="Researchteam">
-						</select>
+						<select data-dest-noauto="researchteam" id="researchteamInput"></select>
 					</div>
 					<div class="tableCell text">
 						<label>Into which catalog does this creature belong (if any)?</label>
 					</div>
 					<div class="tableCell data">
-						<select id="catalog_input" name="Catalog">
+						<select data-dest-noauto="catalog" id="catalogInput">
 						</select>
 					</div>
 					<div class="tableHeader data no-flex">
-						<label for="appearance_input">Appearance</label>
-						<textarea name="Appearance" id="appearance_input"></textarea>
+						<label for="appearanceInput">Appearance</label>
+						<textarea data-dest="appearance" id="appearanceInput"></textarea>
 					</div>
 					<div class="tableHeader data no-flex">
-						<label for="dm_input">Discovery Menu</label>
-						<textarea name="DM" id="dm_input"></textarea>
+						<label for="dmInput">Discovery Menu</label>
+						<textarea data-dest="DM" id="dmInput"></textarea>
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
@@ -501,7 +497,7 @@
 					<div>==Discovery Menu==</div>
 					<div><output id='DM'></output></div>
 					<br>
-					<div><output id='addObservation'></output></div>
+					<div>'''Additional Observations''': <output id='addObservation'></output></div>
 					<br>
 
 					<div>==Location==</div>
@@ -513,8 +509,8 @@
 					<br>
 
 					<div>==Additional Information==</div>
-					<div><span name="bulletpoint"></span> <output id='addInfo'></output></div>
-					<div><span name="bulletpoint"></span> <output id="docby"></output></div>
+					<div><span data-add-info="*"></span> <output id='addInfo'></output></div>
+					<div><span data-add-info="*"></span> <output id="docby"></output></div>
 					<br>
 
 					<div>==Gallery==</div>

@@ -26,7 +26,6 @@
 
 /* Dark Theme */
 [data-theme="dark"] {
-	/* Wiki styles */
 	--body-backgroundcolor: hsl(228, 10%, 10%);
 	--footer-backgroundcolor: hsl(0, 0%, 7%);
 	--tooltip-background: hsl(0, 0%, 30%);
