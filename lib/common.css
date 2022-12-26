@@ -125,7 +125,7 @@ a:hover {
 
 .button:not([class*="is-"]):focus,
 textarea:focus,
-input:not([type="file"], [type="checkbox"]):focus {
+input:not([type="file"], [type="checkbox"], [type="radio"]):focus {
 	outline: var(--outline-color);
 	outline-style: solid;
 	outline-width: 2px;
