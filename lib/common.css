@@ -99,6 +99,11 @@ a:hover {
 	background-color: transparent;
 	color: var(--text-color);
 	border-color: var(--border-color);
+	white-space: normal;
+}
+
+.button:not(#portalglyphButtons .button) {
+	height: auto;
 }
 
 .button:hover {
@@ -302,6 +307,23 @@ dialog #explanationLink:after {
 	border-color: var(--table-border-color);
 	display: flex;
 	align-items: center;
+	container-type: inline-size;
+}
+
+@container (max-width: 260px) {
+	div.tableCell div.checkboxes {
+		grid-template-columns: 1fr;
+	}
+}
+
+div.checkboxes {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	width: 100%;
+}
+
+.checkbox-label {
+	margin-left: 5px;
 }
 
 .tableHeader:empty {
@@ -339,7 +361,7 @@ input[type="file"] {
 	font-size: 2.5rem;
 }
 
-section.column {
+div.column {
 	padding: 2rem;
 }
 
@@ -544,6 +566,8 @@ footer button {
 
 .sectionToggle {
 	justify-content: space-between;
+	flex-wrap: nowrap;
+	gap: .5rem;
 }
 
 .sectionToggle>* {

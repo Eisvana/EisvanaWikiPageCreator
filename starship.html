@@ -42,7 +42,7 @@
 		</dialog>
 
 		<main class="columns is-desktop">
-			<section id="input" class="column is-full-mobile">
+			<div id="input" class="column is-full-mobile">
 				<div class="table">
 					<div class="tableCell text">
 						<label>Current release:</label>
@@ -462,8 +462,8 @@
 				</div>
 				<div id="actions" class="buttons"></div>
 				<div id="albumActions" class="buttons"></div>
-			</section>
-			<section id="output" class="column is-full-mobile">
+			</div>
+			<div id="output" class="column is-full-mobile">
 				<div class="wikiText" id="fullArticle">
 					<div>{{Version|<output id='release' name="release"></output>}}</div>
 					<div>{{<output id='civStub'></output>}}</div>
@@ -538,7 +538,7 @@
 					<div>{{StarshipRefLinks|type=<output name="type" id='refLinks'></output>}}</div>
 				</div>
 				<div id="albumEntry"></div>
-			</section>
+			</div>
 		</main>
 	</div>
 	<footer id="footer" class="footer"></footer>

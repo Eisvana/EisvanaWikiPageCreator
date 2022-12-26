@@ -38,7 +38,7 @@
 			</form>
 		</dialog>
 		<main class="columns is-desktop">
-			<section id="input" class="column is-full-mobile">
+			<div id="input" class="column is-full-mobile">
 				<div class="table">
 					<div class="tableCell text">
 						<label>Current release:</label>
@@ -195,36 +195,27 @@
 					<div class="tableCell text">
 						<label>Features:</label>
 					</div>
-					<div class="tableCell data no-flex">
-						<div class="checkbox">
-							<input type="checkbox" id="farmCheckbox" value="Yes" data-checkbox-unchecked="No"
-								data-dest-checkbox="farm">
-							<label for="farmCheckbox">Farm</label>
-						</div>
-						<div class="checkbox">
-							<input type="checkbox" id="geobayCheckbox" value="Yes" data-checkbox-unchecked="No"
-								data-dest-checkbox="geobay">
-							<label for="geobayCheckbox">Geobay</label>
-						</div>
-						<div class="checkbox">
-							<input type="checkbox" id="arenaCheckbox" value="Yes" data-checkbox-unchecked="No"
-								data-dest-checkbox="arena">
-							<label for="arenaCheckbox">Arena</label>
-						</div>
-						<div class="checkbox">
-							<input type="checkbox" id="landingPadCheckbox" value="Yes" data-checkbox-unchecked="No"
-								data-dest-checkbox="landingpad">
-							<label for="landingPadCheckbox">Landing Pad</label>
-						</div>
-						<div class="checkbox">
-							<input type="checkbox" id="racetrackCheckbox" value="Yes" data-checkbox-unchecked="No"
-								data-dest-checkbox="racetrack">
-							<label for="racetrackCheckbox">Racetrack</label>
-						</div>
-						<div class="checkbox">
-							<input type="checkbox" id="terminalCheckbox" value="Yes" data-checkbox-unchecked="No"
-								data-dest-checkbox="terminal">
-							<label for="terminalCheckbox">Trade Terminal</label>
+					<div class="tableCell data">
+						<div class="checkboxes">
+							<label class="checkbox" for="farmCheckbox"><input type="checkbox" id="farmCheckbox"
+									value="Yes" data-checkbox-unchecked="No" data-dest-checkbox="farm"><span
+									class="checkbox-label">Farm</span></label>
+							<label class="checkbox" for="geobayCheckbox"><input type="checkbox" id="geobayCheckbox"
+									value="Yes" data-checkbox-unchecked="No" data-dest-checkbox="geobay"><span
+									class="checkbox-label">Geobay</span></label>
+							<label class="checkbox" for="landingPadCheckbox"><input type="checkbox"
+									id="landingPadCheckbox" value="Yes" data-checkbox-unchecked="No"
+									data-dest-checkbox="landingpad"><span class="checkbox-label">Landing
+									Pad</span></label>
+							<label class="checkbox" for="arenaCheckbox"><input type="checkbox" id="arenaCheckbox"
+									value="Yes" data-checkbox-unchecked="No" data-dest-checkbox="arena"><span
+									class="checkbox-label">Arena</span></label>
+							<label class="checkbox" for="terminalCheckbox"><input type="checkbox" id="terminalCheckbox"
+									value="Yes" data-checkbox-unchecked="No" data-dest-checkbox="terminal"><span
+									class="checkbox-label">Trade Terminal</span></label>
+							<label class="checkbox" for="racetrackCheckbox"><input type="checkbox"
+									id="racetrackCheckbox" value="Yes" data-checkbox-unchecked="No"
+									data-dest-checkbox="racetrack"><span class="checkbox-label">Racetrack</span></label>
 						</div>
 					</div>
 					<div class="tableCell text">
@@ -317,8 +308,8 @@
 				<div id="galleryItems">
 				</div>
 				<div id="actions" class="buttons"></div>
-			</section>
-			<section id="output" class="column is-full-mobile">
+			</div>
+			<div id="output" class="column is-full-mobile">
 				<div class="wikiText" id="fullArticle">
 					<div>{{Version|<output id="release" name="release"></output>}}</div>
 					<div>{{<output id="civStub"></output>}}</div>
@@ -343,10 +334,10 @@
 					<div>| release = <output id='release1' name="release"></output></div>
 					<div>| farm = <output id='farm'></output></div>
 					<div>| geobay = <output id='geobay'></output></div>
-					<div>| arena = <output id='arena'></output></div>
 					<div>| landingpad = <output id='landingpad'></output></div>
-					<div>| racetrack = <output id='racetrack'></output></div>
+					<div>| arena = <output id='arena'></output></div>
 					<div>| terminal = <output id='terminal'></output></div>
+					<div>| racetrack = <output id='racetrack'></output></div>
 					<div>| censusplayer = <output id='censusplayer'></output></div>
 					<div>| censusreddit = <output id='censusreddit'></output></div>
 					<div>| censusdiscord = <output id='censusdiscord'></output></div>
@@ -383,7 +374,7 @@
 					<div><output id="galleryCode"></output></div>
 					<div>&lt;/gallery&gt;</div>
 				</div>
-			</section>
+			</div>
 		</main>
 	</div>
 	<footer id="footer" class="footer"></footer>
