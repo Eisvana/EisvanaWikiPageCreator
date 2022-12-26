@@ -183,6 +183,10 @@ input[type="file"]::file-selector-button:focus {
 	border-color: var(--border-color-focus);
 }
 
+select:has(optgroup:hover) {
+	background-color: var(--input-background-hover);
+}
+
 select option {
 	background-color: var(--input-background);
 }
@@ -335,6 +339,7 @@ dialog #explanationLink:after {
 div.checkboxes {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+	column-gap: 5px;
 	width: 100%;
 }
 
