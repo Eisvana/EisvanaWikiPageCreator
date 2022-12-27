@@ -425,6 +425,22 @@ div.column {
 	margin-left: 3px
 }
 
+input[type="radio"]~label,
+.radioButtons label {
+	margin-left: 5px;
+	font-weight: normal;
+}
+
+.radioButtons {
+	justify-content: space-around;
+	align-content: center;
+	column-gap: 5px;
+}
+
+.radioButtons>* {
+	display: flex;
+}
+
 select,
 input[type="text"],
 input[type="number"],

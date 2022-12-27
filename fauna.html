@@ -256,19 +256,21 @@
 					<div class="tableCell text">
 						<label>Which gender should be prioritised?</label>
 					</div>
-					<div class="tableCell data">
-						<input type="radio" id="gender1" name="Gender" value="gender1" checked
-							onchange="creaturePrio('gender')">
-						<label id="gender1_label" for="gender1"></label>
-						<input type="radio" id="gender2" name="Gender" value="gender2"
-							onchange="creaturePrio('gender')">
-						<label id="gender2_label" for="gender2"></label>
+					<div class="tableCell data radioButtons">
+						<div>
+							<input type="radio" id="gender1" name="Gender" value="gender1" checked>
+							<label id="gender1_label" for="gender1"></label>
+						</div>
+						<div>
+							<input type="radio" id="gender2" name="Gender" value="gender2">
+							<label id="gender2_label" for="gender2"></label>
+						</div>
 					</div>
 					<div class="tableCell text">
 						<label>Gender:</label>
 					</div>
 					<div class="tableCell data">
-						<select data-dest-noauto="gender1" id="genderInput">
+						<select data-dest="gender1_label" data-dest-noauto="gender" id="genderInput">
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
 							<option value="Exotic">Exotic</option>
@@ -291,7 +293,7 @@
 						<label>Second Gender:</label>
 					</div>
 					<div class="tableCell data">
-						<select data-dest-noauto="gender2" id="gender2Input">
+						<select data-dest="gender2_label" data-dest-noauto="gender2" id="gender2Input">
 							<option value=""></option>
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
@@ -345,13 +347,13 @@
 						<label for="weight2Input">Gender 2 Weight in kg:</label>
 					</div>
 					<div class="tableCell data" style="display: none;">
-						<input type="text" data-dest-noauto="weight" id="weight2Input" placeholder="0.0">
+						<input type="text" data-dest-noauto="weight2" id="weight2Input" placeholder="0.0">
 					</div>
 					<div class="tableCell text" style="display: none;">
 						<label for="height2Input">Gender 2 Height in m:</label>
 					</div>
 					<div class="tableCell data" style="display: none;">
-						<input type="text" data-dest-noauto="height" id="height2Input" placeholder="0.0">
+						<input type="text" data-dest-noauto="height2" id="height2Input" placeholder="0.0">
 					</div>
 					<div class="tableCell text">
 						<label for="notesInput">Notes:</label>
@@ -366,7 +368,8 @@
 							</span></span>
 					</div>
 					<div class="tableCell data" style="display: none;">
-						<input data-dest-noauto="addObservation" type="text" list="specialNotesData" id="specialNotesInput">
+						<input data-dest-noauto="addObservation" type="text" list="specialNotesData"
+							id="specialNotesInput">
 					</div>
 					<div class="tableCell text">
 						<label>Produces:</label>
@@ -463,10 +466,10 @@
 					<div>| behaviour = <output id='behaviour'></output></div>
 					<div>| diet = <output id='diet'></output></div>
 					<div>| weight = <output id='weight'></output></div>
-					<div>| height = <output id='height' name="height"></output></div>
+					<div>| height = <output id='height'></output></div>
 					<div>| notes = <output id='notes'></output></div>
 					<div>| produces = <output id='produces'></output></div>
-					<div>| genus = <output id='genus'></output></div>
+					<div>| genus = <output id='genus' name="genus"></output></div>
 					<div>| civilized = <output id='civilized'></output></div>
 					<div>| discovered = <output id='discovered'></output></div>
 					<div>| discoveredlink = <output id='discoveredlink'></output></div>
@@ -478,9 +481,8 @@
 					<br>
 
 					<div>==Summary==</div>
-					<div>'''<output id='name2' name="name"></output>''' is a [[creature]], a member of
-						the
-						[[<output id='genus1'></output>]] [[genus]].
+					<div>'''<output id='name2' name="name"></output>''' is a [[creature]], a member of the [[<output
+							id='genus1' name="genus"></output>]] [[genus]].
 					</div>
 					<br>
 
