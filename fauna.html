@@ -133,7 +133,7 @@
 						<input data-dest="newName" type="text" id="nameInput">
 					</div>
 					<div class="tableCell text">
-						<label for="oldNameInput">Original name before uploading if available:</label>
+						<label for="oldNameInput">Original name before uploading (if available):</label>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="oldName" type="text" id="oldNameInput">
@@ -332,7 +332,7 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input data-dest-noauto="weight" type="text" id="weightInput" placeholder="0.0">
+						<input data-dest-noauto="weight" type="text" id="weightInput" maxlength="5" placeholder="0.0">
 					</div>
 					<div class="tableCell text">
 						<label for="heightInput">Height in m:</label>
@@ -341,19 +341,19 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input data-dest-noauto="height" type="text" id="heightInput" placeholder="0.0">
+						<input data-dest-noauto="height" type="text" id="heightInput" maxlength="3" placeholder="0.0">
 					</div>
 					<div class="tableCell text" style="display: none;">
 						<label for="weight2Input">Gender 2 Weight in kg:</label>
 					</div>
 					<div class="tableCell data" style="display: none;">
-						<input type="text" data-dest-noauto="weight2" id="weight2Input" placeholder="0.0">
+						<input type="text" data-dest-noauto="weight2" id="weight2Input" maxlength="5" placeholder="0.0">
 					</div>
 					<div class="tableCell text" style="display: none;">
 						<label for="height2Input">Gender 2 Height in m:</label>
 					</div>
 					<div class="tableCell data" style="display: none;">
-						<input type="text" data-dest-noauto="height2" id="height2Input" placeholder="0.0">
+						<input type="text" data-dest-noauto="height2" id="height2Input" maxlength="3" placeholder="0.0">
 					</div>
 					<div class="tableCell text">
 						<label for="notesInput">Notes:</label>
@@ -387,6 +387,7 @@
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
 							<option value="Normal">Normal</option>
+							<option value="Relaxed">Relaxed</option>
 							<option value="Survival">Survival</option>
 							<option value="Permadeath">Permadeath</option>
 							<option value="Creative">Creative</option>
@@ -397,13 +398,13 @@
 						<label for="discoveredlinkInput">Discoverer wiki account:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="discoveredlinkInput">
+						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
 					</div>
 					<div class="tableCell text">
 						<label for="discoveredInput">Discoverer alias if no wiki:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="discoveredInput">
+						<input type="text" data-dest="discovered" id="discoveredInput">
 					</div>
 					<div class="tableCell text">
 						<label for="docbyInput">Documenter alias if not discoverer:</label>
@@ -430,7 +431,7 @@
 					</div>
 					<div class="tableHeader data no-flex">
 						<label for="dmInput">Discovery Menu</label>
-						<textarea data-dest="DM" id="dmInput"></textarea>
+						<textarea data-dest-noauto="DM" id="dmInput"></textarea>
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
@@ -503,7 +504,7 @@
 					<br>
 
 					<div>==Location==</div>
-					<div>It can be found on the <output id='locPlanet'></output> in the [[<output id='locSystem'
+					<div>It can be found on the <output id='celestialBody'></output> in the [[<output id='locSystem'
 							name="system"></output>]] [[star system]].</div>
 					<br>
 					<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}
