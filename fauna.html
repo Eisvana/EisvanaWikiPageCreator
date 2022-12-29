@@ -18,67 +18,10 @@
 	<script>
 		const galleryArray = ['', 'x gender', 'x gender scan', 'Creature scan', 'Discovery Menu', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
 
-		// 1. param	= id in div and spans in wikicode
-		// 2. param	= id in input tags
-		function showInput() {
-			document.getElementById("dm_input").value = document.getElementById("dm_input").value.replaceAll('\n', ' ').replaceAll('  ', ' ');
-			creaturePrio("gender");
-			textFunctionMultiple("release", "version_input");
-			textFunctionMultiple("newName", "name_input");
-			textFunctionMultiple("name", pageName('oldName_input', 'name_input'));
-			textFunctionMultiple("image", "image_input");
-			textFunctionMultiple("system", "system_input");
-			textFunction("planet", "planet_input");
-			textFunction("moon", "moon_input");
-			planetMoon("planet_input", "moon_input", "locPlanet");
-			textFunctionMultiple("portalglyphs", "portalglyphs_input");
-			textFunction("discovered", "discovered_input");
-			textFunction("discoveredlink", "discoveredlink_input");
-			textAreaFunction("appearance", "appearance_input");
-			textFunction("genus", "genus_input");
-			textFunction("genus1", "genus_input");
-			textFunction("hemisphere", "hemisphere_input");
-			textFunction("rarity", "rarity_input");
-			textFunction("ecosystem", "ecosystem_input");
-			textFunction("activity", "activity_input");
-			textFunction("behaviour", "behaviour_input");
-			textFunction("diet", "diet_input");
-			textFunction("DM", "dm_input");
-			genderProps("gender2_input", "gender_input", "gender2_input", "gender");
-			genderProps("gender2_input", "weight_input", "weight2_input", "weight");
-			genderProps("gender2_input", "height_input", "height2_input", "height");
-			textFunction("notes", "notes_input");
-			textFunction("produces", "produces_input");
-			textFunction("mode", "mode_input");
-			textFunction("researchteam", "researchteam_input");
-			civGalaxy("civ");
-			hideDiscoverer('discovered_input', 'discoveredlink_input');
-			researchTeam("researchteam", "civilized");
-			glyphRegion("portalglyphs_input", "civ", "region");
-			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
-			addInfo("catalog_input", "researchteam", "addInfo");
-			hideOrgName('oldName_input', 'oldName');
-			specialNotesTextFunc("notes_input", "specialNotes_input", "addObservation");
-			creaPrioRadioName("gender_input", "gender2_input", "gender1_label", "gender2_label");
-			addInfoBullet("bulletpoint");
-			albumHeight("height", "albumHeight");
-			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
-			hideInput("catalog_input", "albumText");
-			textFunction("album", "catalog_input");
-		}
 		window.onload = () => {
 			pageData.pageType = 'Creature';
 			startUp();
-
-/* 			researchTeamDropdown("civ", "researchteam_input")
-			autoRefresh();
-			genusDropdown("ecosystem_input", "genus_input");
-			genusProduces("genus_input", "produces_input");
-			hideSecGenderProps("gender_input", "gender2_input", "weight2_input", "height2_input");
-			albumDropdown("civ", "ecosystem_input", "catalog_input");
-			specialNotes("notes_input", "specialNotes_input");
-			showInput();
- */		}
+		}
 	</script>
 </head>
 
