@@ -16,7 +16,7 @@
 	<script src="./lib/misc_logic/creatureDatalists.js" defer></script>
 	<script src="./lib/misc_logic/locationLogic.js"></script>
 	<script>
-		const galleryArray = ['', 'x gender', 'x gender scan', 'Creature scan', 'Discovery Menu', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
+		const galleryArray = ['', 'x gender', 'x gender scan', 'Creature scan', 'Discovery Menu', 'Planet Page', 'Moon Page', 'System Page', 'Galaxy Map'];
 
 		window.onload = () => {
 			pageData.pageType = 'Creature';
@@ -64,9 +64,9 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the creature:</label>
-						<span class="tooltip" onclick="explanation('Ship Name', 
+						<span class="tooltip" onclick="explanation('Creature Name', 
 								'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-								'./helperimg/ship/shipName.jpg'	
+								'./helperimg/creature/creatureName.jpg'	
 								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
 							</span></span>
@@ -85,7 +85,7 @@
 						<span class="tooltip" onclick="explanation('File Upload', 
 								`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
 								You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
-								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Picture won't be uploaded to the wiki. This is only to autofill the image name.
 							</span></span>
 					</div>
@@ -102,7 +102,7 @@
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Planet Name OR the planet circled by the moon where the base can be found.
+								Planet Name OR the planet circled by the moon where the creature can be found.
 							</span></span>
 					</div>
 					<div class="tableCell data">
@@ -111,7 +111,7 @@
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if applicable):</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								If the base is located on a moon. Leave blank if the base is on a
+								If the creature is located on a moon. Leave blank if the creature is on a
 								planet.</span></span>
 					</div>
 					<div class="tableCell data">
@@ -138,9 +138,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Genus:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								See the <a href="https://nomanssky.fandom.com/wiki/Genus" target="_blank"
-									rel="noopener noreferrer">wiki</a> for a list of genera.
+						<span class="tooltip" onclick="explanation(
+							'Genus',
+							`The genus is defined by the general appearance of a creature.<br>
+							See the wiki for a <a href='https://nomanssky.fandom.com/wiki/Genus#Genus_List' target='_blank'
+									rel='noopener noreferrer'>list of genera</a>.`
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								See the wiki for a list of genera.
 							</span></span>
 					</div>
 					<div class="tableCell data">
@@ -151,6 +155,14 @@
 					</div>
 					<div class="tableCell text">
 						<label>Hemisphere:</label>
+						<span class="tooltip" onclick="explanation(
+							'Hemisphere',
+							`Found in the creature discovery menu.<br>
+							If no hemisphere is given, leave the input empty.`,
+							'./helperimg/creature/creatureHemisphere.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found in the creature discovery menu.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="hemisphere" id="hemisphereInput">
@@ -161,6 +173,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Rarity:</label>
+						<span class="tooltip" onclick="explanation(
+							'Rarity',
+							'Found in the creature discovery menu.',
+							'./helperimg/creature/creatureRarity.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found in the creature discovery menu.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="rarity" id="rarityInput">
@@ -171,6 +190,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Ecosystem:</label>
+						<span class="tooltip" onclick="explanation(
+							'Ecosystem',
+							'Found in the creature discovery menu.',
+							'./helperimg/creature/creatureEcosystem.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found in the creature discovery menu.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="ecosystem" id="ecosystemInput">
@@ -182,6 +208,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Activity:</label>
+						<span class="tooltip" onclick="explanation(
+							'Activity',
+							'Found in the creature discovery menu.',
+							'./helperimg/creature/creatureActivity.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found in the creature discovery menu.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="activity" id="activityInput">
@@ -210,6 +243,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Gender:</label>
+						<span class="tooltip" onclick="explanation(
+							'Gender',
+							`Found on the creature scan.`,
+							'./helperimg/creature/creatureGender.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="gender1_label" data-dest-noauto="gender" id="genderInput">
@@ -233,6 +273,14 @@
 					</div>
 					<div class="tableCell text">
 						<label>Second Gender:</label>
+						<span class="tooltip" onclick="explanation(
+							'Second Gender',
+							`Some genera have two genders, while others have only one gender.<br>
+							Birds, fish and weird/anomalous fauna for example have only one gender.<br>
+							They might show up as two genders, but will have the exact same appearance.`
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Only applies to certain genera. Can be found on the creature scan.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="gender2_label" data-dest-noauto="gender2" id="gender2Input">
@@ -257,20 +305,39 @@
 					</div>
 					<div class="tableCell text">
 						<label for="behaviourInput">Behaviour:</label>
+						<span class="tooltip" onclick="explanation(
+							'Behaviour',
+							`Found on the creature scan.`,
+							'./helperimg/creature/creatureBehaviour.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="behaviour" type="text" list="behaviourData" id="behaviourInput">
 					</div>
 					<div class="tableCell text">
 						<label for="dietInput">Diet:</label>
+						<span class="tooltip" onclick="explanation(
+							'Diet',
+							`Found on the creature scan.`,
+							'./helperimg/creature/creatureDiet.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="diet" type="text" list="dietData" id="dietInput">
 					</div>
 					<div class="tableCell text">
 						<label for="weightInput">Weight in kg:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								No "kg" necessary.
+						<span class="tooltip" onclick='explanation(
+							"Weight",
+							`Found on the creature scan.<br>
+							No "kg" necessary.`,
+							"./helperimg/creature/creatureWeight.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan. No "kg" necessary.
 							</span></span>
 					</div>
 					<div class="tableCell data">
@@ -278,8 +345,13 @@
 					</div>
 					<div class="tableCell text">
 						<label for="heightInput">Height in m:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								No "m" necessary.
+						<span class="tooltip" onclick='explanation(
+							"Height",
+							`Found on the creature scan.<br>
+							No "m" necessary.`,
+							"./helperimg/creature/creatureHeight.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan. No "m" necessary.
 							</span></span>
 					</div>
 					<div class="tableCell data">
@@ -299,13 +371,26 @@
 					</div>
 					<div class="tableCell text">
 						<label for="notesInput">Notes:</label>
+						<span class="tooltip" onclick='explanation(
+							"Notes",
+							`Found on the creature scan.<br>
+							This might differ from the discovery menu.`,
+							"./helperimg/creature/creatureNotes.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan. Might differ from the discovery menu.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input data-dest-noauto="notes" type="text" list="notesData" id="notesInput">
 					</div>
 					<div class="tableCell text" style="display: none;">
 						<label for="specialNotesInput">Notes for discovery menu:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+						<span class="tooltip" onclick='explanation(
+							"Discovery Menu Notes",
+							`Found in the discovery menu.<br>
+							This might differ from the creature scan.`,
+							"./helperimg/creature/creatureDMNotes.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext">
 								This might differ from the scan. Please check in the discovery menu.
 							</span></span>
 					</div>
@@ -315,6 +400,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Produces:</label>
+						<span class="tooltip" onclick="explanation(
+							'Produces',
+							`Found on the creature scan.`,
+							'./helperimg/creature/creatureProduces.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="produces" id="producesInput">
@@ -325,6 +417,11 @@
 					</div>
 					<div class="tableCell text">
 						<label>Gamemode:</label>
+						<span class="tooltip" onclick="explanation('Gamemode', 
+						'Gamemode of the save on which this creature was built.<br>Found in the main menu:',
+						'./helperimg/shared/gamemode.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Gamemode of the save on which this creature was discovered.</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
@@ -369,14 +466,36 @@
 					</div>
 					<div class="tableHeader data no-flex">
 						<label for="appearanceInput">Appearance</label>
-						<textarea data-dest="appearance" id="appearanceInput"></textarea>
+						<textarea data-dest="appearance" id="appearanceInput"
+							placeholder="What does the creature look like?"></textarea>
 					</div>
 					<div class="tableHeader data no-flex">
 						<label for="dmInput">Discovery Menu</label>
+						<span class="tooltip" onclick="explanation('Discovery Menu Text', 
+							`Found in the Discovery Menu. Enter exactly as seen in game, but ignore any linebreaks.`,
+							'./helperimg/creature/creatureDM.jpg'
+							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the Discovery Menu. Enter exactly as seen in game.</span></span>
 						<textarea data-dest-noauto="DM" id="dmInput"></textarea>
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
+						<span class="tooltip" onclick="explanation('Gallery', 
+						`The preferred order of pictures is as follows:
+						<div class='is-flex is-justify-content-center'>
+							<ol class='has-text-left'>
+								<li>Gender 1</li>
+								<li>Gender 2</li>
+								<li>Gender 1 scan</li>
+								<li>Gender 2 scan</li>
+								<li>Discovery Menu</li>
+								<li>Planet/Moon DM</li>
+								<li>System DM</li>
+								<li>Galaxy Map</li>
+							</ol>
+						</div>`); galleryUploadShown = true">
+							<img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								There is a preferred order of pictures.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
@@ -442,7 +561,7 @@
 					<div>==Discovery Menu==</div>
 					<div><output id='DM'></output></div>
 					<br>
-					<div>'''Additional Observations''': <output id='addObservation'></output></div>
+					<div><output id='addObservation'></output></div>
 					<br>
 
 					<div>==Location==</div>
