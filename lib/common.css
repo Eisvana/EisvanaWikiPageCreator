@@ -331,12 +331,12 @@ dialog #explanationLink:after {
 }
 
 @container (max-width: 260px) {
-	div.tableCell div.checkboxes {
+	div.tableCell div.checkboxes-grid {
 		grid-template-columns: 1fr;
 	}
 }
 
-div.checkboxes {
+div.checkboxes-grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	column-gap: 5px;
