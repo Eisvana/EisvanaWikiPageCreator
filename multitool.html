@@ -8,15 +8,15 @@
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js" defer></script>
 	<script src="./lib/pages/multitool.js" defer></script>
+	<script src="./lib/misc_logic/huburbs.js" defer></script>
 	<script src="./lib/modules/portalglyphs.js" defer></script>
 	<script src="./lib/modules/gallery.js" defer></script>
 	<script src="./lib/modules/actions.js" defer></script>
 	<script src="./lib/modules/albumactions.js" defer></script>
 	<script src="./lib/modules/footer.js" defer></script>
-	<script src="./lib/misc_logic/creatureDatalists.js" defer></script>
 	<script src="./lib/misc_logic/locationLogic.js"></script>
 	<script>
-		const galleryArray = ['', 'Discovery Menu', 'Price Page', 'Minor Settlement', 'Sentinel Pillar', 'Tool in hand'];
+		const galleryArray = ['', 'Discovery Menu', 'Price Page', 'Base Stats', 'Minor Settlement', 'Sentinel Pillar', 'Tool in hand', 'First Person View',];
 
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
@@ -72,10 +72,6 @@
 		window.onload = () => {
 			pageData.pageType = 'Multi-Tool';
 			startUp();
-
-			// researchTeamDropdown("civ", "researchteam_input")
-			// autoRefresh();
-			// showInput();
 		}
 	</script>
 </head>
@@ -142,8 +138,7 @@
 						<label>Type of the multi-tool:</label>
 					</div>
 					<div class="tableCell data">
-						<select name="Type" id="type_input"
-							onchange="appearance('name_input', 'type_input', 'mainColour_input', 'secColour_input', 'appearance_input')">
+						<select id="typeInput" data-dest-noauto="type">
 							<option value="Starter Pistol">Starter Pistol</option>
 							<option value="Standard">Standard</option>
 							<option value="Experimental">Experimental</option>
@@ -155,7 +150,7 @@
 						<label>Inventory size of the multi-tool:</label>
 					</div>
 					<div class="tableCell data" style="display: none;">
-						<select name="Type" id="size_input">
+						<select id="sizeInput" data-dest-noauto="size">
 							<option value="Pistol">Pistol (Small)</option>
 							<option value="SMG">SMG (Medium)</option>
 							<option value="Rifle">Rifle (Large)</option>
@@ -171,7 +166,7 @@
 						<label>Location:</label>
 					</div>
 					<div class="tableCell data">
-						<select name="Location" id="loc_input">
+						<select id="locInput" data-dest="location">
 							<option value="Minor Settlement">Minor Settlement</option>
 							<option value="Space Station">Space Station</option>
 							<option value="Sentinel Pillar">Sentinel Pillar</option>
@@ -210,7 +205,7 @@
 						<label>Save/reload location type:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="srloc_input" name="SRLoc">
+						<select id="srlocInput" data-dest-noauto="srLoc">
 							<option value="Planet">Planet</option>
 							<option value="Moon">Moon</option>
 							<option value="Space Station">Space Station</option>
@@ -218,10 +213,10 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label for="sr_input">Save/reload location name (if different):</label>
+						<label for="srInput">Save/reload location name (if different):</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Sr" id="sr_input">
+						<input type="text" id="srInput" data-dest-noauto="srLocName">
 					</div>
 					<div class="tableCell text">
 						<div class="glyphs-label-button">
@@ -246,7 +241,7 @@
 						<label>Class:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="class_input" name="Class">
+						<select id="class_input" data-dest="class">
 							<option value="S">S</option>
 							<option value="A">A</option>
 							<option value="B">B</option>
@@ -258,40 +253,39 @@
 					</div>
 					<div class="tableCell data">
 						<div class="checkboxes">
-							<label class="checkbox" for="crystals_input"><input type="checkbox" id="crystals_input"
-									value="Yes" data-checkbox-unchecked="" data-dest-checkbox="crystals"><span
+							<label class="checkbox" for="crystalsInput"><input type="checkbox" id="crystalsInput"
+									value="Yes" data-dest-checkbox="crystals"><span
 									class="checkbox-label">Crystals</span></label>
-							<label class="checkbox" for="horns_input"><input type="checkbox" id="horns_input"
-									value="Yes" data-checkbox-unchecked="" data-dest-checkbox="horns"><span
-									class="checkbox-label">Horns</span></label>
-							<label class="checkbox" for="glowtubes_input"><input type="checkbox" id="glowtubes_input"
-									value="Yes" data-checkbox-unchecked="" data-dest-checkbox="glowtubes"><span
+							<label class="checkbox" for="hornsInput"><input type="checkbox" id="hornsInput" value="Yes"
+									data-dest-checkbox="horns"><span class="checkbox-label">Horns</span></label>
+							<label class="checkbox" for="glowtubesInput"><input type="checkbox" id="glowtubesInput"
+									value="Yes" data-dest-checkbox="glowtubes"><span
 									class="checkbox-label">Glowtubes</span></label>
 						</div>
 					</div>
 					<div class="tableCell text">
-						<label for="slots_input">Slot count:</label>
+						<label for="slotsInput">Slot count:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Slots" id="slots_input">
+						<input type="text" id="slotsInput" data-dest="slots">
 					</div>
 					<div class="tableCell text">
-						<label for="cost_input">Cost:</label>
+						<label for="costInput">Cost:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Cost" id="cost_input">
+						<input type="text" id="costInput" data-dest="cost">
 					</div>
 					<div class="tableCell text">
-						<label for="dmg_input">Base Damage Potential:</label>
+						<label for="dmgInput">Base Damage Potential:</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 								Base damage. Every tech except for the Scanner and the Mining Beam needs to
 								be dismantled.</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Damage" id="dmg_input" placeholder="0.0">
+						<input type="text" id="dmgInput" placeholder="0.0" data-dest="dmg">
 					</div>
 					<div class="tableCell text">
-						<label for="scan_input">Base Scanner Range:</label>
+						<label for="scanInput">Base Scanner Range:</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 								Base range. Every tech except for the Scanner and the Mining Beam needs to
 								be
@@ -299,68 +293,64 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Scan" id="scan_input" placeholder="0.0">
+						<input type="text" id="scanInput" placeholder="0.0" data-dest="scanRange">
 					</div>
 					<div class="tableHeader text">
 						<p>
-							Note: These should be from the discovery menu (except coordinates)
+							<span class="has-text-weight-bold">Note</span>: These should be from the discovery menu (except coordinates)
 						</p>
 					</div>
 					<div class="tableCell text">
-						<label for="sr_img_input">Save/Reload Location</label>
+						<label for="srImgInput">Save/Reload Location</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="SRPlanet" id="sr_img_input">
-						<input type="file" id="sr_img_upload" name="SR_Img_Upload" accept="image/*"
-							oninput="imgName('sr_img_upload', 'sr_img_input');">
+						<input type="text" id="srImgInput" data-dest-noauto="srPlanetImg">
+						<input type="file" id="srImgUpload" accept="image/*" oninput="image(this);">
 					</div>
 					<div class="tableCell text">
 						<label for="sys_img_input">System (Cabinet location highlighted)</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="SysImage" id="sys_img_input">
-						<input type="file" id="sys_img_upload" name="Sys_Img_Upload" accept="image/*"
-							oninput="imgName('sys_img_upload', 'sys_img_input');">
+						<input type="text" id="sysImgInput" data-dest-noauto="sysImg">
+						<input type="file" id="sysImgUpload" accept="image/*" oninput="image(this);">
 					</div>
 					<div class="tableCell text">
 						<label for="cab_input">Cabinet Planet/Moon</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Image" id="cab_input">
-						<input type="file" id="cab_upload" name="Cab_Upload" accept="image/*"
-							oninput="imgName('cab_upload', 'cab_input');">
+						<input type="text" id="cabInput" data-dest-noauto="cabinetPlanetImg">
+						<input type="file" id="cabUpload" accept="image/*" oninput="image(this);">
 					</div>
 					<div class="tableCell text">
 						<label for="coords_input">Coordinates</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Image" id="coords_input">
-						<input type="file" id="coords_upload" name="Coords_Upload" accept="image/*"
-							oninput="imgName('coords_upload', 'coords_input');">
+						<input type="text" id="coordsInput" data-dest-noauto="axesImg">
+						<input type="file" id="coordsUpload" accept="image/*" oninput="image(this);">
 					</div>
 					<div class="tableCell text">
-						<label for="discoveredlink_input">Discoverer wiki account:</label>
+						<label for="discoveredlinkInput">Discoverer wiki account:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Discoveredlink" id="discoveredlink_input">
+						<input type="text" id="discoveredlinkInput" data-dest="discoveredlink">
 					</div>
 					<div class="tableCell text">
-						<label for="discovered_input">Discoverer alias if no wiki:</label>
+						<label for="discoveredInput">Discoverer alias if no wiki:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Discovered" id="discovered_input">
+						<input type="text" id="discoveredInput" data-dest="discovered">
 					</div>
 					<div class="tableCell text">
-						<label for="docby_input">Documenter alias if not discoverer:</label>
+						<label for="docbyInput">Documenter alias if not discoverer:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="DocBy" id="docby_input">
+						<input type="text" id="docbyInput" data-dest-noauto="docby">
 					</div>
 					<div class="tableCell text">
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
-						<select id="researchteam_input" name="Researchteam">
+						<select id="researchteamInput" data-dest-noauto="researchteam">
 						</select>
 					</div>
 					<div class="tableHeader text sectionToggle">
@@ -371,7 +361,7 @@
 						<label>Main Colour:</label>
 					</div>
 					<div data-section="appearance" class="tableCell data">
-						<select name="mainColour" id="mainColour_input">
+						<select id="mainColourInput" data-dest-noauto="mainColour">
 							<option value=" "></option>
 							<option value="blue">Blue</option>
 							<option value="chrome">Chrome</option>
@@ -392,7 +382,7 @@
 						<label>Secondary Colour:</label>
 					</div>
 					<div data-section="appearance" class="tableCell data">
-						<select name="secColour" id="secColour_input">
+						<select id="secColourInput" data-dest-noauto="secColour">
 							<option value=" "></option>
 							<option value="black">Black</option>
 							<option value="blue">Blue</option>
@@ -423,14 +413,12 @@
 						`The preferred order of pictures is as follows:
 						<div class='is-flex is-justify-content-center'>
 							<ol class='has-text-left'>
-								<li>Gender 1</li>
-								<li>Gender 2</li>
-								<li>Gender 1 scan</li>
-								<li>Gender 2 scan</li>
 								<li>Discovery Menu</li>
-								<li>Planet/Moon DM</li>
-								<li>System DM</li>
-								<li>Galaxy Map</li>
+								<li>Price Page</li>
+								<li>Base Stats</li>
+								<li>Minor Settlement/Sentinel Pillar</li>
+								<li>Tool in Hand</li>
+								<li>First Person View</li>
 							</ol>
 						</div>`); galleryUploadShown = true">
 							<img src="./lib/help.svg"><span class="tooltiptext nms-font">
@@ -501,6 +489,7 @@
 					<div>The {{Class|<output id="class1" name="class"></output>}} class version of this weapon
 						has
 						the following base stats:</div>
+					<!--the replace function removes the thousand separator-->
 					<div>* '''Damage Potential''': {{subst:#replace:<output id="dmg"></output>|,}}</div>
 					<div>* '''Scanner Range''': {{subst:#replace:<output id="scanRange"></output>|,}}</div>
 					<br>
@@ -513,9 +502,8 @@
 					<br>
 
 					<div>==Additional Information==</div>
-					<div><span name="bulletpoint"></span> Featured in the [[<output id='mtCatalog'></output>
-						Multi-Tool Catalog]]<output id="chapterResearch"></output></div>
-					<div><span name="bulletpoint"></span> <output id="docby"></output></div>
+					<div><span data-add-info="*"></span> Featured in the <output id='addInfo'></output></div>
+					<div><span data-add-info="*"></span> <output id="docby"></output></div>
 					<br>
 
 					<div>==Gallery==</div>
