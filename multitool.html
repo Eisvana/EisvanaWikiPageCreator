@@ -18,57 +18,6 @@
 	<script>
 		const galleryArray = ['', 'Discovery Menu', 'Price Page', 'Base Stats', 'Minor Settlement', 'Sentinel Pillar', 'Tool in hand', 'First Person View',];
 
-		// 1. param	= id in div and spans in wikicode
-		// 2. param	= id in input tags
-		function showInput() {
-			autoRoyal("type_input", "loc_input");
-			textFunction("researchteam", "researchteam_input");
-			textFunctionMultiple("release", "version_input");
-			textFunctionMultiple("name", "name_input");
-			textFunctionMultiple("image", "image_input");
-			textFunctionMultiple("system", "system_input");
-			textFunction("planet", "planet_input");
-			textFunction("moon", "moon_input");
-			textFunction("axes", "axes_input");
-			textFunction("location", "loc_input");
-			textFunctionMultiple("portalglyphs", "portalglyphs_input");
-			textFunctionMultiple("type", "type_input");
-			textFunctionMultiple("slots", "slots_input");
-			floatFunction("cost", "cost_input", "0");
-			floatFunction("dmg", "dmg_input", "1");
-			floatFunction("scanRange", "scan_input", "1");
-			checkBoxFunction("crystals", "crystals_input");
-			checkBoxFunction("horns", "horns_input");
-			checkBoxFunction("glowtubes", "glowtubes_input");
-			textFunctionMultiple("class", "class_input");
-			textFunction("discovered", "discovered_input");
-			textFunction("discoveredlink", "discoveredlink_input");
-			textAreaFunction("appearance", "appearance_input");
-			acquirement("loc_input", "planet_input", "moon_input", "axes_input", "sr_input", "srloc_input", "acquirement");
-			catalog("civ", "mtCatalog");
-			addInfoChapter("researchteam_input", "chapterResearch");
-			acquirementGallery("sr_img_input", "sys_img_input", "cab_input", "coords_input", "loc_input", "srloc_input", "sr_input", "moon_input", "acquirementGallery");
-			civGalaxy("civ");
-			hideDiscoverer('discovered_input', 'discoveredlink_input');
-			enPrefix("type_input", "enPrefix");
-			researchTeam("researchteam", "civilized");
-			glyphRegion("portalglyphs_input", "civ", "region");
-			locGalaxy("civ", "locGalaxy");
-			addInfoBullet("bulletpoint");
-			hideInput("loc_input", "Space Station", "Space Anomaly", "axes_input", "planet_input", "moon_input", "coords_input", "cab_input");
-			hideInput("srloc_input", "Space Station", "Space Anomaly", "sr_input");
-			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
-			codeFunction("region1", "region");
-			document.getElementById("HubNr").innerHTML = regNr("region");
-			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
-			MTType("type_input", "albumType");
-			textFunction("albumCiv", "civ");
-			document.getElementById("albumDesc").innerHTML = document.getElementById("acquirement").innerHTML.replace('Save and reload', 'S/r');
-			showSizeDropdown('type_input', 'size_input');
-			MTType('size_input', 'type_input', 'type');
-			catalogMTType('size_input', 'type_input', 'albumType');
-		}
-
 		window.onload = () => {
 			pageData.pageType = 'Multi-Tool';
 			startUp();
@@ -241,7 +190,7 @@
 						<label>Class:</label>
 					</div>
 					<div class="tableCell data">
-						<select id="class_input" data-dest="class">
+						<select id="classInput" data-dest="class">
 							<option value="S">S</option>
 							<option value="A">A</option>
 							<option value="B">B</option>
@@ -307,21 +256,21 @@
 						<input type="file" id="srImgUpload" accept="image/*" oninput="image(this);">
 					</div>
 					<div class="tableCell text">
-						<label for="sys_img_input">System (Cabinet location highlighted)</label>
+						<label for="sysImgInput">System (Cabinet location highlighted)</label>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="sysImgInput" data-dest-noauto="sysImg">
 						<input type="file" id="sysImgUpload" accept="image/*" oninput="image(this);">
 					</div>
 					<div class="tableCell text">
-						<label for="cab_input">Cabinet Planet/Moon</label>
+						<label for="cabInput">Cabinet Planet/Moon</label>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="cabInput" data-dest-noauto="cabinetPlanetImg">
 						<input type="file" id="cabUpload" accept="image/*" oninput="image(this);">
 					</div>
 					<div class="tableCell text">
-						<label for="coords_input">Coordinates</label>
+						<label for="coordsInput">Coordinates</label>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="coordsInput" data-dest-noauto="axesImg">
