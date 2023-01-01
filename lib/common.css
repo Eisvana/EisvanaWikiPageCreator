@@ -290,6 +290,7 @@ dialog {
 
 dialog .title {
 	color: var(--heading-color);
+	margin-bottom: 1rem !important;
 }
 
 dialog form {
@@ -300,13 +301,13 @@ dialog form {
 
 dialog img {
 	max-width: 450px;
-	max-height: 500px
+	max-height: 500px;
+	margin-top: 1rem;
 }
 
 dialog #explanationLink:after {
 	display: block;
 	content: 'Click to enlarge';
-	margin-bottom: 1em;
 }
 
 .no-flex {

@@ -60,9 +60,9 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the multi-tool:</label>
-						<span class="tooltip" onclick="explanation('Base Name', 
+						<span class="tooltip" onclick="explanation('Multi-Tool Name', 
 						'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-						'./helperimg/base/baseName.jpg'	
+						'./helperimg/mt/mtName.jpg'	
 						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
 							</span></span>
@@ -85,6 +85,12 @@
 					</div>
 					<div class="tableCell text">
 						<label>Type of the multi-tool:</label>
+						<span class="tooltip" onclick="explanation('Multi-Tool Type', 
+						`The Multi-Tool type is defined by the shape of the tool.`,
+						'./helperimg/mt/MultitoolDifferentiation.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								MT Type is defined by the shape of the tool.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select id="typeInput" data-dest-noauto="type">
@@ -97,6 +103,12 @@
 					</div>
 					<div class="tableCell text" style="display: none;">
 						<label>Inventory size of the multi-tool:</label>
+						<span class="tooltip" onclick="explanation('Inventory Size', 
+						`The Multi-Tool inventory size is defined by the shape of the tool.`,
+						'./helperimg/mt/MultitoolDifferentiation.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								MT Inventory size is defined by the shape of the tool.
+							</span></span>
 					</div>
 					<div class="tableCell data" style="display: none;">
 						<select id="sizeInput" data-dest-noauto="size">
@@ -113,6 +125,8 @@
 					</div>
 					<div class="tableCell text">
 						<label>Location:</label>
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Where the tool was found.</span></span>
 					</div>
 					<div class="tableCell data">
 						<select id="locInput" data-dest="location">
@@ -125,7 +139,7 @@
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Planet Name OR the planet circled by the moon where the base can be found.
+								Planet Name OR the planet circled by the moon where the tool can be found.
 							</span></span>
 					</div>
 					<div class="tableCell data">
@@ -134,7 +148,7 @@
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if applicable):</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								If the base is located on a moon. Leave blank if the base is on a planet.</span></span>
+								If the tool is located on a moon. Leave blank if the tool is on a planet.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
@@ -152,6 +166,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Save/reload location type:</label>
+						<span class="tooltip" onclick="explanation('Save/Reload Location', 
+						`Where you have to reload in order to get the tool to load.<br>
+						If you are unsure what this means, please read this
+						<a href='https://www.reddit.com/r/NMSCoordinateExchange/wiki/multitool/' target='_blank' rel='noopener noreferrer'>guide on multi-tool spawning mechanics</a>.`,
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Where you have to reload in order to get the tool to load.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select id="srlocInput" data-dest-noauto="srLoc">
@@ -199,6 +220,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Add-ons:</label>
+						<span class="tooltip" onclick="explanation('Multi-Tool Add-ons', 
+						`Check the boxes which apply to the tool.<br>
+						There are certain rules for some MT types in order to qualify for the add-on.<br>
+						<a href='https://nomanssky.fandom.com/wiki/Multi-Tool_Catalogue#Add-ons' target='_blank' rel='noopener noreferrer'>Detailed info can be found on the wiki</a>`,
+						'./helperimg/mt/addons.png'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Whether the tool has these features.</span></span>
 					</div>
 					<div class="tableCell data">
 						<div class="checkboxes">
@@ -214,42 +242,62 @@
 					</div>
 					<div class="tableCell text">
 						<label for="slotsInput">Slot count:</label>
+						<span class="tooltip" onclick="explanation('Multi-Tool Slotcount', 
+						`Slotcount of the tool. Can be found on the price page.`,
+						'./helperimg/mt/slots.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Can be found on the price page.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="slotsInput" data-dest-noauto="slots">
 					</div>
 					<div class="tableCell text">
 						<label for="costInput">Cost:</label>
+						<span class="tooltip" onclick="explanation('Multi-Tool Cost', 
+						`Can be found on the price page. Enter the Buy price, not the trade-in price.`,
+						'./helperimg/mt/price.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Can be found on the price page.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="costInput" data-dest-noauto="cost">
 					</div>
 					<div class="tableCell text">
 						<label for="dmgInput">Base Damage Potential:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Base damage. Every tech except for the Scanner and the Mining Beam needs to
-								be dismantled.</span></span>
+						<span class="tooltip" onclick="explanation('Multi-Tool Base Damage', 
+						`Base damage with no installed upgrades. Every tech except for the Scanner and the Mining Beam needs to be dismantled.
+						Watch out that no supercharged slots (lightblue) are used.`,
+						'./helperimg/mt/baseDmg.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Base damage with no installed upgrades.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="dmgInput" placeholder="0.0" data-dest-noauto="dmg">
 					</div>
 					<div class="tableCell text">
 						<label for="scanInput">Base Scanner Range:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Base range. Every tech except for the Scanner and the Mining Beam needs to be
-								dismantled.</span></span>
+						<span class="tooltip" onclick="explanation('Multi-Tool Base Scanner Range', 
+						`Base scanner range with no installed upgrades. Every tech except for the Scanner and the Mining Beam needs to be dismantled.
+						Watch out that no supercharged slots (lightblue) are used.`,
+						'./helperimg/mt/baseScan.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Base scan range with no installed upgrades.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="scanInput" placeholder="0.0" data-dest-noauto="scanRange">
 					</div>
 					<div class="tableHeader text">
 						<p>
-							<span class="has-text-weight-bold">Note</span>: These should be from the discovery menu
-							(except coordinates)
+							<span class="has-text-weight-bold">Note</span>: These pictures should be from the discovery
+							menu (except coordinates)
 						</p>
 					</div>
 					<div class="tableCell text">
 						<label for="srImgInput">Save/Reload Location</label>
+						<span class="tooltip" onclick="explanation('Save/Reload Location Picture', null, 
+						'./helperimg/mt/srExample.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Click to see an example picture.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="srImgInput" data-dest-noauto="srPlanetImg">
@@ -257,6 +305,10 @@
 					</div>
 					<div class="tableCell text">
 						<label for="sysImgInput">System (Cabinet location highlighted)</label>
+						<span class="tooltip" onclick="explanation('Save/Reload Location Picture', null, 
+						'./helperimg/mt/sysExample.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Click to see an example picture.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="sysImgInput" data-dest-noauto="sysImg">
@@ -264,6 +316,10 @@
 					</div>
 					<div class="tableCell text">
 						<label for="cabInput">Cabinet Planet/Moon</label>
+						<span class="tooltip" onclick="explanation('Save/Reload Location Picture', null, 
+						'./helperimg/mt/srExample.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Click to see an example picture.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="cabInput" data-dest-noauto="cabinetPlanetImg">
@@ -271,6 +327,10 @@
 					</div>
 					<div class="tableCell text">
 						<label for="coordsInput">Coordinates</label>
+						<span class="tooltip" onclick="explanation('Save/Reload Location Picture', null, 
+						'./helperimg/mt/coordExample.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Click to see an example picture.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="coordsInput" data-dest-noauto="axesImg">
