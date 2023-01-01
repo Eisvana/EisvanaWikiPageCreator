@@ -267,13 +267,13 @@
 						<label for="slotsInput">Slot count:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="slotsInput" data-dest="slots">
+						<input type="text" id="slotsInput" data-dest-noauto="slots">
 					</div>
 					<div class="tableCell text">
 						<label for="costInput">Cost:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="costInput" data-dest="cost">
+						<input type="text" id="costInput" data-dest-noauto="cost">
 					</div>
 					<div class="tableCell text">
 						<label for="dmgInput">Base Damage Potential:</label>
@@ -282,22 +282,21 @@
 								be dismantled.</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="dmgInput" placeholder="0.0" data-dest="dmg">
+						<input type="text" id="dmgInput" placeholder="0.0" data-dest-noauto="dmg">
 					</div>
 					<div class="tableCell text">
 						<label for="scanInput">Base Scanner Range:</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Base range. Every tech except for the Scanner and the Mining Beam needs to
-								be
-								dismantled.
-							</span></span>
+								Base range. Every tech except for the Scanner and the Mining Beam needs to be
+								dismantled.</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="scanInput" placeholder="0.0" data-dest="scanRange">
+						<input type="text" id="scanInput" placeholder="0.0" data-dest-noauto="scanRange">
 					</div>
 					<div class="tableHeader text">
 						<p>
-							<span class="has-text-weight-bold">Note</span>: These should be from the discovery menu (except coordinates)
+							<span class="has-text-weight-bold">Note</span>: These should be from the discovery menu
+							(except coordinates)
 						</p>
 					</div>
 					<div class="tableCell text">
@@ -457,7 +456,7 @@
 					<div>| glowtubes = <output id='glowtubes'></output></div>
 					<div>| class = <output id='class' name="class"></output></div>
 					<div>| slots = <output id='slots' name="slots"></output></div>
-					<div>| cost = <output id='cost'></output></div>
+					<div>| cost = {{subst:formatnum:<output id='cost'></output>}}</div>
 					<div>| discovered = <output id='discovered'></output></div>
 					<div>| discoveredlink = <output id='discoveredlink'></output></div>
 					<div>| researchteam = <output id='researchteam'></output></div>
@@ -477,8 +476,7 @@
 					<br>
 
 					<div>==Location==</div>
-					<div>This multi-tool is located in the [[<output id="system1" name="system"></output>]]
-						[[star
+					<div>This multi-tool is located in the [[<output id="system1" name="system"></output>]] [[star
 						system]] in the [[<output id="region1" name="region"></output>]] [[region]]<output
 							id='HubNr'></output> of the <output id="locGalaxy"></output>.</div>
 					<br>
@@ -486,12 +484,10 @@
 					<br>
 
 					<div>==Stats==</div>
-					<div>The {{Class|<output id="class1" name="class"></output>}} class version of this weapon
-						has
-						the following base stats:</div>
-					<!--the replace function removes the thousand separator-->
-					<div>* '''Damage Potential''': {{subst:#replace:<output id="dmg"></output>|,}}</div>
-					<div>* '''Scanner Range''': {{subst:#replace:<output id="scanRange"></output>|,}}</div>
+					<div>The {{Class|<output id="class1" name="class"></output>}} class version of this weapon has the
+						following base stats:</div>
+					<div>* '''Damage Potential''': <output id="dmg"></output></div>
+					<div>* '''Scanner Range''': <output id="scanRange"></output></div>
 					<br>
 
 					<div>==Acquirement==</div>
