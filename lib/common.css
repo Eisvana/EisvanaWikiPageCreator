@@ -317,9 +317,10 @@ dialog #explanationLink:after {
 /* Input table */
 .table {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: auto auto;
 	background-color: transparent;
 	color: var(--text-color);
+	column-gap: 10px;
 }
 
 .table>* {
@@ -328,6 +329,7 @@ dialog #explanationLink:after {
 	border-color: var(--table-border-color);
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	container-type: inline-size;
 }
 
@@ -428,7 +430,8 @@ div.column {
 }
 
 input[type="radio"]~label,
-.radioButtons label {
+label>input[type="radio"]~span,
+.radioButtons label:not(:has(input~span)) {
 	margin-left: 5px;
 	font-weight: normal;
 }
@@ -484,8 +487,6 @@ input[type="date"]:hover {
 	height: auto;
 	position: relative;
 	display: inline-block;
-	margin-left: auto;
-	margin-right: 10px;
 }
 
 .tooltip[onclick] {
