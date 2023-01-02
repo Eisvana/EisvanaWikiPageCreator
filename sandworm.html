@@ -16,59 +16,6 @@
 	<script>
 		const galleryArray = ['', 'Worm scan', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
 
-		// assigns planet or moon name dynamically
-		function wormName(planet_inputId, moon_inputId, codeName) {
-			const planet = document.getElementById(planet_inputId).value;
-			const moon = document.getElementById(moon_inputId).value;
-
-			let body = planet_inputId;
-			if (moon != '') body = moon_inputId;
-
-			textFunctionMultiple(codeName, body)
-		}
-
-		// sets the autospawn value according to input
-		function autoSpawn(inputId, codeId) {
-			const spawn = document.querySelector(`[id^=${inputId}]:checked`).value;
-			const output = `This creature ${spawn} automatically spawn on a game reload.`;
-			if (spawn != '') {
-				document.getElementById(codeId).style.display = '';
-				setOutput(codeId, output);
-			} else {
-				document.getElementById(codeId).style.display = 'none';
-			}
-		}
-
-		// assigns "documented by GHEC" sentence
-		function catalog(civ, researchTeam_codeId, codeId) {
-			const chapter = document.getElementById(researchTeam_codeId).innerHTML;
-			const hub = document.getElementById(civ).value;
-
-			let research = '';
-			if (chapter == 'GHEC') {
-				research = ' and documented by the [[Galactic Hub Exobiology Corps]]'
-			}
-
-			let album;
-			switch (hub) {
-				case "GHub":
-					album = "GHEC Sandworm";
-					break;
-
-				case "CalHub":
-					album = "CalHub Rare Fauna";
-					break;
-
-				case "EisHub":
-					album = "EisHub Shaihuluda";
-					break;
-			}
-
-			const output = `[[${album} Album]]${research}`;
-
-			setOutput(codeId, output);
-		}
-
 		// 1. param	= id in div and spans in wikicode
 		// 2. param	= id in input tags
 		function showInput() {
@@ -146,18 +93,6 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label for="nameInput">Name of the creature:</label>
-						<span class="tooltip" onclick="explanation('Creature Name', 
-								'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-								'./helperimg/creature/creatureName.jpg'	
-								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
-							</span></span>
-					</div>
-					<div class="tableCell data">
-						<input data-dest-noauto="name" type="text" id="nameInput">
-					</div>
-					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
 						<span class="tooltip" onclick="explanation('File Upload', 
 								`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
@@ -171,31 +106,31 @@
 						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
 					</div>
 					<div class="tableCell text">
-						<label for="system_input">Name of the system:</label>
+						<label for="systemInput">Name of the system:</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="System" id="system_input">
+						<input type="text" data-dest="system" id="systemInput">
 					</div>
 					<div class="tableCell text">
-						<label for="planet_input">Name of the planet:</label>
+						<label for="planetInput">Name of the planet:</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 								Planet Name OR the planet circled by the moon where the worm can be found.
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Planet" id="planet_input">
+						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="tableCell text">
-						<label for="moon_input">Name of the moon (if applicable):</label>
+						<label for="moonInput">Name of the moon (if applicable):</label>
 						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
 								If the worm is located on a moon. Leave blank if the worm is on a planet.
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Moon" id="moon_input">
+						<input type="text" data-dest="moon" id="moonInput">
 					</div>
 					<div class="tableCell text">
 						<div class="glyphs-label-button">
@@ -223,7 +158,7 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<select id="wormclass_input" name="WormClass">
+						<select id="wormclassInput">
 							<option value="Ceaseless Burrower">Ceaseless Burrower</option>
 							<option value="Colossal Being">Colossal Being</option>
 							<option value="Gargantuan">Gargantuan</option>
@@ -242,7 +177,7 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="MaxDepth" id="wormmaxdepth_input" placeholder="0.0">
+						<input type="text" id="wormmaxdepthInput" placeholder="0.0">
 					</div>
 					<div class="tableCell text">
 						<label>Stomach:</label>
@@ -251,7 +186,7 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<select id="wormstomach_input" name="WormClass">
+						<select id="wormstomachInput">
 							<option value="Consumed waypoints">Consumed waypoints</option>
 							<option value="Entire [[Trade Outpost|trade outpost]]">Entire trade outpost</option>
 							<option value="[[Freighter]] components">Freighter components</option>
@@ -274,11 +209,11 @@
 						<label>Does this worm spawn on game reload?</label>
 					</div>
 					<div class="tableCell data radioButtons">
-						<label for="autoSpawn_inputY"><input type="radio" id="autoSpawn_inputY" name="autoSpawn"
+						<label for="autoSpawnInputY"><input type="radio" id="autoSpawnInputY" name="autoSpawn"
 								value="will"><span>Yes</span></label>
-						<label for="autoSpawn_inputN"><input type="radio" id="autoSpawn_inputN" name="autoSpawn"
+						<label for="autoSpawnInputN"><input type="radio" id="autoSpawnInputN" name="autoSpawn"
 								value="will not"><span>No</span></label>
-						<label for="autoSpawn_inputA"><input type="radio" id="autoSpawn_inputA" name="autoSpawn"
+						<label for="autoSpawnInputA"><input type="radio" id="autoSpawnInputA" name="autoSpawn"
 								value="" checked><span>I don't know</span></label>
 					</div>
 					<div class="tableCell text">
@@ -300,28 +235,28 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label for="discoveredlink_input">Discoverer wiki account:</label>
+						<label for="discoveredlinkInput">Discoverer wiki account:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Discoveredlink" id="discoveredlink_input">
+						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
 					</div>
 					<div class="tableCell text">
-						<label for="discovered_input">Discoverer alias if no wiki:</label>
+						<label for="discoveredInput">Discoverer alias if no wiki:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="Discovered" id="discovered_input">
+						<input type="text" data-dest="discovered" id="discoveredInput">
 					</div>
 					<div class="tableCell text">
-						<label for="docby_input">Documenter alias if not discoverer:</label>
+						<label for="docbyInput">Documenter alias if not discoverer:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" name="DocBy" id="docby_input">
+						<input type="text" id="docbyInput">
 					</div>
 					<div class="tableCell text">
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
-						<select id="researchteam_input" name="Researchteam">
+						<select id="researchteamInput">
 						</select>
 					</div>
 					<div class="tableHeader data no-flex">
@@ -386,10 +321,8 @@
 					<br>
 
 					<div>==Summary==</div>
-					<div>'''Immortal Worm <output id='name2' name="bodyName"></output>''' is a [[creature]], a
-						member
-						of the [[Shaihuluda]] [[genus]].
-					</div>
+					<div>'''Immortal Worm <output id='name2' name="bodyName"></output>''' is a [[creature]], a member of
+						the [[Shaihuluda]] [[genus]].</div>
 					<br>
 
 					<div>==Appearance==</div>
@@ -404,9 +337,9 @@
 					<br>
 
 					<div>==Additional Information==</div>
-					<div><span name="bulletpoint"></span> <output id='autoSpawn'></output></div>
-					<div><span name="bulletpoint"></span> Featured in the <output id='addInfo'></output></div>
-					<div><span name="bulletpoint"></span> <output id="docby"></output></div>
+					<div><span data-add-info="*"></span> <output id='autoSpawn'></output></div>
+					<div><span data-add-info="*"></span> Featured in the <output id='addInfo'></output></div>
+					<div><span data-add-info="*"></span> <output id="docby"></output></div>
 					<br>
 
 					<div>==Gallery==</div>
