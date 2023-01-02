@@ -263,6 +263,7 @@ nav {
 .hub-images {
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 	gap: 2.5rem;
 }
 
@@ -320,7 +321,6 @@ dialog #explanationLink:after {
 	grid-template-columns: auto auto;
 	background-color: transparent;
 	color: var(--text-color);
-	column-gap: 10px;
 }
 
 .table>* {
@@ -339,6 +339,12 @@ dialog #explanationLink:after {
 	}
 }
 
+@container (max-width: 125px) {
+	div.tableCell div.radioButtons {
+		display: block;
+	}
+}
+
 div.checkboxes-grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -352,6 +358,10 @@ div.checkboxes-grid {
 
 .tableHeader:empty {
 	display: none;
+}
+
+.tableCell.text {
+	padding-right: 10px;
 }
 
 .tableCell.data {
@@ -437,9 +447,12 @@ label>input[type="radio"]~span,
 }
 
 .radioButtons {
+	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-around;
 	align-content: center;
 	column-gap: 5px;
+	width: 100%;
 }
 
 .radioButtons>* {
