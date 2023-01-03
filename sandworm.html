@@ -52,7 +52,7 @@
 						<select id="versionInput" data-dest="release"></select>
 					</div>
 					<div class="tableCell text">
-						<label>Which civ does this creature belong to?</label>
+						<label>Which civ does this worm belong to?</label>
 					</div>
 					<div class="tableCell data">
 						<select id="civInput">
@@ -122,9 +122,10 @@
 					</div>
 					<div class="tableCell text">
 						<label>Class:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Found on the worm scan.
-							</span></span>
+						<span class="tooltip" onclick="explanation('Class',
+						'Found on the worm scan.', './helperimg/sandworm/class.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the worm scan.</span></span>
 					</div>
 					<div class="tableCell data">
 						<select id="wormclassInput" data-dest="wormclass">
@@ -140,19 +141,21 @@
 					</div>
 					<div class="tableCell text">
 						<label>Max Depth:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Found on the worm scan.<br>Give the full number, including the decimal.<br>No
-								"ku" necessary.
-							</span></span>
+						<span class="tooltip" onclick='explanation("Max Depth",
+						`Found on the worm scan.<br>Give the full number, including the decimal.<br>No "ku" necessary.`,
+						"./helperimg/sandworm/maxDepth.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext">Found on the worm scan.</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="wormmaxdepthInput" data-dest="wormmaxdepth" placeholder="0.0">
+						<input type="text" id="wormmaxdepthInput" data-dest-noauto="wormmaxdepth" maxlength="5"
+							placeholder="0.0">
 					</div>
 					<div class="tableCell text">
-						<label>Stomach:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Found on the worm scan.
-							</span></span>
+						<label>Stomach Contents:</label>
+						<span class="tooltip" onclick="explanation('Stomach Contents',
+						'Found on the worm scan.', './helperimg/sandworm/stomachContents.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the worm scan.</span></span>
 					</div>
 					<div class="tableCell data">
 						<select id="wormstomachInput" data-dest="wormstomach">
@@ -176,6 +179,12 @@
 					</div>
 					<div class="tableCell text">
 						<label>Does this worm spawn on game reload?</label>
+						<span class="tooltip" onclick="explanation('Worm on Reload',
+						`Some worms spawn immediately after you reload your game. To test this, make a manual save by entering and exiting your starship,
+						then reload your latest save in the options.<br>If the worm doesn't spawn after 5-10 seconds, it doesn't spawn after reload.<br>
+						You can't really overlook a worm, they make a very loud sound and shake the ground.`
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Reload your game and observe.</span></span>
 					</div>
 					<div class="tableCell data">
 						<div class="radioButtons">
@@ -190,10 +199,10 @@
 					<div class="tableCell text">
 						<label>Gamemode:</label>
 						<span class="tooltip" onclick="explanation('Gamemode', 
-						'Gamemode of the save on which this creature was built.<br>Found in the main menu:',
+						'Gamemode of the save on which this worm was discovered.<br>Found in the main menu:',
 						'./helperimg/shared/gamemode.jpg'
 						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Gamemode of the save on which this creature was discovered.</span></span>
+								Gamemode of the save on which this worm was discovered.</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
@@ -232,7 +241,7 @@
 					<div class="tableHeader data no-flex">
 						<label for="appearanceInput">Appearance</label>
 						<textarea data-dest="appearance" id="appearanceInput"
-							placeholder="What does the creature look like?"></textarea>
+							placeholder="What does the worm look like?"></textarea>
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>

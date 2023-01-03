@@ -24,8 +24,8 @@
 			const a = document.getElementsByTagName("a");
 			for (const link of a) {
 				if (!isExternalURL(link.href)) continue;
-				link.setAttribute("target", "_blank");
-				link.setAttribute("rel", "noopener noreferrer");
+				link.target = "_blank";
+				link.rel = "noopener noreferrer";
 			}
 			if (window.location.host.includes('nmsgalactichub.com')) document.querySelector('a[href=".."]').href = 'https://nmsgalactichub.com';
 		}
@@ -54,12 +54,18 @@
 			</nav>
 			<div class="built-by">
 				<div>Brought to you by:</div>
-				<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes"
-					title="Galactic Hub Eissentam Scribes">Galactic Hub Eissentam Scribes <img
-						src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/e/ea/EisHub_Scribe_logo.png"
-						alt="Galactic Hub Eissentam Scribes logo"></a>
-				<a href="https://nmsassistant.com/" title="Assistant for No Man's Sky">Assistant for No Man's Sky
-					<img src="https://cdn.assistantapps.com/assistantNMS.png" alt="Assistant for NMS logo"></a>
+				<div>
+					<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes"
+						title="Galactic Hub Eissentam Scribes">Galactic Hub Eissentam Scribes
+						<img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/e/ea/EisHub_Scribe_logo.png"
+							alt="Galactic Hub Eissentam Scribes logo">
+					</a>
+				</div>
+				<div>
+					<a href="https://nmsassistant.com/" title="Assistant for No Man's Sky">Assistant for No Man's Sky
+						<img src="https://cdn.assistantapps.com/assistantNMS.png" alt="Assistant for NMS logo">
+					</a>
+				</div>
 			</div>
 			<div class="hub-images">
 				<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Project">
