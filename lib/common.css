@@ -524,9 +524,9 @@ input[type="date"]:hover {
 		align-self: end;
 	}
 
-	.tooltip:not([onclick]):hover .tooltiptext {
-		visibility: visible;
-		opacity: 1;
+	.tooltip[onclick]:hover .tooltiptext {
+		visibility: hidden;
+		opacity: 0;
 	}
 }
 
