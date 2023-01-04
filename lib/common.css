@@ -397,6 +397,12 @@ div.column {
 	padding: 2rem;
 }
 
+@media only screen and (max-width: 550px) {
+	div.column {
+		padding: 1rem;
+	}
+}
+
 #output {
 	border-left: 1px dashed;
 	border-color: var(--column-divider-color);
@@ -610,13 +616,6 @@ footer button {
 		flex-wrap: wrap;
 	}
 }
-
-@media only screen and (max-width: 550px) {
-	div.column {
-		padding: 1rem;
-	}
-}
-
 
 #portalglyphButtons>* {
 	margin: .5px;
