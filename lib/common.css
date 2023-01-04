@@ -554,8 +554,8 @@ input[type="date"]:hover {
 	border-top-color: var(--tooltip-background);
 }
 
-.tooltip:hover .tooltiptext,
-.tooltip:not([onclick]):active .tooltiptext {
+/* .tooltip:not([onclick]):active .tooltiptext */
+.tooltip:hover .tooltiptext {
 	visibility: visible;
 	opacity: 1;
 }
