@@ -531,10 +531,8 @@ input[type="date"]:hover {
 		opacity: 0;
 	}
 
-	.tooltip[onclick],
-	.tooltip[onclick] * {
-		user-select: none;
-		-webkit-user-select: none;
+	.tooltip[onclick] {
+		-webkit-tap-highlight-color: transparent;
 	}
 }
 
