@@ -6,99 +6,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Sandworm</title>
 	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js"></script>
+	<script src="./lib/common.js" defer></script>
+	<script src="./lib/pages/sandworm.js" defer></script>
+	<script src="./lib/modules/portalglyphs.js" defer></script>
+	<script src="./lib/modules/gallery.js" defer></script>
+	<script src="./lib/modules/actions.js" defer></script>
+	<script src="./lib/modules/albumactions.js" defer></script>
+	<script src="./lib/modules/footer.js" defer></script>
+	<script src="./lib/misc_logic/locationLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Worm scan', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
 
-		// assigns planet or moon name dynamically
-		function wormName(planet_inputId, moon_inputId, codeName) {
-			const planet = document.getElementById(planet_inputId).value;
-			const moon = document.getElementById(moon_inputId).value;
-
-			let body = planet_inputId;
-			if (moon != '') body = moon_inputId;
-
-			textFunctionMultiple(codeName, body)
-		}
-
-		// sets the autospawn value according to input
-		function autoSpawn(inputId, codeId) {
-			const spawn = document.querySelector(`[id^=${inputId}]:checked`).value;
-			const output = `This creature ${spawn} automatically spawn on a game reload.`;
-			if (spawn != '') {
-				document.getElementById(codeId).style.display = '';
-				setOutput(codeId, output);
-			} else {
-				document.getElementById(codeId).style.display = 'none';
-			}
-		}
-
-		// assigns "documented by GHEC" sentence
-		function catalog(civ, researchTeam_codeId, codeId) {
-			const chapter = document.getElementById(researchTeam_codeId).innerHTML;
-			const hub = document.getElementById(civ).value;
-
-			let research = '';
-			if (chapter == 'GHEC') {
-				research = ' and documented by the [[Galactic Hub Exobiology Corps]]'
-			}
-
-			let album;
-			switch (hub) {
-				case "GHub":
-					album = "GHEC Sandworm";
-					break;
-
-				case "CalHub":
-					album = "CalHub Rare Fauna";
-					break;
-
-				case "EisHub":
-					album = "EisHub Shaihuluda";
-					break;
-			}
-
-			const output = `[[${album} Album]]${research}`;
-
-			setOutput(codeId, output);
-		}
-
-		// 1. param	= id in div and spans in wikicode
-		// 2. param	= id in input tags
-		function showInput() {
-			civGalaxy("civ");
-			textFunctionMultiple("release", "version_input");
-			textFunctionMultiple("image", "image_input");
-			textFunctionMultiple("system", "system_input");
-			textFunction("planet", "planet_input");
-			textFunction("moon", "moon_input");
-			wormName("planet_input", "moon_input", "bodyName");
-			planetMoon("planet_input", "moon_input", "locPlanet");
-			textFunctionMultiple("portalglyphs", "portalglyphs_input");
-			textFunction("discovered", "discovered_input");
-			textFunction("discoveredlink", "discoveredlink_input");
-			textFunctionMultiple("wormclass", "wormclass_input");
-			floatFunction("wormmaxdepth", "wormmaxdepth_input", "1");
-			textFunctionMultiple("wormstomach", "wormstomach_input");
-			textFunction("mode", "mode_input");
-			textFunction("researchteam", "researchteam_input");
-			researchTeam("researchteam", "civilized");
-			hideDiscoverer('discovered_input', 'discoveredlink_input');
-			glyphRegion("portalglyphs_input", "civ", "region");
-			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
-			autoSpawn("autoSpawn_input", "autoSpawn");
-			catalog("civ", "researchteam", "addInfo");
-			textAreaFunction('appearance', 'appearance_input');
-			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
-			codeFunction("albumDepth", "wormmaxdepth");
-			addInfoBullet("bulletpoint");
-			document.getElementById("album").innerHTML = getCodeValue("addInfo").replace('[[', '').replace(']]', '');
-		}
-
 		window.onload = () => {
-			researchTeamDropdown("civ", "researchteam_input")
-			autoRefresh();
-			showInput();
+			pageData.pageType = 'Sandworm';
+			startUp();
 		}
 	</script>
 </head>
@@ -109,418 +30,307 @@
 			<div><a href="./" title="Main page">&larr; Return to main page</a></div>
 			<div><a href="./fauna.html" title="Fauna">&#8624; Fauna</a></div>
 		</nav>
-		<br>
-		<h1 class="title is-2">Hub Wiki Page Creator - Sandworm</h1>
-		<br>
+		<h1 class="title is-3">Hub Wiki Page Creator - Sandworm</h1>
+		<dialog id="explanation" class="modal-content content">
+			<h2 id="explanationHeading" class="title is-4"></h2>
+			<div id="explanationContent" class="nms-font"></div>
+			<a id="explanationLink" target='_blank' rel='noopener noreferrer'>
+				<img id="explanationImg" alt='Explainer Image'>
+			</a>
+			<form method="dialog">
+				<button class="button" autofocus>Close</button>
+			</form>
+		</dialog>
 
-		<div class="columns is-desktop">
-			<div class="column is-full-mobile">
-				<form id="form" onreset="resetAll('gallery_descs')">
-					<table style="text-align:left">
-						<tr>
-							<th><label>Current release:</label>
-							<td>
-								<select id="version_input" name="Release">
-									<option value="Waypoint">Waypoint
-									<option value="Endurance">Endurance
-									<option value="Outlaws">Outlaws
-									<option value="SentinelUp">Sentinel
-									<option value="Prisms">Prisms
-									<option value="Expeditions">Expeditions
-									<option value="Companions">Companions
-									<option value="NextGen">NextGen
-									<option value="Origins">Origins
-									<option value="Desolation">Desolation
-									<option value="Crossplay">Crossplay
-									<option value="ExoMech">ExoMech
-									<option value="Living Ship">Living Ship
-									<option value="Synthesis">Synthesis
-									<option value="Beyond">Beyond
-									<option value="Visions">Visions
-									<option value="Abyss">Abyss
-									<option value="NEXT">NEXT
-									<option value="Atlas Rises">Atlas Rises
-									<option value="Pathfinder">Pathfinder
-									<option value="Foundation">Foundation
-									<option value="Release">Release
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Which civ does this sandworm belong to?</label>
-							<td>
-								<select id="civ" name="Civ"
-									onchange="researchTeamDropdown('civ', 'researchteam_input')">
-									<option value="GHub" id="GHub">GHub
-									<option value="CalHub" id="CalHub">CalHub
-									<option value="EisHub" id="EisHub">EisHub
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label for="image_input">Main image name, including file extension:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Picture won't be uploaded to the wiki. This is only to autofill the image
-										name.
-									</span></span>
-							</th>
-							<td>
-								<input type="text" name="Image" id="image_input">
-								<br>
-								<input type="file" id="image_upload" name="Image_upload" accept="image/*"
-									onchange="imgUpload('image', 'image_upload', 'image_input')">
-							</td>
-						</tr>
-						<tr>
-							<th><label for="system_input">Name of the system:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
-									</span></span>
-							</th>
-							<td><input type="text" name="System" id="system_input">
-						</tr>
-						<tr>
-							<th><label for="planet_input">Name of the planet:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Planet Name OR the planet circled by the moon where the worm can be found.
-									</span></span>
-							</th>
-							<td>
-								<input type="text" name="Planet" id="planet_input">
-							</td>
-						</tr>
-						<tr>
-							<th><label for="moon_input">Name of the moon (if applicable):</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										If the worm is located on a moon. Leave blank if the worm is on a planet.
-									</span></span>
-							</th>
-							<td>
-								<input type="text" name="Moon" id="moon_input">
-							</td>
-						</tr>
-						<tr>
-							<th><label for="portalglyphs_input">Portalglyphs:</label>
-								<button class="button is-small is-danger" type="button"
-									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Found in Photo Mode. Glyphs are specific to each planet.
-									</span></span>
-							</th>
-							<td>
-								<input type="text" name="Glyphs" id="portalglyphs_input"
-									oninput="glyphInputOnChange(this)">
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="portal-buttons">
-									<button class="button" type="button" value="0"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">0</span>
-									</button>
-									<button class="button" type="button" value="1"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">1</span>
-									</button>
-									<button class="button" type="button" value="2"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">2</span>
-									</button>
-									<button class="button" type="button" value="3"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">3</span>
-									</button>
-									<button class="button" type="button" value="4"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">4</span>
-									</button>
-									<button class="button" type="button" value="5"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">5</span>
-									</button>
-									<button class="button" type="button" value="6"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">6</span>
-									</button>
-									<button class="button" type="button" value="7"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">7</span>
-									</button>
-									<button class="button" type="button" value="8"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">8</span>
-									</button>
-									<button class="button" type="button" value="9"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">9</span>
-									</button>
-									<button class="button" type="button" value="A"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">A</span>
-									</button>
-									<button class="button" type="button" value="B"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">B</span>
-									</button>
-									<button class="button" type="button" value="C"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">C</span>
-									</button>
-									<button class="button" type="button" value="D"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">D</span>
-									</button>
-									<button class="button" type="button" value="E"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">E</span>
-									</button>
-									<button class="button" type="button" value="F"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">F</span>
-									</button>
-								</div>
-								<output class="glyphs" style="word-break: break-word" id="glyph_display"
-									name="portalglyphs"></output>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Class:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Found on the worm scan.
-									</span></span>
-							</th>
-							<td>
-								<select id="wormclass_input" name="WormClass">
-									<option value="Ceaseless Burrower">Ceaseless Burrower
-									<option value="Colossal Being">Colossal Being
-									<option value="Gargantuan">Gargantuan
-									<option value="Giant Parasite">Giant Parasite
-									<option value="Planetary Maggot">Planetary Maggot
-									<option value="The Consumer">The Consumer
-									<option value="Unstoppable Nematode">Unstoppable Nematode
-									<option value="Worm Lord">Worm Lord
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Max Depth:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Found on the worm scan.<br>Give the full number, including the decimal.<br>No
-										"ku" necessary.
-									</span></span>
-							</th>
-							<td>
-								<input type="number" name="MaxDepth" id="wormmaxdepth_input" placeholder="0.0"
-									step="0.1" onkeypress="return isNumberKey(event)">
-							</td>
-						</tr>
-						<tr>
-							<th><label>Stomach:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Found on the worm scan.
-									</span></span>
-							</th>
-							<td>
-								<select id="wormstomach_input" name="WormClass">
-									<option value="Consumed waypoints">Consumed waypoints
-									<option value="Entire [[Trade Outpost|trade outpost]]">Entire trade outpost
-									<option value="[[Freighter]] components">Freighter components
-									<option value="Horrific Eggs">Horrific Eggs
-									<option value="Layers of teeth">Layers of teeth
-									<option value="Lost [[starship]]s">Lost starships
-									<option value="Magma">Magma
-									<option value="Many [[Sentinel]]s">Many Sentinels
-									<option value="Minerals">Minerals
-									<option value="Mostly sand">Mostly sand
-									<option value="Other gargantuans">Other gargantuans
-									<option value="Planetary beacon">Planetary beacon
-									<option value="Rubble">Rubble
-									<option value="[[Sentinel Walker]]s">Sentinel Walkers
-									<option value="Several [[Gek]]">Several Gek
-									<option value="Unpleasant liquid">Unpleasant liquid
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Does this worm spawn on game reload?</label>
-							<td>
-								<input type="radio" id="autoSpawn_inputY" name="autoSpawn" value="will">
-								<label for="autoSpawn_inputY">Yes</label>
-								<input type="radio" id="autoSpawn_inputN" name="autoSpawn" value="will not">
-								<label for="autoSpawn_inputN">No</label>
-								<input type="radio" id="autoSpawn_inputA" name="autoSpawn" value="" checked>
-								<label for="autoSpawn_inputA">I don't know</label>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Gamemode:</label>
-							<td>
-								<select id="mode_input" name="Mode">
-									<option value="Normal">Normal
-									<option value="Survival">Survival
-									<option value="Permadeath">Permadeath
-									<option value="Creative">Creative
-									<option value="Custom">Custom
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label for="discoveredlink_input">Discoverer wiki account:</label>
-							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
-						</tr>
-						<tr>
-							<th><label for="discovered_input">Discoverer alias if no wiki:</label>
-							<td><input type="text" name="Discovered" id="discovered_input">
-						</tr>
-						<tr>
-							<th><label for="docby_input">Documenter alias if not discoverer:</label>
-							<td><input type="text" name="DocBy" id="docby_input">
-						</tr>
-						<tr>
-							<th><label>Do you belong to a chapter?</label>
-							<td>
-								<select id="researchteam_input" name="Researchteam">
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<p>Note: You can drag on the bottom right corner to expand the
-									text area
-								</p>
-							</td>
-						</tr>
-						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label for="appearance_input">Appearance</label>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<textarea name="Appearance" id="appearance_input"></textarea>
-							</td>
-						</tr>
-						<tr>
-							<th><label for="gallery_upload">Gallery files</label>
-							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
-									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
-						</tr>
-					</table>
-				</form>
-				<div id="gallery_descs">
+		<main class="columns is-desktop">
+			<div id="input" class="column is-full-mobile">
+				<div class="table">
+					<div class="tableCell text">
+						<label>Current release:</label>
+					</div>
+					<div class="tableCell data">
+						<select id="versionInput" data-dest="release"></select>
+					</div>
+					<div class="tableCell text">
+						<label>Which civ does this worm belong to?</label>
+					</div>
+					<div class="tableCell data">
+						<select id="civInput">
+							<option value="GHub">GHub</option>
+							<option value="CalHub">CalHub</option>
+							<option value="EisHub">EisHub</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label for="fileInput">Main image name, including file extension:</label>
+						<span class="tooltip" onclick="explanation('File Upload', 
+								`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
+								You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
+								); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Picture won't be uploaded to the wiki. This is only to autofill the image name.
+							</span></span>
+					</div>
+					<div class="tableCell data" id="imageInput">
+						<input type="text" id="fileInput" data-dest="image">
+						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+					</div>
+					<div class="tableCell text">
+						<label for="systemInput">Name of the system:</label>
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="system" id="systemInput">
+					</div>
+					<div class="tableCell text">
+						<label for="planetInput">Name of the planet:</label>
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								Planet Name OR the planet circled by the moon where the worm can be found.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="planet" id="planetInput">
+					</div>
+					<div class="tableCell text">
+						<label for="moonInput">Name of the moon (if applicable):</label>
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								If the worm is located on a moon. Leave blank if the worm is on a planet.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="moon" id="moonInput">
+					</div>
+					<div class="tableCell text">
+						<div class="glyphs-label-button">
+							<label for="portalglyphsInput">Portalglyphs:</label>
+							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+								Delete</button>
+						</div>
+						<span class="tooltip" onclick="explanation('Portalglyphs', 
+							`Found in Photo Mode. Glyphs are specific to each planet.`,
+							'./helperimg/shared/glyphs.jpg'
+							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
+					</div>
+					<div class="tableHeader data">
+						<div id="portalglyphButtons"></div>
+						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
+					</div>
+					<div class="tableCell text">
+						<label>Class:</label>
+						<span class="tooltip" onclick="explanation('Class',
+						'Found on the worm scan.', './helperimg/sandworm/class.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the worm scan.</span></span>
+					</div>
+					<div class="tableCell data">
+						<select id="wormclassInput" data-dest="wormclass">
+							<option value="Ceaseless Burrower">Ceaseless Burrower</option>
+							<option value="Colossal Being">Colossal Being</option>
+							<option value="Gargantuan">Gargantuan</option>
+							<option value="Giant Parasite">Giant Parasite</option>
+							<option value="Planetary Maggot">Planetary Maggot</option>
+							<option value="The Consumer">The Consumer</option>
+							<option value="Unstoppable Nematode">Unstoppable Nematode</option>
+							<option value="Worm Lord">Worm Lord</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label>Max Depth:</label>
+						<span class="tooltip" onclick='explanation("Max Depth",
+						`Found on the worm scan.<br>Give the full number, including the decimal.<br>No "ku" necessary.`,
+						"./helperimg/sandworm/maxDepth.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext">Found on the worm scan.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" id="wormmaxdepthInput" data-dest-noauto="wormmaxdepth" maxlength="5"
+							placeholder="0.0">
+					</div>
+					<div class="tableCell text">
+						<label>Stomach Contents:</label>
+						<span class="tooltip" onclick="explanation('Stomach Contents',
+						'Found on the worm scan.', './helperimg/sandworm/stomachContents.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the worm scan.</span></span>
+					</div>
+					<div class="tableCell data">
+						<select id="wormstomachInput" data-dest="wormstomach">
+							<option value="Consumed waypoints">Consumed waypoints</option>
+							<option value="Entire [[Trade Outpost|trade outpost]]">Entire trade outpost</option>
+							<option value="[[Freighter]] components">Freighter components</option>
+							<option value="Horrific Eggs">Horrific Eggs</option>
+							<option value="Layers of teeth">Layers of teeth</option>
+							<option value="Lost [[starship]]s">Lost starships</option>
+							<option value="Magma">Magma</option>
+							<option value="Many [[Sentinel]]s">Many Sentinels</option>
+							<option value="Minerals">Minerals</option>
+							<option value="Mostly sand">Mostly sand</option>
+							<option value="Other gargantuans">Other gargantuans</option>
+							<option value="Planetary beacon">Planetary beacon</option>
+							<option value="Rubble">Rubble</option>
+							<option value="[[Sentinel Walker]]s">Sentinel Walkers</option>
+							<option value="Several [[Gek]]">Several Gek</option>
+							<option value="Unpleasant liquid">Unpleasant liquid</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label>Does this worm spawn on game reload?</label>
+						<span class="tooltip" onclick="explanation('Worm on Reload',
+						`Some worms spawn immediately after you reload your game. To test this, make a manual save by entering and exiting your starship,
+						then reload your latest save in the options.<br>If the worm doesn't spawn after 5-10 seconds, it doesn't spawn after reload.<br>
+						You can't really overlook a worm, they make a very loud sound and shake the ground.`
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Reload your game and observe.</span></span>
+					</div>
+					<div class="tableCell data">
+						<div class="radioButtons">
+							<label for="autoSpawnInputY"><input type="radio" id="autoSpawnInputY" name="autoSpawnInput"
+									value="will"><span>Yes</span></label>
+							<label for="autoSpawnInputN"><input type="radio" id="autoSpawnInputN" name="autoSpawnInput"
+									value="will not"><span>No</span></label>
+							<label for="autoSpawnInputA"><input type="radio" id="autoSpawnInputA" name="autoSpawnInput"
+									value="" checked><span>I don't know</span></label>
+						</div>
+					</div>
+					<div class="tableCell text">
+						<label>Gamemode:</label>
+						<span class="tooltip" onclick="explanation('Gamemode', 
+						'Gamemode of the save on which this worm was discovered.<br>Found in the main menu:',
+						'./helperimg/shared/gamemode.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Gamemode of the save on which this worm was discovered.</span></span>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="mode" id="modeInput">
+							<option value="Normal">Normal</option>
+							<option value="Relaxed">Relaxed</option>
+							<option value="Survival">Survival</option>
+							<option value="Permadeath">Permadeath</option>
+							<option value="Creative">Creative</option>
+							<option value="Custom">Custom</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label for="discoveredlinkInput">Discoverer wiki account:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
+					</div>
+					<div class="tableCell text">
+						<label for="discoveredInput">Discoverer alias if no wiki:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="discovered" id="discoveredInput">
+					</div>
+					<div class="tableCell text">
+						<label for="docbyInput">Documenter alias if not discoverer:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest-noauto="docby" id="docbyInput">
+					</div>
+					<div class="tableCell text">
+						<label>Do you belong to a chapter?</label>
+					</div>
+					<div class="tableCell data">
+						<select data-dest-noauto="researchteam" id="researchteamInput"></select>
+					</div>
+					<div class="tableHeader data no-flex">
+						<label for="appearanceInput">Appearance</label>
+						<textarea data-dest="appearance" id="appearanceInput"
+							placeholder="What does the worm look like?"></textarea>
+					</div>
+					<div class="tableCell text">
+						<label for="galleryUpload">Gallery files</label>
+						<span class="tooltip" onclick="explanation('Gallery', 
+						`The preferred order of pictures is as follows:
+						<div class='is-flex is-justify-content-center'>
+							<ol class='has-text-left'>
+								<li>Gender 1</li>
+								<li>Gender 2</li>
+								<li>Gender 1 scan</li>
+								<li>Gender 2 scan</li>
+								<li>Discovery Menu</li>
+								<li>Planet/Moon DM</li>
+								<li>System DM</li>
+								<li>Galaxy Map</li>
+							</ol>
+						</div>`); galleryUploadShown = true">
+							<img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								There is a preferred order of pictures.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+					</div>
 				</div>
-				<div>
-					<span class="actions" style="white-space: nowrap">
-						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
-					</span>
-					<span class="actions" style="white-space: nowrap">
-						<button id="btn" class="button is-outlined is-primary"
-							onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
-						<a id="downloadbtn" class="button is-outlined is-primary"
-							onclick="downloadFile('downloadbtn', 'wikiText', 'system_input')">Download file</a>
-						<a class="button is-outlined is-primary" id="link" value="test"
-							onclick="wikiLink('link', 'region', (document.getElementById('moon_input').value ? 'moon_input' : 'planet_input'), 'Immortal Worm');">Create
-							page</a>
-					</span>
+				<div id="galleryItems">
 				</div>
-				<br>
+				<div id="actions" class="buttons"></div>
+				<div id="albumActions" class="buttons"></div>
 			</div>
-			<div class="column is-full-mobile">
-				<div class="output">
-					<div id="wikiText">
-						<div>{{Version|<output id='release' name="release"></output>}}</div>
-						<div>{{<output id='civStub'></output>}}</div>
-						<div>{{Creature infobox</div>
-						<div>| name = Immortal Worm <output id='name' name="bodyName"></output></div>
-						<div>| image = <output id='image' name="image"></output></div>
-						<div>| galaxy = <output id='galaxy'></output></div>
-						<div>| region = <output id='region'></output></div>
-						<div>| system = <output id='system' name="system"></output></div>
-						<div>| planet = <output id='planet'></output></div>
-						<div>| moon = <output id='moon'></output></div>
-						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}
-						</div>
-						<div>| genus = Shaihuluda</div>
-						<div>| wormclass = <output id="wormclass" name="wormclass"></output></div>
-						<div>| wormmaxdepth = <output id="wormmaxdepth"></output></div>
-						<div>| wormstomach = <output id="wormstomach" name="wormstomach"></output></div>
-						<div>| civilized = <output id='civilized'></output></div>
-						<div>| discovered = <output id='discovered'></output></div>
-						<div>| discoveredlink = <output id='discoveredlink'></output></div>
-						<div>| researchteam = <output id='researchteam'></output></div>
-						<div>| mode = <output id='mode'></output></div>
-						<div>| release = <output id="release1" name="release"></output></div>
-						<div>}}</div>
-						<div>'''Immortal Worm <output id='name1' name="bodyName"></output>''' is a creature.</div>
-						<br>
-
-						<div>==Summary==</div>
-						<div>'''Immortal Worm <output id='name2' name="bodyName"></output>''' is a [[creature]], a
-							member
-							of the [[Shaihuluda]] [[genus]].
-						</div>
-						<br>
-
-						<div>==Appearance==</div>
-						<div><output id='appearance'></output></div>
-						<br>
-
-						<div>==Location==</div>
-						<div>It can be found on the <output id='locPlanet'></output> in the [[<output id='locSystem'
-								name="system"></output>]] [[star system]].</div>
-						<br>
-						<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
-						<br>
-
-						<div>==Additional Information==</div>
-						<div><span name="bulletpoint"></span> <output id='autoSpawn'></output></div>
-						<div><span name="bulletpoint"></span> Featured in the <output id='addInfo'></output></div>
-						<div><span name="bulletpoint"></span> <output id="docby"></output></div>
-						<br>
-
-						<div>==Gallery==</div>
-						<div>&lt;gallery&gt;</div>
-						<div><output id="galleryCode"></output></div>
-						<div>&lt;/gallery&gt;</div>
+			<div id="output" class="column is-full-mobile">
+				<div class="wikiText" id="fullArticle">
+					<div>{{Version|<output id='release' name="release"></output>}}</div>
+					<div>{{<output id='civStub'></output>}}</div>
+					<div>{{Creature infobox</div>
+					<div>| name = Immortal Worm <output id='name' name="bodyName"></output></div>
+					<div>| image = <output id='image' name="image"></output></div>
+					<div>| galaxy = <output id='galaxy'></output></div>
+					<div>| region = <output id='region'></output></div>
+					<div>| system = <output id='system' name="system"></output></div>
+					<div>| planet = <output id='planet'></output></div>
+					<div>| moon = <output id='moon'></output></div>
+					<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}
 					</div>
+					<div>| genus = Shaihuluda</div>
+					<div>| wormclass = <output id="wormclass"></output></div>
+					<div>| wormmaxdepth = <output id="wormmaxdepth"></output></div>
+					<div>| wormstomach = <output id="wormstomach"></output></div>
+					<div>| civilized = <output id='civilized'></output></div>
+					<div>| discovered = <output id='discovered'></output></div>
+					<div>| discoveredlink = <output id='discoveredlink'></output></div>
+					<div>| researchteam = <output id='researchteam'></output></div>
+					<div>| mode = <output id='mode'></output></div>
+					<div>| release = <output id="release1" name="release"></output></div>
+					<div>}}</div>
+					<div>'''Immortal Worm <output id='name1' name="bodyName"></output>''' is a creature.</div>
+					<br>
+
+					<div>==Summary==</div>
+					<div>'''Immortal Worm <output id='name2' name="bodyName"></output>''' is a [[creature]], a member of
+						the [[Shaihuluda]] [[genus]].</div>
+					<br>
+
+					<div>==Appearance==</div>
+					<div><output id='appearance'></output></div>
+					<br>
+
+					<div>==Location==</div>
+					<div>It can be found on the <output id="celestialBody"></output> in the [[<output id='locSystem'
+							name="system"></output>]] [[star system]].</div>
+					<br>
+					<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
+					<br>
+
+					<div>==Additional Information==</div>
+					<div><span data-add-info="*"></span> <output id='autoSpawn'></output></div>
+					<div><span data-add-info="*"></span> Featured in the <output id='addInfo'></output></div>
+					<div><span data-add-info="*"></span> <output id="docby"></output></div>
+					<br>
+
+					<div>==Gallery==</div>
+					<div>&lt;gallery&gt;</div>
+					<div><output id="galleryCode"></output></div>
+					<div>&lt;/gallery&gt;</div>
 				</div>
-				<div class="output" id="AlbumEntry">
-					<h3 class="subtitle is-5" style="margin-bottom:0.5rem"><output id="album"></output> entry for
-						<output name="bodyName"></output>:
-					</h3>
-					<div>
-						<div id="albumText">
-							| {{album | file=<output name="image" id="albumImage"></output> | name=[[Immortal Worm
-							<output id="albumName" name="bodyName"></output>|<output id="albumClass"
-								name="wormclass"></output>]] | other=(<output
-								id="albumDepth"></output>ku)&lt;br&gt;Stomach: <output id="albumStomach"
-								name="wormstomach"></output> | glyph=<output id='albumGlyphs'
-								name="portalglyphs"></output> | <output id="albumDiscoverer"></output>}}
-						</div>
-					</div>
-					<div class="actions" style="margin-top:0.5rem;">
-						<button id="albumBtn" class="button is-outlined is-primary"
-							onclick="copyText('albumText', 'albumBtn')">
-							Copy album wikicode
-						</button>
-						<a class="button is-outlined is-primary" id="albumLink"
-							onclick="wikiLink('albumLink', 'region', (document.getElementById('moon_input').value ? 'moon_input' : 'planet_input')); this.href ? this.href = 'https://nomanssky.fandom.com/wiki/' + document.getElementById('addInfo').innerHTML.replace('[[', '').replace(']]', '') : this.removeAttribute('href')">
-							Open Album
-						</a>
-					</div>
-				</div>
+				<div id="albumEntry"></div>
 			</div>
-		</div>
+		</main>
 	</div>
-	<footer class="footer">
-		<div>
-			Please consider contributing to the project:
-			<ul>
-				<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank"
-						rel="noopener noreferrer">GitHub repository</a></li>
-			</ul>
-		</div>
-		<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
-	</footer>
+	<footer id="footer" class="footer"></footer>
 </body>
 
 </html>

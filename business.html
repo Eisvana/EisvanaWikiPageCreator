@@ -6,393 +6,224 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Business</title>
 	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js"></script>
-	<script src="./lib/businesslogic.js"></script>
+	<script src="./lib/common.js" defer></script>
+	<script src="./lib/pages/business.js" defer></script>
+	<script src="./lib/modules/gallery.js" defer></script>
+	<script src="./lib/modules/actions.js" defer></script>
+	<script src="./lib/modules/footer.js" defer></script>
 	<script>
-		// 1. param	= id in div and spans in wikicode
-		// 2. param	= id in input tags
-		function showInput() {
-			fixHC("currency_input");
-			civGalaxy("civ");
-			textFunctionMultiple("release", "version_input");
-			textFunction("image", "image_input");
-			textFunctionMultiple("name", "name_input");
-			textFunction("system", "system_input");
-			textFunction("planet", "planet_input");
-			textFunction("moon", "moon_input");
-			//	textFunctionMultiple("portalglyphs", "portalglyphs_input");
-			textFunction("owner", "owner_input");
-			textFunction("ownerlink", "ownerlink_input");
-			textFunction("headquarters", "headquarters_input");
-			textFunction("description", "description_input");
-			textFunction("wallet", "wallet_input");
-			textFunction("services", "services_input");
-			textFunction("platform", "platform_input");
-			hideDiscoverer('owner_input', 'ownerlink_input');
-			textFunction("region", "region_input");
-			//	textFunction("content", "content_input");
-			textAreaFunction("addInfo", "addInfo_input");
-			enPrefix("currency_input", "enPrefix");
-			textFunctionMultiple("currency", "currency_input");
-		}
-
 		window.onload = () => {
-			updateRegions('civ', 'region_input');
-			autoRefresh();
-			showInput();
+			pageData.pageType = 'Business';
+			startUp();
 		}
 	</script>
 </head>
 
 <body>
 	<div class="container">
-		<nav>
-			<div><a href="./" title="Main page">&larr; Return to main page</a></div>
-		</nav>
-		<br>
-		<h1 class="title is-2">Hub Wiki Page Creator - Business</h1>
-		<br>
-
-		<div class="columns is-desktop">
-			<div class="column is-full-mobile">
-				<form id="form" onreset="resetAll('gallery_descs')">
-					<table style="text-align:left">
-						<tbody>
-							<tr>
-								<th><label>Current release:</label>
-								<td>
-									<select id="version_input" name="Release">
-										<option value="Waypoint">Waypoint
-										<option value="Endurance">Endurance
-										<option value="Outlaws">Outlaws
-										<option value="SentinelUp">Sentinel
-										<option value="Prisms">Prisms
-										<option value="Expeditions">Expeditions
-										<option value="Companions">Companions
-										<option value="NextGen">NextGen
-										<option value="Origins">Origins
-										<option value="Desolation">Desolation
-										<option value="Crossplay">Crossplay
-										<option value="ExoMech">ExoMech
-										<option value="Living Ship">Living Ship
-										<option value="Synthesis">Synthesis
-										<option value="Beyond">Beyond
-										<option value="Visions">Visions
-										<option value="Abyss">Abyss
-										<option value="NEXT">NEXT
-										<option value="Atlas Rises">Atlas Rises
-										<option value="Pathfinder">Pathfinder
-										<option value="Foundation">Foundation
-										<option value="Release">Release
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<th><label>Which civ does this Business belong to?</label>
-								<td>
-									<select id="civ" name="Civ" onchange="updateRegions('civ', 'region_input')">
-										<option value="GHub" id="GHub">GHub
-										<option value="CalHub" id="CalHub">CalHub
-										<option value="EisHub" id="EisHub">EisHub
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<th><label for="name_input">Name of the business:</label>
-								<td><input type="text" name="Name" id="name_input">
-							</tr>
-							<tr>
-								<th><label for="image_input">Main image name, including file extension:</label>
-									<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-											Picture won't be uploaded to the wiki. This is only to autofill the image
-											name.
-										</span></span>
-								</th>
-								<td>
-									<input type="text" name="Image" id="image_input">
-									<br>
-									<input type="file" id="image_upload" name="Image_upload" accept="image/*"
-										onchange="imgUpload('image', 'image_upload', 'image_input')">
-								</td>
-							</tr>
-							<tr>
-								<th><label>Region:</label>
-								<td>
-									<select id="region_input" name="Region">
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<th><label for="system_input">Name of the system:</label>
-								<td><input type="text" name="System" id="system_input">
-							</tr>
-							<tr>
-								<th><label for="planet_input">Name of the planet:</label>
-									<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-											Planet Name OR the planet circled by the moon where the business can be
-											found.
-										</span></span>
-								</th>
-								<td> <input type="text" name="Planet" id="planet_input">
-							</tr>
-							<tr>
-								<th><label for="moon_input">Name of the moon (if applicable):</label>
-									<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-											Planet Name OR the planet circled by the moon where the business can be
-											found.
-										</span></span>
-								</th>
-								<td> <input type="text" name="Moon" id="moon_input">
-							</tr>
-							<tr>
-								<th><label for="headquarters_input">Name of the headquarter base:</label>
-								<td> <input type="text" name="Headquarters" id="headquarters_input">
-							</tr>
-							<!--						<tr>
-							<th><label for="portalglyphs_input">Portalglyphs:</label>
-								<button class="button is-small is-danger" type="button"
-									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
-							</th>
-							<td>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Found in Photo Mode. Glyphs are specific to each planet.
-									</span></span>
-								<input type="text" name="Glyphs" id="portalglyphs_input"
-									oninput="glyphInputOnChange(this)">
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="portal-buttons">
-									<button class="button" type="button" value="0"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">0</span>
-									</button>
-									<button class="button" type="button" value="1"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">1</span>
-									</button>
-									<button class="button" type="button" value="2"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">2</span>
-									</button>
-									<button class="button" type="button" value="3"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">3</span>
-									</button>
-									<button class="button" type="button" value="4"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">4</span>
-									</button>
-									<button class="button" type="button" value="5"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">5</span>
-									</button>
-									<button class="button" type="button" value="6"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">6</span>
-									</button>
-									<button class="button" type="button" value="7"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">7</span>
-									</button>
-									<button class="button" type="button" value="8"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">8</span>
-									</button>
-									<button class="button" type="button" value="9"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">9</span>
-									</button>
-									<button class="button" type="button" value="A"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">A</span>
-									</button>
-									<button class="button" type="button" value="B"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">B</span>
-									</button>
-									<button class="button" type="button" value="C"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">C</span>
-									</button>
-									<button class="button" type="button" value="D"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">D</span>
-									</button>
-									<button class="button" type="button" value="E"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">E</span>
-									</button>
-									<button class="button" type="button" value="F"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">F</span>
-									</button>
-								</div>
-								<output class="glyphs" style="word-break: break-word" id="glyph_display"
-									name="portalglyphs"></output>
-							</td>
-						</tr>-->
-							<tr>
-								<th><label for="description_input">Description:</label>
-								<td> <input type="text" name="Description" id="description_input">
-							</tr>
-							<tr>
-								<th><label for="wallet_input">Wallet:</label>
-								<td> <input type="text" name="Wallet" id="wallet_input">
-							</tr>
-							<tr>
-								<th><label for="currency_input">Currency:</label>
-								<td> <input type="text" list="currencies" name="Currency" id="currency_input">
-							</tr>
-							<tr>
-								<th><label for="services_input">Services:</label>
-								<td> <input type="text" name="Services" id="services_input">
-							</tr>
-							<!--						<tr>
-							<th><label>Gamemode:</label>
-							<td>
-								<select id="mode_input" name="Mode">
-									<option value="Normal">Normal
-									<option value="Survival">Survival
-									<option value="Permadeath">Permadeath
-									<option value="Creative">Creative
-								</select>
-							</td>
-						</tr>-->
-							<tr>
-								<th><label for="ownerlink_input">Owner wiki account:</label>
-								<td><input type="text" name="Ownerlink" id="ownerlink_input">
-							</tr>
-							<tr>
-								<th><label for="owner_input">Owner alias if no wiki:</label>
-								<td><input type="text" name="Owner" id="owner_input">
-							</tr>
-							<tr>
-								<th><label>Platform:</label>
-								<td>
-									<select id="platform_input" name="Platform">
-										<option value="PC">PC
-										<option value="PS">PS
-										<option value="XB">XB
-										<option value="NS">Switch
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<p>Note: You can drag on the bottom right corner to expand
-										the text area
-									</p>
-								</td>
-							</tr>
-						</tbody>
-						<tbody id="contents_input">
-						</tbody>
-						<tbody>
-							<tr>
-								<td><button type="button" onclick="addSection('contents_input', 'contents')">Add
-										section</button></td>
-							</tr>
-							<tr class="no-border">
-								<th colspan="2"><label for="addInfo_input">Additional
-										information:</label>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<textarea name="addInfo" id="addInfo_input"></textarea>
-								</td>
-							</tr>
-							<tr>
-								<th><label for="gallery_upload">Gallery files</label>
-								<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*"
-										multiple
-										onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
-							</tr>
-						</tbody>
-					</table>
-				</form>
-				<div id="gallery_descs">
-				</div>
-				<div>
-					<span class="actions" style="white-space: nowrap">
-						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
-					</span>
-					<span class="actions" style="white-space: nowrap">
-						<button id="btn" class="button is-outlined is-primary"
-							onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
-						<a id="downloadbtn" class="button is-outlined is-primary"
-							onclick="downloadFile('downloadbtn', 'wikiText', 'name_input')">Download file</a>
-						<a class="button is-outlined is-primary" id="link"
-							onclick="wikiLink('link', 'region', 'name_input');">Create page</a>
-					</span>
-				</div>
-				<br>
-			</div>
-			<div class="column is-full-mobile">
-				<div class="output">
-					<div id="wikiText">
-						<div>{{Version|<output id='release' name="release"></output>}}</div>
-						<div>{{Business infobox</div>
-						<div>| name = <output id='name' name="name"></output></div>
-						<div>| image = <output id='image'></output></div>
-						<div>| galaxy = <output id='galaxy'></output></div>
-						<div>| region = <output id='region'></output></div>
-						<div>| system = <output id='system'></output></div>
-						<div>| planet = <output id='planet'></output></div>
-						<div>| moon = <output id='moon'></output></div>
-						<div>| headquarters = <output id='headquarters'></output></div>
-						<div>| description = <output id="description"></output></div>
-						<div>| wallet = <output id="wallet"></output></div>
-						<div>| currency = <output id="currency" name="currency"></output></div>
-						<div>| services = <output id="services"></output></div>
-						<div>| vanilla = </div>
-						<div>| civilized = <output id='civilized'></output></div>
-						<div>| owner = <output id='owner'></output></div>
-						<div>| ownerlink = <output id='ownerlink'></output></div>
-						<div>| platform = <output id='platform'></output></div>
-						<div>| release = <output id="release1" name="release"></output></div>
-						<div>}}</div>
-						<div>'''<output id='name1' name="name"></output>''' is a business.</div>
-						<br>
-
-						<div>==Summary==</div>
-						<div>'''<output id='name2' name="name"></output>''' is <output id="enPrefix"></output>
-							<output id="currency1" name="currency"></output>-based business.
-						</div>
-						<br>
-
-						<div id="contents"></div>
-
-						<div>==Additional Information==</div>
-						<div><output id="addInfo"></output></div>
-						<br>
-
-						<div>==Gallery==</div>
-						<div>&lt;gallery&gt;</div>
-						<div><output id="galleryCode"></output></div>
-						<div>&lt;/gallery&gt;</div>
-						<br>
-
-						<div>[[Category:<output id="name3" name="name"></output>| ]]</div>
+		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
+		<h1 class="title is-3">Hub Wiki Page Creator - Business</h1>
+		<dialog id="explanation" class="modal-content content">
+			<h2 id="explanationHeading" class="title is-4"></h2>
+			<div id="explanationContent" class="nms-font"></div>
+			<a id="explanationLink" target='_blank' rel='noopener noreferrer'>
+				<img id="explanationImg" alt='Explainer Image'>
+			</a>
+			<form method="dialog">
+				<button class="button" autofocus>Close</button>
+			</form>
+		</dialog>
+		<main class="columns is-desktop">
+			<div id="input" class="column is-full-mobile">
+				<div class="table">
+					<div class="tableCell text">
+						<label>Current release:</label>
+					</div>
+					<div class="tableCell data">
+						<select id="versionInput" data-dest="release"></select>
+					</div>
+					<div class="tableCell text">
+						<label>Which civ does this business belong to?</label>
+					</div>
+					<div class="tableCell data">
+						<select id="civInput">
+							<option value="GHub">GHub</option>
+							<option value="CalHub">CalHub</option>
+							<option value="EisHub">EisHub</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label for="nameInput">Name of the business:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="name" id="nameInput">
+					</div>
+					<div class="tableCell text">
+						<label for="fileInput">Main image name, including file extension:</label>
+						<span class="tooltip" onclick="explanation('File Upload', 
+						`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
+						You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
+						); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Picture won't be uploaded to the wiki. This is only to autofill the image name.
+							</span></span>
+					</div>
+					<div class="tableCell data" id="imageInput">
+						<input type="text" id="fileInput" data-dest="image">
+						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+					</div>
+					<div class="tableCell text">
+						<label>Region:</label>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="region" id="regionInput"></select>
+					</div>
+					<div class="tableCell text">
+						<label for="systemInput">Name of the system:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="system" id="systemInput">
+					</div>
+					<div class="tableCell text">
+						<label for="planetInput">Name of the planet:</label>
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								Planet Name OR the planet circled by the moon where the business can be
+								found.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="planet" id="planetInput">
+					</div>
+					<div class="tableCell text">
+						<label for="moonInput">Name of the moon (if applicable):</label>
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								Planet Name OR the planet circled by the moon where the business can be
+								found.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="moon" id="moonInput">
+					</div>
+					<div class="tableCell text">
+						<label for="headquartersInput">Name of the headquarter base:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="headquarters" id="headquartersInput">
+					</div>
+					<div class="tableCell text">
+						<label for="descriptionInput">Business description:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="description" id="descriptionInput">
+					</div>
+					<div class="tableCell text">
+						<label for="walletInput">Wallet:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="wallet" id="walletInput">
+					</div>
+					<div class="tableCell text">
+						<label for="currencyInput">Currency:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="currency" list="currencies" id="currencyInput">
+					</div>
+					<div class="tableCell text">
+						<label for="servicesInput">Services:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="services" id="servicesInput">
+					</div>
+					<div class="tableCell text">
+						<label for="ownerlinkInput">Owner wiki account:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="ownerlink" id="ownerlinkInput">
+					</div>
+					<div class="tableCell text">
+						<label for="ownerInput">Owner alias if no wiki:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="owner" id="ownerInput">
+					</div>
+					<div class="tableCell text">
+						<label>Platform:</label>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="platform" id="platformInput">
+							<option value="PC">PC</option>
+							<option value="PS">PlayStation</option>
+							<option value="XB">XBox</option>
+							<option value="NS">Switch</option>
+						</select>
+					</div>
+					<!--insert additional sections above #contentsInput-->
+					<div class="tableHeader text" id="contentsInput">
+						<button class="button is-primary" type="button" onclick="addSection()">+ Add
+							Section</button>
+					</div>
+					<div class="tableHeader data no-flex">
+						<label for="addInfoInput">Additional Information:</label>
+						<textarea id="addInfoInput" data-dest="addInfo"></textarea>
+					</div>
+					<div class="tableCell text">
+						<label for="galleryUpload">Gallery files</label>
+					</div>
+					<div class="tableCell data">
+						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
 					</div>
 				</div>
+				<div id="galleryItems">
+				</div>
+				<div id="actions" class="buttons"></div>
 			</div>
-		</div>
+			<div id="output" class="column is-full-mobile">
+				<div class="wikiText" id="fullArticle">
+					<div>{{Version|<output id='release' name="release"></output>}}</div>
+					<div>{{Business infobox</div>
+					<div>| name = <output id='name' name="name"></output></div>
+					<div>| image = <output id='image'></output></div>
+					<div>| galaxy = <output id='galaxy'></output></div>
+					<div>| region = <output id='region'></output></div>
+					<div>| system = <output id='system'></output></div>
+					<div>| planet = <output id='planet'></output></div>
+					<div>| moon = <output id='moon'></output></div>
+					<div>| headquarters = <output id='headquarters'></output></div>
+					<div>| description = <output id="description"></output></div>
+					<div>| wallet = <output id="wallet"></output></div>
+					<div>| currency = <output id="currency" name="currency"></output></div>
+					<div>| services = <output id="services"></output></div>
+					<div>| vanilla = </div>
+					<div>| civilized = <output id='civilized'></output></div>
+					<div>| owner = <output id='owner'></output></div>
+					<div>| ownerlink = <output id='ownerlink'></output></div>
+					<div>| platform = <output id='platform'></output></div>
+					<div>| release = <output id="release1" name="release"></output></div>
+					<div>}}</div>
+					<div>'''<output id='name1' name="name"></output>''' is a business.</div>
+					<br>
+
+					<div>==Summary==</div>
+					<div>'''<output id='name2' name="name"></output>''' is <output id="enPrefix"></output>
+						<output id="currency1" name="currency"></output>-based business.
+					</div>
+					<br>
+
+					<div id="contents"></div>
+
+					<div>==Additional Information==</div>
+					<div><output id="addInfo"></output></div>
+					<br>
+
+					<div>==Gallery==</div>
+					<div>&lt;gallery&gt;</div>
+					<div><output id="galleryCode"></output></div>
+					<div>&lt;/gallery&gt;</div>
+					<br>
+
+					<div>[[Category:<output id="name3" name="name"></output>| ]]</div>
+				</div>
+			</div>
+		</main>
 	</div>
-	<footer class="footer">
-		<div>
-			Please consider contributing to the project:
-			<ul>
-				<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank"
-						rel="noopener noreferrer">GitHub repository</a></li>
-			</ul>
-		</div>
-		<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
-	</footer>
-	<datalist id="currencies">
-		<option value="{{CurrencyHubCoin}}">
-	</datalist>
+	<footer id="footer" class="footer"></footer>
 </body>
 
 </html>

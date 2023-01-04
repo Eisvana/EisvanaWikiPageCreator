@@ -1,0 +1,1 @@
+This folder holds various resources that are not HTML. For example SVG images, CSS stylesheets and Javascript logic.

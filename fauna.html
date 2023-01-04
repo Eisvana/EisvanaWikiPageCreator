@@ -6,68 +6,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Fauna</title>
 	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js"></script>
-	<script src="./lib/creaturelogic.js"></script>
+	<script src="./lib/common.js" defer></script>
+	<script src="./lib/pages/fauna.js" defer></script>
+	<script src="./lib/modules/portalglyphs.js" defer></script>
+	<script src="./lib/modules/gallery.js" defer></script>
+	<script src="./lib/modules/actions.js" defer></script>
+	<script src="./lib/modules/albumactions.js" defer></script>
+	<script src="./lib/modules/footer.js" defer></script>
+	<script src="./lib/misc_logic/creatureDatalists.js" defer></script>
+	<script src="./lib/misc_logic/locationLogic.js"></script>
 	<script>
-		const galleryArray = ['', 'x gender', 'x gender scan', 'Creature scan', 'Discovery Menu', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
+		const galleryArray = ['', 'x gender', 'x gender scan', 'Creature scan', 'Discovery Menu', 'Planet Page', 'Moon Page', 'System Page', 'Galaxy Map'];
 
-		// 1. param	= id in div and spans in wikicode
-		// 2. param	= id in input tags
-		function showInput() {
-			document.getElementById("dm_input").value = document.getElementById("dm_input").value.replaceAll('\n', ' ').replaceAll('  ', ' ');
-			creaturePrio("gender");
-			textFunctionMultiple("release", "version_input");
-			textFunctionMultiple("newName", "name_input");
-			textFunctionMultiple("name", pageName('oldName_input', 'name_input'));
-			textFunctionMultiple("image", "image_input");
-			textFunctionMultiple("system", "system_input");
-			textFunction("planet", "planet_input");
-			textFunction("moon", "moon_input");
-			planetMoon("planet_input", "moon_input", "locPlanet");
-			textFunctionMultiple("portalglyphs", "portalglyphs_input");
-			textFunction("discovered", "discovered_input");
-			textFunction("discoveredlink", "discoveredlink_input");
-			textAreaFunction("appearance", "appearance_input");
-			textFunction("genus", "genus_input");
-			textFunction("genus1", "genus_input");
-			textFunction("hemisphere", "hemisphere_input");
-			textFunction("rarity", "rarity_input");
-			textFunction("ecosystem", "ecosystem_input");
-			textFunction("activity", "activity_input");
-			textFunction("behaviour", "behaviour_input");
-			textFunction("diet", "diet_input");
-			textFunction("DM", "dm_input");
-			genderProps("gender2_input", "gender_input", "gender2_input", "gender");
-			genderProps("gender2_input", "weight_input", "weight2_input", "weight");
-			genderProps("gender2_input", "height_input", "height2_input", "height");
-			textFunction("notes", "notes_input");
-			textFunction("produces", "produces_input");
-			textFunction("mode", "mode_input");
-			textFunction("researchteam", "researchteam_input");
-			civGalaxy("civ");
-			hideDiscoverer('discovered_input', 'discoveredlink_input');
-			researchTeam("researchteam", "civilized");
-			glyphRegion("portalglyphs_input", "civ", "region");
-			docBy("docby", "docby_input", "discovered_input", "discoveredlink_input", "researchteam_input");
-			addInfo("catalog_input", "researchteam", "addInfo");
-			hideOrgName('oldName_input', 'oldName');
-			specialNotesTextFunc("notes_input", "specialNotes_input", "addObservation");
-			creaPrioRadioName("gender_input", "gender2_input", "gender1_label", "gender2_label");
-			addInfoBullet("bulletpoint");
-			albumHeight("height", "albumHeight");
-			albumDiscoverer("discovered_input", "discoveredlink_input", "albumDiscoverer");
-			hideInput("catalog_input", "albumText");
-			textFunction("album", "catalog_input");
-		}
 		window.onload = () => {
-			researchTeamDropdown("civ", "researchteam_input")
-			autoRefresh();
-			genusDropdown("ecosystem_input", "genus_input");
-			genusProduces("genus_input", "produces_input");
-			hideSecGenderProps("gender_input", "gender2_input", "weight2_input", "height2_input");
-			albumDropdown("civ", "ecosystem_input", "catalog_input");
-			specialNotes("notes_input", "specialNotes_input");
-			showInput();
+			pageData.pageType = 'Creature';
+			startUp();
 		}
 	</script>
 </head>
@@ -78,1021 +31,562 @@
 			<div><a href="./" title="Main page">&larr; Return to main page</a></div>
 			<div><a href="./sandworm.html" title="Sandworm">&#8627; Sandworm</a></div>
 		</nav>
-		<br>
-		<h1 class="title is-2">Hub Wiki Page Creator - Fauna</h1>
-		<br>
+		<h1 class="title is-3">Hub Wiki Page Creator - Fauna</h1>
+		<dialog id="explanation" class="modal-content content">
+			<h2 id="explanationHeading" class="title is-4"></h2>
+			<div id="explanationContent" class="nms-font"></div>
+			<a id="explanationLink" target='_blank' rel='noopener noreferrer'>
+				<img id="explanationImg" alt='Explainer Image'>
+			</a>
+			<form method="dialog">
+				<button class="button" autofocus>Close</button>
+			</form>
+		</dialog>
 
-		<div class="columns is-desktop">
-			<div class="column is-full-mobile">
-				<form id="form" onreset="resetAll('gallery_descs')">
-					<table style="text-align:left">
-						<tr>
-							<th><label>Current release:</label>
-							<td>
-								<select id="version_input" name="Release">
-									<option value="Waypoint">Waypoint
-									<option value="Endurance">Endurance
-									<option value="Outlaws">Outlaws
-									<option value="SentinelUp">Sentinel
-									<option value="Prisms">Prisms
-									<option value="Expeditions">Expeditions
-									<option value="Companions">Companions
-									<option value="NextGen">NextGen
-									<option value="Origins">Origins
-									<option value="Desolation">Desolation
-									<option value="Crossplay">Crossplay
-									<option value="ExoMech">ExoMech
-									<option value="Living Ship">Living Ship
-									<option value="Synthesis">Synthesis
-									<option value="Beyond">Beyond
-									<option value="Visions">Visions
-									<option value="Abyss">Abyss
-									<option value="NEXT">NEXT
-									<option value="Atlas Rises">Atlas Rises
-									<option value="Pathfinder">Pathfinder
-									<option value="Foundation">Foundation
-									<option value="Release">Release
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Which civ does this creature belong to?</label>
-							<td>
-								<select id="civ" name="Civ" onchange="researchTeamDropdown('civ', 'researchteam_input'); 
-									albumDropdown('civ', 'ecosystem_input', 'catalog_input')">
-									<option value="GHub" id="GHub">GHub
-									<option value="CalHub" id="CalHub">CalHub
-									<option value="EisHub" id="EisHub">EisHub
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label for="name_input">Name of the creature:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Enter exactly as seen in game.
-									</span></span>
-							</th>
-							<td><input type="text" name="Name" id="name_input">
-						</tr>
-						<tr>
-							<th><label for="oldName_input">Original name before uploading if available:</label>
-							<td><input type="text" name="OldName" id="oldName_input">
-						</tr>
-						<tr>
-							<th><label for="image_input">Main image name, including file extension:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Picture won't be uploaded to the wiki. This is only to autofill the image name.
-									</span></span>
-							</th>
-							<td>
-								<input type="text" name="Image" id="image_input">
-								<br>
-								<input type="file" id="image_upload" name="Image_upload" accept="image/*"
-									onchange="imgUpload('image', 'image_upload', 'image_input')">
-							</td>
-						</tr>
-						<tr>
-							<th><label for="system_input">Name of the system:</label>
-							<td><input type="text" name="System" id="system_input">
-						</tr>
-						<tr>
-							<th><label for="planet_input">Name of the planet:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Planet Name OR the planet circled by the moon where the creature can be found.
-									</span></span>
-							</th>
-							<td><input type="text" name="Planet" id="planet_input">
-						</tr>
-						<tr>
-							<th><label for="moon_input">Name of the moon (if applicable):</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										If the creature is located on a moon. Leave blank if the creature is on a
-										planet.
-									</span></span>
-							</th>
-							<td><input type="text" name="Moon" id="moon_input">
-						</tr>
-						<tr>
-							<th><label for="portalglyphs_input">Portalglyphs:</label><button
-									class="button is-small is-danger" type="button"
-									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										Found in Photo Mode. Glyphs are specific to each planet.
-									</span></span>
-							</th>
-							<td><input type="text" name="Glyphs" id="portalglyphs_input"
-									oninput="glyphInputOnChange(this)">
-						</tr>
-						<tr>
-							<td colspan="2">
-								<div class="portal-buttons">
-									<button class="button" type="button" value="0"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">0</span>
-									</button>
-									<button class="button" type="button" value="1"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">1</span>
-									</button>
-									<button class="button" type="button" value="2"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">2</span>
-									</button>
-									<button class="button" type="button" value="3"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">3</span>
-									</button>
-									<button class="button" type="button" value="4"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">4</span>
-									</button>
-									<button class="button" type="button" value="5"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">5</span>
-									</button>
-									<button class="button" type="button" value="6"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">6</span>
-									</button>
-									<button class="button" type="button" value="7"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">7</span>
-									</button>
-									<button class="button" type="button" value="8"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">8</span>
-									</button>
-									<button class="button" type="button" value="9"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">9</span>
-									</button>
-									<button class="button" type="button" value="A"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">A</span>
-									</button>
-									<button class="button" type="button" value="B"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">B</span>
-									</button>
-									<button class="button" type="button" value="C"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">C</span>
-									</button>
-									<button class="button" type="button" value="D"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">D</span>
-									</button>
-									<button class="button" type="button" value="E"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">E</span>
-									</button>
-									<button class="button" type="button" value="F"
-										onclick="glyphOnClick(this, 'portalglyphs_input')">
-										<span class="glyphs icon is-small">F</span>
-									</button>
-								</div>
-								<output class="glyphs" style="word-break: break-word" id="glyph_display"
-									name="portalglyphs"></output>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Genus:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										See the <a href="https://nomanssky.fandom.com/wiki/Genus" target="_blank"
-											rel="noopener noreferrer">wiki</a> for a list of genera.
-									</span></span>
-							</th>
-							<td>
-								<select id="genus_input" name="Genus"
-									onchange="genusProduces('genus_input', 'produces_input');">
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<p>The following information can be found in the creature discovery menu.</p>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Hemisphere:</label>
-							<td>
-								<select id="hemisphere_input" name="Hemisphere">
-									<option value="">
-									<option value="North">North
-									<option value="South">South
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Rarity:</label>
-							<td>
-								<select id="rarity_input" name="Rarity">
-									<option value="Common">Common
-									<option value="Uncommon">Uncommon
-									<option value="Rare">Rare
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Ecosystem:</label>
-							<td>
-								<select id="ecosystem_input" name="Ecosystem"
-									onchange="genusDropdown('ecosystem_input', 'genus_input'); genusProduces('genus_input', 'produces_input'); albumDropdown('civ', 'ecosystem_input', 'catalog_input')">
-									<option value="Ground">Ground
-									<option value="Flying">Flying
-									<option value="Underwater">Underwater
-									<option value="Underground">Underground
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Activity:</label>
-							<td>
-								<select id="activity_input" name="Activity">
-									<option value="Always Active">Always Active
-									<option value="Diurnal">Diurnal
-									<option value="Nocturnal">Nocturnal
-									<option value="Mostly Diurnal">Mostly Diurnal
-									<option value="Mostly Nocturnal">Mostly Nocturnal
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<p>The following information can be found on the creature scan.</p>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Which gender should be prioritised?</label>
-							<td>
-								<input type="radio" id="gender1" name="Gender" value="gender1" checked
-									onchange="creaturePrio('gender')">
-								<label id="gender1_label" for="gender1"></label>
-								<input type="radio" id="gender2" name="Gender" value="gender2"
-									onchange="creaturePrio('gender')">
-								<label id="gender2_label" for="gender2"></label>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Gender:</label>
-							<td>
-								<select id="gender_input" name="Gender"
-									onchange="hideSecGenderProps('gender_input', 'gender2_input', 'weight2_input', 'height2_input');">
-									<option value="Male">Male
-									<option value="Female">Female
-									<option value="Exotic">Exotic
-									<option value="Unknown">Unknown
-									<option value="Indeterminate">Indeterminate
-									<option value="Asymmetric">Asymmetric
-									<option value="Non-uniform">Non-uniform
-									<option value="Symmetric">Symmetric
-									<option value="Rational">Rational
-									<option value="Vectorised">Vectorised
-									<option value="Prime">Prime
-									<option value="Alpha">Alpha
-									<option value="Radical">Radical
-									<option value="Asymptotic">Asymptotic
-									<option value="Orthogonal">Orthogonal
-									<option value="None">None
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Second Gender:</label>
-							<td>
-								<select id="gender2_input" name="Gender2"
-									onchange="hideSecGenderProps('gender_input', 'gender2_input', 'weight2_input', 'height2_input');">
-									<option value="">
-									<option value="Male">Male
-									<option value="Female">Female
-									<option value="Exotic">Exotic
-									<option value="Unknown">Unknown
-									<option value="Indeterminate">Indeterminate
-									<option value="Asymmetric">Asymmetric
-									<option value="Non-uniform">Non-uniform
-									<option value="Symmetric">Symmetric
-									<option value="Rational">Rational
-									<option value="Vectorised">Vectorised
-									<option value="Prime">Prime
-									<option value="Alpha">Alpha
-									<option value="Radical">Radical
-									<option value="Asymptotic">Asymptotic
-									<option value="Orthogonal">Orthogonal
-									<option value="None">None
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label for="behaviour_input">Behaviour:</label>
-							<td><input type="text" list="behaviourData" name="Behaviour" id="behaviour_input">
-						</tr>
-						<tr>
-							<th><label for="diet_input">Diet:</label>
-							<td><input type="text" list="dietData" name="Diet" id="diet_input">
-						</tr>
-						<tr>
-							<th><label for="weight_input">Weight in kg:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										No "kg" necessary.
-									</span></span>
-							</th>
-							<td><input type="number" step="0.1" name="Weight" id="weight_input" placeholder="0.0"
-									onkeypress="return isNumberKey(event)">
-						</tr>
-						<tr>
-							<th><label for="height_input">Height in m:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										No "m" necessary.
-									</span></span>
-							</th>
-							<td><input type="number" step="0.1" name="Height" id="height_input" placeholder="0.0"
-									onkeypress="return isNumberKey(event)">
-						</tr>
-						<tr style="display: none;">
-							<th><label for="weight2_input">Gender 2 Weight in kg:</label>
-							<td><input type="number" step="0.1" name="Weight2" id="weight2_input" placeholder="0.0"
-									onkeypress="return isNumberKey(event)">
-						</tr>
-						<tr style="display: none;">
-							<th><label for="height2_input">Gender 2 Height in m:</label>
-							<td><input type="number" step="0.1" name="Height" id="height2_input" placeholder="0.0"
-									onkeypress="return isNumberKey(event)">
-						</tr>
-						<tr>
-							<th><label for="notes_input">Notes:</label>
-							<td><input type="text" list="notesData" name="Notes" id="notes_input"
-									oninput="specialNotes('notes_input', 'specialNotes_input')">
-						</tr>
-						<tr style="display: none;">
-							<th><label for="specialNotes_input">Notes for discovery menu:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-										This might differ from the scan. Please check in the discovery menu.
-									</span></span>
-							</th>
-							<td><input type="text" list="specialNotesData" name="SpecialNotes" id="specialNotes_input">
-						</tr>
-						<tr>
-							<th><label>Produces:</label>
-							<td>
-								<select id="produces_input" name="Produces">
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<p>Information about the player.</p>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Gamemode:</label>
-							<td>
-								<select id="mode_input" name="Mode">
-									<option value="Normal">Normal
-									<option value="Survival">Survival
-									<option value="Permadeath">Permadeath
-									<option value="Creative">Creative
-										<option value="Custom">Custom
-										</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label for="discoveredlink_input">Discoverer wiki account:</label>
-							<td><input type="text" name="Discoveredlink" id="discoveredlink_input">
-						</tr>
-						<tr>
-							<th><label for="discovered_input">Discoverer alias if no wiki:</label>
-							<td><input type="text" name="Discovered" id="discovered_input">
-						</tr>
-						<tr>
-							<th><label for="docby_input">Documenter alias if not discoverer:</label>
-							<td><input type="text" name="DocBy" id="docby_input">
-						</tr>
-						<tr>
-							<th><label>Do you belong to a chapter?</label>
-							<td>
-								<select id="researchteam_input" name="Researchteam">
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th><label>Into which catalog does this creature belong (if
-									any)?</label>
-							<td>
-								<select id="catalog_input" name="Catalog">
-								</select>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<p>Note: You can drag on the bottom right corner to expand the
-									text area
-								</p>
-							</td>
-						</tr>
-						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label for="appearance_input">Appearance</label>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<textarea name="Appearance" id="appearance_input"></textarea>
-							</td>
-						</tr>
-						<tr class="no-border">
-							<th style="vertical-align:top" colspan="2"><label for="dm_input">Discovery Menu</label>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<textarea name="DM" id="dm_input"></textarea>
-							</td>
-						</tr>
-						<tr>
-							<th><label for="gallery_upload">Gallery files</label>
-							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
-									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
-						</tr>
-					</table>
-				</form>
-				<div id="gallery_descs">
+		<main class="columns is-desktop">
+			<div id="input" class="column is-full-mobile">
+				<div class="table">
+					<div class="tableCell text">
+						<label>Current release:</label>
+					</div>
+					<div class="tableCell data">
+						<select id="versionInput" data-dest="release"></select>
+					</div>
+					<div class="tableCell text">
+						<label>Which civ does this creature belong to?</label>
+					</div>
+					<div class="tableCell data">
+						<select id="civInput">
+							<option value="GHub">GHub</option>
+							<option value="CalHub">CalHub</option>
+							<option value="EisHub">EisHub</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label for="nameInput">Name of the creature:</label>
+						<span class="tooltip" onclick="explanation('Creature Name', 
+								'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
+								'./helperimg/creature/creatureName.jpg'	
+								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<input data-dest="newName" type="text" id="nameInput">
+					</div>
+					<div class="tableCell text">
+						<label for="oldNameInput">Original name before uploading (if available):</label>
+					</div>
+					<div class="tableCell data">
+						<input data-dest="oldName" type="text" id="oldNameInput">
+					</div>
+					<div class="tableCell text">
+						<label for="fileInput">Main image name, including file extension:</label>
+						<span class="tooltip" onclick="explanation('File Upload', 
+								`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
+								You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
+								); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Picture won't be uploaded to the wiki. This is only to autofill the image name.
+							</span></span>
+					</div>
+					<div class="tableCell data" id="imageInput">
+						<input type="text" id="fileInput" data-dest="image">
+						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+					</div>
+					<div class="tableCell text">
+						<label for="systemInput">Name of the system:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="system" id="systemInput">
+					</div>
+					<div class="tableCell text">
+						<label for="planetInput">Name of the planet:</label>
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Planet Name OR the planet circled by the moon where the creature can be found.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="planet" id="planetInput">
+					</div>
+					<div class="tableCell text">
+						<label for="moonInput">Name of the moon (if applicable):</label>
+						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								If the creature is located on a moon. Leave blank if the creature is on a
+								planet.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="moon" id="moonInput">
+					</div>
+					<div class="tableCell text">
+						<div class="glyphs-label-button">
+							<label for="portalglyphsInput">Portalglyphs:</label>
+							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+								Delete</button>
+						</div>
+						<span class="tooltip" onclick="explanation('Portalglyphs', 
+							`Found in Photo Mode. Glyphs are specific to each planet.`,
+							'./helperimg/shared/glyphs.jpg'
+							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
+					</div>
+					<div class="tableHeader data">
+						<div id="portalglyphButtons"></div>
+						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
+					</div>
+					<div class="tableCell text">
+						<label>Genus:</label>
+						<span class="tooltip" onclick="explanation(
+							'Genus',
+							`The genus is defined by the general appearance of a creature.<br>
+							See the wiki for a <a href='https://nomanssky.fandom.com/wiki/Genus#Genus_List' target='_blank'
+									rel='noopener noreferrer'>list of genera</a>.`
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								See the wiki for a list of genera.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="genus" id="genusInput"></select>
+					</div>
+					<div class="tableHeader text">
+						<p>The following information can be found in the creature discovery menu.</p>
+					</div>
+					<div class="tableCell text">
+						<label>Hemisphere:</label>
+						<span class="tooltip" onclick="explanation(
+							'Hemisphere',
+							`Found in the creature discovery menu.<br>
+							If no hemisphere is given, leave the input empty.`,
+							'./helperimg/creature/creatureHemisphere.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found in the creature discovery menu.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="hemisphere" id="hemisphereInput">
+							<option value=""></option>
+							<option value="North">North</option>
+							<option value="South">South</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label>Rarity:</label>
+						<span class="tooltip" onclick="explanation(
+							'Rarity',
+							'Found in the creature discovery menu.',
+							'./helperimg/creature/creatureRarity.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found in the creature discovery menu.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="rarity" id="rarityInput">
+							<option value="Common">Common</option>
+							<option value="Uncommon">Uncommon</option>
+							<option value="Rare">Rare</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label>Ecosystem:</label>
+						<span class="tooltip" onclick="explanation(
+							'Ecosystem',
+							'Found in the creature discovery menu.',
+							'./helperimg/creature/creatureEcosystem.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found in the creature discovery menu.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="ecosystem" id="ecosystemInput">
+							<option value="Ground">Ground</option>
+							<option value="Flying">Flying</option>
+							<option value="Underwater">Underwater</option>
+							<option value="Underground">Underground</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label>Activity:</label>
+						<span class="tooltip" onclick="explanation(
+							'Activity',
+							'Found in the creature discovery menu.',
+							'./helperimg/creature/creatureActivity.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found in the creature discovery menu.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="activity" id="activityInput">
+							<option value="Always Active">Always Active</option>
+							<option value="Diurnal">Diurnal</option>
+							<option value="Nocturnal">Nocturnal</option>
+							<option value="Mostly Diurnal">Mostly Diurnal</option>
+							<option value="Mostly Nocturnal">Mostly Nocturnal</option>
+						</select>
+					</div>
+					<div class="tableHeader text">
+						<p>The following information can be found on the creature scan.</p>
+					</div>
+					<div class="tableCell text">
+						<label>Which gender should be prioritised?</label>
+					</div>
+					<div class="tableCell data radioButtons">
+						<div>
+							<input type="radio" id="gender1" name="Gender" value="gender1" checked>
+							<label id="gender1_label" for="gender1"></label>
+						</div>
+						<div>
+							<input type="radio" id="gender2" name="Gender" value="gender2">
+							<label id="gender2_label" for="gender2"></label>
+						</div>
+					</div>
+					<div class="tableCell text">
+						<label>Gender:</label>
+						<span class="tooltip" onclick="explanation(
+							'Gender',
+							`Found on the creature scan.`,
+							'./helperimg/creature/creatureGender.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="gender1_label" data-dest-noauto="gender" id="genderInput">
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+							<option value="Exotic">Exotic</option>
+							<option value="Unknown">Unknown</option>
+							<option value="Indeterminate">Indeterminate</option>
+							<option value="Asymmetric">Asymmetric</option>
+							<option value="Non-uniform">Non-uniform</option>
+							<option value="Symmetric">Symmetric</option>
+							<option value="Rational">Rational</option>
+							<option value="Vectorised">Vectorised</option>
+							<option value="Prime">Prime</option>
+							<option value="Alpha">Alpha</option>
+							<option value="Radical">Radical</option>
+							<option value="Asymptotic">Asymptotic</option>
+							<option value="Orthogonal">Orthogonal</option>
+							<option value="None">None</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label>Second Gender:</label>
+						<span class="tooltip" onclick="explanation(
+							'Second Gender',
+							`Some genera have two genders, while others have only one gender.<br>
+							Birds, fish and weird/anomalous fauna for example have only one gender.<br>
+							They might show up as two genders, but will have the exact same appearance.`
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Only applies to certain genera. Can be found on the creature scan.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="gender2_label" data-dest-noauto="gender2" id="gender2Input">
+							<option value=""></option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+							<option value="Exotic">Exotic</option>
+							<option value="Unknown">Unknown</option>
+							<option value="Indeterminate">Indeterminate</option>
+							<option value="Asymmetric">Asymmetric</option>
+							<option value="Non-uniform">Non-uniform</option>
+							<option value="Symmetric">Symmetric</option>
+							<option value="Rational">Rational</option>
+							<option value="Vectorised">Vectorised</option>
+							<option value="Prime">Prime</option>
+							<option value="Alpha">Alpha</option>
+							<option value="Radical">Radical</option>
+							<option value="Asymptotic">Asymptotic</option>
+							<option value="Orthogonal">Orthogonal</option>
+							<option value="None">None</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label for="behaviourInput">Behaviour:</label>
+						<span class="tooltip" onclick="explanation(
+							'Behaviour',
+							`Found on the creature scan.`,
+							'./helperimg/creature/creatureBehaviour.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<input data-dest="behaviour" type="text" list="behaviourData" id="behaviourInput">
+					</div>
+					<div class="tableCell text">
+						<label for="dietInput">Diet:</label>
+						<span class="tooltip" onclick="explanation(
+							'Diet',
+							`Found on the creature scan.`,
+							'./helperimg/creature/creatureDiet.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<input data-dest="diet" type="text" list="dietData" id="dietInput">
+					</div>
+					<div class="tableCell text">
+						<label for="weightInput">Weight in kg:</label>
+						<span class="tooltip" onclick='explanation(
+							"Weight",
+							`Found on the creature scan.<br>
+							No "kg" necessary.`,
+							"./helperimg/creature/creatureWeight.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan. No "kg" necessary.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<input data-dest-noauto="weight" type="text" id="weightInput" maxlength="5" placeholder="0.0">
+					</div>
+					<div class="tableCell text">
+						<label for="heightInput">Height in m:</label>
+						<span class="tooltip" onclick='explanation(
+							"Height",
+							`Found on the creature scan.<br>
+							No "m" necessary.`,
+							"./helperimg/creature/creatureHeight.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan. No "m" necessary.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<input data-dest-noauto="height" type="text" id="heightInput" maxlength="3" placeholder="0.0">
+					</div>
+					<div class="tableCell text" style="display: none;">
+						<label for="weight2Input">Gender 2 Weight in kg:</label>
+					</div>
+					<div class="tableCell data" style="display: none;">
+						<input type="text" data-dest-noauto="weight2" id="weight2Input" maxlength="5" placeholder="0.0">
+					</div>
+					<div class="tableCell text" style="display: none;">
+						<label for="height2Input">Gender 2 Height in m:</label>
+					</div>
+					<div class="tableCell data" style="display: none;">
+						<input type="text" data-dest-noauto="height2" id="height2Input" maxlength="3" placeholder="0.0">
+					</div>
+					<div class="tableCell text">
+						<label for="notesInput">Notes:</label>
+						<span class="tooltip" onclick='explanation(
+							"Notes",
+							`Found on the creature scan.<br>
+							This might differ from the discovery menu.`,
+							"./helperimg/creature/creatureNotes.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan. Might differ from the discovery menu.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<input data-dest-noauto="notes" type="text" list="notesData" id="notesInput">
+					</div>
+					<div class="tableCell text" style="display: none;">
+						<label for="specialNotesInput">Notes for discovery menu:</label>
+						<span class="tooltip" onclick='explanation(
+							"Discovery Menu Notes",
+							`Found in the discovery menu.<br>
+							This might differ from the creature scan.`,
+							"./helperimg/creature/creatureDMNotes.jpg"
+						)'><img src="./lib/help.svg"><span class="tooltiptext">
+								This might differ from the scan. Please check in the discovery menu.
+							</span></span>
+					</div>
+					<div class="tableCell data" style="display: none;">
+						<input data-dest-noauto="addObservation" type="text" list="specialNotesData"
+							id="specialNotesInput">
+					</div>
+					<div class="tableCell text">
+						<label>Produces:</label>
+						<span class="tooltip" onclick="explanation(
+							'Produces',
+							`Found on the creature scan.`,
+							'./helperimg/creature/creatureProduces.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext">
+								Found on the creature scan.
+							</span></span>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="produces" id="producesInput">
+						</select>
+					</div>
+					<div class="tableHeader text">
+						<p>Information about the player.</p>
+					</div>
+					<div class="tableCell text">
+						<label>Gamemode:</label>
+						<span class="tooltip" onclick="explanation('Gamemode', 
+						'Gamemode of the save on which this creature was discovered.<br>Found in the main menu:',
+						'./helperimg/shared/gamemode.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Gamemode of the save on which this creature was discovered.</span></span>
+					</div>
+					<div class="tableCell data">
+						<select data-dest="mode" id="modeInput">
+							<option value="Normal">Normal</option>
+							<option value="Relaxed">Relaxed</option>
+							<option value="Survival">Survival</option>
+							<option value="Permadeath">Permadeath</option>
+							<option value="Creative">Creative</option>
+							<option value="Custom">Custom</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label for="discoveredlinkInput">Discoverer wiki account:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
+					</div>
+					<div class="tableCell text">
+						<label for="discoveredInput">Discoverer alias if no wiki:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest="discovered" id="discoveredInput">
+					</div>
+					<div class="tableCell text">
+						<label for="docbyInput">Documenter alias if not discoverer:</label>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest-noauto="docby" id="docbyInput">
+					</div>
+					<div class="tableCell text">
+						<label>Do you belong to a chapter?</label>
+					</div>
+					<div class="tableCell data">
+						<select data-dest-noauto="researchteam" id="researchteamInput"></select>
+					</div>
+					<div class="tableCell text">
+						<label>Into which catalog does this creature belong (if any)?</label>
+					</div>
+					<div class="tableCell data">
+						<select data-dest-noauto="catalog" id="catalogInput">
+						</select>
+					</div>
+					<div class="tableHeader data no-flex">
+						<label for="appearanceInput">Appearance</label>
+						<textarea data-dest="appearance" id="appearanceInput"
+							placeholder="What does the creature look like?"></textarea>
+					</div>
+					<div class="tableHeader data no-flex">
+						<label for="dmInput">Discovery Menu</label>
+						<span class="tooltip" onclick="explanation('Discovery Menu Text', 
+							`Found in the Discovery Menu. Enter exactly as seen in game, but ignore any linebreaks.`,
+							'./helperimg/creature/creatureDM.jpg'
+							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the Discovery Menu. Enter exactly as seen in game.</span></span>
+						<textarea data-dest-noauto="DM" id="dmInput"></textarea>
+					</div>
+					<div class="tableCell text">
+						<label for="galleryUpload">Gallery files</label>
+						<span class="tooltip" onclick="explanation('Gallery', 
+						`The preferred order of pictures is as follows:
+						<div class='is-flex is-justify-content-center'>
+							<ol class='has-text-left'>
+								<li>Gender 1</li>
+								<li>Gender 2</li>
+								<li>Gender 1 scan</li>
+								<li>Gender 2 scan</li>
+								<li>Discovery Menu</li>
+								<li>Planet/Moon DM</li>
+								<li>System DM</li>
+								<li>Galaxy Map</li>
+							</ol>
+						</div>`); galleryUploadShown = true">
+							<img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								There is a preferred order of pictures.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+					</div>
 				</div>
-				<div>
-					<span class="actions" style="white-space: nowrap">
-						<button class="button is-warning" type="reset" form="form">Reset inputs</button>
-					</span>
-					<span class="actions" style="white-space: nowrap">
-						<button id="btn" class="button is-outlined is-primary"
-							onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
-						<a id="downloadbtn" class="button is-outlined is-primary"
-							onclick="downloadFile('downloadbtn', 'wikiText', pageName('oldName_input', 'name_input'))">Download
-							file</a>
-						<a class="button is-outlined is-primary" id="link"
-							onclick="wikiLink('link', 'region', pageName('oldName_input', 'name_input'));">Create
-							page</a>
-					</span>
+				<div id="galleryItems">
 				</div>
-				<br>
+				<div id="actions" class="buttons"></div>
+				<div id="albumActions" class="buttons"></div>
 			</div>
-			<div class="column is-full-mobile">
-				<div class="output">
-					<div id="wikiText">
-						<div>{{Version|<output id='release' name="release"></output>}}</div>
-						<div>{{<output id='civStub'></output>}}</div>
-						<div>{{Creature infobox</div>
-						<div>| name = <output id='name' name="newName"></output></div>
-						<div>| image = <output id='image' name="image"></output></div>
-						<div>| galaxy = <output id='galaxy'></output></div>
-						<div>| region = <output id='region'></output></div>
-						<div>| system = <output id='system' name="system"></output></div>
-						<div>| planet = <output id='planet'></output></div>
-						<div>| moon = <output id='moon'></output></div>
-						<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}
-						</div>
-						<div>| hemisphere = <output id='hemisphere'></output></div>
-						<div>| rarity = <output id='rarity'></output></div>
-						<div>| ecosystem = <output id='ecosystem'></output></div>
-						<div>| activity = <output id='activity'></output></div>
-						<div>| gender = <output id='gender'></output></div>
-						<div>| behaviour = <output id='behaviour'></output></div>
-						<div>| diet = <output id='diet'></output></div>
-						<div>| weight = <output id='weight'></output></div>
-						<div>| height = <output id='height' name="height"></output></div>
-						<div>| notes = <output id='notes'></output></div>
-						<div>| produces = <output id='produces'></output></div>
-						<div>| genus = <output id='genus'></output></div>
-						<div>| civilized = <output id='civilized'></output></div>
-						<div>| discovered = <output id='discovered'></output></div>
-						<div>| discoveredlink = <output id='discoveredlink'></output></div>
-						<div>| researchteam = <output id='researchteam'></output></div>
-						<div>| mode = <output id='mode'></output></div>
-						<div>| release = <output id="release1" name="release"></output></div>
-						<div>}}</div>
-						<div>'''<output id='name1' name="name"></output>''' is a creature.</div>
-						<br>
-
-						<div>==Summary==</div>
-						<div>'''<output id='name2' name="name"></output>''' is a [[creature]], a member of the [[<output
-								id='genus1'></output>]] [[genus]].
-						</div>
-						<br>
-
-						<div>==Appearance==</div>
-						<div><output id='appearance'></output></div>
-						<br>
-
-						<div>==Alias Names==</div>
-						<div>{{aliasc|text=Original|name=<output id='oldName'></output>}}</div>
-						<div>{{aliasc|text=Current|name=<output id='newName' name="newName"></output>}}</div>
-						<br>
-
-						<div>==Discovery Menu==</div>
-						<div><output id='DM'></output></div>
-						<br>
-						<div><output id='addObservation'></output></div>
-						<br>
-
-						<div>==Location==</div>
-						<div>It can be found on the <output id='locPlanet'></output> in the [[<output id='locSystem'
-								name="system"></output>]] [[star system]].</div>
-						<br>
-						<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
-						<br>
-
-						<div>==Additional Information==</div>
-						<div><span name="bulletpoint"></span> <output id='addInfo'></output></div>
-						<div><span name="bulletpoint"></span> <output id="docby"></output></div>
-						<br>
-
-						<div>==Gallery==</div>
-						<div>&lt;gallery&gt;</div>
-						<div><output id="galleryCode"></output></div>
-						<div>&lt;/gallery&gt;</div>
+			<div id="output" class="column is-full-mobile">
+				<div class="wikiText" id="fullArticle">
+					<div>{{Version|<output id='release' name="release"></output>}}</div>
+					<div>{{<output id='civStub'></output>}}</div>
+					<div>{{Creature infobox</div>
+					<div>| name = <output id='name' name="newName"></output></div>
+					<div>| image = <output id='image' name="image"></output></div>
+					<div>| galaxy = <output id='galaxy'></output></div>
+					<div>| region = <output id='region'></output></div>
+					<div>| system = <output id='system' name="system"></output></div>
+					<div>| planet = <output id='planet'></output></div>
+					<div>| moon = <output id='moon'></output></div>
+					<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}
 					</div>
+					<div>| hemisphere = <output id='hemisphere'></output></div>
+					<div>| rarity = <output id='rarity'></output></div>
+					<div>| ecosystem = <output id='ecosystem'></output></div>
+					<div>| activity = <output id='activity'></output></div>
+					<div>| gender = <output id='gender'></output></div>
+					<div>| behaviour = <output id='behaviour'></output></div>
+					<div>| diet = <output id='diet'></output></div>
+					<div>| weight = <output id='weight'></output></div>
+					<div>| height = <output id='height'></output></div>
+					<div>| notes = <output id='notes'></output></div>
+					<div>| produces = <output id='produces'></output></div>
+					<div>| genus = <output id='genus' name="genus"></output></div>
+					<div>| civilized = <output id='civilized'></output></div>
+					<div>| discovered = <output id='discovered'></output></div>
+					<div>| discoveredlink = <output id='discoveredlink'></output></div>
+					<div>| researchteam = <output id='researchteam'></output></div>
+					<div>| mode = <output id='mode'></output></div>
+					<div>| release = <output id="release1" name="release"></output></div>
+					<div>}}</div>
+					<div>'''<output id='name1' name="name"></output>''' is a creature.</div>
+					<br>
+
+					<div>==Summary==</div>
+					<div>'''<output id='name2' name="name"></output>''' is a [[creature]], a member of the [[<output
+							id='genus1' name="genus"></output>]] [[genus]].
+					</div>
+					<br>
+
+					<div>==Appearance==</div>
+					<div><output id='appearance'></output></div>
+					<br>
+
+					<div>==Alias Names==</div>
+					<div>{{aliasc|text=Original|name=<output id='oldName'></output>}}</div>
+					<div>{{aliasc|text=Current|name=<output id='newName' name="newName"></output>}}
+					</div>
+					<br>
+
+					<div>==Discovery Menu==</div>
+					<div><output id='DM'></output></div>
+					<br>
+					<div><output id='addObservation'></output></div>
+					<br>
+
+					<div>==Location==</div>
+					<div>It can be found on the <output id='celestialBody'></output> in the [[<output id='locSystem'
+							name="system"></output>]] [[star system]].</div>
+					<br>
+					<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}
+					</div>
+					<br>
+
+					<div>==Additional Information==</div>
+					<div><span data-add-info="*"></span> <output id='addInfo'></output></div>
+					<div><span data-add-info="*"></span> <output id="docby"></output></div>
+					<br>
+
+					<div>==Gallery==</div>
+					<div>&lt;gallery&gt;</div>
+					<div><output id="galleryCode"></output></div>
+					<div>&lt;/gallery&gt;</div>
 				</div>
-				<div class="output" id="AlbumEntry">
-					<h3 class="subtitle is-5" style="margin-bottom:0.5rem"><output id="album"></output> Album entry for
-						<output name="newName"></output>:
-					</h3>
-					<div>
-						<div id="albumText">
-							| {{album | file=<output name="image" id="albumImage"></output> | name=[[<output
-								id="albumName" name="newName"></output>]] | other=(<output name="height"
-								id="albumHeight"></output>m) | glyph=<output id='albumGlyphs'
-								name="portalglyphs"></output> | <output id="albumDiscoverer"></output>}}
-						</div>
-					</div>
-					<div class="actions" style="margin-top:0.5rem;">
-						<button id="albumBtn" class="button is-outlined is-primary"
-							onclick="copyText('albumText', 'albumBtn')">
-							Copy album wikicode
-						</button>
-						<a class="button is-outlined is-primary" id="albumLink"
-							onclick="wikiLink('albumLink', 'region', 'catalog_input'); this.href ? this.href = this.href.replace('Special:EditPage/', '') + '_Album' : this.removeAttribute('href');">
-							Open Album
-						</a>
-					</div>
-				</div>
+				<div id="albumEntry"></div>
 			</div>
-		</div>
+		</main>
 	</div>
-	<footer class="footer">
-		<div>
-			Please consider contributing to the project:
-			<ul>
-				<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank"
-						rel="noopener noreferrer">GitHub repository</a></li>
-			</ul>
-		</div>
-		<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
-	</footer>
-	<datalist id="notesData">
-		<option value="Many hidden toes">
-		<option value="Builds metal nest">
-		<option value="Dislikes bright colours">
-		<option value="Moon Baby">
-		<option value="Lays beautiful eggs">
-		<option value="Waxy all-over">
-		<option value="Secretes venom">
-		<option value="Compound eyes">
-		<option value="Inverted organ sacs">
-		<option value="Good pollinator">
-		<option value="Ultrasonic roar">
-		<option value="Retractable appendages">
-		<option value="Has no bones">
-		<option value="Not carbon based">
-		<option value="Evil">
-		<option value="Nutritious faeces">
-		<option value="Asexual reproduction">
-		<option value="Changes gender when cold">
-		<option value="Can dislocate jawbones">
-		<option value="Powerful mandibles">
-		<option value="Autonomous regeneration">
-		<option value="Technically immortal">
-		<option value="Blue blood">
-		<option value="Green blood">
-		<option value="Yellow blood">
-		<option value="Excess of bile">
-		<option value="Creates beautiful webs">
-		<option value="Strong burrower">
-		<option value="Hibernates">
-		<option value="Mates for life">
-		<option value="Carries symbiotic fungus">
-		<option value="Stomach inside skull">
-		<option value="Nine additional senses">
-		<option value="Sense organs in feet">
-		<option value="Excellent sense of smell">
-		<option value="Poor hearing">
-		<option value="Ticklish">
-		<option value="Highly intelligent">
-		<option value="Cannot see colour">
-		<option value="Sprays ink when scared">
-		<option value="Produces vile stench">
-		<option value="Unpleasant to eat">
-		<option value="Gelatinous bones">
-		<option value="Can change colour">
-		<option value="Chromatophore">
-		<option value="Rapid self-healing">
-		<option value="Valuable blood">
-		<option value="Absorbs moisture from air">
-		<option value="Mildly radioactive">
-		<option value="Strongly radioactive">
-		<option value="Hybrid species">
-		<option value="Genetically unstable">
-		<option value="Partially domesticated">
-		<option value="Gentle soul">
-		<option value="Hidden extra skull">
-		<option value="Secondary skin">
-		<option value="Hidden extra tongue">
-		<option value="Redundant internal organs">
-		<option value="Rigid bones">
-		<option value="Hidden extra claws">
-		<option value="Six stomachs">
-		<option value="Powerful digestive enzymes">
-		<option value="Saliva pH 14">
-		<option value="Flexible joints">
-		<option value="Hidden stinger">
-		<option value="Covered in tiny hairs">
-		<option value="Untameable">
-		<option value="Fragile skull">
-		<option value="Fragile skin">
-		<option value="Detachable tongue">
-		<option value="Bruisable organs">
-		<option value="Brittle bones">
-		<option value="Calcified claws">
-		<option value="Translucent teeth">
-		<option value="Caustic skin">
-		<option value="Toxic tongue">
-		<option value="Covered in toxic bristles">
-		<option value="Venom-laden claws">
-		<option value="Armoured skull">
-		<option value="Regularly sheds skin">
-		<option value="Monstrous tongue">
-		<option value="Tiny organs">
-		<option value="Metal bones">
-		<option value="Bioluminescent teeth">
-		<option value="Thick skull">
-		<option value="Toughened skin">
-		<option value="Massive tongue">
-		<option value="Stores water in hidden sacs">
-		<option value="Sheds and regrows bones">
-		<option value="Sharp claws">
-		<option value="Rubber skull">
-		<option value="Porous skin">
-		<option value="Regrows teeth each day">
-		<option value="Grows lungs after birth">
-		<option value="Carbon-based skeleton">
-		<option value="Decentralised nervous system">
-		<option value="Skull full of holes">
-		<option value="Skin parasites">
-		<option value="Tongue parasites">
-		<option value="Extensive gut bacteria">
-		<option value="Digests via symbionts">
-		<option value="Claws harbour disease">
-		<option value="Spawns in water">
-		<option value="Goes underground to die">
-		<option value="Tapeworm host">
-		<option value="Delicious">
-		<option value="Easily trained">
-		<option value="Inflates when stressed">
-		<option value="Poor sense of direction">
-		<option value="Excellent navigator">
-		<option value="Can sense magnetic fields">
-		<option value="Easily confused">
-		<option value="Frequently lost">
-		<option value="Hears ground vibrations">
-		<option value="Scared of fire">
-		<option value="Hydrophobic">
-		<option value="Vestigial udders">
-		<option value="Makes art with sticks">
-		<option value="Recognises other species">
-		<option value="Beloved by the [[Gek]]">
-		<option value="Bonds with [[Vy'keen]]">
-		<option value="Hunts [[Sentinel]]s">
-		<option value="Matriarchal society">
-		<option value="Digs underground nests">
-		<option value="One extendible finger">
-		<option value="Grows wings before death">
-		<option value="Alluring pheromones">
-		<option value="Sings beautifully">
-		<option value="Deceptively fast">
-		<option value="Lacks gallbladder">
-		<option value="Both gills and lungs">
-		<option value="Respires inorganically">
-		<option value="Has chlorophyll glands">
-		<option value="Sleeps standing up">
-		<option value="Never blinks">
-		<option value="Frequently regurgitates">
-		<option value="Irritable">
-		<option value="Highly social">
-		<option value="Dislikes being scanned">
-		<option value="Telepathic">
-		<option value="Burns in the sun">
-		<option value="Well insulated">
-		<option value="Photosensitive">
-		<option value="Secretes phytotoxins">
-		<option value="Lovely eyes">
-		<option value="Good parent">
-		<option value="Can feel love">
-		<option value="Screams when upset">
-		<option value="Forms colonies">
-		<option value="Hatched from cocoons">
-		<option value="Fragrant">
-		<option value="Particularly oily">
-		<option value="Gets cold easily">
-		<option value="Drinks blood">
-		<option value="Does not age">
-		<option value="Always waiting">
-		<option value="Always watching">
-		<option value="Aware of its fate">
-		<option value="Senses ATLAS">
-		<option value="Limited sentience">
-		<option value="Born on meteors">
-		<option value="Laden with nectar">
-		<option value="Occasionally eats rocks">
-		<option value="Scared of mirrors">
-		<option value="Self-aware">
-		<option value="Eyes regrow after damage">
-		<option value="Superheated stomach">
-		<option value="Three hearts">
-		<option value="Two livers">
-		<option value="Acidic blood">
-		<option value="Respires anaerobically">
-		<option value="Carries symbiotic worms">
-		<option value="Riddled with pests">
-		<option value="Carries babies in pouch">
-		<option value="Promiscuous">
-		<option value="Symmetrical insides">
-		<option value="Occasionally invisible">
-		<option value="Limited mind control">
-		<option value="Buries food supplies">
-		<option value="Cannot sweat">
-		<option value="Weak lungs">^
-		<option value="Strong swimmer">
-		<option value="Made of stardust">
-		<option value="Requires dietary iron">
-		<option value="Magnetic teeth">
-		<option value="Retractable eyestalks">
-		<option value="Breathes through mouth">
-		<option value="Smells with tongue">
-		<option value="Cannot drown">
-		<option value="Highly fertile">
-		<option value="Nitrogen-rich blood">
-		<option value="Bioluminescent blood">
-		<option value="Fears the rain">
-		<option value="Echolocation glands">
-		<option value="Possesses language">
-		<option value="Varied phenotype">
-		<option value="Tiny brain">
-		<option value="Cannot digest starch">
-		<option value="Seeks red flowers">
-		<option value="Nests in blue foliage">
-		<option value="Elaborate mating displays">
-		<option value="Brain hemispheres not linked">
-		<option value="Sweats milk for infants">
-		<option value="No stomach">
-		<option value="Double-coned eyes">
-		<option value="Cutaneous respiration">
-		<option value="Barbed feet">
-		<option value="Extremely homozygous">
-		<option value="Extremely heterozygous">
-		<option value="Parasites in brain">
-		<option value="Night vision">
-	</datalist>
-
-	<datalist id="specialNotesData">
-		<option value="Evil">
-		<option value="Sheds and regrows bones">
-		<option
-			value="But there is something particularly unsettling about this creature, some deep shadow hanging over them. They are to be treated with extreme caution.">
-		<option
-			value="Skeletal analysis reveals unusually supple bones, as if they had only recently grown: possible defense mechanism to shed and rapidly regrow body parts?">
-	</datalist>
-
-	<datalist id="behaviourData">
-		<option value="Careful hunter">
-		<option value="Patient hunter">
-		<option value="Cautious">
-		<option value="Impulsive">
-		<option value="Reckless">
-		<option value="Aggressive">
-		<option value="Unafraid">
-		<option value="Cold-blooded">
-		<option value="Does not fear death">
-		<option value="Intelligent">
-		<option value="Calm">
-		<option value="Enjoys the hunt">
-		<option value="Bold">
-		<option value="Stalks prey for days">
-		<option value="Unpredictable">
-		<option value="Dangerous">
-		<option value="Wildly aggressive">
-		<option value="Vicious">
-		<option value="Cruel">
-		<option value="Hyperviolent">
-		<option value="Excited by violence">
-		<option value="Angry">
-		<option value="Easily enraged">
-		<option value="Warlike">
-		<option value="Apex predator">
-		<option value="Watchful">
-		<option value="Nervous">
-		<option value="Skittish">
-		<option value="Timid">
-		<option value="Shy">
-		<option value="Highly observant">
-		<option value="Slow grazer">
-		<option value="Tends plants">
-		<option value="Seeks company">
-		<option value="Wary">
-		<option value="Easily startled">
-		<option value="Vigilant">
-		<option value="Inattentive">
-		<option value="Constantly moving">
-		<option value="Hasty">
-		<option value="Fidgety">
-		<option value="Anxious">
-		<option value="Long-distance migration">
-		<option value="Nomadic">
-		<option value="Remembers faces">
-		<option value="Submissive">
-		<option value="Highly intelligent">
-		<option value="Passive">
-		<option value="Docile">
-		<option value="Wise">
-		<option value="Prudent">
-		<option value="Far-sighted">
-		<option value="Always foraging">
-		<option value="Methodical">
-		<option value="Friendly">
-		<option value="Cheerful">
-		<option value="Gentle">
-		<option value="Peaceful">
-		<option value="Flighty">
-		<option value="Collects shiny objects">
-		<option value="Builds large nests">
-		<option value="Easily scared">
-		<option value="Migratory">
-		<option value="Very cautious">
-		<option value="Sings at dusk">
-		<option value="Long-sighted">
-		<option value="Ever-moving">
-		<option value="Instinctive">
-		<option value="Desperate">
-		<option value="Food-seeking">
-		<option value="Mate-seeking">
-		<option value="Never sleeps">
-		<option value="Melancholy">
-		<option value="Lonely">
-		<option value="Observant">
-		<option value="Drifts on currents">
-		<option value="Deep-diving">
-		<option value="Seeks cold">
-		<option value="Seeks warmth">
-		<option value="Bioelectric Defenses">
-		<option value="Can inflate quickly">
-		<option value="Lost">
-		<option value="Haunted by unheard sound">
-		<option value="Uses sonar">
-		<option value="Effectively blind">
-		<option value="Pressure sensitive">
-		<option value="Photophobic">
-		<option value="Only sees up">
-		<option value="Chromatophoric">
-		<option value="Forms schools">
-		<option value="Frequent shoaling">
-		<option value="Smells blood">
-		<option value="Silent stalker">
-		<option value="Hostile">
-		<option value="Ambush predation">
-		<option value="Shoots neurotoxic spines">
-		<option value="Strikes from below">
-		<option value="Pack hunter">
-		<option value="Lone predator">
-		<option value="Threatening">
-		<option value="Transcendent">
-		<option value="Self-aware">
-		<option value="Hungry">
-		<option value="Afraid">
-	</datalist>
-
-	<datalist id="dietData">
-		<option value="[[Star Bramble]]">
-		<option value="[[Echinocactus]]">
-		<option value="[[Solar Vine]]">
-		<option value="[[Frostwort]]">
-		<option value="[[Fungal Cluster]]">
-		<option value="[[Gamma Weed]]">
-		<option value="Vegetation">
-		<option value="Foliage">
-		<option value="Small trees">
-		<option value="Rotting fruit">
-		<option value="Fresh leaves">
-		<option value="Plant roots">
-		<option value="Digs for tubers">
-		<option value="Grass">
-		<option value="Foraged nuts">
-		<option value="Collects seeds">
-		<option value="Nibbles at shoots">
-		<option value="Tall grasses">
-		<option value="[[Marrow Bulb|Cave marrow]]">
-		<option value="Mordite roots">
-		<option value="[[Faecium]]">
-		<option value="[[Coprite]]">
-		<option value="Well-Matured Dung">
-		<option value="Mostly rocks">
-		<option value="[[Di-hydrogen]] crystals">
-		<option value="Processes dirt">
-		<option value="Oxide elements">
-		<option value="Absorbed nutrients">
-		<option value="[[NipNip Buds|NipNip buds]]">
-		<option value="[[Gravitino Ball|Gravitino balls]]">
-		<option value="Stinging leaves">
-		<option value="Algae">
-		<option value="Flowers">
-		<option value="Petals">
-		<option value="Nectar">
-		<option value="Pollen">
-		<option value="Scavenged scraps">
-		<option value="Insects and grubs">
-		<option value="Worms">
-		<option value="Anything">
-		<option value="Faeces">
-		<option value="Birds">
-		<option value="Scavenged remains">
-		<option value="Partially-digested meat">
-		<option value="Eggs">
-		<option value="Steals from others">
-		<option value="[[Venom Urchin]]s">
-		<option value="Foraged leftovers">
-		<option value="Small animals">
-		<option value="Old bones">
-		<option value="[[Mordite]]">
-		<option value="Carnivorous">
-		<option value="Meat-eater">
-		<option value="Hypnotises prey">
-		<option value="Crunches bones">
-		<option value="Blood-drinker">
-		<option value="Liquidised organs">
-		<option value="Extracts bone marrow">
-		<option value="Organs">
-		<option value="Raw meat">
-		<option value="Flesh-eater">
-		<option value="Hypercarnivore">
-		<option value="Brain matter">
-		<option value="Sinew">
-		<option value="Fresh meat">
-		<option value="Corpses">
-		<option value="Putrefied meat">
-		<option value="Cannibal">
-		<option value="Offal">
-		<option value="Removed hearts">
-		<option value="Small animals">
-		<option value="Other carnivores">
-		<option value="Large mammals">
-		<option value="Flesh chunks">
-		<option value="Meat chunks">
-		<option value="Coagulated blood">
-		<option value="Frozen meat">
-		<option value="Boiled meat">
-		<option value="Radioactive meat">
-		<option value="Toxic meat">
-		<option value="Rotten meat">
-		<option value="Preserved meat">
-		<option value="Marine snow">
-		<option value="Chemosynthesis">
-		<option value="Vented minerals">
-		<option value="Plankton">
-		<option value="Seaweed">
-		<option value="Deepwater algae">
-		<option value="Small crustaceans">
-		<option value="Rotten wood">
-		<option value="Decayed plant life">
-		<option value="Marine detritus">
-		<option value="Algal particulates">
-		<option value="Coral">
-		<option value="Living sponges">
-		<option value="Deepwater spores">
-		<option value="Nibbles at moss">
-		<option value="Hydrothermal minerals">
-		<option value="Water filtration">
-		<option value="Drifting plants">
-		<option value="Silicates">
-		<option value="High in calcium">
-		<option value="Water vines">
-		<option value="[[Kelp Sac|Kelp sacs]]">
-		<option value="Nutritious water weeds">
-		<option value="Other fish">
-		<option value="Cannibalism">
-		<option value="Marine eggs">
-		<option value="Turtles">
-		<option value="Shellfish">
-		<option value="Drifting carcasses">
-		<option value="Bones">
-		<option value="Hunts squid">
-		<option value="Brined organs">
-		<option value="Salinated flesh">
-		<option value="Brains">
-		<option value="Blood">
-		<option value="Gelatinous chunks">
-		<option value="Wasteflesh">
-	</datalist>
+	<footer id="footer" class="footer"></footer>
 </body>
 
 </html>
