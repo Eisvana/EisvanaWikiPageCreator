@@ -530,8 +530,9 @@ input[type="date"]:hover {
 		visibility: hidden;
 		opacity: 0;
 	}
-	.tooltip[onclick] .tooltiptext,
-	.tooltip[onclick] {
+
+	.tooltip[onclick],
+	.tooltip[onclick] * {
 		user-select: none;
 		-webkit-user-select: none;
 	}
