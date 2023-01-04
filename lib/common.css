@@ -611,6 +611,13 @@ footer button {
 	}
 }
 
+@media only screen and (max-width: 550px) {
+	div.column {
+		padding: 1rem;
+	}
+}
+
+
 #portalglyphButtons>* {
 	margin: .5px;
 }
