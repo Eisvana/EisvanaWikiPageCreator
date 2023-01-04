@@ -527,6 +527,7 @@ input[type="date"]:hover {
 	.tooltip[onclick]:hover .tooltiptext {
 		visibility: hidden;
 		opacity: 0;
+		user-select: none;
 	}
 }
 
