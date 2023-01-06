@@ -8,11 +8,12 @@
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js" defer></script>
 	<script src="./lib/pages/sandworm.js" defer></script>
+	<script src="./lib/modules/footer.js" defer></script>
 	<script src="./lib/modules/portalglyphs.js" defer></script>
 	<script src="./lib/modules/gallery.js" defer></script>
 	<script src="./lib/modules/actions.js" defer></script>
 	<script src="./lib/modules/albumactions.js" defer></script>
-	<script src="./lib/modules/footer.js" defer></script>
+	<script src="./lib/modules/dialog.js" defer></script>
 	<script src="./lib/misc_logic/locationLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Worm scan', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
@@ -31,16 +32,7 @@
 			<div><a href="./fauna.html" title="Fauna">&#8624; Fauna</a></div>
 		</nav>
 		<h1 class="title is-3">Hub Wiki Page Creator - Sandworm</h1>
-		<dialog id="explanation" class="modal-content content">
-			<h2 id="explanationHeading" class="title is-4"></h2>
-			<div id="explanationContent" class="nms-font"></div>
-			<a id="explanationLink" target='_blank' rel='noopener noreferrer'>
-				<img id="explanationImg" alt='Explainer Image'>
-			</a>
-			<form method="dialog">
-				<button class="button" autofocus>Close</button>
-			</form>
-		</dialog>
+		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
