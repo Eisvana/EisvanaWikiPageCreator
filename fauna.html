@@ -8,12 +8,13 @@
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js" defer></script>
 	<script src="./lib/pages/fauna.js" defer></script>
+	<script src="./lib/modules/footer.js" defer></script>
 	<script src="./lib/modules/portalglyphs.js" defer></script>
 	<script src="./lib/modules/gallery.js" defer></script>
 	<script src="./lib/modules/actions.js" defer></script>
 	<script src="./lib/modules/albumactions.js" defer></script>
-	<script src="./lib/modules/footer.js" defer></script>
 	<script src="./lib/misc_logic/creatureDatalists.js" defer></script>
+	<script src="./lib/modules/dialog.js" defer></script>
 	<script src="./lib/misc_logic/locationLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'x gender', 'x gender scan', 'Creature scan', 'Discovery Menu', 'Planet Page', 'Moon Page', 'System Page', 'Galaxy Map'];
@@ -32,16 +33,7 @@
 			<div><a href="./sandworm.html" title="Sandworm">&#8627; Sandworm</a></div>
 		</nav>
 		<h1 class="title is-3">Hub Wiki Page Creator - Fauna</h1>
-		<dialog id="explanation" class="modal-content content">
-			<h2 id="explanationHeading" class="title is-4"></h2>
-			<div id="explanationContent" class="nms-font"></div>
-			<a id="explanationLink" target='_blank' rel='noopener noreferrer'>
-				<img id="explanationImg" alt='Explainer Image'>
-			</a>
-			<form method="dialog">
-				<button class="button" autofocus>Close</button>
-			</form>
-		</dialog>
+		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
@@ -139,8 +131,7 @@
 					<div class="tableCell text">
 						<label>Genus:</label>
 						<span class="tooltip" onclick="explanation(
-							'Genus',
-							`The genus is defined by the general appearance of a creature.<br>
+							'Genus', `The genus is defined by the general appearance of a creature.<br>
 							See the wiki for a <a href='https://nomanssky.fandom.com/wiki/Genus#Genus_List' target='_blank'
 									rel='noopener noreferrer'>list of genera</a>.`
 						)"><img src="./lib/help.svg"><span class="tooltiptext">
@@ -156,8 +147,7 @@
 					<div class="tableCell text">
 						<label>Hemisphere:</label>
 						<span class="tooltip" onclick="explanation(
-							'Hemisphere',
-							`Found in the creature discovery menu.<br>
+							'Hemisphere', `Found in the creature discovery menu.<br>
 							If no hemisphere is given, leave the input empty.`,
 							'./helperimg/creature/creatureHemisphere.jpg'
 						)"><img src="./lib/help.svg"><span class="tooltiptext">
@@ -174,8 +164,7 @@
 					<div class="tableCell text">
 						<label>Rarity:</label>
 						<span class="tooltip" onclick="explanation(
-							'Rarity',
-							'Found in the creature discovery menu.',
+							'Rarity', 'Found in the creature discovery menu.',
 							'./helperimg/creature/creatureRarity.jpg'
 						)"><img src="./lib/help.svg"><span class="tooltiptext">
 								Found in the creature discovery menu.
@@ -191,8 +180,7 @@
 					<div class="tableCell text">
 						<label>Ecosystem:</label>
 						<span class="tooltip" onclick="explanation(
-							'Ecosystem',
-							'Found in the creature discovery menu.',
+							'Ecosystem', 'Found in the creature discovery menu.',
 							'./helperimg/creature/creatureEcosystem.jpg'
 						)"><img src="./lib/help.svg"><span class="tooltiptext">
 								Found in the creature discovery menu.
@@ -209,8 +197,7 @@
 					<div class="tableCell text">
 						<label>Activity:</label>
 						<span class="tooltip" onclick="explanation(
-							'Activity',
-							'Found in the creature discovery menu.',
+							'Activity', 'Found in the creature discovery menu.',
 							'./helperimg/creature/creatureActivity.jpg'
 						)"><img src="./lib/help.svg"><span class="tooltiptext">
 								Found in the creature discovery menu.
@@ -244,8 +231,7 @@
 					<div class="tableCell text">
 						<label>Gender:</label>
 						<span class="tooltip" onclick="explanation(
-							'Gender',
-							`Found on the creature scan.`,
+							'Gender', `Found on the creature scan.`,
 							'./helperimg/creature/creatureGender.jpg'
 						)"><img src="./lib/help.svg"><span class="tooltiptext">
 								Found on the creature scan.

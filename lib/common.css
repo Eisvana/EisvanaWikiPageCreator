@@ -46,13 +46,13 @@
 	--invert: 90%;
 }
 
-body[data-transition],
-body[data-transition] *,
-body[data-transition] input::file-selector-button,
-body[data-transition] input[type="date"]::-webkit-calendar-picker-indicator,
-body[data-transition] input::placeholder,
-body[data-transition] textarea::placeholder,
-body[data-transition] label {
+html[data-transition],
+html[data-transition] *,
+html[data-transition] input::file-selector-button,
+html[data-transition] input[type="date"]::-webkit-calendar-picker-indicator,
+html[data-transition] input::placeholder,
+html[data-transition] textarea::placeholder,
+html[data-transition] label {
 	transition: all .3s;
 	-moz-transition: all .3s;
 	-webkit-transition: all .3s;
@@ -395,6 +395,12 @@ input[type="file"] {
 
 div.column {
 	padding: 2rem;
+}
+
+@media only screen and (max-width: 550px) {
+	div.column {
+		padding: 1rem;
+	}
 }
 
 #output {
