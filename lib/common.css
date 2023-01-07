@@ -337,6 +337,12 @@ dialog #explanationLink:after {
 	}
 }
 
+@container (max-width: 450px) {
+	div.tableHeader div.checkboxes-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
 @container (max-width: 125px) {
 	div.tableCell div.radioButtons {
 		display: block;
@@ -432,6 +438,7 @@ div.column {
 .checkbox {
 	display: flex;
 	margin: 3px 0;
+	align-items: center;
 }
 
 .checkbox,
@@ -607,6 +614,7 @@ footer button {
 #portalglyphButtons {
 	display: grid;
 	grid-template-columns: repeat(8, 60px);
+	gap: 1px;
 }
 
 @media only screen and (max-width: 550px),
@@ -615,10 +623,6 @@ footer button {
 		display: flex;
 		flex-wrap: wrap;
 	}
-}
-
-#portalglyphButtons>* {
-	margin: .5px;
 }
 
 #portalglyphButtons .glyph.icon.is-small {
@@ -738,4 +742,9 @@ footer button {
 .gallery-item .controlButtons .delete-icon:hover,
 .handle:hover {
 	opacity: 1;
+}
+
+body[data-mark="false"] #output {
+	user-select: none;
+	-webkit-user-select: none;
 }
