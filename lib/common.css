@@ -748,11 +748,3 @@ body[data-mark="false"] #output {
 	user-select: none;
 	-webkit-user-select: none;
 }
-
-[data-tradeable]:has(output[id^="text"]:empty) {
-	display: none;
-}
-
-.codeWrapper span {
-	display: block;
-}
