@@ -127,7 +127,7 @@
 						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
 					</div>
 					<div class="tableCell text">
-						<label for="fileInput">Navigation image name, including file extension:</label>
+						<label for="navFileInput">Navigation image name, including file extension:</label>
 						<span class="tooltip" onclick="explanation('File Upload', 
 									`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
 									You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
@@ -141,7 +141,7 @@
 						<input type="file" id="navFileUpload" accept="image/*" onchange="image(this)">
 					</div>
 					<div class="tableCell text">
-						<label for="fileInput">Space Station image name, including file extension:</label>
+						<label for="ssFileInput">Space Station image name, including file extension:</label>
 						<span class="tooltip" onclick="explanation('File Upload', 
 									`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
 									You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
@@ -195,28 +195,30 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label>Stellar class:</label>
+						<label for="classInput">Stellar class:</label>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="classInput" data-dest="class">
 					</div>
 					<div class="tableCell text">
-						<label>Distance to center:</label>
+						<label for="distanceInput">Distance to center:</label>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="distanceInput" data-dest-noauto="distance">
 					</div>
 					<div class="tableCell text">
-						<label>Number of planets:</label>
+						<label for="planetInput">Number of planets:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" value="1" maxlength="1" id="planetInput" data-dest="planet" data-default="1">
+						<input type="text" value="1" maxlength="1" id="planetInput" data-dest-noauto="planet"
+							data-default="1">
 					</div>
 					<div class="tableCell text">
-						<label>Number of moons:</label>
+						<label for="moonInput">Number of moons:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" value="0" maxlength="1" id="moonInput" data-dest="moon" data-default="0">
+						<input type="text" value="0" maxlength="1" id="moonInput" data-dest-noauto="moon"
+							data-default="0">
 					</div>
 					<div class="tableCell text">
 						<label for="waterInput">Water in the system?</label>
@@ -295,16 +297,16 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label>Economy sell:</label>
+						<label for="economysellInput">Economy sell:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="economysellInput" data-dest="economysell">
+						<input type="text" id="economysellInput" data-dest-noauto="economysell">
 					</div>
 					<div class="tableCell text">
-						<label>Economy buy:</label>
+						<label for="economybuyInput">Economy buy:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="economybuyInput" data-dest="economybuy">
+						<input type="text" id="economybuyInput" data-dest-noauto="economybuy">
 					</div>
 					<div class="tableCell text">
 						<label>System wealth:</label>
@@ -413,13 +415,13 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label>When was this system discovered?</label>
+						<label for="discDateInput">When was this system discovered?</label>
 					</div>
 					<div class="tableCell data">
 						<input type="date" id="discDateInput" data-dest-noauto="discDate">
 					</div>
 					<div class="tableCell text">
-						<label>When was this system documented?</label>
+						<label for="docDateInput">When was this system documented?</label>
 					</div>
 					<div class="tableCell data">
 						<input type="date" id="docDateInput" data-dest-noauto="docDate">
@@ -743,7 +745,7 @@
 					<br>
 					<div>==Summary==</div>
 					<div>'''<output id='name2' name="name"></output>''' is a [[star system]], located in the <output
-							id='region1' name="region"></output> region.</div>
+							id="regionLong"></output>.</div>
 					<br>
 					<div>==Alias Names==</div>
 					<div>{{aliasc|text=Original|name=<output id='oldName'></output>}}</div>
@@ -765,7 +767,7 @@
 					<div>!style="background-color:#2f4f4f"|Sentinels</div>
 					<div>!style="background-color:#2f4f4f"|Flora</div>
 					<div>!style="background-color:#2f4f4f"|Fauna</div>
-					<div id="planetmoons">
+					<div id="planets">
 					</div>
 					<div>|}</div>
 					<br>
