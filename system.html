@@ -136,7 +136,8 @@
 							</span></span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="navFileInput" data-dest="navImage">
+						<input type="text" id="navFileInput" data-dest="navImage"
+							data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="navFileUpload" accept="image/*" onchange="image(this)">
 					</div>
 					<div class="tableCell text">
@@ -209,13 +210,13 @@
 						<label>Number of planets:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" value="1" maxlength="1" id="planetInput" data-dest-noauto="planet">
+						<input type="text" value="1" maxlength="1" id="planetInput" data-dest="planet" data-default="1">
 					</div>
 					<div class="tableCell text">
 						<label>Number of moons:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" value="0" maxlength="1" id="moonInput" data-dest-noauto="moon">
+						<input type="text" value="0" maxlength="1" id="moonInput" data-dest="moon" data-default="0">
 					</div>
 					<div class="tableCell text">
 						<label for="waterInput">Water in the system?</label>
@@ -485,8 +486,11 @@
 					<div id="terminalInputs" class="tableHeader text">
 						<button class="button is-primary" type="button" onclick="tradeables()">+ Add Tradeable</button>
 					</div>
-					<div class="tableHeader data no-flex">
-						<label>S-class multitool merchant upgrades:</label>
+					<div class="tableHeader text sectionToggle">
+						<p>S-class multitool merchant upgrades:</p>
+						<button class="button" onclick="toggleSection('MTMerchant', this)">Show</button>
+					</div>
+					<div class="tableHeader data" data-section="MTMerchant" style="display: none;">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="mtAVUInput"><input type="checkbox" id="mtAVUInput"
 									value="Analysis Visor Upgrade" data-dest-checkbox-group="MTMerchant"><span
@@ -521,8 +525,11 @@
 									class="checkbox-label">Scatter Blaster Upgrade</span></label>
 						</div>
 					</div>
-					<div class="tableHeader data no-flex">
-						<label>S-class starship merchant upgrades:</label>
+					<div class="tableHeader text sectionToggle">
+						<p>S-class starship merchant upgrades:</p>
+						<button class="button" onclick="toggleSection('SSMerchant', this)">Show</button>
+					</div>
+					<div class="tableHeader data" data-section="SSMerchant" style="display: none;">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="ssCBU"><input type="checkbox" id="ssCBU"
 									value="Cyclotron Ballista Upgrade" data-dest-checkbox-group="SSMerchant"><span
@@ -561,8 +568,11 @@
 									class="checkbox-label">Pulse Engine Upgrade</span></label>
 						</div>
 					</div>
-					<div class="tableHeader data no-flex">
-						<label>S-class exocraft merchant upgrades:</label>
+					<div class="tableHeader text sectionToggle">
+						<p>S-class exocraft merchant upgrades:</p>
+						<button class="button" onclick="toggleSection('ECMerchant', this)">Show</button>
+					</div>
+					<div class="tableHeader data" data-section="ECMerchant" style="display: none;">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="ecEAMU"><input type="checkbox" id="ecEAMU"
 									value="Exocraft Acceleration Module Upgrade"
@@ -602,9 +612,12 @@
 									class="checkbox-label">Nautilon Cannon Upgrade</span></label>
 						</div>
 					</div>
-					<div class="tableHeader data no-flex">
-						<label>S-class exosuit merchant upgrades:</label>
-						<div class="checkboxes-grid">
+					<div class="tableHeader text sectionToggle">
+						<p>S-class exosuit merchant upgrades:</p>
+						<button class="button" onclick="toggleSection('ESMerchant', this)">Show</button>
+					</div>
+					<div class="tableHeader data" data-section="ESMerchant" style="display: none;">
+						<div class="checkboxes-grid" style="width: 100%;">
 							<label class="checkbox" for="esDSU"><input type="checkbox" id="esDSU"
 									value="Defence Systems Upgrade" data-dest-checkbox-group="ESMerchant"><span
 									class="checkbox-label">Defence Systems Upgrade</span></label>
@@ -638,6 +651,47 @@
 							<label class="checkbox" for="esUPM"><input type="checkbox" id="esUPM"
 									value="Underwater Protection Module" data-dest-checkbox-group="ESMerchant"><span
 									class="checkbox-label">Underwater Protection Module</span></label>
+						</div>
+					</div>
+					<div class="tableHeader text sectionToggle">
+						<p>X-class scrapdealer upgrades:</p>
+						<button class="button" onclick="toggleSection('SDMerchant', this)">Show</button>
+					</div>
+					<div class="tableHeader data" data-section="SDMerchant" style="display: none;">
+						<div class="checkboxes-grid" style="width: 100%;">
+							<label class="checkbox" for="sdN"><input type="checkbox" id="sdN" value=""
+									data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Nothing</span></label>
+
+							<label class="checkbox" for="sdLTU"><input type="checkbox" id="sdLTU"
+									value="Suspicious Launch Thrusters Module"
+									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Suspicious Launch
+									Thrusters Module</span></label>
+
+							<label class="checkbox" for="sdMBM"><input type="checkbox" id="sdMBM"
+									value="Suspicious Mining Beam Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Mining Beam Module</span></label>
+
+							<label class="checkbox" for="sdSM"><input type="checkbox" id="sdSM"
+									value="Suspicious Scanner Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Scanner Module</span></label>
+
+							<label class="checkbox" for="sdBM"><input type="checkbox" id="sdBM"
+									value="Suspicious Boltcaster Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Boltcaster Module</span></label>
+
+							<label class="checkbox" for="sdHPM"><input type="checkbox" id="sdHPM"
+									value="Suspicious Hazard Protection Module"
+									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Suspicious Hazard
+									Protection Module</span></label>
+
+							<label class="checkbox" for="sdMM"><input type="checkbox" id="sdMM"
+									value="Suspicious Movement Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Movement Module</span></label>
+
+							<label class="checkbox" for="sdPEM"><input type="checkbox" id="sdPEM"
+									value="Suspicious Pulse Engine Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Pulse Engine Module</span></label>
 						</div>
 					</div>
 					<div class="tableHeader data no-flex">
@@ -743,7 +797,7 @@
 					<div>! style="background-color:#2F4F4F; min-width:125px"| Price per Item</div>
 					<div id=tradeTerminal></div>
 					<div>|}</div>
-					<div>The [[Space Station]] merchants offer the following {{class|S}} class items for sale:</div>
+					<div>The Space Station merchants offer the following {{class|S}} class items for sale:</div>
 					<br>
 					<div>{{SSMerchants</div>
 					<div><output id="MTMerchant"></output></div>
@@ -752,6 +806,13 @@
 					<div><output id="ESMerchant"></output></div>
 					<div>}}</div>
 					<br>
+					<div class="codeWrapper">
+						<div>===Scrap Dealer===</div>
+						<div>{{ScrapDealer</div>
+						<div><output id="SDMerchant"></output></div>
+						<div>}}</div>
+						<br>
+					</div>
 					<div>==Additional Information==</div>
 					<div><output id='addInfo'></output></div>
 					<br>
