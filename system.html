@@ -20,49 +20,6 @@
 	<script>
 		const galleryArray = ['', 'System Page', 'System Exploration Guide', 'Default SS Multitool'];
 
-		// 1. param	= id in div and spans in wikicode
-		// 2. param	= id in input tags
-		function showInput() {
-			textFunction("release", "versionInput");
-			textFunction("release1", "versionInput"); //duplicates due to IDs needing to be unique across document
-			textFunctionMultiple("name", "nameInput");
-			textFunction("image", "imageInput");
-			textFunction("navImage", "navImageInput");
-			textFunction("ssImage", "ssImageInput");
-			textFunction("discovered", "discoveredInput");
-			textFunction("discoveredlink", "discoveredlinkInput");
-			explorer("discoveredInput", "discoveredlinkInput", "docbyInput", "researchteamInput", "platformInput", "docDateInput", "discDateInput", "docby");
-			textFunctionMultiple("portalglyphs", "portalglyphsInput");
-			textFunction("mode", "modeInput");
-			textFunction("multiplestars", "multiplestarsInput");
-			textFunction("color", "colorInput");
-			textFunction("class", "classInput");
-			textFunction("distance", "distanceInput");
-			textFunction("planet", "planetInput");
-			textFunction("moon", "moonInput");
-			radioFunction("water", "waterInput");
-			textFunction("faction", "factionInput");
-			textFunction("economy", "economyInput");
-			textFunction("economybuy", "economybuyInput");
-			textFunction("economysell", "economysellInput");
-			textFunction("wealth", "wealthInput");
-			textFunction("conflict", "conflictInput");
-			textFunctionMultiple("researchteam", "researchteamInput");
-			textFunction("originalname", "originalnameInput");
-			researchTeam("researchteam", "civilized");
-			merchantUpgrades('MTMerchant', 'SSMerchant', 'ECMerchant', 'ESMerchant', 'ssmerchants');
-
-
-
-			// todo: Spaceship dealers
-			// radioFunction("mtAML", "mtAMLInput");
-			textFunction("addInfo", "addInfoInput");
-			civGalaxy("civ");
-			hideDiscoverer("discoveredInput", "discoveredlinkInput");
-			glyphRegion("portalglyphsInput", "civ", "region");
-			codeFunctionMultiple("region", "region");
-			codeFunctionMultiple("galaxy", "galaxy");
-		}
 		window.onload = () => {
 			pageData.pageType = 'System';
 			startUp();
@@ -490,7 +447,8 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>S-class multitool merchant upgrades:</p>
-						<button class="button" onclick="toggleSection('MTMerchant', this)">Show</button>
+						<button class="button" data-display-default="none"
+							onclick="toggleSection('MTMerchant', this)">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="MTMerchant" style="display: none;">
 						<div class="checkboxes-grid">
@@ -529,7 +487,8 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>S-class starship merchant upgrades:</p>
-						<button class="button" onclick="toggleSection('SSMerchant', this)">Show</button>
+						<button class="button" data-display-default="none"
+							onclick="toggleSection('SSMerchant', this)">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="SSMerchant" style="display: none;">
 						<div class="checkboxes-grid">
@@ -572,7 +531,8 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>S-class exocraft merchant upgrades:</p>
-						<button class="button" onclick="toggleSection('ECMerchant', this)">Show</button>
+						<button class="button" data-display-default="none"
+							onclick="toggleSection('ECMerchant', this)">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="ECMerchant" style="display: none;">
 						<div class="checkboxes-grid">
@@ -616,7 +576,8 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>S-class exosuit merchant upgrades:</p>
-						<button class="button" onclick="toggleSection('ESMerchant', this)">Show</button>
+						<button class="button" data-display-default="none"
+							onclick="toggleSection('ESMerchant', this)">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="ESMerchant" style="display: none;">
 						<div class="checkboxes-grid" style="width: 100%;">
@@ -657,7 +618,8 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>X-class scrapdealer upgrades:</p>
-						<button class="button" onclick="toggleSection('SDMerchant', this)">Show</button>
+						<button class="button" data-display-default="none"
+							onclick="toggleSection('SDMerchant', this)">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="SDMerchant" style="display: none;">
 						<div class="checkboxes-grid" style="width: 100%;">
