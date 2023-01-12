@@ -657,6 +657,28 @@
 									class="checkbox-label">Suspicious Pulse Engine Module</span></label>
 						</div>
 					</div>
+					<div class="tableCell text">
+						<label>Add optional templates:</label>
+					</div>
+					<div class="tableCell data">
+						<div class="checkboxes-grid">
+							<label class="checkbox" for="farmCheckbox"><input type="checkbox" name="systemExtras"
+									value="Freighters" id="farmCheckbox"><span
+									class="checkbox-label">Freighters</span></label>
+							<label class="checkbox" for="geobayCheckbox"><input type="checkbox" name="systemExtras"
+									value="Derelict" id="geobayCheckbox"><span class="checkbox-label">Derelict
+									Freighter</span></label>
+							<label class="checkbox" for="landingPadCheckbox"><input type="checkbox" name="systemExtras"
+									value="Organic" id="landingPadCheckbox"><span class="checkbox-label">Organic
+									Frigate</span></label>
+							<label class="checkbox" for="terminalCheckbox"><input type="checkbox" name="systemExtras"
+									value="Starships" id="terminalCheckbox"><span class="checkbox-label">System Starship
+									Catalog</span></label>
+							<label class="checkbox" for="arenaCheckbox"><input type="checkbox" name="systemExtras"
+									value="MTs" id="arenaCheckbox"><span class="checkbox-label">System Multi-Tool
+									Catalog</span></label>
+						</div>
+					</div>
 					<div class="tableHeader data no-flex">
 						<label for="addInfoInput">Additional Information:</label>
 						<textarea id="addInfoInput" data-dest="addInfo"></textarea>
@@ -729,18 +751,90 @@
 					<div>!style="background-color:#2f4f4f"|Sentinels</div>
 					<div>!style="background-color:#2f4f4f"|Flora</div>
 					<div>!style="background-color:#2f4f4f"|Fauna</div>
-					<div id="planets">
-					</div>
+					<div id="planets"></div>
 					<div>|}</div>
 					<br>
+					<div id="Freighters" style="display: none;">
+						<div>==Freighters==</div>
+						<div>===Capital Freighter===</div>
+						<div>{| class="wikitable" style="text-align:center; width:100%; max-width: 800px;"</div>
+						<div>|-</div>
+						<div>!width=150 style="background-color:#2f4f4f"|Image</div>
+						<div>!style="background-color:#2f4f4f"|Name</div>
+						<div>!style="background-color:#2f4f4f"|Type</div>
+						<div>!style="background-color:#2f4f4f"|Discoverer</div>
+						<div>|-</div>
+						<div>| [[File:NmsMisc_NotAvailable.png|150px]] || [[freighterName]]|| [[Starship Catalogue -
+							Freighter|subtype]] || DiscovererInfo</div>
+						<div>|}</div>
+						<br>
+						<div>===System Freighters===</div>
+						<div>{| class="wikitable" style="text-align:center; width:100%; max-width: 800px;"</div>
+						<div>!width=150 style="background-color:#2f4f4f"|Image</div>
+						<div>!style="background-color:#2f4f4f"|Name</div>
+						<div>!style="background-color:#2f4f4f"|Type</div>
+						<div>!style="background-color:#2f4f4f"|Discoverer</div>
+						<div>|-</div>
+						<div>| [[File:NmsMisc_NotAvailable.png|150px]] || [[freighterName]]|| [[Starship Catalogue -
+							Freighter|subtype]] || DiscovererInfo</div>
+						<div>|}</div>
+						<br>
+					</div>
+					<div id="Derelict" style="display: none;">
+						<div>===Derelict Freighter===</div>
+						<div>{| class="wikitable" style="text-align:center; width:100%; max-width: 800px;"</div>
+						<div>|-</div>
+						<div>!width=150 style="background-color:#2f4f4f;"|Image</div>
+						<div>!style="background-color:#2f4f4f;"|Name</div>
+						<div>!style="background-color:#2f4f4f;"|Class</div>
+						<div>!style="background-color:#2f4f4f;"|Hyperdrive</div>
+						<div>!style="background-color:#2f4f4f;"|Fuel</div>
+						<div>!style="background-color:#2f4f4f;"|Zones</div>
+						<div>!style="background-color:#2f4f4f;"|Dangers</div>
+						<div>!style="background-color:#2f4f4f;"|Discoverer</div>
+						<div>|[[File: NmsMisc_NotAvailable.png|150px]] || freighterName || {{class|X}} || ? ly || ?%
+							|| ?(rooms) || select:Rogue AI, [[Minifiend]], [[Green Jellyfish]] || DiscovererInfo</div>
+						<div>|}</div>
+						<br>
+					</div>
+					<div id="Organic" style="display: none;">
+						<div>==Organic Frigate==</div>
+						<div>{| class="wikitable" style="text-align:center; width:100%; max-width: 800px"</div>
+						<div>|-</div>
+						<div>!width=150 style="background-color:#2f4f4f"|Image</div>
+						<div>!style="background-color:#2f4f4f"|Name</div>
+						<div>!style="background-color:#2f4f4f"|Class</div>
+						<div>!style="background-color:#2f4f4f"|Stats</div>
+						<div>!style="background-color:#2f4f4f"|Fuel</div>
+						<div>!style="background-color:#2f4f4f"|Discoverer</div>
+						<div>| [[File:NmsMisc_NotAvailable.png|150px]] || frigateName || {{Class|X}} || Combat: ? /
+							Exploration: ?
+							Industrial: ? / Trade: ? || ?t / 250 LY || DiscovererInfo</div>
+						<div>|}</div>
+						<br>
+					</div>
 					<div>==Documented Starships==</div>
 					<div>{{CARGOShipSys|<output id="shipcoords" name="galacticCoords"></output>|<output id="galaxy1"
 							name="galaxy"></output>}}</div>
 					<br>
+					<div style="display: none;" id="Starships">
+						All Starships discovered in the system can be found in the [[<output name="name"></output> -
+						Starship Catalog]] and the respective [[<output name="civShorter"></output> Starship
+						Catalog]]s.
+						<br>
+						<br>
+					</div>
 					<div>==Documented Multi-Tools==</div>
 					<div>{{CARGOMTCoord|<output id="mtcoords" name="galacticCoords"></output>|<output id="galaxy2"
 							name="galaxy"></output>}}</div>
 					<br>
+					<div style="display: none;" id="MTs">
+						All Multi-Tools discovered in the system can be found in the [[<output name="name"></output> -
+						Multi-Tool Catalog]] and the respective [[<output name="civShorter"></output> Multi-Tool
+						Catalog]]s.
+						<br>
+						<br>
+					</div>
 					<div>==Location Information==</div>
 					<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="galacticCoords"></output>}}
 					</div>
