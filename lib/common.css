@@ -721,6 +721,10 @@ footer button {
 	min-height: 25px;
 }
 
+.gallery-item:first-child:last-child .controlButtons :is(.handle, .moveButton) {
+	visibility: hidden;
+}
+
 .handle {
 	width: 33px;
 	filter: invert(var(--invert));

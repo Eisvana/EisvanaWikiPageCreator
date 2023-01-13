@@ -662,20 +662,20 @@
 					</div>
 					<div class="tableCell data">
 						<div class="checkboxes-grid">
-							<label class="checkbox" for="farmCheckbox"><input type="checkbox" name="systemExtras"
-									value="Freighters" id="farmCheckbox"><span
+							<label class="checkbox" for="freightersCheckbox"><input type="checkbox" name="systemExtras"
+									value="Freighters" id="freightersCheckbox"><span
 									class="checkbox-label">Freighters</span></label>
-							<label class="checkbox" for="geobayCheckbox"><input type="checkbox" name="systemExtras"
-									value="Derelict" id="geobayCheckbox"><span class="checkbox-label">Derelict
+							<label class="checkbox" for="derelictCheckbox"><input type="checkbox" name="systemExtras"
+									value="Derelict" id="derelictCheckbox"><span class="checkbox-label">Derelict
 									Freighter</span></label>
-							<label class="checkbox" for="landingPadCheckbox"><input type="checkbox" name="systemExtras"
-									value="Organic" id="landingPadCheckbox"><span class="checkbox-label">Organic
+							<label class="checkbox" for="organicCheckbox"><input type="checkbox" name="systemExtras"
+									value="Organic" id="organicCheckbox"><span class="checkbox-label">Organic
 									Frigate</span></label>
-							<label class="checkbox" for="terminalCheckbox"><input type="checkbox" name="systemExtras"
-									value="Starships" id="terminalCheckbox"><span class="checkbox-label">System Starship
+							<label class="checkbox" for="starshipCheckbox"><input type="checkbox" name="systemExtras"
+									value="Starships" id="starshipCheckbox"><span class="checkbox-label">System Starship
 									Catalog</span></label>
-							<label class="checkbox" for="arenaCheckbox"><input type="checkbox" name="systemExtras"
-									value="MTs" id="arenaCheckbox"><span class="checkbox-label">System Multi-Tool
+							<label class="checkbox" for="mtCheckbox"><input type="checkbox" name="systemExtras"
+									value="MTs" id="mtCheckbox"><span class="checkbox-label">System Multi-Tool
 									Catalog</span></label>
 						</div>
 					</div>
@@ -685,6 +685,17 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
+						<span class="tooltip" onclick="explanation('Gallery', 
+						`The preferred order of pictures is as follows:
+						<div class='is-flex is-justify-content-center'>
+							<ol class='has-text-left'>
+								<li>System Exploration Guide</li>
+								<li>System Page</li>
+								<li>Default SS Multitool</li>
+							</ol>
+						</div>`); galleryUploadShown = true">
+							<img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								There is a preferred order of pictures.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
