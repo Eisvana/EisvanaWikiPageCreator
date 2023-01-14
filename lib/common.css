@@ -309,8 +309,21 @@ dialog #explanationLink:after {
 	content: 'Click to enlarge';
 }
 
+dialog #explanationContent .dialog-center {
+	display: flex;
+	justify-content: center;
+}
+
+dialog #explanationContent .dialog-list {
+	text-align: left;
+}
+
 .no-flex {
 	display: block !important;
+}
+
+.no-flex>label {
+	margin-right: 1rem;
 }
 
 /* Input table */
@@ -326,6 +339,7 @@ dialog #explanationLink:after {
 	border-bottom: 1px dashed;
 	border-color: var(--table-border-color);
 	display: flex;
+	column-gap: 1em;
 	align-items: center;
 	justify-content: space-between;
 	container-type: inline-size;
@@ -407,6 +421,10 @@ div.column {
 	div.column {
 		padding: 1rem;
 	}
+
+	main {
+		width: 100%;
+	}
 }
 
 #output {
@@ -430,9 +448,8 @@ div.column {
 
 .tableCell>label,
 .tableHeader>label,
-.glyphs-label-button>label {
+.label-combo>label {
 	font-weight: bold;
-	margin-right: 1em;
 }
 
 .checkbox {
@@ -604,11 +621,12 @@ footer button {
 	margin: 1rem 0;
 }
 
-.glyphs-label-button {
+.label-combo {
 	display: flex;
 	flex-wrap: wrap;
-	margin-right: .5em;
 	align-items: center;
+	column-gap: 1rem;
+	row-gap: .3rem;
 }
 
 #portalglyphButtons {
@@ -643,11 +661,9 @@ footer button {
 	width: unset !important;
 }
 
-#explanationContent ul {
-	text-align: left;
-	margin-left: 30%;
+dialog #explanationContent :is(ul, ol) {
+	margin: 1em 0;
 }
-
 
 /* Gallery styles */
 #gallery_descs {

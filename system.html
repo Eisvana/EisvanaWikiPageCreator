@@ -55,7 +55,7 @@
 						<label for="nameInput">Name of the system:</label>
 						<span class="tooltip" onclick="explanation('System Name', 
 									'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-									'./helperimg/creature/creatureName.jpg'	
+									'./helperimg/system/systemName.jpg'	
 									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
 							</span></span>
@@ -65,6 +65,14 @@
 					</div>
 					<div class="tableCell text">
 						<label for="oldNameInput">Original name before uploading (if available):</label>
+						<span class="tooltip" onclick="explanation('Original System Name', 
+									`If you don't have this info, there is a trick:<br>
+									Open the galaxy map, then hover over a different nearby star.<br>
+									Your current location should now be displayed with its original name.`,
+									'./helperimg/system/originalName.jpg'	
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Hover over a different star in the galaxy map.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="oldName" type="text" id="oldNameInput">
@@ -84,12 +92,6 @@
 					</div>
 					<div class="tableCell text">
 						<label for="navFileInput">Navigation image name, including file extension:</label>
-						<span class="tooltip" onclick="explanation('File Upload', 
-									`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
-									You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
-									); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Picture won't be uploaded to the wiki. This is only to autofill the image name.
-							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="navFileInput" data-dest="navImage"
@@ -98,19 +100,13 @@
 					</div>
 					<div class="tableCell text">
 						<label for="ssFileInput">Space Station image name, including file extension:</label>
-						<span class="tooltip" onclick="explanation('File Upload', 
-									`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
-									You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
-									); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Picture won't be uploaded to the wiki. This is only to autofill the image name.
-							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="ssFileInput" data-dest="ssImage">
 						<input type="file" id="ssFileUpload" accept="image/*" onchange="image(this)">
 					</div>
 					<div class="tableCell text">
-						<div class="glyphs-label-button">
+						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
 							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
 								Delete</button>
@@ -130,6 +126,15 @@
 					</div>
 					<div class="tableCell text">
 						<label>Number of stars:</label>
+						<span class="tooltip" onclick="explanation('Number of stars', 
+									`Number of visible local stars in space.<br>
+									Enter Photomode, then press the button to rotate the system star to your cursor.<br>
+									Enter the number of stars you see.<br>
+									This for example is 1 star:`,
+									'./helperimg/system/numOfStars.jpg'	
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Number of visible local stars in space.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select id="multiplestarsInput" data-dest="multiplestars">
@@ -139,7 +144,22 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label>Color of (primary) star:</label>
+						<label>Colour of (primary) star:</label>
+						<span class="tooltip" onclick='explanation("Star Colour", 
+									`Colour as seen in the galaxy map. Make sure you don&apos;t have any filters active.<br>
+									The colours usually correlate with the available stellar metal in the system:
+									<div class="dialog-center">
+										<ul class="dialog-list">
+											<li>Copper: Yellow</li>
+											<li>Cadmium: Red</li>
+											<li>Emeril: Green</li>
+											<li>Indium: Blue</li>
+										</ul>
+									</div>
+									If the system has a black hole, select "Black Hole".`
+									)'><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Colour as seen in the galaxy map.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select id="colorInput" data-dest="color">
@@ -152,18 +172,42 @@
 					</div>
 					<div class="tableCell text">
 						<label for="classInput">Stellar class:</label>
+						<span class="tooltip" onclick="explanation('Stellar Class', 
+						`Number of visible local stars in space.<br>
+						Enter Photomode, then press the button to rotate the system star to your cursor.<br>
+						Enter the number of stars you see.`,
+						'./helperimg/system/stellarClass.jpg'	
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the galaxy map.
+							</span></span>
+
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="classInput" data-dest="class">
 					</div>
 					<div class="tableCell text">
-						<label for="distanceInput">Distance to center:</label>
+						<label for="distanceInput">Distance to centre:</label>
+						<span class="tooltip" onclick="explanation('Distance to Centre', 
+									`In the galaxy map, move the camera <span class='is-italic'>very</span> close to the star.<br>
+									You must unfocus the system in order to get close enough to the star. If you're basically inside the star, that's the correct position.<br>
+									You can then read the distance to centre value on the top left.<br><br>
+									Background: This is the <span class='is-italic'>camera</span> distance to centre, not the actual <span class='is-italic'>system</span> distance to centre.<br>
+									On PC, you can use the <a href='https://www.nexusmods.com/nomanssky/mods/2203' rel='noopener noreferrer' target='_blank'>GalaxyCenterDistance</a> mod to get the distance to centre accurately on the top of the galaxy map.`
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found on the galaxy map. Click here for a guide of how to get an accurate value.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="distanceInput" data-dest-noauto="distance">
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Number of planets:</label>
+						<span class="tooltip" onclick="explanation('Number of Planets', 
+									'Found in the discovery menu.',
+									'./helperimg/system/planetNumber.jpg'
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the discovery menu.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" value="1" maxlength="1" id="planetInput" data-dest-noauto="planet"
@@ -171,6 +215,12 @@
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Number of moons:</label>
+						<span class="tooltip" onclick="explanation('Number of Moons', 
+									'Found in the discovery menu. Enter 0 if there are no moons',
+									'./helperimg/system/moonNumber.jpg'
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the discovery menu. Put 0 if there are no moons.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" value="0" maxlength="1" id="moonInput" data-dest-noauto="moon"
@@ -178,6 +228,12 @@
 					</div>
 					<div class="tableCell text">
 						<label for="waterInput">Water in the system?</label>
+						<span class="tooltip" onclick="explanation('Water', 
+									`Found in the galaxy map. If it doesn't display &quot;Water&quot;, don't check the box.`,
+									'./helperimg/system/water.jpg'
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the galaxy map. If it doesn't display "Water", there is no water.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="checkbox" id="waterInput" value="Yes" data-checkbox-unchecked="No"
@@ -185,6 +241,15 @@
 					</div>
 					<div class="tableCell text">
 						<label>System Faction:</label>
+						<span class="tooltip" onclick="explanation('Faction', 
+									`Found in the expanded view of the galaxy map.<br>
+									The button to enter expanded view is displayed below the box with the system details.<br>
+									If it doesn't display anything, it's &quot;Uncharted&quot;`,
+									'./helperimg/system/faction.jpg'
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the expanded view of the galaxy map. If it doesn't display anything, it's
+								"Uncharted".
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select id="factionInput" data-dest="faction">
@@ -199,6 +264,15 @@
 					</div>
 					<div class="tableCell text">
 						<label>System economy:</label>
+						<span class="tooltip" onclick="explanation('Economy', 
+									`Found in the expanded view of the galaxy map.<br>
+									The button to enter expanded view is displayed below the box with the system details.<br>
+									If it doesn't display anything, it's &quot;Uncharted&quot;`,
+									'./helperimg/system/economy.jpg'
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the expanded view of the galaxy map. If it doesn't display anything, it's
+								"Uncharted".
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select id="economyInput" data-dest="economy">
@@ -254,22 +328,39 @@
 					</div>
 					<div class="tableCell text">
 						<label for="economysellInput">Economy sell:</label>
+						<span class="tooltip" onclick="explanation('Economy-Sell', 
+									`Found in the expanded view of the galaxy map.<br>
+									The button to enter expanded view is displayed below the box with the system details.`,
+									'./helperimg/system/e-sell.jpg'
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the expanded view of the galaxy map.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="economysellInput" data-dest-noauto="economysell">
 					</div>
 					<div class="tableCell text">
 						<label for="economybuyInput">Economy buy:</label>
+						<span class="tooltip" onclick="explanation('Economy-Buy', 
+									`Found in the expanded view of the galaxy map.<br>
+									The button to enter expanded view is displayed below the box with the system details.`,
+									'./helperimg/system/e-buy.jpg'
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the expanded view of the galaxy map.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="economybuyInput" data-dest-noauto="economybuy">
 					</div>
 					<div class="tableCell text">
 						<label>System wealth:</label>
-						<span class="tooltip" onclick='explanation(`Economy`,
-							`Found in the exploration guide under "Economy".`,
-							`./helperimg/shared/economy.jpg`)'><img src="./lib/help.svg"><span class="tooltiptext">
-								Found in the exploration guide under "Economy".
+						<span class="tooltip" onclick="explanation('Wealth', 
+									`Found in the expanded view of the galaxy map.<br>
+									The button to enter expanded view is displayed below the box with the system details.<br>
+									If it doesn't display anything, it's either &quot;Abandoned&quot; or &quot;Uncharted&quot;. This can be determined looking at the faction value.`,
+									'./helperimg/system/wealth.jpg'
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the expanded view of the galaxy map.
 							</span></span>
 					</div>
 					<div class="tableCell data">
@@ -320,6 +411,14 @@
 					</div>
 					<div class="tableCell text">
 						<label>System conflict:</label>
+						<span class="tooltip" onclick="explanation('Conflict', 
+									`Found in the expanded view of the galaxy map.<br>
+									The button to enter expanded view is displayed below the box with the system details.<br>
+									If it doesn't display anything, it's either &quot;Abandoned&quot; or &quot;Uncharted&quot;. This can be determined looking at the faction value.`,
+									'./helperimg/system/conflict.jpg'
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the expanded view of the galaxy map.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select id="conflictInput" data-dest="conflict">
@@ -372,6 +471,13 @@
 					</div>
 					<div class="tableCell text">
 						<label for="discDateInput">When was this system discovered?</label>
+						<span class="tooltip" onclick="explanation('Discovery Date', 
+									`Found in the analysis visor in the space station.<br>
+									The exact discovery timestamp is displayed on the top left.`,
+									'./helperimg/system/discDate.jpg'
+									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the analysis visor in the space station.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="date" id="discDateInput" data-dest-noauto="discDate">
@@ -437,7 +543,10 @@
 					</div>
 					<div class="tableHeader text no-flex">
 						<label>Tradeables:</label>
-						<span class="tooltip" onclick="explanation('Space Station Tradeables', 
+						<span class="tooltip" onclick="explanation('Space Station Tradeables',
+								`Can be found on the space station at the trade terminal.<br>
+								Only include tradeables (items with white background at the top)`,
+								'./helperimg/system/tradeables.jpg'
 								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Can be found on the space station.</span></span>
 					</div>
@@ -445,7 +554,15 @@
 						<button class="button is-primary" type="button" onclick="tradeables()">+ Add Tradeable</button>
 					</div>
 					<div class="tableHeader text sectionToggle">
-						<p>S-class multitool merchant upgrades:</p>
+						<div class="label-combo is-flex-wrap-nowrap">
+							<p>S-class multi-tool merchant upgrades:</p>
+							<span class="tooltip" onclick="explanation('Multi-Tool Merchant Upgrades',
+								`Can be found on the space station at the multi-tool merchant.<br>
+								Only check upgrades available in S class.`,
+								'./helperimg/system/MTU.jpg'
+								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+									Can be found on the space station.</span></span>
+						</div>
 						<button class="button" data-display-default="none"
 							onclick="toggleSection('MTMerchant', this)">Show</button>
 					</div>
@@ -485,7 +602,15 @@
 						</div>
 					</div>
 					<div class="tableHeader text sectionToggle">
-						<p>S-class starship merchant upgrades:</p>
+						<div class="label-combo is-flex-wrap-nowrap">
+							<p>S-class starship merchant upgrades:</p>
+							<span class="tooltip" onclick="explanation('Starship Merchant Upgrades',
+								`Can be found on the space station at the starship merchant.<br>
+								Only check upgrades available in S class.`,
+								'./helperimg/system/SSU.jpg'
+								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+									Can be found on the space station.</span></span>
+						</div>
 						<button class="button" data-display-default="none"
 							onclick="toggleSection('SSMerchant', this)">Show</button>
 					</div>
@@ -529,7 +654,15 @@
 						</div>
 					</div>
 					<div class="tableHeader text sectionToggle">
-						<p>S-class exocraft merchant upgrades:</p>
+						<div class="label-combo is-flex-wrap-nowrap">
+							<p>S-class exocraft merchant upgrades:</p>
+							<span class="tooltip" onclick="explanation('Exocraft Merchant Upgrades',
+								`Can be found on the space station at the Exocraft merchant.<br>
+								Only check upgrades available in S class.`,
+								'./helperimg/system/ECU.jpg'
+								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+									Can be found on the space station.</span></span>
+						</div>
 						<button class="button" data-display-default="none"
 							onclick="toggleSection('ECMerchant', this)">Show</button>
 					</div>
@@ -574,7 +707,15 @@
 						</div>
 					</div>
 					<div class="tableHeader text sectionToggle">
-						<p>S-class exosuit merchant upgrades:</p>
+						<div class="label-combo is-flex-wrap-nowrap">
+							<p>S-class exosuit merchant upgrades:</p>
+							<span class="tooltip" onclick="explanation('Exosuit Merchant Upgrades',
+								`Can be found on the space station at the Exosuit merchant.<br>
+								Only check upgrades available in S class.`,
+								'./helperimg/system/ESU.jpg'
+								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+									Can be found on the space station.</span></span>
+						</div>
 						<button class="button" data-display-default="none"
 							onclick="toggleSection('ESMerchant', this)">Show</button>
 					</div>
@@ -616,7 +757,15 @@
 						</div>
 					</div>
 					<div class="tableHeader text sectionToggle">
-						<p>X-class scrapdealer upgrades:</p>
+						<div class="label-combo is-flex-wrap-nowrap">
+							<p>X-class scrapdealer upgrades:</p>
+							<span class="tooltip" onclick="explanation('Scrapdealer Merchant Upgrades',
+								`Can be found on the space station at the scrapdealer merchant.<br>
+								If they sell no upgrades, check the &quot;Nothing&quot; box.`,
+								'./helperimg/system/SDU.jpg'
+								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+									Can be found on the space station.</span></span>
+						</div>
 						<button class="button" data-display-default="none"
 							onclick="toggleSection('SDMerchant', this)">Show</button>
 					</div>
@@ -687,8 +836,8 @@
 						<label for="galleryUpload">Gallery files</label>
 						<span class="tooltip" onclick="explanation('Gallery', 
 						`The preferred order of pictures is as follows:
-						<div class='is-flex is-justify-content-center'>
-							<ol class='has-text-left'>
+						<div class='dialog-center'>
+							<ol class='dialog-list'>
 								<li>System Exploration Guide</li>
 								<li>System Page</li>
 								<li>Default SS Multitool</li>
