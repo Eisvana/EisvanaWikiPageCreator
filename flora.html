@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,9 +8,11 @@
 </head>
 
 <body>
-	<p><strong><big>This script does currently not exist, please check back at a later date or consider contributing yourself!</big></strong></p>
+	<p><strong><big>This script does currently not exist, please check back at a later date or consider contributing
+				yourself!</big></strong></p>
 	<p><a href="./index.html" title="Back to main page">Back to main page</a></p>
 </body>
+
 </html>
 
 
@@ -22,6 +25,7 @@
 	<title>Hub Wiki Page Creator - Flora</title>
 	<link rel="stylesheet" href="./lib/common.css">
 	<script src="./lib/common.js"></script>
+	<script src="./lib/datalists/floraDatalists.js"></script>
 	<script>
 		const galleryArray = ['', 'Scanner view', 'Discovery Menu', 'Other image', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
 
@@ -66,43 +70,18 @@
 <body>
 	<div class="container">
 		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
-		<br>
-		<h1 class="title is-2">Hub Wiki Page Creator - Flora</h1>
-		<br>
+		<h1 class="title is-3">Hub Wiki Page Creator - Flora</h1>
+		<dialog id="explanation" class="modal-content content"></dialog>
 
-		<div class="columns is-desktop">
-			<div class="column is-full-mobile">
-				<form id="form" onreset="resetAll('gallery_descs')">
-					<table style="text-align:left">
-						<tr>
-							<th><label>Current release:</label>
-							<td>
-								<select id="version_input" name="Release">
-									<option value="Waypoint">Waypoint
-									<option value="Endurance">Endurance
-									<option value="Outlaws">Outlaws
-									<option value="SentinelUp">Sentinel
-									<option value="Prisms">Prisms
-									<option value="Expeditions">Expeditions
-									<option value="Companions">Companions
-									<option value="NextGen">NextGen
-									<option value="Origins">Origins
-									<option value="Desolation">Desolation
-									<option value="Crossplay">Crossplay
-									<option value="ExoMech">ExoMech
-									<option value="Living Ship">Living Ship
-									<option value="Synthesis">Synthesis
-									<option value="Beyond">Beyond
-									<option value="Visions">Visions
-									<option value="Abyss">Abyss
-									<option value="NEXT">NEXT
-									<option value="Atlas Rises">Atlas Rises
-									<option value="Pathfinder">Pathfinder
-									<option value="Foundation">Foundation
-									<option value="Release">Release
-								</select>
-							</td>
-						</tr>
+		<main class="columns is-desktop">
+			<div id="input" class="column is-full-mobile">
+				<div class="table">
+					<div class="tableCell text">
+						<label>Current release:</label>
+					</div>
+					<div class="tableCell data">
+						<select id="versionInput" data-dest="release"></select>
+					</div>
 						<tr>
 							<th><label>Which civ does this flora belong to?</label>
 							<td>
@@ -321,30 +300,13 @@
 							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
 									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
 						</tr>
-					</table>
-				</form>
-				<div id="gallery_descs">
 				</div>
-				<div>
-					<span class="actions" style="white-space: nowrap">
-						<button class="button is-warning" type="reset" form="form"
-							onclick="document.getElementById('discordError').style.display = 'none'; document.getElementById('censusDiscord_input').style.backgroundColor = '';">Reset
-							inputs</button>
-					</span>
-					<span class="actions" style="white-space: nowrap">
-						<button id="btn" class="button is-outlined is-primary"
-							onclick="copyText('wikiText', 'btn')">Copy wikicode</button>
-						<a id="downloadbtn" class="button is-outlined is-primary"
-							onclick="downloadFile('downloadbtn', 'wikiText', 'name_input')">Download file</a>
-						<a class="button is-outlined is-primary" id="link"
-							onclick="wikiLink('link', 'region', 'name_input');">Create page</a>
-					</span>
+				<div id="galleryItems">
 				</div>
-				<br>
+				<div id="actions" class="buttons"></div>
 			</div>
-			<div class="column is-full-mobile">
-				<div class="output">
-					<div id="wikiText">
+			<div id="output" class="column is-full-mobile">
+				<div class="wikiText" id="fullArticle">
 						<div>{{Version|<output id='release' name="release"></output>}}</div>
 						<div>{{<output id='civStub'></output>}}</div>
 						<div>{{Flora infobox</div>
@@ -406,203 +368,11 @@
 						<div>&lt;gallery&gt;</div>
 						<div><output id="galleryCode"></output></div>
 						<div>&lt;/gallery&gt;</div>
-					</div>
 				</div>
 			</div>
-		</div>
+		</main>
 	</div>
-	<footer class="footer">
-		<div>
-			Please consider contributing to the project:
-			<ul>
-				<li><a href="https://github.com/Lenni009/NMSWikiPageCreator" target="_blank"
-						rel="noopener noreferrer">GitHub repository</a></li>
-			</ul>
-		</div>
-		<p>If you encounter any issues contact Lenni#4423 on Discord.</p>
-	</footer>
-	<datalist id="notesData">
-		<option value="Mono-Seasonal">
-		<option value="Sensitive to Light">
-		<option value="Potentially Medicinal">
-		<option value="Hollow">
-		<option value="Insect Habitation">
-		<option value="Toxic Bark">
-		<option value="Bitter Stems">
-		<option value="Unpollinated">
-		<option value="Bioluminescent">
-		<option value="Succulent Tubers">
-		<option value="Waxy Fruit">
-		<option value="Mono-Infrequent Flowering">
-		<option value="Edible Seeds">
-		<option value="Inconsistent Blossom">
-		<option value="Inedible Petals">
-		<option value="Pungent">
-		<option value="Nocturnal Pollinators">
-		<option value="Parasite Host">
-		<option value="Omni-Seasonal">
-		<option value="Bi-Seasonal">
-		<option value="Caustic Sap">
-		<option value="Psychotropic Leaves">
-		<option value="Hallucogenic Bark">
-		<option value="Extendible Fronds">
-		<option value="Stinging Hairs">
-		<option value="Annual Spore Clouds">
-		<option value="Sentient Fruit">
-		<option value="Hidden Tentacles">
-		<option value="Itchy Pollen">
-		<option value="Hypnotic Perfume">
-		<option value="Calming Scent">
-		<option value="Pheromone Sacs">
-		<option value="Translucent Nuts">
-		<option value="Crepuscular Fruit">
-		<option value="Self-Healing Bark">
-		<option value="Delicate Stems">
-		<option value="Irresistible Seeds">
-		<option value="Wailing Roots">
-		<option value="Umbral Sprouts">
-		<option value="Bewegungsanfällig">
-		<option value="Airborne Seeds">
-		<option value="Multicolour Wood">
-		<option value="Photosensitive Tendrils">
-		<option value="Iridescent Seed Pods">
-		<option value="Retractable Fronds">
-		<option value="Metallic Nodules">
-		<option value="Partially Developed Eyes">
-		<option value="Sneaky">
-		<option value="Whispering Leaves">
-		<option value="Haunted Nests">
-		<option value="Nesting Moths">
-		<option value="Unripe Fruit">
-		<option value="Inner Beauty">
-		<option value="Hibernating">
-		<option value="Biologically Inert">
-		<option value="Self-Pollinating">
-		<option value="Inaudible">
-		<option value="Frost Resistant">
-		<option value="Carbon Dense">
-		<option value="Delicious">
-		<option value="Proto-Skeletal">
-		<option value="Ticklish Stamen">
-		<option value="Four Dimensional">
-		<option value="Ocular Irritant">
-		<option value="Mist-Based Defences">
-		<option value="Cloud Generator">
-		<option value="Pharmacologically Active">
-		<option value="Altitude Tolerant">
-		<option value="Drought Resistant">
-		<option value="Tidal Sap">
-		<option value="Easily Startled">
-		<option value="Meaty Roots">
-		<option value="True Neutral">
-		<option value="All Colours">
-		<option value="Blight Resistant">
-		<option value="Water Laden">
-		<option value="Durable Fruit">
-		<option value="Wind-Blown Seeds">
-		<option value="Mobile">
-		<option value="Genetically Diverse">
-		<option value="Cloned">
-		<option value="Rapidly Mutating">
-		<option value="Faintly Singing">
-		<option value="Pleasing Aroma">
-		<option value="Slowly Rotting">
-		<option value="Extremely Poisonous">
-		<option value="High Metal Content">
-		<option value="Liquidises Soil">
-		<option value="High Internal Pressure">
-		<option value="Unstable Fruit">
-		<option value="Covered in Tiny Eggs">
-		<option value="Aggressive">
-		<option value="Golden Sap">
-		<option value="Flakey Coating">
-		<option value="Suspicious Odour">
-		<option value="Vigorous">
-		<option value="Hydrophilic">
-		<option value="Ericaceous">
-		<option value="Calcifuge">
-		<option value="Calcicole">
-		<option value="Odourless">
-		<option value="Spongy Coating">
-		<option value="Parasitic Leaves">
-		<option value="Tiny Hairs">
-		<option value="Sticky Coating">
-		<option value="Nanite Sap">
-		<option value="Water Resistant">
-		<option value="Choking Scent">
-		<option value="Flowers Once">
-		<option value="Infectious Spores">
-		<option value="Hive Mind">
-		<option value="Extraterrestrial">
-		<option value="Migratory">
-		<option value="Perennial">
-		<option value="Self-Propagating">
-		<option value="Rapid Reproduction">
-		<option value="Self-Replicating">
-		<option value="Slow Growing">
-		<option value="Fragile Stems">
-		<option value="Delicate Flowers">
-		<option value="Paralysing Spores">
-		<option value="Neurotoxic Pollen">
-		<option value="Oily Seeds">
-		<option value="Stinging Fruit">
-		<option value="Crimson Seeds">
-		<option value="Fireproof Nuts">
-		<option value="Crystalline Flowers">
-		<option value="Shadow Petals">
-		<option value="Combustible Fruit">
-		<option value="Glasslike Seeds">
-		<option value="Fragile Bulbs">
-		<option value="Mouldy Bulbs">
-		<option value="Semi-Liquid Bulbs">
-		<option value="Luminous Bulbs">
-		<option value="Glowing Tubers">
-		<option value="Spreading Tubers">
-		<option value="Toxic Thorns">
-		<option value="Launchable Thorns">
-		<option value="Invisible Bristles">
-		<option value="Internal Branches">
-		<option value="Inaudible Singing">
-		<option value="Haunted Roots">
-		<option value="Internal Teeth">
-		<option value="Fungal Soul">
-		<option value="Must Not Be Touched">
-		<option value="Favoured by Atlas">
-		<option value="Enraged at Fate">
-		<option value="Doomed">
-		<option value="Lost in Time">
-		<option value="Already Dying">
-		<option value="Hungry for Stars">
-		<option value="Thirsting for Glass">
-		<option value="Howls When Alone">
-		<option value="Unbound Seeds">
-		<option value="Rooted in the Beyond">
-		<option value="Yearning">
-		<option value="Blood Sap">
-		<option value="Crimson Spores">
-		<option value="Infinite Branches">
-		<option value="Complex Nervous System">
-		<option value="Partially Skeletal">
-		<option value="Sees in the Dark">
-		<option value="Lonely">
-		<option value="Searching for a Host">
-		<option value="Nightstalker">
-		<option value="Sap Binds Permanently">
-		<option value="Roots can Talk">
-		<option value="Decentralised Mind">
-		<option value="Senses Beyond the Soil">
-		<option value="Longs to be Consumed">
-		<option value="Can Sense You">
-		<option value="Lacks Spirit">
-		<option value="Invasive">
-		<option value="Searches For The Light">
-		<option value="Diseased">
-		<option value="[BREACH POINT]">
-		<option value="[BOUNDARY FAILURE]">
-		<option value="[ANOMALOUS]">
-		<option value="[ITERATION ERROR]">
-		<option value="[CORRUPTED ENTITY]">
-	</datalist>
+	<footer id="footer" class="footer"></footer>
 </body>
 
 </html>-->

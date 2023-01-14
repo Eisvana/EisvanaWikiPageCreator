@@ -309,8 +309,21 @@ dialog #explanationLink:after {
 	content: 'Click to enlarge';
 }
 
+dialog #explanationContent .dialog-center {
+	display: flex;
+	justify-content: center;
+}
+
+dialog #explanationContent .dialog-list {
+	text-align: left;
+}
+
 .no-flex {
 	display: block !important;
+}
+
+.no-flex>label {
+	margin-right: 1rem;
 }
 
 /* Input table */
@@ -326,6 +339,7 @@ dialog #explanationLink:after {
 	border-bottom: 1px dashed;
 	border-color: var(--table-border-color);
 	display: flex;
+	column-gap: 1em;
 	align-items: center;
 	justify-content: space-between;
 	container-type: inline-size;
@@ -333,6 +347,12 @@ dialog #explanationLink:after {
 
 @container (max-width: 260px) {
 	div.tableCell div.checkboxes-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@container (max-width: 450px) {
+	div.tableHeader div.checkboxes-grid {
 		grid-template-columns: 1fr;
 	}
 }
@@ -401,6 +421,10 @@ div.column {
 	div.column {
 		padding: 1rem;
 	}
+
+	main {
+		width: 100%;
+	}
 }
 
 #output {
@@ -424,14 +448,14 @@ div.column {
 
 .tableCell>label,
 .tableHeader>label,
-.glyphs-label-button>label {
+.label-combo>label {
 	font-weight: bold;
-	margin-right: 1em;
 }
 
 .checkbox {
 	display: flex;
 	margin: 3px 0;
+	align-items: center;
 }
 
 .checkbox,
@@ -597,16 +621,18 @@ footer button {
 	margin: 1rem 0;
 }
 
-.glyphs-label-button {
+.label-combo {
 	display: flex;
 	flex-wrap: wrap;
-	margin-right: .5em;
 	align-items: center;
+	column-gap: 1rem;
+	row-gap: .3rem;
 }
 
 #portalglyphButtons {
 	display: grid;
 	grid-template-columns: repeat(8, 60px);
+	gap: 1px;
 }
 
 @media only screen and (max-width: 550px),
@@ -615,10 +641,6 @@ footer button {
 		display: flex;
 		flex-wrap: wrap;
 	}
-}
-
-#portalglyphButtons>* {
-	margin: .5px;
 }
 
 #portalglyphButtons .glyph.icon.is-small {
@@ -639,11 +661,9 @@ footer button {
 	width: unset !important;
 }
 
-#explanationContent ul {
-	text-align: left;
-	margin-left: 30%;
+dialog #explanationContent :is(ul, ol) {
+	margin: 1em 0;
 }
-
 
 /* Gallery styles */
 #gallery_descs {
@@ -717,6 +737,10 @@ footer button {
 	min-height: 25px;
 }
 
+.gallery-item:first-child:last-child .controlButtons :is(.handle, .moveButton) {
+	visibility: hidden;
+}
+
 .handle {
 	width: 33px;
 	filter: invert(var(--invert));
@@ -738,4 +762,25 @@ footer button {
 .gallery-item .controlButtons .delete-icon:hover,
 .handle:hover {
 	opacity: 1;
+}
+
+body[data-mark="false"] #output {
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+[data-theme="dark"] .is-even {
+	background-color: hsl(228, 10%, 16%) !important;
+}
+
+.is-even {
+	background-color: hsl(0, 0%, 93%) !important;
+}
+
+[data-theme="dark"] .is-odd {
+	background-color: hsl(228, 10%, 13%) !important;
+}
+
+.is-odd {
+	background-color: hsl(0, 0%, 96%) !important;
 }

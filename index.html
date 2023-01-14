@@ -27,7 +27,9 @@
 				link.target = "_blank";
 				link.rel = "noopener noreferrer";
 			}
-			if (window.location.host.includes('nmsgalactichub.com')) document.querySelector('a[href=".."]').href = 'https://nmsgalactichub.com';
+
+			const GHubHosts = ['wiki.nmsgalactichub.com', 'nmswikipagecreator.nmsgalactichub.com', 'hubwikipagecreator.nmsgalactichub.com'];
+			if (GHubHosts.includes(window.location.host)) document.querySelector('a[href=".."]').href = 'https://nmsgalactichub.com';
 		}
 	</script>
 </head>
@@ -49,7 +51,7 @@
 				<a href="./multitool.html" title="Multi-Tool" class="button is-link is-outlined">Multi-Tool</a>
 				<a href="./planet.html" title="Planet" class="button is-link is-outlined" disabled>Planet</a>
 				<a href="./starship.html" title="Starship" class="button is-link is-outlined">Starship</a>
-				<a href="./system.html" title="System" class="button is-link is-outlined" disabled>System</a>
+				<a href="./system.html" title="System" class="button is-link is-outlined">System</a>
 				<a href="./business.html" title="Business" class="button is-link is-outlined">Business</a>
 			</nav>
 			<div class="built-by">

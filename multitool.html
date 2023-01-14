@@ -72,7 +72,7 @@
 								Picture won't be uploaded to the wiki. This is only to autofill the image name.
 							</span></span>
 					</div>
-					<div class="tableCell data" id="imageInput">
+					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image">
 						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
 					</div>
@@ -182,7 +182,7 @@
 						<input type="text" id="srInput" data-dest-noauto="srLocName">
 					</div>
 					<div class="tableCell text">
-						<div class="glyphs-label-button">
+						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
 							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
 								Delete</button>
@@ -363,7 +363,7 @@
 					</div>
 					<div data-section="appearance" class="tableCell data">
 						<select id="mainColourInput" data-dest-noauto="mainColour">
-							<option value=" "></option>
+							<option value=" " label=" "></option>
 							<option value="blue">Blue</option>
 							<option value="chrome">Chrome</option>
 							<option value="cream">Cream</option>
@@ -384,7 +384,7 @@
 					</div>
 					<div data-section="appearance" class="tableCell data">
 						<select id="secColourInput" data-dest-noauto="secColour">
-							<option value=" "></option>
+							<option value=" " label=" "></option>
 							<option value="black">Black</option>
 							<option value="blue">Blue</option>
 							<option value="chrome">Chrome</option>
@@ -458,7 +458,7 @@
 					<div>| glowtubes = <output id='glowtubes'></output></div>
 					<div>| class = <output id='class' name="class"></output></div>
 					<div>| slots = <output id='slots' name="slots"></output></div>
-					<div>| cost = {{subst:formatnum:<output id='cost'></output>}}</div>
+					<div>| cost = <output id='cost'></output></div>
 					<div>| discovered = <output id='discovered'></output></div>
 					<div>| discoveredlink = <output id='discoveredlink'></output></div>
 					<div>| researchteam = <output id='researchteam'></output></div>

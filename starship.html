@@ -72,7 +72,7 @@
 								Picture won't be uploaded to the wiki. This is only to autofill the image name.
 							</span></span>
 					</div>
-					<div class="tableCell data" id="imageInput">
+					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image">
 						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
 					</div>
@@ -135,52 +135,52 @@
 						<label>System economy:</label>
 						<span class="tooltip" onclick='explanation(`Economy`,
 						`Found in the exploration guide under "Economy".`,
-						`./helperimg/shared/economy.jpg`)'><img src="./lib/help.svg"><span class="tooltiptext">
+						`./helperimg/ship/economy.jpg`)'><img src="./lib/help.svg"><span class="tooltiptext">
 								Found in the exploration guide under "Economy".
 							</span></span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="economy" id="economyInput">
 							<optgroup label="T3">
-								<option value="★★★ (Advanced)">Advanced
-								<option value="★★★ (Affluent)">Affluent
-								<option value="★★★ (Booming)">Booming
-								<option value="★★★ (Flourishing)">Flourishing
-								<option value="★★★ (High Supply)">High Supply
-								<option value="★★★ (Opulent)">Opulent
-								<option value="★★★ (Prosperous)">Prosperous
-								<option value="★★★ (Wealthy)">Wealthy
+								<option value="★★★ (Advanced)">Advanced</option>
+								<option value="★★★ (Affluent)">Affluent</option>
+								<option value="★★★ (Booming)">Booming</option>
+								<option value="★★★ (Flourishing)">Flourishing</option>
+								<option value="★★★ (High Supply)">High Supply</option>
+								<option value="★★★ (Opulent)">Opulent</option>
+								<option value="★★★ (Prosperous)">Prosperous</option>
+								<option value="★★★ (Wealthy)">Wealthy</option>
 							</optgroup><!-- here ends T3-->
 							<optgroup label="T2">
 								<!--here begins T2-->
-								<option value="★★ (Adequate)">Adequate
-								<option value="★★ (Balanced)">Balanced
-								<option value="★★ (Comfortable)">Comfortable
-								<option value="★★ (Developing)">Developing
-								<option value="★★ (Medium Supply)">Medium Supply
-								<option value="★★ (Promising)">Promising
-								<option value="★★ (Satisfactory)">Satisfactory
-								<option value="★★ (Sustainable)">Sustainable
+								<option value="★★ (Adequate)">Adequate</option>
+								<option value="★★ (Balanced)">Balanced</option>
+								<option value="★★ (Comfortable)">Comfortable</option>
+								<option value="★★ (Developing)">Developing</option>
+								<option value="★★ (Medium Supply)">Medium Supply</option>
+								<option value="★★ (Promising)">Promising</option>
+								<option value="★★ (Satisfactory)">Satisfactory</option>
+								<option value="★★ (Sustainable)">Sustainable</option>
 							</optgroup><!-- here ends T2-->
 							<optgroup label="T1">
 								<!--here begins T1-->
-								<option value="★ (Declining)">Declining
-								<option value="★ (Destitute)">Destitute
-								<option value="★ (Failing)">Failing
-								<option value="★ (Fledgling)">Fledgling
-								<option value="★ (Low Supply)">Low Supply
-								<option value="★ (Struggling)">Struggling
-								<option value="★ (Unsuccessful)">Unsuccessful
-								<option value="★ (Unpromising)">Unpromising
+								<option value="★ (Declining)">Declining</option>
+								<option value="★ (Destitute)">Destitute</option>
+								<option value="★ (Failing)">Failing</option>
+								<option value="★ (Fledgling)">Fledgling</option>
+								<option value="★ (Low Supply)">Low Supply</option>
+								<option value="★ (Struggling)">Struggling</option>
+								<option value="★ (Unsuccessful)">Unsuccessful</option>
+								<option value="★ (Unpromising)">Unpromising</option>
 							</optgroup>
 							<!--here ends T1-->
 							<optgroup label="Pirate">
-								<option value="💀 (Black Market)">Black Market
-							</optgroup>
+								<option value="💀 (Black Market)">Black Market</option>
+						</optgroup>
 						</select>
 					</div>
 					<div class="tableCell text">
-						<div class="glyphs-label-button">
+						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
 							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
 								Delete</button>
@@ -325,7 +325,7 @@
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
-					<div class="tableCell data">
+					<div class="tableCell text">
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
@@ -340,20 +340,20 @@
 					</div>
 					<div data-section="appearance" class="tableCell data">
 						<select id="mainColourInput">
-							<option value=" ">
-							<option value="blue">Blue
-							<option value="chrome">Chrome
-							<option value="cream">Cream
-							<option value="green">Green
-							<option value="grey">Grey
-							<option value="orange">Orange
-							<option value="pink">Pink
-							<option value="purple">Purple
-							<option value="red">Red
-							<option value="tan">Tan
-							<option value="teal">Teal
-							<option value="white">White
-							<option value="yellow">Yellow
+							<option value=" " label=" "></option>
+							<option value="blue">Blue</option>
+							<option value="chrome">Chrome</option>
+							<option value="cream">Cream</option>
+							<option value="green">Green</option>
+							<option value="grey">Grey</option>
+							<option value="orange">Orange</option>
+							<option value="pink">Pink</option>
+							<option value="purple">Purple</option>
+							<option value="red">Red</option>
+							<option value="tan">Tan</option>
+							<option value="teal">Teal</option>
+							<option value="white">White</option>
+							<option value="yellow">Yellow</option>
 						</select>
 					</div>
 					<div data-section="appearance" class="tableCell text">
@@ -361,23 +361,23 @@
 					</div>
 					<div data-section="appearance" class="tableCell data">
 						<select id="secColourInput">
-							<option value=" ">
-							<option value="black">Black
-							<option value="blue">Blue
-							<option value="chrome">Chrome
-							<option value="cream">Cream
-							<option value="gold">Gold
-							<option value="green">Green
-							<option value="grey">Grey
-							<option value="orange">Orange
-							<option value="pink">Pink
-							<option value="purple">Purple
-							<option value="red">Red
-							<option value="silver">Silver
-							<option value="tan">Tan
-							<option value="teal">Teal
-							<option value="white">White
-							<option value="yellow">Yellow
+							<option value=" " label=" "></option>
+							<option value="black">Black</option>
+							<option value="blue">Blue</option>
+							<option value="chrome">Chrome</option>
+							<option value="cream">Cream</option>
+							<option value="gold">Gold</option>
+							<option value="green">Green</option>
+							<option value="grey">Grey</option>
+							<option value="orange">Orange</option>
+							<option value="pink">Pink</option>
+							<option value="purple">Purple</option>
+							<option value="red">Red</option>
+							<option value="silver">Silver</option>
+							<option value="tan">Tan</option>
+							<option value="teal">Teal</option>
+							<option value="white">White</option>
+							<option value="yellow">Yellow</option>
 						</select>
 					</div>
 					<div data-section="appearance" class="tableCell text">
