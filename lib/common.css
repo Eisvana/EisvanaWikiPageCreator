@@ -609,8 +609,7 @@ footer button {
 	grid-template-columns: repeat(8, 60px);
 }
 
-@media only screen and (max-width: 550px),
-(1024px <=width <=1215px) {
+@container (max-width: 470px) {
 	#portalglyphButtons {
 		display: flex;
 		flex-wrap: wrap;
