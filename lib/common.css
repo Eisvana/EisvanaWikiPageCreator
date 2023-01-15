@@ -614,6 +614,11 @@ footer button {
 		display: flex;
 		flex-wrap: wrap;
 	}
+
+	#portalglyphButtons button .glyph {
+		margin-left: -.5em;
+		margin-right: -.5em;
+	}
 }
 
 #portalglyphButtons>* {
