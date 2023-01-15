@@ -334,6 +334,10 @@ dialog #explanationContent .dialog-list {
 	color: var(--text-color);
 }
 
+#input>.table {
+	margin-bottom: 2rem;
+} 
+
 .table>* {
 	padding: 5px 0;
 	border-bottom: 1px dashed;
@@ -419,12 +423,19 @@ div.column {
 
 @media only screen and (max-width: 550px) {
 	div.column {
-		padding: 1rem;
+		padding-left: 0;
+		padding-right: 0;
 	}
 
-	main {
+	main.columns {
 		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
 	}
+}
+
+.column>*:last-child {
+	margin-bottom: 1rem;
 }
 
 #output {
@@ -608,8 +619,8 @@ input[type="date"]:hover {
 
 .buttons {
 	justify-content: center;
-	margin-left: -1em;
-	margin-top: 2em;
+	margin-left: -1rem;
+	margin-top: 1rem;
 }
 
 footer.footer {
