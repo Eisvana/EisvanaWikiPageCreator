@@ -334,6 +334,10 @@ dialog #explanationContent .dialog-list {
 	color: var(--text-color);
 }
 
+#input>.table {
+	margin-bottom: 2rem;
+} 
+
 .table>* {
 	padding: 5px 0;
 	border-bottom: 1px dashed;
@@ -615,8 +619,8 @@ input[type="date"]:hover {
 
 .buttons {
 	justify-content: center;
-	margin-left: -1em;
-	margin-top: 2em;
+	margin-left: -1rem;
+	margin-top: 1rem;
 }
 
 footer.footer {
