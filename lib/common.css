@@ -53,10 +53,10 @@ html[data-transition] input[type="date"]::-webkit-calendar-picker-indicator,
 html[data-transition] input::placeholder,
 html[data-transition] textarea::placeholder,
 html[data-transition] label {
-	transition: all .3s;
 	-moz-transition: all .3s;
 	-webkit-transition: all .3s;
 	-o-transition: all .3s;
+	transition: all .3s;
 }
 
 html,
@@ -207,8 +207,8 @@ input[type="file"]::file-selector-button {
 
 
 img {
-	user-select: none;
 	-webkit-user-select: none;
+	user-select: none;
 }
 
 .nms-font {
@@ -242,8 +242,8 @@ nav {
 .page-options {
 	max-width: 500px;
 	margin: 1em auto;
-	user-select: none;
 	-webkit-user-select: none;
+	user-select: none;
 }
 
 .page-options a {
@@ -743,8 +743,8 @@ dialog #explanationContent :is(ul, ol) {
 .gallery-item .controlButtons .delete-icon {
 	cursor: pointer;
 	padding: .5em 0 .3em;
-	user-select: none;
 	-webkit-user-select: none;
+	user-select: none;
 }
 
 .gallery-item .gallery-meta input {
@@ -779,8 +779,8 @@ dialog #explanationContent :is(ul, ol) {
 }
 
 body[data-mark="false"] #output {
-	user-select: none;
 	-webkit-user-select: none;
+	user-select: none;
 }
 
 [data-theme="dark"] .is-even {
