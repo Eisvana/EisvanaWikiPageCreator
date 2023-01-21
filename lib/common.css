@@ -338,8 +338,12 @@ dialog #explanationContent .dialog-list {
 }
 
 #input>.table {
+	margin-bottom: 1rem;
+}
+
+#input>#galleryItems {
 	margin-bottom: 2rem;
-} 
+}
 
 .table>* {
 	padding: 5px 0;
