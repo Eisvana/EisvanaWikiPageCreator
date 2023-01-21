@@ -53,10 +53,10 @@ html[data-transition] input[type="date"]::-webkit-calendar-picker-indicator,
 html[data-transition] input::placeholder,
 html[data-transition] textarea::placeholder,
 html[data-transition] label {
-	transition: all .3s;
 	-moz-transition: all .3s;
 	-webkit-transition: all .3s;
 	-o-transition: all .3s;
+	transition: all .3s;
 }
 
 html,
@@ -123,8 +123,11 @@ a:hover {
 }
 
 .button:not([class*="is-"]):focus,
+.button:not([class*="is-"]):focus-visible,
 textarea:focus,
-input:not([type="file"], [type="checkbox"], [type="radio"]):focus {
+textarea:focus-visible,
+input:not([type="file"], [type="checkbox"], [type="radio"]):focus,
+input:not([type="file"], [type="checkbox"], [type="radio"]):focus-visible {
 	outline: var(--outline-color);
 	outline-style: solid;
 	outline-width: 2px;
@@ -204,8 +207,8 @@ input[type="file"]::file-selector-button {
 
 
 img {
-	user-select: none;
 	-webkit-user-select: none;
+	user-select: none;
 }
 
 .nms-font {
@@ -239,8 +242,8 @@ nav {
 .page-options {
 	max-width: 500px;
 	margin: 1em auto;
-	user-select: none;
 	-webkit-user-select: none;
+	user-select: none;
 }
 
 .page-options a {
@@ -335,8 +338,12 @@ dialog #explanationContent .dialog-list {
 }
 
 #input>.table {
+	margin-bottom: 1rem;
+}
+
+#input>#galleryItems {
 	margin-bottom: 2rem;
-} 
+}
 
 .table>* {
 	padding: 5px 0;
@@ -673,7 +680,8 @@ footer button {
 }
 
 dialog #explanationContent :is(ul, ol) {
-	margin: 1em 0;
+	margin: 1rem 0;
+	padding-left: 1rem;
 }
 
 /* Gallery styles */
@@ -740,8 +748,8 @@ dialog #explanationContent :is(ul, ol) {
 .gallery-item .controlButtons .delete-icon {
 	cursor: pointer;
 	padding: .5em 0 .3em;
-	user-select: none;
 	-webkit-user-select: none;
+	user-select: none;
 }
 
 .gallery-item .gallery-meta input {
@@ -776,8 +784,8 @@ dialog #explanationContent :is(ul, ol) {
 }
 
 body[data-mark="false"] #output {
-	user-select: none;
 	-webkit-user-select: none;
+	user-select: none;
 }
 
 [data-theme="dark"] .is-even {
