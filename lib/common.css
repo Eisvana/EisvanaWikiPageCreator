@@ -676,7 +676,8 @@ footer button {
 }
 
 dialog #explanationContent :is(ul, ol) {
-	margin: 1em 0;
+	margin: 1rem 0;
+	padding-left: 1rem;
 }
 
 /* Gallery styles */
