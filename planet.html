@@ -14,8 +14,9 @@
 	<script src="./lib/modules/actions.js" defer></script>
 	<script src="./lib/modules/dialog.js" defer></script>
 	<script src="./lib/datalists/planetDatalists.js" defer></script>
-	<script src="./lib/misc_logic/celestialobjectslogic.js"></script>
+	<script src="./lib/misc_logic/celestialobjectslogic.js" defer></script>
 	<script src="./lib/misc_logic/locationLogic.js"></script>
+	<script src="./lib/misc_logic/dateLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Landscape', 'Night View', 'Cave System', 'Coast Area', 'Underwater', 'Analysis Visor', 'Planet Exploration Guide', 'Planet Page', 'System Page', 'Galaxy Map'];
 
@@ -132,6 +133,13 @@
 						</select>
 					</div>
 					<div class="tableCell text">
+						<label for="infestedInput">Is infested</label>
+					</div>
+					<div class="tableCell data">
+						<input type="checkbox" id="infestedInput" value="([[Biome Subtype - Infested|Infested]]) "
+							data-dest-checkbox="infested">
+					</div>
+					<div class="tableCell text">
 						<label for="descriptionInput">Description of the planet:</label>
 					</div>
 					<div class="tableCell data">
@@ -159,13 +167,9 @@
 						<label>Resources:</label>
 					</div>
 					<div id="resourceInputs" class="tableHeader text">
-						<button class="button is-primary" type="button" onclick="addResource(this)">+ Add Resource</button>
+						<button class="button is-primary" type="button" onclick="addResource(this)">+ Add
+							Resource</button>
 					</div>
-
-
-					<!--Resources Stuff here. use the add section thingy I think, and make them all into links with their shorthands (see object somewhere)-->
-
-
 					<div class="tableCell text">
 						<label for="sentinelInput">Sentinel level of the planet:</label>
 					</div>
@@ -269,9 +273,6 @@
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
-
-
-
 					<div class="tableHeader data no-flex">
 						<label for="addInfoInput">Additional Information:</label>
 						<textarea id="addInfoInput" data-dest="addInfo"></textarea>
@@ -331,7 +332,7 @@
 					<br>
 					<div>==Summary==</div>
 					<div>'''<output id='name2' name="name"></output>''' is a [[planet]] in the <output id="introSystem"
-							name="system"></output>.</div>
+							name="system"></output> star system.</div>
 					<br>
 
 					<div>==Alias Names==</div>
@@ -344,8 +345,9 @@
 					<br>
 
 					<div>==Planet Type==</div>
-					<div>{{Biome|<output id="biomeType" name="biome"></output>}} - <output id="descriptionType"
-							name="description"></output></div>
+					<div>{{Biome|<output id="biomeType" name="biome"></output>}} <output id="infested"></output>-
+						<output id="descriptionType" name="description"></output>
+					</div>
 					<br>
 
 					<div>===Moons===</div>
@@ -353,8 +355,7 @@
 					<br>
 
 					<div>==Location==</div>
-					<div>It can be found in the [[SystemName]] [[star system]] in the [[RegionName]] [[region]] (HUBx)
-						of the [[Galactic Hub Eissentam]], in the [[Eissentam]] [[galaxy]].</div>
+					<div><output id="location"></output></div>
 					<br>
 					<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
 					<br>
