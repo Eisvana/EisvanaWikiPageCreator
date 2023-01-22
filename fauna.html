@@ -15,6 +15,7 @@
 	<script src="./lib/modules/albumactions.js" defer></script>
 	<script src="./lib/datalists/creatureDatalists.js" defer></script>
 	<script src="./lib/modules/dialog.js" defer></script>
+	<script src="./lib/misc_logic/creatureData.js"></script>
 	<script src="./lib/misc_logic/locationLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'x gender', 'x gender scan', 'Creature scan', 'Discovery Menu', 'Planet Page', 'Moon Page', 'System Page', 'Galaxy Map'];
@@ -75,7 +76,7 @@
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
 						<span class="tooltip" onclick="explanation('File Upload', 
-								`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
+								`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name. Maximum filesize is 10MB.
 								You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
 								); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Picture won't be uploaded to the wiki. This is only to autofill the image name.
@@ -156,7 +157,7 @@
 					</div>
 					<div class="tableCell data">
 						<select data-dest="hemisphere" id="hemisphereInput">
-							<option value="" label=" "></option>
+							<option value=""></option>
 							<option value="North">North</option>
 							<option value="South">South</option>
 						</select>
@@ -270,7 +271,7 @@
 					</div>
 					<div class="tableCell data">
 						<select data-dest="gender2_label" data-dest-noauto="gender2" id="gender2Input">
-							<option value="" label=" "></option>
+							<option value=""></option>
 							<option value="Alpha">Alpha</option>
 							<option value="Asymmetric">Asymmetric</option>
 							<option value="Asymptotic">Asymptotic</option>
