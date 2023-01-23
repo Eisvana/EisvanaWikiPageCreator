@@ -13,9 +13,12 @@
 	<script src="./lib/modules/gallery.js" defer></script>
 	<script src="./lib/modules/actions.js" defer></script>
 	<script src="./lib/modules/dialog.js" defer></script>
+	<script src="./lib/misc_logic/planetMoonLogic.js" defer></script>
+	<script src="./lib/misc_logic/celestialobjectslogic.js" defer></script>
 	<script src="./lib/datalists/planetDatalists.js" defer></script>
-	<script src="./lib/misc_logic/celestialobjectslogic.js"></script>
 	<script src="./lib/misc_logic/locationLogic.js"></script>
+	<script src="./lib/misc_logic/creatureData.js"></script>
+	<script src="./lib/misc_logic/dateLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Landscape', 'Night View', 'Cave System', 'Coast Area', 'Underwater', 'Analysis Visor', 'Planet Exploration Guide', 'Planet Page', 'System Page', 'Galaxy Map'];
 
@@ -72,7 +75,7 @@
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
 						<span class="tooltip" onclick="explanation('File Upload', 
-						`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name.
+						`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name. Maximum filesize is 10MB.
 						You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
 						); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Picture won't be uploaded to the wiki. This is only to autofill the image name.
@@ -132,6 +135,13 @@
 						</select>
 					</div>
 					<div class="tableCell text">
+						<label for="infestedInput">Is infested</label>
+					</div>
+					<div class="tableCell data">
+						<input type="checkbox" id="infestedInput" value="([[Biome Subtype - Infested|Infested]]) "
+							data-dest-checkbox="infested">
+					</div>
+					<div class="tableCell text">
 						<label for="descriptionInput">Description of the planet:</label>
 					</div>
 					<div class="tableCell data">
@@ -159,13 +169,9 @@
 						<label>Resources:</label>
 					</div>
 					<div id="resourceInputs" class="tableHeader text">
-						<button class="button is-primary" type="button" onclick="addResource(this)">+ Add Resource</button>
+						<button class="button is-primary" type="button" onclick="addResource(this)">+ Add
+							Resource</button>
 					</div>
-
-
-					<!--Resources Stuff here. use the add section thingy I think, and make them all into links with their shorthands (see object somewhere)-->
-
-
 					<div class="tableCell text">
 						<label for="sentinelInput">Sentinel level of the planet:</label>
 					</div>
@@ -190,14 +196,29 @@
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="faunaNumber" id="faunaNumberInput">
 					</div>
-
-
-
-
-
-
-
-					<div class="tableCell text">
+					<div class="tableHeader text sectionToggle">
+						<p>Fauna:</p>
+						<button class="button" onclick="toggleSection('fauna', this)">Hide</button>
+					</div>
+					<div id="faunaInputs" class="tableHeader text" data-section="fauna">
+						<button class="button is-primary" type="button" onclick="addFauna(this)">+ Add Fauna</button>
+					</div>
+					<div class="tableHeader text sectionToggle">
+						<p>Flora:</p>
+						<button class="button" onclick="toggleSection('flora', this)">Hide</button>
+					</div>
+					<div id="floraInputs" class="tableHeader text" data-section="flora">
+						<button class="button is-primary" type="button" onclick="addFlora(this)">+ Add Flora</button>
+					</div>
+					<div class="tableHeader text sectionToggle">
+						<p>Minerals:</p>
+						<button class="button" onclick="toggleSection('mineral', this)">Hide</button>
+					</div>
+					<div id="mineralInputs" class="tableHeader text" data-section="mineral">
+						<button class="button is-primary" type="button" onclick="addMineral(this)">+ Add
+							Mineral</button>
+					</div>
+					<div class="tableCell text ">
 						<label for="discDateInput">When was this planet discovered?</label>
 						<span class="tooltip" onclick="explanation('Discovery Date', 
 									`Found in the analysis visor in the space station.<br>
@@ -269,9 +290,6 @@
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
-
-
-
 					<div class="tableHeader data no-flex">
 						<label for="addInfoInput">Additional Information:</label>
 						<textarea id="addInfoInput" data-dest="addInfo"></textarea>
@@ -331,7 +349,7 @@
 					<br>
 					<div>==Summary==</div>
 					<div>'''<output id='name2' name="name"></output>''' is a [[planet]] in the <output id="introSystem"
-							name="system"></output>.</div>
+							name="system"></output> star system.</div>
 					<br>
 
 					<div>==Alias Names==</div>
@@ -344,8 +362,9 @@
 					<br>
 
 					<div>==Planet Type==</div>
-					<div>{{Biome|<output id="biomeType" name="biome"></output>}} - <output id="descriptionType"
-							name="description"></output></div>
+					<div>{{Biome|<output id="biomeType" name="biome"></output>}} <output id="infested"></output>-
+						<output id="descriptionType" name="description"></output>
+					</div>
 					<br>
 
 					<div>===Moons===</div>
@@ -353,8 +372,7 @@
 					<br>
 
 					<div>==Location==</div>
-					<div>It can be found in the [[SystemName]] [[star system]] in the [[RegionName]] [[region]] (HUBx)
-						of the [[Galactic Hub Eissentam]], in the [[Eissentam]] [[galaxy]].</div>
+					<div><output id="location"></output></div>
 					<br>
 					<div>{{CoordGlyphConvert|<output id='portalglyphs1' name="portalglyphs"></output>}}</div>
 					<br>
