@@ -9,6 +9,7 @@
 	<script src="./lib/common.js" defer></script>
 	<script src="./lib/pages/business.js" defer></script>
 	<script src="./lib/modules/footer.js" defer></script>
+	<script src="./lib/modules/portalglyphs.js" defer></script>
 	<script src="./lib/modules/gallery.js" defer></script>
 	<script src="./lib/modules/actions.js" defer></script>
 	<script src="./lib/modules/dialog.js" defer></script>
@@ -65,12 +66,6 @@
 						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
 					</div>
 					<div class="tableCell text">
-						<label>Region:</label>
-					</div>
-					<div class="tableCell data">
-						<select data-dest="region" id="regionInput"></select>
-					</div>
-					<div class="tableCell text">
 						<label for="systemInput">Name of the system:</label>
 					</div>
 					<div class="tableCell data">
@@ -93,6 +88,25 @@
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
+					</div>
+					<div class="tableCell text">
+						<div class="label-combo">
+							<label for="portalglyphsInput">Portalglyphs:</label>
+							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+								Delete</button>
+						</div>
+						<span class="tooltip" onclick="explanation('Portalglyphs', 
+								`Found in Photo Mode. Glyphs are specific to each planet.`,
+								'./helperimg/shared/glyphs.jpg'
+								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
+					</div>
+					<div class="tableHeader data">
+						<div id="portalglyphButtons"></div>
+						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
 					<div class="tableCell text">
 						<label for="headquartersInput">Name of the headquarter base:</label>
