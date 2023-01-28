@@ -217,7 +217,7 @@ img {
 
 @media only screen and (max-width: 1023px) {
 	.container {
-		margin: 0 1em;
+		margin: 0 1rem;
 	}
 
 	#gallery_descs {
@@ -731,8 +731,8 @@ dialog #explanationContent :is(ul, ol) {
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	padding-bottom: 10px;
-	padding-right: 5px;
+	padding: .5em;
+	padding-left: 0;
 }
 
 .gallery-item .controlButtons .moveButton {
@@ -747,7 +747,6 @@ dialog #explanationContent :is(ul, ol) {
 
 .gallery-item .controlButtons .delete-icon {
 	cursor: pointer;
-	padding: .5em 0 .3em;
 	-webkit-user-select: none;
 	user-select: none;
 }
@@ -802,4 +801,18 @@ body[data-mark="false"] #output {
 
 .is-odd {
 	background-color: hsl(0, 0%, 96%) !important;
+}
+
+.is-odd,
+.is-even {
+	padding-left: .5rem;
+	padding-right: .5rem;
+	margin-left: -.5rem;
+	margin-right: -.5rem;
+}
+
+.removable {
+	display: flex;
+	justify-content: start;
+	gap: .5rem;
 }
