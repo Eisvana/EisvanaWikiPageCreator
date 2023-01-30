@@ -60,7 +60,7 @@
 						<label for="nameInput">Name of the planet:</label>
 						<span class="tooltip" onclick="explanation('Planet Name', 
 						'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-						'./helperimg/base/baseName.jpg'	
+						'./helperimg/planet/planetName.jpg'	
 						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
 							</span></span>
@@ -76,12 +76,19 @@
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="explanation('File Upload', 
-						`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name. Maximum filesize is 10MB.
-						You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
-						); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Picture won't be uploaded to the wiki. This is only to autofill the image name.
-							</span></span>
+						<span class="tooltip" onclick="explanation('File Upload',
+						`Any pictures you upload here won't be uploaded to the wiki.<br>
+						This is only to autofill the image name. Maximum filesize is 10MB<br><br>
+						Should show the entire planet from space.<br>
+						Make sure no asteroids/pulse lines/freighters are obstructing the picture.<br>
+						Point the sun directly at the planet, no weird angles.<br>
+						Also try to only get the planet into the shot, no other planets.
+						Only exception to this are moons or rings, which should be included if they exist.<br>
+						Disable the vignette.`,
+						'./helperimg/planet/planetPic.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Picture won't be uploaded to the wiki. This is only to autofill the image name. Should
+								show the entire planet from space. Click for an example picture.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image">
@@ -120,6 +127,11 @@
 					</div>
 					<div class="tableCell text">
 						<label for="biomeInput">Biome of the planet:</label>
+						<span class="tooltip" onclick="explanation('Planet Biome',
+						`Can be determined from the planetary features such as the weather, harvestable plants or available resources.<br>
+						See the <a href='https://nomanssky.fandom.com/wiki/Biome' rel='noreferrer noopener' target='_blank'>Biome wiki page</a> for more information.`,
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Can be determined from the planetary features.</span></span>
 					</div>
 					<div class="tableCell data">
 						<select id="biomeInput" data-dest="biome">
@@ -138,6 +150,11 @@
 					</div>
 					<div class="tableCell text">
 						<label for="infestedInput">Is infested</label>
+						<span class="tooltip" onclick="explanation('Infested Biome',
+						`Can be determined from the planetary features such as the planet descriptor, the weather descriptor, or the alien looking flora.<br>
+						See the <a href='https://nomanssky.fandom.com/wiki/Biome_Subtype_-_Infested' rel='noreferrer noopener' target='_blank'>wiki</a> for more information.`,
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Can be determined from the planetary features.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="checkbox" id="infestedInput" value="([[Biome Subtype - Infested|Infested]]) "
@@ -145,30 +162,57 @@
 					</div>
 					<div class="tableCell text">
 						<label for="descriptionInput">Description of the planet:</label>
+						<span class="tooltip" onclick="explanation('Planet Description',
+						'Can be found in the exploration guide.',
+						'./helperimg/planet/planetDesc.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Can be found in the exploration guide.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="description" list="planetDescriptors" id="descriptionInput">
 					</div>
 					<div class="tableCell text">
 						<label for="atmosphereInput">Atmosphere of the planet:</label>
+						<span class="tooltip" onclick="explanation('Planet Atmosphere', 
+						'Found in the exploration guide.',
+						'./helperimg/planet/atmosphere.jpg'	
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the exploration guide.
+							</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="atmosphere" id="atmosphereInput">
 					</div>
 					<div class="tableCell text">
 						<label for="terrainInput">Terrain of the planet:</label>
+						<span class="tooltip" onclick="explanation('Planet Terrain',
+						'Can be found in the exploration guide.',
+						'./helperimg/planet/terrain.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Can be found in the exploration guide.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="terrain" list="terrainData" id="terrainInput">
 					</div>
 					<div class="tableCell text">
 						<label for="weatherInput">Weather of the planet:</label>
+						<span class="tooltip" onclick="explanation('Planet Weather',
+						'Can be found in the discovery menu.',
+						'./helperimg/planet/weather.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Can be found in the discovery menu.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="weather" list="weatherData" id="weatherInput">
 					</div>
 					<div class="tableHeader text no-flex">
-						<label>Resources:</label>
+						<p style="display: inline; margin-right: 1.5rem;">Resources:</p>
+						<span class="tooltip" onclick="explanation('Planet Resources', 
+						'Found in the Discovery Menu or on the analysis visor.',
+						'./helperimg/planet/resources.jpg'	
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Found in the Discovery Menu or on the analysis visor.
+							</span></span>
 					</div>
 					<div id="resourceInputs" class="tableHeader text">
 						<button class="button is-primary" type="button" onclick="addResource(this)">+ Add
@@ -176,24 +220,44 @@
 					</div>
 					<div class="tableCell text">
 						<label for="sentinelInput">Sentinel level of the planet:</label>
+						<span class="tooltip" onclick="explanation('Planet Sentinel Level',
+						'Can be found in the discovery menu.',
+						'./helperimg/planet/sentinels.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Can be found in the discovery menu.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="sentinel" list="sentinels" id="sentinelInput">
 					</div>
 					<div class="tableCell text">
 						<label for="floraInput">Flora level of the planet:</label>
+						<span class="tooltip" onclick="explanation('Planet Flora Level',
+						'Can be found in the discovery menu.',
+						'./helperimg/planet/flora.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Can be found in the discovery menu.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="flora" list="rarity" id="floraInput">
 					</div>
 					<div class="tableCell text">
 						<label for="faunaInput">Fauna level of the planet:</label>
+						<span class="tooltip" onclick="explanation('Planet Fauna Level',
+						'Can be found in the discovery menu.',
+						'./helperimg/planet/fauna.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Can be found in the discovery menu.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="fauna" list="rarity" id="faunaInput">
 					</div>
 					<div class="tableCell text">
 						<label for="faunaNumberInput">Number of Fauna:</label>
+						<span class="tooltip" onclick="explanation('Planet Fauna Number',
+						'Can be found in the discovery menu.',
+						'./helperimg/planet/faunaNum.jpg'
+						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
+								Can be found in the discovery menu.</span></span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="faunaNumber" id="faunaNumberInput">
@@ -225,7 +289,7 @@
 						<span class="tooltip" onclick="explanation('Discovery Date', 
 									`Found in the analysis visor in the space station.<br>
 									The exact discovery timestamp is displayed on the top left.`,
-									'./helperimg/system/discDate.jpg'
+									'./helperimg/planet/discDate.jpg'
 									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
 								Found in the analysis visor in the space station.
 							</span></span>

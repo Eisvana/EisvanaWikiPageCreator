@@ -20,6 +20,8 @@
 	--border-color-focus-hover: hsl(0, 0%, 0%);
 	--table-border-color: hsla(0, 0%, 20%, 0.1);
 	--column-divider-color: hsl(0, 0%, 80%);
+	--is-even-background-color: hsl(0, 0%, 93%);
+	--is-odd-background-color: hsl(0, 0%, 96%);
 	--border-radius: 5px;
 	--invert: 0%;
 }
@@ -43,6 +45,8 @@
 	--border-color-focus-hover: hsl(0, 0%, 100%);
 	--table-border-color: hsla(0, 0%, 80%, 0.1);
 	--column-divider-color: hsl(0, 0%, 20%);
+	--is-even-background-color: hsl(228, 10%, 16%);
+	--is-odd-background-color: hsl(228, 10%, 13%);
 	--invert: 90%;
 }
 
@@ -787,24 +791,28 @@ body[data-mark="false"] #output {
 	user-select: none;
 }
 
-[data-theme="dark"] .is-even {
-	background-color: hsl(228, 10%, 16%) !important;
-}
-
 .is-even {
-	background-color: hsl(0, 0%, 93%) !important;
-}
-
-[data-theme="dark"] .is-odd {
-	background-color: hsl(228, 10%, 13%) !important;
+	background-color: var(--is-even-background-color) !important;
 }
 
 .is-odd {
-	background-color: hsl(0, 0%, 96%) !important;
+	background-color: var(--is-odd-background-color) !important;
 }
 
-.is-odd,
-.is-even {
+.tableCell.text.is-odd,
+.tableCell.text.is-even {
+	padding-left: .5rem;
+	margin-left: -.5rem;
+}
+
+.tableCell.data.is-odd,
+.tableCell.data.is-even {
+	padding-right: .5rem;
+	margin-right: -.5rem;
+}
+
+.tableHeader.is-even,
+.tableHeader.is-odd {
 	padding-left: .5rem;
 	padding-right: .5rem;
 	margin-left: -.5rem;
