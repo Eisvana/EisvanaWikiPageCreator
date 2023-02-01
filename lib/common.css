@@ -71,6 +71,18 @@ body {
 	transition: filter .15s;
 }
 
+html[data-debug]::before {
+	display: block;
+	width: 100%;
+	content: 'Debug';
+	background-color: hsl(0, 50%, 50%);
+	position: fixed;
+	z-index: 2;
+	text-align: center;
+	font-size: 1.5rem;
+	color: white;
+}
+
 body:has(dialog[open]) {
 	filter: blur(3px);
 }
