@@ -71,7 +71,7 @@ body {
 	transition: filter .15s;
 }
 
-html[data-debug]::before {
+html[data-debug="true"]::before {
 	display: block;
 	width: 100%;
 	content: 'Debug';
