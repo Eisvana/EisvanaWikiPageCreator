@@ -50,24 +50,30 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the base:</label>
-						<span class="tooltip" onclick="explanation('Base Name', 
-						'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-						'./helperimg/base/baseName.jpg'	
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
-							</span></span>
+						<span class="tooltip">
+							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>Base Name</data>
+							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>./helperimg/base/baseName.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="explanation('File Upload', 
-						`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name. Maximum filesize is 10MB.
-						You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
-						); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Picture won't be uploaded to the wiki. This is only to autofill the image name.
-							</span></span>
+						<span class="tooltip" onclick="uploadShown = true;">
+							<data>Picture won't be uploaded to the wiki. This is only to autofill the
+								image name.</data>
+							<data>File Upload</data>
+							<data>
+								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
+								image name. Maximum filesize is 10MB.
+								You can upload your pictures to the wiki on <a
+									href='https://nomanssky.fandom.com/Special:Upload' target='_blank'
+									rel='noopener noreferrer'>Special:Upload</a>
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image">
@@ -99,28 +105,30 @@
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Planet Name OR the planet circled by the moon where the base can be found.
-							</span></span>
+						<span class="tooltip">
+							<data>Planet Name OR the planet circled by the moon where the base can be found.</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if applicable):</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								If the base is located on a moon. Leave blank if the base is on a planet.</span></span>
+						<span class="tooltip">
+							<data>If the base is located on a moon. Leave blank if the base is on a planet.</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
 					</div>
 					<div class="tableCell text">
 						<label for="axesInput">Planetary coords:</label>
-						<span class="tooltip" onclick="explanation('Planetary Coordinates', 
-						`Found using your analysis visor OR on your ship's dashboard.`,
-						'./helperimg/shared/axes.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Found using your analysis visor OR on your ship's dashboard.</span></span>
+						<span class="tooltip">
+							<data>Found using your analysis visor OR on your ship's dashboard.</data>
+							<data>Planetary Coordinates</data>
+							<data>Found using your analysis visor OR on your ship's dashboard.</data>
+							<data>./helperimg/shared/axes.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" placeholder="+0.00, -0.00" data-dest="axes" id="axesInput">
@@ -131,11 +139,12 @@
 							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
 								Delete</button>
 						</div>
-						<span class="tooltip" onclick="explanation('Portalglyphs', 
-						`Found in Photo Mode. Glyphs are specific to each planet.`,
-						'./helperimg/shared/glyphs.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
+						<span class="tooltip">
+							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
+							<data>Portalglyphs</data>
+							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
+							<data>./helperimg/shared/glyphs.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -146,32 +155,35 @@
 					</div>
 					<div class="tableCell text">
 						<label for="typeInput">Type of the base:</label>
-						<span class="tooltip" onclick="explanation('Portalglyphs', 
-						`Type and purpose of the base. Some examples: 
-						<div class='dialog-center'>
-							<ul class='dialog-list'>
-								<li>Artistic</li>
-								<li>Embassy</li>
-								<li>Farm</li>
-								<li>Headquarters</li>
-								<li>Industrial</li>
-								<li>Memorial</li>
-								<li>Residential</li>
-							</ul>
-						</div>`
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Type and purpose of the base.</span></span>
+						<span class="tooltip">
+							<data>Type and purpose of the base.</data>
+							<data>Base Type</data>
+							<data>
+								<div class='dialog-center'>
+									<ul class='dialog-list'>
+										<li>Artistic</li>
+										<li>Embassy</li>
+										<li>Farm</li>
+										<li>Headquarters</li>
+										<li>Industrial</li>
+										<li>Memorial</li>
+										<li>Residential</li>
+									</ul>
+								</div>
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="type" id="typeInput">
 					</div>
 					<div class="tableCell text">
 						<label>Gamemode:</label>
-						<span class="tooltip" onclick="explanation('Gamemode', 
-						'Gamemode of the save on which this base was built.<br>Found in the main menu:',
-						'./helperimg/shared/gamemode.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Gamemode of the save on which this base was built.</span></span>
+						<span class="tooltip">
+							<data>Gamemode of the save on which this base was built.</data>
+							<data>Gamemode</data>
+							<data>Gamemode of the save on which this base was built.<br>Found in the main menu:</data>
+							<data>./helperimg/shared/gamemode.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
@@ -232,41 +244,46 @@
 					</div>
 					<div data-section="census" class="tableCell text">
 						<label for="censusPlayerInput">Ingame name of the player?</label>
-						<span class="tooltip" onclick="explanation('Player Name', 
-						`Your ingame name. Don't include any ingame titles.`,
-						'./helperimg/base/playerName.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext">
-								Your ingame name.
-							</span></span>
+						<span class="tooltip">
+							<data>Your ingame name.</data>
+							<data>Player Name</data>
+							<data>Your ingame name. Don't include any ingame titles.</data>
+							<data>./helperimg/base/playerName.jpg</data>
+						</span>
 					</div>
 					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest="censusplayer" id="censusPlayerInput">
 					</div>
 					<div data-section="census" class="tableCell text">
 						<label for="censusRedditInput">Reddit name of the player?</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Your Reddit name. "u/" not necessary.
-							</span></span>
+						<span class="tooltip">
+							<data>Your Reddit name. "u/" not necessary.</data>
+						</span>
 					</div>
 					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest-noauto="censusreddit" id="censusRedditInput">
 					</div>
 					<div data-section="census" class="tableCell text">
 						<label for="censusDiscordInput">Discord name of the player?</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Your Discord name. Include the #xxxx at the end.
-							</span></span>
+						<span class="tooltip">
+							<data>Your Discord name. Include the #xxxx at the end.</data>
+						</span>
 					</div>
 					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest="censusdiscord" id="censusDiscordInput">
 					</div>
 					<div data-section="census" class="tableCell text">
 						<label for="censusFriendInput">NMS friend code of the player?</label>
-						<span class="tooltip" onclick="explanation('NMS Friend Code',
-						`You can find your friend code in the Options &rarr; Network &rarr; View No Man's Sky Friends List &rarr; Show My No
-								Man's Sky Friend Code`, './helperimg/base/friendCode.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext">
-								Can be found in the Options.</span></span>
+						<span class="tooltip">
+							<data>Can be found in the Options.</data>
+							<data>NMS Friend Code</data>
+							<data>
+								You can find your friend code in the Options &rarr; Network &rarr; View No Man's Sky
+								Friends List &rarr; Show My No
+								Man's Sky Friend Code
+							</data>
+							<data>./helperimg/base/friendCode.jpg</data>
+						</span>
 					</div>
 					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest-noauto="censusfriend" maxlength="15" id="censusFriendInput">
