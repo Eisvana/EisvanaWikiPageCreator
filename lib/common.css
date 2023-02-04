@@ -564,6 +564,10 @@ input[type="date"]:hover {
 	display: inline-block;
 }
 
+.tooltip>data {
+	display: none;
+}
+
 .tooltip[onclick] {
 	cursor: pointer;
 }
