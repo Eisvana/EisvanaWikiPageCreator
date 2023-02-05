@@ -1,4 +1,5 @@
 (() => {
+	// handle dialog stuff
 	const dialogElements = {
 		output: {
 			explanationHeading: 'explanationHeading',
@@ -20,6 +21,12 @@
 	globalElements.output.explanation.innerHTML = content;
 
 	updateGlobalElements(dialogElements);
+
+	// add tooltips on pageload
+	const elements = document.querySelectorAll('span.tooltip');
+	for (const element of elements) {
+		constructTooltip(element);
+	}
 })();
 
 // shows an explanation modal and fills text
@@ -37,4 +44,32 @@ function explanation(heading, text, img) {
 	globalElements.output.explanationHeading.innerText = heading;
 	globalElements.output.explanationContent.innerHTML = text;
 	globalElements.output.explanation.showModal();
+}
+
+// turns HTML tooltip data into actual interactive tooltip
+function constructTooltip(element) {
+	const dataElements = Array.from(element.getElementsByTagName('data'));	// conversion to array is necessary because otherwise it'd be a *live* HTMLCollection.
+	if (!dataElements.length) return;
+
+	const dataArr = new Array;
+	for (const element of dataElements) {
+		const text = removeNewlines(element.innerHTML).trim();
+		dataArr.push(text);
+		element.remove();		// this needs a static array, the live HTML stuff doesn't work with a for of loop
+	}
+
+	const img = document.createElement('img');
+	img.src = './assets/vector/help.svg';
+	img.alt = 'Help';
+
+	const tooltip = document.createElement('span');
+	tooltip.classList.add('tooltiptext', 'nms-font');
+	tooltip.innerHTML = dataArr[0];
+
+	if (dataArr.length > 1) {
+		assignFunction(element, 'explanation(`' + (dataArr[1] ?? '') + '`,`' + (dataArr[2] ?? '') + '`,`' + (dataArr[3] ?? '') + '`)', 'onclick');
+	}
+
+	element.appendChild(img);
+	element.appendChild(tooltip);
 }
