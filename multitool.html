@@ -5,17 +5,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Multi-Tool</title>
-	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js" defer></script>
-	<script src="./lib/pages/multitool.js" defer></script>
-	<script src="./lib/modules/footer.js" defer></script>
-	<script src="./lib/misc_logic/huburbs.js" defer></script>
-	<script src="./lib/modules/portalglyphs.js" defer></script>
-	<script src="./lib/modules/gallery.js" defer></script>
-	<script src="./lib/modules/actions.js" defer></script>
-	<script src="./lib/modules/albumactions.js" defer></script>
-	<script src="./lib/modules/dialog.js" defer></script>
-	<script src="./lib/misc_logic/locationLogic.js"></script>
+	<link rel="stylesheet" href="./src/css/common.css">
+	<script src="./src/common.js" defer></script>
+	<script src="./src/pages/multitool.js" defer></script>
+	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/misc_logic/huburbs.js" defer></script>
+	<script src="./src/modules/portalglyphs.js" defer></script>
+	<script src="./src/modules/gallery.js" defer></script>
+	<script src="./src/modules/actions.js" defer></script>
+	<script src="./src/modules/albumactions.js" defer></script>
+	<script src="./src/modules/commonModules.js" defer></script>
+	<script src="./src/misc_logic/locationLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Discovery Menu', 'Price Page', 'Base Stats', 'Minor Settlement', 'Sentinel Pillar', 'Tool in hand', 'First Person View',];
 
@@ -53,24 +53,29 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the multi-tool:</label>
-						<span class="tooltip" onclick="explanation('Multi-Tool Name', 
-						'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-						'./helperimg/mt/MTName.jpg'	
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
-							</span></span>
+						<span class="tooltip">
+							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>Multi-Tool Name</data>
+							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>./assets/bitmap/mt/MTName.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="explanation('File Upload', 
-						`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name. Maximum filesize is 10MB.
-						You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
-						); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Picture won't be uploaded to the wiki. This is only to autofill the image name.
-							</span></span>
+						<span class="tooltip" onclick="uploadShown = true">
+							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
+							<data>File Upload</data>
+							<data>
+								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
+								image name. Maximum filesize is 10MB.
+								You can upload your pictures to the wiki on <a
+									href='https://nomanssky.fandom.com/Special:Upload' target='_blank'
+									rel='noopener noreferrer'>Special:Upload</a>
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image">
@@ -78,12 +83,12 @@
 					</div>
 					<div class="tableCell text">
 						<label>Type of the multi-tool:</label>
-						<span class="tooltip" onclick="explanation('Multi-Tool Type', 
-						`The Multi-Tool type is defined by the shape of the tool.`,
-						'./helperimg/mt/MultitoolDifferentiation.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								MT Type is defined by the shape of the tool.
-							</span></span>
+						<span class="tooltip">
+							<data>MT Type is defined by the shape of the tool.</data>
+							<data>Multi-Tool Type</data>
+							<data>The Multi-Tool type is defined by the shape of the tool.</data>
+							<data>./assets/bitmap/mt/MultitoolDifferentiation.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select id="typeInput" data-dest-noauto="type">
@@ -94,16 +99,16 @@
 							<option value="Royal">Royal</option>
 						</select>
 					</div>
-					<div class="tableCell text" style="display: none;">
+					<div class="tableCell text" style="display: none">
 						<label>Inventory size of the multi-tool:</label>
-						<span class="tooltip" onclick="explanation('Inventory Size', 
-						`The Multi-Tool inventory size is defined by the shape of the tool.`,
-						'./helperimg/mt/MultitoolDifferentiation.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								MT Inventory size is defined by the shape of the tool.
-							</span></span>
+						<span class="tooltip">
+							<data>MT Inventory size is defined by the shape of the tool.</data>
+							<data>Inventory Size</data>
+							<data>The Multi-Tool inventory size is defined by the shape of the tool.</data>
+							<data>./assets/bitmap/mt/MultitoolDifferentiation.jpg</data>
+						</span>
 					</div>
-					<div class="tableCell data" style="display: none;">
+					<div class="tableCell data" style="display: none">
 						<select id="sizeInput" data-dest-noauto="size">
 							<option value="Pistol">Pistol (Small)</option>
 							<option value="SMG">SMG (Medium)</option>
@@ -118,8 +123,9 @@
 					</div>
 					<div class="tableCell text">
 						<label>Location:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Where the tool was found.</span></span>
+						<span class="tooltip">
+							<data>Where the tool was found.</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select id="locInput" data-dest="location">
@@ -131,41 +137,46 @@
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Planet Name OR the planet circled by the moon where the tool can be found.
-							</span></span>
+						<span class="tooltip">
+							<data>Planet Name OR the planet circled by the moon where the tool can be found.</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if applicable):</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								If the tool is located on a moon. Leave blank if the tool is on a planet.</span></span>
+						<span class="tooltip">
+							<data>If the tool is located on a moon. Leave blank if the tool is on a planet.</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
 					</div>
 					<div class="tableCell text">
 						<label for="axesInput">Planetary coords:</label>
-						<span class="tooltip" onclick="explanation('Planetary Coordinates', 
-						`Found using your analysis visor OR on your ship's dashboard.`,
-						'./helperimg/shared/axes.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Found using your analysis visor OR on your ship's dashboard.</span></span>
+						<span class="tooltip">
+							<data>Found using your analysis visor OR on your ship's dashboard.</data>
+							<data>Planetary Coordinates</data>
+							<data>Found using your analysis visor OR on your ship's dashboard.</data>
+							<data>./assets/bitmap/shared/axes.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" placeholder="+0.00, -0.00" data-dest="axes" id="axesInput">
 					</div>
 					<div class="tableCell text">
 						<label>Save/reload location type:</label>
-						<span class="tooltip" onclick="explanation('Save/Reload Location', 
-						`Where you have to reload in order to get the tool to load.<br>
-						If you are unsure what this means, please read this
-						<a href='https://www.reddit.com/r/NMSCoordinateExchange/wiki/multitool/' target='_blank' rel='noopener noreferrer'>guide on multi-tool spawning mechanics</a>.`,
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Where you have to reload in order to get the tool to load.
-							</span></span>
+						<span class="tooltip">
+							<data>Where you have to reload in order to get the tool to load.</data>
+							<data>Save/Reload Location</data>
+							<data>
+								Where you have to reload in order to get the tool to load.<br>
+								If you are unsure what this means, please read this
+								<a href='https://www.reddit.com/r/NMSCoordinateExchange/wiki/multitool/' target='_blank'
+									rel='noopener noreferrer'>guide on multi-tool spawning mechanics</a>.
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select id="srlocInput" data-dest-noauto="srLoc">
@@ -187,11 +198,12 @@
 							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
 								Delete</button>
 						</div>
-						<span class="tooltip" onclick="explanation('Portalglyphs', 
-							`Found in Photo Mode. Glyphs are specific to each planet.`,
-							'./helperimg/shared/glyphs.jpg'
-							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
+						<span class="tooltip">
+							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
+							<data>Portalglyphs</data>
+							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
+							<data>./assets/bitmap/shared/glyphs.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -213,13 +225,17 @@
 					</div>
 					<div class="tableCell text">
 						<label>Add-ons:</label>
-						<span class="tooltip" onclick="explanation('Multi-Tool Add-ons', 
-						`Check the boxes which apply to the tool.<br>
-						There are certain rules for some MT types in order to qualify for the add-on.<br>
-						<a href='https://nomanssky.fandom.com/wiki/Multi-Tool_Catalogue#Add-ons' target='_blank' rel='noopener noreferrer'>Detailed info can be found on the wiki</a>`,
-						'./helperimg/mt/addons.png'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Whether the tool has these features.</span></span>
+						<span class="tooltip">
+							<data>Whether the tool has these features.</data>
+							<data>Multi-Tool Add-ons</data>
+							<data>
+								Check the boxes which apply to the tool.<br>
+								There are certain rules for some MT types in order to qualify for the add-on.<br>
+								<a href='https://nomanssky.fandom.com/wiki/Multi-Tool_Catalogue#Add-ons' target='_blank'
+									rel='noopener noreferrer'>Detailed info can be found on the wiki</a>
+							</data>
+							<data>./assets/bitmap/mt/addons.png</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<div class="checkboxes">
@@ -235,46 +251,56 @@
 					</div>
 					<div class="tableCell text">
 						<label for="slotsInput">Slot count:</label>
-						<span class="tooltip" onclick="explanation('Multi-Tool Slotcount', 
-						`Slotcount of the tool. Can be found on the price page.`,
-						'./helperimg/mt/slots.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Can be found on the price page.</span></span>
+						<span class="tooltip">
+							<data>Can be found on the price page.</data>
+							<data>Multi-Tool Slotcount</data>
+							<data>Slotcount of the tool. Can be found on the price page.</data>
+							<data>./assets/bitmap/mt/slots.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="slotsInput" data-dest-noauto="slots">
 					</div>
 					<div class="tableCell text">
 						<label for="costInput">Cost:</label>
-						<span class="tooltip" onclick="explanation('Multi-Tool Cost', 
-						`Can be found on the price page. Enter the Buy price, not the trade-in price.`,
-						'./helperimg/mt/price.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Can be found on the price page.</span></span>
+						<span class="tooltip">
+							<data>Can be found on the price page.</data>
+							<data>Multi-Tool Cost</data>
+							<data>Can be found on the price page. Enter the Buy price, not the trade-in price.</data>
+							<data>./assets/bitmap/mt/price.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="costInput" data-dest-noauto="cost">
 					</div>
 					<div class="tableCell text">
 						<label for="dmgInput">Base Damage Potential:</label>
-						<span class="tooltip" onclick="explanation('Multi-Tool Base Damage', 
-						`Base damage with no installed upgrades. Every tech except for the Scanner and the Mining Beam needs to be dismantled.
-						Watch out that no supercharged slots (lightblue) are used.`,
-						'./helperimg/mt/baseDmg.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext">
-								Base damage with no installed upgrades.</span></span>
+						<span class="tooltip">
+							<data>Base damage with no installed upgrades.</data>
+							<data>Multi-Tool Base Damage</data>
+							<data>
+								Base damage with no installed upgrades. Every tech except for the Scanner and the
+								Mining Beam needs to be dismantled.
+								Watch out that no supercharged slots (lightblue) are used.
+							</data>
+							<data>./assets/bitmap/mt/baseDmg.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="dmgInput" placeholder="0.0" data-dest-noauto="dmg">
 					</div>
 					<div class="tableCell text">
 						<label for="scanInput">Base Scanner Range:</label>
-						<span class="tooltip" onclick="explanation('Multi-Tool Base Scanner Range', 
-						`Base scanner range with no installed upgrades. Every tech except for the Scanner and the Mining Beam needs to be dismantled.
-						Watch out that no supercharged slots (lightblue) are used.`,
-						'./helperimg/mt/baseScan.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext">
-								Base scan range with no installed upgrades.</span></span>
+						<span class="tooltip">
+							<data>Base scan range with no installed upgrades.</data>
+							<data>Multi-Tool Base Scanner Range</data>
+							<data>
+								Base scanner range with no installed upgrades. Every tech except for the Scanner and the
+								Mining Beam needs to be dismantled.
+								Watch out that no supercharged slots (lightblue) are used.
+							</data>
+							<data>./assets/bitmap/mt/baseScan.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="scanInput" placeholder="0.0" data-dest-noauto="scanRange">
@@ -287,47 +313,55 @@
 					</div>
 					<div class="tableCell text">
 						<label for="srImgInput">Save/Reload Location</label>
-						<span class="tooltip" onclick="explanation('Save/Reload Location Picture', null, 
-						'./helperimg/mt/srExample.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext">
-								Click to see an example picture.</span></span>
+						<span class="tooltip">
+							<data>Click to see an example picture.</data>
+							<data>Save/Reload Location Picture</data>
+							<data></data>
+							<data>./assets/bitmap/mt/srExample.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="srImgInput" data-dest-noauto="srPlanetImg">
-						<input type="file" id="srImgUpload" accept="image/*" oninput="image(this);">
+						<input type="file" id="srImgUpload" accept="image/*" oninput="image(this)">
 					</div>
 					<div class="tableCell text">
 						<label for="sysImgInput">System (Cabinet location highlighted)</label>
-						<span class="tooltip" onclick="explanation('Save/Reload Location Picture', null, 
-						'./helperimg/mt/sysExample.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext">
-								Click to see an example picture.</span></span>
+						<span class="tooltip">
+							<data>Click to see an example picture.</data>
+							<data>Save/Reload Location Picture</data>
+							<data></data>
+							<data>./assets/bitmap/mt/sysExample.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="sysImgInput" data-dest-noauto="sysImg">
-						<input type="file" id="sysImgUpload" accept="image/*" oninput="image(this);">
+						<input type="file" id="sysImgUpload" accept="image/*" oninput="image(this)">
 					</div>
 					<div class="tableCell text">
 						<label for="cabInput">Cabinet Planet/Moon</label>
-						<span class="tooltip" onclick="explanation('Save/Reload Location Picture', null, 
-						'./helperimg/mt/srExample.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext">
-								Click to see an example picture.</span></span>
+						<span class="tooltip">
+							<data>Click to see an example picture.</data>
+							<data>Save/Reload Location Picture</data>
+							<data></data>
+							<data>./assets/bitmap/mt/srExample.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="cabInput" data-dest-noauto="cabinetPlanetImg">
-						<input type="file" id="cabUpload" accept="image/*" oninput="image(this);">
+						<input type="file" id="cabUpload" accept="image/*" oninput="image(this)">
 					</div>
 					<div class="tableCell text">
 						<label for="coordsInput">Coordinates</label>
-						<span class="tooltip" onclick="explanation('Save/Reload Location Picture', null, 
-						'./helperimg/mt/coordExample.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext">
-								Click to see an example picture.</span></span>
+						<span class="tooltip">
+							<data>Click to see an example picture.</data>
+							<data>Save/Reload Location Picture</data>
+							<data></data>
+							<data>./assets/bitmap/mt/coordExample.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="coordsInput" data-dest-noauto="axesImg">
-						<input type="file" id="coordsUpload" accept="image/*" oninput="image(this);">
+						<input type="file" id="coordsUpload" accept="image/*" oninput="image(this)">
 					</div>
 					<div class="tableCell text">
 						<label for="discoveredlinkInput">Discoverer wiki account:</label>
@@ -410,20 +444,22 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<span class="tooltip" onclick="explanation('Gallery', 
-						`The preferred order of pictures is as follows:
-						<div class='dialog-center'>
-							<ol class='dialog-list'>
-								<li>Discovery Menu</li>
-								<li>Price Page</li>
-								<li>Base Stats</li>
-								<li>Minor Settlement/Sentinel Pillar</li>
-								<li>Tool in Hand</li>
-								<li>First Person View</li>
-							</ol>
-						</div>`); galleryUploadShown = true">
-							<img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								There is a preferred order of pictures.</span></span>
+						<span class="tooltip" onclick="galleryUploadShown = true">
+							<data>There is a preferred order of pictures.</data>
+							<data>Gallery</data>
+							<data>The preferred order of pictures is as follows:
+								<div class='dialog-center'>
+									<ol class='dialog-list'>
+										<li>Discovery Menu</li>
+										<li>Price Page</li>
+										<li>Base Stats</li>
+										<li>Minor Settlement/Sentinel Pillar</li>
+										<li>Tool in Hand</li>
+										<li>First Person View</li>
+									</ol>
+								</div>
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">

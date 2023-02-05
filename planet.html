@@ -5,22 +5,22 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Planet</title>
-	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js" defer></script>
-	<script src="./lib/pages/planet.js" defer></script>
-	<script src="./lib/modules/footer.js" defer></script>
-	<script src="./lib/modules/portalglyphs.js" defer></script>
-	<script src="./lib/modules/gallery.js" defer></script>
-	<script src="./lib/modules/actions.js" defer></script>
-	<script src="./lib/modules/dialog.js" defer></script>
-	<script src="./lib/misc_logic/planetMoonLogic.js" defer></script>
-	<script src="./lib/misc_logic/celestialobjectslogic.js" defer></script>
-	<script src="./lib/datalists/planetDatalists.js" defer></script>
-	<script src="./lib/datalists/floraDatalists.js" defer></script>
-	<script src="./lib/datalists/mineralDatalists.js" defer></script>
-	<script src="./lib/misc_logic/locationLogic.js"></script>
-	<script src="./lib/misc_logic/creatureData.js"></script>
-	<script src="./lib/misc_logic/dateLogic.js"></script>
+	<link rel="stylesheet" href="./src/css/common.css">
+	<script src="./src/common.js" defer></script>
+	<script src="./src/pages/planet.js" defer></script>
+	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/modules/portalglyphs.js" defer></script>
+	<script src="./src/modules/gallery.js" defer></script>
+	<script src="./src/modules/actions.js" defer></script>
+	<script src="./src/modules/commonModules.js" defer></script>
+	<script src="./src/misc_logic/planetMoonLogic.js" defer></script>
+	<script src="./src/misc_logic/celestialobjectslogic.js" defer></script>
+	<script src="./src/datalists/planetDatalists.js" defer></script>
+	<script src="./src/datalists/floraDatalists.js" defer></script>
+	<script src="./src/datalists/mineralDatalists.js" defer></script>
+	<script src="./src/misc_logic/locationLogic.js"></script>
+	<script src="./src/misc_logic/creatureData.js"></script>
+	<script src="./src/misc_logic/dateLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Landscape', 'Night View', 'Cave System', 'Coast Area', 'Underwater', 'Analysis Visor', 'Planet Exploration Guide', 'Planet Page', 'System Page', 'Galaxy Map'];
 
@@ -58,12 +58,12 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the planet:</label>
-						<span class="tooltip" onclick="explanation('Planet Name', 
-						'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-						'./helperimg/base/baseName.jpg'	
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
-							</span></span>
+						<span class="tooltip">
+							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>Planet Name</data>
+							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>./assets/bitmap/planet/planetName.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
@@ -76,12 +76,23 @@
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="explanation('File Upload', 
-						`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name. Maximum filesize is 10MB.
-						You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
-						); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Picture won't be uploaded to the wiki. This is only to autofill the image name.
-							</span></span>
+						<span class="tooltip">
+							<data>
+								Picture won't be uploaded to the wiki. This is only to autofill the image name. Should
+								show the entire planet from space. Click for an example picture.
+							</data>
+							<data>File Upload</data>
+							<data>
+								This is only to autofill the image name. Maximum filesize is 10MB<br><br>
+								Should show the entire planet from space.<br>
+								Make sure no asteroids/pulse lines/freighters are obstructing the picture.<br>
+								Point the sun directly at the planet, no weird angles.<br>
+								Also try to only get the planet into the shot, no other planets.
+								Only exception to this are moons or rings, which should be included if they exist.<br>
+								Disable the vignette.
+							</data>
+							<data>./assets/bitmap/planet/planetPic.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image">
@@ -105,11 +116,12 @@
 							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
 								Delete</button>
 						</div>
-						<span class="tooltip" onclick="explanation('Portalglyphs', 
-								`Found in Photo Mode. Glyphs are specific to each planet.`,
-								'./helperimg/shared/glyphs.jpg'
-								)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
+						<span class="tooltip">
+							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
+							<data>Portalglyphs</data>
+							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
+							<data>./assets/bitmap/shared/glyphs.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -120,6 +132,17 @@
 					</div>
 					<div class="tableCell text">
 						<label for="biomeInput">Biome of the planet:</label>
+						<span class="tooltip">
+							<data>Can be determined from the planetary features.</data>
+							<data>Planet Biome</data>
+							<data>
+								Can be "determined" fro'm t\`he planetary features such as the weather, harvestable
+								plants or
+								available resources.<br>
+								See the <a href='https://nomanssky.fandom.com/wiki/Biome' rel='noreferrer noopener'
+									target='_blank'>Biome wiki page</a> for more information.
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select id="biomeInput" data-dest="biome">
@@ -138,6 +161,16 @@
 					</div>
 					<div class="tableCell text">
 						<label for="infestedInput">Is infested</label>
+						<span class="tooltip">
+							<data>Can be determined from the planetary features.</data>
+							<data>Infested Biome</data>
+							<data>
+								Can be determined from the planetary features such as the planet descriptor, the weather
+								descriptor, or the alien looking flora.<br>
+								See the <a href='https://nomanssky.fandom.com/wiki/Biome_Subtype_-_Infested'
+									rel='noreferrer noopener' target='_blank'>wiki</a> for more information.
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="checkbox" id="infestedInput" value="([[Biome Subtype - Infested|Infested]]) "
@@ -145,30 +178,60 @@
 					</div>
 					<div class="tableCell text">
 						<label for="descriptionInput">Description of the planet:</label>
+						<span class="tooltip">
+							<data>Can be found in the exploration guide.</data>
+							<data>Planet Description</data>
+							<data>Can be found in the exploration guide.</data>
+							<data>./assets/bitmap/planet/planetDesc.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="description" list="planetDescriptors" id="descriptionInput">
 					</div>
 					<div class="tableCell text">
 						<label for="atmosphereInput">Atmosphere of the planet:</label>
+						<span class="tooltip">
+							<data>Found in the exploration guide.</data>
+							<data>Planet Atmosphere</data>
+							<data>Found in the exploration guide.</data>
+							<data>./assets/bitmap/planet/atmosphere.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="atmosphere" id="atmosphereInput">
 					</div>
 					<div class="tableCell text">
 						<label for="terrainInput">Terrain of the planet:</label>
+						<span class="tooltip">
+							<data>Can be found in the exploration guide.</data>
+							<data>Planet Terrain</data>
+							<data>Can be found in the exploration guide.</data>
+							<data>./assets/bitmap/planet/terrain.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="terrain" list="terrainData" id="terrainInput">
 					</div>
 					<div class="tableCell text">
 						<label for="weatherInput">Weather of the planet:</label>
+						<span class="tooltip">
+							<data>Can be found in the discovery menu.</data>
+							<data>Planet Weather</data>
+							<data>Can be found in the discovery menu.</data>
+							<data>./assets/bitmap/planet/weather.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="weather" list="weatherData" id="weatherInput">
 					</div>
 					<div class="tableHeader text no-flex">
-						<label>Resources:</label>
+						<p style="display: inline; margin-right: 1.5rem;">Resources:</p>
+						<span class="tooltip">
+							<data>Found in the Discovery Menu or on the analysis visor.</data>
+							<data>Planet Resources</data>
+							<data>Found in the Discovery Menu or on the analysis visor.</data>
+							<data>./assets/bitmap/planet/resources.jpg</data>
+						</span>
 					</div>
 					<div id="resourceInputs" class="tableHeader text">
 						<button class="button is-primary" type="button" onclick="addResource(this)">+ Add
@@ -176,24 +239,48 @@
 					</div>
 					<div class="tableCell text">
 						<label for="sentinelInput">Sentinel level of the planet:</label>
+						<span class="tooltip">
+							<data>Can be found in the discovery menu.</data>
+							<data>Planet Sentinel Level</data>
+							<data>Can be found in the discovery menu.</data>
+							<data>./assets/bitmap/planet/sentinels.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="sentinel" list="sentinels" id="sentinelInput">
 					</div>
 					<div class="tableCell text">
 						<label for="floraInput">Flora level of the planet:</label>
+						<span class="tooltip">
+							<data>Can be found in the discovery menu.</data>
+							<data>Planet Flora Level</data>
+							<data>Can be found in the discovery menu.</data>
+							<data>./assets/bitmap/planet/flora.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="flora" list="rarity" id="floraInput">
 					</div>
 					<div class="tableCell text">
 						<label for="faunaInput">Fauna level of the planet:</label>
+						<span class="tooltip">
+							<data>Can be found in the discovery menu.</data>
+							<data>Planet Fauna Level</data>
+							<data>Can be found in the discovery menu.</data>
+							<data>./assets/bitmap/planet/fauna.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="fauna" list="rarity" id="faunaInput">
 					</div>
 					<div class="tableCell text">
 						<label for="faunaNumberInput">Number of Fauna:</label>
+						<span class="tooltip">
+							<data>Can be found in the discovery menu.</data>
+							<data>Planet Fauna Number</data>
+							<data>Can be found in the discovery menu.</data>
+							<data>./assets/bitmap/planet/faunaNum.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="faunaNumber" id="faunaNumberInput">
@@ -222,13 +309,15 @@
 					</div>
 					<div class="tableCell text ">
 						<label for="discDateInput">When was this planet discovered?</label>
-						<span class="tooltip" onclick="explanation('Discovery Date', 
-									`Found in the analysis visor in the space station.<br>
-									The exact discovery timestamp is displayed on the top left.`,
-									'./helperimg/system/discDate.jpg'
-									)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Found in the analysis visor in the space station.
-							</span></span>
+						<span class="tooltip">
+							<data>Found in the analysis visor in the space station.</data>
+							<data>Discovery Date</data>
+							<data>
+								Found in the analysis visor in the space station.<br>
+								The exact discovery timestamp is displayed on the top left.
+							</data>
+							<data>./assets/bitmap/planet/discDate.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="date" id="discDateInput" data-dest-noauto="discDate">
@@ -247,11 +336,15 @@
 					</div>
 					<div class="tableCell text">
 						<label>Gamemode:</label>
-						<span class="tooltip" onclick="explanation('Gamemode', 
-						'Gamemode of the save on which this planet was documented.<br>Found in the main menu:',
-						'./helperimg/shared/gamemode.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Gamemode of the save on which this planet was documented.</span></span>
+						<span class="tooltip">
+							<data>Gamemode of the save on which this planet was documented.</data>
+							<data>Gamemode</data>
+							<data>
+								Gamemode of the save on which this planet was documented.<br>Found in the main
+								menu:
+							</data>
+							<data>./assets/bitmap/shared/gamemode.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
@@ -298,17 +391,19 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<span class="tooltip" onclick="explanation('Gallery', 
-						`The preferred order of pictures is as follows:
-						<div class='dialog-center'>
-							<ol class='dialog-list'>
-								<li>System Exploration Guide</li>
-								<li>System Page</li>
-								<li>Default SS Multitool</li>
-							</ol>
-						</div>`); galleryUploadShown = true">
-							<img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								There is a preferred order of pictures.</span></span>
+						<span class="tooltip">
+							<data>There is a preferred order of pictures.</data>
+							<data>Gallery</data>
+							<data>The preferred order of pictures is as follows:
+								<div class='dialog-center'>
+									<ol class='dialog-list'>
+										<li>System Exploration Guide</li>
+										<li>System Page</li>
+										<li>Default SS Multitool</li>
+									</ol>
+								</div>
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
@@ -387,7 +482,7 @@
 					<div>===Fauna===</div>
 					<div>* There <output id="faunaSentencePlural"></output> <output id="faunaNumberSentence"
 							name="faunaNumber"></output> fauna on this planet</div>
-					<div>{| class="article-table" style="text-align:center; width:100%; max-width: 1250px;"</div>
+					<div>{| class="article-table" style="text-align:center; width:100%; max-width: 1250px"</div>
 					<div>|-</div>
 					<div>!width=150 style="background-color:#2f4f4f"|Image</div>
 					<div>!style="background-color:#2f4f4f"|Name</div>
@@ -401,7 +496,7 @@
 					<br>
 
 					<div>===Flora===</div>
-					<div>{| class="article-table" style="text-align:center; width:100%; max-width: 1250px;"</div>
+					<div>{| class="article-table" style="text-align:center; width:100%; max-width: 1250px"</div>
 					<div>|-</div>
 					<div>!width=150 style="background-color:#2f4f4f"|Image</div>
 					<div>!style="background-color:#2f4f4f"|Name</div>
@@ -417,7 +512,7 @@
 					<br>
 
 					<div>==Minerals==</div>
-					<div>{| class="article-table" style="text-align:center; width:100%; max-width: 1250px;"</div>
+					<div>{| class="article-table" style="text-align:center; width:100%; max-width: 1250px"</div>
 					<div>|-</div>
 					<div>!width=150 style="background-color:#2f4f4f"|Image</div>
 					<div>!style="background-color:#2f4f4f"|Name</div>

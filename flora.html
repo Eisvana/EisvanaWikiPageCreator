@@ -23,9 +23,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Flora</title>
-	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js"></script>
-	<script src="./lib/datalists/floraDatalists.js"></script>
+	<link rel="stylesheet" href="./src/css/common.css">
+	<script src="./src/common.js"></script>
+	<script src="./src/datalists/floraDatalists.js"></script>
 	<script>
 		const galleryArray = ['', 'Scanner view', 'Discovery Menu', 'Other image', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
 
@@ -95,7 +95,7 @@
 						</tr>
 						<tr>
 							<th><label for="name_input">Name of the flora:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								<span class="tooltip"><img src="./src/help.svg"><span class="tooltiptext">
 										Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
 									</span></span>
 							</th>
@@ -107,7 +107,7 @@
 						</tr>
 						<tr>
 							<th><label for="image_input">Main image name, including file extension:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								<span class="tooltip"><img src="./src/help.svg"><span class="tooltiptext">
 										Picture won't be uploaded to the wiki. This is only to autofill the image name.
 									</span></span>
 							</th>
@@ -124,7 +124,7 @@
 						</tr>
 						<tr>
 							<th><label for="planet_input">Name of the planet:</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								<span class="tooltip"><img src="./src/help.svg"><span class="tooltiptext">
 										Planet Name OR the planet circled by the moon where the flora can be found.
 									</span></span>
 							</th>
@@ -132,7 +132,7 @@
 						</tr>
 						<tr>
 							<th><label for="moon_input">Name of the moon (if applicable):</label>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								<span class="tooltip"><img src="./src/help.svg"><span class="tooltiptext">
 										If the flora is located on a moon. Leave blank if the flora is on a planet.
 									</span></span>
 							</th>
@@ -142,7 +142,7 @@
 							<th><label for="portalglyphs_input">Portalglyphs:</label><button
 									class="button is-small is-danger" type="button"
 									onclick="deleteCharacter('portalglyphs_input')">&larr; Delete</button>
-								<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
+								<span class="tooltip"><img src="./src/help.svg"><span class="tooltiptext">
 										Found in Photo Mode. Glyphs are specific to each planet.
 									</span></span>
 							</th>
@@ -298,7 +298,7 @@
 						<tr>
 							<th><label for="gallery_upload">Gallery files</label>
 							<td><input type="file" id="gallery_upload" name="Gallery_upload" accept="image/*" multiple
-									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode');">
+									onchange="galleryUpload('gallery_upload', 'gallery_descs', 'galleryCode')">
 						</tr>
 				</div>
 				<div id="galleryItems">

@@ -5,17 +5,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Starship</title>
-	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js" defer></script>
-	<script src="./lib/pages/starship.js" defer></script>
-	<script src="./lib/modules/footer.js" defer></script>
-	<script src="./lib/misc_logic/huburbs.js" defer></script>
-	<script src="./lib/modules/portalglyphs.js" defer></script>
-	<script src="./lib/modules/gallery.js" defer></script>
-	<script src="./lib/modules/actions.js" defer></script>
-	<script src="./lib/modules/albumactions.js" defer></script>
-	<script src="./lib/modules/dialog.js" defer></script>
-	<script src="./lib/misc_logic/locationLogic.js"></script>
+	<link rel="stylesheet" href="./src/css/common.css">
+	<script src="./src/common.js" defer></script>
+	<script src="./src/pages/starship.js" defer></script>
+	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/misc_logic/huburbs.js" defer></script>
+	<script src="./src/modules/portalglyphs.js" defer></script>
+	<script src="./src/modules/gallery.js" defer></script>
+	<script src="./src/modules/actions.js" defer></script>
+	<script src="./src/modules/albumactions.js" defer></script>
+	<script src="./src/modules/commonModules.js" defer></script>
+	<script src="./src/misc_logic/locationLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Rear view of ship/freighter', 'Inventory screen', 'NPC freighter captain', 'NPC ship pilot', 'Analysis Visor Scan', 'Crash site', 'System Page', 'Moon Page', 'Planet Page', 'Galaxy Map'];
 
@@ -53,24 +53,29 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the starship:</label>
-						<span class="tooltip" onclick="explanation('Ship Name', 
-							'Enter exactly as seen in game. Watch out for 0 (zero) and O (o).',
-							'./helperimg/ship/shipName.jpg'	
-							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
-							</span></span>
+						<span class="tooltip">
+							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>Ship Name</data>
+							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>./assets/bitmap/ship/shipName.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="explanation('File Upload', 
-							`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name. Maximum filesize is 10MB.
-							You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
-							); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Picture won't be uploaded to the wiki. This is only to autofill the image name.
-							</span></span>
+						<span class="tooltip" onclick="uploadShown = true">
+							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
+							<data>File Upload</data>
+							<data>
+								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
+								image name. Maximum filesize is 10MB.
+								You can upload your pictures to the wiki on <a
+									href='https://nomanssky.fandom.com/Special:Upload' target='_blank'
+									rel='noopener noreferrer'>Special:Upload</a>
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image">
@@ -78,10 +83,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Type of the starship:</label>
-						<span class="tooltip" onclick='explanation("Ship Type", 
-						`The starship type can be seen on the ship scan. Living Ships are displayed as "Alien"`, "./helperimg/ship/shipType.jpg"
-						)'><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								The starship type can be seen on the ship scan.</span></span>
+						<span class="tooltip">
+							<data>The starship type can be seen on the ship scan.</data>
+							<data>Ship Type</data>
+							<data>The starship type can be seen on the ship scan. Living Ships are displayed as
+								"Alien"</data>
+							<data>./assets/bitmap/ship/shipType.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="type" id="typeInput">
@@ -103,41 +111,42 @@
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Planet Name OR the planet circled by the moon where the starship can be found.
-							</span></span>
+						<span class="tooltip">
+							<data>Planet Name OR the planet circled by the moon where the starship can be found.</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if applicable):</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								If the ship is located on a moon. Leave blank if the starship is on a
-								planet.
-							</span></span>
+						<span class="tooltip">
+							<data>If the ship is located on a moon. Leave blank if the starship is on a planet.</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
 					</div>
 					<div class="tableCell text">
 						<label for="axesInput">Planetary coords:</label>
-						<span class="tooltip" onclick="explanation('Planetary Coordinates', 
-						`Found using your analysis visor OR on your ship's dashboard.`,
-						'./helperimg/shared/axes.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Found using your analysis visor OR on your ship's dashboard.</span></span>
+						<span class="tooltip">
+							<data>Found using your analysis visor OR on your ship's dashboard.</data>
+							<data>Planetary Coordinates</data>
+							<data>Found using your analysis visor OR on your ship's dashboard.</data>
+							<data>./assets/bitmap/shared/axes.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="axesInput" data-dest="axes" placeholder="+0.00, -0.00">
 					</div>
 					<div class="tableCell text">
 						<label>System economy:</label>
-						<span class="tooltip" onclick='explanation(`Economy`,
-						`Found in the exploration guide under "Economy".`,
-						`./helperimg/ship/economy.jpg`)'><img src="./lib/help.svg"><span class="tooltiptext">
-								Found in the exploration guide under "Economy".
-							</span></span>
+						<span class="tooltip">
+							<data>Found in the exploration guide under "Economy".</data>
+							<data>Economy</data>
+							<data>Found in the exploration guide under "Economy".</data>
+							<data>./assets/bitmap/ship/economy.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="economy" id="economyInput">
@@ -176,7 +185,7 @@
 							<!--here ends T1-->
 							<optgroup label="Pirate">
 								<option value="💀 (Black Market)">Black Market</option>
-						</optgroup>
+							</optgroup>
 						</select>
 					</div>
 					<div class="tableCell text">
@@ -185,11 +194,12 @@
 							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
 								Delete</button>
 						</div>
-						<span class="tooltip" onclick="explanation('Portalglyphs', 
-							`Found in Photo Mode. Glyphs are specific to each planet.`,
-							'./helperimg/shared/glyphs.jpg'
-							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
+						<span class="tooltip">
+							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
+							<data>Portalglyphs</data>
+							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
+							<data>./assets/bitmap/shared/glyphs.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -200,21 +210,32 @@
 					</div>
 					<div class="tableCell text">
 						<label>Subtype:</label>
-						<span class="tooltip" onclick="explanation('Ship Subtype', 
-						`Subtypes are defined by specific hull features of a ship.<br>See the specific naming conventions for your ship type:
-						<div class='dialog-center'>
-							<ul class='dialog-list'>
-								<li><a href='https://static.wikia.nocookie.net/nomanssky_gamepedia/images/c/c7/NmsStarship_FighterParts2.jpg' rel='noopener noreferrer' target='_blank'>Fighter</a></li>
-								<li><a href='https://nmsce.com/images/explorer-parts-names.svg' rel='noopener noreferrer' target='_blank'>Explorer</a></li>
-								<li><a href='https://static.wikia.nocookie.net/nomanssky_gamepedia/images/1/13/NmsStarship_HaulerWings.png' rel='noopener noreferrer' target='_blank'>Hauler</a></li>
-								<li><a href='https://static.wikia.nocookie.net/nomanssky_gamepedia/images/e/e4/Shuttle_Big_parts.png' rel='noopener noreferrer' target='_blank'>Shuttle</a></li>
-								<li><a href='https://static.wikia.nocookie.net/nomanssky_gamepedia/images/4/47/SolarBodies.png' rel='noopener noreferrer' target='_blank'>Solar</a></li>
-								<li><a href='https://i.redd.it/8iwt7rmcg3d61.png' rel='noopener noreferrer' target='_blank'>Living Ship</a></li>
-								<li><a href='https://nomanssky.fandom.com/wiki/Freighter_Types' rel='noopener noreferrer' target='_blank'>Freighter</a></li>
-							</ul>
-						</div>`
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Subtypes are defined by specific hull features of a ship.</span></span>
+						<span class="tooltip">
+							<data>Subtypes are defined by specific hull features of a ship.</data>
+							<data>Ship Subtype</data>
+							<data>
+								Subtypes are defined by specific hull features of a ship.<br>See the specific naming
+								conventions for your ship type:
+								<div class='dialog-center'>
+									<ul class='dialog-list'>
+										<li><a href='https://static.wikia.nocookie.net/nomanssky_gamepedia/images/c/c7/NmsStarship_FighterParts2.jpg'
+												rel='noopener noreferrer' target='_blank'>Fighter</a></li>
+										<li><a href='https://nmsce.com/images/explorer-parts-names.svg'
+												rel='noopener noreferrer' target='_blank'>Explorer</a></li>
+										<li><a href='https://static.wikia.nocookie.net/nomanssky_gamepedia/images/1/13/NmsStarship_HaulerWings.png'
+												rel='noopener noreferrer' target='_blank'>Hauler</a></li>
+										<li><a href='https://static.wikia.nocookie.net/nomanssky_gamepedia/images/e/e4/Shuttle_Big_parts.png'
+												rel='noopener noreferrer' target='_blank'>Shuttle</a></li>
+										<li><a href='https://static.wikia.nocookie.net/nomanssky_gamepedia/images/4/47/SolarBodies.png'
+												rel='noopener noreferrer' target='_blank'>Solar</a></li>
+										<li><a href='https://i.redd.it/8iwt7rmcg3d61.png' rel='noopener noreferrer'
+												target='_blank'>Living Ship</a></li>
+										<li><a href='https://nomanssky.fandom.com/wiki/Freighter_Types'
+												rel='noopener noreferrer' target='_blank'>Freighter</a></li>
+									</ul>
+								</div>
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="subtype" id="subtypeInput">
@@ -222,12 +243,17 @@
 					</div>
 					<div class="tableCell text">
 						<label>Exotic type:</label>
-						<span class="tooltip" onclick="explanation('Exotic Subtype', 
-						`Subtypes are defined by specific hull features of the ship.<br>
-						See this <a href='https://www.reddit.com/r/NMSCoordinateExchange/comments/k2srjr/exotic_parts_naming_conventions_and_part_combo/'
-						rel='noopener noreferrer' target='_blank'>Reddit post</a> for explanations of the different exotic subtypes.`
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Subtypes are defined by specific hull features of the ship.</span></span>
+						<span class="tooltip">
+							<data>Subtypes are defined by specific hull features of the ship.</data>
+							<data>Exotic Subtype</data>
+							<data>
+								Subtypes are defined by specific hull features of the ship.<br>
+								See this <a
+									href='https://www.reddit.com/r/NMSCoordinateExchange/comments/k2srjr/exotic_parts_naming_conventions_and_part_combo/'
+									rel='noopener noreferrer' target='_blank'>Reddit post</a> for explanations of the
+								different exotic subtypes.
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="exotic" id="exoticInput">
@@ -249,12 +275,19 @@
 					</div>
 					<div class="tableCell text">
 						<label>Inventory:</label>
-						<span class="tooltip" onclick="explanation('Inventory Size', 
-						`Inventory sizes can be seen from certain ship parts. See the part catalogues for the individual ship types.<br>
-						Alternatively, you can compare your ship's inventory size to the inventory tables on the <a href='https://nomanssky.fandom.com/wiki/Starship'
-						rel='noopener noreferrer' target='_blank'>Starship</a> wiki page to get your ship's inventory size.`
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Inventory sizes can be seen from certain ship parts.</span></span>
+						<span class="tooltip">
+							<data>Inventory sizes can be seen from certain ship parts.</data>
+							<data>Inventory Size</data>
+							<data>
+								Inventory sizes can be seen from certain ship parts. See the <a
+									href='https://nomanssky.fandom.com/wiki/Template:Ship_Parts_Catalogue'
+									target='_blank' rel='noopener noreferrer'>part catalogues</a> for the individual
+								ship types.<br>
+								Alternatively, you can compare your ship's inventory size to the inventory tables on the
+								<a href='https://nomanssky.fandom.com/wiki/Starship' rel='noopener noreferrer'
+									target='_blank'>Starship</a> wiki page to get your ship's inventory size.
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="inventory" id="inventoryInput">
@@ -262,12 +295,16 @@
 					</div>
 					<div class="tableCell text">
 						<label for="maneuverBInput">Maneuverability:</label>
-						<span class="tooltip" onclick='explanation("Maneuverability", 
-						`Enter the "Core" value exactly as seen in the scan of the ship.<br>
-						It is preferred to enter the values as seen after buying, as they might change.<br>
-						If there is no core value, use the regular one.`, "./helperimg/ship/maneuverability.jpg"
-						)'><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Enter the "Core" value as seen on the ship's scan.</span></span>
+						<span class="tooltip">
+							<data>Enter the "Core" value as seen on the ship's scan.</data>
+							<data>Maneuverability</data>
+							<data>
+								Enter the "Core" value exactly as seen in the scan of the ship.<br>
+								It is preferred to enter the values as seen after buying, as they might change.<br>
+								If there is no core value, use the regular one.
+							</data>
+							<data>./assets/bitmap/ship/maneuverability.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="maneuverB" maxlength="5" placeholder="0.0"
@@ -275,36 +312,48 @@
 					</div>
 					<div class="tableCell text">
 						<label for="damageBInput">Damage:</label>
-						<span class="tooltip" onclick='explanation("Maneuverability", 
-						`Enter the "Core" value exactly as seen in the scan of the ship.<br>
-						It is preferred to enter the values as seen after buying, as they might change.<br>
-						If there is no core value, use the regular one.`, "./helperimg/ship/damage.jpg"
-						)'><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Enter the "Core" value as seen on the ship's scan.</span></span>
+						<span class="tooltip">
+							<data>Enter the "Core" value as seen on the ship's scan.</data>
+							<data>Damage</data>
+							<data>
+								Enter the "Core" value exactly as seen in the scan of the ship.<br>
+								It is preferred to enter the values as seen after buying, as they might change.<br>
+								If there is no core value, use the regular one.
+							</data>
+							<data>./assets/bitmap/ship/damage.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="damageB" maxlength="5" placeholder="0.0" id="damageBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="shieldBInput">Shield:</label>
-						<span class="tooltip" onclick='explanation("Maneuverability", 
-						`Enter the "Core" value exactly as seen in the scan of the ship.<br>
-						It is preferred to enter the values as seen after buying, as they might change.<br>
-						If there is no core value, use the regular one.`, "./helperimg/ship/shield.jpg"
-						)'><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Enter the "Core" value as seen on the ship's scan.</span></span>
+						<span class="tooltip">
+							<data>Enter the "Core" value as seen on the ship's scan.</data>
+							<data>Maneuverability</data>
+							<data>
+								Enter the "Core" value exactly as seen in the scan of the ship.<br>
+								It is preferred to enter the values as seen after buying, as they might change.<br>
+								If there is no core value, use the regular one.
+							</data>
+							<data>./assets/bitmap/ship/shield.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="shieldB" maxlength="5" placeholder="0.0" id="shieldBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="warpBInput">Warp:</label>
-						<span class="tooltip" onclick='explanation("Maneuverability", 
-						`Enter the "Core" value exactly as seen in the scan of the ship.<br>
-						It is preferred to enter the values as seen after buying, as they might change.<br>
-						If there is no core value, use the regular one.`, "./helperimg/ship/hyperdrive.jpg"
-						)'><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Enter the "Core" value as seen on the ship's scan.</span></span>
+						<span class="tooltip">
+							<data>Enter the "Core" value as seen on the ship's scan.</data>
+							<data>Warp</data>
+							<data>
+								Enter the "Core" value exactly as seen in the scan of the ship.<br>
+								It is preferred to enter the values as seen after buying, as they might change.<br>
+								If there is no core value, use the regular one.
+							</data>
+							<data>./assets/bitmap/ship/hyperdrive.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="warpB" maxlength="5" placeholder="0.0" id="warpBInput">
@@ -410,43 +459,46 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<span class="tooltip" onclick="explanation('Gallery', 
-						`The preferred order of pictures is as follows:
-						<div class='dialog-center is-flex-wrap-wrap mt-2' style='gap: 1rem'>
-							<div>
-								<div class='has-text-weight-bold'>Normal Ships:</div>
-								<ol class='dialog-list mt-1'>
-									<li>Rear view of ship</li>
-									<li>Inventory screen</li>
-									<li>NPC Ship Pilot</li>
-									<li>Analysis Visor Scan</li>
-									<li>System Page</li>
-								</ol>
-							</div>
-							<div>
-								<div class='has-text-weight-bold'>Living Ships:</div>
-								<ol class='dialog-list mt-1'>
-									<li>Rear view of ship</li>
-									<li>Inventory screen</li>
-									<li>Analysis Visor Scan</li>
-									<li>Crash site</li>
-									<li>Planet/Moon Page</li>
-									<li>System Page</li>
-								</ol>
-							</div>
-							<div>
-								<div class='has-text-weight-bold'>Freighters:</div>
-								<ol class='dialog-list mt-1'>
-									<li>Rear view of freighter</li>
-									<li>Inventory screen</li>
-									<li>NPC freighter captain</li>
-									<li>Analysis Visor Scan</li>
-									<li>System Page</li>
-								</ol>
-							</div>
-						</div>`); galleryUploadShown = true">
-							<img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								There is a preferred order of pictures.</span></span>
+						<span class="tooltip" onclick="galleryUploadShown = true">
+							<data>There is a preferred order of pictures.</data>
+							<data>Gallery</data>
+							<data>
+								The preferred order of pictures is as follows:
+								<div class='dialog-center is-flex-wrap-wrap mt-2' style='gap: 1rem'>
+									<div>
+										<div class='has-text-weight-bold'>Normal Ships:</div>
+										<ol class='dialog-list mt-1'>
+											<li>Rear view of ship</li>
+											<li>Inventory screen</li>
+											<li>NPC Ship Pilot</li>
+											<li>Analysis Visor Scan</li>
+											<li>System Page</li>
+										</ol>
+									</div>
+									<div>
+										<div class='has-text-weight-bold'>Living Ships:</div>
+										<ol class='dialog-list mt-1'>
+											<li>Rear view of ship</li>
+											<li>Inventory screen</li>
+											<li>Analysis Visor Scan</li>
+											<li>Crash site</li>
+											<li>Planet/Moon Page</li>
+											<li>System Page</li>
+										</ol>
+									</div>
+									<div>
+										<div class='has-text-weight-bold'>Freighters:</div>
+										<ol class='dialog-list mt-1'>
+											<li>Rear view of freighter</li>
+											<li>Inventory screen</li>
+											<li>NPC freighter captain</li>
+											<li>Analysis Visor Scan</li>
+											<li>System Page</li>
+										</ol>
+									</div>
+								</div>
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
