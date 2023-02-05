@@ -2,7 +2,7 @@
 	const content = `<button class="button" id="switchTheme" onclick="switchTheme()">Switch light/dark mode</button>
 	<p>Found a bug, have an improvement suggestion or simply want to leave some feedback?<br>
 	Fill out the <a href='https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform' rel='noreferrer noopener' target='_blank'>feedback form</a>!</p>
-	<a href='./about.html' class="about">About</a>`;
+	<a href='./about.html' id="about">About</a>`;
 	if (typeof globalElements == 'undefined') {
 		document.getElementById('footer').innerHTML = content
 	} else {
@@ -21,6 +21,9 @@
 	if (theme == 'dark') document.documentElement.dataset.theme = 'dark';
 
 	if (!localStorage.getItem('theme')) localStorage.setItem('theme', theme);
+
+	const about = document.getElementById('about');
+	if (about.href == window.location) about.remove();
 })();
 
 // function that changes the theme, and sets a localStorage variable to track the theme between page loads

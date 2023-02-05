@@ -93,7 +93,33 @@ h3,
 h4,
 .title,
 .subtitle {
-	color: var(--heading-color);
+	color: var(--heading-color) !important;
+}
+
+.article-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(max(50%, 300px), 1fr));
+	text-align: center;
+}
+
+article img {
+	width: 170px;
+	height: 170px;
+	border-radius: 10%;
+	object-fit: cover;
+	float: right;
+	margin-left: 1rem;
+}
+
+.linklist {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.content li {
+	list-style-position: inside;
 }
 
 a {
@@ -659,7 +685,7 @@ footer button {
 	margin: 1rem 0;
 }
 
-footer .about {
+footer #about {
 	display: inline-block;
 	margin-top: 1.5rem;
 }
