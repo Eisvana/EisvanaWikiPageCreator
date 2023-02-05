@@ -21,12 +21,6 @@
 	globalElements.output.explanation.innerHTML = content;
 
 	updateGlobalElements(dialogElements);
-
-	// add tooltips on pageload
-	const elements = document.querySelectorAll('span.tooltip');
-	for (const element of elements) {
-		constructTooltip(element);
-	}
 })();
 
 // shows an explanation modal and fills text
@@ -44,6 +38,14 @@ function explanation(heading, text, img) {
 	globalElements.output.explanationHeading.innerText = heading;
 	globalElements.output.explanationContent.innerHTML = text;
 	globalElements.output.explanation.showModal();
+}
+
+// adds all tooltips which are not yet generated
+function addAllTooltips() {
+	const elements = document.querySelectorAll('span.tooltip');
+	for (const element of elements) {
+		constructTooltip(element);
+	}
 }
 
 // turns HTML tooltip data into actual interactive tooltip

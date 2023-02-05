@@ -214,7 +214,7 @@ function startUp() {
 	uploadShown = false;
 	galleryUploadShown = false;
 	enableTextMarking();
-	assignAlt();
+	addAllTooltips();
 	// the order of the touch and mouse events MUST NOT BE CHANGED!!!
 	// it will not work the other way around. Touch must be before mouse
 	// globalElements.output.output.ontouchstart = () => preventCopy();	// this must be first		// this is commented out because it had bad scroll UX on mobile. It should be triggered when tapped, but not when swiped.
@@ -933,4 +933,4 @@ function extractNumber(string) {
 function oddEven(number) {
 	if (number % 2 == 0) return 'even';
 	return 'odd';
-};
+}

@@ -375,6 +375,7 @@ function addMineral(element) {
 
 function postProcessSection(element, sectionType, i) {
 	changeTableEntry(element);
+	addAllTooltips();
 
 	const sectionElements = { input: {}, output: {} };
 

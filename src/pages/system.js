@@ -320,7 +320,7 @@ function planetInputs() {
 
 		biomeLinks(document.getElementById(`biome_input${i}`));
 		infestedBiomeLinks(document.getElementById(`infested_input${i}`));
-		assignAlt();
+		addAllTooltips();
 	}
 }
 
