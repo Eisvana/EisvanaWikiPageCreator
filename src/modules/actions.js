@@ -18,13 +18,23 @@
 	}
 	const skipCheck = `<label style="display:flex; gap: .3rem"><input class="checkbox" type="checkbox" id="skipCheck">Enable debug (no checks, no popups)</label>`;
 	globalElements.output.actions.insertAdjacentHTML('beforeend', skipCheck);
-	document.getElementById('skipCheck').onchange = (e) => {
+	const skipCheckElement = document.getElementById('skipCheck');
+	skipCheckElement.onchange = (e) => {
 		const checkState = e.target.checked;
 		pageData.debug = checkState;
 		uploadShown = checkState;
 		galleryUploadShown = checkState;
 		document.documentElement.dataset.debug = checkState;
 	}
+	const urlParams = new URLSearchParams(url.search);
+	if (!urlParams.has('debug')) return;
+
+	skipCheckElement.checked = true;
+	const event = new Event('change', {
+		bubbles: true,
+		cancelable: true,
+	});
+	skipCheckElement.dispatchEvent(event);
 })();
 
 function reset() {

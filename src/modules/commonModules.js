@@ -50,14 +50,13 @@ function addAllTooltips() {
 
 // turns HTML tooltip data into actual interactive tooltip
 function constructTooltip(element) {
-	const dataElements = Array.from(element.getElementsByTagName('data'));	// conversion to array is necessary because otherwise it'd be a *live* HTMLCollection.
+	const dataElements = element.getElementsByTagName('data');
 	if (!dataElements.length) return;
 
 	const dataArr = new Array;
 	for (const element of dataElements) {
-		const text = removeNewlines(element.innerHTML).trim();
+		const text = element.innerHTML;
 		dataArr.push(text);
-		element.remove();		// this needs a static array, the live HTML stuff doesn't work with a for of loop
 	}
 
 	const img = document.createElement('img');
@@ -72,6 +71,5 @@ function constructTooltip(element) {
 		assignFunction(element, 'explanation(`' + (dataArr[1] ?? '') + '`,`' + (dataArr[2] ?? '') + '`,`' + (dataArr[3] ?? '') + '`)', 'onclick');
 	}
 
-	element.appendChild(img);
-	element.appendChild(tooltip);
+	element.innerHTML = img.outerHTML + tooltip.outerHTML;
 }

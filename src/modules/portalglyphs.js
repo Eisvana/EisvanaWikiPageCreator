@@ -10,13 +10,7 @@ const validPortalKeys = '0123456789ABCDEF';
 })();
 
 function executeOnInput() {
-	const input = globalElements.input.portalglyphsInput;
-	const event = new Event('input', {
-		bubbles: true,
-		cancelable: true,
-	});
-
-	input.dispatchEvent(event);
+	globalElements.input.portalglyphsInput.oninput.call(globalElements.input.portalglyphsInput);
 }
 
 function glyphOnClick(button) {

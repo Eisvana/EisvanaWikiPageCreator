@@ -150,6 +150,15 @@ function addFauna(element) {
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<label>Hemisphere:</label>
+		<span class="tooltip">
+			<data>Found in the creature discovery menu.</data>
+			<data>Hemisphere</data>
+			<data>
+				Found in the creature discovery menu.<br>
+				If no hemisphere is given, leave the input empty.
+			</data>
+			<data>./assets/bitmap/creature/creatureHemisphere.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<select data-dest="faunaHemisphere${i}" id="faunaHemisphereInput${i}">
@@ -160,6 +169,12 @@ function addFauna(element) {
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<label>Rarity:</label>
+			<span class="tooltip">
+			<data>Found in the creature discovery menu.</data>
+			<data>Rarity</data>
+			<data>Found in the creature discovery menu.</data>
+			<data>./assets/bitmap/creature/creatureRarity.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<select data-dest="faunaRarity${i}" id="faunaRarityInput${i}">
@@ -170,6 +185,12 @@ function addFauna(element) {
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<label>Ecosystem:</label>
+		<span class="tooltip">
+			<data>Found in the creature discovery menu.</data>
+			<data>Ecosystem</data>
+			<data>Found in the creature discovery menu.</data>
+			<data>./assets/bitmap/creature/creatureEcosystem.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<select data-dest="faunaEcosystem${i}" id="faunaEcosystemInput${i}" onchange="genusDropdown(this)">
@@ -181,6 +202,12 @@ function addFauna(element) {
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<label>Activity:</label>
+		<span class="tooltip">
+			<data>Found in the creature discovery menu.</data>
+			<data>Activity</data>
+			<data>Found in the creature discovery menu.</data>
+			<data>./assets/bitmap/creature/creatureActivity.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<select data-dest="faunaActivity${i}" id="faunaActivityInput${i}">
@@ -193,18 +220,37 @@ function addFauna(element) {
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<label>Genus:</label>
+		<span class="tooltip">
+			<data>See the wiki for a list of genera.</data>
+			<data>Genus</data>
+			<data>The genus is defined by the general appearance of a creature.<br>
+				See the wiki for a <a href='https://nomanssky.fandom.com/wiki/Genus#Genus_List'
+					target='_blank' rel='noopener noreferrer'>list of genera</a>.</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<select data-dest-noauto="faunaGenus${i}" id="faunaGenusInput${i}" onchange="addGenus(this)"></select>
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<label for="faunaWeightInput${i}">Weight in kg:</label>
+			<span class="tooltip">
+			<data>Found on the creature scan. No "kg" necessary.</data>
+			<data>Weight</data>
+			<data>Found on the creature scan.<br>No "kg" necessary.</data>
+			<data>./assets/bitmap/creature/creatureWeight.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<input data-dest-noauto="faunaWeight${i}" type="text" id="faunaWeightInput${i}" maxlength="5" placeholder="0.0" oninput="numberStats(this)">
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<label for="faunaHeightInput${i}">Height in m:</label>
+			<span class="tooltip">
+			<data>Found on the creature scan. No "m" necessary.</data>
+			<data>Height</data>
+			<data>Found on the creature scan.<br>No "m" necessary.</data>
+			<data>./assets/bitmap/creature/creatureHeight.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<input data-dest-noauto="faunaHeight${i}" type="text" id="faunaHeightInput${i}" maxlength="3" placeholder="0.0" oninput="numberStats(this)">
@@ -239,6 +285,12 @@ function addFlora(element) {
 	</div>
 	<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 		<label for="floraNameInput${i}">Plant name:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Name</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/floraName.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 		<input type="text" data-dest="floraName${i}" id="floraNameInput${i}">
@@ -252,36 +304,72 @@ function addFlora(element) {
 	</div>
 	<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 		<label for="floraAgeInput${i}">Age:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Age</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/age.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 		<input type="text" data-dest="floraAge${i}" list="ageData" id="floraAgeInput${i}">
 	</div>
 	<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 		<label for="floraRootInput${i}">Root structure:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Root Structure</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/roots.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 		<input type="text" data-dest="floraRoot${i}" list="rootData" id="floraRootInput${i}">
 	</div>
 	<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 		<label for="floraNutInput${i}">Nutrient source:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Nutrient Source</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/nutSource.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 		<input type="text" data-dest="floraNut${i}" list="nutSourceData" id="floraNutInput${i}">
 	</div>
 	<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 		<label for="floraNoteInput${i}">Notes:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Notes</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/notes.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 		<input type="text" data-dest="floraNote${i}" list="floraNotesData" id="floraNoteInput${i}">
 	</div>
 	<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
-		<label for="floraResourcePrimInput${i}">Primary resource:</label>
+		<label for="floraResourcePrimInput${i}">Primary element:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Primary Element</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/primEl.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 	<input data-dest-noauto="floraElements${i}" type="text" list="floraResources" id="floraResourcePrimInput${i}" oninput="floraMineralResourceLinks(this)">
 	</div>
 	<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
-		<label for="floraResourceSecInput${i}">Secondary resource:</label>
+		<label for="floraResourceSecInput${i}">Secondary element:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Secondary Element</data>
+			<data>Found in the analysis visor. Leave empty if there is no secondary element.</data>
+			<data>./assets/bitmap/flora/secEl.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 		<input data-dest-noauto="floraElements${i}" type="text" list="floraResources" id="floraResourceSecInput${i}" oninput="floraMineralResourceLinks(this)">
@@ -316,6 +404,12 @@ function addMineral(element) {
 	</div>
 	<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
 		<label for="mineralNameInput${i}">Mineral name:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Name</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/mineral/mineralName.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">
 		<input type="text" data-dest="mineralName${i}" id="mineralNameInput${i}">
@@ -329,30 +423,60 @@ function addMineral(element) {
 	</div>
 	<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
 		<label for="mineralMetalInput${i}">Metal Content:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Metal Content</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/mineral/content.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">
 		<input type="text" data-dest-noauto="mineralMetal${i}" id="mineralMetalInput${i}" maxlength="2" oninput="wikiCodePercentage(this)">
 	</div>
 	<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
 		<label for="mineralFormationInput${i}">Formation Process:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Formation Process</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/mineral/formation.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">
 		<input type="text" data-dest="mineralFormation${i}" list="formationData" id="mineralFormationInput${i}">
 	</div>
 	<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
 		<label for="mineralNoteInput${i}">Notes:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Notes</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/mineral/notes.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">
 		<input type="text" data-dest="mineralNote${i}" list="mineralNotesData" id="mineralNoteInput${i}">
 	</div>
 	<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-		<label for="mineralResourcePrimInput${i}">Primary resource:</label>
+		<label for="mineralResourcePrimInput${i}">Primary element:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Primary Element</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/mineral/primEl.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">
 	<input data-dest-noauto="mineralElements${i}" type="text" list="mineralResources" id="mineralResourcePrimInput${i}" oninput="floraMineralResourceLinks(this)">
 	</div>
 	<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-		<label for="mineralResourceSecInput${i}">Secondary resource:</label>
+		<label for="mineralResourceSecInput${i}">Secondary element:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Secondary Element</data>
+			<data>Found in the analysis visor. Leave empty if there is no secondary element.</data>
+			<data>./assets/bitmap/mineral/secEl.jpg</data>
+		</span>
 	</div>
 	<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">
 		<input data-dest-noauto="mineralElements${i}" type="text" list="mineralResources" id="mineralResourceSecInput${i}" oninput="floraMineralResourceLinks(this)">
