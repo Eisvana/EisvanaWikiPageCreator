@@ -955,7 +955,7 @@ function constructTooltip(element) {
 	}
 
 	const img = document.createElement('img');
-	img.src = './lib/help.svg';
+	img.src = './assets/vector/help.svg';
 	img.alt = 'Help';
 
 	const tooltip = document.createElement('span');

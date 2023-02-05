@@ -136,7 +136,7 @@ function addFauna(element) {
 			<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 			<data>Creature Name</data>
 			<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-			<data>./helperimg/creature/creatureName.jpg</data>
+			<data>./assets/bitmap/creature/creatureName.jpg</data>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<input type="text" data-dest="faunaName${i}" id="faunaNameInput${i}">

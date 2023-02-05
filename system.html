@@ -5,18 +5,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - System</title>
-	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js" defer></script>
-	<script src="./lib/pages/system.js" defer></script>
-	<script src="./lib/modules/footer.js" defer></script>
-	<script src="./lib/modules/portalglyphs.js" defer></script>
-	<script src="./lib/modules/gallery.js" defer></script>
-	<script src="./lib/modules/actions.js" defer></script>
-	<script src="./lib/modules/dialog.js" defer></script>
-	<script src="./lib/misc_logic/celestialobjectslogic.js" defer></script>
-	<script src="./lib/datalists/systemDatalists.js" defer></script>
-	<script src="./lib/datalists/planetDatalists.js" defer></script>
-	<script src="./lib/misc_logic/locationLogic.js"></script>
+	<link rel="stylesheet" href="./src/css/common.css">
+	<script src="./src/common.js" defer></script>
+	<script src="./src/pages/system.js" defer></script>
+	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/modules/portalglyphs.js" defer></script>
+	<script src="./src/modules/gallery.js" defer></script>
+	<script src="./src/modules/actions.js" defer></script>
+	<script src="./src/modules/dialog.js" defer></script>
+	<script src="./src/misc_logic/celestialobjectslogic.js" defer></script>
+	<script src="./src/datalists/systemDatalists.js" defer></script>
+	<script src="./src/datalists/planetDatalists.js" defer></script>
+	<script src="./src/misc_logic/locationLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'System Page', 'System Exploration Guide', 'Default SS Multi-Tool'];
 
@@ -58,7 +58,7 @@
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>System Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>./helperimg/system/systemName.jpg</data>
+							<data>./assets/bitmap/system/systemName.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -74,7 +74,7 @@
 								Open the galaxy map, then hover over a different nearby star.<br>
 								Your current location should now be displayed with its original name.
 							</data>
-							<data>./helperimg/system/originalName.jpg</data>
+							<data>./assets/bitmap/system/originalName.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -123,7 +123,7 @@
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>./helperimg/shared/glyphs.jpg</data>
+							<data>./assets/bitmap/shared/glyphs.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -145,7 +145,7 @@
 								This for example is 1 star:
 							</data>
 							<data>
-								./helperimg/system/numOfStars.jpg
+								./assets/bitmap/system/numOfStars.jpg
 							</data>
 						</span>
 					</div>
@@ -193,7 +193,7 @@
 							<data>Number of visible local stars in space.<br>
 								Enter Photomode, then press the button to rotate the system star to your cursor.<br>
 								Enter the number of stars you see.</data>
-							<data>./helperimg/system/stellarClass.jpg</data>
+							<data>./assets/bitmap/system/stellarClass.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -228,7 +228,7 @@
 							<data>Found in the discovery menu.</data>
 							<data>Number of Planets</data>
 							<data>Found in the discovery menu.</data>
-							<data>./helperimg/system/planetNumber.jpg</data>
+							<data>./assets/bitmap/system/planetNumber.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -241,7 +241,7 @@
 							<data>Found in the discovery menu. Put 0 if there are no moons.</data>
 							<data>Number of Moons</data>
 							<data>Found in the discovery menu. Enter 0 if there are no moons.</data>
-							<data>./helperimg/system/moonNumber.jpg</data>
+							<data>./assets/bitmap/system/moonNumber.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -254,7 +254,7 @@
 							<data>Found in the galaxy map. If it doesn't display "Water", there is no water.</data>
 							<data>Water</data>
 							<data>Found in the galaxy map. If it doesn't display "Water", don't check the box.</data>
-							<data>./helperimg/system/water.jpg</data>
+							<data>./assets/bitmap/system/water.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -272,7 +272,7 @@
 								The button to enter expanded view is displayed below the box with the system
 								details.<br>If it doesn't display anything, it's "Uncharted"
 							</data>
-							<data>./helperimg/system/faction.jpg</data>
+							<data>./assets/bitmap/system/faction.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -297,7 +297,7 @@
 								The button to enter expanded view is displayed below the box with the system
 								details.<br>If it doesn't display anything, it's "Uncharted"
 							</data>
-							<data>./helperimg/system/economy.jpg</data>
+							<data>./assets/bitmap/system/economy.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -362,7 +362,7 @@
 								The button to enter expanded view is displayed below the box with the system
 								details.
 							</data>
-							<data>./helperimg/system/e-sell.jpg</data>
+							<data>./assets/bitmap/system/e-sell.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -377,7 +377,7 @@
 								Found in the expanded view of the galaxy map.<br>
 								The button to enter expanded view is displayed below the box with the system details.
 							</data>
-							<data>./helperimg/system/e-buy.jpg</data>
+							<data>./assets/bitmap/system/e-buy.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -395,7 +395,7 @@
 								If it doesn't display anything, it's either "Abandoned" or "Uncharted". This can be
 								determined looking at the faction value.
 							</data>
-							<data>./helperimg/system/wealth.jpg</data>
+							<data>./assets/bitmap/system/wealth.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -456,7 +456,7 @@
 								If it doesn't display anything, it's either "Abandoned" or
 								"Uncharted". This can be determined looking at the faction value.
 							</data>
-							<data>./helperimg/system/conflict.jpg</data>
+							<data>./assets/bitmap/system/conflict.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -517,7 +517,7 @@
 								Found in the analysis visor in the space station.<br>
 								The exact discovery timestamp is displayed on the top left.
 							</data>
-							<data>./helperimg/system/discDate.jpg</data>
+							<data>./assets/bitmap/system/discDate.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -542,7 +542,7 @@
 							<data>Gamemode</data>
 							<data>Gamemode of the save on which this system was documented.<br>Found in the main
 								menu:</data>
-							<data>./helperimg/shared/gamemode.jpg</data>
+							<data>./assets/bitmap/shared/gamemode.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -593,7 +593,7 @@
 								Can be found on the space station at the trade terminal.<br>
 								Only include tradeables (items with white background at the top)
 							</data>
-							<data>./helperimg/system/tradeables.jpg</data>
+							<data>./assets/bitmap/system/tradeables.jpg</data>
 						</span>
 					</div>
 					<div id="terminalInputs" class="tableHeader text">
@@ -609,7 +609,7 @@
 									Can be found on the space station at the multi-tool merchant.<br>
 									Only check upgrades available in S class.
 								</data>
-								<data>./helperimg/system/MTU.jpg</data>
+								<data>./assets/bitmap/system/MTU.jpg</data>
 							</span>
 						</div>
 						<button class="button" data-display-default="none"
@@ -660,7 +660,7 @@
 									Can be found on the space station at the starship merchant.<br>
 									Only check upgrades available in S class.
 								</data>
-								<data>./helperimg/system/SSU.jpg</data>
+								<data>./assets/bitmap/system/SSU.jpg</data>
 							</span>
 						</div>
 						<button class="button" data-display-default="none"
@@ -715,7 +715,7 @@
 									Can be found on the space station at the Exocraft merchant.<br>
 									Only check upgrades available in S class.
 								</data>
-								<data>./helperimg/system/ECU.jpg</data>
+								<data>./assets/bitmap/system/ECU.jpg</data>
 							</span>
 						</div>
 						<button class="button" data-display-default="none"
@@ -771,7 +771,7 @@
 									Can be found on the space station at the Exosuit merchant.<br>
 									Only check upgrades available in S class.
 								</data>
-								<data>./helperimg/system/ESU.jpg</data>
+								<data>./assets/bitmap/system/ESU.jpg</data>
 							</span>
 						</div>
 						<button class="button" data-display-default="none"
@@ -822,7 +822,7 @@
 								<data>Scrapdealer Merchant Upgrades</data>
 								<data>Can be found on the space station at the scrapdealer merchant.<br>
 									If they sell no upgrades, check the "Nothing" box.</data>
-								<data>./helperimg/system/SDU.jpg</data>
+								<data>./assets/bitmap/system/SDU.jpg</data>
 							</span>
 						</div>
 						<button class="button" data-display-default="none"

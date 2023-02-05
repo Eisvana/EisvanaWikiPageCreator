@@ -116,7 +116,7 @@ function planetInputs() {
 				<data>Can be found in the discovery menu.</data>
 				<data>Planet Name</data>
 				<data>Can be found in the planet discovery menu.<br>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-				<data>./helperimg/planet/planetName.jpg</data>
+				<data>./assets/bitmap/planet/planetName.jpg</data>
 			</span>			
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -135,7 +135,7 @@ function planetInputs() {
 					Only exception to this are moons or rings, which should be included if they exist.
 					<br>Disable the vignette.
 				</data>
-				<data>./helperimg/planet/planetPic.jpg</data>
+				<data>./assets/bitmap/planet/planetPic.jpg</data>
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -144,8 +144,9 @@ function planetInputs() {
 		</div>
 		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 			<label for="landscapeFile_input${i}">Landscape file name</label>
-			<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-				Showcase the planet's landscape.</span></span>
+			<span class="tooltip">
+				<data>Showcase the planet's landscape.</data>
+			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 				<input type="text" id="landscapeFile_input${i}" data-dest="landscapeFile${i}">
@@ -197,7 +198,7 @@ function planetInputs() {
 				<data>Can be found in the exploration guide.</data>
 				<data>Planet Description</data>
 				<data>Can be found in the exploration guide.</data>
-				<data>./helperimg/planet/planetDesc.jpg</data>
+				<data>./assets/bitmap/planet/planetDesc.jpg</data>
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -210,7 +211,7 @@ function planetInputs() {
 					<data>Found in the Discovery Menu or on the analysis visor.</data>
 					<data>Planet Resources</data>
 					<data>Found in the Discovery Menu or on the analysis visor.</data>
-					<data>./helperimg/planet/resources.jpg</data>
+					<data>./assets/bitmap/planet/resources.jpg</data>
 				</span>
 			</div>
 			<button class="button" onclick="toggleSection('resource${i}', this)">Hide</button>
@@ -224,7 +225,7 @@ function planetInputs() {
 				<data>Can be found in the discovery menu.</data>
 				<data>Planet Weather</data>
 				<data>Can be found in the discovery menu.</data>
-				<data>./helperimg/planet/weather.jpg</data>
+				<data>./assets/bitmap/planet/weather.jpg</data>
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -236,7 +237,7 @@ function planetInputs() {
 				<data>Can be found in the discovery menu.</data>
 				<data>Planet Sentinel Level</data>
 				<data>Can be found in the discovery menu.</data>
-				<data>./helperimg/planet/sentinels.jpg</data>
+				<data>./assets/bitmap/planet/sentinels.jpg</data>
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -248,7 +249,7 @@ function planetInputs() {
 				<data>Can be found in the discovery menu.</data>
 				<data>Planet Flora Level</data>
 				<data>Can be found in the discovery menu.</data>
-				<data>./helperimg/planet/flora.jpg</data>
+				<data>./assets/bitmap/planet/flora.jpg</data>
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -260,7 +261,7 @@ function planetInputs() {
 				<data>Can be found in the discovery menu.</data>
 				<data>Planet Fauna Level</data>
 				<data>Can be found in the discovery menu.</data>
-				<data>./helperimg/planet/fauna.jpg</data>
+				<data>./assets/bitmap/planet/fauna.jpg</data>
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -272,7 +273,7 @@ function planetInputs() {
 				<data>Can be found in the discovery menu.</data>
 				<data>Planet Fauna Number</data>
 				<data>Can be found in the discovery menu.</data>
-				<data>./helperimg/planet/faunaNum.jpg</data>
+				<data>./assets/bitmap/planet/faunaNum.jpg</data>
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">

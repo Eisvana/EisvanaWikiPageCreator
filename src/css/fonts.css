@@ -1,0 +1,21 @@
+/* Nunito */
+/* latin */
+@font-face {
+	font-family: 'Nunito';
+	font-weight: 400 700;
+	src: local('Nunito'), url('/assets/fonts/Nunito.woff2') format('woff2');
+}
+
+/* Roboto */
+/* latin */
+@font-face {
+	font-family: 'Roboto';
+	font-weight: 400;
+	src: local('Roboto'), url('/assets/fonts/Roboto.woff2') format('woff2');
+}
+
+/* glyph font */
+@font-face {
+	font-family: 'NMS-Glyphs-Mono';
+	src: local('NMS-Glyphs-Mono'), url('/assets/fonts/NMS-Glyphs-Mono.ttf') format('truetype');
+}

@@ -5,17 +5,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Multi-Tool</title>
-	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js" defer></script>
-	<script src="./lib/pages/multitool.js" defer></script>
-	<script src="./lib/modules/footer.js" defer></script>
-	<script src="./lib/misc_logic/huburbs.js" defer></script>
-	<script src="./lib/modules/portalglyphs.js" defer></script>
-	<script src="./lib/modules/gallery.js" defer></script>
-	<script src="./lib/modules/actions.js" defer></script>
-	<script src="./lib/modules/albumactions.js" defer></script>
-	<script src="./lib/modules/dialog.js" defer></script>
-	<script src="./lib/misc_logic/locationLogic.js"></script>
+	<link rel="stylesheet" href="./src/css/common.css">
+	<script src="./src/common.js" defer></script>
+	<script src="./src/pages/multitool.js" defer></script>
+	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/misc_logic/huburbs.js" defer></script>
+	<script src="./src/modules/portalglyphs.js" defer></script>
+	<script src="./src/modules/gallery.js" defer></script>
+	<script src="./src/modules/actions.js" defer></script>
+	<script src="./src/modules/albumactions.js" defer></script>
+	<script src="./src/modules/dialog.js" defer></script>
+	<script src="./src/misc_logic/locationLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Discovery Menu', 'Price Page', 'Base Stats', 'Minor Settlement', 'Sentinel Pillar', 'Tool in hand', 'First Person View',];
 
@@ -57,7 +57,7 @@
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>Multi-Tool Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>./helperimg/mt/MTName.jpg</data>
+							<data>./assets/bitmap/mt/MTName.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -87,7 +87,7 @@
 							<data>MT Type is defined by the shape of the tool.</data>
 							<data>Multi-Tool Type</data>
 							<data>The Multi-Tool type is defined by the shape of the tool.</data>
-							<data>./helperimg/mt/MultitoolDifferentiation.jpg</data>
+							<data>./assets/bitmap/mt/MultitoolDifferentiation.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -105,7 +105,7 @@
 							<data>MT Inventory size is defined by the shape of the tool.</data>
 							<data>Inventory Size</data>
 							<data>The Multi-Tool inventory size is defined by the shape of the tool.</data>
-							<data>./helperimg/mt/MultitoolDifferentiation.jpg</data>
+							<data>./assets/bitmap/mt/MultitoolDifferentiation.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data" style="display: none">
@@ -159,7 +159,7 @@
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
 							<data>Planetary Coordinates</data>
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
-							<data>./helperimg/shared/axes.jpg</data>
+							<data>./assets/bitmap/shared/axes.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -202,7 +202,7 @@
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>./helperimg/shared/glyphs.jpg</data>
+							<data>./assets/bitmap/shared/glyphs.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -234,7 +234,7 @@
 								<a href='https://nomanssky.fandom.com/wiki/Multi-Tool_Catalogue#Add-ons' target='_blank'
 									rel='noopener noreferrer'>Detailed info can be found on the wiki</a>
 							</data>
-							<data>./helperimg/mt/addons.png</data>
+							<data>./assets/bitmap/mt/addons.png</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -255,7 +255,7 @@
 							<data>Can be found on the price page.</data>
 							<data>Multi-Tool Slotcount</data>
 							<data>Slotcount of the tool. Can be found on the price page.</data>
-							<data>./helperimg/mt/slots.jpg</data>
+							<data>./assets/bitmap/mt/slots.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -267,7 +267,7 @@
 							<data>Can be found on the price page.</data>
 							<data>Multi-Tool Cost</data>
 							<data>Can be found on the price page. Enter the Buy price, not the trade-in price.</data>
-							<data>./helperimg/mt/price.jpg</data>
+							<data>./assets/bitmap/mt/price.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -283,7 +283,7 @@
 								Mining Beam needs to be dismantled.
 								Watch out that no supercharged slots (lightblue) are used.
 							</data>
-							<data>./helperimg/mt/baseDmg.jpg</data>
+							<data>./assets/bitmap/mt/baseDmg.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -299,7 +299,7 @@
 								Mining Beam needs to be dismantled.
 								Watch out that no supercharged slots (lightblue) are used.
 							</data>
-							<data>./helperimg/mt/baseScan.jpg</data>
+							<data>./assets/bitmap/mt/baseScan.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -317,7 +317,7 @@
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
-							<data>./helperimg/mt/srExample.jpg</data>
+							<data>./assets/bitmap/mt/srExample.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -330,7 +330,7 @@
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
-							<data>./helperimg/mt/sysExample.jpg</data>
+							<data>./assets/bitmap/mt/sysExample.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -343,7 +343,7 @@
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
-							<data>./helperimg/mt/srExample.jpg</data>
+							<data>./assets/bitmap/mt/srExample.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -356,7 +356,7 @@
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
-							<data>./helperimg/mt/coordExample.jpg</data>
+							<data>./assets/bitmap/mt/coordExample.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">

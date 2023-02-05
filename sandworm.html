@@ -5,16 +5,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Sandworm</title>
-	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js" defer></script>
-	<script src="./lib/pages/sandworm.js" defer></script>
-	<script src="./lib/modules/footer.js" defer></script>
-	<script src="./lib/modules/portalglyphs.js" defer></script>
-	<script src="./lib/modules/gallery.js" defer></script>
-	<script src="./lib/modules/actions.js" defer></script>
-	<script src="./lib/modules/albumactions.js" defer></script>
-	<script src="./lib/modules/dialog.js" defer></script>
-	<script src="./lib/misc_logic/locationLogic.js"></script>
+	<link rel="stylesheet" href="./src/css/common.css">
+	<script src="./src/common.js" defer></script>
+	<script src="./src/pages/sandworm.js" defer></script>
+	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/modules/portalglyphs.js" defer></script>
+	<script src="./src/modules/gallery.js" defer></script>
+	<script src="./src/modules/actions.js" defer></script>
+	<script src="./src/modules/albumactions.js" defer></script>
+	<script src="./src/modules/dialog.js" defer></script>
+	<script src="./src/misc_logic/locationLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Worm scan', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
 
@@ -73,27 +73,27 @@
 					</div>
 					<div class="tableCell text">
 						<label for="systemInput">Name of the system:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
-							</span></span>
+						<span class="tooltip">
+							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Planet Name OR the planet circled by the moon where the worm can be found.
-							</span></span>
+						<span class="tooltip">
+							<data>Planet Name OR the planet circled by the moon where the worm can be found.</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if applicable):</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								If the worm is located on a moon. Leave blank if the worm is on a planet.
-							</span></span>
+						<span class="tooltip">
+							<data>If the worm is located on a moon. Leave blank if the worm is on a planet.</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
@@ -108,7 +108,7 @@
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>./helperimg/shared/glyphs.jpg</data>
+							<data>./assets/bitmap/shared/glyphs.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -124,7 +124,7 @@
 							<data>Found on the worm scan.</data>
 							<data>Class</data>
 							<data>Found on the worm scan.</data>
-							<data>./helperimg/sandworm/class.jpg</data>
+							<data>./assets/bitmap/sandworm/class.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -146,7 +146,7 @@
 							<data>Max Depth</data>
 							<data>Found on the worm scan.<br>Give the full number, including the decimal.<br>No "ku"
 								necessary.</data>
-							<data>./helperimg/sandworm/maxDepth.jpg</data>
+							<data>./assets/bitmap/sandworm/maxDepth.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -159,7 +159,7 @@
 							<data>Found on the worm scan.</data>
 							<data>Stomach Contents</data>
 							<data>Found on the worm scan.</data>
-							<data>./helperimg/sandworm/stomachContents.jpg</data>
+							<data>./assets/bitmap/sandworm/stomachContents.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -213,7 +213,7 @@
 							<data>Gamemode</data>
 							<data>Gamemode of the save on which this worm was discovered.<br>Found in the main
 								menu:</data>
-							<data>./helperimg/shared/gamemode.jpg</data>
+							<data>./assets/bitmap/shared/gamemode.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">

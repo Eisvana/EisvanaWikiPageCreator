@@ -5,22 +5,22 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Planet</title>
-	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js" defer></script>
-	<script src="./lib/pages/planet.js" defer></script>
-	<script src="./lib/modules/footer.js" defer></script>
-	<script src="./lib/modules/portalglyphs.js" defer></script>
-	<script src="./lib/modules/gallery.js" defer></script>
-	<script src="./lib/modules/actions.js" defer></script>
-	<script src="./lib/modules/dialog.js" defer></script>
-	<script src="./lib/misc_logic/planetMoonLogic.js" defer></script>
-	<script src="./lib/misc_logic/celestialobjectslogic.js" defer></script>
-	<script src="./lib/datalists/planetDatalists.js" defer></script>
-	<script src="./lib/datalists/floraDatalists.js" defer></script>
-	<script src="./lib/datalists/mineralDatalists.js" defer></script>
-	<script src="./lib/misc_logic/locationLogic.js"></script>
-	<script src="./lib/misc_logic/creatureData.js"></script>
-	<script src="./lib/misc_logic/dateLogic.js"></script>
+	<link rel="stylesheet" href="./src/css/common.css">
+	<script src="./src/common.js" defer></script>
+	<script src="./src/pages/planet.js" defer></script>
+	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/modules/portalglyphs.js" defer></script>
+	<script src="./src/modules/gallery.js" defer></script>
+	<script src="./src/modules/actions.js" defer></script>
+	<script src="./src/modules/dialog.js" defer></script>
+	<script src="./src/misc_logic/planetMoonLogic.js" defer></script>
+	<script src="./src/misc_logic/celestialobjectslogic.js" defer></script>
+	<script src="./src/datalists/planetDatalists.js" defer></script>
+	<script src="./src/datalists/floraDatalists.js" defer></script>
+	<script src="./src/datalists/mineralDatalists.js" defer></script>
+	<script src="./src/misc_logic/locationLogic.js"></script>
+	<script src="./src/misc_logic/creatureData.js"></script>
+	<script src="./src/misc_logic/dateLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Landscape', 'Night View', 'Cave System', 'Coast Area', 'Underwater', 'Analysis Visor', 'Planet Exploration Guide', 'Planet Page', 'System Page', 'Galaxy Map'];
 
@@ -62,7 +62,7 @@
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>Planet Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>./helperimg/planet/planetName.jpg</data>
+							<data>./assets/bitmap/planet/planetName.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -91,7 +91,7 @@
 								Only exception to this are moons or rings, which should be included if they exist.<br>
 								Disable the vignette.
 							</data>
-							<data>./helperimg/planet/planetPic.jpg</data>
+							<data>./assets/bitmap/planet/planetPic.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -117,7 +117,7 @@
 								<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 								<data>Portalglyphs</data>
 								<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-								<data>./helperimg/shared/glyphs.jpg</data>
+								<data>./assets/bitmap/shared/glyphs.jpg</data>
 							</span>
 							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
 								Delete</button>
@@ -182,7 +182,7 @@
 							<data>Can be found in the exploration guide.</data>
 							<data>Planet Description</data>
 							<data>Can be found in the exploration guide.</data>
-							<data>./helperimg/planet/planetDesc.jpg</data>
+							<data>./assets/bitmap/planet/planetDesc.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -194,7 +194,7 @@
 							<data>Found in the exploration guide.</data>
 							<data>Planet Atmosphere</data>
 							<data>Found in the exploration guide.</data>
-							<data>./helperimg/planet/atmosphere.jpg</data>
+							<data>./assets/bitmap/planet/atmosphere.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -206,7 +206,7 @@
 							<data>Can be found in the exploration guide.</data>
 							<data>Planet Terrain</data>
 							<data>Can be found in the exploration guide.</data>
-							<data>./helperimg/planet/terrain.jpg</data>
+							<data>./assets/bitmap/planet/terrain.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -218,7 +218,7 @@
 							<data>Can be found in the discovery menu.</data>
 							<data>Planet Weather</data>
 							<data>Can be found in the discovery menu.</data>
-							<data>./helperimg/planet/weather.jpg</data>
+							<data>./assets/bitmap/planet/weather.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -230,7 +230,7 @@
 							<data>Found in the Discovery Menu or on the analysis visor.</data>
 							<data>Planet Resources</data>
 							<data>Found in the Discovery Menu or on the analysis visor.</data>
-							<data>./helperimg/planet/resources.jpg</data>
+							<data>./assets/bitmap/planet/resources.jpg</data>
 						</span>
 					</div>
 					<div id="resourceInputs" class="tableHeader text">
@@ -243,7 +243,7 @@
 							<data>Can be found in the discovery menu.</data>
 							<data>Planet Sentinel Level</data>
 							<data>Can be found in the discovery menu.</data>
-							<data>./helperimg/planet/sentinels.jpg</data>
+							<data>./assets/bitmap/planet/sentinels.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -255,7 +255,7 @@
 							<data>Can be found in the discovery menu.</data>
 							<data>Planet Flora Level</data>
 							<data>Can be found in the discovery menu.</data>
-							<data>./helperimg/planet/flora.jpg</data>
+							<data>./assets/bitmap/planet/flora.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -267,7 +267,7 @@
 							<data>Can be found in the discovery menu.</data>
 							<data>Planet Fauna Level</data>
 							<data>Can be found in the discovery menu.</data>
-							<data>./helperimg/planet/fauna.jpg</data>
+							<data>./assets/bitmap/planet/fauna.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -279,7 +279,7 @@
 							<data>Can be found in the discovery menu.</data>
 							<data>Planet Fauna Number</data>
 							<data>Can be found in the discovery menu.</data>
-							<data>./helperimg/planet/faunaNum.jpg</data>
+							<data>./assets/bitmap/planet/faunaNum.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -316,7 +316,7 @@
 								Found in the analysis visor in the space station.<br>
 								The exact discovery timestamp is displayed on the top left.
 							</data>
-							<data>./helperimg/planet/discDate.jpg</data>
+							<data>./assets/bitmap/planet/discDate.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -343,7 +343,7 @@
 								Gamemode of the save on which this planet was documented.<br>Found in the main
 								menu:
 							</data>
-							<data>./helperimg/shared/gamemode.jpg</data>
+							<data>./assets/bitmap/shared/gamemode.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">

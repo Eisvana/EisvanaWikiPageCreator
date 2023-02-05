@@ -50,7 +50,7 @@ function galleryUpload() {
 			</div>
 			<div class="controlButtons">
 				<span class="delete-icon is-clickable" title="Remove picture from gallery" onclick="rmGallery(this, '${wikiCodeGalleryId}')">&#10060</span>
-				<img class="handle" src="./lib/arrow.svg" title="Move picture up or down">
+				<img class="handle" src="./assets/vector/arrow.svg" title="Move picture up or down">
 				<button class="button moveButton" title="Move up" onclick="mobileMoveItem(this, '${wikiCodeGalleryId}', 'up')">
 					<svg width="36" height="36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
 				</button>

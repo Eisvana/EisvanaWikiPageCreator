@@ -5,17 +5,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Starship</title>
-	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js" defer></script>
-	<script src="./lib/pages/starship.js" defer></script>
-	<script src="./lib/modules/footer.js" defer></script>
-	<script src="./lib/misc_logic/huburbs.js" defer></script>
-	<script src="./lib/modules/portalglyphs.js" defer></script>
-	<script src="./lib/modules/gallery.js" defer></script>
-	<script src="./lib/modules/actions.js" defer></script>
-	<script src="./lib/modules/albumactions.js" defer></script>
-	<script src="./lib/modules/dialog.js" defer></script>
-	<script src="./lib/misc_logic/locationLogic.js"></script>
+	<link rel="stylesheet" href="./src/css/common.css">
+	<script src="./src/common.js" defer></script>
+	<script src="./src/pages/starship.js" defer></script>
+	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/misc_logic/huburbs.js" defer></script>
+	<script src="./src/modules/portalglyphs.js" defer></script>
+	<script src="./src/modules/gallery.js" defer></script>
+	<script src="./src/modules/actions.js" defer></script>
+	<script src="./src/modules/albumactions.js" defer></script>
+	<script src="./src/modules/dialog.js" defer></script>
+	<script src="./src/misc_logic/locationLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'Rear view of ship/freighter', 'Inventory screen', 'NPC freighter captain', 'NPC ship pilot', 'Analysis Visor Scan', 'Crash site', 'System Page', 'Moon Page', 'Planet Page', 'Galaxy Map'];
 
@@ -57,7 +57,7 @@
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>Ship Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>./helperimg/ship/shipName.jpg</data>
+							<data>./assets/bitmap/ship/shipName.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -88,7 +88,7 @@
 							<data>Ship Type</data>
 							<data>The starship type can be seen on the ship scan. Living Ships are displayed as
 								"Alien"</data>
-							<data>./helperimg/ship/shipType.jpg</data>
+							<data>./assets/bitmap/ship/shipType.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -111,19 +111,18 @@
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								Planet Name OR the planet circled by the moon where the starship can be found.
-							</span></span>
+						<span class="tooltip">
+							<data>Planet Name OR the planet circled by the moon where the starship can be found.</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if applicable):</label>
-						<span class="tooltip"><img src="./lib/help.svg"><span class="tooltiptext">
-								If the ship is located on a moon. Leave blank if the starship is on a
-								planet.
-							</span></span>
+						<span class="tooltip">
+							<data>If the ship is located on a moon. Leave blank if the starship is on a planet.</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
@@ -134,7 +133,7 @@
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
 							<data>Planetary Coordinates</data>
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
-							<data>./helperimg/shared/axes.jpg</data>
+							<data>./assets/bitmap/shared/axes.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -146,7 +145,7 @@
 							<data>Found in the exploration guide under "Economy".</data>
 							<data>Economy</data>
 							<data>Found in the exploration guide under "Economy".</data>
-							<data>./helperimg/ship/economy.jpg</data>
+							<data>./assets/bitmap/ship/economy.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -199,7 +198,7 @@
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>./helperimg/shared/glyphs.jpg</data>
+							<data>./assets/bitmap/shared/glyphs.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -304,7 +303,7 @@
 								It is preferred to enter the values as seen after buying, as they might change.<br>
 								If there is no core value, use the regular one.
 							</data>
-							<data>./helperimg/ship/maneuverability.jpg</data>
+							<data>./assets/bitmap/ship/maneuverability.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -321,7 +320,7 @@
 								It is preferred to enter the values as seen after buying, as they might change.<br>
 								If there is no core value, use the regular one.
 							</data>
-							<data>./helperimg/ship/damage.jpg</data>
+							<data>./assets/bitmap/ship/damage.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -337,7 +336,7 @@
 								It is preferred to enter the values as seen after buying, as they might change.<br>
 								If there is no core value, use the regular one.
 							</data>
-							<data>./helperimg/ship/shield.jpg</data>
+							<data>./assets/bitmap/ship/shield.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -353,7 +352,7 @@
 								It is preferred to enter the values as seen after buying, as they might change.<br>
 								If there is no core value, use the regular one.
 							</data>
-							<data>./helperimg/ship/hyperdrive.jpg</data>
+							<data>./assets/bitmap/ship/hyperdrive.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">

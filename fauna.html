@@ -5,18 +5,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Fauna</title>
-	<link rel="stylesheet" href="./lib/common.css">
-	<script src="./lib/common.js" defer></script>
-	<script src="./lib/pages/fauna.js" defer></script>
-	<script src="./lib/modules/footer.js" defer></script>
-	<script src="./lib/modules/portalglyphs.js" defer></script>
-	<script src="./lib/modules/gallery.js" defer></script>
-	<script src="./lib/modules/actions.js" defer></script>
-	<script src="./lib/modules/albumactions.js" defer></script>
-	<script src="./lib/datalists/creatureDatalists.js" defer></script>
-	<script src="./lib/modules/dialog.js" defer></script>
-	<script src="./lib/misc_logic/creatureData.js"></script>
-	<script src="./lib/misc_logic/locationLogic.js"></script>
+	<link rel="stylesheet" href="./src/css/common.css">
+	<script src="./src/common.js" defer></script>
+	<script src="./src/pages/fauna.js" defer></script>
+	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/modules/portalglyphs.js" defer></script>
+	<script src="./src/modules/gallery.js" defer></script>
+	<script src="./src/modules/actions.js" defer></script>
+	<script src="./src/modules/albumactions.js" defer></script>
+	<script src="./src/datalists/creatureDatalists.js" defer></script>
+	<script src="./src/modules/dialog.js" defer></script>
+	<script src="./src/misc_logic/creatureData.js"></script>
+	<script src="./src/misc_logic/locationLogic.js"></script>
 	<script>
 		const galleryArray = ['', 'x gender', 'x gender scan', 'Creature scan', 'Discovery Menu', 'Planet Page', 'Moon Page', 'System Page', 'Galaxy Map'];
 
@@ -61,7 +61,7 @@
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>Creature Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>./helperimg/creature/creatureName.jpg</data>
+							<data>./assets/bitmap/creature/creatureName.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -128,7 +128,7 @@
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>./helperimg/shared/glyphs.jpg</data>
+							<data>./assets/bitmap/shared/glyphs.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -163,7 +163,7 @@
 								Found in the creature discovery menu.<br>
 								If no hemisphere is given, leave the input empty.
 							</data>
-							<data>./helperimg/creature/creatureHemisphere.jpg</data>
+							<data>./assets/bitmap/creature/creatureHemisphere.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -179,7 +179,7 @@
 							<data>Found in the creature discovery menu.</data>
 							<data>Rarity</data>
 							<data>Found in the creature discovery menu.</data>
-							<data>./helperimg/creature/creatureRarity.jpg</data>
+							<data>./assets/bitmap/creature/creatureRarity.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -195,7 +195,7 @@
 							<data>Found in the creature discovery menu.</data>
 							<data>Ecosystem</data>
 							<data>Found in the creature discovery menu.</data>
-							<data>./helperimg/creature/creatureEcosystem.jpg</data>
+							<data>./assets/bitmap/creature/creatureEcosystem.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -212,7 +212,7 @@
 							<data>Found in the creature discovery menu.</data>
 							<data>Activity</data>
 							<data>Found in the creature discovery menu.</data>
-							<data>./helperimg/creature/creatureActivity.jpg</data>
+							<data>./assets/bitmap/creature/creatureActivity.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -246,7 +246,7 @@
 							<data>Found on the creature scan.</data>
 							<data>Gender</data>
 							<data>Found on the creature scan.</data>
-							<data>./helperimg/creature/creatureGender.jpg</data>
+							<data>./assets/bitmap/creature/creatureGender.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -308,7 +308,7 @@
 							<data>Found on the creature scan.</data>
 							<data>Behaviour</data>
 							<data>Found on the creature scan.</data>
-							<data>./helperimg/creature/creatureBehaviour.jpg</data>
+							<data>./assets/bitmap/creature/creatureBehaviour.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -320,7 +320,7 @@
 							<data>Found on the creature scan.</data>
 							<data>Diet</data>
 							<data>Found on the creature scan.</data>
-							<data>./helperimg/creature/creatureDiet.jpg</data>
+							<data>./assets/bitmap/creature/creatureDiet.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -332,7 +332,7 @@
 							<data>Found on the creature scan. No "kg" necessary.</data>
 							<data>Weight</data>
 							<data>Found on the creature scan.<br>No "kg" necessary.</data>
-							<data>./helperimg/creature/creatureWeight.jpg</data>
+							<data>./assets/bitmap/creature/creatureWeight.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -344,7 +344,7 @@
 							<data>Found on the creature scan. No "m" necessary.</data>
 							<data>Height</data>
 							<data>Found on the creature scan.<br>No "m" necessary.</data>
-							<data>./helperimg/creature/creatureHeight.jpg</data>
+							<data>./assets/bitmap/creature/creatureHeight.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -368,7 +368,7 @@
 							<data>Found on the creature scan. Might differ from the discovery menu.</data>
 							<data>Notes</data>
 							<data>Found on the creature scan.</data>
-							<data>./helperimg/creature/creatureNotes.jpg</data>
+							<data>./assets/bitmap/creature/creatureNotes.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -377,7 +377,7 @@
 					<div class="tableCell text" style="display: none">
 						<label for="specialNotesInput">Notes for discovery menu:</label>
 						<span class="tooltip">
-							<data>./helperimg/creature/creatureDMNotes.jpg</data>
+							<data>./assets/bitmap/creature/creatureDMNotes.jpg</data>
 							<data>Discovery Menu Notes</data>
 							<data>Found in the discovery menu.<br>This might differ from the creature scan.</data>
 							<data>This might differ from the scan. Please check in the discovery menu.</data>
@@ -393,7 +393,7 @@
 							<data>Found on the creature scan.</data>
 							<data>Produces</data>
 							<data>Found on the creature scan.</data>
-							<data>./helperimg/creature/creatureProduces.jpg</data>
+							<data>./assets/bitmap/creature/creatureProduces.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -412,7 +412,7 @@
 								Gamemode of the save on which this creature was discovered.<br>
 								Found in the main menu:
 							</data>
-							<data>./helperimg/shared/gamemode.jpg</data>
+							<data>./assets/bitmap/shared/gamemode.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
@@ -470,7 +470,7 @@
 								Found in the Discovery Menu. Enter exactly as seen in game,
 								but ignore any linebreaks.
 							</data>
-							<data>./helperimg/creature/creatureDM.jpg</data>
+							<data>./assets/bitmap/creature/creatureDM.jpg</data>
 						</span>
 						<textarea data-dest-noauto="DM" id="dmInput"></textarea>
 					</div>
