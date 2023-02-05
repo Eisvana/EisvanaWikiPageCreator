@@ -55,12 +55,17 @@
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="explanation('File Upload', 
-								`Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href='https://nomanssky.fandom.com/Special:Upload' target='_blank' rel='noopener noreferrer'>Special:Upload</a>`
-								); uploadShown = true"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Picture won't be uploaded to the wiki. This is only to autofill the image name.
-							</span></span>
+						<span class="tooltip" onclick="uploadShown = true">
+							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
+							<data>File Upload</data>
+							<data>
+								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
+								image name. Maximum filesize is 10MB.
+								You can upload your pictures to the wiki on <a
+									href='https://nomanssky.fandom.com/Special:Upload' target='_blank'
+									rel='noopener noreferrer'>Special:Upload</a>
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image">
@@ -99,11 +104,12 @@
 							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
 								Delete</button>
 						</div>
-						<span class="tooltip" onclick="explanation('Portalglyphs', 
-							`Found in Photo Mode. Glyphs are specific to each planet.`,
-							'./helperimg/shared/glyphs.jpg'
-							)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Found in Photo Mode. Glyphs are specific to each planet.</span></span>
+						<span class="tooltip">
+							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
+							<data>Portalglyphs</data>
+							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
+							<data>./helperimg/shared/glyphs.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -114,10 +120,12 @@
 					</div>
 					<div class="tableCell text">
 						<label>Class:</label>
-						<span class="tooltip" onclick="explanation('Class',
-						'Found on the worm scan.', './helperimg/sandworm/class.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext">
-								Found on the worm scan.</span></span>
+						<span class="tooltip">
+							<data>Found on the worm scan.</data>
+							<data>Class</data>
+							<data>Found on the worm scan.</data>
+							<data>./helperimg/sandworm/class.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select id="wormclassInput" data-dest="wormclass">
@@ -133,10 +141,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Max Depth:</label>
-						<span class="tooltip" onclick='explanation("Max Depth",
-						`Found on the worm scan.<br>Give the full number, including the decimal.<br>No "ku" necessary.`,
-						"./helperimg/sandworm/maxDepth.jpg"
-						)'><img src="./lib/help.svg"><span class="tooltiptext">Found on the worm scan.</span></span>
+						<span class="tooltip">
+							<data>Found on the worm scan.</data>
+							<data>Max Depth</data>
+							<data>Found on the worm scan.<br>Give the full number, including the decimal.<br>No "ku"
+								necessary.</data>
+							<data>./helperimg/sandworm/maxDepth.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="wormmaxdepthInput" data-dest-noauto="wormmaxdepth" maxlength="5"
@@ -144,10 +155,12 @@
 					</div>
 					<div class="tableCell text">
 						<label>Stomach Contents:</label>
-						<span class="tooltip" onclick="explanation('Stomach Contents',
-						'Found on the worm scan.', './helperimg/sandworm/stomachContents.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext">
-								Found on the worm scan.</span></span>
+						<span class="tooltip">
+							<data>Found on the worm scan.</data>
+							<data>Stomach Contents</data>
+							<data>Found on the worm scan.</data>
+							<data>./helperimg/sandworm/stomachContents.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select id="wormstomachInput" data-dest="wormstomach">
@@ -171,12 +184,17 @@
 					</div>
 					<div class="tableCell text">
 						<label>Does this worm spawn on game reload?</label>
-						<span class="tooltip" onclick="explanation('Worm on Reload',
-						`Some worms spawn immediately after you reload your game. To test this, make a manual save by entering and exiting your starship,
-						then reload your latest save in the options.<br>If the worm doesn't spawn after 5-10 seconds, it doesn't spawn after reload.<br>
-						You can't really overlook a worm, they make a very loud sound and shake the ground.`
-						)"><img src="./lib/help.svg"><span class="tooltiptext">
-								Reload your game and observe.</span></span>
+						<span class="tooltip">
+							<data>Reload your game and observe.</data>
+							<data>Worm on Reload</data>
+							<data>
+								Some worms spawn immediately after you reload your game. To test this, make a manual
+								save by entering and exiting your starship,
+								then reload your latest save in the options.<br>If the worm doesn't spawn after 5-10
+								seconds, it doesn't spawn after reload.<br>
+								You can't really overlook a worm, they make a very loud sound and shake the ground.
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<div class="radioButtons">
@@ -190,11 +208,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Gamemode:</label>
-						<span class="tooltip" onclick="explanation('Gamemode', 
-						'Gamemode of the save on which this worm was discovered.<br>Found in the main menu:',
-						'./helperimg/shared/gamemode.jpg'
-						)"><img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								Gamemode of the save on which this worm was discovered.</span></span>
+						<span class="tooltip">
+							<data>Gamemode of the save on which this worm was discovered.</data>
+							<data>Gamemode</data>
+							<data>Gamemode of the save on which this worm was discovered.<br>Found in the main
+								menu:</data>
+							<data>./helperimg/shared/gamemode.jpg</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
@@ -237,22 +257,25 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<span class="tooltip" onclick="explanation('Gallery', 
-						`The preferred order of pictures is as follows:
-						<div class='dialog-center'>
-							<ol class='dialog-list'>
-								<li>Gender 1</li>
-								<li>Gender 2</li>
-								<li>Gender 1 scan</li>
-								<li>Gender 2 scan</li>
-								<li>Discovery Menu</li>
-								<li>Planet/Moon DM</li>
-								<li>System DM</li>
-								<li>Galaxy Map</li>
-							</ol>
-						</div>`); galleryUploadShown = true">
-							<img src="./lib/help.svg"><span class="tooltiptext nms-font">
-								There is a preferred order of pictures.</span></span>
+						<span class="tooltip" onclick="galleryUploadShown = true">
+							<data>There is a preferred order of pictures.</data>
+							<data>Gallery</data>
+							<data>
+								The preferred order of pictures is as follows:
+								<div class='dialog-center'>
+									<ol class='dialog-list'>
+										<li>Gender 1</li>
+										<li>Gender 2</li>
+										<li>Gender 1 scan</li>
+										<li>Gender 2 scan</li>
+										<li>Discovery Menu</li>
+										<li>Planet/Moon DM</li>
+										<li>System DM</li>
+										<li>Galaxy Map</li>
+									</ol>
+								</div>
+							</data>
+						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
