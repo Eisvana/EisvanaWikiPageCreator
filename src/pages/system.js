@@ -202,7 +202,7 @@ function planetInputs() {
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="descriptor_input${i}" list="planetDescriptors" data-dest="descriptor${i}">
+			<input type="text" id="descriptor_input${i}" list="planetDescriptors" data-dest-noauto="descriptor${i}" oninput="wikiCodeSimple(this)">
 		</div>
 		<div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}" data-section="planet${i}">
 			<div style="display:flex">
@@ -229,7 +229,7 @@ function planetInputs() {
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="weather_input${i}" list="weatherData" oninput="wikiCodeSimple(this)">
+			<input type="text" id="weather_input${i}" list="weatherData" data-dest-noauto="weather${i}" oninput="wikiCodeSimple(this)">
 		</div>
 		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 			<label for="sentinel_input${i}">Sentinels</label>
@@ -292,7 +292,7 @@ function planetInputs() {
         <div>|<output id="fauna${i}"></output> (<output id="faunaTotal${i}" name="FaunaTotal${i}"></output>)</div>
         <div>|-</div>
         <div>!style="background-color:#2f4f4f"|Notes:</div>
-        <div>|colspan=8 style="text-align:left"|'''100% Zoology Bonus:''' {{FaunaTotal|<output id="faunaTotalNotes${i}" name="FaunaTotal${i}"></output>}} {{nanites}}</div></div>`
+        <div>|colspan=8 style="text-align:left"|'''100% Zoology Bonus''': {{FaunaTotal|<output id="faunaTotalNotes${i}" name="FaunaTotal${i}"></output>}} {{nanites}}</div></div>`
 
 		inputTarget.insertAdjacentHTML('beforebegin', inputTemplate);
 		outputTarget.insertAdjacentHTML('beforeend', planetTemplate);
