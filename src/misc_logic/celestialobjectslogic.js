@@ -1,6 +1,7 @@
 const celestialObjectElementFunctions = {
 	docDateInput: ['docByExternal()'],
 	discDateInput: ['docByExternal()'],
+	platformInput: ['docByExternal()'],
 }
 assignElementFunctions(celestialObjectElementFunctions);
 
@@ -9,7 +10,7 @@ function docByExternal() {
 	const discovered = pageData.discovered;
 	const discoveredlink = pageData.discoveredlink;
 	const documenter = pageData.docby;
-	const platform = pageData.platform;
+	const platform = (pageData.platform == 'NS') ? 'Switch' : pageData.platform;
 	const civilized = pageData.civilized;
 
 	function formatDate(date) {
