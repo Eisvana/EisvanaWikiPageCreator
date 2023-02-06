@@ -818,7 +818,7 @@ function getSelectedText(section) {
 
 	const sectionText = removeNewlines(section.closest('.wikiText').innerText).trim();
 	const selected = (() => {
-		const text = window.getSelection().toString().replace(newlineRegex, '').trim();
+		const text = removeNewlines(window.getSelection().toString()).trim();
 		if (text.endsWith(buttonText)) return text.replace(buttonText, '').trim();
 		return text;
 	})();

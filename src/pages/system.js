@@ -277,14 +277,14 @@ function planetInputs() {
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="faunatotal_input${i}" data-dest-noauto="FaunaTotal${i}" oninput="numberStats(this)">
+			<input type="text" id="faunatotal_input${i}" maxlength="2" data-dest-noauto="FaunaTotal${i}" oninput="numberStats(this)">
 		</div>`
 
 		const planetTemplate = `<div class="${oddEvenClass}" data-planet="planet${i}" id="body${i}"><div>|-</div>
         <div>|[[File:<output id="planetFile${i}"></output>|150px]]</div>
         <div>|[[File:<output id="landscapeFile${i}"></output>|150px]]</div>
         <div>|[[<output id="planetName${i}" name="planetName${i}"></output>]]</div>
-        <div>|<output id="biome${i}"></output> <output id="infested${i}"></output>&lt;br&gt;<output id="descriptor${i}"></output></div>
+        <div>|<output id="biome${i}"></output><output id="infested${i}"></output>&lt;br&gt;<output id="descriptor${i}"></output></div>
         <div>|<output id="resource${i}"></output></div>
         <div>|<output id="weather${i}"></output></div>
         <div>|<output id="sentinel${i}"></output></div>

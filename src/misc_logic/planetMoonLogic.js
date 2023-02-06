@@ -16,6 +16,8 @@ const planetMoonElementFunctions = {
 	systemInput: ['locationSentence()'],
 	faunaNumberInput: ['numberStats(this); plural(pageData[this.dataset.destNoauto], "faunaSentencePlural")'],
 	sentinelInput: ['sentinelSentence()'],
+	descriptionInput: ['wikiCodeSimple(this)'],
+	weatherInput: ['wikiCodeSimple(this)'],
 }
 assignElementFunctions(planetMoonElementFunctions);
 
