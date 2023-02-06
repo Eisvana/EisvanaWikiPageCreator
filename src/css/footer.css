@@ -1,0 +1,13 @@
+footer.footer {
+	text-align: center;
+	background-color: var(--footer-backgroundcolor);
+}
+
+footer button {
+	margin: 1rem 0;
+}
+
+footer #about {
+	display: inline-block;
+	margin-top: 1.5rem;
+}

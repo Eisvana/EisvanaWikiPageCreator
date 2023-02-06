@@ -1,0 +1,51 @@
+body:has(dialog[open]) {
+	filter: blur(3px);
+}
+
+dialog {
+	position: fixed !important;
+	margin-top: 5vh !important;
+	text-align: center;
+	border-radius: var(--border-radius);
+	box-shadow: 0 .5em 1em -.125em rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .02);
+	border: 1px solid;
+	border-color: var(--border-color);
+	background-color: var(--body-backgroundcolor);
+	color: var(--text-color);
+}
+
+dialog .title {
+	color: var(--heading-color);
+	margin-bottom: 1rem !important;
+}
+
+dialog form {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 1rem;
+}
+
+dialog img {
+	max-width: 450px;
+	max-height: 500px;
+	margin-top: 1rem;
+}
+
+dialog #explanationLink:after {
+	display: block;
+	content: 'Click to enlarge';
+}
+
+dialog #explanationContent .dialog-center {
+	display: flex;
+	justify-content: center;
+}
+
+dialog #explanationContent .dialog-list {
+	text-align: left;
+}
+
+dialog #explanationContent :is(ul, ol) {
+	margin: 1rem 0;
+	padding-left: 1rem;
+}
