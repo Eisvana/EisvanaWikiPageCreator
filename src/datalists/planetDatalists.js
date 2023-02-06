@@ -76,7 +76,8 @@ function getResourceData() {
 		'Mordite': 'Mo',
 		'Faecium': 'Fa',
 		'Ancient Bones': 'Ab',
-		'Salvageable Scrap': 'Sa'
+		'Salvageable Scrap': 'Sa',
+		'Rusted Metal': 'Jn',
 	}
 	return resources;
 };
