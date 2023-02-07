@@ -186,7 +186,7 @@
 						</span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="description" list="planetDescriptors"
+						<input type="text" data-dest-simple="description" list="planetDescriptors"
 							id="descriptionInput">
 					</div>
 					<div class="tableCell text">
@@ -223,7 +223,7 @@
 						</span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="weather" list="weatherData" id="weatherInput">
+						<input type="text" data-dest-simple="weather" list="weatherData" id="weatherInput">
 					</div>
 					<div class="tableHeader text no-flex">
 						<p style="display: inline; margin-right: 1.5rem;">Resources:</p>
@@ -291,21 +291,24 @@
 						<button class="button" onclick="toggleSection('fauna', this)">Hide</button>
 					</div>
 					<div id="faunaInputs" class="tableHeader text" data-section="fauna">
-						<button class="button is-primary" type="button" data-dest-noauto="creatures" onclick="addFauna(this)">+ Add Fauna</button>
+						<button class="button is-primary" type="button" data-dest-noauto="creatures"
+							onclick="addFauna(this)">+ Add Fauna</button>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Flora:</p>
 						<button class="button" onclick="toggleSection('flora', this)">Hide</button>
 					</div>
 					<div id="floraInputs" class="tableHeader text" data-section="flora">
-						<button class="button is-primary" type="button" data-dest-noauto="plants" onclick="addFlora(this)">+ Add Flora</button>
+						<button class="button is-primary" type="button" data-dest-noauto="plants"
+							onclick="addFlora(this)">+ Add Flora</button>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Minerals:</p>
 						<button class="button" onclick="toggleSection('mineral', this)">Hide</button>
 					</div>
 					<div id="mineralInputs" class="tableHeader text" data-section="mineral">
-						<button class="button is-primary" type="button" data-dest-noauto="minerals" onclick="addMineral(this)">+ Add
+						<button class="button is-primary" type="button" data-dest-noauto="minerals"
+							onclick="addMineral(this)">+ Add
 							Mineral</button>
 					</div>
 					<div class="tableCell text ">
@@ -398,9 +401,16 @@
 							<data>The preferred order of pictures is as follows:
 								<div class='dialog-center'>
 									<ol class='dialog-list'>
-										<li>System Exploration Guide</li>
+										<li>Landscape</li>
+										<li>Night View</li>
+										<li>Cave System</li>
+										<li>Coast Area</li>
+										<li>Underwater</li>
+										<li>Analysis Visor</li>
+										<li>Planet Exploration Guide</li>
+										<li>Planet Page</li>
 										<li>System Page</li>
-										<li>Default SS Multitool</li>
+										<li>Galaxy Map</li>
 									</ol>
 								</div>
 							</data>

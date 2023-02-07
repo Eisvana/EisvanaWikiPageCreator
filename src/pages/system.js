@@ -1,8 +1,6 @@
-function startupFunctions() {
+function systemStartupFunctions() {
 	regionLong();
 	merchantUpgrades();
-	hideOrgName();
-	loc();
 	planetInputs();
 	expectedHubTagSentence();
 	civCatalog();
@@ -28,12 +26,11 @@ const systemElements = {
 updateGlobalElements(systemElements);
 
 const systemElementFunctions = {
-	civ: ['loc(); regionLong(); expectedHubTagSentence(); civCatalog()', null, true],
-	portalglyphsInput: ['loc(); regionLong(); expectedHubTagSentence(); autoBH()', null, true],
+	civ: ['regionLong(); expectedHubTagSentence(); civCatalog()', null, true],
+	portalglyphsInput: ['regionLong(); expectedHubTagSentence(); autoBH()', null, true],
 	planetInput: ['numberStats(this); planetInputs()'],
 	moonInput: ['numberStats(this); planetInputs()'],
 	nameInput: ['expectedHubTagSentence()'],
-	oldNameInput: ['hideOrgName()'],
 	factionInput: ['combineEconConf()'],
 	economybuyInput: ['wikiCodePercentage(this)'],
 	economysellInput: ['wikiCodePercentage(this)'],
@@ -45,7 +42,7 @@ const systemElementFunctions = {
 }
 assignElementFunctions(systemElementFunctions);
 
-function loc() {
+function locationSentence() {
 	const region = pageData.region;
 	const civ = pageData.civShort;
 	const HubNr = regNr(region);
@@ -202,7 +199,7 @@ function planetInputs() {
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="descriptor_input${i}" list="planetDescriptors" data-dest-noauto="descriptor${i}" oninput="wikiCodeSimple(this)">
+			<input type="text" id="descriptor_input${i}" list="planetDescriptors" data-dest-simple="descriptor${i}" oninput="wikiCodeSimple(this)">
 		</div>
 		<div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}" data-section="planet${i}">
 			<div style="display:flex">
@@ -229,7 +226,7 @@ function planetInputs() {
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="weather_input${i}" list="weatherData" data-dest-noauto="weather${i}" oninput="wikiCodeSimple(this)">
+			<input type="text" id="weather_input${i}" list="weatherData" data-dest-simple="weather${i}" oninput="wikiCodeSimple(this)">
 		</div>
 		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 			<label for="sentinel_input${i}">Sentinels</label>
@@ -728,9 +725,9 @@ function galleryExplanationExternal() {
 	return `There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
-		<li>System Exploration Guide</li>
-		<li>System Page</li>
-		<li>Default SS Multitool</li>
-	</ol>
+			<li>System Exploration Guide</li>
+			<li>System Page</li>
+			<li>Default SS Multitool</li>
+		</ol>
 	</div>`
 }

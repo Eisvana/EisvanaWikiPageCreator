@@ -1,23 +1,11 @@
-function startupFunctions() {
-	addResource();
-	locationSentence();
-}
-
-const systemElements = {
+const planetElements = {
 	input: {
 		moonInputs: 'moonInputs',
 	},
 	output: {
 	}
 }
-updateGlobalElements(systemElements);
-
-const systemElementFunctions = {
-	civ: ['locationSentence()', null, true],
-	portalglyphsInput: ['locationSentence()', null, true],
-}
-assignElementFunctions(systemElementFunctions);
-
+updateGlobalElements(planetElements);
 
 function addMoon(element) {
 	const inputSection = element.parentElement;
@@ -78,9 +66,16 @@ function galleryExplanationExternal() {
 	return `There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
-		<li>System Exploration Guide</li>
-		<li>System Page</li>
-		<li>Default SS Multitool</li>
-	</ol>
+			<li>Landscape</li>
+			<li>Night View</li>
+			<li>Cave System</li>
+			<li>Coast Area</li>
+			<li>Underwater</li>
+			<li>Analysis Visor</li>
+			<li>Planet Exploration Guide</li>
+			<li>Planet Page</li>
+			<li>System Page</li>
+			<li>Galaxy Map</li>
+		</ol>
 	</div>`
 }
