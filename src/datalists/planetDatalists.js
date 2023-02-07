@@ -78,6 +78,7 @@ function getResourceData() {
 		'Ancient Bones': 'Ab',
 		'Salvageable Scrap': 'Sa',
 		'Rusted Metal': 'Jn',
+		'Basalt': 'B',
 	}
 	return resources;
 };
