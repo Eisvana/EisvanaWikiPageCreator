@@ -106,10 +106,10 @@
 							data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="navFileUpload" accept="image/*" onchange="image(this)">
 					</div>
-					<div class="tableCell text">
+					<div class="tableCell text" data-station="img">
 						<label for="ssFileInput">Space Station image name, including file extension:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="tableCell data" data-station="img">
 						<input type="text" id="ssFileInput" data-dest="ssImage">
 						<input type="file" id="ssFileUpload" accept="image/*" onchange="image(this)">
 					</div>
@@ -584,7 +584,7 @@
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
-					<div class="tableHeader text no-flex">
+					<div class="tableHeader text no-flex" data-station="terminal">
 						<label>Tradeables:</label>
 						<span class="tooltip">
 							<data>Can be found on the space station.</data>
@@ -596,10 +596,10 @@
 							<data>./assets/bitmap/system/tradeables.jpg</data>
 						</span>
 					</div>
-					<div id="terminalInputs" class="tableHeader text">
+					<div id="terminalInputs" class="tableHeader text" data-station="terminal">
 						<button class="button is-primary" type="button" onclick="tradeables()">+ Add Tradeable</button>
 					</div>
-					<div class="tableHeader text sectionToggle">
+					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
 							<p>S-class multi-tool merchant upgrades:</p>
 							<span class="tooltip">
@@ -615,7 +615,8 @@
 						<button class="button" data-display-default="none"
 							onclick="toggleSection('MTMerchant', this)">Show</button>
 					</div>
-					<div class="tableHeader data" data-section="MTMerchant" style="display: none">
+					<div class="tableHeader data" data-section="MTMerchant" style="display: none"
+						data-station="merchant">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="mtAVUInput"><input type="checkbox" id="mtAVUInput"
 									value="Analysis Visor Upgrade" data-dest-checkbox-group="MTMerchant"><span
@@ -650,7 +651,7 @@
 									class="checkbox-label">Scatter Blaster Upgrade</span></label>
 						</div>
 					</div>
-					<div class="tableHeader text sectionToggle">
+					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
 							<p>S-class starship merchant upgrades:</p>
 							<span class="tooltip">
@@ -666,7 +667,8 @@
 						<button class="button" data-display-default="none"
 							onclick="toggleSection('SSMerchant', this)">Show</button>
 					</div>
-					<div class="tableHeader data" data-section="SSMerchant" style="display: none">
+					<div class="tableHeader data" data-section="SSMerchant" style="display: none"
+						data-station="merchant">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="ssCBU"><input type="checkbox" id="ssCBU"
 									value="Cyclotron Ballista Upgrade" data-dest-checkbox-group="SSMerchant"><span
@@ -705,7 +707,7 @@
 									class="checkbox-label">Pulse Engine Upgrade</span></label>
 						</div>
 					</div>
-					<div class="tableHeader text sectionToggle">
+					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
 							<p>S-class exocraft merchant upgrades:</p>
 							<span class="tooltip">
@@ -721,7 +723,8 @@
 						<button class="button" data-display-default="none"
 							onclick="toggleSection('ECMerchant', this)">Show</button>
 					</div>
-					<div class="tableHeader data" data-section="ECMerchant" style="display: none">
+					<div class="tableHeader data" data-section="ECMerchant" style="display: none"
+						data-station="merchant">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="ecEAMU"><input type="checkbox" id="ecEAMU"
 									value="Exocraft Acceleration Module Upgrade"
@@ -761,7 +764,7 @@
 									class="checkbox-label">Nautilon Cannon Upgrade</span></label>
 						</div>
 					</div>
-					<div class="tableHeader text sectionToggle">
+					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
 							<p>S-class exosuit merchant upgrades:</p>
 							<span class="tooltip">
@@ -777,7 +780,8 @@
 						<button class="button" data-display-default="none"
 							onclick="toggleSection('ESMerchant', this)">Show</button>
 					</div>
-					<div class="tableHeader data" data-section="ESMerchant" style="display: none">
+					<div class="tableHeader data" data-section="ESMerchant" style="display: none"
+						data-station="merchant">
 						<div class="checkboxes-grid" style="width: 100%">
 							<label class="checkbox" for="esDSU"><input type="checkbox" id="esDSU"
 									value="Defence Systems Upgrade" data-dest-checkbox-group="ESMerchant"><span
@@ -814,7 +818,7 @@
 									class="checkbox-label">Underwater Protection Module</span></label>
 						</div>
 					</div>
-					<div class="tableHeader text sectionToggle">
+					<div class="tableHeader text sectionToggle" data-station="scrapDealer">
 						<div class="label-combo is-flex-wrap-nowrap">
 							<p>X-class scrapdealer upgrades:</p>
 							<span class="tooltip">
@@ -828,7 +832,8 @@
 						<button class="button" data-display-default="none"
 							onclick="toggleSection('SDMerchant', this)">Show</button>
 					</div>
-					<div class="tableHeader data" data-section="SDMerchant" style="display: none">
+					<div class="tableHeader data" data-section="SDMerchant" style="display: none"
+						data-station="scrapDealer">
 						<div class="checkboxes-grid" style="width: 100%">
 							<label class="checkbox" for="sdN"><input type="checkbox" id="sdN" value=""
 									data-dest-checkbox-group="SDMerchant"><span
@@ -1067,31 +1072,36 @@
 					<div><output id="loc"></output></div>
 					<br>
 					<div>==Space Station==</div>
-					<div>[[File:<output id=ssImage></output>|thumb|System space station]]</div>
-					<div>The [[Space Station]] [[Galactic Trade Terminal|terminal]] offers the following [[Trade
-						Commodities]] for sale:</div>
-					<div>{| class="article-table"</div>
-					<div>|-</div>
-					<div>! style="background-color:#2F4F4F; min-width:250px"| Item Name</div>
-					<div>! style="background-color:#2F4F4F; min-width:125px"| Price per Item</div>
-					<div id=tradeTerminal></div>
-					<div>|}</div>
-					<div>The Space Station merchants offer the following {{class|S}} class items for sale:</div>
-					<br>
-					<div>{{SSMerchants</div>
-					<div><output id="MTMerchant"></output></div>
-					<div><output id="SSMerchant"></output></div>
-					<div><output id="ECMerchant"></output></div>
-					<div><output id="ESMerchant"></output></div>
-					<div>}}</div>
-					<br>
-					<div class="codeWrapper">
+					<div data-station="img">[[File:<output id=ssImage></output>|thumb|System space station]]</div>
+					<div data-station="note"></div>
+					<div data-station="terminal">
+						<div>The [[Space Station]] [[Galactic Trade Terminal|terminal]] offers the following [[Trade
+							Commodities]] for sale:</div>
+						<div>{| class="article-table"</div>
+						<div>|-</div>
+						<div>! style="background-color:#2F4F4F; min-width:250px"| Item Name</div>
+						<div>! style="background-color:#2F4F4F; min-width:125px"| Price per Item</div>
+						<div id=tradeTerminal></div>
+						<div>|}</div>
+					</div>
+					<div data-station="merchant">
+						<div>The Space Station merchants offer the following {{class|S}} class items for sale:</div>
+						<br>
+						<div>{{SSMerchants</div>
+						<div><output id="MTMerchant"></output></div>
+						<div><output id="SSMerchant"></output></div>
+						<div><output id="ECMerchant"></output></div>
+						<div><output id="ESMerchant"></output></div>
+						<div>}}</div>
+					</div>
+					<div id="scrapDealer" data-station="scrapDealer">
+						<br>
 						<div>===Scrap Dealer===</div>
 						<div>{{ScrapDealer</div>
 						<div><output id="SDMerchant"></output></div>
 						<div>}}</div>
-						<br>
 					</div>
+					<br>
 					<div>==Additional Information==</div>
 					<div><output id='addInfo'></output></div>
 					<br>
