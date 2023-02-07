@@ -200,10 +200,16 @@ function assignAlt() {
 // initialises show/hide buttons with their proper attributes
 toggleSection();
 
-const inputs = document.querySelectorAll('[data-dest]');
-const checkboxes = document.querySelectorAll('[data-dest-checkbox]');
-const stores = document.querySelectorAll('[data-dest-noauto]');
-const defaults = document.querySelectorAll('[data-default]');
+function getInputData() {
+	const inputData = {
+		inputs: document.querySelectorAll('[data-dest]'),
+		checkboxes: document.querySelectorAll('[data-dest-checkbox]'),
+		stores: document.querySelectorAll('[data-dest-noauto]'),
+		defaults: document.querySelectorAll('[data-default]'),
+		simple: document.querySelectorAll('[data-dest-simple]'),
+	}
+	return inputData;
+}
 
 function startUp() {
 	autoShow();
@@ -272,36 +278,46 @@ function assignFunction(element, functionName, listener = null, invert = false) 
 }
 
 function autoShow() {
-	for (const element of defaults) {
+	const inputData = getInputData();
+	for (const element of inputData.defaults) {
 		assignFunction(element, 'assignDefaultValue(this)');
 	}
 
-	for (const input of inputs) {
+	for (const input of inputData.inputs) {
 		assignFunction(input, 'wikiCode(this)');
 	}
 
-	for (const checkbox of checkboxes) {
+	for (const checkbox of inputData.checkboxes) {
 		assignFunction(checkbox, 'checkboxWikiCode(this)');
 	}
 
-	for (const store of stores) {
+	for (const store of inputData.stores) {
 		assignFunction(store, 'storeData(this)');
+	}
+
+	for (const simple of inputData.simple) {
+		assignFunction(simple, 'wikiCodeSimple(this)');
 	}
 }
 
 function showAll() {
-	for (const input of inputs) {
+	const inputData = getInputData();
+	for (const input of inputData.inputs) {
 		wikiCode(input);
 	}
-	for (const checkbox of checkboxes) {
+	for (const checkbox of inputData.checkboxes) {
 		checkboxWikiCode(checkbox);
 	}
-	for (const store of stores) {
+	for (const store of inputData.stores) {
 		storeData(store);
 	}
 
-	for (const element of defaults) {
+	for (const element of inputData.defaults) {
 		assignDefaultValue(element);
+	}
+
+	for (const simple of inputData.simple) {
+		wikiCodeSimple(simple);
 	}
 
 	numberStats();
@@ -349,10 +365,14 @@ function storeData(element) {
 	pageData[store] = sanitiseString(element.value);
 }
 
-// just puts a value from an element into the code. Nothing fancy, not even wikitext sanitisation, just one-to-one value transfer
+// just puts a value from an element into the code. No wikitext sanitisation. It also needed to be capable of managine one-to-many, so it can do that, too
 function wikiCodeSimple(element) {
-	const dest = element.dataset.destNoauto;
-	document.getElementById(dest).innerText = element.value;
+	const dest = element.dataset.destSimple;
+	const outputs = Array.from(document.getElementsByName(dest));
+	if (!outputs.length) outputs.push(document.getElementById(dest));
+	for (const output of outputs) {
+		output.innerText = element.value;
+	}
 }
 
 function civ() {

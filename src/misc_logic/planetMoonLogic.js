@@ -11,13 +11,10 @@ const planetMoonElements = {
 }
 updateGlobalElements(planetMoonElements);
 
-
 const planetMoonElementFunctions = {
 	systemInput: ['locationSentence()'],
 	faunaNumberInput: ['numberStats(this); plural(pageData[this.dataset.destNoauto], "faunaSentencePlural")'],
 	sentinelInput: ['sentinelSentence()'],
-	descriptionInput: ['wikiCodeSimple(this)'],
-	weatherInput: ['wikiCodeSimple(this)'],
 }
 assignElementFunctions(planetMoonElementFunctions);
 
@@ -28,6 +25,17 @@ function plural(number, dest = null) {
 	})();
 	if (!dest) return word;
 	wikiCode(word, dest);
+}
+
+// constructs location sentence
+function locationSentence() {
+	const systemName = pageData.system;
+	const regionName = pageData.region;
+	const civ = pageData.civShort;
+
+	const output = `It can be found in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]] (HUB${getHubNumber(regionName)}) of the ${HubGal(civ)}.`;
+
+	globalElements.output.location.innerText = output;
 }
 
 function addResource(element = globalElements.input.resourceInputs.querySelector('button')) {

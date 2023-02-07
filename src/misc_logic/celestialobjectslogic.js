@@ -1,7 +1,16 @@
+function startupFunctions() {
+	hideOrgName();
+	locationSentence();
+	if (typeof systemStartupFunctions == 'function') systemStartupFunctions();
+}
+
 const celestialObjectElementFunctions = {
 	docDateInput: ['docByExternal()'],
 	discDateInput: ['docByExternal()'],
 	platformInput: ['docByExternal()'],
+	oldNameInput: ['hideOrgName()'],
+	civ: ['locationSentence()', null, true],
+	portalglyphsInput: ['locationSentence()', null, true],
 }
 assignElementFunctions(celestialObjectElementFunctions);
 
