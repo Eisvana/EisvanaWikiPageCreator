@@ -124,7 +124,7 @@ function sentinelSentence() {
 		}
 	})();
 
-	const output = `[[Sentinel]] activity on this ${pageData.pageType} is classified as: ''${sentDescriptor}''. The sentinels ${(sentLevel == 'aggressive') ? 'do' : "don't"} present an immediate threat.`;
+	const output = `[[Sentinel]] activity on this ${pageData.pageType.toLowerCase()} is classified as: ''${sentDescriptor}''. The sentinels ${(sentLevel == 'aggressive') ? 'do' : "don't"} present an immediate threat.`;
 	globalElements.output.sentinelSentence.innerText = output;
 }
 
