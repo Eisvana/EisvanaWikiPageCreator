@@ -2,6 +2,7 @@ function startupFunctions() {
 	hideOrgName();
 	locationSentence();
 	if (typeof systemStartupFunctions == 'function') systemStartupFunctions();
+	if (typeof planetStartupFunctions == 'function') planetStartupFunctions();
 }
 
 const celestialObjectElementFunctions = {

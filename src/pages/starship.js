@@ -3,6 +3,7 @@ function startupFunctions() {
 	showHideStarshipSelects();
 	shipStats();
 	calcS();
+	introType();
 	loc();
 	addInfo();
 	appearanceDropdowns();
@@ -18,7 +19,7 @@ const starshipElementFunctions = {
 	moonInput: ['loc(); albumOther()'],
 	portalglyphsInput: ['loc()', null, true],
 	axesInput: ['loc(); albumOther()'],
-	typeInput: ['subtypeDropdown(); showHideStarshipSelects(); shipStats(); appearanceDropdowns(); appearanceSentence(); calcS(); loc(); addInfo(); albumOther(); enPrefix(this.value, "enPrefix")'],
+	typeInput: ['introType(); subtypeDropdown(); showHideStarshipSelects(); shipStats(); appearanceDropdowns(); appearanceSentence(); calcS(); loc(); addInfo(); albumOther(); enPrefix(this.value, "enPrefix")'],
 	subtypeInput: ['invDropdown(); calcInv(); appearanceSentence(), loc()'],
 	inventoryInput: ['costSlotCalc(); loc()'],
 	economyInput: ['calcS(); albumOther()'],
@@ -330,9 +331,9 @@ function calcS() {
 			default:
 				chance = '5%';
 		}
-		chanceSentence = 'has a ' + chance + ' chance to spawn'
+		chanceSentence = `has a ${chance} chance to spawn`;
 	}
-	globalElements.output.sChance.innerText = chanceSentence
+	globalElements.output.sChance.innerText = chanceSentence;
 }
 
 // assigns starship stats macro
@@ -425,19 +426,24 @@ function costSlotCalc() {
 	globalElements.output.techslots.innerText = shipData[type].techslots[inventory];
 }
 
+function introType() {
+	wikiCode(shipType(), 'archetype');
+}
+
+function shipType() {
+	if (pageData.type == 'Freighter') {
+		return 'freighter';
+	} else {
+		return 'starship';
+	}
+}
+
 // constructs location sentence
 function loc() {
 	const systemName = pageData.system;
 	const regionName = pageData.region;
 	const civ = pageData.civShort;
 	const type = pageData.type;
-	function shipType() {
-		if (type == 'Freighter') {
-			return 'freighter';
-		} else {
-			return 'starship';
-		}
-	}
 
 	function capitalDetection() {
 		const inventory = pageData.inventory;

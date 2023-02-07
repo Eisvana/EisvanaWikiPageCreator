@@ -848,7 +848,11 @@ function getSelectedText(section) {
 }
 
 function enableTextMarking() {
-	document.body.dataset.mark = !checkDataIntegrity(true);
+	if (pageData.debug) {
+		document.body.dataset.mark = true;
+	} else {
+		document.body.dataset.mark = !checkDataIntegrity(true);
+	}
 }
 
 function preventCopy() {

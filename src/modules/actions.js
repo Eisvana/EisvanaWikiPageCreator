@@ -25,6 +25,7 @@
 		uploadShown = checkState;
 		galleryUploadShown = checkState;
 		document.documentElement.dataset.debug = checkState;
+		enableTextMarking();
 	}
 	const urlParams = new URLSearchParams(url.search);
 	if (!urlParams.has('debug')) return;

@@ -7,6 +7,10 @@ const planetElements = {
 }
 updateGlobalElements(planetElements);
 
+function planetStartupFunctions() {
+	moonList();
+}
+
 function addMoon(element) {
 	const inputSection = element.parentElement;
 	const elementList = document.querySelectorAll('[data-moon]');
