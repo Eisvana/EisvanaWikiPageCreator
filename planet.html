@@ -291,21 +291,21 @@
 						<button class="button" onclick="toggleSection('fauna', this)">Hide</button>
 					</div>
 					<div id="faunaInputs" class="tableHeader text" data-section="fauna">
-						<button class="button is-primary" type="button" onclick="addFauna(this)">+ Add Fauna</button>
+						<button class="button is-primary" type="button" data-dest-noauto="creatures" onclick="addFauna(this)">+ Add Fauna</button>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Flora:</p>
 						<button class="button" onclick="toggleSection('flora', this)">Hide</button>
 					</div>
 					<div id="floraInputs" class="tableHeader text" data-section="flora">
-						<button class="button is-primary" type="button" onclick="addFlora(this)">+ Add Flora</button>
+						<button class="button is-primary" type="button" data-dest-noauto="plants" onclick="addFlora(this)">+ Add Flora</button>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Minerals:</p>
 						<button class="button" onclick="toggleSection('mineral', this)">Hide</button>
 					</div>
 					<div id="mineralInputs" class="tableHeader text" data-section="mineral">
-						<button class="button is-primary" type="button" onclick="addMineral(this)">+ Add
+						<button class="button is-primary" type="button" data-dest-noauto="minerals" onclick="addMineral(this)">+ Add
 							Mineral</button>
 					</div>
 					<div class="tableCell text ">
@@ -418,7 +418,7 @@
 				<div class="wikiText" id="fullArticle">
 					<div>{{Version|<output id='release' name="release"></output>}}</div>
 					<div>{{<output id='civStub'></output>}}</div>
-					<div>{{System infobox</div>
+					<div>{{Planet infobox</div>
 					<div>| name = <output id='name' name="name"></output></div>
 					<div>| image = <output id='image'></output></div>
 					<div>| region = <output id='region' name="region"></output></div>

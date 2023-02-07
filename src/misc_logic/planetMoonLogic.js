@@ -122,7 +122,7 @@ function sentinelSentence() {
 
 function addFauna(element) {
 	const inputSection = element.parentElement;
-	const outputSection = globalElements.output.creatures;
+	const outputSection = globalElements.output[element.dataset.destNoauto];
 	const sectionType = 'fauna';
 	const elementList = document.querySelectorAll(`[data-${sectionType}]`);
 	const i = getChildIndex(elementList, `dataset.${sectionType}`);
@@ -275,7 +275,7 @@ function addFauna(element) {
 
 function addFlora(element) {
 	const inputSection = element.parentElement;
-	const outputSection = globalElements.output.creatures;
+	const outputSection = globalElements.output[element.dataset.destNoauto];
 	const sectionType = 'flora';
 	const elementList = document.querySelectorAll(`[data-${sectionType}]`);
 	const i = getChildIndex(elementList, `dataset.${sectionType}`);
@@ -394,7 +394,7 @@ function addFlora(element) {
 
 function addMineral(element) {
 	const inputSection = element.parentElement;
-	const outputSection = globalElements.output.minerals;
+	const outputSection = globalElements.output[element.dataset.destNoauto];
 	const sectionType = 'mineral';
 	const elementList = document.querySelectorAll(`[data-${sectionType}]`);
 	const i = getChildIndex(elementList, `dataset.${sectionType}`);
