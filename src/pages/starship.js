@@ -331,9 +331,9 @@ function calcS() {
 			default:
 				chance = '5%';
 		}
-		chanceSentence = 'has a ' + chance + ' chance to spawn'
+		chanceSentence = `has a ${chance} chance to spawn`;
 	}
-	globalElements.output.sChance.innerText = chanceSentence
+	globalElements.output.sChance.innerText = chanceSentence;
 }
 
 // assigns starship stats macro
@@ -427,7 +427,7 @@ function costSlotCalc() {
 }
 
 function introType() {
-	globalElements.output.archetype.innerText = shipType();
+	wikiCode(shipType(), 'archetype');
 }
 
 function shipType() {
