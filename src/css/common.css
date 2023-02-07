@@ -145,8 +145,8 @@ nav {
 	margin-top: 2em;
 }
 
-.no-flex {
-	display: block !important;
+.tableHeader.no-flex {
+	display: block;
 }
 
 .no-flex>label {

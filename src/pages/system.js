@@ -1,6 +1,7 @@
 function systemStartupFunctions() {
-	regionLong();
 	merchantUpgrades();
+	regionLong();
+	spaceStationSection();
 	planetInputs();
 	expectedHubTagSentence();
 	civCatalog();
@@ -31,7 +32,7 @@ const systemElementFunctions = {
 	planetInput: ['numberStats(this); planetInputs()'],
 	moonInput: ['numberStats(this); planetInputs()'],
 	nameInput: ['expectedHubTagSentence()'],
-	factionInput: ['combineEconConf()'],
+	factionInput: ['spaceStationSection(); combineEconConf()'],
 	economybuyInput: ['wikiCodePercentage(this)'],
 	economysellInput: ['wikiCodePercentage(this)'],
 	wealthInput: ['autoPirate(this)'],
@@ -433,7 +434,7 @@ function merchantUpgrades(group = null) {
 			code.push(output);
 		}
 		wikiCode(code.join('\n'), group);
-		const wrapper = globalElements.output[group].closest('.codeWrapper');
+		const wrapper = globalElements.output[group].closest('#scrapDealer');
 		if (!wrapper) return;		// return if not scrap dealer
 		if (code.length == 0) {
 			wrapper.style.display = 'none';
@@ -453,20 +454,20 @@ function tradeables() {
 	const text_input = 'text_input' + childIndex;
 	const price_input = 'price_input' + childIndex;
 
-	const inputHTML = `<div class="tableHeader text sectionToggle" data-tradeable="section${childIndex}">
+	const inputHTML = `<div class="tableHeader text sectionToggle" data-tradeable="section${childIndex}" data-station="terminal">
 		<span class="has-text-weight-bold">Tradeable</span>
 		<button class="button is-danger is-outlined" type="button" onclick="removeSpecificSection('section${childIndex}', 'tradeable'); enableTradeableAdd()">Remove</button>
 	</div>
-	<div class="tableCell text" data-tradeable="section${childIndex}">
+	<div class="tableCell text" data-tradeable="section${childIndex}" data-station="terminal">
 		<label for="${text_input}">Tradeable name:</label>
 	</div>
-	<div class="tableCell data" data-tradeable="section${childIndex}">
-	<input type="text" list="terminal" id="${text_input}" data-dest="${text}">
+	<div class="tableCell data" data-tradeable="section${childIndex}" data-station="terminal">
+		<input type="text" list="terminal" id="${text_input}" data-dest="${text}">
 	</div>
-	<div class="tableCell text" data-tradeable="section${childIndex}">
+	<div class="tableCell text" data-tradeable="section${childIndex}" data-station="terminal">
 		<label for="${price_input}">Tradeable price:</label>
 	</div>
-	<div class="tableCell data" data-tradeable="section${childIndex}">
+	<div class="tableCell data" data-tradeable="section${childIndex}" data-station="terminal">
 		<input type="text" id="${price_input}" data-dest-noauto="${price}">
 	</div>`;
 
@@ -627,6 +628,62 @@ function expectedHubTagSentence() {
 	outputElement.insertAdjacentHTML('beforeend', '<br><br>');
 }
 
+function spaceStationSection() {
+	// define notes
+	const notes = {
+		uncharted: 'This system is uncharted and has no [[Space Station]].',
+		abandoned: 'This space station is abandoned.' + '\n\n',
+	}
+
+	// define structure
+	const sectionDefinition = {
+		normal: ['img', 'terminal', 'merchant', 'scrapDealer'],
+		pirate: ['img', 'scrapDealer'],
+		abandoned: ['note', 'terminal'],
+		uncharted: ['note'],
+	}
+
+	// define faction
+	const faction = (() => {
+		const input = pageData.faction;
+		if (input == 'Uncharted') return 'uncharted';
+		if (input.includes('Abandoned')) return 'abandoned';
+		if (pageData.wealth.includes('Black Market')) return 'pirate';
+		return 'normal';
+	})();
+
+	// get all station sections
+	const stationSections = document.querySelectorAll('[data-station]');
+	for (let i = 0; i < stationSections.length; i++) {
+		const section = stationSections[i];
+		const sectionName = section.dataset.station;
+		if (sectionDefinition[faction].includes(sectionName)) {
+			if ((sectionName == 'merchant' || sectionName == 'scrapDealer') && defaultDisplay(section)) {
+				i++;
+			}
+			if (section.id == 'scrapDealer' && !pageData.SDMerchant) {
+				section.style.display = 'none';
+			} else {
+				section.style.display = '';
+			}
+		} else {
+			section.style.display = 'none';
+		}
+	}
+	if (!notes[faction]) return;
+
+	document.querySelector('[data-station="note"]').innerText = notes[faction];
+
+	function defaultDisplay(section) {
+		const button = section.querySelector('button');
+		if (!button) return;
+		const buttonId = button.dataset.buttonId;
+		if (!buttonId) return;
+		const displayId = 'display' + buttonId;
+		const displayValue = button.dataset[displayId];
+		return displayValue;
+	}
+}
 
 /* utility stuff here */
 // autofill black hole if SIV is 79 (hide)
@@ -655,6 +712,7 @@ function autoPirate(element) {
 		input.value = pirate;
 		wikiCode(input);
 	}
+	spaceStationSection();
 }
 
 // autofill conflict/economy/wealth if faction includes 'Abandoned' (hide)

@@ -492,7 +492,6 @@ function toggleSection(sectionName, button, attributeName = 'section') {
 	const displayID = `display${id}`;
 	const state = button.dataset[displayID];
 
-
 	for (const element of elements) {
 		const object = element.dataset;
 		let hide = false;
