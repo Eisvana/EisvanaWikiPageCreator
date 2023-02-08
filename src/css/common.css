@@ -177,7 +177,6 @@ nav {
 	column-gap: 1em;
 	align-items: center;
 	justify-content: space-between;
-	container-type: inline-size;
 }
 
 div.checkboxes-grid {
@@ -431,6 +430,10 @@ label>input[type="radio"]~span,
 	.tooltip[onclick] {
 		-webkit-tap-highlight-color: transparent;
 	}
+}
+
+.table>*:has(.checkboxes-grid, .radioButtons, #portalglyphButtons) {
+	container-type: inline-size;
 }
 
 /* Container Queries */
