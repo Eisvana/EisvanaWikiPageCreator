@@ -1,4 +1,5 @@
 function systemStartupFunctions() {
+	combineEconConf();
 	merchantUpgrades();
 	regionLong();
 	spaceStationSection();
@@ -715,27 +716,7 @@ function autoPirate(element) {
 	spaceStationSection();
 }
 
-// autofill conflict/economy/wealth if faction includes 'Abandoned' (hide)
-function autoAbandoned(inputs) {
-	for (const input of inputs) {
-		const abandoned = input.querySelector('optgroup[label="Abandoned"] option').value;
-		input.value = abandoned;
-		wikiCode(input);
-		hideInput(input, 'none');
-	}
-}
-
-// autofill conflict/economy/wealth if faction is uncharted (hide)
-function autoUncharted(inputs) {
-	for (const input of inputs) {
-		const uncharted = input.querySelector('optgroup[label="Uncharted"] option').value;
-		input.value = uncharted;
-		wikiCode(input);
-		hideInput(input, 'none');
-	}
-}
-
-// combine the two above functions into one
+// autofill conflict/economy/wealth if faction includes 'Abandoned' or 'Uncharted' (hide)
 function combineEconConf() {
 	const faction = pageData.faction;
 	const wealth = globalElements.input.wealthInput;
@@ -743,14 +724,16 @@ function combineEconConf() {
 	const conflict = globalElements.input.conflictInput;
 	const inputs = [wealth, economy, conflict];
 
-	if (faction.includes('Abandoned')) {
-		autoAbandoned(inputs);
+	if (faction.includes('Abandoned') || faction == 'Uncharted') {
+		for (const input of inputs) {
+			const value = input.querySelector('optgroup[label="Abandoned/Uncharted"] option').value;
+			input.value = value;
+			wikiCode(input);
+			hideInput(input, 'none');
+		}
 		return;
 	}
-	if (faction.includes('Uncharted')) {
-		autoUncharted(inputs);
-		return;
-	}
+
 	for (const input of inputs) {
 		hideInput(input, '');
 	}
