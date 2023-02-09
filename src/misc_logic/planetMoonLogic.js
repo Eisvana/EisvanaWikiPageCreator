@@ -547,6 +547,14 @@ function changeTableEntry(element) {
 	}
 	if (!parent.dataset[section]) return;
 
+	if (section == 'fauna') {
+		findAndRemove(links.genera);
+		addGenus();
+	} else {
+		findAndRemove(links.resources?.[section]);
+		floraMineralResourceLinks();
+	}
+
 	function findAndRemove(object) {
 		if (!object) return;
 		const subsection = parent.dataset[section];
@@ -554,14 +562,6 @@ function changeTableEntry(element) {
 		const item = Object.keys(object);
 		const itemName = item.find(element => extractNumber(element) == sectionNumber);
 		delete object[itemName];
-	}
-
-	if (section == 'fauna') {
-		findAndRemove(links.genera);
-		addGenus();
-	} else {
-		findAndRemove(links.resources);
-		floraMineralResourceLinks();
 	}
 }
 
@@ -594,29 +594,37 @@ function floraMineralResourceLinks(element = null) {
 	const resources = links.resources ??= new Object;
 	if (element) {
 		const value = element.value;
-		const object = element.dataset.destNoauto;
+		const target = element.dataset.destNoauto;
 		const id = element.id;
+		const sectionName = element.parentElement.dataset.section.split(' ')[0];
+		const planetProp = sectionName.replace(extractNumber(sectionName), '');
 
-		resources[object] ??= new Object;
-		resources[object][id] = sanitiseString(value);
+		resources[planetProp] ??= new Object;
+		resources[planetProp][target] ??= new Object;
+		resources[planetProp][target][id] = sanitiseString(value);
 	}
 
 	const usedResources = new Set();
-	const linkedResources = sortObj(structuredClone(resources), true);
-	for (const objectName in linkedResources) {
-		const object = linkedResources[objectName];
-		for (const key in object) {
-			const resource = object[key];
-			if (resource && !usedResources.has(resource)) {
-				linkedResources[objectName][key] = `[[${resource}]]`;
-				usedResources.add(resource);
+	const linkedResources = sortObj(structuredClone(resources));	// flora, minerals
+	for (const planetPropName in sortObj(linkedResources)) {
+		const planetProp = linkedResources[planetPropName];			// flora1, flora2, flora3...
+		for (const destId in sortObj(planetProp)) {
+			const resources = planetProp[destId];					// flora1prim, flora1sec
+			for (const resourceInput in resources) {						// Carbon, Sodium
+				const resource = resources[resourceInput];
+				if (resource && !usedResources.has(resource)) {
+					resources[resourceInput] = `[[${resource}]]`;
+					usedResources.add(resource);
+				}
 			}
 		}
 	}
 
-	for (const key in linkedResources) {
-		const output = Object.values(linkedResources[key]).filter(resource => resource).join(', ');		// filters for truthy values
-		globalElements.output[key].innerText = output;
+	for (const prop in linkedResources) {
+		for (const outputElement in linkedResources[prop]) {
+			const output = Object.values(linkedResources[prop][outputElement]).filter(resource => resource).join(', ');		// filters for truthy values
+			globalElements.output[outputElement].innerText = output;
+		}
 	}
 }
 
