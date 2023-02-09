@@ -929,14 +929,15 @@ function getChildIndex(array, data) {
 // (all strings are deleted except their numbers, and the remaining numbers are then sorted)
 function sortObj(obj, number = false) {
 	if (number) {
-		const keys = Object.keys(obj);
+		const keys = Object.keys(sortObj(obj));
 		const numbers = keys.map(key => extractNumber(key)).map(Number).sort((a, b) => {
 			return a - b;
 		});
 		const result = new Object;
-		for (let i = 0; i < numbers.length; i++) {
-			const number = numbers[i];
-			const key = keys.find(element => extractNumber(element) == number);
+		for (const number of numbers) {
+			const keyIndex = keys.findIndex(element => extractNumber(element) == number)
+			const key = keys[keyIndex];
+			keys.splice(keyIndex, 1);
 			result[key] = obj[key];
 		}
 		return result;
@@ -950,7 +951,7 @@ function sortObj(obj, number = false) {
 
 // this only works for integers
 function extractNumber(string) {
-	return string.match(/[0-9]/g).join('');
+	return string?.match(/[0-9]/g)?.join('') ?? '';
 }
 
 function oddEven(number) {
