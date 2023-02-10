@@ -656,9 +656,6 @@ function addInfoBullet() {
 	const lines = new Array;
 	for (const element of elements) {
 		if (element.nextElementSibling.style.display == '' && element.nextElementSibling.innerText != '') lines.push(element);
-	}
-
-	for (const element of elements) {
 		element.innerHTML = '';
 	}
 
