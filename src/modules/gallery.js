@@ -38,13 +38,24 @@ function galleryUpload() {
 		const wikiCodeGalleryId = 'wikiCodeGallery' + childIndex;
 		const wikiCodeGalleryValueId = 'wikiCodeGalleryValue' + childIndex;
 
+		const nameElement = (() => {
+			const p = document.createElement('p');
+			const span = document.createElement('span');
+			p.innerText = name;
+			span.classList.add('has-text-weight-bold');
+			span.innerText = 'Name: ';
+			p.insertAdjacentElement('afterbegin', span);
+			console.log(p.outerHTML)
+			return p.outerHTML;
+		})();
+
 		const galleryTemplate = `
 		<div id="${galleryId}" class="gallery-item">
 			<a class="gallery-media" href=${imgUrlData} target="_blank" rel="noopener noreferrer">
 				<img src="${imgUrlData}">
 			</a>
 			<div class="gallery-meta">
-				<p><span class="has-text-weight-bold">Name: </span>${name}</p>
+				${nameElement}
 				<div><select id="${dropdownId}" onchange="galleryDesc(this,'${inputId}', '${wikiCodeGalleryValueId}')"></select></div>
 				<div><input id="${inputId}" type="text" placeholder="Description" oninput="galleryInput(this,'${wikiCodeGalleryValueId}')" /></div>
 			</div>

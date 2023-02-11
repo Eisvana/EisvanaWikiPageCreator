@@ -209,8 +209,10 @@ function acquirementGallery() {
 		const pic = picObj.picName;
 		const desc = picObj.desc;
 		if (!pic || !desc) continue;
-		const gallery = `<span style="display:block">${pic}|${desc}</span>`;
-		codeArray.push(gallery);
+		const gallery = document.createElement('span');
+		gallery.style.display = 'block';
+		gallery.innerText = `${pic}|${desc}`;
+		codeArray.push(gallery.outerHTML);
 	}
 	globalElements.output.acquirementGallery.innerHTML = codeArray.join('');
 }

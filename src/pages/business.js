@@ -96,6 +96,6 @@ function showContentImg(element) {
 
 function resetExternal() {
 	const contentSections = document.querySelectorAll('[data-section]');
-	globalElements.output.contents.innerHTML = '';
+	globalElements.output.contents.innerText = '';
 	removeSection(contentSections);
 }
