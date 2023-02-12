@@ -369,3 +369,34 @@ function albumLinkGen() {
 	const link = wikiLink + catalogName;
 	return link;
 }
+
+function generateGalleryArray() {
+	const array = [
+		'',
+		'Discovery Menu',
+		'Price Page',
+		'Base Stats',
+		'Minor Settlement',
+		'Sentinel Pillar',
+		'Tool in hand',
+		'First Person View'
+	];
+
+	const location = pageData.location;
+	const locs = ['Minor Settlement', 'Sentinel Pillar'];
+	if (locs.includes(location)) {
+		const rmLoc = (() => {
+			const index = locs.indexOf(location);
+			locs.splice(index, 1);
+			return locs[0];
+		})();
+		const index = array.indexOf(rmLoc);
+		array.splice(index, 1);
+	} else {
+		for (let i = array.length - 1; i >= 0; i--) {
+			if (locs.includes(array[i])) array.splice(i, 1);
+		}
+	}
+
+	pageData.galleryArray = array;
+}

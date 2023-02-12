@@ -110,3 +110,34 @@ function albumOtherExternal() {
 function albumLinkGen() {
 	return wikiLink + pageData.catalog;
 }
+
+function generateGalleryArray() {
+	const array = [
+		'',
+		'Worm scan',
+		'Moon Page',
+		'Planet Page',
+		'System Page',
+		'Galaxy Map'
+	];
+
+	if (!pageData.moon) {
+		const index = array.findIndex(item => item.toLowerCase().includes('moon'));
+		array.splice(index, 1);
+	}
+
+	pageData.galleryArray = array;
+}
+
+function galleryExplanationExternal() {
+	return `The preferred order of pictures is as follows:
+	<div class='dialog-center'>
+		<ol class='dialog-list'>
+			<li>Worm scan</li>
+			<li>Moon Page</li>
+			<li>Planet Page</li>
+			<li>System Page</li>
+			<li>Galaxy Map</li>
+		</ol>
+	</div>`
+}

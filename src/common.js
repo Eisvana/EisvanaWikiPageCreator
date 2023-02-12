@@ -217,8 +217,10 @@ function startUp() {
 	uploadShown = true;
 	galleryUploadShown = true;
 	showAll();
-	uploadShown = false;
-	galleryUploadShown = false;
+	if (!pageData.debug) {
+		uploadShown = false;
+		galleryUploadShown = false;
+	}
 	enableTextMarking();
 	addAllTooltips();
 	// the order of the touch and mouse events MUST NOT BE CHANGED!!!

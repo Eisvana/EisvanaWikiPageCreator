@@ -22,8 +22,6 @@
 	<script src="./src/misc_logic/creatureData.js"></script>
 	<script src="./src/misc_logic/dateLogic.js"></script>
 	<script>
-		const galleryArray = ['', 'Landscape', 'Night View', 'Cave System', 'Coast Area', 'Underwater', 'Analysis Visor', 'Planet Exploration Guide', 'Planet Page', 'System Page', 'Galaxy Map'];
-
 		window.onload = () => {
 			pageData.pageType = 'Planet';
 			startUp();
@@ -33,7 +31,10 @@
 
 <body>
 	<div class="container">
-		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
+		<nav>
+			<div><a href="./" title="Main page">&larr; Return to main page</a></div>
+			<div><a href="./moon.html" title="Moon">&#8627; Moon</a></div>
+		</nav>
 		<h1 class="title is-3">Hub Wiki Page Creator - Planet</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
@@ -226,7 +227,7 @@
 						<input type="text" data-dest-simple="weather" list="weatherData" id="weatherInput">
 					</div>
 					<div class="tableHeader text no-flex">
-						<p style="display: inline; margin-right: 1.5rem;">Resources:</p>
+						<p style="display: inline; margin-right: 1.5rem">Resources:</p>
 						<span class="tooltip">
 							<data>Found in the Discovery Menu or on the analysis visor.</data>
 							<data>Planet Resources</data>

@@ -283,7 +283,7 @@ function planetInputs() {
         <div>|[[File:<output id="planetFile${i}"></output>|150px]]</div>
         <div>|[[File:<output id="landscapeFile${i}"></output>|150px]]</div>
         <div>|[[<output id="planetName${i}" name="planetName${i}"></output>]]</div>
-        <div>|<output id="biome${i}"></output><output id="infested${i}"></output>&lt;br&gt;<output id="descriptor${i}"></output></div>
+        <div>|<output id="biome${i}"></output><output id="infested${i}"></output>&lt;hr&gt;<output id="descriptor${i}"></output></div>
         <div>|<output id="resource${i}"></output></div>
         <div>|<output id="weather${i}"></output></div>
         <div>|<output id="sentinel${i}"></output></div>
@@ -423,7 +423,7 @@ function merchantUpgrades(group = null) {
 
 	function getCheckedBoxes(group) {
 		const checkboxes = document.querySelectorAll(`[data-dest-checkbox-group="${group}"]`);
-		const parm = (group.substring(0, 2) == 'SD') ? '' : group.substring(0, 2);
+		const parm = (group.startsWith('SD')) ? '' : group.substring(0, 2);
 		const checked = new Array;
 		for (const checkbox of checkboxes) {
 			if (checkbox.checked) checked.push(checkbox.value);
@@ -591,7 +591,7 @@ function infestedBiomeLinks(element) {
 	for (const planetName in linkedBiomes) {
 		const checked = linkedBiomes[planetName];
 		if (checked && !infestedBiomeLink) {
-			linkedBiomes[planetName] = ` ([[Biome Subtype - Infested|Infested]]) `;
+			linkedBiomes[planetName] = `<br>([[Biome Subtype - Infested|Infested]])`;
 			infestedBiomeLink = true;
 		} else if (!checked) {
 			linkedBiomes[planetName] = '';
@@ -762,13 +762,28 @@ function civCatalog() {
 	wikiCode(civ, 'civShorter');
 }
 
+function generateGalleryArray() {
+	const array = [
+		'',
+		'System Exploration Guide',
+		'System Page',
+		'Default SS Multi-Tool',
+	];
+
+	if (pageData.faction == 'Uncharted' || pageData.faction.includes('Abandoned')) {
+		array.pop();
+	}
+
+	pageData.galleryArray = array;
+}
+
 function galleryExplanationExternal() {
 	return `There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
 			<li>System Exploration Guide</li>
 			<li>System Page</li>
-			<li>Default SS Multitool</li>
+			<li>Default SS Multi-Tool</li>
 		</ol>
 	</div>`
 }
