@@ -106,7 +106,7 @@ function planetInputs() {
 	function addPlanet(i) {
 		const oddEvenClass = 'is-' + oddEven(i);
 		const inputTemplate = `<div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}">
-			<p>Planet ${i}: <output class="has-text-weight-bold" name="planetName${i}"></output></p>
+			<p><output id=planetClass${i}>Planet</output> ${i}: <output class="has-text-weight-bold" name="planetName${i}"></output></p>
 			<button class="button" onclick="toggleSection('planet${i}', this)">Hide</button>
 		</div>
 		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -201,7 +201,13 @@ function planetInputs() {
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="descriptor_input${i}" list="planetDescriptors" data-dest-simple="descriptor${i}" oninput="wikiCodeSimple(this)">
+			<input type="text" id="descriptor_input${i}" list="planetDescriptors" data-dest-noauto="descriptor${i}" oninput="expandDescriptor(this)">
+		</div>
+		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+			<label for="moon_input${i}">Is moon</label>
+		</div>
+		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+			<input type="checkbox" id="moon_input${i}" data-dest-noauto="descriptor_input${i}" oninput="moonSwitch(this)">
 		</div>
 		<div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}" data-section="planet${i}">
 			<div style="display:flex">
@@ -400,6 +406,44 @@ function removeResource(resourceID) {
 			if (button) button.disabled = true;
 		}
 	}
+}
+
+function moonSwitch(element) {
+	const descriptorDropdown = document.getElementById(element.dataset.destNoauto);
+	const i = extractNumber(element.id);
+	const planetClass = element.checked ? 'Moon' : 'Planet';
+
+	document.getElementById('planetClass' + i).innerText = planetClass;
+
+	expandDescriptor(descriptorDropdown, planetClass);
+}
+
+function expandDescriptor(element, planetClass = null) {
+	const data = getDescriptorData();
+	if (planetClass === null) {
+		const i = extractNumber(element.id);
+		planetClass = document.getElementById('moon_input' + i).checked ? 'Moon' : 'Planet';
+	}
+	const descriptor = element.value;
+	const dest = element.dataset.destNoauto;
+	const section = (() => {
+		for (const list in data) {
+			if (data[list].includes(descriptor)) return list;
+		}
+	})();
+	const output = (() => {
+		switch (section) {
+			case 'prefix':
+				return `${planetClass}<br>${descriptor}`;
+
+			case 'suffix':
+				return `${descriptor}<br>${planetClass}`;
+
+			default:
+				return `${descriptor}`;
+		}
+	})();
+	globalElements.output[dest].innerText = output;
 }
 
 // generates Space Station Merchants upgrade list
