@@ -1,3 +1,9 @@
+function startupFunctions() {
+	celestialStartupFunctions();
+	autoInfested();
+	if (typeof planetStartupFunctions == 'function') planetStartupFunctions();
+}
+
 const planetMoonElements = {
 	input: {
 		resourceInputs: 'resourceInputs',
@@ -15,6 +21,7 @@ const planetMoonElementFunctions = {
 	systemInput: ['locationSentence()'],
 	faunaNumberInput: ['numberStats(this); plural(pageData[this.dataset.destNoauto], "faunaSentencePlural")'],
 	sentinelInput: ['sentinelSentence()'],
+	descriptionInput: ['autoInfested(this)'],
 }
 assignElementFunctions(planetMoonElementFunctions);
 

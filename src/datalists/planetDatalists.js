@@ -110,7 +110,6 @@ function getDescriptorData() {
 			'Capped',
 			'Columned',
 			'Contoured',
-			'Corrupted',
 			'Crimson',
 			'Doomed',
 			'Erased',
@@ -231,10 +230,6 @@ function getDescriptorData() {
 			'Unstable',
 			'Violent',
 			'Volcanic',
-			'Infested',
-			'Worm-ridden',
-			'Tainted',
-			'Mutated',
 			'Drowning',
 			'Oceanic',
 			'Tidal',
@@ -258,21 +253,32 @@ function getDescriptorData() {
 			'Vile Anomaly',
 			'Imminent Core Detonation',
 			'Obsidian Bead',
-			'Infested Paradise',
-			'Toxic Horror',
-			'Boiling Doom',
-			'Radioactive Abomination',
-			'Icy Abhorrence',
-			'Xeno-Colony',
-			'Caustic Nightmare',
-			'Fiery Dreadworld',
-			'Frozen Hell',
-			'Infected Dustbowl',
-			'The Nest',
-			'Terrorsphere',
 			'Waterworld',
 			'Endless Seas',
-		]
+		],
+		Infested: {
+			suffix: [
+				'Infested',
+				'Worm-ridden',
+				'Tainted',
+				'Mutated',
+				'Corrupted',
+			],
+			none: [
+				'Infested Paradise',
+				'Toxic Horror',
+				'Boiling Doom',
+				'Radioactive Abomination',
+				'Icy Abhorrence',
+				'Xeno-Colony',
+				'Caustic Nightmare',
+				'Fiery Dreadworld',
+				'Frozen Hell',
+				'Infected Dustbowl',
+				'The Nest',
+				'Terrorsphere',
+			]
+		}
 	}
 	return planetDescriptors;
 }
@@ -737,8 +743,11 @@ function getDescriptorData() {
 
 	planetDatalists.planetDescriptors = new Array;
 	const planetDescriptors = getDescriptorData();
+	for (const list in planetDescriptors.Infested) {
+		planetDescriptors[list].push(...planetDescriptors.Infested[list]);
+	}
 	for (const list in planetDescriptors) {
-		planetDatalists.planetDescriptors.push(...planetDescriptors[list]);
+		if (Array.isArray(planetDescriptors[list])) planetDatalists.planetDescriptors.push(...planetDescriptors[list]);
 	}
 
 	planetDatalists.resources = Object.keys(getResourceData());

@@ -163,23 +163,6 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label for="infestedInput">Is infested</label>
-						<span class="tooltip">
-							<data>Can be determined from the planetary features.</data>
-							<data>Infested Biome</data>
-							<data>
-								Can be determined from the planetary features such as the moon descriptor, the weather
-								descriptor, or the alien looking flora.<br>
-								See the <a href='https://nomanssky.fandom.com/wiki/Biome_Subtype_-_Infested'
-									rel='noreferrer noopener' target='_blank'>wiki</a> for more information.
-							</data>
-						</span>
-					</div>
-					<div class="tableCell data">
-						<input type="checkbox" id="infestedInput" value="([[Biome Subtype - Infested|Infested]]) "
-							data-dest-checkbox="infested">
-					</div>
-					<div class="tableCell text">
 						<label for="descriptionInput">Description of the moon:</label>
 						<span class="tooltip">
 							<data>Can be found in the exploration guide.</data>
@@ -189,7 +172,7 @@
 						</span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="description" list="planetDescriptors"
+						<input type="text" data-dest-simple="description" list="planetDescriptors"
 							id="descriptionInput">
 					</div>
 					<div class="tableCell text">

@@ -1,8 +1,6 @@
-function startupFunctions() {
+function celestialStartupFunctions() {
 	hideOrgName();
 	locationSentence();
-	if (typeof systemStartupFunctions == 'function') systemStartupFunctions();
-	if (typeof planetStartupFunctions == 'function') planetStartupFunctions();
 }
 
 const celestialObjectElementFunctions = {
@@ -72,4 +70,18 @@ function wikiCodePercentage(element = null) {
 	const propertyValue = pageData[dest];
 	const propertyData = numberError(element, propertyValue);
 	wikiCode(propertyData ? propertyData + '%' : '', dest);
+}
+
+function autoInfested(element = globalElements.input.descriptionInput) {
+	const descriptorData = getDescriptorData().Infested;
+	const infestedDescriptors = new Array;
+	for (const list in descriptorData) {
+		infestedDescriptors.push(...descriptorData[list]);
+	}
+
+	// true: system. false: planet/moon
+	const isInfested = infestedDescriptors.includes(element.value);
+	if (pageData.pageType == 'System') return isInfested;
+
+	document.getElementById('infested').innerText = isInfested ? '([[Biome Subtype - Infested|Infested]]) ' : '';
 }

@@ -1,3 +1,7 @@
+function planetStartupFunctions() {
+	moonList();
+}
+
 const planetElements = {
 	input: {
 		moonInputs: 'moonInputs',
@@ -6,10 +10,6 @@ const planetElements = {
 	}
 }
 updateGlobalElements(planetElements);
-
-function planetStartupFunctions() {
-	moonList();
-}
 
 function addMoon(element) {
 	const inputSection = element.parentElement;

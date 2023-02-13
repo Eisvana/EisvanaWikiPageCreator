@@ -1,4 +1,5 @@
-function systemStartupFunctions() {
+function startupFunctions() {
+	celestialStartupFunctions();
 	combineEconConf();
 	merchantUpgrades();
 	regionLong();
@@ -178,20 +179,6 @@ function planetInputs() {
 				</select>
 		</div>
 		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="infested_input${i}">Is infested</label>
-			<span class="tooltip">
-				<data>Can be determined from the planetary features.</data>
-				<data>Infested Biome</data>
-				<data>
-					Can be determined from the planetary features such as the planet descriptor, the weather descriptor, or the alien looking flora.<br>
-					See the <a href=https://nomanssky.fandom.com/wiki/Biome_Subtype_-_Infested rel=noreferrer target=_blank>wiki</a> for more information.
-				</data>
-			</span>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="checkbox" id="infested_input${i}" data-dest-checkbox-noauto="infested${i}" onchange="infestedBiomeLinks(this)">
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 			<label for="descriptor_input${i}">Planet description</label>
 			<span class="tooltip">
 				<data>Can be found in the exploration guide.</data>
@@ -324,7 +311,6 @@ function planetInputs() {
 		updateGlobalElements(resourceOutputs);
 
 		biomeLinks(document.getElementById(`biome_input${i}`));
-		infestedBiomeLinks(document.getElementById(`infested_input${i}`));
 		addAllTooltips();
 	}
 }
@@ -420,15 +406,15 @@ function moonSwitch(element) {
 
 function expandDescriptor(element, planetClass = null) {
 	const data = getDescriptorData();
-	if (planetClass === null) {
-		const i = extractNumber(element.id);
+	const i = extractNumber(element.id);
+	if (!planetClass) {
 		planetClass = document.getElementById('moon_input' + i).checked ? 'Moon' : 'Planet';
 	}
 	const descriptor = element.value;
 	const dest = element.dataset.destNoauto;
 	const section = (() => {
 		for (const list in data) {
-			if (data[list].includes(descriptor)) return list;
+			if (data[list]?.includes?.(descriptor)) return list;
 		}
 	})();
 	const output = (() => {
@@ -444,6 +430,9 @@ function expandDescriptor(element, planetClass = null) {
 		}
 	})();
 	globalElements.output[dest].innerText = output;
+
+	const isInfested = autoInfested(element);		// returns true or false
+	infestedBiomeLinks('infested' + i, isInfested)
 }
 
 // generates Space Station Merchants upgrade list
@@ -624,11 +613,9 @@ function biomeLinks(element) {
 	}
 }
 
-function infestedBiomeLinks(element) {
-	const dest = element.dataset.destCheckboxNoauto;
-
+function infestedBiomeLinks(dest, bool) {
 	const infestedBiomes = links.infestedBiomes ??= new Object;
-	infestedBiomes[dest] = element.checked;
+	infestedBiomes[dest] = bool;
 
 	let infestedBiomeLink = false;
 	const linkedBiomes = sortObj(structuredClone(infestedBiomes), true);
