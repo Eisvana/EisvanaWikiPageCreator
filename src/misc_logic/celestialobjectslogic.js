@@ -85,3 +85,24 @@ function autoInfested(element = globalElements.input.descriptionInput) {
 
 	document.getElementById('infested').innerText = isInfested ? '([[Biome Subtype - Infested|Infested]]) ' : '';
 }
+
+function buildDescriptor(descriptor, planetClass, filler) {
+	const data = getDescriptorData();
+	const section = (() => {
+		for (const biome in data) {
+			for (const list in data[biome]) {
+				if (data[biome][list]?.includes?.(descriptor.trim())) return list;
+			}
+		}
+	})();
+	switch (section) {
+		case 'prefix':
+			return planetClass + filler + descriptor.trim();
+
+		case 'suffix':
+			return descriptor.trim() + filler + planetClass;
+
+		default:
+			return descriptor.trim();
+	}
+}

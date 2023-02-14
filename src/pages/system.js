@@ -411,30 +411,13 @@ function moonSwitch(element) {
 }
 
 function expandDescriptor(element, planetClass = null) {
-	const data = getDescriptorData();
 	const i = extractNumber(element.id);
 	if (!planetClass) {
 		planetClass = document.getElementById('moon_input' + i).checked ? 'Moon' : 'Planet';
 	}
 	const descriptor = element.value;
 	const dest = element.dataset.destNoauto;
-	const section = (() => {
-		for (const list in data) {
-			if (data[list]?.includes?.(descriptor)) return list;
-		}
-	})();
-	const output = (() => {
-		switch (section) {
-			case 'prefix':
-				return `${planetClass}<br>${descriptor}`;
-
-			case 'suffix':
-				return `${descriptor}<br>${planetClass}`;
-
-			default:
-				return `${descriptor}`;
-		}
-	})();
+	const output = buildDescriptor(descriptor, planetClass, '<br>');
 	globalElements.output[dest].innerText = output;
 
 	const isInfested = autoInfested(element);		// returns true or false

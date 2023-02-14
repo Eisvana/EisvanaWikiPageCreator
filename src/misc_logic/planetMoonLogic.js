@@ -21,7 +21,7 @@ const planetMoonElementFunctions = {
 	systemInput: ['locationSentence()'],
 	faunaNumberInput: ['numberStats(this); plural(pageData[this.dataset.destNoauto], "faunaSentencePlural")'],
 	sentinelInput: ['sentinelSentence()'],
-	descriptionInput: ['autoInfested(this)'],
+	descriptionInput: ['autoInfested(this); planetDescriptor(this)'],
 }
 assignElementFunctions(planetMoonElementFunctions);
 
@@ -32,6 +32,12 @@ function plural(number, dest = null) {
 	})();
 	if (!dest) return word;
 	wikiCode(word, dest);
+}
+
+function planetDescriptor(element) {
+	const dest = element.dataset.destNoauto;
+	const output = buildDescriptor(element.value, pageData.pageType, ' ');
+	globalElements.output[dest].innerText = output;
 }
 
 // constructs location sentence
