@@ -139,7 +139,7 @@ function planetInputs() {
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-				<input type="text" id="planetFile_input${i}" data-dest="planetFile${i}">
+				<input type="text" id="planetFile_input${i}" data-dest="planetFile${i}" data-default="NmsMisc_NotAvailable.png">
 				<input type="file" id="mainFileUpl${i}" accept="image/*" oninput="image(this)">
 		</div>
 		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -149,7 +149,7 @@ function planetInputs() {
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-				<input type="text" id="landscapeFile_input${i}" data-dest="landscapeFile${i}">
+				<input type="text" id="landscapeFile_input${i}" data-dest="landscapeFile${i}" data-default="NmsMisc_NotAvailable.png">
 				<input type="file" id="secFileUpl${i}" accept="image/*" onchange="image(this)">
 		</div>
 		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -289,6 +289,12 @@ function planetInputs() {
 		inputTarget.insertAdjacentHTML('beforebegin', inputTemplate);
 		outputTarget.insertAdjacentHTML('beforeend', planetTemplate);
 
+		// default must be first, otherwise it won't work
+		const defaultValue = document.querySelectorAll(`[data-planet="planet${i}"] [data-default]`);
+		for (const input of defaultValue) {
+			assignFunction(input, 'assignDefaultValue(this)');
+			assignDefaultValue(input);
+		}
 		const auto = document.querySelectorAll(`[data-planet="planet${i}"] [data-dest]`);
 		for (const input of auto) {
 			assignFunction(input, 'wikiCode(this)');

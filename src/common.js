@@ -861,7 +861,7 @@ function preventCopy() {
 }
 
 function assignDefaultValue(element, value = element.dataset.default) {
-	if (element.value) return;
+	if (element.value.trim()) return;
 	const dest = element.dataset.dest ?? element.dataset.destNoauto;
 	wikiCode(value, dest);
 }
