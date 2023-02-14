@@ -14,7 +14,6 @@
 })();
 
 let galleryUploadShown = false;
-
 // handles gallery images
 function galleryUpload() {
 	const inp = globalElements.input.galleryUpload;
@@ -45,7 +44,6 @@ function galleryUpload() {
 			span.classList.add('has-text-weight-bold');
 			span.innerText = 'Name: ';
 			p.insertAdjacentElement('afterbegin', span);
-			console.log(p.outerHTML)
 			return p.outerHTML;
 		})();
 
@@ -80,10 +78,14 @@ function galleryUpload() {
 		wikiCodeGalleryDiv.insertAdjacentHTML('afterbegin', wikiCodeGalleryTemplate);
 
 		const galleryElement = document.getElementById(dropdownId);
-		if (typeof galleryArray == 'undefined') {
-			galleryElement.parentElement.style.display = 'none';
-		} else {
+
+		if (typeof generateGalleryArray == 'function') generateGalleryArray();
+
+		const galleryArray = pageData.galleryArray;
+		if (galleryArray) {
 			setDropdownOptions(galleryElement, galleryArray);
+		} else {
+			galleryElement.parentElement.style.display = 'none';
 		}
 	}
 	if (errors.length) {

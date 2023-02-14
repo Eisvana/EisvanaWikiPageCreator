@@ -217,8 +217,10 @@ function startUp() {
 	uploadShown = true;
 	galleryUploadShown = true;
 	showAll();
-	uploadShown = false;
-	galleryUploadShown = false;
+	if (!pageData.debug) {
+		uploadShown = false;
+		galleryUploadShown = false;
+	}
 	enableTextMarking();
 	addAllTooltips();
 	// the order of the touch and mouse events MUST NOT BE CHANGED!!!
@@ -859,7 +861,7 @@ function preventCopy() {
 }
 
 function assignDefaultValue(element, value = element.dataset.default) {
-	if (element.value) return;
+	if (element.value.trim()) return;
 	const dest = element.dataset.dest ?? element.dataset.destNoauto;
 	wikiCode(value, dest);
 }

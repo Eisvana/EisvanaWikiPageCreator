@@ -1,3 +1,9 @@
+function startupFunctions() {
+	celestialStartupFunctions();
+	autoInfested();
+	if (typeof planetStartupFunctions == 'function') planetStartupFunctions();
+}
+
 const planetMoonElements = {
 	input: {
 		resourceInputs: 'resourceInputs',
@@ -15,6 +21,7 @@ const planetMoonElementFunctions = {
 	systemInput: ['locationSentence()'],
 	faunaNumberInput: ['numberStats(this); plural(pageData[this.dataset.destNoauto], "faunaSentencePlural")'],
 	sentinelInput: ['sentinelSentence()'],
+	descriptionInput: ['autoInfested(this); planetDescriptor(this)'],
 }
 assignElementFunctions(planetMoonElementFunctions);
 
@@ -25,6 +32,12 @@ function plural(number, dest = null) {
 	})();
 	if (!dest) return word;
 	wikiCode(word, dest);
+}
+
+function planetDescriptor(element) {
+	const dest = element.dataset.destNoauto;
+	const output = buildDescriptor(element.value, pageData.pageType, ' ');
+	globalElements.output[dest].innerText = output;
 }
 
 // constructs location sentence
@@ -155,7 +168,7 @@ function addFauna(element) {
 		<label for="faunaFile_input${i}">Creature file name:</label>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
-		<input type="text" id="faunaFile_input${i}" data-dest="faunaFile${i}">
+		<input type="text" id="faunaFile_input${i}" data-dest="faunaFile${i}" data-default="NmsMisc_NotAvailable.png">
 		<input type="file" id="faunaFileUpl${i}" accept="image/*" oninput="image(this)">
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
@@ -309,7 +322,7 @@ function addFlora(element) {
 		<label for="floraFile_input${i}">Plant file name:</label>
 	</div>
 	<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
-		<input type="text" id="floraFile_input${i}" data-dest="floraFile${i}">
+		<input type="text" id="floraFile_input${i}" data-dest="floraFile${i}" data-default="NmsMisc_NotAvailable.png">
 		<input type="file" id="floraFileUpl${i}" accept="image/*" oninput="image(this)">
 	</div>
 	<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
@@ -428,7 +441,7 @@ function addMineral(element) {
 		<label for="mineralFile_input${i}">Mineral file name:</label>
 	</div>
 	<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-		<input type="text" id="mineralFile_input${i}" data-dest="mineralFile${i}">
+		<input type="text" id="mineralFile_input${i}" data-dest="mineralFile${i}" data-default="NmsMisc_NotAvailable.png">
 		<input type="file" id="mineralFileUpl${i}" accept="image/*" oninput="image(this)">
 	</div>
 	<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
@@ -523,6 +536,10 @@ function postProcessSection(element, sectionType, i) {
 		if (input.dataset.destNoauto) {
 			assignFunction(input, 'storeData(this)');
 			storeData(input);
+		}
+		if (input.dataset.default) {
+			assignFunction(input, 'assignDefaultValue(this)', null, true);
+			assignDefaultValue(input);
 		}
 	}
 	const outputs = document.querySelectorAll(`[data-${sectionType}="section${i}"] output`);

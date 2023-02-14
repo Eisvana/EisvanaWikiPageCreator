@@ -309,6 +309,51 @@ function noLineBreak() {
 	wikiCode(element, dest);
 }
 
+function generateGalleryArray() {
+	let gender1, gender2;
+	if (pageData.gender2) {
+		const prio = creaturePrio();
+		if (prio == 'gender2') {
+			gender1 = pageData.gender2;
+			gender2 = pageData.gender;
+		} else {
+			gender1 = pageData.gender;
+			gender2 = pageData.gender2;
+		}
+	}
+
+	const array = [
+		'',
+		`${gender1} gender`,
+		`${gender1} gender scan`,
+		`${gender2} gender`,
+		`${gender2} gender scan`,
+		'Creature scan',
+		'Discovery Menu',
+		'Moon Page',
+		'Planet Page',
+		'System Page',
+		'Galaxy Map'
+	];
+
+	if (!pageData.moon) {
+		const index = array.findIndex(item => item.toLowerCase().includes('moon'));
+		array.splice(index, 1);
+	}
+
+	const lowerCase = structuredClone(array).map(item => item.toLowerCase());
+	for (let i = array.length - 1; i >= 0; i--) {
+		const element = lowerCase[i];
+		if (gender2) {
+			if (element.includes('creature')) array.splice(i, 1);
+		} else {
+			if (element.includes('gender')) array.splice(i, 1);
+		}
+	}
+
+	pageData.galleryArray = array;
+}
+
 function galleryExplanationExternal() {
 	return `There is a preferred order of pictures:
 	<div class='dialog-center'>
@@ -318,8 +363,9 @@ function galleryExplanationExternal() {
 			<li>Gender 1 scan</li>
 			<li>Gender 2 scan</li>
 			<li>Discovery Menu</li>
-			<li>Planet/Moon DM</li>
-			<li>System DM</li>
+			<li>Moon Page</li>
+			<li>Planet Page</li>
+			<li>System Page</li>
 			<li>Galaxy Map</li>
 		</ol>
 	</div>`

@@ -635,6 +635,46 @@ function albumTypeExternal() {
 	return 'Catalog';
 }
 
+function generateGalleryArray() {
+	const array = [
+		'',
+		'Rear view of ship',
+		'Rear view of freighter',
+		'Inventory screen',
+		'NPC freighter captain',
+		'NPC ship pilot',
+		'Analysis Visor Scan',
+		'Crash site',
+		'Moon Page',
+		'Planet Page',
+		'System Page',
+		'Galaxy Map'
+	];
+
+	const common = ['moon', 'planet', 'crash'];
+	const deactivate = {
+		'Living Ship': ['npc', 'freighter'],
+		'Freighter': ['ship', ...common],
+		'default': ['freighter', ...common],
+	}
+
+	if (!pageData.moon) {
+		const index = array.findIndex(item => item.toLowerCase().includes('moon'));
+		array.splice(index, 1);
+	}
+
+	const type = pageData.type;
+	const lowerCase = structuredClone(array).map(item => item.toLowerCase());
+	for (let i = array.length - 1; i >= 0; i--) {
+		const element = lowerCase[i];
+		for (const word of deactivate[type] ?? deactivate.default) {
+			if (element.includes(word)) array.splice(i, 1);
+		}
+	}
+
+	pageData.galleryArray = array;
+}
+
 function galleryExplanationExternal() {
 	return `There is a preferred order of gallery pictures, depending on ship type:
 	<div class='dialog-center is-flex-wrap-wrap mt-2' style='gap: 1rem'>

@@ -41,7 +41,7 @@ function validateReddit() {
 	const element = globalElements.input.censusRedditInput;
 	const value = element.value.trim();
 	const redditName = (() => {
-		if (value.toLowerCase().substring(0, 2) === 'u/') {
+		if (value.toLowerCase().startsWith('u/')) {
 			return value.substring(2);
 		} else {
 			return value;

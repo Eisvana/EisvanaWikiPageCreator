@@ -1,4 +1,5 @@
-function systemStartupFunctions() {
+function startupFunctions() {
+	celestialStartupFunctions();
 	combineEconConf();
 	merchantUpgrades();
 	regionLong();
@@ -106,7 +107,7 @@ function planetInputs() {
 	function addPlanet(i) {
 		const oddEvenClass = 'is-' + oddEven(i);
 		const inputTemplate = `<div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}">
-			<p>Planet ${i}: <output class="has-text-weight-bold" name="planetName${i}"></output></p>
+			<p><output id=planetClass${i}>Planet</output> ${i}: <output class="has-text-weight-bold" name="planetName${i}"></output></p>
 			<button class="button" onclick="toggleSection('planet${i}', this)">Hide</button>
 		</div>
 		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -138,7 +139,7 @@ function planetInputs() {
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-				<input type="text" id="planetFile_input${i}" data-dest="planetFile${i}">
+				<input type="text" id="planetFile_input${i}" data-dest="planetFile${i}" data-default="NmsMisc_NotAvailable.png">
 				<input type="file" id="mainFileUpl${i}" accept="image/*" oninput="image(this)">
 		</div>
 		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -148,7 +149,7 @@ function planetInputs() {
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-				<input type="text" id="landscapeFile_input${i}" data-dest="landscapeFile${i}">
+				<input type="text" id="landscapeFile_input${i}" data-dest="landscapeFile${i}" data-default="NmsMisc_NotAvailable.png">
 				<input type="file" id="secFileUpl${i}" accept="image/*" onchange="image(this)">
 		</div>
 		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -178,20 +179,6 @@ function planetInputs() {
 				</select>
 		</div>
 		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="infested_input${i}">Is infested</label>
-			<span class="tooltip">
-				<data>Can be determined from the planetary features.</data>
-				<data>Infested Biome</data>
-				<data>
-					Can be determined from the planetary features such as the planet descriptor, the weather descriptor, or the alien looking flora.<br>
-					See the <a href=https://nomanssky.fandom.com/wiki/Biome_Subtype_-_Infested rel=noreferrer target=_blank>wiki</a> for more information.
-				</data>
-			</span>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="checkbox" id="infested_input${i}" data-dest-checkbox-noauto="infested${i}" onchange="infestedBiomeLinks(this)">
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 			<label for="descriptor_input${i}">Planet description</label>
 			<span class="tooltip">
 				<data>Can be found in the exploration guide.</data>
@@ -201,7 +188,13 @@ function planetInputs() {
 			</span>
 		</div>
 		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="descriptor_input${i}" list="planetDescriptors" data-dest-simple="descriptor${i}" oninput="wikiCodeSimple(this)">
+			<input type="text" id="descriptor_input${i}" list="planetDescriptors" data-dest-noauto="descriptor${i}" oninput="expandDescriptor(this)">
+		</div>
+		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+			<label for="moon_input${i}">Is moon</label>
+		</div>
+		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+			<input type="checkbox" id="moon_input${i}" data-dest-noauto="descriptor_input${i}" oninput="moonSwitch(this)">
 		</div>
 		<div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}" data-section="planet${i}">
 			<div style="display:flex">
@@ -283,7 +276,7 @@ function planetInputs() {
         <div>|[[File:<output id="planetFile${i}"></output>|150px]]</div>
         <div>|[[File:<output id="landscapeFile${i}"></output>|150px]]</div>
         <div>|[[<output id="planetName${i}" name="planetName${i}"></output>]]</div>
-        <div>|<output id="biome${i}"></output><output id="infested${i}"></output>&lt;br&gt;<output id="descriptor${i}"></output></div>
+        <div>|<output id="biome${i}"></output><output id="infested${i}"></output>&lt;hr&gt;<output id="descriptor${i}"></output></div>
         <div>|<output id="resource${i}"></output></div>
         <div>|<output id="weather${i}"></output></div>
         <div>|<output id="sentinel${i}"></output></div>
@@ -296,6 +289,12 @@ function planetInputs() {
 		inputTarget.insertAdjacentHTML('beforebegin', inputTemplate);
 		outputTarget.insertAdjacentHTML('beforeend', planetTemplate);
 
+		// default must be first, otherwise it won't work
+		const defaultValue = document.querySelectorAll(`[data-planet="planet${i}"] [data-default]`);
+		for (const input of defaultValue) {
+			assignFunction(input, 'assignDefaultValue(this)');
+			assignDefaultValue(input);
+		}
 		const auto = document.querySelectorAll(`[data-planet="planet${i}"] [data-dest]`);
 		for (const input of auto) {
 			assignFunction(input, 'wikiCode(this)');
@@ -318,7 +317,6 @@ function planetInputs() {
 		updateGlobalElements(resourceOutputs);
 
 		biomeLinks(document.getElementById(`biome_input${i}`));
-		infestedBiomeLinks(document.getElementById(`infested_input${i}`));
 		addAllTooltips();
 	}
 }
@@ -402,6 +400,30 @@ function removeResource(resourceID) {
 	}
 }
 
+function moonSwitch(element) {
+	const descriptorDropdown = document.getElementById(element.dataset.destNoauto);
+	const i = extractNumber(element.id);
+	const planetClass = element.checked ? 'Moon' : 'Planet';
+
+	document.getElementById('planetClass' + i).innerText = planetClass;
+
+	expandDescriptor(descriptorDropdown, planetClass);
+}
+
+function expandDescriptor(element, planetClass = null) {
+	const i = extractNumber(element.id);
+	if (!planetClass) {
+		planetClass = document.getElementById('moon_input' + i).checked ? 'Moon' : 'Planet';
+	}
+	const descriptor = element.value;
+	const dest = element.dataset.destNoauto;
+	const output = buildDescriptor(descriptor, planetClass, '<br>');
+	globalElements.output[dest].innerText = output;
+
+	const isInfested = autoInfested(element);		// returns true or false
+	infestedBiomeLinks('infested' + i, isInfested)
+}
+
 // generates Space Station Merchants upgrade list
 function merchantUpgrades(group = null) {
 	const checkboxes = document.querySelectorAll('[data-dest-checkbox-group]');
@@ -423,7 +445,7 @@ function merchantUpgrades(group = null) {
 
 	function getCheckedBoxes(group) {
 		const checkboxes = document.querySelectorAll(`[data-dest-checkbox-group="${group}"]`);
-		const parm = (group.substring(0, 2) == 'SD') ? '' : group.substring(0, 2);
+		const parm = (group.startsWith('SD')) ? '' : group.substring(0, 2);
 		const checked = new Array;
 		for (const checkbox of checkboxes) {
 			if (checkbox.checked) checked.push(checkbox.value);
@@ -580,18 +602,16 @@ function biomeLinks(element) {
 	}
 }
 
-function infestedBiomeLinks(element) {
-	const dest = element.dataset.destCheckboxNoauto;
-
+function infestedBiomeLinks(dest, bool) {
 	const infestedBiomes = links.infestedBiomes ??= new Object;
-	infestedBiomes[dest] = element.checked;
+	infestedBiomes[dest] = bool;
 
 	let infestedBiomeLink = false;
 	const linkedBiomes = sortObj(structuredClone(infestedBiomes), true);
 	for (const planetName in linkedBiomes) {
 		const checked = linkedBiomes[planetName];
 		if (checked && !infestedBiomeLink) {
-			linkedBiomes[planetName] = ` ([[Biome Subtype - Infested|Infested]]) `;
+			linkedBiomes[planetName] = `<br>([[Biome Subtype - Infested|Infested]])`;
 			infestedBiomeLink = true;
 		} else if (!checked) {
 			linkedBiomes[planetName] = '';
@@ -762,13 +782,28 @@ function civCatalog() {
 	wikiCode(civ, 'civShorter');
 }
 
+function generateGalleryArray() {
+	const array = [
+		'',
+		'System Exploration Guide',
+		'System Page',
+		'Default SS Multi-Tool',
+	];
+
+	if (pageData.faction == 'Uncharted' || pageData.faction.includes('Abandoned')) {
+		array.pop();
+	}
+
+	pageData.galleryArray = array;
+}
+
 function galleryExplanationExternal() {
 	return `There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
 			<li>System Exploration Guide</li>
 			<li>System Page</li>
-			<li>Default SS Multitool</li>
+			<li>Default SS Multi-Tool</li>
 		</ol>
 	</div>`
 }

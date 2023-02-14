@@ -1,3 +1,7 @@
+function planetStartupFunctions() {
+	moonList();
+}
+
 const planetElements = {
 	input: {
 		moonInputs: 'moonInputs',
@@ -6,10 +10,6 @@ const planetElements = {
 	}
 }
 updateGlobalElements(planetElements);
-
-function planetStartupFunctions() {
-	moonList();
-}
 
 function addMoon(element) {
 	const inputSection = element.parentElement;
@@ -64,6 +64,24 @@ function moonSentence() {
 		}
 	})();
 	wikiCode(output, 'moonSentence');
+}
+
+function generateGalleryArray() {
+	const array = [
+		'',
+		'Landscape',
+		'Night View',
+		'Cave System',
+		'Coast Area',
+		'Underwater',
+		'Analysis Visor',
+		'Planet Exploration Guide',
+		'Planet Page',
+		'System Page',
+		'Galaxy Map'
+	];
+
+	pageData.galleryArray = array;
 }
 
 function galleryExplanationExternal() {

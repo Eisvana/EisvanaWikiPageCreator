@@ -166,10 +166,10 @@ function acquirement() {
 // handles acquirement gallery images
 function acquirementGallery() {
 	const srName = pageData.srLocName;
-	const srImg = pageData.srPlanetImg;
-	const sysImg = pageData.sysImg;
-	const cabinetPlanetImg = pageData.cabinetPlanetImg;
-	const axesImg = pageData.axesImg;
+	const srImg = pageData.srPlanetImg || 'nmsMisc_notAvailable.png';
+	const sysImg = pageData.sysImg || 'nmsMisc_notAvailable.png';
+	const cabinetPlanetImg = pageData.cabinetPlanetImg || 'nmsMisc_notAvailable.png';
+	const axesImg = pageData.axesImg || 'nmsMisc_notAvailable.png';
 	const loc = pageData.location;
 	const pics = [{}, {}, {}, {}];
 
@@ -197,11 +197,11 @@ function acquirementGallery() {
 		obj.desc = desc;
 	}
 
-	if (srImg) fillPicObj(pics[0], srImg, `Save/Reload ${srloc}`);
-	if (sysImg) fillPicObj(pics[1], sysImg, `System ${highlight}`);
+	fillPicObj(pics[0], srImg, `Save/Reload ${srloc}`);
+	fillPicObj(pics[1], sysImg, `System ${highlight}`);
 	if (!loc.includes('Space')) {
-		if (cabinetPlanetImg) fillPicObj(pics[2], cabinetPlanetImg, `${type} ${body}`);
-		if (axesImg) fillPicObj(pics[3], axesImg, 'Coordinates');
+		fillPicObj(pics[2], cabinetPlanetImg, `${type} ${body}`);
+		fillPicObj(pics[3], axesImg, 'Coordinates');
 	}
 
 	const codeArray = new Array;
@@ -368,4 +368,35 @@ function albumLinkGen() {
 
 	const link = wikiLink + catalogName;
 	return link;
+}
+
+function generateGalleryArray() {
+	const array = [
+		'',
+		'Discovery Menu',
+		'Price Page',
+		'Base Stats',
+		'Minor Settlement',
+		'Sentinel Pillar',
+		'Tool in hand',
+		'First Person View'
+	];
+
+	const location = pageData.location;
+	const locs = ['Minor Settlement', 'Sentinel Pillar'];
+	if (locs.includes(location)) {
+		const rmLoc = (() => {
+			const index = locs.indexOf(location);
+			locs.splice(index, 1);
+			return locs[0];
+		})();
+		const index = array.indexOf(rmLoc);
+		array.splice(index, 1);
+	} else {
+		for (let i = array.length - 1; i >= 0; i--) {
+			if (locs.includes(array[i])) array.splice(i, 1);
+		}
+	}
+
+	pageData.galleryArray = array;
 }

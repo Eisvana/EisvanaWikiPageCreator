@@ -22,8 +22,6 @@
 	<script src="./src/misc_logic/creatureData.js"></script>
 	<script src="./src/misc_logic/dateLogic.js"></script>
 	<script>
-		const galleryArray = ['', 'Landscape', 'Night View', 'Cave System', 'Analysis Visor', 'Moon Exploration Guide', 'Moon Page', 'Planet Page', 'System Page', 'Galaxy Map'];
-
 		window.onload = () => {
 			pageData.pageType = 'Moon';
 			startUp();
@@ -33,7 +31,10 @@
 
 <body>
 	<div class="container">
-		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
+		<nav>
+			<div><a href="./" title="Main page">&larr; Return to main page</a></div>
+			<div><a href="./planet.html" title="Planet">&#8624; Planet</a></div>
+		</nav>
 		<h1 class="title is-3">Hub Wiki Page Creator - Planet</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
@@ -162,23 +163,6 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label for="infestedInput">Is infested</label>
-						<span class="tooltip">
-							<data>Can be determined from the planetary features.</data>
-							<data>Infested Biome</data>
-							<data>
-								Can be determined from the planetary features such as the moon descriptor, the weather
-								descriptor, or the alien looking flora.<br>
-								See the <a href='https://nomanssky.fandom.com/wiki/Biome_Subtype_-_Infested'
-									rel='noreferrer noopener' target='_blank'>wiki</a> for more information.
-							</data>
-						</span>
-					</div>
-					<div class="tableCell data">
-						<input type="checkbox" id="infestedInput" value="([[Biome Subtype - Infested|Infested]]) "
-							data-dest-checkbox="infested">
-					</div>
-					<div class="tableCell text">
 						<label for="descriptionInput">Description of the moon:</label>
 						<span class="tooltip">
 							<data>Can be found in the exploration guide.</data>
@@ -188,8 +172,8 @@
 						</span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="description" list="planetDescriptors"
-							id="descriptionInput">
+						<input type="text" data-dest-simple="description" data-dest-noauto="fullDescription"
+							list="planetDescriptors" id="descriptionInput">
 					</div>
 					<div class="tableCell text">
 						<label for="atmosphereInput">Atmosphere of the moon:</label>
@@ -228,7 +212,7 @@
 						<input type="text" data-dest-noauto="weather" list="weatherData" id="weatherInput">
 					</div>
 					<div class="tableHeader text no-flex">
-						<p style="display: inline; margin-right: 1.5rem;">Resources:</p>
+						<p style="display: inline; margin-right: 1.5rem">Resources:</p>
 						<span class="tooltip">
 							<data>Found in the Discovery Menu or on the analysis visor.</data>
 							<data>Moon Resources</data>
@@ -438,7 +422,7 @@
 					<div>| planet = <output id="planet" name="planet"></output></div>
 					<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}</div>
 					<div>| type = <output id="biome" name="biome"></output></div>
-					<div>| description = <output id="description" name="description"></output></div>
+					<div>| description = <output id="description"></output></div>
 					<div>| atmosphere = <output id="atmosphere"></output></div>
 					<div>| terrain = <output id="terrain"></output></div>
 					<div>| weather = <output id="weather"></output></div>
@@ -474,7 +458,7 @@
 
 					<div>==Moon Type==</div>
 					<div>{{Biome|<output id="biomeType" name="biome"></output>}} <output id="infested"></output>-
-						<output id="descriptionType" name="description"></output>
+						<output id="fullDescription"></output>
 					</div>
 					<br>
 
