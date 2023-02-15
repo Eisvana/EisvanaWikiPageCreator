@@ -645,8 +645,7 @@ function expectedHubTagSentence() {
 	outputElement.innerHTML = '';
 	if (systemName.includes(expected)) return;
 
-	outputElement.innerText = `The expected HUB Tag for this system is ${expected}.`
-	outputElement.insertAdjacentHTML('beforeend', '<br><br>');
+	outputElement.innerText = `The expected HUB Tag for this system is ${expected}.` + '\n\n';
 }
 
 function spaceStationSection() {
@@ -660,8 +659,8 @@ function spaceStationSection() {
 	const sectionDefinition = {
 		normal: ['img', 'terminal', 'merchant', 'scrapDealer'],
 		pirate: ['img', 'scrapDealer'],
-		abandoned: ['note', 'terminal'],
-		uncharted: ['note'],
+		abandoned: ['img', 'note', 'terminal'],
+		uncharted: ['img', 'note'],
 	}
 
 	// define faction
