@@ -660,7 +660,7 @@ function spaceStationSection() {
 		normal: ['img', 'terminal', 'merchant', 'scrapDealer'],
 		pirate: ['img', 'scrapDealer'],
 		abandoned: ['img', 'note', 'terminal'],
-		uncharted: ['img', 'note'],
+		uncharted: ['note'],
 	}
 
 	// define faction
