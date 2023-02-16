@@ -69,7 +69,7 @@ function reset() {
 	if (typeof resetGallery == 'function') resetGallery();
 
 	for (const key in pageData) {
-		if (key != 'pageType') delete pageData[key];
+		if (key != 'pageType' && key != 'galleryArray') delete pageData[key];
 	}
 
 	const errors = document.querySelectorAll('.error')
