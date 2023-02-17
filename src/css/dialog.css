@@ -64,6 +64,7 @@ dialog #explanationLink.loading::before {
 	content: '';
 	animation: spinner .75s linear infinite;
 	margin: 0 auto;
+	margin-top: -.5rem;
 	opacity: .75;
 	z-index: -1;
 }
