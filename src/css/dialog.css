@@ -50,8 +50,3 @@ dialog #explanationContent :is(ul, ol) {
 	margin: 1rem 0;
 	padding-left: 1rem;
 }
-
-.button.is-primary:not(.is-outlined),
-.button.is-primary.is-outlined:hover {
-	color: var(--body-backgroundcolor) !important;
-}
