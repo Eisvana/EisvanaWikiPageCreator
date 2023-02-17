@@ -303,6 +303,10 @@ function planetInputs() {
 		for (const input of noauto) {
 			assignFunction(input, 'storeData(this)');
 		}
+		const lists = document.querySelectorAll(`[data-planet="planet${i}"] [list]`);
+		for (const input of lists) {
+			assignFunction(input, 'forceDatalist(this)', 'onchange');
+		}
 		const resourceButton = document.getElementById(`addResourceButton${i}`);
 		for (let j = 0; j < 3; j++) {
 			addResourceInput(resourceButton, i);

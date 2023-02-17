@@ -62,7 +62,7 @@ function addResource(element = globalElements.input.resourceInputs.querySelector
 		<label for="${resource_input}">Resource name:</label>
 	</div>
 	<div class="tableCell data" data-resource="section${childIndex}">
-		<input type="text" list="resources" id="${resource_input}" oninput="resourceList()">
+		<input type="text" list="resources" id="${resource_input}" oninput="resourceList()" onchange="forceDatalist(this)">
 	</div>`;
 
 	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
@@ -540,6 +540,9 @@ function postProcessSection(element, sectionType, i) {
 		if (input.dataset.default) {
 			assignFunction(input, 'assignDefaultValue(this)', null, true);
 			assignDefaultValue(input);
+		}
+		if (input.list) {
+			assignFunction(input, 'forceDatalist(this)', 'onchange');
 		}
 	}
 	const outputs = document.querySelectorAll(`[data-${sectionType}="section${i}"] output`);

@@ -207,6 +207,7 @@ function getInputData() {
 		stores: document.querySelectorAll('[data-dest-noauto]'),
 		defaults: document.querySelectorAll('[data-default]'),
 		simple: document.querySelectorAll('[data-dest-simple]'),
+		lists: document.querySelectorAll('[list]'),
 	}
 	return inputData;
 }
@@ -299,6 +300,10 @@ function autoShow() {
 
 	for (const simple of inputData.simple) {
 		assignFunction(simple, 'wikiCodeSimple(this)');
+	}
+
+	for (const list of inputData.lists) {
+		assignFunction(list, 'forceDatalist(this)', 'onchange');
 	}
 }
 
@@ -806,8 +811,8 @@ function datalists(object) {
 
 function forceDatalist(element) {
 	const option = element.list.querySelector(`[value="${element.value}"]`);
-	if (!option) {
-		errorMessage(element, 'Not a valid option. If you believe this is an error, submit a <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform" rel="noreferrer noopener" target="_blank">bug report</a>');
+	if (!option && element.value) {
+		errorMessage(element, 'Not a valid option. If you believe this is an error, submit a <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform" rel="noreferrer noopener" target="_blank">bug report</a>.');
 	} else {
 		errorMessage(element);
 	}
