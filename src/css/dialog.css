@@ -52,7 +52,9 @@ dialog #explanationContent :is(ul, ol) {
 }
 
 dialog #explanationLink.loading::before {
-	display: block;
+	position: absolute;
+    left: calc(50% - 2em);
+    top: calc(50% - 2em);
 	width: 4em;
 	height: 4em;
 	border: .4em solid var(--text-color);
@@ -63,6 +65,7 @@ dialog #explanationLink.loading::before {
 	margin: 0 auto;
 	margin-top: 1rem;
 	opacity: .75;
+	z-index: -1;
 }
 
 @keyframes spinner {
