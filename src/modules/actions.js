@@ -69,7 +69,7 @@ function reset() {
 	if (typeof resetGallery == 'function') resetGallery();
 
 	for (const key in pageData) {
-		if (key != 'pageType' && key != 'galleryArray') delete pageData[key];
+		delete pageData[key];
 	}
 
 	const errors = document.querySelectorAll('.error')
@@ -82,11 +82,7 @@ function reset() {
 	}
 
 	// allow an external function to add reset logic. This external function has to be created when needed.
-	try {
-		resetExternal();
-	} catch (error) {
-		/* do nothing */
-	}
+	if (typeof resetExternal == 'function') resetExternal();
 
 	showAll();
 }
