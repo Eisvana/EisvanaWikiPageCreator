@@ -28,9 +28,14 @@ dialog form {
 dialog img {
 	max-width: 450px;
 	max-height: 500px;
-	min-height: 100px;
+	min-height: 4em;
 	margin-top: 1rem;
 	transition: opacity .5s;
+}
+
+dialog #explanationLink {
+	display: block;
+    position: relative;
 }
 
 dialog #explanationLink::after {
