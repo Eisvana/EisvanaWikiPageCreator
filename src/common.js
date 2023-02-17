@@ -377,6 +377,10 @@ function wikiCodeSimple(element) {
 	}
 }
 
+function addStaticPageData(key, value) {
+	Object.defineProperty(pageData, key, { configurable: false, writable: false, value: value });
+}
+
 function civ() {
 	const input = globalElements.input.civ.value;
 	const civData = new Object;

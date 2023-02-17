@@ -13,7 +13,7 @@
 	// adds debug mode checkbox
 	const url = window.location;
 	if (url.hostname != '127.0.0.1' && url.protocol != 'file:') {
-		Object.defineProperty(pageData, "debug", { configurable: false, writable: false, value: false });
+		addStaticPageData('debug', false);
 		return;
 	}
 	const skipCheck = `<label style="display:flex; gap: .3rem"><input class="checkbox" type="checkbox" id="skipCheck">Enable debug (no checks, no popups)</label>`;

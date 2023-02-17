@@ -23,7 +23,7 @@
 	<script src="./src/misc_logic/dateLogic.js"></script>
 	<script>
 		window.onload = () => {
-			pageData.galleryArray = [
+			addStaticPageData('galleryArray', [
 				'',
 				'Landscape',
 				'Night View',
@@ -34,8 +34,8 @@
 				'Planet Page',
 				'System Page',
 				'Galaxy Map'
-			]
-			pageData.pageType = 'Moon';
+			]);
+			addStaticPageData('pageType', 'Moon');
 			startUp();
 		}
 	</script>
