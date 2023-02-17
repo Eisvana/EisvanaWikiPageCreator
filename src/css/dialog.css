@@ -29,6 +29,7 @@ dialog img {
 	max-width: 450px;
 	max-height: 500px;
 	margin-top: 1rem;
+	transition: opacity .5s;
 }
 
 dialog #explanationLink:after {

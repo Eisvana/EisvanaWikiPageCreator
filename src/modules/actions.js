@@ -13,7 +13,7 @@
 	// adds debug mode checkbox
 	const url = window.location;
 	if (url.hostname != '127.0.0.1' && url.protocol != 'file:') {
-		Object.defineProperty(pageData, "debug", { configurable: false, writable: false, value: false });
+		addStaticPageData('debug', false);
 		return;
 	}
 	const skipCheck = `<label style="display:flex; gap: .3rem"><input class="checkbox" type="checkbox" id="skipCheck">Enable debug (no checks, no popups)</label>`;
@@ -69,7 +69,7 @@ function reset() {
 	if (typeof resetGallery == 'function') resetGallery();
 
 	for (const key in pageData) {
-		if (key != 'pageType' && key != 'galleryArray') delete pageData[key];
+		delete pageData[key];
 	}
 
 	const errors = document.querySelectorAll('.error')
@@ -82,11 +82,7 @@ function reset() {
 	}
 
 	// allow an external function to add reset logic. This external function has to be created when needed.
-	try {
-		resetExternal();
-	} catch (error) {
-		/* do nothing */
-	}
+	if (typeof resetExternal == 'function') resetExternal();
 
 	showAll();
 }

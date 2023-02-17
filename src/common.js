@@ -207,6 +207,7 @@ function getInputData() {
 		stores: document.querySelectorAll('[data-dest-noauto]'),
 		defaults: document.querySelectorAll('[data-default]'),
 		simple: document.querySelectorAll('[data-dest-simple]'),
+		lists: document.querySelectorAll('[list]'),
 	}
 	return inputData;
 }
@@ -300,6 +301,10 @@ function autoShow() {
 	for (const simple of inputData.simple) {
 		assignFunction(simple, 'wikiCodeSimple(this)');
 	}
+
+	for (const list of inputData.lists) {
+		assignFunction(list, 'forceDatalist(this)', 'onchange');
+	}
 }
 
 function showAll() {
@@ -375,6 +380,10 @@ function wikiCodeSimple(element) {
 	for (const output of outputs) {
 		output.innerText = element.value;
 	}
+}
+
+function addStaticPageData(key, value) {
+	Object.defineProperty(pageData, key, { configurable: false, writable: false, value: value });
 }
 
 function civ() {
@@ -797,6 +806,15 @@ function datalists(object) {
 			datalist.appendChild(optionElement);
 		}
 		document.body.appendChild(datalist);
+	}
+}
+
+function forceDatalist(element) {
+	const option = element.list.querySelector(`[value="${element.value}"]`);
+	if (!option && element.value) {
+		errorMessage(element, 'Not a valid option. If you believe this is an error, submit a <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform" rel="noreferrer noopener" target="_blank">bug report</a>.');
+	} else {
+		errorMessage(element);
 	}
 }
 
