@@ -45,6 +45,7 @@ function explanation(heading, text, img) {
 		//	debugger
 		linkElement.classList.add('loaded');
 		//	imgElement.style.display = '';
+		imgElement.style.marginTop = '1rem';
 		imgElement.style.opacity = 1;
 	}
 	globalElements.output.explanation.showModal();
