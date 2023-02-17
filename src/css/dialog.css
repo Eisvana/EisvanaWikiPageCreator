@@ -28,11 +28,16 @@ dialog form {
 dialog img {
 	max-width: 450px;
 	max-height: 500px;
-	margin-top: 1rem;
+	min-height: 110px;
 	transition: opacity .5s;
 }
 
-dialog #explanationLink:after {
+dialog #explanationLink {
+	display: block;
+    position: relative;
+}
+
+dialog #explanationLink::after {
 	display: block;
 	content: 'Click to enlarge';
 }
@@ -49,4 +54,25 @@ dialog #explanationContent .dialog-list {
 dialog #explanationContent :is(ul, ol) {
 	margin: 1rem 0;
 	padding-left: 1rem;
+}
+
+dialog #explanationLink.loading::before {
+	position: absolute;
+    left: calc(50% - 2em);
+    top: calc(50% - 3em);
+	width: 4em;
+	height: 4em;
+	border: .4em solid var(--text-color);
+	border-radius: 50%;
+	border-right-color: transparent;
+	content: '';
+	animation: spinner .75s linear infinite;
+	opacity: .75;
+	z-index: -1;
+}
+
+@keyframes spinner {
+	to {
+		transform: rotate(360deg)
+	}
 }

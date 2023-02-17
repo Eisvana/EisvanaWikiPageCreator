@@ -668,4 +668,7 @@ function genusDropdown(element) {
 function resetExternal() {
 	const sections = document.querySelectorAll('[data-moon], [data-resource], [data-fauna], [data-flora], [data-mineral]');
 	removeSection(sections);
+
+	enableResourceAdd();
+	if (typeof enableMoonAdd == 'function') enableMoonAdd();
 }
