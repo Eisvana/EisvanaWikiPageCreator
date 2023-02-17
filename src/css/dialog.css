@@ -32,7 +32,7 @@ dialog img {
 	transition: opacity .5s;
 }
 
-dialog #explanationLink:after {
+dialog #explanationLink::after {
 	display: block;
 	content: 'Click to enlarge';
 }
@@ -49,4 +49,23 @@ dialog #explanationContent .dialog-list {
 dialog #explanationContent :is(ul, ol) {
 	margin: 1rem 0;
 	padding-left: 1rem;
+}
+
+dialog #explanationLink.loading::before {
+	display: block;
+	width: 4em;
+	height: 4em;
+	border: .4em solid var(--text-color);
+	border-radius: 50%;
+	border-right-color: transparent;
+	content: '';
+	animation: spinner .75s linear infinite;
+	margin: 0 auto;
+	margin-top: 1rem;
+}
+
+@keyframes spinner {
+	to {
+		transform: rotate(360deg)
+	}
 }
