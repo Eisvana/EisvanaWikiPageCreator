@@ -811,7 +811,7 @@ function datalists(object) {
 
 function forceDatalist(element) {
 	const option = element.list.querySelector(`[value="${element.value}"]`);
-	if (!option && element.value) {
+	if (!option && element.value && element.id != 'currencyInput') {
 		errorMessage(element, 'Not a valid option. If you believe this is an error, submit a <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform" rel="noreferrer noopener" target="_blank">bug report</a>.');
 	} else {
 		errorMessage(element);
