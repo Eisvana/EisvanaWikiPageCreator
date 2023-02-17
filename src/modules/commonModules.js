@@ -29,14 +29,20 @@ function explanation(heading, text, img) {
 	const linkElement = globalElements.output.explanationLink;
 	if (img) {
 		imgElement.src = '';
-		imgElement.src = img
+		imgElement.style.opacity = 0;
+		imgElement.src = img;
 		linkElement.style.display = '';
+		linkElement.classList.add('loading');
 		linkElement.href = img;
 	} else {
 		linkElement.style.display = 'none';
 	}
 	globalElements.output.explanationHeading.innerText = heading;
 	globalElements.output.explanationContent.innerHTML = text;
+	imgElement.onload = () => {
+		imgElement.style.marginTop = '1rem';
+		imgElement.style.opacity = 1;
+	}
 	globalElements.output.explanation.showModal();
 }
 
