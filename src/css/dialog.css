@@ -28,6 +28,7 @@ dialog form {
 dialog img {
 	max-width: 450px;
 	max-height: 500px;
+	min-height: 100px;
 	margin-top: 1rem;
 	transition: opacity .5s;
 }
@@ -63,7 +64,6 @@ dialog #explanationLink.loading::before {
 	content: '';
 	animation: spinner .75s linear infinite;
 	margin: 0 auto;
-	margin-top: 1rem;
 	opacity: .75;
 	z-index: -1;
 }
