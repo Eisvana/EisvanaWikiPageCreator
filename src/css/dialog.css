@@ -28,8 +28,6 @@ dialog form {
 dialog img {
 	max-width: 450px;
 	max-height: 500px;
-	min-height: 4em;
-	margin-top: 1rem;
 	min-height: 110px;
 	transition: opacity .5s;
 }
@@ -61,7 +59,7 @@ dialog #explanationContent :is(ul, ol) {
 dialog #explanationLink.loading::before {
 	position: absolute;
     left: calc(50% - 2em);
-    top: calc(50% - 2em);
+    top: calc(50% - 3em);
 	width: 4em;
 	height: 4em;
 	border: .4em solid var(--text-color);
