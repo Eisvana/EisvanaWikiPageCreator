@@ -28,23 +28,18 @@ function explanation(heading, text, img) {
 	const imgElement = globalElements.output.explanationImg;
 	const linkElement = globalElements.output.explanationLink;
 	if (img) {
-		// WARNING:DUMPSTER FIRE
-		//	imgElement.style.display = 'none';
 		imgElement.src = '';
 		imgElement.style.opacity = 0;
 		imgElement.src = img;
-		linkElement.href = img;
-		linkElement.classList.add('loading');
 		linkElement.style.display = '';
+		linkElement.classList.add('loading');
+		linkElement.href = img;
 	} else {
 		linkElement.style.display = 'none';
 	}
 	globalElements.output.explanationHeading.innerText = heading;
 	globalElements.output.explanationContent.innerHTML = text;
 	imgElement.onload = () => {
-		//	debugger
-		linkElement.classList.add('loaded');
-		//	imgElement.style.display = '';
 		imgElement.style.marginTop = '1rem';
 		imgElement.style.opacity = 1;
 	}
