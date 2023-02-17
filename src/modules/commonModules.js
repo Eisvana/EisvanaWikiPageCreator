@@ -27,15 +27,25 @@
 function explanation(heading, text, img) {
 	const imgElement = globalElements.output.explanationImg;
 	const linkElement = globalElements.output.explanationLink;
+	// getAttribute is necessary to get the raw value, not the parsed URL
 	if (img) {
-		imgElement.src = '';
-		imgElement.style.opacity = 0;
-		imgElement.src = img;
-		linkElement.style.display = '';
-		linkElement.classList.add('loading');
-		linkElement.href = img;
+
+		if (imgElement.getAttribute('src') == img) {
+			linkElement.style.display = '';		// don't re-render
+
+		} else {	// add loading animation
+
+			imgElement.src = '';
+			imgElement.style.opacity = 0;
+			imgElement.style.marginTop = 0;
+			imgElement.src = img;
+			linkElement.style.display = '';
+			linkElement.classList.add('loading');
+			linkElement.href = img;
+		}
+
 	} else {
-		linkElement.style.display = 'none';
+		linkElement.style.display = 'none';		// no image
 	}
 	globalElements.output.explanationHeading.innerText = heading;
 	globalElements.output.explanationContent.innerHTML = text;
