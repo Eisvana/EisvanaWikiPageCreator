@@ -30,8 +30,9 @@ dialog img {
 	max-height: 500px;
 	min-height: 110px;
 	transition: opacity .5s;
-	width: min(100%, 450px);
+	width: 100%;
 	aspect-ratio: initial;
+	object-fit: contain;
 }
 
 dialog #explanationLink {
