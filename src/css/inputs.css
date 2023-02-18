@@ -42,7 +42,9 @@ input:not([type="file"], [type="checkbox"], [type="radio"]):focus-visible {
 }
 
 .button.is-primary:not(.is-outlined),
-.button.is-primary.is-outlined:hover {
+.button.is-primary.is-outlined:hover,
+.button.is-primary.is-outlined:active,
+.button.is-primary.is-outlined:focus {
 	color: var(--body-backgroundcolor);
 }
 
