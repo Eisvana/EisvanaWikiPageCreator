@@ -190,8 +190,8 @@
 						</span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-simple="description" data-dest-noauto="fullDescription"
-							list="planetDescriptors" id="descriptionInput">
+						<input type="text" data-dest-noauto="description" list="planetDescriptors"
+							id="descriptionInput">
 					</div>
 					<div class="tableCell text">
 						<label for="atmosphereInput">Atmosphere of the moon:</label>
@@ -440,7 +440,7 @@
 					<div>| planet = <output id="planet" name="planet"></output></div>
 					<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}</div>
 					<div>| type = <output id="biome" name="biome"></output></div>
-					<div>| description = <output id="description"></output></div>
+					<div>| description = <output id="description" name="description"></output></div>
 					<div>| atmosphere = <output id="atmosphere"></output></div>
 					<div>| terrain = <output id="terrain"></output></div>
 					<div>| weather = <output id="weather"></output></div>
@@ -476,7 +476,7 @@
 
 					<div>==Moon Type==</div>
 					<div>{{Biome|<output id="biomeType" name="biome"></output>}} <output id="infested"></output>-
-						<output id="fullDescription"></output>
+						<output id="fullDescription" name="description"></output>
 					</div>
 					<br>
 

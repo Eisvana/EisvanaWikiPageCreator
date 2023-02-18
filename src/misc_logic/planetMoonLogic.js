@@ -37,7 +37,12 @@ function plural(number, dest = null) {
 function planetDescriptor(element) {
 	const dest = element.dataset.destNoauto;
 	const output = buildDescriptor(element.value, pageData.pageType, ' ');
-	globalElements.output[dest].innerText = output;
+	const destElements = globalElements.output[dest];
+	if (Array.isArray(destElements)) {
+		destElements.forEach(item => item.innerText = output);
+	} else {
+		destElements.innerText = output;
+	}
 }
 
 // constructs location sentence
