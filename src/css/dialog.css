@@ -30,11 +30,13 @@ dialog img {
 	max-height: 500px;
 	min-height: 110px;
 	transition: opacity .5s;
+	width: min(100%, 450px);
+	aspect-ratio: initial;
 }
 
 dialog #explanationLink {
 	display: block;
-    position: relative;
+	position: relative;
 }
 
 dialog #explanationLink::after {
@@ -58,8 +60,8 @@ dialog #explanationContent :is(ul, ol) {
 
 dialog #explanationLink.loading::before {
 	position: absolute;
-    left: calc(50% - 2em);
-    top: calc(50% - 3em);
+	left: calc(50% - 2em);
+	top: calc(50% - 3em);
 	width: 4em;
 	height: 4em;
 	border: .4em solid var(--text-color);
