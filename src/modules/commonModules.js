@@ -23,18 +23,29 @@
 	updateGlobalElements(dialogElements);
 })();
 
+// set holds images that were previously opened and thereby cached
+const cachedImages = new Set();
+
 // shows an explanation modal and fills text
 function explanation(heading, text, img) {
 	const imgElement = globalElements.output.explanationImg;
 	const linkElement = globalElements.output.explanationLink;
-	// getAttribute is necessary to get the raw value, not the parsed URL
 	if (img) {
+		// image is given
+		if (cachedImages.has(img)) {
+			// image has been opened before -> is cached -> no loading anim necessary
+			linkElement.classList.remove('loading');
+			
+			// getAttribute is necessary to get the raw value, not the parsed URL
+			if (imgElement.getAttribute('src') != img) {
+				// image is not same as previous -> need to adjust src and link href
+				imgElement.src = '';
+				imgElement.src = img;
+				linkElement.href = img;
+			}
 
-		if (imgElement.getAttribute('src') == img) {
-			linkElement.style.display = '';		// don't re-render
-
-		} else {	// add loading animation
-
+		} else {
+			// image, not cached
 			imgElement.src = '';
 			imgElement.style.opacity = 0;
 			imgElement.style.marginTop = 0;
@@ -42,10 +53,13 @@ function explanation(heading, text, img) {
 			linkElement.style.display = '';
 			linkElement.classList.add('loading');
 			linkElement.href = img;
+			cachedImages.add(img);
 		}
+		linkElement.style.display = '';
 
 	} else {
-		linkElement.style.display = 'none';		// no image
+		// no image
+		linkElement.style.display = 'none';
 	}
 	globalElements.output.explanationHeading.innerText = heading;
 	globalElements.output.explanationContent.innerHTML = text;
