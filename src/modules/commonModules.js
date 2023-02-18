@@ -50,7 +50,6 @@ function explanation(heading, text, img) {
 			imgElement.style.opacity = 0;
 			imgElement.style.marginTop = 0;
 			imgElement.src = img;
-			linkElement.style.display = '';
 			linkElement.classList.add('loading');
 			linkElement.href = img;
 			cachedImages.add(img);
