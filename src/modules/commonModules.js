@@ -67,6 +67,7 @@ function explanation(heading, text, img) {
 		imgElement.style.opacity = 1;
 	}
 	globalElements.output.explanation.showModal();
+	globalElements.output.explanation.scrollTo(0, 0);
 }
 
 // adds all tooltips which are not yet generated
