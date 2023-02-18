@@ -5,6 +5,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Planet</title>
+	<meta name="application-name" content="Hub Wiki Page Creator">
+	<meta name="description" content="Easily generate the wikicode to create a moon discovery page for the Galactic Hub on the No Man's Sky Wiki!">
+	<meta name="theme-color" content="#3cb4a9">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Moon">
 	<link rel="stylesheet" href="./src/css/common.css">
 	<script src="./src/common.js" defer></script>
 	<script src="./src/modules/footer.js" defer></script>
@@ -190,8 +194,8 @@
 						</span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-simple="description" data-dest-noauto="fullDescription"
-							list="planetDescriptors" id="descriptionInput">
+						<input type="text" data-dest-noauto="description" list="planetDescriptors"
+							id="descriptionInput">
 					</div>
 					<div class="tableCell text">
 						<label for="atmosphereInput">Atmosphere of the moon:</label>
@@ -227,7 +231,7 @@
 						</span>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="weather" list="weatherData" id="weatherInput">
+						<input type="text" data-dest-simple="weather" list="weatherData" id="weatherInput">
 					</div>
 					<div class="tableHeader text no-flex">
 						<p style="display: inline; margin-right: 1.5rem">Resources:</p>
@@ -440,7 +444,7 @@
 					<div>| planet = <output id="planet" name="planet"></output></div>
 					<div>| coordinates = {{Glyphs2Coords|<output id='portalglyphs' name="portalglyphs"></output>}}</div>
 					<div>| type = <output id="biome" name="biome"></output></div>
-					<div>| description = <output id="description"></output></div>
+					<div>| description = <output id="description" name="description"></output></div>
 					<div>| atmosphere = <output id="atmosphere"></output></div>
 					<div>| terrain = <output id="terrain"></output></div>
 					<div>| weather = <output id="weather"></output></div>
@@ -476,7 +480,7 @@
 
 					<div>==Moon Type==</div>
 					<div>{{Biome|<output id="biomeType" name="biome"></output>}} <output id="infested"></output>-
-						<output id="fullDescription"></output>
+						<output id="fullDescription" name="description"></output>
 					</div>
 					<br>
 
