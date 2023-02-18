@@ -30,12 +30,13 @@ const cachedImages = new Set();
 function explanation(heading, text, img) {
 	const imgElement = globalElements.output.explanationImg;
 	const linkElement = globalElements.output.explanationLink;
+	const dialogElement = globalElements.output.explanation;
 	if (img) {
 		// image is given
 		if (cachedImages.has(img)) {
 			// image has been opened before -> is cached -> no loading anim necessary
 			linkElement.classList.remove('loading');
-			
+
 			// getAttribute is necessary to get the raw value, not the parsed URL
 			if (imgElement.getAttribute('src') != img) {
 				// image is not same as previous -> need to adjust src and link href
@@ -52,7 +53,6 @@ function explanation(heading, text, img) {
 			imgElement.src = img;
 			linkElement.classList.add('loading');
 			linkElement.href = img;
-			cachedImages.add(img);
 		}
 		linkElement.style.display = '';
 
@@ -65,9 +65,12 @@ function explanation(heading, text, img) {
 	imgElement.onload = () => {
 		imgElement.style.marginTop = '1rem';
 		imgElement.style.opacity = 1;
+		cachedImages.add(img);
 	}
-	globalElements.output.explanation.showModal();
-	globalElements.output.explanation.scrollTo(0, 0);
+	dialogElement.style.translate = '0 -100vh';
+	dialogElement.showModal();
+	dialogElement.style.translate = '0 0';
+	dialogElement.scrollTo(0, 0);
 }
 
 // adds all tooltips which are not yet generated
