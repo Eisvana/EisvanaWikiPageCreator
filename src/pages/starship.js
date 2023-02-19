@@ -314,7 +314,8 @@ function calcS() {
 	const type = pageData.type;
 	let chance;
 	let chanceSentence = 'always spawns';
-	if (type != 'Exotic' && type != 'Living Ship') {
+	const exceptions = ['Exotic', 'Living Ship'];
+	if (!exceptions.includes(type)) {
 		switch (econ[0]) {
 			case "★★★":
 				chance = '2%';

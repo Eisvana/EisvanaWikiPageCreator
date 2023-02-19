@@ -19,7 +19,7 @@ function startupFunctions() {
 globalElements.input.censusDiscordInput.onchange = () => {
 	const element = globalElements.input.censusDiscordInput;
 	const tag = element.value;
-	if (tag == '') {
+	if (!tag) {
 		errorMessage(element);
 		return;
 	}

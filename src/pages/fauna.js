@@ -151,7 +151,7 @@ function hideSecGenderProps() {
 	const gen2Height = globalElements.input.height2Input;
 	const gen2Input = globalElements.input.gender2Input;
 
-	if (gen2 != '' && gen1 != gen2) {
+	if (gen2 && gen1 != gen2) {
 		hideInput(gen2Weight, '');
 		hideInput(gen2Height, '');
 	} else {
@@ -191,7 +191,7 @@ function specialNotesTextFunc() {
 		return;
 	}
 	const noteText = (() => {
-		if (specialNotes == notes || specialNotes == '') {
+		if (!specialNotes || specialNotes == notes) {
 			return "'''Additional Observations''': " + notes;
 		} else {
 			return specialNotes;

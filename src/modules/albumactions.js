@@ -89,7 +89,7 @@ function albumDiscoverer() {
 		} else {
 			const discovered = pageData.discovered;
 			const discoveredlink = pageData.discoveredlink;
-			if (discoveredlink != '') {
+			if (discoveredlink) {
 				return `wiki=${discoveredlink}`;
 			} else {
 				return `discoverer=${discovered}`;
