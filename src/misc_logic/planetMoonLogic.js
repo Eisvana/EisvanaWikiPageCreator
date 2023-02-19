@@ -269,7 +269,7 @@ function addFauna(element) {
 		</span>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
-		<input data-dest-noauto="faunaWeight${i}" type="text" id="faunaWeightInput${i}" maxlength="5" placeholder="0.0" oninput="numberStats(this)">
+		<input data-dest-noauto="faunaWeight${i}" type="text" id="faunaWeightInput${i}" maxlength="5" placeholder="0.0" oninput="numberStats(this, 1)">
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<label for="faunaHeightInput${i}">Height in m:</label>
@@ -281,7 +281,7 @@ function addFauna(element) {
 		</span>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
-		<input data-dest-noauto="faunaHeight${i}" type="text" id="faunaHeightInput${i}" maxlength="3" placeholder="0.0" oninput="numberStats(this)">
+		<input data-dest-noauto="faunaHeight${i}" type="text" id="faunaHeightInput${i}" maxlength="3" placeholder="0.0" oninput="numberStats(this, 1)">
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<label for="faunaDiscovererInput${i}">Discoverer:</label>

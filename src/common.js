@@ -792,7 +792,7 @@ function getNumber(number, decimals = null, outputRaw = false) {
 		return raw;
 	})();
 	if (outputRaw || !output) return output.toString();
-	return new Intl.NumberFormat('en-UK').format(output);
+	return new Intl.NumberFormat('en-UK', { minimumFractionDigits: decimals }).format(output);
 }
 
 // expects object in the following format: { datalistId1:['entry1', 'entry2'], datalistId2:['entry1'] }
