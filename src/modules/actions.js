@@ -11,9 +11,11 @@
 	globalElements.output.actions.insertAdjacentHTML('beforebegin', copyNote);
 
 	// adds debug mode checkbox
+	const debugHostnames = ['127.0.0.1', 'localhost'];
 	const url = window.location;
-	if (url.hostname != '127.0.0.1' && url.protocol != 'file:') {
+	if (!debugHostnames.includes(url.hostname) && url.protocol != 'file:') {
 		addStaticPageData('debug', false);
+
 		return;
 	}
 	const skipCheck = `<label style="display:flex; gap: .3rem"><input class="checkbox" type="checkbox" id="skipCheck">Enable debug (no checks, no popups)</label>`;
