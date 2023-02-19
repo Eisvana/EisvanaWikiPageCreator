@@ -142,7 +142,7 @@ function sentinelSentence() {
 		}
 	})();
 
-	const output = `[[Sentinel]] activity on this ${pageData.pageType.toLowerCase()} is classified as: ''${sentDescriptor}''. The sentinels ${(sentLevel == 'aggressive') ? 'do' : "don't"} present an immediate threat.`;
+	const output = `[[Sentinel]] activity on this ${pageData.pageType.toLowerCase()} is classified as: ''${sentDescriptor}''. The sentinels ${(sentLevel == 'aggressive') ? '' : "don't"} present an immediate threat.`;
 	globalElements.output.sentinelSentence.innerText = output;
 }
 
@@ -269,7 +269,7 @@ function addFauna(element) {
 		</span>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
-		<input data-dest-noauto="faunaWeight${i}" type="text" id="faunaWeightInput${i}" maxlength="5" placeholder="0.0" oninput="numberStats(this)">
+		<input data-dest-noauto="faunaWeight${i}" type="text" id="faunaWeightInput${i}" maxlength="5" placeholder="0.0" oninput="numberStats(this, 1)">
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<label for="faunaHeightInput${i}">Height in m:</label>
@@ -281,7 +281,7 @@ function addFauna(element) {
 		</span>
 	</div>
 	<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
-		<input data-dest-noauto="faunaHeight${i}" type="text" id="faunaHeightInput${i}" maxlength="3" placeholder="0.0" oninput="numberStats(this)">
+		<input data-dest-noauto="faunaHeight${i}" type="text" id="faunaHeightInput${i}" maxlength="3" placeholder="0.0" oninput="numberStats(this, 1)">
 	</div>
 	<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 		<label for="faunaDiscovererInput${i}">Discoverer:</label>
@@ -291,7 +291,7 @@ function addFauna(element) {
 	</div>`;
 
 	const outputHTML = `<div data-fauna="section${i}">|-</div>
-	<div data-fauna="section${i}">|[[File:<output id="faunaFile${i}"></output>|150px]] || <output id="faunaName${i}" name="faunaName${i}"></output> || <output id="faunaRarity${i}"></output> / <output id="faunaEcosystem${i}"></output> / <output id="faunaActivity${i}"> </output><output id="faunaHemisphere${i}"></output> || <output id="faunaGenus${i}"></output> || <output id="faunaHeight${i}"></output>m || <output id="faunaWeight${i}"></output>kg || <output id="faunaDiscoverer${i}"></output></div>`;
+	<div data-fauna="section${i}">|[[File:<output id="faunaFile${i}"></output>|150px]] || <output id="faunaName${i}" name="faunaName${i}"></output> || <output id="faunaRarity${i}"></output> / <output id="faunaEcosystem${i}"></output> / <output id="faunaActivity${i}"> </output> <output id="faunaHemisphere${i}"></output> || <output id="faunaGenus${i}"></output> || <output id="faunaHeight${i}"></output>m || <output id="faunaWeight${i}"></output>kg || <output id="faunaDiscoverer${i}"></output></div>`;
 
 	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
 	outputSection.insertAdjacentHTML('beforeend', outputHTML);

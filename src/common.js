@@ -556,10 +556,11 @@ function researchTeam() {
 	const dest = researchteamInput.dataset.destNoauto;
 	pageData[dest] = researchteamValue;
 	const civ = pageData.civilized;
+	const exceptions = ['Base', 'Racetrack'];
 	const researchteam = (() => {
 		if (researchteamValue.split(' ').length == 2) {
 			return civ + ' ' + researchteamValue.split(' ')[1];
-		} else if (!researchteamValue && pageData.pageType != 'Base' && pageData.pageType != 'Racetrack') {
+		} else if (!researchteamValue && !exceptions.includes(pageData.pageType)) {
 			return civ;
 		} else {
 			return researchteamValue;
@@ -583,8 +584,9 @@ function docBy() {
 	const dest = docByElement.dataset.destNoauto;
 	const chapter = displayResearch();
 	const formattedDocumenter = formatName(documenter);
+	const discArray = [discoverer, discoveredlink];
 
-	if (documenter && documenter != discoverer && documenter != discoveredlink) {
+	if (documenter && !discArray.includes(documenter)) {
 		globalElements.output[dest].style.display = '';
 		globalElements.output[dest].innerText = `Documented by ${chapter} ${formattedDocumenter}`;
 	} else {
@@ -666,7 +668,7 @@ function addInfoBullet() {
 	const elements = document.querySelectorAll('[data-add-info]');
 	const lines = new Array;
 	for (const element of elements) {
-		if (element.nextElementSibling.style.display == '' && element.nextElementSibling.innerText != '') lines.push(element);
+		if (!element.nextElementSibling.style.display && element.nextElementSibling.innerText) lines.push(element);
 		element.innerHTML = '';
 	}
 
@@ -792,7 +794,7 @@ function getNumber(number, decimals = null, outputRaw = false) {
 		return raw;
 	})();
 	if (outputRaw || !output) return output.toString();
-	return new Intl.NumberFormat('en-UK').format(output);
+	return new Intl.NumberFormat('en-UK', { minimumFractionDigits: decimals }).format(output);
 }
 
 // expects object in the following format: { datalistId1:['entry1', 'entry2'], datalistId2:['entry1'] }

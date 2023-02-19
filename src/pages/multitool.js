@@ -243,10 +243,11 @@ function showSizeDropdown() {
 	}
 	if (type == 'Experimental' && size == 'SMG') sizeInput.value = 'Pistol';
 
-	if (type != 'Royal' && type != 'Starter Pistol') {
-		hideInput(sizeInput, '');
-	} else {
+	const hideSize = ['Royal', 'Starter Pistol'];
+	if (hideSize.includes(type)) {
 		hideInput(sizeInput, 'none');
+	} else {
+		hideInput(sizeInput, '');
 	}
 }
 
