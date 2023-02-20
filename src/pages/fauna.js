@@ -11,7 +11,6 @@ function startupFunctions() {
 	hideSecGenderProps();
 	hideCreaturePrio();
 	bundlePropFunctions();
-	planetMoonSentence();
 	hideAlbumEntry();
 	albumFunctions();
 	noLineBreak();

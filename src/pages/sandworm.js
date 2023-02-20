@@ -1,6 +1,5 @@
 function startupFunctions() {
 	wormName();
-	planetMoonSentence();
 	catalog();
 	autoSpawn();
 	albumFunctions();
