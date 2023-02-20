@@ -84,6 +84,6 @@ dialog #explanationLink.loading::before {
 @media (orientation: portrait),
 (max-height: 800px) {
 	dialog.modal-content {
-		max-height: 90vh;
+		max-height: 90svh;
 	}
 }
