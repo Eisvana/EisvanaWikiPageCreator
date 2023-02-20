@@ -778,7 +778,8 @@ function numberStats(element, decimals = null, outputRaw = false) {
 
 function numberError(element, value = element.value, decimals = null, outputRaw = false) {
 	const number = getNumber(value, decimals, outputRaw);
-	if (number || !value || value == '+' || value == '-') {
+	const allowedSymbols = ['+', '-'];
+	if (number || !value || allowedSymbols.includes(value)) {
 		errorMessage(element);
 	} else {
 		errorMessage(element, 'Must only contain numbers');
