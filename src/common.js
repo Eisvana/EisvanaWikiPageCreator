@@ -57,6 +57,7 @@ const regions = {
 }
 
 const versions = [
+	'Fractal',
 	'Waypoint',
 	'Endurance',
 	'Outlaws',
@@ -433,7 +434,6 @@ function updateCiv() {
 
 function sanitiseString(input) {
 	const doubleWikiMarkup = ['{', '}', '[', ']'];
-	const tempReplacement = '<><><>';
 	const linkStartReplacement = '####';
 	const linkEndReplacement = '****';
 
@@ -451,10 +451,12 @@ function sanitiseString(input) {
 	}
 
 	for (const markup of doubleWikiMarkup) {
-		text = text.replaceAll(`${markup}${markup}`, tempReplacement)
-			.replaceAll(markup, '')
-			.replaceAll(tempReplacement, `${markup}${markup}`);
+		const doubleMarkup = markup.repeat(2);
+		text = text.split(doubleMarkup)						// split based on double markup (isolate valid markup)
+			.map(part => part.replaceAll(markup, ''))		// remove all invalid markup
+			.join(doubleMarkup);							// join back together using double markup
 	}
+
 	text = text.replaceAll(linkStartReplacement, '[http')
 		.replaceAll(linkEndReplacement, ']')
 		.trim();
