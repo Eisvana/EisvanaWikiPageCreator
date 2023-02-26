@@ -171,6 +171,14 @@ function acquirementGallery() {
 	const cabinetPlanetImg = pageData.cabinetPlanetImg || 'nmsMisc_notAvailable.png';
 	const axesImg = pageData.axesImg || 'nmsMisc_notAvailable.png';
 	const loc = pageData.location;
+
+	const InputElementIds = [
+		'srImgInput',
+		'sysImgInput',
+		'cabInput',
+		'coordsInput',
+	]
+
 	const pics = [{}, {}, {}, {}];
 
 	const body = planetMoon();
@@ -199,20 +207,28 @@ function acquirementGallery() {
 
 	fillPicObj(pics[0], srImg, `Save/Reload ${srloc}`);
 	fillPicObj(pics[1], sysImg, `System ${highlight}`);
-	if (!loc.includes('Space')) {
+	const picCondition = !loc.includes('Space');
+	if (picCondition) {
 		fillPicObj(pics[2], cabinetPlanetImg, `${type} ${body}`);
 		fillPicObj(pics[3], axesImg, 'Coordinates');
 	}
 
 	const codeArray = new Array;
-	for (const picObj of pics) {
+	for (let i = 0; i < pics.length; i++) {
+		const picObj = pics[i];
 		const pic = picObj.picName;
 		const desc = picObj.desc;
-		if (!pic || !desc) continue;
+		const input = InputElementIds[i];
+		if (!pic || !desc) {
+			hideInput(globalElements.input[input], 'none');
+			continue;
+		}
+		hideInput(globalElements.input[input], '');
 		const gallery = document.createElement('span');
 		gallery.style.display = 'block';
 		gallery.innerText = `${pic}|${desc}`;
 		codeArray.push(gallery.outerHTML);
+		globalElements.output[input + 'Label'].innerText = desc;
 	}
 	globalElements.output.acquirementGallery.innerHTML = codeArray.join('');
 }
@@ -229,6 +245,7 @@ function autoRoyal() {
 	} else {
 		hideInput(locElement, '');
 	}
+	acquirementGallery();
 }
 
 // shows or hides size dropdown
