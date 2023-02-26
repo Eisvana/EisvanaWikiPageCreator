@@ -649,7 +649,6 @@ function generateGalleryArray() {
 		'Moon Page',
 		'Planet Page',
 		'System Page',
-		'Galaxy Map'
 	];
 
 	const common = ['moon', 'planet', 'crash'];
