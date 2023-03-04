@@ -6,7 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Business</title>
 	<meta name="application-name" content="Hub Wiki Page Creator">
-	<meta name="description" content="Easily generate the wikicode to create a business page for the Galactic Hub on the No Man's Sky Wiki!">
+	<meta name="description"
+		content="Easily generate the wikicode to create a business page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Business">
 	<link rel="stylesheet" href="./src/css/common.css">
@@ -171,6 +172,16 @@
 							<option value="NS">Switch</option>
 						</select>
 					</div>
+					<div class="tableHeader data no-flex">
+						<label for="menuInput">Menu:</label>
+						<span class="tooltip">
+							<data>For the marketplace table.<br>Not shown on the business page.</data>
+						</span>
+						<textarea id="menuInput" data-dest="menu"></textarea>
+					</div>
+					<div class="tableHeader text">
+						<p>Page Content</p>
+					</div>
 					<!--insert additional sections above #contentsInput-->
 					<div class="tableHeader text" id="contentsInput">
 						<button class="button is-primary" type="button" onclick="addSection()">+ Add
@@ -213,6 +224,8 @@
 					<div>| ownerlink = <output id='ownerlink'></output></div>
 					<div>| platform = <output id='platform'></output></div>
 					<div>| release = <output id="release1" name="release"></output></div>
+					<div>| menu =</div>
+					<div><output id="menu"></output></div>
 					<div>}}</div>
 					<div>'''<output id='name1' name="name"></output>''' is a business.</div>
 					<br>
