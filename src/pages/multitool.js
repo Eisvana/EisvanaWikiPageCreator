@@ -10,6 +10,7 @@ function startupFunctions() {
 	hideLocName();
 	hideSrLocName();
 	locHubNr();
+	hideCost();
 }
 
 // 1. param: string of all functions to add to the element
@@ -21,7 +22,7 @@ const MTElementFunctions = {
 	typeInput: ['addInfo(); appearance(); autoRoyal(); showSizeDropdown(); MTType(); albumItemType(); albumOther()', null, true],
 	sizeInput: ['showSizeDropdown(); MTType(); albumOther()'],
 	researchTeam: ['addInfo()', null, true],
-	locInput: ['acquirementBundle(); hideLocName()'],
+	locInput: ['acquirementBundle(); hideLocName(); hideCost()'],
 	srlocInput: ['acquirementBundle(); hideSrLocName()'],
 	srInput: ['acquirementBundle()'],
 	planetInput: ['acquirementBundle()'],
@@ -245,6 +246,7 @@ function autoRoyal() {
 	} else {
 		hideInput(locElement, '');
 	}
+	hideCost();
 	acquirementGallery();
 }
 
@@ -324,6 +326,18 @@ function hideSrLocName() {
 		wikiCode(srLocNameInput);
 	} else {
 		hideInput(srLocNameInput, '');
+	}
+}
+
+function hideCost() {
+	const location = pageData.location;
+	const costElement = globalElements.input.costInput;
+	if (location == 'Sentinel Pillar') {
+		hideInput(costElement, 'none');
+		costElement.value = '';
+		costElement.oninput();
+	} else {
+		hideInput(costElement, '');
 	}
 }
 
