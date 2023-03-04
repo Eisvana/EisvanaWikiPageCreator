@@ -288,6 +288,7 @@ function planetInputs() {
 
 		inputTarget.insertAdjacentHTML('beforebegin', inputTemplate);
 		outputTarget.insertAdjacentHTML('beforeend', planetTemplate);
+		addAllTooltips();
 
 		// default must be first, otherwise it won't work
 		const defaultValue = document.querySelectorAll(`[data-planet="planet${i}"] [data-default]`);
@@ -321,7 +322,6 @@ function planetInputs() {
 		updateGlobalElements(resourceOutputs);
 
 		biomeLinks(document.getElementById(`biome_input${i}`));
-		addAllTooltips();
 	}
 }
 

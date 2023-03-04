@@ -190,14 +190,6 @@ function assignElementFunctions(object) {
 }
 assignElementFunctions(elementFunctions);
 
-// assigns alt attributes to tooltip images
-function assignAlt() {
-	const imgs = document.querySelectorAll('.tooltip img:not([alt])');
-	for (const img of imgs) {
-		img.alt = 'Help';
-	}
-}
-
 // initialises show/hide buttons with their proper attributes
 toggleSection();
 
@@ -214,6 +206,7 @@ function getInputData() {
 }
 
 function startUp() {
+	addAllTooltips();
 	autoShow();
 	versionDropdown();
 	uploadShown = true;
@@ -224,7 +217,6 @@ function startUp() {
 		galleryUploadShown = false;
 	}
 	enableTextMarking();
-	addAllTooltips();
 	// the order of the touch and mouse events MUST NOT BE CHANGED!!!
 	// it will not work the other way around. Touch must be before mouse
 	// globalElements.output.output.ontouchstart = () => preventCopy();	// this must be first		// this is commented out because it had bad scroll UX on mobile. It should be triggered when tapped, but not when swiped.

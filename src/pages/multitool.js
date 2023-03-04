@@ -329,6 +329,7 @@ function hideSrLocName() {
 	}
 }
 
+// hide cost if Sentinel Pillar is selected (MT is free there)
 function hideCost() {
 	const location = pageData.location;
 	const costElement = globalElements.input.costInput;

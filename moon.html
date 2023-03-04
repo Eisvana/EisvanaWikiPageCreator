@@ -6,7 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Moon</title>
 	<meta name="application-name" content="Hub Wiki Page Creator">
-	<meta name="description" content="Easily generate the wikicode to create a moon discovery page for the Galactic Hub on the No Man's Sky Wiki!">
+	<meta name="description"
+		content="Easily generate the wikicode to create a moon discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Moon">
 	<link rel="stylesheet" href="./src/css/common.css">
@@ -294,6 +295,12 @@
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="faunaNumber" id="faunaNumberInput">
 					</div>
+					<div class="tableCell text">
+						<label for="sandwormInput">Sandworm?</label>
+					</div>
+					<div class="tableCell data">
+						<input type="checkbox" id="sandwormInput" data-dest-noauto="sandworm">
+					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Fauna:</p>
 						<button class="button" onclick="toggleSection('fauna', this)">Hide</button>
@@ -518,6 +525,23 @@
 					<div id="creatures"></div>
 					<div>|}</div>
 					<br>
+					<div id="sandworm" style="display: none">
+						<div>* There is a [[sandworm]] on this moon, it is featured in the [[EisHub Shaihuluda Album]]
+						</div>
+						<div>{| class="article-table" style="text-align:center; width:100%; max-width: 1000px"</div>
+						<div>|-</div>
+						<div>!style="background-color:#2f4f4f; width:150px"|Image</div>
+						<div>!style="background-color:#2f4f4f"|Class</div>
+						<div>!style="background-color:#2f4f4f"|Head Type</div>
+						<div>!style="background-color:#2f4f4f"|Max Depth</div>
+						<div>!style="background-color:#2f4f4f"|Stomach Contents</div>
+						<div>!style="background-color:#2f4f4f"|Discovered by</div>
+						<div>|-</div>
+						<div>|[[File:nmsMisc_notAvailable.png|150px]] || class || headType || ku || stomach ||
+							discovererInfo</div>
+						<div>|}</div>
+						<br>
+					</div>
 
 					<div>===Flora===</div>
 					<div>{| class="article-table" style="text-align:center; width:100%; max-width: 1250px"</div>
