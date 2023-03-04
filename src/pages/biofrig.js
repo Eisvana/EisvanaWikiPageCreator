@@ -3,9 +3,11 @@ function startupFunctions() {
 	locHubNr();
 	locGalaxy();
 	addInfo();
+	albumFunctions();
 }
 
 const frigateElementFunctions = {
+	nameInput: ['albumName(); appearance()'],
 	costInput: ['numberStats(this)'],
 	combatInput: ['numberStats(this)'],
 	explorationInput: ['numberStats(this)'],
@@ -16,11 +18,14 @@ const frigateElementFunctions = {
 	civ: ['locGalaxy(); addInfo(); appearance(); locHubNr()', null, true],
 	mainColourInput: ['appearance()'],
 	secColourInput: ['appearance()'],
+	tentacleInput: ['appearance()'],
+	researchTeam: ['addInfo()'],
+	classInput: ['albumOther()'],
 }
 assignElementFunctions(frigateElementFunctions);
 
 function locHubNr() {
-	wikiCode(regNr(pageData.region), 'HubNr');
+	globalElements.output.HubNr.innerText = regNr(pageData.region);
 }
 
 // adds region to location sentence
@@ -47,9 +52,10 @@ function appearance() {
 	const name = pageData.name;
 	const colour1 = pageData.mainColour;
 	const colour2 = pageData.secColour;
+	const tentacles = pageData.tentacles;
 	const appearance = globalElements.input.appearanceInput;
 
-	if (!(colour1.trim() || colour2.trim())) return;
+	if (!(colour1.trim() || colour2.trim() || tentacles.trim())) return;
 
 	const mainColour = (() => {
 		if (colour1.trim()) return `${enPrefix(colour1)} ${colour1.trim()}`;
@@ -61,9 +67,17 @@ function appearance() {
 		return '';
 	})();
 
-	const output = `${name} is ${mainColour} organic frigate${accentColour}.`;
+	const output = `${name} is ${mainColour} organic frigate${accentColour} with ${tentacles}.`;
 	appearance.value = output;
 	wikiCode(appearance);
+}
+
+function albumOtherExternal() {
+	return `{{Class|${pageData.class}}}`;
+}
+
+function albumItemTypeExternal() {
+	return 'Organic Frigate Catalog';
 }
 
 function generateGalleryArray() {

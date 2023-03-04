@@ -60,6 +60,8 @@ function albumLink(element) {
 
 // these functions can be overwritten using by chaining "External" behind their name.
 // the external function should return the value that should go into the field.
+
+// the part directly behind the civ in the heading
 function albumItemType() {
 	const output = (() => {
 		if (typeof albumItemTypeExternal == 'function') {
@@ -71,6 +73,7 @@ function albumItemType() {
 	albumElements.output.album.innerText = output;
 }
 
+// this is after the album macro, used for MT pages
 function albumDesc() {
 	const output = (() => {
 		if (typeof albumDescExternal == 'function') {
@@ -82,6 +85,7 @@ function albumDesc() {
 	albumElements.output.albumDesc.innerText = output;
 }
 
+// discoverer in the album
 function albumDiscoverer() {
 	const output = (() => {
 		if (typeof albumDiscovererExternal == 'function') {
@@ -99,6 +103,7 @@ function albumDiscoverer() {
 	albumElements.output.albumDiscoverer.innerText = output;
 }
 
+// name of civ in the heading
 function albumCiv() {
 	const output = (() => {
 		if (typeof albumCivExternal == 'function') {
@@ -110,6 +115,7 @@ function albumCiv() {
 	albumElements.output.albumCiv.innerText = output;
 }
 
+// name of the object in the album
 function albumName() {
 	const output = (() => {
 		if ((typeof albumNameExternal == 'function')) {
@@ -121,6 +127,7 @@ function albumName() {
 	albumElements.output.albumName.innerText = output;
 }
 
+// "other" parm in the album
 function albumOther() {
 	const output = (() => {
 		if (typeof albumOtherExternal == 'function') {
@@ -132,6 +139,7 @@ function albumOther() {
 	globalElements.output.albumOther.innerText = output;
 }
 
+// third part in the heading, before the "entry"
 function albumType() {
 	const output = (() => {
 		if (typeof albumTypeExternal == 'function') {

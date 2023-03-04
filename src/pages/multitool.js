@@ -17,7 +17,7 @@ function startupFunctions() {
 // 2. param: string of the listener that should be used ('onchange', 'oninput'...)
 // 3. param: boolean whether the function string should be inserted before or after existing functions
 const MTElementFunctions = {
-	nameInput: ['albumName()'],
+	nameInput: ['albumName(); appearance()'],
 	civ: ['locGalaxy(); addInfo(); appearance(); locHubNr()', null, true],
 	typeInput: ['addInfo(); appearance(); autoRoyal(); showSizeDropdown(); MTType(); albumItemType(); albumOther()', null, true],
 	sizeInput: ['showSizeDropdown(); MTType(); albumOther()'],
@@ -51,7 +51,7 @@ assignElementFunctions(MTElementFunctions);
 
 
 function locHubNr() {
-	wikiCode(regNr(pageData.region), 'HubNr');
+	globalElements.output.HubNr.innerText = regNr(pageData.region);
 }
 
 // adds region to location sentence
