@@ -48,6 +48,20 @@
 				<select id="researchteamDefault" data-store="researchteamInput">
 				</select>
 			</div>
+			<div class="tableCell text">
+				<div class="label-combo">
+					<label for="portalglyphsInput">Portalglyphs:</label>
+					<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+						Delete</button>
+				</div>
+			</div>
+			<div class="tableCell data">
+				<input type="text" id="settingsPortalglyphs" data-dest-noauto="settingsPortalglyphs" maxlength="12">
+			</div>
+			<div class="tableHeader data">
+				<div id="settingsPortalglyphButtons" class="portalglyphButtons"></div>
+				<output name="settingsPortalglyphs" id="settingsPortalglyphsPreview" class="glyph portalglyphsPreview"></output>
+			</div>
 
 		</div>
 		<form method="dialog">
@@ -101,7 +115,8 @@ function switchTheme() {
 const footerElements = new Object;
 (() => {
 	const dialog = footerElements.dialog ??= document.getElementById('settings');
-	footerElements.inputs ??= Array.from(dialog.querySelectorAll('.data>*'));
+	const inputs = footerElements.inputs ??= Array.from(dialog.querySelectorAll('.data>*'));
+	addPortalGlyphButtons(inputs.find(input => input.id == 'settingsPortalglyphButtons'));
 	assignSettingFunctions();
 })();
 
@@ -147,6 +162,7 @@ function updateDefaultValues() {
 	const inputs = footerElements.inputs;
 	for (const input of inputs) {
 		const value = input.value;
+		if (value == undefined) continue;
 		const store = input.dataset.store;
 		settings[store] = sanitiseString(value);
 	}
@@ -180,8 +196,9 @@ function readDefaultValues() {
 function restoreDefaults() {
 	const inputs = footerElements.inputs;
 	for (const input of inputs) {
+		if (input.value == undefined) continue;
 		if (input.tagName.toLowerCase() == 'select') {
-			input.value = input.options[0].value;
+			input.value = input.options?.[0]?.value;
 		} else {
 			input.value = '';
 		}

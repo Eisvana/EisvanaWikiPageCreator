@@ -302,16 +302,24 @@ label>input[type="radio"]~span,
 	row-gap: .3rem;
 }
 
+.portalglyphButtons,
 #portalglyphButtons {
 	display: grid;
 	grid-template-columns: repeat(8, 60px);
 	gap: 1px;
 }
 
+.portalglyphButtons button,
+#portalglypButtons button {
+	padding: 0;
+}
+
+.portalglyphButtons .glyph.icon.is-small,
 #portalglyphButtons .glyph.icon.is-small {
 	height: 1em;
 }
 
+.portalglyphsPreview,
 #portalglyphsPreview {
 	word-break: break-all;
 }

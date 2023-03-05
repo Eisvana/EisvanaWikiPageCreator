@@ -1,13 +1,14 @@
 const validPortalKeys = '0123456789ABCDEF';
 
-(() => {
+function addPortalGlyphButtons(element) {
 	const glyphs = new Array;
 	for (const letter of validPortalKeys) {
 		const glyph = `<button type="button" class="button" value="${letter}" onclick="glyphOnClick(this)"><span class="glyph icon is-small">${letter}</span></button>`;
 		glyphs.push(glyph);
 	}
-	globalElements.output.portalglyphButtons.innerHTML = glyphs.join('');
-})();
+	element.innerHTML = glyphs.join('');
+}
+addPortalGlyphButtons(globalElements.output.portalglyphButtons);
 
 function executeOnInput() {
 	globalElements.input.portalglyphsInput.oninput.call(globalElements.input.portalglyphsInput);

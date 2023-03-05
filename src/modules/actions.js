@@ -62,7 +62,7 @@ function reset() {
 	}
 
 	for (const select of selects) {
-		select.value = select.options[0].value;
+		select.value = select.options?.[0]?.value;
 	}
 
 	for (const output of outputs) {
