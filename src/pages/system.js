@@ -599,11 +599,7 @@ function biomeLinks(element) {
 			usedBiomes.add(biome);
 		}
 	}
-
-	for (const key in linkedBiomes) {
-		const output = linkedBiomes[key];
-		globalElements.output[key].innerText = output;
-	}
+	setBiomeText(linkedBiomes);
 }
 
 function infestedBiomeLinks(dest, bool) {
@@ -624,9 +620,12 @@ function infestedBiomeLinks(dest, bool) {
 			linkedBiomes[planetName] = ` (Infested) `;
 		}
 	}
+	setBiomeText(linkedBiomes);
+}
 
-	for (const key in linkedBiomes) {
-		const output = linkedBiomes[key];
+function setBiomeText(array) {
+	for (const key in array) {
+		const output = array[key];
 		globalElements.output[key].innerText = output;
 	}
 }

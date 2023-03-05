@@ -2,6 +2,7 @@ function startupFunctions() {
 	celestialStartupFunctions();
 	autoInfested();
 	wormAutoSpawn();
+	wormAlbumName();
 	if (typeof planetStartupFunctions == 'function') planetStartupFunctions();
 }
 
@@ -21,6 +22,7 @@ const planetMoonElements = {
 updateGlobalElements(planetMoonElements);
 
 const planetMoonElementFunctions = {
+	civ: ['wormAlbumName()', null, true],
 	systemInput: ['locationSentence()'],
 	faunaNumberInput: ['numberStats(this); plural(pageData[this.dataset.destNoauto], "faunaSentencePlural")'],
 	sentinelInput: ['sentinelSentence()'],
@@ -677,8 +679,7 @@ function genusDropdown(element) {
 }
 
 function autoWorm(wormBool) {
-	if (!wormBool) return;
-	globalElements.input.sandwormInput.checked = true;
+	if (wormBool) globalElements.input.sandwormInput.checked = true;
 	addSandwormTemplate();
 }
 
@@ -705,6 +706,24 @@ function wormAutoSpawn() {
 		}
 	})();
 	globalElements.output.wormAutoSpawn.innerText = spawn;
+}
+
+function wormAlbumName() {
+	const civ = pageData.civilized;
+	const civShort = pageData.civShort;
+	const output = (() => {
+		switch (civShort) {
+			case 'GHub':
+				return 'GHEC Sandworm Album';
+
+			case 'CalHub':
+				return 'CalHub Rare Fauna Album#Sandworm|CalHub Rare Fauna Album';
+
+			case 'EisHub':
+				return 'EisHub Shaihuluda Album';
+		}
+	})();
+	globalElements.output.wormAlbumName.innerText = output;
 }
 
 function resetExternal() {

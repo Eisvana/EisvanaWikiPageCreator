@@ -116,7 +116,7 @@ function galleryDesc(dropdownElement, inputId, codeId) {
 function galleryInput(input, galleryId) {
 	const desc = sanitiseString(input.value);
 	if (desc) {
-		document.getElementById(galleryId).innerText = '\|' + desc;
+		document.getElementById(galleryId).innerText = '|' + desc;
 	} else {
 		document.getElementById(galleryId).innerText = '';
 	}

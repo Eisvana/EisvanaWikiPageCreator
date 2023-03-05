@@ -349,6 +349,8 @@
 								<ul>
 									<li><a href="https://nomanssky.fandom.com/wiki/GHEC_Sandworm_Album" target="_blank"
 											rel="noreferrer noopener">GHEC Sandworm Album</a></li>
+									<li><a href="https://nomanssky.fandom.com/wiki/CalHub_Rare_Fauna_Album#Sandworm"
+											target="_blank" rel="noreferrer noopener">CalHub Rare Fauna Album</a></li>
 									<li><a href="https://nomanssky.fandom.com/wiki/EisHub_Shaihuluda_Album"
 											target="_blank" rel="noreferrer noopener">EisHub Shaihuluda Album</a></li>
 								</ul>
@@ -435,13 +437,13 @@
 									value="" checked><span>I don't know</span></label>
 						</div>
 					</div>
-					<div class="tableCell text">
+					<div class="tableCell text" data-section="sandworm">
 						<label for="wormDiscoveredInput">Discoverer:</label>
 						<span class="tooltip">
 							<data>If there are no previous posts of this worm anywhere, you are the discoverer.</data>
 						</span>
 					</div>
-					<div class="tableCell data">
+					<div class="tableCell data" data-section="sandworm">
 						<input type="text" data-dest="wormDiscovered" id="wormDiscoveredInput">
 					</div>
 					<div class="tableHeader text sectionToggle">
@@ -670,8 +672,9 @@
 					<div id="creatures"></div>
 					<div>|}</div>
 					<br>
-					<div id="sandworm" style="display: none">
-						<div>* There is a [[sandworm]] on this planet, it is featured in the [[EisHub Shaihuluda Album]]
+					<div id="sandworm">
+						<div>* There is a [[sandworm]] on this planet, it is featured in the [[<output
+								id="wormAlbumName"></output>]]
 						</div>
 						<div>{| class="article-table" style="text-align:center; width:100%; max-width: 1000px"</div>
 						<div>|-</div>

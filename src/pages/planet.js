@@ -45,7 +45,7 @@ function moonList() {
 	const moonInputs = document.querySelectorAll('[data-moon] input');
 	const moons = new Array;
 	for (const input of moonInputs) {
-		if (input.value) moons.push(`[[${input.value}]]`);
+		if (input.value) moons.push(`[[${sanitiseString(input.value)}]]`);
 	}
 
 	globalElements.output.moonList.innerText = moons.join(', ');
