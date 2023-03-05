@@ -33,7 +33,7 @@ const creatureElementFunctions = {
 	civ: ['albumDropdown(); hideAlbumEntry();', null, true],
 	notesInput: ['specialNotes(); specialNotesTextFunc()'],
 	specialNotesInput: ['specialNotesTextFunc()'],
-	catalogInput: ['addInfo(); addInfoBullet(); albumTitle(); hideAlbumEntry()'],
+	catalogueInput: ['addInfo(); addInfoBullet(); albumTitle(); hideAlbumEntry()'],
 	researchTeam: ['addInfo()', null, true],
 	genderInput: ['hideSecGenderProps(); hideCreaturePrio(); genderProps("gender", "gender2")'],
 	gender2Input: ['hideSecGenderProps(); hideCreaturePrio(); genderProps("gender", "gender2")'],
@@ -69,7 +69,7 @@ function albumDropdown() {
 	// if civ is GHub, use GHEC instead. Otherwise use the Civ shortname
 	const civ = (pageData.civShort == "GHub") ? "GHEC" : pageData.civShort;
 	const ecosystem = pageData.ecosystem;
-	const catalogInput = globalElements.input.catalogInput;
+	const catalogueInput = globalElements.input.catalogueInput;
 	const galaxy = pageData.galaxy;
 
 	const albums = creatureData.catalogs[galaxy][ecosystem];
@@ -81,8 +81,8 @@ function albumDropdown() {
 		albumValues.push(`${text} Album`);
 		albumTexts.push(text);
 	}
-	setDropdownOptions(catalogInput, albumValues, albumTexts);
-	storeData(catalogInput);
+	setDropdownOptions(catalogueInput, albumValues, albumTexts);
+	storeData(catalogueInput);
 }
 
 // generates additional information sentence
@@ -91,15 +91,15 @@ function addInfo() {
 
 	// only accept GHEC as researchteam and construct sentence based on that
 	const chapter = docByResearchteam('GHEC');
-	const catalog = pageData.catalog;
+	const catalogue = pageData.catalogue;
 
-	if (!catalog) {
+	if (!catalogue) {
 		outputElement.style.display = 'none';
 		return;
 	}
 	outputElement.style.display = ''
 
-	const output = '[[' + catalog + ']]' + chapter
+	const output = '[[' + catalogue + ']]' + chapter
 
 	outputElement.innerText = `Featured in the ${output}`;
 	addInfoBullet();
@@ -265,7 +265,7 @@ function bundlePropFunctions() {
 
 function hideAlbumEntry() {
 	const displayState = { true: '', false: 'hidden' };
-	const boolString = Boolean(pageData.catalog).toString();
+	const boolString = Boolean(pageData.catalogue).toString();
 	const display = displayState[boolString];
 	globalElements.output.albumEntry.style.visibility = display;
 	globalElements.output.albumActions.style.visibility = display;
@@ -283,15 +283,8 @@ function albumOtherExternal() {
 	return output;
 }
 
-function albumLinkGen() {
-	const catalog = pageData.catalog;
-	if (!catalog) return;
-	const link = wikiLink + catalog;
-	return link;
-}
-
 function albumTitle() {
-	globalElements.output.album.innerText = pageData.catalog;
+	globalElements.output.album.innerText = pageData.catalogue;
 }
 
 function albumCivExternal() {

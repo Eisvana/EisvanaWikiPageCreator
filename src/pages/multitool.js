@@ -71,7 +71,7 @@ function addInfo() {
 		return preType;
 	})();
 
-	const catalog = (() => {
+	const catalogue = (() => {
 		if (civ != 'CalHub') {
 			return `${civ} Multi-Tool Catalog - ${type}`;
 		} else {
@@ -79,7 +79,7 @@ function addInfo() {
 		}
 	})();
 
-	const output = '[[' + catalog + ']]' + researchteam;
+	const output = '[[' + catalogue + ']]' + researchteam;
 
 	globalElements.output.addInfo.innerText = output;
 }
@@ -367,7 +367,7 @@ function albumItemTypeExternal() {
 
 function albumOtherExternal() {
 
-	// determine if MT is SMG for catalog
+	// determine if MT is SMG for catalogue
 	function catalogMTType() {
 		const type = pageData.type;
 		const size = pageData.size;
@@ -399,8 +399,7 @@ function albumLinkGen() {
 		return civ + ' Multi-Tool Catalog - ' + longType;
 	})();
 
-	const link = wikiLink + catalogName;
-	return link;
+	return catalogName;
 }
 
 function generateGalleryArray() {

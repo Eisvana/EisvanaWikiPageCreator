@@ -46,16 +46,17 @@ assignElementFunctions(albumElementFunctions);
 // expects external 'albumLinkGen()' function which returns the link to the album
 function albumLink(element) {
 	element.style.pointerEvents = 'none';
-
-	const link = (() => {
-		try {
+	const catalogue = (() => {
+		if (typeof albumLinkGen == 'function') {
 			return albumLinkGen();
-		} catch (error) {
-			console.warn('No link provided. Add the function "albumLinkGen()" to your code!');
+		} else if (pageData.catalogue) {
+			return pageData.catalogue;
+		} else {
+			console.warn('No wiki page provided. Add the function `albumLinkGen()` to your code or define a catalog in the `pageData.catalogue` property!');
+			element.style.pointerEvents = '';
 		}
 	})();
-
-	assignLink(element, link);
+	if (catalogue) assignLink(element, wikiLink + catalogue);
 }
 
 // these functions can be overwritten using by chaining "External" behind their name.

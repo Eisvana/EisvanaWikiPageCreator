@@ -487,19 +487,19 @@ function loc() {
 
 // constructs additional information sentence
 function addInfo() {
-	let catalog = '';
+	let catalogue = '';
 	const civ = shortenGHub(pageData.civShort);
 	const researchteam = docByResearchteam('GHSH');
 	const type = pageData.type;
 
-	if (civ != 'CalHub') catalog = ' - ' + type;
+	if (civ != 'CalHub') catalogue = ' - ' + type;
 
 	if (type == 'Freighter' && civ != 'CalHub') {
-		catalog = civ + ' Freighter Catalog';
+		catalogue = civ + ' Freighter Catalog';
 	} else {
-		catalog = civ + ' Starship Catalog' + catalog;
+		catalogue = civ + ' Starship Catalog' + catalogue;
 	}
-	const output = '[[' + catalog + ']]' + researchteam;
+	const output = '[[' + catalogue + ']]' + researchteam;
 
 	globalElements.output.addInfo.innerText = output;
 }
@@ -627,9 +627,7 @@ function albumLinkGen() {
 		return `${civ} Starship Catalog - ${type} (${rarity})`; 										// EisHub Fighter
 	}
 
-	const catalog = getCatalog();
-	const link = wikiLink + catalog;
-	return link;
+	return getCatalog();
 }
 
 function albumTypeExternal() {

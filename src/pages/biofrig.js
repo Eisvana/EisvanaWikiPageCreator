@@ -2,11 +2,13 @@ function startupFunctions() {
 	numberStats();
 	locHubNr();
 	locGalaxy();
+	generateCatalogue();
 	addInfo();
 	albumFunctions();
 }
 
 const frigateElementFunctions = {
+	civ: ['locGalaxy(); addInfo(); appearance(); locHubNr(); generateCatalogue()', null, true],
 	nameInput: ['albumName(); appearance()'],
 	costInput: ['numberStats(this)'],
 	combatInput: ['numberStats(this)'],
@@ -15,7 +17,6 @@ const frigateElementFunctions = {
 	tradeInput: ['numberStats(this)'],
 	fuelInput: ['numberStats(this)'],
 	portalglyphsInput: ['locHubNr()', null, true],
-	civ: ['locGalaxy(); addInfo(); appearance(); locHubNr()', null, true],
 	mainColourInput: ['appearance()'],
 	secColourInput: ['appearance()'],
 	tentacleInput: ['appearance()'],
@@ -37,15 +38,25 @@ function locGalaxy() {
 
 function addInfo() {
 	const researchteam = docByResearchteam('GHSH');
+	const catalogue = pageData.catalogue;
+
+	globalElements.output.addInfo.innerText = `[[${catalogue}]]${researchteam}`;
+}
+
+function generateCatalogue() {
 	const civShort = pageData.civShort;
 	const civ = pageData.civilized;
-	const catalogue = {
-		GHub: () => civ.split(' ').slice(0, -1).join(' '),
-		CalHub: () => civ,
-		EisHub: () => civShort,
-	}
+	const catalogueCiv = (() => {
+		switch (civShort) {
+			case 'GHub':
+			case 'EisHub':
+				return shortenGHub(civShort);
 
-	globalElements.output.addInfo.innerText = `[[${catalogue[civShort]()} Organic Frigate Catalog]]${researchteam}`;
+			case 'CalHub':
+				return civ;
+		}
+	})();
+	pageData.catalogue = `${catalogueCiv} Organic Frigate Catalog`;
 }
 
 function appearance() {
