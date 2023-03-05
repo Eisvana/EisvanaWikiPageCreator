@@ -361,7 +361,7 @@ function showHideStarshipSelects() {
 		if (data.length > 1) {
 			inputElement.value = data[1];
 		} else if (inputElement.tagName.toLowerCase() == 'select') {
-			inputElement.value ||= inputElement.querySelector('option')?.value;
+			inputElement.value ||= inputElement.options?.[0]?.value;
 		}
 		wikiCode(inputElement);
 	}

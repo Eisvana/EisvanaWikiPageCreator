@@ -19,7 +19,8 @@
 		return;
 	}
 	const skipCheck = `<label style="display:flex; gap: .3rem"><input class="checkbox" type="checkbox" id="skipCheck">Enable debug (no checks, no popups)</label>`;
-	globalElements.output.actions.insertAdjacentHTML('beforeend', skipCheck);
+	const clearLocalStorage = `<button style="margin: 0 1rem" class="button is-danger is-small" id="clearCache" onclick="localStorage.clear()">Clear Localstorage</button>`;
+	globalElements.output.actions.insertAdjacentHTML('beforeend', skipCheck + clearLocalStorage);
 	const skipCheckElement = document.getElementById('skipCheck');
 	skipCheckElement.onchange = (e) => {
 		const checkState = e.target.checked;
@@ -61,7 +62,7 @@ function reset() {
 	}
 
 	for (const select of selects) {
-		select.value = select.querySelector('option').value;
+		select.value = select.options[0].value;
 	}
 
 	for (const output of outputs) {
@@ -85,7 +86,7 @@ function reset() {
 
 	// allow an external function to add reset logic. This external function has to be created when needed.
 	if (typeof resetExternal == 'function') resetExternal();
-
+	readDefaultValues();
 	showAll();
 }
 

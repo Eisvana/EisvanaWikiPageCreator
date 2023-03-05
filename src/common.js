@@ -208,6 +208,7 @@ function getInputData() {
 function startUp() {
 	addAllTooltips();
 	autoShow();
+	readDefaultValues();
 	versionDropdown();
 	uploadShown = true;
 	galleryUploadShown = true;
@@ -522,9 +523,7 @@ function toggleSection(sectionName, button, attributeName = 'section') {
 }
 
 // generates researchteam dropdown
-function researchTeamDropdown() {
-	const civ = pageData.civShort;
-	const inputElement = globalElements.input.researchTeam;
+function researchTeamDropdown(inputElement = globalElements.input.researchTeam, civ = pageData.civShort) {
 	if (!inputElement) return;
 	const prevSelect = inputElement.value;
 	const teams = ['', 'GHGS', 'GHEC', 'GHSH', 'GHDF', 'GHBG', 'GHSL', 'GHTD', 'HBS'];
@@ -540,7 +539,7 @@ function researchTeamDropdown() {
 	}
 	setDropdownOptions(inputElement, teams);
 	inputElement.value = prevSelect;
-	researchTeam();
+	if (!arguments.length) researchTeam();
 }
 
 // adds generic civ researchteam if none is given and expands some civ specific teams
@@ -632,13 +631,40 @@ function formatName(documenter) {
 // hide discoveredlink input if discovered is populated and vice versa
 function hideDiscoverer(keepId = null, removeId = null) {
 	if (!keepId && !removeId) {			// show everything if no inputs are given
-		const elements = document.querySelectorAll('[oninput*="hideDiscoverer"], [onchange*="hideDiscoverer"]')
+		// I wrote this, but I have no idea how it works
+		const elements = document.querySelectorAll('[oninput*="hideDiscoverer"], [onchange*="hideDiscoverer"]');
+		const usedElements = new Set();		// holds already done elements so we don't get duplicates
+		const inputPairs = new Array;		// holds our new pairs
+		// builds the pair arrays and pushes them to inputPairs
 		for (const element of elements) {
-			hideInput(element, '');
+			if (usedElements.has(element)) continue;
+			const tableCell = element.closest('.tableCell');
+			const prev = tableCell.previousElementSibling.previousElementSibling.querySelector('input');
+			const next = tableCell.nextElementSibling.nextElementSibling.querySelector('input');
+			const siblingArray = [prev, next];
+			const adjacentInput = siblingArray.find(input => Array.from(elements).includes(input));
+			const pair = [element, adjacentInput];
+			usedElements.add(adjacentInput);
+			inputPairs.push(pair);
+		}
+		for (const pair of inputPairs) {
+			const input1 = pair[0];
+			const input2 = pair[1];
+
+			if (input1.value) {
+				hideInput(input1, '');
+				hideInput(input2, 'none');
+				input2.value = '';
+			} else if (input2.value) {
+				hideInput(input2, '');
+				hideInput(input1, 'none');
+				input1.value = '';
+			} else {
+				pair.forEach(input => hideInput(input, ''));
+			}
 		}
 		return;
 	}
-
 	const keepInput = document.getElementById(keepId);
 	const removeInput = document.getElementById(removeId);
 	const removeInputCell = removeInput.closest('.data');
