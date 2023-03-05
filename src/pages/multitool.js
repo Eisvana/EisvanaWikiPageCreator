@@ -10,18 +10,19 @@ function startupFunctions() {
 	hideLocName();
 	hideSrLocName();
 	locHubNr();
+	hideCost();
 }
 
 // 1. param: string of all functions to add to the element
 // 2. param: string of the listener that should be used ('onchange', 'oninput'...)
 // 3. param: boolean whether the function string should be inserted before or after existing functions
 const MTElementFunctions = {
-	nameInput: ['albumName()'],
+	nameInput: ['albumName(); appearance()'],
 	civ: ['locGalaxy(); addInfo(); appearance(); locHubNr()', null, true],
 	typeInput: ['addInfo(); appearance(); autoRoyal(); showSizeDropdown(); MTType(); albumItemType(); albumOther()', null, true],
 	sizeInput: ['showSizeDropdown(); MTType(); albumOther()'],
 	researchTeam: ['addInfo()', null, true],
-	locInput: ['acquirementBundle(); hideLocName()'],
+	locInput: ['acquirementBundle(); hideLocName(); hideCost()'],
 	srlocInput: ['acquirementBundle(); hideSrLocName()'],
 	srInput: ['acquirementBundle()'],
 	planetInput: ['acquirementBundle()'],
@@ -50,7 +51,7 @@ assignElementFunctions(MTElementFunctions);
 
 
 function locHubNr() {
-	wikiCode(regNr(pageData.region), 'HubNr');
+	globalElements.output.HubNr.innerText = regNr(pageData.region);
 }
 
 // adds region to location sentence
@@ -70,7 +71,7 @@ function addInfo() {
 		return preType;
 	})();
 
-	const catalog = (() => {
+	const catalogue = (() => {
 		if (civ != 'CalHub') {
 			return `${civ} Multi-Tool Catalog - ${type}`;
 		} else {
@@ -78,7 +79,7 @@ function addInfo() {
 		}
 	})();
 
-	const output = '[[' + catalog + ']]' + researchteam;
+	const output = '[[' + catalogue + ']]' + researchteam;
 
 	globalElements.output.addInfo.innerText = output;
 }
@@ -171,6 +172,14 @@ function acquirementGallery() {
 	const cabinetPlanetImg = pageData.cabinetPlanetImg || 'nmsMisc_notAvailable.png';
 	const axesImg = pageData.axesImg || 'nmsMisc_notAvailable.png';
 	const loc = pageData.location;
+
+	const InputElementIds = [
+		'srImgInput',
+		'sysImgInput',
+		'cabInput',
+		'coordsInput',
+	]
+
 	const pics = [{}, {}, {}, {}];
 
 	const body = planetMoon();
@@ -199,20 +208,28 @@ function acquirementGallery() {
 
 	fillPicObj(pics[0], srImg, `Save/Reload ${srloc}`);
 	fillPicObj(pics[1], sysImg, `System ${highlight}`);
-	if (!loc.includes('Space')) {
+	const picCondition = !loc.includes('Space');
+	if (picCondition) {
 		fillPicObj(pics[2], cabinetPlanetImg, `${type} ${body}`);
 		fillPicObj(pics[3], axesImg, 'Coordinates');
 	}
 
 	const codeArray = new Array;
-	for (const picObj of pics) {
+	for (let i = 0; i < pics.length; i++) {
+		const picObj = pics[i];
 		const pic = picObj.picName;
 		const desc = picObj.desc;
-		if (!pic || !desc) continue;
+		const input = InputElementIds[i];
+		if (!pic || !desc) {
+			hideInput(globalElements.input[input], 'none');
+			continue;
+		}
+		hideInput(globalElements.input[input], '');
 		const gallery = document.createElement('span');
 		gallery.style.display = 'block';
 		gallery.innerText = `${pic}|${desc}`;
 		codeArray.push(gallery.outerHTML);
+		globalElements.output[input + 'Label'].innerText = desc;
 	}
 	globalElements.output.acquirementGallery.innerHTML = codeArray.join('');
 }
@@ -229,6 +246,8 @@ function autoRoyal() {
 	} else {
 		hideInput(locElement, '');
 	}
+	hideCost();
+	acquirementGallery();
 }
 
 // shows or hides size dropdown
@@ -310,6 +329,19 @@ function hideSrLocName() {
 	}
 }
 
+// hide cost if Sentinel Pillar is selected (MT is free there)
+function hideCost() {
+	const location = pageData.location;
+	const costElement = globalElements.input.costInput;
+	if (location == 'Sentinel Pillar') {
+		hideInput(costElement, 'none');
+		costElement.value = '';
+		costElement.oninput();
+	} else {
+		hideInput(costElement, '');
+	}
+}
+
 function galleryExplanationExternal() {
 	return `There is a preferred order of pictures:
 	<div class='is-flex is-justify-content-center'>
@@ -335,7 +367,7 @@ function albumItemTypeExternal() {
 
 function albumOtherExternal() {
 
-	// determine if MT is SMG for catalog
+	// determine if MT is SMG for catalogue
 	function catalogMTType() {
 		const type = pageData.type;
 		const size = pageData.size;
@@ -367,8 +399,7 @@ function albumLinkGen() {
 		return civ + ' Multi-Tool Catalog - ' + longType;
 	})();
 
-	const link = wikiLink + catalogName;
-	return link;
+	return catalogName;
 }
 
 function generateGalleryArray() {

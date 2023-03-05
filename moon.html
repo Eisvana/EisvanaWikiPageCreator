@@ -6,7 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - Moon</title>
 	<meta name="application-name" content="Hub Wiki Page Creator">
-	<meta name="description" content="Easily generate the wikicode to create a moon discovery page for the Galactic Hub on the No Man's Sky Wiki!">
+	<meta name="description"
+		content="Easily generate the wikicode to create a moon discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Moon">
 	<link rel="stylesheet" href="./src/css/common.css">
@@ -294,6 +295,158 @@
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="faunaNumber" id="faunaNumberInput">
 					</div>
+					<div class="tableCell text">
+						<label for="sandwormInput">Sandworm?</label>
+					</div>
+					<div class="tableCell data">
+						<input type="checkbox" id="sandwormInput" data-dest-noauto="sandworm">
+					</div>
+					<div class="tableCell text" data-section="sandworm">
+						<label for="sandwormImgInput">Sandworm image:</label>
+						<span class="tooltip" onclick="uploadShown = true">
+							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
+							<data>File Upload</data>
+							<data>
+								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
+								image name. Maximum filesize is 10MB.
+								You can upload your pictures to the wiki on <a
+									href='https://nomanssky.fandom.com/Special:Upload' target='_blank'
+									rel='noopener noreferrer'>Special:Upload</a>
+							</data>
+						</span>
+					</div>
+					<div class="tableCell data" data-section="sandworm">
+						<input type="text" id="sandwormImgInput" data-dest="sandwormImg"
+							data-default="NmsMisc_NotAvailable.png">
+						<input type="file" id="sandwormImgUpload" accept="image/*" onchange="image(this)">
+					</div>
+					<div class="tableCell text" data-section="sandworm">
+						<label>Class:</label>
+						<span class="tooltip">
+							<data>Found on the worm scan.</data>
+							<data>Class</data>
+							<data>Found on the worm scan.</data>
+							<data>./assets/bitmap/sandworm/class.jpg</data>
+						</span>
+					</div>
+					<div class="tableCell data" data-section="sandworm">
+						<select id="wormclassInput" data-dest="wormclass">
+							<option value="Ceaseless Burrower">Ceaseless Burrower</option>
+							<option value="Colossal Being">Colossal Being</option>
+							<option value="Gargantuan">Gargantuan</option>
+							<option value="Giant Parasite">Giant Parasite</option>
+							<option value="Planetary Maggot">Planetary Maggot</option>
+							<option value="The Consumer">The Consumer</option>
+							<option value="Unstoppable Nematode">Unstoppable Nematode</option>
+							<option value="Worm Lord">Worm Lord</option>
+						</select>
+					</div>
+					<div class="tableCell text" data-section="sandworm">
+						<label for="wormHeadInput">Head type:</label>
+						<span class="tooltip">
+							<data>Head type of the worm</data>
+							<data>Head Type</data>
+							<data>Head type of the worm. See the catalogs for examples of the different types:
+								<ul>
+									<li><a href="https://nomanssky.fandom.com/wiki/GHEC_Sandworm_Album" target="_blank"
+											rel="noreferrer noopener">GHEC Sandworm Album</a></li>
+									<li><a href="https://nomanssky.fandom.com/wiki/CalHub_Rare_Fauna_Album#Sandworm"
+											target="_blank" rel="noreferrer noopener">CalHub Rare Fauna Album</a></li>
+									<li><a href="https://nomanssky.fandom.com/wiki/EisHub_Shaihuluda_Album"
+											target="_blank" rel="noreferrer noopener">EisHub Shaihuluda Album</a></li>
+								</ul>
+							</data>
+						</span>
+					</div>
+					<div class="tableCell data" data-section="sandworm">
+						<select id="wormHeadInput" data-dest="wormHead">
+							<option value="Glowworm">Glowworm</option>
+							<option value="Arrakis">Arrakis</option>
+							<option value="Stubby">Stubby</option>
+							<option value="Fangs">Fangs</option>
+							<option value="Dragon">Dragon</option>
+							<option value="Fish">Fish</option>
+							<option value="Round Mouth">Round Mouth</option>
+							<option value="Sarlacc">Sarlacc</option>
+							<option value="Lips">Lips</option>
+						</select>
+					</div>
+					<div class="tableCell text" data-section="sandworm">
+						<label>Max Depth:</label>
+						<span class="tooltip">
+							<data>Found on the worm scan.</data>
+							<data>Max Depth</data>
+							<data>Found on the worm scan.<br>Give the full number, including the decimal.<br>No "ku"
+								necessary.</data>
+							<data>./assets/bitmap/sandworm/maxDepth.jpg</data>
+						</span>
+					</div>
+					<div class="tableCell data" data-section="sandworm">
+						<input type="text" id="wormmaxdepthInput" data-dest-noauto="wormmaxdepth" maxlength="5"
+							placeholder="0.0">
+					</div>
+					<div class="tableCell text" data-section="sandworm">
+						<label>Stomach Contents:</label>
+						<span class="tooltip">
+							<data>Found on the worm scan.</data>
+							<data>Stomach Contents</data>
+							<data>Found on the worm scan.</data>
+							<data>./assets/bitmap/sandworm/stomachContents.jpg</data>
+						</span>
+					</div>
+					<div class="tableCell data" data-section="sandworm">
+						<select id="wormstomachInput" data-dest="wormstomach">
+							<option value="Consumed waypoints">Consumed waypoints</option>
+							<option value="Entire [[Trade Outpost|trade outpost]]">Entire trade outpost</option>
+							<option value="[[Freighter]] components">Freighter components</option>
+							<option value="Horrific Eggs">Horrific Eggs</option>
+							<option value="Layers of teeth">Layers of teeth</option>
+							<option value="Lost [[starship]]s">Lost starships</option>
+							<option value="Magma">Magma</option>
+							<option value="Many Sentinels">Many Sentinels</option>
+							<option value="Minerals">Minerals</option>
+							<option value="Mostly sand">Mostly sand</option>
+							<option value="Other gargantuans">Other gargantuans</option>
+							<option value="Planetary beacon">Planetary beacon</option>
+							<option value="Rubble">Rubble</option>
+							<option value="[[Sentinel Walker]]s">Sentinel Walkers</option>
+							<option value="Several [[Gek]]">Several Gek</option>
+							<option value="Unpleasant liquid">Unpleasant liquid</option>
+						</select>
+					</div>
+					<div class="tableCell text" data-section="sandworm">
+						<label>Does this worm spawn on game reload?</label>
+						<span class="tooltip">
+							<data>Reload your game and observe.</data>
+							<data>Worm on Reload</data>
+							<data>
+								Some worms spawn immediately after you reload your game. To test this, make a manual
+								save by entering and exiting your starship,
+								then reload your latest save in the options.<br>If the worm doesn't spawn after 5-10
+								seconds, it doesn't spawn after reload.<br>
+								You can't really overlook a worm, they make a very loud sound and shake the ground.
+							</data>
+						</span>
+					</div>
+					<div class="tableCell data" data-section="sandworm">
+						<div class="radioButtons">
+							<label for="autoSpawnInputY"><input type="radio" id="autoSpawnInputY" name="autoSpawnInput"
+									value="Yes"><span>Yes</span></label>
+							<label for="autoSpawnInputN"><input type="radio" id="autoSpawnInputN" name="autoSpawnInput"
+									value="No"><span>No</span></label>
+							<label for="autoSpawnInputA"><input type="radio" id="autoSpawnInputA" name="autoSpawnInput"
+									value="" checked><span>I don't know</span></label>
+						</div>
+					</div>
+					<div class="tableCell text" data-section="sandworm">
+						<label for="wormDiscoveredInput">Discoverer:</label>
+						<span class="tooltip">
+							<data>If there are no previous posts of this worm anywhere, you are the discoverer.</data>
+						</span>
+					</div>
+					<div class="tableCell data" data-section="sandworm">
+						<input type="text" data-dest="wormDiscovered" id="wormDiscoveredInput">
+					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Fauna:</p>
 						<button class="button" onclick="toggleSection('fauna', this)">Hide</button>
@@ -518,6 +671,28 @@
 					<div id="creatures"></div>
 					<div>|}</div>
 					<br>
+					<div id="sandworm">
+						<div>* There is a [[sandworm]] on this moon, it is featured in the [[<output
+								id="wormAlbumName"></output>]]
+						</div>
+						<div>{| class="article-table" style="text-align:center; width:100%; max-width: 1000px"</div>
+						<div>|-</div>
+						<div>!style="background-color:#2f4f4f; width:150px"|Image</div>
+						<div>!style="background-color:#2f4f4f"|Class</div>
+						<div>!style="background-color:#2f4f4f"|Head Type</div>
+						<div>!style="background-color:#2f4f4f"|Max Depth</div>
+						<div>!style="background-color:#2f4f4f"|Stomach Contents</div>
+						<div>!style="background-color:#2f4f4f"|Spawns on Reload</div>
+						<div>!style="background-color:#2f4f4f"|Discovered by</div>
+						<div>|-</div>
+						<div>|[[File:<output id="sandwormImg"></output>|150px]] || <output id="wormclass"></output> ||
+							<output id="wormHead"></output> || <output id="wormmaxdepth"></output>ku || <output
+								id="wormstomach"></output> || <output id="wormAutoSpawn"></output> || <output
+								id="wormDiscovered"></output>
+						</div>
+						<div>|}</div>
+						<br>
+					</div>
 
 					<div>===Flora===</div>
 					<div>{| class="article-table" style="text-align:center; width:100%; max-width: 1250px"</div>

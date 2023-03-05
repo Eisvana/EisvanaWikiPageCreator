@@ -80,10 +80,13 @@ function autoInfested(element = globalElements.input.descriptionInput) {
 	}
 
 	// true: system. false: planet/moon
-	const isInfested = infestedDescriptors.includes(element.value);
+	const isInfested = infestedDescriptors.includes(element.value.trim());
 	if (pageData.pageType == 'System') return isInfested;
 
-	document.getElementById('infested').innerText = isInfested ? '([[Biome Subtype - Infested|Infested]]) ' : '';
+	globalElements.output.infested.innerText = isInfested ? '([[Biome Subtype - Infested|Infested]]) ' : '';
+	pageData.infested = isInfested;
+	planetDescriptor(element);
+	autoWorm(isInfested);
 }
 
 function buildDescriptor(descriptor, planetClass, filler) {

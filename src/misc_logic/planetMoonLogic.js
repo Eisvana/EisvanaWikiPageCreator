@@ -1,27 +1,35 @@
 function startupFunctions() {
 	celestialStartupFunctions();
 	autoInfested();
+	wormAutoSpawn();
+	wormAlbumName();
 	if (typeof planetStartupFunctions == 'function') planetStartupFunctions();
 }
 
 const planetMoonElements = {
 	input: {
 		resourceInputs: 'resourceInputs',
+		autoSpawn: 'autoSpawnInput',
 	},
 	output: {
 		resourceBullets: 'resourceBullets',
 		creatures: 'creatures',
 		plants: 'plants',
 		minerals: 'minerals',
+		sandworm: 'sandworm',
 	}
 }
 updateGlobalElements(planetMoonElements);
 
 const planetMoonElementFunctions = {
+	civ: ['wormAlbumName()', null, true],
 	systemInput: ['locationSentence()'],
 	faunaNumberInput: ['numberStats(this); plural(pageData[this.dataset.destNoauto], "faunaSentencePlural")'],
 	sentinelInput: ['sentinelSentence()'],
-	descriptionInput: ['autoInfested(this); planetDescriptor(this)'],
+	descriptionInput: ['autoInfested(this)'],
+	sandwormInput: ['addSandwormTemplate()'],
+	wormmaxdepthInput: ['numberStats(this, 1)'],
+	autoSpawn: ['wormAutoSpawn()'],
 }
 assignElementFunctions(planetMoonElementFunctions);
 
@@ -526,8 +534,8 @@ function addMineral(element) {
 }
 
 function postProcessSection(element, sectionType, i) {
-	changeTableEntry(element);
 	addAllTooltips();
+	changeTableEntry(element);
 
 	const sectionElements = { input: {}, output: {} };
 
@@ -668,6 +676,54 @@ function genusDropdown(element) {
 
 	setDropdownOptions(globalElements.input[genusInputID], genera, commonNames);
 	addGenus(globalElements.input[genusInputID]);
+}
+
+function autoWorm(wormBool) {
+	if (wormBool) globalElements.input.sandwormInput.checked = true;
+	addSandwormTemplate();
+}
+
+function addSandwormTemplate() {
+	const element = globalElements.input.sandwormInput;
+	const dest = element.dataset.destNoauto;
+	const sections = Array.from(document.querySelectorAll(`[data-section="${dest}"]`));
+	const outputElement = globalElements.output[dest];
+	sections.push(outputElement);
+	for (const section of sections) {
+		if (element.checked) {
+			section.style.display = '';
+		} else {
+			section.style.display = 'none';
+		}
+	}
+}
+
+function wormAutoSpawn() {
+	const spawn = (() => {
+		const elements = globalElements.input.autoSpawn;
+		for (const element of elements) {
+			if (element.checked) return element.value;
+		}
+	})();
+	globalElements.output.wormAutoSpawn.innerText = spawn;
+}
+
+function wormAlbumName() {
+	const civ = pageData.civilized;
+	const civShort = pageData.civShort;
+	const output = (() => {
+		switch (civShort) {
+			case 'GHub':
+				return 'GHEC Sandworm Album';
+
+			case 'CalHub':
+				return 'CalHub Rare Fauna Album#Sandworm|CalHub Rare Fauna Album';
+
+			case 'EisHub':
+				return 'EisHub Shaihuluda Album';
+		}
+	})();
+	globalElements.output.wormAlbumName.innerText = output;
 }
 
 function resetExternal() {

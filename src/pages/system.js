@@ -288,6 +288,7 @@ function planetInputs() {
 
 		inputTarget.insertAdjacentHTML('beforebegin', inputTemplate);
 		outputTarget.insertAdjacentHTML('beforeend', planetTemplate);
+		addAllTooltips();
 
 		// default must be first, otherwise it won't work
 		const defaultValue = document.querySelectorAll(`[data-planet="planet${i}"] [data-default]`);
@@ -321,7 +322,6 @@ function planetInputs() {
 		updateGlobalElements(resourceOutputs);
 
 		biomeLinks(document.getElementById(`biome_input${i}`));
-		addAllTooltips();
 	}
 }
 
@@ -599,11 +599,7 @@ function biomeLinks(element) {
 			usedBiomes.add(biome);
 		}
 	}
-
-	for (const key in linkedBiomes) {
-		const output = linkedBiomes[key];
-		globalElements.output[key].innerText = output;
-	}
+	setBiomeText(linkedBiomes);
 }
 
 function infestedBiomeLinks(dest, bool) {
@@ -624,9 +620,12 @@ function infestedBiomeLinks(dest, bool) {
 			linkedBiomes[planetName] = ` (Infested) `;
 		}
 	}
+	setBiomeText(linkedBiomes);
+}
 
-	for (const key in linkedBiomes) {
-		const output = linkedBiomes[key];
+function setBiomeText(array) {
+	for (const key in array) {
+		const output = array[key];
 		globalElements.output[key].innerText = output;
 	}
 }

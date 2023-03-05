@@ -1,6 +1,6 @@
 function startupFunctions() {
 	wormName();
-	catalog();
+	catalogue();
 	autoSpawn();
 	albumFunctions();
 }
@@ -13,11 +13,11 @@ const sandwormElements = {
 updateGlobalElements(sandwormElements);
 
 const sandwormElementFunctions = {
-	civ: ['catalog(); albumItemType()', null, true],
+	civ: ['catalogue(); albumItemType()', null, true],
 	planetInput: ['wormName(); planetMoonSentence(); albumName()'],
 	moonInput: ['wormName(); planetMoonSentence(); albumName()'],
 	autoSpawn: ['autoSpawn()'],
-	researchTeam: ['catalog()', null, true],
+	researchTeam: ['catalogue()', null, true],
 	wormclassInput: ['albumName()'],
 	wormmaxdepthInput: ['numberStats(this, 1); albumOther()'],
 	discoveredInput: ['albumDiscoverer()'],
@@ -63,7 +63,7 @@ function autoSpawn() {
 }
 
 // adds "documented by GHEC" sentence
-function catalog() {
+function catalogue() {
 	const research = docByResearchteam('GHEC');
 
 	const album = (() => {
@@ -72,7 +72,7 @@ function catalog() {
 				return "GHEC Sandworm";
 
 			case "CalHub":
-				return "CalHub Rare Fauna";
+				return "CalHub Rare Fauna Album#Sandworm|CalHub Rare Fauna";
 
 			case "EisHub":
 				return "EisHub Shaihuluda";
@@ -83,12 +83,12 @@ function catalog() {
 
 	wikiCode(output, 'addInfo');
 	addInfoBullet();
-	pageData.catalog = albumName;
+	pageData.catalogue = albumName
 }
 
 //album functions
 function albumItemTypeExternal() {
-	return pageData.catalog;
+	return pageData.catalogue.split('|').at(-1);
 }
 
 function albumCivExternal() {
@@ -108,7 +108,7 @@ function albumOtherExternal() {
 }
 
 function albumLinkGen() {
-	return wikiLink + pageData.catalog;
+	return pageData.catalogue.split('|')[0];
 }
 
 function generateGalleryArray() {
