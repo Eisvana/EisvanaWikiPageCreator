@@ -43,7 +43,7 @@ const albumElementFunctions = {
 }
 assignElementFunctions(albumElementFunctions);
 
-// expects external 'albumLinkGen()' function which returns the link to the album
+// expects external 'albumLinkGen()' function which returns the PAGENAME of the album
 function albumLink(element) {
 	element.style.pointerEvents = 'none';
 	const catalogue = (() => {
