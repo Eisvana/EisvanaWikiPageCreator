@@ -74,7 +74,7 @@ function explanation(heading, text, img) {
 }
 
 // adds all tooltips which are not yet generated
-async function addAllTooltips() {
+function addAllTooltips() {
 	const elements = document.querySelectorAll('span.tooltip');
 	for (const element of elements) {
 		constructTooltip(element);
