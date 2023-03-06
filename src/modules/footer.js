@@ -112,35 +112,36 @@ function switchTheme() {
 }
 
 // custom global settings
-const footerElements = new Object;
+const footerElements = {
+	input: {
+		settings: 'settings',
+	}
+};
 (() => {
-	const dialog = footerElements.dialog ??= document.getElementById('settings');
-	const inputs = footerElements.inputs ??= Array.from(dialog.querySelectorAll('.data>*'));
-	addPortalGlyphButtons(inputs.find(input => input.id == 'settingsPortalglyphButtons'));
+	const inputs = document.querySelectorAll('footer dialog .data>*');
+	inputs.forEach(input => footerElements.input[input.id] = input.id);
+	updateGlobalElements(footerElements);
+	footerElements.inputs = inputs
+	addPortalGlyphButtons(globalElements.input.settingsPortalglyphButtons);
 	assignSettingFunctions();
 })();
 
 // define dialog internal logic
 function assignSettingFunctions() {
-	const inputs = footerElements.inputs;
 	const settingsElementFunctions = {
-		civDefault: () => `researchTeamDropdown(footerElements.inputs[${findId("researchteamDefault")}], this.value)`,
+		civDefault: () => `researchTeamDropdown(globalElements.input.researchteamDefault], this.value)`,
 		discoveredDefault: () => `hideDiscoverer('discoveredDefault', 'discoveredlinkDefault')`,
 		discoveredlinkDefault: () => `hideDiscoverer('discoveredlinkDefault', 'discoveredDefault')`,
 	}
 	for (const element in settingsElementFunctions) {
-		const input = inputs.find(input => input.id == element)
+		const input = globalElements.input[element];
 		assignFunction(input, settingsElementFunctions[element]());
-	}
-
-	function findId(id) {
-		return inputs.findIndex(input => input.id == id);
 	}
 }
 
 // shows modal
 function showSettings() {
-	const dialog = footerElements.dialog;
+	const dialog = globalElements.input.settings;
 	dialog.style.scale = '0';
 	dialog.showModal();
 	dialog.style.scale = '1';
@@ -162,7 +163,7 @@ function updateDefaultValues() {
 	const inputs = footerElements.inputs;
 	for (const input of inputs) {
 		const value = input.value;
-		if (value == undefined) continue;
+		if (!value) continue;
 		const store = input.dataset.store;
 		settings[store] = sanitiseString(value);
 	}

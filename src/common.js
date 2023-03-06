@@ -652,13 +652,9 @@ function hideDiscoverer(keepId = null, removeId = null) {
 			const input2 = pair[1];
 
 			if (input1.value) {
-				hideInput(input1, '');
-				hideInput(input2, 'none');
-				input2.value = '';
+				hideDiscoverer(input1.id, input2.id);
 			} else if (input2.value) {
-				hideInput(input2, '');
-				hideInput(input1, 'none');
-				input1.value = '';
+				hideDiscoverer(input2.id, input1.id);
 			} else {
 				pair.forEach(input => hideInput(input, ''));
 			}
@@ -667,8 +663,6 @@ function hideDiscoverer(keepId = null, removeId = null) {
 	}
 	const keepInput = document.getElementById(keepId);
 	const removeInput = document.getElementById(removeId);
-	const removeInputCell = removeInput.closest('.data');
-	const removeLabelCell = removeInputCell.previousElementSibling;
 
 	const showStatus = (() => {
 		if (keepInput.value) {
@@ -677,8 +671,7 @@ function hideDiscoverer(keepId = null, removeId = null) {
 			return '';		// keep all
 		}
 	})();
-	removeInputCell.style.display = showStatus;
-	removeLabelCell.style.display = showStatus;
+	hideInput(removeInput, showStatus);
 	removeInput.value = '';
 	wikiCode(removeInput);
 }
