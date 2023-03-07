@@ -1,6 +1,7 @@
 const validPortalKeys = '0123456789ABCDEF';
 
 function addPortalGlyphButtons(element) {
+	if (!element) return;
 	const glyphs = new Array;
 	for (const letter of validPortalKeys) {
 		const glyph = `<button type="button" class="button" value="${letter}" onclick="glyphOnClick(this)"><span class="glyph icon is-small">${letter}</span></button>`;
