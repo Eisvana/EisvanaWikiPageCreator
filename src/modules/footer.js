@@ -50,17 +50,17 @@
 			</div>
 			<div class="tableCell text">
 				<div class="label-combo">
-					<label for="portalglyphsInput">Portalglyphs:</label>
-					<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+					<label for="portalglyphsDefault">Portalglyphs:</label>
+					<button class="button is-small is-danger" type="button" data-input-bind="portalglyphsDefault" onclick="deleteCharacter(this)">&larr;
 						Delete</button>
 				</div>
 			</div>
 			<div class="tableCell data">
-				<input type="text" id="settingsPortalglyphs" data-dest-noauto="settingsPortalglyphs" maxlength="12">
+				<input type="text" id="portalglyphsDefault" maxlength="12" data-store="portalglyphsInput" oninput="glyphInputOnChange(this); document.getElementById('settingsPortalglyphsPreview').value = validateGlyphs(this.value)">
 			</div>
 			<div class="tableHeader data">
 				<div id="settingsPortalglyphButtons" class="portalglyphButtons"></div>
-				<output name="settingsPortalglyphs" id="settingsPortalglyphsPreview" class="glyph portalglyphsPreview"></output>
+				<output id="settingsPortalglyphsPreview" class="glyph portalglyphsPreview"></output>
 			</div>
 
 		</div>
@@ -122,20 +122,20 @@ const footerElements = {
 	inputs.forEach(input => footerElements.input[input.id] = input.id);
 	updateGlobalElements(footerElements);
 	footerElements.inputs = inputs
-	addPortalGlyphButtons(globalElements.input.settingsPortalglyphButtons);
+	addPortalGlyphButtons(globalElements.input.settingsPortalglyphButtons, 'portalglyphsDefault');
 	assignSettingFunctions();
 })();
 
 // define dialog internal logic
 function assignSettingFunctions() {
 	const settingsElementFunctions = {
-		civDefault: () => `researchTeamDropdown(globalElements.input.researchteamDefault], this.value)`,
-		discoveredDefault: () => `hideDiscoverer('discoveredDefault', 'discoveredlinkDefault')`,
-		discoveredlinkDefault: () => `hideDiscoverer('discoveredlinkDefault', 'discoveredDefault')`,
+		civDefault: 'researchTeamDropdown(globalElements.input.researchteamDefault, this.value)',
+		discoveredDefault: 'hideDiscoverer("discoveredDefault", "discoveredlinkDefault")',
+		discoveredlinkDefault: 'hideDiscoverer("discoveredlinkDefault", "discoveredDefault")',
 	}
 	for (const element in settingsElementFunctions) {
 		const input = globalElements.input[element];
-		assignFunction(input, settingsElementFunctions[element]());
+		assignFunction(input, settingsElementFunctions[element]);
 	}
 }
 
@@ -150,8 +150,15 @@ function showSettings() {
 	const settings = JSON.parse(localStorage.getItem('defaultSettings')) ?? new Object;
 	for (const setting in settings) {
 		const input = dialog.querySelector(`.data [data-store="${setting}"]`);
+		if (!input) continue;
 		input.value = settings[setting];
-		if (input.id == 'civDefault') input.onchange();
+		switch (input.id) {
+			case 'civDefault':
+				input.onchange();
+				break;
+			case 'portalglyphsDefault':
+				executeOnInput(input)
+		}
 	}
 	hideDiscoverer();
 }
@@ -162,9 +169,9 @@ function updateDefaultValues() {
 
 	const inputs = footerElements.inputs;
 	for (const input of inputs) {
-		const value = input.value;
+		const value = input?.value;
 		if (!value) continue;
-		const store = input.dataset.store;
+		const store = input?.dataset?.store;
 		settings[store] = sanitiseString(value);
 	}
 
@@ -185,9 +192,14 @@ function readDefaultValues() {
 		if (input) {
 			input.value = settings[setting];
 
-			if (setting == 'civInput') {
-				pageData.civShort = settings[setting];
-				researchTeamDropdown();
+			switch (setting) {
+				case 'civInput':
+					pageData.civShort = settings[setting];
+					researchTeamDropdown();
+					break;
+				case 'portalglyphsInput':
+					executeOnInput(input);
+					break;
 			}
 		}
 	}
@@ -197,7 +209,7 @@ function readDefaultValues() {
 function restoreDefaults() {
 	const inputs = footerElements.inputs;
 	for (const input of inputs) {
-		if (input.value == undefined) continue;
+		if (input?.value == undefined) continue;
 		if (input.tagName.toLowerCase() == 'select') {
 			input.value = input.options?.[0]?.value;
 		} else {

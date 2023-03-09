@@ -168,7 +168,7 @@ const elementFunctions = {
 	nameInput: ['enableTextMarking()'],
 	researchTeam: ['researchTeam(); docBy()'],
 	civ: ['civ()'],
-	portalglyphsInput: ['glyphInputOnChange(this); enableTextMarking()'],
+	portalglyphsInput: ['glyphInputOnChange(this); displayGlyphs(); enableTextMarking()'],
 	discoveredInput: ['hideDiscoverer("discoveredInput", "discoveredlinkInput"); docBy()'],
 	discoveredlinkInput: ['hideDiscoverer("discoveredlinkInput", "discoveredInput"); docBy()'],
 	docbyInput: ['docBy()'],

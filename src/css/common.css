@@ -322,6 +322,7 @@ label>input[type="radio"]~span,
 .portalglyphsPreview,
 #portalglyphsPreview {
 	word-break: break-all;
+	text-align: left;
 }
 
 .sectionToggle {

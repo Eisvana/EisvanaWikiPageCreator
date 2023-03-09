@@ -1,28 +1,30 @@
 const validPortalKeys = '0123456789ABCDEF';
 
-function addPortalGlyphButtons(element) {
+// takes the element to which the buttons should be added, and a function to be executed on glyph press. Function should be a string.
+function addPortalGlyphButtons(element, glyphInputBindId) {
 	if (!element) return;
 	const glyphs = new Array;
 	for (const letter of validPortalKeys) {
-		const glyph = `<button type="button" class="button" value="${letter}" onclick="glyphOnClick(this)"><span class="glyph icon is-small">${letter}</span></button>`;
+		const glyph = `<button type="button" data-input-bind="${glyphInputBindId}" class="button" value="${letter}" onclick="glyphOnClick(this)"><span class="glyph icon is-small">${letter}</span></button>`;
 		glyphs.push(glyph);
 	}
 	element.innerHTML = glyphs.join('');
 }
-addPortalGlyphButtons(globalElements.output.portalglyphButtons);
+addPortalGlyphButtons(globalElements.output.portalglyphButtons, 'portalglyphsInput');
 
-function executeOnInput() {
-	globalElements.input.portalglyphsInput.oninput.call(globalElements.input.portalglyphsInput);
+function executeOnInput(input) {
+	input?.oninput?.call(input);
 }
 
 function glyphOnClick(button) {
-	const input = globalElements.input.portalglyphsInput;
+	const glyphInputBindId = button?.dataset?.inputBind ?? null;
+	const input = globalElements.input[glyphInputBindId] ?? document.getElementById(glyphInputBindId) ?? button?.closest('.tableHeader')?.previousElementSibling?.querySelector('input');
 	const portalCode = input.value;
 
 	if (portalCode.length < 12) {
 		input.value += button.value;
 	}
-	executeOnInput();
+	executeOnInput(input);
 }
 
 function displayGlyphs() {
@@ -35,24 +37,29 @@ function displayGlyphs() {
 	try { wikiCode(glyphs2Coords(glyphString), "galacticCoords") } catch (error) { /* do nothing */ }
 }
 
-function deleteCharacter() {
-	const enteredGlyphs = globalElements.input.portalglyphsInput.value.split('');
+function deleteCharacter(button) {
+	const input = button?.dataset?.inputBind ?? null;
+	const glyphInput = globalElements.input[input] ?? document.getElementById(input) ?? button?.closest('.tableCell')?.nextElementSibling?.querySelector('input') ?? globalElements.input.portalglyphsInput;
+	const enteredGlyphs = glyphInput?.value?.split('');
 	enteredGlyphs.pop();
 	const newString = enteredGlyphs.join('');
-	globalElements.input.portalglyphsInput.value = newString;
-	executeOnInput();
+	glyphInput.value = newString;
+	executeOnInput(glyphInput);
+}
+
+function validateGlyphs(glyphString) {
+	return glyphString
+		.split('')
+		.filter(char => validPortalKeys.includes(char))
+		.join('')
+		.substring(0, 12);
 }
 
 function glyphInputOnChange(input) {
 	const newValue = input?.value?.toUpperCase?.();
 	if (newValue == null) return;
 
-	input.value = newValue
-		.split('')
-		.filter(char => validPortalKeys.includes(char))
-		.join('')
-		.substring(0, 12);
-	displayGlyphs();
+	input.value = validateGlyphs(newValue);
 }
 
 function glyphRegion(glyphs) {
