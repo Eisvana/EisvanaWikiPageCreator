@@ -47,7 +47,7 @@ function deleteCharacter(button) {
 	executeOnInput(glyphInput);
 }
 
-function validateGlyphs(glyphString) {
+function validateGlyphInput(glyphString) {
 	return glyphString
 		.split('')
 		.filter(char => validPortalKeys.includes(char))
@@ -59,17 +59,22 @@ function glyphInputOnChange(input) {
 	const newValue = input?.value?.toUpperCase?.();
 	if (newValue == null) return;
 
-	input.value = validateGlyphs(newValue);
+	input.value = validateGlyphInput(newValue);
+}
+
+function validateGlyphs(glyphs) {
+	const civ = pageData.civShort;
+	const regionList = regions[civ];
+	const regionGlyphs = glyphs.substring(4);
+	const region = regionList[regionGlyphs];
+	return region;
 }
 
 function glyphRegion(glyphs) {
 	const glyphElement = globalElements.input.portalglyphsInput;
-	const civ = pageData.civShort;
-	const regionList = regions[civ];
 	let region = '';
 	if (glyphs?.length == 12) {
-		const regionGlyphs = glyphs.substring(4);
-		region = regionList[regionGlyphs];
+		region = validateGlyphs(glyphs);
 	}
 	if (region == undefined) {
 		errorMessage(glyphElement, 'No valid Hub region. See <a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Regions" target="_blank" rel="noopener noreferrer">Galactic Hub Regions</a> for a list of valid regions.');
