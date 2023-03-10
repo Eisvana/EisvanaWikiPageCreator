@@ -56,7 +56,7 @@
 				</div>
 			</div>
 			<div class="tableCell data">
-				<input type="text" id="portalglyphsDefault" maxlength="12" data-store="portalglyphsInput" oninput="glyphInputOnChange(this); document.getElementById('settingsPortalglyphsPreview').value = validateGlyphs(this.value)">
+				<input type="text" id="portalglyphsDefault" maxlength="12" data-store="portalglyphsInput">
 			</div>
 			<div class="tableHeader data">
 				<div id="settingsPortalglyphButtons" class="portalglyphButtons"></div>
@@ -123,21 +123,17 @@ const footerElements = {
 	updateGlobalElements(footerElements);
 	footerElements.inputs = inputs
 	addPortalGlyphButtons(globalElements.input.settingsPortalglyphButtons, 'portalglyphsDefault');
-	assignSettingFunctions();
+
+	// define dialog internal logic
+	const settingsElementFunctions = {
+		civDefault: '[researchTeamDropdown(globalElements.input.researchteamDefault, this.value)]',
+		discoveredDefault: '[hideDiscoverer("discoveredDefault", "discoveredlinkDefault")]',
+		discoveredlinkDefault: '[hideDiscoverer("discoveredlinkDefault", "discoveredDefault")]',
+		portalglyphsDefault: '[glyphInputOnChange(this); document.getElementById("settingsPortalglyphsPreview").value = validateGlyphs(this.value)]',
+	}
+	assignElementFunctions(settingsElementFunctions);
 })();
 
-// define dialog internal logic
-function assignSettingFunctions() {
-	const settingsElementFunctions = {
-		civDefault: 'researchTeamDropdown(globalElements.input.researchteamDefault, this.value)',
-		discoveredDefault: 'hideDiscoverer("discoveredDefault", "discoveredlinkDefault")',
-		discoveredlinkDefault: 'hideDiscoverer("discoveredlinkDefault", "discoveredDefault")',
-	}
-	for (const element in settingsElementFunctions) {
-		const input = globalElements.input[element];
-		assignFunction(input, settingsElementFunctions[element]);
-	}
-}
 
 // shows modal
 function showSettings() {
