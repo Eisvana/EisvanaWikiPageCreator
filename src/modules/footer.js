@@ -126,10 +126,10 @@ const footerElements = {
 
 	// define dialog internal logic
 	const settingsElementFunctions = {
-		civDefault: '[researchTeamDropdown(globalElements.input.researchteamDefault, this.value)]',
-		discoveredDefault: '[hideDiscoverer("discoveredDefault", "discoveredlinkDefault")]',
-		discoveredlinkDefault: '[hideDiscoverer("discoveredlinkDefault", "discoveredDefault")]',
-		portalglyphsDefault: '[glyphInputOnChange(this); document.getElementById("settingsPortalglyphsPreview").value = validateGlyphs(this.value)]',
+		civDefault: ['researchTeamDropdown(globalElements.input.researchteamDefault, this.value)'],
+		discoveredDefault: ['hideDiscoverer("discoveredDefault", "discoveredlinkDefault")'],
+		discoveredlinkDefault: ['hideDiscoverer("discoveredlinkDefault", "discoveredDefault")'],
+		portalglyphsDefault: ['glyphInputOnChange(this); document.getElementById("settingsPortalglyphsPreview").value = validateGlyphInput(this.value)'],
 	}
 	assignElementFunctions(settingsElementFunctions);
 })();
