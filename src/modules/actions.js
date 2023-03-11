@@ -6,7 +6,7 @@
 	<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload pictures</a>
 	<button class="button is-warning" id="reset" type="reset" onclick="reset()">Reset inputs</button>`;
 
-	const copyNote = `<p class="has-text-centered">You must copy the code first, then paste it into the wiki page. Also don't forget to upload any images you have put here.</p>`
+	const copyNote = `<p class="has-text-centered">You must copy the code first, then paste it into the wiki page.<br>Also don't forget to upload any images you have put here.</p>`
 
 	globalElements.output.actions.innerHTML = actions;
 	globalElements.output.actions.insertAdjacentHTML('beforebegin', copyNote);

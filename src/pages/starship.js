@@ -11,6 +11,13 @@ function startupFunctions() {
 	enPrefix(globalElements.input.typeInput.value, "enPrefix");
 }
 
+const starshipElements = {
+	input: {
+		economyInput: 'wealthInput',
+	}
+}
+updateGlobalElements(starshipElements)
+
 const starshipElementFunctions = {
 	nameInput: ['appearanceSentence(); albumName()'],
 	civ: ['loc(); addInfo()', null, true],
