@@ -633,6 +633,10 @@ function setBiomeText(array) {
 function expectedHubTagSentence() {
 	const outputElement = globalElements.output.expectedHubTag;
 	const systemName = pageData.name;
+	if (!systemName) {
+		outputElement.innerHTML = '';
+		return;
+	};
 	const region = pageData.region;
 	const glyphs = pageData.portalglyphs;
 	const nr = getHubNumber(region);
