@@ -309,11 +309,6 @@ label>input[type="radio"]~span,
 	gap: 1px;
 }
 
-.portalglyphButtons button,
-#portalglypButtons button {
-	padding: 0;
-}
-
 .portalglyphButtons .glyph.icon.is-small,
 #portalglyphButtons .glyph.icon.is-small {
 	height: 1em;
@@ -385,6 +380,7 @@ label>input[type="radio"]~span,
 
 @media only screen and (max-width: 550px),
 (1024px <=width <=1215px) {
+	.portalglyphButtons,
 	#portalglyphButtons {
 		display: flex;
 		flex-wrap: wrap;
