@@ -190,8 +190,11 @@ const footerElements = {
 };
 
 (() => {
-	const inputs = document.querySelectorAll('footer dialog .data>*');
-	inputs.forEach(input => footerElements.input[input.id] = input.id);
+	const inputs = document.querySelectorAll('footer dialog .data>[data-store]');
+	inputs.forEach(input => {
+		footerElements.input[input.id] = input.id;
+		assignFunction(input, 'delete pageData.restored');
+	});
 	updateGlobalElements(footerElements);
 	footerElements.inputs = inputs
 	addPortalGlyphButtons(globalElements.input.settingsPortalglyphButtons, 'portalglyphsDefault');
