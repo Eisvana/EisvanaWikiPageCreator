@@ -12,7 +12,12 @@ dialog {
 	border-color: var(--border-color);
 	background-color: var(--body-backgroundcolor);
 	color: var(--text-color);
-	transition: translate .5s cubic-bezier(.22, .61, .36, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	dialog {
+		transition: translate .5s cubic-bezier(.22, .61, .36, 1), scale .3s cubic-bezier(.22, .61, .36, 1);
+	}
 }
 
 dialog .title {
@@ -22,7 +27,8 @@ dialog .title {
 
 dialog form {
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
+	gap: 1rem;
 	margin-top: 1rem;
 }
 
