@@ -64,6 +64,7 @@
 			</div>
 
 		</div>
+		<p>If you experience weird behaviour, restore the defaults and click "Set".</p>
 		<form method="dialog">
 			<button class="button is-primary" type="submit" onclick="updateDefaultValues()">Set</button>
 			<button class="button is-danger" type="submit" autofocus>Cancel</button>
@@ -117,6 +118,7 @@ const footerElements = {
 		settings: 'settings',
 	}
 };
+
 (() => {
 	const inputs = document.querySelectorAll('footer dialog .data>*');
 	inputs.forEach(input => footerElements.input[input.id] = input.id);
@@ -129,7 +131,7 @@ const footerElements = {
 		civDefault: ['researchTeamDropdown(globalElements.input.researchteamDefault, this.value)'],
 		discoveredDefault: ['hideDiscoverer("discoveredDefault", "discoveredlinkDefault")'],
 		discoveredlinkDefault: ['hideDiscoverer("discoveredlinkDefault", "discoveredDefault")'],
-		portalglyphsDefault: ['glyphInputOnChange(this); document.getElementById("settingsPortalglyphsPreview").value = validateGlyphInput(this.value)'],
+		portalglyphsDefault: ['glyphInputOnChange(this); validateGlyphSettings(this); document.getElementById("settingsPortalglyphsPreview").value = validateGlyphInput(this.value)'],
 	}
 	assignElementFunctions(settingsElementFunctions);
 })();
@@ -137,6 +139,7 @@ const footerElements = {
 
 // shows modal
 function showSettings() {
+	restoreDefaults();
 	const dialog = globalElements.input.settings;
 	dialog.style.scale = '0';
 	dialog.showModal();
@@ -157,18 +160,22 @@ function showSettings() {
 		}
 	}
 	hideDiscoverer();
+	delete pageData.restored;
 }
 
 // called when user submits values. Stores entered values in localstorage
 function updateDefaultValues() {
+	if (pageData.restored) {
+		localStorage.removeItem('defaultSettings');
+		delete pageData.restored;
+		return;
+	}
 	const settings = new Object;
-
 	const inputs = footerElements.inputs;
 	for (const input of inputs) {
 		const value = input?.value;
-		if (!value) continue;
 		const store = input?.dataset?.store;
-		settings[store] = sanitiseString(value);
+		if (value && store) settings[store] = sanitiseString(value);
 	}
 
 	localStorage.setItem('defaultSettings', JSON.stringify(settings));
@@ -213,4 +220,15 @@ function restoreDefaults() {
 		}
 	}
 	hideDiscoverer();
+	pageData.restored = true;
+}
+
+function validateGlyphSettings(input) {
+	const glyphString = input.value;
+	const allRegions = structuredClone(regions);
+	addHuburbs(allRegions);
+	Object.freeze(allRegions);
+	const region = validateGlyphs(glyphString, globalElements.input.civDefault.value, allRegions);
+	glyphError(region, input);
+	globalElements.input.settings.querySelector('form button.is-primary').disabled = region == undefined;
 }

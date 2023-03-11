@@ -47,6 +47,13 @@ function deleteCharacter(button) {
 	executeOnInput(glyphInput);
 }
 
+function glyphInputOnChange(input) {
+	const newValue = input?.value?.toUpperCase?.();
+	if (newValue == null) return;
+
+	input.value = validateGlyphInput(newValue);
+}
+
 function validateGlyphInput(glyphString) {
 	return glyphString
 		.split('')
@@ -55,16 +62,9 @@ function validateGlyphInput(glyphString) {
 		.substring(0, 12);
 }
 
-function glyphInputOnChange(input) {
-	const newValue = input?.value?.toUpperCase?.();
-	if (newValue == null) return;
-
-	input.value = validateGlyphInput(newValue);
-}
-
-function validateGlyphs(glyphs) {
-	const civ = pageData.civShort;
-	const regionList = regions[civ];
+function validateGlyphs(glyphs, civShort = pageData.civShort, regionObj = regions) {
+	if (glyphs.length != 12) return '';
+	const regionList = regionObj[civShort];
 	const regionGlyphs = glyphs.substring(4);
 	const region = regionList[regionGlyphs];
 	return region;
@@ -76,12 +76,16 @@ function glyphRegion(glyphs) {
 	if (glyphs?.length == 12) {
 		region = validateGlyphs(glyphs);
 	}
+	glyphError(region, glyphElement);
+	wikiCode(region ?? '', 'region');
+}
+
+function glyphError(region, glyphElement) {
 	if (region == undefined) {
 		errorMessage(glyphElement, 'No valid Hub region. See <a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Regions" target="_blank" rel="noopener noreferrer">Galactic Hub Regions</a> for a list of valid regions.');
 	} else {
 		errorMessage(glyphElement);
 	}
-	wikiCode(region ?? '', 'region');
 }
 
 function glyphs2Coords(glyphs) {
