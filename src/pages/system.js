@@ -9,10 +9,13 @@ function startupFunctions() {
 	civCatalog();
 	addTemplate();
 	wikiCodePercentage();
+	autoPirate(globalElements.input.wealthInput);
 }
 
 const systemElements = {
 	input: {
+		planetInput: 'planetNumInput',
+		moonInput: 'moonNumInput',
 		terminalInputs: 'terminalInputs',
 		systemExtras: 'systemExtras',
 	},

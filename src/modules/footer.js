@@ -31,6 +31,30 @@
 				<input id="discoveredDefault" type="text" data-store="discoveredInput builderInput ownerInput">
 			</div>
 			<div class="tableCell text">
+				<label for="docbyDefault">Documenter alias if not discoverer:</label>
+			</div>
+			<div class="tableCell data">
+				<input id="docbyDefault" type="text" data-store="docbyInput">
+			</div>
+			<div class="tableCell text">
+				<label for="systemDefault">Name of the system:</label>
+			</div>
+			<div class="tableCell data">
+				<input id="systemDefault" type="text" data-store="systemInput">
+			</div>
+			<div class="tableCell text">
+				<label for="planetDefault">Name of the planet:</label>
+			</div>
+			<div class="tableCell data">
+				<input id="planetDefault" type="text" data-store="planetInput">
+			</div>
+			<div class="tableCell text">
+				<label for="moonDefault">Name of the moon:</label>
+			</div>
+			<div class="tableCell data">
+				<input id="moonDefault" type="text" data-store="moonInput">
+			</div>
+			<div class="tableCell text">
 				<label>Platform:</label>
 			</div>
 			<div class="tableCell data">
@@ -61,6 +85,52 @@
 			<div class="tableHeader data">
 				<div id="settingsPortalglyphButtons" class="portalglyphButtons"></div>
 				<output id="settingsPortalglyphsPreview" class="glyph portalglyphsPreview"></output>
+			</div>
+			<div class="tableCell text">
+				<label>System wealth:</label>
+			</div>
+			<div class="tableCell data">
+				<select id="wealthDefault" data-store="wealthInput">
+					<optgroup label="T3">
+						<option value="★★★ (Advanced)">Advanced</option>
+						<option value="★★★ (Affluent)">Affluent</option>
+						<option value="★★★ (Booming)">Booming</option>
+						<option value="★★★ (Flourishing)">Flourishing</option>
+						<option value="★★★ (High Supply)">High Supply</option>
+						<option value="★★★ (Opulent)">Opulent</option>
+						<option value="★★★ (Prosperous)">Prosperous</option>
+						<option value="★★★ (Wealthy)">Wealthy</option>
+					</optgroup><!-- here ends T3-->
+					<optgroup label="T2">
+						<!--here begins T2-->
+						<option value="★★ (Adequate)">Adequate</option>
+						<option value="★★ (Balanced)">Balanced</option>
+						<option value="★★ (Comfortable)">Comfortable</option>
+						<option value="★★ (Developing)">Developing</option>
+						<option value="★★ (Medium Supply)">Medium Supply</option>
+						<option value="★★ (Promising)">Promising</option>
+						<option value="★★ (Satisfactory)">Satisfactory</option>
+						<option value="★★ (Sustainable)">Sustainable</option>
+					</optgroup><!-- here ends T2-->
+					<optgroup label="T1">
+						<!--here begins T1-->
+						<option value="★ (Declining)">Declining</option>
+						<option value="★ (Destitute)">Destitute</option>
+						<option value="★ (Failing)">Failing</option>
+						<option value="★ (Fledgling)">Fledgling</option>
+						<option value="★ (Low Supply)">Low Supply</option>
+						<option value="★ (Struggling)">Struggling</option>
+						<option value="★ (Unsuccessful)">Unsuccessful</option>
+						<option value="★ (Unpromising)">Unpromising</option>
+					</optgroup>
+					<!--here ends T1-->
+					<optgroup label="Pirate">
+						<option value="💀 (Black Market)">Black Market</option>
+					</optgroup>
+					<optgroup label="Abandoned/Uncharted">
+						<option value="">Data Unavailable</option>
+					</optgroup>
+				</select>
 			</div>
 
 		</div>
@@ -156,7 +226,8 @@ function showSettings() {
 				input.onchange();
 				break;
 			case 'portalglyphsDefault':
-				executeOnInput(input)
+				executeOnInput(input);
+				break;
 		}
 	}
 	hideDiscoverer();
@@ -175,7 +246,7 @@ function updateDefaultValues() {
 	for (const input of inputs) {
 		const value = input?.value;
 		const store = input?.dataset?.store;
-		if (value && store) settings[store] = sanitiseString(value);
+		if ((input?.options?.[input.options.length - 1]?.value == value || value) && store) settings[store] = sanitiseString(value);
 	}
 
 	localStorage.setItem('defaultSettings', JSON.stringify(settings));
