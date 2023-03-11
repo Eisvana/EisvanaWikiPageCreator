@@ -14,7 +14,7 @@
 	white-space: normal;
 }
 
-.button:not(#portalglyphButtons .button) {
+.button:not(#portalglyphButtons .button, .portalglyphButtons .button) {
 	height: auto;
 }
 
