@@ -389,7 +389,8 @@ label>input[type="radio"]~span,
 
 @media only screen and (max-width: 1023px) {
 	.container {
-		margin: 0 1rem;
+		margin-left: 1rem;
+		margin-right: 1rem;
 	}
 
 	#gallery_descs {
