@@ -190,10 +190,10 @@ const footerElements = {
 };
 
 (() => {
-	const inputs = document.querySelectorAll('footer dialog .data>[data-store]');
+	const inputs = document.querySelectorAll('footer dialog .data>*');
 	inputs.forEach(input => {
 		footerElements.input[input.id] = input.id;
-		assignFunction(input, 'delete pageData.restored');
+		if (input.dataset.store) assignFunction(input, 'delete pageData.restored');
 	});
 	updateGlobalElements(footerElements);
 	footerElements.inputs = inputs
