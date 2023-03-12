@@ -33,15 +33,15 @@ Copy album wikicode
 onclick="albumLink(this)">
 Open Album
 </a>`
-	globalElements.output.albumEntry.innerHTML = wikitext;
-	globalElements.output.albumActions.innerHTML = actions;
+	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext;
+	if (globalElements.output.albumActions) globalElements.output.albumActions.innerHTML = actions;
 	updateGlobalElements(albumElements);
-})();
 
-const albumElementFunctions = {
-	civ: ['albumCiv()', null, true],
-}
-assignElementFunctions(albumElementFunctions);
+	const albumElementFunctions = {
+		civ: ['albumCiv()', null, true],
+	}
+	assignElementFunctions(albumElementFunctions);
+})();
 
 // expects external 'albumLinkGen()' function which returns the PAGENAME of the album
 function albumLink(element) {

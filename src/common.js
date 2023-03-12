@@ -354,7 +354,7 @@ function showAll() {
 	numberStats();
 	civ();
 	image(globalElements.input.fileUpload);
-	galleryUpload();
+	if (typeof galleryUpload == 'function') galleryUpload();
 	try { glyphInputOnChange(globalElements.input.portalglyphsInput) } catch (error) { /*do nothing*/ }
 	try { researchTeam() } catch (error) { /*do nothing*/ }
 	try { planetMoonSentence() } catch (error) { /*do nothing*/ }
@@ -373,6 +373,10 @@ function wikiCode(element, dest = element.dataset.dest) {
 		return;
 	}
 	for (const destElement of destElements) {
+		if (destElement == null) {
+			console.error('destElement is null. Element:', element, 'Value:', value);
+			continue;
+		}
 		destElement.innerText = value;
 	}
 }
@@ -411,7 +415,8 @@ function addStaticPageData(key, value) {
 }
 
 function civ() {
-	const input = globalElements.input.civ.value;
+	const input = globalElements?.input?.civ?.value;
+	if (!input) return;
 	const civData = new Object;
 	switch (input) {
 		case 'GHub':
