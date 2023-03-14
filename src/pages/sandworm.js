@@ -52,7 +52,7 @@ function autoSpawn() {
 			if (element.checked) return element.value;
 		}
 	})();
-	const output = `This creature ${spawn} automatically spawn on game reload`;
+	const output = `This creature ${spawn} automatically spawns on game reload`;
 	if (spawn) {
 		globalElements.output.autoSpawn.style.display = '';
 		globalElements.output.autoSpawn.innerText = output;
