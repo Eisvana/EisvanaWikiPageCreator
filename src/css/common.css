@@ -239,7 +239,7 @@ div.column {
 	color: var(--code-color);
 }
 
-#albumEntry {
+#output>*:nth-child(n + 2) {
 	margin-top: 5rem;
 }
 
@@ -380,6 +380,7 @@ label>input[type="radio"]~span,
 
 @media only screen and (max-width: 550px),
 (1024px <=width <=1215px) {
+
 	.portalglyphButtons,
 	#portalglyphButtons {
 		display: flex;
