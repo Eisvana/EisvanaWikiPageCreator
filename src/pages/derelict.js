@@ -1,5 +1,5 @@
 function startupFunctions() {
-
+	researchTeamDropdown();
 }
 
 (() => {
@@ -18,10 +18,10 @@ function startupFunctions() {
 
 	const derelictElementFunctions = {
 		nameInput: ['updateGalaxyTableEntry()'],
-		galaxyInput: ['researchTeamDropdown(globalElements.input.researchTeam, this.value); setGalaxy(this.value)'],
+		galaxyInput: ['setGalaxy(this.value); researchTeamDropdown()'],
+		roomInput: ['numberStats(this)'],
 		hyperdriveInput: ['numberStats(this)'],
 		fuelInput: ['numberStats(this)'],
-		roomInput: ['numberStats(this)'],
 		enemies: ['enemyCheckboxes()'],
 	}
 	assignElementFunctions(derelictElementFunctions);
@@ -62,5 +62,6 @@ function setGalaxy(civShort) {
 		CalHub: 'Calypso',
 		EisHub: 'Eissentam',
 	}
+	pageData.civShort = civShort;
 	pageData.galaxy = galaxies[civShort];
 }

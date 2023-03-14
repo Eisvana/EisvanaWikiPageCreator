@@ -386,7 +386,7 @@ function removeResource(resourceID) {
 	const id = resourceInput.id;
 	const sectionTarget = extractNumber(planet);
 
-	// remove element from resources 
+	// remove element from resources
 	if (resourceInput.value) {
 		delete links.resources[planet][id];
 		addResource();
@@ -689,7 +689,7 @@ function spaceStationSection() {
 		const sectionName = section.dataset.station;
 		if (sectionDefinition[faction].includes(sectionName)) {
 			if ((sectionName == 'merchant' || sectionName == 'scrapDealer') && defaultDisplay(section)) {
-				i++;
+				i++;	// NoSonar (I know what I'm doing, this is to skip the next section)
 			}
 			if (section.id == 'scrapDealer' && !pageData.SDMerchant) {
 				section.style.display = 'none';

@@ -5,7 +5,7 @@
 	document.head.appendChild(script);
 	script.onload = () => {
 		const galleryWrapper = globalElements.output.galleryItems;
-		const gallerySort = new Sortable(galleryWrapper, {
+		const gallerySort = new Sortable(galleryWrapper, {		// NoSonar (used by another library, not useless!)
 			handle: '.handle',	// handle's class
 			animation: 250,
 			onUpdate: function (evt) { moveItem(evt) },
@@ -21,8 +21,7 @@ function galleryUpload() {
 	const inputDiv = globalElements.output.galleryItems;
 	const wikiCodeGalleryDiv = globalElements.output.galleryCode;
 	const errors = new Array;
-	for (let fileIndex = 0; fileIndex < inp.files.length; fileIndex++) {
-		const file = inp.files[fileIndex];
+	for (const file of inp.files.length) {
 		const name = file.name;
 		if (file.size > 10000000) {
 			errors.push(name);

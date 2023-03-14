@@ -241,7 +241,7 @@ function startUp() {
 	readDefaultValues();
 	versionDropdown();
 	uploadShown = true;
-	galleryUploadShown = true;
+	galleryUploadShown = true;		// NoSonar (defined by gallery.js - isn't used by anything else, an if statement would just hurt performance)
 	showAll();
 	if (!pageData.debug) {
 		uploadShown = false;
@@ -270,7 +270,7 @@ function versionDropdown() {
 // take element and array of values and array of corresponding text.
 function setDropdownOptions(element, values, texts = values) {
 	const dropdown = new Array;
-	for (i = 0; i < values.length; i++) {
+	for (let i = 0; i < values.length; i++) {
 		const value = values[i];
 		const text = texts[i];
 		const dropdownOption = document.createElement('option');
@@ -363,8 +363,7 @@ function showAll() {
 }
 
 function wikiCode(element, dest = element.dataset.dest) {
-	const destElements = Array.from(document.getElementsByName(dest));
-	if (destElements.length == 0) destElements.push(document.getElementById(dest));
+	const destElements = getDestElements(dest);
 	const value = sanitiseString(element.value ?? element);
 	if (dest) {
 		pageData[dest] = value;
@@ -373,12 +372,20 @@ function wikiCode(element, dest = element.dataset.dest) {
 		return;
 	}
 	for (const destElement of destElements) {
-		if (destElement == null) {
+		try {
+			destElement.innerText = value;
+		} catch (error) {
 			console.error('destElement is null. Element:', element, 'Value:', value);
 			continue;
 		}
-		destElement.innerText = value;
 	}
+}
+
+// returns an array of elements
+function getDestElements(dest) {
+	const destElements = Array.from(document.getElementsByName(dest));
+	if (destElements.length == 0) destElements.push(document.getElementById(dest));
+	return destElements;
 }
 
 function checkboxWikiCode(element) {
@@ -395,9 +402,8 @@ function checkboxWikiCode(element) {
 	}
 }
 
-function storeData(element) {
-	const store = element.dataset.destNoauto;
-	pageData[store] = sanitiseString(element.value);
+function storeData(element, key = element.dataset.destNoauto) {
+	pageData[key] = sanitiseString(element.value);
 }
 
 // just puts a value from an element into the code. No wikitext sanitisation. It also needed to be capable of managine one-to-many, so it can do that, too
@@ -474,7 +480,7 @@ function sanitiseString(input) {
 		const searchIndex = text.indexOf(searchString, preIndex);
 
 		const textArr = Array.from(text);
-		if (!(searchIndex < 0)) textArr.splice(searchIndex + 1, 0, linkEndReplacement);
+		if (searchIndex >= 0) textArr.splice(searchIndex + 1, 0, linkEndReplacement);
 		text = textArr.join('').replace('[http', linkStartReplacement);
 	}
 
@@ -820,8 +826,11 @@ function numberStats(element, decimals = null, outputRaw = false) {
 	const dest = element.dataset.destNoauto
 	const propertyValue = pageData[dest];
 	const propertyData = numberError(element, propertyValue, decimals, outputRaw);
-
-	wikiCode(propertyData, dest);
+	if (getDestElements(dest)[0]) {
+		wikiCode(propertyData, dest);
+	} else {
+		pageData[dest] = propertyData;
+	}
 }
 
 function numberError(element, value = element.value, decimals = null, outputRaw = false) {
