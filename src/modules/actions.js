@@ -131,8 +131,6 @@ function downloadFile(button) {
 	a.download = name + '.txt';
 }
 
-const wikiLink = 'https://nomanssky.fandom.com/wiki/';
-
 function createPage(element) {
 	element.style.pointerEvents = 'none';
 	const name = pageData.name;

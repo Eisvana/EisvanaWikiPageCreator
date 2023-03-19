@@ -1,5 +1,8 @@
 function startupFunctions() {
+	setGalaxy(globalElements.input.galaxyInput.value);
+	enemyCheckboxes();
 	researchTeamDropdown();
+	updateGalaxyTableEntry();
 }
 
 (() => {
@@ -18,11 +21,12 @@ function startupFunctions() {
 
 	const derelictElementFunctions = {
 		nameInput: ['updateGalaxyTableEntry()'],
-		galaxyInput: ['setGalaxy(this.value); researchTeamDropdown()'],
-		roomInput: ['numberStats(this)'],
-		hyperdriveInput: ['numberStats(this)'],
-		fuelInput: ['numberStats(this)'],
-		enemies: ['enemyCheckboxes()'],
+		galaxyInput: ['setGalaxy(this.value); researchTeamDropdown(); updateGalaxyTableEntry()'],
+		roomInput: ['numberStats(this); updateGalaxyTableEntry()'],
+		hyperdriveInput: ['numberStats(this); updateGalaxyTableEntry()'],
+		fuelInput: ['numberStats(this); updateGalaxyTableEntry()'],
+		enemies: ['enemyCheckboxes(); updateGalaxyTableEntry()'],
+		portalglyphsInput: ['updateGalaxyTableEntry()', null, true],
 	}
 	assignElementFunctions(derelictElementFunctions);
 })();
@@ -33,17 +37,17 @@ function updateGalaxyTableEntry() {
 	const galaxy = pageData.galaxy.toLowerCase();
 	const unusedGalaxies = tables.filter(table => table != galaxy);
 	const galaxyTable = globalElements.output[galaxy];
+	const galaxyTableOutput = galaxyTable.querySelector('output');
 
 	const galaxyTableEntry = `| [[File: ${pageData.file}|150px]] || [[${pageData.name}]] || ${pageData.rooms || '?'} || ${pageData.enemies.join(', ') || '?'} || {{gl/Small|${pageData.glyphs}}} || ${pageData.discoverer}
-								|-`;
+	|-`;
 
 	galaxyTableEntryElement.innerText = galaxyTableEntry;
-	galaxyTable.innerText = galaxyTableEntry;
+	galaxyTableOutput.innerText = galaxyTableEntry;
 	galaxyTable.style.display = '';
 
 	for (const table of unusedGalaxies) {
 		globalElements.output[table].style.display = 'none';
-		globalElements.output[table].innerText = '';
 	}
 }
 
@@ -62,6 +66,13 @@ function setGalaxy(civShort) {
 		CalHub: 'Calypso',
 		EisHub: 'Eissentam',
 	}
+
+	const hubs = {
+		GHub: 'Galactic Hub Project',
+		CalHub: 'Galactic Hub Calypso',
+		EisHub: 'Galactic Hub Eissentam',
+	}
 	pageData.civShort = civShort;
+	pageData.civilized = hubs[civShort];
 	pageData.galaxy = galaxies[civShort];
 }
