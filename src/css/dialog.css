@@ -4,7 +4,7 @@ body:has(dialog[open]) {
 
 dialog {
 	position: fixed !important;
-	margin-top: 5vh !important;
+	margin-block-start: 5vh !important;
 	text-align: center;
 	border-radius: var(--border-radius);
 	box-shadow: 0 .5em 1em -.125em rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .02);
@@ -22,21 +22,21 @@ dialog {
 
 dialog .title {
 	color: var(--heading-color);
-	margin-bottom: 1rem !important;
+	margin-block-end: 1rem !important;
 }
 
 dialog form {
 	display: flex;
 	justify-content: center;
 	gap: 1rem;
-	margin-top: 1rem;
+	margin-block-start: 1rem;
 }
 
 dialog img {
 	max-width: 450px;
 	max-height: 500px;
 	min-height: 110px;
-	transition: opacity .5s, margin-top .5s;
+	transition: opacity .5s, margin-block-start .5s;
 	width: 100%;
 	aspect-ratio: initial;
 	object-fit: contain;
@@ -63,7 +63,7 @@ dialog #explanationContent .dialog-list {
 
 dialog #explanationContent :is(ul, ol) {
 	margin: 1rem 0;
-	padding-left: 1rem;
+	padding-inline-start: 1rem;
 }
 
 dialog #explanationLink.loading::before {
@@ -74,7 +74,7 @@ dialog #explanationLink.loading::before {
 	height: 4em;
 	border: .4em solid var(--text-color);
 	border-radius: 50%;
-	border-right-color: transparent;
+	border-inline-end-color: transparent;
 	content: '';
 	animation: spinner .75s linear infinite;
 	opacity: .75;
