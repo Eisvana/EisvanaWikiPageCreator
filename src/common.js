@@ -81,7 +81,7 @@ function addHuburbs(object) {
 		object.GHub[regionCode] = GHubHuburbRegions[regionCode];
 	}
 }
-if (typeof huburbs != 'undefined') {
+if (typeof huburbs != 'undefined') {	// NoSonar (we need to check if this is defined, otherwise it throws an error)
 	if (huburbs) addHuburbs(regions);
 }
 Object.freeze(regions);
@@ -466,35 +466,79 @@ function updateCiv() {
 	docBy();
 }
 
+// allows wiki links, templates and external links in wiki markup, strips out all other wiki markup. Returns a string.
+/*
+testing string:
+	this [[is]] a {test} [[with] some {extra} {markup} {mixed [in}]}]crazy[http://test-link.com]link[http://another-link.net][a][b][c][[d]]e{f}g{hi}jkl[m]nop[qrs]t[u]v^w_x[[y]z{[http://nested-link.com]}
+expected output:
+	this [[is]] a test [[with some extra markup mixed in]]crazy[http://test-link.com]link[http://another-link.net]abc[[d]]efghijklmnopqrstuv^w_x[[yz[http://nested-link.com]
+*/
 function sanitiseString(input) {
 	const doubleWikiMarkup = ['{', '}', '[', ']'];
-	const linkStartReplacement = '####';
-	const linkEndReplacement = '****';
-
 	let text = input;
+	const outputArray = new Array;
 
-	while (text.includes('[http')) {
-		const preString = '[http';
-		const searchString = ']';
-		const preIndex = text.indexOf(preString);
-		const searchIndex = text.indexOf(searchString, preIndex);
+	// split text into sections that contain only wiki links in wiki markup and only non-wiki-linked text.
+	const markupSections = text.split('[http');
 
-		const textArr = Array.from(text);
-		if (searchIndex >= 0) textArr.splice(searchIndex + 1, 0, linkEndReplacement);
-		text = textArr.join('').replace('[http', linkStartReplacement);
+	// remove all wiki markup except for wiki links in each section.
+	for (let i = 0; i < markupSections.length; i++) {
+		const noMarkupText = removeAllMarkup(markupSections[i], i != 0);
+		outputArray.push(noMarkupText);
+		console.log(noMarkupText)
 	}
 
-	for (const markup of doubleWikiMarkup) {
+	// join sections back together and return trimmed string.
+	text = outputArray.join('[http').trim();
+	return text;
+
+
+	// This function removes all wiki markup from a given string. Returns a string.
+	function removeAllMarkup(str, ignoreFirstBracket = false) {
+		let noMarkupString = str;
+		for (const markup of doubleWikiMarkup) {
+			if (ignoreFirstBracket && markup == ']') {
+				noMarkupString = skipFirst(noMarkupString, markup);
+			} else {
+				noMarkupString = removeSpecificMarkup(noMarkupString, markup);
+			}
+		}
+		return noMarkupString;
+	}
+
+	function removeSpecificMarkup(string, markup) {
 		const doubleMarkup = markup.repeat(2);
-		text = text.split(doubleMarkup)						// split based on double markup (isolate valid markup)
+		const noMarkupString = string.split(doubleMarkup)	// split based on double markup (isolate valid markup)
 			.map(part => part.replaceAll(markup, ''))		// remove all invalid markup
 			.join(doubleMarkup);							// join back together using double markup
+		return noMarkupString;
 	}
 
-	text = text.replaceAll(linkStartReplacement, '[http')
-		.replaceAll(linkEndReplacement, ']')
-		.trim();
-	return text;
+	// Removes the first occurrence of a given character in every occurrence of a double-wiki-markup-separated string. Returns a string.
+	function skipFirst(string, char) {
+		const doubleWikiMarkup = char.repeat(2);
+		const partArray = new Array;
+		// split by the double-wiki-markup
+		const splitDoubleWikiMarkup = string.split(doubleWikiMarkup);
+		for (let i = 0; i < splitDoubleWikiMarkup.length; i++) {
+			const part = splitDoubleWikiMarkup[i];
+			if (i == 0) {
+				// get all indices of the character we want to strip out, except the first one
+				const firstBracketIndex = part.indexOf(char);
+				const noMarkupString = removeSpecificMarkup(part, char);
+				const stringArray = noMarkupString.split('');
+				// put a character at the character at the first bracket indices
+				stringArray.splice(firstBracketIndex, 0, char);
+				// push the modified string to the array of modified strings
+				partArray.push(stringArray.join(''));
+			} else {
+				const noMarkupString = removeSpecificMarkup(part, char);
+				partArray.push(noMarkupString);
+			}
+		}
+		// join the array of modified strings with the wiki markup
+		return partArray.join(doubleWikiMarkup);
+	}
 }
 
 function image(element) {
