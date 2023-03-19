@@ -475,21 +475,19 @@ expected output:
 */
 function sanitiseString(input) {
 	const doubleWikiMarkup = ['{', '}', '[', ']'];
-	let text = input;
 	const outputArray = new Array;
 
 	// split text into sections that contain only wiki links in wiki markup and only non-wiki-linked text.
-	const markupSections = text.split('[http');
+	const markupSections = input.split('[http');
 
 	// remove all wiki markup except for wiki links in each section.
 	for (let i = 0; i < markupSections.length; i++) {
 		const noMarkupText = removeAllMarkup(markupSections[i], i != 0);
 		outputArray.push(noMarkupText);
-		console.log(noMarkupText)
 	}
 
 	// join sections back together and return trimmed string.
-	text = outputArray.join('[http').trim();
+	const text = outputArray.join('[http').trim();
 	return text;
 
 
@@ -516,28 +514,14 @@ function sanitiseString(input) {
 
 	// Removes the first occurrence of a given character in every occurrence of a double-wiki-markup-separated string. Returns a string.
 	function skipFirst(string, char) {
-		const doubleWikiMarkup = char.repeat(2);
-		const partArray = new Array;
-		// split by the double-wiki-markup
-		const splitDoubleWikiMarkup = string.split(doubleWikiMarkup);
-		for (let i = 0; i < splitDoubleWikiMarkup.length; i++) {
-			const part = splitDoubleWikiMarkup[i];
-			if (i == 0) {
-				// get all indices of the character we want to strip out, except the first one
-				const firstBracketIndex = part.indexOf(char);
-				const noMarkupString = removeSpecificMarkup(part, char);
-				const stringArray = noMarkupString.split('');
-				// put a character at the character at the first bracket indices
-				stringArray.splice(firstBracketIndex, 0, char);
-				// push the modified string to the array of modified strings
-				partArray.push(stringArray.join(''));
-			} else {
-				const noMarkupString = removeSpecificMarkup(part, char);
-				partArray.push(noMarkupString);
-			}
-		}
+		// get all indices of the character we want to strip out, except the first one
+		const firstBracketIndex = string.indexOf(char);
+		const noMarkupString = removeSpecificMarkup(string, char);
+		const stringArray = noMarkupString.split('');
+		// put a character at the character at the first bracket indices
+		stringArray.splice(firstBracketIndex, 0, char);
 		// join the array of modified strings with the wiki markup
-		return partArray.join(doubleWikiMarkup);
+		return stringArray.join('');
 	}
 }
 
