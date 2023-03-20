@@ -22,8 +22,23 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
+      - name: Set up NodeJS
+        uses: actions/setup-node@v3
+          cache: "npm"
+      - run: |
+          npm install jsdoc
+          npm install jsdoc-to-markdown
+
       - name: Minify Action
         uses: anthonyftwang/minify-action@v1.0.1
+
+      - name: Generate JSDoc
+        run: |
+          jsdoc2md ./src/* > ./wiki/Functions.md
+          cd wiki
+          git add .
+          git commit -m "Update doc"
+          git push
 
       - run: |
           touch .nojekyll
