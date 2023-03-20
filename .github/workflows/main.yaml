@@ -1,1 +1,64 @@
 
+
+
+name: Main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2.1.5
+      with:
+        node-version: '14'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
+      with:
+        languages: javascript
+
+    - name: Minify Files
+      run: npm run minify
+
+    - name: Checkout gh-pages Branch
+      uses: actions/checkout@v2
+      with:
+        ref: 'gh-pages'
+        fetch-depth: 0
+        persist-credentials: false
+
+    - name: Get Latest Changes on gh-pages Branch
+      run: git pull
+
+    - name: Copy Minified Files
+      run: cp -a dist/. .
+
+    - name: Commit Changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Minified Files"
+        git push
+
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        branch: gh-pages
+        folder: .
+
+
+
+
+
