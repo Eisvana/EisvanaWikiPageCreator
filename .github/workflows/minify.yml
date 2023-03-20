@@ -29,9 +29,6 @@ jobs:
           npm install jsdoc
           npm install jsdoc-to-markdown
 
-      - name: Minify Action
-        uses: anthonyftwang/minify-action@v1.0.1
-
       - name: Generate JSDoc
         run: |
           jsdoc2md ./src/* > ./wiki/Functions.md
@@ -40,6 +37,9 @@ jobs:
           git commit -m "Update doc"
           git push
           cd ..
+
+      - name: Minify Action
+        uses: anthonyftwang/minify-action@v1.0.1
 
       - run: |
           touch .nojekyll
