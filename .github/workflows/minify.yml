@@ -25,7 +25,9 @@ jobs:
       - name: Minify Action
         uses: anthonyftwang/minify-action@v1.0.1
 
-      - run: touch .nojekyll
+      - run: |
+          touch .nojekyll
+          find . -name "*.md" -type f -delete
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
