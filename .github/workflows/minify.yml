@@ -24,6 +24,9 @@ jobs:
 
       - name: Minify Action
         uses: anthonyftwang/minify-action@v1.0.1
+        uses: nizarmah/auto-minify@v2.1
+        with:
+          overwrite: true
 
       - run: |
           touch .nojekyll
