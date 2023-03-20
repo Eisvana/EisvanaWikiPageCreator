@@ -25,9 +25,6 @@ jobs:
       - name: Minify Action
         uses: anthonyftwang/minify-action@v1.0.1
 
-      - name: Compress Images
-        uses: calibreapp/image-actions@main
-
       - run: |
           touch .nojekyll
           find . -name "*.md" -type f -delete
