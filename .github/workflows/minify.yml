@@ -25,12 +25,10 @@ jobs:
       - name: Set up NodeJS
         uses: actions/setup-node@v3
 
-      - run: |
-          npm install jsdoc
-          npm install jsdoc-to-markdown
-
       - name: Generate JSDoc
         run: |
+          npm install -g jsdoc
+          npm install -g jsdoc-to-markdown
           jsdoc2md ./src/* > ./wiki/Functions.md
           cd wiki
           git add .
