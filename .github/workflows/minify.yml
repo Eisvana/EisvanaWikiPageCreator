@@ -22,20 +22,6 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: Set up NodeJS
-        uses: actions/setup-node@v3
-
-      - name: Generate JSDoc
-        run: |
-          npm install -g jsdoc
-          npm install -g jsdoc-to-markdown
-          jsdoc2md ./src/* > ./wiki/Functions.md
-          cd wiki
-          git add .
-          git commit -m "Update doc"
-          git push
-          cd ..
-
       - name: Minify Action
         uses: anthonyftwang/minify-action@v1.0.1
 
