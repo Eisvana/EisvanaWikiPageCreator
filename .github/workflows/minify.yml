@@ -1,0 +1,38 @@
+name: Minify
+
+run-name: Minify Code
+
+on:
+  push:
+    branches: ['main']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "minify"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    environment: github-pages
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Minify Action
+        uses: anthonyftwang/minify-action@v1.0.1
+
+      - name: Compress Images
+        uses: calibreapp/image-actions@main
+
+      - run: |
+          touch .nojekyll
+          find . -name "*.md" -type f -delete
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: . # The folder the action should deploy.

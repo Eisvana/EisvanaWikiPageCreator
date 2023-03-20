@@ -26,8 +26,8 @@
 	skipCheckElement.onchange = (e) => {
 		const checkState = e.target.checked;
 		pageData.debug = checkState;
-		uploadShown = checkState;
-		galleryUploadShown = checkState;
+		uploadShown = checkState;		// NoSonar (defined by common.js)
+		galleryUploadShown = checkState;		// NoSonar (defined by gallery.js)
 		document.documentElement.dataset.debug = checkState;
 		enableTextMarking();
 	}
@@ -81,7 +81,7 @@ function reset() {
 		errorMessage(error.previousElementSibling);
 	}
 
-	for (key in links) {
+	for (const key in links) {
 		delete links[key];
 	}
 
@@ -130,8 +130,6 @@ function downloadFile(button) {
 	a.href = mimeType + ',' + encodeURIComponent(downloadFileContent);
 	a.download = name + '.txt';
 }
-
-const wikiLink = 'https://nomanssky.fandom.com/wiki/';
 
 function createPage(element) {
 	element.style.pointerEvents = 'none';

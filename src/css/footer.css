@@ -12,7 +12,7 @@ footer .footerLinks {
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 2rem;
-	margin-top: 1rem;
+	margin-block-start: 1rem;
 	font-size: large;
 }
 

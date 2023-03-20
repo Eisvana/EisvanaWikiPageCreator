@@ -709,7 +709,6 @@ function wormAutoSpawn() {
 }
 
 function wormAlbumName() {
-	const civ = pageData.civilized;
 	const civShort = pageData.civShort;
 	const output = (() => {
 		switch (civShort) {

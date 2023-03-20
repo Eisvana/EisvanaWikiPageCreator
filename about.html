@@ -11,14 +11,8 @@
 	<script src="./src/modules/footer.js" defer></script>
 	<script>
 		// making all external links open in a new tab
-		const isExternalURL = (url) => new URL(url).origin !== location.origin;
 		window.onload = () => {
-			const a = document.getElementsByTagName("a");
-			for (const link of a) {
-				if (!isExternalURL(link.href)) continue;
-				link.target = "_blank";
-				link.rel = "noopener noreferrer";
-			}
+			externalLinks();
 		}
 	</script>
 </head>
@@ -47,14 +41,13 @@
 					<img src="./assets/bitmap/misc/lenni.png" alt="Lenni profile picture">
 					<p>
 						The page creator was made by me, Lenni, from the <a
-							href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes">Galactic Hub
+							href="Galactic_Hub_Eissentam_Scribes" data-wiki>Galactic Hub
 							Eissentam Scribes</a>. I make sure
 						the
 						data is correct after each NMS update, and also fix any bugs that you report.
 					</p>
 					<p>
-						I'm also the director of the <a
-							href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam">Galactic Hub Eissentam</a>
+						I'm also the director of the <a href="Galactic_Hub_Eissentam" data-wiki>Galactic Hub Eissentam</a>
 						and a wiki admin.
 					</p>
 					<p>You can contact me either on Discord or on Reddit:</p>
@@ -78,7 +71,7 @@
 					</p>
 					<p>
 						If you come across a bug and want to report it, use either the <a
-							href='https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform'>feedback
+							href="https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform">feedback
 							form</a>, text me on Reddit or Discord, or submit a <a
 							href="https://github.com/Lenni009/HubWikiPageCreator/issues/new">GitHub issue</a>.
 					</p>

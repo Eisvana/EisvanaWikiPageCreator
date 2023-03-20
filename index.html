@@ -27,16 +27,7 @@
 		}
 	</style>
 	<script>
-		// making all external links open in a new tab
-		const isExternalURL = (url) => new URL(url).origin !== location.origin;
 		window.onload = () => {
-			const a = document.getElementsByTagName("a");
-			for (const link of a) {
-				if (!isExternalURL(link.href)) continue;
-				link.target = "_blank";
-				link.rel = "noopener noreferrer";
-			}
-
 			const GHubHosts = ['wiki.nmsgalactichub.com', 'nmswikipagecreator.nmsgalactichub.com', 'hubwikipagecreator.nmsgalactichub.com'];
 			if (GHubHosts.includes(window.location.host)) document.querySelector('a[href=".."]').href = 'https://nmsgalactichub.com';
 		}
@@ -45,11 +36,11 @@
 
 <body>
 	<div class="container">
-		<nav><a href=".." title="Other pages">&larr; View other pages</a></nav>
+		<nav aria-label="Other pages"><a href=".." title="Other pages">&larr; View other pages</a></nav>
 		<main class="home">
 			<h1 class="title is-spaced">Hub Wiki Page Creator</h1>
 			<div class="subtitle is-4">Choose what page you want to create:</div>
-			<nav class="page-options">
+			<nav aria-label="Subpages" class="page-options">
 				<a href="./base.html" title="Create a Base page" class="button is-link is-outlined">Base</a>
 				<a href="./racetrack.html" title="Create a Racetrack page" class="button is-link is-outlined"
 					disabled>Racetrack</a>
@@ -78,8 +69,8 @@
 			<div class="built-by">
 				<div>Brought to you by:</div>
 				<div>
-					<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam_Scribes"
-						title="Galactic Hub Eissentam Scribes">Galactic Hub Eissentam Scribes
+					<a href="Galactic_Hub_Eissentam_Scribes" title="Galactic Hub Eissentam Scribes" data-wiki>Galactic
+						Hub Eissentam Scribes
 						<img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/e/ea/EisHub_Scribe_logo.png"
 							alt="Galactic Hub Eissentam Scribes logo">
 					</a>
@@ -91,15 +82,15 @@
 				</div>
 			</div>
 			<div class="hub-images">
-				<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Project">
+				<a href="Galactic_Hub_Project" data-wiki>
 					<img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/7/75/Galactic_Hub_Emblem.png"
 						alt="Galactic Hub logo">
 				</a>
-				<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Calypso">
+				<a href="Galactic_Hub_Calypso" data-wiki>
 					<img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/c/cb/Galactic_Hub_Calypso.png"
 						alt="Galactic Hub Calypso logo">
 				</a>
-				<a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Eissentam">
+				<a href="Galactic_Hub_Eissentam" data-wiki>
 					<img src="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/6/60/Galactic_Hub_Eissentam_Emblem.png"
 						alt="Galactic Hub Eissentam logo">
 				</a>

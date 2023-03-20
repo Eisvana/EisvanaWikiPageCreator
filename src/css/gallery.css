@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	margin-top: 2em;
+	margin-block-start: 2em;
 }
 
 .gallery-item {
@@ -36,7 +36,7 @@
 }
 
 .gallery-item .gallery-meta>*:last-child {
-	margin-top: 5px;
+	margin-block-start: 5px;
 }
 
 .gallery-item .controlButtons {
@@ -45,7 +45,7 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: .5em;
-	padding-left: 0;
+	padding-inline-start: 0;
 }
 
 .gallery-item .controlButtons .moveButton {

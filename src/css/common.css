@@ -66,7 +66,7 @@ article img {
 	border-radius: 10%;
 	object-fit: cover;
 	float: right;
-	margin-left: 1rem;
+	margin-inline-start: 1rem;
 }
 
 .linklist {
@@ -141,8 +141,8 @@ nav {
 }
 
 .container {
-	margin-bottom: 5em;
-	margin-top: 2em;
+	margin-block-end: 5em;
+	margin-block-start: 2em;
 }
 
 .tableHeader.no-flex {
@@ -150,7 +150,7 @@ nav {
 }
 
 .no-flex>label {
-	margin-right: 1rem;
+	margin-inline-end: 1rem;
 }
 
 /* Input table */
@@ -162,16 +162,16 @@ nav {
 }
 
 #input>.table {
-	margin-bottom: 1rem;
+	margin-block-end: 1rem;
 }
 
 #input>#galleryItems {
-	margin-bottom: 2rem;
+	margin-block-end: 2rem;
 }
 
 .table>* {
 	padding: 5px 0;
-	border-bottom: 1px dashed;
+	border-block-end: 1px dashed;
 	border-color: var(--table-border-color);
 	display: flex;
 	column-gap: 1em;
@@ -187,7 +187,7 @@ div.checkboxes-grid {
 }
 
 .checkbox-label {
-	margin-left: 5px;
+	margin-inline-start: 5px;
 }
 
 .tableHeader:empty {
@@ -195,7 +195,7 @@ div.checkboxes-grid {
 }
 
 .tableCell.text {
-	padding-right: 10px;
+	padding-inline-end: 10px;
 }
 
 .tableCell.data {
@@ -203,7 +203,7 @@ div.checkboxes-grid {
 }
 
 .tableCell.data .error {
-	margin-top: .3rem;
+	margin-block-start: .3rem;
 }
 
 .tableHeader {
@@ -225,13 +225,13 @@ div.column {
 }
 
 .column>*:last-child {
-	margin-bottom: 1rem;
+	margin-block-end: 1rem;
 }
 
 #output {
-	border-left: 1px dashed;
+	border-inline-start: 1px dashed;
 	border-color: var(--column-divider-color);
-	padding-bottom: 3rem;
+	padding-block-end: 3rem;
 }
 
 .wikiText {
@@ -240,7 +240,7 @@ div.column {
 }
 
 #output>*:nth-child(n + 2) {
-	margin-top: 5rem;
+	margin-block-start: 5rem;
 }
 
 .title {
@@ -265,13 +265,13 @@ div.column {
 }
 
 .checkbox label {
-	margin-left: 3px
+	margin-inline-start: 3px
 }
 
 input[type="radio"]~label,
 label>input[type="radio"]~span,
 .radioButtons label:not(:has(input~span)) {
-	margin-left: 5px;
+	margin-inline-start: 5px;
 	font-weight: normal;
 }
 
@@ -290,8 +290,8 @@ label>input[type="radio"]~span,
 
 .buttons {
 	justify-content: center;
-	margin-left: -1rem;
-	margin-top: 1rem;
+	margin-inline-start: -1rem;
+	margin-block-start: 1rem;
 }
 
 .label-combo {
@@ -340,22 +340,22 @@ label>input[type="radio"]~span,
 
 .tableCell.text.is-odd,
 .tableCell.text.is-even {
-	padding-left: .5rem;
-	margin-left: -.5rem;
+	padding-inline-start: .5rem;
+	margin-inline-start: -.5rem;
 }
 
 .tableCell.data.is-odd,
 .tableCell.data.is-even {
-	padding-right: .5rem;
-	margin-right: -.5rem;
+	padding-inline-end: .5rem;
+	margin-inline-end: -.5rem;
 }
 
 .tableHeader.is-even,
 .tableHeader.is-odd {
-	padding-left: .5rem;
-	padding-right: .5rem;
-	margin-left: -.5rem;
-	margin-right: -.5rem;
+	padding-inline-start: .5rem;
+	padding-inline-end: .5rem;
+	margin-inline-start: -.5rem;
+	margin-inline-end: -.5rem;
 }
 
 .removable {
@@ -367,14 +367,14 @@ label>input[type="radio"]~span,
 /* Media Queries */
 @media only screen and (max-width: 550px) {
 	div.column {
-		padding-left: 0;
-		padding-right: 0;
+		padding-inline-start: 0;
+		padding-inline-end: 0;
 	}
 
 	main.columns {
 		width: 100%;
-		margin-left: 0;
-		margin-right: 0;
+		margin-inline-start: 0;
+		margin-inline-end: 0;
 	}
 }
 
@@ -390,8 +390,8 @@ label>input[type="radio"]~span,
 
 @media only screen and (max-width: 1023px) {
 	.container {
-		margin-left: 1rem;
-		margin-right: 1rem;
+		margin-inline-start: 1rem;
+		margin-inline-end: 1rem;
 	}
 
 	#gallery_descs {
@@ -399,7 +399,7 @@ label>input[type="radio"]~span,
 	}
 
 	#output {
-		border-left: none !important;
+		border-inline-start: none !important;
 	}
 }
 

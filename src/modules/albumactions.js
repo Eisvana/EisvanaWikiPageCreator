@@ -71,7 +71,7 @@ function albumItemType() {
 			return pageData.type;
 		}
 	})();
-	albumElements.output.album.innerText = output;
+	globalElements.output.album.innerText = output;
 }
 
 // this is after the album macro, used for MT pages
@@ -83,7 +83,7 @@ function albumDesc() {
 			return '';
 		}
 	})();
-	albumElements.output.albumDesc.innerText = output;
+	globalElements.output.albumDesc.innerText = output;
 }
 
 // discoverer in the album
@@ -101,7 +101,7 @@ function albumDiscoverer() {
 			}
 		}
 	})();
-	albumElements.output.albumDiscoverer.innerText = output;
+	globalElements.output.albumDiscoverer.innerText = output;
 }
 
 // name of civ in the heading
@@ -113,7 +113,7 @@ function albumCiv() {
 			return pageData.civShort;
 		}
 	})();
-	albumElements.output.albumCiv.innerText = output;
+	globalElements.output.albumCiv.innerText = output;
 }
 
 // name of the object in the album
@@ -125,7 +125,7 @@ function albumName() {
 			return pageData.name;
 		}
 	})();
-	albumElements.output.albumName.innerText = output;
+	globalElements.output.albumName.innerText = output;
 }
 
 // "other" parm in the album
@@ -149,7 +149,7 @@ function albumType() {
 			return '';
 		}
 	})();
-	albumElements.output.albumType.innerText = output;
+	globalElements.output.albumType.innerText = output;
 }
 
 // wrap all functions from above into one so it can be easier called on pageload
