@@ -26,8 +26,8 @@ jobs:
         uses: actions/setup-node@v3
 
       - run: |
-          npm install jsdoc
-          npm install jsdoc-to-markdown
+          npm install -g jsdoc
+          npm install -g jsdoc-to-markdown
 
       - name: Generate JSDoc
         run: |
