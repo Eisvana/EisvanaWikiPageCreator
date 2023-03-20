@@ -24,6 +24,8 @@ jobs:
 
       - name: Minify Action
         uses: anthonyftwang/minify-action@v1.0.1
+
+      - name: Minify Nr. 2
         uses: nizarmah/auto-minify@v2.1.1
         with:
           overwrite: true
