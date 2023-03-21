@@ -1,1 +1,335 @@
-function startupFunctions(){celestialStartupFunctions(),autoInfested(),wormAutoSpawn(),wormAlbumName(),"function"==typeof planetStartupFunctions&&planetStartupFunctions()}const planetMoonElements={input:{resourceInputs:"resourceInputs",autoSpawn:"autoSpawnInput"},output:{resourceBullets:"resourceBullets",creatures:"creatures",plants:"plants",minerals:"minerals",sandworm:"sandworm"}};updateGlobalElements(planetMoonElements);const planetMoonElementFunctions={civ:["wormAlbumName()",null,!0],systemInput:["locationSentence()"],faunaNumberInput:['numberStats(this); plural(pageData[this.dataset.destNoauto], "faunaSentencePlural")'],sentinelInput:["sentinelSentence()"],descriptionInput:["autoInfested(this)"],sandwormInput:["addSandwormTemplate()"],wormmaxdepthInput:["numberStats(this, 1)"],autoSpawn:["wormAutoSpawn()"]};function plural(t,a=null){const e=1==t?"is":"are";if(!a)return e;wikiCode(e,a)}function planetDescriptor(t){const a=t.dataset.destNoauto,e=buildDescriptor(t.value,pageData.pageType," "),n=globalElements.output[a];Array.isArray(n)?n.forEach((t=>t.innerText=e)):n.innerText=e}function locationSentence(){const t=pageData.system,a=pageData.region,e=pageData.civShort,n=`It can be found in the [[${t}]] [[star system]] in the [[${a}]] [[region]] (HUB${getHubNumber(a)}) of the ${HubGal(e)}.`;globalElements.output.location.innerText=n}function addResource(t=globalElements.input.resourceInputs.querySelector("button")){const a=t.parentElement,e=document.querySelectorAll("[data-resource]"),n=getChildIndex(e,"dataset.resource"),o="resource_input"+n,i=`<div class="tableCell text removable" data-resource="section${n}">\n\t\t<button class="button is-outlined is-danger icon is-small" title="Remove resource" type="button" disabled onclick="removeSpecificSection('section${n}', 'resource'); enableResourceAdd()">&#10006</button>\n\t\t<label for="${o}">Resource name:</label>\n\t</div>\n\t<div class="tableCell data" data-resource="section${n}">\n\t\t<input type="text" list="resources" id="${o}" oninput="resourceList()" onchange="forceDatalist(this)">\n\t</div>`;a.insertAdjacentHTML("beforebegin",i);const l=document.querySelectorAll("[data-resource] button"),s=l.length;for(;document.querySelectorAll("[data-resource] button").length<3;)addResource(t);if(s+1>6&&(t.disabled=!0),s>3)for(const t of l)t.disabled=!1}function enableResourceAdd(){globalElements.input.resourceInputs.querySelector("button").disabled=!1;const t=document.querySelectorAll("[data-resource] button");if(t.length<4)for(const a of t)a.disabled=!0;resourceList()}function resourceList(){const t=getResourceData(),a=document.querySelectorAll("[data-resource] input"),e=new Set;for(const t of a)t.value&&e.add(t.value);const n=new Object;for(const a of Array.from(e))n[a]=t[a];const o=Object.keys(n),i=Object.values(n);for(let t=0;t<o.length;t++){const a=o[t];o[t]=`* {{ilink|${a}}}`;const e=i[t];i[t]=`[[${e}]]`}globalElements.output.resourceList.innerText=i.join(", "),globalElements.output.resourceBullets.innerText=o.join("\n")}function sentinelSentence(){const t=pageData.sentinel,a=getSentinelData(),e=(()=>{for(const e in a)if(a[e].includes(t))return e})(),n=`[[Sentinel]] activity on this ${pageData.pageType.toLowerCase()} is classified as: ''${t}''. The sentinels ${"aggressive"==e?"":"don't"} present an immediate threat.`;globalElements.output.sentinelSentence.innerText=n}function addFauna(t){const a=t.parentElement,e=globalElements.output[t.dataset.destNoauto],n="fauna",o=document.querySelectorAll(`[data-${n}]`),i=getChildIndex(o,`dataset.${n}`),l=`<div class="tableHeader text sectionToggle" data-fauna="section${i}" data-section="fauna">\n\t\t<p style="margin-right:auto">Creature: <output class="has-text-weight-bold" name="faunaName${i}"></output></p>\n\t\t<button class="button is-danger is-outlined" type="button" onclick="removeSpecificSection('section${i}', 'fauna'); changeTableEntry(this)">Remove</button>\n\t\t<button class="button" onclick="toggleSection('fauna${i}', this)">Hide</button>\n\t</div>\n\t<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<label for="faunaNameInput${i}">Creature name:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>\n\t\t\t<data>Creature Name</data>\n\t\t\t<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>\n\t\t\t<data>./assets/bitmap/creature/creatureName.jpg</data>\n\t</div>\n\t<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<input type="text" data-dest="faunaName${i}" id="faunaNameInput${i}">\n\t</div>\n\t\t<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<label for="faunaFile_input${i}">Creature file name:</label>\n\t</div>\n\t<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<input type="text" id="faunaFile_input${i}" data-dest="faunaFile${i}" data-default="NmsMisc_NotAvailable.png">\n\t\t<input type="file" id="faunaFileUpl${i}" accept="image/*" oninput="image(this)">\n\t</div>\n\t<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<label>Hemisphere:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the creature discovery menu.</data>\n\t\t\t<data>Hemisphere</data>\n\t\t\t<data>\n\t\t\t\tFound in the creature discovery menu.<br>\n\t\t\t\tIf no hemisphere is given, leave the input empty.\n\t\t\t</data>\n\t\t\t<data>./assets/bitmap/creature/creatureHemisphere.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<select data-dest="faunaHemisphere${i}" id="faunaHemisphereInput${i}">\n\t\t\t<option value=""></option>\n\t\t\t<option value="/ Found in the North">North</option>\n\t\t\t<option value="/ Found in the South">South</option>\n\t\t</select>\n\t</div>\n\t<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<label>Rarity:</label>\n\t\t\t<span class="tooltip">\n\t\t\t<data>Found in the creature discovery menu.</data>\n\t\t\t<data>Rarity</data>\n\t\t\t<data>Found in the creature discovery menu.</data>\n\t\t\t<data>./assets/bitmap/creature/creatureRarity.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<select data-dest="faunaRarity${i}" id="faunaRarityInput${i}">\n\t\t\t<option value="Common">Common</option>\n\t\t\t<option value="Uncommon">Uncommon</option>\n\t\t\t<option value="Rare">Rare</option>\n\t\t</select>\n\t</div>\n\t<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<label>Ecosystem:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the creature discovery menu.</data>\n\t\t\t<data>Ecosystem</data>\n\t\t\t<data>Found in the creature discovery menu.</data>\n\t\t\t<data>./assets/bitmap/creature/creatureEcosystem.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<select data-dest="faunaEcosystem${i}" id="faunaEcosystemInput${i}" onchange="genusDropdown(this)">\n\t\t\t<option value="Ground">Ground</option>\n\t\t\t<option value="Flying">Flying</option>\n\t\t\t<option value="Underwater">Underwater</option>\n\t\t\t<option value="Underground">Underground</option>\n\t\t</select>\n\t</div>\n\t<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<label>Activity:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the creature discovery menu.</data>\n\t\t\t<data>Activity</data>\n\t\t\t<data>Found in the creature discovery menu.</data>\n\t\t\t<data>./assets/bitmap/creature/creatureActivity.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<select data-dest="faunaActivity${i}" id="faunaActivityInput${i}">\n\t\t\t<option value="Always Active">Always Active</option>\n\t\t\t<option value="Diurnal">Diurnal</option>\n\t\t\t<option value="Nocturnal">Nocturnal</option>\n\t\t\t<option value="Mostly Diurnal">Mostly Diurnal</option>\n\t\t\t<option value="Mostly Nocturnal">Mostly Nocturnal</option>\n\t\t</select>\n\t</div>\n\t<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<label>Genus:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>See the wiki for a list of genera.</data>\n\t\t\t<data>Genus</data>\n\t\t\t<data>The genus is defined by the general appearance of a creature.<br>\n\t\t\t\tSee the wiki for a <a href='https://nomanssky.fandom.com/wiki/Genus#Genus_List'\n\t\t\t\t\ttarget='_blank' rel='noopener noreferrer'>list of genera</a>.</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<select data-dest-noauto="faunaGenus${i}" id="faunaGenusInput${i}" onchange="addGenus(this)"></select>\n\t</div>\n\t<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<label for="faunaWeightInput${i}">Weight in kg:</label>\n\t\t\t<span class="tooltip">\n\t\t\t<data>Found on the creature scan. No "kg" necessary.</data>\n\t\t\t<data>Weight</data>\n\t\t\t<data>Found on the creature scan.<br>No "kg" necessary.</data>\n\t\t\t<data>./assets/bitmap/creature/creatureWeight.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<input data-dest-noauto="faunaWeight${i}" type="text" id="faunaWeightInput${i}" maxlength="5" placeholder="0.0" oninput="numberStats(this, 1)">\n\t</div>\n\t<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<label for="faunaHeightInput${i}">Height in m:</label>\n\t\t\t<span class="tooltip">\n\t\t\t<data>Found on the creature scan. No "m" necessary.</data>\n\t\t\t<data>Height</data>\n\t\t\t<data>Found on the creature scan.<br>No "m" necessary.</data>\n\t\t\t<data>./assets/bitmap/creature/creatureHeight.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<input data-dest-noauto="faunaHeight${i}" type="text" id="faunaHeightInput${i}" maxlength="3" placeholder="0.0" oninput="numberStats(this, 1)">\n\t</div>\n\t<div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<label for="faunaDiscovererInput${i}">Discoverer:</label>\n\t</div>\n\t<div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">\n\t\t<input data-dest="faunaDiscoverer${i}" type="text" id="faunaDiscovererInput${i}">\n\t</div>`,s=`<div data-fauna="section${i}">|-</div>\n\t<div data-fauna="section${i}">|[[File:<output id="faunaFile${i}"></output>|150px]] || <output id="faunaName${i}" name="faunaName${i}"></output> || <output id="faunaRarity${i}"></output> / <output id="faunaEcosystem${i}"></output> / <output id="faunaActivity${i}"> </output> <output id="faunaHemisphere${i}"></output> || <output id="faunaGenus${i}"></output> || <output id="faunaHeight${i}"></output>m || <output id="faunaWeight${i}"></output>kg || <output id="faunaDiscoverer${i}"></output></div>`;a.insertAdjacentHTML("beforebegin",l),e.insertAdjacentHTML("beforeend",s),postProcessSection(t,n,i),genusDropdown(globalElements.input[`faunaEcosystemInput${i}`])}function addFlora(t){const a=t.parentElement,e=globalElements.output[t.dataset.destNoauto],n="flora",o=document.querySelectorAll(`[data-${n}]`),i=getChildIndex(o,`dataset.${n}`),l=`<div class="tableHeader text sectionToggle" data-flora="section${i}" data-section="flora">\n\t\t<p style="margin-right:auto">Plant: <output class="has-text-weight-bold" name="floraName${i}"></output></p>\n\t\t<button class="button is-danger is-outlined" type="button" onclick="removeSpecificSection('section${i}', 'flora'); changeTableEntry(this)">Remove</button>\n\t\t<button class="button" onclick="toggleSection('flora${i}', this)">Hide</button>\n\t</div>\n\t<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<label for="floraNameInput${i}">Plant name:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Flora Name</data>\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>./assets/bitmap/flora/floraName.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<input type="text" data-dest="floraName${i}" id="floraNameInput${i}">\n\t</div>\n\t\t<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<label for="floraFile_input${i}">Plant file name:</label>\n\t</div>\n\t<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<input type="text" id="floraFile_input${i}" data-dest="floraFile${i}" data-default="NmsMisc_NotAvailable.png">\n\t\t<input type="file" id="floraFileUpl${i}" accept="image/*" oninput="image(this)">\n\t</div>\n\t<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<label for="floraAgeInput${i}">Age:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Flora Age</data>\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>./assets/bitmap/flora/age.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<input type="text" data-dest="floraAge${i}" list="ageData" id="floraAgeInput${i}">\n\t</div>\n\t<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<label for="floraRootInput${i}">Root structure:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Flora Root Structure</data>\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>./assets/bitmap/flora/roots.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<input type="text" data-dest="floraRoot${i}" list="rootData" id="floraRootInput${i}">\n\t</div>\n\t<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<label for="floraNutInput${i}">Nutrient source:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Flora Nutrient Source</data>\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>./assets/bitmap/flora/nutSource.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<input type="text" data-dest="floraNut${i}" list="nutSourceData" id="floraNutInput${i}">\n\t</div>\n\t<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<label for="floraNoteInput${i}">Notes:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Flora Notes</data>\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>./assets/bitmap/flora/notes.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<input type="text" data-dest="floraNote${i}" list="floraNotesData" id="floraNoteInput${i}">\n\t</div>\n\t<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<label for="floraResourcePrimInput${i}">Primary element:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Flora Primary Element</data>\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>./assets/bitmap/flora/primEl.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">\n\t<input data-dest-noauto="floraElements${i}" type="text" list="floraResources" id="floraResourcePrimInput${i}" oninput="floraMineralResourceLinks(this)">\n\t</div>\n\t<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<label for="floraResourceSecInput${i}">Secondary element:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Flora Secondary Element</data>\n\t\t\t<data>Found in the analysis visor. Leave empty if there is no secondary element.</data>\n\t\t\t<data>./assets/bitmap/flora/secEl.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<input data-dest-noauto="floraElements${i}" type="text" list="floraResources" id="floraResourceSecInput${i}" oninput="floraMineralResourceLinks(this)">\n\t</div>\n\t<div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<label for="floraDiscovererInput${i}">Discoverer:</label>\n\t</div>\n\t<div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">\n\t\t<input data-dest="floraDiscoverer${i}" type="text" id="floraDiscovererInput${i}">\n\t</div>`,s=`<div data-flora="section${i}">|-</div>\n\t<div data-flora="section${i}">|[[File:<output id="floraFile${i}"></output>|150px]] || <output id="floraName${i}" name="floraName${i}"></output> || <output id="floraAge${i}"></output> || <output id="floraRoot${i}"></output> || <output id="floraNut${i}"></output> || <output id="floraNote${i}"></output> || <output id="floraElements${i}"></output> || <output id="floraDiscoverer${i}"></output></div>`;a.insertAdjacentHTML("beforebegin",l),e.insertAdjacentHTML("beforeend",s),postProcessSection(t,n,i)}function addMineral(t){const a=t.parentElement,e=globalElements.output[t.dataset.destNoauto],n="mineral",o=document.querySelectorAll(`[data-${n}]`),i=getChildIndex(o,`dataset.${n}`),l=`<div class="tableHeader text sectionToggle" data-mineral="section${i}" data-section="mineral">\n\t\t<p style="margin-right:auto">Mineral: <output class="has-text-weight-bold" name="mineralName${i}"></output></p>\n\t\t<button class="button is-danger is-outlined" type="button" onclick="removeSpecificSection('section${i}', 'mineral'); changeTableEntry(this)">Remove</button>\n\t\t<button class="button" onclick="toggleSection('mineral${i}', this)">Hide</button>\n\t</div>\n\t<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<label for="mineralNameInput${i}">Mineral name:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Mineral Name</data>\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>./assets/bitmap/mineral/mineralName.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<input type="text" data-dest="mineralName${i}" id="mineralNameInput${i}">\n\t</div>\n\t\t<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<label for="mineralFile_input${i}">Mineral file name:</label>\n\t</div>\n\t<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<input type="text" id="mineralFile_input${i}" data-dest="mineralFile${i}" data-default="NmsMisc_NotAvailable.png">\n\t\t<input type="file" id="mineralFileUpl${i}" accept="image/*" oninput="image(this)">\n\t</div>\n\t<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<label for="mineralMetalInput${i}">Metal Content:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Mineral Metal Content</data>\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>./assets/bitmap/mineral/content.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<input type="text" data-dest-noauto="mineralMetal${i}" id="mineralMetalInput${i}" maxlength="2" oninput="wikiCodePercentage(this)">\n\t</div>\n\t<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<label for="mineralFormationInput${i}">Formation Process:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Mineral Formation Process</data>\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>./assets/bitmap/mineral/formation.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<input type="text" data-dest="mineralFormation${i}" list="formationData" id="mineralFormationInput${i}">\n\t</div>\n\t<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<label for="mineralNoteInput${i}">Notes:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Mineral Notes</data>\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>./assets/bitmap/mineral/notes.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<input type="text" data-dest="mineralNote${i}" list="mineralNotesData" id="mineralNoteInput${i}">\n\t</div>\n\t<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<label for="mineralResourcePrimInput${i}">Primary element:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Mineral Primary Element</data>\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>./assets/bitmap/mineral/primEl.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t<input data-dest-noauto="mineralElements${i}" type="text" list="mineralResources" id="mineralResourcePrimInput${i}" oninput="floraMineralResourceLinks(this)">\n\t</div>\n\t<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<label for="mineralResourceSecInput${i}">Secondary element:</label>\n\t\t<span class="tooltip">\n\t\t\t<data>Found in the analysis visor.</data>\n\t\t\t<data>Mineral Secondary Element</data>\n\t\t\t<data>Found in the analysis visor. Leave empty if there is no secondary element.</data>\n\t\t\t<data>./assets/bitmap/mineral/secEl.jpg</data>\n\t\t</span>\n\t</div>\n\t<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<input data-dest-noauto="mineralElements${i}" type="text" list="mineralResources" id="mineralResourceSecInput${i}" oninput="floraMineralResourceLinks(this)">\n\t</div>\n\t<div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<label for="mineralDiscovererInput${i}">Discoverer:</label>\n\t</div>\n\t<div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">\n\t\t<input data-dest="mineralDiscoverer${i}" type="text" id="mineralDiscovererInput${i}">\n\t</div>`,s=`<div data-mineral="section${i}">|-</div>\n\t<div data-mineral="section${i}">|[[File:<output id="mineralFile${i}"></output>|150px]] || <output id="mineralName${i}" name="mineralName${i}"></output> || <output id="mineralMetal${i}"></output> || <output id="mineralFormation${i}"></output> || <output id="mineralNote${i}"></output> || <output id="mineralElements${i}"></output> || <output id="mineralDiscoverer${i}"></output></div>`;a.insertAdjacentHTML("beforebegin",l),e.insertAdjacentHTML("beforeend",s),postProcessSection(t,n,i)}function postProcessSection(t,a,e){addAllTooltips(),changeTableEntry(t);const n={input:{},output:{}},o=document.querySelectorAll(`[data-${a}="section${e}"] :is(input, select)`);for(const t of o)n.input[t.id]=t.id,t.dataset.dest&&(assignFunction(t,"wikiCode(this)"),wikiCode(t)),t.dataset.destNoauto&&(assignFunction(t,"storeData(this)"),storeData(t)),t.dataset.default&&(assignFunction(t,"assignDefaultValue(this)",null,!0),assignDefaultValue(t)),t.list&&assignFunction(t,"forceDatalist(this)","onchange");const i=document.querySelectorAll(`[data-${a}="section${e}"] output`);for(const t of i)t.id&&(n.output[t.id]=t.id);updateGlobalElements(n)}function changeTableEntry(t){const a=t.parentElement,e=a.dataset.section,n=document.querySelectorAll(`.tableHeader[data-${e}]`);for(let t=0;t<n.length;t++){const a="is-"+oddEven(t+1),o=n[t].dataset[e],i=document.querySelectorAll(`[data-${e}="${o}"]`);for(const t of i)t.classList.remove("is-odd","is-even"),t.classList.add(a)}function o(t){if(!t)return;const n=a.dataset[e],o=extractNumber(n),i=Object.keys(t).find((t=>extractNumber(t)==o));delete t[i]}a.dataset[e]&&("fauna"==e?(o(links.genera),addGenus()):(o(links.resources?.[e]),floraMineralResourceLinks()))}function addGenus(t=null){const a=links.genera??=new Object;if(t){const e=t.value;a[t.dataset.destNoauto]=sanitiseString(e)}const e=new Set,n=sortObj(structuredClone(a),!0);for(const t in n){const a=n[t];a&&!e.has(a)&&(n[t]=`[[${a}]]`,e.add(a))}for(const t in n){const a=n[t];globalElements.output[t].innerText=a}}function floraMineralResourceLinks(t=null){const a=links.resources??=new Object;if(t){const e=t.value,n=t.dataset.destNoauto,o=t.id,i=t.parentElement.dataset.section.split(" ")[0],l=i.replace(extractNumber(i),"");a[l]??=new Object,a[l][n]??=new Object,a[l][n][o]=sanitiseString(e)}const e=new Set,n=sortObj(structuredClone(a));for(const t in sortObj(n)){const a=n[t];for(const t in sortObj(a)){const n=a[t];for(const t in n){const a=n[t];a&&!e.has(a)&&(n[t]=`[[${a}]]`,e.add(a))}}}for(const t in n)for(const a in n[t]){const e=Object.values(n[t][a]).filter((t=>t)).join(", ");globalElements.output[a].innerText=e}}function genusDropdown(t){const a=getCreatureData(),e=t.value,n=Object.keys(a.ecosystems[e]),o="faunaGenusInput"+extractNumber(t.id),i=new Array;for(const t of n)i.push(`${t} (${a.ecosystems[e][t].commonName})`);setDropdownOptions(globalElements.input[o],n,i),addGenus(globalElements.input[o])}function autoWorm(t){t&&(globalElements.input.sandwormInput.checked=!0),addSandwormTemplate()}function addSandwormTemplate(){const t=globalElements.input.sandwormInput,a=t.dataset.destNoauto,e=Array.from(document.querySelectorAll(`[data-section="${a}"]`)),n=globalElements.output[a];e.push(n);for(const a of e)t.checked?a.style.display="":a.style.display="none"}function wormAutoSpawn(){const t=(()=>{const t=globalElements.input.autoSpawn;for(const a of t)if(a.checked)return a.value})();globalElements.output.wormAutoSpawn.innerText=t}function wormAlbumName(){const t=pageData.civShort,a=(()=>{switch(t){case"GHub":return"GHEC Sandworm Album";case"CalHub":return"CalHub Rare Fauna Album#Sandworm|CalHub Rare Fauna Album";case"EisHub":return"EisHub Shaihuluda Album"}})();globalElements.output.wormAlbumName.innerText=a}function resetExternal(){const t=document.querySelectorAll("[data-moon], [data-resource], [data-fauna], [data-flora], [data-mineral]");removeSection(t),enableResourceAdd(),"function"==typeof enableMoonAdd&&enableMoonAdd()}assignElementFunctions(planetMoonElementFunctions);
+function startupFunctions(){celestialStartupFunctions(),autoInfested(),wormAutoSpawn(),wormAlbumName(),"function"==typeof planetStartupFunctions&&planetStartupFunctions()}const planetMoonElements={input:{resourceInputs:"resourceInputs",autoSpawn:"autoSpawnInput"},output:{resourceBullets:"resourceBullets",creatures:"creatures",plants:"plants",minerals:"minerals",sandworm:"sandworm"}},planetMoonElementFunctions=(updateGlobalElements(planetMoonElements),{civ:["wormAlbumName()",null,!0],systemInput:["locationSentence()"],faunaNumberInput:['numberStats(this); plural(pageData[this.dataset.destNoauto], "faunaSentencePlural")'],sentinelInput:["sentinelSentence()"],descriptionInput:["autoInfested(this)"],sandwormInput:["addSandwormTemplate()"],wormmaxdepthInput:["numberStats(this, 1)"],autoSpawn:["wormAutoSpawn()"]});function plural(a,t=null){a=1==a?"is":"are";if(!t)return a;wikiCode(a,t)}function planetDescriptor(a){var t=a.dataset.destNoauto;const e=buildDescriptor(a.value,pageData.pageType," ");a=globalElements.output[t];Array.isArray(a)?a.forEach(a=>a.innerText=e):a.innerText=e}function locationSentence(){var a=pageData.system,t=pageData.region,e=pageData.civShort,a=`It can be found in the [[${a}]] [[star system]] in the [[${t}]] [[region]] (HUB${getHubNumber(t)}) of the ${HubGal(e)}.`;globalElements.output.location.innerText=a}function addResource(a=globalElements.input.resourceInputs.querySelector("button")){for(var t=a.parentElement,e=document.querySelectorAll("[data-resource]"),e=getChildIndex(e,"dataset.resource"),n="resource_input"+e,t=(t.insertAdjacentHTML("beforebegin",`<div class="tableCell text removable" data-resource="section${e}">
+		<button class="button is-outlined is-danger icon is-small" title="Remove resource" type="button" disabled onclick="removeSpecificSection('section${e}', 'resource'); enableResourceAdd()">&#10006</button>
+		<label for="${n}">Resource name:</label>
+	</div>
+	<div class="tableCell data" data-resource="section${e}">
+		<input type="text" list="resources" id="${n}" oninput="resourceList()" onchange="forceDatalist(this)">
+	</div>`),document.querySelectorAll("[data-resource] button")),e=t.length;document.querySelectorAll("[data-resource] button").length<3;)addResource(a);if(6<e+1&&(a.disabled=!0),3<e)for(const o of t)o.disabled=!1}function enableResourceAdd(){globalElements.input.resourceInputs.querySelector("button").disabled=!1;var a=document.querySelectorAll("[data-resource] button");if(a.length<4)for(const t of a)t.disabled=!0;resourceList()}function resourceList(){var a=getResourceData(),t=document.querySelectorAll("[data-resource] input"),e=new Set;for(const s of t)s.value&&e.add(s.value);var n=new Object;for(const d of Array.from(e))n[d]=a[d];var o=Object.keys(n),i=Object.values(n);for(let a=0;a<o.length;a++){var l=o[a],l=(o[a]=`* {{ilink|${l}}}`,i[a]);i[a]=`[[${l}]]`}globalElements.output.resourceList.innerText=i.join(", "),globalElements.output.resourceBullets.innerText=o.join("\n")}function sentinelSentence(){const t=pageData.sentinel,e=getSentinelData();var a=(()=>{for(const a in e)if(e[a].includes(t))return a})(),a=`[[Sentinel]] activity on this ${pageData.pageType.toLowerCase()} is classified as: ''${t}''. The sentinels ${"aggressive"==a?"":"don't"} present an immediate threat.`;globalElements.output.sentinelSentence.innerText=a}function addFauna(a){var t=a.parentElement,e=globalElements.output[a.dataset.destNoauto],n="fauna",o=document.querySelectorAll(`[data-${n}]`),o=getChildIndex(o,"dataset."+n),i=`<div data-fauna="section${o}">|-</div>
+	<div data-fauna="section${o}">|[[File:<output id="faunaFile${o}"></output>|150px]] || <output id="faunaName${o}" name="faunaName${o}"></output> || <output id="faunaRarity${o}"></output> / <output id="faunaEcosystem${o}"></output> / <output id="faunaActivity${o}"> </output> <output id="faunaHemisphere${o}"></output> || <output id="faunaGenus${o}"></output> || <output id="faunaHeight${o}"></output>m || <output id="faunaWeight${o}"></output>kg || <output id="faunaDiscoverer${o}"></output></div>`;t.insertAdjacentHTML("beforebegin",`<div class="tableHeader text sectionToggle" data-fauna="section${o}" data-section="fauna">
+		<p style="margin-right:auto">Creature: <output class="has-text-weight-bold" name="faunaName${o}"></output></p>
+		<button class="button is-danger is-outlined" type="button" onclick="removeSpecificSection('section${o}', 'fauna'); changeTableEntry(this)">Remove</button>
+		<button class="button" onclick="toggleSection('fauna${o}', this)">Hide</button>
+	</div>
+	<div class="tableCell text" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<label for="faunaNameInput${o}">Creature name:</label>
+		<span class="tooltip">
+			<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+			<data>Creature Name</data>
+			<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+			<data>./assets/bitmap/creature/creatureName.jpg</data>
+	</div>
+	<div class="tableCell data" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<input type="text" data-dest="faunaName${o}" id="faunaNameInput${o}">
+	</div>
+		<div class="tableCell text" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<label for="faunaFile_input${o}">Creature file name:</label>
+	</div>
+	<div class="tableCell data" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<input type="text" id="faunaFile_input${o}" data-dest="faunaFile${o}" data-default="NmsMisc_NotAvailable.png">
+		<input type="file" id="faunaFileUpl${o}" accept="image/*" oninput="image(this)">
+	</div>
+	<div class="tableCell text" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<label>Hemisphere:</label>
+		<span class="tooltip">
+			<data>Found in the creature discovery menu.</data>
+			<data>Hemisphere</data>
+			<data>
+				Found in the creature discovery menu.<br>
+				If no hemisphere is given, leave the input empty.
+			</data>
+			<data>./assets/bitmap/creature/creatureHemisphere.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<select data-dest="faunaHemisphere${o}" id="faunaHemisphereInput${o}">
+			<option value=""></option>
+			<option value="/ Found in the North">North</option>
+			<option value="/ Found in the South">South</option>
+		</select>
+	</div>
+	<div class="tableCell text" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<label>Rarity:</label>
+			<span class="tooltip">
+			<data>Found in the creature discovery menu.</data>
+			<data>Rarity</data>
+			<data>Found in the creature discovery menu.</data>
+			<data>./assets/bitmap/creature/creatureRarity.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<select data-dest="faunaRarity${o}" id="faunaRarityInput${o}">
+			<option value="Common">Common</option>
+			<option value="Uncommon">Uncommon</option>
+			<option value="Rare">Rare</option>
+		</select>
+	</div>
+	<div class="tableCell text" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<label>Ecosystem:</label>
+		<span class="tooltip">
+			<data>Found in the creature discovery menu.</data>
+			<data>Ecosystem</data>
+			<data>Found in the creature discovery menu.</data>
+			<data>./assets/bitmap/creature/creatureEcosystem.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<select data-dest="faunaEcosystem${o}" id="faunaEcosystemInput${o}" onchange="genusDropdown(this)">
+			<option value="Ground">Ground</option>
+			<option value="Flying">Flying</option>
+			<option value="Underwater">Underwater</option>
+			<option value="Underground">Underground</option>
+		</select>
+	</div>
+	<div class="tableCell text" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<label>Activity:</label>
+		<span class="tooltip">
+			<data>Found in the creature discovery menu.</data>
+			<data>Activity</data>
+			<data>Found in the creature discovery menu.</data>
+			<data>./assets/bitmap/creature/creatureActivity.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<select data-dest="faunaActivity${o}" id="faunaActivityInput${o}">
+			<option value="Always Active">Always Active</option>
+			<option value="Diurnal">Diurnal</option>
+			<option value="Nocturnal">Nocturnal</option>
+			<option value="Mostly Diurnal">Mostly Diurnal</option>
+			<option value="Mostly Nocturnal">Mostly Nocturnal</option>
+		</select>
+	</div>
+	<div class="tableCell text" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<label>Genus:</label>
+		<span class="tooltip">
+			<data>See the wiki for a list of genera.</data>
+			<data>Genus</data>
+			<data>The genus is defined by the general appearance of a creature.<br>
+				See the wiki for a <a href='https://nomanssky.fandom.com/wiki/Genus#Genus_List'
+					target='_blank' rel='noopener noreferrer'>list of genera</a>.</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<select data-dest-noauto="faunaGenus${o}" id="faunaGenusInput${o}" onchange="addGenus(this)"></select>
+	</div>
+	<div class="tableCell text" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<label for="faunaWeightInput${o}">Weight in kg:</label>
+			<span class="tooltip">
+			<data>Found on the creature scan. No "kg" necessary.</data>
+			<data>Weight</data>
+			<data>Found on the creature scan.<br>No "kg" necessary.</data>
+			<data>./assets/bitmap/creature/creatureWeight.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<input data-dest-noauto="faunaWeight${o}" type="text" id="faunaWeightInput${o}" maxlength="5" placeholder="0.0" oninput="numberStats(this, 1)">
+	</div>
+	<div class="tableCell text" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<label for="faunaHeightInput${o}">Height in m:</label>
+			<span class="tooltip">
+			<data>Found on the creature scan. No "m" necessary.</data>
+			<data>Height</data>
+			<data>Found on the creature scan.<br>No "m" necessary.</data>
+			<data>./assets/bitmap/creature/creatureHeight.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<input data-dest-noauto="faunaHeight${o}" type="text" id="faunaHeightInput${o}" maxlength="3" placeholder="0.0" oninput="numberStats(this, 1)">
+	</div>
+	<div class="tableCell text" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<label for="faunaDiscovererInput${o}">Discoverer:</label>
+	</div>
+	<div class="tableCell data" data-fauna="section${o}" data-section="fauna fauna${o}">
+		<input data-dest="faunaDiscoverer${o}" type="text" id="faunaDiscovererInput${o}">
+	</div>`),e.insertAdjacentHTML("beforeend",i),postProcessSection(a,n,o),genusDropdown(globalElements.input["faunaEcosystemInput"+o])}function addFlora(a){var t=a.parentElement,e=globalElements.output[a.dataset.destNoauto],n="flora",o=document.querySelectorAll(`[data-${n}]`),o=getChildIndex(o,"dataset."+n),i=`<div data-flora="section${o}">|-</div>
+	<div data-flora="section${o}">|[[File:<output id="floraFile${o}"></output>|150px]] || <output id="floraName${o}" name="floraName${o}"></output> || <output id="floraAge${o}"></output> || <output id="floraRoot${o}"></output> || <output id="floraNut${o}"></output> || <output id="floraNote${o}"></output> || <output id="floraElements${o}"></output> || <output id="floraDiscoverer${o}"></output></div>`;t.insertAdjacentHTML("beforebegin",`<div class="tableHeader text sectionToggle" data-flora="section${o}" data-section="flora">
+		<p style="margin-right:auto">Plant: <output class="has-text-weight-bold" name="floraName${o}"></output></p>
+		<button class="button is-danger is-outlined" type="button" onclick="removeSpecificSection('section${o}', 'flora'); changeTableEntry(this)">Remove</button>
+		<button class="button" onclick="toggleSection('flora${o}', this)">Hide</button>
+	</div>
+	<div class="tableCell text" data-flora="section${o}" data-section="flora flora${o}">
+		<label for="floraNameInput${o}">Plant name:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Name</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/floraName.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-flora="section${o}" data-section="flora flora${o}">
+		<input type="text" data-dest="floraName${o}" id="floraNameInput${o}">
+	</div>
+		<div class="tableCell text" data-flora="section${o}" data-section="flora flora${o}">
+		<label for="floraFile_input${o}">Plant file name:</label>
+	</div>
+	<div class="tableCell data" data-flora="section${o}" data-section="flora flora${o}">
+		<input type="text" id="floraFile_input${o}" data-dest="floraFile${o}" data-default="NmsMisc_NotAvailable.png">
+		<input type="file" id="floraFileUpl${o}" accept="image/*" oninput="image(this)">
+	</div>
+	<div class="tableCell text" data-flora="section${o}" data-section="flora flora${o}">
+		<label for="floraAgeInput${o}">Age:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Age</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/age.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-flora="section${o}" data-section="flora flora${o}">
+		<input type="text" data-dest="floraAge${o}" list="ageData" id="floraAgeInput${o}">
+	</div>
+	<div class="tableCell text" data-flora="section${o}" data-section="flora flora${o}">
+		<label for="floraRootInput${o}">Root structure:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Root Structure</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/roots.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-flora="section${o}" data-section="flora flora${o}">
+		<input type="text" data-dest="floraRoot${o}" list="rootData" id="floraRootInput${o}">
+	</div>
+	<div class="tableCell text" data-flora="section${o}" data-section="flora flora${o}">
+		<label for="floraNutInput${o}">Nutrient source:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Nutrient Source</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/nutSource.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-flora="section${o}" data-section="flora flora${o}">
+		<input type="text" data-dest="floraNut${o}" list="nutSourceData" id="floraNutInput${o}">
+	</div>
+	<div class="tableCell text" data-flora="section${o}" data-section="flora flora${o}">
+		<label for="floraNoteInput${o}">Notes:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Notes</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/notes.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-flora="section${o}" data-section="flora flora${o}">
+		<input type="text" data-dest="floraNote${o}" list="floraNotesData" id="floraNoteInput${o}">
+	</div>
+	<div class="tableCell text" data-flora="section${o}" data-section="flora flora${o}">
+		<label for="floraResourcePrimInput${o}">Primary element:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Primary Element</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/flora/primEl.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-flora="section${o}" data-section="flora flora${o}">
+	<input data-dest-noauto="floraElements${o}" type="text" list="floraResources" id="floraResourcePrimInput${o}" oninput="floraMineralResourceLinks(this)">
+	</div>
+	<div class="tableCell text" data-flora="section${o}" data-section="flora flora${o}">
+		<label for="floraResourceSecInput${o}">Secondary element:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Flora Secondary Element</data>
+			<data>Found in the analysis visor. Leave empty if there is no secondary element.</data>
+			<data>./assets/bitmap/flora/secEl.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-flora="section${o}" data-section="flora flora${o}">
+		<input data-dest-noauto="floraElements${o}" type="text" list="floraResources" id="floraResourceSecInput${o}" oninput="floraMineralResourceLinks(this)">
+	</div>
+	<div class="tableCell text" data-flora="section${o}" data-section="flora flora${o}">
+		<label for="floraDiscovererInput${o}">Discoverer:</label>
+	</div>
+	<div class="tableCell data" data-flora="section${o}" data-section="flora flora${o}">
+		<input data-dest="floraDiscoverer${o}" type="text" id="floraDiscovererInput${o}">
+	</div>`),e.insertAdjacentHTML("beforeend",i),postProcessSection(a,n,o)}function addMineral(a){var t=a.parentElement,e=globalElements.output[a.dataset.destNoauto],n="mineral",o=document.querySelectorAll(`[data-${n}]`),o=getChildIndex(o,"dataset."+n),i=`<div data-mineral="section${o}">|-</div>
+	<div data-mineral="section${o}">|[[File:<output id="mineralFile${o}"></output>|150px]] || <output id="mineralName${o}" name="mineralName${o}"></output> || <output id="mineralMetal${o}"></output> || <output id="mineralFormation${o}"></output> || <output id="mineralNote${o}"></output> || <output id="mineralElements${o}"></output> || <output id="mineralDiscoverer${o}"></output></div>`;t.insertAdjacentHTML("beforebegin",`<div class="tableHeader text sectionToggle" data-mineral="section${o}" data-section="mineral">
+		<p style="margin-right:auto">Mineral: <output class="has-text-weight-bold" name="mineralName${o}"></output></p>
+		<button class="button is-danger is-outlined" type="button" onclick="removeSpecificSection('section${o}', 'mineral'); changeTableEntry(this)">Remove</button>
+		<button class="button" onclick="toggleSection('mineral${o}', this)">Hide</button>
+	</div>
+	<div class="tableCell text" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<label for="mineralNameInput${o}">Mineral name:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Name</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/mineral/mineralName.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<input type="text" data-dest="mineralName${o}" id="mineralNameInput${o}">
+	</div>
+		<div class="tableCell text" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<label for="mineralFile_input${o}">Mineral file name:</label>
+	</div>
+	<div class="tableCell data" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<input type="text" id="mineralFile_input${o}" data-dest="mineralFile${o}" data-default="NmsMisc_NotAvailable.png">
+		<input type="file" id="mineralFileUpl${o}" accept="image/*" oninput="image(this)">
+	</div>
+	<div class="tableCell text" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<label for="mineralMetalInput${o}">Metal Content:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Metal Content</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/mineral/content.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<input type="text" data-dest-noauto="mineralMetal${o}" id="mineralMetalInput${o}" maxlength="2" oninput="wikiCodePercentage(this)">
+	</div>
+	<div class="tableCell text" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<label for="mineralFormationInput${o}">Formation Process:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Formation Process</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/mineral/formation.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<input type="text" data-dest="mineralFormation${o}" list="formationData" id="mineralFormationInput${o}">
+	</div>
+	<div class="tableCell text" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<label for="mineralNoteInput${o}">Notes:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Notes</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/mineral/notes.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<input type="text" data-dest="mineralNote${o}" list="mineralNotesData" id="mineralNoteInput${o}">
+	</div>
+	<div class="tableCell text" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<label for="mineralResourcePrimInput${o}">Primary element:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Primary Element</data>
+			<data>Found in the analysis visor.</data>
+			<data>./assets/bitmap/mineral/primEl.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-mineral="section${o}" data-section="mineral mineral${o}">
+	<input data-dest-noauto="mineralElements${o}" type="text" list="mineralResources" id="mineralResourcePrimInput${o}" oninput="floraMineralResourceLinks(this)">
+	</div>
+	<div class="tableCell text" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<label for="mineralResourceSecInput${o}">Secondary element:</label>
+		<span class="tooltip">
+			<data>Found in the analysis visor.</data>
+			<data>Mineral Secondary Element</data>
+			<data>Found in the analysis visor. Leave empty if there is no secondary element.</data>
+			<data>./assets/bitmap/mineral/secEl.jpg</data>
+		</span>
+	</div>
+	<div class="tableCell data" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<input data-dest-noauto="mineralElements${o}" type="text" list="mineralResources" id="mineralResourceSecInput${o}" oninput="floraMineralResourceLinks(this)">
+	</div>
+	<div class="tableCell text" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<label for="mineralDiscovererInput${o}">Discoverer:</label>
+	</div>
+	<div class="tableCell data" data-mineral="section${o}" data-section="mineral mineral${o}">
+		<input data-dest="mineralDiscoverer${o}" type="text" id="mineralDiscovererInput${o}">
+	</div>`),e.insertAdjacentHTML("beforeend",i),postProcessSection(a,n,o)}function postProcessSection(a,t,e){addAllTooltips(),changeTableEntry(a);var n={input:{},output:{}};for(const o of document.querySelectorAll(`[data-${t}="section${e}"] :is(input, select)`))n.input[o.id]=o.id,o.dataset.dest&&(assignFunction(o,"wikiCode(this)"),wikiCode(o)),o.dataset.destNoauto&&(assignFunction(o,"storeData(this)"),storeData(o)),o.dataset.default&&(assignFunction(o,"assignDefaultValue(this)",null,!0),assignDefaultValue(o)),o.list&&assignFunction(o,"forceDatalist(this)","onchange");for(const i of document.querySelectorAll(`[data-${t}="section${e}"] output`))i.id&&(n.output[i.id]=i.id);updateGlobalElements(n)}function changeTableEntry(a){const n=a.parentElement,o=n.dataset.section;var t=document.querySelectorAll(`.tableHeader[data-${o}]`);for(let a=0;a<t.length;a++){var e="is-"+oddEven(a+1),i=t[a].dataset[o];for(const s of document.querySelectorAll(`[data-${o}="${i}"]`))s.classList.remove("is-odd","is-even"),s.classList.add(e)}function l(a){if(a){var t=n.dataset[o];const e=extractNumber(t);delete a[Object.keys(a).find(a=>extractNumber(a)==e)]}}n.dataset[o]&&("fauna"==o?(l(links.genera),addGenus):(l(links.resources?.[o]),floraMineralResourceLinks))()}function addGenus(a=null){var t,e=links.genera??=new Object,n=(a&&(t=a.value,e[a.dataset.destNoauto]=sanitiseString(t)),new Set),o=sortObj(structuredClone(e),!0);for(const s in o){var i=o[s];i&&!n.has(i)&&(o[s]=`[[${i}]]`,n.add(i))}for(const d in o){var l=o[d];globalElements.output[d].innerText=l}}function floraMineralResourceLinks(a=null){const t=links.resources??=new Object;a&&(e=a.value,n=a.dataset.destNoauto,o=a.id,a=(a=a.parentElement.dataset.section.split(" ")[0]).replace(extractNumber(a),""),t[a]??=new Object,t[a][n]??=new Object,t[a][n][o]=sanitiseString(e));var e,n,o,i=new Set,l=sortObj(structuredClone(t));for(const u in sortObj(l)){var s=l[u];for(const c in sortObj(s)){const t=s[c];for(const p in t){var d=t[p];d&&!i.has(d)&&(t[p]=`[[${d}]]`,i.add(d))}}}for(const m in l)for(const f in l[m]){var r=Object.values(l[m][f]).filter(a=>a).join(", ");globalElements.output[f].innerText=r}}function genusDropdown(a){var t=getCreatureData(),e=a.value,n=Object.keys(t.ecosystems[e]),a="faunaGenusInput"+extractNumber(a.id),o=new Array;for(const i of n)o.push(`${i} (${t.ecosystems[e][i].commonName})`);setDropdownOptions(globalElements.input[a],n,o),addGenus(globalElements.input[a])}function autoWorm(a){a&&(globalElements.input.sandwormInput.checked=!0),addSandwormTemplate()}function addSandwormTemplate(){var a=globalElements.input.sandwormInput,t=a.dataset.destNoauto,e=Array.from(document.querySelectorAll(`[data-section="${t}"]`)),t=globalElements.output[t];e.push(t);for(const n of e)a.checked?n.style.display="":n.style.display="none"}function wormAutoSpawn(){var a=(()=>{for(const a of globalElements.input.autoSpawn)if(a.checked)return a.value})();globalElements.output.wormAutoSpawn.innerText=a}function wormAlbumName(){const a=pageData.civShort;var t=(()=>{switch(a){case"GHub":return"GHEC Sandworm Album";case"CalHub":return"CalHub Rare Fauna Album#Sandworm|CalHub Rare Fauna Album";case"EisHub":return"EisHub Shaihuluda Album"}})();globalElements.output.wormAlbumName.innerText=t}function resetExternal(){var a=document.querySelectorAll("[data-moon], [data-resource], [data-fauna], [data-flora], [data-mineral]");removeSection(a),enableResourceAdd(),"function"==typeof enableMoonAdd&&enableMoonAdd()}assignElementFunctions(planetMoonElementFunctions);
