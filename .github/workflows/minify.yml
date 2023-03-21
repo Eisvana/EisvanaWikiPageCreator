@@ -22,14 +22,10 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: Minify Action
-        uses: nizarmah/auto-minify@v2.1.1
+      - name: Minify Code
+        uses: Lenni009/minify-js@main
         with:
           overwrite: true
-          directory: 'src/css'
-
-      - name: Minify Nr. 2
-        uses: anthonyftwang/minify-action@v1.0.1
 
       - run: |
           touch .nojekyll
