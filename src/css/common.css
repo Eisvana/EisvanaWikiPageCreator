@@ -1,11 +1,11 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
-@import "/src/css/fonts.css";
-@import "/src/css/variables.css";
-@import "/src/css/tooltip.css";
-@import "/src/css/dialog.css";
-@import "/src/css/footer.css";
-@import "/src/css/gallery.css";
-@import "/src/css/inputs.css";
+@import "fonts.css";
+@import "variables.css";
+@import "tooltip.css";
+@import "dialog.css";
+@import "footer.css";
+@import "gallery.css";
+@import "inputs.css";
 
 html[data-transition],
 html[data-transition] *,
