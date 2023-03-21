@@ -26,7 +26,7 @@ jobs:
         uses: nizarmah/auto-minify@v2.1.1
         with:
           overwrite: true
-          js_engine: uglify-js
+          directory: 'src/css'
 
       - name: Minify Nr. 2
         uses: anthonyftwang/minify-action@v1.0.1
