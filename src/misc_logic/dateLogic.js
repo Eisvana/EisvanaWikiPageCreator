@@ -1,1 +1,1 @@
-function processDate(e){var t=e.value,e=e.dataset.destNoauto;wikiCode(t.replaceAll("-","/"),e)}function getCurrentYear(e){var t=(new Date).getFullYear();wikiCode(t.toString(),e)}
+function processDate(e){const t=e.value,o=e.dataset.destNoauto;wikiCode(t.replaceAll("-","/"),o)}function getCurrentYear(e){const t=(new Date).getFullYear();wikiCode(t.toString(),e)}
