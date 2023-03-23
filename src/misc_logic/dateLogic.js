@@ -1,11 +1,1 @@
-function processDate(element) {
-	const date = element.value;
-	const dest = element.dataset.destNoauto;
-	wikiCode(date.replaceAll("-", "/"), dest);
-}
-
-function getCurrentYear(outputId) {
-	const currentYear = new Date().getFullYear();
-
-	wikiCode(currentYear.toString(), outputId);
-}
+function processDate(e){const t=e.value,o=e.dataset.destNoauto;wikiCode(t.replaceAll("-","/"),o)}function getCurrentYear(e){const t=(new Date).getFullYear();wikiCode(t.toString(),e)}
