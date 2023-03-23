@@ -1,1 +1,16 @@
-function galleryExplanationExternal(){return"There is a preferred order of pictures:\n\t<div class='dialog-center'>\n\t\t<ol class='dialog-list'>\n\t\t\t<li>Landscape</li>\n\t\t\t<li>Night View</li>\n\t\t\t<li>Cave System</li>\n\t\t\t<li>Analysis Visor</li>\n\t\t\t<li>Moon Exploration Guide</li>\n\t\t\t<li>Moon Page</li>\n\t\t\t<li>Planet Page</li>\n\t\t\t<li>System Page</li>\n\t\t\t<li>Galaxy Map</li>\n\t\t</ol>\n\t</div>"}
+function galleryExplanationExternal() {
+	return `There is a preferred order of pictures:
+	<div class='dialog-center'>
+		<ol class='dialog-list'>
+			<li>Landscape</li>
+			<li>Night View</li>
+			<li>Cave System</li>
+			<li>Analysis Visor</li>
+			<li>Moon Exploration Guide</li>
+			<li>Moon Page</li>
+			<li>Planet Page</li>
+			<li>System Page</li>
+			<li>Galaxy Map</li>
+		</ol>
+	</div>`
+}

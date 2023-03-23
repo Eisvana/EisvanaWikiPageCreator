@@ -1,1 +1,85 @@
-function planetStartupFunctions(){moonList()}const planetElements={input:{moonInputs:"moonInputs"},output:{}};function addMoon(t){const n=t.parentElement,e=document.querySelectorAll("[data-moon]"),o=getChildIndex(e,"dataset.moon"),l="moon_input"+o,i=`<div class="tableCell text removable" data-moon="section${o}">\n\t\t<button class="button is-outlined is-danger icon is-small" title="Remove moon" type="button" onclick="removeSpecificSection('section${o}', 'moon'); enableMoonAdd()">&#10006</button>\n\t\t<label for="${l}">Moon name:</label>\n\t</div>\n\t<div class="tableCell data" data-moon="section${o}">\n\t\t<input type="text" id="${l}" oninput="moonList()">\n\t</div>`;n.insertAdjacentHTML("beforebegin",i);document.querySelectorAll("[data-moon]").length/2+1>2&&(t.disabled=!0)}function enableMoonAdd(){globalElements.input.moonInputs.querySelector("button").disabled=!1,moonList()}function moonList(){const t=document.querySelectorAll("[data-moon] input"),n=new Array;for(const e of t)e.value&&n.push(`[[${sanitiseString(e.value)}]]`);globalElements.output.moonList.innerText=n.join(", "),pageData.moons=n,moonSentence()}function moonSentence(){const t=(()=>{const t=pageData.moons;if(t&&0!=t.length){const n=t.length;return`This planet's [[moon]]${2==n?"s":""} ${plural(n)} ${t.join(" and ")}.`}return"This planet has no moons."})();wikiCode(t,"moonSentence")}function galleryExplanationExternal(){return"There is a preferred order of pictures:\n\t<div class='dialog-center'>\n\t\t<ol class='dialog-list'>\n\t\t\t<li>Landscape</li>\n\t\t\t<li>Night View</li>\n\t\t\t<li>Cave System</li>\n\t\t\t<li>Coast Area</li>\n\t\t\t<li>Underwater</li>\n\t\t\t<li>Analysis Visor</li>\n\t\t\t<li>Planet Exploration Guide</li>\n\t\t\t<li>Planet Page</li>\n\t\t\t<li>System Page</li>\n\t\t\t<li>Galaxy Map</li>\n\t\t</ol>\n\t</div>"}updateGlobalElements(planetElements);
+function planetStartupFunctions() {
+	moonList();
+}
+
+const planetElements = {
+	input: {
+		moonInputs: 'moonInputs',
+	},
+	output: {
+	}
+}
+updateGlobalElements(planetElements);
+
+function addMoon(element) {
+	const inputSection = element.parentElement;
+	const elementList = document.querySelectorAll('[data-moon]');
+	const childIndex = getChildIndex(elementList, 'dataset.moon');
+	const moon_input = 'moon_input' + childIndex;
+
+	const inputHTML = `<div class="tableCell text removable" data-moon="section${childIndex}">
+		<button class="button is-outlined is-danger icon is-small" title="Remove moon" type="button" onclick="removeSpecificSection('section${childIndex}', 'moon'); enableMoonAdd()">&#10006</button>
+		<label for="${moon_input}">Moon name:</label>
+	</div>
+	<div class="tableCell data" data-moon="section${childIndex}">
+		<input type="text" id="${moon_input}" oninput="moonList()">
+	</div>`;
+
+	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
+
+	const moonInputSectionCount = document.querySelectorAll('[data-moon]').length / 2;
+
+	// enter the number of sections you want to allow behind the ">" operator.
+	if (moonInputSectionCount + 1 > 2) {
+		element.disabled = true;
+	}
+}
+
+function enableMoonAdd() {
+	const addButton = globalElements.input.moonInputs.querySelector('button');
+	addButton.disabled = false;
+	moonList();
+}
+
+function moonList() {
+	const moonInputs = document.querySelectorAll('[data-moon] input');
+	const moons = new Array;
+	for (const input of moonInputs) {
+		if (input.value) moons.push(`[[${sanitiseString(input.value)}]]`);
+	}
+
+	globalElements.output.moonList.innerText = moons.join(', ');
+	pageData.moons = moons;
+	moonSentence()
+}
+
+function moonSentence() {
+	const output = (() => {
+		const moons = pageData.moons;
+		if (!moons || moons.length == 0) {
+			return `This planet has no moons.`;
+		} else {
+			const moonCount = moons.length;
+			return `This planet's [[moon]]${(moonCount == 2) ? 's' : ''} ${plural(moonCount)} ${moons.join(' and ')}.`;
+		}
+	})();
+	wikiCode(output, 'moonSentence');
+}
+
+function galleryExplanationExternal() {
+	return `There is a preferred order of pictures:
+	<div class='dialog-center'>
+		<ol class='dialog-list'>
+			<li>Landscape</li>
+			<li>Night View</li>
+			<li>Cave System</li>
+			<li>Coast Area</li>
+			<li>Underwater</li>
+			<li>Analysis Visor</li>
+			<li>Planet Exploration Guide</li>
+			<li>Planet Page</li>
+			<li>System Page</li>
+			<li>Galaxy Map</li>
+		</ol>
+	</div>`
+}
