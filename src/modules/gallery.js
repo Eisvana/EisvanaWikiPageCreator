@@ -1,1 +1,164 @@
-(()=>{if(window.matchMedia("(pointer: coarse)").matches)return;const t=document.createElement("script");t.src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js",document.head.appendChild(t),t.onload=()=>{const t=globalElements.output.galleryItems;new Sortable(t,{handle:".handle",animation:250,onUpdate:function(t){moveItem(t)}})}})();let galleryUploadShown=!1;function galleryUpload(){const t=globalElements.input.galleryUpload;if(!t.value)return;const e=globalElements.output.galleryItems,n=globalElements.output.galleryCode,l=new Array;for(const o of t.files.length){const t=o.name;if(o.size>1e7){l.push(t);continue}const a=URL.createObjectURL(o),i=e.children,r=getChildIndex(i,"id"),s="pic"+r,c="dropdown"+r,d="wikiCodeGallery"+r,u="wikiCodeGalleryValue"+r,m=`\n\t\t<div id="${"gallery"+r}" class="gallery-item">\n\t\t\t<a class="gallery-media" href=${a} target="_blank" rel="noopener noreferrer">\n\t\t\t\t<img src="${a}">\n\t\t\t</a>\n\t\t\t<div class="gallery-meta">\n\t\t\t\t${(()=>{const e=document.createElement("p"),n=document.createElement("span");return e.innerText=t,n.classList.add("has-text-weight-bold"),n.innerText="Name: ",e.insertAdjacentElement("afterbegin",n),e.outerHTML})()}\n\t\t\t\t<div><select id="${c}" onchange="galleryDesc(this,'${s}', '${u}')"></select></div>\n\t\t\t\t<div><input id="${s}" type="text" placeholder="Description" oninput="galleryInput(this,'${u}')" /></div>\n\t\t\t</div>\n\t\t\t<div class="controlButtons">\n\t\t\t\t<span class="delete-icon is-clickable" title="Remove picture from gallery" onclick="rmGallery(this, '${d}')">&#10060</span>\n\t\t\t\t<img class="handle" src="./assets/vector/arrow.svg" title="Move picture up or down">\n\t\t\t\t<button class="button moveButton" title="Move up" onclick="mobileMoveItem(this, '${d}', 'up')">\n\t\t\t\t\t<svg width="36" height="36"><path d="M2 25h32L18 9 2 25Z"></path></svg>\n\t\t\t\t</button>\n\t\t\t\t<button class="button moveButton" title="Move down" onclick="mobileMoveItem(this, '${d}', 'down')">\n\t\t\t\t\t<svg width="36" height="36"><path d="M2 11h32L18 27 2 11Z"></path></svg>\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</div>`;e.insertAdjacentHTML("afterbegin",m);const g=`<div id="${d}">\n\t\t\t<span>${t}</span><output id="${u}"></output>\n\t\t</div>`;n.insertAdjacentHTML("afterbegin",g);const p=document.getElementById(c);"function"==typeof generateGalleryArray&&generateGalleryArray();const y=pageData.galleryArray;y?setDropdownOptions(p,y):p.parentElement.style.display="none"}l.length?errorMessage(t,`The following files exceed the 10MB upload limit and couldn't be added: ${l.join(", ")}`):errorMessage(t),galleryUploadShown||("function"==typeof galleryExplanationExternal&&explanation("Gallery",`${galleryExplanationExternal()}\n\t\t<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the gallery upload button.</div>`),galleryUploadShown=!0)}function galleryDesc(t,e,n){const l=t.value,o=document.getElementById(e);o.value=l,galleryInput(o,n)}function galleryInput(t,e){const n=sanitiseString(t.value);document.getElementById(e).innerText=n?"|"+n:""}function rmGallery(t,e){document.getElementById(e).remove(),t.closest(".gallery-item").remove()}function moveItem(t){const e=t.oldIndex,n=t.newIndex,l=Array.from(document.getElementById("galleryCode").children),o=l.splice(e,1);l.splice(n,0,o[0]);const a=new Array;for(const t of l){const e=t.outerHTML;a.push(e)}document.getElementById("galleryCode").innerHTML=a.join("")}function mobileMoveItem(t,e,n){const l=[t.closest(".gallery-item"),document.getElementById(e)];for(const t of l){const e=t.parentNode;"up"==n&&t.previousElementSibling?e.insertBefore(t,t.previousElementSibling):"down"==n&&t.nextElementSibling&&e.insertBefore(t,t.nextElementSibling.nextElementSibling)}}function resetGallery(){globalElements.output.galleryItems.innerHTML=""}
+(() => {
+	if (window.matchMedia('(pointer: coarse)').matches) return;
+	const script = document.createElement('script');
+	script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
+	document.head.appendChild(script);
+	script.onload = () => {
+		const galleryWrapper = globalElements.output.galleryItems;
+		const gallerySort = new Sortable(galleryWrapper, {		// NoSonar (used by another library, not useless!)
+			handle: '.handle',	// handle's class
+			animation: 250,
+			onUpdate: function (evt) { moveItem(evt) },
+		});
+	}
+})();
+
+let galleryUploadShown = false;
+// handles gallery images
+function galleryUpload() {
+	const inp = globalElements.input.galleryUpload;
+	if (!inp.value) return;
+	const inputDiv = globalElements.output.galleryItems;
+	const wikiCodeGalleryDiv = globalElements.output.galleryCode;
+	const errors = new Array;
+	for (const file of inp.files.length) {
+		const name = file.name;
+		if (file.size > 10000000) {
+			errors.push(name);
+			continue;
+		}
+		const imgUrlData = URL.createObjectURL(file);
+		const childtree = inputDiv.children;
+		const childIndex = getChildIndex(childtree, 'id');
+		const inputId = 'pic' + childIndex;
+		const dropdownId = 'dropdown' + childIndex;
+		const galleryId = 'gallery' + childIndex;
+		const wikiCodeGalleryId = 'wikiCodeGallery' + childIndex;
+		const wikiCodeGalleryValueId = 'wikiCodeGalleryValue' + childIndex;
+
+		const nameElement = (() => {
+			const p = document.createElement('p');
+			const span = document.createElement('span');
+			p.innerText = name;
+			span.classList.add('has-text-weight-bold');
+			span.innerText = 'Name: ';
+			p.insertAdjacentElement('afterbegin', span);
+			return p.outerHTML;
+		})();
+
+		const galleryTemplate = `
+		<div id="${galleryId}" class="gallery-item">
+			<a class="gallery-media" href=${imgUrlData} target="_blank" rel="noopener noreferrer">
+				<img src="${imgUrlData}">
+			</a>
+			<div class="gallery-meta">
+				${nameElement}
+				<div><select id="${dropdownId}" onchange="galleryDesc(this,'${inputId}', '${wikiCodeGalleryValueId}')"></select></div>
+				<div><input id="${inputId}" type="text" placeholder="Description" oninput="galleryInput(this,'${wikiCodeGalleryValueId}')" /></div>
+			</div>
+			<div class="controlButtons">
+				<span class="delete-icon is-clickable" title="Remove picture from gallery" onclick="rmGallery(this, '${wikiCodeGalleryId}')">&#10060</span>
+				<img class="handle" src="./assets/vector/arrow.svg" title="Move picture up or down">
+				<button class="button moveButton" title="Move up" onclick="mobileMoveItem(this, '${wikiCodeGalleryId}', 'up')">
+					<svg width="36" height="36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
+				</button>
+				<button class="button moveButton" title="Move down" onclick="mobileMoveItem(this, '${wikiCodeGalleryId}', 'down')">
+					<svg width="36" height="36"><path d="M2 11h32L18 27 2 11Z"></path></svg>
+				</button>
+			</div>
+		</div>`;
+
+		inputDiv.insertAdjacentHTML('afterbegin', galleryTemplate);
+
+		const wikiCodeGalleryTemplate = `<div id="${wikiCodeGalleryId}">
+			<span>${name}</span><output id="${wikiCodeGalleryValueId}"></output>
+		</div>`;
+
+		wikiCodeGalleryDiv.insertAdjacentHTML('afterbegin', wikiCodeGalleryTemplate);
+
+		const galleryElement = document.getElementById(dropdownId);
+
+		if (typeof generateGalleryArray == 'function') generateGalleryArray();
+
+		const galleryArray = pageData.galleryArray;
+		if (galleryArray) {
+			setDropdownOptions(galleryElement, galleryArray);
+		} else {
+			galleryElement.parentElement.style.display = 'none';
+		}
+	}
+	if (errors.length) {
+		errorMessage(inp, `The following files exceed the 10MB upload limit and couldn't be added: ${errors.join(', ')}`)
+	} else {
+		errorMessage(inp);
+	}
+
+	if (galleryUploadShown) return;
+	// the galleryExplanationExternal() function should return string with the popup text. HTML is supported.
+	if (typeof galleryExplanationExternal == 'function') {
+		explanation('Gallery',
+			`${galleryExplanationExternal()}
+		<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the gallery upload button.</div>`);
+	}
+	galleryUploadShown = true;
+}
+
+// takes description from gallery dropdown into input field
+function galleryDesc(dropdownElement, inputId, codeId) {
+	const dropdown = dropdownElement.value;
+	const input = document.getElementById(inputId);
+	input.value = dropdown;
+	galleryInput(input, codeId);
+}
+
+// adds or removes descriptions from the gallery
+function galleryInput(input, galleryId) {
+	const desc = sanitiseString(input.value);
+	if (desc) {
+		document.getElementById(galleryId).innerText = '|' + desc;
+	} else {
+		document.getElementById(galleryId).innerText = '';
+	}
+}
+
+// removes gallery row if X is clicked
+function rmGallery(galleryNode, wikiCodeGalleryId) {
+	const wikiCodeGalleryNode = document.getElementById(wikiCodeGalleryId);
+	wikiCodeGalleryNode.remove();
+	galleryNode.closest('.gallery-item').remove();
+}
+
+// moves item in gallery and gallery wikicode up or down depending on dragging direction
+function moveItem(evt) {
+	const oldIndex = evt.oldIndex;
+	const newIndex = evt.newIndex;
+	const galleryItems = Array.from(document.getElementById('galleryCode').children);
+	const extractedItem = galleryItems.splice(oldIndex, 1);
+	galleryItems.splice(newIndex, 0, extractedItem[0])
+	const HTML = new Array;
+	for (const item of galleryItems) {
+		const code = item.outerHTML;
+		HTML.push(code);
+	}
+	document.getElementById('galleryCode').innerHTML = HTML.join('')
+}
+
+// moves item in gallery and gallery wikicode up or down depending on user input
+function mobileMoveItem(element, codeId, direction) {
+	const galleryItem = element.closest('.gallery-item')
+	const galleryCodeItem = document.getElementById(codeId);
+	const elements = [galleryItem, galleryCodeItem];
+	for (const element of elements) {
+		const wrapper = element.parentNode;
+
+		if (direction == 'up' && element.previousElementSibling) {
+			wrapper.insertBefore(element, element.previousElementSibling);
+		} else if (direction == 'down' && element.nextElementSibling) {
+			wrapper.insertBefore(element, element.nextElementSibling.nextElementSibling);
+		}
+	}
+}
+
+function resetGallery() {
+	globalElements.output.galleryItems.innerHTML = '';
+}

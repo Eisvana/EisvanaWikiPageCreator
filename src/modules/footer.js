@@ -1,1 +1,308 @@
-function switchTheme(){document.documentElement.dataset.transition="true","light"==localStorage.getItem("theme")?(localStorage.setItem("theme","dark"),document.documentElement.dataset.theme="dark"):(localStorage.setItem("theme","light"),document.documentElement.dataset.theme="light"),setTimeout((()=>{delete document.documentElement.dataset.transition}),400)}(()=>{const t='<button class="button" id="switchTheme" onclick="switchTheme()">Switch light/dark mode</button>\n\t<div class="footerLinks">\n\t\t<button type="button" onclick="showSettings()">Settings</button>\n\t\t<a href=\'./about.html\' id="about">About</a>\n\t\t<a href=\'https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform\' rel=\'noreferrer noopener\' target=\'_blank\'>Feedback Form</a>\n\t</div>\n\t<dialog id="settings" class="modal-content content">\n\t\t<h2 class="title is-4">Global Preload Values</h2>\n\t\t<div class="table">\n\t\t\t<div class="tableCell text">\n\t\t\t\t<label>Civ:</label>\n\t\t\t</div>\n\t\t\t<div class="tableCell data">\n\t\t\t\t<select id="civDefault" data-store="civInput">\n\t\t\t\t\t<option value="GHub">GHub</option>\n\t\t\t\t\t<option value="CalHub">CalHub</option>\n\t\t\t\t\t<option value="EisHub">EisHub</option>\n\t\t\t\t</select>\n\t\t\t</div>\n\t\t\t<div class="tableCell text">\n\t\t\t\t<label for="discoveredlinkDefault">Discoverer wiki account:</label>\n\t\t\t</div>\n\t\t\t<div class="tableCell data">\n\t\t\t\t<input id="discoveredlinkDefault" type="text" data-store="discoveredlinkInput builderlinkInput ownerlinkInput">\n\t\t\t</div>\n\t\t\t<div class="tableCell text">\n\t\t\t\t<label for="discoveredDefault">Discoverer alias if no wiki:</label>\n\t\t\t</div>\n\t\t\t<div class="tableCell data">\n\t\t\t\t<input id="discoveredDefault" type="text" data-store="discoveredInput builderInput ownerInput">\n\t\t\t</div>\n\t\t\t<div class="tableCell text">\n\t\t\t\t<label for="docbyDefault">Documenter alias if not discoverer:</label>\n\t\t\t</div>\n\t\t\t<div class="tableCell data">\n\t\t\t\t<input id="docbyDefault" type="text" data-store="docbyInput">\n\t\t\t</div>\n\t\t\t<div class="tableCell text">\n\t\t\t\t<label for="systemDefault">Name of the system:</label>\n\t\t\t</div>\n\t\t\t<div class="tableCell data">\n\t\t\t\t<input id="systemDefault" type="text" data-store="systemInput">\n\t\t\t</div>\n\t\t\t<div class="tableCell text">\n\t\t\t\t<label for="planetDefault">Name of the planet:</label>\n\t\t\t</div>\n\t\t\t<div class="tableCell data">\n\t\t\t\t<input id="planetDefault" type="text" data-store="planetInput">\n\t\t\t</div>\n\t\t\t<div class="tableCell text">\n\t\t\t\t<label for="moonDefault">Name of the moon:</label>\n\t\t\t</div>\n\t\t\t<div class="tableCell data">\n\t\t\t\t<input id="moonDefault" type="text" data-store="moonInput">\n\t\t\t</div>\n\t\t\t<div class="tableCell text">\n\t\t\t\t<label>Platform:</label>\n\t\t\t</div>\n\t\t\t<div class="tableCell data">\n\t\t\t\t<select id="platformDefault" data-store="platformInput">\n\t\t\t\t\t<option value="PC">PC</option>\n\t\t\t\t\t<option value="PS">PlayStation</option>\n\t\t\t\t\t<option value="XB">Xbox</option>\n\t\t\t\t\t<option value="NS">Switch</option>\n\t\t\t\t</select>\n\t\t\t</div>\n\t\t\t<div class="tableCell text">\n\t\t\t\t<label>Chapter:</label>\n\t\t\t</div>\n\t\t\t<div class="tableCell data">\n\t\t\t\t<select id="researchteamDefault" data-store="researchteamInput">\n\t\t\t\t</select>\n\t\t\t</div>\n\t\t\t<div class="tableCell text">\n\t\t\t\t<div class="label-combo">\n\t\t\t\t\t<label for="portalglyphsDefault">Portalglyphs:</label>\n\t\t\t\t\t<button class="button is-small is-danger" type="button" data-input-bind="portalglyphsDefault" onclick="deleteCharacter(this)">&larr;\n\t\t\t\t\t\tDelete</button>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class="tableCell data">\n\t\t\t\t<input type="text" id="portalglyphsDefault" maxlength="12" data-store="portalglyphsInput">\n\t\t\t</div>\n\t\t\t<div class="tableHeader data">\n\t\t\t\t<div id="settingsPortalglyphButtons" class="portalglyphButtons"></div>\n\t\t\t\t<output id="settingsPortalglyphsPreview" class="glyph portalglyphsPreview"></output>\n\t\t\t</div>\n\t\t\t<div class="tableCell text">\n\t\t\t\t<label>System wealth:</label>\n\t\t\t</div>\n\t\t\t<div class="tableCell data">\n\t\t\t\t<select id="wealthDefault" data-store="wealthInput">\n\t\t\t\t\t<optgroup label="T3">\n\t\t\t\t\t\t<option value="★★★ (Advanced)">Advanced</option>\n\t\t\t\t\t\t<option value="★★★ (Affluent)">Affluent</option>\n\t\t\t\t\t\t<option value="★★★ (Booming)">Booming</option>\n\t\t\t\t\t\t<option value="★★★ (Flourishing)">Flourishing</option>\n\t\t\t\t\t\t<option value="★★★ (High Supply)">High Supply</option>\n\t\t\t\t\t\t<option value="★★★ (Opulent)">Opulent</option>\n\t\t\t\t\t\t<option value="★★★ (Prosperous)">Prosperous</option>\n\t\t\t\t\t\t<option value="★★★ (Wealthy)">Wealthy</option>\n\t\t\t\t\t</optgroup>\x3c!-- here ends T3--\x3e\n\t\t\t\t\t<optgroup label="T2">\n\t\t\t\t\t\t\x3c!--here begins T2--\x3e\n\t\t\t\t\t\t<option value="★★ (Adequate)">Adequate</option>\n\t\t\t\t\t\t<option value="★★ (Balanced)">Balanced</option>\n\t\t\t\t\t\t<option value="★★ (Comfortable)">Comfortable</option>\n\t\t\t\t\t\t<option value="★★ (Developing)">Developing</option>\n\t\t\t\t\t\t<option value="★★ (Medium Supply)">Medium Supply</option>\n\t\t\t\t\t\t<option value="★★ (Promising)">Promising</option>\n\t\t\t\t\t\t<option value="★★ (Satisfactory)">Satisfactory</option>\n\t\t\t\t\t\t<option value="★★ (Sustainable)">Sustainable</option>\n\t\t\t\t\t</optgroup>\x3c!-- here ends T2--\x3e\n\t\t\t\t\t<optgroup label="T1">\n\t\t\t\t\t\t\x3c!--here begins T1--\x3e\n\t\t\t\t\t\t<option value="★ (Declining)">Declining</option>\n\t\t\t\t\t\t<option value="★ (Destitute)">Destitute</option>\n\t\t\t\t\t\t<option value="★ (Failing)">Failing</option>\n\t\t\t\t\t\t<option value="★ (Fledgling)">Fledgling</option>\n\t\t\t\t\t\t<option value="★ (Low Supply)">Low Supply</option>\n\t\t\t\t\t\t<option value="★ (Struggling)">Struggling</option>\n\t\t\t\t\t\t<option value="★ (Unsuccessful)">Unsuccessful</option>\n\t\t\t\t\t\t<option value="★ (Unpromising)">Unpromising</option>\n\t\t\t\t\t</optgroup>\n\t\t\t\t\t\x3c!--here ends T1--\x3e\n\t\t\t\t\t<optgroup label="Pirate">\n\t\t\t\t\t\t<option value="💀 (Black Market)">Black Market</option>\n\t\t\t\t\t</optgroup>\n\t\t\t\t\t<optgroup label="Abandoned/Uncharted">\n\t\t\t\t\t\t<option value="">Data Unavailable</option>\n\t\t\t\t\t</optgroup>\n\t\t\t\t</select>\n\t\t\t</div>\n\n\t\t</div>\n\t\t<p>If you experience weird behaviour, restore the defaults and click "Set".</p>\n\t\t<form method="dialog">\n\t\t\t<button class="button is-primary" type="submit" onclick="updateDefaultValues()">Set</button>\n\t\t\t<button class="button is-danger" type="submit" autofocus>Cancel</button>\n\t\t\t<button class="button is-warning" type="reset" onclick="restoreDefaults()">Restore Defaults</button>\n\t\t</form>\n\t</dialog>';"undefined"==typeof globalElements?document.getElementById("footer").innerHTML=t:globalElements.output.footer.innerHTML=t;let e=localStorage.getItem("theme")??"light";!localStorage.getItem("theme")&&window.matchMedia("(prefers-color-scheme: dark)").matches&&(e="dark"),"dark"==e&&(document.documentElement.dataset.theme="dark"),localStorage.getItem("theme")||localStorage.setItem("theme",e);const n=document.getElementById("about");n.href==window.location&&n.remove()})();const footerElements={input:{settings:"settings"}};function showSettings(){restoreDefaults();const t=globalElements.input.settings;t.style.scale="0",t.showModal(),t.style.scale="1",t.scrollTo(0,0);const e=JSON.parse(localStorage.getItem("defaultSettings"))??new Object;for(const n in e){const l=t.querySelector(`.data [data-store="${n}"]`);if(l)switch(l.value=e[n],l.id){case"civDefault":l.onchange();break;case"portalglyphsDefault":executeOnInput(l)}}hideDiscoverer(),delete pageData.restored}function updateDefaultValues(){if(pageData.restored)return localStorage.removeItem("defaultSettings"),void delete pageData.restored;const t=new Object,e=footerElements.inputs;for(const n of e){const e=n?.value,l=n?.dataset?.store;(n?.options?.[n.options.length-1]?.value==e||e)&&l&&(t[l]=sanitiseString(e))}localStorage.setItem("defaultSettings",JSON.stringify(t))}function readDefaultValues(){const t=JSON.parse(localStorage.getItem("defaultSettings"))??new Object;for(const e in t){const n=e.split(" ").length>1?e.split(" ").map((t=>document.getElementById(t))).find((t=>t)):document.getElementById(e);if(n)switch(n.value=t[e],e){case"civInput":pageData.civShort=t[e],researchTeamDropdown();break;case"portalglyphsInput":executeOnInput(n)}}}function restoreDefaults(){const t=footerElements.inputs;for(const e of t)null!=e?.value&&("select"==e.tagName.toLowerCase()?e.value=e.options?.[0]?.value:e.value="");hideDiscoverer(),pageData.restored=!0}function validateGlyphSettings(t){const e=t.value,n=structuredClone(regions);addHuburbs(n),Object.freeze(n);const l=validateGlyphs(e,globalElements.input.civDefault.value,n);glyphError(l,t),globalElements.input.settings.querySelector("form button.is-primary").disabled=null==l}(()=>{const t=document.querySelectorAll("footer dialog .data>*");t.forEach((t=>{footerElements.input[t.id]=t.id,t.dataset.store&&assignFunction(t,"delete pageData.restored")})),updateGlobalElements(footerElements),footerElements.inputs=t,addPortalGlyphButtons(globalElements.input.settingsPortalglyphButtons,"portalglyphsDefault");assignElementFunctions({civDefault:["researchTeamDropdown(globalElements.input.researchteamDefault, this.value)"],discoveredDefault:['hideDiscoverer("discoveredDefault", "discoveredlinkDefault")'],discoveredlinkDefault:['hideDiscoverer("discoveredlinkDefault", "discoveredDefault")'],portalglyphsDefault:['glyphInputOnChange(this); validateGlyphSettings(this); document.getElementById("settingsPortalglyphsPreview").value = validateGlyphInput(this.value)']})})();
+(() => {
+	const content = `<button class="button" id="switchTheme" onclick="switchTheme()">Switch light/dark mode</button>
+	<div class="footerLinks">
+		<button type="button" onclick="showSettings()">Settings</button>
+		<a href='./about.html' id="about">About</a>
+		<a href='https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform' rel='noreferrer noopener' target='_blank'>Feedback Form</a>
+	</div>
+	<dialog id="settings" class="modal-content content">
+		<h2 class="title is-4">Global Preload Values</h2>
+		<div class="table">
+			<div class="tableCell text">
+				<label>Civ:</label>
+			</div>
+			<div class="tableCell data">
+				<select id="civDefault" data-store="civInput">
+					<option value="GHub">GHub</option>
+					<option value="CalHub">CalHub</option>
+					<option value="EisHub">EisHub</option>
+				</select>
+			</div>
+			<div class="tableCell text">
+				<label for="discoveredlinkDefault">Discoverer wiki account:</label>
+			</div>
+			<div class="tableCell data">
+				<input id="discoveredlinkDefault" type="text" data-store="discoveredlinkInput builderlinkInput ownerlinkInput">
+			</div>
+			<div class="tableCell text">
+				<label for="discoveredDefault">Discoverer alias if no wiki:</label>
+			</div>
+			<div class="tableCell data">
+				<input id="discoveredDefault" type="text" data-store="discoveredInput builderInput ownerInput">
+			</div>
+			<div class="tableCell text">
+				<label for="docbyDefault">Documenter alias if not discoverer:</label>
+			</div>
+			<div class="tableCell data">
+				<input id="docbyDefault" type="text" data-store="docbyInput">
+			</div>
+			<div class="tableCell text">
+				<label for="systemDefault">Name of the system:</label>
+			</div>
+			<div class="tableCell data">
+				<input id="systemDefault" type="text" data-store="systemInput">
+			</div>
+			<div class="tableCell text">
+				<label for="planetDefault">Name of the planet:</label>
+			</div>
+			<div class="tableCell data">
+				<input id="planetDefault" type="text" data-store="planetInput">
+			</div>
+			<div class="tableCell text">
+				<label for="moonDefault">Name of the moon:</label>
+			</div>
+			<div class="tableCell data">
+				<input id="moonDefault" type="text" data-store="moonInput">
+			</div>
+			<div class="tableCell text">
+				<label>Platform:</label>
+			</div>
+			<div class="tableCell data">
+				<select id="platformDefault" data-store="platformInput">
+					<option value="PC">PC</option>
+					<option value="PS">PlayStation</option>
+					<option value="XB">Xbox</option>
+					<option value="NS">Switch</option>
+				</select>
+			</div>
+			<div class="tableCell text">
+				<label>Chapter:</label>
+			</div>
+			<div class="tableCell data">
+				<select id="researchteamDefault" data-store="researchteamInput">
+				</select>
+			</div>
+			<div class="tableCell text">
+				<div class="label-combo">
+					<label for="portalglyphsDefault">Portalglyphs:</label>
+					<button class="button is-small is-danger" type="button" data-input-bind="portalglyphsDefault" onclick="deleteCharacter(this)">&larr;
+						Delete</button>
+				</div>
+			</div>
+			<div class="tableCell data">
+				<input type="text" id="portalglyphsDefault" maxlength="12" data-store="portalglyphsInput">
+			</div>
+			<div class="tableHeader data">
+				<div id="settingsPortalglyphButtons" class="portalglyphButtons"></div>
+				<output id="settingsPortalglyphsPreview" class="glyph portalglyphsPreview"></output>
+			</div>
+			<div class="tableCell text">
+				<label>System wealth:</label>
+			</div>
+			<div class="tableCell data">
+				<select id="wealthDefault" data-store="wealthInput">
+					<optgroup label="T3">
+						<option value="★★★ (Advanced)">Advanced</option>
+						<option value="★★★ (Affluent)">Affluent</option>
+						<option value="★★★ (Booming)">Booming</option>
+						<option value="★★★ (Flourishing)">Flourishing</option>
+						<option value="★★★ (High Supply)">High Supply</option>
+						<option value="★★★ (Opulent)">Opulent</option>
+						<option value="★★★ (Prosperous)">Prosperous</option>
+						<option value="★★★ (Wealthy)">Wealthy</option>
+					</optgroup><!-- here ends T3-->
+					<optgroup label="T2">
+						<!--here begins T2-->
+						<option value="★★ (Adequate)">Adequate</option>
+						<option value="★★ (Balanced)">Balanced</option>
+						<option value="★★ (Comfortable)">Comfortable</option>
+						<option value="★★ (Developing)">Developing</option>
+						<option value="★★ (Medium Supply)">Medium Supply</option>
+						<option value="★★ (Promising)">Promising</option>
+						<option value="★★ (Satisfactory)">Satisfactory</option>
+						<option value="★★ (Sustainable)">Sustainable</option>
+					</optgroup><!-- here ends T2-->
+					<optgroup label="T1">
+						<!--here begins T1-->
+						<option value="★ (Declining)">Declining</option>
+						<option value="★ (Destitute)">Destitute</option>
+						<option value="★ (Failing)">Failing</option>
+						<option value="★ (Fledgling)">Fledgling</option>
+						<option value="★ (Low Supply)">Low Supply</option>
+						<option value="★ (Struggling)">Struggling</option>
+						<option value="★ (Unsuccessful)">Unsuccessful</option>
+						<option value="★ (Unpromising)">Unpromising</option>
+					</optgroup>
+					<!--here ends T1-->
+					<optgroup label="Pirate">
+						<option value="💀 (Black Market)">Black Market</option>
+					</optgroup>
+					<optgroup label="Abandoned/Uncharted">
+						<option value="">Data Unavailable</option>
+					</optgroup>
+				</select>
+			</div>
+
+		</div>
+		<p>If you experience weird behaviour, restore the defaults and click "Set".</p>
+		<form method="dialog">
+			<button class="button is-primary" type="submit" onclick="updateDefaultValues()">Set</button>
+			<button class="button is-danger" type="submit" autofocus>Cancel</button>
+			<button class="button is-warning" type="reset" onclick="restoreDefaults()">Restore Defaults</button>
+		</form>
+	</dialog>`;
+
+	if (typeof globalElements == 'undefined') {
+		document.getElementById('footer').innerHTML = content
+	} else {
+		globalElements.output.footer.innerHTML = content;
+	}
+
+	// determines if the user has a set theme
+	let theme = localStorage.getItem('theme') ?? 'light';    //default to light
+	// local storage is used to override OS theme settings
+	if (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+		// OS theme setting detected as dark
+		theme = 'dark';
+	}
+
+	// if dark theme is preferred, set document with a `data-theme` attribute
+	if (theme == 'dark') document.documentElement.dataset.theme = 'dark';
+
+	if (!localStorage.getItem('theme')) localStorage.setItem('theme', theme);
+
+	const about = document.getElementById('about');
+	if (about.href == window.location) about.remove();
+})();
+
+// function that changes the theme, and sets a localStorage variable to track the theme between page loads
+function switchTheme() {
+	document.documentElement.dataset.transition = 'true';
+	if (localStorage.getItem('theme') == 'light') {
+		localStorage.setItem('theme', 'dark');
+		document.documentElement.dataset.theme = 'dark';
+	} else {
+		localStorage.setItem('theme', 'light');
+		document.documentElement.dataset.theme = 'light';
+	}
+
+	// adding delay to allow the CSS transition to complete. This is only for Chrome, Firefox would work with any timeout (even 0) #chromesucks
+	setTimeout(() => {
+		delete document.documentElement.dataset.transition;
+	}, 400);
+}
+
+// custom global settings
+const footerElements = {
+	input: {
+		settings: 'settings',
+	}
+};
+
+(() => {
+	const inputs = document.querySelectorAll('footer dialog .data>*');
+	inputs.forEach(input => {
+		footerElements.input[input.id] = input.id;
+		if (input.dataset.store) assignFunction(input, 'delete pageData.restored');
+	});
+	updateGlobalElements(footerElements);
+	footerElements.inputs = inputs
+	addPortalGlyphButtons(globalElements.input.settingsPortalglyphButtons, 'portalglyphsDefault');
+
+	// define dialog internal logic
+	const settingsElementFunctions = {
+		civDefault: ['researchTeamDropdown(globalElements.input.researchteamDefault, this.value)'],
+		discoveredDefault: ['hideDiscoverer("discoveredDefault", "discoveredlinkDefault")'],
+		discoveredlinkDefault: ['hideDiscoverer("discoveredlinkDefault", "discoveredDefault")'],
+		portalglyphsDefault: ['glyphInputOnChange(this); validateGlyphSettings(this); document.getElementById("settingsPortalglyphsPreview").value = validateGlyphInput(this.value)'],
+	}
+	assignElementFunctions(settingsElementFunctions);
+})();
+
+
+// shows modal
+function showSettings() {
+	restoreDefaults();
+	const dialog = globalElements.input.settings;
+	dialog.style.scale = '0';
+	dialog.showModal();
+	dialog.style.scale = '1';
+	dialog.scrollTo(0, 0);
+
+	const settings = JSON.parse(localStorage.getItem('defaultSettings')) ?? new Object;
+	for (const setting in settings) {
+		const input = dialog.querySelector(`.data [data-store="${setting}"]`);
+		if (!input) continue;
+		input.value = settings[setting];
+		switch (input.id) {
+			case 'civDefault':
+				input.onchange();
+				break;
+			case 'portalglyphsDefault':
+				executeOnInput(input);
+				break;
+		}
+	}
+	hideDiscoverer();
+	delete pageData.restored;
+}
+
+// called when user submits values. Stores entered values in localstorage
+function updateDefaultValues() {
+	if (pageData.restored) {
+		localStorage.removeItem('defaultSettings');
+		delete pageData.restored;
+		return;
+	}
+	const settings = new Object;
+	const inputs = footerElements.inputs;
+	for (const input of inputs) {
+		const value = input?.value;
+		const store = input?.dataset?.store;
+		if ((input?.options?.[input.options.length - 1]?.value == value || value) && store) settings[store] = sanitiseString(value);
+	}
+
+	localStorage.setItem('defaultSettings', JSON.stringify(settings));
+}
+
+// called on pageload and on reset. Populates inputs with values before the code automation kicks in
+function readDefaultValues() {
+	const settings = JSON.parse(localStorage.getItem('defaultSettings')) ?? new Object;
+	for (const setting in settings) {
+		const input = (() => {
+			if (setting.split(' ').length > 1) {
+				return setting.split(' ').map(id => document.getElementById(id)).find(element => element);
+			} else {
+				return document.getElementById(setting);
+			}
+		})();
+		if (input) {
+			input.value = settings[setting];
+
+			switch (setting) {
+				case 'civInput':
+					pageData.civShort = settings[setting];
+					researchTeamDropdown();
+					break;
+				case 'portalglyphsInput':
+					executeOnInput(input);
+					break;
+			}
+		}
+	}
+}
+
+// called when user resets custom globals. Sets all dialog options back to default
+function restoreDefaults() {
+	const inputs = footerElements.inputs;
+	for (const input of inputs) {
+		if (input?.value == undefined) continue;
+		if (input.tagName.toLowerCase() == 'select') {
+			input.value = input.options?.[0]?.value;
+		} else {
+			input.value = '';
+		}
+	}
+	hideDiscoverer();
+	pageData.restored = true;
+}
+
+function validateGlyphSettings(input) {
+	const glyphString = input.value;
+	const allRegions = structuredClone(regions);
+	addHuburbs(allRegions);
+	Object.freeze(allRegions);
+	const region = validateGlyphs(glyphString, globalElements.input.civDefault.value, allRegions);
+	glyphError(region, input);
+	globalElements.input.settings.querySelector('form button.is-primary').disabled = region == undefined;
+}
