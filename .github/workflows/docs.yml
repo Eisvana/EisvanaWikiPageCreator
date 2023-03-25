@@ -1,5 +1,4 @@
 name: Docs
-
 run-name: Generate Documentation
 
 on:
@@ -11,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  Create:
     runs-on: ubuntu-latest
     
     permissions:

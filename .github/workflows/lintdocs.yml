@@ -1,5 +1,4 @@
 name: Lint Doc
-
 run-name: Lint JSDoc Comments
 
 on:
@@ -11,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  Lint:
     runs-on: ubuntu-latest
 
     permissions:
