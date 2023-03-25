@@ -1,4 +1,4 @@
-name: Lint Doc
+name: Lint JSDoc
 run-name: Lint JSDoc Comments
 
 on:
