@@ -1,5 +1,4 @@
 name: Minify
-
 run-name: Minify Code
 
 on:
@@ -14,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  Minify:
     environment: github-pages
     runs-on: ubuntu-latest
     
