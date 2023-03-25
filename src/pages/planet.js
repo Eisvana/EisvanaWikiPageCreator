@@ -11,6 +11,11 @@ const planetElements = {
 }
 updateGlobalElements(planetElements);
 
+/**
+ * Add a new section for adding a moon to a planet.
+ * @param {HTMLElement} element - The element that triggered the addition of the moon section.
+ * @returns {void}
+ */
 function addMoon(element) {
 	const inputSection = element.parentElement;
 	const elementList = document.querySelectorAll('[data-moon]');
@@ -35,12 +40,22 @@ function addMoon(element) {
 	}
 }
 
+/**
+ * Enables the add button for moonInputs and triggers the moonList function
+ * @function
+ * @returns {void}
+ */
 function enableMoonAdd() {
 	const addButton = globalElements.input.moonInputs.querySelector('button');
 	addButton.disabled = false;
 	moonList();
 }
 
+/**
+* Populates the moon list in the output with the current values of the moonInputs.
+* @function moonList 
+* @returns {undefined}
+*/
 function moonList() {
 	const moonInputs = document.querySelectorAll('[data-moon] input');
 	const moons = new Array;
@@ -53,6 +68,11 @@ function moonList() {
 	moonSentence()
 }
 
+/**
+ * Generates a sentence describing the moons of the current planet.
+ * @function
+ * @returns {string} - Sentence describing the planet's moons.
+ */
 function moonSentence() {
 	const output = (() => {
 		const moons = pageData.moons;

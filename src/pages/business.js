@@ -28,14 +28,36 @@ assignElementFunctions(businessElementFunctions);
 	datalists(currencyDatalist);
 })();
 
-// replaces HubCoin with the HubCoin link macro
+/**
+ * Replaces HubCoin with the HubCoin link macro
+ * @param {HTMLElement} element - The element to replace HubCoin with HubCoin link macro
+ * @returns {void}
+ */
 function fixHC(element) {
 	const value = pageData.currency.toLowerCase();
 	const dest = element.dataset.dest;
 	if (value === 'hubcoin') wikiCode('{{CurrencyHubCoin}}', dest);
 }
 
-// adds section to input and code
+/**
+ * Adds a section to the input and code.
+ * 
+ * @function
+ * @memberof globalElements
+ * @param {Element} inputSection - The section to add to the input.
+ * @param {Element} outputSection - The section to add to the output.
+ * @param {NodeList} elementList - The list of elements with section data.
+ * @param {number} childIndex - The index of the child.
+ * @param {string} heading - The heading element ID.
+ * @param {string} img - The image element ID.
+ * @param {string} text - The text element ID.
+ * @param {string} heading_input - The heading input element ID.
+ * @param {string} img_input - The image input element ID.
+ * @param {string} img_upload - The image upload element ID.
+ * @param {string} text_input - The text input element ID.
+ * @constant {string} input_template - The HTML template for adding a new section to the input.
+ * @constant {string} code_template - The HTML template for adding a new section to the code.
+ */
 function addSection() {
 	const inputSection = globalElements.input.contentsInput;
 	const outputSection = globalElements.output.contents;
@@ -84,6 +106,11 @@ function addSection() {
 	}
 }
 
+/**
+ * Hides or shows an image based on the value of its corresponding checkbox.
+ * @param {HTMLElement} element - The checkbox input element.
+ * @returns {void}
+ */
 function showContentImg(element) {
 	const dest = element.dataset.dest;
 	const target = document.getElementById(dest).parentElement;
@@ -94,6 +121,13 @@ function showContentImg(element) {
 	}
 }
 
+/**
+ * Resets the 'contents' element of the global 'output' object to an empty string
+ * and removes all content sections from the page.
+ *
+ * @function
+ * @returns {void}
+ */
 function resetExternal() {
 	const contentSections = document.querySelectorAll('[data-section]');
 	globalElements.output.contents.innerText = '';

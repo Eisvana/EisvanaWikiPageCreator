@@ -15,7 +15,12 @@ function startupFunctions() {
 	getCurrentYear('censusrenewal');
 }
 
-// validates Discord tags (must have #xxxx at the end)
+/**
+ * Validates Discord tags.
+ *
+ * @param {Object} inputElement - The input element to validate.
+ * @returns {void}
+ */
 globalElements.input.censusDiscordInput.onchange = () => {
 	const element = globalElements.input.censusDiscordInput;
 	const tag = element.value;
@@ -37,6 +42,12 @@ globalElements.input.censusDiscordInput.onchange = () => {
 	}
 }
 
+/**
+ * Validates the input value for a Reddit user name and generates wiki code for it.
+ * @function
+ *
+ * @returns {void}
+ */
 function validateReddit() {
 	const element = globalElements.input.censusRedditInput;
 	const value = element.value.trim();
@@ -57,6 +68,10 @@ function validateReddit() {
 	wikiCode(redditName, dest);
 }
 
+/**
+ * Capitalizes the input value of a friend code input element and calls the wikiCode function.
+ * @function
+ */
 function capitaliseFriendCode() {
 	const element = globalElements.input.censusFriendInput;
 	element.value = element.value.toUpperCase();
@@ -64,7 +79,12 @@ function capitaliseFriendCode() {
 	wikiCode(element, dest);
 }
 
-// validates friend code format (xxxx-xxxx-xxxxx)
+/**
+ * Validates a friend code format (xxxx-xxxx-xxxxx).
+ * @function
+ * @param {Event} e - The change event.
+ * @returns {void}
+ */
 globalElements.input.censusFriendInput.onchange = () => {
 	const element = globalElements.input.censusFriendInput;
 	const friendCode = element.value;
@@ -76,7 +96,12 @@ globalElements.input.censusFriendInput.onchange = () => {
 	}
 }
 
-// automatically check/uncheck checkbox to create a censusentry
+/**
+ * Automatically checks or unchecks a checkbox to create a census entry.
+ *
+ * @function
+ * @returns {void}
+ */
 function createCensusEntry() {
 	const input = globalElements.input.censusPlayerInput;
 	const inputBool = Boolean(input.value);	// boolean from the input (true if any input is given)
