@@ -550,7 +550,7 @@ function wikiCode(element, dest = element.dataset.dest) {
 		try {
 			destElement.innerText = value;
 		} catch (error) {
-			console.error('destElement is null. Element:', element, 'Value:', value);
+			console.error('destElement is null. Element:', element, 'Value:', value, 'Stacktrace:', error);
 			continue;
 		}
 	}
@@ -692,11 +692,7 @@ function civ() {
 	pageData.civShort = input;
 	for (const key in civData) {
 		pageData[key] = civData[key];
-		try {
-			wikiCode(pageData[key], key);
-		} catch (error) {
-			// If an error occurs, catch it and do nothing.
-		}
+		if (document.getElementById(key)) wikiCode(pageData[key], key);
 	}
 
 	// Update the research team dropdown and glyph region.
