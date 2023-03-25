@@ -1,0 +1,27 @@
+name: Docs
+
+run-name: Generate Documentation
+
+on:
+  push:
+    branches: ['main']
+
+concurrency:
+  group: "doc"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Create Doc
+        uses: Lenni009/jsdoc2wiki-action/create-doc@main
+        with:
+          secret: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}

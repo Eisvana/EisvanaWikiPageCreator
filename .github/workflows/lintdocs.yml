@@ -1,0 +1,26 @@
+name: Lint Doc
+
+run-name: Lint JSDoc Comments
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+concurrency:
+  group: "lintdoc"
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Lint JSDoc Comments
+        uses: Lenni009/jsdoc2wiki-action/lint-doc@main

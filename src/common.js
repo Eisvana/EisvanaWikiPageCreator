@@ -303,7 +303,7 @@ function addOutputs() {
 /**
  * Updates the globalElements object with the values of the object parameter. The object parameter must be an object with properties that correspond to the sections of the page (e.g. "inputSection", "outputSection", etc.). Each property's value should be an object with properties that correspond to the element IDs within those sections. The value of each of those properties should either be the ID of the element or an array of DOM elements.
  *
- * @param {object} object - The object whose values will be used to update globalElements.
+ * @param {Object} object - The object whose values will be used to update globalElements.
  */
 function updateGlobalElements(object) {
 	for (const section in object) {
@@ -1114,7 +1114,7 @@ function errorMessage(element, msg = null) {
  *
  * @param {Boolean} [error=true] - Whether to display an error message if the input is invalid. Defaults to true.
  *
- * @returns {String} - Returns "error" if the input is invalid, otherwise returns undefined.
+ * @returns {string} - Returns "error" if the input is invalid, otherwise returns undefined.
  *
  * @example
  * // The following input would be considered invalid: "12.34, 56.78"
