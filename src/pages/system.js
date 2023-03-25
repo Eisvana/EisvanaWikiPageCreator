@@ -334,7 +334,7 @@ function addResourceInput(element, sectionTarget) {
 	const childIndex = getChildIndex(elementList, 'dataset.resource');
 	const resource = 'resource' + sectionTarget;
 	const resource_input = 'resource_input' + childIndex;
-	const oddEvenClass = 'is-' + oddEven(i);
+	const oddEvenClass = 'is-' + oddEven(sectionTarget);
 
 	const inputHTML = `<div class="tableCell text removable ${oddEvenClass}" data-section="resource${sectionTarget} planet${sectionTarget}" data-resource="section${childIndex}" data-planet="planet${sectionTarget}">
 		<button class="button is-danger is-outlined icon is-small" title="Remove resource" type="button" disabled onclick="removeSpecificSection('section${childIndex}', 'resource'); removeResource('${resource_input}')">&#10006</button>

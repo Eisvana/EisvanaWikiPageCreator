@@ -21,7 +21,7 @@ function galleryUpload() {
 	const inputDiv = globalElements.output.galleryItems;
 	const wikiCodeGalleryDiv = globalElements.output.galleryCode;
 	const errors = new Array;
-	for (const file of inp.files.length) {
+	for (const file of inp.files) {
 		const name = file.name;
 		if (file.size > 10000000) {
 			errors.push(name);
