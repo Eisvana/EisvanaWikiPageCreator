@@ -34,7 +34,7 @@ function displayGlyphs() {
 	const dest = input.dataset.destNoauto;
 	wikiCode(glyphString, dest);
 	glyphRegion(glyphString);
-	try { wikiCode(glyphs2Coords(glyphString), "galacticCoords") } catch (error) { /* do nothing */ }
+	if (getDestElements('galacticCoords').length) wikiCode(glyphs2Coords(glyphString), 'galacticCoords')
 }
 
 function deleteCharacter(button) {

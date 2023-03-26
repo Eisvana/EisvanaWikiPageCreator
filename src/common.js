@@ -564,7 +564,10 @@ function wikiCode(element, dest = element.dataset.dest) {
  */
 function getDestElements(dest) {
 	const destElements = Array.from(document.getElementsByName(dest));
-	if (destElements.length == 0) destElements.push(document.getElementById(dest));
+	if (destElements.length == 0) {
+		const element = document.getElementById(dest);
+		if (element) destElements.push(element);
+	}
 	return destElements;
 }
 
@@ -692,7 +695,7 @@ function civ() {
 	pageData.civShort = input;
 	for (const key in civData) {
 		pageData[key] = civData[key];
-		if (document.getElementById(key)) wikiCode(pageData[key], key);
+		if (getDestElements(key).length) wikiCode(pageData[key], key);
 	}
 
 	// Update the research team dropdown and glyph region.

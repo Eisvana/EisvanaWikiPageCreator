@@ -53,7 +53,7 @@ function enableMoonAdd() {
 
 /**
 * Populates the moon list in the output with the current values of the moonInputs.
-* @function moonList 
+* @function moonList
 * @returns {undefined}
 */
 function moonList() {
