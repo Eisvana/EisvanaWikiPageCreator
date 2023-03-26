@@ -206,7 +206,6 @@ function hideSecGenderProps() {
  *
  * @function
  * @name specialNotes
- * @memberof module:notes
  * @returns {void}
  *
  * @example

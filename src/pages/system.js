@@ -74,7 +74,7 @@ function locationSentence() {
  * @function
  * @returns {void}
  */
-function planetInputs() {
+async function planetInputs() {
 	const inputTarget = globalElements.input.waterInput.parentElement.previousElementSibling;
 	const outputTarget = globalElements.output.planets;
 	const planetNr = pageData.planet;
@@ -116,7 +116,7 @@ function planetInputs() {
 
 	while (diff() != 0) {
 		if (diff() > 0) {
-			addPlanet(childIndex);
+			await addPlanet(childIndex);
 			childIndex++;
 		} else {
 			removePlanet();
@@ -145,229 +145,57 @@ function planetInputs() {
 	 * @param {number} i - The index of the planet section to add.
 	 * @returns {void}
 	 */
-	function addPlanet(i) {
-		const oddEvenClass = 'is-' + oddEven(i);
-		const inputTemplate = `<div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}">
-			<p><output id=planetClass${i}>Planet</output> ${i}: <output class="has-text-weight-bold" name="planetName${i}"></output></p>
-			<button class="button" onclick="toggleSection('planet${i}', this)">Hide</button>
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="planetName_input${i}">Planet name</label>
-			<span class="tooltip">
-				<data>Can be found in the discovery menu.</data>
-				<data>Planet Name</data>
-				<data>Can be found in the planet discovery menu.<br>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-				<data>./assets/bitmap/planet/planetName.jpg</data>
-			</span>			
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="planetName_input${i}" data-dest="planetName${i}">
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="planetFile_input${i}">Planet file name</label>
-			<span class="tooltip">
-				<data>Should show the entire planet from space. Click for an example picture.</data>
-				<data>Planet Name</data>
-				<data>
-					Should show the entire planet from space.<br>
-					Make sure no asteroids/pulse lines/freighters are obstructing the picture.
-					<br>Point the sun directly at the planet, no weird angles.
-					<br>Also try to only get the planet into the shot, no other planets.
-					Only exception to this are moons or rings, which should be included if they exist.
-					<br>Disable the vignette.
-				</data>
-				<data>./assets/bitmap/planet/planetPic.jpg</data>
-			</span>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-				<input type="text" id="planetFile_input${i}" data-dest="planetFile${i}" data-default="NmsMisc_NotAvailable.png">
-				<input type="file" id="mainFileUpl${i}" accept="image/*" oninput="image(this)">
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="landscapeFile_input${i}">Landscape file name</label>
-			<span class="tooltip">
-				<data>Showcase the planet's landscape.</data>
-			</span>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-				<input type="text" id="landscapeFile_input${i}" data-dest="landscapeFile${i}" data-default="NmsMisc_NotAvailable.png">
-				<input type="file" id="secFileUpl${i}" accept="image/*" onchange="image(this)">
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label>Biome</label>
-			<span class="tooltip">
-				<data>Can be determined from the planetary features.</data>
-				<data>Planet Biome</data>
-				<data>
-					Can be determined from the planetary features such as the weather, harvestable plants or available resources.<br>
-					See the <a href=https://nomanssky.fandom.com/wiki/Biome rel=noreferrer target=_blank>Biome wiki page</a> for more information.
-				</data>
-			</span>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-				<select id="biome_input${i}" data-dest-noauto="biome${i}" onchange="biomeLinks(this)">
-					<option value="Lush">Lush</option>
-					<option value="Barren">Barren</option>
-					<option value="Dead">Dead</option>
-					<option value="Exotic">Exotic</option>
-					<option value="Mega Exotic">Mega Exotic</option>
-					<option value="Scorched">Scorched</option>
-					<option value="Frozen">Frozen</option>
-					<option value="Toxic">Toxic</option>
-					<option value="Irradiated">Irradiated</option>
-					<option value="Marsh">Marsh</option>
-					<option value="Volcanic">Volcanic</option>
-				</select>
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="descriptor_input${i}">Planet description</label>
-			<span class="tooltip">
-				<data>Can be found in the exploration guide.</data>
-				<data>Planet Description</data>
-				<data>Can be found in the exploration guide.</data>
-				<data>./assets/bitmap/planet/planetDesc.jpg</data>
-			</span>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="descriptor_input${i}" list="planetDescriptors" data-dest-noauto="descriptor${i}" oninput="expandDescriptor(this)">
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="moon_input${i}">Is moon</label>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="checkbox" id="moon_input${i}" data-dest-noauto="descriptor_input${i}" oninput="moonSwitch(this)">
-		</div>
-		<div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}" data-section="planet${i}">
-			<div style="display:flex">
-				<p style="margin-right:1.5rem">Resources</p>
-				<span class="tooltip">
-					<data>Found in the Discovery Menu or on the analysis visor.</data>
-					<data>Planet Resources</data>
-					<data>Found in the Discovery Menu or on the analysis visor.</data>
-					<data>./assets/bitmap/planet/resources.jpg</data>
-				</span>
-			</div>
-			<button class="button" onclick="toggleSection('resource${i}', this)">Hide</button>
-		</div>
-		<div class="tableHeader text ${oddEvenClass}" data-section="resource${i} planet${i}" data-planet="planet${i}">
-			<button class="button is-primary" id="addResourceButton${i}" type="button" onclick="addResourceInput(this, ${i})">+ Add Resource</button>
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="weather_input${i}">Weather</label>
-			<span class="tooltip">
-				<data>Can be found in the discovery menu.</data>
-				<data>Planet Weather</data>
-				<data>Can be found in the discovery menu.</data>
-				<data>./assets/bitmap/planet/weather.jpg</data>
-			</span>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="weather_input${i}" list="weatherData" data-dest-simple="weather${i}" oninput="wikiCodeSimple(this)">
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="sentinel_input${i}">Sentinels</label>
-			<span class="tooltip">
-				<data>Can be found in the discovery menu.</data>
-				<data>Planet Sentinel Level</data>
-				<data>Can be found in the discovery menu.</data>
-				<data>./assets/bitmap/planet/sentinels.jpg</data>
-			</span>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="sentinel_input${i}" list="sentinels" data-dest="sentinel${i}">
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="flora_input${i}">Flora</label>
-			<span class="tooltip">
-				<data>Can be found in the discovery menu.</data>
-				<data>Planet Flora Level</data>
-				<data>Can be found in the discovery menu.</data>
-				<data>./assets/bitmap/planet/flora.jpg</data>
-			</span>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="flora_input${i}" list="rarity" data-dest="flora${i}">
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="fauna_input${i}">Fauna</label>
-			<span class="tooltip">
-				<data>Can be found in the discovery menu.</data>
-				<data>Planet Fauna Level</data>
-				<data>Can be found in the discovery menu.</data>
-				<data>./assets/bitmap/planet/fauna.jpg</data>
-			</span>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="fauna_input${i}" list="rarity" data-dest="fauna${i}">
-		</div>
-		<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<label for="faunatotal_input${i}">Number of Fauna</label>
-			<span class="tooltip">
-				<data>Can be found in the discovery menu.</data>
-				<data>Planet Fauna Number</data>
-				<data>Can be found in the discovery menu.</data>
-				<data>./assets/bitmap/planet/faunaNum.jpg</data>
-			</span>
-		</div>
-		<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-			<input type="text" id="faunatotal_input${i}" maxlength="2" data-dest-noauto="FaunaTotal${i}" oninput="numberStats(this)">
-		</div>`
+	async function addPlanet(i) {
+		const replacementStrings = {
+			i: i,
+			oddEvenClass: 'is-' + oddEven(i),
+		}
 
-		const planetTemplate = `<div class="${oddEvenClass}" data-planet="planet${i}" id="body${i}"><div>|-</div>
-        <div>|[[File:<output id="planetFile${i}"></output>|150px]]</div>
-        <div>|[[File:<output id="landscapeFile${i}"></output>|150px]]</div>
-        <div>|[[<output id="planetName${i}" name="planetName${i}"></output>]]</div>
-        <div>|<output id="biome${i}"></output><output id="infested${i}"></output>&lt;hr&gt;<output id="descriptor${i}"></output></div>
-        <div>|<output id="resource${i}"></output></div>
-        <div>|<output id="weather${i}"></output></div>
-        <div>|<output id="sentinel${i}"></output></div>
-        <div>|<output id="flora${i}"></output></div>
-        <div>|<output id="fauna${i}"></output> (<output id="faunaTotal${i}" name="FaunaTotal${i}"></output>)</div>
-        <div>|-</div>
-        <div>!style="background-color:#2f4f4f"|Notes:</div>
-        <div>|colspan=8 style="text-align:left"|'''100% Zoology Bonus''': {{FaunaTotal|<output id="faunaTotalNotes${i}" name="FaunaTotal${i}"></output>}} {{nanites}}</div></div>`
-
-		inputTarget.insertAdjacentHTML('beforebegin', inputTemplate);
-		outputTarget.insertAdjacentHTML('beforeend', planetTemplate);
-		addAllTooltips();
+		const inputDom = await loadHTML('src/htmlSnippets/planetInputs.html', replacementStrings);
+		const outputDom = await loadHTML('src/htmlSnippets/planetOutputs.html', replacementStrings);
 
 		// adds functionality to the input elements in the new planet section
 		// default must be first, otherwise it won't work
-		const defaultValue = document.querySelectorAll(`[data-planet="planet${i}"] [data-default]`);
+		const defaultValue = inputDom.querySelectorAll(`[data-planet="planet${i}"] [data-default]`);
 		for (const input of defaultValue) {
 			assignFunction(input, 'assignDefaultValue(this)');
 			assignDefaultValue(input);
 		}
-		const auto = document.querySelectorAll(`[data-planet="planet${i}"] [data-dest]`);
+		const auto = inputDom.querySelectorAll(`[data-planet="planet${i}"] [data-dest]`);
 		for (const input of auto) {
 			assignFunction(input, 'wikiCode(this)');
 		}
-		const noauto = document.querySelectorAll(`[data-planet="planet${i}"] [data-dest-noauto]`);
+		const noauto = inputDom.querySelectorAll(`[data-planet="planet${i}"] [data-dest-noauto]`);
 		for (const input of noauto) {
 			assignFunction(input, 'storeData(this)');
 		}
-		const lists = document.querySelectorAll(`[data-planet="planet${i}"] [list]`);
+		const lists = inputDom.querySelectorAll(`[data-planet="planet${i}"] [list]`);
 		for (const input of lists) {
 			assignFunction(input, 'forceDatalist(this)', 'onchange');
 		}
+
+		// updates global elements with new output elements
+		const resourceOutputs = { output: {} };
+		const outputs = outputDom.querySelectorAll(`output`);
+		for (const output of outputs) {
+			const id = output.id;
+			resourceOutputs.output[id] = id;
+		}
+		updateGlobalElements(resourceOutputs, outputDom);
+
+		// updates the biome links for the new planet section
+		biomeLinks(inputDom.getElementById(`biome_input${i}`));
+
+		addAllTooltips(inputDom);
+
+		inputTarget.insertAdjacentHTML('beforebegin', inputDom.body.innerHTML);
+		outputTarget.insertAdjacentHTML('beforeend', outputDom.body.innerHTML);
 
 		// adds resource input elements to the new planet section
 		const resourceButton = document.getElementById(`addResourceButton${i}`);
 		for (let j = 0; j < 3; j++) {
 			addResourceInput(resourceButton, i);
 		}
-
-		// updates global elements with new output elements
-		const resourceOutputs = { output: {} };
-		const outputs = document.querySelectorAll(`#body${i} output`);
-		for (const output of outputs) {
-			const id = output.id;
-			resourceOutputs.output[id] = id;
-		}
-		updateGlobalElements(resourceOutputs);
-
-		// updates the biome links for the new planet section
-		biomeLinks(document.getElementById(`biome_input${i}`));
 	}
 }
 
@@ -563,56 +391,45 @@ function merchantUpgrades(group = null) {
 }
 
 /**
- * Creates a new tradeable item section in the globalElements.output.tradeTerminal element based on user input.
- * @function
- * @returns {void}
+ *  Creates new tradeable input and output sections in the trade terminal.
+ *  @function addTradeableSections
+ *  @description This function defines commonly used elements and variables, assigns functions to certain input elements, and adds new tradeable input and output sections to the appropriate elements in the trade terminal. It also disables the "Add Tradeable" button if the number of sections would exceed 5.
+ *  @example addTradeableSections();
  */
-function tradeables() {
+async function tradeables() {
 	// Define commonly used elements and variables
 	const inputSection = globalElements.input.terminalInputs;
 	const outputSection = globalElements.output.tradeTerminal;
 	const elementList = document.querySelectorAll('[data-tradeable]');
 	const childIndex = getChildIndex(elementList, 'dataset.tradeable');
-	const price = 'price' + childIndex;
-	const text = 'text' + childIndex;
-	const text_input = 'text_input' + childIndex;
-	const price_input = 'price_input' + childIndex;
+	const replacementStrings = {
+		childIndex: childIndex,
+		price: 'price' + childIndex,
+		text: 'text' + childIndex,
+		text_input: 'text_input' + childIndex,
+		price_input: 'price_input' + childIndex,
+	}
 
-	// Define the HTML for the new tradeable input section
-	const inputHTML = `<div class="tableHeader text sectionToggle" data-tradeable="section${childIndex}" data-station="terminal">
-		<span class="has-text-weight-bold">Tradeable</span>
-		<button class="button is-danger is-outlined" type="button" onclick="removeSpecificSection('section${childIndex}', 'tradeable'); enableTradeableAdd()">Remove</button>
-	</div>
-	<div class="tableCell text" data-tradeable="section${childIndex}" data-station="terminal">
-		<label for="${text_input}">Tradeable name:</label>
-	</div>
-	<div class="tableCell data" data-tradeable="section${childIndex}" data-station="terminal">
-		<input type="text" list="terminal" id="${text_input}" data-dest="${text}">
-	</div>
-	<div class="tableCell text" data-tradeable="section${childIndex}" data-station="terminal">
-		<label for="${price_input}">Tradeable price:</label>
-	</div>
-	<div class="tableCell data" data-tradeable="section${childIndex}" data-station="terminal">
-		<input type="text" id="${price_input}" data-dest-noauto="${price}">
-	</div>`;
+	// Get the HTML for the new tradeable input section
+	const inputDom = await loadHTML('src/htmlSnippets/tradeableInputs.html', replacementStrings);
 
 	// Define the HTML for the new tradeable output section
 	const codeHTML = `<div data-tradeable="section${childIndex}">|-</div>
-	<div data-tradeable="section${childIndex}">| {{ilink|<output id="${text}"></output>}} || {{Units}} <output id="${price}"></output></div>`;
-
-	// Add the new tradeable input and output sections to the appropriate elements
-	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
-	outputSection.insertAdjacentHTML('beforeend', codeHTML);
+	<div data-tradeable="section${childIndex}">| {{ilink|<output id="${replacementStrings.text}"></output>}} || {{Units}} <output id="${replacementStrings.price}"></output></div>`;
 
 	// Assign functions to certain input elements
-	const inputs = document.querySelectorAll(`[data-tradeable="section${childIndex}"] input[data-dest]`);
+	const inputs = inputDom.querySelectorAll(`[data-tradeable="section${childIndex}"] input[data-dest]`);
 	for (const input of inputs) {
 		assignFunction(input, 'wikiCode(this)');
 	}
-	const noautoInputs = document.querySelectorAll(`[data-tradeable="section${childIndex}"] input[data-dest-noauto]`);
+	const noautoInputs = inputDom.querySelectorAll(`[data-tradeable="section${childIndex}"] input[data-dest-noauto]`);
 	for (const input of noautoInputs) {
 		assignFunction(input, 'storeData(this); numberStats(this)');
 	}
+
+	// Add the new tradeable input and output sections to the appropriate elements
+	inputSection.insertAdjacentHTML('beforebegin', inputDom.body.innerHTML);
+	outputSection.insertAdjacentHTML('beforeend', codeHTML);
 
 	// Count the number of tradeable input sections and disable the "Add Tradeable" button if it exceeds 5 sections
 	const tradeableInputSections = document.querySelectorAll('[data-tradeable]');
