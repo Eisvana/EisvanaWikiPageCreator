@@ -48,18 +48,32 @@ const systemElementFunctions = {
 }
 assignElementFunctions(systemElementFunctions);
 
+/**
+ * Generates a sentence that describes the location of the page.
+ *
+ * @function
+ */
 function locationSentence() {
 	const region = pageData.region;
 	const civ = pageData.civShort;
 	const HubNr = regNr(region);
 	const galaxy = HubGal(civ);
 
+	/**
+	 * The sentence describing the location of the page.
+	 *
+	 * @type {string}
+	 */
 	const output = `Located in the [[${region}]] [[region]]${HubNr} of the ${galaxy}.`;
 
 	wikiCode(output, 'loc');
 }
 
-// inserts the planet table into the code
+/**
+ * Inserts the planet table into the code.
+ * @function
+ * @returns {void}
+ */
 function planetInputs() {
 	const inputTarget = globalElements.input.waterInput.parentElement.previousElementSibling;
 	const outputTarget = globalElements.output.planets;
@@ -68,10 +82,23 @@ function planetInputs() {
 	const bodies = clamp(parseInt(planetNr) + parseInt(moonNr), 2, 6);
 	if (isNaN(bodies)) return;
 
+	/**
+	 * Clamps a value between a minimum and maximum value.
+	 * @function
+	 * @param {number} value - The value to clamp.
+	 * @param {number} min - The minimum value to clamp to.
+	 * @param {number} max - The maximum value to clamp to.
+	 * @returns {number} The clamped value.
+	 */
 	function clamp(value, min, max) {
 		return Math.max(min, Math.min(max, value));
 	}
 
+	/**
+	 * Calculates the difference between the number of planet sections in the code and the number of planet sections that should exist based on the number of planets and moons.
+	 * @function
+	 * @returns {number} The difference in the number of planet sections.
+	 */
 	function diff() {
 		const planetIDs = new Set();
 		const planets = (() => {
@@ -96,6 +123,11 @@ function planetInputs() {
 		}
 	}
 
+	/**
+	 * Removes a planet section from the planet table.
+	 * @function
+	 * @returns {void}
+	 */
 	function removePlanet() {
 		const elements = document.querySelectorAll('[data-planet]');
 		const planetIDs = new Set();
@@ -107,6 +139,12 @@ function planetInputs() {
 		removeSection(sections);
 	}
 
+	/**
+	 * Adds a new planet section to the planet table.
+	 * @function
+	 * @param {number} i - The index of the planet section to add.
+	 * @returns {void}
+	 */
 	function addPlanet(i) {
 		const oddEvenClass = 'is-' + oddEven(i);
 		const inputTemplate = `<div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}">
@@ -293,6 +331,7 @@ function planetInputs() {
 		outputTarget.insertAdjacentHTML('beforeend', planetTemplate);
 		addAllTooltips();
 
+		// adds functionality to the input elements in the new planet section
 		// default must be first, otherwise it won't work
 		const defaultValue = document.querySelectorAll(`[data-planet="planet${i}"] [data-default]`);
 		for (const input of defaultValue) {
@@ -311,11 +350,14 @@ function planetInputs() {
 		for (const input of lists) {
 			assignFunction(input, 'forceDatalist(this)', 'onchange');
 		}
+
+		// adds resource input elements to the new planet section
 		const resourceButton = document.getElementById(`addResourceButton${i}`);
 		for (let j = 0; j < 3; j++) {
 			addResourceInput(resourceButton, i);
 		}
 
+		// updates global elements with new output elements
 		const resourceOutputs = { output: {} };
 		const outputs = document.querySelectorAll(`#body${i} output`);
 		for (const output of outputs) {
@@ -324,10 +366,18 @@ function planetInputs() {
 		}
 		updateGlobalElements(resourceOutputs);
 
+		// updates the biome links for the new planet section
 		biomeLinks(document.getElementById(`biome_input${i}`));
 	}
 }
 
+/**
+ * Adds a new resource input section and updates the global elements list.
+ *
+ * @param {HTMLElement} element - The HTML element that was clicked.
+ * @param {string} sectionTarget - The target section.
+ * @returns {undefined} - Returns nothing.
+ */
 function addResourceInput(element, sectionTarget) {
 	const inputSection = element.parentElement;
 	const elementList = document.querySelectorAll('[data-resource]');
@@ -346,19 +396,23 @@ function addResourceInput(element, sectionTarget) {
 
 	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
 
+	// Update the global elements list for the new input element.
 	const resourceElements = { input: {} };
 	resourceElements.input[resource_input] = resource_input;
 	updateGlobalElements(resourceElements);
 
+	// Get all of the current resource input sections, and count them.
 	const resourceInputSections = getResourceInputSections(sectionTarget);
 	const resourceInputSectionCount = getResourceInputSectionCount(resourceInputSections);
 
 	// enter the number of sections you want to allow behind the ">" operator.
+	// If there are more input sections than the maximum (6), disable the "add" button.
 	if (resourceInputSectionCount + 1 > 6) {
 		element.disabled = true;
 	}
 
-	// default state is disabled because that's easier to handle. Enable if more than 3 sections are present (every planet has at least 3 resources)
+	// default state is disabled because that's easier to handle.
+	// Enable the "remove" button for every input section if there are more than the minimum (3, because every planet has at least 3 resources).
 	if (resourceInputSectionCount > 3) {
 		for (const element of resourceInputSections) {
 			const button = element.querySelector('button');
@@ -367,11 +421,22 @@ function addResourceInput(element, sectionTarget) {
 	}
 }
 
+/**
+ * Returns an array of DOM elements that have the attribute "data-resource"
+ * and the attribute "data-planet" that matches the specified "sectionTarget" value.
+ *
+ * @param {string} sectionTarget - The value to match the "data-planet" attribute of the elements to be returned.
+ * @returns {Array.<HTMLElement>} - The array of elements that match the specified criteria.
+ */
 function getResourceInputSections(sectionTarget) {
 	return document.querySelectorAll(`[data-resource][data-planet="planet${sectionTarget}"]`);
 }
 
-// takes an array provided by getResourceInputSections()
+/**
+ * Returns the count of unique 'resource' input sections in the provided array.
+ * @param {HTMLInputElement[]} inputs - Array of input elements containing a dataset property with a 'resource' key.
+ * @returns {number} - Count of unique 'resource' input sections.
+ */
 function getResourceInputSectionCount(inputs) {
 	const sections = new Set();
 	for (const input of inputs) {
@@ -380,6 +445,12 @@ function getResourceInputSectionCount(inputs) {
 	return sections.size;
 }
 
+/**
+ * Removes a specified resource from the page.
+ *
+ * @param {string} resourceID - The ID of the resource input element to remove.
+ * @returns {void}
+ */
 function removeResource(resourceID) {
 	const resourceInput = globalElements.input[resourceID];
 	const planet = resourceInput.dataset.destNoauto;
@@ -407,6 +478,11 @@ function removeResource(resourceID) {
 	}
 }
 
+/**
+ * Toggles between "Moon" and "Planet" descriptions for an element and expands a descriptor dropdown.
+ * @param {HTMLInputElement} element - The element that was clicked.
+ * @returns {void}
+ */
 function moonSwitch(element) {
 	const descriptorDropdown = document.getElementById(element.dataset.destNoauto);
 	const i = extractNumber(element.id);
@@ -417,6 +493,13 @@ function moonSwitch(element) {
 	expandDescriptor(descriptorDropdown, planetClass);
 }
 
+/**
+ * Expand a descriptor from a user input and use it to build output for a specified element.
+ *
+ * @param {HTMLElement} element - The element containing the user input.
+ * @param {string|null} planetClass - The class of planet or moon.
+ * @returns {void}
+ */
 function expandDescriptor(element, planetClass = null) {
 	const i = extractNumber(element.id);
 	if (!planetClass) {
@@ -431,7 +514,12 @@ function expandDescriptor(element, planetClass = null) {
 	infestedBiomeLinks('infested' + i, isInfested)
 }
 
-// generates Space Station Merchants upgrade list
+/**
+ * Generates a list of upgrades for Space Station Merchants.
+ *
+ * @param {string|null} group - The ID of the checkbox group to get upgrades for. If not provided, checks all groups.
+ * @returns {void}
+ */
 function merchantUpgrades(group = null) {
 	const checkboxes = document.querySelectorAll('[data-dest-checkbox-group]');
 	if (group) {
@@ -474,7 +562,13 @@ function merchantUpgrades(group = null) {
 	}
 }
 
+/**
+ * Creates a new tradeable item section in the globalElements.output.tradeTerminal element based on user input.
+ * @function
+ * @returns {void}
+ */
 function tradeables() {
+	// Define commonly used elements and variables
 	const inputSection = globalElements.input.terminalInputs;
 	const outputSection = globalElements.output.tradeTerminal;
 	const elementList = document.querySelectorAll('[data-tradeable]');
@@ -484,6 +578,7 @@ function tradeables() {
 	const text_input = 'text_input' + childIndex;
 	const price_input = 'price_input' + childIndex;
 
+	// Define the HTML for the new tradeable input section
 	const inputHTML = `<div class="tableHeader text sectionToggle" data-tradeable="section${childIndex}" data-station="terminal">
 		<span class="has-text-weight-bold">Tradeable</span>
 		<button class="button is-danger is-outlined" type="button" onclick="removeSpecificSection('section${childIndex}', 'tradeable'); enableTradeableAdd()">Remove</button>
@@ -501,12 +596,15 @@ function tradeables() {
 		<input type="text" id="${price_input}" data-dest-noauto="${price}">
 	</div>`;
 
+	// Define the HTML for the new tradeable output section
 	const codeHTML = `<div data-tradeable="section${childIndex}">|-</div>
 	<div data-tradeable="section${childIndex}">| {{ilink|<output id="${text}"></output>}} || {{Units}} <output id="${price}"></output></div>`;
 
+	// Add the new tradeable input and output sections to the appropriate elements
 	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
 	outputSection.insertAdjacentHTML('beforeend', codeHTML);
 
+	// Assign functions to certain input elements
 	const inputs = document.querySelectorAll(`[data-tradeable="section${childIndex}"] input[data-dest]`);
 	for (const input of inputs) {
 		assignFunction(input, 'wikiCode(this)');
@@ -516,6 +614,7 @@ function tradeables() {
 		assignFunction(input, 'storeData(this); numberStats(this)');
 	}
 
+	// Count the number of tradeable input sections and disable the "Add Tradeable" button if it exceeds 5 sections
 	const tradeableInputSections = document.querySelectorAll('[data-tradeable]');
 	const tradeableInputSectionCount = (() => {
 		const sections = new Set();
@@ -534,6 +633,12 @@ function tradeables() {
 	}
 }
 
+/**
+ * Enables the "add tradeable" button in the terminal input section.
+ *
+ * @function
+ * @returns {void}
+ */
 function enableTradeableAdd() {
 	const inputSection = globalElements.input.terminalInputs;
 	const button = inputSection.querySelector('button');
@@ -547,6 +652,12 @@ function resetExternal() {
 	removeSection(sections);
 }
 
+/**
+ * Sets the text content of the 'regionLong' element to the full name of the region
+ * or a modified version of the name if it contains more than one word.
+ * @function
+ * @returns {void}
+ */
 function regionLong() {
 	const region = pageData.region;
 	const output = (() => {
@@ -556,6 +667,12 @@ function regionLong() {
 	globalElements.output.regionLong.innerText = output;
 }
 
+/**
+ * Creates or updates the `resources` object with a new resource and generates the output to display.
+ *
+ * @param {HTMLInputElement|null} element - The input element from which to get the resource and planet data. If null, no new resource is added.
+ * @returns {undefined}
+ */
 function addResource(element = null) {
 	const resources = links.resources ??= new Object;
 	if (element) {
@@ -586,6 +703,12 @@ function addResource(element = null) {
 	}
 }
 
+/**
+ * Generates links to biomes based on given element's value and destination planet number.
+ *
+ * @param {HTMLElement} element - The HTML element that triggered the function.
+ * @returns {void}
+ */
 function biomeLinks(element) {
 	const value = element.value;
 	const planet = element.dataset.destNoauto;
@@ -605,6 +728,12 @@ function biomeLinks(element) {
 	setBiomeText(linkedBiomes);
 }
 
+/**
+ * Adds or removes links to the infested biome page depending on whether they are checked or not.
+ * @param {string} dest - The name of the destination of the link.
+ * @param {boolean} bool - Whether the link is checked or not.
+ * @returns {void}
+ */
 function infestedBiomeLinks(dest, bool) {
 	const infestedBiomes = links.infestedBiomes ??= new Object;
 	infestedBiomes[dest] = bool;
@@ -626,6 +755,11 @@ function infestedBiomeLinks(dest, bool) {
 	setBiomeText(linkedBiomes);
 }
 
+/**
+ * Set the text of specified elements with data from an array of values.
+ * @param {Array} array - An array of values to use for setting the text.
+ * @returns {void}
+ */
 function setBiomeText(array) {
 	for (const key in array) {
 		const output = array[key];
@@ -633,6 +767,13 @@ function setBiomeText(array) {
 	}
 }
 
+/**
+ * Updates the output element to display the expected hub tag for the current system, based on its region and glyphs.
+ *
+ * @function
+ * @name expectedHubTagSentence
+ * @returns {void}
+ */
 function expectedHubTagSentence() {
 	const outputElement = globalElements.output.expectedHubTag;
 	const systemName = pageData.name;
@@ -658,6 +799,19 @@ function expectedHubTagSentence() {
 	outputElement.innerText = `The expected HUB Tag for this system is ${expected}.` + '\n\n';
 }
 
+/**
+ * Creates a section for a space station based on the input data.
+ *
+ * @function
+ * @returns {Object} An object containing the structure and faction of the section.
+ *
+ * @example
+ * const section = spaceStationSection();
+ * // section = {
+ * //     structure: ['img', 'note', 'terminal'],
+ * //     faction: 'abandoned'
+ * // }
+ */
 function spaceStationSection() {
 	// define notes
 	const notes = {
@@ -704,6 +858,13 @@ function spaceStationSection() {
 
 	document.querySelector('[data-station="note"]').innerText = notes[faction];
 
+	/**
+	 * Determines if the default display should be used for a space station section.
+	 *
+	 * @function
+	 * @param {Object} section - The space station section HTML element.
+	 * @returns {Boolean} Returns true if the default display should be used, false otherwise.
+	 */
 	function defaultDisplay(section) {
 		const button = section.querySelector('button');
 		if (!button) return;
@@ -716,21 +877,35 @@ function spaceStationSection() {
 }
 
 /* utility stuff here */
-// autofill black hole if SIV is 79 (hide)
+/**
+ * Autofills the color input with 'Black Hole' if the SIV is 79.
+ *
+ * @function
+ * @name autoBH
+ * @returns {undefined}
+ */
 function autoBH() {
 	const glyphs = pageData.portalglyphs;
 	const colorInput = globalElements.input.colorInput;
 	const SIV = glyphs.substring(2, 4);
+
+	// Hides the input if SIV is 79, otherwise shows it and sets its value to an empty string.
 	if (SIV == '79') {
 		hideInput(colorInput, 'none');
 		colorInput.value = 'Black Hole';
 	} else {
 		hideInput(colorInput, '');
 	}
+
+	// Calls the wikiCode function with the colorInput as the argument.
 	wikiCode(colorInput);
 }
 
-// autofill conflict/wealth if pirate is selected on either (don't hide)
+/**
+ * Autofills `conflictInput` and `wealthInput` if `Pirate` is selected on either.
+ *
+ * @param {Element} element - The element that triggered the function call.
+ */
 function autoPirate(element) {
 	const value = element.value;
 	if (!value.includes('Black Market') && !value.includes('Pirate Controlled')) return;
@@ -745,7 +920,11 @@ function autoPirate(element) {
 	spaceStationSection();
 }
 
-// autofill conflict/economy/wealth if faction includes 'Abandoned' or 'Uncharted' (hide)
+/**
+ * Autofills conflict/economy/wealth if faction includes 'Abandoned' or 'Uncharted'
+ * @function
+ * @returns {void}
+ */
 function combineEconConf() {
 	const faction = pageData.faction;
 	const wealth = globalElements.input.wealthInput;
@@ -768,7 +947,11 @@ function combineEconConf() {
 	}
 }
 
-// keep templates for starships/freighters/frigates...
+/**
+ * Adds or removes a template element depending on the checked status of the supplied checkbox.
+ * If no checkbox is supplied, adds element for all system extras checkboxes.
+ * @param {HTMLInputElement} [element=null] - The checkbox element to check.
+*/
 function addTemplate(element = null) {
 	if (!element) {
 		const checkboxes = document.getElementsByName('systemExtras');
@@ -791,6 +974,14 @@ function civCatalog() {
 	wikiCode(civ, 'civShorter');
 }
 
+/**
+ * Generates an array for the page gallery based on the faction of the current page.
+ * If the faction is 'Uncharted' or includes 'Abandoned', the last element is removed.
+ *
+ * @function
+ * @name generateGalleryArray
+ * @returns {void}
+ */
 function generateGalleryArray() {
 	const array = [
 		'',

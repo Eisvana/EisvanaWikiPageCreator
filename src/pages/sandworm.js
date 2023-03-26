@@ -26,24 +26,50 @@ const sandwormElementFunctions = {
 assignElementFunctions(sandwormElementFunctions);
 
 
-// assigns planet or moon name dynamically
+/**
+ * Assigns a dynamic name to the worm, based on the
+ * planet or moon the worm is on.
+ *
+ * @function wormName
+ * @returns {void}
+ */
 function wormName() {
 	const planet = pageData.planet;
 	const moon = pageData.moon;
+
+	/*
+	 * If there's no planet, set pageData.name to an
+	 * empty string and return.
+	 */
 	if (!planet) {
 		pageData.name = '';
 		return;
 	}
 
+	/*
+	 * If there's a moon, set body to moon, otherwise set
+	 * it to planet.
+	 */
 	const body = (() => {
 		if (moon) return moon;
 		return planet;
 	})();
 
+	/*
+	 * Use the wikiCode function to generate wiki code
+	 * for bodyName and set pageData.name to "Immortal
+	 * Worm" plus body.
+	 */
 	wikiCode(body, 'bodyName');
 	pageData.name = `Immortal Worm ${body}`;
 }
 
+/**
+ * Sets the `autospawn` value according to the user input and updates the `globalEelements.output.autoSpawn` element to reflect changes.
+ * @function
+ * @name autoSpawn
+ * @returns {void}
+ */
 // sets the autospawn value according to input
 function autoSpawn() {
 	const spawn = (() => {
@@ -62,7 +88,16 @@ function autoSpawn() {
 	addInfoBullet();
 }
 
-// adds "documented by GHEC" sentence
+/**
+ * Adds a catalogue entry for the current page.
+ * @function catalogue
+ * @returns {void} No return value.
+ * @description Adds information to the wikiCode for a specific album after checking the pageData's civShort value.
+ *              If it's "GHub", it will add information to the "GHEC Sandworm Album".
+ *              If it's "CalHub", it will add information to the "CalHub Rare Fauna Album#Sandworm" page.
+ *              If it's "EisHub", it will add information to the "EisHub Shaihuluda Album" page.
+ *              Also adds a "documented by GHEC" sentence to the output.
+ */
 function catalogue() {
 	const research = docByResearchteam('GHEC');
 
@@ -111,6 +146,11 @@ function albumLinkGen() {
 	return pageData.catalogue.split('|')[0];
 }
 
+/**
+ * Generates an array of gallery items for the page
+ * @function generateGalleryArray
+ * @returns {Array} - An array of gallery items that are unique to the page
+ */
 function generateGalleryArray() {
 	const array = [
 		'',

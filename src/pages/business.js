@@ -41,7 +41,7 @@ function fixHC(element) {
 
 /**
  * Adds a section to the input and code.
- * 
+ *
  * @function
  * @memberof globalElements
  * @param {Element} inputSection - The section to add to the input.

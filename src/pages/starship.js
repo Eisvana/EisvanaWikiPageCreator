@@ -46,7 +46,55 @@ const starshipElementFunctions = {
 }
 assignElementFunctions(starshipElementFunctions);
 
+/**
+ * Function to retrieve the ship data object.
+ * @function
+ * @returns {ShipDataObject} Ship data object containing data related to different types of ships.
+ */
 function getShipData() {
+	/**
+	 * Object containing data related to different types of ships. The pattern is repeated for all ship types.
+	 * @typedef {Object} ShipDataObject
+	 * @property {Object} Freighter - The data related to Freighter ships.
+	 * @property {Object} Freighter.cost - The cost of each type of Freighter ship.
+	 * @property {string} Freighter.cost.Small - The cost range of small Freighter ships.
+	 * @property {string} Freighter.cost.Large - The cost range of large Freighter ships.
+	 * @property {Object} Freighter.slots - The number of slots each type of Freighter ship has.
+	 * @property {string} Freighter.slots.Small - The number of slots of small Freighter ships.
+	 * @property {string} Freighter.slots.Large - The number of slots of large Freighter ships.
+	 * @property {Object} Freighter.techslots - The number of tech slots each type of Freighter ship has.
+	 * @property {string} Freighter.techslots.Small - The number of tech slots of small Freighter ships.
+	 * @property {string} Freighter.techslots.Large - The number of tech slots of large Freighter ships.
+	 * @property {string[]} Freighter.subtypes - The different subtypes of Freighter ships.
+	 * @property {string[]} Freighter.secParts - The different secondary parts for Freighter ships.
+	 * @propety {string[]} Freighter.accessories - The different accessories for Freighter ships.
+	 * @property {string[]} Freighter.miscParts - The different miscellaneous parts for Freighter ships.
+	 * @property {Object} Freighter.sections - The different sections of the Freighter ship builder.
+	 * @property {string[]} Freighter.sections.subtypeInput - Controls the visibility of subtype input.
+	 * @property {string[]} Freighter.sections.exoticInput - Controls the visibility of exotic input.
+	 * @property {string[]} Freighter.sections.pilotInput - Controls the visibility of pilot input.
+	 * @property {string[]} Freighter.sections.inventoryInput - Controls the visibility of inventory input.
+	 * @property {string[]} Freighter.sections.maneuverBInput - Controls the visibility of maneuverability input.
+	 * @property {string[]} Freighter.sections.damageBInput - Controls the visibility of damage input.
+	 * @property {string[]} Freighter.sections.shieldBInput - Controls the visibility of shield input.
+	 * @property {string[]} Freighter.sections.warpBInput - Controls the visibility of warp input.
+	 * @property {string[]} Freighter.sections.economyInput - Controls the visibility of economy input.
+	 * @property {string[]} Freighter.sections.planetInput - Controls the visibility of planet input.
+	 * @property {string[]} Freighter.sections.moonInput - Controls the visibility of moon input.
+	 * @property {string[]} Freighter.sections.axesInput - Controls the visibility of axes input.
+	 * @property {Object} Exotic - The data related to Exotic ships.
+	 * @property {Object} Solar - The data related to Solar ships.
+	 * @property {Object} Fighter - The data related to Fighter ships.
+	 * @property {Object} Explorer - The data related to Explorer ships.
+	 * @property {Object} Hauler - The data related to Hauler ships.
+	 * @property {Object} Shuttle - The data related to Shuttle ships.
+	 * @property {Object} "Living Ship" - The data related to Living ships.
+	 */
+
+	/**
+	 * Ship data object containing data related to different types of ships.
+	 * @type {ShipDataObject}
+	 */
 	const defaultSections = {
 		subtypeInput: ['show'],
 		exoticInput: ['hide', ''],
@@ -301,7 +349,11 @@ function getShipData() {
 	return shipData;
 }
 
-// subtype dropdowns for different ship types
+/**
+ * Set subtype dropdown options based on selected ship type.
+ * @function
+ * @returns {void}
+ */
 function subtypeDropdown() {
 	const type = pageData.type;
 	const subtype = globalElements.input.subtypeInput
@@ -315,7 +367,12 @@ function subtypeDropdown() {
 	wikiCode(subtype);
 }
 
-// calculates S class spawn chance
+/**
+ * Calculates the spawn chance of an S class ship based on the economy rating and type of the system
+ *
+ * @function
+ * @returns {undefined}
+ */
 function calcS() {
 	const econ = pageData.economy.split(' ');
 	const type = pageData.type;
@@ -350,7 +407,12 @@ function shipStats() {
 	globalElements.output.stats.innerText = type + 'Ship';
 }
 
-// shows and hides section based on other input
+/**
+ * Shows and hides section based on other input.
+ *
+ * @function
+ * @returns {void}
+ */
 function showHideStarshipSelects() {
 	const shipData = getShipData();
 	const showState = {
@@ -375,6 +437,12 @@ function showHideStarshipSelects() {
 	calcInv();
 }
 
+/**
+ * Sets the dropdown options for the inventory input based on the page data and ship data.
+ * @function
+ * @name invDropdown
+ * @returns {void}
+ */
 function invDropdown() {
 	const type = pageData.type;
 	const subtype = pageData.subtype;
@@ -394,7 +462,11 @@ function invDropdown() {
 	wikiCode(inventory);
 }
 
-// calculates inventory size based on type or subtype
+/**
+ * Calculates inventory size based on type and subtype.
+ * @function
+ * @returns {void}
+ */
 function calcInv() {
 	const type = pageData.type
 	const subtype = pageData.subtype
@@ -423,15 +495,20 @@ function calcInv() {
 	costSlotCalc();
 }
 
-// calculates cost and slot count
+/**
+ * Calculates the cost and slot count required for the current pageData.
+ * @function
+ * @returns {void}
+ */
 function costSlotCalc() {
 	const type = pageData.type;
 	const inventory = pageData.inventory;
+	const propArray = ["cost", "slots", "techslots"];
 	const shipData = getShipData();
 
-	globalElements.output.cost.innerText = shipData[type].cost[inventory];
-	globalElements.output.slots.innerText = shipData[type].slots[inventory];
-	globalElements.output.techslots.innerText = shipData[type].techslots[inventory];
+	for (const prop of propArray) {
+		globalElements.output[prop].innerText = shipData[type][prop][inventory];
+	}
 }
 
 function introType() {
@@ -446,18 +523,39 @@ function shipType() {
 	}
 }
 
-// constructs location sentence
+/**
+ * Constructs a location sentence for a discovered ship.
+ * @function loc
+ * @return {string} The completed location sentence.
+ */
 function loc() {
 	const systemName = pageData.system;
 	const regionName = pageData.region;
 	const civ = pageData.civShort;
 	const type = pageData.type;
 
+	// this output has a linebreak. This is intended, because we use .innerText to display this. If we used <br>, it would display '<br>', not the linebreak.
+	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName)} of the ${HubGal(civ)}.
+
+	It can be found ${locText()}.`
+
+	globalElements.output.location.innerText = output;
+
+	/**
+	 * Determines whether the discovered ship is a capital ship based on inventory size
+	 * @function capitalDetection
+	 * @return {string} If ship is a capital ship, returns the string 'Capital'; otherwise returns undefined.
+	 */
 	function capitalDetection() {
 		const inventory = pageData.inventory;
 		if (inventory == 'Large') return 'Capital';
 	}
 
+	/**
+	 * Determines the method of freighter spawn
+	 * @function freighterSpawn
+	 * @return {string} Returns a sentence describing the freighter spawn location.
+	 */
 	function freighterSpawn() {
 		if (capitalDetection() == 'Capital') {
 			return 'after warping into the star system if a space battle is triggered'
@@ -466,12 +564,22 @@ function loc() {
 		}
 	}
 
+	/**
+	 * Determines the method of living ship spawn
+	 * @function livingShipSpawn
+	 * @return {string} Returns a sentence describing the living ship spawn location and coordinates.
+	 */
 	function livingShipSpawn() {
 		const axes = pageData.axes;
 		const celestialBody = planetMoonSentence();
 		return `on the ${celestialBody} at the coordinates ${axes}`
 	}
 
+	/**
+	 * Constructs the location sentence based on ship type
+	 * @function locText
+	 * @return {string} Returns the location sentence.
+	 */
 	function locText() {
 		switch (type) {
 			case 'Freighter':
@@ -484,15 +592,13 @@ function loc() {
 				return 'at either the [[Space Station]] or any [[Trade Outpost]]s available in the star system';
 		}
 	}
-	// this output has a linebreak. This is intended, because we use .innerText to display this. If we used <br>, it would display '<br>', not the linebreak.
-	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName)} of the ${HubGal(civ)}.
-
-	It can be found ${locText()}.`
-
-	globalElements.output.location.innerText = output;
 }
 
-// constructs additional information sentence
+/**
+ * Constructs additional information sentence that includes the catalogue and research team
+ * @function
+ * @returns {string} - The additional information sentence
+ */
 function addInfo() {
 	let catalogue = '';
 	const civ = shortenGHub(pageData.civShort);
@@ -511,20 +617,31 @@ function addInfo() {
 	globalElements.output.addInfo.innerText = output;
 }
 
-// adds items to the part dropdowns
+/**
+ * Adds items to the part dropdowns based on the selected ship type.
+ * @function
+ * @returns {void}
+ */
 function appearanceDropdowns() {
 	const type = globalElements.input.typeInput.value;
-	const secParts = globalElements.input.secPartsInput;
-	const accessories = globalElements.input.accessoriesInput;
-	const miscParts = globalElements.input.miscPartsInput;
+	const parts = {
+		secParts: globalElements.input.secPartsInput,
+		accessories: globalElements.input.accessoriesInput,
+		miscParts: globalElements.input.miscPartsInput,
+	}
 	const shipData = getShipData();
 
-	setDropdownOptions(secParts, shipData[type].secParts);
-	setDropdownOptions(accessories, shipData[type].accessories);
-	setDropdownOptions(miscParts, shipData[type].miscParts);
+	for (const part in parts) {
+		const input = parts[part];
+		setDropdownOptions(part, shipData[type][input])
+	}
 }
 
-// sets the actual appearance sentence
+/**
+ * Sets the actual appearance sentence of the specified creature, using the information provided in the input fields.
+ * @function appearanceSentence
+ * @returns {void}
+ */
 function appearanceSentence() {
 	const mainColour = globalElements.input.mainColourInput.value;
 	const secColour = globalElements.input.secColourInput.value;
@@ -549,7 +666,7 @@ function appearanceSentence() {
 
 	const addParts = (() => {
 		let partList = '';
-		if (secParts || accessories || miscParts) partList += 'It features ';
+		if (secParts || accessories || miscParts) partList = 'It features ';
 		const partArray = [secParts.toLowerCase(), accessories.toLowerCase(), miscParts.toLowerCase()];
 		const usedParts = new Array;
 		for (const part of partArray) {
@@ -580,7 +697,11 @@ function appearanceSentence() {
 	wikiCode(textarea);
 }
 
-// fills economy/race/coords for the "other" parm on starship album entries
+/**
+ * Fills economy, race, and coords for the "other" parameter on starship album entries.
+ * @function
+ * @returns {string} Returns a string that includes the filled-out properties.
+ */
 function albumOtherExternal() {
 	const planet = pageData.planet;
 	const moon = pageData.moon;
@@ -608,20 +729,31 @@ function albumOtherExternal() {
 	return output;
 }
 
+/**
+ * Generates a link to a starship catalog based on the properties of the pageData object.
+ * @function albumLinkGen
+ * @returns {String} The link to the appropriate starship catalog.
+ */
 function albumLinkGen() {
-	const civLong = pageData.civStub;
-	const civShort = pageData.civShort;
+	const civLong = pageData.civStub;		// The long version of the civilization name.
+	const civShort = pageData.civShort;		// The shortened version of the civilization name.
 	const civ = (() => {
 		if (civLong.split(' ').length > 1) return pageData.civShort;
 		return pageData.civilized.split(' ').slice(0, 2).join(' ');
-	})();
-	const type = pageData.type;
-	const subtype = pageData.subtype;
+	})();	// The civilization name, either the short version or the first two words of the long version.
+
+	const type = pageData.type; // The type of starship.
+	const subtype = pageData.subtype; // The subtype of starship.
 	const fighterSubtypes = {
 		Common: ['Barrel', 'Jet', 'Snowspeeder', 'Viper'],
 		Rare: ['Alpha', 'Long', 'Needle', 'Rasa', 'Stubby'],
-	}
+	}	// An object containing arrays of fighter subtypes, sorted by rarity.
 
+	/**
+	 * Returns the appropriate catalog name based on the properties of the pageData object.
+	 * @function getCatalog
+	 * @returns {String} The name of the corresponding starship catalog.
+	 */
 	function getCatalog() {
 		if (civShort == 'CalHub') return 'CalHub Starship Catalog';										// CalHub Freighter
 		if (type == 'Freighter') return civ + ' Freighter Catalog';										// GHub/EisHub Freighter
@@ -630,7 +762,8 @@ function albumLinkGen() {
 			for (const rarity in fighterSubtypes) {
 				if (fighterSubtypes[rarity].includes(subtype)) return rarity;
 			}
-		})();
+		})();	// The rarity of the fighter subtype, determined by checking the fighterSubtypes object.
+
 		return `${civ} Starship Catalog - ${type} (${rarity})`; 										// EisHub Fighter
 	}
 
@@ -641,7 +774,14 @@ function albumTypeExternal() {
 	return 'Catalog';
 }
 
+/**
+ * Creates an array of gallery images based on the current page data.
+ *
+ * @function
+ * @returns {void}
+ */
 function generateGalleryArray() {
+	// Array of default gallery images
 	const array = [
 		'',
 		'Rear view of ship',
@@ -656,18 +796,23 @@ function generateGalleryArray() {
 		'System Page',
 	];
 
+	// Locations which apply to a living ship
 	const common = ['moon', 'planet', 'crash'];
+
+	// Images to deactivate based on the type of page data
 	const deactivate = {
 		'Living Ship': ['npc', 'freighter'],
 		'Freighter': ['ship', ...common],
 		'default': ['freighter', ...common],
 	}
 
+	// Remove 'Moon Page' from the array if there is no moon in the page data
 	if (!pageData.moon) {
 		const index = array.findIndex(item => item.toLowerCase().includes('moon'));
 		array.splice(index, 1);
 	}
 
+	// Loop through the array and remove images based on the type of page data
 	const type = pageData.type;
 	const lowerCase = structuredClone(array).map(item => item.toLowerCase());
 	for (let i = array.length - 1; i >= 0; i--) {
@@ -677,6 +822,7 @@ function generateGalleryArray() {
 		}
 	}
 
+	// Update page data with the new gallery array
 	pageData.galleryArray = array;
 }
 
