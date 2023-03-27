@@ -15,7 +15,7 @@
 
 let galleryUploadShown = false;
 // handles gallery images
-function galleryUpload() {
+async function galleryUpload() {
 	const inp = globalElements.input.galleryUpload;
 	if (!inp.value) return;
 	const inputDiv = globalElements.output.galleryItems;
@@ -27,12 +27,9 @@ function galleryUpload() {
 			errors.push(name);
 			continue;
 		}
-		const imgUrlData = URL.createObjectURL(file);
 		const childtree = inputDiv.children;
 		const childIndex = getChildIndex(childtree, 'id');
-		const inputId = 'pic' + childIndex;
 		const dropdownId = 'dropdown' + childIndex;
-		const galleryId = 'gallery' + childIndex;
 		const wikiCodeGalleryId = 'wikiCodeGallery' + childIndex;
 		const wikiCodeGalleryValueId = 'wikiCodeGalleryValue' + childIndex;
 
@@ -46,34 +43,21 @@ function galleryUpload() {
 			return p.outerHTML;
 		})();
 
-		const galleryTemplate = `
-		<div id="${galleryId}" class="gallery-item">
-			<a class="gallery-media" href=${imgUrlData} target="_blank" rel="noopener noreferrer">
-				<img src="${imgUrlData}">
-			</a>
-			<div class="gallery-meta">
-				${nameElement}
-				<div><select id="${dropdownId}" onchange="galleryDesc(this,'${inputId}', '${wikiCodeGalleryValueId}')"></select></div>
-				<div><input id="${inputId}" type="text" placeholder="Description" oninput="galleryInput(this,'${wikiCodeGalleryValueId}')" /></div>
-			</div>
-			<div class="controlButtons">
-				<span class="delete-icon is-clickable" title="Remove picture from gallery" onclick="rmGallery(this, '${wikiCodeGalleryId}')">&#10060</span>
-				<img class="handle" src="./assets/vector/arrow.svg" title="Move picture up or down">
-				<button class="button moveButton" title="Move up" onclick="mobileMoveItem(this, '${wikiCodeGalleryId}', 'up')">
-					<svg width="36" height="36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
-				</button>
-				<button class="button moveButton" title="Move down" onclick="mobileMoveItem(this, '${wikiCodeGalleryId}', 'down')">
-					<svg width="36" height="36"><path d="M2 11h32L18 27 2 11Z"></path></svg>
-				</button>
-			</div>
-		</div>`;
+		const replacementStrings = {
+			imgUrlData: URL.createObjectURL(file),
+			inputId: 'pic' + childIndex,
+			dropdownId: 'dropdown' + childIndex,
+			galleryId: 'gallery' + childIndex,
+			nameElement: nameElement,
+		}
 
-		inputDiv.insertAdjacentHTML('afterbegin', galleryTemplate);
+		const galleryTemplate = await loadHTML('src/htmlSnippets/galleryInput.html', replacementStrings);
 
 		const wikiCodeGalleryTemplate = `<div id="${wikiCodeGalleryId}">
-			<span>${name}</span><output id="${wikiCodeGalleryValueId}"></output>
+		<span>${name}</span><output id="${wikiCodeGalleryValueId}"></output>
 		</div>`;
 
+		inputDiv.insertAdjacentHTML('afterbegin', galleryTemplate.body.innerHTML);
 		wikiCodeGalleryDiv.insertAdjacentHTML('afterbegin', wikiCodeGalleryTemplate);
 
 		const galleryElement = document.getElementById(dropdownId);

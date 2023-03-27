@@ -62,7 +62,7 @@ async function addSection() {
 	const outputSection = globalElements.output.contents;
 	const elementList = document.querySelectorAll('[data-section]');
 	const childIndex = getChildIndex(elementList, 'dataset.section');
-	const strings = {
+	const replacementStrings = {
 		childIndex: childIndex,
 		heading: 'heading' + childIndex,
 		img: 'img' + childIndex,
@@ -73,8 +73,11 @@ async function addSection() {
 		text_input: 'text_input' + childIndex,
 	}
 
-	const input_dom = await loadHTML('src/htmlSnippets/businessInputs.html', strings);
-	const code_dom = await loadHTML('src/htmlSnippets/businessOutputs.html', strings);
+	const input_dom = await loadHTML('src/htmlSnippets/businessInputs.html', replacementStrings);
+	const code = `
+		<div data-section="section${childIndex}">==<output name="${replacementStrings.heading}"></output>==</div>
+		<div style="display:none" data-section="section${childIndex}">[[File:<output id="${replacementStrings.img}"></output>|thumb]]</div>
+		<div data-section="section${childIndex}"><output id="${replacementStrings.text}"></output><br><br></div>`;
 
 	const inputs = input_dom.querySelectorAll(`[data-section="section${strings.childIndex}"] :is(input, textarea)`);
 	for (const input of inputs) {
@@ -82,7 +85,7 @@ async function addSection() {
 	}
 
 	inputSection.insertAdjacentHTML("beforebegin", input_dom.body.innerHTML);
-	outputSection.insertAdjacentHTML("beforeend", code_dom.body.innerHTML);
+	outputSection.insertAdjacentHTML("beforeend", code);
 }
 
 /**
