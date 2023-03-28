@@ -24,8 +24,9 @@ const albumElements = {
  * @function
  */
 (async () => {
+	console.log('start loading!')
 	const wikitext = await loadHTML('src/htmlSnippets/album.html');
-
+	console.log("loaded!")
 	const actions = `<button id="albumBtn" class="button is-outlined is-primary"
 onclick="copyCode(this, 'albumText')">
 Copy album wikicode
@@ -35,7 +36,7 @@ onclick="albumLink(this)">
 Open Album
 </a>`
 	// If the global albumEntry element exists, set its innerHTML to the wikitext.
-	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext;
+	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext.body.innerHTML;
 
 	// If the global albumActions element exists, set its innerHTML to the actions.
 	if (globalElements.output.albumActions) globalElements.output.albumActions.innerHTML = actions;
@@ -51,6 +52,7 @@ Open Album
 	}
 	// Assign albumElementFunctions to their respective HTML elements.
 	assignElementFunctions(albumElementFunctions);
+
 })();
 
 /**
