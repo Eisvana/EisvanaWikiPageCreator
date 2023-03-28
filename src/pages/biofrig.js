@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Organic Frigate page creator.
+ */
+
 function startupFunctions() {
 	numberStats();
 	locHubNr();

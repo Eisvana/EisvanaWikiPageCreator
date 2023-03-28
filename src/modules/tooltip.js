@@ -1,4 +1,8 @@
 /**
+ * @fileoverview Generates tooltips and handles all logic related to tooltips and explanation popups.
+ */
+
+/**
  * Adds all tooltips and sets up dialog handling.
  * @function
  */

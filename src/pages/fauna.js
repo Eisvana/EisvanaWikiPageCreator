@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Creature page creator.
+ */
+
 function startupFunctions() {
 	genusDropdown();
 	albumDropdown();

@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Provides data for mineral datalists
+ */
 (() => {
 	const mineralDatalists = {
 		formationData: [

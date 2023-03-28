@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Multi-Tool page creator.
+ */
+
 function startupFunctions() {
 	locGalaxy();
 	acquirementBundle();

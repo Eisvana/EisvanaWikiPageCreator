@@ -1,4 +1,8 @@
 /**
+ * @fileoverview Provides functions needed for the actions (reset, download file, copy code, create page...) to work.
+ */
+
+/**
  * Sets actions and notes for the HubWikiPageCreator. This function first sets up
  * several buttons for copying, downloading, and creating pages. It then adds a note
  * reminding the user to upload any images they have added. Finally, it adds a debug

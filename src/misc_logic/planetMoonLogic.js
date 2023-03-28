@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions that can be used by Planet and Moon pages.
+ */
+
 function startupFunctions() {
 	celestialStartupFunctions();
 	autoInfested();
@@ -33,6 +37,30 @@ const planetMoonElementFunctions = {
 }
 assignElementFunctions(planetMoonElementFunctions);
 
+/**
+ * Immediately invoked function expression (IIFE) that caches HTML files for future use.
+ * @function
+ * @returns {void}
+ */
+(() => {
+	const files = [
+		'creatureInputs',
+		'floraInputs',
+		'mineralInputs'
+	]
+	for (const file of files) {
+		cachedHTML.files.add(`src/htmlSnippets/${file}.html`);
+	}
+})();
+
+/**
+ * Determines the appropriate verb to use based on the given number, and sends the output to the
+ * specified destination if provided.
+ *
+ * @param {number} number - The number used to decide which verb to use.
+ * @param {string} [dest] - An optional destination to send the output of the wikiCode() function to.
+ * @returns {string} Either "is" or "are," depending if the number is singular or plural.
+ */
 function plural(number, dest = null) {
 	const word = (() => {
 		if (number == 1) return 'is';
@@ -42,6 +70,11 @@ function plural(number, dest = null) {
 	wikiCode(word, dest);
 }
 
+/**
+ * Updates the descriptor text for a planet element.
+ * @param {HTMLElement} element - The planet element to add the descriptor to.
+ * @returns {void}
+ */
 function planetDescriptor(element) {
 	const dest = element.dataset.destNoauto;
 	const output = buildDescriptor(element.value, pageData.pageType, ' ');
@@ -53,7 +86,11 @@ function planetDescriptor(element) {
 	}
 }
 
-// constructs location sentence
+/**
+* Constructs a sentence describing the location of the current star system.
+* @function
+* @returns {string} - A string describing the location of the current star system.
+*/
 function locationSentence() {
 	const systemName = pageData.system;
 	const regionName = pageData.region;
@@ -64,12 +101,23 @@ function locationSentence() {
 	globalElements.output.location.innerText = output;
 }
 
+/**
+ * Adds a new section for entering a planet resource name.
+ *
+ * @param {Element} element - The button element that was clicked to add a new section.
+ * @returns {void}
+ */
 function addResource(element = globalElements.input.resourceInputs.querySelector('button')) {
+	// Finds the inputSection element that is the parent element of the button element
 	const inputSection = element.parentElement;
+	// Finds all elements that have a 'data-resource' attribute and returns a NodeList
 	const elementList = document.querySelectorAll('[data-resource]');
+	// Returns the index of the last element found with 'data-resource' attribute
 	const childIndex = getChildIndex(elementList, 'dataset.resource');
+	// Creates a new string that's the name of the new input element
 	const resource_input = 'resource_input' + childIndex;
 
+	// Creates HTML code for a new resource input section
 	const inputHTML = `<div class="tableCell text removable" data-resource="section${childIndex}">
 		<button class="button is-outlined is-danger icon is-small" title="Remove resource" type="button" disabled onclick="removeSpecificSection('section${childIndex}', 'resource'); enableResourceAdd()">&#10006</button>
 		<label for="${resource_input}">Resource name:</label>
@@ -78,21 +126,25 @@ function addResource(element = globalElements.input.resourceInputs.querySelector
 		<input type="text" list="resources" id="${resource_input}" oninput="resourceList()" onchange="forceDatalist(this)">
 	</div>`;
 
+	// Inserts the newly-generated inputHTML before the current inputSection
 	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
 
+	// Gets all the remove buttons for the resource inputs and stores the count to a variable
 	const resourceRemoveButtons = document.querySelectorAll('[data-resource] button');
 	const resourceInputSectionCount = resourceRemoveButtons.length;
 
+	// Ensures that there are always at least three resource inputs present
 	while (document.querySelectorAll('[data-resource] button').length < 3) {
 		addResource(element);
 	}
 
+	// Disables the add resource button if the number of sections is more than 6
 	// enter the number of sections you want to allow behind the ">" operator.
 	if (resourceInputSectionCount + 1 > 6) {
 		element.disabled = true;
 	}
 
-	// default state is disabled because that's easier to handle. Enable if more than 3 sections are present (every planet has at least 3 resources)
+	// Enables all remove buttons if more than 3 sections are present (every planet has at least 3 resources)
 	if (resourceInputSectionCount > 3) {
 		for (const button of resourceRemoveButtons) {
 			button.disabled = false;
@@ -100,6 +152,13 @@ function addResource(element = globalElements.input.resourceInputs.querySelector
 	}
 }
 
+/**
+ * Enables the resource add button and disables the resource remove buttons if there are less than 4 resource input sections.
+ * Also calls the resourceList function to update the list of resources.
+ *
+ * @function
+ * @returns {void}
+ */
 function enableResourceAdd() {
 	const addButton = globalElements.input.resourceInputs.querySelector('button');
 	addButton.disabled = false;
@@ -115,6 +174,13 @@ function enableResourceAdd() {
 	resourceList();
 }
 
+/**
+ * Gets the data of the resources and generates a list of resources, including their in-game names and shortcuts.
+ * The generated list is then displayed in the HTML elements for the resource list and the resource bullets.
+ *
+ * @function
+ * @returns {void}
+ */
 function resourceList() {
 	const resourceShorts = getResourceData();
 	const resourceInputs = document.querySelectorAll('[data-resource] input');
@@ -127,33 +193,46 @@ function resourceList() {
 		resourceData[resource] = resourceShorts[resource];
 	}
 
-	const usedResources = Object.keys(resourceData);
-	const usedResourceShorts = Object.values(resourceData);
+	const usedResources = Object.keys(resourceData).map(resource => `* {{ilink|${resource}}}`);
+	const usedResourceShorts = Object.values(resourceData).map(resource => `[[${resource}]]`);
 
-	for (let i = 0; i < usedResources.length; i++) {
-		const resource = usedResources[i];
-		usedResources[i] = `* {{ilink|${resource}}}`;
-
-		const resourceShort = usedResourceShorts[i];
-		usedResourceShorts[i] = `[[${resourceShort}]]`;
-	}
 	globalElements.output.resourceList.innerText = usedResourceShorts.join(', ');
 	globalElements.output.resourceBullets.innerText = usedResources.join('\n');
 }
 
+/**
+ * Generates and assigns a sentence describing [[Sentinel]] activity on this page.
+ * @function
+ * @returns {void}
+ */
 function sentinelSentence() {
+	// Assigns the descriptor of the sentinel activity on this page.
 	const sentDescriptor = pageData.sentinel;
+
+	// Retrieves data about the available sentinel activities.
 	const sentinels = getSentinelData();
+
+	// Identifies the level of sentinel activity on this page.
 	const sentLevel = (() => {
 		for (const level in sentinels) {
 			if (sentinels[level].includes(sentDescriptor)) return level;
 		}
 	})();
 
+	// Constructs a sentence describing Sentinel activity on this page.
 	const output = `[[Sentinel]] activity on this ${pageData.pageType.toLowerCase()} is classified as: ''${sentDescriptor}''. The sentinels ${(sentLevel == 'aggressive') ? '' : "don't"} present an immediate threat.`;
+
+	// Assigns the constructed sentence to the corresponding HTML element.
 	globalElements.output.sentinelSentence.innerText = output;
 }
 
+/**
+ * Adds a new fauna section to the page and updates the output section accordingly.
+ *
+ * @async
+ * @param {Element} element - The button element that was clicked to add the fauna section.
+ * @returns {Promise} A promise that resolves when the fauna section is successfully added.
+ **/
 async function addFauna(element) {
 	const inputSection = element.parentElement;
 	const outputSection = globalElements.output[element.dataset.destNoauto];
@@ -172,6 +251,13 @@ async function addFauna(element) {
 	genusDropdown(globalElements.input[`faunaEcosystemInput${i}`]);
 }
 
+/**
+ * Adds a flora element to the page.
+ *
+ * @async
+ * @param {HTMLElement} element - The element to add the flora to.
+ * @returns {Promise<void>}
+ */
 async function addFlora(element) {
 	const inputSection = element.parentElement;
 	const outputSection = globalElements.output[element.dataset.destNoauto];

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Business page creator.
+ */
+
 function startupFunctions() {
 	const input = document.querySelector('[oninput*="enPrefix"]');
 	enPrefix(input.value, 'enPrefix');
@@ -26,6 +30,8 @@ assignElementFunctions(businessElementFunctions);
 		currencies: ['{{CurrencyHubCoin}}']
 	}
 	datalists(currencyDatalist);
+
+	cachedHTML.files.add('src/htmlSnippets/businessInputs.html');
 })();
 
 /**

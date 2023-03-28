@@ -1,13 +1,21 @@
 /**
- * Determines if the user has a set theme and updates the document accordingly.
+ * @fileoverview Generates the footer and handles theming, as well as user defined global default values.
+ */
+
+/**
+ * Determines the user's theme preference and applies it to the footer of the current HTML document.
  * @async
  * @function
- * @returns {Promise} A promise that resolves when the footer is loaded and rendered.
+ * @returns {undefined}
  */
 (async () => {
 	// determines if the user has a set theme
 	let theme = localStorage.getItem('theme') ?? 'light';    //default to light
-	// local storage is used to override OS theme settings
+
+	/**
+	 * If the user has not yet set a theme preference, and the user's operating system is using a dark theme,
+	 * the theme of the footer will be set to "dark".
+	 */
 	if (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 		// OS theme setting detected as dark
 		theme = 'dark';
@@ -18,13 +26,18 @@
 
 	if (!localStorage.getItem('theme')) localStorage.setItem('theme', theme);
 
+	/**
+	 * Loads the HTML of the footer and removes the `<a>` element with an `id` of `about` if it links to the current page.
+	 */
 	const dom = await loadHTML('src/htmlSnippets/footer.html');
-
 	const about = dom.getElementById('about');
 	if (about.href == window.location) about.remove();
 
+	/**
+	 * If a global `globalElements` object exists, the `innerHTML` property of the `footer` key is set to `footerHTML`.
+	 * Otherwise, the `innerHTML` property of the element with an `id` of `footer` is set to `footerHTML`.
+	 */
 	const footerHTML = dom.body.innerHTML;
-
 	if (typeof globalElements == 'undefined') {
 		document.getElementById('footer').innerHTML = footerHTML;
 	} else {
@@ -32,7 +45,11 @@
 	}
 })();
 
-// function that changes the theme, and sets a localStorage variable to track the theme between page loads
+/**
+ * Changes the theme of the page and sets a localStorage variable to track the theme between page loads.
+ * @function
+ * @returns {void}
+ */
 function switchTheme() {
 	document.documentElement.dataset.transition = 'true';
 	if (localStorage.getItem('theme') == 'light') {
@@ -56,28 +73,61 @@ const footerElements = {
 	}
 };
 
+/**
+ * Immediately invoked function expression to set up footer dialog elements and define internal logic.
+ */
 (() => {
+	/**
+	 * NodeList of input elements inside the footer dialog's "data" container.
+	 *
+	 * @type {NodeList}
+	 */
 	const inputs = document.querySelectorAll('footer dialog .data>*');
+
+	// Iterate over each input element and add its `id` to the `footerElements.input` object.
 	inputs.forEach(input => {
 		footerElements.input[input.id] = input.id;
+
+		// If the input element has a `data-store` attribute, add a `delete` function to it.
 		if (input.dataset.store) assignFunction(input, 'delete pageData.restored');
 	});
+
+	// Update the global `footerElements` object to include the new input elements.
 	updateGlobalElements(footerElements);
+
+	/**
+	 * Array of input elements inside the footer dialog's "data" container.
+	 *
+	 * @type {Array}
+	 */
 	footerElements.inputs = inputs
+
+	// Add portal glyph buttons to the `globalElements.input.settingsPortalglyphButtons` container.
 	addPortalGlyphButtons(globalElements.input.settingsPortalglyphButtons, 'portalglyphsDefault');
 
-	// define dialog internal logic
+	/**
+	 * Object containing functions to be called when certain settings elements in the footer dialog are changed.
+	 *
+	 * @type {Object}
+	 */
 	const settingsElementFunctions = {
 		civDefault: ['researchTeamDropdown(globalElements.input.researchteamDefault, this.value)'],
 		discoveredDefault: ['hideDiscoverer("discoveredDefault", "discoveredlinkDefault")'],
 		discoveredlinkDefault: ['hideDiscoverer("discoveredlinkDefault", "discoveredDefault")'],
 		portalglyphsDefault: ['glyphInputOnChange(this); validateGlyphSettings(this); document.getElementById("settingsPortalglyphsPreview").value = validateGlyphInput(this.value)'],
 	}
+
+	// Assign each function to its corresponding element in the footer dialog.
 	assignElementFunctions(settingsElementFunctions);
 })();
 
 
-// shows modal
+/**
+ * Displays the settings modal and restores default values.
+ * @function
+ * @global
+ * @return {void}
+ */
 function showSettings() {
 	restoreDefaults();
 	const dialog = globalElements.input.settings;
@@ -104,7 +154,11 @@ function showSettings() {
 	delete pageData.restored;
 }
 
-// called when user submits values. Stores entered values in localstorage
+/**
+ * Called when user submits values. Stores entered values in localstorage.
+ * @function
+ * @returns {void}
+ */
 function updateDefaultValues() {
 	if (pageData.restored) {
 		localStorage.removeItem('defaultSettings');
@@ -122,7 +176,12 @@ function updateDefaultValues() {
 	localStorage.setItem('defaultSettings', JSON.stringify(settings));
 }
 
-// called on pageload and on reset. Populates inputs with values before the code automation kicks in
+/**
+ * Populates input fields with default values on page load and on reset.
+ * Retrieves default values from local storage, if available.
+ * @function
+ * @returns {void}
+ */
 function readDefaultValues() {
 	const settings = JSON.parse(localStorage.getItem('defaultSettings')) ?? new Object;
 	for (const setting in settings) {
@@ -133,24 +192,32 @@ function readDefaultValues() {
 				return document.getElementById(setting);
 			}
 		})();
-		if (input) {
-			input.value = settings[setting];
+		if (!input) continue;
 
-			switch (setting) {
-				case 'civInput':
-					pageData.civShort = settings[setting];
-					researchTeamDropdown();
-					break;
-				case 'portalglyphsInput':
-					executeOnInput(input);
-					break;
-			}
+		input.value = settings[setting];
+
+		switch (setting) {
+			case 'civInput':
+				pageData.civShort = settings[setting];
+				researchTeamDropdown();
+				break;
+			case 'portalglyphsInput':
+				executeOnInput(input);
+				break;
 		}
 	}
 }
 
-// called when user resets custom globals. Sets all dialog options back to default
+/**
+ * Sets dialog options back to their default values when the user resets custom globals.
+ * @function
+ * @returns {void}
+ */
 function restoreDefaults() {
+	/**
+	 * The input HTML elements in the footer.
+	 * @type {NodeList}
+	 */
 	const inputs = footerElements.inputs;
 	for (const input of inputs) {
 		if (input?.value == undefined) continue;
@@ -164,6 +231,10 @@ function restoreDefaults() {
 	pageData.restored = true;
 }
 
+/**
+ * Validates a glyph user input and updates the UI with any errors
+ * @param {HTMLInputElement} input - The user's glyph input
+ */
 function validateGlyphSettings(input) {
 	const glyphString = input.value;
 	const allRegions = structuredClone(regions);

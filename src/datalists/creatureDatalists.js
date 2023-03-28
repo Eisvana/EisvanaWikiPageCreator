@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Provides data for creature datalists
+ */
 (() => {
 	const creatureDatalists = {
 		notesData: [

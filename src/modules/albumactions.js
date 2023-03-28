@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions needed for the album actions (copy album code, open album...) to work.
+ */
+
 // The logic for calculating the link target should be done by the main JS file of the page
 const albumElements = {
 	output: {
@@ -19,8 +23,8 @@ const albumElements = {
  * Initializes the album entry with the provided album information and sets up the UI.
  * @function
  */
-(() => {
-	const wikitext = loadHTML('src/htmlSnippets/album.html')
+(async () => {
+	const wikitext = await loadHTML('src/htmlSnippets/album.html');
 
 	const actions = `<button id="albumBtn" class="button is-outlined is-primary"
 onclick="copyCode(this, 'albumText')">

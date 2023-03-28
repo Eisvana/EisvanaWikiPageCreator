@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the System page creator.
+ */
+
 function startupFunctions() {
 	celestialStartupFunctions();
 	combineEconConf();
@@ -47,6 +51,22 @@ const systemElementFunctions = {
 	systemExtras: ['addTemplate(this)'],
 }
 assignElementFunctions(systemElementFunctions);
+
+/**
+ * Immediately invoked function expression (IIFE) that caches HTML files for future use.
+ * @function
+ * @returns {void}
+ */
+(() => {
+	const files = [
+		'planetInputs',
+		'planetOutputs',
+		'tradeableInputs'
+	]
+	for (const file of files) {
+		cachedHTML.files.add(`src/htmlSnippets/${file}.html`);
+	}
+})();
 
 /**
  * Generates a sentence that describes the location of the page.

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Starship page creator.
+ */
+
 function startupFunctions() {
 	subtypeDropdown();
 	showHideStarshipSelects();

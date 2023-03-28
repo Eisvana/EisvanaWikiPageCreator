@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Planet page creator.
+ */
+
 function planetStartupFunctions() {
 	moonList();
 }

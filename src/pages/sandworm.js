@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Sandworm page creator.
+ */
+
 function startupFunctions() {
 	wormName();
 	catalogue();

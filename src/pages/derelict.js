@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Derelict Freighter page creator.
+ */
+
 function startupFunctions() {
 	setGalaxy(globalElements.input.galaxyInput.value);
 	enemyCheckboxes();

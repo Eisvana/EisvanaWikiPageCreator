@@ -1,4 +1,8 @@
 /**
+ * @fileoverview Provides general functions which can be used by all pages.
+ */
+
+/**
  * An object representing discovery regions and their associated systems.
  * @typedef {Object} RegionsObject
  * @property {Object} GHub - The Galactic Hub Project.
@@ -200,7 +204,7 @@ const pageData = new Object;
  * A object that contains cached HTML snippets.
  * @type {Object}
  */
-const cachedHTML = new Object();
+const cachedHTML = { files: new Set() };
 
 /**
  * Object used to store the current page data and check for data integrity issues.
@@ -391,6 +395,17 @@ function startUp() {
 		globalElements.output.albumText.ontouchend = (e) => getSelectedText(e.target);
 		globalElements.output.albumText.onmouseup = (e) => getSelectedText(e.target);
 	}
+	preloadHTML();
+}
+
+/**
+ * Preloads HTML files from the `cachedHTML` object
+ * @function
+ * @returns {void}
+ */
+function preloadHTML() {
+	const files = cachedHTML.files;
+	files.forEach(file => loadHTML(file));
 }
 
 /**

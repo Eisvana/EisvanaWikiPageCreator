@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Functions that can be used by Planet, Moon and System pages
+ */
 function celestialStartupFunctions() {
 	hideOrgName();
 	locationSentence();
@@ -13,7 +16,11 @@ const celestialObjectElementFunctions = {
 }
 assignElementFunctions(celestialObjectElementFunctions);
 
-// generates discovered section sentences
+/**
+ * Generates discovered section sentences
+ * @function
+ * @returns {void}
+ */
 function docByExternal() {
 	const discovered = pageData.discovered;
 	const discoveredlink = pageData.discoveredlink;
@@ -21,6 +28,12 @@ function docByExternal() {
 	const platform = (pageData.platform == 'NS') ? 'Switch' : pageData.platform;
 	const civilized = pageData.civilized;
 
+	/**
+	 * Formats a given date to be in the format 'Month Day, Year'
+	 * @function
+	 * @param {string} date - The date to format in the format 'YYYY-MM-DD'
+	 * @returns {string} The formatted date in the format 'Month Day, Year'
+	 */
 	function formatDate(date) {
 		const options = { year: 'numeric', month: 'long', day: 'numeric' };
 		const simpleDate = date.replaceAll('-', '/');
@@ -32,12 +45,22 @@ function docByExternal() {
 
 	const documented = formatName(documenter);
 
+	/**
+	 * Determines the research chapter sentence to use
+	 * @function
+	 * @returns {string} The research chapter sentence to use
+	 */
 	const research = (() => {
 		const chapterSentence = displayResearch();
 		if (chapterSentence == civilized || !chapterSentence) return platform + ' explorer';
 		return chapterSentence;
 	})();
 
+	/**
+	 * Formats the name of the discoverer
+	 * @function
+	 * @returns {string} The formatted name of the discoverer
+	 */
 	const discoverer = (() => {
 		if (!discoveredlink) {
 			return formatName(discovered);
@@ -46,6 +69,11 @@ function docByExternal() {
 		}
 	})();
 
+	/**
+	 * Formats and generates sections to be used in the explorer string
+	 * @function
+	 * @returns {string} The final generated explorer string
+	 */
 	const explorer = (() => {
 		if (!documenter || documenter == discovered || documenter == discoveredlink) {
 			return `Discovered and uploaded by ${research} ${discoverer} on ${discDate}`
@@ -57,7 +85,10 @@ function docByExternal() {
 	globalElements.output.docby.innerText = explorer;
 }
 
-// add % to e-sell/buy
+/**
+* Add percentage sign to e-sell/buy property data for wikiCode output.
+* @param {HTMLElement|null} element - the element to apply percentage formatting to.
+*/
 function wikiCodePercentage(element = null) {
 	if (!element) {
 		const inputs = document.querySelectorAll('[oninput*="wikiCodePercentage"]');
@@ -72,6 +103,12 @@ function wikiCodePercentage(element = null) {
 	wikiCode(propertyData ? propertyData + '%' : '', dest);
 }
 
+/**
+ * Determines whether or not the given element is infested, and updates the page accordingly.
+ *
+ * @param {HTMLElement} [element=globalElements.input.descriptionInput] - The element to check for infestation.
+ * @return {Boolean} - If on a System page, returns true if the element is Infested, false otherwise. If on a Planet/Moon page, updates the output text and pageData object accordingly, and returns nothing.
+ */
 function autoInfested(element = globalElements.input.descriptionInput) {
 	const descriptorData = getDescriptorData().Infested;
 	const infestedDescriptors = new Array;
@@ -89,6 +126,13 @@ function autoInfested(element = globalElements.input.descriptionInput) {
 	autoWorm(isInfested);
 }
 
+/**
+* Builds a descriptor for a planet based on its planet class.
+* @param {string} descriptor - The descriptor to be used in the construction of the planet's name.
+* @param {string} planetClass - The classification of the planet, which will be incorporated into the constructed name.
+* @param {string} filler - A string to be added between the planet class and the descriptor for added emphasis in the name.
+* @returns {string} The constructed name for the planet.
+*/
 function buildDescriptor(descriptor, planetClass, filler) {
 	const data = getDescriptorData();
 	const section = (() => {

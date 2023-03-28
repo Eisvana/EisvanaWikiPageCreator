@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Base page creator.
+ */
+
 const baseElementFunctions = {
 	planetInput: ['planetMoonSentence()'],
 	moonInput: ['planetMoonSentence()'],
