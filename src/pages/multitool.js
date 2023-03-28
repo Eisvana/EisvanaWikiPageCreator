@@ -136,7 +136,8 @@ function acquirementAlbumBundle() {
 }
 
 async function acquirementBundle() {
-	await window.initAlbumEntryPromise;
+	await globalElements.initAlbumEntryPromise;
+	delete globalElements.initAlbumEntryPromise;
 	acquirementAlbumBundle();
 	acquirementGallery();
 }
