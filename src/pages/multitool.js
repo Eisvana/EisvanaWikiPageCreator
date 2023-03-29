@@ -14,7 +14,7 @@ function startupFunctions() {
 	hideSrLocName();
 	locHubNr();
 	hideCost();
-	albumInitialised ? albumFunctions() : document.addEventListener('IIFE_end', () => albumFunctions());
+	albumFunctions();
 }
 
 // 1. param: string of all functions to add to the element

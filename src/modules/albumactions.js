@@ -22,11 +22,20 @@ const albumElements = {
 let albumInitialised = false;
 
 /**
- * Initializes the album entry with the provided album information and sets up the UI.
- * @function
+ * Asynchronous IIFE that loads album HTML and assigns element functions.
+ * @returns {Promise<void>}
  */
 (async () => {
+	/**
+	 * Represents the album HTML code.
+	 * @type {HTMLHtmlElement}
+	 */
 	const wikitext = await loadHTML('src/htmlSnippets/album.html');
+
+	/**
+	 * Represents the album actions HTML code.
+	 * @type {string}
+	 */
 	const actions = `<button id="albumBtn" class="button is-outlined is-primary"
 onclick="copyCode(this, 'albumText')">
 Copy album wikicode
@@ -46,6 +55,7 @@ Open Album
 
 	/**
 	 * Object containing functions that act upon album-related HTML elements.
+	 * @type {Object.<string, Array.<string|function|null|boolean>>}
 	 */
 	const albumElementFunctions = {
 		civ: ['albumCiv()', null, true],
@@ -53,7 +63,13 @@ Open Album
 	// Assign albumElementFunctions to their respective HTML elements.
 	assignElementFunctions(albumElementFunctions);
 
+	// Dispatches the album_IIFE_end event to notify that the IIFE has completed.
 	document.dispatchEvent(new Event('album_IIFE_end'));
+
+	/**
+	 * Boolean flag indicating that the album has been initialised.
+	 * @type {boolean}
+	 */
 	albumInitialised = true;
 })();
 
@@ -216,11 +232,14 @@ function albumType() {
  * @returns {void}
  */
 function albumFunctions() {
-	albumCiv();
-	albumDiscoverer();
-	albumName();
-	albumOther();
-	albumType();
-	albumItemType();
-	albumDesc();
+	albumInitialised ? functions() : document.addEventListener('album_IIFE_end', () => functions());
+	const functions = () => {
+		albumCiv();
+		albumDiscoverer();
+		albumName();
+		albumOther();
+		albumType();
+		albumItemType();
+		albumDesc();
+	}
 }
