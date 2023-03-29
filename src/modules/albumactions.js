@@ -226,13 +226,21 @@ function albumType() {
 }
 
 /**
- * Calls all functions related to album creation on page load.
+ * This function contains several sub-functions which are called only when the album is completely loaded. If the album is already loaded, then the sub-functions will execute immediately. If not, the function listens for the 'album_IIFE_end' event to trigger and then executes the sub-functions.
+ *
  * @function
  * @name albumFunctions
  * @returns {void}
  */
 function albumFunctions() {
 	albumInitialised ? functions() : document.addEventListener('album_IIFE_end', () => functions());
+
+	/**
+	 * Calls all functions related to album creation.
+	 * @function
+	 * @name functions
+	 * @returns {void}
+	 */
 	const functions = () => {
 		albumCiv();
 		albumDiscoverer();

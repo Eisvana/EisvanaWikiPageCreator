@@ -637,7 +637,7 @@ function appearanceDropdowns() {
 
 	for (const part in parts) {
 		const input = parts[part];
-		setDropdownOptions(part, shipData[type][input])
+		setDropdownOptions(input, shipData[type][part]);
 	}
 }
 
@@ -696,7 +696,7 @@ function appearanceSentence() {
 		return enPrefix(type);
 	})();
 
-	const output = `${name} is ${primaryColour} ${type.toLowerCase()} of the ${subtype.toLowerCase() || exotic.toLowerCase()} subtype${accentColour}. ${addParts}`
+	const output = `${name} is ${primaryColour} ${type.toLowerCase()} of the ${subtype.toLowerCase() || exotic.toLowerCase()} subtype${accentColour}. ${addParts}`;
 	textarea.value = output;
 	wikiCode(textarea);
 }
