@@ -135,8 +135,7 @@ function acquirementAlbumBundle() {
 	albumDesc();
 }
 
-async function acquirementBundle() {
-	await window.initAlbumEntryPromise;
+function acquirementBundle() {
 	acquirementAlbumBundle();
 	acquirementGallery();
 }

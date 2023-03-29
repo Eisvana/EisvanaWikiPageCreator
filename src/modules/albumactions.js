@@ -23,7 +23,7 @@ const albumElements = {
  * Initializes the album entry with the provided album information and sets up the UI.
  * @function
  */
-async function initAlbumEntry() {
+(async () => {
 	console.log('start loading!')
 	const wikitext = await loadHTML('src/htmlSnippets/album.html');
 	console.log("loaded!")
@@ -53,9 +53,7 @@ Open Album
 	// Assign albumElementFunctions to their respective HTML elements.
 	assignElementFunctions(albumElementFunctions);
 
-};
-var initAlbumEntryPromise = initAlbumEntry;
-initAlbumEntryPromise();
+})();
 
 /**
  * Assigns a link to given element based on the album's PAGENAME.
