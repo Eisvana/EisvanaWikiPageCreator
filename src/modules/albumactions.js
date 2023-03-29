@@ -19,14 +19,14 @@ const albumElements = {
 	}
 };		// this semicolon is necessary, otherwise the code throws an error
 
+let albumInitialised = false;
+
 /**
  * Initializes the album entry with the provided album information and sets up the UI.
  * @function
  */
 (async () => {
-	console.log('start loading!')
 	const wikitext = await loadHTML('src/htmlSnippets/album.html');
-	console.log("loaded!")
 	const actions = `<button id="albumBtn" class="button is-outlined is-primary"
 onclick="copyCode(this, 'albumText')">
 Copy album wikicode
@@ -53,6 +53,8 @@ Open Album
 	// Assign albumElementFunctions to their respective HTML elements.
 	assignElementFunctions(albumElementFunctions);
 
+	document.dispatchEvent(new Event('album_IIFE_end'));
+	albumInitialised = true;
 })();
 
 /**

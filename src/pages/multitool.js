@@ -10,11 +10,11 @@ function startupFunctions() {
 	showSizeDropdown();
 	MTType();
 	bundleNumberStats();
-	albumFunctions();
 	hideLocName();
 	hideSrLocName();
 	locHubNr();
 	hideCost();
+	albumInitialised ? albumFunctions() : document.addEventListener('IIFE_end', () => albumFunctions());
 }
 
 // 1. param: string of all functions to add to the element
@@ -132,7 +132,7 @@ function appearance() {
 
 function acquirementAlbumBundle() {
 	acquirement();
-	albumDesc();
+	albumInitialised ? albumDesc() : document.addEventListener('album_IIFE_end', () => albumDesc());
 }
 
 function acquirementBundle() {
