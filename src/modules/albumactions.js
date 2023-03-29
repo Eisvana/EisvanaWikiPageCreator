@@ -23,41 +23,39 @@ const albumElements = {
  * Initializes the album entry with the provided album information and sets up the UI.
  * @function
  */
-(async () => {
-	async function initAlbumEntry() {
-		console.log('start loading!')
-		const wikitext = await loadHTML('src/htmlSnippets/album.html');
-		console.log("loaded!")
-		const actions = `<button id="albumBtn" class="button is-outlined is-primary"
-			onclick="copyCode(this, 'albumText')">
-			Copy album wikicode
-			</button>
-			<a class="button is-outlined is-primary" id="albumLink"
-			onclick="albumLink(this)">
-			Open Album
-			</a>`
-		// If the global albumEntry element exists, set its innerHTML to the wikitext.
-		if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext.body.innerHTML;
+async function initAlbumEntry() {
+	console.log('start loading!')
+	const wikitext = await loadHTML('src/htmlSnippets/album.html');
+	console.log("loaded!")
+	const actions = `<button id="albumBtn" class="button is-outlined is-primary"
+onclick="copyCode(this, 'albumText')">
+Copy album wikicode
+</button>
+<a class="button is-outlined is-primary" id="albumLink"
+onclick="albumLink(this)">
+Open Album
+</a>`
+	// If the global albumEntry element exists, set its innerHTML to the wikitext.
+	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext.body.innerHTML;
 
-		// If the global albumActions element exists, set its innerHTML to the actions.
-		if (globalElements.output.albumActions) globalElements.output.albumActions.innerHTML = actions;
+	// If the global albumActions element exists, set its innerHTML to the actions.
+	if (globalElements.output.albumActions) globalElements.output.albumActions.innerHTML = actions;
 
-		// Update the global albumElements with their respective IDs.
-		updateGlobalElements(albumElements);
+	// Update the global albumElements with their respective IDs.
+	updateGlobalElements(albumElements);
 
-		/**
-		 * Object containing functions that act upon album-related HTML elements.
-		 */
-		const albumElementFunctions = {
-			civ: ['albumCiv()', null, true],
-		}
-		// Assign albumElementFunctions to their respective HTML elements.
-		assignElementFunctions(albumElementFunctions);
+	/**
+	 * Object containing functions that act upon album-related HTML elements.
+	 */
+	const albumElementFunctions = {
+		civ: ['albumCiv()', null, true],
+	}
+	// Assign albumElementFunctions to their respective HTML elements.
+	assignElementFunctions(albumElementFunctions);
 
-	};
-	globalElements.initAlbumEntryPromise = initAlbumEntry;
-	globalElements.initAlbumEntryPromise();
-})();
+};
+var initAlbumEntryPromise = initAlbumEntry;
+initAlbumEntryPromise();
 
 /**
  * Assigns a link to given element based on the album's PAGENAME.
