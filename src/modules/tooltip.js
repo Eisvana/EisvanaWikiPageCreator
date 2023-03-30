@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Generates tooltips and handles all logic related to tooltips and explanation popups.
+ */
+
+/**
+ * Adds all tooltips and sets up dialog handling.
+ * @function
+ */
 (() => {
 	addAllTooltips();
 
@@ -25,30 +33,42 @@
 	updateGlobalElements(dialogElements);
 })();
 
-// set holds images that were previously opened and thereby cached
+/**
+ * A Set which holds images that have been previously loaded and cached.
+ * @type {Set}
+ */
 const cachedImages = new Set();
 
-// shows an explanation modal and fills text
+/**
+ * Displays an explanation modal with optional text and image.
+ * @param {string} heading - The heading of the modal.
+ * @param {string} text - The text content of the modal.
+ * @param {string} img - The URL of the image to display in the modal.
+ */
 function explanation(heading, text, img) {
 	const imgElement = globalElements.output.explanationImg;
 	const linkElement = globalElements.output.explanationLink;
 	const dialogElement = globalElements.output.explanation;
+
+	// Check if img URL was provided
 	if (img) {
-		// image is given
+
+		// Check if img was previously loaded and thus cached in the Set
 		if (cachedImages.has(img)) {
-			// image has been opened before -> is cached -> no loading anim necessary
+
+			// Image was previously loaded, no need for loading animation
 			linkElement.classList.remove('loading');
 
-			// getAttribute is necessary to get the raw value, not the parsed URL
+			// Check if img is different from the previously loaded image
 			if (imgElement.getAttribute('src') != img) {
-				// image is not same as previous -> need to adjust src and link href
+				// Update img source and link href if img is different
 				imgElement.src = '';
 				imgElement.src = img;
 				linkElement.href = img;
 			}
 
 		} else {
-			// image, not cached
+			// Image is not cached, need to load it and show a loading animation
 			imgElement.src = '';
 			imgElement.style.opacity = 0;
 			imgElement.style.marginBlockStart = 0;
@@ -56,33 +76,51 @@ function explanation(heading, text, img) {
 			linkElement.classList.add('loading');
 			linkElement.href = img;
 		}
+
+		// Set link display style to visible
 		linkElement.style.display = '';
 
 	} else {
-		// no image
+		// No img URL provided, hide the link
 		linkElement.style.display = 'none';
 	}
+
+	// Set modal heading and text content
 	globalElements.output.explanationHeading.innerText = heading;
 	globalElements.output.explanationContent.innerHTML = text;
+
+	// Show the modal with a slide-down animation
+	dialogElement.style.translate = '0 -100vh';
+	dialogElement.showModal();
+	dialogElement.style.translate = '0 0';
+	dialogElement.scrollTo(0, 0);
+
+	// Wait for img to load, then update the DOM and cache the image
 	imgElement.onload = () => {
 		imgElement.style.marginBlockStart = '1rem';
 		imgElement.style.opacity = 1;
 		cachedImages.add(img);
 	}
-	dialogElement.style.translate = '0 -100vh';
-	dialogElement.showModal();
-	dialogElement.style.translate = '0 0';
-	dialogElement.scrollTo(0, 0);
 }
 
-// adds all tooltips which are not yet generated
-function addAllTooltips() {
-	const elements = document.querySelectorAll('span.tooltip');
+/**
+ * Adds a tooltip to all HTML elements with the class name 'tooltip'
+ *
+ * @param  {Object} [dom=document] - Optional DOM object to query for elements
+ * @return {void}
+ */
+function addAllTooltips(dom = document) {
+	const elements = dom.querySelectorAll('span.tooltip');
 	for (const element of elements) {
 		constructTooltip(element);
 	}
 
-	// turns HTML tooltip data into actual interactive tooltip
+	/**
+	 * Turns HTML tooltip data into actual interactive tooltip
+	 * @function
+	 * @param {Element} element - The tooltip element to be constructed
+	 * @returns {void}
+	 */
 	function constructTooltip(element) {
 		const dataElements = element.getElementsByTagName('data');
 		if (!dataElements.length) return;
@@ -99,10 +137,17 @@ function addAllTooltips() {
 
 		const tooltip = document.createElement('span');
 		tooltip.classList.add('tooltiptext', 'nms-font');
-		tooltip.innerHTML = dataArr[0];
+		tooltip.innerHTML = dataArr.shift();
 
-		if (dataArr.length > 1) {
-			assignFunction(element, 'explanation(`' + (dataArr[1] ?? '') + '`,`' + (dataArr[2] ?? '') + '`,`' + (dataArr[3] ?? '') + '`)', 'onclick');
+		/**
+		* This if statement checks if the length of dataArr is truthy. If it is, params is assigned to an array with dataArr elements joined with a comma as the separator.
+		* Then, the functionCall is assigned the result of interpolating params into a string with the `explanation` function call.
+		* Finally, assignFunction is called with element, functionCall, and 'onclick' as its arguments.
+		*/
+		if (dataArr.length) {
+			const params = dataArr.join('`,`');
+			const functionCall = `explanation(\`${params}\`)`;
+			assignFunction(element, functionCall, 'onclick');
 		}
 
 		element.innerHTML = img.outerHTML + tooltip.outerHTML;

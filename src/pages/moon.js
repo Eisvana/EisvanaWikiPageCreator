@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Moon page creator. Currently only `galleryExplanationExternal()`.
+ */
+
 function galleryExplanationExternal() {
 	return `There is a preferred order of pictures:
 	<div class='dialog-center'>

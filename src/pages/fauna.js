@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Creature page creator.
+ */
+
 function startupFunctions() {
 	genusDropdown();
 	albumDropdown();
@@ -12,8 +16,8 @@ function startupFunctions() {
 	hideCreaturePrio();
 	bundlePropFunctions();
 	hideAlbumEntry();
-	albumFunctions();
 	noLineBreak();
+	albumFunctions();
 }
 
 const creatureElements = {
@@ -48,7 +52,12 @@ const creatureElementFunctions = {
 }
 assignElementFunctions(creatureElementFunctions);
 
-// sets genus dropdown
+/**
+ * Sets the genus dropdown based on creature data and current ecosystem.
+ *
+ * @function genusDropdown
+ * @returns {void}
+ */
 function genusDropdown() {
 	const creatureData = getCreatureData();
 	const ecosystem = pageData.ecosystem;
@@ -63,7 +72,11 @@ function genusDropdown() {
 	wikiCode(globalElements.input.genusInput);
 }
 
-// generates dropdowns for album names
+/**
+ * Generates dropdowns for album names
+ * @function
+ * @returns {void}
+ */
 function albumDropdown() {
 	const creatureData = getCreatureData();
 	// if civ is GHub, use GHEC instead. Otherwise use the Civ shortname
@@ -85,27 +98,46 @@ function albumDropdown() {
 	storeData(catalogueInput);
 }
 
-// generates additional information sentence
+/**
+ * Generates an additional information sentence based on selected criteria and displays it in a specified HTML element.
+ * @function addInfo
+ * @returns {void}
+ */
 function addInfo() {
+	// get the HTML element where the output will be displayed
 	const outputElement = globalElements.output.addInfo;
 
 	// only accept GHEC as researchteam and construct sentence based on that
 	const chapter = docByResearchteam('GHEC');
+
+	// get the catalogue from the page data
 	const catalogue = pageData.catalogue;
 
+	// if no catalogue is found, hide the output element and return
 	if (!catalogue) {
 		outputElement.style.display = 'none';
 		return;
 	}
+
+	// if a catalogue is found, show the output element
 	outputElement.style.display = ''
 
+	// construct the output sentence based on the catalogue and the chapter
 	const output = '[[' + catalogue + ']]' + chapter
 
+	// display the output sentence in the specified HTML element
 	outputElement.innerText = `Featured in the ${output}`;
+
+	// add a bullet point as a decoration
 	addInfoBullet();
 }
 
-// generates name to use for wikilink
+/**
+ * Generates a name to use for a wikilink.
+ *
+ * @function
+ * @returns {string} - The name generated for the wikilink.
+ */
 function pageName() {
 	const newName = globalElements.input.nameInput.value;
 	const orgName = globalElements.input.oldNameInput.value;
@@ -120,28 +152,37 @@ function pageName() {
 	return name;
 }
 
-// sets produces parm value or dropdown
+/**
+ * Populates the 'Produces' dropdown or text field based on the current genus and ecosystem.
+ *
+ */
 function genusProduces() {
 	const genus = pageData.genus;
 	const creatureData = getCreatureData();
 	const ecosystems = Object.keys(creatureData.ecosystems);
-	const producesElement = globalElements.input.producesInput;
+	const producesInputElement = globalElements.input.producesInput;
 	for (const ecosystem of ecosystems) {
 		if (!Object.keys(creatureData.ecosystems[ecosystem]).includes(genus)) continue;
 
 		const food = creatureData.ecosystems[ecosystem][genus].produces;
-		setDropdownOptions(producesElement, food);
+		setDropdownOptions(producesInputElement, food);
 
 		if (food.length > 1) {
-			hideInput(producesElement, '');
+			hideInput(producesInputElement, '');
 		} else {
-			hideInput(producesElement, 'none');
+			hideInput(producesInputElement, 'none');
 		}
-		wikiCode(producesElement);
+		wikiCode(producesInputElement);
 	}
 }
 
-// hides weight and height of second gender if none is given or equal to first gender
+/**
+ * Hides the weight and height of the second gender if none is given or if it is equal to the first gender.
+ *
+ * @function
+ * @name hideSecGenderProps
+ * @returns {void}
+ */
 function hideSecGenderProps() {
 	const gen1 = pageData.gender;
 	const gen2 = pageData.gender2;
@@ -150,22 +191,31 @@ function hideSecGenderProps() {
 	const gen2Height = globalElements.input.height2Input;
 	const gen2Input = globalElements.input.gender2Input;
 
+	const gen2Props = [gen2Weight, gen2Height];
+
 	if (gen2 && gen1 != gen2) {
-		hideInput(gen2Weight, '');
-		hideInput(gen2Height, '');
+		gen2Props.forEach(prop => hideInput(prop, ''));
 	} else {
-		hideInput(gen2Weight, 'none');
-		hideInput(gen2Height, 'none');
-		gen2Weight.value = ''
-		gen2Height.value = ''
-		gen2Input.value = ''
-		storeData(gen2Weight);
-		storeData(gen2Height);
-		storeData(gen2Input);
+		gen2Props.forEach(prop => hideInput(prop, 'none'));
+		gen2Props.push(gen2Input);
+		gen2Props.forEach(prop => {
+			prop.value = '';
+			storeData(prop);
+		})
 	}
 }
 
-// syncs notes value to the discovery menu notes input or makes visible for certain keywords
+/**
+ * Syncs the `notes` value to the discovery menu notes input or makes it visible for certain keywords.
+ *
+ * @function
+ * @name specialNotes
+ * @returns {void}
+ *
+ * @example
+ * // Example usage:
+ * specialNotes();
+ */
 function specialNotes() {
 	const notes = pageData.notes;
 	const specialNotesElement = globalElements.input.specialNotesInput
@@ -178,7 +228,12 @@ function specialNotes() {
 	storeData(specialNotesElement);
 }
 
-// handles additional observations that don't have the additional observations text
+/**
+ * Handles additional observations that don't have the additional observations text.
+ *
+ * @function
+ * @returns {void}
+ */
 function specialNotesTextFunc() {
 	const notes = pageData.notes;
 	const specialNotes = pageData.addObservation;
@@ -191,7 +246,7 @@ function specialNotesTextFunc() {
 	}
 	const noteText = (() => {
 		if (!specialNotes || specialNotes == notes) {
-			return "'''Additional Observations''': " + notes;
+			return `'''Additional Observations''': ${notes}`;
 		} else {
 			return specialNotes;
 		}
@@ -199,7 +254,12 @@ function specialNotesTextFunc() {
 	addObservationElement.innerText = noteText;
 }
 
-// shows or hides the creature priority radio buttons
+/**
+ * Shows or hides the creature priority radio buttons.
+ *
+ * @function
+ * @global
+ */
 function hideCreaturePrio() {
 	const radio = globalElements.input.gender1;
 	if (pageData.gender2) {
@@ -209,7 +269,11 @@ function hideCreaturePrio() {
 	}
 }
 
-// get text from creature prio radio
+/**
+ * Returns the selected value from the 'creature priority' radio buttons.
+ * @function
+ * @returns {string} The value of the checked radio button.
+ */
 function creaturePrio() {
 	const genderRadios = globalElements.input.gender;
 	for (const radio of genderRadios) {
@@ -217,7 +281,14 @@ function creaturePrio() {
 	}
 }
 
-// provides creature height and weight formatting
+/**
+ * Provides creature height and weight formatting.
+ *
+ * @function
+ * @param {string} property1Name - The name of the first property to format.
+ * @param {string} property2Name - The name of the second property to format.
+ * @returns {void}
+ */
 function genderProps(property1Name, property2Name) {
 	const prioritise = creaturePrio();
 	const gender2 = pageData.gender2;
@@ -257,12 +328,27 @@ function genderProps(property1Name, property2Name) {
 	globalElements.output[property1Name].innerText = result;
 }
 
+/**
+ * Bundles property functions for gender, height, and weight.
+ * @function
+ * @returns {void}
+ */
 function bundlePropFunctions() {
 	genderProps("height", "height2");
 	genderProps("weight", "weight2");
 	genderProps("gender", "gender2");
 }
 
+/**
+ * Hides the album entry and album actions elements on the page based on the presence of pageData.catalogue.
+ * @function
+ * @returns {void}
+ * @description This function modifies the visibility style property of globalElements.output.albumEntry and globalElements.output.albumActions
+ * based on the presence of the pageData.catalogue property. If pageData.catalogue is falsy, then the elements are hidden. Otherwise, they are visible.
+ * @example
+ * // Example usage:
+ * hideAlbumEntry();
+ */
 function hideAlbumEntry() {
 	const displayState = { true: '', false: 'hidden' };
 	const boolString = Boolean(pageData.catalogue).toString();
@@ -271,7 +357,11 @@ function hideAlbumEntry() {
 	globalElements.output.albumActions.style.visibility = display;
 }
 
-// puts primary height into album entry
+/**
+ * This function puts the primary height of an album into the album entry.
+ * @function
+ * @returns {string} Returns the primary height with an "m" appended to it.
+ */
 function albumOtherExternal() {
 	const heights = [pageData.height, pageData.height2];
 	const prio = creaturePrio();
@@ -291,6 +381,12 @@ function albumCivExternal() {
 	return '';
 }
 
+/**
+ * Replaces line breaks in an input element's value with a single space.
+ * Then passes it to wikiCode function to generate wiki code.
+ * @function
+ * @global
+ */
 function noLineBreak() {
 	const element = globalElements.input.dmInput;
 	const dest = element.dataset.destNoauto;
@@ -301,6 +397,13 @@ function noLineBreak() {
 	wikiCode(element, dest);
 }
 
+/**
+ * Generates an array of strings representing the different pages in the gallery.
+ * If pageData.gender2 is defined, the function sets the genders according to the creaturePrio() system.
+ *
+ * @function
+ * @returns {Array<String>} An array of strings representing the different pages in the gallery.
+ */
 function generateGalleryArray() {
 	let gender1, gender2;
 	if (pageData.gender2) {

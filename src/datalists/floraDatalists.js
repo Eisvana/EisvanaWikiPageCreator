@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Provides data for flora datalists
+ */
 (() => {
 	const floraDatalists = {
 		floraNotesData: [

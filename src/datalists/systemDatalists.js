@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Provides data for system datalists
+ */
 (() => {
 	const systemDatalists = {
 		terminal: [

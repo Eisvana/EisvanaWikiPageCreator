@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Provides data for planet datalists
+ */
 function getSentinelData() {
 	const sentinels = {
 		low: [
@@ -805,12 +808,18 @@ function getDescriptorData() {
 		]
 	}
 
+	/**
+	 * Populates `planetDatalists.sentinels` with the data from `getSentinelData()`.
+	 */
 	planetDatalists.sentinels = new Array;
 	const sentinels = getSentinelData();
 	for (const level in sentinels) {
 		planetDatalists.sentinels.push(...sentinels[level]);
 	}
 
+	/**
+	 * Populates `planetDatalists.planetDescriptors` with the unique descriptors in `getDescriptorData()`.
+	 */
 	const descriptors = new Set()
 	const planetDescriptors = getDescriptorData();
 	for (const biome in planetDescriptors) {
@@ -819,8 +828,14 @@ function getDescriptorData() {
 		}
 	}
 
+	/**
+	 * Populates `planetDatalists.resources` with the keys from `getResourceData()`.
+	 */
 	planetDatalists.planetDescriptors = Array.from(descriptors);
 	planetDatalists.resources = Object.keys(getResourceData());
 
+	/**
+	 * Calls `datalists()` with `planetDatalists`.
+	 */
 	datalists(planetDatalists);
 })();

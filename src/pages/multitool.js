@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Multi-Tool page creator.
+ */
+
 function startupFunctions() {
 	locGalaxy();
 	acquirementBundle();
@@ -6,11 +10,11 @@ function startupFunctions() {
 	showSizeDropdown();
 	MTType();
 	bundleNumberStats();
-	albumFunctions();
 	hideLocName();
 	hideSrLocName();
 	locHubNr();
 	hideCost();
+	albumFunctions();
 }
 
 // 1. param: string of all functions to add to the element
@@ -54,14 +58,23 @@ function locHubNr() {
 	globalElements.output.HubNr.innerText = regNr(pageData.region);
 }
 
-// adds region to location sentence
+/**
+ * Adds region to location sentence
+ * @function
+ * @name locGalaxy
+ * @returns {void}
+ */
 function locGalaxy() {
-	const civ = pageData.civShort;
-	const text = HubGal(civ);
-	wikiCode(text, 'locGalaxy');
+	const civ = pageData.civShort; // The civilization short name
+	const text = HubGal(civ); // The location galaxy text
+	wikiCode(text, 'locGalaxy'); // Adds the location galaxy text to the page with the section name 'locGalaxy'
 }
 
-// constructs additional information sentence
+/**
+ * Constructs additional information sentence.
+ * @function
+ * @returns {undefined}
+ */
 function addInfo() {
 	const civ = shortenGHub(pageData.civShort);
 	const researchteam = docByResearchteam('GHSH');
@@ -84,6 +97,13 @@ function addInfo() {
 	globalElements.output.addInfo.innerText = output;
 }
 
+/**
+ * Calculate the appearance of a multi-tool based on pageData and assigns it to a given input element.
+ *
+ * @function
+ * @param {Object} pageData - An object containing multi-tool data such as name, type, and colors.
+ * @param {HTMLElement} input - The input element to assign the calculated appearance to.
+ */
 function appearance() {
 	const name = pageData.name;
 	const type = pageData.type.toLowerCase();
@@ -91,6 +111,7 @@ function appearance() {
 	const colour2 = pageData.secColour;
 	const appearance = globalElements.input.appearanceInput;
 
+	// Handles the case where both colors are empty/undefined
 	if (!(colour1.trim() || colour2.trim())) return;
 
 	const mainColour = (() => {
@@ -103,6 +124,7 @@ function appearance() {
 		return '';
 	})();
 
+	// Constructs the final appearance string and assigns it to the input element.
 	const output = `${name} is ${mainColour} ${type} multi-tool${accentColour}.`;
 	appearance.value = output;
 	wikiCode(appearance);
@@ -110,7 +132,7 @@ function appearance() {
 
 function acquirementAlbumBundle() {
 	acquirement();
-	albumDesc();
+	albumInitialised ? albumDesc() : document.addEventListener('albumLoaded', () => albumDesc());
 }
 
 function acquirementBundle() {
@@ -118,7 +140,14 @@ function acquirementBundle() {
 	acquirementGallery();
 }
 
-// constructs the acquirement sentence
+/**
+ * Constructs the acquirement sentence.
+ *
+ * @function
+ * @name acquirement
+ * @returns {string} The constructed sentence.
+ * @throws Will throw an error if page data is missing.
+ */
 function acquirement() {
 	const srName = pageData.srLocName;				// name of the s/r location (for example a planetname)
 	const planet = pageData.planet;					// planet name of the MT
@@ -164,7 +193,11 @@ function acquirement() {
 	pageData.actualSrLoc = srloc;
 }
 
-// handles acquirement gallery images
+/**
+ * Handles acquisition gallery images, retrieves type and highlights location, and generates code array.
+ * @function
+ * @returns {undefined}
+ */
 function acquirementGallery() {
 	const srName = pageData.srLocName;
 	const srImg = pageData.srPlanetImg || 'nmsMisc_notAvailable.png';
@@ -201,6 +234,13 @@ function acquirementGallery() {
 		return '';
 	})();
 
+	/**
+	 * Fills picture object with image and description.
+	 * @param {Object} obj - An object representing pictures.
+	 * @param {string} img - An image source.
+	 * @param {string} desc - A picture description.
+	 * @returns {undefined}
+	 */
 	function fillPicObj(obj, img, desc) {
 		obj.picName = img;
 		obj.desc = desc;
@@ -234,7 +274,11 @@ function acquirementGallery() {
 	globalElements.output.acquirementGallery.innerHTML = codeArray.join('');
 }
 
-// automatically switches to Sentinel Pillar when Royal is selected
+/**
+ * Automatically switches to Sentinel Pillar when Royal is selected.
+ * @function
+ * @returns {void}
+ */
 function autoRoyal() {
 	const type = pageData.type;
 	const locElement = globalElements.input.locInput;
@@ -270,7 +314,12 @@ function showSizeDropdown() {
 	}
 }
 
-// determine MT type for infobox
+/**
+ * Shows or hides the size dropdown based on the type of page being displayed and the selected size.
+ * @function
+ * @global
+ * @returns {void}
+ */
 function MTType() {
 	const typeElement = globalElements.input.typeInput;
 	const type = typeElement.value;
@@ -299,6 +348,10 @@ function bundleNumberStats() {
 	numberStats(globalElements.input.slotsInput);
 }
 
+/**
+ * Hides location name input fields if the location is in Space.
+ * Otherwise, shows the location name input fields.
+ */
 function hideLocName() {
 	const loc = pageData.location;
 	const idArray = ['planetInput', 'moonInput', 'axesInput'];
@@ -317,6 +370,12 @@ function hideLocName() {
 	}
 }
 
+/**
+ * Hides the input field for the srLoc name if the srLoc includes the word "Space".
+ * Otherwise, shows the input field.
+ *
+ * @function
+ */
 function hideSrLocName() {
 	const srLoc = pageData.srLoc;
 	const srLocNameInput = globalElements.input.srInput;
@@ -329,7 +388,11 @@ function hideSrLocName() {
 	}
 }
 
-// hide cost if Sentinel Pillar is selected (MT is free there)
+/**
+ * Hide cost input element if Sentinel Pillar is selected.
+ * If cost element exists, its `value` property will be emptied and it will fire the `oninput` event.
+ * @function
+ */
 function hideCost() {
 	const location = pageData.location;
 	const costElement = globalElements.input.costInput;
@@ -379,6 +442,16 @@ function albumOtherExternal() {
 	return output;
 }
 
+/**
+ * Returns a string that describes the acquisition status of an album in external mode.
+ *
+ * @function
+ * @returns {string} - A string that describes the acquisition status of an album.
+ *
+ * @property {Object} pageData - An object that holds user input values.
+ * @property {string} pageData.axes - The axes of the MT location.
+ * @property {string} pageData.acquirement - The acquisition instructions of the MT.
+ */
 function albumDescExternal() {
 	const output = (() => {
 		const axes = pageData.axes;
@@ -389,6 +462,12 @@ function albumDescExternal() {
 	return output;
 }
 
+/**
+ * Generates a link for the multi-tool catalog album based on the pageData properties.
+ *
+ * @function
+ * @returns {string} - Link for the multi-tool catalog album.
+ */
 function albumLinkGen() {
 	const civ = shortenGHub(pageData.civShort);
 	const type = pageData.type;
@@ -402,6 +481,15 @@ function albumLinkGen() {
 	return catalogName;
 }
 
+/**
+ * Generates an array of strings to be used in the gallery section on a page.
+ *
+ * @param {void} None
+ * @returns {void} None
+ *
+ * @example
+ * generateGalleryArray();
+ */
 function generateGalleryArray() {
 	const array = [
 		'',

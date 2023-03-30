@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions which can be used by the Organic Frigate page creator.
+ */
+
 function startupFunctions() {
 	numberStats();
 	locHubNr();
@@ -29,13 +33,23 @@ function locHubNr() {
 	globalElements.output.HubNr.innerText = regNr(pageData.region);
 }
 
-// adds region to location sentence
+/**
+ * Adds region to location sentence.
+ * @function
+ * @name locGalaxy
+ * @returns {undefined}
+ */
 function locGalaxy() {
 	const civ = pageData.civShort;
 	const text = HubGal(civ);
 	wikiCode(text, 'locGalaxy');
 }
 
+/**
+ * Adds information to globalElements.output based on pageData.catalogue and research team code.
+ * @function
+ * @returns {void}
+ */
 function addInfo() {
 	const researchteam = docByResearchteam('GHSH');
 	const catalogue = pageData.catalogue;
@@ -43,6 +57,11 @@ function addInfo() {
 	globalElements.output.addInfo.innerText = `[[${catalogue}]]${researchteam}`;
 }
 
+/**
+ * Generates a catalogue of organic frigates based on the civilization data in `pageData`.
+ * @function
+ * @returns {void}
+ */
 function generateCatalogue() {
 	const civShort = pageData.civShort;
 	const civ = pageData.civilized;
@@ -59,27 +78,44 @@ function generateCatalogue() {
 	pageData.catalogue = `${catalogueCiv} Organic Frigate Catalog`;
 }
 
+/**
+ * Sets the appearance of the organic frigate.
+ *
+ * @function appearance
+ * @returns {void}
+ */
 function appearance() {
+	// Extract data from pageData object.
 	const name = pageData.name;
 	const colour1 = pageData.mainColour;
 	const colour2 = pageData.secColour;
 	const tentacles = pageData.tentacles;
+
+	// Get the appearance input from globalElement object.
 	const appearance = globalElements.input.appearanceInput;
 
+	// Return if no colors were provided.
 	if (!(colour1.trim() || colour2.trim() || tentacles.trim())) return;
 
+	// Set the main color with prefix if applicable.
 	const mainColour = (() => {
 		if (colour1.trim()) return `${enPrefix(colour1)} ${colour1.trim()}`;
 		return '';
 	})();
 
+	// Set the accent color.
 	const accentColour = (() => {
 		if (colour2.trim()) return ` with ${colour2} accents`;
 		return '';
 	})();
 
+	// Set the output for the appearance.
 	const output = `${name} is ${mainColour} organic frigate${accentColour} with ${tentacles}.`;
+
+	// Set the value of appearance input to the output.
 	appearance.value = output;
+
+	// Call wikiCode function to update the wiki code.
 	wikiCode(appearance);
 }
 

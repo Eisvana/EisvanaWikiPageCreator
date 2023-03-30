@@ -1,7 +1,18 @@
+/**
+ * @fileoverview Provides functions needed for the gallery to work.
+ */
+
+/**
+ * This function adds a Sortable.js component to the galleryWrapper element,
+ * allowing the user to reorganize the items in the gallery with drag-and-drop.
+ * It checks if the device has a coarse pointer, and if so, it will not load the Sortable.js component.
+ * @global
+ * @param {Object} galleryWrapper - The gallery element where items will be reordered.
+ */
 (() => {
-	if (window.matchMedia('(pointer: coarse)').matches) return;
+	if (window.matchMedia('(pointer: coarse)').matches) return;		// Check if device has coarse pointer
 	const script = document.createElement('script');
-	script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';
+	script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';		// Load Sortable.js library
 	document.head.appendChild(script);
 	script.onload = () => {
 		const galleryWrapper = globalElements.output.galleryItems;
@@ -11,31 +22,44 @@
 			onUpdate: function (evt) { moveItem(evt) },
 		});
 	}
+
+	cachedHTML.files.add(`src/htmlSnippets/galleryInput.html`);
 })();
 
+// Declare and initialize galleryUploadShown boolean
 let galleryUploadShown = false;
-// handles gallery images
-function galleryUpload() {
+
+/**
+* Handles gallery image uploads
+*
+* @async
+* @function
+*/
+async function galleryUpload() {
+	// Get globalElements and set input, inputDiv, wikiCodeGalleryDiv, and errors
 	const inp = globalElements.input.galleryUpload;
 	if (!inp.value) return;
 	const inputDiv = globalElements.output.galleryItems;
 	const wikiCodeGalleryDiv = globalElements.output.galleryCode;
 	const errors = new Array;
+
+	// Loop through each file in inp.files
 	for (const file of inp.files) {
+
+		// Declare and initialize name variable
 		const name = file.name;
+
+		// Check if file is too large, and continue if it is
 		if (file.size > 10000000) {
 			errors.push(name);
 			continue;
 		}
-		const imgUrlData = URL.createObjectURL(file);
+
+		// Get childtree and childIndex, and set dropdownId, wikiCodeGalleryId, and wikiCodeGalleryValueId
 		const childtree = inputDiv.children;
 		const childIndex = getChildIndex(childtree, 'id');
-		const inputId = 'pic' + childIndex;
-		const dropdownId = 'dropdown' + childIndex;
-		const galleryId = 'gallery' + childIndex;
-		const wikiCodeGalleryId = 'wikiCodeGallery' + childIndex;
-		const wikiCodeGalleryValueId = 'wikiCodeGalleryValue' + childIndex;
 
+		// Create nameElement
 		const nameElement = (() => {
 			const p = document.createElement('p');
 			const span = document.createElement('span');
@@ -46,38 +70,33 @@ function galleryUpload() {
 			return p.outerHTML;
 		})();
 
-		const galleryTemplate = `
-		<div id="${galleryId}" class="gallery-item">
-			<a class="gallery-media" href=${imgUrlData} target="_blank" rel="noopener noreferrer">
-				<img src="${imgUrlData}">
-			</a>
-			<div class="gallery-meta">
-				${nameElement}
-				<div><select id="${dropdownId}" onchange="galleryDesc(this,'${inputId}', '${wikiCodeGalleryValueId}')"></select></div>
-				<div><input id="${inputId}" type="text" placeholder="Description" oninput="galleryInput(this,'${wikiCodeGalleryValueId}')" /></div>
-			</div>
-			<div class="controlButtons">
-				<span class="delete-icon is-clickable" title="Remove picture from gallery" onclick="rmGallery(this, '${wikiCodeGalleryId}')">&#10060</span>
-				<img class="handle" src="./assets/vector/arrow.svg" title="Move picture up or down">
-				<button class="button moveButton" title="Move up" onclick="mobileMoveItem(this, '${wikiCodeGalleryId}', 'up')">
-					<svg width="36" height="36"><path d="M2 25h32L18 9 2 25Z"></path></svg>
-				</button>
-				<button class="button moveButton" title="Move down" onclick="mobileMoveItem(this, '${wikiCodeGalleryId}', 'down')">
-					<svg width="36" height="36"><path d="M2 11h32L18 27 2 11Z"></path></svg>
-				</button>
-			</div>
+		// Create replacementStrings object
+		const replacementStrings = {
+			imgUrlData: URL.createObjectURL(file),
+			inputId: 'pic' + childIndex,
+			dropdownId: 'dropdown' + childIndex,
+			galleryId: 'gallery' + childIndex,
+			wikiCodeGalleryId: 'wikiCodeGallery' + childIndex,
+			wikiCodeGalleryValueId: 'wikiCodeGalleryValue' + childIndex,
+			nameElement: nameElement,
+		}
+
+		// Load galleryTemplate using loadHTML function and replacementStrings
+		const galleryTemplate = await loadHTML('src/htmlSnippets/galleryInput.html', replacementStrings);
+
+		// Set wikiCodeGalleryTemplate string
+		const wikiCodeGalleryTemplate = `<div id="${replacementStrings.wikiCodeGalleryId}">
+		<span>${name}</span><output id="${replacementStrings.wikiCodeGalleryValueId}"></output>
 		</div>`;
 
-		inputDiv.insertAdjacentHTML('afterbegin', galleryTemplate);
-
-		const wikiCodeGalleryTemplate = `<div id="${wikiCodeGalleryId}">
-			<span>${name}</span><output id="${wikiCodeGalleryValueId}"></output>
-		</div>`;
-
+		// Add galleryTemplate and wikiCodeGalleryTemplate to respective divs
+		inputDiv.insertAdjacentHTML('afterbegin', galleryTemplate.body.innerHTML);
 		wikiCodeGalleryDiv.insertAdjacentHTML('afterbegin', wikiCodeGalleryTemplate);
 
-		const galleryElement = document.getElementById(dropdownId);
+		// Get galleryElement and generate galleryArray if it exists
+		const galleryElement = document.getElementById(replacementStrings.dropdownId);
 
+		// Set dropdown options or hide element if galleryArray is empty
 		if (typeof generateGalleryArray == 'function') generateGalleryArray();
 
 		const galleryArray = pageData.galleryArray;
@@ -87,12 +106,11 @@ function galleryUpload() {
 			galleryElement.parentElement.style.display = 'none';
 		}
 	}
-	if (errors.length) {
-		errorMessage(inp, `The following files exceed the 10MB upload limit and couldn't be added: ${errors.join(', ')}`)
-	} else {
-		errorMessage(inp);
-	}
 
+	// If errors exist, show error message. Otherwise, clear error message
+	errorMessage(inp, errors.length ? `The following files exceed the 10MB upload limit and couldn't be added:<br>${errors.join(',<br>')}` : null);
+
+	// If galleryUploadShown is true, exit the function. Otherwise, show gallery explanation popup
 	if (galleryUploadShown) return;
 	// the galleryExplanationExternal() function should return string with the popup text. HTML is supported.
 	if (typeof galleryExplanationExternal == 'function') {
@@ -103,7 +121,13 @@ function galleryUpload() {
 	galleryUploadShown = true;
 }
 
-// takes description from gallery dropdown into input field
+/**
+ * Takes the selected description from a dropdown element and inserts it into an input field.
+ *
+ * @param {HTMLInputElement} dropdownElement - The dropdown element that contains the descriptions.
+ * @param {string} inputId - The ID of the input field to insert the selected description.
+ * @param {string} codeId - The ID of the code block to update after inserting the description.
+ */
 function galleryDesc(dropdownElement, inputId, codeId) {
 	const dropdown = dropdownElement.value;
 	const input = document.getElementById(inputId);
@@ -111,24 +135,34 @@ function galleryDesc(dropdownElement, inputId, codeId) {
 	galleryInput(input, codeId);
 }
 
-// adds or removes descriptions from the gallery
+/**
+ * Adds or removes descriptions from the gallery.
+ *
+ * @param {HTMLInputElement} input - The input element containing the description to add or remove
+ * @param {string} galleryId - The ID of the gallery element to modify
+ * @returns {void}
+ */
 function galleryInput(input, galleryId) {
 	const desc = sanitiseString(input.value);
-	if (desc) {
-		document.getElementById(galleryId).innerText = '|' + desc;
-	} else {
-		document.getElementById(galleryId).innerText = '';
-	}
+	document.getElementById(galleryId).innerText = desc ? '|' + desc : '';
 }
 
-// removes gallery row if X is clicked
+/**
+ * Removes a gallery entry when the X button is clicked.
+ * @param {Node} galleryNode - The gallery node to remove from the DOM.
+ * @param {string} wikiCodeGalleryId - The ID of the wiki code gallery node.
+ */
 function rmGallery(galleryNode, wikiCodeGalleryId) {
 	const wikiCodeGalleryNode = document.getElementById(wikiCodeGalleryId);
 	wikiCodeGalleryNode.remove();
 	galleryNode.closest('.gallery-item').remove();
 }
 
-// moves item in gallery and gallery wikicode up or down depending on dragging direction
+/**
+* This function moves the selected item in the gallery up or down depending on the drag direction and updates the gallery wikicode accordingly.
+* @function moveItem
+* @param {Object} evt - The event object containing information about the item that was moved.
+*/
 function moveItem(evt) {
 	const oldIndex = evt.oldIndex;
 	const newIndex = evt.newIndex;
@@ -143,7 +177,13 @@ function moveItem(evt) {
 	document.getElementById('galleryCode').innerHTML = HTML.join('')
 }
 
-// moves item in gallery and gallery wikicode up or down depending on user input
+/**
+ * Moves item in gallery and gallery wikicode up or down depending on user input
+ * @param {HTMLElement} element - The element to move
+ * @param {string} codeId - The ID of the gallery code item
+ * @param {('up'|'down')} direction - The direction to move the element
+ * @returns {void}
+ */
 function mobileMoveItem(element, codeId, direction) {
 	const galleryItem = element.closest('.gallery-item')
 	const galleryCodeItem = document.getElementById(codeId);

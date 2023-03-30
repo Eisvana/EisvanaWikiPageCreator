@@ -1,4 +1,8 @@
 /**
+ * @fileoverview Provides general functions which can be used by all pages.
+ */
+
+/**
  * An object representing discovery regions and their associated systems.
  * @typedef {Object} RegionsObject
  * @property {Object} GHub - The Galactic Hub Project.
@@ -197,6 +201,12 @@ const links = new Object;
 const pageData = new Object;
 
 /**
+ * A object that contains cached HTML snippets.
+ * @type {Object}
+ */
+const cachedHTML = { files: new Set() };
+
+/**
  * Object used to store the current page data and check for data integrity issues.
  * @type {Object}
  * @property {string} text - The current page data, represented as a string.
@@ -301,16 +311,16 @@ function addOutputs() {
 }
 
 /**
- * Updates the globalElements object with the values of the object parameter. The object parameter must be an object with properties that correspond to the sections of the page (e.g. "inputSection", "outputSection", etc.). Each property's value should be an object with properties that correspond to the element IDs within those sections. The value of each of those properties should either be the ID of the element or an array of DOM elements.
- *
- * @param {Object} object - The object whose values will be used to update globalElements.
+ * Updates global elements with values from an object.
+ * @param {Object} object - The object containing values to be updated.
+ * @param {Object} [dom=document] - The document object to use for looking up elements.
  */
-function updateGlobalElements(object) {
+function updateGlobalElements(object, dom = document) {
 	for (const section in object) {
 		for (const element in object[section]) {
 			const dest = object[section][element];
-			const destElements = Array.from(document.getElementsByName(dest));
-			const destElement = document.getElementById(dest);
+			const destElements = Array.from(dom.getElementsByName(dest));
+			const destElement = dom.getElementById(dest);
 			if (destElements.length) {
 				object[section][element] = destElements;
 			} else {
@@ -385,6 +395,17 @@ function startUp() {
 		globalElements.output.albumText.ontouchend = (e) => getSelectedText(e.target);
 		globalElements.output.albumText.onmouseup = (e) => getSelectedText(e.target);
 	}
+	preloadHTML();
+}
+
+/**
+ * Preloads HTML files from the `cachedHTML` object
+ * @function
+ * @returns {void}
+ */
+function preloadHTML() {
+	const files = cachedHTML.files;
+	files.forEach(file => loadHTML(file));
 }
 
 /**
@@ -564,7 +585,10 @@ function wikiCode(element, dest = element.dataset.dest) {
  */
 function getDestElements(dest) {
 	const destElements = Array.from(document.getElementsByName(dest));
-	if (destElements.length == 0) destElements.push(document.getElementById(dest));
+	if (destElements.length == 0) {
+		const element = document.getElementById(dest);
+		if (element) destElements.push(element);
+	}
 	return destElements;
 }
 
@@ -692,7 +716,7 @@ function civ() {
 	pageData.civShort = input;
 	for (const key in civData) {
 		pageData[key] = civData[key];
-		if (document.getElementById(key)) wikiCode(pageData[key], key);
+		if (getDestElements(key).length) wikiCode(pageData[key], key);
 	}
 
 	// Update the research team dropdown and glyph region.
@@ -737,7 +761,10 @@ function sanitiseString(input) {
 	}
 
 	// join sections back together and return trimmed string.
-	const text = outputArray.join('[http').trim();
+	const regex = /\n{3,}/g;					// This regex searches for three or more consecutive new lines.
+	const text = outputArray.join('[http')		// Join the sections together with [http in between.
+		.replace(regex, "\n\n")					// Replace the three or more consecutive new lines with just two new lines.
+		.trim();								// Trim any leading or trailing white space.
 	return text;
 
 
@@ -1537,4 +1564,30 @@ function extractNumber(string) {
 function oddEven(number) {
 	if (number % 2 == 0) return 'even';
 	return 'odd';
+}
+
+/**
+ * Load and parse HTML from a given URL and replace specified variables.
+ * @async
+ * @param {string} url - The URL of the HTML file to load.
+ * @param {Object} [varObj] - An object containing key-value pairs to replace in the loaded HTML.
+ * @returns {Promise<Document>} - A promise that resolves with the parsed HTML DOM of the loaded file.
+ * The loaded HTML is cached in the `cachedHTML` object to improve performance on subsequent calls.
+ */
+async function loadHTML(url, varObj = {}) {
+	let html = await (async () => {
+		if (cachedHTML[url]) return cachedHTML[url];
+
+		const response = await fetch(url);
+		const html = await response.text();
+		cachedHTML[url] = html;		// Add returned value to cachedHTML object
+		return html;
+	})();
+
+	for (const variable in varObj) {
+		html = html.replaceAll('${' + variable + '}', varObj[variable]);
+	}
+	const parser = new DOMParser();
+	const dom = parser.parseFromString(html, 'text/html');
+	return dom;
 }

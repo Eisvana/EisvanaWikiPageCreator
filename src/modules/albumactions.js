@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides functions needed for the album actions (copy album code, open album...) to work.
+ */
+
 // The logic for calculating the link target should be done by the main JS file of the page
 const albumElements = {
 	output: {
@@ -13,37 +17,68 @@ const albumElements = {
 		albumText: 'albumText',
 		albumDesc: 'albumDesc'
 	}
-};		// this semicolon is necessary, otherwise the code throws an error
+}
 
-(() => {
-	const wikitext = `<h3 class="title is-5 has-text-left has-text-weight-bold mb-2"><output id="albumCiv"></output>
-<output id="album" name="type"></output> <output id="albumType"></output> entry for <output id='albumHeaderName' name="name"></output>:
-</h3>
-<div id="albumText" class="wikiText">
-| {{album| file=<output name="image" id="albumImage"></output> | name=[[<output id="albumName"></output>]]
-| other=<output id="albumOther"></output> | glyph=<output id='albumGlyphs' name="portalglyphs"></output> |
-<output id="albumDiscoverer"></output>}} <output id="albumDesc"></output>
-</div>`
+let albumInitialised = false;
 
+/**
+ * Asynchronous IIFE that loads album HTML and assigns element functions.
+ * @returns {Promise<void>}
+ */
+(async () => {
+	/**
+	 * Represents the album HTML code.
+	 * @type {HTMLHtmlElement}
+	 */
+	const wikitext = await loadHTML('src/htmlSnippets/album.html');
+
+	/**
+	 * Represents the album actions HTML code.
+	 * @type {string}
+	 */
 	const actions = `<button id="albumBtn" class="button is-outlined is-primary"
-onclick="copyCode(this, 'albumText')">
-Copy album wikicode
-</button>
-<a class="button is-outlined is-primary" id="albumLink"
-onclick="albumLink(this)">
-Open Album
-</a>`
-	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext;
+		onclick="copyCode(this, 'albumText')">
+		Copy album wikicode
+		</button>
+		<a class="button is-outlined is-primary" id="albumLink"
+		onclick="albumLink(this)">
+		Open Album
+		</a>`
+	// If the global albumEntry element exists, set its innerHTML to the wikitext.
+	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext.body.innerHTML;
+
+	// If the global albumActions element exists, set its innerHTML to the actions.
 	if (globalElements.output.albumActions) globalElements.output.albumActions.innerHTML = actions;
+
+	// Update the global albumElements with their respective IDs.
 	updateGlobalElements(albumElements);
 
+	/**
+	 * Object containing functions that act upon album-related HTML elements.
+	 * @type {Object.<string, Array.<string|function|null|boolean>>}
+	 */
 	const albumElementFunctions = {
 		civ: ['albumCiv()', null, true],
 	}
+	// Assign albumElementFunctions to their respective HTML elements.
 	assignElementFunctions(albumElementFunctions);
+
+	// Dispatches the albumLoaded event to notify that the IIFE has completed.
+	document.dispatchEvent(new Event('albumLoaded'));
+
+	/**
+	 * Boolean flag indicating that the album has been initialised.
+	 * @type {boolean}
+	 */
+	albumInitialised = true;
 })();
 
-// expects external 'albumLinkGen()' function which returns the PAGENAME of the album
+/**
+ * Assigns a link to given element based on the album's PAGENAME.
+ * Expects external 'albumLinkGen()' function which returns the PAGENAME of the album.
+ * @param {Element} element - The element to assign the link to.
+ * @returns {void}
+ */
 function albumLink(element) {
 	element.style.pointerEvents = 'none';
 	const catalogue = (() => {
@@ -59,10 +94,16 @@ function albumLink(element) {
 	if (catalogue) assignLink(element, wikiLink + catalogue);
 }
 
-// these functions can be overwritten using by chaining "External" behind their name.
-// the external function should return the value that should go into the field.
+/**
+ * These functions can be overwritten using by chaining "External" behind their name.
+ * The external function should return the value that should go into the field.
+ */
 
-// the part directly behind the civ in the heading
+/**
+ * Sets the output value for the album item type (the part directly behind the civ in the heading).
+ * @function
+ * @returns {string} The type of album item.
+ */
 function albumItemType() {
 	const output = (() => {
 		if (typeof albumItemTypeExternal == 'function') {
@@ -74,7 +115,13 @@ function albumItemType() {
 	globalElements.output.album.innerText = output;
 }
 
-// this is after the album macro, used for MT pages
+/**
+ * Updates the album description element on MT pages (after the album macro, used for MT pages).
+ *
+ * @function
+ * @name albumDesc
+ * @returns {undefined}
+ */
 function albumDesc() {
 	const output = (() => {
 		if (typeof albumDescExternal == 'function') {
@@ -86,7 +133,16 @@ function albumDesc() {
 	globalElements.output.albumDesc.innerText = output;
 }
 
-// discoverer in the album
+/**
+ * A function that retrieves information about the discoverer of an album.
+ *
+ * @function
+ * @return {string} - Returns the discoverer of an album, or a link to the wiki page if available.
+ * @example
+ *
+ * // Sample usage
+ * albumDiscoverer();
+ */
 function albumDiscoverer() {
 	const output = (() => {
 		if (typeof albumDiscovererExternal == 'function') {
@@ -104,7 +160,12 @@ function albumDiscoverer() {
 	globalElements.output.albumDiscoverer.innerText = output;
 }
 
-// name of civ in the heading
+/**
+ * Sets the name of the civilization in the heading.
+ * @function
+ * @name albumCiv
+ * @returns {void}
+ */
 function albumCiv() {
 	const output = (() => {
 		if (typeof albumCivExternal == 'function') {
@@ -116,7 +177,12 @@ function albumCiv() {
 	globalElements.output.albumCiv.innerText = output;
 }
 
-// name of the object in the album
+/**
+ * Sets the name of the album in the global output element.
+ *
+ * @function
+ * @returns {void}
+ */
 function albumName() {
 	const output = (() => {
 		if ((typeof albumNameExternal == 'function')) {
@@ -128,7 +194,10 @@ function albumName() {
 	globalElements.output.albumName.innerText = output;
 }
 
-// "other" parm in the album
+/**
+ * Populates the "other" parameter in the album.
+ * @returns {void}
+ */
 function albumOther() {
 	const output = (() => {
 		if (typeof albumOtherExternal == 'function') {
@@ -140,7 +209,11 @@ function albumOther() {
 	globalElements.output.albumOther.innerText = output;
 }
 
-// third part in the heading, before the "entry"
+/**
+ * Sets the album type in the heading before the "entry".
+ * @function
+ * @returns {string} The album type.
+ */
 function albumType() {
 	const output = (() => {
 		if (typeof albumTypeExternal == 'function') {
@@ -152,13 +225,45 @@ function albumType() {
 	globalElements.output.albumType.innerText = output;
 }
 
-// wrap all functions from above into one so it can be easier called on pageload
+/**
+ * Updates the album data in the UI based on the page data.
+ */
+function updateAlbumData() {
+	const dataLinks = {
+		albumHeaderName: 'name',
+		albumImage: 'image',
+		albumGlyphs: 'portalglyphs'
+	};
+	for (const id in dataLinks) {
+		const element = globalElements.output[id];
+		element.innerText = pageData[dataLinks[id]];
+	}
+}
+
+/**
+ * This function contains several sub-functions which are called only when the album is completely loaded. If the album is already loaded, then the sub-functions will execute immediately. If not, the function listens for the 'albumLoaded' event to trigger and then executes the sub-functions.
+ *
+ * @function
+ * @name albumFunctions
+ * @returns {void}
+ */
 function albumFunctions() {
-	albumCiv();
-	albumDiscoverer();
-	albumName();
-	albumOther();
-	albumType();
-	albumItemType();
-	albumDesc();
+	albumInitialised ? albumData() : document.addEventListener('albumLoaded', () => albumData());
+
+	/**
+	 * Calls all functions related to album creation and updating.
+	 * @function
+	 * @name albumData
+	 * @returns {void}
+	 */
+	function albumData() {
+		updateAlbumData();
+		albumCiv();
+		albumDiscoverer();
+		albumName();
+		albumOther();
+		albumType();
+		albumItemType();
+		albumDesc();
+	}
 }
