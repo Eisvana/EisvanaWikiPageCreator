@@ -233,15 +233,15 @@ function albumType() {
  * @returns {void}
  */
 function albumFunctions() {
-	albumInitialised ? functions() : document.addEventListener('album_IIFE_end', () => functions());
+	albumInitialised ? albumData() : document.addEventListener('album_IIFE_end', () => albumData());
 
 	/**
-	 * Calls all functions related to album creation.
+	 * Calls all functions related to album creation and updating.
 	 * @function
-	 * @name functions
+	 * @name albumData
 	 * @returns {void}
 	 */
-	const functions = () => {
+	const albumData = () => {
 		albumCiv();
 		albumDiscoverer();
 		albumName();
