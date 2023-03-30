@@ -1572,7 +1572,7 @@ function oddEven(number) {
  * @param {string} url - The URL of the HTML file to load.
  * @param {Object} [varObj] - An object containing key-value pairs to replace in the loaded HTML.
  * @returns {Promise<Document>} - A promise that resolves with the parsed HTML DOM of the loaded file.
- * @note The loaded HTML is cached in the `cachedHTML` object to improve performance on subsequent calls.
+ * The loaded HTML is cached in the `cachedHTML` object to improve performance on subsequent calls.
  */
 async function loadHTML(url, varObj = {}) {
 	let html = await (async () => {
