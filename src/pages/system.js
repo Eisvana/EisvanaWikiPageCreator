@@ -59,8 +59,6 @@ assignElementFunctions(systemElementFunctions);
  */
 (() => {
 	const files = [
-		'planetInputs',
-		'planetOutputs',
 		'tradeableInputs'
 	]
 	for (const file of files) {

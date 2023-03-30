@@ -16,8 +16,8 @@ function startupFunctions() {
 	hideCreaturePrio();
 	bundlePropFunctions();
 	hideAlbumEntry();
-	albumFunctions();
 	noLineBreak();
+	albumFunctions();
 }
 
 const creatureElements = {

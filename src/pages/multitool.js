@@ -132,7 +132,7 @@ function appearance() {
 
 function acquirementAlbumBundle() {
 	acquirement();
-	albumInitialised ? albumDesc() : document.addEventListener('album_IIFE_end', () => albumDesc());
+	albumInitialised ? albumDesc() : document.addEventListener('albumLoaded', () => albumDesc());
 }
 
 function acquirementBundle() {

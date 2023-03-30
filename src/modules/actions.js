@@ -15,8 +15,8 @@
 	const actions = `
 	<button class="button is-outlined is-primary" id="copy" type="button" onclick="copyCode(this, 'fullArticle')">Copy wikicode</button>
 	<a class="button is-outlined is-primary" id="download" onclick="downloadFile(this)">Download file</a>
-	<a class="button is-outlined is-primary" id="create" onclick="createPage(this)">Create page</a>
 	<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload pictures</a>
+	<a class="button is-outlined is-primary" id="create" onclick="createPage(this)">Create page</a>
 	<button class="button is-warning" id="reset" type="reset" onclick="reset()">Reset inputs</button>`;
 
 	// Adds a note reminding the user to upload any images they have added.

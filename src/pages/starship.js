@@ -11,8 +11,8 @@ function startupFunctions() {
 	loc();
 	addInfo();
 	appearanceDropdowns();
-	albumFunctions();
 	enPrefix(globalElements.input.typeInput.value, "enPrefix");
+	albumFunctions();
 }
 
 const starshipElements = {

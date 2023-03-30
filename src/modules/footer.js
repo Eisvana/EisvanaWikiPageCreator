@@ -2,6 +2,13 @@
  * @fileoverview Generates the footer and handles theming, as well as user defined global default values.
  */
 
+// custom global settings
+const footerElements = {
+	input: {
+		settings: 'settings',
+	}
+};
+
 /**
  * Determines the user's theme preference and applies it to the footer of the current HTML document.
  * @async
@@ -43,40 +50,11 @@
 	} else {
 		globalElements.output.footer.innerHTML = footerHTML;
 	}
-})();
 
-/**
- * Changes the theme of the page and sets a localStorage variable to track the theme between page loads.
- * @function
- * @returns {void}
- */
-function switchTheme() {
-	document.documentElement.dataset.transition = 'true';
-	if (localStorage.getItem('theme') == 'light') {
-		localStorage.setItem('theme', 'dark');
-		document.documentElement.dataset.theme = 'dark';
-	} else {
-		localStorage.setItem('theme', 'light');
-		document.documentElement.dataset.theme = 'light';
-	}
+	/**
+	 * Set up footer dialog elements and define internal logic.
+	 */
 
-	// adding delay to allow the CSS transition to complete. This is only for Chrome, Firefox would work with any timeout (even 0) #chromesucks
-	setTimeout(() => {
-		delete document.documentElement.dataset.transition;
-	}, 400);
-}
-
-// custom global settings
-const footerElements = {
-	input: {
-		settings: 'settings',
-	}
-};
-
-/**
- * Immediately invoked function expression to set up footer dialog elements and define internal logic.
- */
-(() => {
 	/**
 	 * NodeList of input elements inside the footer dialog's "data" container.
 	 *
@@ -121,6 +99,26 @@ const footerElements = {
 	assignElementFunctions(settingsElementFunctions);
 })();
 
+/**
+ * Changes the theme of the page and sets a localStorage variable to track the theme between page loads.
+ * @function
+ * @returns {void}
+ */
+function switchTheme() {
+	document.documentElement.dataset.transition = 'true';
+	if (localStorage.getItem('theme') == 'light') {
+		localStorage.setItem('theme', 'dark');
+		document.documentElement.dataset.theme = 'dark';
+	} else {
+		localStorage.setItem('theme', 'light');
+		document.documentElement.dataset.theme = 'light';
+	}
+
+	// adding delay to allow the CSS transition to complete. This is only for Chrome, Firefox would work with any timeout (even 0) #chromesucks
+	setTimeout(() => {
+		delete document.documentElement.dataset.transition;
+	}, 400);
+}
 
 /**
  * Displays the settings modal and restores default values.

@@ -17,7 +17,7 @@ const albumElements = {
 		albumText: 'albumText',
 		albumDesc: 'albumDesc'
 	}
-};		// this semicolon is necessary, otherwise the code throws an error
+}
 
 let albumInitialised = false;
 
@@ -37,13 +37,13 @@ let albumInitialised = false;
 	 * @type {string}
 	 */
 	const actions = `<button id="albumBtn" class="button is-outlined is-primary"
-onclick="copyCode(this, 'albumText')">
-Copy album wikicode
-</button>
-<a class="button is-outlined is-primary" id="albumLink"
-onclick="albumLink(this)">
-Open Album
-</a>`
+		onclick="copyCode(this, 'albumText')">
+		Copy album wikicode
+		</button>
+		<a class="button is-outlined is-primary" id="albumLink"
+		onclick="albumLink(this)">
+		Open Album
+		</a>`
 	// If the global albumEntry element exists, set its innerHTML to the wikitext.
 	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext.body.innerHTML;
 
@@ -63,8 +63,8 @@ Open Album
 	// Assign albumElementFunctions to their respective HTML elements.
 	assignElementFunctions(albumElementFunctions);
 
-	// Dispatches the album_IIFE_end event to notify that the IIFE has completed.
-	document.dispatchEvent(new Event('album_IIFE_end'));
+	// Dispatches the albumLoaded event to notify that the IIFE has completed.
+	document.dispatchEvent(new Event('albumLoaded'));
 
 	/**
 	 * Boolean flag indicating that the album has been initialised.
@@ -226,14 +226,29 @@ function albumType() {
 }
 
 /**
- * This function contains several sub-functions which are called only when the album is completely loaded. If the album is already loaded, then the sub-functions will execute immediately. If not, the function listens for the 'album_IIFE_end' event to trigger and then executes the sub-functions.
+ * Updates the album data in the UI based on the page data.
+ */
+function updateAlbumData() {
+	const dataLinks = {
+		albumHeaderName: 'name',
+		albumImage: 'image',
+		albumGlyphs: 'portalglyphs'
+	};
+	for (const id in dataLinks) {
+		const element = globalElements.output[id];
+		element.innerText = pageData[dataLinks[id]];
+	}
+}
+
+/**
+ * This function contains several sub-functions which are called only when the album is completely loaded. If the album is already loaded, then the sub-functions will execute immediately. If not, the function listens for the 'albumLoaded' event to trigger and then executes the sub-functions.
  *
  * @function
  * @name albumFunctions
  * @returns {void}
  */
 function albumFunctions() {
-	albumInitialised ? albumData() : document.addEventListener('album_IIFE_end', () => albumData());
+	albumInitialised ? albumData() : document.addEventListener('albumLoaded', () => albumData());
 
 	/**
 	 * Calls all functions related to album creation and updating.
@@ -241,7 +256,8 @@ function albumFunctions() {
 	 * @name albumData
 	 * @returns {void}
 	 */
-	const albumData = () => {
+	function albumData() {
+		updateAlbumData();
 		albumCiv();
 		albumDiscoverer();
 		albumName();
