@@ -348,7 +348,7 @@
 			'Nibbles at shoots',
 			'Tall grasses',
 			'[[Marrow Bulb|Cave marrow]]',
-			'Mordite roots',
+			'[[Mordite Root|Mordite roots]]',
 			'[[Faecium]]',
 			'[[Coprite]]',
 			'Well-Matured Dung',
