@@ -144,6 +144,7 @@ Object.freeze(regions);
  * @constant
  */
 const versions = [
+	'Interceptor',
 	'Fractal',
 	'Waypoint',
 	'Endurance',
