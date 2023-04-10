@@ -1422,6 +1422,7 @@ function preventCopy() {
 	const error = checkDataIntegrity(true);
 	if (error) {
 		explanation('Missing/Incorrect Data', error);
+		enableTextMarking();
 	}
 }
 
