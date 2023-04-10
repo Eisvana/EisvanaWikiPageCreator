@@ -273,6 +273,19 @@
 							data-dest-checkbox="water">
 					</div>
 					<div class="tableCell text">
+						<label for="waterInput">Dissonant system?</label>
+						<span class="tooltip">
+							<data>Found in the galaxy map. If it doesn't display "Dissonant", it is not dissonant.</data>
+							<data>Dissonant</data>
+							<data>Found in the galaxy map. If it doesn't display "Dissonant", don't check the box.</data>
+							<data>./assets/bitmap/system/dissonant.jpg</data>
+						</span>
+					</div>
+					<div class="tableCell data">
+						<input type="checkbox" id="dissonantInput" value="Yes" data-checkbox-unchecked="No"
+							data-dest-checkbox="dissonant">
+					</div>
+					<div class="tableCell text">
 						<label>System Faction:</label>
 						<span class="tooltip">
 							<data>Found in the expanded view of the galaxy map. If it doesn't display anything, it's
@@ -940,6 +953,7 @@
 					<div>| planet = <output id="planet"></output></div>
 					<div>| moon = <output id="moon"></output></div>
 					<div>| water = <output id="water"></output></div>
+					<div>| dissonant = <output id="dissonant"></output></div>
 					<div>| faction = <output id="faction"></output></div>
 					<div>| economy = <output id="economy"></output></div>
 					<div>| economysell = <output id="economysell"></output></div>
