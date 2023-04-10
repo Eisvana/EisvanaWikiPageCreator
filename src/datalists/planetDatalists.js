@@ -43,6 +43,15 @@ function getSentinelData() {
 			'Malicious',
 			'Threatening',
 			'Zealous',
+		],
+		corrupted: [
+			'Corrupted',
+			'Forsaken',
+			'Rebellious',
+			'Answer To None',
+			'Sharded from the Atlas',
+			'Dissonant',
+			'De-Harmonised',
 		]
 	}
 	return sentinels;
