@@ -314,7 +314,6 @@ function addOutputs() {
 /**
  * Updates global elements with values from an object.
  * @param {Object} object - The object containing values to be updated.
- * @param {Object} [dom=document] - The document object to use for looking up elements.
  */
 function updateGlobalElements(object) {
 	for (const section in object) {
