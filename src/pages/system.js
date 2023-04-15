@@ -192,22 +192,22 @@ async function planetInputs() {
 			assignFunction(input, 'forceDatalist(this)', 'onchange');
 		}
 
-		// updates global elements with new output elements
-		const resourceOutputs = { output: {} };
-		const outputs = outputDom.querySelectorAll(`output`);
-		for (const output of outputs) {
-			const id = output.id;
-			resourceOutputs.output[id] = id;
-		}
-		updateGlobalElements(resourceOutputs, outputDom);
-
-		// updates the biome links for the new planet section
-		biomeLinks(inputDom.getElementById(`biome_input${i}`));
-
 		addAllTooltips(inputDom);
 
 		inputTarget.insertAdjacentHTML('beforebegin', inputDom.body.innerHTML);
 		outputTarget.insertAdjacentHTML('beforeend', outputDom.body.innerHTML);
+
+		// updates global elements with new output elements
+		const resourceOutputs = { output: {} };
+		const outputs = document.querySelectorAll(`#body${i} output`);
+		for (const output of outputs) {
+			const id = output.id;
+			resourceOutputs.output[id] = id;
+		}
+		updateGlobalElements(resourceOutputs);
+
+		// updates the biome links for the new planet section
+		biomeLinks(inputDom.getElementById(`biome_input${i}`));
 
 		// adds resource input elements to the new planet section
 		const resourceButton = document.getElementById(`addResourceButton${i}`);

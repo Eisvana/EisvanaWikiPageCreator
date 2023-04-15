@@ -314,14 +314,13 @@ function addOutputs() {
 /**
  * Updates global elements with values from an object.
  * @param {Object} object - The object containing values to be updated.
- * @param {Object} [dom=document] - The document object to use for looking up elements.
  */
-function updateGlobalElements(object, dom = document) {
+function updateGlobalElements(object) {
 	for (const section in object) {
 		for (const element in object[section]) {
 			const dest = object[section][element];
-			const destElements = Array.from(dom.getElementsByName(dest));
-			const destElement = dom.getElementById(dest);
+			const destElements = Array.from(document.getElementsByName(dest));
+			const destElement = document.getElementById(dest);
 			if (destElements.length) {
 				object[section][element] = destElements;
 			} else {
@@ -1422,6 +1421,7 @@ function preventCopy() {
 	const error = checkDataIntegrity(true);
 	if (error) {
 		explanation('Missing/Incorrect Data', error);
+		enableTextMarking();
 	}
 }
 
