@@ -6,7 +6,7 @@ function startupFunctions() {
 	locGalaxy();
 	acquirementBundle();
 	addInfo();
-	autoRoyal();
+	autoMTType();
 	showSizeDropdown();
 	MTType();
 	bundleNumberStats();
@@ -23,10 +23,10 @@ function startupFunctions() {
 const MTElementFunctions = {
 	nameInput: ['albumName(); appearance()'],
 	civ: ['locGalaxy(); addInfo(); appearance(); locHubNr()', null, true],
-	typeInput: ['addInfo(); appearance(); autoRoyal(); showSizeDropdown(); MTType(); albumItemType(); albumOther()', null, true],
+	typeInput: ['addInfo(); appearance(); autoMTType(); showSizeDropdown(); MTType(); albumItemType(); albumOther()', null, true],
 	sizeInput: ['showSizeDropdown(); MTType(); albumOther()'],
 	researchTeam: ['addInfo()', null, true],
-	locInput: ['acquirementBundle(); hideLocName(); hideCost()'],
+	locInput: ['acquirementBundle(); hideLocName(); hideCost(); autoSentinel(this)'],
 	srlocInput: ['acquirementBundle(); hideSrLocName()'],
 	srInput: ['acquirementBundle()'],
 	planetInput: ['acquirementBundle()'],
@@ -279,18 +279,24 @@ function acquirementGallery() {
  * @function
  * @returns {void}
  */
-function autoRoyal() {
+function autoMTType() {
 	const type = pageData.type;
 	const locElement = globalElements.input.locInput;
 
-	if (type == 'Royal') {
+	const locsByType = {
+		Royal: 'Sentinel Pillar',
+		Sentinel: 'Harmonic Camp',
+	}
+
+	if (type in locsByType) {
 		hideInput(locElement, 'none');
-		locElement.value = 'Sentinel Pillar';
+		locElement.value = locsByType[type];
 		wikiCode(locElement);
 	} else {
 		hideInput(locElement, '');
 	}
 	hideCost();
+	hideAddons();
 	acquirementGallery();
 }
 
@@ -306,7 +312,7 @@ function showSizeDropdown() {
 	}
 	if (type == 'Experimental' && size == 'SMG') sizeInput.value = 'Pistol';
 
-	const hideSize = ['Royal', 'Starter Pistol'];
+	const hideSize = ['Royal', 'Starter Pistol', 'Sentinel'];
 	if (hideSize.includes(type)) {
 		hideInput(sizeInput, 'none');
 	} else {
@@ -396,13 +402,62 @@ function hideSrLocName() {
 function hideCost() {
 	const location = pageData.location;
 	const costElement = globalElements.input.costInput;
-	if (location == 'Sentinel Pillar') {
+	if (location == 'Sentinel Pillar' || location == 'Harmonic Camp') {
 		hideInput(costElement, 'none');
 		costElement.value = '';
 		costElement.oninput();
 	} else {
 		hideInput(costElement, '');
 	}
+}
+
+/**
+ * Hides the crystal addons input box if the page type is 'Royal' or 'Sentinel'
+ * @function
+ * @returns {void}
+ */
+function hideAddons() {
+	// Gets the page type from the pageData object
+	const type = pageData.type;
+
+	// Gets the crystal addons input box element
+	const addonInput = globalElements.input.crystalsInput;
+
+	// If the MT type is 'Royal' or 'Sentinel'
+	if (type == 'Royal' || type == 'Sentinel') {
+		// Gets all checkboxes in the same container as the addonInput
+		const checkboxes = addonInput.closest('.checkboxes').querySelectorAll('input[type="checkbox"]');
+
+		// Hides the addonInput box
+
+		hideInput(addonInput, 'none');
+		// Unchecks all checkboxes and triggers their onchange event
+		checkboxes.forEach(checkbox => {
+			checkbox.checked = false;
+			checkbox.onchange();
+		})
+		// If the MT type is not 'Royal' or 'Sentinel'
+	} else {
+		// Shows the addonInput box
+		hideInput(addonInput, '');
+	}
+}
+
+/**
+ * Automatically sets the type input of a global element to 'Sentinel'
+ * and hides certain input elements depending on the value of 'input'.
+ *
+ * @function
+ * @param {object} input - The input element to be checked.
+ * @returns {undefined}
+ */
+function autoSentinel(input) {
+	if (input.value != 'Harmonic Camp') return;
+	const typeInput = globalElements.input.typeInput;
+	typeInput.value = 'Sentinel';
+	typeInput.onchange();
+	hideInput(typeInput, 'none');
+	hideInput(input, '');
 }
 
 function galleryExplanationExternal() {
