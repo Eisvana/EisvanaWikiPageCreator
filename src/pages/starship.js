@@ -71,7 +71,7 @@ function getShipData() {
 	 * @property {string} Freighter.techslots.Large - The number of tech slots of large Freighter ships.
 	 * @property {string[]} Freighter.subtypes - The different subtypes of Freighter ships.
 	 * @property {string[]} Freighter.secParts - The different secondary parts for Freighter ships.
-	 * @propety {string[]} Freighter.accessories - The different accessories for Freighter ships.
+	 * @property {string[]} Freighter.accessories - The different accessories for Freighter ships.
 	 * @property {string[]} Freighter.miscParts - The different miscellaneous parts for Freighter ships.
 	 * @property {Object} Freighter.sections - The different sections of the Freighter ship builder.
 	 * @property {string[]} Freighter.sections.subtypeInput - Controls the visibility of subtype input.
