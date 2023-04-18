@@ -79,16 +79,16 @@ function addInfo() {
 	const civ = shortenGHub(pageData.civShort);
 	const researchteam = docByResearchteam('GHSH');
 	const type = (() => {
-		const preType = pageData.type;		// Alien/Experimental/Starter Pistol/Standard/Royal
+		const preType = pageData.type;		// Alien/Experimental/Starter Pistol/Standard/Royal/Sentinel
 		if (preType == 'Standard') return 'Standard Multi-Tool';
 		return preType;
 	})();
 
 	const catalogue = (() => {
-		if (civ != 'CalHub') {
-			return `${civ} Multi-Tool Catalog - ${type}`;
-		} else {
+		if (civ == 'CalHub') {
 			return `${civ} Multi-Tool Catalog`;
+		} else {
+			return `${civ} Multi-Tool Catalog - ${type}`;
 		}
 	})();
 
@@ -489,7 +489,8 @@ function albumOtherExternal() {
 	function catalogMTType() {
 		const type = pageData.type;
 		const size = pageData.size;
-		if (type == 'Royal' || type == 'Starter Pistol') return '';
+		const noSize = ['Royal', 'Starter Pistol', 'Sentinel']
+		if (noSize.includes(type)) return '';
 		return size + ' -';
 	}
 
@@ -511,7 +512,7 @@ function albumDescExternal() {
 	const output = (() => {
 		const axes = pageData.axes;
 		const sentence = pageData.acquirement.replace('Save and reload', 'S/r');
-		if (axes && !validateCoords(false)) return sentence.replace(pageData.axes, `(${pageData.axes})`);
+		if (axes && !validateCoords(false)) return sentence.replace(/[()]/g, '').replace(axes, `(${axes})`);
 		return sentence;
 	})();
 	return output;

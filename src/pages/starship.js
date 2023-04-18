@@ -749,11 +749,12 @@ function albumOtherExternal() {
 	let prop1 = economy;
 	let prop2 = '';
 	switch (type) {
-		case "Freighter":
+		case 'Freighter':
 			prop2 = faction;
 			break;
 
-		case "Living Ship":
+		case 'Interceptor':
+		case 'Living Ship':
 			prop1 = loc;
 			prop2 = axes;
 			break;
