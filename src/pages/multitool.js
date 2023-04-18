@@ -6,7 +6,7 @@ function startupFunctions() {
 	locGalaxy();
 	acquirementBundle();
 	addInfo();
-	autoRoyal();
+	autoMTType();
 	showSizeDropdown();
 	MTType();
 	bundleNumberStats();
@@ -23,10 +23,10 @@ function startupFunctions() {
 const MTElementFunctions = {
 	nameInput: ['albumName(); appearance()'],
 	civ: ['locGalaxy(); addInfo(); appearance(); locHubNr()', null, true],
-	typeInput: ['addInfo(); appearance(); autoRoyal(); showSizeDropdown(); MTType(); albumItemType(); albumOther()', null, true],
+	typeInput: ['addInfo(); appearance(); autoMTType(); showSizeDropdown(); MTType(); albumItemType(); albumOther()', null, true],
 	sizeInput: ['showSizeDropdown(); MTType(); albumOther()'],
 	researchTeam: ['addInfo()', null, true],
-	locInput: ['acquirementBundle(); hideLocName(); hideCost()'],
+	locInput: ['acquirementBundle(); hideLocName(); hideCost(); autoSentinel(this)'],
 	srlocInput: ['acquirementBundle(); hideSrLocName()'],
 	srInput: ['acquirementBundle()'],
 	planetInput: ['acquirementBundle()'],
@@ -79,16 +79,16 @@ function addInfo() {
 	const civ = shortenGHub(pageData.civShort);
 	const researchteam = docByResearchteam('GHSH');
 	const type = (() => {
-		const preType = pageData.type;		// Alien/Experimental/Starter Pistol/Standard/Royal
+		const preType = pageData.type;		// Alien/Experimental/Starter Pistol/Standard/Royal/Sentinel
 		if (preType == 'Standard') return 'Standard Multi-Tool';
 		return preType;
 	})();
 
 	const catalogue = (() => {
-		if (civ != 'CalHub') {
-			return `${civ} Multi-Tool Catalog - ${type}`;
-		} else {
+		if (civ == 'CalHub') {
 			return `${civ} Multi-Tool Catalog`;
+		} else {
+			return `${civ} Multi-Tool Catalog - ${type}`;
 		}
 	})();
 
@@ -279,18 +279,24 @@ function acquirementGallery() {
  * @function
  * @returns {void}
  */
-function autoRoyal() {
+function autoMTType() {
 	const type = pageData.type;
 	const locElement = globalElements.input.locInput;
 
-	if (type == 'Royal') {
+	const locsByType = {
+		Royal: 'Sentinel Pillar',
+		Sentinel: 'Harmonic Camp',
+	}
+
+	if (type in locsByType) {
 		hideInput(locElement, 'none');
-		locElement.value = 'Sentinel Pillar';
+		locElement.value = locsByType[type];
 		wikiCode(locElement);
 	} else {
 		hideInput(locElement, '');
 	}
 	hideCost();
+	hideAddons();
 	acquirementGallery();
 }
 
@@ -306,7 +312,7 @@ function showSizeDropdown() {
 	}
 	if (type == 'Experimental' && size == 'SMG') sizeInput.value = 'Pistol';
 
-	const hideSize = ['Royal', 'Starter Pistol'];
+	const hideSize = ['Royal', 'Starter Pistol', 'Sentinel'];
 	if (hideSize.includes(type)) {
 		hideInput(sizeInput, 'none');
 	} else {
@@ -396,13 +402,62 @@ function hideSrLocName() {
 function hideCost() {
 	const location = pageData.location;
 	const costElement = globalElements.input.costInput;
-	if (location == 'Sentinel Pillar') {
+	if (location == 'Sentinel Pillar' || location == 'Harmonic Camp') {
 		hideInput(costElement, 'none');
 		costElement.value = '';
 		costElement.oninput();
 	} else {
 		hideInput(costElement, '');
 	}
+}
+
+/**
+ * Hides the crystal addons input box if the page type is 'Royal' or 'Sentinel'
+ * @function
+ * @returns {void}
+ */
+function hideAddons() {
+	// Gets the page type from the pageData object
+	const type = pageData.type;
+
+	// Gets the crystal addons input box element
+	const addonInput = globalElements.input.crystalsInput;
+
+	// If the MT type is 'Royal' or 'Sentinel'
+	if (type == 'Royal' || type == 'Sentinel') {
+		// Gets all checkboxes in the same container as the addonInput
+		const checkboxes = addonInput.closest('.checkboxes').querySelectorAll('input[type="checkbox"]');
+
+		// Hides the addonInput box
+
+		hideInput(addonInput, 'none');
+		// Unchecks all checkboxes and triggers their onchange event
+		checkboxes.forEach(checkbox => {
+			checkbox.checked = false;
+			checkbox.onchange();
+		})
+		// If the MT type is not 'Royal' or 'Sentinel'
+	} else {
+		// Shows the addonInput box
+		hideInput(addonInput, '');
+	}
+}
+
+/**
+ * Automatically sets the type input of a global element to 'Sentinel'
+ * and hides certain input elements depending on the value of 'input'.
+ *
+ * @function
+ * @param {object} input - The input element to be checked.
+ * @returns {undefined}
+ */
+function autoSentinel(input) {
+	if (input.value != 'Harmonic Camp') return;
+	const typeInput = globalElements.input.typeInput;
+	typeInput.value = 'Sentinel';
+	typeInput.onchange();
+	hideInput(typeInput, 'none');
+	hideInput(input, '');
 }
 
 function galleryExplanationExternal() {
@@ -412,7 +467,7 @@ function galleryExplanationExternal() {
 			<li>Discovery Menu</li>
 			<li>Price Page</li>
 			<li>Base Stats</li>
-			<li>Minor Settlement/Sentinel Pillar</li>
+			<li>Minor Settlement/Sentinel Pillar/Harmonic Camp</li>
 			<li>Tool in Hand</li>
 			<li>First Person View</li>
 		</ol>
@@ -434,7 +489,8 @@ function albumOtherExternal() {
 	function catalogMTType() {
 		const type = pageData.type;
 		const size = pageData.size;
-		if (type == 'Royal' || type == 'Starter Pistol') return '';
+		const noSize = ['Royal', 'Starter Pistol', 'Sentinel']
+		if (noSize.includes(type)) return '';
 		return size + ' -';
 	}
 
@@ -456,7 +512,7 @@ function albumDescExternal() {
 	const output = (() => {
 		const axes = pageData.axes;
 		const sentence = pageData.acquirement.replace('Save and reload', 'S/r');
-		if (axes && !validateCoords(false)) return sentence.replace(pageData.axes, `(${pageData.axes})`);
+		if (axes && !validateCoords(false)) return sentence.replace(/[()]/g, '').replace(axes, `(${axes})`);
 		return sentence;
 	})();
 	return output;
@@ -482,10 +538,13 @@ function albumLinkGen() {
 }
 
 /**
- * Generates an array of strings to be used in the gallery section on a page.
+ * Generates an array for use in a gallery. The function uses pageData's location property to determine whether to include
+ * the 'Minor Settlement', 'Sentinel Pillar', and 'Harmonic Camp' locations, or remove them from the array.
  *
- * @param {void} None
- * @returns {void} None
+ * @function
+ * @returns {undefined} Returns an array for use in a gallery.
+ *
+ * @throws {TypeError} If `pageData` object or `location` property is not found, a TypeError is thrown.
  *
  * @example
  * generateGalleryArray();
@@ -498,20 +557,20 @@ function generateGalleryArray() {
 		'Base Stats',
 		'Minor Settlement',
 		'Sentinel Pillar',
+		'Harmonic Camp',
 		'Tool in hand',
 		'First Person View'
 	];
 
 	const location = pageData.location;
-	const locs = ['Minor Settlement', 'Sentinel Pillar'];
+	const locs = ['Minor Settlement', 'Sentinel Pillar', 'Harmonic Camp'];
 	if (locs.includes(location)) {
-		const rmLoc = (() => {
-			const index = locs.indexOf(location);
-			locs.splice(index, 1);
-			return locs[0];
-		})();
-		const index = array.indexOf(rmLoc);
-		array.splice(index, 1);
+		const rmLocs = locs.filter(loc => loc != location);
+		console.log(rmLocs)
+		rmLocs.forEach(loc => {
+			const index = array.indexOf(loc);
+			array.splice(index, 1);
+		})
 	} else {
 		for (let i = array.length - 1; i >= 0; i--) {
 			if (locs.includes(array[i])) array.splice(i, 1);

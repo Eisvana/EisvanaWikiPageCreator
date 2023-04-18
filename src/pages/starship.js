@@ -71,7 +71,7 @@ function getShipData() {
 	 * @property {string} Freighter.techslots.Large - The number of tech slots of large Freighter ships.
 	 * @property {string[]} Freighter.subtypes - The different subtypes of Freighter ships.
 	 * @property {string[]} Freighter.secParts - The different secondary parts for Freighter ships.
-	 * @propety {string[]} Freighter.accessories - The different accessories for Freighter ships.
+	 * @property {string[]} Freighter.accessories - The different accessories for Freighter ships.
 	 * @property {string[]} Freighter.miscParts - The different miscellaneous parts for Freighter ships.
 	 * @property {Object} Freighter.sections - The different sections of the Freighter ship builder.
 	 * @property {string[]} Freighter.sections.subtypeInput - Controls the visibility of subtype input.
@@ -320,7 +320,7 @@ function getShipData() {
 		},
 		"Living Ship": {
 			cost: {
-				'Medium': '21,850,000',
+				'Medium': '',
 			},
 			slots: {
 				'Medium': '36',
@@ -337,6 +337,35 @@ function getShipData() {
 				exoticInput: ['hide', ''],
 				pilotInput: ['hide', ''],
 				inventoryInput: ['hide', 'Medium'],
+				maneuverBInput: ['show'],
+				damageBInput: ['show'],
+				shieldBInput: ['show'],
+				warpBInput: ['show'],
+				economyInput: ['hide', ''],
+				planetInput: ['show'],
+				moonInput: ['show'],
+				axesInput: ['show']
+			}
+		},
+		"Interceptor": {
+			cost: {
+				'Large': '',
+			},
+			slots: {
+				'Large': '32-40',
+			},
+			techslots: {
+				'Large': '22-28',
+			},
+			subtypes: [],
+			secParts: [],
+			accessories: [],
+			miscParts: [],
+			sections: {
+				subtypeInput: ['hide'],		// subtype and parts (above) need to be revised once the naming convention is done
+				exoticInput: ['hide', ''],
+				pilotInput: ['hide', ''],
+				inventoryInput: ['hide', 'Large'],
 				maneuverBInput: ['show'],
 				damageBInput: ['show'],
 				shieldBInput: ['show'],
@@ -720,11 +749,12 @@ function albumOtherExternal() {
 	let prop1 = economy;
 	let prop2 = '';
 	switch (type) {
-		case "Freighter":
+		case 'Freighter':
 			prop2 = faction;
 			break;
 
-		case "Living Ship":
+		case 'Interceptor':
+		case 'Living Ship':
 			prop1 = loc;
 			prop2 = axes;
 			break;
@@ -802,10 +832,12 @@ function generateGalleryArray() {
 
 	// Locations which apply to a living ship
 	const common = ['moon', 'planet', 'crash'];
+	const crash = ['npc', 'freighter'];
 
 	// Images to deactivate based on the type of page data
 	const deactivate = {
-		'Living Ship': ['npc', 'freighter'],
+		'Living Ship': crash,
+		'Interceptor': crash,
 		'Freighter': ['ship', ...common],
 		'default': ['freighter', ...common],
 	}
@@ -818,11 +850,12 @@ function generateGalleryArray() {
 
 	// Loop through the array and remove images based on the type of page data
 	const type = pageData.type;
+	const deactivateArray = deactivate[type] ?? deactivate.default;
 	const lowerCase = structuredClone(array).map(item => item.toLowerCase());
 	for (let i = array.length - 1; i >= 0; i--) {
 		const element = lowerCase[i];
-		for (const word of deactivate[type] ?? deactivate.default) {
-			if (element.includes(word)) array.splice(i, 1);
+		if (deactivateArray.some(item => element.includes(item))) {
+			array.splice(i, 1);
 		}
 	}
 
@@ -844,7 +877,7 @@ function galleryExplanationExternal() {
 			</ol>
 		</div>
 		<div>
-			<div class='has-text-weight-bold'>Living Ships:</div>
+			<div class='has-text-weight-bold'>Living Ships/Interceptors:</div>
 			<ol class='dialog-list mt-1'>
 				<li>Rear view of ship</li>
 				<li>Inventory screen</li>
