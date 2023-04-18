@@ -467,7 +467,7 @@ function galleryExplanationExternal() {
 			<li>Discovery Menu</li>
 			<li>Price Page</li>
 			<li>Base Stats</li>
-			<li>Minor Settlement/Sentinel Pillar</li>
+			<li>Minor Settlement/Sentinel Pillar/Harmonic Camp</li>
 			<li>Tool in Hand</li>
 			<li>First Person View</li>
 		</ol>
@@ -538,10 +538,13 @@ function albumLinkGen() {
 }
 
 /**
- * Generates an array of strings to be used in the gallery section on a page.
+ * Generates an array for use in a gallery. The function uses pageData's location property to determine whether to include
+ * the 'Minor Settlement', 'Sentinel Pillar', and 'Harmonic Camp' locations, or remove them from the array.
  *
- * @param {void} None
- * @returns {void} None
+ * @function
+ * @returns {undefined} Returns an array for use in a gallery.
+ *
+ * @throws {TypeError} If `pageData` object or `location` property is not found, a TypeError is thrown.
  *
  * @example
  * generateGalleryArray();
@@ -554,20 +557,20 @@ function generateGalleryArray() {
 		'Base Stats',
 		'Minor Settlement',
 		'Sentinel Pillar',
+		'Harmonic Camp',
 		'Tool in hand',
 		'First Person View'
 	];
 
 	const location = pageData.location;
-	const locs = ['Minor Settlement', 'Sentinel Pillar'];
+	const locs = ['Minor Settlement', 'Sentinel Pillar', 'Harmonic Camp'];
 	if (locs.includes(location)) {
-		const rmLoc = (() => {
-			const index = locs.indexOf(location);
-			locs.splice(index, 1);
-			return locs[0];
-		})();
-		const index = array.indexOf(rmLoc);
-		array.splice(index, 1);
+		const rmLocs = locs.filter(loc => loc != location);
+		console.log(rmLocs)
+		rmLocs.forEach(loc => {
+			const index = array.indexOf(loc);
+			array.splice(index, 1);
+		})
 	} else {
 		for (let i = array.length - 1; i >= 0; i--) {
 			if (locs.includes(array[i])) array.splice(i, 1);
