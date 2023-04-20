@@ -1354,11 +1354,11 @@ function checkDataIntegrity(simple = false) {		// returns false if nothing is wr
 		dataIntegrityObj.copy = false;
 		return false;
 	} else if (!name) {
-		return 'Missing name!';
+		return 'Missing Name!';
 	} else if ((!glyphs || !region)) {
-		return 'Wrong glyphs!';
+		return 'Wrong Glyphs!';
 	} else {
-		return 'Copy code first!';
+		return 'Copy Code First!';
 	}
 }
 

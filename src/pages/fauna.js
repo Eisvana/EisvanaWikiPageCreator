@@ -334,19 +334,12 @@ function bundlePropFunctions() {
 }
 
 /**
- * Hides the album entry and album actions elements on the page based on the presence of pageData.catalogue.
- * @function
+ * Hides the album entry code and album actions buttons if `pageData.catalogue` is falsy,
+ * or shows them otherwise.
  * @returns {void}
- * @description This function modifies the visibility style property of globalElements.output.albumEntry and globalElements.output.albumActions
- * based on the presence of the pageData.catalogue property. If pageData.catalogue is falsy, then the elements are hidden. Otherwise, they are visible.
- * @example
- * // Example usage:
- * hideAlbumEntry();
  */
 function hideAlbumEntry() {
-	const displayState = { true: '', false: 'hidden' };
-	const boolString = Boolean(pageData.catalogue).toString();
-	const display = displayState[boolString];
+	const display = pageData.catalogue ? '' : 'hidden';
 	globalElements.output.albumEntry.style.visibility = display;
 	globalElements.output.albumActions.style.visibility = display;
 }

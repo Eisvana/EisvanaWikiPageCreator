@@ -38,7 +38,7 @@ let albumInitialised = false;
 	 */
 	const actions = `<button id="albumBtn" class="button is-outlined is-primary"
 		onclick="copyCode(this, 'albumText')">
-		Copy album wikicode
+		Copy Album Wikicode
 		</button>
 		<a class="button is-outlined is-primary" id="albumLink"
 		onclick="albumLink(this)">
@@ -71,6 +71,9 @@ let albumInitialised = false;
 	 * @type {boolean}
 	 */
 	albumInitialised = true;
+
+	const albumNote = `<p style="width:100%" class="has-text-centered mb-3">Please don't forget to create an album entry!</p>`;
+	globalElements.output.albumActions.insertAdjacentHTML('afterbegin', albumNote);
 })();
 
 /**
