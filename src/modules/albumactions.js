@@ -37,13 +37,13 @@ let albumInitialised = false;
 	 * @type {string}
 	 */
 	const actions = `<button id="albumBtn" class="button is-outlined is-primary"
-		onclick="copyCode(this, 'albumText')">
+		data-link="album" onclick="copyCode(this, 'albumText')">
 		Copy Album Wikicode
 		</button>
 		<a class="button is-outlined is-primary" id="albumLink"
-		onclick="albumLink(this)">
+		data-link="album" onclick="albumLink(this)">
 		Open Album
-		</a>`
+		</a>`;
 	// If the global albumEntry element exists, set its innerHTML to the wikitext.
 	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext.body.innerHTML;
 

@@ -13,10 +13,10 @@
 (() => {
 	// Sets up buttons for copying, downloading, and creating pages.
 	const actions = `
-	<button class="button is-outlined is-primary" id="copy" type="button" onclick="copyCode(this, 'fullArticle')">Copy Wikicode</button>
+	<button class="button is-outlined is-primary" id="copy" type="button" data-link="page" onclick="copyCode(this, 'fullArticle')">Copy Wikicode</button>
 	<a class="button is-outlined is-primary" id="download" onclick="downloadFile(this)">Download File</a>
 	<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload Pictures</a>
-	<a class="button is-outlined is-primary" id="create" onclick="createPage(this)">Create Page</a>
+	<a class="button is-outlined is-primary" id="create" data-link="page" onclick="createPage(this)">Create Page</a>
 	<button class="button is-warning" id="reset" type="reset" onclick="reset()">Reset Inputs</button>`;
 
 	// Adds a note reminding the user to upload any images they have added.
@@ -128,14 +128,14 @@ function copyCode(input, wikiCodeId) {
 	input.style.pointerEvents = 'none';
 
 	// Saves the initial button text for later use.
-	const buttonText = input.innerText;
+	const { innerText: buttonText, dataset: { link: dataLink } } = input;
 
 	// Updates the dataIntegrityObj with the new page data and sets the copy flag.
 	dataIntegrityObj.text = JSON.stringify(pageData);
-	dataIntegrityObj.copy = true;
+	dataIntegrityObj.copy = dataLink;
 
 	// Checks if the data is valid.
-	const dataIntegrity = checkDataIntegrity();		// true if data is wrong
+	const dataIntegrity = checkDataIntegrity(input);		// true if data is wrong
 	if (dataIntegrity) {
 		// If the data is invalid, updates the button text to reflect the error and resets the button after a delay.
 		input.classList.remove('is-primary');
@@ -153,7 +153,7 @@ function copyCode(input, wikiCodeId) {
 	// If the data is valid, copies the text to the clipboard and updates the dataIntegrityObj.
 	const copyTextContent = globalElements?.output?.[wikiCodeId]?.innerText?.replaceAll('\n\n\n', '\n\n') ?? wikiCodeId;
 	navigator.clipboard.writeText(copyTextContent);
-	dataIntegrityObj.copy = true;	// this must be here, since checkDataIntegrity sets it to false
+	dataIntegrityObj.copy = dataLink;	// this must be here, since checkDataIntegrity sets it to false
 
 	// Updates the button text to show that the code has been copied and resets it after a delay.
 	input.innerText = 'Copied!';
@@ -207,7 +207,7 @@ function createPage(element, pagename = pageData.name) {
  * assignLink(myAnchorElement, 'https://www.example.com')
  */
 function assignLink(element, link) {
-	const dataIntegrity = checkDataIntegrity();
+	const dataIntegrity = checkDataIntegrity(element);		// boolean
 	if (!dataIntegrity) {
 		// If dataIntegrity is valid, assign link to element and open in new tab
 		element.href = link;
@@ -271,6 +271,7 @@ function toggleRedirect() {
 		if (document.getElementById(id)) return;
 		button.classList.add('button', 'is-outlined', 'is-primary');
 		button.id = id;
+		button.dataset.link = 'redirect';
 		codeArray.push(button.outerHTML);
 	}
 	lastBtn.insertAdjacentHTML('beforebegin', codeArray.join(''));

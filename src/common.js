@@ -1339,18 +1339,19 @@ function forceDatalist(element) {
 }
 
 /**
- * Checks if the current page data is valid and has no issues with data integrity.
- * @param {boolean} [simple=false] - Whether to perform a simple check or a full check.
- * @returns {boolean|string} Returns `false` if there are no issues with data integrity, and a string containing an error message if there is an issue.
+ * Checks the integrity of the page data and returns an error message if there's an issue.
+ * @param {HTMLElement} [element=null] - The HTML element related to the data check.
+ * @param {boolean} [simple=false] - Indicates whether to perform a simple data check.
+ * @returns {string|false} A string with an error message if a data integrity issue was found, or false otherwise.
  */
-function checkDataIntegrity(simple = false) {		// returns false if nothing is wrong
+function checkDataIntegrity(element = null, simple = false) {
 	if (pageData.debug) return false;
 	const currentText = JSON.stringify(pageData);
 	const savedText = dataIntegrityObj.text;
 
 	const { name, portalglyphs: glyphs, region } = pageData;
 
-	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.copy === true) || simple)) {
+	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.copy === element.dataset.link) || simple)) {
 		dataIntegrityObj.copy = false;
 		return false;
 	} else if (!name) {
@@ -1402,11 +1403,7 @@ function getSelectedText(section) {
  * @returns {void}
  */
 function enableTextMarking() {
-	if (pageData.debug) {
-		document.body.dataset.mark = true;
-	} else {
-		document.body.dataset.mark = !checkDataIntegrity(true);
-	}
+	document.body.dataset.mark = pageData.debug ? true : !checkDataIntegrity(null, true);
 }
 
 /**
@@ -1415,7 +1412,7 @@ function enableTextMarking() {
  * @returns {void}
  */
 function preventCopy() {
-	const error = checkDataIntegrity(true);
+	const error = checkDataIntegrity(null, true);
 	if (error) {
 		explanation('Missing/Incorrect Data', error);
 		enableTextMarking();
