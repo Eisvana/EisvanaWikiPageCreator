@@ -171,31 +171,13 @@ async function planetInputs() {
 
 		const inputDom = await loadHTML('src/htmlSnippets/planetInputs.html', replacementStrings);
 		const outputDom = await loadHTML('src/htmlSnippets/planetOutputs.html', replacementStrings);
-
-		// adds functionality to the input elements in the new planet section
-		// default must be first, otherwise it won't work
-		const defaultValue = inputDom.querySelectorAll(`[data-planet="planet${i}"] [data-default]`);
-		for (const input of defaultValue) {
-			assignFunction(input, 'assignDefaultValue(this)');
-			assignDefaultValue(input);
-		}
-		const auto = inputDom.querySelectorAll(`[data-planet="planet${i}"] [data-dest]`);
-		for (const input of auto) {
-			assignFunction(input, 'wikiCode(this)');
-		}
-		const noauto = inputDom.querySelectorAll(`[data-planet="planet${i}"] [data-dest-noauto]`);
-		for (const input of noauto) {
-			assignFunction(input, 'storeData(this)');
-		}
-		const lists = inputDom.querySelectorAll(`[data-planet="planet${i}"] [list]`);
-		for (const input of lists) {
-			assignFunction(input, 'forceDatalist(this)', 'onchange');
-		}
-
 		addAllTooltips(inputDom);
 
 		inputTarget.insertAdjacentHTML('beforebegin', inputDom.body.innerHTML);
 		outputTarget.insertAdjacentHTML('beforeend', outputDom.body.innerHTML);
+
+		// adds functionality to the input elements in the new planet section
+		initialiseSectionInputs(`[data-planet="planet${i}"]`);
 
 		// updates global elements with new output elements
 		const resourceOutputs = { output: {} };

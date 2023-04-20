@@ -4,6 +4,7 @@
 
 function startupFunctions() {
 	celestialStartupFunctions();
+	globalElements.input.resourceInputs.querySelector('button').onclick();
 	autoInfested();
 	wormAutoSpawn();
 	wormAlbumName();
@@ -300,26 +301,16 @@ function postProcessSection(element, sectionType, i) {
 
 	const sectionElements = { input: {}, output: {} };
 
-	const inputs = document.querySelectorAll(`[data-${sectionType}="section${i}"] :is(input, select)`);
+	const sectionSelector = `[data-${sectionType}="section${i}"]`;
+
+	// adds functionality to the input elements in the new section
+	initialiseSectionInputs(sectionSelector);
+
+	const inputs = document.querySelectorAll(`${sectionSelector} :is(input, select)`);
 	for (const input of inputs) {
 		sectionElements.input[input.id] = input.id;
-		if (input.dataset.dest) {
-			assignFunction(input, 'wikiCode(this)');
-			wikiCode(input);
-		}
-		if (input.dataset.destNoauto) {
-			assignFunction(input, 'storeData(this)');
-			storeData(input);
-		}
-		if (input.dataset.default) {
-			assignFunction(input, 'assignDefaultValue(this)', null, true);
-			assignDefaultValue(input);
-		}
-		if (input.list) {
-			assignFunction(input, 'forceDatalist(this)', 'onchange');
-		}
 	}
-	const outputs = document.querySelectorAll(`[data-${sectionType}="section${i}"] output`);
+	const outputs = document.querySelectorAll(`${sectionSelector} output`);
 	for (const output of outputs) {
 		if (output.id) sectionElements.output[output.id] = output.id;
 	}
