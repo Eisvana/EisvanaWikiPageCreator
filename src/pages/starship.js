@@ -13,6 +13,7 @@ function startupFunctions() {
 	appearanceDropdowns();
 	enPrefix(globalElements.input.typeInput.value, "enPrefix");
 	albumFunctions();
+	toggleRedirect();
 }
 
 const starshipElements = {
@@ -23,7 +24,7 @@ const starshipElements = {
 updateGlobalElements(starshipElements)
 
 const starshipElementFunctions = {
-	nameInput: ['appearanceSentence(); albumName()'],
+	nameInput: ['appearanceSentence(); albumName(); toggleRedirect()'],
 	civ: ['loc(); addInfo()', null, true],
 	systemInput: ['loc()'],
 	planetInput: ['loc(); albumOther()'],
@@ -886,4 +887,47 @@ function galleryExplanationExternal() {
 			</ol>
 		</div>
 	</div>`
+}
+
+/**
+ * Redirects to a new page if the page name contains any Greek letters.
+ * @function
+ * @returns {(boolean|string)} Either false if the page name doesn't contain Greek letters or a string with the name containing Greek letters replaced with their English transliterations.
+ */
+function redirectPage() {
+	const name = pageData.name;
+	const greekLetters = {
+		α: 'alpha',
+		β: 'beta',
+		γ: 'gamma',
+		δ: 'delta',
+		ε: 'epsilon',
+		ζ: 'zeta',
+		η: 'eta',
+		θ: 'theta',
+		ι: 'iota',
+		κ: 'kappa',
+		λ: 'lambda',
+		μ: 'mu',
+		ν: 'nu',
+		ξ: 'xi',
+		ο: 'omicron',
+		π: 'pi',
+		ρ: 'rho',
+		σ: 'sigma',
+		ς: 'sigma',
+		ϲ: 'sigma',
+		τ: 'tau',
+		υ: 'upsilon',
+		φ: 'phi',
+		χ: 'chi',
+		ψ: 'psi',
+		ω: 'omega',
+	}
+	const containsGreekLetter = Object.keys(greekLetters).some(letter => name.includes(letter));
+	if (!containsGreekLetter) return false;
+	const regex = new RegExp(`[${Object.keys(greekLetters).join('')}]`, 'g');
+	const newName = name.replace(regex, letter => greekLetters[letter]);
+
+	return newName;
 }

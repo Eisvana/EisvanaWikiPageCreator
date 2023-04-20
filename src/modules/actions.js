@@ -151,7 +151,7 @@ function copyCode(input, wikiCodeId) {
 	}
 
 	// If the data is valid, copies the text to the clipboard and updates the dataIntegrityObj.
-	const copyTextContent = globalElements.output[wikiCodeId].innerText.replaceAll('\n\n\n', '\n\n');
+	const copyTextContent = globalElements?.output?.[wikiCodeId]?.innerText?.replaceAll('\n\n\n', '\n\n') ?? wikiCodeId;
 	navigator.clipboard.writeText(copyTextContent);
 	dataIntegrityObj.copy = true;	// this must be here, since checkDataIntegrity sets it to false
 
@@ -183,12 +183,13 @@ function downloadFile(button) {
  * Disables pointer events on the given element, gets the name of the page,
  * creates a wiki link, and assigns the link to the element.
  *
- * @param {HTMLElement} element - The element to assign the link to.
+ * @param {HTMLElement} element - The element that the link should be assigned to.
+ * @param {string} [pagename=pageData.name] - The name of the new wiki page. Defaults to the name specified in the pageData object.
+ * @returns {void}
  */
-function createPage(element) {
+function createPage(element, pagename = pageData.name) {
 	element.style.pointerEvents = 'none';
-	const name = pageData.name;
-	const link = wikiLink + 'Special:EditPage/' + name;
+	const link = wikiLink + 'Special:EditPage/' + pagename;
 	assignLink(element, link);
 }
 
@@ -227,4 +228,44 @@ function assignLink(element, link) {
 			element.style.pointerEvents = '';
 		}, 1500);
 	}
+}
+
+/**
+ * Toggles the display of copy and create redirect buttons.
+ *
+ * @function
+ */
+function toggleRedirect() {
+	if (typeof redirectPage != 'function') return;
+	const lastBtn = document.getElementById('reset');
+	const redirectIDs = ['copyRedirect', 'createRedirect'];
+	if (!redirectPage()) {
+		redirectIDs.forEach(() => {
+			const secondLastBtn = lastBtn.previousElementSibling;
+			if (redirectIDs.includes(secondLastBtn.id)) secondLastBtn.remove();
+		})
+		return;
+	}
+	const copyRedirect = document.createElement('button');
+	copyRedirect.innerText = 'Copy Redirect Code';
+	copyRedirect.type = 'button';
+	assignFunction(copyRedirect, 'copyCode(this, `#REDIRECT [[${pageData.name}]]`)', 'onclick');
+
+	const createRedirect = document.createElement('a');
+	createRedirect.rel = 'noopener noreferrer';
+	createRedirect.target = '_blank';
+	createRedirect.innerText = 'Create Redirect';
+	assignFunction(createRedirect, 'createPage(this, redirectPage())', 'onclick');
+
+	const codeArray = new Array;
+	const buttons = [copyRedirect, createRedirect]
+	for (let i = 0; i < buttons.length; i++) {
+		const button = buttons[i];
+		const id = redirectIDs[i];
+		if (document.getElementById(id)) return;
+		button.classList.add('button', 'is-outlined', 'is-primary');
+		button.id = id;
+		codeArray.push(button.outerHTML);
+	}
+	lastBtn.insertAdjacentHTML('beforebegin', codeArray.join(''));
 }

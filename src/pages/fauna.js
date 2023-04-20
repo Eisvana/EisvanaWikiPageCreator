@@ -18,6 +18,7 @@ function startupFunctions() {
 	hideAlbumEntry();
 	noLineBreak();
 	albumFunctions();
+	toggleRedirect();
 }
 
 const creatureElements = {
@@ -28,8 +29,8 @@ const creatureElements = {
 updateGlobalElements(creatureElements);
 
 const creatureElementFunctions = {
-	nameInput: ['pageName(); albumName()'],
-	oldNameInput: ['hideOrgName(); pageName(); albumName()'],
+	nameInput: ['pageName(); albumName(); toggleRedirect()'],
+	oldNameInput: ['hideOrgName(); pageName(); albumName(); toggleRedirect()'],
 	planetInput: ['planetMoonSentence()'],
 	moonInput: ['planetMoonSentence()'],
 	ecosystemInput: ['genusDropdown(); albumDropdown(); genusProduces()'],
@@ -456,4 +457,14 @@ function galleryExplanationExternal() {
 			<li>Galaxy Map</li>
 		</ol>
 	</div>`
+}
+
+/**
+ * Gives the pagename of the redirect if it is not equal the real pagename.
+ *
+ * @function
+ * @returns {string|undefined} Returns the updated page name if the page has been renamed, otherwise returns undefined.
+ */
+function redirectPage() {
+	if (pageData.oldName && pageData.oldName != pageData.newName) return pageData.newName;
 }
