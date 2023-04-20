@@ -22,11 +22,8 @@ assignElementFunctions(celestialObjectElementFunctions);
  * @returns {void}
  */
 function docByExternal() {
-	const discovered = pageData.discovered;
-	const discoveredlink = pageData.discoveredlink;
-	const documenter = pageData.docby;
+	const { discovered, discoveredlink, docby: documenter, civilized } = pageData;
 	const platform = (pageData.platform == 'NS') ? 'Switch' : pageData.platform;
-	const civilized = pageData.civilized;
 
 	/**
 	 * Formats a given date to be in the format 'Month Day, Year'

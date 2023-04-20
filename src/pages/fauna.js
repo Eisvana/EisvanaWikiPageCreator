@@ -81,9 +81,8 @@ function albumDropdown() {
 	const creatureData = getCreatureData();
 	// if civ is GHub, use GHEC instead. Otherwise use the Civ shortname
 	const civ = (pageData.civShort == "GHub") ? "GHEC" : pageData.civShort;
-	const ecosystem = pageData.ecosystem;
+	const { ecosystem, galaxy } = pageData;
 	const catalogueInput = globalElements.input.catalogueInput;
-	const galaxy = pageData.galaxy;
 
 	const albums = creatureData.catalogs[galaxy][ecosystem];
 	const albumValues = [albums[0]];
@@ -139,8 +138,8 @@ function addInfo() {
  * @returns {string} - The name generated for the wikilink.
  */
 function pageName() {
-	const newName = globalElements.input.nameInput.value;
-	const orgName = globalElements.input.oldNameInput.value;
+	const { nameInput: { value: newName }, oldNameInput: { value: orgName } } = globalElements.input;
+
 	const name = (() => {
 		if (orgName) {
 			return orgName;
@@ -184,13 +183,8 @@ function genusProduces() {
  * @returns {void}
  */
 function hideSecGenderProps() {
-	const gen1 = pageData.gender;
-	const gen2 = pageData.gender2;
-
-	const gen2Weight = globalElements.input.weight2Input;
-	const gen2Height = globalElements.input.height2Input;
-	const gen2Input = globalElements.input.gender2Input;
-
+	const { gender: gen1, gender2: gen2 } = pageData;
+	const { weight2Input: gen2Weight, height2Input: gen2Height, gender2Input: gen2Input } = globalElements.input;
 	const gen2Props = [gen2Weight, gen2Height];
 
 	if (gen2 && gen1 != gen2) {
@@ -235,10 +229,9 @@ function specialNotes() {
  * @returns {void}
  */
 function specialNotesTextFunc() {
-	const notes = pageData.notes;
-	const specialNotes = pageData.addObservation;
-	const notesElement = globalElements.input.notesInput;
-	const addObservationElement = globalElements.output.addObservation;
+	const { notes, addObservation: specialNotes } = pageData;
+	const { input: { notesInput: notesElement }, output: { addObservation: addObservationElement } } = globalElements;
+
 	wikiCode(notesElement, notesElement.dataset.destNoauto);
 	if (!notes) {
 		addObservationElement.innerText = "'''Additional Observations''': ";
@@ -389,8 +382,7 @@ function albumCivExternal() {
  */
 function noLineBreak() {
 	const element = globalElements.input.dmInput;
-	const dest = element.dataset.destNoauto;
-	const value = element.value;
+	const { value, dataset: { destNoauto: dest } } = element;
 	const noBreak = value.replaceAll('\n', ' ');
 	element.value = noBreak;
 

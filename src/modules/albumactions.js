@@ -148,8 +148,7 @@ function albumDiscoverer() {
 		if (typeof albumDiscovererExternal == 'function') {
 			return albumDiscovererExternal();
 		} else {
-			const discovered = pageData.discovered;
-			const discoveredlink = pageData.discoveredlink;
+			const { discovered, discoveredlink } = pageData
 			if (discoveredlink) {
 				return `wiki=${discoveredlink}`;
 			} else {

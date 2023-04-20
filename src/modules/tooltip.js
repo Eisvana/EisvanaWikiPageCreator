@@ -46,9 +46,7 @@ const cachedImages = new Set();
  * @param {string} img - The URL of the image to display in the modal.
  */
 function explanation(heading, text, img) {
-	const imgElement = globalElements.output.explanationImg;
-	const linkElement = globalElements.output.explanationLink;
-	const dialogElement = globalElements.output.explanation;
+	const { explanationImg: imgElement, explanationLink: linkElement, explanation: dialogElement } = globalElements.output;
 
 	// Check if img URL was provided
 	if (img) {

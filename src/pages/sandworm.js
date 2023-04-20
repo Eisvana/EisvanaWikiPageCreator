@@ -38,8 +38,7 @@ assignElementFunctions(sandwormElementFunctions);
  * @returns {void}
  */
 function wormName() {
-	const planet = pageData.planet;
-	const moon = pageData.moon;
+	const { planet, moon } = pageData;
 
 	/*
 	 * If there's no planet, set pageData.name to an
@@ -136,8 +135,7 @@ function albumCivExternal() {
 
 function albumNameExternal() {
 	enableTextMarking();
-	const name = pageData.name;
-	const wormclass = pageData.wormclass;
+	const { name, wormclass } = pageData;
 	const output = `${name}|${wormclass}`;
 	return output;
 }

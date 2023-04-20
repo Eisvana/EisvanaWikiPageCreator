@@ -9,11 +9,7 @@
  * @returns {string} - A string indicating whether the celestial body is a moon or planet.
  */
 function planetMoon(moon = pageData.moon) {
-	if (moon) {
-		return 'Moon';
-	} else {
-		return 'Planet';
-	}
+	return moon ? 'Moon' : 'Planet';
 }
 
 /**

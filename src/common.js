@@ -935,8 +935,7 @@ function researchTeamDropdown(inputElement = globalElements.input.researchTeam, 
  */
 function researchTeam() {
 	const researchteamInput = globalElements.input.researchTeam;
-	const researchteamValue = researchteamInput.value;
-	const dest = researchteamInput.dataset.destNoauto;
+	const { value: researchteamValue, dataset: { destNoauto: dest } } = researchteamInput;
 	pageData[dest] = researchteamValue;
 	const civ = pageData.civilized;
 	const exceptions = ['Base', 'Racetrack'];
@@ -1349,9 +1348,7 @@ function checkDataIntegrity(simple = false) {		// returns false if nothing is wr
 	const currentText = JSON.stringify(pageData);
 	const savedText = dataIntegrityObj.text;
 
-	const name = pageData.name;
-	const glyphs = pageData.portalglyphs;
-	const region = pageData.region;
+	const { name, portalglyphs: glyphs, region } = pageData;
 
 	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.copy === true) || simple)) {
 		dataIntegrityObj.copy = false;
@@ -1470,11 +1467,7 @@ function removeSpecificSection(sectionName, attribute = 'section') {
 function hideOrgName() {
 	const orgName = pageData.oldName;
 	const aliascElement = globalElements.output.oldName.parentElement;
-	if (orgName) {
-		aliascElement.style.display = ''
-	} else {
-		aliascElement.style.display = 'none'
-	}
+	aliascElement.style.display = orgName ? '' : 'none';
 }
 
 /**
