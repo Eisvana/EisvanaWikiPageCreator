@@ -13,11 +13,11 @@
 (() => {
 	// Sets up buttons for copying, downloading, and creating pages.
 	const actions = `
-	<button class="button is-outlined is-primary" id="copy" type="button" onclick="copyCode(this, 'fullArticle')">Copy wikicode</button>
-	<a class="button is-outlined is-primary" id="download" onclick="downloadFile(this)">Download file</a>
-	<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload pictures</a>
-	<a class="button is-outlined is-primary" id="create" onclick="createPage(this)">Create page</a>
-	<button class="button is-warning" id="reset" type="reset" onclick="reset()">Reset inputs</button>`;
+	<button class="button is-outlined is-primary" id="copy" type="button" data-link="page" onclick="copyCode(this, 'fullArticle')">Copy Wikicode</button>
+	<a class="button is-outlined is-primary" id="download" onclick="downloadFile(this)">Download File</a>
+	<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload Pictures</a>
+	<a class="button is-outlined is-primary" id="create" data-link="page" onclick="createPage(this)">Create Page</a>
+	<button class="button is-warning" id="reset" type="reset" onclick="reset()">Reset Inputs</button>`;
 
 	// Adds a note reminding the user to upload any images they have added.
 	const copyNote = `<p class="has-text-centered">You must copy the code first, then paste it into the wiki page.<br>Also don't forget to upload any images you have put here.</p>`
@@ -128,14 +128,14 @@ function copyCode(input, wikiCodeId) {
 	input.style.pointerEvents = 'none';
 
 	// Saves the initial button text for later use.
-	const buttonText = input.innerText;
+	const { innerText: buttonText, dataset: { link: dataLink } } = input;
 
 	// Updates the dataIntegrityObj with the new page data and sets the copy flag.
 	dataIntegrityObj.text = JSON.stringify(pageData);
-	dataIntegrityObj.copy = true;
+	dataIntegrityObj.copy = dataLink;
 
 	// Checks if the data is valid.
-	const dataIntegrity = checkDataIntegrity();		// true if data is wrong
+	const dataIntegrity = checkDataIntegrity(input);		// true if data is wrong
 	if (dataIntegrity) {
 		// If the data is invalid, updates the button text to reflect the error and resets the button after a delay.
 		input.classList.remove('is-primary');
@@ -151,9 +151,9 @@ function copyCode(input, wikiCodeId) {
 	}
 
 	// If the data is valid, copies the text to the clipboard and updates the dataIntegrityObj.
-	const copyTextContent = globalElements.output[wikiCodeId].innerText.replaceAll('\n\n\n', '\n\n');
+	const copyTextContent = globalElements?.output?.[wikiCodeId]?.innerText?.replaceAll('\n\n\n', '\n\n') ?? wikiCodeId;
 	navigator.clipboard.writeText(copyTextContent);
-	dataIntegrityObj.copy = true;	// this must be here, since checkDataIntegrity sets it to false
+	dataIntegrityObj.copy = dataLink;	// this must be here, since checkDataIntegrity sets it to false
 
 	// Updates the button text to show that the code has been copied and resets it after a delay.
 	input.innerText = 'Copied!';
@@ -183,12 +183,13 @@ function downloadFile(button) {
  * Disables pointer events on the given element, gets the name of the page,
  * creates a wiki link, and assigns the link to the element.
  *
- * @param {HTMLElement} element - The element to assign the link to.
+ * @param {HTMLElement} element - The element that the link should be assigned to.
+ * @param {string} [pagename=pageData.name] - The name of the new wiki page. Defaults to the name specified in the pageData object.
+ * @returns {void}
  */
-function createPage(element) {
+function createPage(element, pagename = pageData.name) {
 	element.style.pointerEvents = 'none';
-	const name = pageData.name;
-	const link = wikiLink + 'Special:EditPage/' + name;
+	const link = wikiLink + 'Special:EditPage/' + pagename;
 	assignLink(element, link);
 }
 
@@ -206,7 +207,7 @@ function createPage(element) {
  * assignLink(myAnchorElement, 'https://www.example.com')
  */
 function assignLink(element, link) {
-	const dataIntegrity = checkDataIntegrity();
+	const dataIntegrity = checkDataIntegrity(element);		// boolean
 	if (!dataIntegrity) {
 		// If dataIntegrity is valid, assign link to element and open in new tab
 		element.href = link;
@@ -227,4 +228,52 @@ function assignLink(element, link) {
 			element.style.pointerEvents = '';
 		}, 1500);
 	}
+}
+
+/**
+ * Toggles the display of copy and create redirect buttons.
+ *
+ * @function
+ */
+function toggleRedirect() {
+	if (typeof redirectPage != 'function') return;
+	const lastBtn = document.getElementById('reset');
+	const redirectIDs = ['copyRedirect', 'createRedirect'];
+	const redirectNote = document.createElement('p');
+	redirectNote.id = 'redirectNote';
+	redirectNote.classList.add('has-text-centered');
+	redirectNote.innerText = 'Please create a redirect for your page!';
+
+	if (!redirectPage()) {
+		redirectIDs.forEach(() => {
+			const secondLastBtn = lastBtn.previousElementSibling;
+			if (redirectIDs.includes(secondLastBtn.id)) secondLastBtn.remove();
+		})
+		document.getElementById(redirectNote.id)?.remove();
+		return;
+	}
+	const copyRedirect = document.createElement('button');
+	copyRedirect.innerText = 'Copy Redirect Code';
+	copyRedirect.type = 'button';
+	assignFunction(copyRedirect, 'copyCode(this, `#REDIRECT [[${pageData.name}]]`)', 'onclick');
+
+	const createRedirect = document.createElement('a');
+	createRedirect.rel = 'noopener noreferrer';
+	createRedirect.target = '_blank';
+	createRedirect.innerText = 'Create Redirect';
+	assignFunction(createRedirect, 'createPage(this, redirectPage())', 'onclick');
+
+	const codeArray = new Array;
+	const buttons = [copyRedirect, createRedirect]
+	for (let i = 0; i < buttons.length; i++) {
+		const button = buttons[i];
+		const id = redirectIDs[i];
+		if (document.getElementById(id)) return;
+		button.classList.add('button', 'is-outlined', 'is-primary');
+		button.id = id;
+		button.dataset.link = 'redirect';
+		codeArray.push(button.outerHTML);
+	}
+	lastBtn.insertAdjacentHTML('beforebegin', codeArray.join(''));
+	lastBtn.parentElement.insertAdjacentElement('beforebegin', redirectNote);
 }

@@ -64,12 +64,11 @@ function fixHC(element) {
  * @constant {string} code_template - The HTML template for adding a new section to the code.
  */
 async function addSection() {
-	const inputSection = globalElements.input.contentsInput;
-	const outputSection = globalElements.output.contents;
+	const { input: { contentsInput: inputSection }, output: { contents: outputSection } } = globalElements;
 	const elementList = document.querySelectorAll('[data-section]');
 	const childIndex = getChildIndex(elementList, 'dataset.section');
 	const replacementStrings = {
-		childIndex: childIndex,
+		childIndex,
 		heading: 'heading' + childIndex,
 		img: 'img' + childIndex,
 		text: 'text' + childIndex,

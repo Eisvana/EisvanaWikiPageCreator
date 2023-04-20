@@ -13,6 +13,7 @@ function startupFunctions() {
 	appearanceDropdowns();
 	enPrefix(globalElements.input.typeInput.value, "enPrefix");
 	albumFunctions();
+	toggleRedirect();
 }
 
 const starshipElements = {
@@ -23,7 +24,7 @@ const starshipElements = {
 updateGlobalElements(starshipElements)
 
 const starshipElementFunctions = {
-	nameInput: ['appearanceSentence(); albumName()'],
+	nameInput: ['appearanceSentence(); albumName(); toggleRedirect()'],
 	civ: ['loc(); addInfo()', null, true],
 	systemInput: ['loc()'],
 	planetInput: ['loc(); albumOther()'],
@@ -477,8 +478,7 @@ function showHideStarshipSelects() {
  * @returns {void}
  */
 function invDropdown() {
-	const type = pageData.type;
-	const subtype = pageData.subtype;
+	const { type, subtype } = pageData;
 	const inventory = globalElements.input.inventoryInput;
 	const shipData = getShipData();
 	if (type == 'Hauler') {
@@ -501,8 +501,7 @@ function invDropdown() {
  * @returns {void}
  */
 function calcInv() {
-	const type = pageData.type
-	const subtype = pageData.subtype
+	const { type, subtype } = pageData;
 	const inventoryElement = globalElements.input.inventoryInput;
 	const shipData = getShipData();
 	let inventory;
@@ -562,10 +561,7 @@ function shipType() {
  * @return {string} The completed location sentence.
  */
 function loc() {
-	const systemName = pageData.system;
-	const regionName = pageData.region;
-	const civ = pageData.civShort;
-	const type = pageData.type;
+	const { system: systemName, region: regionName, civShort: civ, type } = pageData;
 
 	// this output has a linebreak. This is intended, because we use .innerText to display this. If we used <br>, it would display '<br>', not the linebreak.
 	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName)} of the ${HubGal(civ)}.
@@ -657,11 +653,8 @@ function addInfo() {
  */
 function appearanceDropdowns() {
 	const type = globalElements.input.typeInput.value;
-	const parts = {
-		secParts: globalElements.input.secPartsInput,
-		accessories: globalElements.input.accessoriesInput,
-		miscParts: globalElements.input.miscPartsInput,
-	}
+	const { secPartsInput: secParts, accessoriesInput: accessories, miscPartsInput: miscParts } = globalElements.input;
+	const parts = { secParts, accessories, miscParts };
 	const shipData = getShipData();
 
 	for (const part in parts) {
@@ -676,21 +669,19 @@ function appearanceDropdowns() {
  * @returns {void}
  */
 function appearanceSentence() {
-	const mainColour = globalElements.input.mainColourInput.value;
-	const secColour = globalElements.input.secColourInput.value;
-
-	const secParts = globalElements.input.secPartsInput.value;
-	const accessories = globalElements.input.accessoriesInput.value;
-	const miscParts = globalElements.input.miscPartsInput.value;
+	// this is object destructuring, it may seem a bit chaotic
+	const {
+		mainColourInput: { value: mainColour },
+		secColourInput: { value: secColour },
+		secPartsInput: { value: secParts },
+		accessoriesInput: { value: accessories },
+		miscPartsInput: { value: miscParts },
+		appearanceInput: textarea
+	} = globalElements.input;
 
 	if (!(mainColour.trim() || secColour.trim() || secParts || accessories || miscParts)) return;
 
-	const name = pageData.name;
-	const type = pageData.type;
-	const subtype = pageData.subtype;
-	const exotic = pageData.exotic;
-
-	const textarea = globalElements.input.appearanceInput;
+	const { name, type, subtype, exotic } = pageData;
 
 	const accentColour = (() => {
 		if (secColour.trim()) return ` with ${secColour} accents`;
@@ -736,10 +727,8 @@ function appearanceSentence() {
  * @returns {string} Returns a string that includes the filled-out properties.
  */
 function albumOtherExternal() {
-	const planet = pageData.planet;
-	const moon = pageData.moon;
+	const { planet, moon, type } = pageData;
 	const axes = '(' + pageData.axes + ')';
-	const type = pageData.type;
 
 	const economyinput = pageData.economy;
 	const economy = economyinput.includes('Black') ? '{{BlackMarket}}' : economyinput.split(' ')[0] + ' Economy';
@@ -769,15 +758,15 @@ function albumOtherExternal() {
  * @returns {String} The link to the appropriate starship catalog.
  */
 function albumLinkGen() {
-	const civLong = pageData.civStub;		// The long version of the civilization name.
-	const civShort = pageData.civShort;		// The shortened version of the civilization name.
+	// The long version of the civilization name.
+	// The shortened version of the civilization name.
+	const { civStub: civLong, civShort } = pageData;
 	const civ = (() => {
 		if (civLong.split(' ').length > 1) return pageData.civShort;
 		return pageData.civilized.split(' ').slice(0, 2).join(' ');
 	})();	// The civilization name, either the short version or the first two words of the long version.
 
-	const type = pageData.type; // The type of starship.
-	const subtype = pageData.subtype; // The subtype of starship.
+	const { type, subtype } = pageData;
 	const fighterSubtypes = {
 		Common: ['Barrel', 'Jet', 'Snowspeeder', 'Viper'],
 		Rare: ['Alpha', 'Long', 'Needle', 'Rasa', 'Stubby'],
@@ -898,4 +887,47 @@ function galleryExplanationExternal() {
 			</ol>
 		</div>
 	</div>`
+}
+
+/**
+ * Redirects to a new page if the page name contains any Greek letters.
+ * @function
+ * @returns {(boolean|string)} Either false if the page name doesn't contain Greek letters or a string with the name containing Greek letters replaced with their English transliterations.
+ */
+function redirectPage() {
+	const name = pageData.name;
+	const greekLetters = {
+		α: 'alpha',
+		β: 'beta',
+		γ: 'gamma',
+		δ: 'delta',
+		ε: 'epsilon',
+		ζ: 'zeta',
+		η: 'eta',
+		θ: 'theta',
+		ι: 'iota',
+		κ: 'kappa',
+		λ: 'lambda',
+		μ: 'mu',
+		ν: 'nu',
+		ξ: 'xi',
+		ο: 'omicron',
+		π: 'pi',
+		ρ: 'rho',
+		σ: 'sigma',
+		ς: 'sigma',
+		ϲ: 'sigma',
+		τ: 'tau',
+		υ: 'upsilon',
+		φ: 'phi',
+		χ: 'chi',
+		ψ: 'psi',
+		ω: 'omega',
+	}
+	const containsGreekLetter = Object.keys(greekLetters).some(letter => name.includes(letter));
+	if (!containsGreekLetter) return false;
+	const regex = new RegExp(`[${Object.keys(greekLetters).join('')}]`, 'g');
+	const newName = name.replace(regex, letter => greekLetters[letter]);
+
+	return newName;
 }

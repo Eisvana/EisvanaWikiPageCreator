@@ -105,10 +105,8 @@ function addInfo() {
  * @param {HTMLElement} input - The input element to assign the calculated appearance to.
  */
 function appearance() {
-	const name = pageData.name;
+	const { name, mainColour: colour1, secColour: colour2 } = pageData;
 	const type = pageData.type.toLowerCase();
-	const colour1 = pageData.mainColour;
-	const colour2 = pageData.secColour;
 	const appearance = globalElements.input.appearanceInput;
 
 	// Handles the case where both colors are empty/undefined
@@ -149,10 +147,12 @@ function acquirementBundle() {
  * @throws Will throw an error if page data is missing.
  */
 function acquirement() {
-	const srName = pageData.srLocName;				// name of the s/r location (for example a planetname)
-	const planet = pageData.planet;					// planet name of the MT
-	const moon = pageData.moon;						// moon name of the MT
-	const coords = pageData.axes;					// coords of the MT
+	// srName: name of the s/r location (for example a planetname)
+	// planet: planet name of the MT
+	// moon: moon name of the MT
+	// coords: coords of the MT
+	const { srLocName: srName, planet, moon, axes: coords } = pageData
+
 	const loc = pageData.location.toLowerCase();	// location type of the MT (for example space station/settlement/sentinel pillar)
 	const body = planetMoonSentence(planet, moon);
 	let instructions, savereload;
@@ -199,12 +199,11 @@ function acquirement() {
  * @returns {undefined}
  */
 function acquirementGallery() {
-	const srName = pageData.srLocName;
+	const { srLocName: srName, location: loc } = pageData;
 	const srImg = pageData.srPlanetImg || 'nmsMisc_notAvailable.png';
 	const sysImg = pageData.sysImg || 'nmsMisc_notAvailable.png';
 	const cabinetPlanetImg = pageData.cabinetPlanetImg || 'nmsMisc_notAvailable.png';
 	const axesImg = pageData.axesImg || 'nmsMisc_notAvailable.png';
-	const loc = pageData.location;
 
 	const InputElementIds = [
 		'srImgInput',
@@ -302,8 +301,7 @@ function autoMTType() {
 
 // shows or hides size dropdown
 function showSizeDropdown() {
-	const type = pageData.type;
-	const size = pageData.size;
+	const { type, size } = pageData;
 	const sizeInput = globalElements.input.sizeInput;
 	if (type == 'Experimental') {
 		sizeInput.querySelector('option[value="SMG"]').style.display = 'none';
@@ -487,8 +485,7 @@ function albumOtherExternal() {
 
 	// determine if MT is SMG for catalogue
 	function catalogMTType() {
-		const type = pageData.type;
-		const size = pageData.size;
+		const { type, size } = pageData
 		const noSize = ['Royal', 'Starter Pistol', 'Sentinel']
 		if (noSize.includes(type)) return '';
 		return size + ' -';

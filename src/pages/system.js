@@ -72,8 +72,7 @@ assignElementFunctions(systemElementFunctions);
  * @function
  */
 function locationSentence() {
-	const region = pageData.region;
-	const civ = pageData.civShort;
+	const { region, civShort: civ } = pageData;
 	const HubNr = regNr(region);
 	const galaxy = HubGal(civ);
 
@@ -95,8 +94,7 @@ function locationSentence() {
 async function planetInputs() {
 	const inputTarget = globalElements.input.waterInput.parentElement.previousElementSibling;
 	const outputTarget = globalElements.output.planets;
-	const planetNr = pageData.planet;
-	const moonNr = pageData.moon;
+	const { planet: planetNr, moon: moonNr } = pageData;
 	const bodies = clamp(parseInt(planetNr) + parseInt(moonNr), 2, 6);
 	if (isNaN(bodies)) return;
 
@@ -165,37 +163,19 @@ async function planetInputs() {
 	 */
 	async function addPlanet(i) {
 		const replacementStrings = {
-			i: i,
+			i,
 			oddEvenClass: 'is-' + oddEven(i),
 		}
 
 		const inputDom = await loadHTML('src/htmlSnippets/planetInputs.html', replacementStrings);
 		const outputDom = await loadHTML('src/htmlSnippets/planetOutputs.html', replacementStrings);
-
-		// adds functionality to the input elements in the new planet section
-		// default must be first, otherwise it won't work
-		const defaultValue = inputDom.querySelectorAll(`[data-planet="planet${i}"] [data-default]`);
-		for (const input of defaultValue) {
-			assignFunction(input, 'assignDefaultValue(this)');
-			assignDefaultValue(input);
-		}
-		const auto = inputDom.querySelectorAll(`[data-planet="planet${i}"] [data-dest]`);
-		for (const input of auto) {
-			assignFunction(input, 'wikiCode(this)');
-		}
-		const noauto = inputDom.querySelectorAll(`[data-planet="planet${i}"] [data-dest-noauto]`);
-		for (const input of noauto) {
-			assignFunction(input, 'storeData(this)');
-		}
-		const lists = inputDom.querySelectorAll(`[data-planet="planet${i}"] [list]`);
-		for (const input of lists) {
-			assignFunction(input, 'forceDatalist(this)', 'onchange');
-		}
-
 		addAllTooltips(inputDom);
 
 		inputTarget.insertAdjacentHTML('beforebegin', inputDom.body.innerHTML);
 		outputTarget.insertAdjacentHTML('beforeend', outputDom.body.innerHTML);
+
+		// adds functionality to the input elements in the new planet section
+		initialiseSectionInputs(`[data-planet="planet${i}"]`);
 
 		// updates global elements with new output elements
 		const resourceOutputs = { output: {} };
@@ -416,12 +396,11 @@ function merchantUpgrades(group = null) {
  */
 async function tradeables() {
 	// Define commonly used elements and variables
-	const inputSection = globalElements.input.terminalInputs;
-	const outputSection = globalElements.output.tradeTerminal;
+	const { input: { terminalInputs: inputSection }, output: { tradeTerminal: outputSection } } = globalElements;
 	const elementList = document.querySelectorAll('[data-tradeable]');
 	const childIndex = getChildIndex(elementList, 'dataset.tradeable');
 	const replacementStrings = {
-		childIndex: childIndex,
+		childIndex,
 		price: 'price' + childIndex,
 		text: 'text' + childIndex,
 		text_input: 'text_input' + childIndex,
@@ -616,8 +595,7 @@ function expectedHubTagSentence() {
 		outputElement.innerHTML = '';
 		return;
 	};
-	const region = pageData.region;
-	const glyphs = pageData.portalglyphs;
+	const { region, portalglyphs: glyphs } = pageData;
 	const nr = getHubNumber(region);
 	const index = (() => {
 		let SIV = glyphs.substring(1, 4);
@@ -744,8 +722,7 @@ function autoBH() {
 function autoPirate(element) {
 	const value = element.value;
 	if (!value.includes('Black Market') && !value.includes('Pirate Controlled')) return;
-	const conflict = globalElements.input.conflictInput;
-	const wealth = globalElements.input.wealthInput;
+	const { conflictInput: conflict, wealthInput: wealth } = globalElements.input;
 	const inputs = [wealth, conflict];
 	for (const input of inputs) {
 		const pirate = input.querySelector('optgroup[label="Pirate"] option').value;
@@ -762,9 +739,9 @@ function autoPirate(element) {
  */
 function combineEconConf() {
 	const faction = pageData.faction;
-	const wealth = globalElements.input.wealthInput;
-	const economy = globalElements.input.economyInput;
-	const conflict = globalElements.input.conflictInput;
+
+	const { wealthInput: wealth, economyInput: economy, conflictInput: conflict } = globalElements.input;
+
 	const inputs = [wealth, economy, conflict];
 
 	if (faction.includes('Abandoned') || faction == 'Uncharted') {
@@ -797,11 +774,7 @@ function addTemplate(element = null) {
 	}
 
 	const outputElement = globalElements.output[element.value];
-	if (element.checked) {
-		outputElement.style.display = '';
-	} else {
-		outputElement.style.display = 'none';
-	}
+	outputElement.style.display = element.checked ? '' : 'none';
 }
 
 function civCatalog() {

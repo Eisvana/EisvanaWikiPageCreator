@@ -39,8 +39,7 @@ async function galleryUpload() {
 	// Get globalElements and set input, inputDiv, wikiCodeGalleryDiv, and errors
 	const inp = globalElements.input.galleryUpload;
 	if (!inp.value) return;
-	const inputDiv = globalElements.output.galleryItems;
-	const wikiCodeGalleryDiv = globalElements.output.galleryCode;
+	const { galleryItems: inputDiv, galleryCode: wikiCodeGalleryDiv } = globalElements.output;
 	const errors = new Array;
 
 	// Loop through each file in inp.files
@@ -78,7 +77,7 @@ async function galleryUpload() {
 			galleryId: 'gallery' + childIndex,
 			wikiCodeGalleryId: 'wikiCodeGallery' + childIndex,
 			wikiCodeGalleryValueId: 'wikiCodeGalleryValue' + childIndex,
-			nameElement: nameElement,
+			nameElement,
 		}
 
 		// Load galleryTemplate using loadHTML function and replacementStrings

@@ -63,8 +63,7 @@ function addInfo() {
  * @returns {void}
  */
 function generateCatalogue() {
-	const civShort = pageData.civShort;
-	const civ = pageData.civilized;
+	const { civShort, civilized: civ } = pageData;
 	const catalogueCiv = (() => {
 		switch (civShort) {
 			case 'GHub':
@@ -86,10 +85,7 @@ function generateCatalogue() {
  */
 function appearance() {
 	// Extract data from pageData object.
-	const name = pageData.name;
-	const colour1 = pageData.mainColour;
-	const colour2 = pageData.secColour;
-	const tentacles = pageData.tentacles;
+	const { name, mainColour: colour1, secColour: colour2, tentacles } = pageData;
 
 	// Get the appearance input from globalElement object.
 	const appearance = globalElements.input.appearanceInput;

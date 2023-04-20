@@ -4,6 +4,7 @@
 
 function startupFunctions() {
 	celestialStartupFunctions();
+	globalElements.input.resourceInputs.querySelector('button').onclick();
 	autoInfested();
 	wormAutoSpawn();
 	wormAlbumName();
@@ -92,9 +93,7 @@ function planetDescriptor(element) {
 * @returns {string} - A string describing the location of the current star system.
 */
 function locationSentence() {
-	const systemName = pageData.system;
-	const regionName = pageData.region;
-	const civ = pageData.civShort;
+	const { system: systemName, region: regionName, civShort: civ } = pageData
 
 	const output = `It can be found in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]] (HUB${getHubNumber(regionName)}) of the ${HubGal(civ)}.`;
 
@@ -240,7 +239,7 @@ async function addFauna(element) {
 	const elementList = document.querySelectorAll(`[data-${sectionType}]`);
 	const i = getChildIndex(elementList, `dataset.${sectionType}`);
 
-	const inputHTML = await loadHTML('src/htmlSnippets/creatureInputs.html', { i: i });
+	const inputHTML = await loadHTML('src/htmlSnippets/creatureInputs.html', { i });
 
 	const outputHTML = `<div data-fauna="section${i}">|-</div>
 	<div data-fauna="section${i}">|[[File:<output id="faunaFile${i}"></output>|150px]] || <output id="faunaName${i}" name="faunaName${i}"></output> || <output id="faunaRarity${i}"></output> / <output id="faunaEcosystem${i}"></output> / <output id="faunaActivity${i}"> </output> <output id="faunaHemisphere${i}"></output> || <output id="faunaGenus${i}"></output> || <output id="faunaHeight${i}"></output>m || <output id="faunaWeight${i}"></output>kg || <output id="faunaDiscoverer${i}"></output></div>`;
@@ -265,7 +264,7 @@ async function addFlora(element) {
 	const elementList = document.querySelectorAll(`[data-${sectionType}]`);
 	const i = getChildIndex(elementList, `dataset.${sectionType}`);
 
-	const inputHTML = await loadHTML('src/htmlSnippets/floraInputs.html', { i: i });
+	const inputHTML = await loadHTML('src/htmlSnippets/floraInputs.html', { i });
 
 	const outputHTML = `<div data-flora="section${i}">|-</div>
 	<div data-flora="section${i}">|[[File:<output id="floraFile${i}"></output>|150px]] || <output id="floraName${i}" name="floraName${i}"></output> || <output id="floraAge${i}"></output> || <output id="floraRoot${i}"></output> || <output id="floraNut${i}"></output> || <output id="floraNote${i}"></output> || <output id="floraElements${i}"></output> || <output id="floraDiscoverer${i}"></output></div>`;
@@ -283,7 +282,7 @@ async function addMineral(element) {
 	const elementList = document.querySelectorAll(`[data-${sectionType}]`);
 	const i = getChildIndex(elementList, `dataset.${sectionType}`);
 
-	const inputHTML = await loadHTML('src/htmlSnippets/mineralInputs.html', { i: i });
+	const inputHTML = await loadHTML('src/htmlSnippets/mineralInputs.html', { i });
 
 	const outputHTML = `<div data-mineral="section${i}">|-</div>
 	<div data-mineral="section${i}">|[[File:<output id="mineralFile${i}"></output>|150px]] || <output id="mineralName${i}" name="mineralName${i}"></output> || <output id="mineralMetal${i}"></output> || <output id="mineralFormation${i}"></output> || <output id="mineralNote${i}"></output> || <output id="mineralElements${i}"></output> || <output id="mineralDiscoverer${i}"></output></div>`;
@@ -300,26 +299,16 @@ function postProcessSection(element, sectionType, i) {
 
 	const sectionElements = { input: {}, output: {} };
 
-	const inputs = document.querySelectorAll(`[data-${sectionType}="section${i}"] :is(input, select)`);
+	const sectionSelector = `[data-${sectionType}="section${i}"]`;
+
+	// adds functionality to the input elements in the new section
+	initialiseSectionInputs(sectionSelector);
+
+	const inputs = document.querySelectorAll(`${sectionSelector} :is(input, select)`);
 	for (const input of inputs) {
 		sectionElements.input[input.id] = input.id;
-		if (input.dataset.dest) {
-			assignFunction(input, 'wikiCode(this)');
-			wikiCode(input);
-		}
-		if (input.dataset.destNoauto) {
-			assignFunction(input, 'storeData(this)');
-			storeData(input);
-		}
-		if (input.dataset.default) {
-			assignFunction(input, 'assignDefaultValue(this)', null, true);
-			assignDefaultValue(input);
-		}
-		if (input.list) {
-			assignFunction(input, 'forceDatalist(this)', 'onchange');
-		}
 	}
-	const outputs = document.querySelectorAll(`[data-${sectionType}="section${i}"] output`);
+	const outputs = document.querySelectorAll(`${sectionSelector} output`);
 	for (const output of outputs) {
 		if (output.id) sectionElements.output[output.id] = output.id;
 	}

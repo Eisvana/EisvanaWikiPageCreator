@@ -37,13 +37,13 @@ let albumInitialised = false;
 	 * @type {string}
 	 */
 	const actions = `<button id="albumBtn" class="button is-outlined is-primary"
-		onclick="copyCode(this, 'albumText')">
-		Copy album wikicode
+		data-link="album" onclick="copyCode(this, 'albumText')">
+		Copy Album Wikicode
 		</button>
 		<a class="button is-outlined is-primary" id="albumLink"
-		onclick="albumLink(this)">
+		data-link="album" onclick="albumLink(this)">
 		Open Album
-		</a>`
+		</a>`;
 	// If the global albumEntry element exists, set its innerHTML to the wikitext.
 	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext.body.innerHTML;
 
@@ -71,6 +71,9 @@ let albumInitialised = false;
 	 * @type {boolean}
 	 */
 	albumInitialised = true;
+
+	const albumNote = `<p style="width:100%" class="has-text-centered mb-3">Please don't forget to create an album entry!</p>`;
+	globalElements.output.albumActions.insertAdjacentHTML('afterbegin', albumNote);
 })();
 
 /**
@@ -148,8 +151,7 @@ function albumDiscoverer() {
 		if (typeof albumDiscovererExternal == 'function') {
 			return albumDiscovererExternal();
 		} else {
-			const discovered = pageData.discovered;
-			const discoveredlink = pageData.discoveredlink;
+			const { discovered, discoveredlink } = pageData
 			if (discoveredlink) {
 				return `wiki=${discoveredlink}`;
 			} else {

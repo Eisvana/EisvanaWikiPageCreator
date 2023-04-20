@@ -107,9 +107,8 @@ globalElements.input.censusFriendInput.onchange = () => {
  * @returns {void}
  */
 function createCensusEntry() {
-	const input = globalElements.input.censusPlayerInput;
+	const { censusPlayerInput: input, censusShowInput: checkbox } = globalElements.input;
 	const inputBool = Boolean(input.value);	// boolean from the input (true if any input is given)
-	const checkbox = globalElements.input.censusShowInput;
 	if (checkbox.checked == inputBool) return;
 	checkbox.checked = inputBool;
 	checkboxWikiCode(checkbox);

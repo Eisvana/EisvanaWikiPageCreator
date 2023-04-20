@@ -22,11 +22,8 @@ assignElementFunctions(celestialObjectElementFunctions);
  * @returns {void}
  */
 function docByExternal() {
-	const discovered = pageData.discovered;
-	const discoveredlink = pageData.discoveredlink;
-	const documenter = pageData.docby;
+	const { discovered, discoveredlink, docby: documenter, civilized } = pageData;
 	const platform = (pageData.platform == 'NS') ? 'Switch' : pageData.platform;
-	const civilized = pageData.civilized;
 
 	/**
 	 * Formats a given date to be in the format 'Month Day, Year'
@@ -151,5 +148,31 @@ function buildDescriptor(descriptor, planetClass, filler) {
 
 		default:
 			return descriptor.trim();
+	}
+}
+
+/**
+ * Initialise form input fields.
+ * @param {string} sectionSelector - CSS selector for the input fields to initialise.
+ * @returns {void}
+ */
+function initialiseSectionInputs(sectionSelector) {
+	const inputs = document.querySelectorAll(`${sectionSelector} :is(input, select)`);
+	for (const input of inputs) {
+		if (input.dataset.dest) {
+			assignFunction(input, 'wikiCode(this)');
+			wikiCode(input);
+		}
+		if (input.dataset.destNoauto) {
+			assignFunction(input, 'storeData(this)');
+			storeData(input);
+		}
+		if (input.dataset.default) {
+			assignFunction(input, 'assignDefaultValue(this)', null, true);
+			assignDefaultValue(input);
+		}
+		if (input.list) {
+			assignFunction(input, 'forceDatalist(this)', 'onchange');
+		}
 	}
 }
