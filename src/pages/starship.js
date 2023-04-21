@@ -79,6 +79,7 @@ function getShipData() {
 	 * @property {string[]} Freighter.sections.exoticInput - Controls the visibility of exotic input.
 	 * @property {string[]} Freighter.sections.pilotInput - Controls the visibility of pilot input.
 	 * @property {string[]} Freighter.sections.inventoryInput - Controls the visibility of inventory input.
+	 * @property {string[]} Freighter.sections.classInput - Controls the visibility of class input.
 	 * @property {string[]} Freighter.sections.maneuverBInput - Controls the visibility of maneuverability input.
 	 * @property {string[]} Freighter.sections.damageBInput - Controls the visibility of damage input.
 	 * @property {string[]} Freighter.sections.shieldBInput - Controls the visibility of shield input.
@@ -105,6 +106,7 @@ function getShipData() {
 		exoticInput: ['hide', ''],
 		pilotInput: ['hide', ''],
 		inventoryInput: ['show'],
+		classInput: ['hide', ''],
 		maneuverBInput: ['hide', ''],
 		damageBInput: ['hide', ''],
 		shieldBInput: ['hide', ''],
@@ -138,6 +140,7 @@ function getShipData() {
 				exoticInput: ['hide', ''],
 				pilotInput: ['show'],
 				inventoryInput: ['hide'],
+				classInput: ['hide', ''],
 				maneuverBInput: ['hide', ''],
 				damageBInput: ['hide', ''],
 				shieldBInput: ['hide', ''],
@@ -167,6 +170,7 @@ function getShipData() {
 				exoticInput: ['show'],
 				pilotInput: ['hide', ''],
 				inventoryInput: ['hide', 'Small'],
+				classInput: ['hide', 'S'],
 				maneuverBInput: ['hide', ''],
 				damageBInput: ['hide', ''],
 				shieldBInput: ['hide', ''],
@@ -196,6 +200,7 @@ function getShipData() {
 				exoticInput: ['hide', ''],
 				pilotInput: ['hide', ''],
 				inventoryInput: ['hide'],
+				classInput: ['hide', ''],
 				maneuverBInput: ['hide', ''],
 				damageBInput: ['hide', ''],
 				shieldBInput: ['hide', ''],
@@ -309,6 +314,7 @@ function getShipData() {
 				exoticInput: ['hide', ''],
 				pilotInput: ['hide', ''],
 				inventoryInput: ['hide'],
+				classInput: ['hide', ''],
 				maneuverBInput: ['hide', ''],
 				damageBInput: ['hide', ''],
 				shieldBInput: ['hide', ''],
@@ -338,6 +344,7 @@ function getShipData() {
 				exoticInput: ['hide', ''],
 				pilotInput: ['hide', ''],
 				inventoryInput: ['hide', 'Medium'],
+				classInput: ['hide', 'S'],
 				maneuverBInput: ['show'],
 				damageBInput: ['show'],
 				shieldBInput: ['show'],
@@ -367,6 +374,7 @@ function getShipData() {
 				exoticInput: ['hide', ''],
 				pilotInput: ['hide', ''],
 				inventoryInput: ['hide', 'Large'],
+				classInput: ['show'],
 				maneuverBInput: ['show'],
 				damageBInput: ['show'],
 				shieldBInput: ['show'],
