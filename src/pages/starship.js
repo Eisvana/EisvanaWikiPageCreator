@@ -752,6 +752,10 @@ function albumOtherExternal() {
 			break;
 
 		case 'Interceptor':
+			prop1 = `${economy}<br>${loc}`;
+			prop2 = axes;
+			break;
+
 		case 'Living Ship':
 			prop1 = loc;
 			prop2 = axes;
