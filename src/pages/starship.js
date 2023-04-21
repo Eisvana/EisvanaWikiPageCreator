@@ -614,6 +614,7 @@ function loc() {
 			case 'Freighter':
 				return freighterSpawn();
 
+			case 'Interceptor':
 			case 'Living Ship':
 				return livingShipSpawn();
 
