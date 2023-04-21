@@ -371,7 +371,7 @@ function getShipData() {
 				damageBInput: ['show'],
 				shieldBInput: ['show'],
 				warpBInput: ['show'],
-				economyInput: ['hide', ''],
+				economyInput: ['show', ''],
 				planetInput: ['show'],
 				moonInput: ['show'],
 				axesInput: ['show']
