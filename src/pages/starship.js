@@ -36,6 +36,7 @@ const starshipElementFunctions = {
 	inventoryInput: ['costSlotCalc(); loc()'],
 	economyInput: ['calcS(); albumOther()'],
 	pilotInput: ['albumOther()'],
+	classInput: ['loc()'],
 	maneuverBInput: ['numberStats(this, 1)'],
 	damageBInput: ['numberStats(this, 1)'],
 	shieldBInput: ['numberStats(this, 1)'],
@@ -569,12 +570,12 @@ function shipType() {
  * @return {string} The completed location sentence.
  */
 function loc() {
-	const { system: systemName, region: regionName, civShort: civ, type } = pageData;
+	const { class: shipClass, system: systemName, region: regionName, civShort: civ, type } = pageData;
 
 	// this output has a linebreak. This is intended, because we use .innerText to display this. If we used <br>, it would display '<br>', not the linebreak.
 	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName)} of the ${HubGal(civ)}.
 
-	It can be found ${locText()}.`
+	${type == 'Interceptor' ? 'The {{Class|' + shipClass + '}} version of this starship' : 'It'} can be found ${locText()}.`
 
 	globalElements.output.location.innerText = output;
 
