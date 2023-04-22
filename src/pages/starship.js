@@ -424,15 +424,16 @@ function calcS() {
 	const exceptions = ['Exotic', 'Living Ship'];
 	if (!exceptions.includes(type)) {
 		switch (econ[0]) {
-			case "★★★":
+			case '★★★':
 				chance = '2%';
 				break;
 
-			case "★★":
+			case '★★':
 				chance = '1%';
 				break;
 
-			case "★":
+			case '★':
+			case 'Data':
 				chance = '0%';
 				break;
 
@@ -542,8 +543,7 @@ function calcInv() {
  * @returns {void}
  */
 function costSlotCalc() {
-	const type = pageData.type;
-	const inventory = pageData.inventory;
+	const { type, inventory } = pageData;
 	const propArray = ["cost", "slots", "techslots"];
 	const shipData = getShipData();
 
@@ -737,13 +737,16 @@ function appearanceSentence() {
  * @returns {string} Returns a string that includes the filled-out properties.
  */
 function albumOtherExternal() {
-	const { planet, moon, type } = pageData;
+	const { economy: economyRaw, planet, moon, type } = pageData;
 	const axes = '(' + pageData.axes + ')';
-
-	const economyinput = pageData.economy;
-	const economy = economyinput.includes('Black') ? '{{BlackMarket}}' : economyinput.split(' ')[0] + ' Economy';
 	const faction = '- ' + pageData.pilot;
-	const loc = (moon ? `[[${moon}]]` : `[[${planet}]]`);
+
+	const loc = moon ? `[[${moon}]]` : `[[${planet}]]`;
+	const economy = (() => {
+		if (economyRaw.includes('Black')) return '{{BlackMarket}}';
+		if (economyRaw == 'Data Unavailable') return '★ Economy (Abandoned)';
+		return economyRaw.split(' ')[0] + ' Economy';
+	})();
 
 	let prop1 = economy;
 	let prop2 = '';
