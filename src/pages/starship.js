@@ -36,6 +36,7 @@ const starshipElementFunctions = {
 	inventoryInput: ['costSlotCalc(); loc()'],
 	economyInput: ['calcS(); albumOther()'],
 	pilotInput: ['albumOther()'],
+	classInput: ['loc()'],
 	maneuverBInput: ['numberStats(this, 1)'],
 	damageBInput: ['numberStats(this, 1)'],
 	shieldBInput: ['numberStats(this, 1)'],
@@ -79,6 +80,7 @@ function getShipData() {
 	 * @property {string[]} Freighter.sections.exoticInput - Controls the visibility of exotic input.
 	 * @property {string[]} Freighter.sections.pilotInput - Controls the visibility of pilot input.
 	 * @property {string[]} Freighter.sections.inventoryInput - Controls the visibility of inventory input.
+	 * @property {string[]} Freighter.sections.classInput - Controls the visibility of class input.
 	 * @property {string[]} Freighter.sections.maneuverBInput - Controls the visibility of maneuverability input.
 	 * @property {string[]} Freighter.sections.damageBInput - Controls the visibility of damage input.
 	 * @property {string[]} Freighter.sections.shieldBInput - Controls the visibility of shield input.
@@ -105,6 +107,7 @@ function getShipData() {
 		exoticInput: ['hide', ''],
 		pilotInput: ['hide', ''],
 		inventoryInput: ['show'],
+		classInput: ['hide', ''],
 		maneuverBInput: ['hide', ''],
 		damageBInput: ['hide', ''],
 		shieldBInput: ['hide', ''],
@@ -138,6 +141,7 @@ function getShipData() {
 				exoticInput: ['hide', ''],
 				pilotInput: ['show'],
 				inventoryInput: ['hide'],
+				classInput: ['hide', ''],
 				maneuverBInput: ['hide', ''],
 				damageBInput: ['hide', ''],
 				shieldBInput: ['hide', ''],
@@ -167,6 +171,7 @@ function getShipData() {
 				exoticInput: ['show'],
 				pilotInput: ['hide', ''],
 				inventoryInput: ['hide', 'Small'],
+				classInput: ['hide', 'S'],
 				maneuverBInput: ['hide', ''],
 				damageBInput: ['hide', ''],
 				shieldBInput: ['hide', ''],
@@ -196,6 +201,7 @@ function getShipData() {
 				exoticInput: ['hide', ''],
 				pilotInput: ['hide', ''],
 				inventoryInput: ['hide'],
+				classInput: ['hide', ''],
 				maneuverBInput: ['hide', ''],
 				damageBInput: ['hide', ''],
 				shieldBInput: ['hide', ''],
@@ -309,6 +315,7 @@ function getShipData() {
 				exoticInput: ['hide', ''],
 				pilotInput: ['hide', ''],
 				inventoryInput: ['hide'],
+				classInput: ['hide', ''],
 				maneuverBInput: ['hide', ''],
 				damageBInput: ['hide', ''],
 				shieldBInput: ['hide', ''],
@@ -338,6 +345,7 @@ function getShipData() {
 				exoticInput: ['hide', ''],
 				pilotInput: ['hide', ''],
 				inventoryInput: ['hide', 'Medium'],
+				classInput: ['hide', 'S'],
 				maneuverBInput: ['show'],
 				damageBInput: ['show'],
 				shieldBInput: ['show'],
@@ -367,11 +375,12 @@ function getShipData() {
 				exoticInput: ['hide', ''],
 				pilotInput: ['hide', ''],
 				inventoryInput: ['hide', 'Large'],
+				classInput: ['show'],
 				maneuverBInput: ['show'],
 				damageBInput: ['show'],
 				shieldBInput: ['show'],
 				warpBInput: ['show'],
-				economyInput: ['hide', ''],
+				economyInput: ['show'],
 				planetInput: ['show'],
 				moonInput: ['show'],
 				axesInput: ['show']
@@ -415,15 +424,16 @@ function calcS() {
 	const exceptions = ['Exotic', 'Living Ship'];
 	if (!exceptions.includes(type)) {
 		switch (econ[0]) {
-			case "★★★":
+			case '★★★':
 				chance = '2%';
 				break;
 
-			case "★★":
+			case '★★':
 				chance = '1%';
 				break;
 
-			case "★":
+			case '★':
+			case 'Data':
 				chance = '0%';
 				break;
 
@@ -533,8 +543,7 @@ function calcInv() {
  * @returns {void}
  */
 function costSlotCalc() {
-	const type = pageData.type;
-	const inventory = pageData.inventory;
+	const { type, inventory } = pageData;
 	const propArray = ["cost", "slots", "techslots"];
 	const shipData = getShipData();
 
@@ -561,12 +570,12 @@ function shipType() {
  * @return {string} The completed location sentence.
  */
 function loc() {
-	const { system: systemName, region: regionName, civShort: civ, type } = pageData;
+	const { class: shipClass, system: systemName, region: regionName, civShort: civ, type } = pageData;
 
 	// this output has a linebreak. This is intended, because we use .innerText to display this. If we used <br>, it would display '<br>', not the linebreak.
 	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName)} of the ${HubGal(civ)}.
 
-	It can be found ${locText()}.`
+	${type == 'Interceptor' ? 'The {{Class|' + shipClass + '}} version of this starship' : 'It'} can be found ${locText()}.`
 
 	globalElements.output.location.innerText = output;
 
@@ -614,6 +623,7 @@ function loc() {
 			case 'Freighter':
 				return freighterSpawn();
 
+			case 'Interceptor':
 			case 'Living Ship':
 				return livingShipSpawn();
 
@@ -727,13 +737,16 @@ function appearanceSentence() {
  * @returns {string} Returns a string that includes the filled-out properties.
  */
 function albumOtherExternal() {
-	const { planet, moon, type } = pageData;
+	const { economy: economyRaw, planet, moon, type } = pageData;
 	const axes = '(' + pageData.axes + ')';
-
-	const economyinput = pageData.economy;
-	const economy = economyinput.includes('Black') ? '{{BlackMarket}}' : economyinput.split(' ')[0] + ' Economy';
 	const faction = '- ' + pageData.pilot;
-	const loc = (moon ? `[[${moon}]]` : `[[${planet}]]`);
+
+	const loc = moon ? `[[${moon}]]` : `[[${planet}]]`;
+	const economy = (() => {
+		if (economyRaw.includes('Black')) return '{{BlackMarket}}';
+		if (economyRaw == 'Data Unavailable') return '★ Economy (Abandoned)';
+		return economyRaw.split(' ')[0] + ' Economy';
+	})();
 
 	let prop1 = economy;
 	let prop2 = '';
@@ -743,6 +756,10 @@ function albumOtherExternal() {
 			break;
 
 		case 'Interceptor':
+			prop1 = `${economy}<br>${loc}`;
+			prop2 = axes;
+			break;
+
 		case 'Living Ship':
 			prop1 = loc;
 			prop2 = axes;
@@ -897,32 +914,32 @@ function galleryExplanationExternal() {
 function redirectPage() {
 	const name = pageData.name;
 	const greekLetters = {
-		α: 'alpha',
-		β: 'beta',
-		γ: 'gamma',
-		δ: 'delta',
-		ε: 'epsilon',
-		ζ: 'zeta',
-		η: 'eta',
-		θ: 'theta',
-		ι: 'iota',
-		κ: 'kappa',
-		λ: 'lambda',
-		μ: 'mu',
-		ν: 'nu',
-		ξ: 'xi',
-		ο: 'omicron',
-		π: 'pi',
-		ρ: 'rho',
-		σ: 'sigma',
-		ς: 'sigma',
-		ϲ: 'sigma',
-		τ: 'tau',
-		υ: 'upsilon',
-		φ: 'phi',
-		χ: 'chi',
-		ψ: 'psi',
-		ω: 'omega',
+		α: 'Alpha',
+		β: 'Beta',
+		γ: 'Gamma',
+		δ: 'Delta',
+		ε: 'Epsilon',
+		ζ: 'Zeta',
+		η: 'Eta',
+		θ: 'Theta',
+		ι: 'Iota',
+		κ: 'Kappa',
+		λ: 'Lambda',
+		μ: 'Mu',
+		ν: 'Nu',
+		ξ: 'Xi',
+		ο: 'Omicron',
+		π: 'Pi',
+		ρ: 'Rho',
+		σ: 'Sigma',
+		ς: 'Sigma',
+		ϲ: 'Sigma',
+		τ: 'Tau',
+		υ: 'Upsilon',
+		φ: 'Phi',
+		χ: 'Chi',
+		ψ: 'Psi',
+		ω: 'Omega',
 	}
 	const containsGreekLetter = Object.keys(greekLetters).some(letter => name.includes(letter));
 	if (!containsGreekLetter) return false;

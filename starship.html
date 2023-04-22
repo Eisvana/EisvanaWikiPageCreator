@@ -62,38 +62,43 @@
 							<data>Ship Name</data>
 							<data>
 								Enter exactly as seen in game. Watch out for 0 (zero) and O (o). Also put Greek
-								characters exactly as they are in game when documenting interceptors. You can copy from this list:
+								characters exactly as they are in game when documenting interceptors. You can copy from
+								this list:
 								<div>
-									<span title="alpha">α</span>,
-									<span title="beta">β</span>,
-									<span title="gamma">γ</span>,
-									<span title="delta">δ</span>,
-									<span title="epsilon">ε</span>,
-									<span title="zeta">ζ</span>,
-									<span title="eta">η</span>,
-									<span title="theta">θ</span>,
-									<span title="iota">ι</span>,
-									<span title="kappa">κ</span>,
-									<span title="lambda">λ</span>,
-									<span title="mu">μ</span>,
-									<span title="nu">ν</span>,
-									<span title="xi">ξ</span>,
-									<span title="omicron">ο</span>,
-									<span title="pi">π</span>,
-									<span title="rho">ρ</span>,
-									<span title="sigma">σ/ς/ϲ</span>,
-									<span title="tau">τ</span>,
-									<span title="upsilon">υ</span>,
-									<span title="phi">φ</span>,
-									<span title="chi">χ</span>,
-									<span title="psi">ψ</span>,
-									<span title="omega">ω</span>
+									<span title="Alpha">α</span>,
+									<span title="Beta">β</span>,
+									<span title="Gamma">γ</span>,
+									<span title="Delta">δ</span>,
+									<span title="Epsilon">ε</span>,
+									<span title="Zeta">ζ</span>,
+									<span title="Eta">η</span>,
+									<span title="Theta">θ</span>,
+									<span title="Iota">ι</span>,
+									<span title="Kappa">κ</span>,
+									<span title="Lambda">λ</span>,
+									<span title="Mu">μ</span>,
+									<span title="Nu">ν</span>,
+									<span title="Xi">ξ</span>,
+									<span title="Omicron">ο</span>,
+									<span title="Pi">π</span>,
+									<span title="Rho">ρ</span>,
+									<span title="Sigma">σ/ς/ϲ</span>,
+									<span title="Tau">τ</span>,
+									<span title="Upsilon">υ</span>,
+									<span title="Phi">φ</span>,
+									<span title="Chi">χ</span>,
+									<span title="Psi">ψ</span>,
+									<span title="Omega">ω</span>
 								</div>
-								Please also create a redirect with the Greek letter written out (for example from "Beta-Hope" to "β-Hope").
+								Please also create a redirect with the Greek letter written out (for example from
+								"Beta-Hope" to "β-Hope").
 								For more detailed information, see <a
 									href="https://nomanssky.fandom.com/wiki/No_Mans_Sky_Wiki:Explained_-_Interceptor_Ship_Names"
 									rel="noopener noreferrer" target="_blank">No Mans Sky Wiki:Explained - Interceptor
 									Ship Names</a>
+								<div class="mt-2 has-text-weight-bold">Important for Interceptors:</div>
+								You must reload your game after claiming the interceptor in order to get the correct
+								name!
 							</data>
 							<data>./assets/bitmap/ship/shipName.jpg</data>
 						</span>
@@ -224,6 +229,10 @@
 							<optgroup label="Pirate">
 								<option value="💀 (Black Market)">Black Market</option>
 							</optgroup>
+							<!--here ends Pirate-->
+							<optgroup label="Abandoned">
+								<option value="Data Unavailable">Data Unavailable</option>
+							</optgroup>
 						</select>
 					</div>
 					<div class="tableCell text">
@@ -331,24 +340,18 @@
 						</select>
 					</div>
 					<div class="tableCell text">
-						<label for="maneuverBInput">Maneuverability:</label>
-						<span class="tooltip">
-							<data>Enter the "Core" value as seen on the ship's scan.</data>
-							<data>Maneuverability</data>
-							<data>
-								Enter the "Core" value exactly as seen in the scan of the ship.<br>
-								It is preferred to enter the values as seen after buying, as they might change.<br>
-								If there is no core value, use the regular one.
-							</data>
-							<data>./assets/bitmap/ship/maneuverability.jpg</data>
-						</span>
+						<label for="classInput">Class:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="maneuverB" maxlength="5" placeholder="0.0"
-							id="maneuverBInput">
+						<select id="classInput" data-dest="class">
+							<option value="S">S</option>
+							<option value="A">A</option>
+							<option value="B">B</option>
+							<option value="C">C</option>
+						</select>
 					</div>
 					<div class="tableCell text">
-						<label for="damageBInput">Damage:</label>
+						<label for="damageBInput">Damage Potential:</label>
 						<span class="tooltip">
 							<data>Enter the "Core" value as seen on the ship's scan.</data>
 							<data>Damage</data>
@@ -356,6 +359,9 @@
 								Enter the "Core" value exactly as seen in the scan of the ship.<br>
 								It is preferred to enter the values as seen after buying, as they might change.<br>
 								If there is no core value, use the regular one.
+								<div class="mt-2 has-text-weight-bold">Important for Interceptors:</div>
+								You must reload your game after claiming the interceptor in order to get the correct
+								stats!
 							</data>
 							<data>./assets/bitmap/ship/damage.jpg</data>
 						</span>
@@ -364,7 +370,7 @@
 						<input type="text" data-dest-noauto="damageB" maxlength="5" placeholder="0.0" id="damageBInput">
 					</div>
 					<div class="tableCell text">
-						<label for="shieldBInput">Shield:</label>
+						<label for="shieldBInput">Shield Strength:</label>
 						<span class="tooltip">
 							<data>Enter the "Core" value as seen on the ship's scan.</data>
 							<data>Maneuverability</data>
@@ -372,6 +378,9 @@
 								Enter the "Core" value exactly as seen in the scan of the ship.<br>
 								It is preferred to enter the values as seen after buying, as they might change.<br>
 								If there is no core value, use the regular one.
+								<div class="mt-2 has-text-weight-bold">Important for Interceptors:</div>
+								You must reload your game after claiming the interceptor in order to get the correct
+								stats!
 							</data>
 							<data>./assets/bitmap/ship/shield.jpg</data>
 						</span>
@@ -380,7 +389,7 @@
 						<input type="text" data-dest-noauto="shieldB" maxlength="5" placeholder="0.0" id="shieldBInput">
 					</div>
 					<div class="tableCell text">
-						<label for="warpBInput">Warp:</label>
+						<label for="warpBInput">Hyperdrive Range:</label>
 						<span class="tooltip">
 							<data>Enter the "Core" value as seen on the ship's scan.</data>
 							<data>Warp</data>
@@ -388,12 +397,35 @@
 								Enter the "Core" value exactly as seen in the scan of the ship.<br>
 								It is preferred to enter the values as seen after buying, as they might change.<br>
 								If there is no core value, use the regular one.
+								<div class="mt-2 has-text-weight-bold">Important for Interceptors:</div>
+								You must reload your game after claiming the interceptor in order to get the correct
+								stats!
 							</data>
 							<data>./assets/bitmap/ship/hyperdrive.jpg</data>
 						</span>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="warpB" maxlength="5" placeholder="0.0" id="warpBInput">
+					</div>
+					<div class="tableCell text">
+						<label for="maneuverBInput">Maneuverability:</label>
+						<span class="tooltip">
+							<data>Enter the "Core" value as seen on the ship's scan.</data>
+							<data>Maneuverability</data>
+							<data>
+								Enter the "Core" value exactly as seen in the scan of the ship.<br>
+								It is preferred to enter the values as seen after buying, as they might change.<br>
+								If there is no core value, use the regular one.
+								<div class="mt-2 has-text-weight-bold">Important for Interceptors:</div>
+								You must reload your game after claiming the interceptor in order to get the correct
+								stats!
+							</data>
+							<data>./assets/bitmap/ship/maneuverability.jpg</data>
+						</span>
+					</div>
+					<div class="tableCell data">
+						<input type="text" data-dest-noauto="maneuverB" maxlength="5" placeholder="0.0"
+							id="maneuverBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="discoveredlinkInput">Discoverer wiki account:</label>
