@@ -1351,7 +1351,7 @@ function checkDataIntegrity(element = null, simple = false) {
 
 	const { name, portalglyphs: glyphs, region } = pageData;
 
-	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.copy === element.dataset.link) || simple)) {
+	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.copy === element?.dataset?.link) || simple)) {
 		dataIntegrityObj.copy = false;
 		return false;
 	} else if (!name) {
