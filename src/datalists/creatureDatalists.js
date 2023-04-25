@@ -4,6 +4,31 @@
 (() => {
 	const creatureDatalists = {
 		notesData: [
+			'Organic Interior',
+			'Magnetic Shell',
+			'Self-Greasing',
+			'Searching for home',
+			'Wonders why',
+			'Waiting for infinity',
+			'Transmitting to the Atlas',
+			'Remembers the Before',
+			'Non-simulated',
+			'Solar Powered',
+			'[ Internal battery leak detected ]',
+			'Unscannable',
+			'Recycled',
+			'Self-constructed',
+			'Assembled in the stars',
+			'Superconducting wires',
+			'Enlarged flux circuit',
+			'Distributed cores',
+			'Divergent',
+			'Self-aware',
+			'Chooses not to speak',
+			'Underclocked',
+			'Overclocked',
+			'Air-cooled',
+			'Graphene wiring',
 			'Many hidden toes',
 			'Builds metal nest',
 			'Dislikes bright colours',
@@ -223,6 +248,15 @@
 			'Skeletal analysis reveals unusually supple bones, as if they had only recently grown: possible defense mechanism to shed and rapidly regrow body parts?'
 		],
 		behaviourData: [
+			'01100001 01101110 01100111 01110010 01111001',
+			'01110011 01100001 01100100',
+			'01100001 01101100 01101111 01101110 01100101',
+			'01101000 01100101 01101100 01110000',
+			'01101000 01100101 01101100 01110000',
+			'01110111 01100001 01101001 01110100',
+			'01101000 01110101 01101110 01110100',
+			'01101011 01101001 01101100 01101100',
+			'01100110 01100001 01101001 01101100',
 			'Careful hunter',
 			'Patient hunter',
 			'Cautious',
@@ -459,3 +493,48 @@
 	}
 	datalists(creatureDatalists);
 })();
+
+function getGenderData(genus = null) {
+	const genderData = {
+		Mechanoceris: [
+			'Electronic',
+			'Virtual',
+			'Uninitialised',
+			'Unmeasurable',
+			'Circular',
+			'Non-boolean',
+			'Mutable',
+			'Asynchronous',
+			'Non-Euclidean'
+		],
+		default: [
+			'Alpha',
+			'Asymmetric',
+			'Asymptotic',
+			'Exotic',
+			'Female',
+			'Indeterminate',
+			'Non-uniform',
+			'None',
+			'Orthogonal',
+			'Prime',
+			'Radical',
+			'Rational',
+			'Symmetric',
+			'Unknown',
+			'Vectorised',
+			'Male'
+		]
+	}
+
+	switch (genus) {
+		case 'Mechanoceris':
+			return genderData.Mechanoceris;
+
+		case null:
+			return genderData;
+
+		default:
+			return genderData.default;
+	}
+}
