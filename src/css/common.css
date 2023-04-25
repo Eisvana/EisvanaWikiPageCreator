@@ -443,6 +443,10 @@ label>input[type="radio"]~span,
 	container-type: inline-size;
 }
 
+.mark {
+	background-color: #ffff006e;
+}
+
 /* Container Queries */
 @container (max-width: 260px) {
 	div.tableCell div.checkboxes-grid {

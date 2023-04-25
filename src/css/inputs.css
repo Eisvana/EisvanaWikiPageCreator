@@ -163,3 +163,13 @@ input[type="date"]:hover {
 	border: 1px solid;
 	border-color: var(--border-color-hover);
 }
+
+.merchant-search {
+	margin-block-end: .5rem;
+	background-color: var(--body-backgroundcolor);
+}
+
+.merchant-search,
+.merchant-search::placeholder {
+	color: var(--text-color);
+}

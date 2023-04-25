@@ -14,6 +14,7 @@ function startupFunctions() {
 	addTemplate();
 	wikiCodePercentage();
 	autoPirate(globalElements.input.wealthInput);
+	globalElements.input.merchantSearch.forEach(element => searchUpgrades(element));
 }
 
 const systemElements = {
@@ -22,6 +23,7 @@ const systemElements = {
 		moonInput: 'moonNumInput',
 		terminalInputs: 'terminalInputs',
 		systemExtras: 'systemExtras',
+		merchantSearch: 'merchant-search',
 	},
 	output: {
 		tradeTerminal: 'tradeTerminal',
@@ -49,6 +51,7 @@ const systemElementFunctions = {
 	platformInput: ['docByExternal()'],
 	distanceInput: ['numberStats(this)'],
 	systemExtras: ['addTemplate(this)'],
+	merchantSearch: ['searchUpgrades(this)'],
 }
 assignElementFunctions(systemElementFunctions);
 
@@ -814,4 +817,30 @@ function galleryExplanationExternal() {
 			<li>Default SS Multi-Tool</li>
 		</ol>
 	</div>`
+}
+
+/**
+ * Searches for and highlights checkboxes based on a search term.
+ *
+ * @param {HTMLInputElement} element - The input element to search with.
+ * @returns {void}
+ */
+function searchUpgrades(element) {
+	const checkboxes = element.parentElement.getElementsByClassName('checkbox');
+	const checkboxData = new Object;
+	for (const checkbox of checkboxes) {
+		const { id } = checkbox.querySelector('input');
+		const value = checkbox.innerText.toLowerCase();
+		checkboxData[id] = value;
+		checkbox.classList.remove('mark');
+	}
+	const searchTerm = element.value.trim().toLowerCase();
+	if (!searchTerm) return;
+	const matches = Object.entries(checkboxData)
+		.filter(([, value]) => value.includes(searchTerm))
+		.map(([key]) => key);
+	for (const match of matches) {
+		const matchedCheckbox = document.getElementById(match);
+		matchedCheckbox.closest('.checkbox').classList.add('mark');
+	}
 }
