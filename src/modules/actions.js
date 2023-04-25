@@ -208,9 +208,12 @@ function createPage(element, pagename = pageData.name) {
  */
 function assignLink(element, link) {
 	const dataIntegrity = checkDataIntegrity(element);		// boolean
+	const forbiddenCharacters = ['#', '<', '>', '[', ']', '{', '|', '}'];
+	const regex = new RegExp(`[${forbiddenCharacters.join('')}]`, 'g');
+
 	if (!dataIntegrity) {
 		// If dataIntegrity is valid, assign link to element and open in new tab
-		element.href = link;
+		element.href = link.replace(regex, ' ');
 		element.target = '_blank';
 		element.rel = 'noopener noreferrer';
 		element.style.pointerEvents = '';

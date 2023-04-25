@@ -93,8 +93,8 @@
 							<data>
 								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
 								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a
-									href="Special:Upload" data-wiki>Special:Upload</a>
+								You can upload your pictures to the wiki on <a href="Special:Upload"
+									data-wiki>Special:Upload</a>
 								<br>
 								<br>
 								Make sure no asteroids/pulse lines/freighters are obstructing the picture.<br>
@@ -275,9 +275,11 @@
 					<div class="tableCell text">
 						<label for="waterInput">Dissonant system?</label>
 						<span class="tooltip">
-							<data>Found in the galaxy map. If it doesn't display "Dissonant", it is not dissonant.</data>
+							<data>Found in the galaxy map. If it doesn't display "Dissonant", it is not
+								dissonant.</data>
 							<data>Dissonant</data>
-							<data>Found in the galaxy map. If it doesn't display "Dissonant", don't check the box.</data>
+							<data>Found in the galaxy map. If it doesn't display "Dissonant", don't check the
+								box.</data>
 							<data>./assets/bitmap/system/dissonant.jpg</data>
 						</span>
 					</div>
@@ -632,38 +634,45 @@
 					</div>
 					<div class="tableHeader data" data-section="MTMerchant" style="display: none"
 						data-station="merchant">
+						<label for="mtSearch">Search:</label>
+						<input type="text" id="mtSearch" placeholder="🔎 Search" name="merchant-search"
+							class="input merchant-search">
 						<div class="checkboxes-grid">
-							<label class="checkbox" for="mtAVUInput"><input type="checkbox" id="mtAVUInput"
+							<label class="checkbox" for="mtAVU"><input type="checkbox" id="mtAVU"
 									value="Analysis Visor Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Analysis Visor Upgrade</span></label>
+									class="checkbox-label">Scanner Module</span></label>
 
-							<label class="checkbox" for="mtBJUInput"><input type="checkbox" id="mtBJUInput"
+							<label class="checkbox" for="mtBJU"><input type="checkbox" id="mtBJU"
 									value="Blaze Javelin Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Blaze Javelin Upgrade</span></label>
+									class="checkbox-label">Blaze Javelin Module</span></label>
 
-							<label class="checkbox" for="mtBUInput"><input type="checkbox" id="mtBUInput"
+							<label class="checkbox" for="mtBU"><input type="checkbox" id="mtBU"
 									value="Boltcaster Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Boltcaster Upgrade</span></label>
+									class="checkbox-label">Boltcaster Module</span></label>
 
-							<label class="checkbox" for="mtGCUInput"><input type="checkbox" id="mtGCUInput"
+							<label class="checkbox" for="mtGCU"><input type="checkbox" id="mtGCU"
 									value="Geology Cannon Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Geology Cannon Upgrade</span></label>
+									class="checkbox-label">Geology Cannon Module</span></label>
 
-							<label class="checkbox" for="mtMBUInput"><input type="checkbox" id="mtMBUInput"
+							<label class="checkbox" for="mtMBU"><input type="checkbox" id="mtMBU"
 									value="Mining Beam Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Mining Beam Upgrade</span></label>
+									class="checkbox-label">Mining Beam Module</span></label>
 
-							<label class="checkbox" for="mtPLUInput"><input type="checkbox" id="mtPLUInput"
+							<label class="checkbox" for="mtNCU"><input type="checkbox" id="mtNCU"
+									value="Neutron Cannon Upgrade" data-dest-checkbox-group="MTMerchant"><span
+									class="checkbox-label">Neutron Cannon Module</span></label>
+
+							<label class="checkbox" for="mtPLU"><input type="checkbox" id="mtPLU"
 									value="Plasma Launcher Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Plasma Launcher Upgrade</span></label>
+									class="checkbox-label">Plasma Launcher Module</span></label>
 
-							<label class="checkbox" for="mtPSUInput"><input type="checkbox" id="mtPSUInput"
+							<label class="checkbox" for="mtPSU"><input type="checkbox" id="mtPSU"
 									value="Pulse Spitter Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Pulse Spitter Upgrade</span></label>
+									class="checkbox-label">Pulse Spitter Module</span></label>
 
-							<label class="checkbox" for="mtSBUInput"><input type="checkbox" id="mtSBUInput"
+							<label class="checkbox" for="mtSBU"><input type="checkbox" id="mtSBU"
 									value="Scatter Blaster Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Scatter Blaster Upgrade</span></label>
+									class="checkbox-label">Scatter Blaster Module</span></label>
 						</div>
 					</div>
 					<div class="tableHeader text sectionToggle" data-station="merchant">
@@ -684,42 +693,45 @@
 					</div>
 					<div class="tableHeader data" data-section="SSMerchant" style="display: none"
 						data-station="merchant">
+						<label for="ssSearch">Search:</label>
+						<input type="text" id="ssSearch" placeholder="🔎 Search" name="merchant-search"
+							class="input merchant-search">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="ssCBU"><input type="checkbox" id="ssCBU"
 									value="Cyclotron Ballista Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Cyclotron Ballista Upgrade</span></label>
+									class="checkbox-label">Cyclotron Module</span></label>
 
 							<label class="checkbox" for="ssDSU"><input type="checkbox" id="ssDSU"
 									value="Deflector Shield Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Deflector Shield Upgrade</span></label>
+									class="checkbox-label">Starship Shield Module</span></label>
 
 							<label class="checkbox" for="ssHU"><input type="checkbox" id="ssHU"
 									value="Hyperdrive Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Hyperdrive Upgrade</span></label>
+									class="checkbox-label">Hyperdrive Module</span></label>
 
 							<label class="checkbox" for="ssIKAU"><input type="checkbox" id="ssIKAU"
 									value="Infra-Knife Accelerator Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Infra-Knife Accelerator Upgrade</span></label>
+									class="checkbox-label">Infra-Knife Module</span></label>
 
 							<label class="checkbox" for="ssLTU"><input type="checkbox" id="ssLTU"
 									value="Launch Thruster Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Launch Thruster Upgrade</span></label>
+									class="checkbox-label">Launch Thrusters Module</span></label>
 
 							<label class="checkbox" for="ssPBU"><input type="checkbox" id="ssPBU"
 									value="Phase Beam Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Phase Beam Upgrade</span></label>
+									class="checkbox-label">Phase Beam Module</span></label>
 
 							<label class="checkbox" for="ssPCU"><input type="checkbox" id="ssPCU"
 									value="Photon Cannon Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Photon Cannon Upgrade</span></label>
+									class="checkbox-label">Photon Cannon Module</span></label>
 
 							<label class="checkbox" for="ssPEU"><input type="checkbox" id="ssPEU"
 									value="Positron Ejector Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Positron Ejector Upgrade</span></label>
+									class="checkbox-label">Positron Module</span></label>
 
 							<label class="checkbox" for="ssPuEU"><input type="checkbox" id="ssPuEU"
 									value="Pulse Engine Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Pulse Engine Upgrade</span></label>
+									class="checkbox-label">Pulse Engine Module</span></label>
 						</div>
 					</div>
 					<div class="tableHeader text sectionToggle" data-station="merchant">
@@ -740,6 +752,9 @@
 					</div>
 					<div class="tableHeader data" data-section="ECMerchant" style="display: none"
 						data-station="merchant">
+						<label for="ecSearch">Search:</label>
+						<input type="text" id="ecSearch" placeholder="🔎 Search" name="merchant-search"
+							class="input merchant-search">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="ecEAMU"><input type="checkbox" id="ecEAMU"
 									value="Exocraft Acceleration Module Upgrade"
@@ -748,35 +763,39 @@
 
 							<label class="checkbox" for="ecEMLU"><input type="checkbox" id="ecEMLU"
 									value="Exocraft Mining Laser Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Exocraft Mining Laser Upgrade</span></label>
+									class="checkbox-label">Exocraft Laser Module</span></label>
 
 							<label class="checkbox" for="ecEMCU"><input type="checkbox" id="ecEMCU"
 									value="Exocraft Mounted Cannon Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Exocraft Mounted Cannon Upgrade</span></label>
+									class="checkbox-label">Exocraft Cannon Module</span></label>
 
 							<label class="checkbox" for="ecFEU"><input type="checkbox" id="ecFEU"
 									value="Fusion Engine Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Fusion Engine Upgrade</span></label>
+									class="checkbox-label">Exocraft Engine Module</span></label>
+
+							<label class="checkbox" for="ecEBU"><input type="checkbox" id="ecEBU"
+									value="Exocraft Boosters Upgrade" data-dest-checkbox-group="ECMerchant"><span
+									class="checkbox-label">Exocraft Boost Module</span></label>
 
 							<label class="checkbox" for="ecHDU"><input type="checkbox" id="ecHDU"
 									value="Humboldt Drive Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Humboldt Drive Upgrade</span></label>
+									class="checkbox-label">Humboldt Drive Module</span></label>
 
 							<label class="checkbox" for="ecMCU"><input type="checkbox" id="ecMCU"
 									value="Minotaur Cannon Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Minotaur Cannon Upgrade</span></label>
+									class="checkbox-label">Minotaur Cannon Module</span></label>
 
 							<label class="checkbox" for="ecMEU"><input type="checkbox" id="ecMEU"
 									value="Minotaur Engine Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Minotaur Engine Upgrade</span></label>
+									class="checkbox-label">Minotaur Engine Module</span></label>
 
 							<label class="checkbox" for="ecMLU"><input type="checkbox" id="ecMLU"
 									value="Minotaur Laser Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Minotaur Laser Upgrade</span></label>
+									class="checkbox-label">Minotaur Laser Module</span></label>
 
 							<label class="checkbox" for="ecNCU"><input type="checkbox" id="ecNCU"
 									value="Nautilon Cannon Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Nautilon Cannon Upgrade</span></label>
+									class="checkbox-label">Nautilon Cannon Module</span></label>
 						</div>
 					</div>
 					<div class="tableHeader text sectionToggle" data-station="merchant">
@@ -797,18 +816,21 @@
 					</div>
 					<div class="tableHeader data" data-section="ESMerchant" style="display: none"
 						data-station="merchant">
+						<label for="esSearch">Search:</label>
+						<input type="text" id="esSearch" placeholder="🔎 Search" name="merchant-search"
+							class="input merchant-search">
 						<div class="checkboxes-grid" style="width: 100%">
 							<label class="checkbox" for="esDSU"><input type="checkbox" id="esDSU"
 									value="Defence Systems Upgrade" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Defence Systems Upgrade</span></label>
+									class="checkbox-label">Shield Module</span></label>
 
 							<label class="checkbox" for="esLSU"><input type="checkbox" id="esLSU"
 									value="Life Support Upgrade" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Life Support Upgrade</span></label>
+									class="checkbox-label">Life Support Module</span></label>
 
 							<label class="checkbox" for="esMSU"><input type="checkbox" id="esMSU"
 									value="Movement System Upgrade" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Movement System Upgrade</span></label>
+									class="checkbox-label">Movement Module</span></label>
 
 							<label class="checkbox" for="esRPM"><input type="checkbox" id="esRPM"
 									value="Radiation Protection Module" data-dest-checkbox-group="ESMerchant"><span
@@ -816,13 +838,11 @@
 
 							<label class="checkbox" for="esTPMC"><input type="checkbox" id="esTPMC"
 									value="Thermal Protection Module (Cold)" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Thermal
-									Protection Module (Cold)</span></label>
+									class="checkbox-label">Thermal Protection Module (Cold)</span></label>
 
 							<label class="checkbox" for="esTPMH"><input type="checkbox" id="esTPMH"
 									value="Thermal Protection Module (Heat)" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Thermal
-									Protection Module (Heat)</span></label>
+									class="checkbox-label">Thermal Protection Module (Heat)</span></label>
 
 							<label class="checkbox" for="esTPM"><input type="checkbox" id="esTPM"
 									value="Toxic Protection Module" data-dest-checkbox-group="ESMerchant"><span
@@ -849,6 +869,9 @@
 					</div>
 					<div class="tableHeader data" data-section="SDMerchant" style="display: none"
 						data-station="scrapDealer">
+						<label for="sdSearch">Search:</label>
+						<input type="text" id="sdSearch" placeholder="🔎 Search" name="merchant-search"
+							class="input merchant-search">
 						<div class="checkboxes-grid" style="width: 100%">
 							<label class="checkbox" for="sdN"><input type="checkbox" id="sdN" value=""
 									data-dest-checkbox-group="SDMerchant"><span
@@ -867,6 +890,10 @@
 									value="Suspicious Scanner Module" data-dest-checkbox-group="SDMerchant"><span
 									class="checkbox-label">Suspicious Scanner Module</span></label>
 
+							<label class="checkbox" for="sdLSM"><input type="checkbox" id="sdLSM"
+									value="Suspicious Life Support Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Life Support Module</span></label>
+
 							<label class="checkbox" for="sdBM"><input type="checkbox" id="sdBM"
 									value="Suspicious Boltcaster Module" data-dest-checkbox-group="SDMerchant"><span
 									class="checkbox-label">Suspicious Boltcaster Module</span></label>
@@ -880,9 +907,64 @@
 									value="Suspicious Movement Module" data-dest-checkbox-group="SDMerchant"><span
 									class="checkbox-label">Suspicious Movement Module</span></label>
 
+							<label class="checkbox" for="sdShM"><input type="checkbox" id="sdShM"
+									value="Suspicious Shield Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Shield Module</span></label>
+
+							<label class="checkbox" for="sdHM"><input type="checkbox" id="sdHM"
+									value="Suspicious Hyperdrive Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Hyperdrive Module</span></label>
+
 							<label class="checkbox" for="sdPEM"><input type="checkbox" id="sdPEM"
 									value="Suspicious Pulse Engine Module" data-dest-checkbox-group="SDMerchant"><span
 									class="checkbox-label">Suspicious Pulse Engine Module</span></label>
+
+							<label class="checkbox" for="sdSSM"><input type="checkbox" id="sdSSM"
+									value="Suspicious Starship Shield Module"
+									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Suspicious
+									Starship Shield Module</span></label>
+
+							<label class="checkbox" for="sdCM"><input type="checkbox" id="sdCM"
+									value="Suspicious Cyclotron Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Cyclotron Module</span></label>
+
+							<label class="checkbox" for="sdIKM"><input type="checkbox" id="sdIKM"
+									value="Suspicious Infra-Knife Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Infra-Knife Module</span></label>
+
+							<label class="checkbox" for="sdPM"><input type="checkbox" id="sdPM"
+									value="Suspicious Positron Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Positron Module</span></label>
+
+							<label class="checkbox" for="sdPCM"><input type="checkbox" id="sdPCM"
+									value="Suspicious Photon Cannon Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Photon Cannon Module</span></label>
+
+							<label class="checkbox" for="sdPSM"><input type="checkbox" id="sdPSM"
+									value="Suspicious Pulse Spitter Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Pulse Spitter Module</span></label>
+
+							<label class="checkbox" for="sdSBM"><input type="checkbox" id="sdSBM"
+									value="Suspicious Scatter Blaster Module"
+									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Suspicious
+									Scatter Blaster Module</span></label>
+
+							<label class="checkbox" for="sdBJM"><input type="checkbox" id="sdBJM"
+									value="Suspicious Blaze Javelin Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Blaze Javelin Module</span></label>
+
+							<label class="checkbox" for="sdGCM"><input type="checkbox" id="sdGCM"
+									value="Suspicious Geology Cannon Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Geology Cannon Module</span></label>
+
+							<label class="checkbox" for="sdPLM"><input type="checkbox" id="sdPLM"
+									value="Suspicious Plasma Launcher Module"
+									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Suspicious Plasma
+									Launcher Module</span></label>
+
+							<label class="checkbox" for="sdNCM"><input type="checkbox" id="sdNCM"
+									value="Suspicious Neutron Cannon Module" data-dest-checkbox-group="SDMerchant"><span
+									class="checkbox-label">Suspicious Neutron Cannon Module</span></label>
 						</div>
 					</div>
 					<div class="tableCell text">

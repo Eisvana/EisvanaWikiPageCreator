@@ -4,6 +4,7 @@
 
 function startupFunctions() {
 	genusDropdown();
+	genderDropdown();
 	albumDropdown();
 	hideOrgName();
 	pageName();
@@ -34,7 +35,7 @@ const creatureElementFunctions = {
 	planetInput: ['planetMoonSentence()'],
 	moonInput: ['planetMoonSentence()'],
 	ecosystemInput: ['genusDropdown(); albumDropdown(); genusProduces()'],
-	genusInput: ['genusProduces()'],
+	genusInput: ['genderDropdown(); specialNotesTextFunc(); genusProduces()'],
 	civ: ['albumDropdown(); hideAlbumEntry();', null, true],
 	notesInput: ['specialNotes(); specialNotesTextFunc()'],
 	specialNotesInput: ['specialNotesTextFunc()'],
@@ -166,12 +167,7 @@ function genusProduces() {
 
 		const food = creatureData.ecosystems[ecosystem][genus].produces;
 		setDropdownOptions(producesInputElement, food);
-
-		if (food.length > 1) {
-			hideInput(producesInputElement, '');
-		} else {
-			hideInput(producesInputElement, 'none');
-		}
+		hideInput(producesInputElement, food.length > 1 ? '' : 'none');
 		wikiCode(producesInputElement);
 	}
 }
@@ -230,16 +226,20 @@ function specialNotes() {
  * @returns {void}
  */
 function specialNotesTextFunc() {
-	const { notes, addObservation: specialNotes } = pageData;
+	const { genus, notes, addObservation: specialNotes } = pageData;
 	const { input: { notesInput: notesElement }, output: { addObservation: addObservationElement } } = globalElements;
 
-	wikiCode(notesElement, notesElement.dataset.destNoauto);
-	if (!notes) {
+	wikiCodeSimple(notesElement, notesElement.dataset.destNoauto);
+	addObservationElement.parentElement.style.display = genus == 'Mechanoceris' ? 'none' : '';
+	if (!notes && genus != 'Mechanoceris') {
 		addObservationElement.innerText = "'''Additional Observations''': ";
 		return;
 	}
+
 	const noteText = (() => {
-		if (!specialNotes || specialNotes == notes) {
+		if (genus == 'Mechanoceris') {
+			return '';
+		} else if (!specialNotes || specialNotes == notes) {
 			return `'''Additional Observations''': ${notes}`;
 		} else {
 			return specialNotes;
@@ -460,4 +460,16 @@ function galleryExplanationExternal() {
  */
 function redirectPage() {
 	if (pageData.oldName && pageData.oldName != pageData.newName) return pageData.newName;
+}
+
+function genderDropdown() {
+	const genus = pageData.genus;
+	const { genderInput, gender2Input } = globalElements.input;
+	const genderArray = getGenderData(genus);
+	const gender2Array = ['', ...genderArray];
+	setDropdownOptions(genderInput, genderArray);
+	setDropdownOptions(gender2Input, gender2Array);
+	for (const input of [genderInput, gender2Input]) {
+		input.onchange();
+	}
 }
