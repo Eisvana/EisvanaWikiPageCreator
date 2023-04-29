@@ -166,10 +166,16 @@ input[type="date"]:hover {
 
 .merchant-search {
 	margin-block-end: .5rem;
-	background-color: var(--body-backgroundcolor);
+	background-color: var(--input-background);
 }
 
 .merchant-search,
 .merchant-search::placeholder {
 	color: var(--text-color);
+}
+
+.required::after {
+	content: '*';
+	color: red;
+	margin-inline: .25rem;
 }

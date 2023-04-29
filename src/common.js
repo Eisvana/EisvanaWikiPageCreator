@@ -1350,13 +1350,17 @@ function checkDataIntegrity(element = null, simple = false) {
 
 	const { name, portalglyphs: glyphs, region } = pageData;
 
-	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.copy === element?.dataset?.link) || simple)) {
+	const requiredMet = typeof requiredInputs == 'function' ? requiredInputs() : [true];
+
+	if (requiredMet[0] && name && glyphs && region && ((currentText == savedText && dataIntegrityObj.copy === element?.dataset?.link) || simple)) {
 		dataIntegrityObj.copy = false;
 		return false;
 	} else if (!name) {
 		return 'Missing Name!';
 	} else if ((!glyphs || !region)) {
 		return 'Wrong Glyphs!';
+	} else if (!requiredMet[0]) {
+		return requiredMet[1];
 	} else {
 		return 'Copy Code First!';
 	}
@@ -1580,4 +1584,68 @@ async function loadHTML(url, varObj = {}) {
 	const parser = new DOMParser();
 	const dom = parser.parseFromString(html, 'text/html');
 	return dom;
+}
+
+/**
+ * Adds a star to the given element by calling the modifyStar function with the 'add' parameter.
+ *
+ * @param {HTMLElement} element - The element to which the star will be added.
+ */
+function addStar(element) {
+	modifyStar(element, 'add');
+}
+
+/**
+ * Removes a star from the given element by calling the modifyStar function with the 'remove' parameter.
+ *
+ * @param {HTMLElement} element - The element from which the star will be removed.
+ */
+function removeStar(element) {
+	modifyStar(element, 'remove');
+}
+
+/**
+ * Modifies the required label of a given element by adding or removing a star.
+ *
+ * @param {HTMLElement} element - The element whose label needs to be modified.
+ * @param {string} operation - The operation to be performed on the label. Should be either 'add' or 'remove'.
+ */
+function modifyStar(element, operation) {
+	const label = (() => {
+		if (element.tagName.toLowerCase() == 'textarea') {
+			return element?.previousElementSibling;
+		} else {
+			return element?.closest('.tableCell, .tableHeader')?.previousElementSibling?.querySelector('label');
+		}
+	})();
+	label?.classList?.[operation]?.('required');
+}
+
+/**
+ * Adds a star to each element in the given array of input names.
+ *
+ * @param {string[]} array - An array of input names, represented as strings.
+ */
+function addStars(array) {
+	for (const input of array) {
+		const element = globalElements.input[input];
+		addStar(element);
+
+		// using this to wait for the end of the function callstack
+		setTimeout(() => {
+			element.style.backgroundColor = '';
+		}, 0);
+	}
+}
+
+/**
+ * Highlights the input field with a red background color, and returns an error message indicating that the input is missing.
+ *
+ * @param {string} input - The name of the input field whose value is missing.
+ * @returns {Array<boolean, string>} - An array containing a boolean and string value. The boolean value is always false, indicating that an error occurred. The string value is an error message indicating that the input is missing.
+ */
+function requiredError(input) {
+	const element = globalElements?.input?.[input];
+	if (element) element.style.backgroundColor = 'red';
+	return [false, `Missing Input: ${input}`];
 }
