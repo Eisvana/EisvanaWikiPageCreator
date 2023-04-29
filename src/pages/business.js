@@ -121,6 +121,11 @@ function resetExternal() {
 	removeSection(contentSections);
 }
 
+/**
+ * An array containing the IDs of all input fields that are required for the form, but are not specifically related to any particular category.
+ *
+ * @type {string[]}
+ */
 const generalRequiredInputIDs = [
 	'systemInput',
 	'planetInput',
@@ -129,7 +134,19 @@ const generalRequiredInputIDs = [
 	'portalglyphsInput',
 	'nameInput',
 ]
+
+/**
+ * An array containing the IDs of all input fields that are required for the form.
+ *
+ * @type {string[]}
+ */
 const requiredInputIDs = ['ownerInput', 'ownerlinkInput', ...generalRequiredInputIDs];
+
+/**
+ * Checks if all required input fields are present and not empty. Returns an error message if any input field is missing, else returns true.
+ *
+ * @returns {(Array<boolean, string>|boolean)} - An array containing a boolean and a string value, indicating an error message if an error occurred. If all input fields are present and not empty, returns true.
+ */
 function requiredInputs() {
 	for (const input of generalRequiredInputIDs) {
 		const element = globalElements.input[input];
