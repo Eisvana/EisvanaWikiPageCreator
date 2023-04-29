@@ -5,6 +5,7 @@
 function startupFunctions() {
 	const input = document.querySelector('[oninput*="enPrefix"]');
 	enPrefix(input.value, 'enPrefix');
+	addStars(requiredInputIDs);
 }
 
 const businessElements = {
@@ -23,7 +24,6 @@ const businessElementFunctions = {
 	currencyInput: ['fixHC(this); enPrefix(this.value, "enPrefix")'],
 }
 assignElementFunctions(businessElementFunctions);
-
 
 (() => {
 	const currencyDatalist = {
@@ -119,4 +119,25 @@ function resetExternal() {
 	const contentSections = document.querySelectorAll('[data-section]');
 	globalElements.output.contents.innerText = '';
 	removeSection(contentSections);
+}
+
+const generalRequiredInputIDs = [
+	'systemInput',
+	'planetInput',
+	'headquartersInput',
+	'fileInput',
+	'portalglyphsInput',
+	'nameInput',
+]
+const requiredInputIDs = ['ownerInput', 'ownerlinkInput', ...generalRequiredInputIDs];
+function requiredInputs() {
+	for (const input of generalRequiredInputIDs) {
+		const element = globalElements.input[input];
+		element.style.backgroundColor = '';
+		if (!element.value || element?.closest('.tableCell, .tableHeader')?.querySelector('.error')) return requiredError(input);
+	}
+
+	if (!globalElements.input.ownerInput.value && !globalElements.input.ownerlinkInput.value) return requiredError('owner');
+
+	return true;
 }

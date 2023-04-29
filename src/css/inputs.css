@@ -173,3 +173,9 @@ input[type="date"]:hover {
 .merchant-search::placeholder {
 	color: var(--text-color);
 }
+
+.required::after {
+	content: '*';
+	color: red;
+	margin-inline: .25rem;
+}

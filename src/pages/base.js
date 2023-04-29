@@ -11,12 +11,15 @@ const baseElementFunctions = {
 	builderInput: ['hideDiscoverer("builderInput", "builderlinkInput"); docBy()'],
 	builderlinkInput: ['hideDiscoverer("builderlinkInput", "builderInput"); docBy()'],
 	addInfoInput: ['addInfoBullet()'],
+	censusShowInput: ['forceCensusInputs()'],
 }
 assignElementFunctions(baseElementFunctions);
 
 // run on startup and reset
 function startupFunctions() {
 	getCurrentYear('censusrenewal');
+	addStars(requiredInputIDs);
+	forceCensusInputs();
 }
 
 /**
@@ -112,4 +115,41 @@ function createCensusEntry() {
 	if (checkbox.checked == inputBool) return;
 	checkbox.checked = inputBool;
 	checkboxWikiCode(checkbox);
+}
+
+const generalRequiredInputIDs = [
+	'systemInput',
+	'planetInput',
+	'axesInput',
+	'fileInput',
+	'portalglyphsInput',
+	'nameInput',
+	'layoutInput',
+]
+const requiredInputIDs = ['builderInput', 'builderlinkInput', ...generalRequiredInputIDs];
+function requiredInputs() {
+	for (const input of generalRequiredInputIDs) {
+		const element = globalElements.input[input];
+		element.style.backgroundColor = '';
+		if (!element.value || element?.closest('.tableCell, .tableHeader')?.querySelector('.error')) return requiredError(input);
+	}
+
+	if (!globalElements.input.builderInput.value && !globalElements.input.builderlinkInput.value) return requiredError('builder');
+
+	if (pageData.censusshow) {
+		const censusInputs = ['censusPlayerInput', 'censusArrivalInput'];
+		for (const input of censusInputs) {
+			if (!globalElements.input[input].value) return requiredError(input);
+		}
+	}
+
+	return true;
+}
+
+function forceCensusInputs() {
+	const censusInputs = ['censusArrivalInput', 'censusPlayerInput'];
+	for (const input of censusInputs) {
+		const element = globalElements.input[input];
+		pageData.censusshow ? addStar(element) : removeStar(element);
+	}
 }
