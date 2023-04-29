@@ -1350,17 +1350,13 @@ function checkDataIntegrity(element = null, simple = false) {
 
 	const { name, portalglyphs: glyphs, region } = pageData;
 
-	const requiredMet = typeof requiredInputs == 'function' ? requiredInputs() : [true];
-
-	if (requiredMet[0] && name && glyphs && region && ((currentText == savedText && dataIntegrityObj.copy === element?.dataset?.link) || simple)) {
+	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.copy === element?.dataset?.link) || simple)) {
 		dataIntegrityObj.copy = false;
 		return false;
 	} else if (!name) {
 		return 'Missing Name!';
 	} else if ((!glyphs || !region)) {
 		return 'Wrong Glyphs!';
-	} else if (!requiredMet[0]) {
-		return requiredMet[1];
 	} else {
 		return 'Copy Code First!';
 	}
@@ -1584,41 +1580,4 @@ async function loadHTML(url, varObj = {}) {
 	const parser = new DOMParser();
 	const dom = parser.parseFromString(html, 'text/html');
 	return dom;
-}
-
-function addStar(element) {
-	modifyStar(element, 'add');
-}
-
-function removeStar(element) {
-	modifyStar(element, 'remove');
-}
-
-function modifyStar(element, operation) {
-	const label = (() => {
-		if (element.tagName.toLowerCase() == 'textarea') {
-			return element?.previousElementSibling;
-		} else {
-			return element?.closest('.tableCell, .tableHeader')?.previousElementSibling?.querySelector('label');
-		}
-	})();
-	label?.classList?.[operation]?.('required');
-}
-
-function addStars(array) {
-	for (const input of array) {
-		const element = globalElements.input[input];
-		addStar(element);
-
-		// using this to wait for the end of the function callstack
-		setTimeout(() => {
-			element.style.backgroundColor = '';
-		}, 0);
-	}
-}
-
-function requiredError(input) {
-	const element = globalElements?.input?.[input];
-	if (element) element.style.backgroundColor = 'red';
-	return [false, `Missing Input: ${input}`];
 }
