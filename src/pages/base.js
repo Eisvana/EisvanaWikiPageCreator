@@ -11,15 +11,12 @@ const baseElementFunctions = {
 	builderInput: ['hideDiscoverer("builderInput", "builderlinkInput"); docBy()'],
 	builderlinkInput: ['hideDiscoverer("builderlinkInput", "builderInput"); docBy()'],
 	addInfoInput: ['addInfoBullet()'],
-	censusShowInput: ['forceCensusInputs()'],
 }
 assignElementFunctions(baseElementFunctions);
 
 // run on startup and reset
 function startupFunctions() {
 	getCurrentYear('censusrenewal');
-	addStars(requiredInputIDs);
-	forceCensusInputs();
 }
 
 /**
@@ -115,61 +112,4 @@ function createCensusEntry() {
 	if (checkbox.checked == inputBool) return;
 	checkbox.checked = inputBool;
 	checkboxWikiCode(checkbox);
-}
-
-/**
- * An array containing the IDs of all input fields that are required for the form, but are not specifically related to any particular category.
- *
- * @type {string[]}
- */
-const generalRequiredInputIDs = [
-	'systemInput',
-	'planetInput',
-	'axesInput',
-	'fileInput',
-	'portalglyphsInput',
-	'nameInput',
-	'layoutInput',
-]
-
-/**
- * An array containing the IDs of all input fields that are required for the form.
- *
- * @type {string[]}
- */
-const requiredInputIDs = ['builderInput', 'builderlinkInput', ...generalRequiredInputIDs];
-
-/**
- * Checks if all required input fields are present and not empty. Returns an error message if any input field is missing, else returns true.
- *
- * @returns {(Array<boolean, string>|boolean)} - An array containing a boolean and a string value, indicating an error message if an error occurred. If all input fields are present and not empty, returns true.
- */
-function requiredInputs() {
-	for (const input of generalRequiredInputIDs) {
-		const element = globalElements.input[input];
-		element.style.backgroundColor = '';
-		if (!element.value || element?.closest('.tableCell, .tableHeader')?.querySelector('.error')) return requiredError(input);
-	}
-
-	if (!globalElements.input.builderInput.value && !globalElements.input.builderlinkInput.value) return requiredError('builder');
-
-	if (pageData.censusshow) {
-		const censusInputs = ['censusPlayerInput', 'censusArrivalInput'];
-		for (const input of censusInputs) {
-			if (!globalElements.input[input].value) return requiredError(input);
-		}
-	}
-
-	return true;
-}
-
-/**
- * Adds a star to the required input fields for the census, if the census is being generated. Removes the star otherwise.
- */
-function forceCensusInputs() {
-	const censusInputs = ['censusArrivalInput', 'censusPlayerInput'];
-	for (const input of censusInputs) {
-		const element = globalElements.input[input];
-		pageData.censusshow ? addStar(element) : removeStar(element);
-	}
 }

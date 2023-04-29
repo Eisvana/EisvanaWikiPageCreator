@@ -5,7 +5,6 @@
 function startupFunctions() {
 	const input = document.querySelector('[oninput*="enPrefix"]');
 	enPrefix(input.value, 'enPrefix');
-	addStars(requiredInputIDs);
 }
 
 const businessElements = {
@@ -24,6 +23,7 @@ const businessElementFunctions = {
 	currencyInput: ['fixHC(this); enPrefix(this.value, "enPrefix")'],
 }
 assignElementFunctions(businessElementFunctions);
+
 
 (() => {
 	const currencyDatalist = {
@@ -119,42 +119,4 @@ function resetExternal() {
 	const contentSections = document.querySelectorAll('[data-section]');
 	globalElements.output.contents.innerText = '';
 	removeSection(contentSections);
-}
-
-/**
- * An array containing the IDs of all input fields that are required for the form, but are not specifically related to any particular category.
- *
- * @type {string[]}
- */
-const generalRequiredInputIDs = [
-	'systemInput',
-	'planetInput',
-	'headquartersInput',
-	'fileInput',
-	'portalglyphsInput',
-	'nameInput',
-]
-
-/**
- * An array containing the IDs of all input fields that are required for the form.
- *
- * @type {string[]}
- */
-const requiredInputIDs = ['ownerInput', 'ownerlinkInput', ...generalRequiredInputIDs];
-
-/**
- * Checks if all required input fields are present and not empty. Returns an error message if any input field is missing, else returns true.
- *
- * @returns {(Array<boolean, string>|boolean)} - An array containing a boolean and a string value, indicating an error message if an error occurred. If all input fields are present and not empty, returns true.
- */
-function requiredInputs() {
-	for (const input of generalRequiredInputIDs) {
-		const element = globalElements.input[input];
-		element.style.backgroundColor = '';
-		if (!element.value || element?.closest('.tableCell, .tableHeader')?.querySelector('.error')) return requiredError(input);
-	}
-
-	if (!globalElements.input.ownerInput.value && !globalElements.input.ownerlinkInput.value) return requiredError('owner');
-
-	return true;
 }
