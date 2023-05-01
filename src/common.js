@@ -836,7 +836,7 @@ function image(element) {
 	wikiCode(fileInput);
 	// this section handles an automatic notice about Special:Upload, since this is a big source of confusion for users
 	if (uploadShown) return;	// ignore following code if we already alerted user about Special:Upload
-	explanation('Upload your picture to the wiki!', `Don't forget to upload your picture to the wiki on <a href="https://nomanssky.fandom.com/wiki/Special:Upload" target="_blank" rel="noopener noreferrer">Special:Upload</a>.
+	explanation('Upload your picture to the wiki!', `Don't forget to upload your picture to the wiki on <a href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" target="_blank" rel="noopener noreferrer">Special:Upload</a>.
 	The upload button only auto-filled the image name into the code, it is not automatically uploaded to the wiki.
 	<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the main image upload button.</div>`);
 	uploadShown = true;

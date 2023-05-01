@@ -15,7 +15,7 @@
 	const actions = `
 	<button class="button is-outlined is-primary" id="copy" type="button" data-link="page" onclick="copyCode(this, 'fullArticle')">Copy Wikicode</button>
 	<a class="button is-outlined is-primary" id="download" onclick="downloadFile(this)">Download File</a>
-	<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload Pictures</a>
+	<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload Pictures</a>
 	<a class="button is-outlined is-primary" id="create" data-link="page" onclick="createPage(this)">Create Page</a>
 	<button class="button is-warning" id="reset" type="reset" onclick="reset()">Reset Inputs</button>`;
 
