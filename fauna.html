@@ -60,7 +60,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the creature:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>Creature Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
@@ -78,7 +78,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip" onclick="uploadShown = true">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
 							<data>File Upload</data>
 							<data>
@@ -101,7 +101,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the creature can be found.</data>
 						</span>
 					</div>
@@ -110,7 +110,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if creature is on moon):</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>
 								If the creature is located on a moon. Leave blank if the creature is on a
 								planet.
@@ -126,7 +126,7 @@
 							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
 								Delete</button>
 						</div>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
@@ -142,7 +142,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Genus:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>See the wiki for a list of genera.</data>
 							<data>Genus</data>
 							<data>The genus is defined by the general appearance of a creature.<br>
@@ -157,7 +157,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Hemisphere:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the creature discovery menu.</data>
 							<data>Hemisphere</data>
 							<data>
@@ -176,7 +176,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Rarity:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the creature discovery menu.</data>
 							<data>Rarity</data>
 							<data>Found in the creature discovery menu.</data>
@@ -192,7 +192,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Ecosystem:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the creature discovery menu.</data>
 							<data>Ecosystem</data>
 							<data>Found in the creature discovery menu.</data>
@@ -209,7 +209,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Activity:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the creature discovery menu.</data>
 							<data>Activity</data>
 							<data>Found in the creature discovery menu.</data>
@@ -243,7 +243,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Gender:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan.</data>
 							<data>Gender</data>
 							<data>Found on the creature scan.</data>
@@ -256,7 +256,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Second Gender:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Only applies to certain genera. Can be found on the creature scan.</data>
 							<data>Second Gender</data>
 							<data>
@@ -272,7 +272,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="behaviourInput">Behaviour:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan.</data>
 							<data>Behaviour</data>
 							<data>Found on the creature scan.</data>
@@ -284,7 +284,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="dietInput">Diet:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan.</data>
 							<data>Diet</data>
 							<data>Found on the creature scan.</data>
@@ -296,7 +296,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="weightInput">Weight in kg:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan. No "kg" necessary.</data>
 							<data>Weight</data>
 							<data>Found on the creature scan.<br>No "kg" necessary.</data>
@@ -308,7 +308,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="heightInput">Height in m:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan. No "m" necessary.</data>
 							<data>Height</data>
 							<data>Found on the creature scan.<br>No "m" necessary.</data>
@@ -332,7 +332,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="notesInput">Notes:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan. Might differ from the discovery menu.</data>
 							<data>Notes</data>
 							<data>Found on the creature scan.</data>
@@ -344,7 +344,7 @@
 					</div>
 					<div class="tableCell text" style="display: none">
 						<label for="specialNotesInput">Notes for discovery menu:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>./assets/bitmap/creature/creatureDMNotes.jpg</data>
 							<data>Discovery Menu Notes</data>
 							<data>Found in the discovery menu.<br>This might differ from the creature scan.</data>
@@ -357,7 +357,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Produces:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan.</data>
 							<data>Produces</data>
 							<data>Found on the creature scan.</data>
@@ -373,7 +373,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Gamemode:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Gamemode of the save on which this creature was discovered.</data>
 							<data>Gamemode</data>
 							<data>
@@ -431,7 +431,7 @@
 					</div>
 					<div class="tableHeader data no-flex">
 						<label for="dmInput">Discovery Menu</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the Discovery Menu. Enter exactly as seen in game</data>
 							<data>Discovery Menu Text</data>
 							<data>
@@ -444,7 +444,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<span class="tooltip" onclick="galleryUploadShown = true">
+						<button class="tooltip" onclick="galleryUploadShown = true">
 							<data>There is a preferred order of pictures.</data>
 							<data>Gallery</data>
 							<data>The preferred order of pictures is as follows:

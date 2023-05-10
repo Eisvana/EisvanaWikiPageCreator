@@ -56,7 +56,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the multi-tool:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>Multi-Tool Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
@@ -68,7 +68,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip" onclick="uploadShown = true">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
 							<data>File Upload</data>
 							<data>
@@ -85,7 +85,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Type of the multi-tool:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>MT Type is defined by the shape of the tool.</data>
 							<data>Multi-Tool Type</data>
 							<data>The Multi-Tool type is defined by the shape of the tool.</data>
@@ -104,7 +104,7 @@
 					</div>
 					<div class="tableCell text" style="display: none">
 						<label>Inventory size of the multi-tool:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>MT Inventory size is defined by the shape of the tool.</data>
 							<data>Inventory Size</data>
 							<data>The Multi-Tool inventory size is defined by the shape of the tool.</data>
@@ -126,7 +126,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Location:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Where the tool was found.</data>
 						</span>
 					</div>
@@ -141,7 +141,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the tool can be found.</data>
 						</span>
 					</div>
@@ -150,7 +150,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if MT is on moon):</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>If the tool is located on a moon. Leave blank if the tool is on a planet.</data>
 						</span>
 					</div>
@@ -159,7 +159,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="axesInput">Planetary coords:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
 							<data>Planetary Coordinates</data>
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
@@ -171,7 +171,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Save/reload location type:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Where you have to reload in order to get the tool to load.</data>
 							<data>Save/Reload Location</data>
 							<data>
@@ -202,7 +202,7 @@
 							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
 								Delete</button>
 						</div>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
@@ -229,7 +229,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Add-ons:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Whether the tool has these features.</data>
 							<data>Multi-Tool Add-ons</data>
 							<data>
@@ -255,7 +255,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="slotsInput">Slot count:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Can be found on the price page.</data>
 							<data>Multi-Tool Slotcount</data>
 							<data>Slotcount of the tool. Can be found on the price page.</data>
@@ -267,7 +267,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="costInput">Cost:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Can be found on the price page.</data>
 							<data>Multi-Tool Cost</data>
 							<data>Can be found on the price page. Enter the Buy price, not the trade-in price.</data>
@@ -279,7 +279,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="dmgInput">Base Damage Potential:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Base damage with no installed upgrades.</data>
 							<data>Multi-Tool Base Damage</data>
 							<data>
@@ -295,7 +295,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="scanInput">Base Scanner Range:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Base scan range with no installed upgrades.</data>
 							<data>Multi-Tool Base Scanner Range</data>
 							<data>
@@ -317,7 +317,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="srImgInput"><output id="srImgInputLabel">Save/Reload Location</output></label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
@@ -331,7 +331,7 @@
 					<div class="tableCell text">
 						<label for="sysImgInput"><output id="sysImgInputLabel">System (Cabinet location
 								highlighted)</output></label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
@@ -344,7 +344,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="cabInput"><output id="cabInputLabel">Cabinet Planet/Moon</output></label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
@@ -357,7 +357,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="coordsInput"><output id="coordsInputLabel">Coordinates</output></label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
@@ -449,7 +449,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<span class="tooltip" onclick="galleryUploadShown = true">
+						<button class="tooltip" onclick="galleryUploadShown = true">
 							<data>There is a preferred order of pictures.</data>
 							<data>Gallery</data>
 							<data>The preferred order of pictures is as follows:

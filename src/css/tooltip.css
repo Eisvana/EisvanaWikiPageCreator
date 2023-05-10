@@ -1,9 +1,19 @@
+/* reset button styles */
+button.tooltip {
+	background: unset;
+	padding: unset;
+	line-height: inherit;
+	font-size: inherit;
+	border: unset;
+}
+
 .tooltip {
 	width: 15px;
 	min-width: 15px;
 	height: auto;
 	position: relative;
 	display: inline-block;
+	outline: none;
 }
 
 .tooltip>data {
@@ -12,6 +22,10 @@
 
 .tooltip[onclick] {
 	cursor: pointer;
+}
+
+.tooltip[onclick]:focus-visible {
+	border-bottom: 1px solid var(--link-color);
 }
 
 .tooltip .tooltiptext {
@@ -43,7 +57,8 @@
 	border-block-start-color: var(--tooltip-background);
 }
 
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptext,
+.tooltip:focus-visible .tooltiptext {
 	visibility: visible;
 	opacity: 1;
 }

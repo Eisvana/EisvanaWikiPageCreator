@@ -108,7 +108,7 @@ function explanation(heading, text, img) {
  * @return {void}
  */
 function addAllTooltips(dom = document) {
-	const elements = dom.querySelectorAll('span.tooltip');
+	const elements = dom.querySelectorAll('button.tooltip');
 	for (const element of elements) {
 		constructTooltip(element);
 	}
