@@ -601,11 +601,10 @@ function expectedHubTagSentence() {
 	const { region, portalglyphs: glyphs } = pageData;
 	const nr = getHubNumber(region);
 	const index = (() => {
-		let SIV = glyphs.substring(1, 4);
-		while (SIV.startsWith('0') && SIV.length > 1) {
-			SIV = SIV.substring(1);
-		}
-		return SIV;
+		const systemIndex = glyphs.substring(1, 4);
+		// this removes leading zeros
+		const SIV = Number('0x' + systemIndex).toString(16).toUpperCase();
+		return SIV.replace('69', '68+1');	// replace 69 with 68+1, because the profanity filter flags it
 	})();
 	const expected = `HUB${nr}-${index}`;
 
