@@ -575,7 +575,7 @@ function loc() {
 	// this output has a linebreak. This is intended, because we use .innerText to display this. If we used <br>, it would display '<br>', not the linebreak.
 	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName)} of the ${HubGal(civ)}.
 
-	${type == 'Interceptor' ? 'The {{Class|' + shipClass + '}} version of this starship' : 'It'} can be found ${locText()}.`
+	${type == 'Interceptor' ? 'The {{Class|' + shipClass + '}} class version of this starship' : 'It'} can be found ${locText()}.`
 
 	globalElements.output.location.innerText = output;
 
