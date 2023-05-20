@@ -10,7 +10,9 @@ export const links = {};
  * An object that contains page data.
  * @type {Object}
  */
-export const pageData = {};
+export const pageData: {
+	[key: string]: string | number | boolean;
+} = {};
 
 
 interface CachedHTML {

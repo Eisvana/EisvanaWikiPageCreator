@@ -2,8 +2,6 @@
  * @fileoverview Provides general functions which can be used by all pages.
  */
 
-import 'bulma';
-import './scss/styles.scss';
 import { wikiLink } from './variables/simple';
 import { GHubHuburbRegions, regions } from "./variables/regions";
 import { Regions } from "./types/regions";

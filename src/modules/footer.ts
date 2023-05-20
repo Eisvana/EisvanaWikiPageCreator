@@ -6,6 +6,7 @@ import { addHuburbs, hideDiscoverer, loadHTML, researchTeamDropdown, sanitiseStr
 import { globalElements, pageData } from "../variables/objects";
 import { regions } from "../variables/regions";
 import { ElementIds } from "../elementFrontends/elementBackend/elementStore";
+import { glyphError, validateGlyphs } from "./portalglyphs";
 
 // custom global settings
 export const footerElements: ElementIds = {

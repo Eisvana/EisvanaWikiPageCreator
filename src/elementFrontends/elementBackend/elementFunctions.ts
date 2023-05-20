@@ -7,15 +7,16 @@ export function assignFunction(dataObject: ElementFunctions): void {
 	const elementId = dataObject.element as keyof GlobalElements;
 	const element = (() => {
 		if (typeof elementId != 'string') return elementId;
-
+		
 		if (globalElements[elementId]) {
 			return globalElements[elementId];
 		}
-
+		
 		return getDestElements(elementId);
 	})() as GlobalElement;
 	const elementArray = [element];
 	const flattenedArray = elementArray.flat();
+
 	for (const element of flattenedArray) {
 		const inputTag = element?.tagName?.toLowerCase();
 		const inputType: string = inputTag == 'input' ? (element as HTMLInputElement).type : '';

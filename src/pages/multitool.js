@@ -563,7 +563,6 @@ function generateGalleryArray() {
 	const locs = ['Minor Settlement', 'Sentinel Pillar', 'Harmonic Camp'];
 	if (locs.includes(location)) {
 		const rmLocs = locs.filter(loc => loc != location);
-		console.log(rmLocs)
 		rmLocs.forEach(loc => {
 			const index = array.indexOf(loc);
 			array.splice(index, 1);
