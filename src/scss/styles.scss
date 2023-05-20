@@ -1,11 +1,10 @@
-@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
-@import "fonts.css";
-@import "variables.css";
-@import "tooltip.css";
-@import "dialog.css";
-@import "footer.css";
-@import "gallery.css";
-@import "inputs.css";
+@use "components/fonts";
+@use "components/variables" as *;
+@use "components/tooltip";
+@use "components/dialog";
+@use "components/footer";
+@use "components/gallery";
+@use "components/inputs";
 
 html[data-transition],
 html[data-transition] *,
@@ -103,7 +102,7 @@ img {
 }
 
 nav {
-	margin: 1rem 0;
+	margin-block: 1rem;
 	font-size: larger;
 }
 

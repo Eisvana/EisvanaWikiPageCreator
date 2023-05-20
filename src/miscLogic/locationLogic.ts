@@ -8,7 +8,7 @@
  * @param {boolean} [moon=pageData.moon] - A boolean indicating whether a moon is present.
  * @returns {string} - A string indicating whether the celestial body is a moon or planet.
  */
-function planetMoon(moon = pageData.moon) {
+export function planetMoon(moon = pageData.moon) {
 	return moon ? 'Moon' : 'Planet';
 }
 
@@ -23,7 +23,7 @@ function planetMoon(moon = pageData.moon) {
  * @returns {string} - The description sentence, or "" if `globalElements.output.celestialBody`
  *                     is falsy.
  */
-function planetMoonSentence(planet = pageData.planet, moon = pageData.moon) {
+export function planetMoonSentence(planet = pageData.planet, moon = pageData.moon) {
 	const dest = globalElements.output.celestialBody;
 	const body = planetMoon(moon);
 	const text = (() => {
@@ -43,7 +43,7 @@ function planetMoonSentence(planet = pageData.planet, moon = pageData.moon) {
  * @param {string} civ - The name of the civilization.
  * @returns {string} The location sentence for the given civilization.
  */
-function HubGal(civ) {
+export function HubGal(civ) {
 	switch (civ) {
 		case "GHub":
 			return '[[Galactic Hub]]';

@@ -1,6 +1,6 @@
-<button class="button" id="switchTheme" onclick="switchTheme()">Switch light/dark mode</button>
+<button class="button" id="switchTheme">Switch light/dark mode</button>
 <div class="footerLinks">
-	<button type="button" onclick="showSettings()">Settings</button>
+	<button type="button" id="openSettingsBtn">Settings</button>
 	<a href="./about.html" id="about">About</a>
 	<a href="https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform"
 		rel="noreferrer noopener" target="_blank">Feedback Form</a>
@@ -77,9 +77,8 @@
 		<div class="tableCell text">
 			<div class="label-combo">
 				<label for="portalglyphsDefault">Portalglyphs:</label>
-				<button class="button is-small is-danger" type="button" data-input-bind="portalglyphsDefault"
-					onclick="deleteCharacter(this)">&larr;
-					Delete</button>
+				<button class="button is-small is-danger" type="button" id="glyphDeleteDefault"
+					data-input-bind="portalglyphsDefault">&larr; Delete</button>
 			</div>
 		</div>
 		<div class="tableCell data">
@@ -139,8 +138,8 @@
 	</div>
 	<p>If you experience weird behaviour, restore the defaults and click "Set".</p>
 	<form method="dialog">
-		<button class="button is-primary" type="submit" onclick="updateDefaultValues()">Set</button>
+		<button class="button is-primary" type="submit" id="submitDefault">Set</button>
 		<button class="button is-danger" type="submit" autofocus>Cancel</button>
-		<button class="button is-warning" type="reset" onclick="restoreDefaults()">Restore Defaults</button>
+		<button class="button is-warning" type="reset" id="resetDefault">Restore Defaults</button>
 	</form>
 </dialog>

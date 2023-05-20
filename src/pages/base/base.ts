@@ -2,22 +2,10 @@
  * @fileoverview Provides functions which can be used by the Base page creator.
  */
 
-const baseElementFunctions = {
-	planetInput: ['planetMoonSentence()'],
-	moonInput: ['planetMoonSentence()'],
-	censusRedditInput: ['validateReddit()'],
-	censusFriendInput: ['capitaliseFriendCode()'],
-	censusPlayerInput: ['createCensusEntry()'],
-	builderInput: ['hideDiscoverer("builderInput", "builderlinkInput"); docBy()'],
-	builderlinkInput: ['hideDiscoverer("builderlinkInput", "builderInput"); docBy()'],
-	addInfoInput: ['addInfoBullet()'],
-}
-assignElementFunctions(baseElementFunctions);
+import { errorMessage } from "../../common";
+import { globalElements } from "../../variables/objects";
 
-// run on startup and reset
-function startupFunctions() {
-	getCurrentYear('censusrenewal');
-}
+
 
 /**
  * Validates Discord tags.
@@ -25,8 +13,8 @@ function startupFunctions() {
  * @param {Object} inputElement - The input element to validate.
  * @returns {void}
  */
-globalElements.input.censusDiscordInput.onchange = () => {
-	const element = globalElements.input.censusDiscordInput;
+export function validateDiscord() {
+	const element = globalElements.input.censusDiscordInput as HTMLInputElement;
 	const tag = element.value;
 	if (!tag) {
 		errorMessage(element);
@@ -52,7 +40,7 @@ globalElements.input.censusDiscordInput.onchange = () => {
  *
  * @returns {void}
  */
-function validateReddit() {
+export function validateReddit() {
 	const element = globalElements.input.censusRedditInput;
 	const value = element.value.trim();
 	const redditName = (() => {
@@ -76,7 +64,7 @@ function validateReddit() {
  * Capitalizes the input value of a friend code input element and calls the wikiCode function.
  * @function
  */
-function capitaliseFriendCode() {
+export function capitaliseFriendCode() {
 	const element = globalElements.input.censusFriendInput;
 	element.value = element.value.toUpperCase();
 	const dest = element.dataset.destNoauto;
@@ -89,7 +77,7 @@ function capitaliseFriendCode() {
  * @param {Event} e - The change event.
  * @returns {void}
  */
-globalElements.input.censusFriendInput.onchange = () => {
+export function validateFriendcode() {
 	const element = globalElements.input.censusFriendInput;
 	const friendCode = element.value;
 	const friendCodeRegex = new RegExp(/(?:[0-9A-Za-z]{4}-){2}[0-9A-Za-z]{5}/);
@@ -106,7 +94,7 @@ globalElements.input.censusFriendInput.onchange = () => {
  * @function
  * @returns {void}
  */
-function createCensusEntry() {
+export function createCensusEntry() {
 	const { censusPlayerInput: input, censusShowInput: checkbox } = globalElements.input;
 	const inputBool = Boolean(input.value);	// boolean from the input (true if any input is given)
 	if (checkbox.checked == inputBool) return;

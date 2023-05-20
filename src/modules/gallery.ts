@@ -2,6 +2,10 @@
  * @fileoverview Provides functions needed for the gallery to work.
  */
 
+import Sortable from "sortablejs";
+import { galleryUploadShown } from "../variables/sessionstorage";
+import { cachedHTML, globalElements } from "../variables/objects";
+
 /**
  * This function adds a Sortable.js component to the galleryWrapper element,
  * allowing the user to reorganize the items in the gallery with drag-and-drop.
@@ -11,23 +15,15 @@
  */
 (() => {
 	if (window.matchMedia('(pointer: coarse)').matches) return;		// Check if device has coarse pointer
-	const script = document.createElement('script');
-	script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js';		// Load Sortable.js library
-	document.head.appendChild(script);
-	script.onload = () => {
-		const galleryWrapper = globalElements.output.galleryItems;
-		const gallerySort = new Sortable(galleryWrapper, {		// NoSonar (used by another library, not useless!)
-			handle: '.handle',	// handle's class
-			animation: 250,
-			onUpdate: function (evt) { moveItem(evt) },
-		});
-	}
+	const galleryWrapper = globalElements.output.galleryItems;
+	new Sortable(galleryWrapper, {		// NoSonar (used by a library, not useless!)
+		handle: '.handle',	// handle's class
+		animation: 250,
+		onUpdate: function (evt) { moveItem(evt) },
+	});
 
 	cachedHTML.files.add(`src/htmlSnippets/galleryInput.html`);
 })();
-
-// Declare and initialize galleryUploadShown boolean
-let galleryUploadShown = false;
 
 /**
 * Handles gallery image uploads
@@ -117,7 +113,7 @@ async function galleryUpload() {
 			`${galleryExplanationExternal()}
 		<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the gallery upload button.</div>`);
 	}
-	galleryUploadShown = true;
+	galleryUploadShown(true);
 }
 
 /**
@@ -165,15 +161,17 @@ function rmGallery(galleryNode, wikiCodeGalleryId) {
 function moveItem(evt) {
 	const oldIndex = evt.oldIndex;
 	const newIndex = evt.newIndex;
-	const galleryItems = Array.from(document.getElementById('galleryCode').children);
+	const galleryElement = document.getElementById('galleryCode');
+	if (!galleryElement) return;
+	const galleryItems = Array.from(galleryElement.children);
 	const extractedItem = galleryItems.splice(oldIndex, 1);
 	galleryItems.splice(newIndex, 0, extractedItem[0])
-	const HTML = new Array;
+	const HTML: Array<string> = [];
 	for (const item of galleryItems) {
 		const code = item.outerHTML;
 		HTML.push(code);
 	}
-	document.getElementById('galleryCode').innerHTML = HTML.join('')
+	galleryElement.innerHTML = HTML.join('');
 }
 
 /**
@@ -183,12 +181,15 @@ function moveItem(evt) {
  * @param {('up'|'down')} direction - The direction to move the element
  * @returns {void}
  */
-function mobileMoveItem(element, codeId, direction) {
+function mobileMoveItem(element: HTMLElement, codeId: string, direction: string) {
 	const galleryItem = element.closest('.gallery-item')
 	const galleryCodeItem = document.getElementById(codeId);
 	const elements = [galleryItem, galleryCodeItem];
 	for (const element of elements) {
+		if (!element) return;
+
 		const wrapper = element.parentNode;
+		if (!wrapper) return;
 
 		if (direction == 'up' && element.previousElementSibling) {
 			wrapper.insertBefore(element, element.previousElementSibling);

@@ -2,275 +2,46 @@
  * @fileoverview Provides general functions which can be used by all pages.
  */
 
-/**
- * An object representing discovery regions and their associated systems.
- * @typedef {Object} RegionsObject
- * @property {Object} GHub - The Galactic Hub Project.
- * @property {Object} CalHub - The Galactic Hub Calypso.
- * @property {Object} EisHub - The Galactic Hub Eissentam.
- * @property {Object.<string, string>} GHub - The systems in the Galactic Hub Project, indexed by their Glyphs.
- * @property {Object.<string, string>} CalHub - The systems in the Galactic Hub Calypso, indexed by their Glyphs.
- * @property {Object.<string, string>} EisHub - The systems in the Galactic Hub Eissentam, indexed by their Glyphs.
- * @example
- * const regions = {
- *    GHub: {
- *        F9556C30: 'The Arm of Vezitinen',
- *        F9555C30: 'Canthian',
- *        F9555C31: 'Dexterf Sector',
- *        F9556C31: 'The Arm of Katteus',
- *        ...
- *    },
- *    CalHub: {
- *        F9556C30: 'Uisaor Spur',
- *        F9555C30: 'The Arm of Kiffeyn',
- *        F9555C31: 'Ilongl Cloud',
- *        F9556C31: 'The Arm of Taticale',
- *        ...
- *    },
- *    EisHub: {
- *        F9556C30: 'Riwala',
- *        F9555C30: 'Omskio Instability',
- *        F9555C31: 'Marcki',
- *        F9556C31: 'Anolamga Spur',
- *        ...
- *    }
- * };
- */
-const regions = {
-	GHub: {
-		F9556C30: 'The Arm of Vezitinen',
-		F9555C30: 'Canthian',
-		F9555C31: 'Dexterf Sector',
-		F9556C31: 'The Arm of Katteus',
-		F9557C31: 'Nugsdor Adjunct',
-		F9557C30: 'Uefert Nebula',
-		F9557C2F: 'Widraik',
-		F9556C2F: 'Airnaka Conflux',
-		F9555C2F: 'Sivess Instability',
-		FA556C30: 'Savenix Instability',
-		F8556C30: 'Nonlopsi Instability'
-	},
-	CalHub: {
-		F9556C30: 'Uisaor Spur',
-		F9555C30: 'The Arm of Kiffeyn',
-		F9555C31: 'Ilongl Cloud',
-		F9556C31: 'The Arm of Taticale',
-		F9557C31: 'Egerap Anomaly',
-		F9557C30: 'Wakestones Expanse',
-		F9557C2F: 'Erhahn Fringe',
-		F9556C2F: 'Imrikians Terminus',
-		F9555C2F: 'Imedeili',
-		FA556C30: 'Kovasu Adjunct',
-		F8556C30: 'Lossians Boundary'
-	},
-	EisHub: {
-		F9556C30: 'Riwala',
-		F9555C30: 'Omskio Instability',
-		F9555C31: 'Marcki',
-		F9556C31: 'Anolamga Spur',
-		F9557C31: 'Sea of Zonyayp',
-		F9557C30: 'Rayuyar Band',
-		F9557C2F: 'Umaton Instability',
-		F9556C2F: 'Exramb Adjunct',
-		F9555C2F: 'Ologowe Fringe',
-		FA556C30: 'Yatrifex',
-		FA555C30: 'Yeiada Sector',
-		FA555C31: 'Iptrevs Fringe',
-		FA556C31: 'Yamiraith Sector',
-		FA557C31: 'Wedragi Spur',
-		FA557C30: 'Rezhensk',
-		FA557C2F: 'Sobert Cloud',
-		FA556C2F: 'Umtats Anomaly',
-		FA555C2F: 'Tavill',
-		F8556C30: 'Qangew Expanse',
-		F8555C30: 'Nijhwal Boundary',
-		F8555C31: 'Usband Cluster',
-		F8556C31: 'Ejongaa Anomaly',
-		F8557C31: 'Zahrel Expanse',
-		F8557C30: 'The Arm of Fupand',
-		F8557C2F: 'Cuculta',
-		F8556C2F: 'Etmarao',
-		F8555C2F: 'Otreie Void'
-	}
-}
+import 'bulma';
+import './scss/styles.scss';
+import { wikiLink } from './variables/simple';
+import { GHubHuburbRegions, regions } from "./variables/regions";
+import { Regions } from "./types/regions";
+import { readDefaultValues } from './modules/footer';
+import { cachedHTML, dataIntegrityObj, globalElements, pageData } from './variables/objects';
+import { uploadShown, galleryUploadShown } from './variables/sessionstorage';
+import { getDestElements } from './elementFrontends/elementBackend/elementStore';
+import { versions } from './variables/versions';
+import { assignFunction } from './elementFrontends/elementBackend/elementFunctions';
+import { glyphRegion } from './modules/portalglyphs';
+import { explanation } from './modules/tooltip';
+import './startup/';
 
-/**
- * A mapping of region codes to region names for huburb regions in the Galactic Hub
- * @type {Object.<string, string>}
- */
-const GHubHuburbRegions = {
-	'FA555C30': 'Wekeram Conflux',
-	'FA555C31': 'Ahomas Fringe',
-	'FA556C31': 'Nudryorob Fringe',
-	'FA557C31': 'Urzews Instability',
-	'FA557C30': 'Ercays',
-	'FA557C2F': 'Dahiloci Conflux',
-	'FA556C2F': 'Rapphosu',
-	'FA555C2F': 'Kemurrim Expanse',
-	'F8555C30': 'Ardarea Sector',
-	'F8555C31': 'Cetrocho Spur',
-	'F8556C31': 'Guitat Cloud',
-	'F8557C31': 'Unceto Cloud',
-	'F8557C30': 'Yamurab Instability',
-	'F8557C2F': 'Tenavata Terminus',
-	'F8556C2F': 'Menacaro',
-	'F8555C2F': 'Ziessuw Mass'
-}
 /**
  * Adds Galactic Hub huburb regions to an object.
  * GHub has additional ship and MT hunting grounds
  * @param {Object} object - The object to add Galactic Hub regions to
  * @returns {void}
  */
-function addHuburbs(object) {
+export function addHuburbs(object: Regions) {
 	// If the object has no GHub property, create one
-	object.GHub ??= new Object;
+	object.GHub ??= {};
 	// Add each region code and name pair to the GHub property
 	for (const regionCode in GHubHuburbRegions) {
 		object.GHub[regionCode] = GHubHuburbRegions[regionCode];
 	}
 }
 // If the 'huburbs' variable is defined and truthy, add Galactic Hub regions to 'regions'
-if (typeof huburbs != 'undefined') {	// NoSonar (we need to check if this is defined, otherwise it throws an error)
-	if (huburbs) addHuburbs(regions);
-}
+const huburbs = sessionStorage.getItem('huburbs');
+if (huburbs) addHuburbs(regions);
+
 // Make 'regions' read-only
 Object.freeze(regions);
 
-/**
- * An array of version names for the game: No Man's Sky
- *
- * @type {string[]}
- * @constant
- */
-const versions = [
-	'Interceptor',
-	'Fractal',
-	'Waypoint',
-	'Endurance',
-	'Outlaws',
-	'SentinelUp',
-	'Frontiers',
-	'Prisms',
-	'Expeditions',
-	'Companions',
-	'NextGen',
-	'Origins',
-	'Desolation',
-	'Crossplay',
-	'ExoMech',
-	'Living Ship',
-	'Synthesis',
-	'Beyond',
-	'Visions',
-	'Abyss',
-	'NEXT',
-	'Atlas Rises',
-	'Pathfinder',
-	'Foundation',
-	'Release',
-]
 
-/**
- * A string containing the vowels 'aeiou'.
- * @type {string}
- */
-const vowels = 'aeiou';
 
-/**
- * A string containing the URL for the No Man's Sky fandom wiki.
- * @type {string}
- */
-const wikiLink = 'https://nomanssky.fandom.com/wiki/';
 
-/**
- * A boolean indicating whether the upload has been shown.
- * @type {boolean}
- */
-let uploadShown = false;
 
-/**
- * An object that contains links.
- * @type {Object}
- */
-const links = new Object;
-
-/**
- * An object that contains page data.
- * @type {Object}
- */
-const pageData = new Object;
-
-/**
- * A object that contains cached HTML snippets.
- * @type {Object}
- */
-const cachedHTML = { files: new Set() };
-
-/**
- * Object used to store the current page data and check for data integrity issues.
- * @type {Object}
- * @property {string} text - The current page data, represented as a string.
- * @property {boolean} copy - Whether the current page's data has been copied.
- */
-const dataIntegrityObj = { text: '', copy: '' };
-
-/**
- * An object that stores elements that are consistent across pages. It is filled automatically on page load, combined from other objects like commonElements.
- * @type {Object}
- * @property {Object} input - An object that contains input elements.
- * @property {Object} output - An object that contains output elements.
- */
-const globalElements = {
-	input: {},
-	output: {},
-}
-
-/**
- * An object that defines IDs and names for elements that are consistent across multiple pages.
- * @type {Object}
- * @property {Object} input - An object that contains input elements.
- * @property {Object} output - An object that contains output elements.
- */
-const commonElements = {
-	input: {
-		version: 'versionInput',
-		civ: 'civInput',
-		fileInput: 'fileInput',
-		fileUpload: 'fileUpload',
-		portalglyphsInput: 'portalglyphsInput',
-		researchTeam: 'researchteamInput',
-		galleryUpload: 'galleryUpload',
-	},
-	output: {
-		output: 'output',
-		portalglyphButtons: 'portalglyphButtons',
-		galleryItems: 'galleryItems',
-		galleryCode: 'galleryCode',
-		explanation: 'explanation',
-		fullArticle: 'fullArticle',
-		actions: 'actions',
-		albumActions: 'albumActions',
-		albumEntry: 'albumEntry',
-		footer: 'footer',
-	}
-}
-
-/**
- * An object containing functions to assign to each input element on the page.
- * Functions are in the format 'functionName(params)' and can be assigned to each input element using `assignElementFunctions`.
- * @type {Object}
- */
-const elementFunctions = {
-	nameInput: ['enableTextMarking()'],
-	researchTeam: ['researchTeam(); docBy()'],
-	civ: ['civ()'],
-	portalglyphsInput: ['glyphInputOnChange(this); displayGlyphs(); enableTextMarking()'],
-	discoveredInput: ['hideDiscoverer("discoveredInput", "discoveredlinkInput"); docBy()'],
-	discoveredlinkInput: ['hideDiscoverer("discoveredlinkInput", "discoveredInput"); docBy()'],
-	docbyInput: ['docBy()'],
-	axesInput: ['validateCoords()', 'onchange'],
-}
 
 /**
  * Executes functions on page load.
@@ -278,81 +49,7 @@ const elementFunctions = {
  * Applies external links to wiki pages and adds tooltips to elements.
  * Toggles sections on the page.
  */
-addInputs();
-addOutputs();
-updateGlobalElements(commonElements);
-assignElementFunctions(elementFunctions);
-externalLinks();
-openWikiLinksExternally();
 toggleSection();
-
-/**
- * Finds all input, select, and text area elements in the current page and adds their IDs to the commonElements list of input IDs.
- */
-function addInputs() {
-	const inputs = document.querySelectorAll('input, select, textarea');
-	const inputElements = Object.values(commonElements.input);
-	for (const input of inputs) {
-		if (inputElements.includes(input.id)) continue;
-		commonElements.input[input.id] = input.id;
-	}
-}
-
-/**
- * Finds all output elements in the current page and adds their names or IDs (whichever exists) to the commonElements list of output names/IDs.
- */
-function addOutputs() {
-	const outputs = document.getElementsByTagName('output');
-	const outputElements = Object.values(commonElements.output);
-	for (const output of outputs) {
-		if (outputElements.includes(output.name) || outputElements.includes(output.id)) continue;
-		const keyVal = output.name || output.id;
-		commonElements.output[keyVal] = keyVal;
-	}
-}
-
-/**
- * Updates global elements with values from an object.
- * @param {Object} object - The object containing values to be updated.
- */
-function updateGlobalElements(object) {
-	for (const section in object) {
-		for (const element in object[section]) {
-			const dest = object[section][element];
-			const destElements = Array.from(document.getElementsByName(dest));
-			const destElement = document.getElementById(dest);
-			if (destElements.length) {
-				object[section][element] = destElements;
-			} else {
-				object[section][element] = destElement;
-			}
-		}
-	}
-	for (const section in object) {
-		for (const element in object[section]) {
-			globalElements[section][element] = object[section][element];
-		}
-	}
-}
-
-/**
- * Assigns element functions to input elements on the page.
- * @param {Object} object - An object where each key corresponds to the ID of an input element on the page, and the value is an array of strings containing functions to assign to that input element.
- */
-function assignElementFunctions(object) {
-	for (const elementId in object) {
-		if (!globalElements.input[elementId]) continue;
-		const element = globalElements.input[elementId];
-		const functionName = object[elementId][0];
-		if (Array.isArray(element)) {
-			for (const input of element) {
-				assignFunction(input, functionName, object[elementId][1], object[elementId][2]);
-			}
-		} else {
-			assignFunction(element, functionName, object[elementId][1], object[elementId][2]);
-		}
-	}
-}
 
 /**
  * Returns an object containing references to input elements on the page.
@@ -373,27 +70,27 @@ function getInputData() {
 /**
  * Runs various startup functions when the page loads.
  */
-function startUp() {
+export function startUp() {
 	autoShow();
 	readDefaultValues();
 	versionDropdown();
-	uploadShown = true;
-	galleryUploadShown = true;		// NoSonar (defined by gallery.js - isn't used by anything else, an if statement would just hurt performance)
+	uploadShown(true);
+	galleryUploadShown(true);		// NoSonar (defined by gallery.js - isn't used by anything else, an if statement would just hurt performance)
 	showAll();
 	if (!pageData.debug) {
-		uploadShown = false;
-		galleryUploadShown = false;
+		uploadShown(false);
+		galleryUploadShown(false);
 	}
 	enableTextMarking();
 	// the order of the touch and mouse events MUST NOT BE CHANGED!!!
 	// it will not work the other way around. Touch must be before mouse
-	// globalElements.output.output.ontouchstart = () => preventCopy();	// this must be first		// this is commented out because it had bad scroll UX on mobile. It should be triggered when tapped, but not when swiped.
-	globalElements.output.output.onmousedown = () => preventCopy();		// this must be second
-	globalElements.output.fullArticle.onmouseup = (e) => getSelectedText(e.target);
-	globalElements.output.fullArticle.ontouchend = (e) => getSelectedText(e.target);
+	// globalElements.output.output.ontouchstart = () => preventCopy();		// this must be first		// this is commented out because it had bad scroll UX on mobile. It should be triggered when tapped, but not when swiped.
+	(globalElements.output.output as HTMLElement).onmousedown = () => preventCopy();		// this must be second
+	(globalElements.output.fullArticle as HTMLElement).onmouseup = (e) => getSelectedText(e.target);
+	(globalElements.output.fullArticle as HTMLElement).ontouchend = (e) => getSelectedText(e.target);
 	if (globalElements.output.albumText) {
-		globalElements.output.albumText.ontouchend = (e) => getSelectedText(e.target);
-		globalElements.output.albumText.onmouseup = (e) => getSelectedText(e.target);
+		(globalElements.output.albumText as HTMLElement).ontouchend = (e) => getSelectedText(e.target);
+		(globalElements.output.albumText as HTMLElement).onmouseup = (e) => getSelectedText(e.target);
 	}
 	preloadHTML();
 }
@@ -415,11 +112,14 @@ function preloadHTML() {
  * @name versionDropdown
  * @returns {void}
  */
-function versionDropdown() {
+export function versionDropdown() {
 	const texts = structuredClone(versions);
 	const index = texts.indexOf('SentinelUp');
 	texts.splice(index, 1, 'Sentinel');
-	setDropdownOptions(globalElements.input.version, versions, texts);
+	const dropdownElement = globalElements.input.version;
+	if (!dropdownElement) return;
+
+	setDropdownOptions(dropdownElement as HTMLSelectElement, versions, texts);
 }
 
 // take element and array of values and array of corresponding text.
@@ -434,7 +134,7 @@ function versionDropdown() {
  *
  * @returns {undefined}
  */
-function setDropdownOptions(element, values, texts = values) {
+export function setDropdownOptions(element: HTMLElement, values: Array<string>, texts: Array<string> = values) {
 	const dropdown = new Array;
 	for (let i = 0; i < values.length; i++) {
 		const value = values[i];
@@ -450,63 +150,34 @@ function setDropdownOptions(element, values, texts = values) {
 }
 
 /**
- * Assigns a function to an HTML element's event listener.
- *
- * @param {HTMLElement} element - The HTML element to assign the function to.
- * @param {string} functionName - The name of the function to assign to the event listener.
- * @param {function} [listener=null] - An optional function that returns the name of the event listener to use.
- * @param {boolean} [invert=false] - An optional boolean indicating whether to invert the order of the function assignment.
- */
-function assignFunction(element, functionName, listener = null, invert = false) {
-	const inputTag = element.tagName.toLowerCase();
-	const inputType = element.type;
-	const changeType = listener ?? (() => {
-		if (inputTag == 'select' || inputType == 'radio' || inputType == 'checkbox') {
-			return 'onchange';
-		} else {
-			return 'oninput';
-		}
-	})();
-	if (element.hasAttribute(changeType)) {
-		if (invert) {
-			element.setAttribute(changeType, `${element.getAttribute(changeType)}; ${functionName}`);
-		} else {
-			element.setAttribute(changeType, `${functionName}; ${element.getAttribute(changeType)}`);
-		}
-	} else {
-		element.setAttribute(changeType, functionName);
-	}
-}
-
-/**
  * Automatically sets up input fields, checkboxes, stores, and datalists with appropriate functions.
  *
  * @returns {void} Nothing is returned by this function.
  */
-function autoShow() {
+export function autoShow(): void {
 	const inputData = getInputData();
-	for (const element of inputData.defaults) {
-		assignFunction(element, 'assignDefaultValue(this)');
+	for (const element of Array.from(inputData.defaults)) {
+		assignFunction({ element: element as HTMLElement, func: function () { assignDefaultValue(this as unknown as HTMLElement) } });
 	}
 
-	for (const input of inputData.inputs) {
-		assignFunction(input, 'wikiCode(this)');
+	for (const input of Array.from(inputData.inputs)) {
+		assignFunction({ element: input as HTMLElement, func: function () { wikiCode(this as unknown as HTMLElement) } });
 	}
 
-	for (const checkbox of inputData.checkboxes) {
-		assignFunction(checkbox, 'checkboxWikiCode(this)');
+	for (const checkbox of Array.from(inputData.checkboxes)) {
+		assignFunction({ element: checkbox as HTMLInputElement, func: function () { checkboxWikiCode(this as unknown as HTMLElement) } });
 	}
 
-	for (const store of inputData.stores) {
-		assignFunction(store, 'storeData(this)');
+	for (const store of Array.from(inputData.stores)) {
+		assignFunction({ element: store as HTMLElement, func: function () { storeData(this as unknown as HTMLElement) } });
 	}
 
-	for (const simple of inputData.simple) {
-		assignFunction(simple, 'wikiCodeSimple(this)');
+	for (const simple of Array.from(inputData.simple)) {
+		assignFunction({ element: simple as HTMLElement, func: function () { wikiCodeSimple(this as unknown as HTMLElement) } });
 	}
 
-	for (const list of inputData.lists) {
-		assignFunction(list, 'forceDatalist(this)', 'onchange');
+	for (const list of Array.from(inputData.lists)) {
+		assignFunction({ element: list as HTMLInputElement, handler: 'change', func: function () { forceDatalist(this as unknown as HTMLInputElement) } });
 	}
 }
 
@@ -515,23 +186,23 @@ function autoShow() {
  * @function
  * @returns {void}
  */
-function showAll() {
+export function showAll() {
 	const inputData = getInputData();
-	for (const input of inputData.inputs) {
+	for (const input of Array.from(inputData.inputs)) {
 		wikiCode(input);
 	}
-	for (const checkbox of inputData.checkboxes) {
+	for (const checkbox of Array.from(inputData.checkboxes)) {
 		checkboxWikiCode(checkbox);
 	}
-	for (const store of inputData.stores) {
+	for (const store of Array.from(inputData.stores)) {
 		storeData(store);
 	}
 
-	for (const element of inputData.defaults) {
+	for (const element of Array.from(inputData.defaults)) {
 		assignDefaultValue(element);
 	}
 
-	for (const simple of inputData.simple) {
+	for (const simple of Array.from(inputData.simple)) {
 		wikiCodeSimple(simple);
 	}
 
@@ -552,7 +223,7 @@ function showAll() {
  * @param {Object} element - The source element to retrieve value or content from.
  * @param {string} dest - The ID of the destination element(s) to update, specified in a data attribute on the source element.
  */
-function wikiCode(element, dest = element.dataset.dest) {
+export function wikiCode(element, dest = element.dataset.dest) {
 	const destElements = getDestElements(dest);
 
 	// sanitize the source value or content
@@ -575,21 +246,6 @@ function wikiCode(element, dest = element.dataset.dest) {
 			continue;
 		}
 	}
-}
-
-/**
- * Returns an array of DOM elements with the specified name or ID.
- *
- * @param {string} dest - The name or ID of the elements to search for.
- * @returns {Array} An array of matching DOM elements.
- */
-function getDestElements(dest) {
-	const destElements = Array.from(document.getElementsByName(dest));
-	if (destElements.length == 0) {
-		const element = document.getElementById(dest);
-		if (element) destElements.push(element);
-	}
-	return destElements;
 }
 
 /**
@@ -627,7 +283,7 @@ function storeData(element, key = element.dataset.destNoauto) {
  * @function externalLinks
  * @return {void}
  */
-function externalLinks() {
+export function externalLinks() {
 	const isExternalURL = (url) => new URL(url).origin !== location.origin;
 	const a = document.getElementsByTagName('a');
 	for (const link of a) {
@@ -642,7 +298,7 @@ function externalLinks() {
  * @function openWikiLinksExternally
  * @returns {void}
  */
-function openWikiLinksExternally() {
+export function openWikiLinksExternally() {
 	const a = document.querySelectorAll('a[data-wiki]');
 	for (const link of a) {
 		link.target ||= '_blank';
@@ -659,7 +315,7 @@ function openWikiLinksExternally() {
  *
  * @param {HTMLElement} element - The input element to source the value from.
  */
-function wikiCodeSimple(element, dest = element.dataset.destSimple) {
+export function wikiCodeSimple(element, dest = element.dataset.destSimple) {
 	const outputs = Array.from(document.getElementsByName(dest));
 	if (!outputs.length) outputs.push(document.getElementById(dest));
 	for (const output of outputs) {
@@ -673,14 +329,14 @@ function wikiCodeSimple(element, dest = element.dataset.destSimple) {
  * @param {string} key - The key of the data to add.
  * @param {*} value - The value of the data to add.
  */
-function addStaticPageData(key, value) {
+export function addStaticPageData(key, value) {
 	Object.defineProperty(pageData, key, { configurable: false, writable: false, value: value });
 }
 
 /**
  * Extracts information based on the user's input about the civilization and saves it as an object.
  */
-function civ() {
+export function civ() {
 	// Get the user's input from the DOM.
 	const input = globalElements?.input?.civ?.value;
 
@@ -746,7 +402,7 @@ function updateCiv() {
  * const inputString = "this [[is]] a {test} [[with] some {extra} {markup} {mixed [in}]}]crazy[http://test-link.com]link[http://another-link.net][a][b][c][[d]]e{f}g{hi}jkl[m]nop[qrs]t[u]v^w_x[[y]z{[http://nested-link.com]}";
  * const outputString = sanitiseString(inputString);
  */
-function sanitiseString(input) {
+export function sanitiseString(input: string) {
 	const doubleWikiMarkup = ['{', '}', '[', ']'];
 	const outputArray = new Array;
 
@@ -821,25 +477,25 @@ function sanitiseString(input) {
  * @param {HTMLInputElement} element - The file input element to process.
  * @returns {void}
  */
-function image(element) {
-	const filename = element.files[0]?.name;
+function image(element: HTMLInputElement) {
+	const filename = element?.files?.[0]?.name;
 	if (!filename) return;
 	// throw error if file is bigger than 10MB (wiki upload limit)
-	if (element.files[0].size > 10000000) {
+	if (element.files![0].size > 10000000) {
 		errorMessage(element, 'This file is too big to be uploaded to the wiki. Maximum filesize is 10MB.');
 	} else {
 		errorMessage(element);
 	}
-	const fileInput = element.previousElementSibling;
+	const fileInput = element.previousElementSibling as HTMLInputElement;
 	const sanitisedName = sanitiseString(filename);
 	fileInput.value = sanitisedName;
 	wikiCode(fileInput);
 	// this section handles an automatic notice about Special:Upload, since this is a big source of confusion for users
-	if (uploadShown) return;	// ignore following code if we already alerted user about Special:Upload
+	if (uploadShown()) return;	// ignore following code if we already alerted user about Special:Upload
 	explanation('Upload your picture to the wiki!', `Don't forget to upload your picture to the wiki on <a href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" target="_blank" rel="noopener noreferrer">Special:Upload</a>.
 	The upload button only auto-filled the image name into the code, it is not automatically uploaded to the wiki.
 	<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the main image upload button.</div>`);
-	uploadShown = true;
+	uploadShown(true);
 }
 
 /**
@@ -903,7 +559,7 @@ function toggleSection(sectionName, button, attributeName = 'section') {
  * @param {string} [civ=pageData.civShort] - The civilization to generate the dropdown for. Defaults to the current civilization.
  * @returns {void}
  */
-function researchTeamDropdown(inputElement = globalElements.input.researchTeam, civ = pageData.civShort) {
+export function researchTeamDropdown(inputElement: HTMLSelectElement = globalElements.input.researchTeam as HTMLSelectElement, civ = pageData.civShort) {
 	if (!inputElement) return;
 	const prevSelect = inputElement.value;
 	const teams = ['', 'GHGS', 'GHEC', 'GHSH', 'GHDF', 'GHBG', 'GHSL', 'GHTD', 'HBS'];
@@ -932,7 +588,7 @@ function researchTeamDropdown(inputElement = globalElements.input.researchTeam, 
  * @function
  * @returns {void}
  */
-function researchTeam() {
+export function researchTeam() {
 	const researchteamInput = globalElements.input.researchTeam;
 	const { value: researchteamValue, dataset: { destNoauto: dest } } = researchteamInput;
 	pageData[dest] = researchteamValue;
@@ -956,7 +612,7 @@ function researchTeam() {
  *
  * @return {void}
  */
-function docBy() {
+export function docBy() {
 	if (typeof docByExternal == 'function') {
 		docByExternal();
 		return;
@@ -1041,22 +697,22 @@ function formatName(documenter) {
  * @param {string} [removeId] - ID of paired input to hide.
  * @returns {undefined}
  */
-function hideDiscoverer(keepId = null, removeId = null) {
+export function hideDiscoverer(keepId: string = '', removeId: string = '') {
 	if (!keepId && !removeId) {			// show everything if no inputs are given
 		// I wrote this, but I have no idea how it works
-		const elements = document.querySelectorAll('[oninput*="hideDiscoverer"], [onchange*="hideDiscoverer"]');
-		const usedElements = new Set();		// holds already done elements so we don't get duplicates
+		const elements: NodeListOf<HTMLInputElement> = document.querySelectorAll('[oninput*="hideDiscoverer"], [onchange*="hideDiscoverer"]');
+		const usedElements: Set<HTMLInputElement> = new Set();		// holds already done elements so we don't get duplicates
 		const inputPairs = new Array;		// holds our new pairs
 		// builds the pair arrays and pushes them to inputPairs
-		for (const element of elements) {
+		for (const element of Array.from(elements)) {
 			if (usedElements.has(element)) continue;
 			const tableCell = element.closest('.tableCell');
-			const prev = tableCell.previousElementSibling.previousElementSibling.querySelector('input');
-			const next = tableCell.nextElementSibling.nextElementSibling.querySelector('input');
+			const prev = tableCell?.previousElementSibling?.previousElementSibling?.querySelector('input');
+			const next = tableCell?.nextElementSibling?.nextElementSibling?.querySelector('input');
 			const siblingArray = [prev, next];
-			const adjacentInput = siblingArray.find(input => Array.from(elements).includes(input));
+			const adjacentInput = siblingArray.find(input => Array.from(elements).includes(input as HTMLInputElement));
 			const pair = [element, adjacentInput];
-			usedElements.add(adjacentInput);
+			usedElements.add(adjacentInput as HTMLInputElement);
 			inputPairs.push(pair);
 		}
 		for (const pair of inputPairs) {
@@ -1073,8 +729,8 @@ function hideDiscoverer(keepId = null, removeId = null) {
 		}
 		return;
 	}
-	const keepInput = document.getElementById(keepId);
-	const removeInput = document.getElementById(removeId);
+	const keepInput = document.getElementById(keepId) as HTMLInputElement;
+	const removeInput = document.getElementById(removeId) as HTMLInputElement;
 
 	const showStatus = (() => {
 		if (keepInput.value) {
@@ -1120,7 +776,7 @@ function addInfoBullet() {
  * @param {string|null} [msg=null] - The error message to display. If null, any existing error message is removed.
  * @returns {void}
  */
-function errorMessage(element, msg = null) {
+export function errorMessage(element: HTMLElement, msg: string = '') {
 	const tableCell = element.closest('.data');
 	tableCell?.querySelector('.error')?.remove();
 	element.style.backgroundColor = '';
@@ -1145,7 +801,7 @@ function errorMessage(element, msg = null) {
  * // The following input would be considered invalid: "12.34, 56.78"
  * validateCoords();
  */
-function validateCoords(error = true) {
+export function validateCoords(error: boolean = true) {
 	const element = globalElements.input.axesInput;
 	const axes = element.value;
 	const axesRegex = new RegExp(/[+-](?:[0-9]{1,3})\.(?:[0-9]{2}), [+-](?:[0-9]{1,3})\.(?:[0-9]{2})/);
@@ -1163,9 +819,9 @@ function validateCoords(error = true) {
  * @param {string} [displayValue=null] - The CSS display value to apply to the input and label cells. Defaults to an empty string if not specified.
  * @returns {void}
  */
-function hideInput(element, displayValue = null) {
-	const inputCell = element.closest('.tableCell')
-	const labelCell = inputCell.previousElementSibling;
+export function hideInput(element: HTMLElement, displayValue: string = '') {
+	const inputCell = element.closest('.tableCell') as HTMLElement;
+	const labelCell = inputCell.previousElementSibling as HTMLElement;
 	const inputRow = [labelCell, inputCell];
 
 	for (const cell of inputRow) {
@@ -1328,7 +984,7 @@ function datalists(object) {
  * @param {HTMLInputElement} element - The input element with the datalist.
  * @returns {void}
  */
-function forceDatalist(element) {
+export function forceDatalist(element) {
 	const option = element.list.querySelector(`[value="${element.value}"]`);
 	if (!option && element.value && element.id != 'currencyInput') {
 		errorMessage(element, 'Not a valid option. If you believe this is an error, submit a <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform" rel="noreferrer noopener" target="_blank">bug report</a>.');
@@ -1343,8 +999,8 @@ function forceDatalist(element) {
  * @param {boolean} [simple=false] - Indicates whether to perform a simple data check.
  * @returns {string|false} A string with an error message if a data integrity issue was found, or false otherwise.
  */
-function checkDataIntegrity(element = null, simple = false) {
-	if (pageData.debug) return false;
+function checkDataIntegrity(element: HTMLElement | null = null, simple: boolean = false) {
+	if (pageData.debug) return '';
 	const currentText = JSON.stringify(pageData);
 	const savedText = dataIntegrityObj.text;
 
@@ -1352,7 +1008,7 @@ function checkDataIntegrity(element = null, simple = false) {
 
 	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.copy === element?.dataset?.link) || simple)) {
 		dataIntegrityObj.copy = false;
-		return false;
+		return '';
 	} else if (!name) {
 		return 'Missing Name!';
 	} else if ((!glyphs || !region)) {
@@ -1401,7 +1057,7 @@ function getSelectedText(section) {
  * @function
  * @returns {void}
  */
-function enableTextMarking() {
+export function enableTextMarking() {
 	document.body.dataset.mark = pageData.debug ? true : !checkDataIntegrity(null, true);
 }
 
@@ -1473,13 +1129,13 @@ function hideOrgName() {
  * @param {string} data - The path to the property to check for an index, in dot notation (e.g. 'dataset.planet').
  * @returns {number} - The next available child index.
  */
-function getChildIndex(array, data) {
+function getChildIndex(array, data: string) {
 	const IDs = [0];	// dummy element to avoid if statement
 	for (const element of array) {
 		const idNumber = extractNumber(fetchFromObject(element, data));	// get all numbers of the string into an array, then join that array
 		IDs.push(parseInt(idNumber));
 	}
-	function compareNumbers(a, b) {
+	function compareNumbers(a: number, b: number) {
 		return a - b;
 	}
 	IDs.sort(compareNumbers);
@@ -1513,7 +1169,7 @@ function getChildIndex(array, data) {
  * or not (i.e. by string value). Default is false.
  * @returns {Object} - A new object with the same key-value pairs as the input object, but with the keys sorted alphabetically.
  */
-function sortObj(obj, number = false) {
+function sortObj(obj, number: boolean = false) {
 	if (!number) {
 		return Object.keys(obj).sort().reduce((result, key) => {
 			result[key] = obj[key];
@@ -1524,7 +1180,7 @@ function sortObj(obj, number = false) {
 	const numbers = keys.map(key => extractNumber(key)).map(Number).sort((a, b) => {
 		return a - b;
 	});
-	const result = new Object;
+	const result = {};
 	for (const number of numbers) {
 		const keyIndex = keys.findIndex(element => extractNumber(element) == number)
 		const key = keys[keyIndex];
@@ -1541,7 +1197,7 @@ function sortObj(obj, number = false) {
  * @param {string} string - The string to extract integers from.
  * @returns {string} A string containing all the integers in the input string.
  */
-function extractNumber(string) {
+function extractNumber(string: string): string {
 	return string?.match(/[0-9]/g)?.join('') ?? '';
 }
 
@@ -1551,7 +1207,7 @@ function extractNumber(string) {
  * @param {number} number - The number to check.
  * @returns {string} A string indicating whether the number is 'even' or 'odd'
  */
-function oddEven(number) {
+function oddEven(number: number) {
 	if (number % 2 == 0) return 'even';
 	return 'odd';
 }
@@ -1564,7 +1220,7 @@ function oddEven(number) {
  * @returns {Promise<Document>} - A promise that resolves with the parsed HTML DOM of the loaded file.
  * The loaded HTML is cached in the `cachedHTML` object to improve performance on subsequent calls.
  */
-async function loadHTML(url, varObj = {}) {
+export async function loadHTML(url: string, varObj = {}) {
 	let html = await (async () => {
 		if (cachedHTML[url]) return cachedHTML[url];
 
@@ -1580,4 +1236,9 @@ async function loadHTML(url, varObj = {}) {
 	const parser = new DOMParser();
 	const dom = parser.parseFromString(html, 'text/html');
 	return dom;
+}
+
+export function triggerEvent(element: HTMLElement, evt: string): void {
+	const event = new Event(evt);
+	element.dispatchEvent(event);
 }

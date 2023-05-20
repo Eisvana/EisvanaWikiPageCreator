@@ -1,5 +1,6 @@
-name: Minify
-run-name: Minify Code
+name: Build
+
+run-name: Build Code
 
 on:
   push:
@@ -9,11 +10,11 @@ permissions:
   contents: write
 
 concurrency:
-  group: "minify"
+  group: "build"
   cancel-in-progress: true
 
 jobs:
-  Minify:
+  build:
     environment: github-pages
     runs-on: ubuntu-latest
     
@@ -21,16 +22,19 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
+      - run: |
+          npm i
+          npm run build
+          cd dist
+          touch .nojekyll
+
       - name: Minify Code
         uses: Lenni009/minify-js@main
         with:
+          directory: dist
           overwrite: true
-
-      - run: |
-          touch .nojekyll
-          find . -name "*.md" -type f -delete
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: . # The folder the action should deploy.
+          folder: dist # The folder the action should deploy.

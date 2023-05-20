@@ -2,6 +2,13 @@
  * @fileoverview Provides functions needed for the actions (reset, download file, copy code, create page...) to work.
  */
 
+/// <reference types="vite/client" />
+
+import { addStaticPageData, enableTextMarking, triggerEvent } from "../common";
+import { globalElements, pageData } from "../variables/objects";
+import { galleryUploadShown, uploadShown } from "../variables/sessionstorage";
+import { wikiLink } from "../variables/simple";
+
 /**
  * Sets actions and notes for the HubWikiPageCreator. This function first sets up
  * several buttons for copying, downloading, and creating pages. It then adds a note
@@ -12,24 +19,61 @@
  */
 (() => {
 	// Sets up buttons for copying, downloading, and creating pages.
-	const actions = `
-	<button class="button is-outlined is-primary" id="copy" type="button" data-link="page" onclick="copyCode(this, 'fullArticle')">Copy Wikicode</button>
-	<a class="button is-outlined is-primary" id="download" onclick="downloadFile(this)">Download File</a>
-	<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload Pictures</a>
-	<a class="button is-outlined is-primary" id="create" data-link="page" onclick="createPage(this)">Create Page</a>
-	<button class="button is-warning" id="reset" type="reset" onclick="reset()">Reset Inputs</button>`;
+	const copyBtn = document.createElement('button');
+	const downloadLink = document.createElement('a');
+	const picUploadLink = document.createElement('a');
+	const createLink = document.createElement('a');
+	const resetBtn = document.createElement('button');
+
+	([copyBtn, downloadLink, picUploadLink, createLink]).forEach(element => element.classList.add('button', 'is-outlined', 'is-primary'));
+
+	// Copy Code Button
+	copyBtn.id = 'copy';
+	copyBtn.type = 'button';
+	copyBtn.dataset.link = 'page';
+	copyBtn.innerText = 'Copy Wikicode';
+	copyBtn.addEventListener('click', function () { copyCode(this as unknown as HTMLButtonElement, 'fullArticle') });
+
+	// Download File Button
+	downloadLink.id = 'download';
+	downloadLink.innerText = 'Download File';
+	downloadLink.addEventListener('click', function () { downloadFile(this as unknown as HTMLAnchorElement) });
+
+	// Upload Pictures Button
+	picUploadLink.id = 'uploadLink';
+	picUploadLink.href = wikiLink + 'Special:Upload?multiple=true';
+	picUploadLink.rel = 'noopener noreferrer';
+	picUploadLink.target = '_blank';
+	picUploadLink.innerText = 'Upload Pictures';
+
+	// Create Page Button
+	createLink.id = 'create';
+	createLink.dataset.link = 'page';
+	createLink.innerText = 'Create Page';
+	createLink.addEventListener('click', function () { createPage(this as unknown as HTMLAnchorElement) });
+
+	// Reset Button
+	resetBtn.classList.add('button', 'is-warning');
+	resetBtn.id = 'reset';
+	resetBtn.innerText = 'Reset Inputs';
+	resetBtn.addEventListener('click', () => reset());
 
 	// Adds a note reminding the user to upload any images they have added.
-	const copyNote = `<p class="has-text-centered">You must copy the code first, then paste it into the wiki page.<br>Also don't forget to upload any images you have put here.</p>`
+	const copyNote = `<p class="has-text-centered">You must copy the code first, then paste it into the wiki page.<br>Also don't forget to upload any images you have put here.</p>`;
 
 	// Inserts the actions and note into the HTML.
-	globalElements.output.actions.innerHTML = actions;
-	globalElements.output.actions.insertAdjacentHTML('beforebegin', copyNote);
+	const actions = globalElements.output.actions as HTMLElement;
+	actions.innerHTML = '';
+	const buttonArray = [copyBtn, downloadLink, picUploadLink, createLink, resetBtn];
+	for (const button of buttonArray) {
+		actions.appendChild(button);
+	}
+
+	actions.insertAdjacentHTML('beforebegin', copyNote);
 
 	// Adds debug mode checkbox and sets up a handler for toggling debug mode on and off.
-	const debugHostnames = ['127.0.0.1', 'localhost'];
-	const url = window.location;
-	if (!debugHostnames.includes(url.hostname) && url.protocol != 'file:') {
+	// import.meta.env.PROD: {boolean} whether the app is running in production. https://vitejs.dev/guide/env-and-mode.html 
+	if (import.meta.env.PROD) {
 		addStaticPageData('debug', false);
 		return;
 	}
@@ -37,26 +81,22 @@
 	const skipCheck = `<label style="display:flex; gap: .3rem"><input class="checkbox" type="checkbox" id="skipCheck">Enable debug (no checks, no popups)</label>`;
 	const clearLocalStorage = `<button style="margin: 0 1rem" class="button is-danger is-small" id="clearCache" onclick="localStorage.clear()">Clear Localstorage</button>`;
 	globalElements.output.actions.insertAdjacentHTML('beforeend', skipCheck + clearLocalStorage);
-	const skipCheckElement = document.getElementById('skipCheck');
+	const skipCheckElement = document.getElementById('skipCheck') as HTMLInputElement | null;
+	if (!skipCheckElement) return;
 	skipCheckElement.onchange = (e) => {
-		const checkState = e.target.checked;
+		const checkState = (e.target as HTMLInputElement).checked;
 		pageData.debug = checkState;
-		uploadShown = checkState;				// NoSonar (defined by common.js)
-		galleryUploadShown = checkState;		// NoSonar (defined by gallery.js)
-		document.documentElement.dataset.debug = checkState;
+		uploadShown(checkState);
+		galleryUploadShown(checkState);
+		document.documentElement.dataset.debug = checkState.toString();
 		enableTextMarking();
 	}
 
-	const urlParams = new URLSearchParams(url.search);
+	const urlParams = new URLSearchParams(window.location.search);
 	if (!urlParams.has('debug')) return;
 
 	skipCheckElement.checked = true;
-	const event = new Event('change', {
-		bubbles: true,
-		cancelable: true,
-	});
-
-	skipCheckElement.dispatchEvent(event);
+	triggerEvent(skipCheckElement, 'change')
 })();
 
 /**
@@ -78,10 +118,10 @@ function reset() {
 				input.checked = false;
 				break;
 			case 'radio':
-				const uncheckedRadios = document.querySelectorAll('input[type="radio"]:not([checked])');
-				const checkedRadios = document.querySelectorAll('input[type="radio"][checked]');
-				for (const radio of uncheckedRadios) radio.checked = false;
-				for (const radio of checkedRadios) radio.checked = true;
+				const uncheckedRadios: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[type="radio"]:not([checked])');
+				const checkedRadios: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[type="radio"][checked]');
+				for (const radio of Array.from(uncheckedRadios)) radio.checked = false;
+				for (const radio of Array.from(checkedRadios)) radio.checked = true;
 				break;
 			default:
 				input.value = '';

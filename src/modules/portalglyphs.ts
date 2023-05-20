@@ -2,6 +2,9 @@
  * @fileoverview Inserts portalglyph buttons into the page and handles all logic surrounding them.
  */
 
+import { errorMessage, triggerEvent, wikiCode } from "../common";
+import { globalElements } from "../variables/objects";
+
 const validPortalKeys = '0123456789ABCDEF';
 
 /**
@@ -10,24 +13,34 @@ const validPortalKeys = '0123456789ABCDEF';
  * @param {string} glyphInputBindId - The input binding ID for the glyph press function.
  * @returns {void}
  */
-function addPortalGlyphButtons(element, glyphInputBindId) {
+export function addPortalGlyphButtons(element: HTMLElement, glyphInputBindId: string) {
 	if (!element) return;
-	const glyphs = new Array;
+	const glyphs: Array<HTMLButtonElement> = [];
 	for (const letter of validPortalKeys) {
-		const glyph = `<button type="button" data-input-bind="${glyphInputBindId}" class="button" value="${letter}" onclick="glyphOnClick(this)"><span class="glyph icon is-small">${letter}</span></button>`;
+		const glyph = generateButton(letter);
 		glyphs.push(glyph);
 	}
-	element.innerHTML = glyphs.join('');
-}
-addPortalGlyphButtons(globalElements.output.portalglyphButtons, 'portalglyphsInput');
+	element.innerHTML = '';
+	for (const glyph of glyphs) {
+		element.appendChild(glyph);
+	}
 
-/**
-* Calls the `oninput` function of the input element.
-*
-* @param {HTMLInputElement} input - The input element to be executed on.
-*/
-function executeOnInput(input) {
-	input?.oninput?.call(input);
+	function generateButton(letter: string) {
+		const button = document.createElement('button');
+		const span = document.createElement('span');
+
+		button.type = 'button';
+		button.dataset.inputBind = glyphInputBindId;
+		button.classList.add('button');
+		button.value = letter;
+		button.addEventListener('click', function () { glyphOnClick(this as unknown as HTMLButtonElement) });
+
+		span.classList.add('glyph', 'icon', 'is-small');
+		span.innerText = letter;
+
+		button.appendChild(span);
+		return button;
+	}
 }
 
 /**
@@ -36,15 +49,15 @@ function executeOnInput(input) {
  * @param {HTMLButtonElement} button - The button that was clicked
  * @returns {void}
  */
-function glyphOnClick(button) {
-	const glyphInputBindId = button?.dataset?.inputBind ?? null;
-	const input = globalElements.input[glyphInputBindId] ?? document.getElementById(glyphInputBindId) ?? button?.closest('.tableHeader')?.previousElementSibling?.querySelector('input');
+function glyphOnClick(button: HTMLButtonElement) {
+	const glyphInputBindId: string | null = button?.dataset?.inputBind ?? null;
+	const input = globalElements.input![glyphInputBindId] ?? document.getElementById(glyphInputBindId) ?? button?.closest('.tableHeader')?.previousElementSibling?.querySelector('input');
 	const portalCode = input.value;
 
 	if (portalCode.length < 12) {
-		input.value += button.value;
+		(input as HTMLInputElement).value += button.value;
 	}
-	executeOnInput(input);
+	triggerEvent(input as HTMLElement, 'input');
 }
 
 /**
@@ -52,7 +65,7 @@ function glyphOnClick(button) {
  *
  * @returns {void}
  */
-function displayGlyphs() {
+export function displayGlyphs() {
 	const input = globalElements.input.portalglyphsInput;
 	const glyphString = input.value;
 	pageData.portalglyphs = glyphString;
@@ -63,19 +76,19 @@ function displayGlyphs() {
 }
 
 /**
- * Removes the last character from a given input field, updates the value of the field, and executes `executeOnInput` with the updated input field.
+ * Removes the last character from a given input field, updates the value of the field, and executes `triggerEvent` with the updated input field.
  *
  * @param {HTMLElement} button - The button element clicked to invoke this function.
  * @returns {void} - This function does not return a value.
  */
-function deleteCharacter(button) {
-	const input = button?.dataset?.inputBind ?? null;
-	const glyphInput = globalElements.input[input] ?? document.getElementById(input) ?? button?.closest('.tableCell')?.nextElementSibling?.querySelector('input') ?? globalElements.input.portalglyphsInput;
-	const enteredGlyphs = glyphInput?.value?.split('');
+export function deleteCharacter(button: HTMLButtonElement) {
+	const input = button?.dataset?.inputBind ?? '';
+	const glyphInput = globalElements.input![input] ?? document.getElementById(input) ?? button?.closest('.tableCell')?.nextElementSibling?.querySelector('input') ?? globalElements.input!.portalglyphsInput;
+	const enteredGlyphs = (glyphInput as HTMLInputElement).value?.split('');
 	enteredGlyphs.pop();
 	const newString = enteredGlyphs.join('');
-	glyphInput.value = newString;
-	executeOnInput(glyphInput);
+	(glyphInput as HTMLInputElement).value = newString;
+	triggerEvent(glyphInput as HTMLElement, 'input');
 }
 
 /**
@@ -84,7 +97,7 @@ function deleteCharacter(button) {
  * @param {HTMLInputElement} input - The input field element for glyph values
  * @returns {void}
  */
-function glyphInputOnChange(input) {
+export function glyphInputOnChange(input) {
 	// Converts the value of the input field to uppercase
 	const newValue = input?.value?.toUpperCase?.();
 	if (newValue == null) return;
@@ -99,7 +112,7 @@ function glyphInputOnChange(input) {
  * @param {string} glyphString - The string of portal glyphs to validate
  * @returns {string} The validated string of portal glyphs
  */
-function validateGlyphInput(glyphString) {
+export function validateGlyphInput(glyphString: string): string {
 	// Filters out invalid characters and truncates the result to 12 characters or less
 	return glyphString
 		.split('')
@@ -116,7 +129,7 @@ function validateGlyphInput(glyphString) {
  * @param {Object} [regionObj=regions] - The object containing the region data
  * @returns {Object|string} - The region object or an empty string if the input does not contain 12 glyphs
  */
-function validateGlyphs(glyphs, civShort = pageData.civShort, regionObj = regions) {
+export function validateGlyphs(glyphs, civShort = pageData.civShort, regionObj = regions) {
 	// Checks if the input contains exactly 12 glyphs
 	if (glyphs.length != 12) return '';
 
@@ -134,13 +147,13 @@ function validateGlyphs(glyphs, civShort = pageData.civShort, regionObj = region
  * @param {Array<string>} glyphs - An array of Portal Glyph strings.
  * @returns {string} The corresponding Wiki code for the valid region, or an empty string if the region is invalid.
  */
-function glyphRegion(glyphs) {
-	const glyphElement = globalElements.input.portalglyphsInput;
+export function glyphRegion(glyphs: string) {
+	const glyphElement = globalElements.input!.portalglyphsInput;
 	let region = '';
 	if (glyphs?.length == 12) {
 		region = validateGlyphs(glyphs);
 	}
-	glyphError(region, glyphElement);
+	glyphError(region, glyphElement as HTMLElement);
 	wikiCode(region ?? '', 'region');
 }
 
@@ -152,11 +165,11 @@ function glyphRegion(glyphs) {
  *
  * @returns {void}
  */
-function glyphError(region, glyphElement) {
+export function glyphError(region: string | undefined, glyphElement: HTMLElement) {
 	errorMessage(glyphElement,
 		(region == undefined)
 			? 'No valid Hub region. See <a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Regions" target="_blank" rel="noopener noreferrer">Galactic Hub Regions</a> for a list of valid regions.'
-			: null);
+			: '');
 }
 
 /**
@@ -164,7 +177,7 @@ function glyphError(region, glyphElement) {
  * @param {string} glyphs - A string of glyphs representing coordinates.
  * @returns {string} A string of coordinates in the format "XXXX:YYYY:ZZZZ:SSSS".
  */
-function glyphs2Coords(glyphs) {
+function glyphs2Coords(glyphs: string) {
 	if (glyphs.length != 12) return '';
 
 	const X_Z_POS_SHIFT = 2049;

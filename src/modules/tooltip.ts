@@ -2,36 +2,15 @@
  * @fileoverview Generates tooltips and handles all logic related to tooltips and explanation popups.
  */
 
+import { updateGlobalElements } from "../elementFrontends/elementBackend/elementStore";
+import { globalElements } from "../variables/objects";
+import { ElementIds } from '../types/elements';
+import { assignFunction } from "../elementFrontends/elementBackend/elementFunctions";
+
 /**
  * Adds all tooltips and sets up dialog handling.
  * @function
  */
-(() => {
-	addAllTooltips();
-
-	// handle dialog stuff
-	const dialogElements = {
-		output: {
-			explanationHeading: 'explanationHeading',
-			explanationContent: 'explanationContent',
-			explanationLink: 'explanationLink',
-			explanationImg: 'explanationImg',
-		}
-	}
-
-	const content = `<h2 id="explanationHeading" class="title is-4"></h2>
-	<div id="explanationContent" class="nms-font"></div>
-	<a id="explanationLink" target='_blank' rel='noopener noreferrer'>
-		<img id="explanationImg" alt='Explainer Image'>
-	</a>
-	<form method="dialog">
-		<button class="button" type="submit" autofocus>Close</button>
-	</form>`;
-
-	globalElements.output.explanation.innerHTML = content;
-
-	updateGlobalElements(dialogElements);
-})();
 
 /**
  * A Set which holds images that have been previously loaded and cached.
@@ -45,8 +24,12 @@ const cachedImages = new Set();
  * @param {string} text - The text content of the modal.
  * @param {string} img - The URL of the image to display in the modal.
  */
-function explanation(heading, text, img) {
-	const { explanationImg: imgElement, explanationLink: linkElement, explanation: dialogElement } = globalElements.output;
+export function explanation(heading: string = '', text: string = '', img: string = '') {
+	// I have no idea how to do type guards in destructuring, so I need to do it the ugly way here.
+	// I also hate past-Lenni for making this ugly interface that needs typeguards and assertions everywhere.
+	const imgElement = globalElements.output.explanationImg as HTMLImageElement;
+	const linkElement = globalElements.output.explanationImg as HTMLAnchorElement;
+	const dialogElement = globalElements.output.explanationImg as HTMLDialogElement;
 
 	// Check if img URL was provided
 	if (img) {
@@ -68,8 +51,8 @@ function explanation(heading, text, img) {
 		} else {
 			// Image is not cached, need to load it and show a loading animation
 			imgElement.src = '';
-			imgElement.style.opacity = 0;
-			imgElement.style.marginBlockStart = 0;
+			imgElement.style.opacity = '0';
+			imgElement.style.marginBlockStart = '0';
 			imgElement.src = img;
 			linkElement.classList.add('loading');
 			linkElement.href = img;
@@ -84,8 +67,8 @@ function explanation(heading, text, img) {
 	}
 
 	// Set modal heading and text content
-	globalElements.output.explanationHeading.innerText = heading;
-	globalElements.output.explanationContent.innerHTML = text;
+	(globalElements.output.explanationHeading as HTMLHeadingElement).innerText = heading;
+	(globalElements.output.explanationContent as HTMLDivElement).innerHTML = text;
 
 	// Show the modal with a slide-down animation
 	dialogElement.style.translate = '0 -100vh';
@@ -96,7 +79,7 @@ function explanation(heading, text, img) {
 	// Wait for img to load, then update the DOM and cache the image
 	imgElement.onload = () => {
 		imgElement.style.marginBlockStart = '1rem';
-		imgElement.style.opacity = 1;
+		imgElement.style.opacity = '1';
 		cachedImages.add(img);
 	}
 }
@@ -107,7 +90,7 @@ function explanation(heading, text, img) {
  * @param  {Object} [dom=document] - Optional DOM object to query for elements
  * @return {void}
  */
-function addAllTooltips(dom = document) {
+export function addAllTooltips(dom = document) {
 	const elements = dom.querySelectorAll('button.tooltip');
 	for (const element of elements) {
 		constructTooltip(element);
@@ -119,12 +102,12 @@ function addAllTooltips(dom = document) {
 	 * @param {Element} element - The tooltip element to be constructed
 	 * @returns {void}
 	 */
-	function constructTooltip(element) {
+	function constructTooltip(element: HTMLButtonElement) {
 		const dataElements = element.getElementsByTagName('data');
 		if (!dataElements.length) return;
 
 		const dataArr = new Array;
-		for (const element of dataElements) {
+		for (const element of Array.from(dataElements)) {
 			const text = element.innerHTML;
 			dataArr.push(text);
 		}
@@ -144,8 +127,7 @@ function addAllTooltips(dom = document) {
 		*/
 		if (dataArr.length) {
 			const params = dataArr.join('`,`');
-			const functionCall = `explanation(\`${params}\`)`;
-			assignFunction(element, functionCall, 'onclick');
+			assignFunction({ element, handler: 'click', func: function () { explanation(...params) } });
 		}
 
 		element.innerHTML = img.outerHTML + tooltip.outerHTML;

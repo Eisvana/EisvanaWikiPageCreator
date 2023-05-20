@@ -1,0 +1,164 @@
+/**
+ * @fileoverview Generates the footer and handles theming, as well as user defined global default values.
+ */
+
+import { addHuburbs, hideDiscoverer, loadHTML, researchTeamDropdown, sanitiseString, triggerEvent } from "../common";
+import { globalElements, pageData } from "../variables/objects";
+import { regions } from "../variables/regions";
+import { ElementIds } from "../elementFrontends/elementBackend/elementStore";
+
+// custom global settings
+export const footerElements: ElementIds = {
+	input: {
+		settings: 'settings',
+	}
+};
+
+/**
+ * Changes the theme of the page and sets a localStorage variable to track the theme between page loads.
+ * @function
+ * @returns {void}
+ */
+export function switchTheme(): void {
+	document.documentElement.dataset.transition = 'true';
+	if (localStorage.getItem('theme') == 'light') {
+		localStorage.setItem('theme', 'dark');
+		document.documentElement.dataset.theme = 'dark';
+	} else {
+		localStorage.setItem('theme', 'light');
+		document.documentElement.dataset.theme = 'light';
+	}
+
+	// adding delay to allow the CSS transition to complete. This is only for Chrome, Firefox would work with any timeout (even 0) #chromesucks
+	setTimeout(() => {
+		delete document.documentElement.dataset.transition;
+	}, 400);
+}
+
+/**
+ * Displays the settings modal and restores default values.
+ * @function
+ * @global
+ * @return {void}
+ */
+export function showSettings() {
+	restoreDefaults();
+	const dialog = globalElements.input.settings as HTMLDialogElement;
+	dialog.style.scale = '0';
+	dialog.showModal();
+	dialog.style.scale = '1';
+	dialog.scrollTo(0, 0);
+
+	const settings = JSON.parse(localStorage.getItem('defaultSettings') ?? '{}');
+	for (const setting in settings) {
+		const input: HTMLInputElement | HTMLSelectElement | null = dialog.querySelector(`.data [data-store="${setting}"]`);
+		if (!input) continue;
+		input.value = settings[setting];
+		switch (input.id) {
+			case 'civDefault':
+				const event = new Event('change');
+				input.dispatchEvent(event);
+
+				break;
+			case 'portalglyphsDefault':
+				triggerEvent(input, 'input');
+				break;
+		}
+	}
+	hideDiscoverer();
+	delete pageData.restored;
+}
+
+/**
+ * Called when user submits values. Stores entered values in localstorage.
+ * @function
+ * @returns {void}
+ */
+export function updateDefaultValues() {
+	if (pageData.restored) {
+		localStorage.removeItem('defaultSettings');
+		delete pageData.restored;
+		return;
+	}
+	const settings = new Object;
+	const inputs = footerElements.inputs;
+	for (const input of inputs) {
+		const value = input?.value;
+		const store = input?.dataset?.store;
+		if ((input?.options?.[input.options.length - 1]?.value == value || value) && store) settings[store] = sanitiseString(value);
+	}
+
+	localStorage.setItem('defaultSettings', JSON.stringify(settings));
+}
+
+/**
+ * Populates input fields with default values on page load and on reset.
+ * Retrieves default values from local storage, if available.
+ * @function
+ * @returns {void}
+ */
+export function readDefaultValues() {
+	const settings = JSON.parse(localStorage.getItem('defaultSettings')) ?? new Object;
+	for (const setting in settings) {
+		const input = (() => {
+			if (setting.split(' ').length > 1) {
+				return setting.split(' ').map(id => document.getElementById(id)).find(element => element);
+			} else {
+				return document.getElementById(setting);
+			}
+		})();
+		if (!input) continue;
+
+		(input as HTMLInputElement | HTMLSelectElement).value = settings[setting];
+
+		switch (setting) {
+			case 'civInput':
+				pageData.civShort = settings[setting];
+				researchTeamDropdown();
+				break;
+
+			case 'portalglyphsInput':
+				triggerEvent(input, 'input');
+				break;
+		}
+	}
+}
+
+/**
+ * Sets dialog options back to their default values when the user resets custom globals.
+ * @function
+ * @returns {void}
+ */
+export function restoreDefaults() {
+	/**
+	 * The input HTML elements in the footer.
+	 * @type {NodeList}
+	 */
+	const inputs = footerElements.inputs;
+	for (const input of inputs) {
+		if (input?.value == undefined) continue;
+		if (input.tagName.toLowerCase() == 'select') {
+			input.value = input.options?.[0]?.value;
+		} else {
+			input.value = '';
+		}
+	}
+	hideDiscoverer();
+	pageData.restored = true;
+}
+
+/**
+ * Validates a glyph user input and updates the UI with any errors
+ * @param {HTMLInputElement} input - The user's glyph input
+ */
+export function validateGlyphSettings(input: HTMLInputElement) {
+	const glyphString = input.value;
+	const allRegions = structuredClone(regions);
+	addHuburbs(allRegions);
+	Object.freeze(allRegions);
+	const region = validateGlyphs(glyphString, (globalElements.input!.civDefault as HTMLSelectElement).value, allRegions);
+	glyphError(region, input);
+	const settingsElement = globalElements.input!.settings as HTMLDialogElement;
+	const closeButton = settingsElement.querySelector('form button.is-primary') as HTMLButtonElement
+	closeButton.disabled = region == undefined;
+}
