@@ -2,6 +2,17 @@
  * @fileoverview Provides functions that can be used by Planet and Moon pages.
  */
 
+import { getChildIndex, loadHTML } from '../common';
+import { globalElements } from '../variables/objects';
+import creatureInputs from '../htmlSnippets/creatureInputs.html?raw';
+import floraInputs from '../htmlSnippets/floraInputs.html?raw';
+import mineralInputs from '../htmlSnippets/mineralInputs.html?raw';
+import { addAllTooltips } from '../modules/tooltip';
+import { updateGlobalElements } from '../elementFrontends/elementBackend/elementStore';
+import { initialiseSectionInputs } from './celestialobjectslogic';
+import { GlobalElements } from '../types/elements';
+
+
 function startupFunctions() {
 	celestialStartupFunctions();
 	globalElements.input.resourceInputs.querySelector('button').onclick();
@@ -232,19 +243,19 @@ function sentinelSentence() {
  * @param {Element} element - The button element that was clicked to add the fauna section.
  * @returns {Promise} A promise that resolves when the fauna section is successfully added.
  **/
-async function addFauna(element) {
+function addFauna(element) {
 	const inputSection = element.parentElement;
 	const outputSection = globalElements.output[element.dataset.destNoauto];
 	const sectionType = 'fauna';
 	const elementList = document.querySelectorAll(`[data-${sectionType}]`);
 	const i = getChildIndex(elementList, `dataset.${sectionType}`);
 
-	const inputHTML = await loadHTML('src/htmlSnippets/creatureInputs.html', { i });
+	const inputHTML = loadHTML(creatureInputs, { i });
 
 	const outputHTML = `<div data-fauna="section${i}">|-</div>
 	<div data-fauna="section${i}">|[[File:<output id="faunaFile${i}"></output>|150px]] || <output id="faunaName${i}" name="faunaName${i}"></output> || <output id="faunaRarity${i}"></output> / <output id="faunaEcosystem${i}"></output> / <output id="faunaActivity${i}"> </output> <output id="faunaHemisphere${i}"></output> || <output id="faunaGenus${i}"></output> || <output id="faunaHeight${i}"></output>m || <output id="faunaWeight${i}"></output>kg || <output id="faunaDiscoverer${i}"></output></div>`;
 
-	inputSection.insertAdjacentHTML('beforebegin', inputHTML.body.innerHTML);
+	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
 	outputSection.insertAdjacentHTML('beforeend', outputHTML);
 	postProcessSection(element, sectionType, i);
 	genusDropdown(globalElements.input[`faunaEcosystemInput${i}`]);
@@ -257,47 +268,47 @@ async function addFauna(element) {
  * @param {HTMLElement} element - The element to add the flora to.
  * @returns {Promise<void>}
  */
-async function addFlora(element) {
+function addFlora(element) {
 	const inputSection = element.parentElement;
 	const outputSection = globalElements.output[element.dataset.destNoauto];
 	const sectionType = 'flora';
 	const elementList = document.querySelectorAll(`[data-${sectionType}]`);
 	const i = getChildIndex(elementList, `dataset.${sectionType}`);
 
-	const inputHTML = await loadHTML('src/htmlSnippets/floraInputs.html', { i });
+	const inputHTML = loadHTML(floraInputs, { i });
 
 	const outputHTML = `<div data-flora="section${i}">|-</div>
 	<div data-flora="section${i}">|[[File:<output id="floraFile${i}"></output>|150px]] || <output id="floraName${i}" name="floraName${i}"></output> || <output id="floraAge${i}"></output> || <output id="floraRoot${i}"></output> || <output id="floraNut${i}"></output> || <output id="floraNote${i}"></output> || <output id="floraElements${i}"></output> || <output id="floraDiscoverer${i}"></output></div>`;
 
-	inputSection.insertAdjacentHTML('beforebegin', inputHTML.body.innerHTML);
+	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
 	outputSection.insertAdjacentHTML('beforeend', outputHTML);
 
 	postProcessSection(element, sectionType, i);
 }
 
-async function addMineral(element) {
+function addMineral(element) {
 	const inputSection = element.parentElement;
 	const outputSection = globalElements.output[element.dataset.destNoauto];
 	const sectionType = 'mineral';
 	const elementList = document.querySelectorAll(`[data-${sectionType}]`);
-	const i = getChildIndex(elementList, `dataset.${sectionType}`);
+	const i = getChildIndex(elementList, `dataset.${sectionType}`).toString();
 
-	const inputHTML = await loadHTML('src/htmlSnippets/mineralInputs.html', { i });
+	const inputHTML = loadHTML(mineralInputs, { i });
 
 	const outputHTML = `<div data-mineral="section${i}">|-</div>
 	<div data-mineral="section${i}">|[[File:<output id="mineralFile${i}"></output>|150px]] || <output id="mineralName${i}" name="mineralName${i}"></output> || <output id="mineralMetal${i}"></output> || <output id="mineralFormation${i}"></output> || <output id="mineralNote${i}"></output> || <output id="mineralElements${i}"></output> || <output id="mineralDiscoverer${i}"></output></div>`;
 
-	inputSection.insertAdjacentHTML('beforebegin', inputHTML.body.innerHTML);
+	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
 	outputSection.insertAdjacentHTML('beforeend', outputHTML);
 
 	postProcessSection(element, sectionType, i);
 }
 
-function postProcessSection(element, sectionType, i) {
+function postProcessSection(element: HTMLElement, sectionType: string, i: string) {
 	addAllTooltips();
 	changeTableEntry(element);
 
-	const sectionElements = { input: {}, output: {} };
+	const sectionElements: GlobalElements = { input: {}, output: {} };
 
 	const sectionSelector = `[data-${sectionType}="section${i}"]`;
 

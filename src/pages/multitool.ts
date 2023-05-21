@@ -2,6 +2,10 @@
  * @fileoverview Provides functions which can be used by the Multi-Tool page creator.
  */
 
+import { hideInput, wikiCode } from "../common";
+import { planetMoon, planetMoonSentence } from "../miscLogic/locationLogic";
+import { globalElements, pageData } from "../variables/objects";
+
 function startupFunctions() {
 	locGalaxy();
 	acquirementBundle();
@@ -153,12 +157,12 @@ function acquirement() {
 	// coords: coords of the MT
 	const { srLocName: srName, planet, moon, axes: coords } = pageData
 
-	const loc = pageData.location.toLowerCase();	// location type of the MT (for example space station/settlement/sentinel pillar)
-	const body = planetMoonSentence(planet, moon);
+	const loc = (pageData.location as string).toLowerCase();	// location type of the MT (for example space station/settlement/sentinel pillar)
+	const body = planetMoonSentence(planet as string, moon as string) as string;
 	let instructions, savereload;
 
 	const srloc = (() => {
-		const preSrloc = pageData.srLoc;
+		const preSrloc = pageData.srLoc as string;
 		if (preSrloc.includes('Space') || srName) return preSrloc;
 		if (loc.includes('Space')) return loc;
 		return body;
@@ -212,7 +216,9 @@ function acquirementGallery() {
 		'coordsInput',
 	]
 
-	const pics = [{}, {}, {}, {}];
+	const pics: Array<{
+		[key: string]: string;
+	}> = [{}, {}, {}, {}];
 
 	const body = planetMoon();
 
@@ -253,7 +259,7 @@ function acquirementGallery() {
 		fillPicObj(pics[3], axesImg, 'Coordinates');
 	}
 
-	const codeArray = new Array;
+	const codeArray: Array<string> = [];
 	for (let i = 0; i < pics.length; i++) {
 		const picObj = pics[i];
 		const pic = picObj.picName;

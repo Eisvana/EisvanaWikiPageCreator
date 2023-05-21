@@ -2,6 +2,11 @@
  * @fileoverview Provides functions which can be used by the System page creator.
  */
 
+import { getChildIndex, loadHTML, wikiCode } from '../common';
+import { assignFunction } from '../elementFrontends/elementBackend/elementFunctions';
+import tradeableInputs from '../htmlSnippets/tradeableInputs.html?raw';
+import { globalElements } from '../variables/objects';
+
 function startupFunctions() {
 	celestialStartupFunctions();
 	combineEconConf();
@@ -170,12 +175,15 @@ async function planetInputs() {
 			oddEvenClass: 'is-' + oddEven(i),
 		}
 
-		const inputDom = await loadHTML('src/htmlSnippets/planetInputs.html', replacementStrings);
-		const outputDom = await loadHTML('src/htmlSnippets/planetOutputs.html', replacementStrings);
+		const inputHtml = loadHTML('src/htmlSnippets/planetInputs.html', replacementStrings);
+		const outputHtml = loadHTML('src/htmlSnippets/planetOutputs.html', replacementStrings);
+
+		const parser = new DOMParser();
+		const inputDom = parser.parseFromString(inputHtml, 'text/html');
 		addAllTooltips(inputDom);
 
 		inputTarget.insertAdjacentHTML('beforebegin', inputDom.body.innerHTML);
-		outputTarget.insertAdjacentHTML('beforeend', outputDom.body.innerHTML);
+		outputTarget.insertAdjacentHTML('beforeend', outputHtml);
 
 		// adds functionality to the input elements in the new planet section
 		initialiseSectionInputs(`[data-planet="planet${i}"]`);
@@ -370,12 +378,12 @@ function merchantUpgrades(group = null) {
 	function getCheckedBoxes(group) {
 		const checkboxes = document.querySelectorAll(`[data-dest-checkbox-group="${group}"]`);
 		const parm = (group.startsWith('SD')) ? '' : group.substring(0, 2);
-		const checked = new Array;
+		const checked: Array<string> = [];
 		for (const checkbox of checkboxes) {
 			if (checkbox.checked) checked.push(checkbox.value);
 		}
 
-		const code = new Array;
+		const code: Array<string> = [];
 		for (let i = 1; i <= checked.length; i++) {
 			const output = `| ${parm}${i}=${checked[i - 1]}`;
 			code.push(output);
@@ -411,7 +419,10 @@ async function tradeables() {
 	}
 
 	// Get the HTML for the new tradeable input section
-	const inputDom = await loadHTML('src/htmlSnippets/tradeableInputs.html', replacementStrings);
+	const inputHtml = loadHTML(tradeableInputs, replacementStrings);
+
+	const parser = new DOMParser();
+	const inputDom = parser.parseFromString(inputHtml, 'text/html');
 
 	// Define the HTML for the new tradeable output section
 	const codeHTML = `<div data-tradeable="section${childIndex}">|-</div>
@@ -840,6 +851,6 @@ function searchUpgrades(element) {
 		.map(([key]) => key);
 	for (const match of matches) {
 		const matchedCheckbox = document.getElementById(match);
-		matchedCheckbox.closest('.checkbox').classList.add('mark');
+		matchedCheckbox?.closest('.checkbox')?.classList.add('mark');
 	}
 }

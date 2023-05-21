@@ -2,6 +2,8 @@
  * @fileoverview Provides functions which can be used by the Business page creator.
  */
 
+import businessInputs from '../htmlSnippets/businessInputs.html?raw';
+
 function startupFunctions() {
 	const input = document.querySelector('[oninput*="enPrefix"]');
 	enPrefix(input.value, 'enPrefix');
@@ -63,7 +65,7 @@ function fixHC(element) {
  * @constant {string} input_template - The HTML template for adding a new section to the input.
  * @constant {string} code_template - The HTML template for adding a new section to the code.
  */
-async function addSection() {
+function addSection() {
 	const { input: { contentsInput: inputSection }, output: { contents: outputSection } } = globalElements;
 	const elementList = document.querySelectorAll('[data-section]');
 	const childIndex = getChildIndex(elementList, 'dataset.section');
@@ -78,7 +80,7 @@ async function addSection() {
 		text_input: 'text_input' + childIndex,
 	}
 
-	const input_dom = await loadHTML('src/htmlSnippets/businessInputs.html', replacementStrings);
+	const inputHtml = loadHTML(businessInputs, replacementStrings);
 	const code = `
 		<div data-section="section${childIndex}">==<output name="${replacementStrings.heading}"></output>==</div>
 		<div style="display:none" data-section="section${childIndex}">[[File:<output id="${replacementStrings.img}"></output>|thumb]]</div>
@@ -89,7 +91,7 @@ async function addSection() {
 		assignFunction(input, 'wikiCode(this)');
 	}
 
-	inputSection.insertAdjacentHTML("beforebegin", input_dom.body.innerHTML);
+	inputSection.insertAdjacentHTML("beforebegin", inputHtml);
 	outputSection.insertAdjacentHTML("beforeend", code);
 }
 

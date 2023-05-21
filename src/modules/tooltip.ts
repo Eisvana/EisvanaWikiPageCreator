@@ -2,9 +2,7 @@
  * @fileoverview Generates tooltips and handles all logic related to tooltips and explanation popups.
  */
 
-import { updateGlobalElements } from "../elementFrontends/elementBackend/elementStore";
 import { globalElements } from "../variables/objects";
-import { ElementIds } from '../types/elements';
 import { assignFunction } from "../elementFrontends/elementBackend/elementFunctions";
 
 /**
@@ -28,9 +26,9 @@ export function explanation(heading: string = '', text: string = '', img: string
 	// I have no idea how to do type guards in destructuring, so I need to do it the ugly way here.
 	// I also hate past-Lenni for making this ugly interface that needs typeguards and assertions everywhere.
 	const imgElement = globalElements.output.explanationImg as HTMLImageElement;
-	const linkElement = globalElements.output.explanationImg as HTMLAnchorElement;
-	const dialogElement = globalElements.output.explanationImg as HTMLDialogElement;
-
+	const linkElement = globalElements.output.explanationLink as HTMLAnchorElement;
+	const dialogElement = globalElements.output.explanation as HTMLDialogElement;
+	console.log(heading, text, img)
 	// Check if img URL was provided
 	if (img) {
 
@@ -91,8 +89,8 @@ export function explanation(heading: string = '', text: string = '', img: string
  * @return {void}
  */
 export function addAllTooltips(dom = document) {
-	const elements = dom.querySelectorAll('button.tooltip');
-	for (const element of elements) {
+	const elements: NodeListOf<HTMLButtonElement> = dom.querySelectorAll('button.tooltip');
+	for (const element of Array.from(elements)) {
 		constructTooltip(element);
 	}
 
@@ -106,7 +104,7 @@ export function addAllTooltips(dom = document) {
 		const dataElements = element.getElementsByTagName('data');
 		if (!dataElements.length) return;
 
-		const dataArr = new Array;
+		const dataArr: Array<string> = [];
 		for (const element of Array.from(dataElements)) {
 			const text = element.innerHTML;
 			dataArr.push(text);
@@ -118,7 +116,7 @@ export function addAllTooltips(dom = document) {
 
 		const tooltip = document.createElement('span');
 		tooltip.classList.add('tooltiptext', 'nms-font');
-		tooltip.innerHTML = dataArr.shift();
+		tooltip.innerHTML = dataArr.shift() as string;
 
 		/**
 		* This if statement checks if the length of dataArr is truthy. If it is, params is assigned to an array with dataArr elements joined with a comma as the separator.
@@ -126,10 +124,11 @@ export function addAllTooltips(dom = document) {
 		* Finally, assignFunction is called with element, functionCall, and 'onclick' as its arguments.
 		*/
 		if (dataArr.length) {
-			const params = dataArr.join('`,`');
-			assignFunction({ element, handler: 'click', func: function () { explanation(...params) } });
+			element.classList.add('is-clickable');
+			assignFunction({ element, handler: 'click', func: () => explanation(...dataArr) });
 		}
 
-		element.innerHTML = img.outerHTML + tooltip.outerHTML;
+		element.innerHTML = img.outerHTML;
+		element.appendChild(tooltip);
 	}
 }

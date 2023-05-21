@@ -2,7 +2,7 @@
  * @fileoverview Generates the footer and handles theming, as well as user defined global default values.
  */
 
-import { addHuburbs, hideDiscoverer, loadHTML, researchTeamDropdown, sanitiseString, triggerEvent } from "../common";
+import { addHuburbs, hideDiscoverer, researchTeamDropdown, sanitiseString, triggerEvent } from "../common";
 import { globalElements, pageData } from "../variables/objects";
 import { regions } from "../variables/regions";
 import { ElementIds } from "../elementFrontends/elementBackend/elementStore";

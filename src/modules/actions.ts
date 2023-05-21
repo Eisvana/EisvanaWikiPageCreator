@@ -80,14 +80,15 @@ import { wikiLink } from "../variables/simple";
 
 	const skipCheck = `<label style="display:flex; gap: .3rem"><input class="checkbox" type="checkbox" id="skipCheck">Enable debug (no checks, no popups)</label>`;
 	const clearLocalStorage = `<button style="margin: 0 1rem" class="button is-danger is-small" id="clearCache" onclick="localStorage.clear()">Clear Localstorage</button>`;
-	globalElements.output.actions.insertAdjacentHTML('beforeend', skipCheck + clearLocalStorage);
+	const actionsWrapper = globalElements.output.actions as HTMLElement;
+	actionsWrapper.insertAdjacentHTML('beforeend', skipCheck + clearLocalStorage);
 	const skipCheckElement = document.getElementById('skipCheck') as HTMLInputElement | null;
 	if (!skipCheckElement) return;
 	skipCheckElement.onchange = (e) => {
 		const checkState = (e.target as HTMLInputElement).checked;
 		pageData.debug = checkState;
-		uploadShown(checkState);
-		galleryUploadShown(checkState);
+		pageData.uploadShown = checkState;
+		pageData.galleryUploadShown = checkState;
 		document.documentElement.dataset.debug = checkState.toString();
 		enableTextMarking();
 	}

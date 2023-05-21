@@ -2,6 +2,9 @@
  * @fileoverview Provides location focused functions
  */
 
+import { sanitiseString } from "../common";
+import { globalElements, pageData } from "../variables/objects";
+
 /**
  * Returns the type of celestial body based on whether a moon is present or not.
  *
@@ -23,8 +26,8 @@ export function planetMoon(moon = pageData.moon) {
  * @returns {string} - The description sentence, or "" if `globalElements.output.celestialBody`
  *                     is falsy.
  */
-export function planetMoonSentence(planet = pageData.planet, moon = pageData.moon) {
-	const dest = globalElements.output.celestialBody;
+export function planetMoonSentence(planet: string = pageData.planet as string, moon: string = pageData.moon as string) {
+	const dest = globalElements.output.celestialBody as HTMLOutputElement;
 	const body = planetMoon(moon);
 	const text = (() => {
 		if (body == 'Moon') {

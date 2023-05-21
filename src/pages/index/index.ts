@@ -1,6 +1,4 @@
-import '../../startup/cssImports';
-import '../../startup/theme';
-import '../../startup/footer';
+import '../../startup/minimal';
 
 const GHubHosts = ['wiki.nmsgalactichub.com', 'nmswikipagecreator.nmsgalactichub.com', 'hubwikipagecreator.nmsgalactichub.com'];
 if (GHubHosts.includes(window.location.host)) {

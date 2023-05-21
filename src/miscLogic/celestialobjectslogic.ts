@@ -1,3 +1,8 @@
+import { assignDefaultValue, storeData, wikiCode } from "../common";
+import { getDescriptorData } from "../datalists/planetDatalists";
+import { assignFunction } from "../elementFrontends/elementBackend/elementFunctions";
+import { globalElements, pageData } from "../variables/objects";
+
 /**
  * @fileoverview Functions that can be used by Planet, Moon and System pages
  */
@@ -106,9 +111,9 @@ export function wikiCodePercentage(element = null) {
  * @param {HTMLElement} [element=globalElements.input.descriptionInput] - The element to check for infestation.
  * @return {Boolean} - If on a System page, returns true if the element is Infested, false otherwise. If on a Planet/Moon page, updates the output text and pageData object accordingly, and returns nothing.
  */
-function autoInfested(element = globalElements.input.descriptionInput) {
+export function autoInfested(element = globalElements.input.descriptionInput) {
 	const descriptorData = getDescriptorData().Infested;
-	const infestedDescriptors = new Array;
+	const infestedDescriptors: Array<string> = [];
 	for (const list in descriptorData) {
 		infestedDescriptors.push(...descriptorData[list]);
 	}
@@ -130,7 +135,7 @@ function autoInfested(element = globalElements.input.descriptionInput) {
 * @param {string} filler - A string to be added between the planet class and the descriptor for added emphasis in the name.
 * @returns {string} The constructed name for the planet.
 */
-function buildDescriptor(descriptor, planetClass, filler) {
+export function buildDescriptor(descriptor: string, planetClass: string, filler: string): string {
 	const data = getDescriptorData();
 	const section = (() => {
 		for (const biome in data) {
@@ -138,6 +143,7 @@ function buildDescriptor(descriptor, planetClass, filler) {
 				if (data[biome][list]?.includes?.(descriptor.trim())) return list;
 			}
 		}
+		return '';		// this is just a catch so TS doesn't complain
 	})();
 	switch (section) {
 		case 'prefix':
@@ -156,19 +162,19 @@ function buildDescriptor(descriptor, planetClass, filler) {
  * @param {string} sectionSelector - CSS selector for the input fields to initialise.
  * @returns {void}
  */
-function initialiseSectionInputs(sectionSelector) {
-	const inputs = document.querySelectorAll(`${sectionSelector} :is(input, select)`);
-	for (const input of inputs) {
+export function initialiseSectionInputs(sectionSelector: string) {
+	const inputs: NodeListOf<HTMLInputElement | HTMLSelectElement> = document.querySelectorAll(`${sectionSelector} :is(input, select)`);
+	for (const input of Array.from(inputs)) {
 		if (input.dataset.dest) {
-			assignFunction(input, 'wikiCode(this)');
+			assignFunction({ element: input, func: function () { wikiCode(this) } });
 			wikiCode(input);
 		}
 		if (input.dataset.destNoauto) {
-			assignFunction(input, 'storeData(this)');
+			assignFunction({ element: input, func: function () { storeData(this) } });
 			storeData(input);
 		}
 		if (input.dataset.default) {
-			assignFunction(input, 'assignDefaultValue(this)', null, true);
+			assignFunction({ element: input, func: function () { assignDefaultValue(this) } });
 			assignDefaultValue(input);
 		}
 		if (input.list) {

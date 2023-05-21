@@ -23,8 +23,8 @@ footerInputs.forEach(input => {
 
 
 	// If the input element has a `data-store` attribute, add a `delete` function to it.
-	if ((input as HTMLElement).dataset.store) assignFunction(functionObj);
-});
+	if (input.dataset.store) assignFunction(functionObj);
+})
 
 // Update the `globalElements` object to include the new footerElements.
 updateGlobalElements(footerElements);

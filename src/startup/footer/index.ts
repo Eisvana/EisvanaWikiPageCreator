@@ -1,3 +1,3 @@
-await import('./footerHtml');
-await import('./footerElementIndex');
-await import('./footerFunctions');
+import './footerHtml';
+import './footerElementIndex';
+import './footerFunctions';

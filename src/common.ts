@@ -6,14 +6,13 @@ import { wikiLink } from './variables/simple';
 import { GHubHuburbRegions, regions } from "./variables/regions";
 import { Regions } from "./types/regions";
 import { readDefaultValues } from './modules/footer';
-import { cachedHTML, dataIntegrityObj, globalElements, pageData } from './variables/objects';
-import { uploadShown, galleryUploadShown } from './variables/sessionstorage';
+import { cachedHTML, dataIntegrityObj, globalElements, globalFunctions, pageData } from './variables/objects';
 import { getDestElements } from './elementFrontends/elementBackend/elementStore';
 import { versions } from './variables/versions';
 import { assignFunction } from './elementFrontends/elementBackend/elementFunctions';
-import { glyphRegion } from './modules/portalglyphs';
+import { glyphInputOnChange, glyphRegion } from './modules/portalglyphs';
 import { explanation } from './modules/tooltip';
-import './startup/';
+import { planetMoonSentence } from './miscLogic/locationLogic';
 
 /**
  * Adds Galactic Hub huburb regions to an object.
@@ -30,7 +29,7 @@ export function addHuburbs(object: Regions) {
 	}
 }
 // If the 'huburbs' variable is defined and truthy, add Galactic Hub regions to 'regions'
-const huburbs = sessionStorage.getItem('huburbs');
+const huburbs = pageData.huburbs;
 if (huburbs) addHuburbs(regions);
 
 // Make 'regions' read-only
@@ -54,7 +53,9 @@ toggleSection();
  * @returns {Object} An object with properties "inputs", "checkboxes", "stores", "defaults", "simple", and "lists", each containing an array of relevant input elements.
  */
 function getInputData() {
-	const inputData = {
+	const inputData: {
+		[key: string]: NodeListOf<HTMLInputElement | HTMLSelectElement>;
+	} = {
 		inputs: document.querySelectorAll('[data-dest]'),
 		checkboxes: document.querySelectorAll('[data-dest-checkbox]'),
 		stores: document.querySelectorAll('[data-dest-noauto]'),
@@ -72,12 +73,12 @@ export function startUp() {
 	autoShow();
 	readDefaultValues();
 	versionDropdown();
-	uploadShown(true);
-	galleryUploadShown(true);		// NoSonar (defined by gallery.js - isn't used by anything else, an if statement would just hurt performance)
+	pageData.uploadShown = true;
+	pageData.galleryUploadShown = true;
 	showAll();
 	if (!pageData.debug) {
-		uploadShown(false);
-		galleryUploadShown(false);
+		pageData.uploadShown = false;
+		pageData.galleryUploadShown = false;
 	}
 	enableTextMarking();
 	// the order of the touch and mouse events MUST NOT BE CHANGED!!!
@@ -90,7 +91,6 @@ export function startUp() {
 		(globalElements.output.albumText as HTMLElement).ontouchend = (e) => getSelectedText(e.target);
 		(globalElements.output.albumText as HTMLElement).onmouseup = (e) => getSelectedText(e.target);
 	}
-	preloadHTML();
 }
 
 /**
@@ -98,10 +98,6 @@ export function startUp() {
  * @function
  * @returns {void}
  */
-function preloadHTML() {
-	const files = cachedHTML.files;
-	files.forEach(file => loadHTML(file));
-}
 
 /**
  * Creates a version dropdown menu in the app UI with custom text labels for certain options.
@@ -133,7 +129,7 @@ export function versionDropdown() {
  * @returns {undefined}
  */
 export function setDropdownOptions(element: HTMLElement, values: Array<string>, texts: Array<string> = values) {
-	const dropdown = new Array;
+	const dropdown: Array<string> = [];
 	for (let i = 0; i < values.length; i++) {
 		const value = values[i];
 		const text = texts[i];
@@ -155,27 +151,27 @@ export function setDropdownOptions(element: HTMLElement, values: Array<string>, 
 export function autoShow(): void {
 	const inputData = getInputData();
 	for (const element of Array.from(inputData.defaults)) {
-		assignFunction({ element: element as HTMLElement, func: function () { assignDefaultValue(this as unknown as HTMLElement) } });
+		assignFunction({ element: element, func: function () { assignDefaultValue(this as unknown as HTMLInputElement) } });
 	}
 
 	for (const input of Array.from(inputData.inputs)) {
-		assignFunction({ element: input as HTMLElement, func: function () { wikiCode(this as unknown as HTMLElement) } });
+		assignFunction({ element: input, func: function () { wikiCode(this as unknown as HTMLInputElement | HTMLSelectElement) } });
 	}
 
 	for (const checkbox of Array.from(inputData.checkboxes)) {
-		assignFunction({ element: checkbox as HTMLInputElement, func: function () { checkboxWikiCode(this as unknown as HTMLElement) } });
+		assignFunction({ element: checkbox, func: function () { checkboxWikiCode(this as unknown as HTMLInputElement) } });
 	}
 
 	for (const store of Array.from(inputData.stores)) {
-		assignFunction({ element: store as HTMLElement, func: function () { storeData(this as unknown as HTMLElement) } });
+		assignFunction({ element: store, func: function () { storeData(this as unknown as HTMLInputElement | HTMLSelectElement) } });
 	}
 
 	for (const simple of Array.from(inputData.simple)) {
-		assignFunction({ element: simple as HTMLElement, func: function () { wikiCodeSimple(this as unknown as HTMLElement) } });
+		assignFunction({ element: simple, func: function () { wikiCodeSimple(this as unknown as HTMLInputElement) } });
 	}
 
 	for (const list of Array.from(inputData.lists)) {
-		assignFunction({ element: list as HTMLInputElement, handler: 'change', func: function () { forceDatalist(this as unknown as HTMLInputElement) } });
+		assignFunction({ element: list, handler: 'change', func: function () { forceDatalist(this as unknown as HTMLInputElement) } });
 	}
 }
 
@@ -207,7 +203,7 @@ export function showAll() {
 	numberStats();
 	civ();
 	image(globalElements.input.fileUpload);
-	if (typeof galleryUpload == 'function') galleryUpload();
+	if (typeof globalFunctions.galleryUpload == 'function') globalFunctions.galleryUpload();
 	try { glyphInputOnChange(globalElements.input.portalglyphsInput) } catch (error) { /*do nothing*/ }
 	try { researchTeam() } catch (error) { /*do nothing*/ }
 	try { planetMoonSentence() } catch (error) { /*do nothing*/ }
@@ -221,7 +217,7 @@ export function showAll() {
  * @param {Object} element - The source element to retrieve value or content from.
  * @param {string} dest - The ID of the destination element(s) to update, specified in a data attribute on the source element.
  */
-export function wikiCode(element, dest = element.dataset.dest) {
+export function wikiCode(element: HTMLInputElement | HTMLSelectElement, dest: string = element.dataset.dest as string) {
 	const destElements = getDestElements(dest);
 
 	// sanitize the source value or content
@@ -231,6 +227,7 @@ export function wikiCode(element, dest = element.dataset.dest) {
 	if (dest) {
 		pageData[dest] = value;
 	} else {	// no destination given, trying to store value in pageData without transferring it into code
+		if (!element.dataset.destNoauto) return;
 		pageData[element.dataset.destNoauto] = value;
 		return;
 	}
@@ -271,7 +268,7 @@ function checkboxWikiCode(element) {
  * @param {Object} element - The DOM element whose value will be stored.
  * @param {string} [key=element.dataset.destNoauto] - The key under which the value will be stored in the page data object. Defaults to the value of the element's `dest-noauto` attribute.
  */
-function storeData(element, key = element.dataset.destNoauto) {
+export function storeData(element: HTMLInputElement | HTMLSelectElement, key: string = element.dataset.destNoauto) {
 	pageData[key] = sanitiseString(element.value);
 }
 
@@ -282,9 +279,10 @@ function storeData(element, key = element.dataset.destNoauto) {
  * @return {void}
  */
 export function externalLinks() {
-	const isExternalURL = (url) => new URL(url).origin !== location.origin;
+	const isExternalURL = (url: string) => new URL(url).origin !== location.origin;
 	const a = document.getElementsByTagName('a');
-	for (const link of a) {
+	for (const link of Array.from(a)) {
+		if (!link.href) continue;
 		if (!isExternalURL(link.href)) continue;
 		link.target ||= '_blank';
 		link.rel ||= 'noopener noreferrer';
@@ -402,7 +400,7 @@ function updateCiv() {
  */
 export function sanitiseString(input: string) {
 	const doubleWikiMarkup = ['{', '}', '[', ']'];
-	const outputArray = new Array;
+	const outputArray: Array<string> = [];
 
 	// split text into sections that contain only wiki links in wiki markup and only non-wiki-linked text.
 	const markupSections = input.split('[http');
@@ -422,7 +420,7 @@ export function sanitiseString(input: string) {
 
 
 	// This function removes all wiki markup from a given string. Returns a string.
-	function removeAllMarkup(str, ignoreFirstBracket = false) {
+	function removeAllMarkup(str: string, ignoreFirstBracket: boolean = false): string {
 		let noMarkupString = str;
 		for (const markup of doubleWikiMarkup) {
 			if (ignoreFirstBracket && markup == ']') {
@@ -441,8 +439,8 @@ export function sanitiseString(input: string) {
 	 * @param {string} markup - The wiki markup character to remove.
 	 * @returns {string} The string with all instances of the markup character removed.
 	 */
-	function removeSpecificMarkup(string, markup) {
-		const doubleMarkup = markup.repeat(2);
+	function removeSpecificMarkup(string: string, markup: string): string {
+		const doubleMarkup = markup.repeat(2);				// NoSonar we need to repeat the markup 2x because MW link syntax uses 2 characters (`[[`, `{{`)
 		const noMarkupString = string.split(doubleMarkup)	// split based on double markup (isolate valid markup)
 			.map(part => part.replaceAll(markup, ''))		// remove all invalid markup
 			.join(doubleMarkup);							// join back together using double markup
@@ -456,7 +454,7 @@ export function sanitiseString(input: string) {
 	 * @param {string} char - The character to remove.
 	 * @returns {string} The modified string with the character removed.
 	 */
-	function skipFirst(string, char) {
+	function skipFirst(string: string, char: string): string {
 		// get all indices of the character we want to strip out, except the first one
 		const firstBracketIndex = string.indexOf(char);
 		const noMarkupString = removeSpecificMarkup(string, char);
@@ -489,11 +487,11 @@ function image(element: HTMLInputElement) {
 	fileInput.value = sanitisedName;
 	wikiCode(fileInput);
 	// this section handles an automatic notice about Special:Upload, since this is a big source of confusion for users
-	if (uploadShown()) return;	// ignore following code if we already alerted user about Special:Upload
+	if (pageData.uploadShown) return;	// ignore following code if we already alerted user about Special:Upload
 	explanation('Upload your picture to the wiki!', `Don't forget to upload your picture to the wiki on <a href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" target="_blank" rel="noopener noreferrer">Special:Upload</a>.
 	The upload button only auto-filled the image name into the code, it is not automatically uploaded to the wiki.
 	<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the main image upload button.</div>`);
-	uploadShown(true);
+	pageData.uploadShown = true;
 }
 
 /**
@@ -642,13 +640,14 @@ export function docBy() {
  * @returns {string} Returns a string that describes the research team
  */
 function displayResearch() {
-	const chapter = pageData.researchteam;
+	const chapter = pageData.researchteam as string;
 	if (!chapter) return chapter;
 
-	const teamIDs = globalElements.input.researchTeam.children;
-	const teams = new Array;
-	for (const team of teamIDs) {
-		teams.push(team.value);
+	const researchteamInput = globalElements.input.researchTeam as HTMLElement;
+	const teamIDs = researchteamInput.children;
+	const teams: Array<string> = [];
+	for (const team of Array.from(teamIDs)) {
+		teams.push((team as HTMLOptionElement).value);
 	}
 	const pos = teams.indexOf(chapter);
 
@@ -700,7 +699,7 @@ export function hideDiscoverer(keepId: string = '', removeId: string = '') {
 		// I wrote this, but I have no idea how it works
 		const elements: NodeListOf<HTMLInputElement> = document.querySelectorAll('[oninput*="hideDiscoverer"], [onchange*="hideDiscoverer"]');
 		const usedElements: Set<HTMLInputElement> = new Set();		// holds already done elements so we don't get duplicates
-		const inputPairs = new Array;		// holds our new pairs
+		const inputPairs: Array<Array<HTMLInputElement | null | undefined>> = [];		// holds our new pairs
 		// builds the pair arrays and pushes them to inputPairs
 		for (const element of Array.from(elements)) {
 			if (usedElements.has(element)) continue;
@@ -714,15 +713,15 @@ export function hideDiscoverer(keepId: string = '', removeId: string = '') {
 			inputPairs.push(pair);
 		}
 		for (const pair of inputPairs) {
-			const input1 = pair[0];
-			const input2 = pair[1];
+			const input1 = pair[0] as HTMLInputElement;
+			const input2 = pair[1] as HTMLInputElement;
 
-			if (input1.value) {
+			if (input1?.value) {
 				hideDiscoverer(input1.id, input2.id);
-			} else if (input2.value) {
+			} else if (input2?.value) {
 				hideDiscoverer(input2.id, input1.id);
 			} else {
-				pair.forEach(input => hideInput(input, ''));
+				pair.forEach(input => hideInput((input as HTMLInputElement), ''));
 			}
 		}
 		return;
@@ -750,16 +749,16 @@ export function hideDiscoverer(keepId: string = '', removeId: string = '') {
  * @returns {void}
  */
 function addInfoBullet() {
-	const elements = document.querySelectorAll('[data-add-info]');
-	const lines = new Array;
-	for (const element of elements) {
-		if (!element.nextElementSibling.style.display && element.nextElementSibling.innerText) lines.push(element);
+	const elements: NodeListOf<HTMLElement> = document.querySelectorAll('[data-add-info]');
+	const lines: Array<HTMLElement> = [];
+	for (const element of Array.from(elements)) {
+		if (!(element.nextElementSibling as HTMLElement)?.style.display && (element.nextElementSibling as HTMLElement)?.innerText) lines.push(element);
 		element.innerHTML = '';
 	}
 
 	for (const line of lines) {
 		if (lines.length > 1) {
-			const content = line.dataset.addInfo;
+			const content = line.dataset.addInfo as string;
 			line.innerHTML = content;
 		} else {
 			line.innerHTML = '';
@@ -964,7 +963,7 @@ function getNumber(number, decimals = null, outputRaw = false) {
  * // Creates a datalist with ID datalist1 and two entries, "entry1" and "entry2"
  * datalists({datalist1: ["entry1", "entry2"]});
  */
-function datalists(object) {
+export function datalists(object) {
 	for (const Id in object) {
 		const datalist = document.createElement('datalist');
 		datalist.id = Id;
@@ -1079,7 +1078,7 @@ function preventCopy() {
  * @param {string} [value=element.dataset.default] - The default value to assign (if no value is provided, the element's "data-default" attribute will be used)
  * @returns {void}
  */
-function assignDefaultValue(element, value = element.dataset.default) {
+export function assignDefaultValue(element: HTMLInputElement | HTMLSelectElement, value: string = element.dataset.default as string) {
 	if (element.value.trim()) return;
 	const dest = element.dataset.dest ?? element.dataset.destNoauto;
 	wikiCode(value, dest);
@@ -1127,7 +1126,7 @@ function hideOrgName() {
  * @param {string} data - The path to the property to check for an index, in dot notation (e.g. 'dataset.planet').
  * @returns {number} - The next available child index.
  */
-function getChildIndex(array, data: string) {
+export function getChildIndex(array, data: string) {
 	const IDs = [0];	// dummy element to avoid if statement
 	for (const element of array) {
 		const idNumber = extractNumber(fetchFromObject(element, data));	// get all numbers of the string into an array, then join that array
@@ -1218,22 +1217,12 @@ function oddEven(number: number) {
  * @returns {Promise<Document>} - A promise that resolves with the parsed HTML DOM of the loaded file.
  * The loaded HTML is cached in the `cachedHTML` object to improve performance on subsequent calls.
  */
-export async function loadHTML(url: string, varObj = {}) {
-	let html = await (async () => {
-		if (cachedHTML[url]) return cachedHTML[url];
-
-		const response = await fetch(url);
-		const html = await response.text();
-		cachedHTML[url] = html;		// Add returned value to cachedHTML object
-		return html;
-	})();
-
+export function loadHTML(html: string, varObj: { [key: string]: string } = {}) {
+	let processingHTML = html;
 	for (const variable in varObj) {
-		html = html.replaceAll('${' + variable + '}', varObj[variable]);
+		processingHTML = processingHTML.replaceAll('${' + variable + '}', varObj[variable]);
 	}
-	const parser = new DOMParser();
-	const dom = parser.parseFromString(html, 'text/html');
-	return dom;
+	return processingHTML;
 }
 
 export function triggerEvent(element: HTMLElement, evt: string): void {

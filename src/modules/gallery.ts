@@ -3,8 +3,10 @@
  */
 
 import Sortable from "sortablejs";
-import { galleryUploadShown } from "../variables/sessionstorage";
-import { cachedHTML, globalElements } from "../variables/objects";
+import { globalElements, globalFunctions, pageData } from "../variables/objects";
+import { errorMessage, loadHTML, setDropdownOptions } from "../common";
+import { explanation } from "./tooltip";
+import galleryInputHtml from '../htmlSnippets/galleryInput.html?raw'
 
 /**
  * This function adds a Sortable.js component to the galleryWrapper element,
@@ -15,14 +17,12 @@ import { cachedHTML, globalElements } from "../variables/objects";
  */
 (() => {
 	if (window.matchMedia('(pointer: coarse)').matches) return;		// Check if device has coarse pointer
-	const galleryWrapper = globalElements.output.galleryItems;
+	const galleryWrapper = globalElements.output.galleryItems as HTMLElement;
 	new Sortable(galleryWrapper, {		// NoSonar (used by a library, not useless!)
 		handle: '.handle',	// handle's class
 		animation: 250,
 		onUpdate: function (evt) { moveItem(evt) },
 	});
-
-	cachedHTML.files.add(`src/htmlSnippets/galleryInput.html`);
 })();
 
 /**
@@ -31,21 +31,23 @@ import { cachedHTML, globalElements } from "../variables/objects";
 * @async
 * @function
 */
-async function galleryUpload() {
+export function galleryUpload() {
 	// Get globalElements and set input, inputDiv, wikiCodeGalleryDiv, and errors
-	const inp = globalElements.input.galleryUpload;
+	const inp = globalElements.input.galleryUpload as HTMLInputElement;
 	if (!inp.value) return;
 	const { galleryItems: inputDiv, galleryCode: wikiCodeGalleryDiv } = globalElements.output;
-	const errors = new Array;
+	const errors: Array<string> = [];
 
 	// Loop through each file in inp.files
-	for (const file of inp.files) {
+	if (!inp.files?.length) return;
+	for (const file of Array.from(inp.files)) {
 
 		// Declare and initialize name variable
-		const name = file.name;
+		const name: string = file.name;
 
 		// Check if file is too large, and continue if it is
-		if (file.size > 10000000) {
+		const uploadSizeLimit = 10000000;
+		if (file.size > uploadSizeLimit) {
 			errors.push(name);
 			continue;
 		}
@@ -77,7 +79,7 @@ async function galleryUpload() {
 		}
 
 		// Load galleryTemplate using loadHTML function and replacementStrings
-		const galleryTemplate = await loadHTML('src/htmlSnippets/galleryInput.html', replacementStrings);
+		const galleryTemplate = loadHTML(galleryInputHtml, replacementStrings);
 
 		// Set wikiCodeGalleryTemplate string
 		const wikiCodeGalleryTemplate = `<div id="${replacementStrings.wikiCodeGalleryId}">
@@ -85,14 +87,14 @@ async function galleryUpload() {
 		</div>`;
 
 		// Add galleryTemplate and wikiCodeGalleryTemplate to respective divs
-		inputDiv.insertAdjacentHTML('afterbegin', galleryTemplate.body.innerHTML);
+		inputDiv.insertAdjacentHTML('afterbegin', galleryTemplate);
 		wikiCodeGalleryDiv.insertAdjacentHTML('afterbegin', wikiCodeGalleryTemplate);
 
 		// Get galleryElement and generate galleryArray if it exists
 		const galleryElement = document.getElementById(replacementStrings.dropdownId);
 
 		// Set dropdown options or hide element if galleryArray is empty
-		if (typeof generateGalleryArray == 'function') generateGalleryArray();
+		if (typeof globalFunctions.generateGalleryArray == 'function') globalFunctions.generateGalleryArray();
 
 		const galleryArray = pageData.galleryArray;
 		if (galleryArray) {
@@ -106,14 +108,14 @@ async function galleryUpload() {
 	errorMessage(inp, errors.length ? `The following files exceed the 10MB upload limit and couldn't be added:<br>${errors.join(',<br>')}` : null);
 
 	// If galleryUploadShown is true, exit the function. Otherwise, show gallery explanation popup
-	if (galleryUploadShown) return;
+	if (pageData.galleryUploadShown) return;
 	// the galleryExplanationExternal() function should return string with the popup text. HTML is supported.
-	if (typeof galleryExplanationExternal == 'function') {
+	if (typeof globalFunctions.galleryExplanationExternal == 'function') {
 		explanation('Gallery',
-			`${galleryExplanationExternal()}
+			`${globalFunctions.galleryExplanationExternal()}
 		<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the gallery upload button.</div>`);
 	}
-	galleryUploadShown(true);
+	pageData.galleryUploadShown = true;
 }
 
 /**

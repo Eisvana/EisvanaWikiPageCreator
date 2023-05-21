@@ -2,6 +2,12 @@
  * @fileoverview Provides functions needed for the album actions (copy album code, open album...) to work.
  */
 
+import { loadHTML } from "../common";
+import { assignElementFunctions } from "../elementFrontends/elementBackend/elementFunctions";
+import { updateGlobalElements } from "../elementFrontends/elementBackend/elementStore";
+import album from "../htmlSnippets/album.html?raw";
+import { globalElements } from "../variables/objects";
+
 // The logic for calculating the link target should be done by the main JS file of the page
 const albumElements = {
 	output: {
@@ -25,12 +31,12 @@ let albumInitialised = false;
  * Asynchronous IIFE that loads album HTML and assigns element functions.
  * @returns {Promise<void>}
  */
-(async () => {
+(() => {
 	/**
 	 * Represents the album HTML code.
 	 * @type {HTMLHtmlElement}
 	 */
-	const wikitext = await loadHTML('src/htmlSnippets/album.html');
+	const wikitext = loadHTML(album);
 
 	/**
 	 * Represents the album actions HTML code.
@@ -45,7 +51,7 @@ let albumInitialised = false;
 		Open Album
 		</a>`;
 	// If the global albumEntry element exists, set its innerHTML to the wikitext.
-	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext.body.innerHTML;
+	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext;
 
 	// If the global albumActions element exists, set its innerHTML to the actions.
 	if (globalElements.output.albumActions) globalElements.output.albumActions.innerHTML = actions;

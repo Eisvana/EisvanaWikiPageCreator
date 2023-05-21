@@ -2,6 +2,11 @@
  * @fileoverview Provides functions which can be used by the Creature page creator.
  */
 
+import { setDropdownOptions, wikiCode } from "../common";
+import { updateGlobalElements } from "../elementFrontends/elementBackend/elementStore";
+import { assignElementFunctions } from "../elementFrontends/elementBackend/elementFunctions";
+import { globalElements, pageData } from "../variables/objects";
+
 function startupFunctions() {
 	genusDropdown();
 	genderDropdown();
@@ -65,7 +70,7 @@ function genusDropdown() {
 	const ecosystem = pageData.ecosystem;
 	const genera = Object.keys(creatureData.ecosystems[ecosystem])
 
-	const commonNames = new Array;
+	const commonNames: Array<string> = [];
 	for (const genus of genera) {
 		commonNames.push(`${genus} (${creatureData.ecosystems[ecosystem][genus].commonName})`);
 	}
