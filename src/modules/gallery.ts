@@ -2,28 +2,11 @@
  * @fileoverview Provides functions needed for the gallery to work.
  */
 
-import Sortable from "sortablejs";
 import { globalElements, globalFunctions, pageData } from "../variables/objects";
-import { errorMessage, loadHTML, setDropdownOptions } from "../common";
+import { errorMessage, getChildIndex, loadHTML, sanitiseString, setDropdownOptions } from "../common";
 import { explanation } from "./tooltip";
 import galleryInputHtml from '../htmlSnippets/galleryInput.html?raw'
-
-/**
- * This function adds a Sortable.js component to the galleryWrapper element,
- * allowing the user to reorganize the items in the gallery with drag-and-drop.
- * It checks if the device has a coarse pointer, and if so, it will not load the Sortable.js component.
- * @global
- * @param {Object} galleryWrapper - The gallery element where items will be reordered.
- */
-(() => {
-	if (window.matchMedia('(pointer: coarse)').matches) return;		// Check if device has coarse pointer
-	const galleryWrapper = globalElements.output.galleryItems as HTMLElement;
-	new Sortable(galleryWrapper, {		// NoSonar (used by a library, not useless!)
-		handle: '.handle',	// handle's class
-		animation: 250,
-		onUpdate: function (evt) { moveItem(evt) },
-	});
-})();
+import { ElementFunctions } from "../types/elements";
 
 /**
 * Handles gallery image uploads
@@ -35,7 +18,8 @@ export function galleryUpload() {
 	// Get globalElements and set input, inputDiv, wikiCodeGalleryDiv, and errors
 	const inp = globalElements.input.galleryUpload as HTMLInputElement;
 	if (!inp.value) return;
-	const { galleryItems: inputDiv, galleryCode: wikiCodeGalleryDiv } = globalElements.output;
+	const inputDiv = globalElements.output.galleryItems as HTMLDivElement;
+	const wikiCodeGalleryDiv = globalElements.output.galleryCode as HTMLDivElement;
 	const errors: Array<string> = [];
 
 	// Loop through each file in inp.files
@@ -81,31 +65,73 @@ export function galleryUpload() {
 		// Load galleryTemplate using loadHTML function and replacementStrings
 		const galleryTemplate = loadHTML(galleryInputHtml, replacementStrings);
 
+		const parser = new DOMParser();
+		const galleryTemplateDom = parser.parseFromString(galleryTemplate, 'text/html');
+		const moveButtons: NodeListOf<HTMLButtonElement> = galleryTemplateDom.querySelectorAll('[data-move]');
+		for (const button of Array.from(moveButtons)) {
+			const direction = button.dataset.move as string;
+			button.addEventListener('click', function () { mobileMoveItem(this, replacementStrings.wikiCodeGalleryId, direction) });
+		}
+
+		const functionObj: Array<ElementFunctions> = [
+			{
+				element: replacementStrings.dropdownId,
+				handler: 'change',
+				func: function () { galleryDesc(this, replacementStrings.inputId, replacementStrings.wikiCodeGalleryValueId) }
+			},
+			{
+				element: replacementStrings.inputId,
+				handler: 'input',
+				func: function () { galleryInput(this, replacementStrings.wikiCodeGalleryValueId) }
+			},
+			{
+				element: galleryTemplateDom.querySelector('.controlButtons span.delete-icon') as HTMLElement,
+				handler: 'click',
+				func: function () { rmGallery(this, replacementStrings.wikiCodeGalleryId) }
+			},
+		]
+
+		for (const obj of functionObj) {
+			const { handler, func } = obj;
+			const element = (() => {
+				if (typeof obj.element == 'string') {
+					return galleryTemplateDom.getElementById(obj.element);
+				} else {
+					return obj.element;
+				}
+			})();
+
+			element?.addEventListener(handler as string, func);
+		}
+
+		// Get galleryElement and generate galleryArray if it exists
+		const dropdown = galleryTemplateDom.getElementById(replacementStrings.dropdownId) as HTMLSelectElement;
+
+		// Set dropdown options or hide element if galleryArray is empty
+		if (typeof globalFunctions.generateGalleryArray == 'function') globalFunctions.generateGalleryArray();
+
+		const galleryArray = pageData.galleryArray as Array<string>;
+		if (galleryArray) {
+			setDropdownOptions(dropdown, galleryArray);
+		} else {
+			dropdown!.parentElement!.style.display = 'none';
+		}
+
+		const wrapper = galleryTemplateDom.getElementById(replacementStrings.galleryId) as HTMLElement;
+
+
 		// Set wikiCodeGalleryTemplate string
 		const wikiCodeGalleryTemplate = `<div id="${replacementStrings.wikiCodeGalleryId}">
 		<span>${name}</span><output id="${replacementStrings.wikiCodeGalleryValueId}"></output>
 		</div>`;
 
 		// Add galleryTemplate and wikiCodeGalleryTemplate to respective divs
-		inputDiv.insertAdjacentHTML('afterbegin', galleryTemplate);
+		inputDiv.insertAdjacentElement('afterbegin', wrapper);
 		wikiCodeGalleryDiv.insertAdjacentHTML('afterbegin', wikiCodeGalleryTemplate);
-
-		// Get galleryElement and generate galleryArray if it exists
-		const galleryElement = document.getElementById(replacementStrings.dropdownId);
-
-		// Set dropdown options or hide element if galleryArray is empty
-		if (typeof globalFunctions.generateGalleryArray == 'function') globalFunctions.generateGalleryArray();
-
-		const galleryArray = pageData.galleryArray;
-		if (galleryArray) {
-			setDropdownOptions(galleryElement, galleryArray);
-		} else {
-			galleryElement.parentElement.style.display = 'none';
-		}
 	}
 
 	// If errors exist, show error message. Otherwise, clear error message
-	errorMessage(inp, errors.length ? `The following files exceed the 10MB upload limit and couldn't be added:<br>${errors.join(',<br>')}` : null);
+	errorMessage(inp, errors.length ? `The following files exceed the 10MB upload limit and couldn't be added:<br>${errors.join(',<br>')}` : undefined);
 
 	// If galleryUploadShown is true, exit the function. Otherwise, show gallery explanation popup
 	if (pageData.galleryUploadShown) return;
@@ -160,7 +186,7 @@ function rmGallery(galleryNode, wikiCodeGalleryId) {
 * @function moveItem
 * @param {Object} evt - The event object containing information about the item that was moved.
 */
-function moveItem(evt) {
+export function moveItem(evt) {
 	const oldIndex = evt.oldIndex;
 	const newIndex = evt.newIndex;
 	const galleryElement = document.getElementById('galleryCode');

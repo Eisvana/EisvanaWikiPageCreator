@@ -3,7 +3,7 @@
  */
 
 import { getChildIndex, loadHTML, wikiCode } from '../common';
-import { assignFunction } from '../elementFrontends/elementBackend/elementFunctions';
+import { assignFunction } from '../commonElements/elementBackend/elementFunctions';
 import tradeableInputs from '../htmlSnippets/tradeableInputs.html?raw';
 import { globalElements } from '../variables/objects';
 

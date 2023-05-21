@@ -2,20 +2,20 @@
  * @fileoverview Provides functions that can be used by Planet and Moon pages.
  */
 
-import { getChildIndex, loadHTML } from '../common';
+import { extractNumber, forceDatalist, getChildIndex, loadHTML, removeSpecificSection, setDropdownOptions, triggerEvent } from '../common';
 import { globalElements } from '../variables/objects';
 import creatureInputs from '../htmlSnippets/creatureInputs.html?raw';
 import floraInputs from '../htmlSnippets/floraInputs.html?raw';
 import mineralInputs from '../htmlSnippets/mineralInputs.html?raw';
 import { addAllTooltips } from '../modules/tooltip';
-import { updateGlobalElements } from '../elementFrontends/elementBackend/elementStore';
+import { updateGlobalElements } from '../commonElements/elementBackend/elementStore';
 import { initialiseSectionInputs } from './celestialobjectslogic';
 import { GlobalElements } from '../types/elements';
 
 
 function startupFunctions() {
 	celestialStartupFunctions();
-	globalElements.input.resourceInputs.querySelector('button').onclick();
+	triggerEvent(globalElements.input.resourceInputs.querySelector('button'), 'click')
 	autoInfested();
 	wormAutoSpawn();
 	wormAlbumName();
@@ -128,35 +128,65 @@ function addResource(element = globalElements.input.resourceInputs.querySelector
 	const resource_input = 'resource_input' + childIndex;
 
 	// Creates HTML code for a new resource input section
-	const inputHTML = `<div class="tableCell text removable" data-resource="section${childIndex}">
-		<button class="button is-outlined is-danger icon is-small" title="Remove resource" type="button" disabled onclick="removeSpecificSection('section${childIndex}', 'resource'); enableResourceAdd()">&#10006</button>
-		<label for="${resource_input}">Resource name:</label>
-	</div>
-	<div class="tableCell data" data-resource="section${childIndex}">
-		<input type="text" list="resources" id="${resource_input}" oninput="resourceList()" onchange="forceDatalist(this)">
-	</div>`;
+
+	const sectionName = 'section' + childIndex;
+
+	const div1 = document.createElement('div');
+	const div2 = document.createElement('div');
+
+	const button = document.createElement('button');
+	const label = document.createElement('label');
+
+	const input = document.createElement('input');
+
+	div1.classList.add('tableCell', 'text', 'removable');
+	div1.dataset.resource = sectionName;
+
+	button.classList.add('button', 'is-outlined', 'is-danger', 'icon', 'is-small');
+	button.title = 'Remove Resource';
+	button.disabled = true;
+	button.innerHTML = '&#10006';
+	button.addEventListener('click', () => { removeSpecificSection(sectionName, 'resource'); enableResourceAdd() });
+
+	label.htmlFor = resource_input;
+	label.innerText = 'Resource name:';
+
+	div2.classList.add('tableCell', 'data');
+	div2.dataset.resource = sectionName;
+
+	input.type = 'text';
+	input.setAttribute('list', 'resources');
+	input.id = resource_input;
+	input.addEventListener('input', () => resourceList());
+	input.addEventListener('change', function () { forceDatalist(this) });
+
+	div1.appendChild(button);
+	div1.appendChild(label);
+
+	div2.appendChild(input);
 
 	// Inserts the newly-generated inputHTML before the current inputSection
-	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
+	inputSection.insertAdjacentElement('beforebegin', div1);
+	inputSection.insertAdjacentElement('beforebegin', div2);
 
 	// Gets all the remove buttons for the resource inputs and stores the count to a variable
-	const resourceRemoveButtons = document.querySelectorAll('[data-resource] button');
+	const resourceRemoveButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('[data-resource] button');
 	const resourceInputSectionCount = resourceRemoveButtons.length;
 
 	// Ensures that there are always at least three resource inputs present
-	while (document.querySelectorAll('[data-resource] button').length < 3) {
+	while (document.querySelectorAll('[data-resource] button').length < 3) {	// NoSonar 3 resources is minimum
 		addResource(element);
 	}
 
 	// Disables the add resource button if the number of sections is more than 6
 	// enter the number of sections you want to allow behind the ">" operator.
-	if (resourceInputSectionCount + 1 > 6) {
+	if (resourceInputSectionCount + 1 > 6) {	// NoSonar 6 resources is maximum. I guess 5 is the max, but I'm not 100% sure
 		element.disabled = true;
 	}
 
 	// Enables all remove buttons if more than 3 sections are present (every planet has at least 3 resources)
-	if (resourceInputSectionCount > 3) {
-		for (const button of resourceRemoveButtons) {
+	if (resourceInputSectionCount > 3) {	// NoSonar 3 resources is minimum
+		for (const button of Array.from(resourceRemoveButtons)) {
 			button.disabled = false;
 		}
 	}
@@ -176,7 +206,7 @@ function enableResourceAdd() {
 	const resourceRemoveButtons = document.querySelectorAll('[data-resource] button');
 	const resourceInputSectionCount = resourceRemoveButtons.length;
 
-	if (resourceInputSectionCount < 4) {
+	if (resourceInputSectionCount < 4) {	// NoSonar minimum resource number is 3, disable button when it's at 3
 		for (const button of resourceRemoveButtons) {
 			button.disabled = true;
 		}
@@ -437,7 +467,7 @@ function genusDropdown(element) {
 	const sectionNumber = extractNumber(element.id);
 	const genusInputID = 'faunaGenusInput' + sectionNumber;
 
-	const commonNames = new Array;
+	const commonNames: Array<string> = [];
 	for (const genus of genera) {
 		commonNames.push(`${genus} (${creatureData.ecosystems[ecosystem][genus].commonName})`);
 	}
@@ -446,7 +476,7 @@ function genusDropdown(element) {
 	addGenus(globalElements.input[genusInputID]);
 }
 
-function autoWorm(wormBool) {
+export function autoWorm(wormBool: boolean) {
 	if (wormBool) globalElements.input.sandwormInput.checked = true;
 	addSandwormTemplate();
 }

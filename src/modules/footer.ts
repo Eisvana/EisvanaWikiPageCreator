@@ -3,17 +3,9 @@
  */
 
 import { addHuburbs, hideDiscoverer, researchTeamDropdown, sanitiseString, triggerEvent } from "../common";
-import { globalElements, pageData } from "../variables/objects";
+import { footerInputs, globalElements, pageData } from "../variables/objects";
 import { regions } from "../variables/regions";
-import { ElementIds } from "../elementFrontends/elementBackend/elementStore";
 import { glyphError, validateGlyphs } from "./portalglyphs";
-
-// custom global settings
-export const footerElements: ElementIds = {
-	input: {
-		settings: 'settings',
-	}
-};
 
 /**
  * Changes the theme of the page and sets a localStorage variable to track the theme between page loads.
@@ -33,7 +25,7 @@ export function switchTheme(): void {
 	// adding delay to allow the CSS transition to complete. This is only for Chrome, Firefox would work with any timeout (even 0) #chromesucks
 	setTimeout(() => {
 		delete document.documentElement.dataset.transition;
-	}, 400);
+	}, 400);	// NoSonar wait 400ms so Chrome can finish its transition
 }
 
 /**
@@ -81,12 +73,15 @@ export function updateDefaultValues() {
 		delete pageData.restored;
 		return;
 	}
-	const settings = new Object;
-	const inputs = footerElements.inputs;
+	const settings: {
+		[key: string]: string;
+	} = {};
+	const inputs = Array.from(footerInputs) as Array<HTMLInputElement | HTMLSelectElement>;
 	for (const input of inputs) {
 		const value = input?.value;
 		const store = input?.dataset?.store;
-		if ((input?.options?.[input.options.length - 1]?.value == value || value) && store) settings[store] = sanitiseString(value);
+		const selectInput = input as HTMLSelectElement
+		if ((selectInput?.options?.[selectInput.options.length - 1]?.value == value || value) && store) settings[store] = sanitiseString(value);
 	}
 
 	localStorage.setItem('defaultSettings', JSON.stringify(settings));
@@ -99,7 +94,7 @@ export function updateDefaultValues() {
  * @returns {void}
  */
 export function readDefaultValues() {
-	const settings = JSON.parse(localStorage.getItem('defaultSettings')) ?? new Object;
+	const settings = JSON.parse(localStorage.getItem('defaultSettings') ?? '{}');
 	for (const setting in settings) {
 		const input = (() => {
 			if (setting.split(' ').length > 1) {
@@ -135,11 +130,11 @@ export function restoreDefaults() {
 	 * The input HTML elements in the footer.
 	 * @type {NodeList}
 	 */
-	const inputs = footerElements.inputs;
+	const inputs = Array.from(footerInputs) as Array<HTMLInputElement | HTMLSelectElement>;
 	for (const input of inputs) {
-		if (input?.value == undefined) continue;
+		if (!input?.value) continue;
 		if (input.tagName.toLowerCase() == 'select') {
-			input.value = input.options?.[0]?.value;
+			input.value = (input as HTMLSelectElement).options?.[0]?.value;
 		} else {
 			input.value = '';
 		}
@@ -157,9 +152,9 @@ export function validateGlyphSettings(input: HTMLInputElement) {
 	const allRegions = structuredClone(regions);
 	addHuburbs(allRegions);
 	Object.freeze(allRegions);
-	const region = validateGlyphs(glyphString, (globalElements.input!.civDefault as HTMLSelectElement).value, allRegions);
+	const region = validateGlyphs(glyphString, (globalElements.input.civDefault as HTMLSelectElement).value, allRegions);
 	glyphError(region, input);
-	const settingsElement = globalElements.input!.settings as HTMLDialogElement;
+	const settingsElement = globalElements.input.settings as HTMLDialogElement;
 	const closeButton = settingsElement.querySelector('form button.is-primary') as HTMLButtonElement
 	closeButton.disabled = region == undefined;
 }

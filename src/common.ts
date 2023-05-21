@@ -6,13 +6,15 @@ import { wikiLink } from './variables/simple';
 import { GHubHuburbRegions, regions } from "./variables/regions";
 import { Regions } from "./types/regions";
 import { readDefaultValues } from './modules/footer';
-import { cachedHTML, dataIntegrityObj, globalElements, globalFunctions, pageData } from './variables/objects';
-import { getDestElements } from './elementFrontends/elementBackend/elementStore';
+import { dataIntegrityObj, globalElements, globalFunctions, pageData } from './variables/objects';
+import { getDestElements } from './commonElements/elementBackend/elementStore';
 import { versions } from './variables/versions';
-import { assignFunction } from './elementFrontends/elementBackend/elementFunctions';
+import { assignFunction } from './commonElements/elementBackend/elementFunctions';
 import { glyphInputOnChange, glyphRegion } from './modules/portalglyphs';
 import { explanation } from './modules/tooltip';
 import { planetMoonSentence } from './miscLogic/locationLogic';
+import { SortObj } from './types/objects';
+import { ElementFunctions } from './types/elements';
 
 /**
  * Adds Galactic Hub huburb regions to an object.
@@ -150,28 +152,25 @@ export function setDropdownOptions(element: HTMLElement, values: Array<string>, 
  */
 export function autoShow(): void {
 	const inputData = getInputData();
-	for (const element of Array.from(inputData.defaults)) {
-		assignFunction({ element: element, func: function () { assignDefaultValue(this as unknown as HTMLInputElement) } });
-	}
+	const functionObj: Array<{
+		elements: NodeListOf<HTMLInputElement | HTMLSelectElement>;
+		handler?: keyof HTMLElementEventMap;
+		func: () => void;
+	}> = [
+			{ elements: inputData.defaults, func: function () { assignDefaultValue(this as unknown as HTMLInputElement) } },
+			{ elements: inputData.inputs, func: function () { wikiCode(this as unknown as HTMLInputElement | HTMLSelectElement) } },
+			{ elements: inputData.checkboxes, func: function () { checkboxWikiCode(this as unknown as HTMLInputElement) } },
+			{ elements: inputData.stores, func: function () { storeData(this as unknown as HTMLInputElement | HTMLSelectElement) } },
+			{ elements: inputData.simple, func: function () { wikiCodeSimple(this as unknown as HTMLInputElement) } },
+			{ elements: inputData.lists, handler: 'change', func: function () { forceDatalist(this as unknown as HTMLInputElement) } },
+		]
 
-	for (const input of Array.from(inputData.inputs)) {
-		assignFunction({ element: input, func: function () { wikiCode(this as unknown as HTMLInputElement | HTMLSelectElement) } });
-	}
-
-	for (const checkbox of Array.from(inputData.checkboxes)) {
-		assignFunction({ element: checkbox, func: function () { checkboxWikiCode(this as unknown as HTMLInputElement) } });
-	}
-
-	for (const store of Array.from(inputData.stores)) {
-		assignFunction({ element: store, func: function () { storeData(this as unknown as HTMLInputElement | HTMLSelectElement) } });
-	}
-
-	for (const simple of Array.from(inputData.simple)) {
-		assignFunction({ element: simple, func: function () { wikiCodeSimple(this as unknown as HTMLInputElement) } });
-	}
-
-	for (const list of Array.from(inputData.lists)) {
-		assignFunction({ element: list, handler: 'change', func: function () { forceDatalist(this as unknown as HTMLInputElement) } });
+	for (const obj of functionObj) {
+		const { elements, func } = obj;
+		const handler = obj.handler as keyof HTMLElementEventMap;
+		for (const element of Array.from(elements)) {
+			assignFunction({ element, handler, func });
+		}
 	}
 }
 
@@ -205,10 +204,8 @@ export function showAll() {
 	image(globalElements.input.fileUpload);
 	if (typeof globalFunctions.galleryUpload == 'function') globalFunctions.galleryUpload();
 	try { glyphInputOnChange(globalElements.input.portalglyphsInput) } catch (error) { /*do nothing*/ }
-	try { researchTeam() } catch (error) { /*do nothing*/ }
 	try { planetMoonSentence() } catch (error) { /*do nothing*/ }
 	hideDiscoverer();
-	try { startupFunctions() } catch (error) { console.warn(error) }
 }
 
 /**
@@ -217,16 +214,16 @@ export function showAll() {
  * @param {Object} element - The source element to retrieve value or content from.
  * @param {string} dest - The ID of the destination element(s) to update, specified in a data attribute on the source element.
  */
-export function wikiCode(element: HTMLInputElement | HTMLSelectElement, dest: string = element.dataset.dest as string) {
-	const destElements = getDestElements(dest);
+export function wikiCode(element: HTMLInputElement | HTMLSelectElement | string, dest: string | undefined = (element as HTMLElement)?.dataset?.dest) {
+	const destElements = typeof dest == 'string' ? getDestElements(dest) : [];
 
 	// sanitize the source value or content
-	const value = sanitiseString(element.value ?? element);
+	const value = sanitiseString(typeof element == 'string' ? element : element.value);
 
 	// update the pageData with the sanitized value
 	if (dest) {
 		pageData[dest] = value;
-	} else {	// no destination given, trying to store value in pageData without transferring it into code
+	} else if (typeof element != 'string') {	// no destination given, trying to store value in pageData without transferring it into code
 		if (!element.dataset.destNoauto) return;
 		pageData[element.dataset.destNoauto] = value;
 		return;
@@ -248,7 +245,7 @@ export function wikiCode(element: HTMLInputElement | HTMLSelectElement, dest: st
  *
  * @param {Object} element - The checkbox element that triggered the event.
  */
-function checkboxWikiCode(element) {
+function checkboxWikiCode(element: HTMLInputElement) {
 	const dest = element.dataset.destCheckbox;
 	const destElement = document.getElementById(dest);
 	const checked = element.value;
@@ -473,15 +470,15 @@ export function sanitiseString(input: string) {
  * @param {HTMLInputElement} element - The file input element to process.
  * @returns {void}
  */
-function image(element: HTMLInputElement) {
+export function image(element: HTMLInputElement) {
 	const filename = element?.files?.[0]?.name;
 	if (!filename) return;
+
 	// throw error if file is bigger than 10MB (wiki upload limit)
-	if (element.files![0].size > 10000000) {
-		errorMessage(element, 'This file is too big to be uploaded to the wiki. Maximum filesize is 10MB.');
-	} else {
-		errorMessage(element);
-	}
+	const fileSizeLimit: number = 10000000;
+	const fileSizeExceeded = element.files![0].size > fileSizeLimit;
+	errorMessage(element, fileSizeExceeded ? 'This file is too big to be uploaded to the wiki. Maximum filesize is 10MB.' : '');
+
 	const fileInput = element.previousElementSibling as HTMLInputElement;
 	const sanitisedName = sanitiseString(filename);
 	fileInput.value = sanitisedName;
@@ -585,21 +582,22 @@ export function researchTeamDropdown(inputElement: HTMLSelectElement = globalEle
  * @returns {void}
  */
 export function researchTeam() {
-	const researchteamInput = globalElements.input.researchTeam;
+	const researchteamInput = globalElements.input.researchTeam as HTMLSelectElement;
 	const { value: researchteamValue, dataset: { destNoauto: dest } } = researchteamInput;
-	pageData[dest] = researchteamValue;
+	pageData[dest as string] = researchteamValue;
 	const civ = pageData.civilized;
 	const exceptions = ['Base', 'Racetrack'];
 	const researchteam = (() => {
 		if (researchteamValue.split(' ').length == 2) {
 			return civ + ' ' + researchteamValue.split(' ')[1];
-		} else if (!researchteamValue && !exceptions.includes(pageData.pageType)) {
+		} else if (!researchteamValue && !exceptions.includes(pageData.pageType as string)) {
 			return civ;
 		} else {
 			return researchteamValue;
 		}
 	})();
-	globalElements.output[dest].innerText = researchteam;
+	const outputElement = globalElements.output[dest as string] as HTMLElement;
+	outputElement.innerText = researchteam as string;
 }
 
 /**
@@ -609,26 +607,28 @@ export function researchTeam() {
  * @return {void}
  */
 export function docBy() {
-	if (typeof docByExternal == 'function') {
-		docByExternal();
+	if (typeof globalFunctions.docByExternal == 'function') {
+		globalFunctions.docByExternal();
 		return;
 	}
 
-	const docByElement = globalElements.input.docbyInput;
+	const docByElement = globalElements.input.docbyInput as HTMLInputElement;
 	if (!docByElement) return;
 	const documenter = sanitiseString(docByElement.value);
 	const discoverer = pageData.discovered ?? pageData.builder;
 	const discoveredlink = pageData.discoveredlink ?? pageData.builderlink;
 	const dest = docByElement.dataset.destNoauto;
+	if (!dest) return;
 	const chapter = displayResearch();
 	const formattedDocumenter = formatName(documenter);
 	const discArray = [discoverer, discoveredlink];
 
+	const outputElement = globalElements.output[dest] as HTMLElement;
 	if (documenter && !discArray.includes(documenter)) {
-		globalElements.output[dest].style.display = '';
-		globalElements.output[dest].innerText = `Documented by ${chapter} ${formattedDocumenter}`;
+		outputElement.style.display = '';
+		outputElement.innerText = `Documented by ${chapter} ${formattedDocumenter}`;
 	} else {
-		globalElements.output[dest].style.display = 'none';
+		outputElement.style.display = 'none';
 	}
 	addInfoBullet();
 }
@@ -697,7 +697,7 @@ function formatName(documenter) {
 export function hideDiscoverer(keepId: string = '', removeId: string = '') {
 	if (!keepId && !removeId) {			// show everything if no inputs are given
 		// I wrote this, but I have no idea how it works
-		const elements: NodeListOf<HTMLInputElement> = document.querySelectorAll('[oninput*="hideDiscoverer"], [onchange*="hideDiscoverer"]');
+		const elements: NodeListOf<HTMLInputElement> = document.querySelectorAll('[data-player]');
 		const usedElements: Set<HTMLInputElement> = new Set();		// holds already done elements so we don't get duplicates
 		const inputPairs: Array<Array<HTMLInputElement | null | undefined>> = [];		// holds our new pairs
 		// builds the pair arrays and pushes them to inputPairs
@@ -748,7 +748,7 @@ export function hideDiscoverer(keepId: string = '', removeId: string = '') {
  * @name addInfoBullet
  * @returns {void}
  */
-function addInfoBullet() {
+export function addInfoBullet() {
 	const elements: NodeListOf<HTMLElement> = document.querySelectorAll('[data-add-info]');
 	const lines: Array<HTMLElement> = [];
 	for (const element of Array.from(elements)) {
@@ -837,7 +837,7 @@ export function hideInput(element: HTMLElement, displayValue: string = '') {
  * @param {string} [dest=null] - The destination to write the output to using `wikiCode()`. Optional.
  * @returns {string} The article to use before `text`.
  */
-function enPrefix(text, dest = null) {
+export function enPrefix(text, dest = null) {
 	const firstLetter = text?.match(/[a-zA-Z]/)?.[0]?.toLowerCase();
 	const output = (() => {
 		if (vowels.includes(firstLetter)) {
@@ -868,7 +868,7 @@ function regexMatch(string, regex) {
  * @param {string} expected - The expected research team abbreviation (e.g., 'GHSH' or 'GHEC').
  * @returns {string} - The documentation text, including the research team name if it matches the expected abbreviation.
  */
-function docByResearchteam(expected) {
+export function docByResearchteam(expected) {
 	const researchteam = pageData.researchteam;
 	const researchteamData = {
 		GHSH: 'Ship Hunters',
@@ -887,7 +887,7 @@ function docByResearchteam(expected) {
  * @param {string} civ - The civilization name to shorten.
  * @returns {string} - The shortened civilization name, or the original name if it doesn't match an abbreviation.
  */
-function shortenGHub(civ) {
+export function shortenGHub(civ: string): string {
 	if (civ == 'GHub' || civ == 'Galactic Hub Project') return 'Galactic Hub';
 	return civ;
 }
@@ -900,20 +900,22 @@ function shortenGHub(civ) {
  * @param {boolean} [outputRaw=false] - Whether to output the raw calculation values along with the formatted results. If `true`, the function will return an object with `formatted` and `raw` properties; if `false`, it will return only the formatted string.
  * @returns {string|Object} The formatted statistics string (and optionally, the raw calculation values).
  */
-function numberStats(element, decimals = null, outputRaw = false) {
+function numberStats(element: HTMLInputElement | null = null, decimals: number | undefined = undefined, outputRaw: boolean = false) {
 	if (arguments.length == 0) {
-		const numbers = document.querySelectorAll('[oninput*="numberStats"]');
-		for (const element of numbers) {
+		const numbers: NodeListOf<HTMLInputElement> = document.querySelectorAll('[oninput*="numberStats"]');
+		for (const element of Array.from(numbers)) {
 			numberStats(element);
 		}
 		return;
 	}
 
-	const dest = element.dataset.destNoauto
-	const propertyValue = pageData[dest];
+	if (!element) return;
+
+	const dest = element.dataset.destNoauto as string;
+	const propertyValue = pageData[dest] as string;
 	const propertyData = numberError(element, propertyValue, decimals, outputRaw);
 	if (getDestElements(dest)[0]) {
-		wikiCode(propertyData, dest);
+		wikiCode(propertyData.toString(), dest);
 	} else {
 		pageData[dest] = propertyData;
 	}
@@ -927,7 +929,7 @@ function numberStats(element, decimals = null, outputRaw = false) {
  * @param {boolean} [outputRaw=false] - If true, returns the raw input value without formatting.
  * @returns {string|number} - The input value, parsed as a number (if valid) or an empty string (if not valid).
  */
-function numberError(element, value = element.value, decimals = null, outputRaw = false) {
+function numberError(element: HTMLInputElement, value: string = element.value, decimals: number | undefined = undefined, outputRaw: boolean = false) {
 	const number = getNumber(value, decimals, outputRaw);
 	const allowedSymbols = ['+', '-'];
 	if (number || !value || allowedSymbols.includes(value)) {
@@ -945,15 +947,15 @@ function numberError(element, value = element.value, decimals = null, outputRaw 
  * @param {boolean} [outputRaw=false] - If true, returns the raw parsed value without formatting.
  * @returns {string|number} - The parsed number, formatted with commas and the specified number of decimal places (if decimals is non-null), or the raw parsed value (if outputRaw is true).
  */
-function getNumber(number, decimals = null, outputRaw = false) {
+function getNumber(number: string, decimals: number | undefined = undefined, outputRaw: boolean = false): number | string {
 	const raw = parseFloat(number.replaceAll(',', ''));
 	const output = (() => {
-		if ((!raw && raw != 0) || isNaN(raw)) return '';
-		if (decimals) return parseFloat(raw).toFixed(decimals);
+		if (!raw || isNaN(raw)) return '';
+		if (decimals) return raw.toFixed(decimals);
 		return raw;
 	})();
 	if (outputRaw || !output) return output.toString();
-	return new Intl.NumberFormat('en-UK', { minimumFractionDigits: decimals }).format(output);
+	return new Intl.NumberFormat('en-UK', { minimumFractionDigits: decimals }).format(output as number);
 }
 
 /**
@@ -1103,7 +1105,7 @@ function removeSection(array) {
  * @param {string} [attribute='section'] - The data-attribute to search for (defaults to "section")
  * @returns {void}
  */
-function removeSpecificSection(sectionName, attribute = 'section') {
+export function removeSpecificSection(sectionName, attribute = 'section') {
 	const sections = document.querySelectorAll(`[data-${attribute}="${sectionName}"]`);
 	removeSection(sections);
 }
@@ -1113,7 +1115,7 @@ function removeSpecificSection(sectionName, attribute = 'section') {
  * @function hideOrgName
  * @returns {void}
  */
-function hideOrgName() {
+export function hideOrgName() {
 	const orgName = pageData.oldName;
 	const aliascElement = globalElements.output.oldName.parentElement;
 	aliascElement.style.display = orgName ? '' : 'none';
@@ -1166,25 +1168,25 @@ export function getChildIndex(array, data: string) {
  * or not (i.e. by string value). Default is false.
  * @returns {Object} - A new object with the same key-value pairs as the input object, but with the keys sorted alphabetically.
  */
-function sortObj(obj, number: boolean = false) {
+export function sortObj(obj: SortObj, number: boolean = false) {
+	const resultObj: SortObj = {};
 	if (!number) {
 		return Object.keys(obj).sort().reduce((result, key) => {
 			result[key] = obj[key];
 			return result;
-		}, {});
+		}, resultObj);
 	}
 	const keys = Object.keys(sortObj(obj));
 	const numbers = keys.map(key => extractNumber(key)).map(Number).sort((a, b) => {
 		return a - b;
 	});
-	const result = {};
 	for (const number of numbers) {
-		const keyIndex = keys.findIndex(element => extractNumber(element) == number)
+		const keyIndex = keys.findIndex(element => extractNumber(element) == number.toString())
 		const key = keys[keyIndex];
 		keys.splice(keyIndex, 1);
-		result[key] = obj[key];
+		resultObj[key] = obj[key];
 	}
-	return result;
+	return resultObj;
 }
 
 /**
@@ -1194,7 +1196,7 @@ function sortObj(obj, number: boolean = false) {
  * @param {string} string - The string to extract integers from.
  * @returns {string} A string containing all the integers in the input string.
  */
-function extractNumber(string: string): string {
+export function extractNumber(string: string): string {
 	return string?.match(/[0-9]/g)?.join('') ?? '';
 }
 
@@ -1204,8 +1206,8 @@ function extractNumber(string: string): string {
  * @param {number} number - The number to check.
  * @returns {string} A string indicating whether the number is 'even' or 'odd'
  */
-function oddEven(number: number) {
-	if (number % 2 == 0) return 'even';
+export function oddEven(number: number) {
+	if (number % 2 == 0) return 'even';		// NoSonar this checks if the number is even
 	return 'odd';
 }
 

@@ -100,7 +100,7 @@
 								name!
 							</data>
 							<data>./assets/bitmap/ship/shipName.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
@@ -116,7 +116,7 @@
 								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
@@ -130,7 +130,7 @@
 							<data>The starship type can be seen on the ship scan. Living Ships are displayed as
 								"Alien"</data>
 							<data>./assets/bitmap/ship/shipType.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="type" id="typeInput">
@@ -155,7 +155,7 @@
 						<label for="planetInput">Name of the planet:</label>
 						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the starship can be found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
@@ -164,7 +164,7 @@
 						<label for="moonInput">Name of the moon (if ship is on moon):</label>
 						<button class="tooltip">
 							<data>If the ship is located on a moon. Leave blank if the starship is on a planet.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
@@ -176,7 +176,7 @@
 							<data>Planetary Coordinates</data>
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
 							<data>./assets/bitmap/shared/axes.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="axesInput" data-dest="axes" placeholder="+0.00, -0.00">
@@ -188,7 +188,7 @@
 							<data>Economy</data>
 							<data>Found in the exploration guide under "Economy".</data>
 							<data>./assets/bitmap/ship/economy.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="economy" id="wealthInput">
@@ -237,7 +237,7 @@
 					<div class="tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
 						<button class="tooltip">
@@ -245,7 +245,7 @@
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -283,7 +283,7 @@
 									</ul>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="subtype" id="subtypeInput">
@@ -300,7 +300,7 @@
 									href="https://www.reddit.com/r/NMSCoordinateExchange/comments/k2srjr/exotic_parts_naming_conventions_and_part_combo/">Reddit
 									post</a> for explanations of the different exotic subtypes.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="exotic" id="exoticInput">
@@ -332,7 +332,7 @@
 								Alternatively, you can compare your ship's inventory size to the inventory tables on the
 								<a href="Starship" data-wiki>Starship</a> wiki page to get your ship's inventory size.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="inventory" id="inventoryInput">
@@ -363,7 +363,7 @@
 								stats!
 							</data>
 							<data>./assets/bitmap/ship/damage.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="damageB" maxlength="5" placeholder="0.0" id="damageBInput">
@@ -382,7 +382,7 @@
 								stats!
 							</data>
 							<data>./assets/bitmap/ship/shield.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="shieldB" maxlength="5" placeholder="0.0" id="shieldBInput">
@@ -401,7 +401,7 @@
 								stats!
 							</data>
 							<data>./assets/bitmap/ship/hyperdrive.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="warpB" maxlength="5" placeholder="0.0" id="warpBInput">
@@ -420,7 +420,7 @@
 								stats!
 							</data>
 							<data>./assets/bitmap/ship/maneuverability.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="maneuverB" maxlength="5" placeholder="0.0"
@@ -566,7 +566,7 @@
 									</div>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">

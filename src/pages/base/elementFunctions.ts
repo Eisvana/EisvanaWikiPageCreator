@@ -1,4 +1,4 @@
-import { hideDiscoverer } from "../../common";
+import { addInfoBullet, docBy, hideDiscoverer } from "../../common";
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import { ElementFunctions } from "../../types/elements";
 import { capitaliseFriendCode, createCensusEntry, validateDiscord, validateFriendcode, validateReddit } from "./base";

@@ -1,4 +1,4 @@
-import { ElementFunctions, GlobalElement, GlobalElements } from '../../types/elements';
+import { ElementFunctions, GlobalElements } from '../../types/elements';
 import { globalElements } from '../../variables/objects';
 import { getDestElements } from './elementStore';
 
@@ -7,20 +7,19 @@ export function assignFunction(dataObject: ElementFunctions): void {
 	const elementId = dataObject.element as keyof GlobalElements;
 	const element = (() => {
 		if (typeof elementId != 'string') return elementId;
-		
-		if (globalElements[elementId]) {
-			return globalElements[elementId];
+
+		if (globalElements.input[elementId]) {
+			return globalElements.input[elementId];
 		}
-		
+
 		return getDestElements(elementId);
-	})() as GlobalElement;
+	})();
 	const elementArray = [element];
 	const flattenedArray = elementArray.flat();
-
 	for (const element of flattenedArray) {
 		const inputTag = element?.tagName?.toLowerCase();
 		const inputType: string = inputTag == 'input' ? (element as HTMLInputElement).type : '';
-		const listener = handler ?? (() => {
+		const listener: keyof HTMLElementEventMap = handler ?? (() => {
 			if (inputTag == 'select' || inputType == 'radio' || inputType == 'checkbox') {
 				return 'change';
 			} else {

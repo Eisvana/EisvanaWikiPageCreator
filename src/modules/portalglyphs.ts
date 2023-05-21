@@ -3,7 +3,10 @@
  */
 
 import { errorMessage, triggerEvent, wikiCode } from "../common";
-import { globalElements } from "../variables/objects";
+import { getDestElements } from "../commonElements/elementBackend/elementStore";
+import { Regions } from "../types/regions";
+import { globalElements, pageData } from "../variables/objects";
+import { regions } from "../variables/regions";
 
 const validPortalKeys = '0123456789ABCDEF';
 
@@ -50,14 +53,16 @@ export function addPortalGlyphButtons(element: HTMLElement, glyphInputBindId: st
  * @returns {void}
  */
 function glyphOnClick(button: HTMLButtonElement) {
-	const glyphInputBindId: string | null = button?.dataset?.inputBind ?? null;
-	const input = globalElements.input![glyphInputBindId] ?? document.getElementById(glyphInputBindId) ?? button?.closest('.tableHeader')?.previousElementSibling?.querySelector('input');
+	const glyphInputBindId: string = button?.dataset?.inputBind ?? '';
+	const input = globalElements.input[glyphInputBindId] as HTMLInputElement
+		?? document.getElementById(glyphInputBindId) as HTMLInputElement
+		?? button?.closest('.tableHeader')?.previousElementSibling?.querySelector('input') as HTMLInputElement;
 	const portalCode = input.value;
 
 	if (portalCode.length < 12) {
-		(input as HTMLInputElement).value += button.value;
+		(input).value += button.value;
 	}
-	triggerEvent(input as HTMLElement, 'input');
+	triggerEvent(input, 'input');
 }
 
 /**
@@ -66,7 +71,7 @@ function glyphOnClick(button: HTMLButtonElement) {
  * @returns {void}
  */
 export function displayGlyphs() {
-	const input = globalElements.input.portalglyphsInput;
+	const input = globalElements.input.portalglyphsInput as HTMLInputElement;
 	const glyphString = input.value;
 	pageData.portalglyphs = glyphString;
 	const dest = input.dataset.destNoauto;
@@ -81,14 +86,23 @@ export function displayGlyphs() {
  * @param {HTMLElement} button - The button element clicked to invoke this function.
  * @returns {void} - This function does not return a value.
  */
-export function deleteCharacter(button: HTMLButtonElement) {
+export function deleteCharacter(button: HTMLButtonElement | undefined = undefined) {
 	const input = button?.dataset?.inputBind ?? '';
-	const glyphInput = globalElements.input![input] ?? document.getElementById(input) ?? button?.closest('.tableCell')?.nextElementSibling?.querySelector('input') ?? globalElements.input!.portalglyphsInput;
-	const enteredGlyphs = (glyphInput as HTMLInputElement).value?.split('');
+	const glyphInput = (() => {
+		if (input) {
+			return globalElements.input[input] as HTMLInputElement
+				?? document.getElementById(input) as HTMLInputElement;
+		} else if (button) {
+			return button.closest('.tableCell')?.nextElementSibling?.querySelector('input') as HTMLInputElement;
+		} else {
+			return globalElements.input.portalglyphsInput as HTMLInputElement;
+		}
+	})();
+	const enteredGlyphs = glyphInput.value?.split('');
 	enteredGlyphs.pop();
 	const newString = enteredGlyphs.join('');
-	(glyphInput as HTMLInputElement).value = newString;
-	triggerEvent(glyphInput as HTMLElement, 'input');
+	(glyphInput).value = newString;
+	triggerEvent(glyphInput, 'input');
 }
 
 /**
@@ -97,7 +111,7 @@ export function deleteCharacter(button: HTMLButtonElement) {
  * @param {HTMLInputElement} input - The input field element for glyph values
  * @returns {void}
  */
-export function glyphInputOnChange(input) {
+export function glyphInputOnChange(input: HTMLInputElement) {
 	// Converts the value of the input field to uppercase
 	const newValue = input?.value?.toUpperCase?.();
 	if (newValue == null) return;
@@ -129,13 +143,13 @@ export function validateGlyphInput(glyphString: string): string {
  * @param {Object} [regionObj=regions] - The object containing the region data
  * @returns {Object|string} - The region object or an empty string if the input does not contain 12 glyphs
  */
-export function validateGlyphs(glyphs, civShort = pageData.civShort, regionObj = regions) {
+export function validateGlyphs(glyphs: string, civShort: string = pageData.civShort as string, regionObj: Regions = regions) {
 	// Checks if the input contains exactly 12 glyphs
-	if (glyphs.length != 12) return '';
+	if (glyphs.length != 12) return '';		// NoSonar 12 is the expected glyph length, because glyph strings are always 12 digits long
 
 	// Gets the region list based on the civilization short name and extracts the region glyphs
 	const regionList = regionObj[civShort];
-	const regionGlyphs = glyphs.substring(4);
+	const regionGlyphs = glyphs.substring(4);	// NoSonar this extracts the region glyphs, which start at glyph index 4.
 
 	// Finds the corresponding region object based on the region glyphs and returns it
 	const region = regionList[regionGlyphs];
@@ -148,9 +162,9 @@ export function validateGlyphs(glyphs, civShort = pageData.civShort, regionObj =
  * @returns {string} The corresponding Wiki code for the valid region, or an empty string if the region is invalid.
  */
 export function glyphRegion(glyphs: string) {
-	const glyphElement = globalElements.input!.portalglyphsInput;
+	const glyphElement = globalElements.input.portalglyphsInput;
 	let region = '';
-	if (glyphs?.length == 12) {
+	if (glyphs?.length == 12) {		// NoSonar this is the normal expected glyph string length
 		region = validateGlyphs(glyphs);
 	}
 	glyphError(region, glyphElement as HTMLElement);
@@ -212,12 +226,14 @@ function glyphs2Coords(glyphs: string) {
 		coords_y = y_glyphs + Y_NEG_SHIFT;
 	}
 
-	const coordinates = new Array(4);
+	const coordinates: Array<string> = [];
+	const coordData = [coords_x, coords_y, coords_z];
 
-	coordinates[0] = coords_x.toString(16).toUpperCase().padStart(4, '0');
-	coordinates[1] = coords_y.toString(16).toUpperCase().padStart(4, '0');
-	coordinates[2] = coords_z.toString(16).toUpperCase().padStart(4, '0');
-	coordinates[3] = system_idx.padStart(4, '0');
+	for (let i = 0; i < 3; i++) {		// NoSonar the 3 is to only get indices 0-2, since the logic for index 3 is different.
+		coordinates[i] = coordData[i].toString(16).toUpperCase().padStart(4, '0');	// NoSonar the 16 is to convert to hex, the 4 is to bump it to a length of 4
+	}
+
+	coordinates[3] = system_idx.padStart(4, '0');	// NoSonar the 4 is to bump it to a length of 4
 
 	return coordinates.join(':');
 }

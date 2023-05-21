@@ -65,7 +65,7 @@
 							<data>Creature Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>./assets/bitmap/creature/creatureName.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="newName" type="text" id="nameInput">
@@ -87,7 +87,7 @@
 								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
@@ -103,7 +103,7 @@
 						<label for="planetInput">Name of the planet:</label>
 						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the creature can be found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
@@ -115,7 +115,7 @@
 								If the creature is located on a moon. Leave blank if the creature is on a
 								planet.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
@@ -123,7 +123,7 @@
 					<div class="tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
 						<button class="tooltip">
@@ -131,7 +131,7 @@
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -147,7 +147,7 @@
 							<data>Genus</data>
 							<data>The genus is defined by the general appearance of a creature.<br>
 								See the wiki for a <a href="Genus#Genus_List" data-wiki>list of genera</a>.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="genus" id="genusInput"></select>
@@ -165,7 +165,7 @@
 								If no hemisphere is given, leave the input empty.
 							</data>
 							<data>./assets/bitmap/creature/creatureHemisphere.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="hemisphere" id="hemisphereInput">
@@ -181,7 +181,7 @@
 							<data>Rarity</data>
 							<data>Found in the creature discovery menu.</data>
 							<data>./assets/bitmap/creature/creatureRarity.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="rarity" id="rarityInput">
@@ -197,7 +197,7 @@
 							<data>Ecosystem</data>
 							<data>Found in the creature discovery menu.</data>
 							<data>./assets/bitmap/creature/creatureEcosystem.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="ecosystem" id="ecosystemInput">
@@ -214,7 +214,7 @@
 							<data>Activity</data>
 							<data>Found in the creature discovery menu.</data>
 							<data>./assets/bitmap/creature/creatureActivity.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="activity" id="activityInput">
@@ -248,7 +248,7 @@
 							<data>Gender</data>
 							<data>Found on the creature scan.</data>
 							<data>./assets/bitmap/creature/creatureGender.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="gender1_label" data-dest-noauto="gender" id="genderInput">
@@ -264,7 +264,7 @@
 								Birds, fish and weird/anomalous fauna for example have only one gender.<br>
 								They might show up as two genders, but will have the exact same appearance.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="gender2_label" data-dest-noauto="gender2" id="gender2Input">
@@ -277,7 +277,7 @@
 							<data>Behaviour</data>
 							<data>Found on the creature scan.</data>
 							<data>./assets/bitmap/creature/creatureBehaviour.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="behaviour" type="text" list="behaviourData" id="behaviourInput">
@@ -289,7 +289,7 @@
 							<data>Diet</data>
 							<data>Found on the creature scan.</data>
 							<data>./assets/bitmap/creature/creatureDiet.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="diet" type="text" list="dietData" id="dietInput">
@@ -301,7 +301,7 @@
 							<data>Weight</data>
 							<data>Found on the creature scan.<br>No "kg" necessary.</data>
 							<data>./assets/bitmap/creature/creatureWeight.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest-noauto="weight" type="text" id="weightInput" maxlength="5" placeholder="0.0">
@@ -313,7 +313,7 @@
 							<data>Height</data>
 							<data>Found on the creature scan.<br>No "m" necessary.</data>
 							<data>./assets/bitmap/creature/creatureHeight.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest-noauto="height" type="text" id="heightInput" maxlength="3" placeholder="0.0">
@@ -337,7 +337,7 @@
 							<data>Notes</data>
 							<data>Found on the creature scan.</data>
 							<data>./assets/bitmap/creature/creatureNotes.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest-noauto="notes" type="text" list="notesData" id="notesInput">
@@ -349,7 +349,7 @@
 							<data>Discovery Menu Notes</data>
 							<data>Found in the discovery menu.<br>This might differ from the creature scan.</data>
 							<data>This might differ from the scan. Please check in the discovery menu.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data" style="display: none">
 						<input data-dest-noauto="addObservation" type="text" list="specialNotesData"
@@ -362,7 +362,7 @@
 							<data>Produces</data>
 							<data>Found on the creature scan.</data>
 							<data>./assets/bitmap/creature/creatureProduces.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="produces" id="producesInput">
@@ -381,7 +381,7 @@
 								Found in the main menu:
 							</data>
 							<data>./assets/bitmap/shared/gamemode.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
@@ -439,7 +439,7 @@
 								but ignore any linebreaks.
 							</data>
 							<data>./assets/bitmap/creature/creatureDM.jpg</data>
-						</span>
+						</button>
 						<textarea data-dest-noauto="DM" id="dmInput"></textarea>
 					</div>
 					<div class="tableCell text">
@@ -462,7 +462,7 @@
 									</ol>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">

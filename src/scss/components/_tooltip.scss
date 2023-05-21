@@ -22,11 +22,11 @@ button.tooltip {
 	display: none;
 }
 
-.tooltip[onclick] {
+.tooltip[data-click-tooltip] {
 	cursor: pointer;
 }
 
-.tooltip[onclick]:focus-visible {
+.tooltip[data-click-tooltip]:focus-visible {
 	border-bottom: 1px solid var(--link-color);
 }
 

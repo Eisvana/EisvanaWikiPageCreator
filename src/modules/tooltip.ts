@@ -3,7 +3,7 @@
  */
 
 import { globalElements } from "../variables/objects";
-import { assignFunction } from "../elementFrontends/elementBackend/elementFunctions";
+import { assignFunction } from "../commonElements/elementBackend/elementFunctions";
 
 /**
  * Adds all tooltips and sets up dialog handling.
@@ -28,7 +28,7 @@ export function explanation(heading: string = '', text: string = '', img: string
 	const imgElement = globalElements.output.explanationImg as HTMLImageElement;
 	const linkElement = globalElements.output.explanationLink as HTMLAnchorElement;
 	const dialogElement = globalElements.output.explanation as HTMLDialogElement;
-	console.log(heading, text, img)
+
 	// Check if img URL was provided
 	if (img) {
 
@@ -124,7 +124,7 @@ export function addAllTooltips(dom = document) {
 		* Finally, assignFunction is called with element, functionCall, and 'onclick' as its arguments.
 		*/
 		if (dataArr.length) {
-			element.classList.add('is-clickable');
+			element.dataset.clickTooltip = '';
 			assignFunction({ element, handler: 'click', func: () => explanation(...dataArr) });
 		}
 

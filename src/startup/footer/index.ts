@@ -1,3 +1,3 @@
 import './footerHtml';
-import './footerElementIndex';
+import './footerElements';
 import './footerFunctions';

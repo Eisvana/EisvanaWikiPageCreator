@@ -428,12 +428,12 @@ label>input[type="radio"]~span,
 		align-self: end;
 	}
 
-	.tooltip[onclick]:hover .tooltiptext {
+	.tooltip[data-click-tooltip]:hover .tooltiptext {
 		visibility: hidden;
 		opacity: 0;
 	}
 
-	.tooltip[onclick] {
+	.tooltip[data-click-tooltip] {
 		-webkit-tap-highlight-color: transparent;
 	}
 }

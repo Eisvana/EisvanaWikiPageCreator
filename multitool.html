@@ -61,7 +61,7 @@
 							<data>Multi-Tool Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>./assets/bitmap/mt/MTName.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
@@ -77,7 +77,7 @@
 								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
@@ -90,7 +90,7 @@
 							<data>Multi-Tool Type</data>
 							<data>The Multi-Tool type is defined by the shape of the tool.</data>
 							<data>./assets/bitmap/mt/MultitoolDifferentiation.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="typeInput" data-dest-noauto="type">
@@ -109,7 +109,7 @@
 							<data>Inventory Size</data>
 							<data>The Multi-Tool inventory size is defined by the shape of the tool.</data>
 							<data>./assets/bitmap/mt/MultitoolDifferentiation.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data" style="display: none">
 						<select id="sizeInput" data-dest-noauto="size">
@@ -128,7 +128,7 @@
 						<label>Location:</label>
 						<button class="tooltip">
 							<data>Where the tool was found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="locInput" data-dest="location">
@@ -143,7 +143,7 @@
 						<label for="planetInput">Name of the planet:</label>
 						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the tool can be found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
@@ -152,7 +152,7 @@
 						<label for="moonInput">Name of the moon (if MT is on moon):</label>
 						<button class="tooltip">
 							<data>If the tool is located on a moon. Leave blank if the tool is on a planet.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
@@ -164,7 +164,7 @@
 							<data>Planetary Coordinates</data>
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
 							<data>./assets/bitmap/shared/axes.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" placeholder="+0.00, -0.00" data-dest="axes" id="axesInput">
@@ -180,7 +180,7 @@
 								<a href="https://www.reddit.com/r/NMSCoordinateExchange/wiki/multitool/">guide on
 									multi-tool spawning mechanics</a>.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="srlocInput" data-dest-noauto="srLoc">
@@ -199,7 +199,7 @@
 					<div class="tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
 						<button class="tooltip">
@@ -207,7 +207,7 @@
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -239,7 +239,7 @@
 									wiki</a>
 							</data>
 							<data>./assets/bitmap/mt/addons.png</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<div class="checkboxes">
@@ -260,7 +260,7 @@
 							<data>Multi-Tool Slotcount</data>
 							<data>Slotcount of the tool. Can be found on the price page.</data>
 							<data>./assets/bitmap/mt/slots.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="slotsInput" data-dest-noauto="slots">
@@ -272,7 +272,7 @@
 							<data>Multi-Tool Cost</data>
 							<data>Can be found on the price page. Enter the Buy price, not the trade-in price.</data>
 							<data>./assets/bitmap/mt/price.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="costInput" data-dest-noauto="cost">
@@ -288,7 +288,7 @@
 								Watch out that no supercharged slots (lightblue) are used.
 							</data>
 							<data>./assets/bitmap/mt/baseDmg.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="dmgInput" placeholder="0.0" data-dest-noauto="dmg">
@@ -304,7 +304,7 @@
 								Watch out that no supercharged slots (lightblue) are used.
 							</data>
 							<data>./assets/bitmap/mt/baseScan.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="scanInput" placeholder="0.0" data-dest-noauto="scanRange">
@@ -322,7 +322,7 @@
 							<data>Save/Reload Location Picture</data>
 							<data></data>
 							<data>./assets/bitmap/mt/srExample.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="srImgInput" data-dest-noauto="srPlanetImg">
@@ -336,7 +336,7 @@
 							<data>Save/Reload Location Picture</data>
 							<data></data>
 							<data>./assets/bitmap/mt/sysExample.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="sysImgInput" data-dest-noauto="sysImg">
@@ -349,7 +349,7 @@
 							<data>Save/Reload Location Picture</data>
 							<data></data>
 							<data>./assets/bitmap/mt/srExample.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="cabInput" data-dest-noauto="cabinetPlanetImg">
@@ -362,7 +362,7 @@
 							<data>Save/Reload Location Picture</data>
 							<data></data>
 							<data>./assets/bitmap/mt/coordExample.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="coordsInput" data-dest-noauto="axesImg">
@@ -464,7 +464,7 @@
 									</ol>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">

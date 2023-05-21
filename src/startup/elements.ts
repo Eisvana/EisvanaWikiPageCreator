@@ -1,15 +1,15 @@
-import { assignElementFunctions } from "../elementFrontends/elementBackend/elementFunctions";
-import { addInputs, addOutputs, updateGlobalElements } from "../elementFrontends/elementBackend/elementStore";
-import elementFunctions from "../elementFrontends/elementFunctionsFrontend";
-import elementIds from "../elementFrontends/elementStoreFrontend";
+import { assignElementFunctions } from "../commonElements/elementBackend/elementFunctions";
+import { addInputs, addOutputs, updateGlobalElements } from "../commonElements/elementBackend/elementStore";
+import elementFunctions from "../commonElements/elementFunctionsFrontend";
+import elementIds from "../commonElements/elementStoreFrontend";
 import { addAllTooltips } from "../modules/tooltip";
 import { ElementIds } from "../types/elements";
 import { globalElements } from "../variables/objects";
 
 addInputs();
 addOutputs();
-updateGlobalElements(elementIds);
 
+updateGlobalElements(elementIds);
 assignElementFunctions(elementFunctions);
 
 addAllTooltips();
@@ -37,3 +37,18 @@ const explanationElement = globalElements.output.explanation as HTMLDialogElemen
 if (explanationElement) explanationElement.innerHTML = content;
 
 updateGlobalElements(dialogElements);
+
+// mark player inputs
+const playerInputIds = [
+	'builderInput',
+	'builderlinkInput',
+	'ownerInput',
+	'ownerlinkInput',
+	'discoveredInput',
+	'discoveredlinkInput'
+]
+for (const id of playerInputIds) {
+	const element = globalElements.input[id] as HTMLInputElement;
+	if (!element) continue;
+	element.dataset.player = '';
+}

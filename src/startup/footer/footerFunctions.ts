@@ -1,5 +1,5 @@
 import { hideDiscoverer, researchTeamDropdown } from "../../common";
-import { assignElementFunctions } from "../../elementFrontends/elementBackend/elementFunctions";
+import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { restoreDefaults, showSettings, switchTheme, updateDefaultValues, validateGlyphSettings } from "../../modules/footer";
 import { deleteCharacter, glyphInputOnChange, validateGlyphInput } from "../../modules/portalglyphs";
 import { ElementFunctions } from "../../types/elements";

@@ -1,5 +1,6 @@
-import { civ, docBy, enableTextMarking, hideDiscoverer, researchTeam, validateCoords } from "../common";
-import { displayGlyphs, glyphInputOnChange } from "../modules/portalglyphs";
+import { civ, docBy, enableTextMarking, hideDiscoverer, image, researchTeam, validateCoords } from "../common";
+import { galleryUpload } from "../modules/gallery";
+import { deleteCharacter, displayGlyphs, glyphInputOnChange } from "../modules/portalglyphs";
 import { ElementFunctions } from "../types/elements";
 
 /**
@@ -21,6 +22,11 @@ const elementFunctions: ElementFunctions[] = [
 		func: function () { civ() }
 	},
 	{
+		element: 'fileUpload',
+		handler: 'change',
+		func: function () { image(this as unknown as HTMLInputElement) }
+	},
+	{
 		element: 'portalglyphsInput',
 		func: function () { glyphInputOnChange(this as unknown as HTMLInputElement); displayGlyphs(); enableTextMarking() }
 	},
@@ -40,6 +46,16 @@ const elementFunctions: ElementFunctions[] = [
 		element: 'axesInput',
 		handler: 'change',
 		func: function () { validateCoords() }
+	},
+	{
+		element: 'glyphDeleteButton',
+		handler: 'click',
+		func: function () { deleteCharacter() }
+	},
+	{
+		element: 'galleryUpload',
+		handler: 'change',
+		func: function () { galleryUpload() }
 	},
 ]
 

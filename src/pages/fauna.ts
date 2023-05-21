@@ -3,8 +3,8 @@
  */
 
 import { setDropdownOptions, wikiCode } from "../common";
-import { updateGlobalElements } from "../elementFrontends/elementBackend/elementStore";
-import { assignElementFunctions } from "../elementFrontends/elementBackend/elementFunctions";
+import { updateGlobalElements } from "../commonElements/elementBackend/elementStore";
+import { assignElementFunctions } from "../commonElements/elementBackend/elementFunctions";
 import { globalElements, pageData } from "../variables/objects";
 
 function startupFunctions() {

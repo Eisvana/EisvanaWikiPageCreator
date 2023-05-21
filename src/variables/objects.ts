@@ -11,20 +11,8 @@ export const links = {};
  * @type {Object}
  */
 export const pageData: {
-	[key: string]: string | number | boolean;
+	[key: string]: string | number | boolean | Array<string>;
 } = {};
-
-
-interface CachedHTML {
-	files: Set<string>;
-	[key: string]: string | Set<string>;
-}
-
-/**
- * A object that contains cached HTML snippets.
- * @type {Object}
- */
-export const cachedHTML: CachedHTML = { files: new Set() };
 
 /**
  * Object used to store the current page data and check for data integrity issues.
@@ -48,3 +36,10 @@ export const globalElements: GlobalElements = {
 export const globalFunctions: {
 	[key: string]: () => void;
 } = {}
+
+/**
+ * NodeList of input elements inside the footer dialog's "data" container.
+ *
+ * @type {NodeList}
+ */
+export const footerInputs: Array<HTMLInputElement | HTMLSelectElement> = [];

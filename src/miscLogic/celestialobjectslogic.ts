@@ -1,6 +1,6 @@
 import { assignDefaultValue, storeData, wikiCode } from "../common";
 import { getDescriptorData } from "../datalists/planetDatalists";
-import { assignFunction } from "../elementFrontends/elementBackend/elementFunctions";
+import { assignFunction } from "../commonElements/elementBackend/elementFunctions";
 import { globalElements, pageData } from "../variables/objects";
 
 /**

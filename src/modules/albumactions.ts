@@ -3,8 +3,8 @@
  */
 
 import { loadHTML } from "../common";
-import { assignElementFunctions } from "../elementFrontends/elementBackend/elementFunctions";
-import { updateGlobalElements } from "../elementFrontends/elementBackend/elementStore";
+import { assignElementFunctions } from "../commonElements/elementBackend/elementFunctions";
+import { updateGlobalElements } from "../commonElements/elementBackend/elementStore";
 import album from "../htmlSnippets/album.html?raw";
 import { globalElements } from "../variables/objects";
 

@@ -68,7 +68,7 @@
 								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
@@ -84,7 +84,7 @@
 						<label for="planetInput">Name of the planet:</label>
 						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the business can be found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
@@ -93,7 +93,7 @@
 						<label for="moonInput">Name of the moon (if HQ is on moon):</label>
 						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the business can be found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
@@ -101,7 +101,7 @@
 					<div class="tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
 						<button class="tooltip">
@@ -109,7 +109,7 @@
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -175,7 +175,7 @@
 						<label for="menuInput">Menu:</label>
 						<button class="tooltip">
 							<data>For the marketplace table.<br>Not shown on the business page.</data>
-						</span>
+						</button>
 						<textarea id="menuInput" data-dest="menu"></textarea>
 					</div>
 					<div class="tableHeader text">
