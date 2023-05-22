@@ -1,17 +1,19 @@
 import { GlobalElements } from "../types/elements";
+import { LinkObj, TransformedElementFunctions } from "../types/objects";
+import { AnyPrimitive } from "../types/values";
 
 /**
  * An object that contains links.
  * @type {Object}
  */
-export const links = {};
+export const links: LinkObj = {};
 
 /**
  * An object that contains page data.
  * @type {Object}
  */
 export const pageData: {
-	[key: string]: string | number | boolean | Array<string>;
+	[key: string]: AnyPrimitive | Array<string>;
 } = {};
 
 /**
@@ -34,12 +36,14 @@ export const globalElements: GlobalElements = {
 }
 
 export const globalFunctions: {
-	[key: string]: () => void;
+	[key: string]: Function;
 } = {}
 
 /**
- * NodeList of input elements inside the footer dialog's "data" container.
+ * Array of input elements inside the footer dialog's "data" container.
  *
- * @type {NodeList}
+ * @type {Array}
  */
 export const footerInputs: Array<HTMLInputElement | HTMLSelectElement> = [];
+
+export const transformedElementFunctions: TransformedElementFunctions = {};

@@ -1,3 +1,4 @@
+import { toggleSection } from "../common";
 import { assignElementFunctions } from "../commonElements/elementBackend/elementFunctions";
 import { addInputs, addOutputs, updateGlobalElements } from "../commonElements/elementBackend/elementStore";
 import elementFunctions from "../commonElements/elementFunctionsFrontend";
@@ -52,3 +53,5 @@ for (const id of playerInputIds) {
 	if (!element) continue;
 	element.dataset.player = '';
 }
+
+toggleSection();

@@ -61,6 +61,7 @@
 }
 
 .gallery-item .controlButtons .delete-icon {
+	all: unset;
 	cursor: pointer;
 	-webkit-user-select: none;
 	user-select: none;

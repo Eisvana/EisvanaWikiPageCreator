@@ -1,4 +1,4 @@
-import { assignDefaultValue, storeData, wikiCode } from "../common";
+import { assignDefaultValue, forceDatalist, storeData, wikiCode } from "../common";
 import { getDescriptorData } from "../datalists/planetDatalists";
 import { assignFunction } from "../commonElements/elementBackend/elementFunctions";
 import { globalElements, pageData } from "../variables/objects";
@@ -177,8 +177,8 @@ export function initialiseSectionInputs(sectionSelector: string) {
 			assignFunction({ element: input, func: function () { assignDefaultValue(this) } });
 			assignDefaultValue(input);
 		}
-		if (input.list) {
-			assignFunction(input, 'forceDatalist(this)', 'onchange');
+		if ((input as HTMLInputElement).list) {
+			assignFunction({ element: input, handler: 'change', func: function () { forceDatalist(this) } });
 		}
 	}
 }

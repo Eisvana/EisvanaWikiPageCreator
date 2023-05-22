@@ -255,7 +255,7 @@ function updateAlbumData() {
  * @name albumFunctions
  * @returns {void}
  */
-function albumFunctions() {
+export function albumFunctions() {
 	albumInitialised ? albumData() : document.addEventListener('albumLoaded', () => albumData());
 
 	/**

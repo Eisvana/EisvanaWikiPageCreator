@@ -39,8 +39,10 @@
 textarea:focus,
 textarea:focus-visible,
 input:not([type="file"], [type="checkbox"], [type="radio"]):focus,
-input:not([type="file"], [type="checkbox"], [type="radio"]):focus-visible {
-	outline: 2px solid var(--outline-color);
+input:not([type="file"], [type="checkbox"], [type="radio"]):focus-visible,
+button.tooltip[data-click-tooltip]:focus-visible,
+button.delete-icon:focus-visible {
+	outline: 2px solid var(--outline-color) !important;
 }
 
 .button.is-primary:not(.is-outlined),

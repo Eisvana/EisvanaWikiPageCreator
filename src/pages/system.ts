@@ -2,10 +2,14 @@
  * @fileoverview Provides functions which can be used by the System page creator.
  */
 
-import { getChildIndex, loadHTML, wikiCode } from '../common';
-import { assignFunction } from '../commonElements/elementBackend/elementFunctions';
+import { getChildIndex, loadHTML, oddEven, wikiCode } from '../common';
+import { assignElementFunctions, assignFunction } from '../commonElements/elementBackend/elementFunctions';
+import { updateGlobalElements } from '../commonElements/elementBackend/elementStore';
+import { initialiseSectionInputs } from '../miscLogic/celestialobjectslogic';
+import { HubGal } from '../miscLogic/locationLogic';
+import { addAllTooltips } from '../modules/tooltip';
+import { globalElements, pageData } from '../variables/objects';
 import tradeableInputs from '../htmlSnippets/tradeableInputs.html?raw';
-import { globalElements } from '../variables/objects';
 
 function startupFunctions() {
 	celestialStartupFunctions();
@@ -65,21 +69,13 @@ assignElementFunctions(systemElementFunctions);
  * @function
  * @returns {void}
  */
-(() => {
-	const files = [
-		'tradeableInputs'
-	]
-	for (const file of files) {
-		cachedHTML.files.add(`src/htmlSnippets/${file}.html`);
-	}
-})();
 
 /**
  * Generates a sentence that describes the location of the page.
  *
  * @function
  */
-function locationSentence() {
+export function locationSentence() {
 	const { region, civShort: civ } = pageData;
 	const HubNr = regNr(region);
 	const galaxy = HubGal(civ);
@@ -114,7 +110,7 @@ async function planetInputs() {
 	 * @param {number} max - The maximum value to clamp to.
 	 * @returns {number} The clamped value.
 	 */
-	function clamp(value, min, max) {
+	function clamp(value: number, min: number, max: number): number {
 		return Math.max(min, Math.min(max, value));
 	}
 
@@ -140,7 +136,7 @@ async function planetInputs() {
 
 	while (diff() != 0) {
 		if (diff() > 0) {
-			await addPlanet(childIndex);
+			addPlanet(childIndex);
 			childIndex++;
 		} else {
 			removePlanet();
@@ -169,7 +165,7 @@ async function planetInputs() {
 	 * @param {number} i - The index of the planet section to add.
 	 * @returns {void}
 	 */
-	async function addPlanet(i) {
+	function addPlanet(i) {
 		const replacementStrings = {
 			i,
 			oddEvenClass: 'is-' + oddEven(i),

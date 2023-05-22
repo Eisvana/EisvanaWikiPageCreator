@@ -7,6 +7,7 @@ import { errorMessage, getChildIndex, loadHTML, sanitiseString, setDropdownOptio
 import { explanation } from "./tooltip";
 import galleryInputHtml from '../htmlSnippets/galleryInput.html?raw'
 import { ElementFunctions } from "../types/elements";
+import Sortable from "sortablejs";
 
 /**
 * Handles gallery image uploads
@@ -77,17 +78,17 @@ export function galleryUpload() {
 			{
 				element: replacementStrings.dropdownId,
 				handler: 'change',
-				func: function () { galleryDesc(this, replacementStrings.inputId, replacementStrings.wikiCodeGalleryValueId) }
+				func: function () { galleryDesc(this as unknown as HTMLSelectElement, replacementStrings.inputId, replacementStrings.wikiCodeGalleryValueId) }
 			},
 			{
 				element: replacementStrings.inputId,
 				handler: 'input',
-				func: function () { galleryInput(this, replacementStrings.wikiCodeGalleryValueId) }
+				func: function () { galleryInput(this as unknown as HTMLInputElement, replacementStrings.wikiCodeGalleryValueId) }
 			},
 			{
-				element: galleryTemplateDom.querySelector('.controlButtons span.delete-icon') as HTMLElement,
+				element: galleryTemplateDom.querySelector('.controlButtons button.delete-icon') as HTMLElement,
 				handler: 'click',
-				func: function () { rmGallery(this, replacementStrings.wikiCodeGalleryId) }
+				func: function () { rmGallery(this as unknown as HTMLButtonElement, replacementStrings.wikiCodeGalleryId) }
 			},
 		]
 
@@ -114,11 +115,10 @@ export function galleryUpload() {
 		if (galleryArray) {
 			setDropdownOptions(dropdown, galleryArray);
 		} else {
-			dropdown!.parentElement!.style.display = 'none';
+			dropdown.parentElement!.style.display = 'none';
 		}
 
 		const wrapper = galleryTemplateDom.getElementById(replacementStrings.galleryId) as HTMLElement;
-
 
 		// Set wikiCodeGalleryTemplate string
 		const wikiCodeGalleryTemplate = `<div id="${replacementStrings.wikiCodeGalleryId}">
@@ -151,9 +151,9 @@ export function galleryUpload() {
  * @param {string} inputId - The ID of the input field to insert the selected description.
  * @param {string} codeId - The ID of the code block to update after inserting the description.
  */
-function galleryDesc(dropdownElement, inputId, codeId) {
+function galleryDesc(dropdownElement: HTMLSelectElement, inputId: string, codeId: string) {
 	const dropdown = dropdownElement.value;
-	const input = document.getElementById(inputId);
+	const input = document.getElementById(inputId) as HTMLInputElement;
 	input.value = dropdown;
 	galleryInput(input, codeId);
 }
@@ -165,9 +165,9 @@ function galleryDesc(dropdownElement, inputId, codeId) {
  * @param {string} galleryId - The ID of the gallery element to modify
  * @returns {void}
  */
-function galleryInput(input, galleryId) {
+function galleryInput(input: HTMLInputElement, galleryId: string) {
 	const desc = sanitiseString(input.value);
-	document.getElementById(galleryId).innerText = desc ? '|' + desc : '';
+	document.getElementById(galleryId)!.innerText = desc ? '|' + desc : '';
 }
 
 /**
@@ -175,10 +175,10 @@ function galleryInput(input, galleryId) {
  * @param {Node} galleryNode - The gallery node to remove from the DOM.
  * @param {string} wikiCodeGalleryId - The ID of the wiki code gallery node.
  */
-function rmGallery(galleryNode, wikiCodeGalleryId) {
+function rmGallery(galleryNode: HTMLButtonElement, wikiCodeGalleryId: string) {
 	const wikiCodeGalleryNode = document.getElementById(wikiCodeGalleryId);
-	wikiCodeGalleryNode.remove();
-	galleryNode.closest('.gallery-item').remove();
+	wikiCodeGalleryNode!.remove();
+	galleryNode.closest('.gallery-item')!.remove();
 }
 
 /**
@@ -186,9 +186,9 @@ function rmGallery(galleryNode, wikiCodeGalleryId) {
 * @function moveItem
 * @param {Object} evt - The event object containing information about the item that was moved.
 */
-export function moveItem(evt) {
-	const oldIndex = evt.oldIndex;
-	const newIndex = evt.newIndex;
+export function moveItem(evt: Sortable.SortableEvent) {
+	const oldIndex = evt.oldIndex as number;
+	const newIndex = evt.newIndex as number;
 	const galleryElement = document.getElementById('galleryCode');
 	if (!galleryElement) return;
 	const galleryItems = Array.from(galleryElement.children);
@@ -228,5 +228,7 @@ function mobileMoveItem(element: HTMLElement, codeId: string, direction: string)
 }
 
 function resetGallery() {
-	globalElements.output.galleryItems.innerHTML = '';
+	const galleryElement = globalElements.output.galleryItems as HTMLDivElement;
+	galleryElement.innerHTML = '';
 }
+globalFunctions.resetGallery = resetGallery;

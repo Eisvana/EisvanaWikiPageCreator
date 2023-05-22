@@ -2,62 +2,9 @@
  * @fileoverview Provides functions which can be used by the Creature page creator.
  */
 
-import { setDropdownOptions, wikiCode } from "../common";
-import { updateGlobalElements } from "../commonElements/elementBackend/elementStore";
-import { assignElementFunctions } from "../commonElements/elementBackend/elementFunctions";
-import { globalElements, pageData } from "../variables/objects";
-
-function startupFunctions() {
-	genusDropdown();
-	genderDropdown();
-	albumDropdown();
-	hideOrgName();
-	pageName();
-	specialNotes();
-	specialNotesTextFunc();
-	genusProduces();
-	addInfo();
-	addInfoBullet();
-	hideSecGenderProps();
-	hideCreaturePrio();
-	bundlePropFunctions();
-	hideAlbumEntry();
-	noLineBreak();
-	albumFunctions();
-	toggleRedirect();
-}
-
-const creatureElements = {
-	input: {
-		gender: 'Gender',
-	}
-}
-updateGlobalElements(creatureElements);
-
-const creatureElementFunctions = {
-	nameInput: ['pageName(); albumName(); toggleRedirect()'],
-	oldNameInput: ['hideOrgName(); pageName(); albumName(); toggleRedirect()'],
-	planetInput: ['planetMoonSentence()'],
-	moonInput: ['planetMoonSentence()'],
-	ecosystemInput: ['genusDropdown(); albumDropdown(); genusProduces()'],
-	genusInput: ['genderDropdown(); specialNotesTextFunc(); genusProduces()'],
-	civ: ['albumDropdown(); hideAlbumEntry();', null, true],
-	notesInput: ['specialNotes(); specialNotesTextFunc()'],
-	specialNotesInput: ['specialNotesTextFunc()'],
-	catalogueInput: ['addInfo(); addInfoBullet(); albumTitle(); hideAlbumEntry()'],
-	researchTeam: ['addInfo()', null, true],
-	genderInput: ['hideSecGenderProps(); hideCreaturePrio(); genderProps("gender", "gender2")'],
-	gender2Input: ['hideSecGenderProps(); hideCreaturePrio(); genderProps("gender", "gender2")'],
-	heightInput: ['genderProps("height", "height2"); albumOther(); numberError(this)'],
-	weightInput: ['genderProps("weight", "weight2"); numberError(this)'],
-	height2Input: ['genderProps("height", "height2"); albumOther(); numberError(this)'],
-	weight2Input: ['genderProps("weight", "weight2"); numberError(this)'],
-	gender: ['bundlePropFunctions(); albumOther()'],
-	discoveredInput: ['albumDiscoverer()'],
-	discoveredlinkInput: ['albumDiscoverer()'],
-	dmInput: ['noLineBreak()'],
-}
-assignElementFunctions(creatureElementFunctions);
+import { addInfoBullet, setDropdownOptions, triggerEvent, wikiCode, wikiCodeSimple } from "../../common";
+import { globalElements, pageData } from "../../variables/objects";
+import getGenderData from "../../datalists/creatureDatalists";
 
 /**
  * Sets the genus dropdown based on creature data and current ecosystem.
@@ -65,7 +12,7 @@ assignElementFunctions(creatureElementFunctions);
  * @function genusDropdown
  * @returns {void}
  */
-function genusDropdown() {
+export function genusDropdown() {
 	const creatureData = getCreatureData();
 	const ecosystem = pageData.ecosystem;
 	const genera = Object.keys(creatureData.ecosystems[ecosystem])
@@ -84,7 +31,7 @@ function genusDropdown() {
  * @function
  * @returns {void}
  */
-function albumDropdown() {
+export function albumDropdown() {
 	const creatureData = getCreatureData();
 	// if civ is GHub, use GHEC instead. Otherwise use the Civ shortname
 	const civ = (pageData.civShort == "GHub") ? "GHEC" : pageData.civShort;
@@ -144,7 +91,7 @@ function addInfo() {
  * @function
  * @returns {string} - The name generated for the wikilink.
  */
-function pageName() {
+export function pageName() {
 	const { nameInput: { value: newName }, oldNameInput: { value: orgName } } = globalElements.input;
 
 	const name = (() => {
@@ -162,7 +109,7 @@ function pageName() {
  * Populates the 'Produces' dropdown or text field based on the current genus and ecosystem.
  *
  */
-function genusProduces() {
+export function genusProduces() {
 	const genus = pageData.genus;
 	const creatureData = getCreatureData();
 	const ecosystems = Object.keys(creatureData.ecosystems);
@@ -184,7 +131,7 @@ function genusProduces() {
  * @name hideSecGenderProps
  * @returns {void}
  */
-function hideSecGenderProps() {
+export function hideSecGenderProps() {
 	const { gender: gen1, gender2: gen2 } = pageData;
 	const { weight2Input: gen2Weight, height2Input: gen2Height, gender2Input: gen2Input } = globalElements.input;
 	const gen2Props = [gen2Weight, gen2Height];
@@ -212,7 +159,7 @@ function hideSecGenderProps() {
  * // Example usage:
  * specialNotes();
  */
-function specialNotes() {
+export function specialNotes() {
 	const notes = pageData.notes;
 	const specialNotesElement = globalElements.input.specialNotesInput
 	specialNotesElement.value = notes;
@@ -230,7 +177,7 @@ function specialNotes() {
  * @function
  * @returns {void}
  */
-function specialNotesTextFunc() {
+export function specialNotesTextFunc() {
 	const { genus, notes, addObservation: specialNotes } = pageData;
 	const { input: { notesInput: notesElement }, output: { addObservation: addObservationElement } } = globalElements;
 
@@ -259,7 +206,7 @@ function specialNotesTextFunc() {
  * @function
  * @global
  */
-function hideCreaturePrio() {
+export function hideCreaturePrio() {
 	const radio = globalElements.input.gender1;
 	if (pageData.gender2) {
 		hideInput(radio, '');
@@ -332,7 +279,7 @@ function genderProps(property1Name, property2Name) {
  * @function
  * @returns {void}
  */
-function bundlePropFunctions() {
+export function bundlePropFunctions() {
 	genderProps("height", "height2");
 	genderProps("weight", "weight2");
 	genderProps("gender", "gender2");
@@ -343,7 +290,7 @@ function bundlePropFunctions() {
  * or shows them otherwise.
  * @returns {void}
  */
-function hideAlbumEntry() {
+export function hideAlbumEntry() {
 	const display = pageData.catalogue ? '' : 'hidden';
 	globalElements.output.albumEntry.style.visibility = display;
 	globalElements.output.albumActions.style.visibility = display;
@@ -379,7 +326,7 @@ function albumCivExternal() {
  * @function
  * @global
  */
-function noLineBreak() {
+export function noLineBreak() {
 	const element = globalElements.input.dmInput;
 	const { value, dataset: { destNoauto: dest } } = element;
 	const noBreak = value.replaceAll('\n', ' ');
@@ -395,7 +342,7 @@ function noLineBreak() {
  * @function
  * @returns {Array<String>} An array of strings representing the different pages in the gallery.
  */
-function generateGalleryArray() {
+export function generateGalleryArray() {
 	let gender1, gender2;
 	if (pageData.gender2) {
 		const prio = creaturePrio();
@@ -440,7 +387,7 @@ function generateGalleryArray() {
 	pageData.galleryArray = array;
 }
 
-function galleryExplanationExternal() {
+export function galleryExplanationExternal() {
 	return `There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
@@ -463,18 +410,20 @@ function galleryExplanationExternal() {
  * @function
  * @returns {string|undefined} Returns the updated page name if the page has been renamed, otherwise returns undefined.
  */
-function redirectPage() {
-	if (pageData.oldName && pageData.oldName != pageData.newName) return pageData.newName;
+export function redirectPage(): string {
+	if (pageData.oldName && pageData.oldName != pageData.newName) return pageData.newName as string;
+	return '';
 }
 
-function genderDropdown() {
-	const genus = pageData.genus;
-	const { genderInput, gender2Input } = globalElements.input;
-	const genderArray = getGenderData(genus);
+export function genderDropdown() {
+	const genus = pageData.genus as string;
+	const genderInput = globalElements.input.genderInput as HTMLInputElement;
+	const gender2Input = globalElements.input.gender2Input as HTMLInputElement;
+	const genderArray = getGenderData(genus) as Array<string>;
 	const gender2Array = ['', ...genderArray];
 	setDropdownOptions(genderInput, genderArray);
 	setDropdownOptions(gender2Input, gender2Array);
 	for (const input of [genderInput, gender2Input]) {
-		input.onchange();
+		triggerEvent(input, 'change');
 	}
 }

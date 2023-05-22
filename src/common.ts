@@ -5,15 +5,15 @@
 import { wikiLink } from './variables/simple';
 import { GHubHuburbRegions, regions } from "./variables/regions";
 import { Regions } from "./types/regions";
-import { readDefaultValues } from './modules/footer';
 import { dataIntegrityObj, globalElements, globalFunctions, pageData } from './variables/objects';
 import { getDestElements } from './commonElements/elementBackend/elementStore';
 import { versions } from './variables/versions';
-import { assignFunction } from './commonElements/elementBackend/elementFunctions';
+import { assignElementFunctions } from './commonElements/elementBackend/elementFunctions';
 import { glyphInputOnChange, glyphRegion } from './modules/portalglyphs';
 import { explanation } from './modules/tooltip';
 import { planetMoonSentence } from './miscLogic/locationLogic';
 import { SortObj } from './types/objects';
+import { AnyPrimitive } from './types/values';
 import { ElementFunctions } from './types/elements';
 
 /**
@@ -37,19 +37,6 @@ if (huburbs) addHuburbs(regions);
 // Make 'regions' read-only
 Object.freeze(regions);
 
-
-
-
-
-
-/**
- * Executes functions on page load.
- * Adds inputs and outputs to the page, updates global elements, and assigns element functions.
- * Applies external links to wiki pages and adds tooltips to elements.
- * Toggles sections on the page.
- */
-toggleSection();
-
 /**
  * Returns an object containing references to input elements on the page.
  * @returns {Object} An object with properties "inputs", "checkboxes", "stores", "defaults", "simple", and "lists", each containing an array of relevant input elements.
@@ -66,33 +53,6 @@ function getInputData() {
 		lists: document.querySelectorAll('[list]'),
 	}
 	return inputData;
-}
-
-/**
- * Runs various startup functions when the page loads.
- */
-export function startUp() {
-	autoShow();
-	readDefaultValues();
-	versionDropdown();
-	pageData.uploadShown = true;
-	pageData.galleryUploadShown = true;
-	showAll();
-	if (!pageData.debug) {
-		pageData.uploadShown = false;
-		pageData.galleryUploadShown = false;
-	}
-	enableTextMarking();
-	// the order of the touch and mouse events MUST NOT BE CHANGED!!!
-	// it will not work the other way around. Touch must be before mouse
-	// globalElements.output.output.ontouchstart = () => preventCopy();		// this must be first		// this is commented out because it had bad scroll UX on mobile. It should be triggered when tapped, but not when swiped.
-	(globalElements.output.output as HTMLElement).onmousedown = () => preventCopy();		// this must be second
-	(globalElements.output.fullArticle as HTMLElement).onmouseup = (e) => getSelectedText(e.target);
-	(globalElements.output.fullArticle as HTMLElement).ontouchend = (e) => getSelectedText(e.target);
-	if (globalElements.output.albumText) {
-		(globalElements.output.albumText as HTMLElement).ontouchend = (e) => getSelectedText(e.target);
-		(globalElements.output.albumText as HTMLElement).onmouseup = (e) => getSelectedText(e.target);
-	}
 }
 
 /**
@@ -155,6 +115,7 @@ export function autoShow(): void {
 	const functionObj: Array<{
 		elements: NodeListOf<HTMLInputElement | HTMLSelectElement>;
 		handler?: keyof HTMLElementEventMap;
+		prio?: boolean;
 		func: () => void;
 	}> = [
 			{ elements: inputData.defaults, func: function () { assignDefaultValue(this as unknown as HTMLInputElement) } },
@@ -165,13 +126,20 @@ export function autoShow(): void {
 			{ elements: inputData.lists, handler: 'change', func: function () { forceDatalist(this as unknown as HTMLInputElement) } },
 		]
 
+	const transformedFunctionArray: Array<ElementFunctions> = [];
+
 	for (const obj of functionObj) {
 		const { elements, func } = obj;
-		const handler = obj.handler as keyof HTMLElementEventMap;
 		for (const element of Array.from(elements)) {
-			assignFunction({ element, handler, func });
+			const transformedFunctionObject: ElementFunctions = {
+				element,
+				prio: true,
+				func
+			}
+			transformedFunctionArray.push(transformedFunctionObject);
 		}
 	}
+	assignElementFunctions(transformedFunctionArray);
 }
 
 /**
@@ -185,7 +153,7 @@ export function showAll() {
 		wikiCode(input);
 	}
 	for (const checkbox of Array.from(inputData.checkboxes)) {
-		checkboxWikiCode(checkbox);
+		checkboxWikiCode(checkbox as HTMLInputElement);
 	}
 	for (const store of Array.from(inputData.stores)) {
 		storeData(store);
@@ -201,9 +169,9 @@ export function showAll() {
 
 	numberStats();
 	civ();
-	image(globalElements.input.fileUpload);
+	image(globalElements.input.fileUpload as HTMLInputElement);
 	if (typeof globalFunctions.galleryUpload == 'function') globalFunctions.galleryUpload();
-	try { glyphInputOnChange(globalElements.input.portalglyphsInput) } catch (error) { /*do nothing*/ }
+	try { glyphInputOnChange(globalElements.input.portalglyphsInput as HTMLInputElement) } catch (error) { /*do nothing*/ }
 	try { planetMoonSentence() } catch (error) { /*do nothing*/ }
 	hideDiscoverer();
 }
@@ -245,7 +213,7 @@ export function wikiCode(element: HTMLInputElement | HTMLSelectElement | string,
  *
  * @param {Object} element - The checkbox element that triggered the event.
  */
-function checkboxWikiCode(element: HTMLInputElement) {
+export function checkboxWikiCode(element: HTMLInputElement) {
 	const dest = element.dataset.destCheckbox;
 	const destElement = document.getElementById(dest);
 	const checked = element.value;
@@ -322,7 +290,7 @@ export function wikiCodeSimple(element, dest = element.dataset.destSimple) {
  * @param {string} key - The key of the data to add.
  * @param {*} value - The value of the data to add.
  */
-export function addStaticPageData(key, value) {
+export function addStaticPageData(key: string, value: AnyPrimitive) {
 	Object.defineProperty(pageData, key, { configurable: false, writable: false, value: value });
 }
 
@@ -500,28 +468,28 @@ export function image(element: HTMLInputElement) {
  * @param {HTMLElement} button - The button element that triggered the toggle action.
  * @param {string} [attributeName='section'] - The name of the data attribute to match against.
  */
-function toggleSection(sectionName, button, attributeName = 'section') {
-	const elements = document.querySelectorAll(`[data-${attributeName}~="${sectionName}"]`);
-	const buttons = document.querySelectorAll('[data-button-id]');
+export function toggleSection(sectionName: string = '', button: HTMLButtonElement | undefined = undefined, attributeName: string = 'section') {
+	const elements: NodeListOf<HTMLElement> = document.querySelectorAll(`[data-${attributeName}~="${sectionName}"]`);
+	const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('[data-button-id]');
 	const childindex = getChildIndex(buttons, 'dataset.buttonId');
 
 	if (arguments.length == 0) {
-		const buttonElements = document.querySelectorAll('.sectionToggle button');
+		const buttonElements: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.sectionToggle button');
 		for (let i = 0; i < buttonElements.length; i++) {
 			const button = buttonElements[i];
-			button.dataset.buttonId ??= childindex + i;
+			button.dataset.buttonId ??= (childindex + i).toString();
 			const id = button.dataset.buttonId;
 			button.dataset[`display${id}`] = button.dataset.displayDefault ?? '';
 		}
 		return;
 	}
 
-	button.dataset.buttonId ??= childindex;
-	const id = button.dataset.buttonId;
+	button!.dataset.buttonId ??= childindex.toString();
+	const id = button!.dataset.buttonId;
 	const displayID = `display${id}`;
-	const state = button.dataset[displayID];
+	const state = button!.dataset[displayID];
 
-	for (const element of elements) {
+	for (const element of Array.from(elements)) {
 		const object = element.dataset;
 		let hide = false;
 		for (const key in object) {
@@ -541,8 +509,8 @@ function toggleSection(sectionName, button, attributeName = 'section') {
 			element.dataset[displayID] = `none`;
 		}
 	}
-	button.innerText = state ? 'Hide' : 'Show';
-	button.dataset[displayID] = state ? '' : 'none';
+	button!.innerText = state ? 'Hide' : 'Show';
+	button!.dataset[displayID] = state ? '' : 'none';
 }
 
 /**
@@ -586,10 +554,10 @@ export function researchTeam() {
 	const { value: researchteamValue, dataset: { destNoauto: dest } } = researchteamInput;
 	pageData[dest as string] = researchteamValue;
 	const civ = pageData.civilized;
-	const exceptions = ['Base', 'Racetrack'];
+	const exceptions = ['base', 'racetrack'];
 	const researchteam = (() => {
-		if (researchteamValue.split(' ').length == 2) {
-			return civ + ' ' + researchteamValue.split(' ')[1];
+		if (researchteamValue.split(' ').length == 2) {		// NoSonar catch inputs like "EisHub Scribes" or "CalHub Archivists"
+			return civ + ' ' + researchteamValue.split(' ')[1];		// only take the last part, so "Scribes" or "Archivists"
 		} else if (!researchteamValue && !exceptions.includes(pageData.pageType as string)) {
 			return civ;
 		} else {
@@ -652,7 +620,7 @@ function displayResearch() {
 	const pos = teams.indexOf(chapter);
 
 	const chapterSentence = (() => {
-		if (pos < 4) {
+		if (pos < 4) {		// NoSonar 0-3 are the research chapters or no chapter (GHSH, GHEC, GHGS)
 			return `[[${chapter}]] researcher`;
 		} else if (chapter.includes('Scribe')) {
 			return 'EisHub [[Galactic Hub Eissentam Scribes|Scribe]]';
@@ -857,7 +825,7 @@ export function enPrefix(text, dest = null) {
  * @param {RegExp} regex - The regular expression to match against.
  * @returns {boolean} - True if the string matches the regex, false otherwise.
  */
-function regexMatch(string, regex) {
+export function regexMatch(string: string, regex: RegExp): boolean {
 	const stringMatches = string.match(regex);
 	return stringMatches?.length == 1 && stringMatches[0]?.length == string.length;
 }
@@ -998,15 +966,16 @@ export function forceDatalist(element) {
  * @param {boolean} [simple=false] - Indicates whether to perform a simple data check.
  * @returns {string|false} A string with an error message if a data integrity issue was found, or false otherwise.
  */
-function checkDataIntegrity(element: HTMLElement | null = null, simple: boolean = false) {
+export function checkDataIntegrity(element: HTMLElement | null = null, simple: boolean = false) {
 	if (pageData.debug) return '';
 	const currentText = JSON.stringify(pageData);
 	const savedText = dataIntegrityObj.text;
 
 	const { name, portalglyphs: glyphs, region } = pageData;
 
-	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.copy === element?.dataset?.link) || simple)) {
+	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.link === element?.dataset?.link) || simple)) {
 		dataIntegrityObj.copy = false;
+		dataIntegrityObj.link = '';
 		return '';
 	} else if (!name) {
 		return 'Missing Name!';
@@ -1023,7 +992,7 @@ function checkDataIntegrity(element: HTMLElement | null = null, simple: boolean 
  * @param {string} text - The text string to remove newlines from.
  * @return {string} - A modified string with all newlines replaced by empty spaces.
  */
-function removeNewlines(text) {
+function removeNewlines(text: string): string {
 	const newlineRegex = /\r?\n|\r/g;
 	const textString = text.replace(newlineRegex, '');
 	return textString;
@@ -1035,7 +1004,7 @@ function removeNewlines(text) {
  * @param {Object} section - The HTML element representing the section to search for selected text.
  * @returns {string} - The selected text as a trimmed string, with any button text removed.
  */
-function getSelectedText(section) {
+export function getSelectedText(section) {
 	// this is some stupid BS: Chrome selects the button text, despite it having user-select:none. #chromesucks
 	// I have no idea how to fix this, so I will just remove the button text from the string :shrug:
 	const buttonText = document.getElementById('switchTheme').innerText;
@@ -1057,7 +1026,7 @@ function getSelectedText(section) {
  * @returns {void}
  */
 export function enableTextMarking() {
-	document.body.dataset.mark = pageData.debug ? true : !checkDataIntegrity(null, true);
+	document.body.dataset.mark = pageData.debug ? true.toString() : (!checkDataIntegrity(null, true)).toString();
 }
 
 /**
@@ -1065,7 +1034,7 @@ export function enableTextMarking() {
  * @function preventCopy
  * @returns {void}
  */
-function preventCopy() {
+export function preventCopy() {
 	const error = checkDataIntegrity(null, true);
 	if (error) {
 		explanation('Missing/Incorrect Data', error);
@@ -1227,7 +1196,7 @@ export function loadHTML(html: string, varObj: { [key: string]: string } = {}) {
 	return processingHTML;
 }
 
-export function triggerEvent(element: HTMLElement, evt: string): void {
+export function triggerEvent(element: HTMLElement, evt: keyof HTMLElementEventMap): void {
 	const event = new Event(evt);
 	element.dispatchEvent(event);
 }

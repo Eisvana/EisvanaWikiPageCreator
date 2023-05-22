@@ -1,0 +1,25 @@
+const creatureElementFunctions = {
+	nameInput: ['pageName(); albumName(); toggleRedirect()'],
+	oldNameInput: ['hideOrgName(); pageName(); albumName(); toggleRedirect()'],
+	planetInput: ['planetMoonSentence()'],
+	moonInput: ['planetMoonSentence()'],
+	ecosystemInput: ['genusDropdown(); albumDropdown(); genusProduces()'],
+	genusInput: ['genderDropdown(); specialNotesTextFunc(); genusProduces()'],
+	civ: ['albumDropdown(); hideAlbumEntry();', null, true],
+	notesInput: ['specialNotes(); specialNotesTextFunc()'],
+	specialNotesInput: ['specialNotesTextFunc()'],
+	catalogueInput: ['addInfo(); addInfoBullet(); albumTitle(); hideAlbumEntry()'],
+	researchTeam: ['addInfo()', null, true],
+	genderInput: ['hideSecGenderProps(); hideCreaturePrio(); genderProps("gender", "gender2")'],
+	gender2Input: ['hideSecGenderProps(); hideCreaturePrio(); genderProps("gender", "gender2")'],
+	heightInput: ['genderProps("height", "height2"); albumOther(); numberError(this)'],
+	weightInput: ['genderProps("weight", "weight2"); numberError(this)'],
+	height2Input: ['genderProps("height", "height2"); albumOther(); numberError(this)'],
+	weight2Input: ['genderProps("weight", "weight2"); numberError(this)'],
+	gender: ['bundlePropFunctions(); albumOther()'],
+	discoveredInput: ['albumDiscoverer()'],
+	discoveredlinkInput: ['albumDiscoverer()'],
+	dmInput: ['noLineBreak()'],
+}
+
+export default creatureElementFunctions;

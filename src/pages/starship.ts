@@ -2,6 +2,9 @@
  * @fileoverview Provides functions which can be used by the Starship page creator.
  */
 
+import { enPrefix, wikiCode } from "../common";
+import { globalElements, pageData } from "../variables/objects";
+
 function startupFunctions() {
 	subtypeDropdown();
 	showHideStarshipSelects();
@@ -701,8 +704,8 @@ function appearanceSentence() {
 	const addParts = (() => {
 		let partList = '';
 		if (secParts || accessories || miscParts) partList = 'It features ';
-		const partArray = [secParts.toLowerCase(), accessories.toLowerCase(), miscParts.toLowerCase()];
-		const usedParts = new Array;
+		const partArray: Array<string> = [secParts.toLowerCase(), accessories.toLowerCase(), miscParts.toLowerCase()];
+		const usedParts: Array<string> = [];
 		for (const part of partArray) {
 			if (part) usedParts.push(part);
 		}
@@ -802,6 +805,7 @@ function albumLinkGen() {
 			for (const rarity in fighterSubtypes) {
 				if (fighterSubtypes[rarity].includes(subtype)) return rarity;
 			}
+			return '';
 		})();	// The rarity of the fighter subtype, determined by checking the fighterSubtypes object.
 
 		return `${civ} Starship Catalog - ${type} (${rarity})`; 										// EisHub Fighter
@@ -841,7 +845,9 @@ function generateGalleryArray() {
 	const crash = ['npc', 'freighter'];
 
 	// Images to deactivate based on the type of page data
-	const deactivate = {
+	const deactivate: {
+		[key: string]: Array<string>;
+	} = {
 		'Living Ship': crash,
 		'Interceptor': crash,
 		'Freighter': ['ship', ...common],
@@ -855,7 +861,7 @@ function generateGalleryArray() {
 	}
 
 	// Loop through the array and remove images based on the type of page data
-	const type = pageData.type;
+	const type = pageData.type as string;
 	const deactivateArray = deactivate[type] ?? deactivate.default;
 	const lowerCase = structuredClone(array).map(item => item.toLowerCase());
 	for (let i = array.length - 1; i >= 0; i--) {
@@ -869,7 +875,7 @@ function generateGalleryArray() {
 	pageData.galleryArray = array;
 }
 
-function galleryExplanationExternal() {
+export function galleryExplanationExternal() {
 	return `There is a preferred order of gallery pictures, depending on ship type:
 	<div class='dialog-center is-flex-wrap-wrap mt-2' style='gap: 1rem'>
 		<div>
@@ -911,9 +917,11 @@ function galleryExplanationExternal() {
  * @function
  * @returns {(boolean|string)} Either false if the page name doesn't contain Greek letters or a string with the name containing Greek letters replaced with their English transliterations.
  */
-function redirectPage() {
-	const name = pageData.name;
-	const greekLetters = {
+export function redirectPage() {
+	const name = pageData.name as string;
+	const greekLetters: {
+		[key: string]: string;
+	} = {
 		α: 'Alpha',
 		β: 'Beta',
 		γ: 'Gamma',

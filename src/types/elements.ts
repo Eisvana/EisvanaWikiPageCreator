@@ -1,6 +1,7 @@
 export interface ElementFunctions {
 	element: string | HTMLElement;
 	handler?: keyof HTMLElementEventMap;
+	prio?: boolean;
 	func: () => void;
 }
 
