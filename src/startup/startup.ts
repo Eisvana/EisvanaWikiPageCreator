@@ -1,9 +1,9 @@
-import { addStaticPageData, autoShow, enableTextMarking, getSelectedText, preventCopy, showAll, versionDropdown } from "../common";
+import { addStaticPageData, autoShow, enableTextMarking, getCurrentHTMLFile, getSelectedText, preventCopy, showAll, versionDropdown } from "../common";
 import { addEventListeners } from "../commonElements/elementBackend/elementFunctions";
 import { readDefaultValues } from "../modules/footer";
-import { globalElements, pageData, transformedElementFunctions } from "../variables/objects";
+import { globalElements, pageData } from "../variables/objects";
 
-const currentHTMLFile = window.location.pathname.split('/')!.at(-1)!.slice(0, -5);	// NoSonar we're leaving out the `.html` here
+const currentHTMLFile = getCurrentHTMLFile();	// NoSonar we're leaving out the `.html` here
 addStaticPageData('pageType', currentHTMLFile);
 
 autoShow();

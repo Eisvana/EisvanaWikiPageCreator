@@ -2,7 +2,7 @@
  * @fileoverview Provides general functions which can be used by all pages.
  */
 
-import { wikiLink } from './variables/simple';
+import { vowels, wikiLink } from './variables/simple';
 import { GHubHuburbRegions, regions } from "./variables/regions";
 import { Regions } from "./types/regions";
 import { dataIntegrityObj, globalElements, globalFunctions, pageData } from './variables/objects';
@@ -12,7 +12,7 @@ import { assignElementFunctions } from './commonElements/elementBackend/elementF
 import { glyphInputOnChange, glyphRegion } from './modules/portalglyphs';
 import { explanation } from './modules/tooltip';
 import { planetMoonSentence } from './miscLogic/locationLogic';
-import { SortObj } from './types/objects';
+import { Datalist, SortObj } from './types/objects';
 import { AnyPrimitive } from './types/values';
 import { ElementFunctions } from './types/elements';
 
@@ -214,8 +214,8 @@ export function wikiCode(element: HTMLInputElement | HTMLSelectElement | string,
  * @param {Object} element - The checkbox element that triggered the event.
  */
 export function checkboxWikiCode(element: HTMLInputElement) {
-	const dest = element.dataset.destCheckbox;
-	const destElement = document.getElementById(dest);
+	const dest = element.dataset.destCheckbox as string;
+	const destElement = document.getElementById(dest) as HTMLOutputElement;
 	const checked = element.value;
 	const unchecked = element.dataset.checkboxUnchecked ?? '';
 	if (element.checked) {
@@ -233,7 +233,7 @@ export function checkboxWikiCode(element: HTMLInputElement) {
  * @param {Object} element - The DOM element whose value will be stored.
  * @param {string} [key=element.dataset.destNoauto] - The key under which the value will be stored in the page data object. Defaults to the value of the element's `dest-noauto` attribute.
  */
-export function storeData(element: HTMLInputElement | HTMLSelectElement, key: string = element.dataset.destNoauto) {
+export function storeData(element: HTMLInputElement | HTMLSelectElement, key: string = element.dataset.destNoauto as string) {
 	pageData[key] = sanitiseString(element.value);
 }
 
@@ -260,12 +260,12 @@ export function externalLinks() {
  * @returns {void}
  */
 export function openWikiLinksExternally() {
-	const a = document.querySelectorAll('a[data-wiki]');
-	for (const link of a) {
+	const a: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a[data-wiki]');
+	for (const link of Array.from(a)) {
 		link.target ||= '_blank';
 		link.rel ||= 'noopener noreferrer';
 		delete link.dataset.wiki;
-		const pagename = link.getAttribute('href');
+		const pagename = link.getAttribute('href') as string;
 		if (pagename.startsWith('http')) continue;
 		link.href = wikiLink + pagename;
 	}
@@ -276,9 +276,9 @@ export function openWikiLinksExternally() {
  *
  * @param {HTMLElement} element - The input element to source the value from.
  */
-export function wikiCodeSimple(element, dest = element.dataset.destSimple) {
+export function wikiCodeSimple(element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement, dest: string = element.dataset.destSimple as string) {
 	const outputs = Array.from(document.getElementsByName(dest));
-	if (!outputs.length) outputs.push(document.getElementById(dest));
+	if (!outputs.length) outputs.push(document.getElementById(dest) as HTMLElement);
 	for (const output of outputs) {
 		output.innerText = element.value;
 	}
@@ -299,13 +299,23 @@ export function addStaticPageData(key: string, value: AnyPrimitive) {
  */
 export function civ() {
 	// Get the user's input from the DOM.
-	const input = globalElements?.input?.civ?.value;
+	const inputElement = globalElements?.input?.civ as HTMLSelectElement;
+	const input = inputElement?.value;
 
 	// If the input is empty, exit the function.
 	if (!input) return;
 
 	// Create a new object to hold the civilization data.
-	const civData = new Object;
+	const civData: {
+		[key: string]: string;
+		galaxy: string;
+		civilized: string;
+		civStub: string;
+	} = {
+		galaxy: '',
+		civilized: '',
+		civStub: '',
+	};
 
 	// Based on the input, set the values for the civData object.
 	switch (input) {
@@ -332,7 +342,7 @@ export function civ() {
 	pageData.civShort = input;
 	for (const key in civData) {
 		pageData[key] = civData[key];
-		if (getDestElements(key).length) wikiCode(pageData[key], key);
+		if (getDestElements(key).length) wikiCode(pageData[key] as string, key);
 	}
 
 	// Update the research team dropdown and glyph region.
@@ -348,7 +358,8 @@ export function civ() {
  */
 function updateCiv() {
 	researchTeamDropdown();
-	glyphRegion(pageData.portalglyphs);
+	const glyphs = pageData.portalglyphs as string;
+	glyphRegion(glyphs);
 	docBy();
 }
 
@@ -471,12 +482,13 @@ export function image(element: HTMLInputElement) {
 export function toggleSection(sectionName: string = '', button: HTMLButtonElement | undefined = undefined, attributeName: string = 'section') {
 	const elements: NodeListOf<HTMLElement> = document.querySelectorAll(`[data-${attributeName}~="${sectionName}"]`);
 	const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('[data-button-id]');
-	const childindex = getChildIndex(buttons, 'dataset.buttonId');
+	const childindex = getChildIndex(Array.from(buttons), 'dataset.buttonId');
 
 	if (arguments.length == 0) {
 		const buttonElements: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.sectionToggle button');
 		for (let i = 0; i < buttonElements.length; i++) {
 			const button = buttonElements[i];
+			button.addEventListener('click', function () { toggleSection('census', this) });
 			button.dataset.buttonId ??= (childindex + i).toString();
 			const id = button.dataset.buttonId;
 			button.dataset[`display${id}`] = button.dataset.displayDefault ?? '';
@@ -641,7 +653,7 @@ function displayResearch() {
  * @returns {string} - The formatted name.
  */
 // formats a name to conform to wiki standards. Plain name = italicised, link = no formatting
-function formatName(documenter) {
+function formatName(documenter: string): string {
 	if (!documenter) return documenter;
 
 	const documented = (() => {
@@ -651,7 +663,7 @@ function formatName(documenter) {
 			return `''${documenter}''`;
 		}
 	})();
-	return documented
+	return documented;
 }
 
 /**
@@ -742,17 +754,17 @@ export function addInfoBullet() {
  * @returns {void}
  */
 export function errorMessage(element: HTMLElement, msg: string = '') {
-	const tableCell = element.closest('.data');
+	const tableCell = element.closest('.data') as HTMLElement;
 	tableCell?.querySelector('.error')?.remove();
 	element.style.backgroundColor = '';
-	tableCell.previousElementSibling.style.alignItems = '';
+	(tableCell.previousElementSibling as HTMLElement).style.alignItems = '';
 	if (!msg) return;
 	element.style.backgroundColor = 'red';
 	const div = document.createElement('div');
 	div.innerHTML = msg;
 	div.className = 'error';
 	tableCell.appendChild(div);
-	tableCell.previousElementSibling.style.alignItems = 'baseline';
+	(tableCell.previousElementSibling as HTMLElement).style.alignItems = 'baseline';
 }
 
 /**
@@ -767,7 +779,7 @@ export function errorMessage(element: HTMLElement, msg: string = '') {
  * validateCoords();
  */
 export function validateCoords(error: boolean = true) {
-	const element = globalElements.input.axesInput;
+	const element = globalElements.input.axesInput as HTMLInputElement;
 	const axes = element.value;
 	const axesRegex = new RegExp(/[+-](?:[0-9]{1,3})\.(?:[0-9]{2}), [+-](?:[0-9]{1,3})\.(?:[0-9]{2})/);
 	if (!axes || regexMatch(axes, axesRegex)) {
@@ -805,8 +817,8 @@ export function hideInput(element: HTMLElement, displayValue: string = '') {
  * @param {string} [dest=null] - The destination to write the output to using `wikiCode()`. Optional.
  * @returns {string} The article to use before `text`.
  */
-export function enPrefix(text, dest = null) {
-	const firstLetter = text?.match(/[a-zA-Z]/)?.[0]?.toLowerCase();
+export function enPrefix(text: string, dest: string | undefined = undefined) {
+	const firstLetter = text?.match(/[a-zA-Z]/)?.[0]?.toLowerCase() as string;
 	const output = (() => {
 		if (vowels.includes(firstLetter)) {
 			return 'an';
@@ -836,9 +848,9 @@ export function regexMatch(string: string, regex: RegExp): boolean {
  * @param {string} expected - The expected research team abbreviation (e.g., 'GHSH' or 'GHEC').
  * @returns {string} - The documentation text, including the research team name if it matches the expected abbreviation.
  */
-export function docByResearchteam(expected) {
+export function docByResearchteam(expected: string) {
 	const researchteam = pageData.researchteam;
-	const researchteamData = {
+	const researchteamData: { [key: string]: string } = {
 		GHSH: 'Ship Hunters',
 		GHEC: 'Exobiology Corps',
 	}
@@ -933,7 +945,7 @@ function getNumber(number: string, decimals: number | undefined = undefined, out
  * // Creates a datalist with ID datalist1 and two entries, "entry1" and "entry2"
  * datalists({datalist1: ["entry1", "entry2"]});
  */
-export function datalists(object) {
+export function datalists(object: Datalist) {
 	for (const Id in object) {
 		const datalist = document.createElement('datalist');
 		datalist.id = Id;
@@ -951,8 +963,8 @@ export function datalists(object) {
  * @param {HTMLInputElement} element - The input element with the datalist.
  * @returns {void}
  */
-export function forceDatalist(element) {
-	const option = element.list.querySelector(`[value="${element.value}"]`);
+export function forceDatalist(element: HTMLInputElement) {
+	const option = element.list?.querySelector(`[value="${element.value}"]`);
 	if (!option && element.value && element.id != 'currencyInput') {
 		errorMessage(element, 'Not a valid option. If you believe this is an error, submit a <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform" rel="noreferrer noopener" target="_blank">bug report</a>.');
 	} else {
@@ -1004,14 +1016,14 @@ function removeNewlines(text: string): string {
  * @param {Object} section - The HTML element representing the section to search for selected text.
  * @returns {string} - The selected text as a trimmed string, with any button text removed.
  */
-export function getSelectedText(section) {
+export function getSelectedText(section: HTMLElement) {
 	// this is some stupid BS: Chrome selects the button text, despite it having user-select:none. #chromesucks
 	// I have no idea how to fix this, so I will just remove the button text from the string :shrug:
-	const buttonText = document.getElementById('switchTheme').innerText;
+	const buttonText = document.getElementById('switchTheme')?.innerText as string;
 
-	const sectionText = removeNewlines(section.closest('.wikiText').innerText).trim();
+	const sectionText = removeNewlines((section.closest('.wikiText') as HTMLElement)?.innerText).trim();
 	const selected = (() => {
-		const text = removeNewlines(window.getSelection().toString()).trim();
+		const text = removeNewlines(window.getSelection()!.toString()).trim();
 		if (text.endsWith(buttonText)) return text.replace(buttonText, '').trim();
 		return text;
 	})();
@@ -1061,7 +1073,7 @@ export function assignDefaultValue(element: HTMLInputElement | HTMLSelectElement
  * @param {Array.<HTMLElement>} array - The array of elements to remove
  * @returns {void}
  */
-function removeSection(array) {
+function removeSection(array: Array<HTMLElement>) {
 	for (const section of array) {
 		section.remove();
 	}
@@ -1074,9 +1086,9 @@ function removeSection(array) {
  * @param {string} [attribute='section'] - The data-attribute to search for (defaults to "section")
  * @returns {void}
  */
-export function removeSpecificSection(sectionName, attribute = 'section') {
-	const sections = document.querySelectorAll(`[data-${attribute}="${sectionName}"]`);
-	removeSection(sections);
+export function removeSpecificSection(sectionName: string, attribute: string = 'section') {
+	const sections: NodeListOf<HTMLElement> = document.querySelectorAll(`[data-${attribute}="${sectionName}"]`);
+	removeSection(Array.from(sections));
 }
 
 /**
@@ -1086,7 +1098,8 @@ export function removeSpecificSection(sectionName, attribute = 'section') {
  */
 export function hideOrgName() {
 	const orgName = pageData.oldName;
-	const aliascElement = globalElements.output.oldName.parentElement;
+	const aliascElement = (globalElements.output.oldName as HTMLOutputElement).parentElement;
+	if (!aliascElement) return;
 	aliascElement.style.display = orgName ? '' : 'none';
 }
 
@@ -1097,10 +1110,11 @@ export function hideOrgName() {
  * @param {string} data - The path to the property to check for an index, in dot notation (e.g. 'dataset.planet').
  * @returns {number} - The next available child index.
  */
-export function getChildIndex(array, data: string) {
+export function getChildIndex(array: Array<HTMLElement>, data: string) {
 	const IDs = [0];	// dummy element to avoid if statement
+	// get all numbers of the string into an array, then join that array
 	for (const element of array) {
-		const idNumber = extractNumber(fetchFromObject(element, data));	// get all numbers of the string into an array, then join that array
+		const idNumber = extractNumber(fetchFromObject(element, data) as string);
 		IDs.push(parseInt(idNumber));
 	}
 	function compareNumbers(a: number, b: number) {
@@ -1112,7 +1126,7 @@ export function getChildIndex(array, data: string) {
 	// necessary to access properties of different depths of an element
 	// takes an object and a string representing the path to the property in dot notation ('dataset.planet')
 	// code from https://stackoverflow.com/questions/4255472/javascript-object-access-variable-property-by-name-as-string
-	function fetchFromObject(obj, prop) {
+	function fetchFromObject(obj: HTMLElement | Object, prop: string): boolean | string | Object {
 		//property not found
 		if (typeof obj === 'undefined') return false;
 
@@ -1122,11 +1136,11 @@ export function getChildIndex(array, data: string) {
 		//property split found; recursive call
 		if (index > -1) {
 			//get object at property (before split), pass on remainder
-			return fetchFromObject(obj[prop.substring(0, index)], prop.substr(index + 1));
+			return fetchFromObject(obj[prop.substring(0, index) as keyof Object], prop.substring(index + 1));
 		}
 
 		//no split; get property
-		return obj[prop];
+		return obj[prop as keyof Object];
 	}
 }
 
@@ -1199,4 +1213,8 @@ export function loadHTML(html: string, varObj: { [key: string]: string } = {}) {
 export function triggerEvent(element: HTMLElement, evt: keyof HTMLElementEventMap): void {
 	const event = new Event(evt);
 	element.dispatchEvent(event);
+}
+
+export function getCurrentHTMLFile() {
+	return window.location.pathname.split('/')!.at(-1)!.slice(0, -5);
 }

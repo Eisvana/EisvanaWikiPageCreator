@@ -229,7 +229,7 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Census:</p>
-						<button class="button" onclick="toggleSection('census', this)">Hide</button>
+						<button class="button">Hide</button>
 					</div>
 					<div data-section="census" class="tableCell text">
 						<label for="censusPlayerInput">Ingame name of the player?</label>
@@ -281,8 +281,7 @@
 						<label for="censusArrivalInput">When did the player arrive in Hub space?</label>
 					</div>
 					<div data-section="census" class="tableCell data">
-						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput"
-							onchange="processDate(this)">
+						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput">
 					</div>
 					<div data-section="census" class="tableCell text">
 						<label for="censusShowInput">Create Census Entry:</label>

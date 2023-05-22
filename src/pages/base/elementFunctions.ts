@@ -1,4 +1,5 @@
 import { addInfoBullet, docBy, hideDiscoverer } from "../../common";
+import { processDate } from "../../miscLogic/dateLogic";
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import { ElementFunctions } from "../../types/elements";
 import { capitaliseFriendCode, createCensusEntry, validateDiscord, validateFriendcode, validateReddit } from "./base";
@@ -45,6 +46,11 @@ const baseElementFunctions: Array<ElementFunctions> = [
 		element: 'censusDiscordInput',
 		handler: 'change',
 		func: function () { validateDiscord() }
+	},
+	{
+		element: 'censusArrivalInput',
+		handler: 'change',
+		func: function () { processDate(this as unknown as HTMLInputElement) }
 	},
 ]
 

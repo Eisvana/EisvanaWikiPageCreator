@@ -73,7 +73,7 @@ assignElementFunctions(planetMoonElementFunctions);
  * @param {string} [dest] - An optional destination to send the output of the wikiCode() function to.
  * @returns {string} Either "is" or "are," depending if the number is singular or plural.
  */
-function plural(number, dest = null) {
+export function plural(number, dest = null) {
 	const word = (() => {
 		if (number == 1) return 'is';
 		return 'are';

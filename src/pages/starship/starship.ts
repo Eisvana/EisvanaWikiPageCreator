@@ -2,8 +2,8 @@
  * @fileoverview Provides functions which can be used by the Starship page creator.
  */
 
-import { enPrefix, wikiCode } from "../common";
-import { globalElements, pageData } from "../variables/objects";
+import { enPrefix, wikiCode } from "../../common";
+import { globalElements, pageData } from "../../variables/objects";
 
 function startupFunctions() {
 	subtypeDropdown();

@@ -1,11 +1,13 @@
+import { getCurrentHTMLFile } from '../../common';
 import { ElementFunctions, GlobalElements } from '../../types/elements';
 import { globalElements, pageData, transformedElementFunctions } from '../../variables/objects';
 import { getDestElements } from './elementStore';
 import { hashElement } from './hashes';
 
 export function assignFunction(dataObject: ElementFunctions): void {
-	if (!pageData.eventListeners) {
-		transformListenerData(dataObject)
+	const simplePages = ['about', ''];	// excludes the index and about pages from the advanced behaviour
+	if (!pageData.eventListeners && !simplePages.includes(getCurrentHTMLFile())) {
+		transformListenerData(dataObject);
 		return;
 	}
 	const { handler, func } = dataObject;

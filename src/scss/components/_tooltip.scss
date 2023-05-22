@@ -26,10 +26,6 @@ button.tooltip {
 	cursor: pointer;
 }
 
-/* .tooltip[data-click-tooltip]:focus-visible {
-	border-bottom: 1px solid var(--link-color);
-}
- */
 .tooltip .tooltiptext {
 	--width: 150px;
 	visibility: hidden;

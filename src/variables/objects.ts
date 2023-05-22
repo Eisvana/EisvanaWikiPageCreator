@@ -36,7 +36,7 @@ export const globalElements: GlobalElements = {
 }
 
 export const globalFunctions: {
-	[key: string]: Function;
+	[key: string]: () => (void | string | number | boolean);
 } = {}
 
 /**

@@ -2,9 +2,9 @@
  * @fileoverview Provides functions which can be used by the Multi-Tool page creator.
  */
 
-import { hideInput, wikiCode } from "../common";
-import { planetMoon, planetMoonSentence } from "../miscLogic/locationLogic";
-import { globalElements, pageData } from "../variables/objects";
+import { hideInput, wikiCode } from "../../common";
+import { planetMoon, planetMoonSentence } from "../../miscLogic/locationLogic";
+import { globalElements, pageData } from "../../variables/objects";
 
 function startupFunctions() {
 	locGalaxy();

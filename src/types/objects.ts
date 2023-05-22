@@ -14,3 +14,7 @@ export interface TransformedElementFunctions {
 		}
 	}
 }
+
+export interface Datalist {
+	[key: string]: Array<string>;
+}

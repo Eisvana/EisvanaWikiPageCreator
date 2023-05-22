@@ -39,7 +39,7 @@ export function galleryUpload() {
 
 		// Get childtree and childIndex, and set dropdownId, wikiCodeGalleryId, and wikiCodeGalleryValueId
 		const childtree = inputDiv.children;
-		const childIndex = getChildIndex(childtree, 'id');
+		const childIndex = getChildIndex(Array.from(childtree) as Array<HTMLElement>, 'id');
 
 		// Create nameElement
 		const nameElement = (() => {
@@ -138,7 +138,7 @@ export function galleryUpload() {
 	// the galleryExplanationExternal() function should return string with the popup text. HTML is supported.
 	if (typeof globalFunctions.galleryExplanationExternal == 'function') {
 		explanation('Gallery',
-			`${globalFunctions.galleryExplanationExternal()}
+			`${pageData.galleryExplanationExternal}
 		<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the gallery upload button.</div>`);
 	}
 	pageData.galleryUploadShown = true;

@@ -2,13 +2,13 @@
  * @fileoverview Provides functions which can be used by the System page creator.
  */
 
-import { getChildIndex, loadHTML, oddEven, wikiCode } from '../common';
-import { assignElementFunctions, assignFunction } from '../commonElements/elementBackend/elementFunctions';
-import { updateGlobalElements } from '../commonElements/elementBackend/elementStore';
-import { initialiseSectionInputs } from '../miscLogic/celestialobjectslogic';
-import { HubGal } from '../miscLogic/locationLogic';
-import { addAllTooltips } from '../modules/tooltip';
-import { globalElements, pageData } from '../variables/objects';
+import { getChildIndex, loadHTML, oddEven, wikiCode } from '../../common';
+import { assignElementFunctions, assignFunction } from '../../commonElements/elementBackend/elementFunctions';
+import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
+import { initialiseSectionInputs } from '../../miscLogic/celestialobjectslogic';
+import { HubGal } from '../../miscLogic/locationLogic';
+import { addAllTooltips } from '../../modules/tooltip';
+import { globalElements, pageData } from '../../variables/objects';
 import tradeableInputs from '../htmlSnippets/tradeableInputs.html?raw';
 
 function startupFunctions() {
@@ -814,7 +814,7 @@ function generateGalleryArray() {
 	pageData.galleryArray = array;
 }
 
-function galleryExplanationExternal() {
+export function galleryExplanationExternal() {
 	return `There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>

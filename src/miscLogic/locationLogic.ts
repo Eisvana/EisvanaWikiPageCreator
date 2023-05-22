@@ -4,6 +4,7 @@
 
 import { sanitiseString } from "../common";
 import { globalElements, pageData } from "../variables/objects";
+import { regions } from "../variables/regions";
 
 /**
  * Returns the type of celestial body based on whether a moon is present or not.
@@ -38,6 +39,7 @@ export function planetMoonSentence(planet: string = pageData.planet as string, m
 	})();
 	if (!dest) return text;
 	dest.innerText = text;
+	return '';
 }
 
 /**
@@ -46,7 +48,7 @@ export function planetMoonSentence(planet: string = pageData.planet as string, m
  * @param {string} civ - The name of the civilization.
  * @returns {string} The location sentence for the given civilization.
  */
-export function HubGal(civ) {
+export function HubGal(civ: string) {
 	switch (civ) {
 		case "GHub":
 			return '[[Galactic Hub]]';
@@ -57,6 +59,7 @@ export function HubGal(civ) {
 		case "EisHub":
 			return '[[Galactic Hub Eissentam]], in the [[Eissentam]] [[galaxy]]';
 	}
+	return '';
 }
 
 /**
@@ -64,13 +67,14 @@ export function HubGal(civ) {
  * @param {string} regionName - The name of the region.
  * @returns {(number|string)} The region number of the Hub region, or 'Huburb' if the region is in GHub and has an index greater than 10.
  */
-function getHubNumber(regionName) {
+function getHubNumber(regionName: string): string {
 	for (const Hub in regions) {
 		const hubRegions = regions[Hub];
 		const index = Object.values(hubRegions).indexOf(regionName);
 		if (Hub == 'GHub' && index > 10) return 'Huburb';
-		if (index != -1) return index + 1;
+		if (index != -1) return (index + 1).toString();
 	}
+	return '';
 }
 
 /**
@@ -79,7 +83,7 @@ function getHubNumber(regionName) {
  * @param {string} regionName - The name of the region
  * @returns {string} - The sentence part for the location section including the region number
  */
-function regNr(regionName) {
+export function regNr(regionName: string): string {
 	const hubNr = getHubNumber(regionName);
 	if (hubNr == 'Huburb') {
 		return ', Huburb';
