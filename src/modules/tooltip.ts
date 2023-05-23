@@ -111,7 +111,7 @@ export function addAllTooltips(dom = document) {
 		}
 
 		const img = document.createElement('img');
-		img.src = './assets/vector/help.svg';
+		img.src = './assets/icons/help.svg';
 		img.alt = 'Help';
 
 		const tooltip = document.createElement('span');

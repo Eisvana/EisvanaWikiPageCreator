@@ -1,3 +1,1 @@
-This folder hold images and other assets like fonts:
-* Bitmap images are "normal" images like jpg, png, webp...
-* Vector images can be scaled infinitely without losing quality. These are often svg files
+This folder hold images and other assets like fonts.
