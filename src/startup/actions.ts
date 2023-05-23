@@ -54,7 +54,7 @@ resetBtn.id = 'reset';
 resetBtn.innerText = 'Reset Inputs';
 resetBtn.addEventListener('click', () => reset());
 
-const functionObj: Array<ElementFunctions> = [
+const functionObj: ElementFunctions = [
 	{
 		element: copyBtn,
 		handler: 'click',

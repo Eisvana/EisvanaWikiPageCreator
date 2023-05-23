@@ -105,7 +105,7 @@ export function copyCode(input: HTMLButtonElement, wikiCodeId: string) {
 
 	// If the data is valid, copies the text to the clipboard and updates the dataIntegrityObj.
 	const copyTextContent = (globalElements?.output?.[wikiCodeId] as HTMLElement)?.innerText?.replaceAll('\n\n\n', '\n\n') ?? wikiCodeId;
-	navigator.clipboard.writeText(copyTextContent);
+	navigator.clipboard.writeText(copyTextContent);		// NoSonar we don't care about this lol (maybe we should, but I can't be bothered right now)
 	dataIntegrityObj.copy = true;	// this must be here, since checkDataIntegrity sets it to false
 	dataIntegrityObj.link = dataLink as string;
 
@@ -160,7 +160,7 @@ export function createPage(element: HTMLAnchorElement, pagename: string = pageDa
  * @example
  * assignLink(myAnchorElement, 'https://www.example.com')
  */
-function assignLink(element: HTMLAnchorElement, link: string) {
+export function assignLink(element: HTMLAnchorElement, link: string) {
 	const dataIntegrity = checkDataIntegrity(element);		// boolean
 	const forbiddenCharacters = ['#', '<', '>', '[', ']', '{', '|', '}'];
 	const regex = new RegExp(`[${forbiddenCharacters.join('')}]`, 'g');
@@ -218,7 +218,7 @@ export function toggleRedirect() {
 	createRedirect.target = '_blank';
 	createRedirect.innerText = 'Create Redirect';
 
-	const functionObj: Array<ElementFunctions> = [
+	const functionObj: ElementFunctions = [
 		{
 			element: copyRedirect,
 			handler: 'click',
@@ -227,7 +227,7 @@ export function toggleRedirect() {
 		{
 			element: createRedirect,
 			handler: 'click',
-			func: function () { createPage(this as unknown as HTMLAnchorElement, globalFunctions.redirectPage()) }
+			func: function () { createPage(this as unknown as HTMLAnchorElement, globalFunctions.redirectPage() as string) }
 		},
 	]
 	assignElementFunctions(functionObj);

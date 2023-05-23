@@ -10,7 +10,7 @@ import { globalElements } from "../../variables/objects";
  *
  * @type {Object}
  */
-const settingsElementFunctions: Array<ElementFunctions> = [
+const settingsElementFunctions: ElementFunctions = [
 	{
 		element: 'civDefault',
 		func: function () { researchTeamDropdown(globalElements.input.researchteamDefault as HTMLSelectElement, (this as unknown as HTMLSelectElement).value) }

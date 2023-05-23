@@ -8,7 +8,7 @@ import { ElementFunctions } from "../types/elements";
  * Functions are in the format 'functionName(params)' and can be assigned to each input element using `assignElementFunctions`.
  * @type {Object}
  */
-const elementFunctions: ElementFunctions[] = [
+const elementFunctions: ElementFunctions = [
 	{
 		element: 'nameInput',
 		func: function () { enableTextMarking() }

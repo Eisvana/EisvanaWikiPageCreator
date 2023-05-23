@@ -1,5 +1,3 @@
-import { datalists } from "../common";
-
 /**
  * @fileoverview Provides data for creature datalists
  */
@@ -492,9 +490,8 @@ const creatureDatalists = {
 		'Interlopers'
 	]
 }
-datalists(creatureDatalists);
 
-export default function getGenderData(genus: string = '') {
+export function getGenderData(genus: string = '') {
 	const genderData = {
 		Mechanoceris: [
 			'Electronic',
@@ -538,3 +535,5 @@ export default function getGenderData(genus: string = '') {
 			return genderData.default;
 	}
 }
+
+export default creatureDatalists;

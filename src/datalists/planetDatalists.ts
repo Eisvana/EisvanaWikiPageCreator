@@ -1,5 +1,3 @@
-import { datalists } from "../common";
-
 /**
  * @fileoverview Provides data for planet datalists
  */
@@ -826,6 +824,7 @@ const planetDatalists: {
 	]
 }
 
+export default function buildPlanetDatalistObject() {
 /**
  * Populates `planetDatalists.sentinels` with the data from `getSentinelData()`.
  */
@@ -851,8 +850,5 @@ for (const biome in planetDescriptors) {
  */
 planetDatalists.planetDescriptors = Array.from(descriptors);
 planetDatalists.resources = Object.keys(getResourceData());
-
-/**
- * Calls `datalists()` with `planetDatalists`.
- */
-datalists(planetDatalists);
+return planetDatalists;
+}

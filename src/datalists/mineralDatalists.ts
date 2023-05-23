@@ -1,5 +1,3 @@
-import { datalists } from "../common";
-
 /**
  * @fileoverview Provides data for mineral datalists
  */
@@ -153,4 +151,5 @@ const mineralDatalists = {
 		'Tritium',
 	]
 }
-datalists(mineralDatalists);
+
+export default mineralDatalists;

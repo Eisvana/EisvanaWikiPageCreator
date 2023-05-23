@@ -220,11 +220,12 @@ export function hideCreaturePrio() {
  * @function
  * @returns {string} The value of the checked radio button.
  */
-function creaturePrio() {
+function creaturePrio(): string {
 	const genderRadios = globalElements.input.gender;
 	for (const radio of genderRadios) {
 		if (radio.checked) return radio.value;
 	}
+	return '';
 }
 
 /**
@@ -235,11 +236,11 @@ function creaturePrio() {
  * @param {string} property2Name - The name of the second property to format.
  * @returns {void}
  */
-function genderProps(property1Name, property2Name) {
+export function genderProps(property1Name: string, property2Name: string) {
 	const prioritise = creaturePrio();
-	const gender2 = pageData.gender2;
-	const property1Value = pageData[property1Name];
-	const property2Value = pageData[property2Name];
+	const gender2 = pageData.gender2 as string;
+	const property1Value = pageData[property1Name] as string;
+	const property2Value = pageData[property2Name] as string;
 
 	// adds .0
 	let property1Number, property2Number;
@@ -271,7 +272,9 @@ function genderProps(property1Name, property2Name) {
 		}
 	})();
 
-	globalElements.output[property1Name].innerText = result;
+	const outputElement = globalElements.output[property1Name] as HTMLOutputElement;
+	if (!outputElement) return;
+	outputElement.innerText = result;
 }
 
 /**
@@ -312,7 +315,7 @@ function albumOtherExternal() {
 	return output;
 }
 
-function albumTitle() {
+export function albumTitle() {
 	globalElements.output.album.innerText = pageData.catalogue;
 }
 

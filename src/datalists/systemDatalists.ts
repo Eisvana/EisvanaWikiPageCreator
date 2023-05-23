@@ -1,5 +1,3 @@
-import { datalists } from "../common";
-
 /**
  * @fileoverview Provides data for system datalists
  */
@@ -43,4 +41,5 @@ const systemDatalists = {
 		'Fusion Core'
 	]
 }
-datalists(systemDatalists);
+
+export default systemDatalists;
