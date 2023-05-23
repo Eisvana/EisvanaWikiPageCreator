@@ -25,7 +25,9 @@ const cachedImages = new Set();
 export function explanation(heading: string = '', text: string = '', img: string = '') {
 	// I have no idea how to do type guards in destructuring, so I need to do it the ugly way here.
 	// I also hate past-Lenni for making this ugly interface that needs typeguards and assertions everywhere.
-	const imgElement = globalElements.output.explanationImg as HTMLImageElement;
+	const imgElement = globalElements.output.explanationFallbackImg as HTMLImageElement;
+	const avifImg = globalElements.output.explanationAvifImg as HTMLSourceElement;
+	const webpImg = globalElements.output.explanationWebPImg as HTMLSourceElement;
 	const linkElement = globalElements.output.explanationLink as HTMLAnchorElement;
 	const dialogElement = globalElements.output.explanation as HTMLDialogElement;
 
@@ -41,19 +43,30 @@ export function explanation(heading: string = '', text: string = '', img: string
 			// Check if img is different from the previously loaded image
 			if (imgElement.getAttribute('src') != img) {
 				// Update img source and link href if img is different
+				for (const element of [webpImg, avifImg]) {
+					element.srcset = '';
+				}
+				//TODO optimise this code (see Discord Clyde answer)
 				imgElement.src = '';
-				imgElement.src = img;
-				linkElement.href = img;
+				webpImg.srcset = `./assets/images/webp/${img}.webp`;
+				avifImg.srcset = `./assets/images/avif/${img}.avif`;
+				imgElement.src = `./assets/images/jpg/${img}.jpg`;
+				linkElement.href = `./assets/images/jpg/${img}.jpg`;	// not sure if I want to send the jpg by default. Maybe it can be adaptive, too?
 			}
 
 		} else {
 			// Image is not cached, need to load it and show a loading animation
+			for (const element of [webpImg, avifImg]) {
+				element.srcset = '';
+			}
 			imgElement.src = '';
 			imgElement.style.opacity = '0';
 			imgElement.style.marginBlockStart = '0';
-			imgElement.src = img;
+			webpImg.srcset = `./assets/images/webp/${img}.webp`;
+			avifImg.srcset = `./assets/images/avif/${img}.avif`;
+			imgElement.src = `./assets/images/jpg/${img}.jpg`;
 			linkElement.classList.add('loading');
-			linkElement.href = img;
+			linkElement.href = `./assets/images/jpg/${img}.jpg`;
 		}
 
 		// Set link display style to visible

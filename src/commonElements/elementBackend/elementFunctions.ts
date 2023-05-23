@@ -1,10 +1,10 @@
 import { getCurrentHTMLFile } from '../../common';
-import { ElementFunctions, GlobalElements } from '../../types/elements';
+import { ElementFunction, ElementFunctions, GlobalElements } from '../../types/elements';
 import { globalElements, pageData, transformedElementFunctions } from '../../variables/objects';
 import { getDestElements } from './elementStore';
 import { hashElement } from './hashes';
 
-export function assignFunction(dataObject: ElementFunctions): void {
+export function assignFunction(dataObject: ElementFunction): void {
 	const simplePages = ['about', ''];	// excludes the index and about pages from the advanced behaviour
 	if (!pageData.eventListeners && !simplePages.includes(getCurrentHTMLFile())) {
 		transformListenerData(dataObject);
@@ -21,7 +21,7 @@ export function assignFunction(dataObject: ElementFunctions): void {
 	}
 }
 
-export function assignElementFunctions(elementFunctions: ElementFunctions[]) {
+export function assignElementFunctions(elementFunctions: ElementFunctions) {
 	for (const functionObject of elementFunctions) {
 		assignFunction(functionObject);
 	}
@@ -50,13 +50,13 @@ function getEventHandler(handler: keyof HTMLElementEventMap | undefined, element
 	})();
 }
 
-export function transformListenerData(dataObj: ElementFunctions | Array<ElementFunctions>) {
+export function transformListenerData(dataObj: ElementFunction | ElementFunctions) {
 	const sourceArray = [dataObj].flat();
 
 	for (const obj of sourceArray) {
 		const htmlElement = getListenerElement(obj.element) as HTMLElement;
 		if (Array.isArray(htmlElement) && !htmlElement.length) continue;
-		const hashedValue = hashElement(htmlElement) as string;
+		const hashedValue = hashElement(htmlElement);
 		const handler = getEventHandler(obj.handler, htmlElement);
 		transformedElementFunctions[hashedValue] ??= {};
 

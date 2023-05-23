@@ -1,5 +1,3 @@
-import { datalists } from "../common";
-
 /**
  * @fileoverview Provides data for flora datalists
  */
@@ -363,4 +361,5 @@ const floraDatalists = {
 		'Kelp Sac',
 	]
 }
-datalists(floraDatalists);
+
+export default floraDatalists;

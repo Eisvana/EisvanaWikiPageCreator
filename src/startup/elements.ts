@@ -21,14 +21,20 @@ const dialogElements: ElementIds = {
 		explanationHeading: 'explanationHeading',
 		explanationContent: 'explanationContent',
 		explanationLink: 'explanationLink',
-		explanationImg: 'explanationImg',
+		explanationWebpImg: 'explanationWebpImg',
+		explanationAvifImg: 'explanationAvifImg',
+		explanationFallbackImg: 'explanationFallbackImg',
 	}
 }
 
-const content = `<h2 id="explanationHeading" class="title is-4"></h2>
+const content: string = `<h2 id="explanationHeading" class="title is-4"></h2>
 <div id="explanationContent" class="nms-font"></div>
-<a id="explanationLink" target='_blank' rel='noopener noreferrer'>
-	<img id="explanationImg" alt='Explainer Image'>
+<a id="explanationLink" target="_blank" rel="noopener noreferrer">
+	<picture>
+		<source type="image/avif" id="explanationAvifImg">
+		<source type="image/webp" id="explanationWebpImg">
+		<img id="explanationFallbackImg" alt="Explainer Image">
+	</picture>
 </a>
 <form method="dialog">
 	<button class="button" type="submit" autofocus>Close</button>

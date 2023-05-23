@@ -74,7 +74,7 @@ export function galleryUpload() {
 			button.addEventListener('click', function () { mobileMoveItem(this, replacementStrings.wikiCodeGalleryId, direction) });
 		}
 
-		const functionObj: Array<ElementFunctions> = [
+		const functionObj: ElementFunctions = [
 			{
 				element: replacementStrings.dropdownId,
 				handler: 'change',

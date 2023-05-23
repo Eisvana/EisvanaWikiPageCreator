@@ -1,6 +1,6 @@
 import { assignFunction } from "../../commonElements/elementBackend/elementFunctions";
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
-import { ElementFunctions, ElementIds } from "../../types/elements";
+import { ElementFunction, ElementIds } from "../../types/elements";
 import { pageData, footerInputs } from "../../variables/objects";
 
 const footerElements: ElementIds = {
@@ -16,7 +16,7 @@ footerInputList.forEach(input => {
 	const id = input.id;
 	footerElements.input![id] = id;
 
-	const functionObj: ElementFunctions = {
+	const functionObj: ElementFunction = {
 		element: id,
 		func: function () { delete pageData.restored }
 	}

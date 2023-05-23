@@ -1,1 +1,0 @@
-This folder holds images used in tooltip popups to explain where to find data.

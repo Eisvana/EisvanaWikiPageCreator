@@ -6,7 +6,9 @@ import { loadHTML } from "../common";
 import { assignElementFunctions } from "../commonElements/elementBackend/elementFunctions";
 import { updateGlobalElements } from "../commonElements/elementBackend/elementStore";
 import album from "../htmlSnippets/album.html?raw";
-import { globalElements } from "../variables/objects";
+import { globalElements, globalFunctions, pageData } from "../variables/objects";
+import { wikiLink } from "../variables/simple";
+import { assignLink } from "./actions";
 
 // The logic for calculating the link target should be done by the main JS file of the page
 const albumElements = {
@@ -79,7 +81,9 @@ let albumInitialised = false;
 	albumInitialised = true;
 
 	const albumNote = `<p style="width:100%" class="has-text-centered mb-3">Please don't forget to create an album entry!</p>`;
-	globalElements.output.albumActions.insertAdjacentHTML('afterbegin', albumNote);
+	const outputElement = globalElements.output.albumActions as HTMLElement;
+	if (!outputElement) return;
+	outputElement.insertAdjacentHTML('afterbegin', albumNote);
 })();
 
 /**
@@ -88,7 +92,7 @@ let albumInitialised = false;
  * @param {Element} element - The element to assign the link to.
  * @returns {void}
  */
-function albumLink(element) {
+export function albumLink(element: HTMLAnchorElement) {
 	element.style.pointerEvents = 'none';
 	const catalogue = (() => {
 		if (typeof albumLinkGen == 'function') {
@@ -133,13 +137,15 @@ function albumItemType() {
  */
 function albumDesc() {
 	const output = (() => {
-		if (typeof albumDescExternal == 'function') {
-			return albumDescExternal();
+		if (typeof globalFunctions.albumDescExternal == 'function') {
+			return globalFunctions.albumDescExternal() as string;
 		} else {
 			return '';
 		}
 	})();
-	globalElements.output.albumDesc.innerText = output;
+	const outputElement = globalElements.output.albumDesc as HTMLElement;
+	if (!outputElement) return;
+	outputElement.innerText = output;
 }
 
 /**
@@ -152,12 +158,12 @@ function albumDesc() {
  * // Sample usage
  * albumDiscoverer();
  */
-function albumDiscoverer() {
+export function albumDiscoverer() {
 	const output = (() => {
-		if (typeof albumDiscovererExternal == 'function') {
-			return albumDiscovererExternal();
+		if (typeof globalFunctions.albumDiscovererExternal == 'function') {
+			return globalFunctions.albumDiscovererExternal() as string;
 		} else {
-			const { discovered, discoveredlink } = pageData
+			const { discovered, discoveredlink } = pageData;
 			if (discoveredlink) {
 				return `wiki=${discoveredlink}`;
 			} else {
@@ -165,7 +171,9 @@ function albumDiscoverer() {
 			}
 		}
 	})();
-	globalElements.output.albumDiscoverer.innerText = output;
+	const outputElement = globalElements.output.albumDiscoverer as HTMLOutputElement;
+	if (!outputElement) return;
+	outputElement.innerText = output;
 }
 
 /**
@@ -191,7 +199,7 @@ function albumCiv() {
  * @function
  * @returns {void}
  */
-function albumName() {
+export function albumName() {
 	const output = (() => {
 		if ((typeof albumNameExternal == 'function')) {
 			return albumNameExternal();
@@ -206,7 +214,7 @@ function albumName() {
  * Populates the "other" parameter in the album.
  * @returns {void}
  */
-function albumOther() {
+export function albumOther() {
 	const output = (() => {
 		if (typeof albumOtherExternal == 'function') {
 			return albumOtherExternal();
@@ -214,7 +222,9 @@ function albumOther() {
 			return '';
 		}
 	})();
-	globalElements.output.albumOther.innerText = output;
+	const outputElement = globalElements.output.albumOther as HTMLOutputElement;
+	if (!outputElement) return;
+	outputElement.innerText = output;
 }
 
 /**
@@ -224,8 +234,8 @@ function albumOther() {
  */
 function albumType() {
 	const output = (() => {
-		if (typeof albumTypeExternal == 'function') {
-			return albumTypeExternal();
+		if (typeof globalFunctions.albumTypeExternal == 'function') {
+			return globalFunctions.albumTypeExternal();
 		} else {
 			return '';
 		}

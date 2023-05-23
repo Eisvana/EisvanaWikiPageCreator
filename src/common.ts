@@ -14,7 +14,7 @@ import { explanation } from './modules/tooltip';
 import { planetMoonSentence } from './miscLogic/locationLogic';
 import { Datalist, SortObj } from './types/objects';
 import { AnyPrimitive } from './types/values';
-import { ElementFunctions } from './types/elements';
+import { ElementFunction, ElementFunctions } from './types/elements';
 
 /**
  * Adds Galactic Hub huburb regions to an object.
@@ -126,12 +126,12 @@ export function autoShow(): void {
 			{ elements: inputData.lists, handler: 'change', func: function () { forceDatalist(this as unknown as HTMLInputElement) } },
 		]
 
-	const transformedFunctionArray: Array<ElementFunctions> = [];
+	const transformedFunctionArray: ElementFunctions = [];
 
 	for (const obj of functionObj) {
 		const { elements, func } = obj;
 		for (const element of Array.from(elements)) {
-			const transformedFunctionObject: ElementFunctions = {
+			const transformedFunctionObject: ElementFunction = {
 				element,
 				prio: true,
 				func
@@ -818,7 +818,7 @@ export function hideInput(element: HTMLElement, displayValue: string = '') {
  * @returns {string} The article to use before `text`.
  */
 export function enPrefix(text: string, dest: string | undefined = undefined) {
-	const firstLetter = text?.match(/[a-zA-Z]/)?.[0]?.toLowerCase() as string;
+	const firstLetter = RegExp(/[a-zA-Z]/).exec(text)?.[0]?.toLowerCase() as string;
 	const output = (() => {
 		if (vowels.includes(firstLetter)) {
 			return 'an';
@@ -838,7 +838,7 @@ export function enPrefix(text: string, dest: string | undefined = undefined) {
  * @returns {boolean} - True if the string matches the regex, false otherwise.
  */
 export function regexMatch(string: string, regex: RegExp): boolean {
-	const stringMatches = string.match(regex);
+	const stringMatches = RegExp(regex).exec(string);
 	return stringMatches?.length == 1 && stringMatches[0]?.length == string.length;
 }
 
@@ -909,7 +909,7 @@ function numberStats(element: HTMLInputElement | null = null, decimals: number |
  * @param {boolean} [outputRaw=false] - If true, returns the raw input value without formatting.
  * @returns {string|number} - The input value, parsed as a number (if valid) or an empty string (if not valid).
  */
-function numberError(element: HTMLInputElement, value: string = element.value, decimals: number | undefined = undefined, outputRaw: boolean = false) {
+export function numberError(element: HTMLInputElement, value: string = element.value, decimals: number | undefined = undefined, outputRaw: boolean = false) {
 	const number = getNumber(value, decimals, outputRaw);
 	const allowedSymbols = ['+', '-'];
 	if (number || !value || allowedSymbols.includes(value)) {
@@ -1160,9 +1160,7 @@ export function sortObj(obj: SortObj, number: boolean = false) {
 		}, resultObj);
 	}
 	const keys = Object.keys(sortObj(obj));
-	const numbers = keys.map(key => extractNumber(key)).map(Number).sort((a, b) => {
-		return a - b;
-	});
+	const numbers = keys.map(key => extractNumber(key)).map(Number).sort((a, b) => a - b);
 	for (const number of numbers) {
 		const keyIndex = keys.findIndex(element => extractNumber(element) == number.toString())
 		const key = keys[keyIndex];
@@ -1216,5 +1214,5 @@ export function triggerEvent(element: HTMLElement, evt: keyof HTMLElementEventMa
 }
 
 export function getCurrentHTMLFile() {
-	return window.location.pathname.split('/')!.at(-1)!.slice(0, -5);
+	return window.location.pathname.split('/')!.at(-1)!.slice(0, -5);	// NoSonar stripping the `.html`
 }
