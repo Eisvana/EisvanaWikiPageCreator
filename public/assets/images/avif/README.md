@@ -1,0 +1,2 @@
+The avif files are currently not used. This is due to a bug in Paint dot net, which causes Firefox to throw an error when trying to read the avif files.
+I'm just not willing to put all images through some online converter, so I just disabled avif entirely for now.

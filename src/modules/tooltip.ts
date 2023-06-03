@@ -5,16 +5,24 @@
 import { globalElements } from "../variables/objects";
 import { assignFunction } from "../commonElements/elementBackend/elementFunctions";
 
-/**
- * Adds all tooltips and sets up dialog handling.
- * @function
- */
+export const explanationContent: string = `
+	<h2 id="explanationHeading" class="title is-4"></h2>
+	<div id="explanationContent" class="nms-font"></div>
+	<a id="explanationLink" target="_blank" rel="noopener noreferrer">
+		<picture>
+			<source type="image/webp" id="explanationWebpImg">
+			<img id="explanationFallbackImg" alt="Explainer Image">
+		</picture>
+	</a>
+	<form method="dialog">
+		<button class="button" type="submit" autofocus>Close</button>
+	</form>`;
 
 /**
  * A Set which holds images that have been previously loaded and cached.
  * @type {Set}
  */
-const cachedImages = new Set();
+const cachedImages: Set<string> = new Set();
 
 /**
  * Displays an explanation modal with optional text and image.
@@ -26,8 +34,7 @@ export function explanation(heading: string = '', text: string = '', img: string
 	// I have no idea how to do type guards in destructuring, so I need to do it the ugly way here.
 	// I also hate past-Lenni for making this ugly interface that needs typeguards and assertions everywhere.
 	const imgElement = globalElements.output.explanationFallbackImg as HTMLImageElement;
-	const avifImg = globalElements.output.explanationAvifImg as HTMLSourceElement;
-	const webpImg = globalElements.output.explanationWebPImg as HTMLSourceElement;
+	const webpImg = globalElements.output.explanationWebpImg as HTMLSourceElement;
 	const linkElement = globalElements.output.explanationLink as HTMLAnchorElement;
 	const dialogElement = globalElements.output.explanation as HTMLDialogElement;
 
@@ -43,27 +50,22 @@ export function explanation(heading: string = '', text: string = '', img: string
 			// Check if img is different from the previously loaded image
 			if (imgElement.getAttribute('src') != img) {
 				// Update img source and link href if img is different
-				for (const element of [webpImg, avifImg]) {
-					element.srcset = '';
-				}
+				webpImg.srcset = '';
+
 				//TODO optimise this code (see Discord Clyde answer)
 				imgElement.src = '';
-				webpImg.srcset = `./assets/images/webp/${img}.webp`;	// TODO these are not yet generated
-				avifImg.srcset = `./assets/images/avif/${img}.avif`;	// TODO these are not yet generated
+				webpImg.srcset = `./assets/images/webp/${img}.webp`;
 				imgElement.src = `./assets/images/jpg/${img}.jpg`;
-				linkElement.href = `./assets/images/jpg/${img}.jpg`;	// not sure if I want to send the jpg by default. Maybe it can be adaptive, too?
+				linkElement.href = `./assets/images/jpg/${img}.jpg`;
 			}
 
 		} else {
 			// Image is not cached, need to load it and show a loading animation
-			for (const element of [webpImg, avifImg]) {
-				element.srcset = '';
-			}
+			webpImg.srcset = '';
 			imgElement.src = '';
 			imgElement.style.opacity = '0';
 			imgElement.style.marginBlockStart = '0';
 			webpImg.srcset = `./assets/images/webp/${img}.webp`;
-			avifImg.srcset = `./assets/images/avif/${img}.avif`;
 			imgElement.src = `./assets/images/jpg/${img}.jpg`;
 			linkElement.classList.add('loading');
 			linkElement.href = `./assets/images/jpg/${img}.jpg`;
