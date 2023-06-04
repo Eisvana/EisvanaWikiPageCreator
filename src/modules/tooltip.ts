@@ -9,19 +9,15 @@ export const explanationContent: string = `
 	<h2 id="explanationHeading" class="title is-4"></h2>
 	<div id="explanationContent" class="nms-font"></div>
 	<a id="explanationLink" target="_blank" rel="noopener noreferrer">
-	<img id="explanationFallbackImg" alt="Explainer Image">
-
+		<picture>
+			<source type="image/avif" id="explanationAvifImg">
+			<source type="image/webp" id="explanationWebpImg">
+			<img id="explanationFallbackImg" alt="Explainer Image">
+		</picture>
 	</a>
 	<form method="dialog">
 		<button class="button" type="submit" autofocus>Close</button>
 	</form>`;
-
-	/*
-			<picture>
-			<source type="image/webp" id="explanationWebpImg">
-			<img id="explanationFallbackImg" alt="Explainer Image">
-		</picture>
-*/
 
 /**
  * A Set which holds images that have been previously loaded and cached.
@@ -36,74 +32,11 @@ const cachedImages: Set<string> = new Set();
  * @param {string} img - The URL of the image to display in the modal.
  */
 export function explanation(heading: string = '', text: string = '', img: string = '') {
-	const imgElement = globalElements.output.explanationFallbackImg as HTMLImageElement;
-	//const webpImg = globalElements.output.explanationWebpImg as HTMLSourceElement;
-	const linkElement = globalElements.output.explanationLink as HTMLAnchorElement;
-	const dialogElement = globalElements.output.explanation as HTMLDialogElement;
-	console.log(img)
-	// Check if img URL was provided
-	if (img) {
-
-		// Check if img was previously loaded and thus cached in the Set
-		if (cachedImages.has(img)) {
-
-			// Image was previously loaded, no need for loading animation
-			linkElement.classList.remove('loading');
-
-			// Check if img is different from the previously loaded image
-			if (imgElement.getAttribute('src') != img) {
-				// Update img source and link href if img is different
-				imgElement.src = '';
-				imgElement.src = `./assets/images/jpg/${img}.jpg`;
-				linkElement.href = `./assets/images/jpg/${img}.jpg`;
-			}
-
-		} else {
-			// Image is not cached, need to load it and show a loading animation
-			imgElement.src = '';
-			imgElement.style.opacity = '0';
-			imgElement.style.marginBlockStart = '0';
-			imgElement.src = `./assets/images/jpg/${img}.jpg`;
-			linkElement.classList.add('loading');
-			linkElement.href = `./assets/images/jpg/${img}.jpg`;
-		}
-
-		// Set link display style to visible
-		linkElement.style.display = '';
-
-	} else {
-		// No img URL provided, hide the link
-		linkElement.style.display = 'none';
-	}
-
-	// Set modal heading and text content
-	(globalElements.output.explanationHeading as HTMLHeadingElement).innerText = heading;
-	(globalElements.output.explanationContent as HTMLDivElement).innerHTML = text;
-
-	// Show the modal with a slide-down animation
-	dialogElement.style.translate = '0 -100vh';
-	dialogElement.showModal();
-	dialogElement.style.translate = '0 0';
-	dialogElement.scrollTo(0, 0);
-
-	// Wait for img to load, then update the DOM and cache the image
-	imgElement.onload = () => {
-		imgElement.style.marginBlockStart = '1rem';
-		imgElement.style.opacity = '1';
-		cachedImages.add(img);
-	}
-}
-
-
-
-
-
-
-/* export function explanation(heading: string = '', text: string = '', img: string = '') {
 	// I have no idea how to do type guards in destructuring, so I need to do it the ugly way here.
 	// I also hate past-Lenni for making this ugly interface that needs typeguards and assertions everywhere.
 	const imgElement = globalElements.output.explanationFallbackImg as HTMLImageElement;
 	const webpImg = globalElements.output.explanationWebpImg as HTMLSourceElement;
+	const avifImg = globalElements.output.explanationAvifImg as HTMLSourceElement;
 	const linkElement = globalElements.output.explanationLink as HTMLAnchorElement;
 	const dialogElement = globalElements.output.explanation as HTMLDialogElement;
 
@@ -115,13 +48,11 @@ export function explanation(heading: string = '', text: string = '', img: string
 
 		if (!isCached || imgElement.getAttribute('src') != `./assets/images/jpg/${img}.jpg`) {
 			const imageFormats = {
+				avif: avifImg,
 				webp: webpImg,
 				jpg: imgElement
 			}
 
-			for (const [, element] of Object.entries(imageFormats)) {
-				element[element.tagName == 'IMG' ? 'src' : 'srcset'] = '';
-			}
 			for (const [format, element] of Object.entries(imageFormats)) {
 				element[element.tagName == 'IMG' ? 'src' : 'srcset'] = `./assets/images/${format}/${img}.${format}`;
 			}
@@ -155,7 +86,7 @@ export function explanation(heading: string = '', text: string = '', img: string
 		cachedImages.add(img);
 	}
 }
- */
+
 /**
  * Adds a tooltip to all HTML elements with the class name 'tooltip'
  *
