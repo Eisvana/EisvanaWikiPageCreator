@@ -3,14 +3,15 @@
  */
 
 import { extractNumber, forceDatalist, getChildIndex, loadHTML, removeSpecificSection, setDropdownOptions, triggerEvent } from '../common';
-import { globalElements } from '../variables/objects';
+import { globalElements, globalFunctions } from '../variables/objects';
 import creatureInputs from '../htmlSnippets/creatureInputs.html?raw';
 import floraInputs from '../htmlSnippets/floraInputs.html?raw';
 import mineralInputs from '../htmlSnippets/mineralInputs.html?raw';
 import { addAllTooltips } from '../modules/tooltip';
 import { updateGlobalElements } from '../commonElements/elementBackend/elementStore';
-import { initialiseSectionInputs } from './celestialobjectslogic';
+import { autoInfested, initialiseSectionInputs } from './celestialobjectslogic';
 import { GlobalElements } from '../types/elements';
+import { assignElementFunctions } from '../commonElements/elementBackend/elementFunctions';
 
 
 function startupFunctions() {
@@ -19,7 +20,7 @@ function startupFunctions() {
 	autoInfested();
 	wormAutoSpawn();
 	wormAlbumName();
-	if (typeof planetStartupFunctions == 'function') planetStartupFunctions();
+	if (typeof globalFunctions.planetStartupFunctions == 'function') globalFunctions.planetStartupFunctions();
 }
 
 const planetMoonElements = {

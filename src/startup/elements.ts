@@ -21,7 +21,7 @@ const dialogElements: ElementIds = {
 		explanationHeading: 'explanationHeading',
 		explanationContent: 'explanationContent',
 		explanationLink: 'explanationLink',
-		explanationWebpImg: 'explanationWebpImg',
+	//	explanationWebpImg: 'explanationWebpImg',
 		explanationFallbackImg: 'explanationFallbackImg',
 	}
 }

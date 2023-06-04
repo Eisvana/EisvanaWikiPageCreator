@@ -12,7 +12,6 @@ import Sortable from "sortablejs";
 /**
 * Handles gallery image uploads
 *
-* @async
 * @function
 */
 export function galleryUpload() {
