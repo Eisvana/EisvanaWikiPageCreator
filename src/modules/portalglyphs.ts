@@ -59,7 +59,7 @@ function glyphOnClick(button: HTMLButtonElement) {
 		?? button?.closest('.tableHeader')?.previousElementSibling?.querySelector('input') as HTMLInputElement;
 	const portalCode = input.value;
 
-	if (portalCode.length < 12) {
+	if (portalCode.length < 12) {	// NoSonar complete portal glyph length
 		(input).value += button.value;
 	}
 	triggerEvent(input, 'input');
@@ -132,7 +132,7 @@ export function validateGlyphInput(glyphString: string): string {
 		.split('')
 		.filter(char => validPortalKeys.includes(char))
 		.join('')
-		.substring(0, 12);
+		.substring(0, 12);		// NoSonar max glyph length
 }
 
 /**
@@ -192,17 +192,17 @@ export function glyphError(region: string | undefined, glyphElement: HTMLElement
  * @returns {string} A string of coordinates in the format "XXXX:YYYY:ZZZZ:SSSS".
  */
 function glyphs2Coords(glyphs: string) {
-	if (glyphs.length != 12) return '';
+	if (glyphs.length != 12) return '';		// NoSonar complete portal glyph length
 
 	const X_Z_POS_SHIFT = 2049;
 	const X_Z_NEG_SHIFT = 2047;
 	const Y_POS_SHIFT = 129;
 	const Y_NEG_SHIFT = 127;
 
-	const x_glyphs = parseInt(glyphs.substring(9, 12), 16);
-	const y_glyphs = parseInt(glyphs.substring(4, 6), 16);
-	const z_glyphs = parseInt(glyphs.substring(6, 9), 16);
-	const system_idx = glyphs.substring(1, 4);
+	const x_glyphs = parseInt(glyphs.substring(9, 12), 16);		// NoSonar X coordinate part
+	const y_glyphs = parseInt(glyphs.substring(4, 6), 16);		// NoSonar Y coordinate part
+	const z_glyphs = parseInt(glyphs.substring(6, 9), 16);		// NoSonar Z coordinate part
+	const system_idx = glyphs.substring(1, 4);					// NoSonar system index part
 
 	let coords_x = 0;
 	let coords_y = 0;

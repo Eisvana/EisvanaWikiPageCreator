@@ -60,7 +60,9 @@ export function getSentinelData() {
 }
 
 export function getResourceData() {
-	const resources = {
+	const resources: {
+		[key: string]: string
+	} = {
 		'Copper': 'Cu',
 		'Cadmium': 'Cd',
 		'Emeril': 'Em',
@@ -825,30 +827,30 @@ const planetDatalists: {
 }
 
 export default function buildPlanetDatalistObject() {
-/**
- * Populates `planetDatalists.sentinels` with the data from `getSentinelData()`.
- */
-planetDatalists.sentinels = [];
-const sentinels = getSentinelData();
-for (const level in sentinels) {
-	planetDatalists.sentinels.push(...sentinels[level]);
-}
-
-/**
- * Populates `planetDatalists.planetDescriptors` with the unique descriptors in `getDescriptorData()`.
- */
-const descriptors: Set<string> = new Set()
-const planetDescriptors = getDescriptorData();
-for (const biome in planetDescriptors) {
-	for (const list in planetDescriptors[biome]) {
-		planetDescriptors[biome][list].forEach(descriptor => descriptors.add(descriptor));
+	/**
+	 * Populates `planetDatalists.sentinels` with the data from `getSentinelData()`.
+	 */
+	planetDatalists.sentinels = [];
+	const sentinels = getSentinelData();
+	for (const level in sentinels) {
+		planetDatalists.sentinels.push(...sentinels[level]);
 	}
-}
 
-/**
- * Populates `planetDatalists.resources` with the keys from `getResourceData()`.
- */
-planetDatalists.planetDescriptors = Array.from(descriptors);
-planetDatalists.resources = Object.keys(getResourceData());
-return planetDatalists;
+	/**
+	 * Populates `planetDatalists.planetDescriptors` with the unique descriptors in `getDescriptorData()`.
+	 */
+	const descriptors: Set<string> = new Set()
+	const planetDescriptors = getDescriptorData();
+	for (const biome in planetDescriptors) {
+		for (const list in planetDescriptors[biome]) {
+			planetDescriptors[biome][list].forEach(descriptor => descriptors.add(descriptor));
+		}
+	}
+
+	/**
+	 * Populates `planetDatalists.resources` with the keys from `getResourceData()`.
+	 */
+	planetDatalists.planetDescriptors = Array.from(descriptors);
+	planetDatalists.resources = Object.keys(getResourceData());
+	return planetDatalists;
 }

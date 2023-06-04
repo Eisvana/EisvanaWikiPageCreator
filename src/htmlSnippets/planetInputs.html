@@ -1,7 +1,7 @@
 <div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}">
 	<p><output id=planetClass${i}>Planet</output> ${i}: <output class="has-text-weight-bold"
 			name="planetName${i}"></output></p>
-	<button class="button" onclick="toggleSection('planet${i}', this)">Hide</button>
+	<button class="button" data-id="hideButtonPlanet">Hide</button>
 </div>
 <div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="planetName_input${i}">Planet name</label>
@@ -34,7 +34,7 @@
 </div>
 <div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="planetFile_input${i}" data-dest="planetFile${i}" data-default="NmsMisc_NotAvailable.png">
-	<input type="file" id="mainFileUpl${i}" accept="image/*" oninput="image(this)">
+	<input type="file" id="mainFileUpl${i}" accept="image/*" data-id="fileInput">
 </div>
 <div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="landscapeFile_input${i}">Landscape file name</label>
@@ -45,7 +45,7 @@
 <div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="landscapeFile_input${i}" data-dest="landscapeFile${i}"
 		data-default="NmsMisc_NotAvailable.png">
-	<input type="file" id="secFileUpl${i}" accept="image/*" onchange="image(this)">
+	<input type="file" id="secFileUpl${i}" accept="image/*" data-id="fileInput">
 </div>
 <div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label>Biome</label>
@@ -61,7 +61,7 @@
 	</button>
 </div>
 <div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<select id="biome_input${i}" data-dest-noauto="biome${i}" onchange="biomeLinks(this)">
+	<select id="biome_input${i}" data-dest-noauto="biome${i}" data-id="biomeInput">
 		<option value="Lush">Lush</option>
 		<option value="Barren">Barren</option>
 		<option value="Dead">Dead</option>
@@ -86,13 +86,13 @@
 </div>
 <div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="descriptor_input${i}" list="planetDescriptors" data-dest-noauto="descriptor${i}"
-		oninput="expandDescriptor(this)">
+		data-id="descriptorInput">
 </div>
 <div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="moon_input${i}">Is moon</label>
 </div>
 <div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<input type="checkbox" id="moon_input${i}" data-dest-noauto="descriptor_input${i}" oninput="moonSwitch(this)">
+	<input type="checkbox" id="moon_input${i}" data-dest-noauto="descriptor_input${i}" data-id="moonCheckbox">
 </div>
 <div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}" data-section="planet${i}">
 	<div style="display:flex">
@@ -104,11 +104,11 @@
 			<data>planet/resources</data>
 		</button>
 	</div>
-	<button class="button" onclick="toggleSection('resource${i}', this)">Hide</button>
+	<button class="button" data-id="hideButtonResource">Hide</button>
 </div>
 <div class="tableHeader text ${oddEvenClass}" data-section="resource${i} planet${i}" data-planet="planet${i}">
-	<button class="button is-primary" id="addResourceButton${i}" type="button"
-		onclick="addResourceInput(this, '${i}')">+ Add Resource</button>
+	<button class="button is-primary" id="addResourceButton${i}" type="button" data-id="addResourceButton">+ Add
+		Resource</button>
 </div>
 <div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="weather_input${i}">Weather</label>
@@ -120,8 +120,7 @@
 	</button>
 </div>
 <div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<input type="text" id="weather_input${i}" list="weatherData" data-dest-simple="weather${i}"
-		oninput="wikiCodeSimple(this)">
+	<input type="text" id="weather_input${i}" list="weatherData" data-dest-simple="weather${i}" data-id="weatherInput">
 </div>
 <div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="sentinel_input${i}">Sentinels</label>
@@ -170,5 +169,5 @@
 </div>
 <div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="faunatotal_input${i}" maxlength="2" data-dest-noauto="FaunaTotal${i}"
-		oninput="numberStats(this)">
+		data-id="faunaTotalInput">
 </div>

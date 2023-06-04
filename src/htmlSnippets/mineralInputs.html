@@ -1,8 +1,7 @@
 <div class="tableHeader text sectionToggle" data-mineral="section${i}" data-section="mineral">
 	<p style="margin-right:auto">Mineral: <output class="has-text-weight-bold" name="mineralName${i}"></output></p>
-	<button class="button is-danger is-outlined" type="button"
-		onclick="removeSpecificSection('section${i}', 'mineral'); changeTableEntry(this)">Remove</button>
-	<button class="button" onclick="toggleSection('mineral${i}', this)">Hide</button>
+	<button class="button is-danger is-outlined" type="button" data-id="removeButton">Remove</button>
+	<button class="button" data-id="hideButton">Hide</button>
 </div>
 <div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
 	<label for="mineralNameInput${i}">Mineral name:</label>
@@ -21,7 +20,7 @@
 </div>
 <div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">
 	<input type="text" id="mineralFile_input${i}" data-dest="mineralFile${i}" data-default="NmsMisc_NotAvailable.png">
-	<input type="file" id="mineralFileUpl${i}" accept="image/*" oninput="image(this)">
+	<input type="file" id="mineralFileUpl${i}" accept="image/*" data-id="fileInput">
 </div>
 <div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
 	<label for="mineralMetalInput${i}">Metal Content:</label>
@@ -34,7 +33,7 @@
 </div>
 <div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">
 	<input type="text" data-dest-noauto="mineralMetal${i}" id="mineralMetalInput${i}" maxlength="2"
-		oninput="wikiCodePercentage(this)">
+		data-id="metalInput">
 </div>
 <div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
 	<label for="mineralFormationInput${i}">Formation Process:</label>
@@ -71,7 +70,7 @@
 </div>
 <div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">
 	<input data-dest-noauto="mineralElements${i}" type="text" list="mineralResources" id="mineralResourcePrimInput${i}"
-		oninput="floraMineralResourceLinks(this)">
+		data-id="mineralResourceInput">
 </div>
 <div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
 	<label for="mineralResourceSecInput${i}">Secondary element:</label>
@@ -84,7 +83,7 @@
 </div>
 <div class="tableCell data" data-mineral="section${i}" data-section="mineral mineral${i}">
 	<input data-dest-noauto="mineralElements${i}" type="text" list="mineralResources" id="mineralResourceSecInput${i}"
-		oninput="floraMineralResourceLinks(this)">
+		data-id="mineralResourceInput">
 </div>
 <div class="tableCell text" data-mineral="section${i}" data-section="mineral mineral${i}">
 	<label for="mineralDiscovererInput${i}">Discoverer:</label>

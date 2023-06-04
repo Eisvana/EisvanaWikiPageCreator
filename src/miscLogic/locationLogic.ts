@@ -67,11 +67,11 @@ export function HubGal(civ: string) {
  * @param {string} regionName - The name of the region.
  * @returns {(number|string)} The region number of the Hub region, or 'Huburb' if the region is in GHub and has an index greater than 10.
  */
-function getHubNumber(regionName: string): string {
+export function getHubNumber(regionName: string): string {
 	for (const Hub in regions) {
 		const hubRegions = regions[Hub];
 		const index = Object.values(hubRegions).indexOf(regionName);
-		if (Hub == 'GHub' && index > 10) return 'Huburb';
+		if (Hub == 'GHub' && index > 10) return 'Huburb';	// NoSonar anything after region 11 (index 10) is a Huburb
 		if (index != -1) return (index + 1).toString();
 	}
 	return '';

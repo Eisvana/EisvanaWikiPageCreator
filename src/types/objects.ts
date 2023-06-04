@@ -1,9 +1,25 @@
+export interface StdObj {
+	[key: string]: string;
+}
+
 export interface SortObj {
 	[key: string]: unknown;
 }
 
 export interface LinkObj {
 	[key: string]: string | LinkObj;
+}
+
+export interface ResourceLinks {
+	[key: string]: {
+		[key: string]: string;
+	}
+}
+
+export interface PlanetPropResourceLinks {
+	[key: string]: {
+		[key: string]: StdObj;
+	}
 }
 
 export interface TransformedElementFunctions {
@@ -17,4 +33,19 @@ export interface TransformedElementFunctions {
 
 export interface Datalist {
 	[key: string]: Array<string>;
+}
+
+export interface CreatureData {
+	ecosystems: {
+		[key: string]: {
+			[key: string]: {
+				[key: string]: string | Array<string>;
+			}
+		}
+	},
+	catalogs: {
+		[key: string]: {
+			[key: string]: Array<string>;
+		}
+	}
 }

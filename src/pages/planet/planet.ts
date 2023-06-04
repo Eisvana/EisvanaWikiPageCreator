@@ -46,10 +46,10 @@ export function addMoon(element: HTMLButtonElement) {
 	inputSection.insertAdjacentElement('beforebegin', div1);
 	inputSection.insertAdjacentElement('beforebegin', div2);
 
-	const moonInputSectionCount = document.querySelectorAll('[data-moon]').length / 2;
+	const moonInputSectionCount = document.querySelectorAll('[data-moon]').length / 2;	// NoSonar there are two sections for every moon (I guess...?)
 
 	// enter the number of sections you want to allow behind the ">" operator.
-	if (moonInputSectionCount + 1 > 2) {
+	if (moonInputSectionCount + 1 > 2) {	// NoSonar 2 moons is maximum
 		element.disabled = true;
 	}
 }
@@ -72,7 +72,7 @@ export function enableMoonAdd() {
 */
 export function moonList() {
 	const moonInputs = document.querySelectorAll('[data-moon] input');
-	const moons = new Array;
+	const moons = [];
 	for (const input of moonInputs) {
 		if (input.value) moons.push(`[[${sanitiseString(input.value)}]]`);
 	}
@@ -94,7 +94,7 @@ function moonSentence() {
 			return `This planet has no moons.`;
 		} else {
 			const moonCount = moons.length;
-			return `This planet's [[moon]]${(moonCount == 2) ? 's' : ''} ${plural(moonCount)} ${moons.join(' and ')}.`;
+			return `This planet's [[moon]]${(moonCount > 1) ? 's' : ''} ${plural(moonCount)} ${moons.join(' and ')}.`;
 		}
 	})();
 	wikiCode(output, 'moonSentence');

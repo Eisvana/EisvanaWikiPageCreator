@@ -1,7 +1,9 @@
+import { CreatureData } from "../types/objects";
+
 /**
  * @fileoverview Provides data for creatures which is not intended to be put into a datalist. This data is needed in multiple files, so it was broken into its own file.
  */
-function getCreatureData() {
+export function getCreatureData(): CreatureData {
 	return {
 		ecosystems: {
 			Ground: {

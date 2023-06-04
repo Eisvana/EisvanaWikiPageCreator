@@ -1,51 +1,26 @@
-import { assignDefaultValue, forceDatalist, storeData, wikiCode } from "../common";
+import { assignDefaultValue, displayResearch, forceDatalist, formatName, numberError, storeData, wikiCode } from "../common";
 import { getDescriptorData } from "../datalists/planetDatalists";
 import { assignFunction } from "../commonElements/elementBackend/elementFunctions";
 import { globalElements, pageData } from "../variables/objects";
+import { autoWorm, planetDescriptor } from "./planetMoonLogic";
 
 /**
  * @fileoverview Functions that can be used by Planet, Moon and System pages
  */
-function celestialStartupFunctions() {
-	hideOrgName();
-	locationSentence();
-}
-
-const celestialObjectElementFunctions = {
-	docDateInput: ['docByExternal()'],
-	discDateInput: ['docByExternal()'],
-	platformInput: ['docByExternal()'],
-	oldNameInput: ['hideOrgName()'],
-	civ: ['locationSentence()', null, true],
-	portalglyphsInput: ['locationSentence()', null, true],
-}
-assignElementFunctions(celestialObjectElementFunctions);
 
 /**
  * Generates discovered section sentences
  * @function
  * @returns {void}
  */
-function docByExternal() {
+export function docByExternal() {
 	const { discovered, discoveredlink, docby: documenter, civilized } = pageData;
 	const platform = (pageData.platform == 'NS') ? 'Switch' : pageData.platform;
 
-	/**
-	 * Formats a given date to be in the format 'Month Day, Year'
-	 * @function
-	 * @param {string} date - The date to format in the format 'YYYY-MM-DD'
-	 * @returns {string} The formatted date in the format 'Month Day, Year'
-	 */
-	function formatDate(date) {
-		const options = { year: 'numeric', month: 'long', day: 'numeric' };
-		const simpleDate = date.replaceAll('-', '/');
-		const dateObj = new Date(simpleDate);
-		return dateObj.toLocaleString('en-UK', options);
-	}
-	const discDate = formatDate(pageData.discDate);
-	const docDate = formatDate(pageData.docDate);
+	const discDate = formatDate(pageData.discDate as string);
+	const docDate = formatDate(pageData.docDate as string);
 
-	const documented = formatName(documenter);
+	const documented = formatName(documenter as string);
 
 	/**
 	 * Determines the research chapter sentence to use
@@ -65,7 +40,7 @@ function docByExternal() {
 	 */
 	const discoverer = (() => {
 		if (!discoveredlink) {
-			return formatName(discovered);
+			return formatName(discovered as string);
 		} else {
 			return `{{profile|${discoveredlink}}}`;
 		}
@@ -84,23 +59,37 @@ function docByExternal() {
 			* Explored and documented by ${research} ${documented} on ${docDate}`
 		}
 	})();
-	globalElements.output.docby.innerText = explorer;
+	(globalElements.output.docby as HTMLOutputElement).innerText = explorer;
+
+
+	/**
+	 * Formats a given date to be in the format 'Month Day, Year'
+	 * @function
+	 * @param {string} date - The date to format in the format 'YYYY-MM-DD'
+	 * @returns {string} The formatted date in the format 'Month Day, Year'
+	 */
+	function formatDate(date: string) {
+		const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+		const simpleDate = date.replaceAll('-', '/');
+		const dateObj = new Date(simpleDate);
+		return dateObj.toLocaleString('en-UK', options);
+	}
 }
 
 /**
 * Add percentage sign to e-sell/buy property data for wikiCode output.
 * @param {HTMLElement|null} element - the element to apply percentage formatting to.
 */
-export function wikiCodePercentage(element = null) {
+export function wikiCodePercentage(element: HTMLInputElement | null = null) {
 	if (!element) {
-		const inputs = document.querySelectorAll('[oninput*="wikiCodePercentage"]');
-		for (const input of inputs) {
+		const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('[data-percentage-input]');
+		for (const input of Array.from(inputs)) {
 			wikiCodePercentage(input);
 		}
 		return;
 	}
-	const dest = element.dataset.destNoauto
-	const propertyValue = pageData[dest];
+	const dest = element.dataset.destNoauto as string;
+	const propertyValue = pageData[dest] as string;
 	const propertyData = numberError(element, propertyValue);
 	wikiCode(propertyData ? propertyData + '%' : '', dest);
 }
@@ -111,7 +100,7 @@ export function wikiCodePercentage(element = null) {
  * @param {HTMLElement} [element=globalElements.input.descriptionInput] - The element to check for infestation.
  * @return {Boolean} - If on a System page, returns true if the element is Infested, false otherwise. If on a Planet/Moon page, updates the output text and pageData object accordingly, and returns nothing.
  */
-export function autoInfested(element = globalElements.input.descriptionInput) {
+export function autoInfested(element: HTMLInputElement = globalElements.input.descriptionInput as HTMLInputElement): boolean | void {
 	const descriptorData = getDescriptorData().Infested;
 	const infestedDescriptors: Array<string> = [];
 	for (const list in descriptorData) {
@@ -122,7 +111,7 @@ export function autoInfested(element = globalElements.input.descriptionInput) {
 	const isInfested = infestedDescriptors.includes(element.value.trim());
 	if (pageData.pageType == 'System') return isInfested;
 
-	globalElements.output.infested.innerText = isInfested ? '([[Biome Subtype - Infested|Infested]]) ' : '';
+	(globalElements.output.infested as HTMLOutputElement).innerText = isInfested ? '([[Biome Subtype - Infested|Infested]]) ' : '';
 	pageData.infested = isInfested;
 	planetDescriptor(element);
 	autoWorm(isInfested);
@@ -166,19 +155,19 @@ export function initialiseSectionInputs(sectionSelector: string) {
 	const inputs: NodeListOf<HTMLInputElement | HTMLSelectElement> = document.querySelectorAll(`${sectionSelector} :is(input, select)`);
 	for (const input of Array.from(inputs)) {
 		if (input.dataset.dest) {
-			assignFunction({ element: input, func: function () { wikiCode(this) } });
+			assignFunction({ element: input, func: function () { wikiCode(this as unknown as HTMLInputElement | HTMLSelectElement) } });
 			wikiCode(input);
 		}
 		if (input.dataset.destNoauto) {
-			assignFunction({ element: input, func: function () { storeData(this) } });
+			assignFunction({ element: input, func: function () { storeData(this as unknown as HTMLInputElement | HTMLSelectElement) } });
 			storeData(input);
 		}
 		if (input.dataset.default) {
-			assignFunction({ element: input, func: function () { assignDefaultValue(this) } });
+			assignFunction({ element: input, func: function () { assignDefaultValue(this as unknown as HTMLInputElement | HTMLSelectElement) } });
 			assignDefaultValue(input);
 		}
 		if ((input as HTMLInputElement).list) {
-			assignFunction({ element: input, handler: 'change', func: function () { forceDatalist(this) } });
+			assignFunction({ element: input, handler: 'change', func: function () { forceDatalist(this as unknown as HTMLInputElement) } });
 		}
 	}
 }

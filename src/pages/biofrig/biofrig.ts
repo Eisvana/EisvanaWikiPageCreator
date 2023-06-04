@@ -2,6 +2,10 @@
  * @fileoverview Provides functions which can be used by the Organic Frigate page creator.
  */
 
+import { docByResearchteam, wikiCode } from "../../common";
+import { HubGal, regNr } from "../../miscLogic/locationLogic";
+import { pageData } from "../../variables/objects";
+
 function startupFunctions() {
 	numberStats();
 	locHubNr();

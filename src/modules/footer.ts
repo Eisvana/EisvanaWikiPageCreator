@@ -76,7 +76,7 @@ export function updateDefaultValues() {
 	const settings: {
 		[key: string]: string;
 	} = {};
-	const inputs = Array.from(footerInputs) as Array<HTMLInputElement | HTMLSelectElement>;
+	const inputs = Array.from(footerInputs);
 	for (const input of inputs) {
 		const value = input?.value;
 		const store = input?.dataset?.store;
@@ -130,7 +130,7 @@ export function restoreDefaults() {
 	 * The input HTML elements in the footer.
 	 * @type {NodeList}
 	 */
-	const inputs = Array.from(footerInputs) as Array<HTMLInputElement | HTMLSelectElement>;
+	const inputs = Array.from(footerInputs);
 	for (const input of inputs) {
 		if (!input?.value) continue;
 		if (input.tagName.toLowerCase() == 'select') {

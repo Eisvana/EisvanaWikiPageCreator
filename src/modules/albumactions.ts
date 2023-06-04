@@ -2,89 +2,26 @@
  * @fileoverview Provides functions needed for the album actions (copy album code, open album...) to work.
  */
 
-import { loadHTML } from "../common";
-import { assignElementFunctions } from "../commonElements/elementBackend/elementFunctions";
-import { updateGlobalElements } from "../commonElements/elementBackend/elementStore";
-import album from "../htmlSnippets/album.html?raw";
 import { globalElements, globalFunctions, pageData } from "../variables/objects";
 import { wikiLink } from "../variables/simple";
 import { assignLink } from "./actions";
 
-// The logic for calculating the link target should be done by the main JS file of the page
-const albumElements = {
-	output: {
-		albumCiv: 'albumCiv',
-		album: 'album',
-		albumType: 'albumType',
-		albumHeaderName: 'albumHeaderName',
-		albumImage: 'albumImage',
-		albumName: 'albumName',
-		albumOther: 'albumOther',
-		albumGlyphs: 'albumGlyphs',
-		albumDiscoverer: 'albumDiscoverer',
-		albumText: 'albumText',
-		albumDesc: 'albumDesc'
-	}
-}
-
-let albumInitialised = false;
-
 /**
- * Asynchronous IIFE that loads album HTML and assigns element functions.
- * @returns {Promise<void>}
- */
-(() => {
-	/**
-	 * Represents the album HTML code.
-	 * @type {HTMLHtmlElement}
-	 */
-	const wikitext = loadHTML(album);
+* Represents the album actions HTML code.
+* @type {string}
+*/
+export const actionsHTML = `<button id="albumBtn" class="button is-outlined is-primary"
+	   data-link="album" onclick="copyCode(this, 'albumText')">
+	   Copy Album Wikicode
+	   </button>
+	   <a class="button is-outlined is-primary" id="albumLink"
+	   data-link="album" onclick="albumLink(this)">
+	   Open Album
+	   </a>`;
 
-	/**
-	 * Represents the album actions HTML code.
-	 * @type {string}
-	 */
-	const actions = `<button id="albumBtn" class="button is-outlined is-primary"
-		data-link="album" onclick="copyCode(this, 'albumText')">
-		Copy Album Wikicode
-		</button>
-		<a class="button is-outlined is-primary" id="albumLink"
-		data-link="album" onclick="albumLink(this)">
-		Open Album
-		</a>`;
-	// If the global albumEntry element exists, set its innerHTML to the wikitext.
-	if (globalElements.output.albumEntry) globalElements.output.albumEntry.innerHTML = wikitext;
 
-	// If the global albumActions element exists, set its innerHTML to the actions.
-	if (globalElements.output.albumActions) globalElements.output.albumActions.innerHTML = actions;
 
-	// Update the global albumElements with their respective IDs.
-	updateGlobalElements(albumElements);
 
-	/**
-	 * Object containing functions that act upon album-related HTML elements.
-	 * @type {Object.<string, Array.<string|function|null|boolean>>}
-	 */
-	const albumElementFunctions = {
-		civ: ['albumCiv()', null, true],
-	}
-	// Assign albumElementFunctions to their respective HTML elements.
-	assignElementFunctions(albumElementFunctions);
-
-	// Dispatches the albumLoaded event to notify that the IIFE has completed.
-	document.dispatchEvent(new Event('albumLoaded'));
-
-	/**
-	 * Boolean flag indicating that the album has been initialised.
-	 * @type {boolean}
-	 */
-	albumInitialised = true;
-
-	const albumNote = `<p style="width:100%" class="has-text-centered mb-3">Please don't forget to create an album entry!</p>`;
-	const outputElement = globalElements.output.albumActions as HTMLElement;
-	if (!outputElement) return;
-	outputElement.insertAdjacentHTML('afterbegin', albumNote);
-})();
 
 /**
  * Assigns a link to given element based on the album's PAGENAME.
@@ -119,13 +56,13 @@ export function albumLink(element: HTMLAnchorElement) {
  */
 function albumItemType() {
 	const output = (() => {
-		if (typeof albumItemTypeExternal == 'function') {
-			return albumItemTypeExternal();
+		if (typeof globalFunctions.albumItemTypeExternal == 'function') {
+			return globalFunctions.albumItemTypeExternal();
 		} else {
 			return pageData.type;
 		}
-	})();
-	globalElements.output.album.innerText = output;
+	})() as string;
+	(globalElements.output.album as HTMLOutputElement).innerText = output;
 }
 
 /**
@@ -182,15 +119,15 @@ export function albumDiscoverer() {
  * @name albumCiv
  * @returns {void}
  */
-function albumCiv() {
+export function albumCiv() {
 	const output = (() => {
-		if (typeof albumCivExternal == 'function') {
-			return albumCivExternal();
+		if (typeof globalFunctions.albumCivExternal == 'function') {
+			return globalFunctions.albumCivExternal();
 		} else {
 			return pageData.civShort;
 		}
-	})();
-	globalElements.output.albumCiv.innerText = output;
+	})() as string;
+	(globalElements.output.albumCiv as HTMLOutputElement).innerText = output;
 }
 
 /**
@@ -201,13 +138,13 @@ function albumCiv() {
  */
 export function albumName() {
 	const output = (() => {
-		if ((typeof albumNameExternal == 'function')) {
-			return albumNameExternal();
+		if ((typeof globalFunctions.albumNameExternal == 'function')) {
+			return globalFunctions.albumNameExternal();
 		} else {
 			return pageData.name;
 		}
-	})();
-	globalElements.output.albumName.innerText = output;
+	})() as string;
+	(globalElements.output.albumName as HTMLOutputElement).innerText = output;
 }
 
 /**
@@ -239,22 +176,22 @@ function albumType() {
 		} else {
 			return '';
 		}
-	})();
-	globalElements.output.albumType.innerText = output;
+	})() as string;
+	(globalElements.output.albumType as HTMLOutputElement).innerText = output;
 }
 
 /**
  * Updates the album data in the UI based on the page data.
  */
 function updateAlbumData() {
-	const dataLinks = {
+	const dataLinks: { [key: string]: string } = {
 		albumHeaderName: 'name',
 		albumImage: 'image',
 		albumGlyphs: 'portalglyphs'
 	};
 	for (const id in dataLinks) {
-		const element = globalElements.output[id];
-		element.innerText = pageData[dataLinks[id]];
+		const element = globalElements.output[id] as HTMLOutputElement;
+		element.innerText = pageData[dataLinks[id]] as string;
 	}
 }
 
@@ -266,7 +203,7 @@ function updateAlbumData() {
  * @returns {void}
  */
 export function albumFunctions() {
-	albumInitialised ? albumData() : document.addEventListener('albumLoaded', () => albumData());
+	pageData.albumInitialised ? albumData() : document.addEventListener('albumLoaded', () => albumData());
 
 	/**
 	 * Calls all functions related to album creation and updating.

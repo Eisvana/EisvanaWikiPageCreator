@@ -8,7 +8,7 @@ import { Regions } from "./types/regions";
 import { dataIntegrityObj, globalElements, globalFunctions, pageData } from './variables/objects';
 import { getDestElements } from './commonElements/elementBackend/elementStore';
 import { versions } from './variables/versions';
-import { assignElementFunctions } from './commonElements/elementBackend/elementFunctions';
+import { assignElementFunctions, assignFunction } from './commonElements/elementBackend/elementFunctions';
 import { glyphInputOnChange, glyphRegion } from './modules/portalglyphs';
 import { explanation } from './modules/tooltip';
 import { planetMoonSentence } from './miscLogic/locationLogic';
@@ -619,7 +619,7 @@ export function docBy() {
  * @function
  * @returns {string} Returns a string that describes the research team
  */
-function displayResearch() {
+export function displayResearch() {
 	const chapter = pageData.researchteam as string;
 	if (!chapter) return chapter;
 
@@ -653,7 +653,7 @@ function displayResearch() {
  * @returns {string} - The formatted name.
  */
 // formats a name to conform to wiki standards. Plain name = italicised, link = no formatting
-function formatName(documenter: string): string {
+export function formatName(documenter: string): string {
 	if (!documenter) return documenter;
 
 	const documented = (() => {
@@ -880,7 +880,7 @@ export function shortenGHub(civ: string): string {
  * @param {boolean} [outputRaw=false] - Whether to output the raw calculation values along with the formatted results. If `true`, the function will return an object with `formatted` and `raw` properties; if `false`, it will return only the formatted string.
  * @returns {string|Object} The formatted statistics string (and optionally, the raw calculation values).
  */
-function numberStats(element: HTMLInputElement | null = null, decimals: number | undefined = undefined, outputRaw: boolean = false) {
+export function numberStats(element: HTMLInputElement | null = null, decimals: number | undefined = undefined, outputRaw: boolean = false) {
 	if (arguments.length == 0) {
 		const numbers: NodeListOf<HTMLInputElement> = document.querySelectorAll('[oninput*="numberStats"]');
 		for (const element of Array.from(numbers)) {
@@ -1073,7 +1073,7 @@ export function assignDefaultValue(element: HTMLInputElement | HTMLSelectElement
  * @param {Array.<HTMLElement>} array - The array of elements to remove
  * @returns {void}
  */
-function removeSection(array: Array<HTMLElement>) {
+export function removeSection(array: Array<HTMLElement>) {
 	for (const section of array) {
 		section.remove();
 	}
@@ -1193,19 +1193,29 @@ export function oddEven(number: number) {
 }
 
 /**
- * Load and parse HTML from a given URL and replace specified variables.
+ * Replace specified variables in a HTML string, and add eventListeners to the resulting DOM.
  * @async
- * @param {string} url - The URL of the HTML file to load.
+ * @param {string} html - The string of HTML to be edited.
  * @param {Object} [varObj] - An object containing key-value pairs to replace in the loaded HTML.
- * @returns {Promise<Document>} - A promise that resolves with the parsed HTML DOM of the loaded file.
- * The loaded HTML is cached in the `cachedHTML` object to improve performance on subsequent calls.
+ * @returns {string|Document} - A string of the edited HTML or a dom with attached eventListeners, depending on the input arguments.
  */
-export function loadHTML(html: string, varObj: { [key: string]: string } = {}) {
+export function loadHTML(html: string, varObj: { [key: string]: string } = {}, funcArray: ElementFunctions = []): string | Document {
 	let processingHTML = html;
 	for (const variable in varObj) {
 		processingHTML = processingHTML.replaceAll('${' + variable + '}', varObj[variable]);
 	}
-	return processingHTML;
+	if (funcArray.length == 0) return processingHTML;
+
+	const parser = new DOMParser();
+	const dom = parser.parseFromString(processingHTML, 'text/html');
+
+	for (const functionObj of funcArray) {
+		const elements: NodeListOf<HTMLElement> = dom.querySelectorAll(`[data-id="${functionObj.element}"]`);
+		for (const element of Array.from(elements)) {
+			assignFunction({ element, handler: functionObj.handler || undefined, func: functionObj.func })
+		}
+	}
+	return dom;
 }
 
 export function triggerEvent(element: HTMLElement, evt: keyof HTMLElementEventMap): void {
@@ -1215,4 +1225,12 @@ export function triggerEvent(element: HTMLElement, evt: keyof HTMLElementEventMa
 
 export function getCurrentHTMLFile() {
 	return window.location.pathname.split('/')!.at(-1)!.slice(0, -5);	// NoSonar stripping the `.html`
+}
+
+export function addDomAsElement(dom: Document, dest: HTMLElement, position: InsertPosition = 'afterbegin'): void {
+	const elements = Array.from(dom.body.children);
+	if (position == 'afterbegin' || position == 'afterend') elements.reverse();
+	for (const element of elements) {
+		dest.insertAdjacentElement(position, element);
+	}
 }

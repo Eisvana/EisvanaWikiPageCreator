@@ -1,8 +1,7 @@
 <div class="tableHeader text sectionToggle" data-flora="section${i}" data-section="flora">
 	<p style="margin-right:auto">Plant: <output class="has-text-weight-bold" name="floraName${i}"></output></p>
-	<button class="button is-danger is-outlined" type="button"
-		onclick="removeSpecificSection('section${i}', 'flora'); changeTableEntry(this)">Remove</button>
-	<button class="button" onclick="toggleSection('flora${i}', this)">Hide</button>
+	<button class="button is-danger is-outlined" type="button" data-id="removeButton">Remove</button>
+	<button class="button" data-id="hideButton">Hide</button>
 </div>
 <div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraNameInput${i}">Plant name:</label>
@@ -21,7 +20,7 @@
 </div>
 <div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 	<input type="text" id="floraFile_input${i}" data-dest="floraFile${i}" data-default="NmsMisc_NotAvailable.png">
-	<input type="file" id="floraFileUpl${i}" accept="image/*" oninput="image(this)">
+	<input type="file" id="floraFileUpl${i}" accept="image/*" data-id="fileInput">
 </div>
 <div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraAgeInput${i}">Age:</label>
@@ -82,7 +81,7 @@
 </div>
 <div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 	<input data-dest-noauto="floraElements${i}" type="text" list="floraResources" id="floraResourcePrimInput${i}"
-		oninput="floraMineralResourceLinks(this)">
+		data-id="floraElements">
 </div>
 <div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraResourceSecInput${i}">Secondary element:</label>
@@ -95,7 +94,7 @@
 </div>
 <div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 	<input data-dest-noauto="floraElements${i}" type="text" list="floraResources" id="floraResourceSecInput${i}"
-		oninput="floraMineralResourceLinks(this)">
+		data-id="floraElements">
 </div>
 <div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraDiscovererInput${i}">Discoverer:</label>
