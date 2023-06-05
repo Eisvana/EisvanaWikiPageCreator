@@ -2,411 +2,24 @@
  * @fileoverview Provides functions which can be used by the Starship page creator.
  */
 
-import { enPrefix, wikiCode } from "../../common";
+import { docByResearchteam, enPrefix, hideInput, setDropdownOptions, shortenGHub, wikiCode } from "../../common";
+import { regNr, HubGal, planetMoonSentence } from "../../miscLogic/locationLogic";
+import { StdObj } from "../../types/objects";
+import { Sections, ShipProp } from "../../types/starshipDataObjects";
 import { globalElements, pageData } from "../../variables/objects";
-
-function startupFunctions() {
-	subtypeDropdown();
-	showHideStarshipSelects();
-	shipStats();
-	calcS();
-	introType();
-	loc();
-	addInfo();
-	appearanceDropdowns();
-	enPrefix(globalElements.input.typeInput.value, "enPrefix");
-	albumFunctions();
-	toggleRedirect();
-}
-
-const starshipElements = {
-	input: {
-		economyInput: 'wealthInput',
-	}
-}
-updateGlobalElements(starshipElements)
-
-const starshipElementFunctions = {
-	nameInput: ['appearanceSentence(); albumName(); toggleRedirect()'],
-	civ: ['loc(); addInfo()', null, true],
-	systemInput: ['loc()'],
-	planetInput: ['loc(); albumOther()'],
-	moonInput: ['loc(); albumOther()'],
-	portalglyphsInput: ['loc()', null, true],
-	axesInput: ['loc(); albumOther()'],
-	typeInput: ['introType(); subtypeDropdown(); showHideStarshipSelects(); shipStats(); appearanceDropdowns(); appearanceSentence(); calcS(); loc(); addInfo(); albumOther(); enPrefix(this.value, "enPrefix")'],
-	subtypeInput: ['invDropdown(); calcInv(); appearanceSentence(), loc()'],
-	inventoryInput: ['costSlotCalc(); loc()'],
-	economyInput: ['calcS(); albumOther()'],
-	pilotInput: ['albumOther()'],
-	classInput: ['loc()'],
-	maneuverBInput: ['numberStats(this, 1)'],
-	damageBInput: ['numberStats(this, 1)'],
-	shieldBInput: ['numberStats(this, 1)'],
-	warpBInput: ['numberStats(this, 1)'],
-	discoveredInput: ['albumDiscoverer()'],
-	discoveredlinkInput: ['albumDiscoverer()'],
-	researchTeam: ['addInfo()', null, true],
-	mainColourInput: ['appearanceSentence()'],
-	secColourInput: ['appearanceSentence()'],
-	secPartsInput: ['appearanceSentence()'],
-	accessoriesInput: ['appearanceSentence()'],
-	miscPartsInput: ['appearanceSentence()'],
-}
-assignElementFunctions(starshipElementFunctions);
-
-/**
- * Function to retrieve the ship data object.
- * @function
- * @returns {ShipDataObject} Ship data object containing data related to different types of ships.
- */
-function getShipData() {
-	/**
-	 * Object containing data related to different types of ships. The pattern is repeated for all ship types.
-	 * @typedef {Object} ShipDataObject
-	 * @property {Object} Freighter - The data related to Freighter ships.
-	 * @property {Object} Freighter.cost - The cost of each type of Freighter ship.
-	 * @property {string} Freighter.cost.Small - The cost range of small Freighter ships.
-	 * @property {string} Freighter.cost.Large - The cost range of large Freighter ships.
-	 * @property {Object} Freighter.slots - The number of slots each type of Freighter ship has.
-	 * @property {string} Freighter.slots.Small - The number of slots of small Freighter ships.
-	 * @property {string} Freighter.slots.Large - The number of slots of large Freighter ships.
-	 * @property {Object} Freighter.techslots - The number of tech slots each type of Freighter ship has.
-	 * @property {string} Freighter.techslots.Small - The number of tech slots of small Freighter ships.
-	 * @property {string} Freighter.techslots.Large - The number of tech slots of large Freighter ships.
-	 * @property {string[]} Freighter.subtypes - The different subtypes of Freighter ships.
-	 * @property {string[]} Freighter.secParts - The different secondary parts for Freighter ships.
-	 * @property {string[]} Freighter.accessories - The different accessories for Freighter ships.
-	 * @property {string[]} Freighter.miscParts - The different miscellaneous parts for Freighter ships.
-	 * @property {Object} Freighter.sections - The different sections of the Freighter ship builder.
-	 * @property {string[]} Freighter.sections.subtypeInput - Controls the visibility of subtype input.
-	 * @property {string[]} Freighter.sections.exoticInput - Controls the visibility of exotic input.
-	 * @property {string[]} Freighter.sections.pilotInput - Controls the visibility of pilot input.
-	 * @property {string[]} Freighter.sections.inventoryInput - Controls the visibility of inventory input.
-	 * @property {string[]} Freighter.sections.classInput - Controls the visibility of class input.
-	 * @property {string[]} Freighter.sections.maneuverBInput - Controls the visibility of maneuverability input.
-	 * @property {string[]} Freighter.sections.damageBInput - Controls the visibility of damage input.
-	 * @property {string[]} Freighter.sections.shieldBInput - Controls the visibility of shield input.
-	 * @property {string[]} Freighter.sections.warpBInput - Controls the visibility of warp input.
-	 * @property {string[]} Freighter.sections.economyInput - Controls the visibility of economy input.
-	 * @property {string[]} Freighter.sections.planetInput - Controls the visibility of planet input.
-	 * @property {string[]} Freighter.sections.moonInput - Controls the visibility of moon input.
-	 * @property {string[]} Freighter.sections.axesInput - Controls the visibility of axes input.
-	 * @property {Object} Exotic - The data related to Exotic ships.
-	 * @property {Object} Solar - The data related to Solar ships.
-	 * @property {Object} Fighter - The data related to Fighter ships.
-	 * @property {Object} Explorer - The data related to Explorer ships.
-	 * @property {Object} Hauler - The data related to Hauler ships.
-	 * @property {Object} Shuttle - The data related to Shuttle ships.
-	 * @property {Object} "Living Ship" - The data related to Living ships.
-	 */
-
-	/**
-	 * Ship data object containing data related to different types of ships.
-	 * @type {ShipDataObject}
-	 */
-	const defaultSections = {
-		subtypeInput: ['show'],
-		exoticInput: ['hide', ''],
-		pilotInput: ['hide', ''],
-		inventoryInput: ['show'],
-		classInput: ['hide', ''],
-		maneuverBInput: ['hide', ''],
-		damageBInput: ['hide', ''],
-		shieldBInput: ['hide', ''],
-		warpBInput: ['hide', ''],
-		economyInput: ['show'],
-		planetInput: ['hide', ''],
-		moonInput: ['hide', ''],
-		axesInput: ['hide', '']
-	}
-
-	const shipData = {
-		Freighter: {
-			cost: {
-				'Small': '5,000,000 - 23,000,000',
-				'Large': '26,150,000 - 178,000,000',
-			},
-			slots: {
-				'Small': '15-19',
-				'Large': '24-34',
-			},
-			techslots: {
-				'Small': '8-12',
-				'Large': '12-20',
-			},
-			subtypes: ['Dreadnought', 'Battleship', 'Sentinel', 'Resurgent', 'Imperial', 'Venator', 'Blade', 'Cargo', 'Centrifuge', 'Enterprise', 'Galleon', 'Hammerhead', 'Iris', 'Oculus', 'Revolver'],
-			secParts: ['', 'Tower', 'Elevated', 'Spoiler', 'Keiser'],
-			accessories: ['', 'Keel', 'Bottom Fin', 'Top Fin', 'W-Wings', 'Wedge', 'Nacelle'],
-			miscParts: ['', 'Cargo Boxes', 'Cargo Pods'],
-			sections: {
-				subtypeInput: ['show'],
-				exoticInput: ['hide', ''],
-				pilotInput: ['show'],
-				inventoryInput: ['hide'],
-				classInput: ['hide', ''],
-				maneuverBInput: ['hide', ''],
-				damageBInput: ['hide', ''],
-				shieldBInput: ['hide', ''],
-				warpBInput: ['hide', ''],
-				economyInput: ['show'],
-				planetInput: ['hide', ''],
-				moonInput: ['hide', ''],
-				axesInput: ['hide', '']
-			}
-		},
-		Exotic: {
-			cost: {
-				'Small': '20,900,000 - 41,000,000',
-			},
-			slots: {
-				'Small': '24-30',
-			},
-			techslots: {
-				'Small': '20-28',
-			},
-			subtypes: [],
-			secParts: ['', 'Small Double Thruster', 'Large Double Thruster', 'Clam Shell Thruster', 'Single Thruster'],
-			accessories: ['', 'Side Wings', 'Side Booster'],
-			miscParts: ['', 'Hexagon', 'Acanthus', 'Geometric Plate', 'Circles', 'Sergeant Stripes'],
-			sections: {
-				subtypeInput: ['hide', ''],
-				exoticInput: ['show'],
-				pilotInput: ['hide', ''],
-				inventoryInput: ['hide', 'Small'],
-				classInput: ['hide', 'S'],
-				maneuverBInput: ['hide', ''],
-				damageBInput: ['hide', ''],
-				shieldBInput: ['hide', ''],
-				warpBInput: ['hide', ''],
-				economyInput: ['show'],
-				planetInput: ['hide', ''],
-				moonInput: ['hide', ''],
-				axesInput: ['hide', '']
-			}
-		},
-		Solar: {
-			cost: {
-				'Small': '4,000,000 - 14,000,000',
-			},
-			slots: {
-				'Small': '24-30',
-			},
-			techslots: {
-				'Small': '13-18',
-			},
-			subtypes: ['Falcon', 'Grouper', 'Jackal', 'Marlin', 'Raven', 'Spider'],
-			secParts: ['', 'Razor', 'Shielded', 'Double Blade', 'Starburst', 'Talon', 'Grapple'],
-			accessories: ['', 'Hex', 'Crescent', 'Rectangle'],
-			miscParts: ['', 'Horza', 'Verta', 'Tristar', 'Torpedo', 'Drill'],
-			sections: {
-				subtypeInput: ['show'],
-				exoticInput: ['hide', ''],
-				pilotInput: ['hide', ''],
-				inventoryInput: ['hide'],
-				classInput: ['hide', ''],
-				maneuverBInput: ['hide', ''],
-				damageBInput: ['hide', ''],
-				shieldBInput: ['hide', ''],
-				warpBInput: ['hide', ''],
-				economyInput: ['show'],
-				planetInput: ['hide', ''],
-				moonInput: ['hide', ''],
-				axesInput: ['hide', '']
-			}
-		},
-		Fighter: {
-			cost: {
-				'Small': '4,050,000 - 15,650,000',
-				'Medium': '4,050,000 - 27,650,000',
-				'Large': '10,500,000 - 57,500,000',
-			},
-			slots: {
-				'Small': '24-28',
-				'Medium': '24-32',
-				'Large': '30-38',
-			},
-			techslots: {
-				'Small': '14-19',
-				'Medium': '14-24',
-				'Large': '19-30',
-			},
-			subtypes: ['Alpha', 'Barrel', 'Jet', 'Long', 'Needle', 'Rasa', 'Snowspeeder', 'Stubby', 'Viper'],
-			secParts: ['', 'Heavy', 'Starjumper', 'Horizon', 'Vector', 'Tie', 'Halo', 'Bowie-H', 'Bowie-V', 'Gull', 'Quasar', 'Vulture', 'Droid', 'Mecha-3', 'Mecha-5', 'Mecha-7', 'E-Wings', 'Aftershock', 'Shockwave', 'Starscream'],
-			accessories: ['', 'Box Thruster', 'Single Thruster', 'Triple Thruster'],
-			miscParts: ['', 'Serenity', 'Firefly'],
-			sections: defaultSections,
-		},
-		Explorer: {
-			cost: {
-				'Small': '3,450,000 - 11,900,000',
-				'Medium': '3,450,000 - 18,300,000',
-				'Large': '9,200,000 - 39,000,000',
-			},
-			slots: {
-				'Small': '24-29',
-				'Medium': '24-32',
-				'Large': '30-38',
-			},
-			techslots: {
-				'Small': '14-19',
-				'Medium': '19-24',
-				'Large': '24-30',
-			},
-			subtypes: ['Hopper', 'Firespray'],
-			secParts: ['', 'Curved Cockpit', 'Bubble Cockpit'],
-			accessories: ['', 'Ajairu', 'Arc', 'Chick', 'Curved-Tie', 'Dagger', 'Dragonfly', 'Glider', 'Lance', 'No Wings', 'Nucleo', 'Proteus', 'Solar Fins', 'Solar Pods', 'Solar Tie', 'T3 Pods', 'Wraith', 'Xenia', 'Xtara', 'X-Wing'],
-			sections: defaultSections,
-		},
-		Hauler: {
-			cost: {
-				'Small': '9,700,000 - 37,500,000',
-				'Medium': '20,850,000 - 58,500,000',
-				'Large': '32,500,000 - 126,000,000',
-			},
-			slots: {
-				'Small': '30-36',
-				'Medium': '36-40',
-				'Large': '40-48',
-			},
-			techslots: {
-				'Small': '12-18',
-				'Medium': '18-24',
-				'Large': '20-30',
-			},
-			subtypes: {
-				'Aftershock': ['Small'],
-				'Ball': ['Small', 'Large'],
-				'Body only': ['Small'],
-				'Box': ['Small', 'Large'],
-				'C-Wing': ['Small'],
-				'Bent Wing': ['Small'],
-				'D-Flect Wing': ['Medium'],
-				'E-Wing': ['Small'],
-				'Fan Wing': ['Large'],
-				'V-Wing': ['Small'],
-				'Thrusters only': ['Small'],
-				'W-Wing': ['Medium'],
-				'Shield': ['Small'],
-				'Tie-Shield': ['Small'],
-				'Split Shield': ['Small']
-			},
-			secParts: ['', 'Mack', 'Duck', 'Robot', 'Turret', 'Box Nose'],
-			accessories: ['', 'Short Tail', 'Long Tail', 'Box Tail'],
-			miscParts: ['', 'High Wings', 'Serenity', '2rpedo', 'Sabre', 'V-Blade', 'Tilt'],
-			sections: defaultSections,
-		},
-		Shuttle: {
-			cost: {
-				'Small': '2,070,000 - 12,650,000',
-				'Medium': '4,400,000 - 22,500,000',
-			},
-			slots: {
-				'Small': '24-32',
-				'Medium': '28-36',
-			},
-			techslots: {
-				'Small': '12-19',
-				'Medium': '18-26',
-			},
-			subtypes: ['Single Tube', 'Small Box Body', 'Double Tube', 'Large Box Body'],
-			secParts: ['', 'Voyager', 'Grill Wings', 'Y-Wings', 'Bent Wings', 'Drop-Wings', 'X-Wings', 'Low Wings', 'Glider', 'V-Wings'],
-			accessories: ['', 'Straight Turbine', 'Tapered Turbine', 'Omega Cap', 'Retro Booster', 'Fatboy', 'Magnatreme Adapter', 'Afterburner', 'Hover Fan', 'Magnatreme Dome', 'Magnatreme Ring', 'Magnatreme Shield', 'Wing Turbine'],
-			miscParts: ['', 'Micro Thruster', 'Vertical Intake', 'Solar Panel', 'Keg', 'Mr. Fusion', 'R2 Unit', 'Fuel Port', 'Antenna', 'Lunch Box', 'Cargo Vent', 'Cooling Channel', 'Exhaust Cooling Channel', 'Angled Vent', 'Fuel Compressor', 'Coolant Ports'],
-			sections: {
-				subtypeInput: ['show'],
-				exoticInput: ['hide', ''],
-				pilotInput: ['hide', ''],
-				inventoryInput: ['hide'],
-				classInput: ['hide', ''],
-				maneuverBInput: ['hide', ''],
-				damageBInput: ['hide', ''],
-				shieldBInput: ['hide', ''],
-				warpBInput: ['hide', ''],
-				economyInput: ['show'],
-				planetInput: ['hide', ''],
-				moonInput: ['hide', ''],
-				axesInput: ['hide', '']
-			}
-		},
-		"Living Ship": {
-			cost: {
-				'Medium': '',
-			},
-			slots: {
-				'Medium': '36',
-			},
-			techslots: {
-				'Medium': '30',
-			},
-			subtypes: ['Anvil', 'Hammerhead', 'Shark', 'Tusked', 'Compact'],
-			secParts: ['', 'Long Arm', 'Short Arm'],
-			accessories: ['', 'Bigfoot', 'Fruitbowl Feet', 'Pedestal Feet'],
-			miscParts: ['', 'Single Thruster', 'Triple Thruster'],
-			sections: {
-				subtypeInput: ['show'],
-				exoticInput: ['hide', ''],
-				pilotInput: ['hide', ''],
-				inventoryInput: ['hide', 'Medium'],
-				classInput: ['hide', 'S'],
-				maneuverBInput: ['show'],
-				damageBInput: ['show'],
-				shieldBInput: ['show'],
-				warpBInput: ['show'],
-				economyInput: ['hide', ''],
-				planetInput: ['show'],
-				moonInput: ['show'],
-				axesInput: ['show']
-			}
-		},
-		"Interceptor": {
-			cost: {
-				'Large': '',
-			},
-			slots: {
-				'Large': '32-40',
-			},
-			techslots: {
-				'Large': '22-28',
-			},
-			subtypes: [],
-			secParts: [],
-			accessories: [],
-			miscParts: [],
-			sections: {
-				subtypeInput: ['hide'],		// subtype and parts (above) need to be revised once the naming convention is done
-				exoticInput: ['hide', ''],
-				pilotInput: ['hide', ''],
-				inventoryInput: ['hide', 'Large'],
-				classInput: ['show'],
-				maneuverBInput: ['show'],
-				damageBInput: ['show'],
-				shieldBInput: ['show'],
-				warpBInput: ['show'],
-				economyInput: ['show'],
-				planetInput: ['show'],
-				moonInput: ['show'],
-				axesInput: ['show']
-			}
-		}
-	}
-	shipData.Explorer.miscParts = structuredClone(shipData.Explorer.accessories);
-	shipData.Explorer.miscParts.push('Antenna', 'Spike', 'Dish', 'Sensor');
-	return shipData;
-}
+import shipData from "./shipData";
 
 /**
  * Set subtype dropdown options based on selected ship type.
  * @function
  * @returns {void}
  */
-function subtypeDropdown() {
-	const type = pageData.type;
-	const subtype = globalElements.input.subtypeInput
-	const shipData = getShipData();
+export function subtypeDropdown() {
+	const type = pageData.type as string;
+	const subtype = globalElements.input.subtypeInput as HTMLSelectElement;
 
 	if (Array.isArray(shipData[type].subtypes)) {
-		setDropdownOptions(subtype, shipData[type].subtypes);
+		setDropdownOptions(subtype, shipData[type].subtypes as Array<string>);
 	} else {
 		setDropdownOptions(subtype, Object.keys(shipData[type].subtypes));
 	}
@@ -419,9 +32,9 @@ function subtypeDropdown() {
  * @function
  * @returns {undefined}
  */
-function calcS() {
-	const econ = pageData.economy.split(' ');
-	const type = pageData.type;
+export function calcS() {
+	const econ = (pageData.economy as string).split(' ');
+	const type = pageData.type as string;
 	let chance;
 	let chanceSentence = 'always spawns';
 	const exceptions = ['Exotic', 'Living Ship'];
@@ -445,13 +58,13 @@ function calcS() {
 		}
 		chanceSentence = `has a ${chance} chance to spawn`;
 	}
-	globalElements.output.sChance.innerText = chanceSentence;
+	(globalElements.output.sChance as HTMLOutputElement).innerText = chanceSentence;
 }
 
 // assigns starship stats macro
-function shipStats() {
-	const type = pageData.type.split(' ')[0];
-	globalElements.output.stats.innerText = type + 'Ship';
+export function shipStats() {
+	const type = (pageData.type as string).split(' ')[0];
+	(globalElements.output.stats as HTMLOutputElement).innerText = type + 'Ship';
 }
 
 /**
@@ -460,24 +73,23 @@ function shipStats() {
  * @function
  * @returns {void}
  */
-function showHideStarshipSelects() {
-	const shipData = getShipData();
-	const showState = {
+export function showHideStarshipSelects() {
+	const showState: StdObj = {
 		show: '',
 		hide: 'none'
 	}
 
-	const type = pageData.type;
+	const type = pageData.type as string;
 	invDropdown();
 
 	for (const input of Object.keys(shipData[type].sections)) {
 		const data = shipData[type].sections[input];
-		const inputElement = globalElements.input[input];
+		const inputElement = globalElements.input[input] as HTMLSelectElement | HTMLInputElement;
 		hideInput(inputElement, showState[data[0]]);
 		if (data.length > 1) {
 			inputElement.value = data[1];
 		} else if (inputElement.tagName.toLowerCase() == 'select') {
-			inputElement.value ||= inputElement.options?.[0]?.value;
+			inputElement.value ||= (inputElement as HTMLSelectElement).options?.[0]?.value;
 		}
 		wikiCode(inputElement);
 	}
@@ -490,14 +102,15 @@ function showHideStarshipSelects() {
  * @name invDropdown
  * @returns {void}
  */
-function invDropdown() {
-	const { type, subtype } = pageData;
-	const inventory = globalElements.input.inventoryInput;
-	const shipData = getShipData();
+export function invDropdown() {
+	const type = pageData.type as string;
+	const subtype = pageData.subtype as string;
+	const inventory = globalElements.input.inventoryInput as HTMLSelectElement;
 	if (type == 'Hauler') {
-		setDropdownOptions(inventory, shipData.Hauler.subtypes[subtype]);
-		if (shipData.Hauler.subtypes[subtype].length == 1) {
-			inventory.value = shipData.Hauler.subtypes[subtype][0];
+		const subtypes = shipData.Hauler.subtypes as Sections;
+		setDropdownOptions(inventory, subtypes[subtype]);
+		if (subtypes[subtype].length == 1) {
+			inventory.value = subtypes[subtype][0];
 			hideInput(inventory, 'none');
 		} else {
 			hideInput(inventory, '');
@@ -513,14 +126,14 @@ function invDropdown() {
  * @function
  * @returns {void}
  */
-function calcInv() {
-	const { type, subtype } = pageData;
-	const inventoryElement = globalElements.input.inventoryInput;
-	const shipData = getShipData();
+export function calcInv() {
+	const subtype = pageData.subtype as string;
+	const type = pageData.type as string;
+	const inventoryElement = globalElements.input.inventoryInput as HTMLSelectElement;
 	let inventory;
 	switch (type) {
 		case "Freighter":
-			if (shipData[type].subtypes.indexOf(subtype) > 5) {
+			if ((shipData[type].subtypes as Array<string>).indexOf(subtype) > 5) {
 				inventory = 'Small'
 			} else {
 				inventory = 'Large'
@@ -528,7 +141,7 @@ function calcInv() {
 			break;
 
 		case "Shuttle":
-			if (shipData[type].subtypes.indexOf(subtype) > 1) {
+			if ((shipData[type].subtypes as Array<string>).indexOf(subtype) > 1) {
 				inventory = 'Medium'
 			} else {
 				inventory = 'Small'
@@ -546,16 +159,16 @@ function calcInv() {
  * @returns {void}
  */
 function costSlotCalc() {
-	const { type, inventory } = pageData;
+	const type = pageData.type as string;
+	const inventory = pageData.inventory as string;
 	const propArray = ["cost", "slots", "techslots"];
-	const shipData = getShipData();
 
 	for (const prop of propArray) {
-		globalElements.output[prop].innerText = shipData[type][prop][inventory];
+		(globalElements.output[prop] as HTMLOutputElement).innerText = (shipData[type][prop] as ShipProp)[inventory] as string;
 	}
 }
 
-function introType() {
+export function introType() {
 	wikiCode(shipType(), 'archetype');
 }
 
@@ -572,22 +185,22 @@ function shipType() {
  * @function loc
  * @return {string} The completed location sentence.
  */
-function loc() {
+export function loc() {
 	const { class: shipClass, system: systemName, region: regionName, civShort: civ, type } = pageData;
 
 	// this output has a linebreak. This is intended, because we use .innerText to display this. If we used <br>, it would display '<br>', not the linebreak.
-	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName)} of the ${HubGal(civ)}.
+	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName as string)} of the ${HubGal(civ as string)}.
 
-	${type == 'Interceptor' ? 'The {{Class|' + shipClass + '}} class version of this starship' : 'It'} can be found ${locText()}.`
+	${type == 'Interceptor' ? 'The {{Class|' + shipClass + '}} class version of this starship' : 'It'} can be found ${locText()}.`;
 
-	globalElements.output.location.innerText = output;
+	(globalElements.output.location as HTMLOutputElement).innerText = output;
 
 	/**
 	 * Determines whether the discovered ship is a capital ship based on inventory size
 	 * @function capitalDetection
 	 * @return {string} If ship is a capital ship, returns the string 'Capital'; otherwise returns undefined.
 	 */
-	function capitalDetection() {
+	function capitalDetection(): string | void {
 		const inventory = pageData.inventory;
 		if (inventory == 'Large') return 'Capital';
 	}
@@ -641,9 +254,9 @@ function loc() {
  * @function
  * @returns {string} - The additional information sentence
  */
-function addInfo() {
+export function addInfo() {
 	let catalogue = '';
-	const civ = shortenGHub(pageData.civShort);
+	const civ = shortenGHub(pageData.civShort as string);
 	const researchteam = docByResearchteam('GHSH');
 	const type = pageData.type;
 
@@ -656,7 +269,7 @@ function addInfo() {
 	}
 	const output = '[[' + catalogue + ']]' + researchteam;
 
-	globalElements.output.addInfo.innerText = output;
+	(globalElements.output.addInfo as HTMLOutputElement).innerText = output;
 }
 
 /**
@@ -664,15 +277,13 @@ function addInfo() {
  * @function
  * @returns {void}
  */
-function appearanceDropdowns() {
-	const type = globalElements.input.typeInput.value;
+export function appearanceDropdowns() {
+	const type = pageData.type as string;	// this was an element.value document call, maybe this was important, idk
 	const { secPartsInput: secParts, accessoriesInput: accessories, miscPartsInput: miscParts } = globalElements.input;
 	const parts = { secParts, accessories, miscParts };
-	const shipData = getShipData();
 
-	for (const part in parts) {
-		const input = parts[part];
-		setDropdownOptions(input, shipData[type][part]);
+	for (const [part, input] of Object.entries(parts)) {
+		setDropdownOptions(input as HTMLSelectElement, shipData[type][part] as Array<string>);
 	}
 }
 
@@ -681,20 +292,22 @@ function appearanceDropdowns() {
  * @function appearanceSentence
  * @returns {void}
  */
-function appearanceSentence() {
-	// this is object destructuring, it may seem a bit chaotic
-	const {
-		mainColourInput: { value: mainColour },
-		secColourInput: { value: secColour },
-		secPartsInput: { value: secParts },
-		accessoriesInput: { value: accessories },
-		miscPartsInput: { value: miscParts },
-		appearanceInput: textarea
-	} = globalElements.input;
+export function appearanceSentence() {
+	// I would really like to use object destructuring here, but I can't type my stuff in there. And without proper types, TS complains everywhere.	
+	const textarea = globalElements.input.appearanceInput as HTMLTextAreaElement;
+
+	const mainColour = (globalElements.input.mainColourInput as HTMLSelectElement).value;
+	const secColour = (globalElements.input.secColourInput as HTMLSelectElement).value;
+	const secParts = (globalElements.input.secPartsInput as HTMLSelectElement).value;
+	const accessories = (globalElements.input.accessoriesInput as HTMLSelectElement).value;
+	const miscParts = (globalElements.input.miscPartsInput as HTMLSelectElement).value;
 
 	if (!(mainColour.trim() || secColour.trim() || secParts || accessories || miscParts)) return;
 
-	const { name, type, subtype, exotic } = pageData;
+	const type = pageData.type as string;
+	const subtype = pageData.subtype as string;
+	const exotic = pageData.exotic as string;
+	const name = pageData.name as string;
 
 	const accentColour = (() => {
 		if (secColour.trim()) return ` with ${secColour} accents`;
@@ -739,8 +352,9 @@ function appearanceSentence() {
  * @function
  * @returns {string} Returns a string that includes the filled-out properties.
  */
-function albumOtherExternal() {
-	const { economy: economyRaw, planet, moon, type } = pageData;
+export function albumOtherExternal() {
+	const { planet, moon, type } = pageData;
+	const economyRaw = pageData.economy as string;
 	const axes = '(' + pageData.axes + ')';
 	const faction = '- ' + pageData.pilot;
 
@@ -777,20 +391,23 @@ function albumOtherExternal() {
  * @function albumLinkGen
  * @returns {String} The link to the appropriate starship catalog.
  */
-function albumLinkGen() {
+export function albumLinkGen() {
 	// The long version of the civilization name.
 	// The shortened version of the civilization name.
-	const { civStub: civLong, civShort } = pageData;
+	const civLong = pageData.civStub as string;
+	const civilized = pageData.civilized as string;
+	const subtype = pageData.subtype as string;
+	const { type, civShort } = pageData;
 	const civ = (() => {
-		if (civLong.split(' ').length > 1) return pageData.civShort;
-		return pageData.civilized.split(' ').slice(0, 2).join(' ');
+		if (civLong.split(' ').length > 1) return civShort;
+		return civilized.split(' ').slice(0, 2).join(' ');
 	})();	// The civilization name, either the short version or the first two words of the long version.
 
-	const { type, subtype } = pageData;
-	const fighterSubtypes = {
+	// An object containing arrays of fighter subtypes, sorted by rarity.
+	const fighterSubtypes: Sections = {
 		Common: ['Barrel', 'Jet', 'Snowspeeder', 'Viper'],
 		Rare: ['Alpha', 'Long', 'Needle', 'Rasa', 'Stubby'],
-	}	// An object containing arrays of fighter subtypes, sorted by rarity.
+	}
 
 	/**
 	 * Returns the appropriate catalog name based on the properties of the pageData object.
@@ -814,7 +431,7 @@ function albumLinkGen() {
 	return getCatalog();
 }
 
-function albumTypeExternal() {
+export function albumTypeExternal() {
 	return 'Catalog';
 }
 
@@ -824,7 +441,7 @@ function albumTypeExternal() {
  * @function
  * @returns {void}
  */
-function generateGalleryArray() {
+export function generateGalleryArray() {
 	// Array of default gallery images
 	const array = [
 		'',

@@ -3,6 +3,7 @@ import { getCurrentYear } from "../../miscLogic/dateLogic";
 import baseElementFunctions from "./elementFunctions";
 import '../../startup';
 
-// functions to run at startup
 assignElementFunctions(baseElementFunctions);
+
+// startupFunctions
 getCurrentYear('censusrenewal');

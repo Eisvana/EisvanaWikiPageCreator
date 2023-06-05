@@ -1,4 +1,4 @@
-import { addInfoBullet, docBy, hideDiscoverer } from "../../common";
+import { addInfoBullet, docBy, hideDiscoverer, toggleSection } from "../../common";
 import { processDate } from "../../miscLogic/dateLogic";
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import { ElementFunctions } from "../../types/elements";
@@ -51,6 +51,11 @@ const baseElementFunctions: ElementFunctions = [
 		element: 'censusArrivalInput',
 		handler: 'change',
 		func: function () { processDate(this as unknown as HTMLInputElement) }
+	},
+	{
+		element: 'censusHideButton',
+		handler: 'click',
+		func: function () { toggleSection('census', this as unknown as HTMLButtonElement) }
 	},
 ]
 

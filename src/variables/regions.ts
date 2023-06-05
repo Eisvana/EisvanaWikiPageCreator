@@ -1,4 +1,6 @@
+import { addHuburbs } from "../common";
 import { Region, Regions } from "../types/regions"
+import { pageData } from "./objects";
 
 /**
  * An object representing discovery regions and their associated systems.
@@ -114,3 +116,10 @@ export const GHubHuburbRegions: Region = {
 	'F8556C2F': 'Menacaro',
 	'F8555C2F': 'Ziessuw Mass'
 }
+
+// If the 'huburbs' variable is defined and truthy, add Galactic Hub regions to 'regions'
+const huburbs = pageData.huburbs;
+if (huburbs) addHuburbs(regions);
+
+// Make 'regions' read-only
+Object.freeze(regions);

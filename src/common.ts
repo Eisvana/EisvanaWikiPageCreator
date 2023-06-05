@@ -3,7 +3,7 @@
  */
 
 import { vowels, wikiLink } from './variables/simple';
-import { GHubHuburbRegions, regions } from "./variables/regions";
+import { GHubHuburbRegions } from "./variables/regions";
 import { Regions } from "./types/regions";
 import { dataIntegrityObj, globalElements, globalFunctions, pageData } from './variables/objects';
 import { getDestElements } from './commonElements/elementBackend/elementStore';
@@ -30,12 +30,6 @@ export function addHuburbs(object: Regions) {
 		object.GHub[regionCode] = GHubHuburbRegions[regionCode];
 	}
 }
-// If the 'huburbs' variable is defined and truthy, add Galactic Hub regions to 'regions'
-const huburbs = pageData.huburbs;
-if (huburbs) addHuburbs(regions);
-
-// Make 'regions' read-only
-Object.freeze(regions);
 
 /**
  * Returns an object containing references to input elements on the page.
@@ -43,7 +37,7 @@ Object.freeze(regions);
  */
 function getInputData() {
 	const inputData: {
-		[key: string]: NodeListOf<HTMLInputElement | HTMLSelectElement>;
+		[key: string]: NodeListOf<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
 	} = {
 		inputs: document.querySelectorAll('[data-dest]'),
 		checkboxes: document.querySelectorAll('[data-dest-checkbox]'),
@@ -113,7 +107,7 @@ export function setDropdownOptions(element: HTMLElement, values: Array<string>, 
 export function autoShow(): void {
 	const inputData = getInputData();
 	const functionObj: Array<{
-		elements: NodeListOf<HTMLInputElement | HTMLSelectElement>;
+		elements: NodeListOf<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
 		handler?: keyof HTMLElementEventMap;
 		prio?: boolean;
 		func: () => void;
@@ -182,7 +176,7 @@ export function showAll() {
  * @param {Object} element - The source element to retrieve value or content from.
  * @param {string} dest - The ID of the destination element(s) to update, specified in a data attribute on the source element.
  */
-export function wikiCode(element: HTMLInputElement | HTMLSelectElement | string, dest: string | undefined = (element as HTMLElement)?.dataset?.dest) {
+export function wikiCode(element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | string, dest: string | undefined = (element as HTMLElement)?.dataset?.dest) {
 	const destElements = typeof dest == 'string' ? getDestElements(dest) : [];
 
 	// sanitize the source value or content
@@ -233,7 +227,7 @@ export function checkboxWikiCode(element: HTMLInputElement) {
  * @param {Object} element - The DOM element whose value will be stored.
  * @param {string} [key=element.dataset.destNoauto] - The key under which the value will be stored in the page data object. Defaults to the value of the element's `dest-noauto` attribute.
  */
-export function storeData(element: HTMLInputElement | HTMLSelectElement, key: string = element.dataset.destNoauto as string) {
+export function storeData(element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement, key: string = element.dataset.destNoauto as string) {
 	pageData[key] = sanitiseString(element.value);
 }
 
@@ -488,7 +482,6 @@ export function toggleSection(sectionName: string = '', button: HTMLButtonElemen
 		const buttonElements: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.sectionToggle button');
 		for (let i = 0; i < buttonElements.length; i++) {
 			const button = buttonElements[i];
-			button.addEventListener('click', function () { toggleSection('census', this) });
 			button.dataset.buttonId ??= (childindex + i).toString();
 			const id = button.dataset.buttonId;
 			button.dataset[`display${id}`] = button.dataset.displayDefault ?? '';
@@ -1061,7 +1054,7 @@ export function preventCopy() {
  * @param {string} [value=element.dataset.default] - The default value to assign (if no value is provided, the element's "data-default" attribute will be used)
  * @returns {void}
  */
-export function assignDefaultValue(element: HTMLInputElement | HTMLSelectElement, value: string = element.dataset.default as string) {
+export function assignDefaultValue(element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement, value: string = element.dataset.default as string) {
 	if (element.value.trim()) return;
 	const dest = element.dataset.dest ?? element.dataset.destNoauto;
 	wikiCode(value, dest);
