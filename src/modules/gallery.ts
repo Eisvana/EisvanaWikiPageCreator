@@ -3,7 +3,7 @@
  */
 
 import { globalElements, globalFunctions, pageData } from "../variables/objects";
-import { errorMessage, getChildIndex, loadHTML, sanitiseString, setDropdownOptions } from "../common";
+import { addDomAsElement, errorMessage, getChildIndex, loadHTML, sanitiseString, setDropdownOptions } from "../common";
 import { explanation } from "./tooltip";
 import galleryInputHtml from '../htmlSnippets/galleryInput.html?raw'
 import { ElementFunctions } from "../types/elements";
@@ -62,47 +62,32 @@ export function galleryUpload() {
 			nameElement,
 		}
 
-		// Load galleryTemplate using loadHTML function and replacementStrings
-		const galleryTemplate = loadHTML(galleryInputHtml, replacementStrings);
-
-		const parser = new DOMParser();
-		const galleryTemplateDom = parser.parseFromString(galleryTemplate, 'text/html');
-		const moveButtons: NodeListOf<HTMLButtonElement> = galleryTemplateDom.querySelectorAll('[data-move]');
-		for (const button of Array.from(moveButtons)) {
-			const direction = button.dataset.move as string;
-			button.addEventListener('click', function () { mobileMoveItem(this, replacementStrings.wikiCodeGalleryId, direction) });
-		}
-
 		const functionObj: ElementFunctions = [
 			{
-				element: replacementStrings.dropdownId,
+				element: 'move',
+				handler: 'click',
+				func: function () { mobileMoveItem(this as unknown as HTMLButtonElement, replacementStrings.wikiCodeGalleryId, (this as unknown as HTMLButtonElement).dataset.move as string) }
+			},
+			{
+				element: 'dropdown',
 				handler: 'change',
 				func: function () { galleryDesc(this as unknown as HTMLSelectElement, replacementStrings.inputId, replacementStrings.wikiCodeGalleryValueId) }
 			},
 			{
-				element: replacementStrings.inputId,
+				element: 'pic',
 				handler: 'input',
 				func: function () { galleryInput(this as unknown as HTMLInputElement, replacementStrings.wikiCodeGalleryValueId) }
 			},
 			{
-				element: galleryTemplateDom.querySelector('.controlButtons button.delete-icon') as HTMLElement,
+				element: 'removeButton',
 				handler: 'click',
 				func: function () { rmGallery(this as unknown as HTMLButtonElement, replacementStrings.wikiCodeGalleryId) }
 			},
+
 		]
 
-		for (const obj of functionObj) {
-			const { handler, func } = obj;
-			const element = (() => {
-				if (typeof obj.element == 'string') {
-					return galleryTemplateDom.getElementById(obj.element);
-				} else {
-					return obj.element;
-				}
-			})();
-
-			element?.addEventListener(handler as string, func);
-		}
+		// Load galleryTemplate using loadHTML function and replacementStrings
+		const galleryTemplateDom = loadHTML(galleryInputHtml, replacementStrings, functionObj) as Document;
 
 		// Get galleryElement and generate galleryArray if it exists
 		const dropdown = galleryTemplateDom.getElementById(replacementStrings.dropdownId) as HTMLSelectElement;
@@ -117,15 +102,13 @@ export function galleryUpload() {
 			dropdown.parentElement!.style.display = 'none';
 		}
 
-		const wrapper = galleryTemplateDom.getElementById(replacementStrings.galleryId) as HTMLElement;
-
 		// Set wikiCodeGalleryTemplate string
 		const wikiCodeGalleryTemplate = `<div id="${replacementStrings.wikiCodeGalleryId}">
 		<span>${name}</span><output id="${replacementStrings.wikiCodeGalleryValueId}"></output>
 		</div>`;
 
 		// Add galleryTemplate and wikiCodeGalleryTemplate to respective divs
-		inputDiv.insertAdjacentElement('afterbegin', wrapper);
+		addDomAsElement(galleryTemplateDom, inputDiv, 'afterbegin');
 		wikiCodeGalleryDiv.insertAdjacentHTML('afterbegin', wikiCodeGalleryTemplate);
 	}
 
