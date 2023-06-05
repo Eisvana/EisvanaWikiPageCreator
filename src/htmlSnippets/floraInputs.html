@@ -1,7 +1,7 @@
 <div class="tableHeader text sectionToggle" data-flora="section${i}" data-section="flora">
 	<p style="margin-right:auto">Plant: <output class="has-text-weight-bold" name="floraName${i}"></output></p>
-	<button class="button is-danger is-outlined" type="button" data-id="removeButton">Remove</button>
-	<button class="button" data-id="hideButton">Hide</button>
+	<button class="button is-danger is-outlined" type="button" data-evt-id="removeButton">Remove</button>
+	<button class="button" data-evt-id="hideButton">Hide</button>
 </div>
 <div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraNameInput${i}">Plant name:</label>
@@ -20,7 +20,7 @@
 </div>
 <div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 	<input type="text" id="floraFile_input${i}" data-dest="floraFile${i}" data-default="NmsMisc_NotAvailable.png">
-	<input type="file" id="floraFileUpl${i}" accept="image/*" data-id="fileInput">
+	<input type="file" id="floraFileUpl${i}" accept="image/*" data-evt-id="fileInput">
 </div>
 <div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraAgeInput${i}">Age:</label>
@@ -81,7 +81,7 @@
 </div>
 <div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 	<input data-dest-noauto="floraElements${i}" type="text" list="floraResources" id="floraResourcePrimInput${i}"
-		data-id="floraElements">
+		data-evt-id="floraElements">
 </div>
 <div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraResourceSecInput${i}">Secondary element:</label>
@@ -94,7 +94,7 @@
 </div>
 <div class="tableCell data" data-flora="section${i}" data-section="flora flora${i}">
 	<input data-dest-noauto="floraElements${i}" type="text" list="floraResources" id="floraResourceSecInput${i}"
-		data-id="floraElements">
+		data-evt-id="floraElements">
 </div>
 <div class="tableCell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraDiscovererInput${i}">Discoverer:</label>

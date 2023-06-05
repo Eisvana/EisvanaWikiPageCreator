@@ -70,7 +70,7 @@ export function locationSentence() {
  */
 export function addResource(element: HTMLButtonElement = (globalElements.input.resourceInputs as HTMLDivElement).querySelector('button') as HTMLButtonElement) {
 	// Finds the inputSection element that is the parent element of the button element
-	const inputSection = element.parentElement;
+	const inputSection = element.parentElement as HTMLElement;
 	// Finds all elements that have a 'data-resource' attribute and returns a NodeList
 	const elementList: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-resource]');
 	// Returns the index of the last element found with 'data-resource' attribute
@@ -78,47 +78,38 @@ export function addResource(element: HTMLButtonElement = (globalElements.input.r
 	// Creates a new string that's the name of the new input element
 	const resource_input = 'resource_input' + childIndex;
 
-	// Creates HTML code for a new resource input section
-
 	const sectionName = 'section' + childIndex;
 
-	const div1 = document.createElement('div');
-	const div2 = document.createElement('div');
+	// Creates HTML code for a new resource input section
+	const inputHTML = `<div class="tableCell text removable" data-resource="section${childIndex}">
+		<button class="button is-outlined is-danger icon is-small" title="Remove resource" type="button" disabled data-evt-id="removeButton">&#10006</button>
+		<label for="${resource_input}">Resource name:</label>
+	</div>
+	<div class="tableCell data" data-resource="section${childIndex}">
+		<input type="text" list="resources" id="${resource_input}" data-evt-id="resourceInput">
+	</div>`;
 
-	const button = document.createElement('button');
-	const label = document.createElement('label');
+	const eventListeners: ElementFunctions = [
+		{
+			element: 'resourceInput',
+			handler: 'input',
+			func: () => resourceList()
+		},
+		{
+			element: 'resourceInput',
+			handler: 'change',
+			func: function () { forceDatalist(this as unknown as HTMLInputElement) }
+		},
+		{
+			element: 'removeButton',
+			handler: 'click',
+			func: () => { removeSpecificSection(sectionName, 'resource'); enableResourceAdd() }
+		},
+	]
 
-	const input = document.createElement('input');
+	const inputDom = loadHTML(inputHTML, {}, eventListeners) as Document;
 
-	div1.classList.add('tableCell', 'text', 'removable');
-	div1.dataset.resource = sectionName;
-
-	button.classList.add('button', 'is-outlined', 'is-danger', 'icon', 'is-small');
-	button.title = 'Remove Resource';
-	button.disabled = true;
-	button.innerHTML = '&#10006';
-	button.addEventListener('click', () => { removeSpecificSection(sectionName, 'resource'); enableResourceAdd() });
-
-	label.htmlFor = resource_input;
-	label.innerText = 'Resource name:';
-
-	div2.classList.add('tableCell', 'data');
-	div2.dataset.resource = sectionName;
-
-	input.type = 'text';
-	input.setAttribute('list', 'resources');
-	input.id = resource_input;
-	input.addEventListener('input', () => resourceList());
-	input.addEventListener('change', function () { forceDatalist(this) });
-
-	div1.appendChild(button);
-	div1.appendChild(label);
-
-	div2.appendChild(input);
-
-	// Inserts the newly-generated inputHTML before the current inputSection
-	inputSection!.insertAdjacentElement('beforebegin', div1);
-	inputSection!.insertAdjacentElement('beforebegin', div2);
+	addDomAsElement(inputDom, inputSection, 'beforebegin');
 
 	// Gets all the remove buttons for the resource inputs and stores the count to a variable
 	const resourceRemoveButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('[data-resource] button');

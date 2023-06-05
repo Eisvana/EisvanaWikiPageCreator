@@ -1210,9 +1210,9 @@ export function loadHTML(html: string, varObj: { [key: string]: string } = {}, f
 	const dom = parser.parseFromString(processingHTML, 'text/html');
 
 	for (const functionObj of funcArray) {
-		const elements: NodeListOf<HTMLElement> = dom.querySelectorAll(`[data-id="${functionObj.element}"]`);
+		const elements: NodeListOf<HTMLElement> = dom.querySelectorAll(`[data-evt-id="${functionObj.element as string}"]`);
 		for (const element of Array.from(elements)) {
-			assignFunction({ element, handler: functionObj.handler || undefined, func: functionObj.func })
+			assignFunction({ element, handler: functionObj.handler ?? undefined, func: functionObj.func })
 		}
 	}
 	return dom;

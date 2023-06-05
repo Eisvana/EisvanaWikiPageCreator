@@ -2,8 +2,9 @@
  * @fileoverview Provides functions which can be used by the Planet page creator.
  */
 
-import { removeSpecificSection, sanitiseString, wikiCode } from "../../common";
+import { addDomAsElement, getChildIndex, loadHTML, removeSpecificSection, sanitiseString, wikiCode } from "../../common";
 import { plural } from "../../miscLogic/planetMoonLogic";
+import { ElementFunctions } from "../../types/elements";
 import { globalElements, pageData } from "../../variables/objects";
 
 /**
@@ -12,39 +13,35 @@ import { globalElements, pageData } from "../../variables/objects";
  * @returns {void}
  */
 export function addMoon(element: HTMLButtonElement) {
-	const inputSection = element.parentElement;
-	const elementList = document.querySelectorAll('[data-moon]');
-	const childIndex = getChildIndex(elementList, 'dataset.moon');
+	const inputSection = element.parentElement as HTMLElement;
+	const elementList: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-moon]');
+	const childIndex = getChildIndex(Array.from(elementList), 'dataset.moon');
 	const moon_input = 'moon_input' + childIndex;
 
-	const div1 = document.createElement('div');
-	const div2 = document.createElement('div');
-	const button = document.createElement('button');
-	const label = document.createElement('label');
-	const input = document.createElement('input');
+	const inputHTML = `<div class="tableCell text removable" data-moon="section${childIndex}">
+		<button class="button is-outlined is-danger icon is-small" title="Remove moon" type="button" data-evt-id="removeButton">&#10006</button>
+		<label for="${moon_input}">Moon name:</label>
+	</div>
+	<div class="tableCell data" data-moon="section${childIndex}">
+		<input type="text" id="${moon_input}" data-evt-id="moonInput">
+	</div>`;
 
-	div1.classList.add('tableCell', 'text', 'removable');
-	div1.dataset.moon = 'section' + childIndex;
+	const eventListeners: ElementFunctions = [
+		{
+			element: 'moonInput',
+			handler: 'input',
+			func: () => moonList()
+		},
+		{
+			element: 'removeButton',
+			handler: 'click',
+			func: () => { removeSpecificSection('section' + childIndex, 'moon'); enableMoonAdd() }
+		},
+	]
 
-	button.classList.add('button', 'is-outlined', 'is-danger', 'icon', 'is-small');
-	button.type = 'button';
-	button.innerHTML = '&#10006';
-	button.addEventListener('click', () => { removeSpecificSection('section' + childIndex, 'moon'); enableMoonAdd() });
+	const inputDom = loadHTML(inputHTML, {}, eventListeners) as Document;
 
-	label.htmlFor = moon_input;
-	label.innerText = 'Moon name:';
-
-	input.type = 'text';
-	input.id = moon_input;
-	input.addEventListener('input', () => moonList());
-
-	div1.appendChild(button);
-	div1.appendChild(label);
-
-	div2.appendChild(input);
-
-	inputSection.insertAdjacentElement('beforebegin', div1);
-	inputSection.insertAdjacentElement('beforebegin', div2);
+	addDomAsElement(inputDom, inputSection, 'beforebegin');
 
 	const moonInputSectionCount = document.querySelectorAll('[data-moon]').length / 2;	// NoSonar there are two sections for every moon (I guess...?)
 
@@ -60,7 +57,7 @@ export function addMoon(element: HTMLButtonElement) {
  * @returns {void}
  */
 export function enableMoonAdd() {
-	const addButton = globalElements.input.moonInputs.querySelector('button');
+	const addButton = (globalElements.input.moonInputs as HTMLDivElement).querySelector('button') as HTMLButtonElement;
 	addButton.disabled = false;
 	moonList();
 }
@@ -71,13 +68,13 @@ export function enableMoonAdd() {
 * @returns {undefined}
 */
 export function moonList() {
-	const moonInputs = document.querySelectorAll('[data-moon] input');
+	const moonInputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('[data-moon] input');
 	const moons = [];
-	for (const input of moonInputs) {
+	for (const input of Array.from(moonInputs)) {
 		if (input.value) moons.push(`[[${sanitiseString(input.value)}]]`);
 	}
 
-	globalElements.output.moonList.innerText = moons.join(', ');
+	(globalElements.output.moonList as HTMLOutputElement).innerText = moons.join(', ');
 	pageData.moons = moons;
 	moonSentence()
 }
@@ -89,7 +86,7 @@ export function moonList() {
  */
 function moonSentence() {
 	const output = (() => {
-		const moons = pageData.moons;
+		const moons = pageData.moons as Array<string>;
 		if (!moons || moons.length == 0) {
 			return `This planet has no moons.`;
 		} else {

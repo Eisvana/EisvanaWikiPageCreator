@@ -1,7 +1,7 @@
 <div class="tableHeader text sectionToggle" data-fauna="section${i}" data-section="fauna">
 	<p style="margin-right:auto">Creature: <output class="has-text-weight-bold" name="faunaName${i}"></output></p>
-	<button class="button is-danger is-outlined" type="button" data-id="removeButton">Remove</button>
-	<button class="button" data-id="hideButton">Hide</button>
+	<button class="button is-danger is-outlined" type="button" data-evt-id="removeButton">Remove</button>
+	<button class="button" data-evt-id="hideButton">Hide</button>
 </div>
 <div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 	<label for="faunaNameInput${i}">Creature name:</label>
@@ -20,7 +20,7 @@
 </div>
 <div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
 	<input type="text" id="faunaFile_input${i}" data-dest="faunaFile${i}" data-default="NmsMisc_NotAvailable.png">
-	<input type="file" id="faunaFileUpl${i}" accept="image/*" data-id="fileInput">
+	<input type="file" id="faunaFileUpl${i}" accept="image/*" data-evt-id="fileInput">
 </div>
 <div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 	<label>Hemisphere:</label>
@@ -67,7 +67,7 @@
 	</button>
 </div>
 <div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
-	<select data-dest="faunaEcosystem${i}" id="faunaEcosystemInput${i}" data-id="ecosystemInput">
+	<select data-dest="faunaEcosystem${i}" id="faunaEcosystemInput${i}" data-evt-id="ecosystemInput">
 		<option value="Ground">Ground</option>
 		<option value="Flying">Flying</option>
 		<option value="Underwater">Underwater</option>
@@ -103,7 +103,7 @@
 	</button>
 </div>
 <div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
-	<select data-dest-noauto="faunaGenus${i}" id="faunaGenusInput${i}" data-id="genusInput"></select>
+	<select data-dest-noauto="faunaGenus${i}" id="faunaGenusInput${i}" data-evt-id="genusInput"></select>
 </div>
 <div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 	<label for="faunaWeightInput${i}">Weight in kg:</label>
@@ -116,7 +116,7 @@
 </div>
 <div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
 	<input data-dest-noauto="faunaWeight${i}" type="text" id="faunaWeightInput${i}" maxlength="5" placeholder="0.0"
-		data-id="creaturePropInput">
+		data-evt-id="creaturePropInput">
 </div>
 <div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 	<label for="faunaHeightInput${i}">Height in m:</label>
@@ -129,7 +129,7 @@
 </div>
 <div class="tableCell data" data-fauna="section${i}" data-section="fauna fauna${i}">
 	<input data-dest-noauto="faunaHeight${i}" type="text" id="faunaHeightInput${i}" maxlength="3" placeholder="0.0"
-		data-id="creaturePropInput">
+		data-evt-id="creaturePropInput">
 </div>
 <div class="tableCell text" data-fauna="section${i}" data-section="fauna fauna${i}">
 	<label for="faunaDiscovererInput${i}">Discoverer:</label>

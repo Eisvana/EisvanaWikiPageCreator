@@ -58,11 +58,11 @@ export function explanation(heading: string = '', text: string = '', img: string
 			}
 
 			linkElement.href = `./assets/images/jpg/${img}.jpg`;
-		}
 
-		if (!isCached) {
-			imgElement.style.opacity = '0';
-			imgElement.style.marginBlockStart = '0';
+			if (!isCached) {
+				imgElement.style.opacity = '0';
+				imgElement.style.marginBlockStart = '0';
+			}
 		}
 	}
 
