@@ -2,64 +2,15 @@
  * @fileoverview Provides functions which can be used by the Multi-Tool page creator.
  */
 
-import { hideInput, wikiCode } from "../../common";
-import { planetMoon, planetMoonSentence } from "../../miscLogic/locationLogic";
+import { docByResearchteam, enPrefix, errorMessage, hideInput, numberStats, shortenGHub, triggerEvent, validateCoords, wikiCode } from "../../common";
+import { HubGal, planetMoon, planetMoonSentence, regNr } from "../../miscLogic/locationLogic";
+import { albumDesc } from "../../modules/albumactions";
+import { PicObj, StdObj } from "../../types/objects";
 import { globalElements, pageData } from "../../variables/objects";
 
-function startupFunctions() {
-	locGalaxy();
-	acquirementBundle();
-	addInfo();
-	autoMTType();
-	showSizeDropdown();
-	MTType();
-	bundleNumberStats();
-	hideLocName();
-	hideSrLocName();
-	locHubNr();
-	hideCost();
-	albumFunctions();
-}
-
-// 1. param: string of all functions to add to the element
-// 2. param: string of the listener that should be used ('onchange', 'oninput'...)
-// 3. param: boolean whether the function string should be inserted before or after existing functions
-const MTElementFunctions = {
-	nameInput: ['albumName(); appearance()'],
-	civ: ['locGalaxy(); addInfo(); appearance(); locHubNr()', null, true],
-	typeInput: ['addInfo(); appearance(); autoMTType(); showSizeDropdown(); MTType(); albumItemType(); albumOther()', null, true],
-	sizeInput: ['showSizeDropdown(); MTType(); albumOther()'],
-	researchTeam: ['addInfo()', null, true],
-	locInput: ['acquirementBundle(); hideLocName(); hideCost(); autoSentinel(this)'],
-	srlocInput: ['acquirementBundle(); hideSrLocName()'],
-	srInput: ['acquirementBundle()'],
-	planetInput: ['acquirementBundle()'],
-	moonInput: ['acquirementBundle()'],
-	axesInput: ['acquirementAlbumBundle()'],
-	dmgInput: ['numberStats(this, 1, true)'],
-	scanInput: ['numberStats(this, 1, true)'],
-	costInput: ['numberStats(this)'],
-	slotsInput: ['numberStats(this); albumOther()'],
-	classInput: ['albumOther()'],
-	srImgInput: ['acquirementGallery()'],
-	sysImgInput: ['acquirementGallery()'],
-	cabInput: ['acquirementGallery()'],
-	coordsInput: ['acquirementGallery()'],
-	srImgUpload: ['acquirementGallery()', null, true],
-	sysImgUpload: ['acquirementGallery()', null, true],
-	cabUpload: ['acquirementGallery()', null, true],
-	coordsUpload: ['acquirementGallery()', null, true],
-	portalglyphsInput: ['locHubNr()', null, true],
-	discoveredInput: ['albumDiscoverer()'],
-	discoveredlinkInput: ['albumDiscoverer()'],
-	mainColourInput: ['appearance()'],
-	secColourInput: ['appearance()'],
-}
-assignElementFunctions(MTElementFunctions);
-
-
-function locHubNr() {
-	globalElements.output.HubNr.innerText = regNr(pageData.region);
+export function locHubNr() {
+	const outputElement = globalElements.output.HubNr as HTMLOutputElement;
+	outputElement.innerText = regNr(pageData.region as string);
 }
 
 /**
@@ -68,10 +19,10 @@ function locHubNr() {
  * @name locGalaxy
  * @returns {void}
  */
-function locGalaxy() {
-	const civ = pageData.civShort; // The civilization short name
-	const text = HubGal(civ); // The location galaxy text
-	wikiCode(text, 'locGalaxy'); // Adds the location galaxy text to the page with the section name 'locGalaxy'
+export function locGalaxy() {
+	const civ = pageData.civShort as string;	// The civilization short name
+	const text = HubGal(civ);	// The location galaxy text
+	wikiCode(text, 'locGalaxy');	// Adds the location galaxy text to the page with the section name 'locGalaxy'
 }
 
 /**
@@ -79,8 +30,8 @@ function locGalaxy() {
  * @function
  * @returns {undefined}
  */
-function addInfo() {
-	const civ = shortenGHub(pageData.civShort);
+export function addInfo() {
+	const civ = shortenGHub(pageData.civShort as string);
 	const researchteam = docByResearchteam('GHSH');
 	const type = (() => {
 		const preType = pageData.type;		// Alien/Experimental/Starter Pistol/Standard/Royal/Sentinel
@@ -98,7 +49,8 @@ function addInfo() {
 
 	const output = '[[' + catalogue + ']]' + researchteam;
 
-	globalElements.output.addInfo.innerText = output;
+	const outputElement = globalElements.output.addInfo as HTMLOutputElement;
+	outputElement.innerText = output;
 }
 
 /**
@@ -108,10 +60,12 @@ function addInfo() {
  * @param {Object} pageData - An object containing multi-tool data such as name, type, and colors.
  * @param {HTMLElement} input - The input element to assign the calculated appearance to.
  */
-function appearance() {
-	const { name, mainColour: colour1, secColour: colour2 } = pageData;
-	const type = pageData.type.toLowerCase();
-	const appearance = globalElements.input.appearanceInput;
+export function appearance() {
+	const colour1 = pageData.mainColour as string;
+	const colour2 = pageData.secColour as string;
+	const name = pageData.name as string;
+	const type = (pageData.type as string).toLowerCase();
+	const appearance = globalElements.input.appearanceInput as HTMLTextAreaElement;
 
 	// Handles the case where both colors are empty/undefined
 	if (!(colour1.trim() || colour2.trim())) return;
@@ -132,12 +86,12 @@ function appearance() {
 	wikiCode(appearance);
 }
 
-function acquirementAlbumBundle() {
+export function acquirementAlbumBundle() {
 	acquirement();
-	albumInitialised ? albumDesc() : document.addEventListener('albumLoaded', () => albumDesc());
+	pageData.albumInitialised ? albumDesc() : document.addEventListener('albumLoaded', () => albumDesc());
 }
 
-function acquirementBundle() {
+export function acquirementBundle() {
 	acquirementAlbumBundle();
 	acquirementGallery();
 }
@@ -150,7 +104,7 @@ function acquirementBundle() {
  * @returns {string} The constructed sentence.
  * @throws Will throw an error if page data is missing.
  */
-function acquirement() {
+export function acquirement() {
 	// srName: name of the s/r location (for example a planetname)
 	// planet: planet name of the MT
 	// moon: moon name of the MT
@@ -158,7 +112,7 @@ function acquirement() {
 	const { srLocName: srName, planet, moon, axes: coords } = pageData
 
 	const loc = (pageData.location as string).toLowerCase();	// location type of the MT (for example space station/settlement/sentinel pillar)
-	const body = planetMoonSentence(planet as string, moon as string) as string;
+	const body = planetMoonSentence(planet as string, moon as string);
 	let instructions, savereload;
 
 	const srloc = (() => {
@@ -202,12 +156,13 @@ function acquirement() {
  * @function
  * @returns {undefined}
  */
-function acquirementGallery() {
-	const { srLocName: srName, location: loc } = pageData;
-	const srImg = pageData.srPlanetImg || 'nmsMisc_notAvailable.png';
-	const sysImg = pageData.sysImg || 'nmsMisc_notAvailable.png';
-	const cabinetPlanetImg = pageData.cabinetPlanetImg || 'nmsMisc_notAvailable.png';
-	const axesImg = pageData.axesImg || 'nmsMisc_notAvailable.png';
+export function acquirementGallery() {
+	const srName = pageData.srLocName as string;
+	const loc = pageData.location as string;
+	const srImg = pageData.srPlanetImg as string || 'nmsMisc_notAvailable.png';
+	const sysImg = pageData.sysImg as string || 'nmsMisc_notAvailable.png';
+	const cabinetPlanetImg = pageData.cabinetPlanetImg as string || 'nmsMisc_notAvailable.png';
+	const axesImg = pageData.axesImg as string || 'nmsMisc_notAvailable.png';
 
 	const InputElementIds = [
 		'srImgInput',
@@ -216,14 +171,12 @@ function acquirementGallery() {
 		'coordsInput',
 	]
 
-	const pics: Array<{
-		[key: string]: string;
-	}> = [{}, {}, {}, {}];
+	const pics: Array<PicObj> = [{}, {}, {}, {}];
 
 	const body = planetMoon();
 
 	const srloc = (() => {
-		const preSrloc = pageData.srLoc;
+		const preSrloc = pageData.srLoc as string;
 		if (preSrloc.includes('Space') || srName) return preSrloc;
 		if (loc.includes('Space')) return loc;
 		return body;
@@ -246,7 +199,7 @@ function acquirementGallery() {
 	 * @param {string} desc - A picture description.
 	 * @returns {undefined}
 	 */
-	function fillPicObj(obj, img, desc) {
+	function fillPicObj(obj: PicObj, img: string, desc: string) {
 		obj.picName = img;
 		obj.desc = desc;
 	}
@@ -255,8 +208,8 @@ function acquirementGallery() {
 	fillPicObj(pics[1], sysImg, `System ${highlight}`);
 	const picCondition = !loc.includes('Space');
 	if (picCondition) {
-		fillPicObj(pics[2], cabinetPlanetImg, `${type} ${body}`);
-		fillPicObj(pics[3], axesImg, 'Coordinates');
+		fillPicObj(pics[2], cabinetPlanetImg, `${type} ${body}`);	// NoSonar this is just to access index 2, wtf
+		fillPicObj(pics[3], axesImg, 'Coordinates');				// NoSonar this is just to access index 3, wtf
 	}
 
 	const codeArray: Array<string> = [];
@@ -266,17 +219,18 @@ function acquirementGallery() {
 		const desc = picObj.desc;
 		const input = InputElementIds[i];
 		if (!pic || !desc) {
-			hideInput(globalElements.input[input], 'none');
+			hideInput(globalElements.input[input] as HTMLInputElement, 'none');
 			continue;
 		}
-		hideInput(globalElements.input[input], '');
+		hideInput(globalElements.input[input] as HTMLInputElement, '');
 		const gallery = document.createElement('span');
 		gallery.style.display = 'block';
 		gallery.innerText = `${pic}|${desc}`;
 		codeArray.push(gallery.outerHTML);
-		globalElements.output[input + 'Label'].innerText = desc;
+		(globalElements.output[input + 'Label'] as HTMLOutputElement).innerText = desc;
 	}
-	globalElements.output.acquirementGallery.innerHTML = codeArray.join('');
+	const outputElement = globalElements.output.acquirementGallery as HTMLOutputElement;
+	outputElement.innerHTML = codeArray.join('');
 }
 
 /**
@@ -284,11 +238,11 @@ function acquirementGallery() {
  * @function
  * @returns {void}
  */
-function autoMTType() {
-	const type = pageData.type;
-	const locElement = globalElements.input.locInput;
+export function autoMTType() {
+	const type = pageData.type as string;
+	const locElement = globalElements.input.locInput as HTMLSelectElement;
 
-	const locsByType = {
+	const locsByType: StdObj = {
 		Royal: 'Sentinel Pillar',
 		Sentinel: 'Harmonic Camp',
 	}
@@ -306,14 +260,13 @@ function autoMTType() {
 }
 
 // shows or hides size dropdown
-function showSizeDropdown() {
-	const { type, size } = pageData;
-	const sizeInput = globalElements.input.sizeInput;
-	if (type == 'Experimental') {
-		sizeInput.querySelector('option[value="SMG"]').style.display = 'none';
-	} else {
-		sizeInput.querySelector('option[value="SMG"]').style.display = '';
-	}
+export function showSizeDropdown() {
+	const type = pageData.type as string;
+	const size = pageData.size as string;
+	const sizeInput = globalElements.input.sizeInput as HTMLSelectElement;
+
+	(sizeInput.querySelector('option[value="SMG"]') as HTMLOptionElement).style.display = type == 'Experimental' ? 'none' : '';
+
 	if (type == 'Experimental' && size == 'SMG') sizeInput.value = 'Pistol';
 
 	const hideSize = ['Royal', 'Starter Pistol', 'Sentinel'];
@@ -330,11 +283,11 @@ function showSizeDropdown() {
  * @global
  * @returns {void}
  */
-function MTType() {
-	const typeElement = globalElements.input.typeInput;
+export function MTType() {
+	const typeElement = globalElements.input.typeInput as HTMLSelectElement;
 	const type = typeElement.value;
 	const typeShort = type.split(' ').slice(-1).join();
-	const size = pageData.size;
+	const size = pageData.size as string;
 	const output = (() => {
 		if (type == 'Standard' && size == 'SMG') {
 			return 'Rifle';
@@ -346,36 +299,41 @@ function MTType() {
 	})();
 
 	enPrefix(output, 'enPrefix');
-	const dest = typeElement.dataset.destNoauto;
+	const dest = typeElement.dataset.destNoauto as string;
 	wikiCode(output, dest);
 	pageData[dest] = type;		// setting this manually to avoid errors down the line. The auto function uses the provided output, which is not unique per option.
 }
 
-function bundleNumberStats() {
-	numberStats(globalElements.input.dmgInput, 1);
-	numberStats(globalElements.input.scanInput, 1);
-	numberStats(globalElements.input.costInput);
-	numberStats(globalElements.input.slotsInput);
+export function bundleNumberStats() {
+	const inputElements = [
+		globalElements.input.dmgInput,
+		globalElements.input.scanInput,
+		globalElements.input.costInput,
+		globalElements.input.slotsInput,
+	]
+
+	for (let i = 0; i < inputElements.length; i++) {
+		const input = inputElements[i];
+		numberStats(input as HTMLInputElement, i < 2 ? 1 : undefined);	// NoSonar dmg and scan have decimal values, the other two do not. index 2 is the first without decimals.
+	}
 }
 
 /**
  * Hides location name input fields if the location is in Space.
  * Otherwise, shows the location name input fields.
  */
-function hideLocName() {
-	const loc = pageData.location;
+export function hideLocName() {
+	const loc = pageData.location as string;
 	const idArray = ['planetInput', 'moonInput', 'axesInput'];
-	if (loc.includes('Space')) {
-		for (const id of idArray) {
-			const element = globalElements.input[id];
-			hideInput(element, 'none');
+	for (const id of idArray) {
+		const element = globalElements.input[id] as HTMLInputElement;
+		const isStation = loc.includes('Space');
+
+		hideInput(element, isStation ? 'none' : '');
+		if (isStation) {
 			element.value = '';
 			wikiCode(element);
 			errorMessage(element);
-		}
-	} else {
-		for (const id of idArray) {
-			hideInput(globalElements.input[id], '');
 		}
 	}
 }
@@ -386,9 +344,9 @@ function hideLocName() {
  *
  * @function
  */
-function hideSrLocName() {
-	const srLoc = pageData.srLoc;
-	const srLocNameInput = globalElements.input.srInput;
+export function hideSrLocName() {
+	const srLoc = pageData.srLoc as string;
+	const srLocNameInput = globalElements.input.srInput as HTMLInputElement;
 	if (srLoc.includes('Space')) {
 		hideInput(srLocNameInput, 'none');
 		srLocNameInput.value = '';
@@ -403,15 +361,14 @@ function hideSrLocName() {
  * If cost element exists, its `value` property will be emptied and it will fire the `oninput` event.
  * @function
  */
-function hideCost() {
-	const location = pageData.location;
-	const costElement = globalElements.input.costInput;
-	if (location == 'Sentinel Pillar' || location == 'Harmonic Camp') {
-		hideInput(costElement, 'none');
+export function hideCost() {
+	const location = pageData.location as string;
+	const costElement = globalElements.input.costInput as HTMLInputElement;
+	const isFree = location == 'Sentinel Pillar' || location == 'Harmonic Camp';
+	hideInput(costElement, isFree ? 'none' : '');
+	if (isFree) {
 		costElement.value = '';
-		costElement.oninput();
-	} else {
-		hideInput(costElement, '');
+		triggerEvent(costElement, 'input');
 	}
 }
 
@@ -420,17 +377,17 @@ function hideCost() {
  * @function
  * @returns {void}
  */
-function hideAddons() {
+export function hideAddons() {
 	// Gets the page type from the pageData object
-	const type = pageData.type;
+	const type = pageData.type as string;
 
 	// Gets the crystal addons input box element
-	const addonInput = globalElements.input.crystalsInput;
+	const addonInput = globalElements.input.crystalsInput as HTMLInputElement;
 
 	// If the MT type is 'Royal' or 'Sentinel'
 	if (type == 'Royal' || type == 'Sentinel') {
 		// Gets all checkboxes in the same container as the addonInput
-		const checkboxes = addonInput.closest('.checkboxes').querySelectorAll('input[type="checkbox"]');
+		const checkboxes: NodeListOf<HTMLInputElement> = addonInput.closest('.checkboxes')!.querySelectorAll('input[type="checkbox"]');
 
 		// Hides the addonInput box
 
@@ -438,7 +395,7 @@ function hideAddons() {
 		// Unchecks all checkboxes and triggers their onchange event
 		checkboxes.forEach(checkbox => {
 			checkbox.checked = false;
-			checkbox.onchange();
+			triggerEvent(checkbox, 'change');
 		})
 		// If the MT type is not 'Royal' or 'Sentinel'
 	} else {
@@ -455,44 +412,31 @@ function hideAddons() {
  * @param {object} input - The input element to be checked.
  * @returns {undefined}
  */
-function autoSentinel(input) {
+export function autoSentinel(input: HTMLSelectElement) {
 	if (input.value != 'Harmonic Camp') return;
-	const typeInput = globalElements.input.typeInput;
+	const typeInput = globalElements.input.typeInput as HTMLSelectElement;
 	typeInput.value = 'Sentinel';
-	typeInput.onchange();
+	triggerEvent(typeInput, 'change');
 	hideInput(typeInput, 'none');
 	hideInput(input, '');
 }
 
-function galleryExplanationExternal() {
-	return `There is a preferred order of pictures:
-	<div class='is-flex is-justify-content-center'>
-		<ol class='has-text-left'>
-			<li>Discovery Menu</li>
-			<li>Price Page</li>
-			<li>Base Stats</li>
-			<li>Minor Settlement/Sentinel Pillar/Harmonic Camp</li>
-			<li>Tool in Hand</li>
-			<li>First Person View</li>
-		</ol>
-	</div>`
-}
-
 // album functions
-function albumTypeExternal() {
+export function albumTypeExternal() {
 	return 'Catalog';
 }
 
-function albumItemTypeExternal() {
-	return pageData.type;
+export function albumItemTypeExternal() {
+	return pageData.type as string;
 }
 
-function albumOtherExternal() {
+export function albumOtherExternal() {
 
 	// determine if MT is SMG for catalogue
 	function catalogMTType() {
-		const { type, size } = pageData
-		const noSize = ['Royal', 'Starter Pistol', 'Sentinel']
+		const type = pageData.type as string;
+		const size = pageData.size as string;
+		const noSize = ['Royal', 'Starter Pistol', 'Sentinel'];
 		if (noSize.includes(type)) return '';
 		return size + ' -';
 	}
@@ -511,10 +455,12 @@ function albumOtherExternal() {
  * @property {string} pageData.axes - The axes of the MT location.
  * @property {string} pageData.acquirement - The acquisition instructions of the MT.
  */
-function albumDescExternal() {
+export function albumDescExternal() {
 	const output = (() => {
-		const axes = pageData.axes;
-		const sentence = pageData.acquirement.replace('Save and reload', 'S/r');
+		const axes = pageData.axes as string;
+		const acquirement = pageData.acquirement as string;
+
+		const sentence = acquirement.replace('Save and reload', 'S/r');
 		if (axes && !validateCoords(false)) return sentence.replace(/[()]/g, '').replace(axes, `(${axes})`);
 		return sentence;
 	})();
@@ -527,8 +473,8 @@ function albumDescExternal() {
  * @function
  * @returns {string} - Link for the multi-tool catalog album.
  */
-function albumLinkGen() {
-	const civ = shortenGHub(pageData.civShort);
+export function albumLinkGen() {
+	const civ = shortenGHub(pageData.civShort as string);
 	const type = pageData.type;
 
 	const catalogName = (() => {
@@ -552,7 +498,7 @@ function albumLinkGen() {
  * @example
  * generateGalleryArray();
  */
-function generateGalleryArray() {
+export function generateGalleryArray() {
 	const array = [
 		'',
 		'Discovery Menu',
@@ -565,7 +511,7 @@ function generateGalleryArray() {
 		'First Person View'
 	];
 
-	const location = pageData.location;
+	const location = pageData.location as string;
 	const locs = ['Minor Settlement', 'Sentinel Pillar', 'Harmonic Camp'];
 	if (locs.includes(location)) {
 		const rmLocs = locs.filter(loc => loc != location);

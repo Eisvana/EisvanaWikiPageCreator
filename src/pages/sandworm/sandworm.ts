@@ -2,33 +2,8 @@
  * @fileoverview Provides functions which can be used by the Sandworm page creator.
  */
 
-function startupFunctions() {
-	wormName();
-	catalogue();
-	autoSpawn();
-	albumFunctions();
-}
-
-const sandwormElements = {
-	input: {
-		autoSpawn: 'autoSpawnInput',
-	}
-}
-updateGlobalElements(sandwormElements);
-
-const sandwormElementFunctions = {
-	civ: ['catalogue(); albumItemType()', null, true],
-	planetInput: ['wormName(); planetMoonSentence(); albumName()'],
-	moonInput: ['wormName(); planetMoonSentence(); albumName()'],
-	autoSpawn: ['autoSpawn()'],
-	researchTeam: ['catalogue()', null, true],
-	wormclassInput: ['albumName()'],
-	wormmaxdepthInput: ['numberStats(this, 1); albumOther()'],
-	discoveredInput: ['albumDiscoverer()'],
-	discoveredlinkInput: ['albumDiscoverer()'],
-}
-assignElementFunctions(sandwormElementFunctions);
-
+import { addInfoBullet, docByResearchteam, enableTextMarking, wikiCode } from "../../common";
+import { globalElements, pageData } from "../../variables/objects";
 
 /**
  * Assigns a dynamic name to the worm, based on the
@@ -37,8 +12,9 @@ assignElementFunctions(sandwormElementFunctions);
  * @function wormName
  * @returns {void}
  */
-function wormName() {
-	const { planet, moon } = pageData;
+export function wormName() {
+	const planet = pageData.planet as string;
+	const moon = pageData.moon as string;
 
 	/*
 	 * If there's no planet, set pageData.name to an
@@ -74,20 +50,18 @@ function wormName() {
  * @returns {void}
  */
 // sets the autospawn value according to input
-function autoSpawn() {
+export function autoSpawn() {
 	const spawn = (() => {
-		const elements = globalElements.input.autoSpawn;
-		for (const element of elements) {
+		const elements = globalElements.input.autoSpawn as Array<HTMLInputElement>;
+		for (const element of Array.from(elements)) {
 			if (element.checked) return element.value;
 		}
+		return '';
 	})();
 	const output = `This creature ${spawn} automatically spawn on game reload`;
-	if (spawn) {
-		globalElements.output.autoSpawn.style.display = '';
-		globalElements.output.autoSpawn.innerText = output;
-	} else {
-		globalElements.output.autoSpawn.style.display = 'none';
-	}
+	const outputElement = globalElements.output.autoSpawn as HTMLOutputElement;
+	outputElement.style.display = spawn ? '' : 'none';
+	if (spawn) outputElement.innerText = output;
 	addInfoBullet();
 }
 
@@ -101,7 +75,7 @@ function autoSpawn() {
  *              If it's "EisHub", it will add information to the "EisHub Shaihuluda Album" page.
  *              Also adds a "documented by GHEC" sentence to the output.
  */
-function catalogue() {
+export function catalogue() {
 	const research = docByResearchteam('GHEC');
 
 	const album = (() => {
@@ -115,6 +89,7 @@ function catalogue() {
 			case "EisHub":
 				return "EisHub Shaihuluda";
 		}
+		return '';
 	})();
 	const albumName = `${album} Album`;
 	const output = `[[${albumName}]]${research}`;
@@ -125,27 +100,29 @@ function catalogue() {
 }
 
 //album functions
-function albumItemTypeExternal() {
-	return pageData.catalogue.split('|').at(-1);
+export function albumItemTypeExternal() {
+	const catalogue = pageData.catalogue as string;
+	return catalogue.split('|').at(-1);
 }
 
-function albumCivExternal() {
+export function albumCivExternal() {
 	return '';
 }
 
-function albumNameExternal() {
+export function albumNameExternal() {
 	enableTextMarking();
 	const { name, wormclass } = pageData;
 	const output = `${name}|${wormclass}`;
 	return output;
 }
 
-function albumOtherExternal() {
+export function albumOtherExternal() {
 	return `(${pageData.wormmaxdepth}ku)`;
 }
 
-function albumLinkGen() {
-	return pageData.catalogue.split('|')[0];
+export function albumLinkGen() {
+	const catalogue = pageData.catalogue as string;
+	return catalogue.split('|')[0];
 }
 
 /**
@@ -153,7 +130,7 @@ function albumLinkGen() {
  * @function generateGalleryArray
  * @returns {Array} - An array of gallery items that are unique to the page
  */
-function generateGalleryArray() {
+export function generateGalleryArray() {
 	const array = [
 		'',
 		'Worm scan',
@@ -169,17 +146,4 @@ function generateGalleryArray() {
 	}
 
 	pageData.galleryArray = array;
-}
-
-function galleryExplanationExternal() {
-	return `The preferred order of pictures is as follows:
-	<div class='dialog-center'>
-		<ol class='dialog-list'>
-			<li>Worm scan</li>
-			<li>Moon Page</li>
-			<li>Planet Page</li>
-			<li>System Page</li>
-			<li>Galaxy Map</li>
-		</ol>
-	</div>`
 }

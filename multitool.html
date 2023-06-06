@@ -10,23 +10,7 @@
 		content="Easily generate the wikicode to create a multi-tool discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Multi-Tool">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/pages/multitool.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/albumactions.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script src="./src/misc_logic/locationLogic.js"></script>
-	<script>
-		const huburbs = true;
-		window.onload = () => {
-			addStaticPageData('pageType', 'Multi-Tool');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/multitool" type="module"></script>
 </head>
 
 <body>
@@ -68,7 +52,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<button class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
 							<data>File Upload</data>
 							<data>
@@ -81,7 +65,7 @@
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label>Type of the multi-tool:</label>
@@ -326,7 +310,7 @@
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="srImgInput" data-dest-noauto="srPlanetImg">
-						<input type="file" id="srImgUpload" accept="image/*" oninput="image(this)">
+						<input type="file" id="srImgUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="sysImgInput"><output id="sysImgInputLabel">System (Cabinet location
@@ -340,7 +324,7 @@
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="sysImgInput" data-dest-noauto="sysImg">
-						<input type="file" id="sysImgUpload" accept="image/*" oninput="image(this)">
+						<input type="file" id="sysImgUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="cabInput"><output id="cabInputLabel">Cabinet Planet/Moon</output></label>
@@ -353,7 +337,7 @@
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="cabInput" data-dest-noauto="cabinetPlanetImg">
-						<input type="file" id="cabUpload" accept="image/*" oninput="image(this)">
+						<input type="file" id="cabUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="coordsInput"><output id="coordsInputLabel">Coordinates</output></label>
@@ -366,7 +350,7 @@
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="coordsInput" data-dest-noauto="axesImg">
-						<input type="file" id="coordsUpload" accept="image/*" oninput="image(this)">
+						<input type="file" id="coordsUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="discoveredlinkInput">Discoverer wiki name:</label>
@@ -395,7 +379,7 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>This section builds a predefined appearance sentence, it is not required.</p>
-						<button class="button" onclick="toggleSection('appearance', this)">Hide</button>
+						<button class="button" id="hideAppearanceButton">Hide</button>
 					</div>
 					<div data-section="appearance" class="tableCell text">
 						<label>Main Colour:</label>
@@ -449,7 +433,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<button class="tooltip" onclick="galleryUploadShown = true">
+						<button class="tooltip">
 							<data>There is a preferred order of pictures.</data>
 							<data>Gallery</data>
 							<data>The preferred order of pictures is as follows:
@@ -467,7 +451,7 @@
 						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">

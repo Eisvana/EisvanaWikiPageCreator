@@ -50,3 +50,8 @@ export interface CreatureData {
 		}
 	}
 }
+
+export interface PicObj {
+	picName?: string;
+	desc?: string;
+}

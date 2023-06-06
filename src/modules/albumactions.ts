@@ -32,12 +32,12 @@ export const actionsHTML = `<button id="albumBtn" class="button is-outlined is-p
 export function albumLink(element: HTMLAnchorElement) {
 	element.style.pointerEvents = 'none';
 	const catalogue = (() => {
-		if (typeof albumLinkGen == 'function') {
-			return albumLinkGen();
+		if (typeof globalFunctions.albumLinkGen == 'function') {
+			return globalFunctions.albumLinkGen();
 		} else if (pageData.catalogue) {
 			return pageData.catalogue;
 		} else {
-			console.warn('No wiki page provided. Add the function `albumLinkGen()` to your code or define a catalog in the `pageData.catalogue` property!');
+			console.warn('No wiki page provided. Define the function `albumLinkGen()` and add it to the `globalFunctions` object or define a catalog in the `pageData.catalogue` property!');
 			element.style.pointerEvents = '';
 		}
 	})();
@@ -54,7 +54,7 @@ export function albumLink(element: HTMLAnchorElement) {
  * @function
  * @returns {string} The type of album item.
  */
-function albumItemType() {
+export function albumItemType() {
 	const output = (() => {
 		if (typeof globalFunctions.albumItemTypeExternal == 'function') {
 			return globalFunctions.albumItemTypeExternal();
@@ -72,7 +72,7 @@ function albumItemType() {
  * @name albumDesc
  * @returns {undefined}
  */
-function albumDesc() {
+export function albumDesc() {
 	const output = (() => {
 		if (typeof globalFunctions.albumDescExternal == 'function') {
 			return globalFunctions.albumDescExternal() as string;

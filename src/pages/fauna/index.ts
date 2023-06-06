@@ -6,12 +6,13 @@ import { toggleRedirect } from "../../modules/actions";
 import { albumFunctions } from "../../modules/albumactions";
 import creatureElementFunctions from "./elementFunctions";
 import creatureElements from "./elementStore";
-import { albumOtherExternal, albumCivExternal, addInfo, albumDropdown, bundlePropFunctions, genderDropdown, genusDropdown, genusProduces, hideAlbumEntry, hideCreaturePrio, hideSecGenderProps, noLineBreak, pageName, specialNotes, specialNotesTextFunc } from "./fauna";
+import { albumOtherExternal, albumCivExternal, addInfo, albumDropdown, bundlePropFunctions, genderDropdown, genusDropdown, genusProduces, hideAlbumEntry, hideCreaturePrio, hideSecGenderProps, noLineBreak, pageName, specialNotes, specialNotesTextFunc, generateGalleryArray } from "./fauna";
 import { globalFunctions, pageData } from "../../variables/objects";
 import '../../startup';
 
 globalFunctions.albumOtherExternal = () => albumOtherExternal();
 globalFunctions.albumCivExternal = () => albumCivExternal();
+globalFunctions.generateGalleryArray = () => generateGalleryArray();
 
 pageData.galleryExplanationExternal = `
 There is a preferred order of pictures:
