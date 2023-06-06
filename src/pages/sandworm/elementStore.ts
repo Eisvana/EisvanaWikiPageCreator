@@ -1,4 +1,6 @@
-const sandwormElements = {
+import { ElementIds } from "../../types/elements";
+
+const sandwormElements: ElementIds = {
 	input: {
 		autoSpawn: 'autoSpawnInput',
 	}

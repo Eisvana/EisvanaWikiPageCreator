@@ -10,20 +10,7 @@
 		content="Easily generate the wikicode to create a business page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Business">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/pages/business.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script>
-		window.onload = () => {
-			addStaticPageData('pageType', 'Business');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/business" type="module"></script>
 </head>
 
 <body>
@@ -59,7 +46,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<button class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
 							<data>File Upload</data>
 							<data>
@@ -72,7 +59,7 @@
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="systemInput">Name of the system:</label>
@@ -184,8 +171,7 @@
 					</div>
 					<!--insert additional sections above #contentsInput-->
 					<div class="tableHeader text" id="contentsInput">
-						<button class="button is-primary" type="button" onclick="addSection()">+ Add
-							Section</button>
+						<button class="button is-primary" type="button" id="sectionAddButton">+ Add Section</button>
 					</div>
 					<div class="tableHeader data no-flex">
 						<label for="addInfoInput">Additional Information:</label>
@@ -195,7 +181,7 @@
 						<label for="galleryUpload">Gallery files</label>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">

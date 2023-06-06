@@ -1,4 +1,6 @@
-const starshipElements = {
+import { ElementIds } from "../../types/elements";
+
+const starshipElements: ElementIds = {
 	input: {
 		economyInput: 'wealthInput',
 	}

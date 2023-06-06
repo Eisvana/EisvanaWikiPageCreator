@@ -2,47 +2,19 @@
  * @fileoverview Provides functions which can be used by the Business page creator.
  */
 
-import businessInputs from '../htmlSnippets/businessInputs.html?raw';
-
-function startupFunctions() {
-	const input = document.querySelector('[oninput*="enPrefix"]');
-	enPrefix(input.value, 'enPrefix');
-}
-
-const businessElements = {
-	input: {
-		contentsInput: 'contentsInput',
-	},
-	output: {
-		contents: 'contents',
-	}
-}
-updateGlobalElements(businessElements);
-
-const businessElementFunctions = {
-	ownerInput: ['hideDiscoverer("ownerInput", "ownerlinkInput")'],
-	ownerlinkInput: ['hideDiscoverer("ownerlinkInput", "ownerInput")'],
-	currencyInput: ['fixHC(this); enPrefix(this.value, "enPrefix")'],
-}
-assignElementFunctions(businessElementFunctions);
-
-
-(() => {
-	const currencyDatalist = {
-		currencies: ['{{CurrencyHubCoin}}']
-	}
-	datalists(currencyDatalist);
-
-	cachedHTML.files.add('src/htmlSnippets/businessInputs.html');
-})();
+import { addDomAsElement, getChildIndex, image, loadHTML, removeSection, removeSpecificSection, wikiCode } from '../../common';
+import { ElementFunctions } from '../../types/elements';
+import { globalElements, pageData } from '../../variables/objects';
+import businessInputs from '../../htmlSnippets/businessInputs.html?raw';
 
 /**
  * Replaces HubCoin with the HubCoin link macro
  * @param {HTMLElement} element - The element to replace HubCoin with HubCoin link macro
  * @returns {void}
  */
-function fixHC(element) {
-	const value = pageData.currency.toLowerCase();
+export function fixHC(element: HTMLInputElement) {
+	const currency = pageData.currency as string;
+	const value = currency.toLowerCase();
 	const dest = element.dataset.dest;
 	if (value === 'hubcoin') wikiCode('{{CurrencyHubCoin}}', dest);
 }
@@ -65,10 +37,10 @@ function fixHC(element) {
  * @constant {string} input_template - The HTML template for adding a new section to the input.
  * @constant {string} code_template - The HTML template for adding a new section to the code.
  */
-function addSection() {
+export function addSection() {
 	const { input: { contentsInput: inputSection }, output: { contents: outputSection } } = globalElements;
-	const elementList = document.querySelectorAll('[data-section]');
-	const childIndex = getChildIndex(elementList, 'dataset.section');
+	const elementList: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-section]');
+	const childIndex = getChildIndex(Array.from(elementList), 'dataset.section').toString();
 	const replacementStrings = {
 		childIndex,
 		heading: 'heading' + childIndex,
@@ -80,19 +52,36 @@ function addSection() {
 		text_input: 'text_input' + childIndex,
 	}
 
-	const inputHtml = loadHTML(businessInputs, replacementStrings);
+	const eventListeners: ElementFunctions = [
+		{
+			element: 'wikicode',
+			handler: 'input',
+			func: function () { wikiCode(this as unknown as HTMLInputElement | HTMLTextAreaElement) }
+		},
+		{
+			element: 'removeButton',
+			handler: 'click',
+			func: () => removeSpecificSection(`section${childIndex}`)
+		},
+		{
+			element: 'fileInput',
+			handler: 'input',
+			func: function () { wikiCode(this as unknown as HTMLInputElement); showContentImg(this as unknown as HTMLInputElement) }
+		},
+		{
+			element: 'imageUpload',
+			handler: 'change',
+			func: function () { image(this as unknown as HTMLInputElement); showContentImg((this as unknown as HTMLInputElement).previousElementSibling as HTMLInputElement) }
+		},
+	]
+
+	const inputDom = loadHTML(businessInputs, replacementStrings, eventListeners) as Document;
 	const code = `
 		<div data-section="section${childIndex}">==<output name="${replacementStrings.heading}"></output>==</div>
 		<div style="display:none" data-section="section${childIndex}">[[File:<output id="${replacementStrings.img}"></output>|thumb]]</div>
 		<div data-section="section${childIndex}"><output id="${replacementStrings.text}"></output><br><br></div>`;
-
-	const inputs = input_dom.querySelectorAll(`[data-section="section${strings.childIndex}"] :is(input, textarea)`);
-	for (const input of inputs) {
-		assignFunction(input, 'wikiCode(this)');
-	}
-
-	inputSection.insertAdjacentHTML("beforebegin", inputHtml);
-	outputSection.insertAdjacentHTML("beforeend", code);
+	addDomAsElement(inputDom, inputSection as HTMLElement, 'beforebegin');
+	(outputSection as HTMLElement).insertAdjacentHTML("beforeend", code);
 }
 
 /**
@@ -100,9 +89,9 @@ function addSection() {
  * @param {HTMLElement} element - The checkbox input element.
  * @returns {void}
  */
-function showContentImg(element) {
-	const dest = element.dataset.dest;
-	const target = document.getElementById(dest).parentElement;
+export function showContentImg(element: HTMLInputElement) {
+	const dest = element.dataset.dest as string;
+	const target = document.getElementById(dest)!.parentElement as HTMLElement;
 	if (element.value) {
 		target.style.display = '';
 	} else {
@@ -117,8 +106,8 @@ function showContentImg(element) {
  * @function
  * @returns {void}
  */
-function resetExternal() {
-	const contentSections = document.querySelectorAll('[data-section]');
-	globalElements.output.contents.innerText = '';
-	removeSection(contentSections);
+export function resetExternal() {
+	const contentSections: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-section]');
+	(globalElements.output.contents as HTMLDivElement).innerText = '';
+	removeSection(Array.from(contentSections));
 }

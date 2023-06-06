@@ -1,4 +1,6 @@
-const creatureElements = {
+import { ElementIds } from "../../types/elements";
+
+const creatureElements:ElementIds = {
 	input: {
 		gender: 'Gender',
 	}

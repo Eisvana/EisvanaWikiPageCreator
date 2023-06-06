@@ -1,4 +1,6 @@
-const planetElements = {
+import { ElementIds } from "../../types/elements";
+
+const planetElements: ElementIds = {
 	input: {
 		moonInputs: 'moonInputs',
 	},
