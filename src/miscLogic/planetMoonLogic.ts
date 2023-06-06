@@ -14,7 +14,7 @@ import { ElementFunctions, ElementIds } from '../types/elements';
 import { getResourceData, getSentinelData } from '../datalists/planetDatalists';
 import { HubGal, getHubNumber } from './locationLogic';
 import { LinkObj, PlanetPropResourceLinks } from '../types/objects';
-import { getCreatureData } from './creatureData';
+import creatureData from './creatureData';
 
 /**
  * Determines the appropriate verb to use based on the given number, and sends the output to the
@@ -489,7 +489,6 @@ function floraMineralResourceLinks(element: HTMLInputElement | undefined = undef
 
 // sets genus dropdown
 function genusDropdown(element: HTMLSelectElement) {
-	const creatureData = getCreatureData();
 	const ecosystem = element.value;
 	const genera = Object.keys(creatureData.ecosystems[ecosystem])
 	const sectionNumber = extractNumber(element.id);

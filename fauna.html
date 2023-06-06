@@ -10,24 +10,7 @@
 		content="Easily generate the wikicode to create a fauna discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Fauna">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/pages/fauna.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/albumactions.js" defer></script>
-	<script src="./src/datalists/creatureDatalists.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script src="./src/misc_logic/creatureData.js"></script>
-	<script src="./src/misc_logic/locationLogic.js"></script>
-	<script>
-		window.onload = () => {
-			addStaticPageData('pageType', 'Creature');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/fauna" type="module"></script>
 </head>
 
 <body>
@@ -91,7 +74,7 @@
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="systemInput">Name of the system:</label>
@@ -465,7 +448,7 @@
 						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">

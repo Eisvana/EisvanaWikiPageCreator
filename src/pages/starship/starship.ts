@@ -133,7 +133,7 @@ export function calcInv() {
 	let inventory;
 	switch (type) {
 		case "Freighter":
-			if ((shipData[type].subtypes as Array<string>).indexOf(subtype) > 5) {
+			if ((shipData[type].subtypes as Array<string>).indexOf(subtype) > 5) {		// NoSonar up to index 4 the freighters are capital. System freighters start at index 5.
 				inventory = 'Small'
 			} else {
 				inventory = 'Large'
@@ -293,7 +293,7 @@ export function appearanceDropdowns() {
  * @returns {void}
  */
 export function appearanceSentence() {
-	// I would really like to use object destructuring here, but I can't type my stuff in there. And without proper types, TS complains everywhere.	
+	// I would really like to use object destructuring here, but I can't type my stuff in there. And without proper types, TS complains everywhere.
 	const textarea = globalElements.input.appearanceInput as HTMLTextAreaElement;
 
 	const mainColour = (globalElements.input.mainColourInput as HTMLSelectElement).value;
@@ -400,8 +400,8 @@ export function albumLinkGen() {
 	const { type, civShort } = pageData;
 	const civ = (() => {
 		if (civLong.split(' ').length > 1) return civShort;
-		return civilized.split(' ').slice(0, 2).join(' ');
-	})();	// The civilization name, either the short version or the first two words of the long version.
+		return civilized.split(' ').slice(0, 2).join(' ');		// I have no idea why this exists...
+	})();	// The civilization name, either the short version or the first two words of the long version. // But why??
 
 	// An object containing arrays of fighter subtypes, sorted by rarity.
 	const fighterSubtypes: Sections = {
@@ -490,43 +490,6 @@ export function generateGalleryArray() {
 
 	// Update page data with the new gallery array
 	pageData.galleryArray = array;
-}
-
-export function galleryExplanationExternal() {
-	return `There is a preferred order of gallery pictures, depending on ship type:
-	<div class='dialog-center is-flex-wrap-wrap mt-2' style='gap: 1rem'>
-		<div>
-			<div class='has-text-weight-bold'>Normal Ships:</div>
-			<ol class='dialog-list mt-1'>
-				<li>Rear view of ship</li>
-				<li>Inventory screen</li>
-				<li>NPC Ship Pilot</li>
-				<li>Analysis Visor Scan</li>
-				<li>System Page</li>
-			</ol>
-		</div>
-		<div>
-			<div class='has-text-weight-bold'>Living Ships/Interceptors:</div>
-			<ol class='dialog-list mt-1'>
-				<li>Rear view of ship</li>
-				<li>Inventory screen</li>
-				<li>Analysis Visor Scan</li>
-				<li>Crash site</li>
-				<li>Planet/Moon Page</li>
-				<li>System Page</li>
-			</ol>
-		</div>
-		<div>
-			<div class='has-text-weight-bold'>Freighters:</div>
-			<ol class='dialog-list mt-1'>
-				<li>Rear view of freighter</li>
-				<li>Inventory screen</li>
-				<li>NPC freighter captain</li>
-				<li>Analysis Visor Scan</li>
-				<li>System Page</li>
-			</ol>
-		</div>
-	</div>`
 }
 
 /**

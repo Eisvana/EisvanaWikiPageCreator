@@ -39,7 +39,8 @@ export interface CreatureData {
 	ecosystems: {
 		[key: string]: {
 			[key: string]: {
-				[key: string]: string | Array<string>;
+				commonName: string;
+				produces: Array<string>;
 			}
 		}
 	},

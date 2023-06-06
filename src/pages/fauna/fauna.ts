@@ -2,9 +2,10 @@
  * @fileoverview Provides functions which can be used by the Creature page creator.
  */
 
-import { addInfoBullet, setDropdownOptions, triggerEvent, wikiCode, wikiCodeSimple } from "../../common";
+import { addInfoBullet, docByResearchteam, extractNumber, hideInput, setDropdownOptions, storeData, triggerEvent, wikiCode, wikiCodeSimple } from "../../common";
 import { globalElements, pageData } from "../../variables/objects";
-import getGenderData from "../../datalists/creatureDatalists";
+import { getGenderData } from "../../datalists/creatureDatalists";
+import creatureData from "../../miscLogic/creatureData";
 
 /**
  * Sets the genus dropdown based on creature data and current ecosystem.
@@ -13,8 +14,7 @@ import getGenderData from "../../datalists/creatureDatalists";
  * @returns {void}
  */
 export function genusDropdown() {
-	const creatureData = getCreatureData();
-	const ecosystem = pageData.ecosystem;
+	const ecosystem = pageData.ecosystem as string;
 	const genera = Object.keys(creatureData.ecosystems[ecosystem])
 
 	const commonNames: Array<string> = [];
@@ -22,8 +22,10 @@ export function genusDropdown() {
 		commonNames.push(`${genus} (${creatureData.ecosystems[ecosystem][genus].commonName})`);
 	}
 
-	setDropdownOptions(globalElements.input.genusInput, genera, commonNames);
-	wikiCode(globalElements.input.genusInput);
+	const genusInput = globalElements.input.genusInput as HTMLSelectElement;
+
+	setDropdownOptions(genusInput, genera, commonNames);
+	wikiCode(genusInput);
 }
 
 /**
@@ -32,11 +34,11 @@ export function genusDropdown() {
  * @returns {void}
  */
 export function albumDropdown() {
-	const creatureData = getCreatureData();
 	// if civ is GHub, use GHEC instead. Otherwise use the Civ shortname
 	const civ = (pageData.civShort == "GHub") ? "GHEC" : pageData.civShort;
-	const { ecosystem, galaxy } = pageData;
-	const catalogueInput = globalElements.input.catalogueInput;
+	const galaxy = pageData.galaxy as string;
+	const ecosystem = pageData.ecosystem as string;
+	const catalogueInput = globalElements.input.catalogueInput as HTMLSelectElement;
 
 	const albums = creatureData.catalogs[galaxy][ecosystem];
 	const albumValues = [albums[0]];
@@ -56,9 +58,9 @@ export function albumDropdown() {
  * @function addInfo
  * @returns {void}
  */
-function addInfo() {
+export function addInfo() {
 	// get the HTML element where the output will be displayed
-	const outputElement = globalElements.output.addInfo;
+	const outputElement = globalElements.output.addInfo as HTMLOutputElement;
 
 	// only accept GHEC as researchteam and construct sentence based on that
 	const chapter = docByResearchteam('GHEC');
@@ -92,7 +94,11 @@ function addInfo() {
  * @returns {string} - The name generated for the wikilink.
  */
 export function pageName() {
-	const { nameInput: { value: newName }, oldNameInput: { value: orgName } } = globalElements.input;
+	const newNameInput = globalElements.input.nameInput as HTMLInputElement;
+	const orgNameInput = globalElements.input.oldNameInput as HTMLInputElement;
+
+	const newName = newNameInput.value;
+	const orgName = orgNameInput.value;
 
 	const name = (() => {
 		if (orgName) {
@@ -110,10 +116,9 @@ export function pageName() {
  *
  */
 export function genusProduces() {
-	const genus = pageData.genus;
-	const creatureData = getCreatureData();
+	const genus = pageData.genus as string;
 	const ecosystems = Object.keys(creatureData.ecosystems);
-	const producesInputElement = globalElements.input.producesInput;
+	const producesInputElement = globalElements.input.producesInput as HTMLSelectElement;
 	for (const ecosystem of ecosystems) {
 		if (!Object.keys(creatureData.ecosystems[ecosystem]).includes(genus)) continue;
 
@@ -134,13 +139,13 @@ export function genusProduces() {
 export function hideSecGenderProps() {
 	const { gender: gen1, gender2: gen2 } = pageData;
 	const { weight2Input: gen2Weight, height2Input: gen2Height, gender2Input: gen2Input } = globalElements.input;
-	const gen2Props = [gen2Weight, gen2Height];
+	const gen2Props = [gen2Weight, gen2Height] as Array<HTMLInputElement | HTMLSelectElement>;
 
 	if (gen2 && gen1 != gen2) {
 		gen2Props.forEach(prop => hideInput(prop, ''));
 	} else {
 		gen2Props.forEach(prop => hideInput(prop, 'none'));
-		gen2Props.push(gen2Input);
+		gen2Props.push(gen2Input as HTMLSelectElement);
 		gen2Props.forEach(prop => {
 			prop.value = '';
 			storeData(prop);
@@ -160,8 +165,8 @@ export function hideSecGenderProps() {
  * specialNotes();
  */
 export function specialNotes() {
-	const notes = pageData.notes;
-	const specialNotesElement = globalElements.input.specialNotesInput
+	const notes = pageData.notes as string;
+	const specialNotesElement = globalElements.input.specialNotesInput as HTMLInputElement;
 	specialNotesElement.value = notes;
 	if (notes == 'Evil' || notes == 'Sheds and regrows bones') {
 		hideInput(specialNotesElement, '');
@@ -178,11 +183,13 @@ export function specialNotes() {
  * @returns {void}
  */
 export function specialNotesTextFunc() {
-	const { genus, notes, addObservation: specialNotes } = pageData;
-	const { input: { notesInput: notesElement }, output: { addObservation: addObservationElement } } = globalElements;
+	const { genus, notes } = pageData;
+	const specialNotes = pageData.addObservation as string;
+	const notesElement = globalElements.input.notesInput as HTMLInputElement;
+	const addObservationElement = globalElements.output.addObservation as HTMLOutputElement;
 
 	wikiCodeSimple(notesElement, notesElement.dataset.destNoauto);
-	addObservationElement.parentElement.style.display = genus == 'Mechanoceris' ? 'none' : '';
+	(addObservationElement.parentElement as HTMLElement).style.display = genus == 'Mechanoceris' ? 'none' : '';
 	if (!notes && genus != 'Mechanoceris') {
 		addObservationElement.innerText = "'''Additional Observations''': ";
 		return;
@@ -207,10 +214,11 @@ export function specialNotesTextFunc() {
  * @global
  */
 export function hideCreaturePrio() {
-	const radio = globalElements.input.gender1;
+	const radio = globalElements.input.gender1 as HTMLInputElement;
 	if (pageData.gender2) {
 		hideInput(radio, '');
 	} else {
+		radio.checked = true;
 		hideInput(radio, 'none');
 	}
 }
@@ -221,8 +229,8 @@ export function hideCreaturePrio() {
  * @returns {string} The value of the checked radio button.
  */
 function creaturePrio(): string {
-	const genderRadios = globalElements.input.gender;
-	for (const radio of genderRadios) {
+	const genderRadios = globalElements.input.gender as Array<HTMLInputElement>;
+	for (const radio of Array.from(genderRadios)) {
 		if (radio.checked) return radio.value;
 	}
 	return '';
@@ -295,8 +303,8 @@ export function bundlePropFunctions() {
  */
 export function hideAlbumEntry() {
 	const display = pageData.catalogue ? '' : 'hidden';
-	globalElements.output.albumEntry.style.visibility = display;
-	globalElements.output.albumActions.style.visibility = display;
+	(globalElements.output.albumEntry as HTMLOutputElement).style.visibility = display;
+	(globalElements.output.albumActions as HTMLOutputElement).style.visibility = display;
 }
 
 /**
@@ -304,7 +312,7 @@ export function hideAlbumEntry() {
  * @function
  * @returns {string} Returns the primary height with an "m" appended to it.
  */
-function albumOtherExternal() {
+export function albumOtherExternal() {
 	const heights = [pageData.height, pageData.height2];
 	const prio = creaturePrio();
 	const index = (() => {
@@ -316,10 +324,10 @@ function albumOtherExternal() {
 }
 
 export function albumTitle() {
-	globalElements.output.album.innerText = pageData.catalogue;
+	(globalElements.output.album as HTMLOutputElement).innerText = pageData.catalogue as string;
 }
 
-function albumCivExternal() {
+export function albumCivExternal() {
 	return '';
 }
 
@@ -330,7 +338,7 @@ function albumCivExternal() {
  * @global
  */
 export function noLineBreak() {
-	const element = globalElements.input.dmInput;
+	const element = globalElements.input.dmInput as HTMLTextAreaElement;
 	const { value, dataset: { destNoauto: dest } } = element;
 	const noBreak = value.replaceAll('\n', ' ');
 	element.value = noBreak;
@@ -388,23 +396,6 @@ export function generateGalleryArray() {
 	}
 
 	pageData.galleryArray = array;
-}
-
-export function galleryExplanationExternal() {
-	return `There is a preferred order of pictures:
-	<div class='dialog-center'>
-		<ol class='dialog-list'>
-			<li>Gender 1</li>
-			<li>Gender 2</li>
-			<li>Gender 1 scan</li>
-			<li>Gender 2 scan</li>
-			<li>Discovery Menu</li>
-			<li>Moon Page</li>
-			<li>Planet Page</li>
-			<li>System Page</li>
-			<li>Galaxy Map</li>
-		</ol>
-	</div>`
 }
 
 /**

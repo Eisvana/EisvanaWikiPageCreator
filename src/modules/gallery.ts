@@ -209,8 +209,7 @@ function mobileMoveItem(element: HTMLElement, codeId: string, direction: string)
 	}
 }
 
-function resetGallery() {
+export function resetGallery() {
 	const galleryElement = globalElements.output.galleryItems as HTMLDivElement;
 	galleryElement.innerHTML = '';
 }
-globalFunctions.resetGallery = resetGallery;

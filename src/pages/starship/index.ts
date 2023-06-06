@@ -3,13 +3,52 @@ import { assignElementFunctions } from "../../commonElements/elementBackend/elem
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
 import { toggleRedirect } from "../../modules/actions";
 import { albumFunctions } from "../../modules/albumactions";
-import { globalElements } from "../../variables/objects";
+import { globalElements, globalFunctions, pageData } from "../../variables/objects";
 import starshipElementFunctions from "./elementFunctions";
 import starshipElements from "./elementStore";
-import { subtypeDropdown, showHideStarshipSelects, shipStats, addInfo, appearanceDropdowns, calcS, introType, loc } from "./starship";
+import { subtypeDropdown, showHideStarshipSelects, shipStats, addInfo, appearanceDropdowns, calcS, introType, loc, albumTypeExternal, albumOtherExternal } from "./starship";
 import '../../startup';
 
 addStaticPageData('huburbs', true);
+
+globalFunctions.albumTypeExternal = () => albumTypeExternal();
+globalFunctions.albumOtherExternal = () => albumOtherExternal();
+
+pageData.galleryExplanationExternal = `
+	There is a preferred order of gallery pictures, depending on ship type:
+	<div class='dialog-center is-flex-wrap-wrap mt-2' style='gap: 1rem'>
+		<div>
+			<div class='has-text-weight-bold'>Normal Ships:</div>
+			<ol class='dialog-list mt-1'>
+				<li>Rear view of ship</li>
+				<li>Inventory screen</li>
+				<li>NPC Ship Pilot</li>
+				<li>Analysis Visor Scan</li>
+				<li>System Page</li>
+			</ol>
+		</div>
+		<div>
+			<div class='has-text-weight-bold'>Living Ships/Interceptors:</div>
+			<ol class='dialog-list mt-1'>
+				<li>Rear view of ship</li>
+				<li>Inventory screen</li>
+				<li>Analysis Visor Scan</li>
+				<li>Crash site</li>
+				<li>Planet/Moon Page</li>
+				<li>System Page</li>
+			</ol>
+		</div>
+		<div>
+			<div class='has-text-weight-bold'>Freighters:</div>
+			<ol class='dialog-list mt-1'>
+				<li>Rear view of freighter</li>
+				<li>Inventory screen</li>
+				<li>NPC freighter captain</li>
+				<li>Analysis Visor Scan</li>
+				<li>System Page</li>
+			</ol>
+		</div>
+	</div>`;
 
 updateGlobalElements(starshipElements)
 assignElementFunctions(starshipElementFunctions);

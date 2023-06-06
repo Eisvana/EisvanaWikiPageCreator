@@ -153,15 +153,15 @@ export function albumName() {
  */
 export function albumOther() {
 	const output = (() => {
-		if (typeof albumOtherExternal == 'function') {
-			return albumOtherExternal();
+		if (typeof globalFunctions.albumOtherExternal == 'function') {
+			return globalFunctions.albumOtherExternal();
 		} else {
 			return '';
 		}
 	})();
 	const outputElement = globalElements.output.albumOther as HTMLOutputElement;
 	if (!outputElement) return;
-	outputElement.innerText = output;
+	outputElement.innerText = output as string;
 }
 
 /**

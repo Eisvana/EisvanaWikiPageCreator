@@ -10,6 +10,7 @@ import { ElementFunctions } from "../types/elements";
 import { dataIntegrityObj, globalElements, globalFunctions, links, pageData } from "../variables/objects";
 import { wikiLink } from "../variables/simple";
 import { readDefaultValues } from "./footer";
+import { resetGallery } from "./gallery";
 
 /**
  * Resets all fields in the input form to their default values and clears any outputs.
@@ -48,7 +49,7 @@ export function reset() {
 		output.innerText = '';
 	}
 
-	if (typeof globalFunctions.resetGallery == 'function') globalFunctions.resetGallery();
+	resetGallery();
 
 	for (const key in pageData) {
 		delete pageData[key];
