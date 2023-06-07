@@ -16,7 +16,7 @@ import { globalElements, pageData } from "../variables/objects";
 const actionsHTML = `
 <button class="button is-outlined is-primary" id="copy" type="button" data-link="page" data-evt-id="copyButton">Copy Wikicode</button>
 <a class="button is-outlined is-primary" id="download" data-evt-id="downloadButton">Download File</a>
-<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload" id="uploadLink" rel="noopener noreferrer" target="_blank" data-evt-id="picUploadButton">Upload Pictures</a>
+<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload Pictures</a>
 <a class="button is-outlined is-primary" id="create" data-link="page" data-evt-id="createPageButton">Create Page</a>
 <button class="button is-warning" id="reset" type="reset" data-evt-id="resetButton">Reset Inputs</button>`;
 
@@ -27,17 +27,17 @@ const evtListenerObj: ElementFunctions = [
 		func: function () { copyCode(this as unknown as HTMLButtonElement, 'fullArticle') }
 	},
 	{
-		element: 'copyButton',
+		element: 'downloadButton',
 		handler: 'click',
 		func: function () { downloadFile(this as unknown as HTMLAnchorElement) }
 	},
 	{
-		element: 'copyButton',
+		element: 'createPageButton',
 		handler: 'click',
 		func: function () { createPage(this as unknown as HTMLAnchorElement) }
 	},
 	{
-		element: 'copyButton',
+		element: 'resetButton',
 		handler: 'click',
 		func: () => reset()
 	},

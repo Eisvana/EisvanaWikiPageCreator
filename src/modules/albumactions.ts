@@ -2,26 +2,39 @@
  * @fileoverview Provides functions needed for the album actions (copy album code, open album...) to work.
  */
 
+import { loadHTML } from "../common";
+import { ElementFunctions } from "../types/elements";
 import { globalElements, globalFunctions, pageData } from "../variables/objects";
 import { wikiLink } from "../variables/simple";
-import { assignLink } from "./actions";
+import { assignLink, copyCode } from "./actions";
 
 /**
 * Represents the album actions HTML code.
 * @type {string}
 */
-export const actionsHTML = `<button id="albumBtn" class="button is-outlined is-primary"
-	   data-link="album" onclick="copyCode(this, 'albumText')">
+const actionsHTML = `<button id="albumBtn" class="button is-outlined is-primary"
+	   data-link="album" data-evt-id="copyButton">
 	   Copy Album Wikicode
 	   </button>
 	   <a class="button is-outlined is-primary" id="albumLink"
-	   data-link="album" onclick="albumLink(this)">
+	   data-link="album" data-evt-id="openAlbumButton">
 	   Open Album
 	   </a>`;
 
+const eventListeners: ElementFunctions = [
+	{
+		element: 'copyButton',
+		handler: 'click',
+		func: function () { copyCode(this as unknown as HTMLButtonElement, 'albumText') }
+	},
+	{
+		element: 'openAlbumButton',
+		handler: 'click',
+		func: function () { albumLink(this as unknown as HTMLAnchorElement) }
+	},
+]
 
-
-
+export const actionsDom = loadHTML(actionsHTML, {}, eventListeners) as Document;
 
 /**
  * Assigns a link to given element based on the album's PAGENAME.
