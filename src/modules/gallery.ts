@@ -83,7 +83,6 @@ export function galleryUpload() {
 				handler: 'click',
 				func: function () { rmGallery(this as unknown as HTMLButtonElement, replacementStrings.wikiCodeGalleryId) }
 			},
-
 		]
 
 		// Load galleryTemplate using loadHTML function and replacementStrings
@@ -118,7 +117,7 @@ export function galleryUpload() {
 	// If galleryUploadShown is true, exit the function. Otherwise, show gallery explanation popup
 	if (pageData.galleryUploadShown) return;
 	// the galleryExplanationExternal() function should return string with the popup text. HTML is supported.
-	if (typeof globalFunctions.galleryExplanationExternal == 'function') {
+	if (pageData.galleryExplanationExternal) {
 		explanation('Gallery',
 			`${pageData.galleryExplanationExternal}
 		<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the gallery upload button.</div>`);

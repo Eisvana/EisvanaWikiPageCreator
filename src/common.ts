@@ -15,6 +15,7 @@ import { planetMoonSentence } from './miscLogic/locationLogic';
 import { Datalist, SortObj } from './types/objects';
 import { AnyPrimitive } from './types/values';
 import { ElementFunction, ElementFunctions } from './types/elements';
+import { galleryUpload } from './modules/gallery';
 
 /**
  * Adds Galactic Hub huburb regions to an object.
@@ -164,7 +165,7 @@ export function showAll() {
 	numberStats();
 	civ();
 	image(globalElements.input.fileUpload as HTMLInputElement);
-	if (typeof globalFunctions.galleryUpload == 'function') globalFunctions.galleryUpload();
+	galleryUpload();
 	try { glyphInputOnChange(globalElements.input.portalglyphsInput as HTMLInputElement) } catch (error) { /*do nothing*/ }
 	try { planetMoonSentence() } catch (error) { /*do nothing*/ }
 	hideDiscoverer();

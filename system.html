@@ -86,7 +86,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<button class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name. Should
 								show the entire system from space. Click for an example picture.</data>
 							<data>File Upload</data>
@@ -108,7 +108,7 @@
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="navFileInput">Navigation image name, including file extension:</label>
@@ -116,16 +116,16 @@
 					<div class="tableCell data">
 						<input type="text" id="navFileInput" data-dest="navImage"
 							data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="navFileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="navFileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text" data-station="img">
 						<label for="ssFileInput">Space Station image name, including file extension:</label>
 					</div>
 					<div class="tableCell data" data-station="img">
 						<input type="text" id="ssFileInput" data-dest="ssImage" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="ssFileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="ssFileUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class=" tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
@@ -996,7 +996,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<button class="tooltip" onclick="galleryUploadShown = true">
+						<button class="tooltip" name="galleryFileUploadTooltip">
 							<data>There is a preferred order of pictures.</data>
 							<data>Gallery</data>
 							<data>
@@ -1012,7 +1012,7 @@
 						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">
