@@ -483,6 +483,7 @@ export function toggleSection(sectionName: string = '', button: HTMLButtonElemen
 		const buttonElements: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.sectionToggle button');
 		for (let i = 0; i < buttonElements.length; i++) {
 			const button = buttonElements[i];
+			console.log(button.id, button)
 			button.dataset.buttonId ??= (childindex + i).toString();
 			const id = button.dataset.buttonId;
 			button.dataset[`display${id}`] = button.dataset.displayDefault ?? '';
@@ -507,13 +508,8 @@ export function toggleSection(sectionName: string = '', button: HTMLButtonElemen
 		}
 		if (hide) continue;
 
-		if (state) {
-			element.style.display = '';
-			element.dataset[displayID] = '';
-		} else {
-			element.style.display = 'none';
-			element.dataset[displayID] = `none`;
-		}
+		element.style.display = state ? '' : 'none';
+		element.dataset[displayID] = state ? '' : 'none';
 	}
 	button!.innerText = state ? 'Hide' : 'Show';
 	button!.dataset[displayID] = state ? '' : 'none';

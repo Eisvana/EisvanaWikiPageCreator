@@ -2,8 +2,14 @@ import { updateGlobalElements } from "../../commonElements/elementBackend/elemen
 import { pageData } from "../../variables/objects";
 import planetElements from "./elementStore";
 import { moonList } from "./planet";
+import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
+import planetElementFunctions from "./elementFunctions";
+import '../../startup/celestialObjects/planetMoon';
+
+console.log('planet')
 
 updateGlobalElements(planetElements);
+assignElementFunctions(planetElementFunctions);
 moonList();
 
 pageData.galleryExplanationExternal = `
@@ -22,3 +28,17 @@ There is a preferred order of pictures:
 			<li>Galaxy Map</li>
 		</ol>
 	</div>`;
+
+pageData.galleryArray = [
+	'',
+	'Landscape',
+	'Night View',
+	'Cave System',
+	'Coast Area',
+	'Underwater',
+	'Analysis Visor',
+	'Planet Exploration Guide',
+	'Planet Page',
+	'System Page',
+	'Galaxy Map'
+]

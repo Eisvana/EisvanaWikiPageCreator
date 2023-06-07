@@ -1,7 +1,7 @@
-import { numberStats } from "../../common";
+import { numberStats, toggleSection } from "../../common";
 import { wikiCodePercentage, docByExternal } from "../../miscLogic/celestialobjectslogic";
 import { ElementFunctions } from "../../types/elements";
-import { addTemplate, autoBH, autoPirate, civCatalog, combineEconConf, expectedHubTagSentence, planetInputs, regionLong, searchUpgrades, spaceStationSection } from "./system";
+import { addTemplate, autoBH, autoPirate, civCatalog, combineEconConf, expectedHubTagSentence, planetInputs, regionLong, searchUpgrades, spaceStationSection, tradeables } from "./system";
 
 const systemElementFunctions: ElementFunctions = [
 	{
@@ -47,6 +47,36 @@ const systemElementFunctions: ElementFunctions = [
 	{
 		element: 'merchantSearch',
 		func: function () { searchUpgrades(this as unknown as HTMLInputElement) }
+	},
+	{
+		element: 'addTradeablesButton',
+		handler: 'click',
+		func: () => tradeables()
+	},
+	{
+		element: 'hideMTMerchantButton',
+		handler: 'click',
+		func: function () { toggleSection('MTMerchant', this as unknown as HTMLButtonElement) }
+	},
+	{
+		element: 'hideSSMerchantButton',
+		handler: 'click',
+		func: function () { toggleSection('SSMerchant', this as unknown as HTMLButtonElement) }
+	},
+	{
+		element: 'hideECMerchantButton',
+		handler: 'click',
+		func: function () { toggleSection('ECMerchant', this as unknown as HTMLButtonElement) }
+	},
+	{
+		element: 'hideESMerchantButton',
+		handler: 'click',
+		func: function () { toggleSection('ESMerchant', this as unknown as HTMLButtonElement) }
+	},
+	{
+		element: 'hideSDMerchantButton',
+		handler: 'click',
+		func: function () { toggleSection('SDMerchant', this as unknown as HTMLButtonElement) }
 	},
 ]
 

@@ -3,21 +3,19 @@ import { assignElementFunctions } from "../../commonElements/elementBackend/elem
 import { docByExternal } from "../../miscLogic/celestialobjectslogic";
 import { locationSentence } from "../../pages/system/system";
 import { ElementFunctions } from "../../types/elements";
+import { globalFunctions } from "../../variables/objects";
+import '../';
+
+console.log("celestial")
+
+globalFunctions.docByExternal = () => docByExternal();
 
 hideOrgName();
 locationSentence();
 
 const celestialObjectElementFunctions: ElementFunctions = [
 	{
-		element: 'docDateInput',
-		func: () => docByExternal()
-	},
-	{
-		element: 'discDateInput',
-		func: () => docByExternal()
-	},
-	{
-		element: 'platformInput',
+		element: ['docDateInput', 'discDateInput', 'platformInput'],
 		func: () => docByExternal()
 	},
 	{
@@ -25,11 +23,7 @@ const celestialObjectElementFunctions: ElementFunctions = [
 		func: () => hideOrgName()
 	},
 	{
-		element: 'civ',
-		func: () => locationSentence()
-	},
-	{
-		element: 'portalglyphsInput',
+		element: ['civ', 'portalglyphsInput'],
 		func: () => locationSentence()
 	},
 ]

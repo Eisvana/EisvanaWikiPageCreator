@@ -13,8 +13,9 @@ import { buildDescriptor, initialiseSectionInputs, wikiCodePercentage } from './
 import { ElementFunctions, ElementIds } from '../types/elements';
 import { getResourceData, getSentinelData } from '../datalists/planetDatalists';
 import { HubGal, getHubNumber } from './locationLogic';
-import { LinkObj, PlanetPropResourceLinks } from '../types/objects';
 import creatureData from './creatureData';
+import { LinkObjValues, PlanetPropResourceLinks } from '../types/links';
+import { StdObj } from '../types/objects';
 
 /**
  * Determines the appropriate verb to use based on the given number, and sends the output to the
@@ -409,14 +410,14 @@ function changeTableEntry(element: HTMLButtonElement) {
 	if (!parent.dataset[section]) return;
 
 	if (section == 'fauna') {
-		findAndRemove(links.genera as LinkObj);
+		findAndRemove(links.genera);
 		addGenus();
 	} else {
-		findAndRemove((links.resources as PlanetPropResourceLinks)?.[section]);
+		findAndRemove((links.planetPropResources as PlanetPropResourceLinks)?.[section]);
 		floraMineralResourceLinks();
 	}
 
-	function findAndRemove(object: LinkObj) {
+	function findAndRemove(object: LinkObjValues) {
 		if (!object) return;
 		const subsection = parent.dataset[section] as string;
 		const sectionNumber = extractNumber(subsection);
@@ -427,7 +428,7 @@ function changeTableEntry(element: HTMLButtonElement) {
 }
 
 function addGenus(element: HTMLSelectElement | undefined = undefined) {
-	const genera: LinkObj = (links.genera as LinkObj) ??= {};
+	const genera: StdObj = (links.genera as StdObj) ??= {};
 	if (element) {
 		const value = element.value;
 		const dest = element.dataset.destNoauto as string;
@@ -435,10 +436,10 @@ function addGenus(element: HTMLSelectElement | undefined = undefined) {
 		genera[dest] = sanitiseString(value);
 	}
 
-	const usedGenera = new Set();
-	const linkedGenera = sortObj(structuredClone(genera), true) as LinkObj;
+	const usedGenera: Set<string> = new Set();
+	const linkedGenera = sortObj(structuredClone(genera), true) as StdObj;
 	for (const creature in linkedGenera) {
-		const genus = linkedGenera[creature] as string;
+		const genus = linkedGenera[creature];
 		if (genus && !usedGenera.has(genus)) {
 			linkedGenera[creature] = `[[${genus}]]`;
 			usedGenera.add(genus);
@@ -446,18 +447,18 @@ function addGenus(element: HTMLSelectElement | undefined = undefined) {
 	}
 
 	for (const [key, output] of Object.entries(linkedGenera)) {
-		(globalElements.output[key] as HTMLOutputElement).innerText = output as string;
+		(globalElements.output[key] as HTMLOutputElement).innerText = output;
 	}
 }
 
 function floraMineralResourceLinks(element: HTMLInputElement | undefined = undefined) {
-	const resources: PlanetPropResourceLinks = (links.resources as PlanetPropResourceLinks) ??= {};
+	const resources: PlanetPropResourceLinks = (links.planetPropResources as PlanetPropResourceLinks) ??= {};
 	if (element) {
 		const value = element.value;
 		const target = element.dataset.destNoauto as string;
 		const id = element.id;
 		const sectionName = element.parentElement!.dataset.section!.split(' ')[0];
-		const planetProp = sectionName.replace(extractNumber(sectionName), '');
+		const planetProp = sectionName.replace(extractNumber(sectionName).toString(), '');
 
 		resources[planetProp] ??= {};
 		resources[planetProp][target] ??= {};

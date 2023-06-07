@@ -11,10 +11,10 @@ import { addAllTooltips } from '../../modules/tooltip';
 import { ElementFunctions, ElementIds } from '../../types/elements';
 import { SortObj, StdObj } from '../../types/objects';
 import { globalElements, links, pageData } from '../../variables/objects';
-import tradeableInputs from '../htmlSnippets/tradeableInputs.html?raw';
-import planetInputHTML from '../htmlSnippets/planetInputs.html?raw';
-import planetOutputHTML from '../htmlSnippets/planetOutputs.html?raw';
-import { BiomeLinks, ResourceLinks } from '../../types/links';
+import tradeableInputs from '../../htmlSnippets/tradeableInputs.html?raw';
+import planetInputHTML from '../../htmlSnippets/planetInputs.html?raw';
+import planetOutputHTML from '../../htmlSnippets/planetOutputs.html?raw';
+import { BiomeLinks, ResourceAndCreatureLinks } from '../../types/links';
 
 /**
  * Generates a sentence that describes the location of the page.
@@ -187,7 +187,7 @@ export function planetInputs() {
 		updateGlobalElements(resourceOutputs);
 
 		// updates the biome links for the new planet section
-		biomeLinks(inputDom.getElementById(`biome_input${i}`) as HTMLSelectElement);
+		biomeLinks(document.getElementById(`biome_input${i}`) as HTMLSelectElement);
 
 		// adds resource input elements to the new planet section
 		const resourceButton = document.getElementById(`addResourceButton${i}`) as HTMLButtonElement;
@@ -303,7 +303,7 @@ export function removeResource(resourceID: string) {
 
 	// remove element from resources
 	if (resourceInput.value) {
-		delete links.resources[planet][id];
+		delete (links.resources as ResourceAndCreatureLinks)[planet][id];
 		addResource();
 	}
 
@@ -376,7 +376,7 @@ export function merchantUpgrades(group: string = '') {
 	// if the checkboxes have no onchange event (i.e. at page load), assign them one
 	const merchants: Set<string> = new Set();
 	for (const checkbox of Array.from(checkboxes)) {
-		const listeners = checkbox.dataset.listener as string;
+		const listeners = checkbox.dataset.listener ?? '';
 		const listenerArray = listeners.split(' ');
 		if (!listenerArray.includes('change')) assignFunction({ element: checkbox, func: function () { merchantUpgrades((this as unknown as HTMLInputElement).dataset.destCheckboxGroup) } });
 		merchants.add(checkbox.dataset.destCheckboxGroup as string);
@@ -522,7 +522,7 @@ export function regionLong() {
  * @returns {undefined}
  */
 function addResource(element: HTMLInputElement | undefined = undefined) {
-	const resources: ResourceLinks = (links.resources as ResourceLinks) ??= {};
+	const resources: ResourceAndCreatureLinks = (links.resources as ResourceAndCreatureLinks) ??= {};
 	if (element) {
 		const value = element.value;
 		const planet = element.dataset.destNoauto as string;
@@ -533,7 +533,7 @@ function addResource(element: HTMLInputElement | undefined = undefined) {
 	}
 
 	const usedResources: Set<string> = new Set();
-	const linkedResources = sortObj(structuredClone(resources), true) as ResourceLinks;
+	const linkedResources = sortObj(structuredClone(resources), true) as ResourceAndCreatureLinks;
 	for (const planetName in linkedResources) {
 		const planet = linkedResources[planetName];
 		for (const key in planet) {

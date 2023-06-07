@@ -1,5 +1,6 @@
 import { GlobalElements } from "../types/elements";
-import { LinkObj, TransformedElementFunctions } from "../types/objects";
+import { LinkObj } from "../types/links";
+import { TransformedElementFunctions } from "../types/objects";
 import { AnyPrimitive } from "../types/values";
 
 /**

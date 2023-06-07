@@ -1,13 +1,13 @@
 import { StdObj } from "./objects";
 
 export interface LinkObj {
-	[key: string]: ResourceLinks | PlanetPropResourceLinks | BiomeLinks;
+	[key: string]: ResourceAndCreatureLinks | PlanetPropResourceLinks | BiomeLinks | StdObj;
 }
 
-export interface ResourceLinks {
-	[key: string]: {
-		[key: string]: string;
-	}
+export type LinkObjValues = LinkObj[keyof LinkObj];
+
+export interface ResourceAndCreatureLinks {
+	[key: string]: StdObj;
 }
 
 export interface PlanetPropResourceLinks {

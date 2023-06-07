@@ -10,40 +10,7 @@
 		content="Easily generate the wikicode to create a moon discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Moon">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script src="./src/misc_logic/planetMoonLogic.js" defer></script>
-	<script src="./src/misc_logic/celestialobjectslogic.js" defer></script>
-	<script src="./src/datalists/planetDatalists.js" defer></script>
-	<script src="./src/datalists/floraDatalists.js" defer></script>
-	<script src="./src/datalists/mineralDatalists.js" defer></script>
-	<script src="./src/pages/moon.js"></script>
-	<script src="./src/misc_logic/locationLogic.js"></script>
-	<script src="./src/misc_logic/creatureData.js"></script>
-	<script src="./src/misc_logic/dateLogic.js"></script>
-	<script>
-		window.onload = () => {
-			addStaticPageData('galleryArray', [
-				'',
-				'Landscape',
-				'Night View',
-				'Cave System',
-				'Analysis Visor',
-				'Moon Exploration Guide',
-				'Moon Page',
-				'Planet Page',
-				'System Page',
-				'Galaxy Map'
-			]);
-			addStaticPageData('pageType', 'Moon');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/moon" type="module"></script>
 </head>
 
 <body>

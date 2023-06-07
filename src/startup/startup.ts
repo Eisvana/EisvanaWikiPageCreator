@@ -3,7 +3,9 @@ import { attachTransformedListeners } from "../commonElements/elementBackend/ele
 import { readDefaultValues } from "../modules/footer";
 import { globalElements, pageData } from "../variables/objects";
 
-const currentHTMLFile = getCurrentHTMLFile();	// NoSonar we're leaving out the `.html` here
+console.log("main")
+
+const currentHTMLFile = getCurrentHTMLFile();
 addStaticPageData('pageType', currentHTMLFile);
 
 autoShow();

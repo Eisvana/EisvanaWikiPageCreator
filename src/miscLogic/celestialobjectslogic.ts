@@ -29,8 +29,8 @@ export function docByExternal() {
 	 */
 	const research = (() => {
 		const chapterSentence = displayResearch();
-		if (chapterSentence == civilized || !chapterSentence) return platform + ' explorer';
-		return chapterSentence;
+		if (chapterSentence && chapterSentence != civilized) return chapterSentence;
+		return '';
 	})();
 
 	/**

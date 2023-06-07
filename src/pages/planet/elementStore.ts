@@ -3,6 +3,7 @@ import { ElementIds } from "../../types/elements";
 const planetElements: ElementIds = {
 	input: {
 		moonInputs: 'moonInputs',
+		addMoonButton: 'addMoonButton',
 	},
 	output: {
 	}
