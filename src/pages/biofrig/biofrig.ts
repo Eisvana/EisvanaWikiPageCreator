@@ -2,39 +2,14 @@
  * @fileoverview Provides functions which can be used by the Organic Frigate page creator.
  */
 
-import { docByResearchteam, wikiCode } from "../../common";
+import { docByResearchteam, enPrefix, shortenGHub, wikiCode } from "../../common";
 import { HubGal, regNr } from "../../miscLogic/locationLogic";
-import { pageData } from "../../variables/objects";
+import { globalElements, pageData } from "../../variables/objects";
 
-function startupFunctions() {
-	numberStats();
-	locHubNr();
-	locGalaxy();
-	generateCatalogue();
-	addInfo();
-	albumFunctions();
-}
-
-const frigateElementFunctions = {
-	civ: ['locGalaxy(); addInfo(); appearance(); locHubNr(); generateCatalogue()', null, true],
-	nameInput: ['albumName(); appearance()'],
-	costInput: ['numberStats(this)'],
-	combatInput: ['numberStats(this)'],
-	explorationInput: ['numberStats(this)'],
-	industrialInput: ['numberStats(this)'],
-	tradeInput: ['numberStats(this)'],
-	fuelInput: ['numberStats(this)'],
-	portalglyphsInput: ['locHubNr()', null, true],
-	mainColourInput: ['appearance()'],
-	secColourInput: ['appearance()'],
-	tentacleInput: ['appearance()'],
-	researchTeam: ['addInfo()'],
-	classInput: ['albumOther()'],
-}
-assignElementFunctions(frigateElementFunctions);
-
-function locHubNr() {
-	globalElements.output.HubNr.innerText = regNr(pageData.region);
+export function locHubNr() {
+	const region = pageData.region as string;
+	const outputElement = globalElements.output.HubNr as HTMLOutputElement;
+	outputElement.innerText = regNr(region);
 }
 
 /**
@@ -43,8 +18,8 @@ function locHubNr() {
  * @name locGalaxy
  * @returns {undefined}
  */
-function locGalaxy() {
-	const civ = pageData.civShort;
+export function locGalaxy() {
+	const civ = pageData.civShort as string;
 	const text = HubGal(civ);
 	wikiCode(text, 'locGalaxy');
 }
@@ -54,11 +29,12 @@ function locGalaxy() {
  * @function
  * @returns {void}
  */
-function addInfo() {
+export function addInfo() {
 	const researchteam = docByResearchteam('GHSH');
 	const catalogue = pageData.catalogue;
 
-	globalElements.output.addInfo.innerText = `[[${catalogue}]]${researchteam}`;
+	const outputElement = globalElements.output.addInfo as HTMLOutputElement;
+	outputElement.innerText = `[[${catalogue}]]${researchteam}`;
 }
 
 /**
@@ -66,7 +42,7 @@ function addInfo() {
  * @function
  * @returns {void}
  */
-function generateCatalogue() {
+export function generateCatalogue() {
 	const { civShort, civilized: civ } = pageData;
 	const catalogueCiv = (() => {
 		switch (civShort) {
@@ -77,6 +53,7 @@ function generateCatalogue() {
 			case 'CalHub':
 				return civ;
 		}
+		return '';
 	})();
 	pageData.catalogue = `${catalogueCiv} Organic Frigate Catalog`;
 }
@@ -87,12 +64,16 @@ function generateCatalogue() {
  * @function appearance
  * @returns {void}
  */
-function appearance() {
+export function appearance() {
+	console.log('called!')
 	// Extract data from pageData object.
-	const { name, mainColour: colour1, secColour: colour2, tentacles } = pageData;
+	const name = pageData.name as string;
+	const tentacles = pageData.tentacles as string;
+	const colour1 = pageData.mainColour as string;
+	const colour2 = pageData.secColour as string;
 
 	// Get the appearance input from globalElement object.
-	const appearance = globalElements.input.appearanceInput;
+	const appearance = globalElements.input.appearanceInput as HTMLTextAreaElement;
 
 	// Return if no colors were provided.
 	if (!(colour1.trim() || colour2.trim() || tentacles.trim())) return;
@@ -119,15 +100,15 @@ function appearance() {
 	wikiCode(appearance);
 }
 
-function albumOtherExternal() {
+export function albumOtherExternal() {
 	return `{{Class|${pageData.class}}}`;
 }
 
-function albumItemTypeExternal() {
+export function albumItemTypeExternal() {
 	return 'Organic Frigate Catalog';
 }
 
-function generateGalleryArray() {
+export function generateGalleryArray() {
 	const array = [
 		'',
 		'Rear view of frigate',
@@ -136,15 +117,4 @@ function generateGalleryArray() {
 	];
 
 	pageData.galleryArray = array;
-}
-
-function galleryExplanationExternal() {
-	return `There is a preferred order of gallery pictures:
-	<div class='dialog-center'>
-		<ol class='dialog-list'>
-			<li>Rear view of frigate</li>
-			<li>Interaction screen</li>
-			<li>System Page</li>
-		</ol>
- 	</div>`
 }
