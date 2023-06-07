@@ -1,5 +1,5 @@
 export interface ElementFunction {
-	element: string | HTMLElement;
+	element: string | HTMLElement | Array<string | HTMLElement>;
 	handler?: keyof HTMLElementEventMap;
 	prio?: boolean;
 	func: () => void;
@@ -9,6 +9,7 @@ export type ElementFunctions = Array<ElementFunction>;
 
 export type AnyHTMLElement<T extends keyof HTMLElementTagNameMap = keyof HTMLElementTagNameMap> = HTMLElementTagNameMap[T];
 export type GlobalElement = AnyHTMLElement | AnyHTMLElement[];
+export type InputElements = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 export interface ElementId {
 	[key: string]: string;

@@ -15,11 +15,7 @@ const creatureElementFunctions: ElementFunctions = [
 		func: () => { hideOrgName(); pageName(); albumName(); toggleRedirect() }
 	},
 	{
-		element: 'planetInput',
-		func: () => planetMoonSentence()
-	},
-	{
-		element: 'moonInput',
+		element: ['planetInput', 'moonInput'],
 		func: () => planetMoonSentence()
 	},
 	{
@@ -51,27 +47,15 @@ const creatureElementFunctions: ElementFunctions = [
 		func: () => addInfo()
 	},
 	{
-		element: 'genderInput',
+		element: ['genderInput', 'gender2Input'],
 		func: () => { hideSecGenderProps(); hideCreaturePrio(); genderProps("gender", "gender2") }
 	},
 	{
-		element: 'gender2Input',
-		func: () => { hideSecGenderProps(); hideCreaturePrio(); genderProps("gender", "gender2") }
-	},
-	{
-		element: 'heightInput',
+		element: ['heightInput', 'height2Input'],
 		func: function () { genderProps("height", "height2"); albumOther(); numberError(this as unknown as HTMLInputElement) }
 	},
 	{
-		element: 'weightInput',
-		func: function () { genderProps("height", "height2"); numberError(this as unknown as HTMLInputElement) }
-	},
-	{
-		element: 'height2Input',
-		func: function () { genderProps("height", "height2"); albumOther(); numberError(this as unknown as HTMLInputElement) }
-	},
-	{
-		element: 'weight2Input',
+		element: ['weightInput', 'weight2Input'],
 		func: function () { genderProps("height", "height2"); numberError(this as unknown as HTMLInputElement) }
 	},
 	{
@@ -79,11 +63,7 @@ const creatureElementFunctions: ElementFunctions = [
 		func: () => { bundlePropFunctions(); albumOther() }
 	},
 	{
-		element: 'discoveredInput',
-		func: () => albumDiscoverer()
-	},
-	{
-		element: 'discoveredlinkInput',
+		element: ['discoveredInput', 'discoveredlinkInput'],
 		func: () => albumDiscoverer()
 	},
 	{

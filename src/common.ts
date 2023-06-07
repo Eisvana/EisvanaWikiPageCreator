@@ -14,7 +14,7 @@ import { explanation } from './modules/tooltip';
 import { planetMoonSentence } from './miscLogic/locationLogic';
 import { Datalist, SortObj } from './types/objects';
 import { AnyPrimitive } from './types/values';
-import { ElementFunction, ElementFunctions } from './types/elements';
+import { ElementFunction, ElementFunctions, InputElements } from './types/elements';
 import { galleryUpload } from './modules/gallery';
 
 /**
@@ -38,7 +38,7 @@ export function addHuburbs(object: Regions) {
  */
 function getInputData() {
 	const inputData: {
-		[key: string]: NodeListOf<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
+		[key: string]: NodeListOf<InputElements>;
 	} = {
 		inputs: document.querySelectorAll('[data-dest]'),
 		checkboxes: document.querySelectorAll('[data-dest-checkbox]'),
@@ -108,7 +108,7 @@ export function setDropdownOptions(element: HTMLElement, values: Array<string>, 
 export function autoShow(): void {
 	const inputData = getInputData();
 	const functionObj: Array<{
-		elements: NodeListOf<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
+		elements: NodeListOf<InputElements>;
 		handler?: keyof HTMLElementEventMap;
 		prio?: boolean;
 		func: () => void;
@@ -177,7 +177,7 @@ export function showAll() {
  * @param {Object} element - The source element to retrieve value or content from.
  * @param {string} dest - The ID of the destination element(s) to update, specified in a data attribute on the source element.
  */
-export function wikiCode(element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | string, dest: string | undefined = (element as HTMLElement)?.dataset?.dest) {
+export function wikiCode(element: InputElements | string, dest: string | undefined = (element as HTMLElement)?.dataset?.dest) {
 	const destElements = typeof dest == 'string' ? getDestElements(dest) : [];
 
 	// sanitize the source value or content
@@ -228,7 +228,7 @@ export function checkboxWikiCode(element: HTMLInputElement) {
  * @param {Object} element - The DOM element whose value will be stored.
  * @param {string} [key=element.dataset.destNoauto] - The key under which the value will be stored in the page data object. Defaults to the value of the element's `dest-noauto` attribute.
  */
-export function storeData(element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement, key: string = element.dataset.destNoauto as string) {
+export function storeData(element: InputElements, key: string = element.dataset.destNoauto as string) {
 	pageData[key] = sanitiseString(element.value);
 }
 
@@ -271,7 +271,7 @@ export function openWikiLinksExternally() {
  *
  * @param {HTMLElement} element - The input element to source the value from.
  */
-export function wikiCodeSimple(element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement, dest: string = element.dataset.destSimple as string) {
+export function wikiCodeSimple(element: InputElements, dest: string = element.dataset.destSimple as string) {
 	const outputs = Array.from(document.getElementsByName(dest));
 	if (!outputs.length) outputs.push(document.getElementById(dest) as HTMLElement);
 	for (const output of outputs) {
@@ -1055,7 +1055,7 @@ export function preventCopy() {
  * @param {string} [value=element.dataset.default] - The default value to assign (if no value is provided, the element's "data-default" attribute will be used)
  * @returns {void}
  */
-export function assignDefaultValue(element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement, value: string = element.dataset.default as string) {
+export function assignDefaultValue(element: InputElements, value: string = element.dataset.default as string) {
 	if (element.value.trim()) return;
 	const dest = element.dataset.dest ?? element.dataset.destNoauto;
 	wikiCode(value, dest);

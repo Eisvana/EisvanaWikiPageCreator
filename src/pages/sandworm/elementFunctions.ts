@@ -10,11 +10,7 @@ const sandwormElementFunctions: ElementFunctions = [
 		func: () => { catalogue(); albumItemType() }
 	},
 	{
-		element: 'planetInput',
-		func: () => { wormName(); planetMoonSentence(); albumName() }
-	},
-	{
-		element: 'moonInput',
+		element: ['planetInput', 'moonInput'],
 		func: () => { wormName(); planetMoonSentence(); albumName() }
 	},
 	{
@@ -34,11 +30,7 @@ const sandwormElementFunctions: ElementFunctions = [
 		func: function () { numberStats(this as unknown as HTMLInputElement, 1); albumOther() }
 	},
 	{
-		element: 'discoveredInput',
-		func: () => albumDiscoverer()
-	},
-	{
-		element: 'discoveredlinkInput',
+		element: ['discoveredInput', 'discoveredlinkInput'],
 		func: () => albumDiscoverer()
 	},
 ]

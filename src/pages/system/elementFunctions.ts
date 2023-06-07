@@ -13,11 +13,7 @@ const systemElementFunctions: ElementFunctions = [
 		func: () => { regionLong(); expectedHubTagSentence(); autoBH() }
 	},
 	{
-		element: 'planetInput',
-		func: function () { numberStats(this as unknown as HTMLInputElement); planetInputs() }
-	},
-	{
-		element: 'moonInput',
+		element: ['planetInput', 'moonInput'],
 		func: function () { numberStats(this as unknown as HTMLInputElement); planetInputs() }
 	},
 	{
@@ -29,19 +25,11 @@ const systemElementFunctions: ElementFunctions = [
 		func: () => { spaceStationSection(); combineEconConf() }
 	},
 	{
-		element: 'economybuyInput',
+		element: ['economybuyInput', 'economysellInput'],
 		func: function () { wikiCodePercentage(this as unknown as HTMLInputElement) }
 	},
 	{
-		element: 'economysellInput',
-		func: function () { wikiCodePercentage(this as unknown as HTMLInputElement) }
-	},
-	{
-		element: 'wealthInput',
-		func: function () { autoPirate(this as unknown as HTMLSelectElement) }
-	},
-	{
-		element: 'conflictInput',
+		element: ['wealthInput', 'conflictInput'],
 		func: function () { autoPirate(this as unknown as HTMLSelectElement) }
 	},
 	{

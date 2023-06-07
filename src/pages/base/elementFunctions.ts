@@ -6,11 +6,7 @@ import { capitaliseFriendCode, createCensusEntry, validateDiscord, validateFrien
 
 const baseElementFunctions: ElementFunctions = [
 	{
-		element: 'planetInput',
-		func: function () { planetMoonSentence() }
-	},
-	{
-		element: 'moonInput',
+		element: ['planetInput', 'moonInput'],
 		func: function () { planetMoonSentence() }
 	},
 	{

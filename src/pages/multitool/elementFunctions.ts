@@ -33,15 +33,7 @@ const MTElementFunctions: ElementFunctions = [
 		func: () => { acquirementBundle(); hideSrLocName() }
 	},
 	{
-		element: 'srInput',
-		func: () => acquirementBundle()
-	},
-	{
-		element: 'planetInput',
-		func: () => acquirementBundle()
-	},
-	{
-		element: 'moonInput',
+		element: ['srInput', 'planetInput', 'moonInput'],
 		func: () => acquirementBundle()
 	},
 	{
@@ -49,11 +41,7 @@ const MTElementFunctions: ElementFunctions = [
 		func: () => acquirementAlbumBundle()
 	},
 	{
-		element: 'dmgInput',
-		func: function () { numberStats(this as unknown as HTMLInputElement, 1, true) }
-	},
-	{
-		element: 'scanInput',
+		element: ['dmgInput', 'scanInput'],
 		func: function () { numberStats(this as unknown as HTMLInputElement, 1, true) }
 	},
 	{
@@ -69,38 +57,11 @@ const MTElementFunctions: ElementFunctions = [
 		func: () => albumOther()
 	},
 	{
-		element: 'srImgInput',
+		element: ['srImgInput', 'sysImgInput', 'cabInput', 'coordsInput'],
 		func: () => acquirementGallery()
 	},
 	{
-		element: 'sysImgInput',
-		func: () => acquirementGallery()
-	},
-	{
-		element: 'cabInput',
-		func: () => acquirementGallery()
-	},
-	{
-		element: 'coordsInput',
-		func: () => acquirementGallery()
-	},
-	{
-		element: 'srImgUpload',
-		handler: 'change',
-		func: function () { image(this as unknown as HTMLInputElement); acquirementGallery() }
-	},
-	{
-		element: 'sysImgUpload',
-		handler: 'change',
-		func: function () { image(this as unknown as HTMLInputElement); acquirementGallery() }
-	},
-	{
-		element: 'cabUpload',
-		handler: 'change',
-		func: function () { image(this as unknown as HTMLInputElement); acquirementGallery() }
-	},
-	{
-		element: 'coordsUpload',
+		element: ['srImgUpload', 'sysImgUpload', 'cabUpload', 'coordsUpload'],
 		handler: 'change',
 		func: function () { image(this as unknown as HTMLInputElement); acquirementGallery() }
 	},
@@ -109,19 +70,11 @@ const MTElementFunctions: ElementFunctions = [
 		func: () => locHubNr()
 	},
 	{
-		element: 'discoveredInput',
+		element: ['discoveredInput', 'discoveredlinkInput'],
 		func: () => albumDiscoverer()
 	},
 	{
-		element: 'discoveredlinkInput',
-		func: () => albumDiscoverer()
-	},
-	{
-		element: 'mainColourInput',
-		func: () => appearance()
-	},
-	{
-		element: 'secColourInput',
+		element: ['mainColourInput', 'secColourInput'],
 		func: () => appearance()
 	},
 	{

@@ -18,11 +18,7 @@ const starshipElementFunctions: ElementFunctions = [
 		func: () => loc()
 	},
 	{
-		element: 'planetInput',
-		func: () => { loc(); albumOther() }
-	},
-	{
-		element: 'moonInput',
+		element: ['planetInput', 'moonInput'],
 		func: () => { loc(); albumOther() }
 	},
 	{
@@ -42,11 +38,7 @@ const starshipElementFunctions: ElementFunctions = [
 		func: () => { invDropdown(); calcInv(); appearanceSentence(); loc() }
 	},
 	{
-		element: 'inventoryInput',
-		func: () => { calcS(); albumOther() }
-	},
-	{
-		element: 'economyInput',
+		element: ['inventoryInput', 'economyInput'],
 		func: () => { calcS(); albumOther() }
 	},
 	{
@@ -54,27 +46,11 @@ const starshipElementFunctions: ElementFunctions = [
 		func: () => albumOther()
 	},
 	{
-		element: 'maneuverBInput',
+		element: ['maneuverBInput', 'damageBInput', 'shieldBInput', 'warpBInput'],
 		func: function () { numberStats(this as unknown as HTMLInputElement, 1) }
 	},
 	{
-		element: 'damageBInput',
-		func: function () { numberStats(this as unknown as HTMLInputElement, 1) }
-	},
-	{
-		element: 'shieldBInput',
-		func: function () { numberStats(this as unknown as HTMLInputElement, 1) }
-	},
-	{
-		element: 'warpBInput',
-		func: function () { numberStats(this as unknown as HTMLInputElement, 1) }
-	},
-	{
-		element: 'discoveredInput',
-		func: () => albumDiscoverer()
-	},
-	{
-		element: 'discoveredlinkInput',
+		element: ['discoveredInput', 'discoveredlinkInput'],
 		func: () => albumDiscoverer()
 	},
 	{
@@ -82,23 +58,7 @@ const starshipElementFunctions: ElementFunctions = [
 		func: () => addInfo()
 	},
 	{
-		element: 'mainColourInput',
-		func: () => appearanceSentence()
-	},
-	{
-		element: 'secColourInput',
-		func: () => appearanceSentence()
-	},
-	{
-		element: 'secPartsInput',
-		func: () => appearanceSentence()
-	},
-	{
-		element: 'accessoriesInput',
-		func: () => appearanceSentence()
-	},
-	{
-		element: 'miscPartsInput',
+		element: ['mainColourInput', 'secColourInput', 'secPartsInput', 'accessoriesInput', 'miscPartsInput'],
 		func: () => appearanceSentence()
 	},
 	{

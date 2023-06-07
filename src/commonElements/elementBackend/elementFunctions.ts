@@ -5,6 +5,14 @@ import { getDestElements } from './elementStore';
 import { hashElement } from './hashes';
 
 export function assignFunction(dataObject: ElementFunction): void {
+	if (Array.isArray(dataObject.element)) {
+		const elements = structuredClone(dataObject.element);
+		for (const element of elements) {
+			dataObject.element = element;
+			assignFunction(dataObject);
+		}
+		return;
+	}
 	const simplePages = ['about', ''];	// excludes the index and about pages from the advanced behaviour
 	if (!pageData.eventListeners && !simplePages.includes(getCurrentHTMLFile())) {
 		transformListenerData(dataObject);
@@ -54,7 +62,7 @@ export function transformListenerData(dataObj: ElementFunction | ElementFunction
 	const sourceArray = [dataObj].flat();
 
 	for (const obj of sourceArray) {
-		const htmlElement = getListenerElement(obj.element) as HTMLElement;
+		const htmlElement = getListenerElement(obj.element as string | HTMLElement) as HTMLElement;
 		if (Array.isArray(htmlElement) && !htmlElement.length) continue;
 		const hashedValue = hashElement(htmlElement);
 		const handler = getEventHandler(obj.handler, htmlElement);

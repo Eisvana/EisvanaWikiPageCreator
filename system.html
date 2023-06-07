@@ -615,7 +615,7 @@
 						</button>
 					</div>
 					<div id="terminalInputs" class="tableHeader text" data-station="terminal">
-						<button class="button is-primary" type="button" onclick="tradeables()">+ Add Tradeable</button>
+						<button class="button is-primary" type="button" id="addTradeablesButton" onclick="tradeables()">+ Add Tradeable</button>
 					</div>
 					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
@@ -630,7 +630,7 @@
 								<data>system/MTU</data>
 							</button>
 						</div>
-						<button class="button" data-display-default="none"
+						<button class="button" data-display-default="none" id="hideMTMerchantButton"
 							onclick="toggleSection('MTMerchant', this)">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="MTMerchant" style="display: none"
@@ -690,7 +690,7 @@
 							</button>
 						</div>
 						<button class="button" data-display-default="none"
-							onclick="toggleSection('SSMerchant', this)">Show</button>
+							onclick="toggleSection('SSMerchant', this)" id="hideSSMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="SSMerchant" style="display: none"
 						data-station="merchant">
@@ -749,7 +749,7 @@
 							</button>
 						</div>
 						<button class="button" data-display-default="none"
-							onclick="toggleSection('ECMerchant', this)">Show</button>
+							onclick="toggleSection('ECMerchant', this)" id="hideECMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="ECMerchant" style="display: none"
 						data-station="merchant">
@@ -813,7 +813,7 @@
 							</button>
 						</div>
 						<button class="button" data-display-default="none"
-							onclick="toggleSection('ESMerchant', this)">Show</button>
+							onclick="toggleSection('ESMerchant', this)" id="hideESMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="ESMerchant" style="display: none"
 						data-station="merchant">
@@ -866,7 +866,7 @@
 							</button>
 						</div>
 						<button class="button" data-display-default="none"
-							onclick="toggleSection('SDMerchant', this)">Show</button>
+							onclick="toggleSection('SDMerchant', this)" id="hideSDMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="SDMerchant" style="display: none"
 						data-station="scrapDealer">
