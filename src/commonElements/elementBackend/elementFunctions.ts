@@ -1,5 +1,5 @@
 import { getCurrentHTMLFile } from '../../common';
-import { ElementFunction, ElementFunctions, GlobalElements } from '../../types/elements';
+import { AnyHTMLElement, ElementFunction, ElementFunctions, GlobalElements } from '../../types/elements';
 import { globalElements, pageData, transformedElementFunctions } from '../../variables/objects';
 import { getDestElements } from './elementStore';
 import { hashElement } from './hashes';
@@ -25,7 +25,7 @@ export function assignFunction(dataObject: ElementFunction): void {
 	const flattenedArray = elementArray.flat();
 	for (const element of flattenedArray) {
 		const listener: keyof HTMLElementEventMap = getEventHandler(handler, element);
-		element?.addEventListener(listener, func);
+		attachListener(element, listener, func);
 	}
 }
 
@@ -78,17 +78,25 @@ export function transformListenerData(dataObj: ElementFunction | ElementFunction
 	}
 }
 
-export function addEventListeners() {
+export function attachTransformedListeners() {
 	for (const [, handlerObj] of Object.entries(transformedElementFunctions)) {
 		for (const [handler, obj] of Object.entries(handlerObj)) {
 			for (const func of obj.func) {
 				const elementArray = [obj.element];
 				const flattenedArray = elementArray.flat();
 				for (const element of flattenedArray) {
-					element?.addEventListener(handler, func);
+					attachListener(element, handler, func);
 					delete element.dataset.hash;
 				}
 			}
 		}
 	}
+}
+
+export function attachListener(element: AnyHTMLElement<keyof HTMLElementTagNameMap>, listener: string, func: () => void) {
+	element?.addEventListener(listener, func);
+	const listeners = (element.dataset.listeners) ??= listener;
+	const listenerArray = listeners.split(' ');
+	if (!listenerArray.includes(listener))
+		element.dataset.listeners += ` ${listener}`;
 }

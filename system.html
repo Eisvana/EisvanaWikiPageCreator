@@ -11,24 +11,7 @@
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords"
 		content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, System, Star System">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/pages/system.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script src="./src/misc_logic/celestialobjectslogic.js" defer></script>
-	<script src="./src/datalists/systemDatalists.js" defer></script>
-	<script src="./src/datalists/planetDatalists.js" defer></script>
-	<script src="./src/misc_logic/locationLogic.js"></script>
-	<script>
-		window.onload = () => {
-			addStaticPageData('pageType', 'System');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/system" type="module"></script>
 </head>
 
 <body>
@@ -615,7 +598,8 @@
 						</button>
 					</div>
 					<div id="terminalInputs" class="tableHeader text" data-station="terminal">
-						<button class="button is-primary" type="button" id="addTradeablesButton" onclick="tradeables()">+ Add Tradeable</button>
+						<button class="button is-primary" type="button" id="addTradeablesButton"
+							onclick="tradeables()">+ Add Tradeable</button>
 					</div>
 					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
@@ -689,8 +673,8 @@
 								<data>system/SSU</data>
 							</button>
 						</div>
-						<button class="button" data-display-default="none"
-							onclick="toggleSection('SSMerchant', this)" id="hideSSMerchantButton">Show</button>
+						<button class="button" data-display-default="none" onclick="toggleSection('SSMerchant', this)"
+							id="hideSSMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="SSMerchant" style="display: none"
 						data-station="merchant">
@@ -748,8 +732,8 @@
 								<data>system/ECU</data>
 							</button>
 						</div>
-						<button class="button" data-display-default="none"
-							onclick="toggleSection('ECMerchant', this)" id="hideECMerchantButton">Show</button>
+						<button class="button" data-display-default="none" onclick="toggleSection('ECMerchant', this)"
+							id="hideECMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="ECMerchant" style="display: none"
 						data-station="merchant">
@@ -812,8 +796,8 @@
 								<data>system/ESU</data>
 							</button>
 						</div>
-						<button class="button" data-display-default="none"
-							onclick="toggleSection('ESMerchant', this)" id="hideESMerchantButton">Show</button>
+						<button class="button" data-display-default="none" onclick="toggleSection('ESMerchant', this)"
+							id="hideESMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="ESMerchant" style="display: none"
 						data-station="merchant">
@@ -865,8 +849,8 @@
 								<data>system/SDU</data>
 							</button>
 						</div>
-						<button class="button" data-display-default="none"
-							onclick="toggleSection('SDMerchant', this)" id="hideSDMerchantButton">Show</button>
+						<button class="button" data-display-default="none" onclick="toggleSection('SDMerchant', this)"
+							id="hideSDMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="SDMerchant" style="display: none"
 						data-station="scrapDealer">

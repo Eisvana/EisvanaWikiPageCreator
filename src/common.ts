@@ -1108,8 +1108,8 @@ export function getChildIndex(array: Array<HTMLElement>, data: string) {
 	const IDs = [0];	// dummy element to avoid if statement
 	// get all numbers of the string into an array, then join that array
 	for (const element of array) {
-		const idNumber = extractNumber(fetchFromObject(element, data) as string);
-		IDs.push(parseInt(idNumber));
+		const idNumber = extractNumber(fetchFromObject(element, data) as string) as number;
+		IDs.push(idNumber);
 	}
 	function compareNumbers(a: number, b: number) {
 		return a - b;
@@ -1171,8 +1171,9 @@ export function sortObj(obj: SortObj, number: boolean = false) {
  * @param {string} string - The string to extract integers from.
  * @returns {string} A string containing all the integers in the input string.
  */
-export function extractNumber(string: string): string {
-	return string?.match(/[0-9]/g)?.join('') ?? '';
+export function extractNumber(string: string): string | number {
+	const matchString = string?.match(/[0-9]/g)?.join('');
+	return matchString ? parseInt(matchString) : '';
 }
 
 /**

@@ -2,18 +2,19 @@
  * @fileoverview Provides functions which can be used by the System page creator.
  */
 
-import { addDomAsElement, extractNumber, getChildIndex, image, loadHTML, numberStats, oddEven, removeSection, removeSpecificSection, sanitiseString, shortenGHub, sortObj, storeData, toggleSection, wikiCode, wikiCodeSimple } from '../../common';
+import { addDomAsElement, extractNumber, getChildIndex, hideInput, image, loadHTML, numberStats, oddEven, removeSection, removeSpecificSection, sanitiseString, shortenGHub, sortObj, storeData, toggleSection, wikiCode, wikiCodeSimple } from '../../common';
 import { assignFunction } from '../../commonElements/elementBackend/elementFunctions';
 import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
 import { autoInfested, buildDescriptor, initialiseSectionInputs } from '../../miscLogic/celestialobjectslogic';
-import { HubGal, regNr } from '../../miscLogic/locationLogic';
+import { HubGal, getHubNumber, regNr } from '../../miscLogic/locationLogic';
 import { addAllTooltips } from '../../modules/tooltip';
 import { ElementFunctions, ElementIds } from '../../types/elements';
-import { ResourceLinks, StdObj } from '../../types/objects';
+import { SortObj, StdObj } from '../../types/objects';
 import { globalElements, links, pageData } from '../../variables/objects';
 import tradeableInputs from '../htmlSnippets/tradeableInputs.html?raw';
 import planetInputHTML from '../htmlSnippets/planetInputs.html?raw';
 import planetOutputHTML from '../htmlSnippets/planetOutputs.html?raw';
+import { BiomeLinks, ResourceLinks } from '../../types/links';
 
 /**
  * Generates a sentence that describes the location of the page.
@@ -41,8 +42,8 @@ export function locationSentence() {
  * @returns {void}
  */
 export function planetInputs() {
-	const inputTarget = globalElements.input.waterInput.parentElement.previousElementSibling;
-	const outputTarget = globalElements.output.planets;
+	const inputTarget = (globalElements.input.waterInput as HTMLInputElement).parentElement!.previousElementSibling as HTMLElement;
+	const outputTarget = globalElements.output.planets as HTMLDivElement;
 	const { planet: planetNr, moon: moonNr } = pageData;
 	const bodies = clamp(parseInt(planetNr as string) + parseInt(moonNr as string), 2, 6);	// NoSonar 2 is the minimum number of planets, 6 is the maximum
 	if (isNaN(bodies)) return;
@@ -67,8 +68,8 @@ export function planetInputs() {
 	function diff() {
 		const planetIDs = new Set();
 		const planets = (() => {
-			const elements = document.querySelectorAll('[data-planet]');
-			for (const element of elements) {
+			const elements: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-planet]');
+			for (const element of Array.from(elements)) {
 				planetIDs.add(element.dataset.planet);
 			}
 			return planetIDs.size;
@@ -76,8 +77,8 @@ export function planetInputs() {
 		const diff = bodies - planets;		// positive if we need to add sections, negative if we need to delete sections
 		return diff;
 	}
-	const elementList = document.querySelectorAll('[data-planet]');
-	let childIndex = getChildIndex(elementList, 'dataset.planet');
+	const elementList: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-planet]');
+	let childIndex = getChildIndex(Array.from(elementList), 'dataset.planet');
 
 	while (diff() != 0) {
 		if (diff() > 0) {
@@ -100,8 +101,8 @@ export function planetInputs() {
 			planetIDs.add(element.dataset.planet);
 		}
 		const sectionName = Array.from(planetIDs).pop();
-		const sections = document.querySelectorAll(`[data-planet="${sectionName}"]`);
-		removeSection(sections);
+		const sections: NodeListOf<HTMLDivElement> = document.querySelectorAll(`[data-planet="${sectionName}"]`);
+		removeSection(Array.from(sections));
 	}
 
 	/**
@@ -186,10 +187,11 @@ export function planetInputs() {
 		updateGlobalElements(resourceOutputs);
 
 		// updates the biome links for the new planet section
-		biomeLinks(inputDom.getElementById(`biome_input${i}`));
+		biomeLinks(inputDom.getElementById(`biome_input${i}`) as HTMLSelectElement);
 
 		// adds resource input elements to the new planet section
-		const resourceButton = document.getElementById(`addResourceButton${i}`);
+		const resourceButton = document.getElementById(`addResourceButton${i}`) as HTMLButtonElement;
+		if (!resourceButton) return;
 		for (let j = 0; j < 3; j++) {		// NoSonar adds 3 resource inputs, because 3 is the minimum
 			addResourceInput(resourceButton, i);
 		}
@@ -203,27 +205,42 @@ export function planetInputs() {
  * @param {string} sectionTarget - The target section.
  * @returns {undefined} - Returns nothing.
  */
-function addResourceInput(element, sectionTarget) {
-	const inputSection = element.parentElement;
-	const elementList = document.querySelectorAll('[data-resource]');
-	const childIndex = getChildIndex(elementList, 'dataset.resource');
+function addResourceInput(element: HTMLButtonElement, sectionTarget: number) {
+	const inputSection = element.parentElement as HTMLElement;
+	const elementList: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-resource]');
+	const childIndex = getChildIndex(Array.from(elementList), 'dataset.resource');
 	const resource = 'resource' + sectionTarget;
 	const resource_input = 'resource_input' + childIndex;
 	const oddEvenClass = 'is-' + oddEven(sectionTarget);
 
 	const inputHTML = `<div class="tableCell text removable ${oddEvenClass}" data-section="resource${sectionTarget} planet${sectionTarget}" data-resource="section${childIndex}" data-planet="planet${sectionTarget}">
-		<button class="button is-danger is-outlined icon is-small" title="Remove resource" type="button" disabled onclick="removeSpecificSection('section${childIndex}', 'resource'); removeResource('${resource_input}')">&#10006</button>
+		<button class="button is-danger is-outlined icon is-small" title="Remove resource" type="button" disabled data-evt-id="removeButton">&#10006</button>
 		<label for="${resource_input}">Resource name:</label>
 	</div>
 	<div class="tableCell data ${oddEvenClass}" data-section="resource${sectionTarget} planet${sectionTarget}" data-resource="section${childIndex}" data-planet="planet${sectionTarget}">
-		<input type="text" list="resources" id="${resource_input}" data-dest-noauto="${resource}" oninput="addResource(this)">
+		<input type="text" list="resources" id="${resource_input}" data-dest-noauto="${resource}" data-evt-id="addButton">
 	</div>`;
 
-	inputSection.insertAdjacentHTML('beforebegin', inputHTML);
+	const evtListeners: ElementFunctions = [
+		{
+			element: 'removeButton',
+			handler: 'click',
+			func: () => { removeSpecificSection(`section${childIndex}`, 'resource'); removeResource(resource_input) }
+		},
+		{
+			element: 'addButton',
+			handler: 'input',
+			func: function () { addResource(this as unknown as HTMLInputElement) }
+		},
+	]
+
+	const inputDom = loadHTML(inputHTML, {}, evtListeners) as Document;
+
+	addDomAsElement(inputDom, inputSection, 'beforebegin');
 
 	// Update the global elements list for the new input element.
-	const resourceElements = { input: {} };
-	resourceElements.input[resource_input] = resource_input;
+	const resourceElements: ElementIds = { input: {} };
+	resourceElements.input![resource_input] = resource_input;
 	updateGlobalElements(resourceElements);
 
 	// Get all of the current resource input sections, and count them.
@@ -239,7 +256,7 @@ function addResourceInput(element, sectionTarget) {
 	// default state is disabled because that's easier to handle.
 	// Enable the "remove" button for every input section if there are more than the minimum (3, because every planet has at least 3 resources).
 	if (resourceInputSectionCount > 3) {		// NoSonar enable "remove" button if more than 3 inputs
-		for (const element of resourceInputSections) {
+		for (const element of Array.from(resourceInputSections)) {
 			const button = element.querySelector('button');
 			if (button) button.disabled = false;
 		}
@@ -253,8 +270,9 @@ function addResourceInput(element, sectionTarget) {
  * @param {string} sectionTarget - The value to match the "data-planet" attribute of the elements to be returned.
  * @returns {Array.<HTMLElement>} - The array of elements that match the specified criteria.
  */
-function getResourceInputSections(sectionTarget) {
-	return document.querySelectorAll(`[data-resource][data-planet="planet${sectionTarget}"]`);
+function getResourceInputSections(sectionTarget: number) {
+	const sections: NodeListOf<HTMLDivElement> = document.querySelectorAll(`[data-resource][data-planet="planet${sectionTarget}"]`);
+	return Array.from(sections);
 }
 
 /**
@@ -262,10 +280,11 @@ function getResourceInputSections(sectionTarget) {
  * @param {HTMLInputElement[]} inputs - Array of input elements containing a dataset property with a 'resource' key.
  * @returns {number} - Count of unique 'resource' input sections.
  */
-function getResourceInputSectionCount(inputs) {
-	const sections = new Set();
+function getResourceInputSectionCount(inputs: Array<HTMLDivElement>) {
+	const sections: Set<string> = new Set();
 	for (const input of inputs) {
-		sections.add(input.dataset.resource);
+		const resource = input.dataset.resource as string;
+		sections.add(resource);
 	}
 	return sections.size;
 }
@@ -276,11 +295,11 @@ function getResourceInputSectionCount(inputs) {
  * @param {string} resourceID - The ID of the resource input element to remove.
  * @returns {void}
  */
-export function removeResource(resourceID) {
-	const resourceInput = globalElements.input[resourceID];
-	const planet = resourceInput.dataset.destNoauto;
+export function removeResource(resourceID: string) {
+	const resourceInput = globalElements.input[resourceID] as HTMLInputElement;
+	const planet = resourceInput.dataset.destNoauto as string;
 	const id = resourceInput.id;
-	const sectionTarget = extractNumber(planet);
+	const sectionTarget = extractNumber(planet) as number;
 
 	// remove element from resources
 	if (resourceInput.value) {
@@ -289,7 +308,7 @@ export function removeResource(resourceID) {
 	}
 
 	// enable "add resource" button
-	document.getElementById(`addResourceButton${sectionTarget}`).disabled = false;
+	(document.getElementById(`addResourceButton${sectionTarget}`) as HTMLButtonElement).disabled = false;
 
 	// disable remove buttons if 3 inputs or less
 	const resourceInputSections = getResourceInputSections(sectionTarget);
@@ -308,15 +327,15 @@ export function removeResource(resourceID) {
  * @param {HTMLInputElement} element - The element that was clicked.
  * @returns {void}
  */
-export function moonSwitch(element) {
-	const descriptorDropdown = document.getElementById(element.dataset.destNoauto);
-	if (!descriptorDropdown) return;
+export function moonSwitch(element: HTMLInputElement) {
+	const descriptorInput = document.getElementById(element.dataset.destNoauto as string) as HTMLInputElement | null;
+	if (!descriptorInput) return;
 	const i = extractNumber(element.id);
 	const planetClass = element.checked ? 'Moon' : 'Planet';
 
 	document.getElementById('planetClass' + i)!.innerText = planetClass;
 
-	expandDescriptor(descriptorDropdown, planetClass);
+	expandDescriptor(descriptorInput, planetClass);
 }
 
 /**
@@ -337,6 +356,7 @@ function expandDescriptor(element: HTMLInputElement, planetClass: string | undef
 	(globalElements.output[dest] as HTMLOutputElement).innerText = output;
 
 	const isInfested = autoInfested(element);		// returns true or false
+	if (typeof isInfested != 'boolean') return;
 	infestedBiomeLinks('infested' + i, isInfested)
 }
 
@@ -347,7 +367,7 @@ function expandDescriptor(element: HTMLInputElement, planetClass: string | undef
  * @returns {void}
  */
 export function merchantUpgrades(group: string = '') {
-	const checkboxes = document.querySelectorAll('[data-dest-checkbox-group]');
+	const checkboxes: NodeListOf<HTMLInputElement> = document.querySelectorAll('[data-dest-checkbox-group]');
 	if (group) {
 		getCheckedBoxes(group);
 		return;
@@ -356,8 +376,10 @@ export function merchantUpgrades(group: string = '') {
 	// if the checkboxes have no onchange event (i.e. at page load), assign them one
 	const merchants: Set<string> = new Set();
 	for (const checkbox of Array.from(checkboxes)) {
-		if (!checkbox.onchange) assignFunction({ element: checkbox, func: function () { merchantUpgrades((this as unknown as HTMLInputElement).dataset.destCheckboxGroup) } });
-		merchants.add(checkbox.dataset.destCheckboxGroup);
+		const listeners = checkbox.dataset.listener as string;
+		const listenerArray = listeners.split(' ');
+		if (!listenerArray.includes('change')) assignFunction({ element: checkbox, func: function () { merchantUpgrades((this as unknown as HTMLInputElement).dataset.destCheckboxGroup) } });
+		merchants.add(checkbox.dataset.destCheckboxGroup as string);
 	}
 	for (const merchant of merchants) {
 		getCheckedBoxes(merchant);
@@ -365,11 +387,12 @@ export function merchantUpgrades(group: string = '') {
 	return;
 
 	function getCheckedBoxes(group: string) {
-		const checkboxes = document.querySelectorAll(`[data-dest-checkbox-group="${group}"]`);
+		const checkboxes: NodeListOf<HTMLInputElement> = document.querySelectorAll(`[data-dest-checkbox-group="${group}"]`);
 		const parm = (group.startsWith('SD')) ? '' : group.substring(0, 2);		// NoSonar this gets everything except the group prefix
 		const checked: Array<string> = [];
-		for (const checkbox of checkboxes) {
-			if (checkbox.checked) checked.push(checkbox.value);
+		for (const checkbox of Array.from(checkboxes)) {
+			const checkboxElement = checkbox;
+			if (checkboxElement.checked) checked.push(checkboxElement.value);
 		}
 
 		const code: Array<string> = [];
@@ -378,7 +401,7 @@ export function merchantUpgrades(group: string = '') {
 			code.push(output);
 		}
 		wikiCode(code.join('\n'), group);
-		const wrapper = globalElements.output[group].closest('#scrapDealer');
+		const wrapper = (globalElements.output[group] as HTMLOutputElement).closest('#scrapDealer') as HTMLDivElement;
 		if (!wrapper) return;		// return if not scrap dealer
 		if (code.length == 0) {
 			wrapper.style.display = 'none';
@@ -396,7 +419,8 @@ export function merchantUpgrades(group: string = '') {
  */
 export function tradeables() {
 	// Define commonly used elements and variables
-	const { input: { terminalInputs: inputSection }, output: { tradeTerminal: outputSection } } = globalElements;
+	const inputSection = globalElements.input.terminalInputs as HTMLDivElement;
+	const outputSection = globalElements.output.tradeTerminal as HTMLDivElement;
 	const elementList: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-tradeable]');
 	const childIndex = getChildIndex(Array.from(elementList), 'dataset.tradeable').toString();
 	const replacementStrings: StdObj = {
@@ -433,12 +457,12 @@ export function tradeables() {
 	}
 
 	// Add the new tradeable input and output sections to the appropriate elements
-	addDomAsElement(inputDom, inputSection as HTMLElement, 'beforebegin');
+	addDomAsElement(inputDom, inputSection, 'beforebegin');
 
 	outputSection.insertAdjacentHTML('beforeend', codeHTML);
 
 	// Count the number of tradeable input sections and disable the "Add Tradeable" button if it exceeds 5 sections
-	const tradeableInputSections = document.querySelectorAll('[data-tradeable]');
+	const tradeableInputSections: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-tradeable]');
 	const tradeableInputSectionCount = (() => {
 		const sections = new Set();
 		for (const tradeableInputSection of Array.from(tradeableInputSections)) {
@@ -463,16 +487,16 @@ export function tradeables() {
  * @returns {void}
  */
 export function enableTradeableAdd() {
-	const inputSection = globalElements.input.terminalInputs;
-	const button = inputSection.querySelector('button');
+	const inputSection = globalElements.input.terminalInputs as HTMLDivElement;
+	const button = inputSection.querySelector('button') as HTMLButtonElement;
 
 	// enable "add tradeable" button
 	button.disabled = false;
 }
 
 export function resetExternal() {
-	const sections = document.querySelectorAll('[data-tradeable], [data-planet]');
-	removeSection(sections);
+	const sections: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-tradeable], [data-planet]');
+	removeSection(Array.from(sections));
 }
 
 /**
@@ -482,12 +506,13 @@ export function resetExternal() {
  * @returns {void}
  */
 export function regionLong() {
-	const region = pageData.region;
+	const region = pageData.region as string;
 	const output = (() => {
 		if (region.split(' ').length == 1) return region + ' region';
 		return region;
 	})();
-	globalElements.output.regionLong.innerText = output;
+	const outputElement = globalElements.output.regionLong as HTMLOutputElement;
+	outputElement.innerText = output;
 }
 
 /**
@@ -496,11 +521,11 @@ export function regionLong() {
  * @param {HTMLInputElement|null} element - The input element from which to get the resource and planet data. If null, no new resource is added.
  * @returns {undefined}
  */
-function addResource(element = null) {
+function addResource(element: HTMLInputElement | undefined = undefined) {
 	const resources: ResourceLinks = (links.resources as ResourceLinks) ??= {};
 	if (element) {
 		const value = element.value;
-		const planet = element.dataset.destNoauto;
+		const planet = element.dataset.destNoauto as string;
 		const id = element.id;
 
 		resources[planet] ??= {};
@@ -508,7 +533,7 @@ function addResource(element = null) {
 	}
 
 	const usedResources: Set<string> = new Set();
-	const linkedResources = sortObj(structuredClone(resources), true);
+	const linkedResources = sortObj(structuredClone(resources), true) as ResourceLinks;
 	for (const planetName in linkedResources) {
 		const planet = linkedResources[planetName];
 		for (const key in planet) {
@@ -522,7 +547,7 @@ function addResource(element = null) {
 
 	for (const key in linkedResources) {
 		const output = Object.values(linkedResources[key]).filter(resource => resource).join('<br>');
-		globalElements.output[key].innerText = output;
+		(globalElements.output[key] as HTMLOutputElement).innerText = output;
 	}
 }
 
@@ -532,19 +557,17 @@ function addResource(element = null) {
  * @param {HTMLElement} element - The HTML element that triggered the function.
  * @returns {void}
  */
-function biomeLinks(element) {
+function biomeLinks(element: HTMLSelectElement) {
 	const value = element.value;
-	const planet = element.dataset.destNoauto;
+	const planet = element.dataset.destNoauto as string;
 
-	const biomes: {
-		[key: string]: string;
-	} = (links.biomes as { [key: string]: string }) ??= {};
+	const biomes: StdObj = (links.biomes as StdObj) ??= {};
 	biomes[planet] = sanitiseString(value);
 
 	const usedBiomes: Set<string> = new Set();
-	const linkedBiomes = sortObj(structuredClone(biomes), true);
+	const linkedBiomes = sortObj(structuredClone(biomes), true) as StdObj;
 	for (const planetName in linkedBiomes) {
-		const biome = linkedBiomes[planetName] as string;
+		const biome = linkedBiomes[planetName];
 		if (biome && !usedBiomes.has(biome)) {
 			linkedBiomes[planetName] = `{{Biome|${biome}}}`;
 			usedBiomes.add(biome);
@@ -559,12 +582,12 @@ function biomeLinks(element) {
  * @param {boolean} bool - Whether the link is checked or not.
  * @returns {void}
  */
-function infestedBiomeLinks(dest, bool) {
-	const infestedBiomes = links.infestedBiomes ??= {};
+function infestedBiomeLinks(dest: string, bool: boolean) {
+	const infestedBiomes = (links.infestedBiomes as BiomeLinks) ??= {};
 	infestedBiomes[dest] = bool;
 
 	let infestedBiomeLink = false;
-	const linkedBiomes = sortObj(structuredClone(infestedBiomes), true);
+	const linkedBiomes = sortObj(structuredClone(infestedBiomes) as SortObj, true) as StdObj;
 	for (const planetName in linkedBiomes) {
 		const checked = linkedBiomes[planetName];
 		if (checked && !infestedBiomeLink) {
@@ -585,10 +608,9 @@ function infestedBiomeLinks(dest, bool) {
  * @param {Array} array - An array of values to use for setting the text.
  * @returns {void}
  */
-function setBiomeText(array) {
-	for (const key in array) {
-		const output = array[key];
-		globalElements.output[key].innerText = output;
+function setBiomeText(obj: StdObj) {
+	for (const [key, output] of Object.entries(obj)) {
+		(globalElements.output[key] as HTMLOutputElement).innerText = output;
 	}
 }
 
@@ -600,13 +622,14 @@ function setBiomeText(array) {
  * @returns {void}
  */
 export function expectedHubTagSentence() {
-	const outputElement = globalElements.output.expectedHubTag;
-	const systemName = pageData.name;
+	const outputElement = globalElements.output.expectedHubTag as HTMLOutputElement;
+	const systemName = pageData.name as string;
 	if (!systemName) {
 		outputElement.innerHTML = '';
 		return;
 	};
-	const { region, portalglyphs: glyphs } = pageData;
+	const region = pageData.region as string;
+	const glyphs = pageData.portalglyphs as string;
 	const nr = getHubNumber(region);
 	const index = (() => {
 		const systemIndex = glyphs.substring(1, 4);		// NoSonar index 1-3 is the system index
@@ -637,7 +660,7 @@ export function expectedHubTagSentence() {
  */
 export function spaceStationSection() {
 	// define notes
-	const notes = {
+	const notes: StdObj = {
 		uncharted: 'This system is uncharted and has no [[Space Station]].',
 		abandoned: 'This space station is abandoned.' + '\n\n',
 	}
@@ -652,18 +675,19 @@ export function spaceStationSection() {
 
 	// define faction
 	const faction = (() => {
-		const input = pageData.faction;
+		const input = pageData.faction as string;
+		const wealth = pageData.wealth as string;
 		if (input == 'Uncharted') return 'uncharted';
 		if (input.includes('Abandoned')) return 'abandoned';
-		if (pageData.wealth.includes('Black Market')) return 'pirate';
+		if (wealth.includes('Black Market')) return 'pirate';
 		return 'normal';
 	})();
 
 	// get all station sections
-	const stationSections = document.querySelectorAll('[data-station]');
+	const stationSections: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-station]');
 	for (let i = 0; i < stationSections.length; i++) {
 		const section = stationSections[i];
-		const sectionName = section.dataset.station;
+		const sectionName = section.dataset.station as string;
 		if (sectionDefinition[faction].includes(sectionName)) {
 			if ((sectionName == 'merchant' || sectionName == 'scrapDealer') && defaultDisplay(section)) {
 				i++;	// NoSonar (I know what I'm doing, this is to skip the next section)
@@ -679,7 +703,8 @@ export function spaceStationSection() {
 	}
 	if (!notes[faction]) return;
 
-	document.querySelector('[data-station="note"]').innerText = notes[faction];
+	const outputElement = document.querySelector('[data-station="note"]') as HTMLDivElement;
+	outputElement.innerText = notes[faction];
 
 	/**
 	 * Determines if the default display should be used for a space station section.
@@ -688,8 +713,8 @@ export function spaceStationSection() {
 	 * @param {Object} section - The space station section HTML element.
 	 * @returns {Boolean} Returns true if the default display should be used, false otherwise.
 	 */
-	function defaultDisplay(section) {
-		const button = section.querySelector('button');
+	function defaultDisplay(section: HTMLDivElement) {
+		const button = section.querySelector('button') as HTMLButtonElement;
 		if (!button) return;
 		const buttonId = button.dataset.buttonId;
 		if (!buttonId) return;
@@ -708,8 +733,8 @@ export function spaceStationSection() {
  * @returns {undefined}
  */
 export function autoBH() {
-	const glyphs = pageData.portalglyphs;
-	const colorInput = globalElements.input.colorInput;
+	const glyphs = pageData.portalglyphs as string;
+	const colorInput = globalElements.input.colorInput as HTMLSelectElement;
 	const SIV = glyphs.substring(2, 4);		// NoSonar gets the last two characters of the SIV, because only those are relevant for checking for black holes
 
 	// Hides the input if SIV is 79, otherwise shows it and sets its value to an empty string.
@@ -729,13 +754,14 @@ export function autoBH() {
  *
  * @param {Element} element - The element that triggered the function call.
  */
-export function autoPirate(element) {
+export function autoPirate(element: HTMLSelectElement) {
 	const value = element.value;
 	if (!value.includes('Black Market') && !value.includes('Pirate Controlled')) return;
-	const { conflictInput: conflict, wealthInput: wealth } = globalElements.input;
+	const conflict = globalElements.input.conflictInput as HTMLSelectElement;
+	const wealth = globalElements.input.wealthInput as HTMLSelectElement;
 	const inputs = [wealth, conflict];
 	for (const input of inputs) {
-		const pirate = input.querySelector('optgroup[label="Pirate"] option').value;
+		const pirate = (input.querySelector('optgroup[label="Pirate"] option') as HTMLOptionElement).value;
 		input.value = pirate;
 		wikiCode(input);
 	}
@@ -748,15 +774,17 @@ export function autoPirate(element) {
  * @returns {void}
  */
 export function combineEconConf() {
-	const faction = pageData.faction;
+	const faction = pageData.faction as string;
 
-	const { wealthInput: wealth, economyInput: economy, conflictInput: conflict } = globalElements.input;
+	const wealth = globalElements.input.wealthInput as HTMLSelectElement;
+	const economy = globalElements.input.economyInput as HTMLSelectElement;
+	const conflict = globalElements.input.conflictInput as HTMLSelectElement;
 
 	const inputs = [wealth, economy, conflict];
 
 	if (faction.includes('Abandoned') || faction == 'Uncharted') {
 		for (const input of inputs) {
-			const value = input.querySelector('optgroup[label="Abandoned/Uncharted"] option').value;
+			const value = (input.querySelector('optgroup[label="Abandoned/Uncharted"] option') as HTMLOptionElement).value;
 			input.value = value;
 			wikiCode(input);
 			hideInput(input, 'none');
@@ -783,7 +811,7 @@ export function addTemplate(element: HTMLInputElement | undefined = undefined) {
 		return;
 	}
 
-	const outputElement = globalElements.output[element.value];
+	const outputElement = globalElements.output[element.value] as HTMLOutputElement;
 	outputElement.style.display = element.checked ? '' : 'none';
 }
 
@@ -815,17 +843,6 @@ export function generateGalleryArray() {
 	pageData.galleryArray = array;
 }
 
-export function galleryExplanationExternal() {
-	return `There is a preferred order of pictures:
-	<div class='dialog-center'>
-		<ol class='dialog-list'>
-			<li>System Exploration Guide</li>
-			<li>System Page</li>
-			<li>Default SS Multi-Tool</li>
-		</ol>
-	</div>`
-}
-
 /**
  * Searches for and highlights checkboxes based on a search term.
  *
@@ -833,7 +850,7 @@ export function galleryExplanationExternal() {
  * @returns {void}
  */
 export function searchUpgrades(element: HTMLInputElement) {
-	const checkboxes = element.parentElement!.getElementsByClassName('checkbox');
+	const checkboxes = element.parentElement!.getElementsByClassName('checkbox') as HTMLCollectionOf<HTMLLabelElement>;
 	const checkboxData: StdObj = {};
 	for (const checkbox of Array.from(checkboxes)) {
 		const { id } = checkbox.querySelector('input') as HTMLInputElement;

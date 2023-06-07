@@ -1,5 +1,5 @@
 import { addStaticPageData, autoShow, enableTextMarking, getCurrentHTMLFile, getSelectedText, preventCopy, showAll, versionDropdown } from "../common";
-import { addEventListeners } from "../commonElements/elementBackend/elementFunctions";
+import { attachTransformedListeners } from "../commonElements/elementBackend/elementFunctions";
 import { readDefaultValues } from "../modules/footer";
 import { globalElements, pageData } from "../variables/objects";
 
@@ -27,5 +27,5 @@ if (globalElements.output.albumText) {
 	(globalElements.output.albumText as HTMLElement).ontouchend = (e) => getSelectedText(e.target as HTMLElement);
 	(globalElements.output.albumText as HTMLElement).onmouseup = (e) => getSelectedText(e.target as HTMLElement);
 }
-addEventListeners();
+attachTransformedListeners();
 addStaticPageData('eventListeners', true);

@@ -6,22 +6,6 @@ export interface SortObj {
 	[key: string]: unknown;
 }
 
-export interface LinkObj {
-	[key: string]: string | LinkObj;
-}
-
-export interface ResourceLinks {
-	[key: string]: {
-		[key: string]: string;
-	}
-}
-
-export interface PlanetPropResourceLinks {
-	[key: string]: {
-		[key: string]: StdObj;
-	}
-}
-
 export interface TransformedElementFunctions {
 	[key: string]: {		// ID of HTMLElement
 		[key: string]: {	// handler
