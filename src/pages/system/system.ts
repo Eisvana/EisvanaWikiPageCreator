@@ -714,7 +714,7 @@ export function spaceStationSection() {
 	 * @returns {Boolean} Returns true if the default display should be used, false otherwise.
 	 */
 	function defaultDisplay(section: HTMLDivElement) {
-		const button = section.querySelector('button') as HTMLButtonElement;
+		const button = section.querySelector('button:not(.tooltip)') as HTMLButtonElement;
 		if (!button) return;
 		const buttonId = button.dataset.buttonId;
 		if (!buttonId) return;
