@@ -677,9 +677,10 @@ export function spaceStationSection() {
 	const faction = (() => {
 		const input = pageData.faction as string;
 		const wealth = pageData.wealth as string;
+		const conflict = pageData.conflict as string;
 		if (input == 'Uncharted') return 'uncharted';
 		if (input.includes('Abandoned')) return 'abandoned';
-		if (wealth.includes('Black Market')) return 'pirate';
+		if (wealth.includes('Black Market') || conflict.includes('Pirate')) return 'pirate';
 		return 'normal';
 	})();
 
@@ -756,13 +757,12 @@ export function autoBH() {
  */
 export function autoPirate(element: HTMLSelectElement) {
 	const value = element.value;
-	if (!value.includes('Black Market') && !value.includes('Pirate Controlled')) return;
 	const conflict = globalElements.input.conflictInput as HTMLSelectElement;
 	const wealth = globalElements.input.wealthInput as HTMLSelectElement;
 	const inputs = [wealth, conflict];
 	for (const input of inputs) {
 		const pirate = (input.querySelector('optgroup[label="Pirate"] option') as HTMLOptionElement).value;
-		input.value = pirate;
+		if (value.includes('Black Market') || value.includes('Pirate Controlled')) input.value = pirate;
 		wikiCode(input);
 	}
 	spaceStationSection();
@@ -784,7 +784,7 @@ export function combineEconConf() {
 
 	if (faction.includes('Abandoned') || faction == 'Uncharted') {
 		for (const input of inputs) {
-			const value = (input.querySelector('optgroup[label="Abandoned/Uncharted"] option') as HTMLOptionElement).value;
+			const value = (input.querySelector('optgroup:last-child option') as HTMLOptionElement).value;
 			input.value = value;
 			wikiCode(input);
 			hideInput(input, 'none');
