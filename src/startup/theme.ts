@@ -16,3 +16,5 @@ if (!localStorageTheme && window.matchMedia('(prefers-color-scheme: dark)').matc
 if (theme == 'dark') document.documentElement.dataset.theme = 'dark';
 
 if (!localStorageTheme) localStorage.setItem('theme', theme);
+
+export { };

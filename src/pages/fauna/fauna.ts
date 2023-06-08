@@ -316,8 +316,8 @@ export function albumOtherExternal() {
 	const heights = [pageData.height, pageData.height2];
 	const prio = creaturePrio();
 	const index = (() => {
-		const numString = extractNumber(prio);
-		return parseInt(numString) - 1;
+		const numString = extractNumber(prio) as number;
+		return numString - 1;
 	})();
 	const output = `(${heights[index]}m)`;
 	return output;
