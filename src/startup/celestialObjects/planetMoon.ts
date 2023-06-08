@@ -3,10 +3,10 @@ import { assignElementFunctions } from '../../commonElements/elementBackend/elem
 import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
 import { autoInfested } from '../../miscLogic/celestialobjectslogic';
 import { wormAlbumName, wormAutoSpawn } from '../../miscLogic/planetMoonLogic';
-import { globalElements, globalFunctions } from '../../variables/objects';
-import './celestialObjects';
+import { globalElements } from '../../variables/objects';
 import planetMoonElementFunctions from './planetMoonElementFunctions';
 import planetMoonElements from './planetMoonElementStore';
+import './celestialObjects';
 
 updateGlobalElements(planetMoonElements);
 assignElementFunctions(planetMoonElementFunctions);
@@ -15,4 +15,3 @@ triggerEvent((globalElements.input.resourceInputs as HTMLDivElement).querySelect
 autoInfested();
 wormAutoSpawn();
 wormAlbumName();
-if (typeof globalFunctions.planetStartupFunctions == 'function') globalFunctions.planetStartupFunctions();
