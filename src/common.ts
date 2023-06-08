@@ -483,7 +483,6 @@ export function toggleSection(sectionName: string = '', button: HTMLButtonElemen
 		const buttonElements: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.sectionToggle button');
 		for (let i = 0; i < buttonElements.length; i++) {
 			const button = buttonElements[i];
-			console.log(button.id, button)
 			button.dataset.buttonId ??= (childindex + i).toString();
 			const id = button.dataset.buttonId;
 			button.dataset[`display${id}`] = button.dataset.displayDefault ?? '';

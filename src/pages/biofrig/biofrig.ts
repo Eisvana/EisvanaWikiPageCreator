@@ -65,7 +65,6 @@ export function generateCatalogue() {
  * @returns {void}
  */
 export function appearance() {
-	console.log('called!')
 	// Extract data from pageData object.
 	const name = pageData.name as string;
 	const tentacles = pageData.tentacles as string;

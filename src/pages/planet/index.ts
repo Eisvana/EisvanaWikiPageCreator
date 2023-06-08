@@ -6,8 +6,6 @@ import { assignElementFunctions } from "../../commonElements/elementBackend/elem
 import planetElementFunctions from "./elementFunctions";
 import '../../startup/celestialObjects/planetMoon';
 
-console.log('planet')
-
 updateGlobalElements(planetElements);
 assignElementFunctions(planetElementFunctions);
 moonList();

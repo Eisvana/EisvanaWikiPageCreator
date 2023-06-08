@@ -8,8 +8,6 @@ import './celestialObjects';
 import planetMoonElementFunctions from './planetMoonElementFunctions';
 import planetMoonElements from './planetMoonElementStore';
 
-console.log("planetmoon")
-
 updateGlobalElements(planetMoonElements);
 assignElementFunctions(planetMoonElementFunctions);
 

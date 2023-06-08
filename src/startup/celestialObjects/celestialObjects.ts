@@ -6,8 +6,6 @@ import { ElementFunctions } from "../../types/elements";
 import { globalFunctions } from "../../variables/objects";
 import '../';
 
-console.log("celestial")
-
 globalFunctions.docByExternal = () => docByExternal();
 
 hideOrgName();

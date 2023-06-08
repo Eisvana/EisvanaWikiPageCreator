@@ -3,8 +3,6 @@ import { attachTransformedListeners } from "../commonElements/elementBackend/ele
 import { readDefaultValues } from "../modules/footer";
 import { globalElements, pageData } from "../variables/objects";
 
-console.log("main")
-
 const currentHTMLFile = getCurrentHTMLFile();
 addStaticPageData('pageType', currentHTMLFile);
 
