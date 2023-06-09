@@ -119,7 +119,7 @@ export function addAllTooltips(dom = document) {
 		img.src = './assets/icons/help.svg';
 		img.alt = 'Help';
 
-		const tooltip = document.createElement('span');
+		const tooltip = document.createElement('p');
 		tooltip.classList.add('tooltiptext', 'nms-font');
 		tooltip.innerHTML = dataArr.shift() as string;
 
@@ -129,8 +129,9 @@ export function addAllTooltips(dom = document) {
 		* Finally, assignFunction is called with element, functionCall, and 'onclick' as its arguments.
 		*/
 		if (dataArr.length) {
-			element.dataset.clickTooltip = '';
 			assignFunction({ element, handler: 'click', func: () => explanation(...dataArr) });
+		} else {
+			element.disabled = true;
 		}
 
 		element.innerHTML = img.outerHTML;

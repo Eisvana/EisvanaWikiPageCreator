@@ -1,37 +1,48 @@
 @use "variables" as *;
 
-.button.is-link.is-outlined {
-	color: #4a80d9;
-	border-color: #4a80d9;
-}
-
-.button.is-link.is-outlined:not([disabled]):hover {
-	color: white;
-}
-
 .button {
 	background-color: transparent;
 	color: var(--text-color);
 	border-color: var(--border-color);
 	white-space: normal;
-}
 
-.button:not(#portalglyphButtons .button, .portalglyphButtons .button) {
-	height: auto;
-}
+	&.is-link.is-outlined {
+		color: #4a80d9;
+		border-color: #4a80d9;
 
-.button:hover {
-	color: var(--border-color-focus);
-	border-color: var(--border-color-hover);
-}
+		&:not([disabled]):hover {
+			color: white;
+		}
+	}
 
-.button:focus {
-	color: unset;
-}
+	&:not(#portalglyphButtons .button, .portalglyphButtons .button) {
+		height: auto;
+	}
 
-.button:active {
-	color: var(--border-color-focus);
-	border-color: var(--border-color-focus);
+	&:hover {
+		color: var(--border-color-focus);
+		border-color: var(--border-color-hover);
+	}
+
+	&:focus {
+		color: unset;
+	}
+
+	&:active {
+		color: var(--border-color-focus);
+		border-color: var(--border-color-focus);
+	}
+
+
+	&.is-primary {
+
+		&:not(.is-outlined),
+		&.is-outlined:hover,
+		&.is-outlined:active,
+		&.is-outlined:focus {
+			color: var(--body-backgroundcolor);
+		}
+	}
 }
 
 .button:not([class*="is-"]):focus,
@@ -40,16 +51,9 @@ textarea:focus,
 textarea:focus-visible,
 input:not([type="file"], [type="checkbox"], [type="radio"]):focus,
 input:not([type="file"], [type="checkbox"], [type="radio"]):focus-visible,
-button.tooltip[data-click-tooltip]:focus-visible,
+button.tooltip:not([disabled]):focus-visible,
 button.delete-icon:focus-visible {
 	outline: 2px solid var(--outline-color) !important;
-}
-
-.button.is-primary:not(.is-outlined),
-.button.is-primary.is-outlined:hover,
-.button.is-primary.is-outlined:active,
-.button.is-primary.is-outlined:focus {
-	color: var(--body-backgroundcolor);
 }
 
 textarea,
@@ -57,30 +61,37 @@ input {
 	background-color: var(--input-background);
 	color: var(--text-color);
 	border-color: var(--border-color);
+
+	&:hover {
+		border-color: var(--border-color-hover);
+	}
+
+	&:focus {
+		border-color: var(--border-color-focus);
+
+		&:hover {
+			border-color: var(--border-color-focus-hover);
+		}
+	}
+
+	&::placeholder {
+		color: var(--placeholder-color);
+	}
 }
 
-textarea:hover,
-input:hover {
-	border-color: var(--border-color-hover);
-}
+input {
+	&[type="date"]::-webkit-calendar-picker-indicator {
+		filter: invert(var(--invert));
+	}
 
-textarea:focus,
-input:focus {
-	border-color: var(--border-color-focus);
-}
+	&[type="file"] {
+		width: 100%;
+		background-color: transparent;
 
-textarea:focus:hover,
-input:focus:hover {
-	border-color: var(--border-color-focus-hover);
-}
-
-textarea::placeholder,
-input::placeholder {
-	color: var(--placeholder-color);
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-	filter: invert(var(--invert));
+		&::file-selector-button {
+			padding: 2px 5px;
+		}
+	}
 }
 
 select,
@@ -91,42 +102,33 @@ input[type="file"]::file-selector-button {
 	border-color: var(--border-color);
 	border-radius: var(--border-radius);
 	padding-inline-start: 5px;
+
+	&:hover {
+		background-color: var(--input-background-hover);
+		border-color: var(--border-color-hover);
+	}
+
+	&:focus {
+		border-color: var(--border-color-focus);
+	}
 }
 
-select:hover,
-input[type="file"]::file-selector-button:hover {
-	background-color: var(--input-background-hover);
-	border-color: var(--border-color-hover);
-}
+select {
+	&:has(optgroup:hover) {
+		background-color: var(--input-background-hover);
+	}
 
-select:focus,
-input[type="file"]::file-selector-button:focus {
-	border-color: var(--border-color-focus);
-}
+	option {
+		background-color: var(--input-background);
+	}
 
-select:has(optgroup:hover) {
-	background-color: var(--input-background-hover);
-}
-
-select option {
-	background-color: var(--input-background);
-}
-
-select optgroup {
-	background-color: var(--input-background-hover);
-}
-
-input[type="file"]::file-selector-button {
-	padding: 2px 5px;
+	optgroup {
+		background-color: var(--input-background-hover);
+	}
 }
 
 .checkbox:hover {
 	color: var(--text-color);
-}
-
-input[type="file"] {
-	width: 100%;
-	background-color: transparent;
 }
 
 *~input[type="file"] {
@@ -158,14 +160,11 @@ input[type="date"] {
 	border: 1px solid;
 	border-color: var(--border-color);
 	padding: 0 5px;
-}
 
-textarea:hover,
-input[type="text"]:hover,
-input[type="number"]:hover,
-input[type="date"]:hover {
-	border: 1px solid;
-	border-color: var(--border-color-hover);
+	&:hover {
+		border: 1px solid;
+		border-color: var(--border-color-hover);
+	}
 }
 
 .merchant-search {

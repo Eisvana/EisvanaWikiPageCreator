@@ -1,68 +1,64 @@
 @use "variables" as *;
 
-/* reset button styles */
+/*
+reset button styles
+the `all: unset` MUST be at the top!
+*/
 button.tooltip {
-	background: unset;
-	padding: unset;
-	line-height: inherit;
-	font-size: inherit;
-	border: unset;
-}
-
-.tooltip {
+	all: unset;
 	width: 15px;
 	min-width: 15px;
 	height: auto;
 	position: relative;
 	display: inline-block;
 	outline: none;
-}
 
-.tooltip>data {
-	display: none;
-}
+	&>data {
+		display: none;
+	}
 
-.tooltip[data-click-tooltip] {
-	cursor: pointer;
-}
+	&>img {
+		position: relative;
+		top: 3px;
+		filter: invert(var(--invert));
+	}
 
-.tooltip .tooltiptext {
-	--width: 150px;
-	visibility: hidden;
-	width: var(--width);
-	background-color: var(--tooltip-background);
-	color: var(--text-color);
-	text-align: center;
-	border-radius: var(--border-radius);
-	padding: 5px 3px;
-	position: absolute;
-	z-index: 1;
-	bottom: 110%;
-	left: 50%;
-	margin-inline-start: calc(var(--width) * -0.5);
-	opacity: 0;
-	transition: opacity .3s !important;
-	font-weight: normal;
-}
+	&:not([disabled]) {
+		cursor: pointer;
+	}
 
-.tooltip .tooltiptext::after {
-	content: "";
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	margin-inline-start: -5px;
-	border: 5px solid transparent;
-	border-block-start-color: var(--tooltip-background);
-}
+	.tooltiptext {
+		--width: 150px;
+		visibility: hidden;
+		width: var(--width);
+		background-color: var(--tooltip-background);
+		color: var(--text-color);
+		text-align: center;
+		border-radius: var(--border-radius);
+		padding: 5px 3px;
+		position: absolute;
+		z-index: 1;
+		bottom: 110%;
+		left: 50%;
+		margin-inline-start: calc(var(--width) * -0.5);
+		opacity: 0;
+		transition: opacity .3s !important;
+		font-weight: normal;
 
-.tooltip:hover .tooltiptext,
-.tooltip:focus-visible .tooltiptext {
-	visibility: visible;
-	opacity: 1;
-}
+		&::after {
+			content: "";
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			margin-inline-start: -5px;
+			border: 5px solid transparent;
+			border-block-start-color: var(--tooltip-background);
+		}
+	}
 
-.tooltip>img {
-	position: relative;
-	top: 3px;
-	filter: invert(var(--invert));
+	&:hover .tooltiptext,
+	&:focus-visible .tooltiptext {
+		visibility: visible;
+		opacity: 1;
+	}
 }
