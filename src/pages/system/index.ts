@@ -5,7 +5,7 @@ import { globalElements, globalFunctions, pageData } from '../../variables/objec
 import systemElementFunctions from './elementFunctions';
 import systemElements from './elementStore';
 import { generateGalleryArray, addTemplate, autoPirate, civCatalog, combineEconConf, expectedHubTagSentence, merchantUpgrades, planetInputs, regionLong, resetExternal, searchUpgrades, spaceStationSection } from './system';
-import '../../startup/celestialObjects/celestialObjects';
+import '../../startup/celestialObjects';
 
 pageData.galleryExplanationExternal = `
 There is a preferred order of pictures:

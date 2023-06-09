@@ -1,15 +1,7 @@
 import { hideOrgName } from "../../common";
-import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { docByExternal } from "../../miscLogic/celestialobjectslogic";
 import { locationSentence } from "../../pages/system/system";
 import { ElementFunctions } from "../../types/elements";
-import { globalFunctions } from "../../variables/objects";
-import '../';
-
-globalFunctions.docByExternal = () => docByExternal();
-
-hideOrgName();
-locationSentence();
 
 const celestialObjectElementFunctions: ElementFunctions = [
 	{
@@ -26,4 +18,4 @@ const celestialObjectElementFunctions: ElementFunctions = [
 	},
 ]
 
-assignElementFunctions(celestialObjectElementFunctions);
+export default celestialObjectElementFunctions;

@@ -4,7 +4,7 @@ import planetElements from "./elementStore";
 import { moonList } from "./planet";
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import planetElementFunctions from "./elementFunctions";
-import '../../startup/celestialObjects/planetMoon';
+import '../../startup/planetMoon';
 
 updateGlobalElements(planetElements);
 assignElementFunctions(planetElementFunctions);

@@ -1,5 +1,5 @@
 import { pageData } from "../../variables/objects";
-import '../../startup/celestialObjects/planetMoon';
+import '../../startup/planetMoon';
 
 pageData.galleryExplanationExternal = `
 There is a preferred order of pictures:
