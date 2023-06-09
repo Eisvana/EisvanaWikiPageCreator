@@ -17,7 +17,7 @@ import Sortable from "sortablejs";
 export function galleryUpload() {
 	// Get globalElements and set input, inputDiv, wikiCodeGalleryDiv, and errors
 	const inp = globalElements.input.galleryUpload as HTMLInputElement;
-	if (!inp.value) return;
+	if (!inp?.value) return;
 	const inputDiv = globalElements.output.galleryItems as HTMLDivElement;
 	const wikiCodeGalleryDiv = globalElements.output.galleryCode as HTMLDivElement;
 	const errors: Array<string> = [];

@@ -209,7 +209,7 @@
 						</button>
 					</div>
 					<div id="resourceInputs" class="tableHeader text">
-						<button class="button is-primary" type="button" onclick="addResource(this)">+ Add
+						<button class="button is-primary" type="button" id="addResourceButton">+ Add
 							Resource</button>
 					</div>
 					<div class="tableCell text">
@@ -411,28 +411,27 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Fauna:</p>
-						<button class="button" onclick="toggleSection('fauna', this)">Hide</button>
+						<button class="button" id="faunaToggleButton">Hide</button>
 					</div>
 					<div id="faunaInputs" class="tableHeader text" data-section="fauna">
 						<button class="button is-primary" type="button" data-dest-noauto="creatures"
-							onclick="addFauna(this)">+ Add Fauna</button>
+							id="addFaunaButton">+ Add Fauna</button>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Flora:</p>
-						<button class="button" onclick="toggleSection('flora', this)">Hide</button>
+						<button class="button" id="floraToggleButton">Hide</button>
 					</div>
 					<div id="floraInputs" class="tableHeader text" data-section="flora">
-						<button class="button is-primary" type="button" data-dest-noauto="plants"
-							onclick="addFlora(this)">+ Add Flora</button>
+						<button class="button is-primary" type="button" data-dest-noauto="plants" id="addFloraButton">+
+							Add Flora</button>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Minerals:</p>
-						<button class="button" onclick="toggleSection('mineral', this)">Hide</button>
+						<button class="button" id="mineralToggleButton">Hide</button>
 					</div>
 					<div id="mineralInputs" class="tableHeader text" data-section="mineral">
 						<button class="button is-primary" type="button" data-dest-noauto="minerals"
-							onclick="addMineral(this)">+ Add
-							Mineral</button>
+							id="addMineralButton">+ Add Mineral</button>
 					</div>
 					<div class="tableCell text ">
 						<label for="discDateInput">When was this moon discovered?</label>

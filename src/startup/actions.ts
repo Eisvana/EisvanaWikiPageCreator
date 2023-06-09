@@ -58,23 +58,45 @@ actions.insertAdjacentHTML('beforebegin', copyNote);
 
 // Adds debug mode checkbox and sets up a handler for toggling debug mode on and off.
 // import.meta.env.PROD: {boolean} whether the app is running in production. https://vitejs.dev/guide/env-and-mode.html
-if (import.meta.env.PROD) addStaticPageData('debug', false);
+const isProd = import.meta.env.PROD
 
-const skipCheck = `<label style="display:flex; gap: .3rem"><input class="checkbox" type="checkbox" id="skipCheck">Enable debug (no checks, no popups)</label>`;
-const clearLocalStorage = `<button style="margin: 0 1rem" class="button is-danger is-small" id="clearCache" onclick="localStorage.clear()">Clear Localstorage</button>`;
+const devTools = `
+<label style="display:flex; gap: .3rem"><input class="checkbox" type="checkbox" id="skipCheck" data-evt-id="skipCheck">Enable debug (no checks, no popups)</label>;
+<button style="margin: 0 1rem" class="button is-danger is-small" id="clearCache" data-evt-id="clearCache">Clear Localstorage</button>`;
+
+const evtListners: ElementFunctions = [
+	{
+		element: 'clearCache',
+		handler: 'click',
+		func: () => localStorage.clear()
+	},
+	{
+		element: 'skipCheck',
+		handler: 'change',
+		func: function () {
+			const checkState = (this as unknown as HTMLInputElement).checked;
+			pageData.debug = checkState;
+			pageData.uploadShown = checkState;
+			pageData.galleryUploadShown = checkState;
+			document.documentElement.dataset.debug = checkState.toString();
+			enableTextMarking();
+		}
+	}
+]
+
 const actionsWrapper = globalElements.output.actions as HTMLElement;
-actionsWrapper.insertAdjacentHTML('beforeend', skipCheck + clearLocalStorage);
+const debugDom = loadHTML(devTools, {}, evtListners) as Document;
+
+// if on production, set the debug flag permanently to false
+// if on dev (not prod), add the devtools from above
+if (isProd) {
+	addStaticPageData('debug', false);
+} else {
+	addDomAsElement(debugDom, actionsWrapper, 'beforeend');
+}
+
 const skipCheckElement = document.getElementById('skipCheck') as HTMLInputElement | null;
 if (skipCheckElement) {
-	skipCheckElement.onchange = (e) => {
-		const checkState = (e.target as HTMLInputElement).checked;
-		pageData.debug = checkState;
-		pageData.uploadShown = checkState;
-		pageData.galleryUploadShown = checkState;
-		document.documentElement.dataset.debug = checkState.toString();
-		enableTextMarking();
-	}
-
 	const urlParams = new URLSearchParams(window.location.search);
 	if (urlParams.has('debug')) {
 		skipCheckElement.checked = true;
