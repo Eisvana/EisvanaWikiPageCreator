@@ -1,4 +1,4 @@
-import { image, numberStats, toggleSection } from "../../common";
+import { image, toggleSection } from "../../common";
 import { albumName, albumOther, albumDiscoverer, albumItemType } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements";
 import { MTType, acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo, appearance, autoMTType, autoSentinel, hideCost, hideLocName, hideSrLocName, locGalaxy, locHubNr, showSizeDropdown } from "./multitool";
@@ -41,19 +41,7 @@ const MTElementFunctions: ElementFunctions = [
 		func: () => acquirementAlbumBundle()
 	},
 	{
-		element: ['dmgInput', 'scanInput'],
-		func: function () { numberStats(this as unknown as HTMLInputElement, 1, true) }
-	},
-	{
-		element: 'costInput',
-		func: function () { numberStats(this as unknown as HTMLInputElement) }
-	},
-	{
-		element: 'slotsInput',
-		func: function () { numberStats(this as unknown as HTMLInputElement); albumOther() }
-	},
-	{
-		element: 'classInput',
+		element: ['slotsInput', 'classInput'],
 		func: () => albumOther()
 	},
 	{

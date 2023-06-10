@@ -2,7 +2,7 @@
  * @fileoverview Provides functions that can be used by Planet and Moon pages.
  */
 
-import { addDomAsElement, extractNumber, forceDatalist, getChildIndex, image, loadHTML, numberStats, oddEven, removeSection, removeSpecificSection, sanitiseString, setDropdownOptions, sortObj, toggleSection, wikiCode } from '../common';
+import { addDomAsElement, extractNumber, forceDatalist, getChildIndex, image, loadHTML, oddEven, removeSection, removeSpecificSection, sanitiseString, setDropdownOptions, sortObj, toggleSection, wikiCode } from '../common';
 import { globalElements, globalFunctions, links, pageData } from '../variables/objects';
 import creatureInputs from '../htmlSnippets/creatureInputs.html?raw';
 import floraInputs from '../htmlSnippets/floraInputs.html?raw';
@@ -249,11 +249,6 @@ export function addFauna(element: HTMLButtonElement) {
 			element: 'genusInput',
 			handler: 'change',
 			func: function () { addGenus(this as unknown as HTMLSelectElement) }
-		},
-		{
-			element: 'creaturePropInput',
-			handler: 'input',
-			func: function () { numberStats(this as unknown as HTMLInputElement, 1) }
 		},
 	]
 

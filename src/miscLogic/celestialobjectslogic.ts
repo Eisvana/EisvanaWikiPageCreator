@@ -1,4 +1,4 @@
-import { assignDefaultValue, displayResearch, forceDatalist, formatName, numberError, storeData, wikiCode } from "../common";
+import { assignDefaultValue, displayResearch, forceDatalist, formatName, numberError, numberStats, storeData, wikiCode, wikiCodeSimple } from "../common";
 import { getDescriptorData } from "../datalists/planetDatalists";
 import { assignFunction } from "../commonElements/elementBackend/elementFunctions";
 import { globalElements, pageData } from "../variables/objects";
@@ -167,6 +167,14 @@ export function initialiseSectionInputs(sectionSelector: string) {
 		if (input.dataset.default) {
 			assignFunction({ element: input, func: function () { assignDefaultValue(this as unknown as HTMLInputElement | HTMLSelectElement) } });
 			assignDefaultValue(input);
+		}
+		if (input.dataset.destSimple) {
+			assignFunction({ element: input, func: function () { wikiCodeSimple(this as unknown as HTMLInputElement) } });
+			wikiCodeSimple(input);
+		}
+		if (input.dataset.destNumber) {
+			assignFunction({ element: input, func: function () { numberStats(this as unknown as HTMLInputElement, parseInt((this as unknown as HTMLInputElement).dataset.destNumber as string) || undefined) } });
+			numberStats(input as HTMLInputElement, parseInt(input.dataset.destNumber) || undefined);
 		}
 		if ((input as HTMLInputElement).list) {
 			assignFunction({ element: input, handler: 'change', func: function () { forceDatalist(this as unknown as HTMLInputElement) } });

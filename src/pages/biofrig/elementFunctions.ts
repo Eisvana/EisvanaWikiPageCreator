@@ -1,4 +1,4 @@
-import { numberStats, toggleSection } from "../../common";
+import { toggleSection } from "../../common";
 import { albumDiscoverer, albumName, albumOther } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements"
 import { addInfo, appearance, generateCatalogue, locGalaxy, locHubNr } from "./biofrig";
@@ -11,10 +11,6 @@ const frigateElementFunctions: ElementFunctions = [
 	{
 		element: 'nameInput',
 		func: () => { albumName(); appearance() }
-	},
-	{
-		element: ['costInput', 'combatInput', 'explorationInput', 'industrialInput', 'tradeInput', 'fuelInput'],
-		func: function () { numberStats(this as unknown as HTMLInputElement) }
 	},
 	{
 		element: 'portalglyphsInput',

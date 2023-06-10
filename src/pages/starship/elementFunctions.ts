@@ -1,4 +1,4 @@
-import { enPrefix, numberStats, toggleSection } from "../../common";
+import { enPrefix, toggleSection } from "../../common";
 import { toggleRedirect } from "../../modules/actions";
 import { albumName, albumOther, albumDiscoverer } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements";
@@ -40,10 +40,6 @@ const starshipElementFunctions: ElementFunctions = [
 	{
 		element: 'pilotInput',
 		func: () => albumOther()
-	},
-	{
-		element: ['maneuverBInput', 'damageBInput', 'shieldBInput', 'warpBInput'],
-		func: function () { numberStats(this as unknown as HTMLInputElement, 1) }
 	},
 	{
 		element: ['discoveredInput', 'discoveredlinkInput'],

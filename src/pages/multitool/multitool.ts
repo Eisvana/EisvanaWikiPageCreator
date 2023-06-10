@@ -2,7 +2,7 @@
  * @fileoverview Provides functions which can be used by the Multi-Tool page creator.
  */
 
-import { docByResearchteam, enPrefix, errorMessage, hideInput, numberStats, shortenGHub, triggerEvent, validateCoords, wikiCode } from "../../common";
+import { docByResearchteam, enPrefix, errorMessage, hideInput, shortenGHub, triggerEvent, validateCoords, wikiCode } from "../../common";
 import { HubGal, planetMoon, planetMoonSentence, regNr } from "../../miscLogic/locationLogic";
 import { albumDesc } from "../../modules/albumactions";
 import { PicObj, StdObj } from "../../types/objects";
@@ -302,20 +302,6 @@ export function MTType() {
 	const dest = typeElement.dataset.destNoauto as string;
 	wikiCode(output, dest);
 	pageData[dest] = type;		// setting this manually to avoid errors down the line. The auto function uses the provided output, which is not unique per option.
-}
-
-export function bundleNumberStats() {
-	const inputElements = [
-		globalElements.input.dmgInput,
-		globalElements.input.scanInput,
-		globalElements.input.costInput,
-		globalElements.input.slotsInput,
-	]
-
-	for (let i = 0; i < inputElements.length; i++) {
-		const input = inputElements[i];
-		numberStats(input as HTMLInputElement, i < 2 ? 1 : undefined);	// NoSonar dmg and scan have decimal values, the other two do not. index 2 is the first without decimals.
-	}
 }
 
 /**

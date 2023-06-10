@@ -1,4 +1,3 @@
-import { numberStats } from "../../common";
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import { albumItemType, albumName, albumOther, albumDiscoverer } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements";
@@ -27,7 +26,7 @@ const sandwormElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'wormmaxdepthInput',
-		func: function () { numberStats(this as unknown as HTMLInputElement, 1); albumOther() }
+		func: () => albumOther()
 	},
 	{
 		element: ['discoveredInput', 'discoveredlinkInput'],

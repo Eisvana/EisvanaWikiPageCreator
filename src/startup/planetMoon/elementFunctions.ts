@@ -1,4 +1,4 @@
-import { numberStats, toggleSection } from "../../common";
+import { toggleSection } from "../../common";
 import { autoInfested } from "../../miscLogic/celestialobjectslogic";
 import { addFauna, addFlora, addMineral, addResource, addSandwormTemplate, locationSentence, plural, sentinelSentence, wormAlbumName, wormAutoSpawn } from "../../miscLogic/planetMoonLogic";
 import { ElementFunctions } from "../../types/elements";
@@ -15,10 +15,7 @@ const planetMoonElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'faunaNumberInput',
-		func: function () {
-			numberStats(this as unknown as HTMLInputElement);
-			plural(parseInt(pageData[(this as unknown as HTMLInputElement).dataset.destNoauto as string] as string), 'faunaSentencePlural')
-		}
+		func: function () { plural(parseInt(pageData[(this as unknown as HTMLInputElement).dataset.destNoauto as string] as string), 'faunaSentencePlural') }
 	},
 	{
 		element: 'sentinelInput',

@@ -1,4 +1,3 @@
-import { numberStats } from "../../common";
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { albumFunctions } from "../../modules/albumactions";
 import { globalFunctions, pageData } from "../../variables/objects";
@@ -23,7 +22,6 @@ pageData.galleryExplanationExternal = `
 assignElementFunctions(frigateElementFunctions);
 
 // startupFunctions
-numberStats();
 locHubNr();
 locGalaxy();
 generateCatalogue();

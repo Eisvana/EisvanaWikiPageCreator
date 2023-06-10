@@ -1,4 +1,4 @@
-import { numberStats, toggleSection } from "../../common";
+import { toggleSection } from "../../common";
 import { wikiCodePercentage, docByExternal } from "../../miscLogic/celestialobjectslogic";
 import { ElementFunctions } from "../../types/elements";
 import { addTemplate, autoBH, autoPirate, civCatalog, combineEconConf, expectedHubTagSentence, planetInputs, regionLong, searchUpgrades, spaceStationSection, tradeables } from "./system";
@@ -14,7 +14,7 @@ const systemElementFunctions: ElementFunctions = [
 	},
 	{
 		element: ['planetInput', 'moonInput'],
-		func: function () { numberStats(this as unknown as HTMLInputElement); planetInputs() }
+		func: () => planetInputs()
 	},
 	{
 		element: 'nameInput',
@@ -35,10 +35,6 @@ const systemElementFunctions: ElementFunctions = [
 	{
 		element: 'platformInput',
 		func: () => docByExternal()
-	},
-	{
-		element: 'distanceInput',
-		func: function () { numberStats(this as unknown as HTMLInputElement) }
 	},
 	{
 		element: 'systemExtras',

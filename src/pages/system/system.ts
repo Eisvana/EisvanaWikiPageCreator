@@ -2,7 +2,7 @@
  * @fileoverview Provides functions which can be used by the System page creator.
  */
 
-import { addDomAsElement, extractNumber, getChildIndex, hideInput, image, loadHTML, numberStats, oddEven, removeSection, removeSpecificSection, sanitiseString, shortenGHub, sortObj, storeData, toggleSection, wikiCode, wikiCodeSimple } from '../../common';
+import { addDomAsElement, extractNumber, getChildIndex, hideInput, image, loadHTML, numberStats, oddEven, removeSection, removeSpecificSection, sanitiseString, shortenGHub, sortObj, storeData, toggleSection, wikiCode } from '../../common';
 import { assignFunction } from '../../commonElements/elementBackend/elementFunctions';
 import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
 import { autoInfested, buildDescriptor, initialiseSectionInputs } from '../../miscLogic/celestialobjectslogic';
@@ -152,16 +152,6 @@ export function planetInputs() {
 				element: 'descriptorInput',
 				handler: 'input',
 				func: function () { expandDescriptor(this as unknown as HTMLInputElement) }
-			},
-			{
-				element: 'weatherInput',
-				handler: 'input',
-				func: function () { wikiCodeSimple(this as unknown as HTMLInputElement) }
-			},
-			{
-				element: 'faunaTotalInput',
-				handler: 'input',
-				func: function () { numberStats(this as unknown as HTMLInputElement) }
 			},
 		]
 
@@ -451,9 +441,15 @@ export function tradeables() {
 	for (const input of Array.from(inputs)) {
 		assignFunction({ element: input, func: function () { wikiCode(this as unknown as HTMLInputElement) } });
 	}
-	const noautoInputs: NodeListOf<HTMLInputElement> = inputDom.querySelectorAll(`[data-tradeable="section${childIndex}"] input[data-dest-noauto]`);
+	const noautoInputs: NodeListOf<HTMLInputElement> = inputDom.querySelectorAll(`[data-tradeable="section${childIndex}"] input[data-dest-number]`);
 	for (const input of Array.from(noautoInputs)) {
-		assignFunction({ element: input, func: function () { storeData(this as unknown as HTMLInputElement); numberStats(this as unknown as HTMLInputElement) } });
+		// Sorry for this huge line of code. It checks whether dataset.destNumber can be parsed into a number, and if no, it instead uses undefined instead of going to NaN.
+		assignFunction({
+			element: input, func: function () {
+				storeData(this as unknown as HTMLInputElement);
+				numberStats(this as unknown as HTMLInputElement, isNaN(parseInt((this as unknown as HTMLInputElement).dataset.destNumber as string)) ? undefined : parseInt((this as unknown as HTMLInputElement).dataset.destNumber as string))
+			}
+		});
 	}
 
 	// Add the new tradeable input and output sections to the appropriate elements

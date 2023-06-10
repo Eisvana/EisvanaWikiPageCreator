@@ -46,6 +46,7 @@ function getInputData() {
 		stores: document.querySelectorAll('[data-dest-noauto]'),
 		defaults: document.querySelectorAll('[data-default]'),
 		simple: document.querySelectorAll('[data-dest-simple]'),
+		number: document.querySelectorAll('[data-dest-number]'),
 		lists: document.querySelectorAll('[list]'),
 	}
 	return inputData;
@@ -107,6 +108,7 @@ export function autoShow(): void {
 		prio?: boolean;
 		func: () => void;
 	}> = [
+			{ elements: inputData.number, func: function () { numberStats(this as unknown as HTMLInputElement, parseInt((this as unknown as HTMLInputElement).dataset.destNumber as string) || undefined) } },
 			{ elements: inputData.defaults, func: function () { assignDefaultValue(this as unknown as HTMLInputElement) } },
 			{ elements: inputData.inputs, func: function () { wikiCode(this as unknown as HTMLInputElement | HTMLSelectElement) } },
 			{ elements: inputData.checkboxes, func: function () { checkboxWikiCode(this as unknown as HTMLInputElement) } },
@@ -866,9 +868,10 @@ export function shortenGHub(civ: string): string {
  */
 export function numberStats(element: HTMLInputElement | null = null, decimals: number | undefined = undefined, outputRaw: boolean = false) {
 	if (arguments.length == 0) {
-		const numbers: NodeListOf<HTMLInputElement> = document.querySelectorAll('[oninput*="numberStats"]');
+		const numbers: NodeListOf<HTMLInputElement> = document.querySelectorAll('[data-dest-number]');
 		for (const element of Array.from(numbers)) {
-			numberStats(element);
+			const decimals = element.dataset.destNumber as string;
+			numberStats(element, parseInt(decimals) || undefined);
 		}
 		return;
 	}
@@ -913,13 +916,14 @@ export function numberError(element: HTMLInputElement, value: string = element.v
  */
 function getNumber(number: string, decimals: number | undefined = undefined, outputRaw: boolean = false): number | string {
 	const raw = parseFloat(number.replaceAll(',', ''));
+	const decimalNumber = parseInt(String(decimals));
 	const output = (() => {
-		if (!raw || isNaN(raw)) return '';
-		if (decimals) return raw.toFixed(decimals);
+		if (isNaN(raw)) return '';
+		if (!isNaN(decimalNumber)) return raw.toFixed(decimalNumber);
 		return raw;
 	})();
 	if (outputRaw || !output) return output.toString();
-	return new Intl.NumberFormat('en-UK', { minimumFractionDigits: decimals }).format(output as number);
+	return new Intl.NumberFormat('en-UK', { minimumFractionDigits: decimalNumber || undefined }).format(output as number);	// does 3 decimals by default if no decimal number is given.
 }
 
 /**
