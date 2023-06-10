@@ -1,4 +1,4 @@
-import { addStaticPageData, autoShow, enableTextMarking, getCurrentHTMLFile, getSelectedText, preventCopy, showAll, versionDropdown } from "../common";
+import { addStaticPageData, autoShow, enableTextMarking, getCurrentHTMLFile, getSelectedText, preventCopy, showAll, triggerEvent, versionDropdown } from "../common";
 import { attachTransformedListeners } from "../commonElements/elementBackend/elementFunctions";
 import { readDefaultValues } from "../modules/footer";
 import { globalElements, pageData } from "../variables/objects";
@@ -30,4 +30,7 @@ for (const section of Array.from(outputColumn.children)) {
 }
 
 attachTransformedListeners();
+try {
+	triggerEvent(globalElements.input.portalglyphsInput as HTMLInputElement, 'input');
+} catch (error) { /* do nothing */ }
 addStaticPageData('eventListeners', true);

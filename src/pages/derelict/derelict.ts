@@ -65,5 +65,6 @@ export function processGlyphs(element: HTMLInputElement) {
 
 	wikiCode(regionGlyphs, dest);
 	wikiCode(regioncoords, 'coordinates');
+	const glyphPreviewElement = globalElements.output.portalglyphsPreview as HTMLOutputElement;
+	glyphPreviewElement.innerText = glyphs;
 }
-

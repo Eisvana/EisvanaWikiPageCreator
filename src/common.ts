@@ -968,7 +968,7 @@ export function checkDataIntegrity(element: HTMLElement | null = null, simple: b
 	const savedText = dataIntegrityObj.text;
 	const { name, portalglyphs: glyphs, region } = pageData;
 
-	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.link === element?.dataset?.link) || simple)) {
+	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.link === element?.dataset?.link && dataIntegrityObj.copy) || simple)) {
 		dataIntegrityObj.copy = false;
 		dataIntegrityObj.link = '';
 		return '';
@@ -988,6 +988,7 @@ export function checkDataIntegrity(element: HTMLElement | null = null, simple: b
  * @return {string} - A modified string with all newlines replaced by empty spaces.
  */
 function removeNewlines(text: string): string {
+	if (!text) return '';
 	const newlineRegex = /\r?\n|\r/g;
 	const textString = text.replace(newlineRegex, '');
 	return textString;
@@ -1013,8 +1014,8 @@ export function getSelectedText(section: HTMLElement) {
 	})();
 
 	dataIntegrityObj.text = md5Hex(JSON.stringify(pageData));
-	dataIntegrityObj.copy = sectionText == selected;
-	dataIntegrityObj.link = wikiTextContainer.dataset.link as string;
+	dataIntegrityObj.copy = (sectionText == selected);
+	dataIntegrityObj.link = wikiTextContainer?.dataset?.link as string;
 }
 
 /**
