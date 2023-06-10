@@ -1,6 +1,6 @@
 import { numberStats, researchTeamDropdown } from "../../common";
 import { ElementFunctions } from "../../types/elements";
-import { enemyCheckboxes, processGlyphs, setGalaxy, updateGalaxyTableEntry } from "./derelict";
+import { discoverer, enemyCheckboxes, processGlyphs, setGalaxy, updateGalaxyTableEntry } from "./derelict";
 
 const derelictElementFunctions: ElementFunctions = [
 	{
@@ -18,6 +18,10 @@ const derelictElementFunctions: ElementFunctions = [
 	{
 		element: 'enemiesInput',
 		func: () => enemyCheckboxes()
+	},
+	{
+		element: ['discoveredInput', 'discoveredlinkInput'],
+		func: () => discoverer()
 	},
 ]
 

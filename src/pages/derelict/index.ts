@@ -2,7 +2,7 @@ import { addDomAsElement, addStaticPageData, loadHTML, researchTeamDropdown, tri
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
 import { globalElements, globalFunctions } from "../../variables/objects";
-import { albumLinkGen, enemyCheckboxes, galaxyTableEntry, setGalaxy, updateGalaxyTableEntry } from "./derelict";
+import { albumLinkGen, discoverer, enemyCheckboxes, galaxyTableEntry, setGalaxy, updateGalaxyTableEntry } from "./derelict";
 import derelictElementFunctions from "./elementFunctions";
 import derelictElements from "./elementStore";
 import { actionsDom } from "../../modules/albumactions";
@@ -71,3 +71,4 @@ setGalaxy((globalElements.input.galaxyInput as HTMLSelectElement).value);
 enemyCheckboxes();
 researchTeamDropdown();
 updateGalaxyTableEntry();
+discoverer();

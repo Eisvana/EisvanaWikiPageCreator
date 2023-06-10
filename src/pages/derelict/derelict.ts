@@ -51,9 +51,9 @@ export function setGalaxy(civShort: string) {
 
 export function albumLinkGen() {
 	const type = dataIntegrityObj.link;
-	const galaxy = pageData.galaxy as string;
+	const { galaxy, class: freighterClass } = pageData;
 	if (type == 'album') return `${pageData.name}#${galaxy}`;
-	return 'GHSH Derelict Freighter Catalog';
+	return `GHSH Derelict Freighter Catalog#${freighterClass}-Class`;
 }
 
 export function processGlyphs(element: HTMLInputElement) {
@@ -67,4 +67,12 @@ export function processGlyphs(element: HTMLInputElement) {
 	wikiCode(regioncoords, 'coordinates');
 	const glyphPreviewElement = globalElements.output.portalglyphsPreview as HTMLOutputElement;
 	glyphPreviewElement.innerText = glyphs;
+}
+
+export function discoverer() {
+	const { discovered, discoveredlink } = pageData;
+	const dest = 'discoverer';
+
+	const discovererString = discovered || `{{Profile|${discoveredlink}}}`;
+	wikiCode(discovererString as string, dest);
 }
