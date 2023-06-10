@@ -124,10 +124,11 @@ export function autoShow(): void {
 	const transformedFunctionArray: ElementFunctions = [];
 
 	for (const obj of functionObj) {
-		const { elements, func } = obj;
+		const { elements, handler, func } = obj;
 		for (const element of Array.from(elements)) {
 			const transformedFunctionObject: ElementFunction = {
 				element,
+				handler,
 				prio: true,
 				func
 			}

@@ -5,6 +5,8 @@ import { globalElements, globalFunctions, pageData } from '../../variables/objec
 import systemElementFunctions from './elementFunctions';
 import systemElements from './elementStore';
 import { generateGalleryArray, addTemplate, autoPirate, civCatalog, combineEconConf, expectedHubTagSentence, merchantUpgrades, planetInputs, regionLong, resetExternal, searchUpgrades, spaceStationSection } from './system';
+import { datalists } from '../../common';
+import systemDatalists from '../../datalists/systemDatalists';
 import '../../startup/celestialObjects';
 
 pageData.galleryExplanationExternal = `
@@ -19,6 +21,8 @@ There is a preferred order of pictures:
 
 globalFunctions.resetExternal = () => resetExternal();
 globalFunctions.generateGalleryArray = () => generateGalleryArray();
+
+datalists(systemDatalists);
 
 updateGlobalElements(systemElements);
 assignElementFunctions(systemElementFunctions);
