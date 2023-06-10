@@ -5,7 +5,6 @@ import { enemyCheckboxes, processGlyphs, setGalaxy, updateGalaxyTableEntry } fro
 const derelictElementFunctions: ElementFunctions = [
 	{
 		element: 'portalglyphsInput',
-		prio: true,
 		func: function () { processGlyphs(this as unknown as HTMLInputElement) }
 	},
 	{
@@ -18,7 +17,7 @@ const derelictElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'enemiesInput',
-		func: () => { enemyCheckboxes() }
+		func: () => enemyCheckboxes()
 	},
 ]
 

@@ -1,4 +1,4 @@
-import { addDomAsElement, addStaticPageData, loadHTML, researchTeamDropdown } from "../../common";
+import { addDomAsElement, addStaticPageData, assignDefaultValue, loadHTML, researchTeamDropdown, wikiCode } from "../../common";
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
 import { globalElements, globalFunctions } from "../../variables/objects";
@@ -20,6 +20,10 @@ const entries: NodeListOf<HTMLOutputElement | HTMLDivElement> = document.querySe
 for (const entry of Array.from(entries)) {
 	entry.innerHTML = galaxyTableEntry;
 }
+
+const imageInput = globalElements.input.fileInput as HTMLInputElement;
+wikiCode(imageInput);
+assignDefaultValue(imageInput);
 
 /* Adding action buttons */
 
