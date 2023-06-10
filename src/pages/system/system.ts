@@ -624,12 +624,12 @@ function setBiomeText(obj: StdObj) {
 export function expectedHubTagSentence() {
 	const outputElement = globalElements.output.expectedHubTag as HTMLOutputElement;
 	const systemName = pageData.name as string;
-	if (!systemName) {
+	const region = pageData.region as string;
+	const glyphs = pageData.portalglyphs as string;
+	if (!systemName || !region) {
 		outputElement.innerHTML = '';
 		return;
 	};
-	const region = pageData.region as string;
-	const glyphs = pageData.portalglyphs as string;
 	const nr = getHubNumber(region);
 	const index = (() => {
 		const systemIndex = glyphs.substring(1, 4);		// NoSonar index 1-3 is the system index
