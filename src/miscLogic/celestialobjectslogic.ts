@@ -111,7 +111,7 @@ export function autoInfested(element: HTMLInputElement = globalElements.input.de
 
 	// true: system. false: planet/moon
 	const isInfested = infestedDescriptors.includes(element.value.trim());
-	if (pageData.pageType == 'System') return isInfested;
+	if (pageData.pageType == 'system') return isInfested;
 
 	(globalElements.output.infested as HTMLOutputElement).innerText = isInfested ? '([[Biome Subtype - Infested|Infested]]) ' : '';
 	pageData.infested = isInfested;
