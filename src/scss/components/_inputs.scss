@@ -10,7 +10,7 @@
 		color: #4a80d9;
 		border-color: #4a80d9;
 
-		&:not(:disabled):hover {
+		&:not([disabled]):hover {
 			color: white;
 		}
 	}
