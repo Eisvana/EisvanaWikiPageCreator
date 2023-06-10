@@ -4,6 +4,7 @@
 
 /// <reference types="vite/client" />
 
+import md5Hex from "md5-hex";
 import { checkDataIntegrity, errorMessage, showAll } from "../common";
 import { assignElementFunctions } from "../commonElements/elementBackend/elementFunctions";
 import { ElementFunctions } from "../types/elements";
@@ -84,7 +85,7 @@ export function copyCode(input: HTMLButtonElement, wikiCodeId: string) {
 	const { innerText: buttonText, dataset: { link: dataLink } } = input;
 
 	// Updates the dataIntegrityObj with the new page data and sets the copy flag.
-	dataIntegrityObj.text = JSON.stringify(pageData);
+	dataIntegrityObj.text = md5Hex(JSON.stringify(pageData));
 	dataIntegrityObj.copy = true;
 	dataIntegrityObj.link = dataLink as string;
 
@@ -162,7 +163,7 @@ export function createPage(element: HTMLAnchorElement, pagename: string = pageDa
  * assignLink(myAnchorElement, 'https://www.example.com')
  */
 export function assignLink(element: HTMLAnchorElement, link: string) {
-	const dataIntegrity = checkDataIntegrity(element);		// boolean
+	const dataIntegrity = checkDataIntegrity(element);		// string, is empty when everything is good, otherwise contains the error message
 	const forbiddenCharacters = ['#', '<', '>', '[', ']', '{', '|', '}'];
 	const regex = new RegExp(`[${forbiddenCharacters.join('')}]`, 'g');
 

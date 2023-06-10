@@ -390,7 +390,7 @@ export function postProcessSection(element: HTMLButtonElement, sectionType: stri
 /**
  * Function that handles the change in table entries.
  *
- * @param {HTMLElement} element - The HTMLElement that was clicked.
+ * @param {HTMLButtonElement} element - The HTMLElement that was clicked.
  *
  * @returns {void}
  */

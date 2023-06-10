@@ -17,15 +17,17 @@ if (!pageData.debug) {
 	pageData.galleryUploadShown = false;
 }
 enableTextMarking();
+const outputColumn = globalElements.output.output as HTMLDivElement;
 // the order of the touch and mouse events MUST NOT BE CHANGED!!!
 // it will not work the other way around. Touch must be before mouse
 // globalElements.output.output.ontouchstart = () => preventCopy();		// this must be first		// this is commented out because it had bad scroll UX on mobile. It should be triggered when tapped, but not when swiped.
-(globalElements.output.output as HTMLElement).onmousedown = () => preventCopy();		// this must be second
-(globalElements.output.fullArticle as HTMLElement).onmouseup = (e) => getSelectedText(e.target as HTMLElement);
-(globalElements.output.fullArticle as HTMLElement).ontouchend = (e) => getSelectedText(e.target as HTMLElement);
-if (globalElements.output.albumText) {
-	(globalElements.output.albumText as HTMLElement).ontouchend = (e) => getSelectedText(e.target as HTMLElement);
-	(globalElements.output.albumText as HTMLElement).onmouseup = (e) => getSelectedText(e.target as HTMLElement);
+outputColumn.onmousedown = () => preventCopy();		// this must be second
+
+for (const section of Array.from(outputColumn.children)) {
+	const outputSection = section as HTMLDivElement;
+	outputSection.onmouseup = (e) => getSelectedText(e.target as HTMLElement);
+	outputSection.ontouchend = (e) => getSelectedText(e.target as HTMLElement);
 }
+
 attachTransformedListeners();
 addStaticPageData('eventListeners', true);

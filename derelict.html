@@ -175,7 +175,7 @@
 				<div id="actions" class="buttons"></div>
 			</div>
 			<div id="output" class="column is-full-mobile">
-				<div class="wikiText" id="fullArticle">
+				<div class="wikiText" id="fullArticle" data-link="page">
 					<div>{{Version|<output name="release"></output>}}</div>
 					<div>{{GHub}}</div>
 					<div>{{Starship infobox</div>
@@ -276,18 +276,12 @@
 					<div>[[Category:Album]]</div>
 					<div>[[Category:Galactic Hub Ship Hunters]]</div>
 				</div>
-				<div id="classTableEntry">
-
-					<div class="wikitext">
-						| [[<output name="name"></output>]] || <output name="hyperdrive"></output> ly || +<output
-							name="fuel">% || <output name="coordinates">:xxxx || {{Gl/Small|0000<output
-									name="glyphs"></output>}} ||
-								<output name="discoverer"></output>
-					</div>
+				<div id="classTableEntry" class="wikitext" data-link="classTable">
+					| [[<output name="name"></output>]] || <output name="hyperdrive"></output> ly || +<output
+						name="fuel">% || <output name="coordinates">:xxxx || {{Gl/Small|0000<output
+								name="glyphs"></output>}} || <output name="discoverer"></output>
 				</div>
-				<div>
-					<div id="galaxyTableEntry" class="wikitext"></div>
-				</div>
+				<div id="galaxTableEntry" class="wikitext" data-link="galaxyTable"></div>
 			</div>
 		</main>
 	</div>

@@ -16,6 +16,7 @@ import { Datalist, SortObj } from './types/objects';
 import { AnyPrimitive } from './types/values';
 import { ElementFunction, ElementFunctions, InputElements } from './types/elements';
 import { galleryUpload } from './modules/gallery';
+import md5Hex from 'md5-hex';
 
 /**
  * Adds Galactic Hub huburb regions to an object.
@@ -51,12 +52,6 @@ function getInputData() {
 }
 
 /**
- * Preloads HTML files from the `cachedHTML` object
- * @function
- * @returns {void}
- */
-
-/**
  * Creates a version dropdown menu in the app UI with custom text labels for certain options.
  *
  * @function
@@ -73,7 +68,6 @@ export function versionDropdown() {
 	setDropdownOptions(dropdownElement as HTMLSelectElement, versions, texts);
 }
 
-// take element and array of values and array of corresponding text.
 /**
  * Sets the options in a dropdown element based on an array
  * of values and corresponding text.
@@ -970,9 +964,8 @@ export function forceDatalist(element: HTMLInputElement) {
  */
 export function checkDataIntegrity(element: HTMLElement | null = null, simple: boolean = false) {
 	if (pageData.debug) return '';
-	const currentText = JSON.stringify(pageData);
+	const currentText = md5Hex(JSON.stringify(pageData));
 	const savedText = dataIntegrityObj.text;
-
 	const { name, portalglyphs: glyphs, region } = pageData;
 
 	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.link === element?.dataset?.link) || simple)) {
@@ -1003,23 +996,25 @@ function removeNewlines(text: string): string {
 /**
  * Returns the selected text within a given section of the wiki page, after performing some preprocessing to remove unwanted text.
  * @function
- * @param {Object} section - The HTML element representing the section to search for selected text.
- * @returns {string} - The selected text as a trimmed string, with any button text removed.
+ * @param {HTMLElement} section - The HTML element representing the section to search for selected text.
+ * @returns {void}
  */
 export function getSelectedText(section: HTMLElement) {
 	// this is some stupid BS: Chrome selects the button text, despite it having user-select:none. #chromesucks
 	// I have no idea how to fix this, so I will just remove the button text from the string :shrug:
 	const buttonText = document.getElementById('switchTheme')?.innerText as string;
 
-	const sectionText = removeNewlines((section.closest('.wikiText') as HTMLElement)?.innerText).trim();
+	const wikiTextContainer = section.closest('.wikiText') as HTMLDivElement;
+	const sectionText = removeNewlines(wikiTextContainer?.innerText).trim();
 	const selected = (() => {
 		const text = removeNewlines(window.getSelection()!.toString()).trim();
 		if (text.endsWith(buttonText)) return text.replace(buttonText, '').trim();
 		return text;
 	})();
 
-	dataIntegrityObj.text = JSON.stringify(pageData);
-	dataIntegrityObj.copy = (sectionText == selected)
+	dataIntegrityObj.text = md5Hex(JSON.stringify(pageData));
+	dataIntegrityObj.copy = sectionText == selected;
+	dataIntegrityObj.link = wikiTextContainer.dataset.link as string;
 }
 
 /**
