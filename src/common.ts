@@ -923,7 +923,7 @@ function getNumber(number: string, decimals: number | undefined = undefined, out
 		return raw;
 	})();
 	if (outputRaw || !output) return output.toString();
-	return new Intl.NumberFormat('en-UK', { minimumFractionDigits: decimalNumber || undefined }).format(output as number);	// does 3 decimals by default if no decimal number is given.
+	return new Intl.NumberFormat('en-UK', { minimumFractionDigits: decimalNumber || 0 }).format(output as number);	// does 3 decimals by default if no decimal number is given.
 }
 
 /**
