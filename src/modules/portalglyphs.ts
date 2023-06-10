@@ -191,7 +191,7 @@ export function glyphError(region: string | undefined, glyphElement: HTMLElement
  * @param {string} glyphs - A string of glyphs representing coordinates.
  * @returns {string} A string of coordinates in the format "XXXX:YYYY:ZZZZ:SSSS".
  */
-function glyphs2Coords(glyphs: string) {
+export function glyphs2Coords(glyphs: string) {
 	if (glyphs.length != 12) return '';		// NoSonar complete portal glyph length
 
 	const X_Z_POS_SHIFT = 2049;

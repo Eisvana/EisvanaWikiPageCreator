@@ -318,8 +318,13 @@ label>input[type="radio"]~span,
 
 .buttons {
 	justify-content: center;
-	margin-inline-start: -1rem;
-	margin-block-start: 1rem;
+	padding-block: .5rem;
+
+	p {
+		width: 100%;
+		text-align: center;
+		margin-block-end: .5rem;
+	}
 }
 
 .label-combo {

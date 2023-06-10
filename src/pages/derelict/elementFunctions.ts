@@ -1,11 +1,12 @@
 import { numberStats, researchTeamDropdown } from "../../common";
 import { ElementFunctions } from "../../types/elements";
-import { enemyCheckboxes, setGalaxy, updateGalaxyTableEntry } from "./derelict";
+import { enemyCheckboxes, processGlyphs, setGalaxy, updateGalaxyTableEntry } from "./derelict";
 
 const derelictElementFunctions: ElementFunctions = [
 	{
-		element: ['nameInput', 'portalglyphsInput'],
-		func: () => updateGalaxyTableEntry()
+		element: 'portalglyphsInput',
+		prio: true,
+		func: function () { processGlyphs(this as unknown as HTMLInputElement) }
 	},
 	{
 		element: 'galaxyInput',

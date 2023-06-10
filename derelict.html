@@ -173,6 +173,8 @@
 
 				</div>
 				<div id="actions" class="buttons"></div>
+				<div id="galaxyTableActions" class="buttons"></div>
+				<div id="classTableActions" class="buttons"></div>
 			</div>
 			<div id="output" class="column is-full-mobile">
 				<div class="wikiText" id="fullArticle" data-link="page">
@@ -182,7 +184,7 @@
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image" name="image"></output></div>
 					<div>| coordinates = <output name="coordinates"></output>:xxxx</div>
-					<div>| portalglyphs = 0000<output name="glyphs"></output>
+					<div>| portalglyphs = 0000<output name="portalglyphs"></output>
 					</div>
 					<div>| type = Freighter</div>
 					<div>| subtype = Derelict</div>
@@ -221,14 +223,14 @@
 					<div id="euclid">
 						<div>{| class="wikitable" style="text-align:center; width:100%; max-width: 1000px"</div>
 						<div>|-</div>
-						<div>!width=150 style="background-color:#2F4F4F"|Image</div>
+						<div>!style="background-color:#2F4F4F; width:150px"|Image</div>
 						<div>!style="background-color:#2F4F4F"|System</div>
 						<div>!style="background-color:#2F4F4F"|Zones</div>
 						<div>!style="background-color:#2F4F4F"|Dangers</div>
 						<div>!style="background-color:#2F4F4F"|Glyphs</div>
 						<div>!style="background-color:#2F4F4F"|Documented by</div>
 						<div>|-</div>
-						<div><output id="euclidEntry"></output></div>
+						<div><output id="euclidEntry" data-entry></output></div>
 						<div>|}</div>
 					</div>
 					<br>
@@ -237,14 +239,14 @@
 					<div id="calypso">
 						<div>{| class="wikitable" style="text-align:center; width:100%; max-width: 1000px"</div>
 						<div>|-</div>
-						<div>!width=150 style="background-color:#2F4F4F"|Image</div>
+						<div>!style="background-color:#2F4F4F; width:150px"|Image</div>
 						<div>!style="background-color:#2F4F4F"|System</div>
 						<div>!style="background-color:#2F4F4F"|Zones</div>
 						<div>!style="background-color:#2F4F4F"|Dangers</div>
 						<div>!style="background-color:#2F4F4F"|Glyphs</div>
 						<div>!style="background-color:#2F4F4F"|Documented by</div>
 						<div>|-</div>
-						<div><output id="calypsoEntry"></output></div>
+						<div><output id="calypsoEntry" data-entry></output></div>
 						<div>|}</div>
 					</div>
 					<br>
@@ -253,14 +255,14 @@
 					<div id="eissentam">
 						<div>{| class="wikitable" style="text-align:center; width:100%; max-width: 1000px"</div>
 						<div>|-</div>
-						<div>!width=150 style="background-color:#2F4F4F"|Image</div>
+						<div>!style="background-color:#2F4F4F; width:150px"|Image</div>
 						<div>!style="background-color:#2F4F4F"|System</div>
 						<div>!style="background-color:#2F4F4F"|Zones</div>
 						<div>!style="background-color:#2F4F4F"|Dangers</div>
 						<div>!style="background-color:#2F4F4F"|Glyphs</div>
 						<div>!style="background-color:#2F4F4F"|Documented by</div>
 						<div>|-</div>
-						<div><output id="eissentamEntry"></output></div>
+						<div><output id="eissentamEntry" data-entry></output></div>
 						<div>|}</div>
 					</div>
 					<br>
@@ -276,12 +278,22 @@
 					<div>[[Category:Album]]</div>
 					<div>[[Category:Galactic Hub Ship Hunters]]</div>
 				</div>
-				<div id="classTableEntry" class="wikitext" data-link="classTable">
-					| [[<output name="name"></output>]] || <output name="hyperdrive"></output> ly || +<output
-						name="fuel">% || <output name="coordinates">:xxxx || {{Gl/Small|0000<output
-								name="glyphs"></output>}} || <output name="discoverer"></output>
+				<div id="galaxyTableEntry">
+					<h2 class="title is-5 has-text-left has-text-weight-bold mb-2">
+						System entry for <output name="name"></output>:
+					</h2>
+					<div id="albumText" class="wikiText" data-link="album" data-entry></div>
 				</div>
-				<div id="galaxTableEntry" class="wikitext" data-link="galaxyTable"></div>
+				<div id="indexEntry">
+					<h2 class="title is-5 has-text-left has-text-weight-bold mb-2">
+						GHSH Derelict Freighter Catalog entry for <output name="name"></output>:
+					</h2>
+					<div id="classTableEntry" class="wikiText" data-link="classTableEntry">
+						| [[<output name="name"></output>]] || <output name="hyperdrive"></output> ly || +<output
+							name="fuel">% || <output name="coordinates">:xxxx || {{Gl/Small|0000<output
+									name="glyphs"></output>}} || <output name="discoverer"></output>
+					</div>
+				</div>
 			</div>
 		</main>
 	</div>
