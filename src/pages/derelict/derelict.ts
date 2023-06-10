@@ -24,12 +24,12 @@ export function updateGalaxyTableEntry() {
 }
 
 export function enemyCheckboxes() {
-	const checkboxes = document.getElementsByName('enemies') as NodeListOf<HTMLInputElement>;
+	const checkboxes = document.getElementsByName('enemiesInput') as NodeListOf<HTMLInputElement>;
 	const enemies: Array<string> = [];
 	for (const checkbox of Array.from(checkboxes)) {
 		if (checkbox.checked) enemies.push(checkbox.value);
 	}
-	pageData.enemies = enemies;
+	wikiCode(enemies.join(', '), 'enemies');
 }
 
 export function setGalaxy(civShort: string) {
@@ -66,3 +66,4 @@ export function processGlyphs(element: HTMLInputElement) {
 	wikiCode(regionGlyphs, dest);
 	wikiCode(regioncoords, 'coordinates');
 }
+

@@ -14,11 +14,11 @@ const derelictElementFunctions: ElementFunctions = [
 	},
 	{
 		element: ['roomInput', 'hyperdriveInput', 'fuelInput'],
-		func: function () { numberStats(this as unknown as HTMLInputElement); updateGalaxyTableEntry() }
+		func: function () { numberStats(this as unknown as HTMLInputElement) }
 	},
 	{
-		element: 'enemies',
-		func: () => { enemyCheckboxes(); updateGalaxyTableEntry() }
+		element: 'enemiesInput',
+		func: () => { enemyCheckboxes() }
 	},
 ]
 
