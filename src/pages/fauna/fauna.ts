@@ -421,3 +421,7 @@ export function genderDropdown() {
 		triggerEvent(input, 'change');
 	}
 }
+
+export function resetExternal() {
+	triggerEvent(globalElements.input.genderInput as HTMLInputElement, 'change');
+}
