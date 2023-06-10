@@ -10,7 +10,7 @@
 		color: #4a80d9;
 		border-color: #4a80d9;
 
-		&:not([disabled]):hover {
+		&:not(:disabled):hover {
 			color: white;
 		}
 	}
@@ -51,7 +51,7 @@ textarea:focus,
 textarea:focus-visible,
 input:not([type="file"], [type="checkbox"], [type="radio"]):focus,
 input:not([type="file"], [type="checkbox"], [type="radio"]):focus-visible,
-button.tooltip:not([disabled]):focus-visible,
+button.tooltip:not(:disabled):focus-visible,
 button.delete-icon:focus-visible {
 	outline: 2px solid var(--outline-color) !important;
 }

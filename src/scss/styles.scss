@@ -436,7 +436,7 @@ label>input[type="radio"]~span,
 		align-self: end;
 	}
 
-	.tooltip:not([disabled]) {
+	.tooltip:not(:disabled) {
 		-webkit-tap-highlight-color: transparent;
 
 		&:hover .tooltiptext {

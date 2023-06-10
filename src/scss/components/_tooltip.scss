@@ -23,7 +23,7 @@ button.tooltip {
 		filter: invert(var(--invert));
 	}
 
-	&:not([disabled]) {
+	&:not(:disabled) {
 		cursor: pointer;
 	}
 
