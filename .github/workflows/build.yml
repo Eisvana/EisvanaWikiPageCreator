@@ -1,0 +1,40 @@
+name: Build
+
+run-name: Build Code
+
+on:
+  push:
+    branches: ['main']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "build"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    environment: github-pages
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - run: |
+          npm i
+          npm run build
+          cd dist
+          touch .nojekyll
+
+      - name: Minify Code
+        uses: Lenni009/minify-js@main
+        with:
+          directory: dist
+          overwrite: true
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist # The folder the action should deploy.

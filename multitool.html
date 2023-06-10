@@ -10,23 +10,7 @@
 		content="Easily generate the wikicode to create a multi-tool discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Multi-Tool">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/pages/multitool.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/albumactions.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script src="./src/misc_logic/locationLogic.js"></script>
-	<script>
-		const huburbs = true;
-		window.onload = () => {
-			addStaticPageData('pageType', 'Multi-Tool');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/multitool" type="module"></script>
 </head>
 
 <body>
@@ -60,15 +44,15 @@
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>Multi-Tool Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>./assets/bitmap/mt/MTName.jpg</data>
-						</span>
+							<data>mt/MTName</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<button class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
 							<data>File Upload</data>
 							<data>
@@ -77,11 +61,11 @@
 								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label>Type of the multi-tool:</label>
@@ -89,8 +73,8 @@
 							<data>MT Type is defined by the shape of the tool.</data>
 							<data>Multi-Tool Type</data>
 							<data>The Multi-Tool type is defined by the shape of the tool.</data>
-							<data>./assets/bitmap/mt/MultitoolDifferentiation.jpg</data>
-						</span>
+							<data>mt/MultitoolDifferentiation</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="typeInput" data-dest-noauto="type">
@@ -108,8 +92,8 @@
 							<data>MT Inventory size is defined by the shape of the tool.</data>
 							<data>Inventory Size</data>
 							<data>The Multi-Tool inventory size is defined by the shape of the tool.</data>
-							<data>./assets/bitmap/mt/MultitoolDifferentiation.jpg</data>
-						</span>
+							<data>mt/MultitoolDifferentiation</data>
+						</button>
 					</div>
 					<div class="tableCell data" style="display: none">
 						<select id="sizeInput" data-dest-noauto="size">
@@ -128,7 +112,7 @@
 						<label>Location:</label>
 						<button class="tooltip">
 							<data>Where the tool was found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="locInput" data-dest="location">
@@ -143,7 +127,7 @@
 						<label for="planetInput">Name of the planet:</label>
 						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the tool can be found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
@@ -152,7 +136,7 @@
 						<label for="moonInput">Name of the moon (if MT is on moon):</label>
 						<button class="tooltip">
 							<data>If the tool is located on a moon. Leave blank if the tool is on a planet.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
@@ -163,8 +147,8 @@
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
 							<data>Planetary Coordinates</data>
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
-							<data>./assets/bitmap/shared/axes.jpg</data>
-						</span>
+							<data>shared/axes</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" placeholder="+0.00, -0.00" data-dest="axes" id="axesInput">
@@ -180,7 +164,7 @@
 								<a href="https://www.reddit.com/r/NMSCoordinateExchange/wiki/multitool/">guide on
 									multi-tool spawning mechanics</a>.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="srlocInput" data-dest-noauto="srLoc">
@@ -199,15 +183,15 @@
 					<div class="tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
 						<button class="tooltip">
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+							<data>shared/glyphs</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -238,8 +222,8 @@
 								<a href="Multi-Tool_Catalogue#Add-ons" data-wiki>Detailed info can be found on the
 									wiki</a>
 							</data>
-							<data>./assets/bitmap/mt/addons.png</data>
-						</span>
+							<data>mt/addons</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<div class="checkboxes">
@@ -259,8 +243,8 @@
 							<data>Can be found on the price page.</data>
 							<data>Multi-Tool Slotcount</data>
 							<data>Slotcount of the tool. Can be found on the price page.</data>
-							<data>./assets/bitmap/mt/slots.jpg</data>
-						</span>
+							<data>mt/slots</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="slotsInput" data-dest-noauto="slots">
@@ -271,8 +255,8 @@
 							<data>Can be found on the price page.</data>
 							<data>Multi-Tool Cost</data>
 							<data>Can be found on the price page. Enter the Buy price, not the trade-in price.</data>
-							<data>./assets/bitmap/mt/price.jpg</data>
-						</span>
+							<data>mt/price</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="costInput" data-dest-noauto="cost">
@@ -287,8 +271,8 @@
 								Mining Beam needs to be dismantled.
 								Watch out that no supercharged slots (lightblue) are used.
 							</data>
-							<data>./assets/bitmap/mt/baseDmg.jpg</data>
-						</span>
+							<data>mt/baseDmg</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="dmgInput" placeholder="0.0" data-dest-noauto="dmg">
@@ -303,8 +287,8 @@
 								Mining Beam needs to be dismantled.
 								Watch out that no supercharged slots (lightblue) are used.
 							</data>
-							<data>./assets/bitmap/mt/baseScan.jpg</data>
-						</span>
+							<data>mt/baseScan</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="scanInput" placeholder="0.0" data-dest-noauto="scanRange">
@@ -321,12 +305,12 @@
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
-							<data>./assets/bitmap/mt/srExample.jpg</data>
-						</span>
+							<data>mt/srExample</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="srImgInput" data-dest-noauto="srPlanetImg">
-						<input type="file" id="srImgUpload" accept="image/*" oninput="image(this)">
+						<input type="file" id="srImgUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="sysImgInput"><output id="sysImgInputLabel">System (Cabinet location
@@ -335,12 +319,12 @@
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
-							<data>./assets/bitmap/mt/sysExample.jpg</data>
-						</span>
+							<data>mt/sysExample</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="sysImgInput" data-dest-noauto="sysImg">
-						<input type="file" id="sysImgUpload" accept="image/*" oninput="image(this)">
+						<input type="file" id="sysImgUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="cabInput"><output id="cabInputLabel">Cabinet Planet/Moon</output></label>
@@ -348,12 +332,12 @@
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
-							<data>./assets/bitmap/mt/srExample.jpg</data>
-						</span>
+							<data>mt/srExample</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="cabInput" data-dest-noauto="cabinetPlanetImg">
-						<input type="file" id="cabUpload" accept="image/*" oninput="image(this)">
+						<input type="file" id="cabUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="coordsInput"><output id="coordsInputLabel">Coordinates</output></label>
@@ -361,12 +345,12 @@
 							<data>Click to see an example picture.</data>
 							<data>Save/Reload Location Picture</data>
 							<data></data>
-							<data>./assets/bitmap/mt/coordExample.jpg</data>
-						</span>
+							<data>mt/coordExample</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="coordsInput" data-dest-noauto="axesImg">
-						<input type="file" id="coordsUpload" accept="image/*" oninput="image(this)">
+						<input type="file" id="coordsUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="discoveredlinkInput">Discoverer wiki name:</label>
@@ -395,7 +379,7 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>This section builds a predefined appearance sentence, it is not required.</p>
-						<button class="button" onclick="toggleSection('appearance', this)">Hide</button>
+						<button class="button" id="hideAppearanceButton">Hide</button>
 					</div>
 					<div data-section="appearance" class="tableCell text">
 						<label>Main Colour:</label>
@@ -449,7 +433,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<button class="tooltip" onclick="galleryUploadShown = true">
+						<button class="tooltip" name="galleryFileUploadTooltip">
 							<data>There is a preferred order of pictures.</data>
 							<data>Gallery</data>
 							<data>The preferred order of pictures is as follows:
@@ -464,10 +448,10 @@
 									</ol>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">

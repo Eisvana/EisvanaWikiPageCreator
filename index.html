@@ -10,10 +10,7 @@
 		content="Easily generate the wikicode to create a discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/pages/index" type="module"></script>
 	<style>
 		@media (min-width: 1216px) {
 			nav {
@@ -26,12 +23,6 @@
 			vertical-align: middle;
 		}
 	</style>
-	<script>
-		window.onload = () => {
-			const GHubHosts = ['wiki.nmsgalactichub.com', 'nmswikipagecreator.nmsgalactichub.com', 'hubwikipagecreator.nmsgalactichub.com'];
-			if (GHubHosts.includes(window.location.host)) document.querySelector('a[href=".."]').href = 'https://lenni009.github.io/';	// 'https://nmsgalactichub.com';
-		}
-	</script>
 </head>
 
 <body>

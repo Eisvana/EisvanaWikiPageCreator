@@ -10,22 +10,7 @@
 		content="Easily generate the wikicode to create a base page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Base">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/pages/base.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/misc_logic/dateLogic.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script src="./src/misc_logic/locationLogic.js"></script>
-	<script>
-		window.onload = () => {
-			addStaticPageData('pageType', 'Base');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/base" type="module"></script>
 </head>
 
 <body>
@@ -59,15 +44,15 @@
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>Base Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>./assets/bitmap/base/baseName.jpg</data>
-						</span>
+							<data>base/baseName</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<button class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the
 								image name.</data>
 							<data>File Upload</data>
@@ -77,11 +62,11 @@
 								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="builderlinkInput">Builder wiki name:</label>
@@ -111,7 +96,7 @@
 						<label for="planetInput">Name of the planet:</label>
 						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the base can be found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
@@ -120,7 +105,7 @@
 						<label for="moonInput">Name of the moon (if base is on moon):</label>
 						<button class="tooltip">
 							<data>If the base is located on a moon. Leave blank if the base is on a planet.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
@@ -131,8 +116,8 @@
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
 							<data>Planetary Coordinates</data>
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
-							<data>./assets/bitmap/shared/axes.jpg</data>
-						</span>
+							<data>shared/axes</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" placeholder="+0.00, -0.00" data-dest="axes" id="axesInput">
@@ -140,15 +125,15 @@
 					<div class="tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
 						<button class="tooltip">
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+							<data>shared/glyphs</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -175,7 +160,7 @@
 									</ul>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="type" id="typeInput">
@@ -186,8 +171,8 @@
 							<data>Gamemode of the save on which this base was built.</data>
 							<data>Gamemode</data>
 							<data>Gamemode of the save on which this base was built.<br>Found in the main menu:</data>
-							<data>./assets/bitmap/shared/gamemode.jpg</data>
-						</span>
+							<data>shared/gamemode</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
@@ -208,6 +193,7 @@
 							<option value="PS">PlayStation</option>
 							<option value="XB">Xbox</option>
 							<option value="NS">Switch</option>
+							<option value="Mac">Mac</option>
 						</select>
 					</div>
 					<div class="tableCell text">
@@ -244,7 +230,7 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Census:</p>
-						<button class="button" onclick="toggleSection('census', this)">Hide</button>
+						<button class="button" id="censusHideButton">Hide</button>
 					</div>
 					<div data-section="census" class="tableCell text">
 						<label for="censusPlayerInput">Ingame name of the player?</label>
@@ -252,8 +238,8 @@
 							<data>Your ingame name.</data>
 							<data>Player Name</data>
 							<data>Your ingame name. Don't include any ingame titles.</data>
-							<data>./assets/bitmap/base/playerName.jpg</data>
-						</span>
+							<data>base/playerName</data>
+						</button>
 					</div>
 					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest="censusplayer" id="censusPlayerInput">
@@ -262,7 +248,7 @@
 						<label for="censusRedditInput">Reddit name of the player?</label>
 						<button class="tooltip">
 							<data>Your Reddit name. "u/" not necessary.</data>
-						</span>
+						</button>
 					</div>
 					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest-noauto="censusreddit" id="censusRedditInput">
@@ -271,7 +257,7 @@
 						<label for="censusDiscordInput">Discord name of the player?</label>
 						<button class="tooltip">
 							<data>Your Discord name. Include the #xxxx at the end.</data>
-						</span>
+						</button>
 					</div>
 					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest="censusdiscord" id="censusDiscordInput">
@@ -286,8 +272,8 @@
 								Friends List &rarr; Show My No
 								Man's Sky Friend Code
 							</data>
-							<data>./assets/bitmap/base/friendCode.jpg</data>
-						</span>
+							<data>base/friendCode</data>
+						</button>
 					</div>
 					<div data-section="census" class="tableCell data">
 						<input type="text" data-dest-noauto="censusfriend" maxlength="15" id="censusFriendInput">
@@ -296,8 +282,7 @@
 						<label for="censusArrivalInput">When did the player arrive in Hub space?</label>
 					</div>
 					<div data-section="census" class="tableCell data">
-						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput"
-							onchange="processDate(this)">
+						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput">
 					</div>
 					<div data-section="census" class="tableCell text">
 						<label for="censusShowInput">Create Census Entry:</label>
@@ -325,7 +310,7 @@
 						<label for="galleryUpload">Gallery files</label>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">

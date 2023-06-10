@@ -4,23 +4,20 @@
 	</a>
 	<div class="gallery-meta">
 		${nameElement}
-		<div><select id="${dropdownId}" onchange="galleryDesc(this,'${inputId}', '${wikiCodeGalleryValueId}')"></select>
+		<div><select id="${dropdownId}" data-evt-id="dropdown"></select>
 		</div>
-		<div><input id="${inputId}" type="text" placeholder="Description"
-				oninput="galleryInput(this,'${wikiCodeGalleryValueId}')" /></div>
+		<div><input id="${inputId}" type="text" placeholder="Description" data-evt-id="pic"></div>
 	</div>
 	<div class="controlButtons">
-		<span class="delete-icon is-clickable" title="Remove picture from gallery"
-			onclick="rmGallery(this, '${wikiCodeGalleryId}')">&#10060</span>
-		<img class="handle" src="./assets/vector/arrow.svg" title="Move picture up or down"
+		<button class="delete-icon is-clickable" title="Remove picture from gallery" data-evt-id="removeButton">&#10060</button>
+		<img class="handle" src="./assets/icons/arrow.svg" title="Move picture up or down"
 			alt="Move image via drag'n'drop">
-		<button class="button moveButton" title="Move up" onclick="mobileMoveItem(this, '${wikiCodeGalleryId}', 'up')">
+		<button class="button moveButton" title="Move up" data-move="up" data-evt-id="move">
 			<svg width="36" height="36">
 				<path d="M2 25h32L18 9 2 25Z"></path>
 			</svg>
 		</button>
-		<button class="button moveButton" title="Move down"
-			onclick="mobileMoveItem(this, '${wikiCodeGalleryId}', 'down')">
+		<button class="button moveButton" title="Move down" data-move="down" data-evt-id="move">
 			<svg width="36" height="36">
 				<path d="M2 11h32L18 27 2 11Z"></path>
 			</svg>

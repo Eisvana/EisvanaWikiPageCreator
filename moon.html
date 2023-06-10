@@ -10,40 +10,7 @@
 		content="Easily generate the wikicode to create a moon discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Moon">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script src="./src/misc_logic/planetMoonLogic.js" defer></script>
-	<script src="./src/misc_logic/celestialobjectslogic.js" defer></script>
-	<script src="./src/datalists/planetDatalists.js" defer></script>
-	<script src="./src/datalists/floraDatalists.js" defer></script>
-	<script src="./src/datalists/mineralDatalists.js" defer></script>
-	<script src="./src/pages/moon.js"></script>
-	<script src="./src/misc_logic/locationLogic.js"></script>
-	<script src="./src/misc_logic/creatureData.js"></script>
-	<script src="./src/misc_logic/dateLogic.js"></script>
-	<script>
-		window.onload = () => {
-			addStaticPageData('galleryArray', [
-				'',
-				'Landscape',
-				'Night View',
-				'Cave System',
-				'Analysis Visor',
-				'Moon Exploration Guide',
-				'Moon Page',
-				'Planet Page',
-				'System Page',
-				'Galaxy Map'
-			]);
-			addStaticPageData('pageType', 'Moon');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/moon" type="module"></script>
 </head>
 
 <body>
@@ -80,8 +47,8 @@
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>moon Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>./assets/bitmap/planet/planetName.jpg</data>
-						</span>
+							<data>planet/planetName</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
@@ -94,7 +61,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<button class="tooltip">
+						<button class="tooltip" name="fileUploadTooltip">
 							<data>
 								Picture won't be uploaded to the wiki. This is only to autofill the image name. Should
 								show the entire moon from space. Click for an example picture.
@@ -114,12 +81,12 @@
 								is allowed, but the contrast must be good.<br>
 								Disable the vignette.
 							</data>
-							<data>./assets/bitmap/planet/planetPic.jpg</data>
-						</span>
+							<data>planet/planetPic</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="systemInput">Name of the system:</label>
@@ -131,7 +98,7 @@
 						<label for="systemInput">Name of the moon's planet:</label>
 						<button class="tooltip">
 							<data>Which planet the moon orbits.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
@@ -139,15 +106,15 @@
 					<div class="tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
 						<button class="tooltip">
 							<data>Found in Photo Mode. Glyphs are specific to each moon.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each moon.</data>
-							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+							<data>shared/glyphs</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -166,7 +133,7 @@
 								plants or available resources.<br>
 								See the <a href="Biome" data-wiki>Biome wiki page</a> for more information.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="biomeInput" data-dest="biome">
@@ -189,8 +156,8 @@
 							<data>Can be found in the exploration guide.</data>
 							<data>Moon Description</data>
 							<data>Can be found in the exploration guide.</data>
-							<data>./assets/bitmap/planet/planetDesc.jpg</data>
-						</span>
+							<data>planet/planetDesc</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="description" list="planetDescriptors"
@@ -202,8 +169,8 @@
 							<data>Found in the exploration guide.</data>
 							<data>Moon Atmosphere</data>
 							<data>Found in the exploration guide.</data>
-							<data>./assets/bitmap/planet/atmosphere.jpg</data>
-						</span>
+							<data>planet/atmosphere</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="atmosphere" id="atmosphereInput">
@@ -214,8 +181,8 @@
 							<data>Can be found in the exploration guide.</data>
 							<data>Moon Terrain</data>
 							<data>Can be found in the exploration guide.</data>
-							<data>./assets/bitmap/planet/terrain.jpg</data>
-						</span>
+							<data>planet/terrain</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="terrain" list="terrainData" id="terrainInput">
@@ -226,8 +193,8 @@
 							<data>Can be found in the discovery menu.</data>
 							<data>Moon Weather</data>
 							<data>Can be found in the discovery menu.</data>
-							<data>./assets/bitmap/planet/weather.jpg</data>
-						</span>
+							<data>planet/weather</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-simple="weather" list="weatherData" id="weatherInput">
@@ -238,11 +205,11 @@
 							<data>Found in the Discovery Menu or on the analysis visor.</data>
 							<data>Moon Resources</data>
 							<data>Found in the Discovery Menu or on the analysis visor.</data>
-							<data>./assets/bitmap/planet/resources.jpg</data>
-						</span>
+							<data>planet/resources</data>
+						</button>
 					</div>
 					<div id="resourceInputs" class="tableHeader text">
-						<button class="button is-primary" type="button" onclick="addResource(this)">+ Add
+						<button class="button is-primary" type="button" id="addResourceButton">+ Add
 							Resource</button>
 					</div>
 					<div class="tableCell text">
@@ -251,8 +218,8 @@
 							<data>Can be found in the discovery menu.</data>
 							<data>Moon Sentinel Level</data>
 							<data>Can be found in the discovery menu.</data>
-							<data>./assets/bitmap/planet/sentinels.jpg</data>
-						</span>
+							<data>planet/sentinels</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="sentinel" list="sentinels" id="sentinelInput">
@@ -263,8 +230,8 @@
 							<data>Can be found in the discovery menu.</data>
 							<data>Moon Flora Level</data>
 							<data>Can be found in the discovery menu.</data>
-							<data>./assets/bitmap/planet/flora.jpg</data>
-						</span>
+							<data>planet/flora</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="flora" list="rarity" id="floraInput">
@@ -275,8 +242,8 @@
 							<data>Can be found in the discovery menu.</data>
 							<data>Moon Fauna Level</data>
 							<data>Can be found in the discovery menu.</data>
-							<data>./assets/bitmap/planet/fauna.jpg</data>
-						</span>
+							<data>planet/fauna</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="fauna" list="rarity" id="faunaInput">
@@ -287,8 +254,8 @@
 							<data>Can be found in the discovery menu.</data>
 							<data>Moon Fauna Number</data>
 							<data>Can be found in the discovery menu.</data>
-							<data>./assets/bitmap/planet/faunaNum.jpg</data>
-						</span>
+							<data>planet/faunaNum</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest-noauto="faunaNumber" id="faunaNumberInput">
@@ -301,7 +268,7 @@
 					</div>
 					<div class="tableCell text" data-section="sandworm">
 						<label for="sandwormImgInput">Sandworm image:</label>
-						<button class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
 							<data>File Upload</data>
 							<data>
@@ -310,12 +277,12 @@
 								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data" data-section="sandworm">
 						<input type="text" id="sandwormImgInput" data-dest="sandwormImg"
 							data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="sandwormImgUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="sandwormImgUpload" accept="image/*">
 					</div>
 					<div class="tableCell text" data-section="sandworm">
 						<label>Class:</label>
@@ -323,8 +290,8 @@
 							<data>Found on the worm scan.</data>
 							<data>Class</data>
 							<data>Found on the worm scan.</data>
-							<data>./assets/bitmap/sandworm/class.jpg</data>
-						</span>
+							<data>sandworm/class</data>
+						</button>
 					</div>
 					<div class="tableCell data" data-section="sandworm">
 						<select id="wormclassInput" data-dest="wormclass">
@@ -351,7 +318,7 @@
 									<li><a href="EisHub_Shaihuluda_Album" data-wiki>EisHub Shaihuluda Album</a></li>
 								</ul>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data" data-section="sandworm">
 						<select id="wormHeadInput" data-dest="wormHead">
@@ -373,8 +340,8 @@
 							<data>Max Depth</data>
 							<data>Found on the worm scan.<br>Give the full number, including the decimal.<br>No "ku"
 								necessary.</data>
-							<data>./assets/bitmap/sandworm/maxDepth.jpg</data>
-						</span>
+							<data>sandworm/maxDepth</data>
+						</button>
 					</div>
 					<div class="tableCell data" data-section="sandworm">
 						<input type="text" id="wormmaxdepthInput" data-dest-noauto="wormmaxdepth" maxlength="5"
@@ -386,8 +353,8 @@
 							<data>Found on the worm scan.</data>
 							<data>Stomach Contents</data>
 							<data>Found on the worm scan.</data>
-							<data>./assets/bitmap/sandworm/stomachContents.jpg</data>
-						</span>
+							<data>sandworm/stomachContents</data>
+						</button>
 					</div>
 					<div class="tableCell data" data-section="sandworm">
 						<select id="wormstomachInput" data-dest="wormstomach">
@@ -421,7 +388,7 @@
 								seconds, it doesn't spawn after reload.<br>
 								You can't really overlook a worm, they make a very loud sound and shake the ground.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data" data-section="sandworm">
 						<div class="radioButtons">
@@ -437,35 +404,34 @@
 						<label for="wormDiscoveredInput">Discoverer:</label>
 						<button class="tooltip">
 							<data>If there are no previous posts of this worm anywhere, you are the discoverer.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data" data-section="sandworm">
 						<input type="text" data-dest="wormDiscovered" id="wormDiscoveredInput">
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Fauna:</p>
-						<button class="button" onclick="toggleSection('fauna', this)">Hide</button>
+						<button class="button" id="faunaToggleButton">Hide</button>
 					</div>
 					<div id="faunaInputs" class="tableHeader text" data-section="fauna">
 						<button class="button is-primary" type="button" data-dest-noauto="creatures"
-							onclick="addFauna(this)">+ Add Fauna</button>
+							id="addFaunaButton">+ Add Fauna</button>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Flora:</p>
-						<button class="button" onclick="toggleSection('flora', this)">Hide</button>
+						<button class="button" id="floraToggleButton">Hide</button>
 					</div>
 					<div id="floraInputs" class="tableHeader text" data-section="flora">
-						<button class="button is-primary" type="button" data-dest-noauto="plants"
-							onclick="addFlora(this)">+ Add Flora</button>
+						<button class="button is-primary" type="button" data-dest-noauto="plants" id="addFloraButton">+
+							Add Flora</button>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Minerals:</p>
-						<button class="button" onclick="toggleSection('mineral', this)">Hide</button>
+						<button class="button" id="mineralToggleButton">Hide</button>
 					</div>
 					<div id="mineralInputs" class="tableHeader text" data-section="mineral">
 						<button class="button is-primary" type="button" data-dest-noauto="minerals"
-							onclick="addMineral(this)">+ Add
-							Mineral</button>
+							id="addMineralButton">+ Add Mineral</button>
 					</div>
 					<div class="tableCell text ">
 						<label for="discDateInput">When was this moon discovered?</label>
@@ -476,8 +442,8 @@
 								Found in the analysis visor in the space station.<br>
 								The exact discovery timestamp is displayed on the top left.
 							</data>
-							<data>./assets/bitmap/planet/discDate.jpg</data>
-						</span>
+							<data>planet/discDate</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="date" id="discDateInput" data-dest-noauto="discDate">
@@ -503,8 +469,8 @@
 								Gamemode of the save on which this moon was documented.<br>Found in the main
 								menu:
 							</data>
-							<data>./assets/bitmap/shared/gamemode.jpg</data>
-						</span>
+							<data>shared/gamemode</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
@@ -525,6 +491,7 @@
 							<option value="PS">PlayStation</option>
 							<option value="XB">Xbox</option>
 							<option value="NS">Switch</option>
+							<option value="Mac">Mac</option>
 						</select>
 					</div>
 					<div class="tableCell text">
@@ -551,7 +518,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<button class="tooltip">
+						<button class="tooltip" name="galleryFileUploadTooltip">
 							<data>There is a preferred order of pictures.</data>
 							<data>Gallery</data>
 							<data>The preferred order of pictures is as follows:
@@ -569,10 +536,10 @@
 									</ol>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">

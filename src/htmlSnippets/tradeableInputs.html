@@ -1,6 +1,6 @@
 <div class="tableHeader text sectionToggle" data-tradeable="section${childIndex}" data-station="terminal">
 	<span class="has-text-weight-bold">Tradeable</span>
-	<button class="button is-danger is-outlined" type="button" onclick="removeSpecificSection('section${childIndex}', 'tradeable'); enableTradeableAdd()">Remove</button>
+	<button class="button is-danger is-outlined" type="button" data-evt-id="removeButton">Remove</button>
 </div>
 <div class="tableCell text" data-tradeable="section${childIndex}" data-station="terminal">
 	<label for="${text_input}">Tradeable name:</label>

@@ -10,23 +10,7 @@
 		content="Easily generate the wikicode to create an organic frigate discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Organic Frigate">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/pages/biofrig.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/albumactions.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script src="./src/misc_logic/locationLogic.js"></script>
-	<script>
-		const huburbs = true;
-		window.onload = () => {
-			addStaticPageData('pageType', 'Organic Frigate');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/biofrig" type="module"></script>
 </head>
 
 <body>
@@ -60,15 +44,15 @@
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>Frigate Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>./assets/bitmap/frigate/frigateName.jpg</data>
-						</span>
+							<data>frigate/frigateName</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<button class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
 							<data>File Upload</data>
 							<data>
@@ -77,11 +61,11 @@
 								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="systemInput">Name of the system:</label>
@@ -92,15 +76,15 @@
 					<div class="tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
 						<button class="tooltip">
 							<data>Found in Photo Mode.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode.</data>
-							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+							<data>shared/glyphs</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -182,7 +166,7 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>This section builds a predefined appearance sentence, it is not required.</p>
-						<button class="button" onclick="toggleSection('appearance', this)">Hide</button>
+						<button class="button" id="hideAppearanceButton">Hide</button>
 					</div>
 					<div data-section="appearance" class="tableCell text">
 						<label>Main Colour:</label>
@@ -252,7 +236,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<button class="tooltip" onclick="galleryUploadShown = true">
+						<button class="tooltip" name="galleryFileUploadTooltip">
 							<data>There is a preferred order of pictures.</data>
 							<data>Gallery</data>
 							<data>
@@ -265,10 +249,10 @@
 									</ol>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">
