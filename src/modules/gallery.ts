@@ -112,7 +112,7 @@ export function galleryUpload() {
 	}
 
 	// If errors exist, show error message. Otherwise, clear error message
-	errorMessage(inp, errors.length ? `The following files exceed the 10MB upload limit and couldn't be added:<br>${errors.join(',<br>')}` : undefined);
+	errorMessage(inp, errors.length ? `The following file(s) exceed the 10MB upload limit and couldn't be added:<br>${errors.join(',<br>')}` : undefined);
 
 	// If galleryUploadShown is true, exit the function. Otherwise, show gallery explanation popup
 	if (pageData.galleryUploadShown) return;

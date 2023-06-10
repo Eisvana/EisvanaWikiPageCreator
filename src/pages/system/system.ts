@@ -691,13 +691,11 @@ export function spaceStationSection() {
 		const sectionName = section.dataset.station as string;
 		if (sectionDefinition[faction].includes(sectionName)) {
 			if ((sectionName == 'merchant' || sectionName == 'scrapDealer') && defaultDisplay(section)) {
-				i++;	// NoSonar (I know what I'm doing, this is to skip the next section)
+				i++;	// NoSonar triggered by row with button, skip row with checkboxes
 			}
-			if (section.id == 'scrapDealer' && !pageData.SDMerchant) {
-				section.style.display = 'none';
-			} else {
-				section.style.display = '';
-			}
+
+			const isScrapDealer = section.id == 'scrapDealer' && !pageData.SDMerchant;
+			section.style.display = isScrapDealer ? 'none' : '';
 		} else {
 			section.style.display = 'none';
 		}

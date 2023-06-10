@@ -59,7 +59,9 @@ export function docByExternal() {
 			* Explored and documented by ${research} ${documented} on ${docDate}`
 		}
 	})();
-	(globalElements.output.docby as HTMLOutputElement).innerText = explorer;
+	const outputElement = globalElements.output.docby as HTMLOutputElement;
+	outputElement.style.display = explorer ? '' : 'none';
+	outputElement.innerText = explorer;
 
 
 	/**
