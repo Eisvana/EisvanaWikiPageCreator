@@ -1,5 +1,5 @@
 import { numberStats, toggleSection } from "../../common";
-import { albumName, albumOther } from "../../modules/albumactions";
+import { albumDiscoverer, albumName, albumOther } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements"
 import { addInfo, appearance, generateCatalogue, locGalaxy, locHubNr } from "./biofrig";
 
@@ -36,6 +36,10 @@ const frigateElementFunctions: ElementFunctions = [
 		element: 'hideAppearanceButton',
 		handler: 'click',
 		func: function () { toggleSection('appearance', this as unknown as HTMLButtonElement) }
+	},
+	{
+		element: ['discoveredInput', 'discoveredlinkInput'],
+		func: () => albumDiscoverer()
 	},
 ]
 
