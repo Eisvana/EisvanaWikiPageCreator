@@ -1,0 +1,24 @@
+import { researchTeamDropdown } from "../../common";
+import { ElementFunctions } from "../../types/elements";
+import { discoverer, enemyCheckboxes, processGlyphs, setGalaxy, updateGalaxyTableEntry } from "./derelict";
+
+const derelictElementFunctions: ElementFunctions = [
+	{
+		element: 'portalglyphsInput',
+		func: function () { processGlyphs(this as unknown as HTMLInputElement) }
+	},
+	{
+		element: 'galaxyInput',
+		func: function () { setGalaxy((this as unknown as HTMLSelectElement).value); researchTeamDropdown(); updateGalaxyTableEntry() }
+	},
+	{
+		element: 'enemiesInput',
+		func: () => enemyCheckboxes()
+	},
+	{
+		element: ['discoveredInput', 'discoveredlinkInput'],
+		func: () => discoverer()
+	},
+]
+
+export default derelictElementFunctions;

@@ -10,24 +10,7 @@
 		content="Easily generate the wikicode to create a fauna discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Fauna">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/pages/fauna.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/albumactions.js" defer></script>
-	<script src="./src/datalists/creatureDatalists.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script src="./src/misc_logic/creatureData.js"></script>
-	<script src="./src/misc_logic/locationLogic.js"></script>
-	<script>
-		window.onload = () => {
-			addStaticPageData('pageType', 'Creature');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/fauna" type="module"></script>
 </head>
 
 <body>
@@ -60,12 +43,12 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the creature:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>Creature Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>./assets/bitmap/creature/creatureName.jpg</data>
-						</span>
+							<data>creature/creatureName</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="newName" type="text" id="nameInput">
@@ -78,20 +61,20 @@
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
 							<data>File Upload</data>
 							<data>
 								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
 								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href="Special:Upload"
+								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="systemInput">Name of the system:</label>
@@ -101,21 +84,21 @@
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the creature can be found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if creature is on moon):</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>
 								If the creature is located on a moon. Leave blank if the creature is on a
 								planet.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
@@ -123,15 +106,15 @@
 					<div class="tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+							<data>shared/glyphs</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -142,12 +125,12 @@
 					</div>
 					<div class="tableCell text">
 						<label>Genus:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>See the wiki for a list of genera.</data>
 							<data>Genus</data>
 							<data>The genus is defined by the general appearance of a creature.<br>
 								See the wiki for a <a href="Genus#Genus_List" data-wiki>list of genera</a>.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="genus" id="genusInput"></select>
@@ -157,15 +140,15 @@
 					</div>
 					<div class="tableCell text">
 						<label>Hemisphere:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the creature discovery menu.</data>
 							<data>Hemisphere</data>
 							<data>
 								Found in the creature discovery menu.<br>
 								If no hemisphere is given, leave the input empty.
 							</data>
-							<data>./assets/bitmap/creature/creatureHemisphere.jpg</data>
-						</span>
+							<data>creature/creatureHemisphere</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="hemisphere" id="hemisphereInput">
@@ -176,12 +159,12 @@
 					</div>
 					<div class="tableCell text">
 						<label>Rarity:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the creature discovery menu.</data>
 							<data>Rarity</data>
 							<data>Found in the creature discovery menu.</data>
-							<data>./assets/bitmap/creature/creatureRarity.jpg</data>
-						</span>
+							<data>creature/creatureRarity</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="rarity" id="rarityInput">
@@ -192,12 +175,12 @@
 					</div>
 					<div class="tableCell text">
 						<label>Ecosystem:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the creature discovery menu.</data>
 							<data>Ecosystem</data>
 							<data>Found in the creature discovery menu.</data>
-							<data>./assets/bitmap/creature/creatureEcosystem.jpg</data>
-						</span>
+							<data>creature/creatureEcosystem</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="ecosystem" id="ecosystemInput">
@@ -209,12 +192,12 @@
 					</div>
 					<div class="tableCell text">
 						<label>Activity:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the creature discovery menu.</data>
 							<data>Activity</data>
 							<data>Found in the creature discovery menu.</data>
-							<data>./assets/bitmap/creature/creatureActivity.jpg</data>
-						</span>
+							<data>creature/creatureActivity</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="activity" id="activityInput">
@@ -243,12 +226,12 @@
 					</div>
 					<div class="tableCell text">
 						<label>Gender:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan.</data>
 							<data>Gender</data>
 							<data>Found on the creature scan.</data>
-							<data>./assets/bitmap/creature/creatureGender.jpg</data>
-						</span>
+							<data>creature/creatureGender</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="gender1_label" data-dest-noauto="gender" id="genderInput">
@@ -256,7 +239,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Second Gender:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Only applies to certain genera. Can be found on the creature scan.</data>
 							<data>Second Gender</data>
 							<data>
@@ -264,7 +247,7 @@
 								Birds, fish and weird/anomalous fauna for example have only one gender.<br>
 								They might show up as two genders, but will have the exact same appearance.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="gender2_label" data-dest-noauto="gender2" id="gender2Input">
@@ -272,48 +255,48 @@
 					</div>
 					<div class="tableCell text">
 						<label for="behaviourInput">Behaviour:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan.</data>
 							<data>Behaviour</data>
 							<data>Found on the creature scan.</data>
-							<data>./assets/bitmap/creature/creatureBehaviour.jpg</data>
-						</span>
+							<data>creature/creatureBehaviour</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="behaviour" type="text" list="behaviourData" id="behaviourInput">
 					</div>
 					<div class="tableCell text">
 						<label for="dietInput">Diet:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan.</data>
 							<data>Diet</data>
 							<data>Found on the creature scan.</data>
-							<data>./assets/bitmap/creature/creatureDiet.jpg</data>
-						</span>
+							<data>creature/creatureDiet</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="diet" type="text" list="dietData" id="dietInput">
 					</div>
 					<div class="tableCell text">
 						<label for="weightInput">Weight in kg:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan. No "kg" necessary.</data>
 							<data>Weight</data>
 							<data>Found on the creature scan.<br>No "kg" necessary.</data>
-							<data>./assets/bitmap/creature/creatureWeight.jpg</data>
-						</span>
+							<data>creature/creatureWeight</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest-noauto="weight" type="text" id="weightInput" maxlength="5" placeholder="0.0">
 					</div>
 					<div class="tableCell text">
 						<label for="heightInput">Height in m:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan. No "m" necessary.</data>
 							<data>Height</data>
 							<data>Found on the creature scan.<br>No "m" necessary.</data>
-							<data>./assets/bitmap/creature/creatureHeight.jpg</data>
-						</span>
+							<data>creature/creatureHeight</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest-noauto="height" type="text" id="heightInput" maxlength="3" placeholder="0.0">
@@ -332,24 +315,24 @@
 					</div>
 					<div class="tableCell text">
 						<label for="notesInput">Notes:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan. Might differ from the discovery menu.</data>
 							<data>Notes</data>
 							<data>Found on the creature scan.</data>
-							<data>./assets/bitmap/creature/creatureNotes.jpg</data>
-						</span>
+							<data>creature/creatureNotes</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest-noauto="notes" type="text" list="notesData" id="notesInput">
 					</div>
 					<div class="tableCell text" style="display: none">
 						<label for="specialNotesInput">Notes for discovery menu:</label>
-						<span class="tooltip">
-							<data>./assets/bitmap/creature/creatureDMNotes.jpg</data>
+						<button class="tooltip">
+							<data>creature/creatureDMNotes</data>
 							<data>Discovery Menu Notes</data>
 							<data>Found in the discovery menu.<br>This might differ from the creature scan.</data>
 							<data>This might differ from the scan. Please check in the discovery menu.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data" style="display: none">
 						<input data-dest-noauto="addObservation" type="text" list="specialNotesData"
@@ -357,12 +340,12 @@
 					</div>
 					<div class="tableCell text">
 						<label>Produces:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the creature scan.</data>
 							<data>Produces</data>
 							<data>Found on the creature scan.</data>
-							<data>./assets/bitmap/creature/creatureProduces.jpg</data>
-						</span>
+							<data>creature/creatureProduces</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="produces" id="producesInput">
@@ -373,15 +356,15 @@
 					</div>
 					<div class="tableCell text">
 						<label>Gamemode:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Gamemode of the save on which this creature was discovered.</data>
 							<data>Gamemode</data>
 							<data>
 								Gamemode of the save on which this creature was discovered.<br>
 								Found in the main menu:
 							</data>
-							<data>./assets/bitmap/shared/gamemode.jpg</data>
-						</span>
+							<data>shared/gamemode</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
@@ -431,20 +414,20 @@
 					</div>
 					<div class="tableHeader data no-flex">
 						<label for="dmInput">Discovery Menu</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the Discovery Menu. Enter exactly as seen in game</data>
 							<data>Discovery Menu Text</data>
 							<data>
 								Found in the Discovery Menu. Enter exactly as seen in game,
 								but ignore any linebreaks.
 							</data>
-							<data>./assets/bitmap/creature/creatureDM.jpg</data>
-						</span>
+							<data>creature/creatureDM</data>
+						</button>
 						<textarea data-dest-noauto="DM" id="dmInput"></textarea>
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<span class="tooltip" onclick="galleryUploadShown = true">
+						<button class="tooltip" name="galleryFileUploadTooltip">
 							<data>There is a preferred order of pictures.</data>
 							<data>Gallery</data>
 							<data>The preferred order of pictures is as follows:
@@ -462,10 +445,10 @@
 									</ol>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">
@@ -474,7 +457,7 @@
 				<div id="albumActions" class="buttons"></div>
 			</div>
 			<div id="output" class="column is-full-mobile">
-				<div class="wikiText" id="fullArticle">
+				<div class="wikiText" id="fullArticle" data-link="page">
 					<div>{{Version|<output id="release" name="release"></output>}}</div>
 					<div>{{<output id="civStub"></output>}}</div>
 					<div>{{Creature infobox</div>
@@ -552,7 +535,7 @@
 					<div><output id="galleryCode"></output></div>
 					<div>&lt;/gallery&gt;</div>
 				</div>
-				<div id="albumEntry"></div>
+				<div id="albumEntry" data-link="album"></div>
 			</div>
 		</main>
 	</div>

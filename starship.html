@@ -10,23 +10,7 @@
 		content="Easily generate the wikicode to create a starship discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Starship">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/pages/starship.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/albumactions.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script src="./src/misc_logic/locationLogic.js"></script>
-	<script>
-		const huburbs = true;
-		window.onload = () => {
-			addStaticPageData('pageType', 'Starship');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/starship" type="module"></script>
 </head>
 
 <body>
@@ -56,7 +40,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the starship:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o). Click here to view
 								Greek characters.</data>
 							<data>Ship Name</data>
@@ -99,38 +83,38 @@
 								You must reload your game after claiming the interceptor in order to get the correct
 								name!
 							</data>
-							<data>./assets/bitmap/ship/shipName.jpg</data>
-						</span>
+							<data>ship/shipName</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
 							<data>File Upload</data>
 							<data>
 								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
 								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href="Special:Upload"
+								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label>Type of the starship:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>The starship type can be seen on the ship scan.</data>
 							<data>Ship Type</data>
 							<data>The starship type can be seen on the ship scan. Living Ships are displayed as
 								"Alien"</data>
-							<data>./assets/bitmap/ship/shipType.jpg</data>
-						</span>
+							<data>ship/shipType</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="type" id="typeInput">
@@ -153,42 +137,42 @@
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the starship can be found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if ship is on moon):</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>If the ship is located on a moon. Leave blank if the starship is on a planet.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
 					</div>
 					<div class="tableCell text">
 						<label for="axesInput">Planetary coords:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
 							<data>Planetary Coordinates</data>
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
-							<data>./assets/bitmap/shared/axes.jpg</data>
-						</span>
+							<data>shared/axes</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="axesInput" data-dest="axes" placeholder="+0.00, -0.00">
 					</div>
 					<div class="tableCell text">
 						<label>System economy:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the exploration guide under "Economy".</data>
 							<data>Economy</data>
 							<data>Found in the exploration guide under "Economy".</data>
-							<data>./assets/bitmap/ship/economy.jpg</data>
-						</span>
+							<data>ship/economy</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="economy" id="wealthInput">
@@ -237,15 +221,15 @@
 					<div class="tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+							<data>shared/glyphs</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -256,7 +240,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Subtype:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Subtypes are defined by specific hull features of a ship.</data>
 							<data>Ship Subtype</data>
 							<data>
@@ -283,7 +267,7 @@
 									</ul>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="subtype" id="subtypeInput">
@@ -291,7 +275,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Exotic type:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Subtypes are defined by specific hull features of the ship.</data>
 							<data>Exotic Subtype</data>
 							<data>
@@ -300,7 +284,7 @@
 									href="https://www.reddit.com/r/NMSCoordinateExchange/comments/k2srjr/exotic_parts_naming_conventions_and_part_combo/">Reddit
 									post</a> for explanations of the different exotic subtypes.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="exotic" id="exoticInput">
@@ -322,7 +306,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Inventory:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Inventory sizes can be seen from certain ship parts.</data>
 							<data>Inventory Size</data>
 							<data>
@@ -332,7 +316,7 @@
 								Alternatively, you can compare your ship's inventory size to the inventory tables on the
 								<a href="Starship" data-wiki>Starship</a> wiki page to get your ship's inventory size.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="inventory" id="inventoryInput">
@@ -351,7 +335,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="damageBInput">Damage Potential:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Enter the "Core" value as seen on the ship's scan.</data>
 							<data>Damage</data>
 							<data>
@@ -362,15 +346,15 @@
 								You must reload your game after claiming the interceptor in order to get the correct
 								stats!
 							</data>
-							<data>./assets/bitmap/ship/damage.jpg</data>
-						</span>
+							<data>ship/damage</data>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="damageB" maxlength="5" placeholder="0.0" id="damageBInput">
+						<input type="text" data-dest-noauto="damageB" data-dest-number="1" maxlength="5" placeholder="0.0" id="damageBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="shieldBInput">Shield Strength:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Enter the "Core" value as seen on the ship's scan.</data>
 							<data>Maneuverability</data>
 							<data>
@@ -381,15 +365,15 @@
 								You must reload your game after claiming the interceptor in order to get the correct
 								stats!
 							</data>
-							<data>./assets/bitmap/ship/shield.jpg</data>
-						</span>
+							<data>ship/shield</data>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="shieldB" maxlength="5" placeholder="0.0" id="shieldBInput">
+						<input type="text" data-dest-noauto="shieldB" data-dest-number="1" maxlength="5" placeholder="0.0" id="shieldBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="warpBInput">Hyperdrive Range:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Enter the "Core" value as seen on the ship's scan.</data>
 							<data>Warp</data>
 							<data>
@@ -400,15 +384,15 @@
 								You must reload your game after claiming the interceptor in order to get the correct
 								stats!
 							</data>
-							<data>./assets/bitmap/ship/hyperdrive.jpg</data>
-						</span>
+							<data>ship/hyperdrive</data>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="warpB" maxlength="5" placeholder="0.0" id="warpBInput">
+						<input type="text" data-dest-noauto="warpB" data-dest-number="1" maxlength="5" placeholder="0.0" id="warpBInput">
 					</div>
 					<div class="tableCell text">
 						<label for="maneuverBInput">Maneuverability:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Enter the "Core" value as seen on the ship's scan.</data>
 							<data>Maneuverability</data>
 							<data>
@@ -419,11 +403,11 @@
 								You must reload your game after claiming the interceptor in order to get the correct
 								stats!
 							</data>
-							<data>./assets/bitmap/ship/maneuverability.jpg</data>
-						</span>
+							<data>ship/maneuverability</data>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="maneuverB" maxlength="5" placeholder="0.0"
+						<input type="text" data-dest-noauto="maneuverB" data-dest-number="1" maxlength="5" placeholder="0.0"
 							id="maneuverBInput">
 					</div>
 					<div class="tableCell text">
@@ -452,7 +436,7 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>This section builds a predefined appearance sentence, it is not required.</p>
-						<button class="button" onclick="toggleSection('appearance', this)">Hide</button>
+						<button class="button" id="hideAppearanceButton">Hide</button>
 					</div>
 					<div data-section="appearance" class="tableCell text">
 						<label>Main Colour:</label>
@@ -527,7 +511,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<span class="tooltip" onclick="galleryUploadShown = true">
+						<button class="tooltip" name="galleryFileUploadTooltip">
 							<data>There is a preferred order of pictures.</data>
 							<data>Gallery</data>
 							<data>
@@ -566,10 +550,10 @@
 									</div>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">
@@ -578,7 +562,7 @@
 				<div id="albumActions" class="buttons"></div>
 			</div>
 			<div id="output" class="column is-full-mobile">
-				<div class="wikiText" id="fullArticle">
+				<div class="wikiText" id="fullArticle" data-link="page">
 					<div>{{Version|<output id="release" name="release"></output>}}</div>
 					<div>{{<output id="civStub"></output>}}</div>
 					<div>{{Starship infobox</div>
@@ -651,7 +635,7 @@
 					<div>==Reference Links==</div>
 					<div>{{StarshipRefLinks|type=<output name="type" id="refLinks"></output>}}</div>
 				</div>
-				<div id="albumEntry"></div>
+				<div id="albumEntry" data-link="album"></div>
 			</div>
 		</main>
 	</div>

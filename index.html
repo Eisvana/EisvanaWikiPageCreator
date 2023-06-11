@@ -10,10 +10,7 @@
 		content="Easily generate the wikicode to create a discovery page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/pages/index" type="module"></script>
 	<style>
 		@media (min-width: 1216px) {
 			nav {
@@ -26,12 +23,6 @@
 			vertical-align: middle;
 		}
 	</style>
-	<script>
-		window.onload = () => {
-			const GHubHosts = ['wiki.nmsgalactichub.com', 'nmswikipagecreator.nmsgalactichub.com', 'hubwikipagecreator.nmsgalactichub.com'];
-			if (GHubHosts.includes(window.location.host)) document.querySelector('a[href=".."]').href = 'https://lenni009.github.io/';	// 'https://nmsgalactichub.com';
-		}
-	</script>
 </head>
 
 <body>
@@ -58,7 +49,7 @@
 				<a href="./mineral.html" title="Create a Mineral page" class="button is-link is-outlined"
 					disabled>Mineral</a>
 				<a href="./derelict.html" title="Create a Derelict Freighter page or album entry"
-					class="button is-link is-outlined" disabled>Derelict Freighter</a>
+					class="button is-link is-outlined">Derelict Freighter</a>
 				<a href="./biofrig.html" title="Create an Organic Frigate page or album entry"
 					class="button is-link is-outlined">Organic Frigate</a>
 				<a href="./business.html" title="Create a Business page" class="button is-link is-outlined">Business</a>

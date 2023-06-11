@@ -11,24 +11,7 @@
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords"
 		content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, System, Star System">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/pages/system.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script src="./src/misc_logic/celestialobjectslogic.js" defer></script>
-	<script src="./src/datalists/systemDatalists.js" defer></script>
-	<script src="./src/datalists/planetDatalists.js" defer></script>
-	<script src="./src/misc_logic/locationLogic.js"></script>
-	<script>
-		window.onload = () => {
-			addStaticPageData('pageType', 'System');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/system" type="module"></script>
 </head>
 
 <body>
@@ -58,19 +41,19 @@
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the system:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>System Name</data>
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>./assets/bitmap/system/systemName.jpg</data>
-						</span>
+							<data>system/systemName</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="name" type="text" id="nameInput">
 					</div>
 					<div class="tableCell text">
 						<label for="oldNameInput">Original name before uploading (if available):</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Hover over a different star in the galaxy map.</data>
 							<data>Original System Name</data>
 							<data>
@@ -78,22 +61,22 @@
 								Open the galaxy map, then hover over a different nearby star.<br>
 								Your current location should now be displayed with its original name.
 							</data>
-							<data>./assets/bitmap/system/originalName.jpg</data>
-						</span>
+							<data>system/originalName</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input data-dest="oldName" type="text" id="oldNameInput">
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name. Should
 								show the entire system from space. Click for an example picture.</data>
 							<data>File Upload</data>
 							<data>
 								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
 								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href="Special:Upload"
+								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 								<br>
 								<br>
@@ -103,12 +86,12 @@
 								they exist.<br>
 								Disable the vignette.
 							</data>
-							<data>./assets/bitmap/system/overview.jpg</data>
-						</span>
+							<data>system/overview</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="navFileInput">Navigation image name, including file extension:</label>
@@ -116,27 +99,27 @@
 					<div class="tableCell data">
 						<input type="text" id="navFileInput" data-dest="navImage"
 							data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="navFileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="navFileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text" data-station="img">
 						<label for="ssFileInput">Space Station image name, including file extension:</label>
 					</div>
 					<div class="tableCell data" data-station="img">
 						<input type="text" id="ssFileInput" data-dest="ssImage" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="ssFileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="ssFileUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class=" tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in Photo Mode.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode.</data>
-							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+							<data>shared/glyphs</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -147,7 +130,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Number of stars:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Number of visible local stars in space.</data>
 							<data>Number of stars</data>
 							<data>
@@ -157,9 +140,9 @@
 								This for example is 1 star:
 							</data>
 							<data>
-								./assets/bitmap/system/numOfStars.jpg
+								system/numOfStars
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="multiplestarsInput" data-dest="multiplestars">
@@ -170,7 +153,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>Colour of (primary) star:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Colour as seen in the galaxy map.</data>
 							<data>Star Colour</data>
 							<data>
@@ -185,7 +168,7 @@
 									</ul>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="colorInput" data-dest="color">
@@ -198,21 +181,21 @@
 					</div>
 					<div class="tableCell text">
 						<label for="classInput">Stellar class:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the galaxy map.</data>
 							<data>Stellar Class</data>
 							<data>Number of visible local stars in space.<br>
 								Enter Photomode, then press the button to rotate the system star to your cursor.<br>
 								Enter the number of stars you see.</data>
-							<data>./assets/bitmap/system/stellarClass.jpg</data>
-						</span>
+							<data>system/stellarClass</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="classInput" data-dest="class">
 					</div>
 					<div class="tableCell text">
 						<label for="distanceInput">Distance to centre:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found on the galaxy map. Click here for a guide of how to get an accurate
 								value.</data>
 							<data>Distance to Centre</data>
@@ -228,45 +211,45 @@
 									rel="noopener noreferrer" target="_blank">GalaxyCenterDistance</a> mod to get the
 								distance to centre accurately on the top of the galaxy map.
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="distanceInput" data-dest-noauto="distance">
+						<input type="text" id="distanceInput" data-dest-number="0" data-dest-noauto="distance">
 					</div>
 					<div class="tableCell text">
 						<label for="planetNumInput">Number of planets:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the discovery menu.</data>
 							<data>Number of Planets</data>
 							<data>Found in the discovery menu.</data>
-							<data>./assets/bitmap/system/planetNumber.jpg</data>
-						</span>
+							<data>system/planetNumber</data>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="text" value="1" maxlength="1" id="planetNumInput" data-dest-noauto="planet"
-							data-default="1">
+						<input type="text" value="1" maxlength="1" id="planetNumInput" data-dest-number="0"
+							data-dest-noauto="planet" data-default="1">
 					</div>
 					<div class="tableCell text">
 						<label for="moonNumInput">Number of moons:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the discovery menu. Put 0 if there are no moons.</data>
 							<data>Number of Moons</data>
 							<data>Found in the discovery menu. Enter 0 if there are no moons.</data>
-							<data>./assets/bitmap/system/moonNumber.jpg</data>
-						</span>
+							<data>system/moonNumber</data>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="text" value="0" maxlength="1" id="moonNumInput" data-dest-noauto="moon"
-							data-default="0">
+						<input type="text" value="0" maxlength="1" id="moonNumInput" data-dest-number="0"
+							data-dest-noauto="moon" data-default="0">
 					</div>
 					<div class="tableCell text">
 						<label for="waterInput">Water in the system?</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the galaxy map. If it doesn't display "Water", there is no water.</data>
 							<data>Water</data>
 							<data>Found in the galaxy map. If it doesn't display "Water", don't check the box.</data>
-							<data>./assets/bitmap/system/water.jpg</data>
-						</span>
+							<data>system/water</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="checkbox" id="waterInput" value="Yes" data-checkbox-unchecked="No"
@@ -274,14 +257,14 @@
 					</div>
 					<div class="tableCell text">
 						<label for="waterInput">Dissonant system?</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the galaxy map. If it doesn't display "Dissonant", it is not
 								dissonant.</data>
 							<data>Dissonant</data>
 							<data>Found in the galaxy map. If it doesn't display "Dissonant", don't check the
 								box.</data>
-							<data>./assets/bitmap/system/dissonant.jpg</data>
-						</span>
+							<data>system/dissonant</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="checkbox" id="dissonantInput" value="Yes" data-checkbox-unchecked="No"
@@ -289,7 +272,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>System Faction:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map. If it doesn't display anything, it's
 								"Uncharted".</data>
 							<data>Faction</data>
@@ -298,8 +281,8 @@
 								The button to enter expanded view is displayed below the box with the system
 								details.<br>If it doesn't display anything, it's "Uncharted"
 							</data>
-							<data>./assets/bitmap/system/faction.jpg</data>
-						</span>
+							<data>system/faction</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="factionInput" data-dest="faction">
@@ -314,7 +297,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>System economy:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map. If it doesn't display anything, it's
 								"Uncharted".</data>
 							<data>Economy</data>
@@ -323,8 +306,8 @@
 								The button to enter expanded view is displayed below the box with the system
 								details.<br>If it doesn't display anything, it's "Uncharted"
 							</data>
-							<data>./assets/bitmap/system/economy.jpg</data>
-						</span>
+							<data>system/economy</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="economyInput" data-dest="economy">
@@ -377,7 +360,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="economysellInput">Economy sell:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map.</data>
 							<data>Economy-Sell</data>
 							<data>
@@ -385,30 +368,30 @@
 								The button to enter expanded view is displayed below the box with the system
 								details.
 							</data>
-							<data>./assets/bitmap/system/e-sell.jpg</data>
-						</span>
+							<data>system/e-sell</data>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="economysellInput" data-dest-noauto="economysell">
+						<input type="text" id="economysellInput" data-dest-noauto="economysell" data-percentage-input>
 					</div>
 					<div class="tableCell text">
 						<label for="economybuyInput">Economy buy:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map.</data>
 							<data>Economy-Buy</data>
 							<data>
 								Found in the expanded view of the galaxy map.<br>
 								The button to enter expanded view is displayed below the box with the system details.
 							</data>
-							<data>./assets/bitmap/system/e-buy.jpg</data>
-						</span>
+							<data>system/e-buy</data>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="text" id="economybuyInput" data-dest-noauto="economybuy">
+						<input type="text" id="economybuyInput" data-dest-noauto="economybuy" data-percentage-input>
 					</div>
 					<div class="tableCell text">
 						<label>System wealth:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map.</data>
 							<data>Wealth</data>
 							<data>
@@ -418,8 +401,8 @@
 								If it doesn't display anything, it's either "Abandoned" or "Uncharted". This can be
 								determined looking at the faction value.
 							</data>
-							<data>./assets/bitmap/system/wealth.jpg</data>
-						</span>
+							<data>system/wealth</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="wealth" id="wealthInput">
@@ -466,7 +449,7 @@
 					</div>
 					<div class="tableCell text">
 						<label>System conflict:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map.</data>
 							<data>Conflict</data>
 							<data>
@@ -476,8 +459,8 @@
 								If it doesn't display anything, it's either "Abandoned" or
 								"Uncharted". This can be determined looking at the faction value.
 							</data>
-							<data>./assets/bitmap/system/conflict.jpg</data>
-						</span>
+							<data>system/conflict</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select id="conflictInput" data-dest="conflict">
@@ -527,15 +510,15 @@
 					</div>
 					<div class="tableCell text">
 						<label for="discDateInput">When was this system discovered?</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in the analysis visor in the space station.</data>
 							<data>Discovery Date</data>
 							<data>
 								Found in the analysis visor in the space station.<br>
 								The exact discovery timestamp is displayed on the top left.
 							</data>
-							<data>./assets/bitmap/system/discDate.jpg</data>
-						</span>
+							<data>system/discDate</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="date" id="discDateInput" data-dest-noauto="discDate">
@@ -554,13 +537,13 @@
 					</div>
 					<div class="tableCell text">
 						<label>Gamemode:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Gamemode of the save on which this system was documented.</data>
 							<data>Gamemode</data>
 							<data>Gamemode of the save on which this system was documented.<br>Found in the main
 								menu:</data>
-							<data>./assets/bitmap/shared/gamemode.jpg</data>
-						</span>
+							<data>shared/gamemode</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<select data-dest="mode" id="modeInput">
@@ -581,6 +564,7 @@
 							<option value="PS">PlayStation</option>
 							<option value="XB">Xbox</option>
 							<option value="NS">Switch</option>
+							<option value="Mac">Mac</option>
 						</select>
 					</div>
 					<div class="tableCell text">
@@ -603,34 +587,34 @@
 					</div>
 					<div class="tableHeader text no-flex" data-station="terminal">
 						<label>Tradeables:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Can be found on the space station.</data>
 							<data>Space Station Tradeables</data>
 							<data>
 								Can be found on the space station at the trade terminal.<br>
 								Only include tradeables (items with white background at the top)
 							</data>
-							<data>./assets/bitmap/system/tradeables.jpg</data>
-						</span>
+							<data>system/tradeables</data>
+						</button>
 					</div>
 					<div id="terminalInputs" class="tableHeader text" data-station="terminal">
-						<button class="button is-primary" type="button" onclick="tradeables()">+ Add Tradeable</button>
+						<button class="button is-primary" type="button" id="addTradeablesButton">+ Add
+							Tradeable</button>
 					</div>
 					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
 							<p>S-class multi-tool merchant upgrades:</p>
-							<span class="tooltip">
+							<button class="tooltip">
 								<data>Can be found on the space station.</data>
 								<data>Multi-Tool Merchant Upgrades</data>
 								<data>
 									Can be found on the space station at the multi-tool merchant.<br>
 									Only check upgrades available in S class.
 								</data>
-								<data>./assets/bitmap/system/MTU.jpg</data>
-							</span>
+								<data>system/MTU</data>
+							</button>
 						</div>
-						<button class="button" data-display-default="none"
-							onclick="toggleSection('MTMerchant', this)">Show</button>
+						<button class="button" data-display-default="none" id="hideMTMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="MTMerchant" style="display: none"
 						data-station="merchant">
@@ -678,18 +662,17 @@
 					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
 							<p>S-class starship merchant upgrades:</p>
-							<span class="tooltip">
+							<button class="tooltip">
 								<data>Can be found on the space station.</data>
 								<data>Starship Merchant Upgrades</data>
 								<data>
 									Can be found on the space station at the starship merchant.<br>
 									Only check upgrades available in S class.
 								</data>
-								<data>./assets/bitmap/system/SSU.jpg</data>
-							</span>
+								<data>system/SSU</data>
+							</button>
 						</div>
-						<button class="button" data-display-default="none"
-							onclick="toggleSection('SSMerchant', this)">Show</button>
+						<button class="button" data-display-default="none" id="hideSSMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="SSMerchant" style="display: none"
 						data-station="merchant">
@@ -737,18 +720,17 @@
 					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
 							<p>S-class exocraft merchant upgrades:</p>
-							<span class="tooltip">
+							<button class="tooltip">
 								<data>Can be found on the space station.</data>
 								<data>Exocraft Merchant Upgrades</data>
 								<data>
 									Can be found on the space station at the Exocraft merchant.<br>
 									Only check upgrades available in S class.
 								</data>
-								<data>./assets/bitmap/system/ECU.jpg</data>
-							</span>
+								<data>system/ECU</data>
+							</button>
 						</div>
-						<button class="button" data-display-default="none"
-							onclick="toggleSection('ECMerchant', this)">Show</button>
+						<button class="button" data-display-default="none" id="hideECMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="ECMerchant" style="display: none"
 						data-station="merchant">
@@ -801,18 +783,17 @@
 					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
 							<p>S-class exosuit merchant upgrades:</p>
-							<span class="tooltip">
+							<button class="tooltip">
 								<data>Can be found on the space station.</data>
 								<data>Exosuit Merchant Upgrades</data>
 								<data>
 									Can be found on the space station at the Exosuit merchant.<br>
 									Only check upgrades available in S class.
 								</data>
-								<data>./assets/bitmap/system/ESU.jpg</data>
-							</span>
+								<data>system/ESU</data>
+							</button>
 						</div>
-						<button class="button" data-display-default="none"
-							onclick="toggleSection('ESMerchant', this)">Show</button>
+						<button class="button" data-display-default="none" id="hideESMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="ESMerchant" style="display: none"
 						data-station="merchant">
@@ -856,16 +837,15 @@
 					<div class="tableHeader text sectionToggle" data-station="scrapDealer">
 						<div class="label-combo is-flex-wrap-nowrap">
 							<p>X-class scrapdealer upgrades:</p>
-							<span class="tooltip">
+							<button class="tooltip">
 								<data>Can be found on the space station.</data>
 								<data>Scrapdealer Merchant Upgrades</data>
 								<data>Can be found on the space station at the scrapdealer merchant.<br>
 									If they sell no upgrades, check the "Nothing" box.</data>
-								<data>./assets/bitmap/system/SDU.jpg</data>
-							</span>
+								<data>system/SDU</data>
+							</button>
 						</div>
-						<button class="button" data-display-default="none"
-							onclick="toggleSection('SDMerchant', this)">Show</button>
+						<button class="button" data-display-default="none" id="hideSDMerchantButton">Show</button>
 					</div>
 					<div class="tableHeader data" data-section="SDMerchant" style="display: none"
 						data-station="scrapDealer">
@@ -995,7 +975,7 @@
 					</div>
 					<div class="tableCell text">
 						<label for="galleryUpload">Gallery files</label>
-						<span class="tooltip" onclick="galleryUploadShown = true">
+						<button class="tooltip" name="galleryFileUploadTooltip">
 							<data>There is a preferred order of pictures.</data>
 							<data>Gallery</data>
 							<data>
@@ -1008,10 +988,10 @@
 									</ol>
 								</div>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">
@@ -1019,7 +999,7 @@
 				<div id="actions" class="buttons"></div>
 			</div>
 			<div id="output" class="column is-full-mobile">
-				<div class="wikiText" id="fullArticle">
+				<div class="wikiText" id="fullArticle" data-link="page">
 					<div>{{Version|<output id="release" name="release"></output>}}</div>
 					<div>{{<output id="civStub"></output>}}</div>
 					<div>{{System infobox</div>

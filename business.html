@@ -10,20 +10,7 @@
 		content="Easily generate the wikicode to create a business page for the Galactic Hub on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Business">
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/pages/business.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
-	<script src="./src/modules/gallery.js" defer></script>
-	<script src="./src/modules/actions.js" defer></script>
-	<script src="./src/modules/tooltip.js" defer></script>
-	<script>
-		window.onload = () => {
-			addStaticPageData('pageType', 'Business');
-			startUp();
-		}
-	</script>
+	<script src="./src/pages/business" type="module"></script>
 </head>
 
 <body>
@@ -59,20 +46,20 @@
 					</div>
 					<div class="tableCell text">
 						<label for="fileInput">Main image name, including file extension:</label>
-						<span class="tooltip" onclick="uploadShown = true">
+						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
 							<data>File Upload</data>
 							<data>
 								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
 								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href="Special:Upload"
+								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
 							</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
-						<input type="file" id="fileUpload" accept="image/*" onchange="image(this)">
+						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="tableCell text">
 						<label for="systemInput">Name of the system:</label>
@@ -82,18 +69,18 @@
 					</div>
 					<div class="tableCell text">
 						<label for="planetInput">Name of the planet:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the business can be found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="tableCell text">
 						<label for="moonInput">Name of the moon (if HQ is on moon):</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the business can be found.</data>
-						</span>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" data-dest="moon" id="moonInput">
@@ -101,15 +88,15 @@
 					<div class="tableCell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
-							<button class="button is-small is-danger" type="button" onclick="deleteCharacter()">&larr;
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
 								Delete</button>
 						</div>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
 							<data>Portalglyphs</data>
 							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>./assets/bitmap/shared/glyphs.jpg</data>
-						</span>
+							<data>shared/glyphs</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
@@ -169,13 +156,14 @@
 							<option value="PS">PlayStation</option>
 							<option value="XB">Xbox</option>
 							<option value="NS">Switch</option>
+							<option value="Mac">Mac</option>
 						</select>
 					</div>
 					<div class="tableHeader data no-flex">
 						<label for="menuInput">Menu:</label>
-						<span class="tooltip">
+						<button class="tooltip">
 							<data>For the marketplace table.<br>Not shown on the business page.</data>
-						</span>
+						</button>
 						<textarea id="menuInput" data-dest="menu"></textarea>
 					</div>
 					<div class="tableHeader text">
@@ -183,8 +171,7 @@
 					</div>
 					<!--insert additional sections above #contentsInput-->
 					<div class="tableHeader text" id="contentsInput">
-						<button class="button is-primary" type="button" onclick="addSection()">+ Add
-							Section</button>
+						<button class="button is-primary" type="button" id="sectionAddButton">+ Add Section</button>
 					</div>
 					<div class="tableHeader data no-flex">
 						<label for="addInfoInput">Additional Information:</label>
@@ -194,7 +181,7 @@
 						<label for="galleryUpload">Gallery files</label>
 					</div>
 					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload" onchange="galleryUpload()">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
 					</div>
 				</div>
 				<div id="galleryItems">
@@ -202,7 +189,7 @@
 				<div id="actions" class="buttons"></div>
 			</div>
 			<div id="output" class="column is-full-mobile">
-				<div class="wikiText" id="fullArticle">
+				<div class="wikiText" id="fullArticle" data-link="page">
 					<div>{{Version|<output id="release" name="release"></output>}}</div>
 					<div>{{Business infobox</div>
 					<div>| name = <output id="name" name="name"></output></div>

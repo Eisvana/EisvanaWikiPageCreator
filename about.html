@@ -5,10 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hub Wiki Page Creator - About</title>
-	<link rel="stylesheet" href="./src/css/common.css">
-	<script src="./src/common.js" defer></script>
-	<script src="./src/modules/portalglyphs.js" defer></script>
-	<script src="./src/modules/footer.js" defer></script>
+	<script src="./src/pages/about" type="module"></script>
 </head>
 
 <body>
@@ -32,16 +29,19 @@
 				</article>
 				<article class="section">
 					<h2 class="title is-5">Who made and maintains this?</h2>
-					<img src="./assets/bitmap/misc/lenni.png" alt="Lenni profile picture">
+					<picture>
+						<source srcset="./assets/images/avif/misc/lenni.avif" type="image/avif">
+						<source srcset="./assets/images/webp/misc/lenni.webp" type="image/webp">
+						<img src="./assets/images/jpg/misc/lenni.jpg" alt="Lenni's profile picture">
+					</picture>
 					<p>
-						The page creator was made by me, Lenni, from the <a
-							href="Galactic_Hub_Eissentam_Scribes" data-wiki>Galactic Hub
-							Eissentam Scribes</a>. I make sure
-						the
-						data is correct after each NMS update, and also fix any bugs that you report.
+						The page creator was made by me, Lenni, from the <a href="Galactic_Hub_Eissentam_Scribes"
+							data-wiki>Galactic Hub Eissentam Scribes</a>. I make sure the data is correct after each NMS
+						update, and also fix any bugs that you report.
 					</p>
 					<p>
-						I'm also the director of the <a href="Galactic_Hub_Eissentam" data-wiki>Galactic Hub Eissentam</a>
+						I'm also the director of the <a href="Galactic_Hub_Eissentam" data-wiki>Galactic Hub
+							Eissentam</a>
 						and a wiki admin.
 					</p>
 					<p>You can contact me either on Discord or on Reddit:</p>
@@ -81,8 +81,9 @@
 				<article class="section">
 					<h2 class="title is-5">Do you collect data?</h2>
 					<p>
-						No, the app collects no data. The only data that is saved to your local drive is your currently
-						selected theme. Everything you do here stays on your local computer.
+						No, the app collects no data. Nothing is sent over the internet, and the only data that is saved
+						to your local drive is your currently selected theme and your personal default parameters if you
+						have set any. Everything you do here stays on your local computer.
 					</p>
 				</article>
 				<article class="section ">
