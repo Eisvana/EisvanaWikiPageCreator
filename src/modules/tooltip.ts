@@ -40,6 +40,7 @@ export function explanation(heading: string = '', text: string = '', img: string
 	const linkElement = globalElements.output.explanationLink as HTMLAnchorElement;
 	const dialogElement = globalElements.output.explanation as HTMLDialogElement;
 
+
 	// Check if img URL was provided
 	if (img) {
 		const isCached = cachedImages.has(img);
@@ -53,8 +54,33 @@ export function explanation(heading: string = '', text: string = '', img: string
 				jpg: imgElement
 			}
 
+			/*
+			This needs an explanation *sigh*
+			You might wonder: Why the fuck is there a setTimeout with 0ms here?!
+			You'd be absolutely right in asking that.
+			So here's the story:
+			Since we serve optimised images, we use a <picture> element.
+			This picture element behaves differently from the <img> element:
+			It doesn't display the picture line by line when they are ready, but it instead waits for the entire thing to load, and then displays it all at once.
+			It also keeps the aspect ratio of the previous picture until the new one is loaded. This is the big pain point.
+			In order to not have the <dialog> jump around during load, we're clearing the source attributes and then re-assigning them.
+			So why the setTimeout() you might ask?
+			Because browsers suck.
+			The code runs so fast that the browser only updates with the new image, it doesn't clear the old one.
+			This means the aspect ratio is never cleared, and therefore the image still jumps around.
+			By using a setTimeout(), we're pushing the new images to the end of the callstack, meaning we wait for everything else to finish running before we fill in the new sources.
+			This results in the necessary wait time for the browser to update, and we get the intended result of no jumping images.
+			*/
 			for (const [format, element] of Object.entries(imageFormats)) {
-				element[element.tagName == 'IMG' ? 'src' : 'srcset'] = `./assets/images/${format}/${img}.${format}`;
+				const attribute = element.tagName == 'IMG' ? 'src' : 'srcset';
+
+				// clear source attributes
+				element[attribute] = '';
+
+				// wait for everything else to update, then set the new image sources
+				setTimeout(() => {
+					element[attribute] = `./assets/images/${format}/${img}.${format}`;
+				}, 0);
 			}
 
 			linkElement.href = `./assets/images/jpg/${img}.jpg`;
@@ -81,6 +107,7 @@ export function explanation(heading: string = '', text: string = '', img: string
 
 	// Wait for img to load, then update the DOM and cache the image
 	imgElement.onload = () => {
+		//		(imgElement.parentElement as HTMLPictureElement).style.display = '';
 		imgElement.style.marginBlockStart = '1rem';
 		imgElement.style.opacity = '1';
 		cachedImages.add(img);
