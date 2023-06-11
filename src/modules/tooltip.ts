@@ -40,7 +40,6 @@ export function explanation(heading: string = '', text: string = '', img: string
 	const linkElement = globalElements.output.explanationLink as HTMLAnchorElement;
 	const dialogElement = globalElements.output.explanation as HTMLDialogElement;
 
-
 	// Check if img URL was provided
 	if (img) {
 		const isCached = cachedImages.has(img);
