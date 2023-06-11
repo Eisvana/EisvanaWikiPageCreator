@@ -106,7 +106,6 @@ export function explanation(heading: string = '', text: string = '', img: string
 
 	// Wait for img to load, then update the DOM and cache the image
 	imgElement.onload = () => {
-		//		(imgElement.parentElement as HTMLPictureElement).style.display = '';
 		imgElement.style.marginBlockStart = '1rem';
 		imgElement.style.opacity = '1';
 		cachedImages.add(img);
