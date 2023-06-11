@@ -1,0 +1,1 @@
+import"./about-44bb0714.js";const c=["wiki.nmsgalactichub.com","nmswikipagecreator.nmsgalactichub.com","hubwikipagecreator.nmsgalactichub.com"];if(c.includes(window.location.host)){const c=document.querySelector('a[href=".."]');c&&(c.href="https://lenni009.github.io/")}
