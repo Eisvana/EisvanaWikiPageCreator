@@ -2,7 +2,7 @@ import { addInfoBullet, docBy, hideDiscoverer, toggleSection } from "../../commo
 import { processDate } from "../../miscLogic/dateLogic";
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import { ElementFunctions } from "../../types/elements";
-import { capitaliseFriendCode, createCensusEntry, validateFriendcode, validateReddit } from "./base";
+import { capitaliseFriendCode, createCensusEntry, validateDiscord, validateFriendcode, validateReddit } from "./base";
 
 const baseElementFunctions: ElementFunctions = [
 	{
@@ -37,6 +37,11 @@ const baseElementFunctions: ElementFunctions = [
 	{
 		element: 'addInfoInput',
 		func: function () { addInfoBullet() }
+	},
+	{
+		element: 'censusDiscordInput',
+		handler: 'change',
+		func: function () { validateDiscord() }
 	},
 	{
 		element: 'censusArrivalInput',
