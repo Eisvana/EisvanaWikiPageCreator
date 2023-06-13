@@ -399,8 +399,8 @@ export function albumLinkGen() {
 	const subtype = pageData.subtype as string;
 	const { type, civShort } = pageData;
 	const civ = (() => {
-		if (civLong.split(' ').length > 1) return civShort;
-		return civilized.split(' ').slice(0, 2).join(' ');		// I have no idea why this exists...
+		if (civLong.split(' ').length > 1) return civShort;		// civLong = "GHub" ||"GHub Eissentam" || "GHub Calypso" => selects "GHub Eissentam" and "GHub Calypso" and returns "EisHub" or "CalHub" for "EisHub Starship Catalog"
+		return civilized.split(' ').slice(0, 2).join(' ');		// NoSonar outputs "Galactic Hub" for the catalog: "Galactic Hub Starship Catalog"
 	})();	// The civilization name, either the short version or the first two words of the long version. // But why??
 
 	// An object containing arrays of fighter subtypes, sorted by rarity.
