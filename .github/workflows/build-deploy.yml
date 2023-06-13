@@ -23,7 +23,7 @@ jobs:
 
       - name: Build App
         run: |
-          npm i
+          npm ci
           npm run build
           cd dist
           touch .nojekyll
