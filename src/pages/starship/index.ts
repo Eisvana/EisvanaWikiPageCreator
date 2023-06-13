@@ -3,7 +3,7 @@ import { assignElementFunctions } from "../../commonElements/elementBackend/elem
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
 import { toggleRedirect } from "../../modules/actions";
 import { albumFunctions } from "../../modules/albumactions";
-import { globalElements, globalFunctions, pageData } from "../../variables/objects";
+import { globalElements, globalFunctions } from "../../variables/objects";
 import starshipElementFunctions from "./elementFunctions";
 import starshipElements from "./elementStore";
 import { subtypeDropdown, showHideStarshipSelects, shipStats, addInfo, appearanceDropdowns, calcS, introType, loc, albumTypeExternal, albumOtherExternal, albumLinkGen, generateGalleryArray } from "./starship";
@@ -16,7 +16,7 @@ globalFunctions.albumOtherExternal = () => albumOtherExternal();
 globalFunctions.albumLinkGen = () => albumLinkGen();
 globalFunctions.generateGalleryArray = () => generateGalleryArray();
 
-pageData.galleryExplanationExternal = `
+addStaticPageData('galleryExplanationExternal', `
 	There is a preferred order of gallery pictures, depending on ship type:
 	<div class='dialog-center is-flex-wrap-wrap mt-2' style='gap: 1rem'>
 		<div>
@@ -50,7 +50,7 @@ pageData.galleryExplanationExternal = `
 				<li>System Page</li>
 			</ol>
 		</div>
-	</div>`;
+	</div>`)
 
 updateGlobalElements(starshipElements)
 assignElementFunctions(starshipElementFunctions);

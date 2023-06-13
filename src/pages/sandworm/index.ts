@@ -3,8 +3,9 @@ import { updateGlobalElements } from "../../commonElements/elementBackend/elemen
 import { albumFunctions } from "../../modules/albumactions";
 import sandwormElementFunctions from "./elementFunctions";
 import sandwormElements from "./elementStore";
-import { globalFunctions, pageData } from "../../variables/objects";
+import { globalFunctions } from "../../variables/objects";
 import { generateGalleryArray, albumLinkGen, albumOtherExternal, albumNameExternal, albumCivExternal, albumItemTypeExternal, autoSpawn, catalogue, wormName } from "./sandworm";
+import { addStaticPageData } from "../../common";
 import '../../startup';
 
 globalFunctions.generateGalleryArray = () => generateGalleryArray();
@@ -14,7 +15,7 @@ globalFunctions.albumNameExternal = () => albumNameExternal();
 globalFunctions.albumCivExternal = () => albumCivExternal();
 globalFunctions.albumItemTypeExternal = () => albumItemTypeExternal();
 
-pageData.galleryExplanationExternal = `
+addStaticPageData('galleryExplanationExternal', `
 	The preferred order of pictures is as follows:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
@@ -24,7 +25,7 @@ pageData.galleryExplanationExternal = `
 			<li>System Page</li>
 			<li>Galaxy Map</li>
 		</ol>
-	</div>`
+	</div>`)
 
 updateGlobalElements(sandwormElements);
 assignElementFunctions(sandwormElementFunctions);

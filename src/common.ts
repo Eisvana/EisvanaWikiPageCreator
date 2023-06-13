@@ -5,7 +5,7 @@
 import { vowels, wikiLink } from './variables/simple';
 import { GHubHuburbRegions } from "./variables/regions";
 import { Regions } from "./types/regions";
-import { dataIntegrityObj, globalElements, globalFunctions, pageData } from './variables/objects';
+import { dataIntegrityObj, globalElements, globalFunctions, pageData, staticBooleans } from './variables/objects';
 import { getDestElements } from './commonElements/elementBackend/elementStore';
 import { versions } from './variables/versions';
 import { assignElementFunctions, assignFunction } from './commonElements/elementBackend/elementFunctions';
@@ -282,7 +282,7 @@ export function wikiCodeSimple(element: InputElements, dest: string = element.da
  * @param {string} key - The key of the data to add.
  * @param {*} value - The value of the data to add.
  */
-export function addStaticPageData(key: string, value: AnyPrimitive) {
+export function addStaticPageData(key: string, value: AnyPrimitive | Array<string>) {
 	Object.defineProperty(pageData, key, { configurable: false, writable: false, value: value });
 }
 
@@ -455,11 +455,11 @@ export function image(element: HTMLInputElement) {
 	fileInput.value = sanitisedName;
 	wikiCode(fileInput);
 	// this section handles an automatic notice about Special:Upload, since this is a big source of confusion for users
-	if (pageData.uploadShown) return;	// ignore following code if we already alerted user about Special:Upload
+	if (staticBooleans.uploadShown) return;	// ignore following code if we already alerted user about Special:Upload
 	explanation('Upload your picture to the wiki!', `Don't forget to upload your picture to the wiki on <a href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" target="_blank" rel="noopener noreferrer">Special:Upload</a>.
 	The upload button only auto-filled the image name into the code, it is not automatically uploaded to the wiki.
 	<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the main image upload button.</div>`);
-	pageData.uploadShown = true;
+	staticBooleans.uploadShown = true;
 }
 
 /**
@@ -967,7 +967,7 @@ export function forceDatalist(element: HTMLInputElement) {
  * @returns {string|false} A string with an error message if a data integrity issue was found, or false otherwise.
  */
 export function checkDataIntegrity(element: HTMLElement | null = null, simple: boolean = false) {
-	if (pageData.debug) return '';
+	if (staticBooleans.debug) return '';
 	const currentText = md5Hex(JSON.stringify(pageData));
 	const savedText = dataIntegrityObj.text;
 	const { name, portalglyphs: glyphs, region } = pageData;
@@ -1028,7 +1028,7 @@ export function getSelectedText(section: HTMLElement) {
  * @returns {void}
  */
 export function enableTextMarking() {
-	document.body.dataset.mark = pageData.debug ? true.toString() : (!checkDataIntegrity(null, true)).toString();
+	document.body.dataset.mark = staticBooleans.debug ? true.toString() : (!checkDataIntegrity(null, true)).toString();
 }
 
 /**

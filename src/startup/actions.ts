@@ -1,7 +1,7 @@
-import { addDomAsElement, addStaticPageData, enableTextMarking, loadHTML, triggerEvent } from "../common";
+import { addDomAsElement, enableTextMarking, loadHTML, triggerEvent } from "../common";
 import { copyCode, createPage, downloadFile, reset } from "../modules/actions";
 import { ElementFunctions } from "../types/elements";
-import { globalElements, pageData } from "../variables/objects";
+import { globalElements, staticBooleans } from "../variables/objects";
 
 /**
  * Sets actions and notes for the HubWikiPageCreator. This function first sets up
@@ -75,9 +75,9 @@ const evtListners: ElementFunctions = [
 		handler: 'change',
 		func: function () {
 			const checkState = (this as unknown as HTMLInputElement).checked;
-			pageData.debug = checkState;
-			pageData.uploadShown = checkState;
-			pageData.galleryUploadShown = checkState;
+			staticBooleans.debug = checkState;
+			staticBooleans.uploadShown = checkState;
+			staticBooleans.galleryUploadShown = checkState;
 			document.documentElement.dataset.debug = checkState.toString();
 			enableTextMarking();
 		}
@@ -90,7 +90,7 @@ const debugDom = loadHTML(devTools, {}, evtListners) as Document;
 // if on production, set the debug flag permanently to false
 // if on dev (not prod), add the devtools from above
 if (isProd) {
-	addStaticPageData('debug', false);
+	Object.defineProperty(staticBooleans, 'debug', { configurable: false, writable: false, value: false });
 } else {
 	addDomAsElement(debugDom, actionsWrapper, 'beforeend');
 }
