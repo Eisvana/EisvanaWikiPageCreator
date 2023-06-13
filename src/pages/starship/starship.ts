@@ -158,7 +158,7 @@ export function calcInv() {
  * @function
  * @returns {void}
  */
-function costSlotCalc() {
+export function costSlotCalc() {
 	const type = pageData.type as string;
 	const inventory = pageData.inventory as string;
 	const propArray = ["cost", "slots", "techslots"];
