@@ -1,7 +1,7 @@
 import { addStaticPageData, autoShow, enableTextMarking, getCurrentHTMLFile, getSelectedText, preventCopy, showAll, triggerEvent, versionDropdown } from "../common";
 import { attachTransformedListeners } from "../commonElements/elementBackend/elementFunctions";
 import { readDefaultValues } from "../modules/footer";
-import { globalElements, pageData } from "../variables/objects";
+import { globalElements, staticBooleans } from "../variables/objects";
 
 const currentHTMLFile = getCurrentHTMLFile();
 addStaticPageData('pageType', currentHTMLFile);
@@ -9,12 +9,12 @@ addStaticPageData('pageType', currentHTMLFile);
 autoShow();
 readDefaultValues();
 versionDropdown();
-pageData.uploadShown = true;
-pageData.galleryUploadShown = true;
+staticBooleans.uploadShown = true;
+staticBooleans.galleryUploadShown = true;
 showAll();
-if (!pageData.debug) {
-	pageData.uploadShown = false;
-	pageData.galleryUploadShown = false;
+if (!staticBooleans.debug) {
+	staticBooleans.uploadShown = false;
+	staticBooleans.galleryUploadShown = false;
 }
 enableTextMarking();
 const outputColumn = globalElements.output.output as HTMLDivElement;

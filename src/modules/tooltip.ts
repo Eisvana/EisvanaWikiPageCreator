@@ -156,7 +156,7 @@ export function addAllTooltips(dom = document) {
 		if (dataArr.length) {
 			assignFunction({ element, handler: 'click', func: () => explanation(...dataArr) });
 		} else {
-			element.disabled = true;
+			element.setAttribute('aria-disabled', 'true');		// Firefox doesn't support the ariaDisabled method, so we need to use this method
 		}
 
 		element.innerHTML = img.outerHTML;

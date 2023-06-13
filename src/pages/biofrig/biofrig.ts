@@ -106,14 +106,3 @@ export function albumOtherExternal() {
 export function albumItemTypeExternal() {
 	return 'Organic Frigate Catalog';
 }
-
-export function generateGalleryArray() {
-	const array = [
-		'',
-		'Rear view of frigate',
-		'Interaction screen',
-		'System Page'
-	];
-
-	pageData.galleryArray = array;
-}
