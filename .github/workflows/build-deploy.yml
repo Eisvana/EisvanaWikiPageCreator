@@ -33,15 +33,22 @@ jobs:
           directory: dist
           overwrite: true
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: HubWikiPageCreator
+          path: dist
+
   deploy-prod:
     runs-on: ubuntu-latest
     needs: build
     if: github.ref == 'refs/heads/main'
     
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
-        
+      - uses: actions/download-artifact@v3
+        with:
+          name: HubWikiPageCreator
+          path: dist
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -53,8 +60,10 @@ jobs:
     if: github.ref == 'refs/heads/staging'
 
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: HubWikiPageCreator
+          path: dist
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
