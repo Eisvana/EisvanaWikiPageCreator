@@ -93,6 +93,7 @@ export function showHideStarshipSelects() {
 		}
 		wikiCode(inputElement);
 	}
+	toggleHaulerInvDropdown();
 	calcInv();
 }
 
@@ -109,16 +110,24 @@ export function invDropdown() {
 	if (type == 'Hauler') {
 		const subtypes = shipData.Hauler.subtypes as Sections;
 		setDropdownOptions(inventory, subtypes[subtype]);
-		if (subtypes[subtype].length == 1) {
-			inventory.value = subtypes[subtype][0];
-			hideInput(inventory, 'none');
-		} else {
-			hideInput(inventory, '');
-		}
+		if (subtypes[subtype].length == 1) inventory.value = subtypes[subtype][0];
 	} else {
 		setDropdownOptions(inventory, ['Small', 'Medium', 'Large']);
 	}
 	wikiCode(inventory);
+}
+
+export function toggleHaulerInvDropdown() {
+	const type = pageData.type as string;
+	if (type != 'Hauler') return;
+	const subtype = pageData.subtype as string;
+	const inventory = globalElements.input.inventoryInput as HTMLSelectElement;
+	const subtypes = shipData.Hauler.subtypes as Sections;
+	if (subtypes[subtype].length == 1) {
+		hideInput(inventory, 'none');
+	} else {
+		hideInput(inventory, '');
+	}
 }
 
 /**

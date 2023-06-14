@@ -2,7 +2,7 @@ import { assignElementFunctions } from "../../commonElements/elementBackend/elem
 import { albumFunctions } from "../../modules/albumactions";
 import { globalFunctions } from "../../variables/objects";
 import MTElementFunctions from "./elementFunctions";
-import { MTType, acquirementBundle, addInfo, albumDescExternal, albumItemTypeExternal, albumLinkGen, albumOtherExternal, albumTypeExternal, autoMTType, generateGalleryArray, hideCost, hideLocName, hideSrLocName, locGalaxy, locHubNr, showSizeDropdown } from "./multitool";
+import { acquirementBundle, addInfo, albumDescExternal, albumItemTypeExternal, albumLinkGen, albumOtherExternal, albumTypeExternal, autoMTLoc, generateGalleryArray, hideCost, hideLocName, hideSrLocName, locGalaxy, locHubNr, subtypeDropdown } from "./multitool";
 import { addStaticPageData } from "../../common";
 import '../../startup';
 
@@ -34,9 +34,8 @@ assignElementFunctions(MTElementFunctions);
 locGalaxy();
 acquirementBundle();
 addInfo();
-autoMTType();
-showSizeDropdown();
-MTType();
+autoMTLoc();
+subtypeDropdown();
 hideLocName();
 hideSrLocName();
 locHubNr();
