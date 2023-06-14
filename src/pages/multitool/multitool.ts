@@ -386,7 +386,7 @@ export function albumItemTypeExternal() {
 
 export function albumOtherExternal() {
 
-	// determine if MT is SMG for catalogue
+	// determine MT size if needed for catalogue
 	function catalogMTType() {
 		const subtype = pageData.subtype as string;
 		if (!subtype || subtype == 'Starter Pistol') return '';
@@ -427,8 +427,7 @@ export function albumDescExternal() {
  */
 export function albumLinkGen() {
 	const civ = shortenGHub(pageData.civShort as string);
-	const type = pageData.type;
-	const subtype = pageData.subtype;
+	const { type, subtype } = pageData;
 
 	const catalogName = (() => {
 		if (civ == 'CalHub') return civ + ' Multi-Tool Catalog';
