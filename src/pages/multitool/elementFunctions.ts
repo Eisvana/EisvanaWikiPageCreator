@@ -14,11 +14,11 @@ const MTElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'typeInput',
-		func: () => { addInfo(); appearance(); autoMTLoc(); subtypeDropdown(); albumItemType(); albumOther() }
+		func: () => { addInfo(); autoMTLoc(); subtypeDropdown(); albumItemType(); albumOther(); appearance() }
 	},
 	{
 		element: 'subtypeInput',
-		func: () => { albumOther(); addInfo() }
+		func: () => { albumOther(); addInfo(); appearance() }
 	},
 	{
 		element: 'researchTeam',

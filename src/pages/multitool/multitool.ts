@@ -51,6 +51,7 @@ export function appearance() {
 	const colour1 = pageData.mainColour as string;
 	const colour2 = pageData.secColour as string;
 	const name = pageData.name as string;
+	const subtype = (pageData.subtype as string).toLowerCase();
 	const type = (pageData.type as string).toLowerCase();
 	const appearance = globalElements.input.appearanceInput as HTMLTextAreaElement;
 
@@ -68,7 +69,8 @@ export function appearance() {
 	})();
 
 	// Constructs the final appearance string and assigns it to the input element.
-	const output = `${name} is ${mainColour} ${type} multi-tool${accentColour}.`;
+	const isStarter = subtype == 'starter pistol';
+	const output = `${name} is ${mainColour} ${isStarter ? subtype : type} multi-tool${accentColour}.`;
 	appearance.value = output;
 	wikiCode(appearance);
 }
