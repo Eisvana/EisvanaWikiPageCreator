@@ -1,7 +1,7 @@
 import { image, toggleSection } from "../../common";
 import { albumName, albumOther, albumDiscoverer, albumItemType } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements";
-import { MTType, acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo, appearance, autoMTType, autoSentinel, hideCost, hideLocName, hideSrLocName, locGalaxy, locHubNr, showSizeDropdown } from "./multitool";
+import { acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo, appearance, autoMTLoc, autoSentinel, hideCost, hideLocName, hideSrLocName, locGalaxy, locHubNr, subtypeDropdown } from "./multitool";
 
 const MTElementFunctions: ElementFunctions = [
 	{
@@ -14,11 +14,11 @@ const MTElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'typeInput',
-		func: () => { addInfo(); appearance(); autoMTType(); showSizeDropdown(); MTType(); albumItemType(); albumOther() }
+		func: () => { addInfo(); appearance(); autoMTLoc(); subtypeDropdown(); albumItemType(); albumOther() }
 	},
 	{
-		element: 'sizeInput',
-		func: () => { showSizeDropdown(); MTType(); albumOther() }
+		element: 'subtypeInput',
+		func: () => { albumOther(); addInfo() }
 	},
 	{
 		element: 'researchTeam',

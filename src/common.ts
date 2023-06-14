@@ -80,7 +80,7 @@ export function versionDropdown() {
  *
  * @returns {undefined}
  */
-export function setDropdownOptions(element: HTMLElement, values: Array<string>, texts: Array<string> = values) {
+export function setDropdownOptions(element: HTMLSelectElement, values: Array<string>, texts: Array<string> = values) {
 	const dropdown: Array<string> = [];
 	for (let i = 0; i < values.length; i++) {
 		const value = values[i];
