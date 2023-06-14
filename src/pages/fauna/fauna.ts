@@ -411,8 +411,8 @@ export function redirectPage(): string {
 
 export function genderDropdown() {
 	const genus = pageData.genus as string;
-	const genderInput = globalElements.input.genderInput as HTMLInputElement;
-	const gender2Input = globalElements.input.gender2Input as HTMLInputElement;
+	const genderInput = globalElements.input.genderInput as HTMLSelectElement;
+	const gender2Input = globalElements.input.gender2Input as HTMLSelectElement;
 	const genderArray = getGenderData(genus) as Array<string>;
 	const gender2Array = ['', ...genderArray];
 	setDropdownOptions(genderInput, genderArray);
