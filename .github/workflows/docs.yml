@@ -17,7 +17,7 @@ jobs:
       contents: write
     
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout Repo
         uses: actions/checkout@v3
 
       - name: Create Doc
