@@ -353,7 +353,7 @@ export function autoSentinel(input: HTMLSelectElement) {
 
 export function subtypeDropdown() {
 	const type = pageData.type as string;
-	const dropdown = globalElements.input.subtypeInput as HTMLElement;
+	const dropdown = globalElements.input.subtypeInput as HTMLSelectElement;
 
 	// [[value], [display]]
 	const subtypes: {
