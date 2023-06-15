@@ -392,7 +392,7 @@ export function albumOtherExternal(): string {
 	// determine MT size if needed for catalogue
 	function catalogMTType() {
 		const subtype = pageData.subtype as string;
-		if (!subtype || subtype == 'Starter Pistol') return '';
+		if (!subtype || pageData.isStarter) return '';
 		return subtype + ' -';
 	}
 
