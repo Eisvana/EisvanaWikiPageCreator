@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  Lint:
+  Build:
     runs-on: ubuntu-latest
 
     permissions:
