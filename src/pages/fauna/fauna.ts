@@ -388,11 +388,7 @@ export function generateGalleryArray() {
 	const lowerCase = structuredClone(array).map(item => item.toLowerCase());
 	for (let i = array.length - 1; i >= 0; i--) {
 		const element = lowerCase[i];
-		if (gender2) {
-			if (element.includes('creature')) array.splice(i, 1);
-		} else {
-			if (element.includes('gender')) array.splice(i, 1);
-		}
+		if (element.includes(gender2 ? 'creature' : 'gender')) array.splice(i, 1);
 	}
 
 	pageData.galleryArray = array;
