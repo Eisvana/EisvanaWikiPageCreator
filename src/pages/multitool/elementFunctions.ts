@@ -18,7 +18,7 @@ const MTElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'subtypeInput',
-		func: () => { albumOther(); addInfo(); appearance() }
+		func: () => { albumOther(); addInfo(); appearance(); albumItemType() }
 	},
 	{
 		element: 'researchTeam',
