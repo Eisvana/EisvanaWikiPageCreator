@@ -376,15 +376,18 @@ export function subtypeDropdown() {
 }
 
 // album functions
-export function albumTypeExternal() {
+export function albumTypeExternal(): string {
 	return 'Catalog';
 }
 
-export function albumItemTypeExternal() {
-	return pageData.type as string;
+export function albumItemTypeExternal(): string {
+	if (pageData.civShort == 'CalHub') return 'Multi-Tool';
+	if (pageData.isStarter) return pageData.subtype as string;
+	if (pageData.isStandard) return 'Standard Multi-Tool';
+	return pageData.type + ' Multi-Tool';
 }
 
-export function albumOtherExternal() {
+export function albumOtherExternal(): string {
 
 	// determine MT size if needed for catalogue
 	function catalogMTType() {
@@ -433,6 +436,8 @@ export function albumLinkGen() {
 		if (civ == 'CalHub') return civ + ' Multi-Tool Catalog';
 		const isStandard = type == 'Rifle' || (type == 'Pistol' && subtype != 'Starter Pistol');
 		const isStarter = type == 'Pistol' && !isStandard;
+		pageData.isStandard = isStandard;
+		pageData.isStarter = isStarter;
 		const longType = (() => {
 			if (isStandard) return 'Standard Multi-Tool';
 			if (isStarter) return subtype;
