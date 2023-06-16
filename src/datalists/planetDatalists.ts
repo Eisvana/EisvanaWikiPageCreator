@@ -845,11 +845,11 @@ for (const biome in planetDescriptors) {
 		planetDescriptors[biome][list].forEach(descriptor => descriptors.add(descriptor));
 	}
 }
+planetDatalists.planetDescriptors = Array.from(descriptors);
 
 /**
  * Populates `planetDatalists.resources` with the keys from `getResourceData()`.
  */
-planetDatalists.planetDescriptors = Array.from(descriptors);
 planetDatalists.resources = Object.keys(getResourceData());
 
 export default planetDatalists;
