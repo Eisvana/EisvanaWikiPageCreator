@@ -373,7 +373,6 @@ export function getDescriptorData() {
 	return planetDescriptors;
 }
 
-
 const planetDatalists: {
 	[key: string]: Array<string>;
 } = {
