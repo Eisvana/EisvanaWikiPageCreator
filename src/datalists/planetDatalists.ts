@@ -374,7 +374,7 @@ export function getDescriptorData() {
 }
 
 
-export const planetDatalists: {
+const planetDatalists: {
 	[key: string]: Array<string>;
 } = {
 	weatherData: [
@@ -851,3 +851,5 @@ planetDatalists.planetDescriptors = Array.from(descriptors);
  * Populates `planetDatalists.resources` with the keys from `getResourceData()`.
  */
 planetDatalists.resources = Object.keys(getResourceData());
+
+export default planetDatalists;
