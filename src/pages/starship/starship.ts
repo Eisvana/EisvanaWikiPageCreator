@@ -398,7 +398,7 @@ export function albumOtherExternal() {
 /**
  * Generates a link to a starship catalog based on the properties of the pageData object.
  * @function albumLinkGen
- * @returns {String} The link to the appropriate starship catalog.
+ * @returns {string} The link to the appropriate starship catalog.
  */
 export function albumLinkGen() {
 	// The long version of the civilization name.
@@ -421,7 +421,7 @@ export function albumLinkGen() {
 	/**
 	 * Returns the appropriate catalog name based on the properties of the pageData object.
 	 * @function getCatalog
-	 * @returns {String} The name of the corresponding starship catalog.
+	 * @returns {string} The name of the corresponding starship catalog.
 	 */
 	function getCatalog() {
 		if (civShort == 'CalHub') return 'CalHub Starship Catalog';										// CalHub Freighter

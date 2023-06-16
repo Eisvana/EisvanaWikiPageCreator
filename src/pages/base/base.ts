@@ -8,7 +8,6 @@ import { globalElements } from "../../variables/objects";
 /**
  * Validates Discord tags.
  *
- * @param {Object} inputElement - The input element to validate.
  * @returns {void}
  */
 export function validateDiscord() {

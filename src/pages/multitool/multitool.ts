@@ -44,8 +44,6 @@ export function addInfo() {
  * Calculate the appearance of a multi-tool based on pageData and assigns it to a given input element.
  *
  * @function
- * @param {Object} pageData - An object containing multi-tool data such as name, type, and colors.
- * @param {HTMLElement} input - The input element to assign the calculated appearance to.
  */
 export function appearance() {
 	const colour1 = pageData.mainColour as string;
@@ -339,7 +337,7 @@ export function hideAddons() {
  * and hides certain input elements depending on the value of 'input'.
  *
  * @function
- * @param {object} input - The input element to be checked.
+ * @param {Object} input - The input element to be checked.
  * @returns {undefined}
  */
 export function autoSentinel(input: HTMLSelectElement) {
