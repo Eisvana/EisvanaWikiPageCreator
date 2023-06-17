@@ -351,7 +351,7 @@ export function noLineBreak() {
  * If pageData.gender2 is defined, the function sets the genders according to the creaturePrio() system.
  *
  * @function
- * @returns {Array<String>} An array of strings representing the different pages in the gallery.
+ * @returns {Array<string>} An array of strings representing the different pages in the gallery.
  */
 export function generateGalleryArray() {
 	let gender1, gender2;
