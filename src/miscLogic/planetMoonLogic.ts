@@ -2,7 +2,7 @@
  * @fileoverview Provides functions that can be used by Planet and Moon pages.
  */
 
-import { addDomAsElement, extractNumber, forceDatalist, getChildIndex, image, loadHTML, oddEven, removeSection, removeSpecificSection, sanitiseString, setDropdownOptions, sortObj, toggleSection, wikiCode } from '../common';
+import { addDomAsElement, extractNumber, forceDatalist, getChildIndex, getWormAlbum, image, loadHTML, oddEven, removeSection, removeSpecificSection, sanitiseString, setDropdownOptions, sortObj, toggleSection, wikiCode } from '../common';
 import { globalElements, globalFunctions, links, pageData } from '../variables/objects';
 import creatureInputs from '../htmlSnippets/creatureInputs.html?raw';
 import floraInputs from '../htmlSnippets/floraInputs.html?raw';
@@ -26,10 +26,7 @@ import { StdObj } from '../types/objects';
  * @returns {string} Either "is" or "are," depending if the number is singular or plural.
  */
 export function plural(number: number, dest: string = ''): string | void {
-	const word = (() => {
-		if (number == 1) return 'is';
-		return 'are';
-	})();
+	const word = number == 1 ? 'is' : 'are';
 	if (!dest) return word;
 	wikiCode(word, dest);
 }
@@ -532,20 +529,8 @@ export function wormAutoSpawn() {
 }
 
 export function wormAlbumName() {
-	const civShort = pageData.civShort;
-	const output = (() => {
-		switch (civShort) {
-			case 'GHub':
-				return 'GHEC Sandworm Album';
-
-			case 'CalHub':
-				return 'CalHub Rare Fauna Album#Sandworm|CalHub Rare Fauna Album';
-
-			case 'EisHub':
-				return 'EisHub Shaihuluda Album';
-		}
-		return '';
-	})();
+	const civShort = pageData.civShort as string;
+	const output = getWormAlbum(civShort);
 	(globalElements.output.wormAlbumName as HTMLOutputElement).innerText = output;
 }
 

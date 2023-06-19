@@ -1,7 +1,8 @@
 import { toggleSection } from "../../common";
+import { locGalaxy } from "../../miscLogic/locationLogic";
 import { albumDiscoverer, albumName, albumOther } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements"
-import { addInfo, appearance, generateCatalogue, locGalaxy, locHubNr } from "./biofrig";
+import { addInfo, appearance, generateCatalogue, locHubNr } from "./biofrig";
 
 const frigateElementFunctions: ElementFunctions = [
 	{

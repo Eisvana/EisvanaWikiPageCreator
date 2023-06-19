@@ -351,7 +351,7 @@ export function noLineBreak() {
  * If pageData.gender2 is defined, the function sets the genders according to the creaturePrio() system.
  *
  * @function
- * @returns {Array<String>} An array of strings representing the different pages in the gallery.
+ * @returns {Array<string>} An array of strings representing the different pages in the gallery.
  */
 export function generateGalleryArray() {
 	let gender1, gender2;
@@ -388,11 +388,7 @@ export function generateGalleryArray() {
 	const lowerCase = structuredClone(array).map(item => item.toLowerCase());
 	for (let i = array.length - 1; i >= 0; i--) {
 		const element = lowerCase[i];
-		if (gender2) {
-			if (element.includes('creature')) array.splice(i, 1);
-		} else {
-			if (element.includes('gender')) array.splice(i, 1);
-		}
+		if (element.includes(gender2 ? 'creature' : 'gender')) array.splice(i, 1);
 	}
 
 	pageData.galleryArray = array;
@@ -411,8 +407,8 @@ export function redirectPage(): string {
 
 export function genderDropdown() {
 	const genus = pageData.genus as string;
-	const genderInput = globalElements.input.genderInput as HTMLInputElement;
-	const gender2Input = globalElements.input.gender2Input as HTMLInputElement;
+	const genderInput = globalElements.input.genderInput as HTMLSelectElement;
+	const gender2Input = globalElements.input.gender2Input as HTMLSelectElement;
 	const genderArray = getGenderData(genus) as Array<string>;
 	const gender2Array = ['', ...genderArray];
 	setDropdownOptions(genderInput, genderArray);

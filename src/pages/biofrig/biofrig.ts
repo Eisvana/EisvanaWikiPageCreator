@@ -3,25 +3,13 @@
  */
 
 import { docByResearchteam, enPrefix, shortenGHub, wikiCode } from "../../common";
-import { HubGal, regNr } from "../../miscLogic/locationLogic";
+import { regNr } from "../../miscLogic/locationLogic";
 import { globalElements, pageData } from "../../variables/objects";
 
 export function locHubNr() {
 	const region = pageData.region as string;
 	const outputElement = globalElements.output.HubNr as HTMLOutputElement;
 	outputElement.innerText = regNr(region);
-}
-
-/**
- * Adds region to location sentence.
- * @function
- * @name locGalaxy
- * @returns {undefined}
- */
-export function locGalaxy() {
-	const civ = pageData.civShort as string;
-	const text = HubGal(civ);
-	wikiCode(text, 'locGalaxy');
 }
 
 /**
@@ -105,15 +93,4 @@ export function albumOtherExternal() {
 
 export function albumItemTypeExternal() {
 	return 'Organic Frigate Catalog';
-}
-
-export function generateGalleryArray() {
-	const array = [
-		'',
-		'Rear view of frigate',
-		'Interaction screen',
-		'System Page'
-	];
-
-	pageData.galleryArray = array;
 }

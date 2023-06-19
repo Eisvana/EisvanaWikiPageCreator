@@ -48,3 +48,5 @@ export const globalFunctions: {
 export const footerInputs: Array<HTMLInputElement | HTMLSelectElement> = [];
 
 export const transformedElementFunctions: TransformedElementFunctions = {};
+
+export const staticBooleans: { [key: string]: boolean } = {};

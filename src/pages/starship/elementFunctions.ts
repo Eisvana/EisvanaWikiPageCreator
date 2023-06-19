@@ -2,7 +2,7 @@ import { enPrefix, toggleSection } from "../../common";
 import { toggleRedirect } from "../../modules/actions";
 import { albumName, albumOther, albumDiscoverer } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements";
-import { subtypeDropdown, showHideStarshipSelects, shipStats, loc, appearanceSentence, addInfo, introType, appearanceDropdowns, calcInv, calcS, invDropdown } from "./starship";
+import { subtypeDropdown, showHideStarshipSelects, shipStats, loc, appearanceSentence, addInfo, introType, appearanceDropdowns, calcInv, calcS, invDropdown, costSlotCalc, toggleHaulerInvDropdown } from "./starship";
 
 const starshipElementFunctions: ElementFunctions = [
 	{
@@ -31,11 +31,11 @@ const starshipElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'subtypeInput',
-		func: () => { invDropdown(); calcInv(); appearanceSentence(); loc() }
+		func: () => { invDropdown(); toggleHaulerInvDropdown(); calcInv(); appearanceSentence(); loc() }
 	},
 	{
 		element: ['inventoryInput', 'economyInput'],
-		func: () => { calcS(); albumOther() }
+		func: () => { calcS(); albumOther(); costSlotCalc() }
 	},
 	{
 		element: 'pilotInput',

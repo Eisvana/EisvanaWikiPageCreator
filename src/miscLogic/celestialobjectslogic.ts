@@ -100,7 +100,7 @@ export function wikiCodePercentage(element: HTMLInputElement | null = null) {
  * Determines whether or not the given element is infested, and updates the page accordingly.
  *
  * @param {HTMLElement} [element=globalElements.input.descriptionInput] - The element to check for infestation.
- * @return {Boolean} - If on a System page, returns true if the element is Infested, false otherwise. If on a Planet/Moon page, updates the output text and pageData object accordingly, and returns nothing.
+ * @return {boolean} - If on a System page, returns true if the element is Infested, false otherwise. If on a Planet/Moon page, updates the output text and pageData object accordingly, and returns nothing.
  */
 export function autoInfested(element: HTMLInputElement = globalElements.input.descriptionInput as HTMLInputElement): boolean | void {
 	const descriptorData = getDescriptorData().Infested;

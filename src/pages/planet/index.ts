@@ -1,16 +1,16 @@
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
-import { pageData } from "../../variables/objects";
 import planetElements from "./elementStore";
 import { moonList } from "./planet";
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import planetElementFunctions from "./elementFunctions";
+import { addStaticPageData } from "../../common";
 import '../../startup/planetMoon';
 
 updateGlobalElements(planetElements);
 assignElementFunctions(planetElementFunctions);
 moonList();
 
-pageData.galleryExplanationExternal = `
+addStaticPageData('galleryExplanationExternal', `
 There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
@@ -25,9 +25,9 @@ There is a preferred order of pictures:
 			<li>System Page</li>
 			<li>Galaxy Map</li>
 		</ol>
-	</div>`;
+	</div>`)
 
-pageData.galleryArray = [
+addStaticPageData('galleryArray', [
 	'',
 	'Landscape',
 	'Night View',
@@ -39,4 +39,4 @@ pageData.galleryArray = [
 	'Planet Page',
 	'System Page',
 	'Galaxy Map'
-]
+])

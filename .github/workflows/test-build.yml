@@ -1,16 +1,16 @@
-name: Lint JSDoc
-run-name: Lint JSDoc Comments
+name: Test Build
+run-name: Test Build
 
 on:
   pull_request:
     types: [opened, synchronize]
 
 concurrency:
-  group: "lintdoc"
+  group: "testbuild"
   cancel-in-progress: true
 
 jobs:
-  Lint:
+  Build:
     runs-on: ubuntu-latest
 
     permissions:
@@ -21,5 +21,5 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Lint JSDoc Comments
-        uses: Lenni009/jsdoc2wiki-action/lint-doc@main
+      - name: Test Build
+        uses: Lenni009/test-build-vite-action@main

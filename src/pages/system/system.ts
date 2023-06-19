@@ -601,7 +601,7 @@ function infestedBiomeLinks(dest: string, bool: boolean) {
 
 /**
  * Set the text of specified elements with data from an array of values.
- * @param {Array} array - An array of values to use for setting the text.
+ * @param {Object} obj - An array of values to use for setting the text.
  * @returns {void}
  */
 function setBiomeText(obj: StdObj) {
@@ -706,7 +706,7 @@ export function spaceStationSection() {
 	 *
 	 * @function
 	 * @param {Object} section - The space station section HTML element.
-	 * @returns {Boolean} Returns true if the default display should be used, false otherwise.
+	 * @returns {boolean} Returns true if the default display should be used, false otherwise.
 	 */
 	function defaultDisplay(section: HTMLDivElement) {
 		const button = section.querySelector('button:not(.tooltip)') as HTMLButtonElement;

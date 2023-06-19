@@ -2,8 +2,8 @@
  * @fileoverview Provides functions which can be used by the Multi-Tool page creator.
  */
 
-import { docByResearchteam, enPrefix, errorMessage, hideInput, shortenGHub, triggerEvent, validateCoords, wikiCode } from "../../common";
-import { HubGal, planetMoon, planetMoonSentence, regNr } from "../../miscLogic/locationLogic";
+import { docByResearchteam, enPrefix, errorMessage, hideInput, setDropdownOptions, shortenGHub, storeData, triggerEvent, validateCoords, wikiCode } from "../../common";
+import { planetMoon, planetMoonSentence, regNr } from "../../miscLogic/locationLogic";
 import { albumDesc } from "../../modules/albumactions";
 import { PicObj, StdObj } from "../../types/objects";
 import { globalElements, pageData } from "../../variables/objects";
@@ -14,42 +14,17 @@ export function locHubNr() {
 }
 
 /**
- * Adds region to location sentence
- * @function
- * @name locGalaxy
- * @returns {void}
- */
-export function locGalaxy() {
-	const civ = pageData.civShort as string;	// The civilization short name
-	const text = HubGal(civ);	// The location galaxy text
-	wikiCode(text, 'locGalaxy');	// Adds the location galaxy text to the page with the section name 'locGalaxy'
-}
-
-/**
  * Constructs additional information sentence.
  * @function
  * @returns {undefined}
  */
 export function addInfo() {
-	const civ = shortenGHub(pageData.civShort as string);
 	const researchteam = docByResearchteam('GHSH');
-	const type = (() => {
-		const preType = pageData.type;		// Alien/Experimental/Starter Pistol/Standard/Royal/Sentinel
-		if (preType == 'Standard') return 'Standard Multi-Tool';
-		return preType;
-	})();
+	const outputElement = globalElements.output.addInfo as HTMLOutputElement;
 
-	const catalogue = (() => {
-		if (civ == 'CalHub') {
-			return `${civ} Multi-Tool Catalog`;
-		} else {
-			return `${civ} Multi-Tool Catalog - ${type}`;
-		}
-	})();
-
+	const catalogue = albumLinkGen();
 	const output = '[[' + catalogue + ']]' + researchteam;
 
-	const outputElement = globalElements.output.addInfo as HTMLOutputElement;
 	outputElement.innerText = output;
 }
 
@@ -57,13 +32,12 @@ export function addInfo() {
  * Calculate the appearance of a multi-tool based on pageData and assigns it to a given input element.
  *
  * @function
- * @param {Object} pageData - An object containing multi-tool data such as name, type, and colors.
- * @param {HTMLElement} input - The input element to assign the calculated appearance to.
  */
 export function appearance() {
 	const colour1 = pageData.mainColour as string;
 	const colour2 = pageData.secColour as string;
 	const name = pageData.name as string;
+	const subtype = (pageData.subtype as string).toLowerCase();
 	const type = (pageData.type as string).toLowerCase();
 	const appearance = globalElements.input.appearanceInput as HTMLTextAreaElement;
 
@@ -81,7 +55,8 @@ export function appearance() {
 	})();
 
 	// Constructs the final appearance string and assigns it to the input element.
-	const output = `${name} is ${mainColour} ${type} multi-tool${accentColour}.`;
+	const isStarter = subtype == 'starter pistol';
+	const output = `${name} is ${mainColour} ${isStarter ? subtype : type} multi-tool${accentColour}.`;
 	appearance.value = output;
 	wikiCode(appearance);
 }
@@ -238,7 +213,7 @@ export function acquirementGallery() {
  * @function
  * @returns {void}
  */
-export function autoMTType() {
+export function autoMTLoc() {
 	const type = pageData.type as string;
 	const locElement = globalElements.input.locInput as HTMLSelectElement;
 
@@ -257,51 +232,6 @@ export function autoMTType() {
 	hideCost();
 	hideAddons();
 	acquirementGallery();
-}
-
-// shows or hides size dropdown
-export function showSizeDropdown() {
-	const type = pageData.type as string;
-	const size = pageData.size as string;
-	const sizeInput = globalElements.input.sizeInput as HTMLSelectElement;
-
-	(sizeInput.querySelector('option[value="SMG"]') as HTMLOptionElement).style.display = type == 'Experimental' ? 'none' : '';
-
-	if (type == 'Experimental' && size == 'SMG') sizeInput.value = 'Pistol';
-
-	const hideSize = ['Royal', 'Starter Pistol', 'Sentinel'];
-	if (hideSize.includes(type)) {
-		hideInput(sizeInput, 'none');
-	} else {
-		hideInput(sizeInput, '');
-	}
-}
-
-/**
- * Shows or hides the size dropdown based on the type of page being displayed and the selected size.
- * @function
- * @global
- * @returns {void}
- */
-export function MTType() {
-	const typeElement = globalElements.input.typeInput as HTMLSelectElement;
-	const type = typeElement.value;
-	const typeShort = type.split(' ').slice(-1).join();
-	const size = pageData.size as string;
-	const output = (() => {
-		if (type == 'Standard' && size == 'SMG') {
-			return 'Rifle';
-		} else if (type == 'Standard') {
-			return size;
-		} else {
-			return typeShort;
-		}
-	})();
-
-	enPrefix(output, 'enPrefix');
-	const dest = typeElement.dataset.destNoauto as string;
-	wikiCode(output, dest);
-	pageData[dest] = type;		// setting this manually to avoid errors down the line. The auto function uses the provided output, which is not unique per option.
 }
 
 /**
@@ -395,7 +325,7 @@ export function hideAddons() {
  * and hides certain input elements depending on the value of 'input'.
  *
  * @function
- * @param {object} input - The input element to be checked.
+ * @param {Object} input - The input element to be checked.
  * @returns {undefined}
  */
 export function autoSentinel(input: HTMLSelectElement) {
@@ -407,24 +337,49 @@ export function autoSentinel(input: HTMLSelectElement) {
 	hideInput(input, '');
 }
 
+export function subtypeDropdown() {
+	const type = pageData.type as string;
+	const dropdown = globalElements.input.subtypeInput as HTMLSelectElement;
+
+	// [[value], [display]]
+	const subtypes: {
+		[key: string]: Array<Array<string>>;
+	} = {
+		Pistol: [['Pistol', 'Starter Pistol'], ['Standard', 'Starter Pistol']],
+		Rifle: [['Rifle', 'SMG'], ['Standard (Large)', 'SMG (Small)']],
+		Experimental: [['Rifle', 'Pistol'], ['Rifle (Large)', 'Pistol (Small)']],
+		Alien: [['Rifle', 'SMG', 'Pistol'], ['Rifle (Large)', 'SMG (Medium)', 'Pistol (Small)']],
+	}
+	const hasSubtypes = Object.keys(subtypes).includes(type);
+
+	hideInput(dropdown, hasSubtypes ? '' : 'none');
+	if (hasSubtypes) {
+		setDropdownOptions(dropdown, subtypes[type][0], subtypes[type][1]);
+	} else {
+		dropdown.value = '';
+	}
+	storeData(dropdown);
+}
+
 // album functions
-export function albumTypeExternal() {
+export function albumTypeExternal(): string {
 	return 'Catalog';
 }
 
-export function albumItemTypeExternal() {
-	return pageData.type as string;
+export function albumItemTypeExternal(): string {
+	if (pageData.civShort == 'CalHub') return 'Multi-Tool';
+	if (pageData.isStarter) return pageData.subtype as string;
+	if (pageData.isStandard) return 'Standard Multi-Tool';
+	return pageData.type + ' Multi-Tool';
 }
 
-export function albumOtherExternal() {
+export function albumOtherExternal(): string {
 
-	// determine if MT is SMG for catalogue
+	// determine MT size if needed for catalogue
 	function catalogMTType() {
-		const type = pageData.type as string;
-		const size = pageData.size as string;
-		const noSize = ['Royal', 'Starter Pistol', 'Sentinel'];
-		if (noSize.includes(type)) return '';
-		return size + ' -';
+		const subtype = pageData.subtype as string;
+		if (!subtype || pageData.isStarter) return '';
+		return subtype + ' -';
 	}
 
 	const output = `<br>{{Class|${pageData.class}}} - ${catalogMTType()} ${pageData.slots} Slots`
@@ -461,11 +416,19 @@ export function albumDescExternal() {
  */
 export function albumLinkGen() {
 	const civ = shortenGHub(pageData.civShort as string);
-	const type = pageData.type;
+	const { type, subtype } = pageData;
 
 	const catalogName = (() => {
 		if (civ == 'CalHub') return civ + ' Multi-Tool Catalog';
-		const longType = (type == 'Standard') ? `${type} Multi-Tool` : type;
+		const isStandard = type == 'Rifle' || (type == 'Pistol' && subtype != 'Starter Pistol');
+		const isStarter = type == 'Pistol' && !isStandard;
+		pageData.isStandard = isStandard;
+		pageData.isStarter = isStarter;
+		const longType = (() => {
+			if (isStandard) return 'Standard Multi-Tool';
+			if (isStarter) return subtype;
+			return type;
+		})();
 		return civ + ' Multi-Tool Catalog - ' + longType;
 	})();
 

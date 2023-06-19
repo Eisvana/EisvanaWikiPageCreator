@@ -106,7 +106,6 @@ export function explanation(heading: string = '', text: string = '', img: string
 
 	// Wait for img to load, then update the DOM and cache the image
 	imgElement.onload = () => {
-		//		(imgElement.parentElement as HTMLPictureElement).style.display = '';
 		imgElement.style.marginBlockStart = '1rem';
 		imgElement.style.opacity = '1';
 		cachedImages.add(img);
@@ -157,7 +156,7 @@ export function addAllTooltips(dom = document) {
 		if (dataArr.length) {
 			assignFunction({ element, handler: 'click', func: () => explanation(...dataArr) });
 		} else {
-			element.disabled = true;
+			element.setAttribute('aria-disabled', 'true');		// Firefox doesn't support the ariaDisabled method, so we need to use this method
 		}
 
 		element.innerHTML = img.outerHTML;

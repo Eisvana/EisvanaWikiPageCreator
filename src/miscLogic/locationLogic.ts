@@ -2,7 +2,7 @@
  * @fileoverview Provides location focused functions
  */
 
-import { sanitiseString } from "../common";
+import { sanitiseString, wikiCode } from "../common";
 import { globalElements, pageData } from "../variables/objects";
 import { regions } from "../variables/regions";
 
@@ -90,4 +90,16 @@ export function regNr(regionName: string): string {
 	} else {
 		return ` (HUB${hubNr})`;
 	}
+}
+
+/**
+ * Adds region to location sentence
+ * @function
+ * @name locGalaxy
+ * @returns {void}
+ */
+export function locGalaxy() {
+	const civ = pageData.civShort as string;	// The civilization short name
+	const text = HubGal(civ);	// The location galaxy text
+	wikiCode(text, 'locGalaxy');	// Adds the location galaxy text to the page with the section name 'locGalaxy'
 }

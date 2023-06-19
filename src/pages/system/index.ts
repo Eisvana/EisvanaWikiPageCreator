@@ -1,15 +1,15 @@
 import { assignElementFunctions } from '../../commonElements/elementBackend/elementFunctions';
 import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
 import { wikiCodePercentage } from '../../miscLogic/celestialobjectslogic';
-import { globalElements, globalFunctions, pageData } from '../../variables/objects';
+import { globalElements, globalFunctions } from '../../variables/objects';
 import systemElementFunctions from './elementFunctions';
 import systemElements from './elementStore';
 import { generateGalleryArray, addTemplate, autoPirate, civCatalog, combineEconConf, expectedHubTagSentence, merchantUpgrades, planetInputs, regionLong, resetExternal, searchUpgrades, spaceStationSection } from './system';
-import { datalists } from '../../common';
+import { addStaticPageData, datalists } from '../../common';
 import systemDatalists from '../../datalists/systemDatalists';
 import '../../startup/celestialObjects';
 
-pageData.galleryExplanationExternal = `
+addStaticPageData('galleryExplanationExternal', `
 There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
@@ -17,7 +17,7 @@ There is a preferred order of pictures:
 			<li>System Page</li>
 			<li>Default SS Multi-Tool</li>
 		</ol>
-	</div>`;
+	</div>`)
 
 globalFunctions.resetExternal = () => resetExternal();
 globalFunctions.generateGalleryArray = () => generateGalleryArray();

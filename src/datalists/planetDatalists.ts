@@ -373,7 +373,6 @@ export function getDescriptorData() {
 	return planetDescriptors;
 }
 
-
 const planetDatalists: {
 	[key: string]: Array<string>;
 } = {
@@ -826,18 +825,14 @@ const planetDatalists: {
 	]
 }
 
-/**
- * Populates `planetDatalists.sentinels` with the data from `getSentinelData()`.
- */
+// Populates `planetDatalists.sentinels` with the data from `getSentinelData()`.
 planetDatalists.sentinels = [];
 const sentinels = getSentinelData();
 for (const level in sentinels) {
 	planetDatalists.sentinels.push(...sentinels[level]);
 }
 
-/**
- * Populates `planetDatalists.planetDescriptors` with the unique descriptors in `getDescriptorData()`.
- */
+// Populates `planetDatalists.planetDescriptors` with the unique descriptors in `getDescriptorData()`.
 const descriptors: Set<string> = new Set()
 const planetDescriptors = getDescriptorData();
 for (const biome in planetDescriptors) {
@@ -845,11 +840,9 @@ for (const biome in planetDescriptors) {
 		planetDescriptors[biome][list].forEach(descriptor => descriptors.add(descriptor));
 	}
 }
-
-/**
- * Populates `planetDatalists.resources` with the keys from `getResourceData()`.
- */
 planetDatalists.planetDescriptors = Array.from(descriptors);
+
+// Populates `planetDatalists.resources` with the keys from `getResourceData()`.
 planetDatalists.resources = Object.keys(getResourceData());
 
 export default planetDatalists;

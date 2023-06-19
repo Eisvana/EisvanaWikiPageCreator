@@ -1,4 +1,4 @@
-import { addInfoBullet, datalists, hideOrgName } from "../../common";
+import { addInfoBullet, addStaticPageData, datalists, hideOrgName } from "../../common";
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
 import creatureDatalists from "../../datalists/creatureDatalists";
@@ -7,7 +7,7 @@ import { albumFunctions } from "../../modules/albumactions";
 import creatureElementFunctions from "./elementFunctions";
 import creatureElements from "./elementStore";
 import { albumOtherExternal, albumCivExternal, addInfo, albumDropdown, bundlePropFunctions, genderDropdown, genusDropdown, genusProduces, hideAlbumEntry, hideCreaturePrio, hideSecGenderProps, noLineBreak, pageName, specialNotes, specialNotesTextFunc, generateGalleryArray, resetExternal } from "./fauna";
-import { globalFunctions, pageData } from "../../variables/objects";
+import { globalFunctions } from "../../variables/objects";
 import '../../startup';
 
 globalFunctions.albumOtherExternal = () => albumOtherExternal();
@@ -15,7 +15,7 @@ globalFunctions.albumCivExternal = () => albumCivExternal();
 globalFunctions.generateGalleryArray = () => generateGalleryArray();
 globalFunctions.resetExternal = () => resetExternal();
 
-pageData.galleryExplanationExternal = `
+addStaticPageData('galleryExplanationExternal', `
 There is a preferred order of pictures:
 <div class='dialog-center'>
 	<ol class='dialog-list'>
@@ -29,7 +29,7 @@ There is a preferred order of pictures:
 		<li>System Page</li>
 		<li>Galaxy Map</li>
 	</ol>
-</div>`;
+</div>`)
 
 datalists(creatureDatalists);
 

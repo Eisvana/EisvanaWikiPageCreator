@@ -2,7 +2,7 @@
  * @fileoverview Provides functions needed for the gallery to work.
  */
 
-import { globalElements, globalFunctions, pageData } from "../variables/objects";
+import { globalElements, globalFunctions, pageData, staticBooleans } from "../variables/objects";
 import { addDomAsElement, errorMessage, getChildIndex, loadHTML, sanitiseString, setDropdownOptions } from "../common";
 import { explanation } from "./tooltip";
 import galleryInputHtml from '../htmlSnippets/galleryInput.html?raw'
@@ -32,7 +32,9 @@ export function galleryUpload() {
 		// Check if file is too large, and continue if it is
 		const uploadSizeLimit = 10000000;
 		if (file.size > uploadSizeLimit) {
-			errors.push(name);
+			const div = document.createElement('div');
+			div.innerText = name;
+			errors.push(div.outerHTML);
 			continue;
 		}
 
@@ -102,8 +104,11 @@ export function galleryUpload() {
 		}
 
 		// Set wikiCodeGalleryTemplate string
+		const nameSpan = document.createElement('span');
+		nameSpan.innerText = name;
+
 		const wikiCodeGalleryTemplate = `<div id="${replacementStrings.wikiCodeGalleryId}">
-		<span>${name}</span><output id="${replacementStrings.wikiCodeGalleryValueId}"></output>
+		${nameSpan.outerHTML}<output id="${replacementStrings.wikiCodeGalleryValueId}"></output>
 		</div>`;
 
 		// Add galleryTemplate and wikiCodeGalleryTemplate to respective divs
@@ -112,17 +117,17 @@ export function galleryUpload() {
 	}
 
 	// If errors exist, show error message. Otherwise, clear error message
-	errorMessage(inp, errors.length ? `The following file(s) exceed the 10MB upload limit and couldn't be added:<br>${errors.join(',<br>')}` : undefined);
+	errorMessage(inp, errors.length ? `The following file(s) exceed the 10MB upload limit and couldn't be added:${errors.join('')}` : undefined);
 
 	// If galleryUploadShown is true, exit the function. Otherwise, show gallery explanation popup
-	if (pageData.galleryUploadShown) return;
+	if (staticBooleans.galleryUploadShown) return;
 	// the galleryExplanationExternal() function should return string with the popup text. HTML is supported.
-	if (pageData.galleryExplanationExternal) {
+	if (staticBooleans.galleryExplanationExternal) {
 		explanation('Gallery',
 			`${pageData.galleryExplanationExternal}
 		<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the gallery upload button.</div>`);
 	}
-	pageData.galleryUploadShown = true;
+	staticBooleans.galleryUploadShown = true;
 }
 
 /**

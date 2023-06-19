@@ -2,7 +2,7 @@ import { civ, docBy, enableTextMarking, hideDiscoverer, image, researchTeam, val
 import { galleryUpload } from "../modules/gallery";
 import { deleteCharacter, displayGlyphs, glyphInputOnChange } from "../modules/portalglyphs";
 import { ElementFunctions } from "../types/elements";
-import { pageData } from "../variables/objects";
+import { staticBooleans } from "../variables/objects";
 
 /**
  * An object containing functions to assign to each input element on the page.
@@ -61,12 +61,12 @@ const elementFunctions: ElementFunctions = [
 	{
 		element: 'fileUploadTooltip',
 		handler: 'click',
-		func: function () { pageData.uploadShown = true }
+		func: function () { staticBooleans.uploadShown = true }
 	},
 	{
 		element: 'galleryFileUploadTooltip',
 		handler: 'click',
-		func: function () { pageData.galleryUploadShown = true }
+		func: function () { staticBooleans.galleryUploadShown = true }
 	},
 ]
 

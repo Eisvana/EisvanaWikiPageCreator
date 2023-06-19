@@ -93,6 +93,7 @@ export function showHideStarshipSelects() {
 		}
 		wikiCode(inputElement);
 	}
+	toggleHaulerInvDropdown();
 	calcInv();
 }
 
@@ -109,16 +110,24 @@ export function invDropdown() {
 	if (type == 'Hauler') {
 		const subtypes = shipData.Hauler.subtypes as Sections;
 		setDropdownOptions(inventory, subtypes[subtype]);
-		if (subtypes[subtype].length == 1) {
-			inventory.value = subtypes[subtype][0];
-			hideInput(inventory, 'none');
-		} else {
-			hideInput(inventory, '');
-		}
+		if (subtypes[subtype].length == 1) inventory.value = subtypes[subtype][0];
 	} else {
 		setDropdownOptions(inventory, ['Small', 'Medium', 'Large']);
 	}
 	wikiCode(inventory);
+}
+
+export function toggleHaulerInvDropdown() {
+	const type = pageData.type as string;
+	if (type != 'Hauler') return;
+	const subtype = pageData.subtype as string;
+	const inventory = globalElements.input.inventoryInput as HTMLSelectElement;
+	const subtypes = shipData.Hauler.subtypes as Sections;
+	if (subtypes[subtype].length == 1) {
+		hideInput(inventory, 'none');
+	} else {
+		hideInput(inventory, '');
+	}
 }
 
 /**
@@ -158,7 +167,7 @@ export function calcInv() {
  * @function
  * @returns {void}
  */
-function costSlotCalc() {
+export function costSlotCalc() {
 	const type = pageData.type as string;
 	const inventory = pageData.inventory as string;
 	const propArray = ["cost", "slots", "techslots"];
@@ -389,7 +398,7 @@ export function albumOtherExternal() {
 /**
  * Generates a link to a starship catalog based on the properties of the pageData object.
  * @function albumLinkGen
- * @returns {String} The link to the appropriate starship catalog.
+ * @returns {string} The link to the appropriate starship catalog.
  */
 export function albumLinkGen() {
 	// The long version of the civilization name.
@@ -399,8 +408,8 @@ export function albumLinkGen() {
 	const subtype = pageData.subtype as string;
 	const { type, civShort } = pageData;
 	const civ = (() => {
-		if (civLong.split(' ').length > 1) return civShort;
-		return civilized.split(' ').slice(0, 2).join(' ');		// I have no idea why this exists...
+		if (civLong.split(' ').length > 1) return civShort;		// civLong = "GHub" ||"GHub Eissentam" || "GHub Calypso" => selects "GHub Eissentam" and "GHub Calypso" and returns "EisHub" or "CalHub" for "EisHub Starship Catalog"
+		return civilized.split(' ').slice(0, 2).join(' ');		// NoSonar outputs "Galactic Hub" for the catalog: "Galactic Hub Starship Catalog"
 	})();	// The civilization name, either the short version or the first two words of the long version. // But why??
 
 	// An object containing arrays of fighter subtypes, sorted by rarity.
@@ -412,7 +421,7 @@ export function albumLinkGen() {
 	/**
 	 * Returns the appropriate catalog name based on the properties of the pageData object.
 	 * @function getCatalog
-	 * @returns {String} The name of the corresponding starship catalog.
+	 * @returns {string} The name of the corresponding starship catalog.
 	 */
 	function getCatalog() {
 		if (civShort == 'CalHub') return 'CalHub Starship Catalog';										// CalHub Freighter

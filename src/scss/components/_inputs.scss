@@ -51,7 +51,7 @@ textarea:focus,
 textarea:focus-visible,
 input:not([type="file"], [type="checkbox"], [type="radio"]):focus,
 input:not([type="file"], [type="checkbox"], [type="radio"]):focus-visible,
-button.tooltip:not(:disabled):focus-visible,
+button.tooltip:not([aria-disabled]):focus-visible,
 button.delete-icon:focus-visible {
 	outline: 2px solid var(--outline-color) !important;
 }

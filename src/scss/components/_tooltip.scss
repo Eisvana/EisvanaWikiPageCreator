@@ -23,7 +23,7 @@ button.tooltip {
 		filter: invert(var(--invert));
 	}
 
-	&:not(:disabled) {
+	&:not([aria-disabled]) {
 		cursor: pointer;
 	}
 
@@ -40,7 +40,7 @@ button.tooltip {
 		z-index: 1;
 		bottom: 110%;
 		left: 50%;
-		margin-inline-start: calc(var(--width) * -0.5);
+		margin-inline-start: calc(var(--width) * -0.5 - 3px);
 		opacity: 0;
 		transition: opacity .3s !important;
 		font-weight: normal;
