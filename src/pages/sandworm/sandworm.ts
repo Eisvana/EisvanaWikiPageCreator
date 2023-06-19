@@ -2,7 +2,7 @@
  * @fileoverview Provides functions which can be used by the Sandworm page creator.
  */
 
-import { addInfoBullet, docByResearchteam, enableTextMarking, wikiCode } from "../../common";
+import { addInfoBullet, docByResearchteam, enableTextMarking, getWormAlbum, wikiCode } from "../../common";
 import { globalElements, pageData } from "../../variables/objects";
 
 /**
@@ -78,19 +78,9 @@ export function autoSpawn() {
 export function catalogue() {
 	const research = docByResearchteam('GHEC');
 
-	const album = (() => {
-		switch (pageData.civShort) {
-			case "GHub":
-				return "GHEC Sandworm";
+	const civShort = pageData.civShort as string;
+	const album = getWormAlbum(civShort);
 
-			case "CalHub":
-				return "CalHub Rare Fauna Album#Sandworm|CalHub Rare Fauna";
-
-			case "EisHub":
-				return "EisHub Shaihuluda";
-		}
-		return '';
-	})();
 	const albumName = `${album} Album`;
 	const output = `[[${albumName}]]${research}`;
 

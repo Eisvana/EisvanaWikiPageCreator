@@ -1,7 +1,8 @@
 import { image, toggleSection } from "../../common";
+import { locGalaxy } from "../../miscLogic/locationLogic";
 import { albumName, albumOther, albumDiscoverer, albumItemType } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements";
-import { acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo, appearance, autoMTLoc, autoSentinel, hideCost, hideLocName, hideSrLocName, locGalaxy, locHubNr, subtypeDropdown } from "./multitool";
+import { acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo, appearance, autoMTLoc, autoSentinel, hideCost, hideLocName, hideSrLocName, locHubNr, subtypeDropdown } from "./multitool";
 
 const MTElementFunctions: ElementFunctions = [
 	{
