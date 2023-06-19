@@ -26,10 +26,7 @@ import { StdObj } from '../types/objects';
  * @returns {string} Either "is" or "are," depending if the number is singular or plural.
  */
 export function plural(number: number, dest: string = ''): string | void {
-	const word = (() => {
-		if (number == 1) return 'is';
-		return 'are';
-	})();
+	const word = number == 1 ? 'is' : 'are';
 	if (!dest) return word;
 	wikiCode(word, dest);
 }
