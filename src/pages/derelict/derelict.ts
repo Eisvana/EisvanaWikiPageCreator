@@ -4,7 +4,6 @@
 
 import { wikiCode } from "../../common";
 import { glyphs2Coords } from "../../modules/portalglyphs";
-import { StdObj } from "../../types/objects";
 import { dataIntegrityObj, globalElements, pageData } from "../../variables/objects";
 
 export const galaxyTableEntry = `| [[File: <output name="image"></output>|150px]] || [[<output name="name"></output>]] || <output name="rooms"></output> || <output name="enemies"></output> || {{gl/Small|0000<output name="portalglyphs"></output>}} || <output name="discoverer"></output><br>
@@ -30,23 +29,6 @@ export function enemyCheckboxes() {
 		if (checkbox.checked) enemies.push(checkbox.value);
 	}
 	wikiCode(enemies.join(', '), 'enemies');
-}
-
-export function setGalaxy(civShort: string) {
-	const galaxies: StdObj = {
-		GHub: 'Euclid',
-		CalHub: 'Calypso',
-		EisHub: 'Eissentam',
-	}
-
-	const hubs: StdObj = {
-		GHub: 'Galactic Hub Project',
-		CalHub: 'Galactic Hub Calypso',
-		EisHub: 'Galactic Hub Eissentam',
-	}
-	pageData.civShort = civShort;
-	pageData.civilized = hubs[civShort];
-	pageData.galaxy = galaxies[civShort];
 }
 
 export function albumLinkGen() {

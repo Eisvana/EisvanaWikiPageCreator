@@ -2,7 +2,7 @@ import { addDomAsElement, addStaticPageData, loadHTML, researchTeamDropdown, tri
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
 import { globalElements, globalFunctions } from "../../variables/objects";
-import { albumLinkGen, discoverer, enemyCheckboxes, galaxyTableEntry, setGalaxy, updateGalaxyTableEntry } from "./derelict";
+import { albumLinkGen, discoverer, enemyCheckboxes, galaxyTableEntry, updateGalaxyTableEntry } from "./derelict";
 import derelictElementFunctions from "./elementFunctions";
 import derelictElements from "./elementStore";
 import { actionsDom } from "../../modules/albumactions";
@@ -32,7 +32,7 @@ actionsDom.body.insertAdjacentHTML('afterbegin', note);
 // save the innerHTML of the body for later
 const domBodyHtml = actionsDom.body.innerHTML;
 
-// add actionsDom to real DOM
+// add actionsDom to real DOM. This clears the actionsDom body
 addDomAsElement(actionsDom, globalElements.input.galaxyTableActions as HTMLDivElement, 'afterbegin');
 
 /* First entry done, starting second entry */
@@ -41,7 +41,7 @@ addDomAsElement(actionsDom, globalElements.input.galaxyTableActions as HTMLDivEl
 const newActionsDom = loadHTML(domBodyHtml, {}, derelictActionsElementFunctions) as Document;
 
 // change content and element IDs so they are still unique
-const noteElement = newActionsDom.getElementById(noteId)
+const noteElement = newActionsDom.getElementById(noteId);
 noteElement!.id = 'indexTableActionsNote';
 noteElement!.innerText = `If the page doesn't exist yet, add an entry to the catalogue as well`;
 
@@ -67,7 +67,6 @@ const imageInput = globalElements.input.fileInput as HTMLInputElement;
 const glyphsInput = globalElements.input.portalglyphsInput as HTMLInputElement;
 triggerEvent(imageInput, 'input');
 triggerEvent(glyphsInput, 'input');
-setGalaxy((globalElements.input.galaxyInput as HTMLSelectElement).value);
 enemyCheckboxes();
 researchTeamDropdown();
 updateGalaxyTableEntry();

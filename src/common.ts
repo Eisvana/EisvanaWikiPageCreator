@@ -1225,3 +1225,17 @@ export function addDomAsElement(dom: Document, dest: HTMLElement, position: Inse
 		dest.insertAdjacentElement(position, element);
 	}
 }
+
+export function getWormAlbum(civShort: string): string {
+	switch (civShort) {
+		case "GHub":
+			return "GHEC Sandworm";
+
+		case "CalHub":
+			return "CalHub Rare Fauna Album#Sandworm|CalHub Rare Fauna";
+
+		case "EisHub":
+			return "EisHub Shaihuluda";
+	}
+	return '';
+}

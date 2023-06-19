@@ -3,7 +3,7 @@
  */
 
 import { docByResearchteam, enPrefix, errorMessage, hideInput, setDropdownOptions, shortenGHub, storeData, triggerEvent, validateCoords, wikiCode } from "../../common";
-import { HubGal, planetMoon, planetMoonSentence, regNr } from "../../miscLogic/locationLogic";
+import { planetMoon, planetMoonSentence, regNr } from "../../miscLogic/locationLogic";
 import { albumDesc } from "../../modules/albumactions";
 import { PicObj, StdObj } from "../../types/objects";
 import { globalElements, pageData } from "../../variables/objects";
@@ -11,18 +11,6 @@ import { globalElements, pageData } from "../../variables/objects";
 export function locHubNr() {
 	const outputElement = globalElements.output.HubNr as HTMLOutputElement;
 	outputElement.innerText = regNr(pageData.region as string);
-}
-
-/**
- * Adds region to location sentence
- * @function
- * @name locGalaxy
- * @returns {void}
- */
-export function locGalaxy() {
-	const civ = pageData.civShort as string;	// The civilization short name
-	const text = HubGal(civ);	// The location galaxy text
-	wikiCode(text, 'locGalaxy');	// Adds the location galaxy text to the page with the section name 'locGalaxy'
 }
 
 /**

@@ -2,9 +2,10 @@ import { assignElementFunctions } from "../../commonElements/elementBackend/elem
 import { albumFunctions } from "../../modules/albumactions";
 import { globalFunctions } from "../../variables/objects";
 import MTElementFunctions from "./elementFunctions";
-import { acquirementBundle, addInfo, albumDescExternal, albumItemTypeExternal, albumLinkGen, albumOtherExternal, albumTypeExternal, autoMTLoc, generateGalleryArray, hideCost, hideLocName, hideSrLocName, locGalaxy, locHubNr, subtypeDropdown } from "./multitool";
+import { acquirementBundle, addInfo, albumDescExternal, albumItemTypeExternal, albumLinkGen, albumOtherExternal, albumTypeExternal, autoMTLoc, generateGalleryArray, hideCost, hideLocName, hideSrLocName, locHubNr, subtypeDropdown } from "./multitool";
 import { addStaticPageData } from "../../common";
 import '../../startup';
+import { locGalaxy } from "../../miscLogic/locationLogic";
 
 addStaticPageData('huburbs', true);
 
