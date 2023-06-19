@@ -8,6 +8,15 @@ Hub Wiki Page Creator is a website project designed to make it easy to create ne
 For detailed information on how to use Hub Wiki Page Creator, please refer to the [[User-Guide]].
 
 ===Contributing===
+Clone the repo, then run the following command:
+```bat
+npm i
+```
+To start the development server, run this command:
+```bat
+npm run dev
+```
+
 Community contributions are welcome! If you would like to contribute to Hub Wiki Page Creator, please refer to the [https://github.com/example/hub-wiki-page-creator/blob/main/CONTRIBUTING.md contributing guidelines].
 
 ===Support===
