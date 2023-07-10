@@ -1,4 +1,4 @@
-import { toggleSection } from "../../common";
+import { image, toggleSection } from "../../common";
 import { wikiCodePercentage, docByExternal } from "../../miscLogic/celestialobjectslogic";
 import { ElementFunctions } from "../../types/elements";
 import { addTemplate, autoBH, autoPirate, civCatalog, combineEconConf, expectedHubTagSentence, planetInputs, regionLong, searchUpgrades, spaceStationSection, tradeables } from "./system";
@@ -73,6 +73,16 @@ const systemElementFunctions: ElementFunctions = [
 		element: 'hideSDMerchantButton',
 		handler: 'click',
 		func: function () { toggleSection('SDMerchant', this as unknown as HTMLButtonElement) }
+	},
+	{
+		element: 'ssFileUpload',
+		handler: 'change',
+		func: function () { image(this as unknown as HTMLInputElement) }
+	},
+	{
+		element: 'navFileUpload',
+		handler: 'change',
+		func: function () { image(this as unknown as HTMLInputElement) }
 	},
 ]
 
