@@ -22,5 +22,3 @@ jobs:
 
       - name: Create Doc
         uses: Lenni009/jsdoc2wiki-action/create-doc@main
-        with:
-          secret: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}

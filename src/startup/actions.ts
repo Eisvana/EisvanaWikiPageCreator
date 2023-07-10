@@ -16,7 +16,7 @@ import { globalElements, staticBooleans } from "../variables/objects";
 const actionsHTML = `
 <button class="button is-outlined is-primary" id="copy" type="button" data-link="page" data-evt-id="copyButton">Copy Wikicode</button>
 <a class="button is-outlined is-primary" id="download" data-evt-id="downloadButton">Download File</a>
-<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload Pictures</a>
+<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload Pictures</a>
 <a class="button is-outlined is-primary" id="create" data-link="page" data-evt-id="createPageButton">Create Page</a>
 <button class="button is-warning" id="reset" type="reset" data-evt-id="resetButton">Reset Inputs</button>`;
 

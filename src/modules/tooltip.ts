@@ -29,9 +29,9 @@ const cachedImages: Set<string> = new Set();
  * Displays an explanation modal with optional text and image.
  * @param {string} heading - The heading of the modal.
  * @param {string} text - The text content of the modal.
- * @param {string} img - The URL of the image to display in the modal.
+ * @param {string} image - The URL of the image to display in the modal.
  */
-export function explanation(heading: string = '', text: string = '', img: string = '') {
+export function explanation(heading: string = '', text: string = '', image: string = '') {
 	// I have no idea how to do type guards in destructuring, so I need to do it the ugly way here.
 	// I also hate past-Lenni for making this ugly interface that needs typeguards and assertions everywhere.
 	const imgElement = globalElements.output.explanationFallbackImg as HTMLImageElement;
@@ -39,6 +39,7 @@ export function explanation(heading: string = '', text: string = '', img: string
 	const avifImg = globalElements.output.explanationAvifImg as HTMLSourceElement;
 	const linkElement = globalElements.output.explanationLink as HTMLAnchorElement;
 	const dialogElement = globalElements.output.explanation as HTMLDialogElement;
+	const img = image.trim();
 
 	// Check if img URL was provided
 	if (img) {
