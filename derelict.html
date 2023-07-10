@@ -44,7 +44,8 @@
 						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 							<data>Freighter Name</data>
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o). Can be found in the
+								analysis visor.</data>
 							<data>derelict/freighterName</data>
 						</button>
 					</div>
@@ -113,7 +114,7 @@
 							<data>
 								Check the boxes which apply to the derelict freighter.
 							</data>
-							<data>mt/addons</data>
+							<data>derelict/enemies</data>
 						</button>
 					</div>
 					<div class="tableCell data">
@@ -131,19 +132,44 @@
 					</div>
 					<div class="tableCell text">
 						<label for="roomInput">Number of rooms:</label>
+						<button class="tooltip">
+							<data>Number of rooms as seen at the bottom right.</data>
+							<data>Number of Rooms</data>
+							<data>
+								Number of rooms in the freighter. It can be seen on the bottom right of the screen. You
+								can get the overlay by pressing H.
+							</data>
+							<data>derelict/zones</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="roomInput" data-dest-number="0" data-dest-noauto="rooms" maxlength="2">
 					</div>
 					<div class="tableCell text">
 						<label for="hyperdriveInput">Hyperdrive:</label>
+						<button class="tooltip">
+							<data>Stat of the hyperdrive upgrade.</data>
+							<data>Hyperdrive Upgrade Bonus</data>
+							<data>
+								Hyperdrive upgrade distance stat. This will always be the same for a given freighter.
+							</data>
+							<data>derelict/hyperdrive</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="hyperdriveInput" data-dest-number="0" data-dest-noauto="hyperdrive"
-							maxlength="3">
+						maxlength="3">
 					</div>
 					<div class="tableCell text">
 						<label for="fuelInput">Fuel:</label>
+						<button class="tooltip">
+							<data>Stat of the frigate fuel upgrade.</data>
+							<data>Frigate Fuel Upgrade Bonus</data>
+							<data>
+								Frigate fuel upgrade stat. This will always be the same for a given freighter.
+							</data>
+							<data>derelict/fuel</data>
+						</button>
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="fuelInput" data-dest-number="0" data-dest-noauto="fuel" maxlength="2">
