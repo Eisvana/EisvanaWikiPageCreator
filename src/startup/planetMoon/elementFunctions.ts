@@ -1,4 +1,4 @@
-import { toggleSection } from "../../common";
+import { image, toggleSection } from "../../common";
 import { autoInfested } from "../../miscLogic/celestialobjectslogic";
 import { addFauna, addFlora, addMineral, addResource, addSandwormTemplate, locationSentence, plural, sentinelSentence, wormAlbumName, wormAutoSpawn } from "../../miscLogic/planetMoonLogic";
 import { ElementFunctions } from "../../types/elements";
@@ -28,6 +28,11 @@ const planetMoonElementFunctions: ElementFunctions = [
 	{
 		element: 'sandwormInput',
 		func: () => addSandwormTemplate()
+	},
+	{
+		element: 'sandwormImgUpload',
+		handler: 'change',
+		func: function () { image(this as unknown as HTMLInputElement) }
 	},
 	{
 		element: 'autoSpawn',
