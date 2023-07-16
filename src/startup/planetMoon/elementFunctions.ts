@@ -10,7 +10,7 @@ const planetMoonElementFunctions: ElementFunctions = [
 		func: () => wormAlbumName()
 	},
 	{
-		element: 'systemInput',
+		element: ['systemInput', 'portalglyphsInput'],
 		func: () => locationSentence()
 	},
 	{
