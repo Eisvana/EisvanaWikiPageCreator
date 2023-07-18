@@ -15,7 +15,7 @@ import creatureData from "../../miscLogic/creatureData";
  */
 export function genusDropdown() {
 	const ecosystem = pageData.ecosystem as string;
-	const genera = Object.keys(creatureData.ecosystems[ecosystem])
+	const genera = Object.keys(creatureData.ecosystems[ecosystem]);
 
 	const commonNames: Array<string> = [];
 	for (const genus of genera) {
@@ -75,10 +75,10 @@ export function addInfo() {
 	}
 
 	// if a catalogue is found, show the output element
-	outputElement.style.display = ''
+	outputElement.style.display = '';
 
 	// construct the output sentence based on the catalogue and the chapter
-	const output = '[[' + catalogue + ']]' + chapter
+	const output = '[[' + catalogue + ']]' + chapter;
 
 	// display the output sentence in the specified HTML element
 	outputElement.innerText = `Featured in the ${output}`;
@@ -100,13 +100,7 @@ export function pageName() {
 	const newName = newNameInput.value;
 	const orgName = orgNameInput.value;
 
-	const name = (() => {
-		if (orgName) {
-			return orgName;
-		} else {
-			return newName;
-		}
-	})();
+	const name = orgName || newName;
 	wikiCode(name, 'name');
 	return name;
 }
@@ -168,11 +162,8 @@ export function specialNotes() {
 	const notes = pageData.notes as string;
 	const specialNotesElement = globalElements.input.specialNotesInput as HTMLInputElement;
 	specialNotesElement.value = notes;
-	if (notes == 'Evil' || notes == 'Sheds and regrows bones') {
-		hideInput(specialNotesElement, '');
-	} else {
-		hideInput(specialNotesElement, 'none');
-	}
+	const hasDifferentSpecialNote = notes === 'Evil' || notes === 'Sheds and regrows bones'
+	hideInput(specialNotesElement, hasDifferentSpecialNote ? '' : 'none');
 	storeData(specialNotesElement);
 }
 
