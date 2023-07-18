@@ -2,7 +2,7 @@
  * @fileoverview Generates the footer and handles theming, as well as user defined global default values.
  */
 
-import { addHuburbs, hideDiscoverer, researchTeamDropdown, sanitiseString, triggerEvent } from "../common";
+import { addHuburbs, hideDiscoverer, sanitiseString, triggerEvent } from "../common";
 import { footerInputs, globalElements, pageData } from "../variables/objects";
 import { regions } from "../variables/regions";
 import { glyphError, validateGlyphs } from "./portalglyphs";
@@ -49,8 +49,7 @@ export function showSettings() {
 		input.value = settings[setting];
 		switch (input.id) {
 			case 'civDefault':
-				const event = new Event('change');
-				input.dispatchEvent(event);
+				triggerEvent(input, 'change')
 
 				break;
 			case 'portalglyphsDefault':
@@ -109,11 +108,11 @@ export function readDefaultValues() {
 
 		switch (setting) {
 			case 'civInput':
-				pageData.civShort = settings[setting];
-				researchTeamDropdown();
+				triggerEvent(input, 'change');
 				break;
 
 			case 'portalglyphsInput':
+			case 'systemInput':
 				triggerEvent(input, 'input');
 				break;
 		}

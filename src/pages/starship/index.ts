@@ -6,7 +6,7 @@ import { albumFunctions } from "../../modules/albumactions";
 import { globalElements, globalFunctions } from "../../variables/objects";
 import starshipElementFunctions from "./elementFunctions";
 import starshipElements from "./elementStore";
-import { subtypeDropdown, showHideStarshipSelects, shipStats, addInfo, appearanceDropdowns, calcS, introType, loc, albumTypeExternal, albumOtherExternal, albumLinkGen, generateGalleryArray } from "./starship";
+import { subtypeDropdown, showHideStarshipSelects, shipStats, addInfo, appearanceDropdowns, calcS, introType, loc, albumTypeExternal, albumOtherExternal, albumLinkGen, generateGalleryArray, resetExternal } from "./starship";
 import '../../startup';
 
 addStaticPageData('huburbs', true);
@@ -15,6 +15,7 @@ globalFunctions.albumTypeExternal = () => albumTypeExternal();
 globalFunctions.albumOtherExternal = () => albumOtherExternal();
 globalFunctions.albumLinkGen = () => albumLinkGen();
 globalFunctions.generateGalleryArray = () => generateGalleryArray();
+globalFunctions.resetExternal = () => resetExternal();
 
 addStaticPageData('galleryExplanationExternal', `
 	There is a preferred order of gallery pictures, depending on ship type:
