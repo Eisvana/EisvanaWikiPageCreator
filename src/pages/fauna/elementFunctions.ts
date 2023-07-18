@@ -1,4 +1,4 @@
-import { addInfoBullet, hideOrgName, numberError } from "../../common";
+import { addInfoBullet, enableTextMarking, hideOrgName, numberError } from "../../common";
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import { toggleRedirect } from "../../modules/actions";
 import { albumDiscoverer, albumName, albumOther } from "../../modules/albumactions";
@@ -8,7 +8,7 @@ import { addInfo, albumDropdown, albumTitle, bundlePropFunctions, genderDropdown
 const creatureElementFunctions: ElementFunctions = [
 	{
 		element: 'nameInput',
-		func: () => { pageName(); albumName(); toggleRedirect() }
+		func: () => { pageName(); albumName(); toggleRedirect(); enableTextMarking() }
 	},
 	{
 		element: 'oldNameInput',
