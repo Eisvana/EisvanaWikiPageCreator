@@ -934,10 +934,10 @@ function getNumber(number: string, decimals: number | undefined = undefined, out
  * datalists({datalist1: ["entry1", "entry2"]});
  */
 export function datalists(object: Datalist) {
-	for (const Id in object) {
+	for (const id in object) {
 		const datalist = document.createElement('datalist');
-		datalist.id = Id;
-		for (const option of object[Id]) {
+		datalist.id = id;
+		for (const option of object[id]) {
 			const optionElement = document.createElement('option');
 			optionElement.value = option;
 			datalist.appendChild(optionElement);

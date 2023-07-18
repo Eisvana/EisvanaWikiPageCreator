@@ -3,7 +3,6 @@
  */
 const systemDatalists = {
 	terminal: [
-		'Decrypted User Data',
 		'Star Silk',
 		'Comet Droplets',
 		'Ion Sphere',
