@@ -189,7 +189,7 @@ const shipData: {
 			'Tie-Shield': ['Small'],
 			'Split Shield': ['Small']
 		},
-		secParts: ['', 'Mack', 'Duck', 'Robot', 'Turret', 'Box Nose'],
+		secParts: ['', 'Short Cab', 'Mack', 'Duck', 'Robot', 'Turret', 'Box Nose'],
 		accessories: ['', 'Short Tail', 'Long Tail', 'Box Tail'],
 		miscParts: ['', 'High Wings', 'Serenity', '2rpedo', 'Sabre', 'V-Blade', 'Tilt'],
 		sections: defaultSections,

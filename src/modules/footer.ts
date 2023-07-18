@@ -108,6 +108,7 @@ export function readDefaultValues() {
 
 		switch (setting) {
 			case 'civInput':
+			case 'wealthInput':
 				triggerEvent(input, 'change');
 				break;
 
