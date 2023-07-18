@@ -2,7 +2,7 @@
  * @fileoverview Provides functions which can be used by the Starship page creator.
  */
 
-import { docByResearchteam, enPrefix, hideInput, setDropdownOptions, shortenGHub, wikiCode } from "../../common";
+import { docByResearchteam, enPrefix, hideInput, setDropdownOptions, shortenGHub, triggerEvent, wikiCode } from "../../common";
 import { regNr, HubGal, planetMoonSentence } from "../../miscLogic/locationLogic";
 import { StdObj } from "../../types/objects";
 import { Sections, ShipProp } from "../../types/starshipDataObjects";
@@ -544,4 +544,8 @@ export function redirectPage() {
 	const newName = name.replace(regex, letter => greekLetters[letter]);
 
 	return newName;
+}
+
+export function resetExternal() {
+	triggerEvent(globalElements.input.typeInput as HTMLSelectElement, 'change');
 }
