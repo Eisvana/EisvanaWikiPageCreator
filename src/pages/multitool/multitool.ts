@@ -84,11 +84,11 @@ export function acquirement() {
 	// planet: planet name of the MT
 	// moon: moon name of the MT
 	// coords: coords of the MT
-	const { srLocName: srName, planet, moon, axes: coords } = pageData
+	const { srLocName: srName, planet, moon, axes: coords } = pageData;
 
 	const loc = (pageData.location as string).toLowerCase();	// location type of the MT (for example space station/settlement/sentinel pillar)
 	const body = planetMoonSentence(planet as string, moon as string);
-	let instructions, savereload;
+	let instructions: string, savereload: string;
 
 	const srloc = (() => {
 		const preSrloc = pageData.srLoc as string;
@@ -111,7 +111,7 @@ export function acquirement() {
 		savereload = `${srloc} [[${srName}]]`;
 		instructions = `fly to ${body} (${coords})`;
 
-		if (srloc.includes('space')) {
+		if (srloc.toLowerCase().includes('space')) {
 			savereload = `the ${srloc}`;
 		} else if ((moon && srloc == 'moon' && srName == moon) || (!moon && srloc == 'planet' && srName == planet)) {
 			instructions = `fly to ${coords}`;
