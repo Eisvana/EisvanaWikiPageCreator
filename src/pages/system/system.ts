@@ -825,6 +825,7 @@ export function civCatalog() {
 export function generateGalleryArray() {
 	const array: Array<string> = [
 		'',
+		'Analysis Visor',
 		'System Exploration Guide',
 		'System Page',
 		'Default SS Multi-Tool',
