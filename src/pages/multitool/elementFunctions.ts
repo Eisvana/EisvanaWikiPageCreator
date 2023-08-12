@@ -1,13 +1,14 @@
-import { image, toggleSection } from "../../common";
+import { enPrefix, image, toggleSection } from "../../common";
 import { locGalaxy } from "../../miscLogic/locationLogic";
 import { albumName, albumOther, albumDiscoverer, albumItemType } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements";
+import { pageData } from "../../variables/objects";
 import { acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo, appearance, autoMTLoc, autoSentinel, hideCost, hideLocName, hideSrLocName, locHubNr, subtypeDropdown } from "./multitool";
 
 const MTElementFunctions: ElementFunctions = [
 	{
 		element: 'nameInput',
-		func: () => { albumName(); appearance() }
+		func: () => { enPrefix(pageData.name as string, 'enPrefix'); albumName(); appearance() }
 	},
 	{
 		element: 'civ',
