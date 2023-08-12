@@ -30,13 +30,8 @@ export function planetMoon(moon = pageData.moon) {
 export function planetMoonSentence(planet: string = pageData.planet as string, moon: string = pageData.moon as string) {
 	const dest = globalElements.output.celestialBody as HTMLOutputElement;
 	const body = planetMoon(moon);
-	const text = (() => {
-		if (body == 'Moon') {
-			return `moon [[${sanitiseString(moon)}]]`;
-		} else {
-			return `planet [[${sanitiseString(planet)}]]`;
-		}
-	})();
+	const text = body == 'Moon' ? `moon [[${sanitiseString(moon)}]]` : `planet [[${sanitiseString(planet)}]]`;
+
 	if (!dest) return text;
 	dest.innerText = text;
 	return '';

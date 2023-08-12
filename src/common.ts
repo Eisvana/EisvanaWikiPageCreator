@@ -163,8 +163,8 @@ export function showAll() {
 	civ();
 	image(globalElements.input.fileUpload as HTMLInputElement);
 	galleryUpload();
-	try { glyphInputOnChange(globalElements.input.portalglyphsInput as HTMLInputElement) } catch (error) { /*do nothing*/ }
-	try { planetMoonSentence() } catch (error) { /*do nothing*/ }
+	try { glyphInputOnChange(globalElements.input.portalglyphsInput as HTMLInputElement) } catch { /*do nothing*/ }
+	try { planetMoonSentence() } catch { /*do nothing*/ }
 	hideDiscoverer();
 }
 
