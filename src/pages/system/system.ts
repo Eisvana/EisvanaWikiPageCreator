@@ -493,6 +493,10 @@ export function enableTradeableAdd() {
 export function resetExternal() {
 	const sections: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-tradeable], [data-planet]');
 	removeSection(Array.from(sections));
+	const markedElements = document.querySelectorAll('.mark');
+	for (const element of Array.from(markedElements)) {
+		element.classList.remove('mark');
+	}
 }
 
 /**
@@ -825,6 +829,7 @@ export function civCatalog() {
 export function generateGalleryArray() {
 	const array: Array<string> = [
 		'',
+		'Analysis Visor',
 		'System Exploration Guide',
 		'System Page',
 		'Default SS Multi-Tool',
