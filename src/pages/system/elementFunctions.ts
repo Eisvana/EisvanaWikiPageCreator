@@ -26,7 +26,7 @@ const systemElementFunctions: ElementFunctions = [
 	},
 	{
 		element: ['economybuyInput', 'economysellInput'],
-		func: function () { wikiCodePercentage(this as unknown as HTMLInputElement) }
+		func: function () { wikiCodePercentage(this as unknown as HTMLInputElement, 1) }
 	},
 	{
 		element: ['wealthInput', 'conflictInput'],
