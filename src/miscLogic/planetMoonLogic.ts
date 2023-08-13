@@ -210,7 +210,6 @@ export function sentinelSentence() {
 /**
  * Adds a new fauna section to the page and updates the output section accordingly.
  *
- * @async
  * @param {Element} element - The button element that was clicked to add the fauna section.
  * @returns {Promise} A promise that resolves when the fauna section is successfully added.
  **/
@@ -252,12 +251,17 @@ export function addFauna(element: HTMLButtonElement) {
 			handler: 'input',
 			func: function () { limitCreatureSize(this as unknown as HTMLInputElement) }
 		},
+		{
+			element: 'creatureLink',
+			handler: 'change',
+			func: function () { linkItem(this as unknown as HTMLInputElement) }
+		},
 	]
 
 	const inputDom = loadHTML(creatureInputs, { i }, evtListeners) as Document;
 
 	const outputHTML = `<div data-fauna="section${i}">|-</div>
-	<div data-fauna="section${i}">|[[File:<output id="faunaFile${i}"></output>|150px]] || <output id="faunaName${i}" name="faunaName${i}"></output> || <output id="faunaRarity${i}"></output> / <output id="faunaEcosystem${i}"></output> / <output id="faunaActivity${i}"> </output> <output id="faunaHemisphere${i}"></output> || <output id="faunaGenus${i}"></output> || <output id="faunaHeight${i}"></output>m || <output id="faunaWeight${i}"></output>kg || <output id="faunaDiscoverer${i}"></output></div>`;
+	<div data-fauna="section${i}">|[[File:<output id="faunaFile${i}"></output>|150px]] || <span style="display:none" name="faunaLink${i}">[[</span><output id="faunaName${i}" name="faunaName${i}"></output><span style="display:none" name="faunaLink${i}">]]</span> || <output id="faunaRarity${i}"></output> / <output id="faunaEcosystem${i}"></output> / <output id="faunaActivity${i}"> </output> <output id="faunaHemisphere${i}"></output> || <output id="faunaGenus${i}"></output> || <output id="faunaHeight${i}"></output>m || <output id="faunaWeight${i}"></output>kg || <output id="faunaDiscoverer${i}"></output></div>`;
 
 	addDomAsElement(inputDom, inputSection as HTMLElement, 'beforebegin');
 
@@ -301,12 +305,17 @@ export function addFlora(element: HTMLButtonElement) {
 			handler: 'input',
 			func: function () { floraMineralResourceLinks(this as unknown as HTMLInputElement) }
 		},
+		{
+			element: 'floraLink',
+			handler: 'change',
+			func: function () { linkItem(this as unknown as HTMLInputElement) }
+		},
 	]
 
 	const inputDom = loadHTML(floraInputs, { i }, evtListeners) as Document;
 
 	const outputHTML = `<div data-flora="section${i}">|-</div>
-	<div data-flora="section${i}">|[[File:<output id="floraFile${i}"></output>|150px]] || <output id="floraName${i}" name="floraName${i}"></output> || <output id="floraAge${i}"></output> || <output id="floraRoot${i}"></output> || <output id="floraNut${i}"></output> || <output id="floraNote${i}"></output> || <output id="floraElements${i}"></output> || <output id="floraDiscoverer${i}"></output></div>`;
+	<div data-flora="section${i}">|[[File:<output id="floraFile${i}"></output>|150px]] || <span style="display:none" name="floraLink${i}">[[</span><output id="floraName${i}" name="floraName${i}"></output><span style="display:none" name="floraLink${i}">]]</span> || <output id="floraAge${i}"></output> || <output id="floraRoot${i}"></output> || <output id="floraNut${i}"></output> || <output id="floraNote${i}"></output> || <output id="floraElements${i}"></output> || <output id="floraDiscoverer${i}"></output></div>`;
 
 	addDomAsElement(inputDom, inputSection as HTMLElement, 'beforebegin');
 
@@ -348,12 +357,17 @@ export function addMineral(element: HTMLButtonElement) {
 			handler: 'input',
 			func: function () { floraMineralResourceLinks(this as unknown as HTMLInputElement) }
 		},
+		{
+			element: 'mineralLink',
+			handler: 'change',
+			func: function () { linkItem(this as unknown as HTMLInputElement) }
+		},
 	]
 
 	const inputDom = loadHTML(mineralInputs, { i }, eventListeners) as Document;
 
 	const outputHTML = `<div data-mineral="section${i}">|-</div>
-	<div data-mineral="section${i}">|[[File:<output id="mineralFile${i}"></output>|150px]] || <output id="mineralName${i}" name="mineralName${i}"></output> || <output id="mineralMetal${i}"></output> || <output id="mineralFormation${i}"></output> || <output id="mineralNote${i}"></output> || <output id="mineralElements${i}"></output> || <output id="mineralDiscoverer${i}"></output></div>`;
+	<div data-mineral="section${i}">|[[File:<output id="mineralFile${i}"></output>|150px]] || <span style="display:none" name="mineralLink${i}">[[</span><output id="mineralName${i}" name="mineralName${i}"></output><span style="display:none" name="mineralLink${i}">]]</span> || <output id="mineralMetal${i}"></output> || <output id="mineralFormation${i}"></output> || <output id="mineralNote${i}"></output> || <output id="mineralElements${i}"></output> || <output id="mineralDiscoverer${i}"></output></div>`;
 
 	addDomAsElement(inputDom, inputSection as HTMLElement, 'beforebegin');
 
@@ -545,4 +559,15 @@ export function resetExternal() {
 
 	enableResourceAdd();
 	if (typeof globalFunctions.enableMoonAdd == 'function') globalFunctions.enableMoonAdd();
+}
+
+function linkItem(element: HTMLInputElement) {
+	const isChecked = element.checked;
+	const dest = element.dataset.destNoauto;
+	if (dest) {
+		const brackets: NodeListOf<HTMLSpanElement> = document.getElementsByName(dest);
+		for (const bracket of Array.from(brackets)) {
+			bracket.style.display = isChecked ? '' : 'none';
+		}
+	}
 }

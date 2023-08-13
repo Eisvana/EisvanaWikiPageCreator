@@ -82,17 +82,17 @@ export function docByExternal() {
 * Add percentage sign to e-sell/buy property data for wikiCode output.
 * @param {HTMLElement|null} element - the element to apply percentage formatting to.
 */
-export function wikiCodePercentage(element: HTMLInputElement | null = null) {
+export function wikiCodePercentage(element: HTMLInputElement | null = null, decimals: number = 0) {
 	if (!element) {
 		const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('[data-percentage-input]');
 		for (const input of Array.from(inputs)) {
-			wikiCodePercentage(input);
+			wikiCodePercentage(input, decimals);
 		}
 		return;
 	}
 	const dest = element.dataset.destNoauto as string;
-	const propertyValue = pageData[dest] as string;
-	const propertyData = numberError(element, propertyValue, 1);
+	const propertyValue = element.value;
+	const propertyData = numberError(element, propertyValue, decimals);
 	wikiCode(propertyData ? propertyData + '%' : '', dest);
 }
 
