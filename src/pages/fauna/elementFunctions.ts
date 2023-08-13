@@ -1,4 +1,4 @@
-import { addInfoBullet, enableTextMarking, hideOrgName, numberError } from "../../common";
+import { addInfoBullet, enableTextMarking, hideOrgName, limitCreatureSize, numberError } from "../../common";
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import { toggleRedirect } from "../../modules/actions";
 import { albumDiscoverer, albumName, albumOther } from "../../modules/albumactions";
@@ -52,7 +52,7 @@ const creatureElementFunctions: ElementFunctions = [
 	},
 	{
 		element: ['heightInput', 'height2Input'],
-		func: function () { genderProps("height", "height2"); albumOther(); numberError(this as unknown as HTMLInputElement) }
+		func: function () { genderProps("height", "height2"); albumOther(); numberError(this as unknown as HTMLInputElement); limitCreatureSize(this as unknown as HTMLInputElement) }
 	},
 	{
 		element: ['weightInput', 'weight2Input'],
