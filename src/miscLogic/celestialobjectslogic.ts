@@ -92,7 +92,7 @@ export function wikiCodePercentage(element: HTMLInputElement | null = null) {
 	}
 	const dest = element.dataset.destNoauto as string;
 	const propertyValue = pageData[dest] as string;
-	const propertyData = numberError(element, propertyValue);
+	const propertyData = numberError(element, propertyValue, 1);
 	wikiCode(propertyData ? propertyData + '%' : '', dest);
 }
 
