@@ -56,7 +56,7 @@ const creatureElementFunctions: ElementFunctions = [
 	},
 	{
 		element: ['weightInput', 'weight2Input'],
-		func: function () { genderProps("height", "height2"); numberError(this as unknown as HTMLInputElement) }
+		func: function () { genderProps("weight", "weight2"); numberError(this as unknown as HTMLInputElement) }
 	},
 	{
 		element: 'gender',
