@@ -1241,6 +1241,5 @@ export function getWormAlbum(civShort: string): string {
 }
 
 export function limitCreatureSize(input: HTMLInputElement) {
-	const firstLetter = input.value.substring(0, 1);
-	input.maxLength = firstLetter === '-' ? 4 : 3;	// NoSonar negative numbers must have a limit of 4 to allow for `-0.1`. Else use 3 for `0.1`
+	input.maxLength = input.value.startsWith('-') ? 4 : 3;	// NoSonar negative numbers must have a limit of 4 to allow for `-0.1`. Else use 3 for `0.1`
 }
