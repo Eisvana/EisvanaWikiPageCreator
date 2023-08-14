@@ -244,8 +244,10 @@ export function genderProps(property1Name: string, property2Name: string) {
 	// adds .0
 	let property1Number, property2Number;
 	if (property1Name != 'gender') {
-		property1Number = isNaN(parseFloat(property1Value)) ? '' : parseFloat(property1Value).toFixed(1);
-		property2Number = isNaN(parseFloat(property2Value)) ? '' : parseFloat(property2Value).toFixed(1);
+		const prependString1 = property1Value.startsWith('-') && !parseFloat(property1Value) ? '-' : '';
+		const prependString2 = property2Value.startsWith('-') && !parseFloat(property2Value) ? '-' : '';
+		property1Number = isNaN(parseFloat(property1Value)) ? '' : prependString1 + parseFloat(property1Value).toFixed(1);
+		property2Number = isNaN(parseFloat(property2Value)) ? '' : prependString2 + parseFloat(property2Value).toFixed(1);
 	}
 
 	const property1Data = property1Number ?? property1Value;

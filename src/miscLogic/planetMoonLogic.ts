@@ -247,7 +247,7 @@ export function addFauna(element: HTMLButtonElement) {
 			func: function () { addGenus(this as unknown as HTMLSelectElement) }
 		},
 		{
-			element: 'creaturePropInput',
+			element: 'creatureHeightInput',
 			handler: 'input',
 			func: function () { limitCreatureSize(this as unknown as HTMLInputElement) }
 		},
