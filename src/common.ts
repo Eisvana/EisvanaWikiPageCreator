@@ -867,7 +867,7 @@ export function shortenGHub(civ: string): string {
  * @returns {string|Object} The formatted statistics string (and optionally, the raw calculation values).
  */
 export function numberStats(element: HTMLInputElement | null = null, decimals: number | undefined = undefined, outputRaw: boolean = false) {
-	if (arguments.length == 0) {
+	if (arguments.length === 0) {
 		const numbers: NodeListOf<HTMLInputElement> = document.querySelectorAll('[data-dest-number]');
 		for (const element of Array.from(numbers)) {
 			const decimals = element.dataset.destNumber as string;
@@ -880,11 +880,12 @@ export function numberStats(element: HTMLInputElement | null = null, decimals: n
 
 	const dest = element.dataset.destNoauto as string;
 	const propertyValue = pageData[dest] as string;
+	const prependString = propertyValue.startsWith('-') && !parseFloat(propertyValue) ? '-' : '';
 	const propertyData = numberError(element, propertyValue, decimals, outputRaw);
 	if (getDestElements(dest)[0]) {
-		wikiCode(propertyData.toString(), dest);
+		wikiCode(prependString + propertyData.toString(), dest);
 	} else {
-		pageData[dest] = propertyData;
+		pageData[dest] = prependString + propertyData;
 	}
 }
 
