@@ -27,13 +27,14 @@ export function planetMoon(moon = pageData.moon) {
  * @returns {string} - The description sentence, or "" if `globalElements.output.celestialBody`
  *                     is falsy.
  */
-export function planetMoonSentence(planet: string = pageData.planet as string, moon: string = pageData.moon as string) {
+export function planetMoonSentence(planet: string = pageData.planet as string, moon: string = pageData.moon as string, link: boolean = false) {
 	const dest = globalElements.output.celestialBody as HTMLOutputElement;
 	const body = planetMoon(moon);
 	const text = body == 'Moon' ? `moon [[${sanitiseString(moon)}]]` : `planet [[${sanitiseString(planet)}]]`;
+	const linkedText = link ? `[[${text.split(' ')[0]}]] ${text.split(' ').slice(1)}` : text;
 
-	if (!dest) return text;
-	dest.innerText = text;
+	if (!dest) return linkedText;
+	dest.innerText = linkedText;
 	return '';
 }
 

@@ -149,6 +149,7 @@ const mineralDatalists = {
 		'Copper',
 		'Silver',
 		'Tritium',
+		'Carbon',
 	]
 }
 
