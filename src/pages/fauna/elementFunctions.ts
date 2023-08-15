@@ -16,7 +16,7 @@ const creatureElementFunctions: ElementFunctions = [
 	},
 	{
 		element: ['planetInput', 'moonInput'],
-		func: () => planetMoonSentence()
+		func: () => planetMoonSentence(undefined, undefined, true)
 	},
 	{
 		element: 'ecosystemInput',
