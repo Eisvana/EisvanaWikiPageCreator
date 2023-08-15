@@ -47,6 +47,7 @@ export function galleryUpload() {
 			const p = document.createElement('p');
 			const span = document.createElement('span');
 			p.innerText = name;
+			p.style.wordBreak = 'break-all'
 			span.classList.add('has-text-weight-bold');
 			span.innerText = 'Name: ';
 			p.insertAdjacentElement('afterbegin', span);
