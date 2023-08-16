@@ -548,4 +548,5 @@ export function redirectPage() {
 
 export function resetExternal() {
 	triggerEvent(globalElements.input.typeInput as HTMLSelectElement, 'change');
+	triggerEvent(globalElements.input.systemInput as HTMLInputElement, 'input');
 }

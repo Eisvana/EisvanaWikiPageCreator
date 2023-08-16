@@ -106,7 +106,7 @@ export function readDefaultValues() {
 
 		(input as HTMLInputElement | HTMLSelectElement).value = settings[setting];
 
-		switch (setting) {
+		switch (setting.split(' ')[0]) {
 			case 'civInput':
 			case 'wealthInput':
 				triggerEvent(input, 'change');
@@ -114,6 +114,12 @@ export function readDefaultValues() {
 
 			case 'portalglyphsInput':
 			case 'systemInput':
+			case 'discoveredlinkInput':
+			case 'discoveredInput':
+			case 'builderlinkInput':
+			case 'builderInput':
+			case 'ownerlinkInput':
+			case 'ownerInput':
 				triggerEvent(input, 'input');
 				break;
 		}
