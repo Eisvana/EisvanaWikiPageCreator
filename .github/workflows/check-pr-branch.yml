@@ -20,10 +20,9 @@ jobs:
             echo "Pushing to main branch is not allowed."
             exit 1
           fi
-        continue-on-error: true
 
       - name: Add PR Comment
+        if: failure()
         uses: mshick/add-pr-comment@v2
         with:
           message: 'Check failed. Please review.'
-        if: ${{ github.head_ref != 'staging' && github.base_ref == 'main' && job.status == 'failure' }}
