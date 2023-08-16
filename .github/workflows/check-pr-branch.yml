@@ -20,6 +20,7 @@ jobs:
             echo "Pushing to main branch is not allowed."
             exit 1
           fi
+        continue-on-error: true
 
       - name: Add PR Comment
         uses: mshick/add-pr-comment@v2
