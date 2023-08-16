@@ -25,4 +25,4 @@ jobs:
         if: failure()
         uses: mshick/add-pr-comment@v2
         with:
-          message: 'Check failed. Please review.'
+          message: 'Only `staging` can push to `main`. Please adjust your base (target) branch.'
