@@ -359,6 +359,7 @@ const floraDatalists = {
 		'Cyto-Phosphate',
 		'Marrow Bulb',
 		'Kelp Sac',
+		'Salt',
 	]
 }
 
