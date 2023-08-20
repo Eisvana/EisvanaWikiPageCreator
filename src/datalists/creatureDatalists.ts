@@ -380,7 +380,7 @@ const creatureDatalists = {
 		'Collects seeds',
 		'Nibbles at shoots',
 		'Tall grasses',
-		'[[Marrow Bulb|Cave marrow]]',
+		'[[Cave Marrow|Cave marrow]]',
 		'[[Mordite Root|Mordite roots]]',
 		'[[Faecium]]',
 		'[[Coprite]]',
