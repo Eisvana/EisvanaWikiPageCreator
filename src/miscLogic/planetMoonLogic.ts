@@ -2,7 +2,7 @@
  * @fileoverview Provides functions that can be used by Planet and Moon pages.
  */
 
-import { addDomAsElement, extractNumber, forceDatalist, getChildIndex, getWormAlbum, image, limitCreatureSize, loadHTML, oddEven, removeSection, removeSpecificSection, sanitiseString, setDropdownOptions, sortObj, toggleSection, wikiCode } from '../common';
+import { addDomAsElement, capitaliseFirst, extractNumber, forceDatalist, getChildIndex, getWormAlbum, image, limitCreatureSize, loadHTML, oddEven, removeSection, removeSpecificSection, sanitiseString, setDropdownOptions, sortObj, toggleSection, wikiCode } from '../common';
 import { globalElements, globalFunctions, links, pageData } from '../variables/objects';
 import creatureInputs from '../htmlSnippets/creatureInputs.html?raw';
 import floraInputs from '../htmlSnippets/floraInputs.html?raw';
@@ -38,7 +38,8 @@ export function plural(number: number, dest: string = ''): string | void {
  */
 export function planetDescriptor(element: HTMLInputElement) {
 	const dest = element.dataset.destNoauto as string;
-	const output = buildDescriptor(element.value, (pageData.pageType as string), ' ');
+	const type = capitaliseFirst(pageData.pageType as string);
+	const output = buildDescriptor(element.value, (type), ' ');
 	const destElements = globalElements.output[dest];
 	if (Array.isArray(destElements)) {
 		destElements.forEach(item => item.innerText = output);
