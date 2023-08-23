@@ -2,7 +2,7 @@
  * @fileoverview Provides functions which can be used by the Starship page creator.
  */
 
-import { docByResearchteam, enPrefix, hideInput, setDropdownOptions, shortenGHub, triggerEvent, wikiCode } from "../../common";
+import { docByResearchteam, enPrefix, hideInput, setDropdownOptions, triggerEvent, wikiCode } from "../../common";
 import { regNr, HubGal, planetMoonSentence } from "../../miscLogic/locationLogic";
 import { StdObj } from "../../types/objects";
 import { Sections, ShipProp } from "../../types/starshipDataObjects";
@@ -264,18 +264,9 @@ export function loc() {
  * @returns {string} - The additional information sentence
  */
 export function addInfo() {
-	let catalogue = '';
-	const civ = shortenGHub(pageData.civShort as string);
+	const catalogue = albumLinkGen();
 	const researchteam = docByResearchteam('GHSH');
-	const type = pageData.type;
 
-	if (civ != 'CalHub') catalogue = ' - ' + type;
-
-	if (type == 'Freighter' && civ != 'CalHub') {
-		catalogue = civ + ' Freighter Catalog';
-	} else {
-		catalogue = civ + ' Starship Catalog' + catalogue;
-	}
 	const output = '[[' + catalogue + ']]' + researchteam;
 
 	(globalElements.output.addInfo as HTMLOutputElement).innerText = output;
