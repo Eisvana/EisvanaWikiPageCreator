@@ -31,7 +31,7 @@ const starshipElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'subtypeInput',
-		func: () => { invDropdown(); toggleHaulerInvDropdown(); calcInv(); appearanceSentence(); loc() }
+		func: () => { invDropdown(); toggleHaulerInvDropdown(); calcInv(); appearanceSentence(); loc(); addInfo() }
 	},
 	{
 		element: ['inventoryInput', 'economyInput'],

@@ -5,6 +5,7 @@
  * @constant
  */
 export const versions = [
+	'Echoes',
 	'Singularity',
 	'Interceptor',
 	'Fractal',

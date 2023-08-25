@@ -92,7 +92,7 @@ export function acquirement() {
 
 	const srloc = (() => {
 		const preSrloc = pageData.srLoc as string;
-		if (preSrloc.includes('Space') || srName) return preSrloc;
+		if (srName || preSrloc.includes('Space')) return preSrloc.toLowerCase();
 		if (loc.includes('Space')) return loc;
 		return body;
 	})();
