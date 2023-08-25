@@ -86,7 +86,8 @@
 							<data>Portalglyphs</data>
 							<data>
 								Found in Photo Mode.
-								<object data="https://nmspar.vercel.app/" title="Glyph Reader" class="glyph-reader" width="450" height="300">Glyph Reader</object>
+								<object data="https://nmspar.vercel.app/" title="Glyph Reader" class="glyph-reader"
+									width="450" height="300">Glyph Reader</object>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -161,7 +162,7 @@
 					</div>
 					<div class="tableCell data">
 						<input type="text" id="hyperdriveInput" data-dest-number="0" data-dest-noauto="hyperdrive"
-						maxlength="3">
+							maxlength="3">
 					</div>
 					<div class="tableCell text">
 						<label for="fuelInput">Fuel:</label>
@@ -196,6 +197,26 @@
 						<select id="researchteamInput" data-dest-noauto="researchteam">
 						</select>
 					</div>
+					<div class="tableCell text">
+						<label for="galleryUpload">Gallery files</label>
+						<button class="tooltip" name="galleryFileUploadTooltip">
+							<data>There is a preferred order of pictures.</data>
+							<data>Gallery</data>
+							<data>The preferred order of pictures is as follows:
+								<div class="dialog-center">
+									<ol class="dialog-list">
+										<li>Upgrade Data</li>
+										<li>Analysis Visor</li>
+									</ol>
+								</div>
+							</data>
+						</button>
+					</div>
+					<div class="tableCell data">
+						<input type="file" multiple accept="image/*" id="galleryUpload">
+					</div>
+				</div>
+				<div id="galleryItems">
 				</div>
 				<div id="actions" class="buttons"></div>
 				<div id="galaxyTableActions" class="buttons"></div>
@@ -297,6 +318,12 @@
 					<br>
 
 					<div>==Additional Information==</div>
+					<br>
+
+					<div>==Gallery==</div>
+					<div>&lt;gallery&gt;</div>
+					<div><output id="galleryCode"></output></div>
+					<div>&lt;/gallery&gt;</div>
 					<br>
 
 					<div>[[Category:Derelict Freighter]]</div>
