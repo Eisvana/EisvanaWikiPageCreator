@@ -1,9 +1,9 @@
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { albumFunctions } from "../../modules/albumactions";
-import { globalFunctions } from "../../variables/objects";
+import { globalFunctions, pageData } from "../../variables/objects";
 import MTElementFunctions from "./elementFunctions";
 import { acquirementBundle, addInfo, albumDescExternal, albumItemTypeExternal, albumLinkGen, albumOtherExternal, albumTypeExternal, autoMTLoc, generateGalleryArray, hideCost, hideLocName, hideSrLocName, locHubNr, subtypeDropdown } from "./multitool";
-import { addStaticPageData } from "../../common";
+import { addStaticPageData, enPrefix } from "../../common";
 import '../../startup';
 import { locGalaxy } from "../../miscLogic/locationLogic";
 
@@ -42,3 +42,4 @@ hideSrLocName();
 locHubNr();
 hideCost();
 albumFunctions();
+enPrefix(pageData.type as string | undefined ?? '', 'enPrefix');
