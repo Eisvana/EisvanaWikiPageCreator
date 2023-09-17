@@ -261,13 +261,12 @@ export function genderProps(property1Name: string, property2Name: string) {
 				return property1Data;
 			} else if (!property1Data) {
 				return property2Data;
+			} else if (prioritise == 'gender1') {
+				return property1Data + ' - ' + property2Data;
 			} else {
-				if (prioritise == 'gender1') {
-					return property1Data + ' - ' + property2Data;
-				} else {
-					return property2Data + ' - ' + property1Data;
-				}
+				return property2Data + ' - ' + property1Data;
 			}
+
 		} else {
 			return property1Data;
 		}

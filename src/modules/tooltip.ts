@@ -10,7 +10,6 @@ export const explanationContent: string = `
 	<div id="explanationContent" class="nms-font"></div>
 	<a id="explanationLink" target="_blank" rel="noopener noreferrer">
 		<picture>
-			<source type="image/avif" id="explanationAvifImg">
 			<source type="image/webp" id="explanationWebpImg">
 			<img id="explanationFallbackImg" alt="Explainer Image">
 		</picture>
@@ -36,7 +35,6 @@ export function explanation(heading: string = '', text: string = '', image: stri
 	// I also hate past-Lenni for making this ugly interface that needs typeguards and assertions everywhere.
 	const imgElement = globalElements.output.explanationFallbackImg as HTMLImageElement;
 	const webpImg = globalElements.output.explanationWebpImg as HTMLSourceElement;
-	const avifImg = globalElements.output.explanationAvifImg as HTMLSourceElement;
 	const linkElement = globalElements.output.explanationLink as HTMLAnchorElement;
 	const dialogElement = globalElements.output.explanation as HTMLDialogElement;
 	const img = image.trim();
@@ -49,7 +47,6 @@ export function explanation(heading: string = '', text: string = '', image: stri
 
 		if (!isCached || imgElement.getAttribute('src') != `./assets/images/jpg/${img}.jpg`) {
 			const imageFormats = {
-				avif: avifImg,
 				webp: webpImg,
 				jpg: imgElement
 			}
