@@ -8,7 +8,7 @@ import { acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo,
 const MTElementFunctions: ElementFunctions = [
 	{
 		element: 'nameInput',
-		func: () => { enPrefix(pageData.name as string, 'enPrefix'); albumName(); appearance() }
+		func: () => { albumName(); appearance() }
 	},
 	{
 		element: 'civ',
@@ -16,7 +16,7 @@ const MTElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'typeInput',
-		func: () => { addInfo(); autoMTLoc(); subtypeDropdown(); albumItemType(); albumOther(); appearance() }
+		func: () => { addInfo(); autoMTLoc(); subtypeDropdown(); enPrefix(pageData.type as string, 'enPrefix'); albumItemType(); albumOther(); appearance() }
 	},
 	{
 		element: 'subtypeInput',

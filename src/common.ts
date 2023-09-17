@@ -175,10 +175,10 @@ export function showAll() {
  * @param {string} dest - The ID of the destination element(s) to update, specified in a data attribute on the source element.
  */
 export function wikiCode(element: InputElements | string, dest: string | undefined = (element as HTMLElement)?.dataset?.dest) {
-	const destElements = typeof dest == 'string' ? getDestElements(dest) : [];
+	const destElements = typeof dest === 'string' ? getDestElements(dest) : [];
 
 	// sanitize the source value or content
-	const value = sanitiseString(typeof element == 'string' ? element : element.value);
+	const value = sanitiseString(typeof element === 'string' ? element : element.value);
 
 	// update the pageData with the sanitized value
 	if (dest) {
