@@ -7,7 +7,6 @@ The functions are sorted by their file.
 ===pages===
 * [[base.js]]
 * [[biofrig.js]]
-* [[business.js]]
 * [[derelict.js]]
 * [[fauna.js]]
 * [[moon.js]]
