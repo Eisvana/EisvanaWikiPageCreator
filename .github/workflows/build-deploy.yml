@@ -75,6 +75,11 @@ jobs:
           name: EisvanaWikiPageCreator
           path: dist
 
+      - name: Adjust Paths
+        run: |
+          sed -i 's_EisvanaWikiPageCreator_EisvanaWikiPageCreator/staging_g' vite.config.ts
+          sed -i 's_EisvanaWikiPageCreator_EisvanaWikiPageCreator/staging_g' tsconfig.json
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
