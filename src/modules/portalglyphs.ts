@@ -138,7 +138,6 @@ export function validateGlyphInput(glyphString: string): string {
  * This function validates a string of glyphs and returns the region object.
  *
  * @param {string} glyphs - The string of glyphs to validate
- * @param {Object} [regionObj=regions] - The object containing the region data
  * @returns {Object|string} - The region object or an empty string if the input does not contain 12 glyphs
  */
 export function validateGlyphs(glyphs: string) {
