@@ -1,14 +1,11 @@
 import { addDomAsElement, addStaticPageData } from "../common";
-import { assignElementFunctions } from "../commonElements/elementBackend/elementFunctions";
 import { updateGlobalElements } from "../commonElements/elementBackend/elementStore";
 import wikitext from "../htmlSnippets/album.html?raw";
-import { actionsDom, albumCiv } from "../modules/albumactions";
-import { ElementFunctions } from "../types/elements";
+import { actionsDom } from "../modules/albumactions";
 import { globalElements } from "../variables/objects";
 
 const albumElements = {
 	output: {
-		albumCiv: 'albumCiv',
 		album: 'album',
 		albumType: 'albumType',
 		albumHeaderName: 'albumHeaderName',
@@ -34,15 +31,6 @@ if (albumActions) {
 
 	// Update the global albumElements with their respective IDs.
 	updateGlobalElements(albumElements);
-
-	const albumElementFunctions: ElementFunctions = [
-		{
-			element: 'civ',
-			func: () => albumCiv()
-		}
-	]
-	// Assign albumElementFunctions to their respective HTML elements.
-	assignElementFunctions(albumElementFunctions);
 
 	// Dispatches the albumLoaded event to notify that the album is ready.
 	document.dispatchEvent(new Event('albumLoaded'));

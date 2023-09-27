@@ -219,7 +219,11 @@
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
-						<select data-dest-noauto="researchteam" id="researchteamInput"></select>
+						<select data-dest-noauto="researchteam" id="researchteamInput">
+							<option value=""></option>
+							<option value="Wiki Scholars">Wiki Scholars</option>
+							<option value="EBC">EBC</option>
+						</select>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Census:</p>
@@ -313,11 +317,11 @@
 			<div id="output" class="column is-full-mobile">
 				<div class="wikiText" id="fullArticle" data-link="page">
 					<div>{{Version|<output id="release" name="release"></output>}}</div>
-					<div>{{<output id="civStub"></output>}}</div>
+					<!-- <div>{{<output id="civStub"></output>}}</div> -->
 					<div>{{Base infobox</div>
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image"></output></div>
-					<div>| civilized = <output id="civilized"></output></div>
+					<div>| civilized = Eisvana</div>
 					<div>| researchteam = <output id="researchteam"></output></div>
 					<div>| builderlink = <output id="builderlink"></output></div>
 					<div>| builder = <output id="builder"></output></div>

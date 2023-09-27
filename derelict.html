@@ -9,8 +9,7 @@
 	<meta name="description"
 		content="Easily generate the wikicode to create a derelict freighter discovery page for Eisvana on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
-	<meta name="keywords"
-		content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, Derelict Freighter">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, Derelict Freighter">
 	<script src="./src/pages/derelict" type="module"></script>
 </head>
 
@@ -185,6 +184,9 @@
 					</div>
 					<div class="tableCell data">
 						<select id="researchteamInput" data-dest-noauto="researchteam">
+							<option value=""></option>
+							<option value="Wiki Scholars">Wiki Scholars</option>
+							<option value="EBC">EBC</option>
 						</select>
 					</div>
 					<div class="tableCell text">
@@ -255,56 +257,21 @@
 					<br>
 
 					<div>==Derelict Freighters==</div>
-					<div>===Euclid===</div>
-					<div id="euclid">
-						<div>{| class="wikitable" style="text-align:center; width:100%; max-width: 1000px"</div>
-						<div>|-</div>
-						<div>!style="background-color:#2F4F4F; width:150px"|Image</div>
-						<div>!style="background-color:#2F4F4F"|System</div>
-						<div>!style="background-color:#2F4F4F"|Zones</div>
-						<div>!style="background-color:#2F4F4F"|Dangers</div>
-						<div>!style="background-color:#2F4F4F"|Glyphs</div>
-						<div>!style="background-color:#2F4F4F"|Documented by</div>
-						<div>|-</div>
-						<div><output id="euclidEntry" data-entry></output></div>
-						<div>|}</div>
-					</div>
-					<br>
-
-					<div>===Calypso===</div>
-					<div id="calypso">
-						<div>{| class="wikitable" style="text-align:center; width:100%; max-width: 1000px"</div>
-						<div>|-</div>
-						<div>!style="background-color:#2F4F4F; width:150px"|Image</div>
-						<div>!style="background-color:#2F4F4F"|System</div>
-						<div>!style="background-color:#2F4F4F"|Zones</div>
-						<div>!style="background-color:#2F4F4F"|Dangers</div>
-						<div>!style="background-color:#2F4F4F"|Glyphs</div>
-						<div>!style="background-color:#2F4F4F"|Documented by</div>
-						<div>|-</div>
-						<div><output id="calypsoEntry" data-entry></output></div>
-						<div>|}</div>
-					</div>
-					<br>
-
-					<div>===Eissentam===</div>
-					<div id="eissentam">
-						<div>{| class="wikitable" style="text-align:center; width:100%; max-width: 1000px"</div>
-						<div>|-</div>
-						<div>!style="background-color:#2F4F4F; width:150px"|Image</div>
-						<div>!style="background-color:#2F4F4F"|System</div>
-						<div>!style="background-color:#2F4F4F"|Zones</div>
-						<div>!style="background-color:#2F4F4F"|Dangers</div>
-						<div>!style="background-color:#2F4F4F"|Glyphs</div>
-						<div>!style="background-color:#2F4F4F"|Documented by</div>
-						<div>|-</div>
-						<div><output id="eissentamEntry" data-entry></output></div>
-						<div>|}</div>
-					</div>
+					<div>{| class="wikitable" style="text-align:center; width:100%; max-width: 1000px"</div>
+					<div>|-</div>
+					<div>!style="background-color:#2F4F4F; width:150px"|Image</div>
+					<div>!style="background-color:#2F4F4F"|System</div>
+					<div>!style="background-color:#2F4F4F"|Zones</div>
+					<div>!style="background-color:#2F4F4F"|Dangers</div>
+					<div>!style="background-color:#2F4F4F"|Glyphs</div>
+					<div>!style="background-color:#2F4F4F"|Documented by</div>
+					<div>|-</div>
+					<div><output id="galaxyTable" data-entry></output></div>
+					<div>|}</div>
 					<br>
 
 					<div>==Location==</div>
-					<div>This freighter can be found in all galaxies at the coordinates of the entries above.</div>
+					<div>This freighter can be found in all galaxies at the coordinates of the entries above. Enemies and room layout may differ.</div>
 					<br>
 
 					<div>==Additional Information==</div>

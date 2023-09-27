@@ -1,4 +1,4 @@
-import { civ, docBy, enableTextMarking, hideDiscoverer, image, researchTeam, validateCoords } from "../common";
+import { docBy, enableTextMarking, hideDiscoverer, image, researchTeam, validateCoords } from "../common";
 import { galleryUpload } from "../modules/gallery";
 import { deleteCharacter, displayGlyphs, glyphInputOnChange } from "../modules/portalglyphs";
 import { ElementFunctions } from "../types/elements";
@@ -17,10 +17,6 @@ const elementFunctions: ElementFunctions = [
 	{
 		element: 'researchTeam',
 		func: function () { researchTeam(); docBy() }
-	},
-	{
-		element: 'civ',
-		func: function () { civ() }
 	},
 	{
 		element: 'fileUpload',

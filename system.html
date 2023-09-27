@@ -9,8 +9,7 @@
 	<meta name="description"
 		content="Easily generate the wikicode to create a star system discovery page for Eisvana on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
-	<meta name="keywords"
-		content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, System, Star System">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, System, Star System">
 	<script src="./src/pages/system" type="module"></script>
 </head>
 
@@ -109,7 +108,8 @@
 							<data>Portalglyphs</data>
 							<data>
 								Found in Photo Mode.
-								<object data="https://nmspar.vercel.app/" title="Glyph Reader" class="glyph-reader" width="450" height="300">Glyph Reader</object>
+								<object data="https://nmspar.vercel.app/" title="Glyph Reader" class="glyph-reader"
+									width="450" height="300">Glyph Reader</object>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -526,7 +526,11 @@
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
-						<select data-dest-noauto="researchteam" id="researchteamInput"></select>
+						<select data-dest-noauto="researchteam" id="researchteamInput">
+							<option value=""></option>
+							<option value="Wiki Scholars">Wiki Scholars</option>
+							<option value="EBC">EBC</option>
+						</select>
 					</div>
 					<div class="tableCell text">
 						<label>Gamemode:</label>
@@ -732,8 +736,8 @@
 							class="input merchant-search">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="ecEAMU"><input type="checkbox" id="ecEAMU"
-									value="Exocraft Boosters Upgrade"
-									data-dest-checkbox-group="ECMerchant"><span class="checkbox-label">Exocraft
+									value="Exocraft Boosters Upgrade" data-dest-checkbox-group="ECMerchant"><span
+									class="checkbox-label">Exocraft
 									Acceleration Module Upgrade</span></label>
 
 							<label class="checkbox" for="ecEMLU"><input type="checkbox" id="ecEMLU"
@@ -995,7 +999,7 @@
 			<div id="output" class="column is-full-mobile">
 				<div class="wikiText" id="fullArticle" data-link="page">
 					<div>{{Version|<output id="release" name="release"></output>}}</div>
-					<div>{{<output id="civStub"></output>}}</div>
+					<!-- <div>{{<output id="civStub"></output>}}</div> -->
 					<div>{{System infobox</div>
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image"></output></div>
@@ -1017,7 +1021,7 @@
 					<div>| wealth = <output id="wealth"></output></div>
 					<div>| conflict = <output id="conflict"></output></div>
 					<div>| mode = <output id="mode"></output></div>
-					<div>| civilized = <output id="civilized"></output></div>
+					<div>| civilized = Eisvana</div>
 					<div>| researchteam = <output id="researchteam"></output></div>
 					<div>| discoveredlink = <output id="discoveredlink"></output></div>
 					<div>| discovered = <output id="discovered" name="discovered"></output></div>
@@ -1119,8 +1123,7 @@
 					<br>
 					<div style="display: none" id="Starships">
 						All Starships discovered in the system can be found in the [[<output name="name"></output> -
-						Starship Catalog]] and the respective [[<output name="civShorter"></output> Starship
-						Catalog]]s.
+						Starship Catalog]] and the respective [[Eisvana Starship Catalogue]]s.
 						<br>
 						<br>
 					</div>
@@ -1130,8 +1133,7 @@
 					<br>
 					<div style="display: none" id="MTs">
 						All Multi-Tools discovered in the system can be found in the [[<output name="name"></output> -
-						Multi-Tool Catalog]] and the respective [[<output name="civShorter"></output> Multi-Tool
-						Catalog]]s.
+						Multi-Tool Catalogue]] and the respective [[Eisvana Multi-Tool Catalogue]]s.
 						<br>
 						<br>
 					</div>

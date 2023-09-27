@@ -425,7 +425,11 @@
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
-						<select data-dest-noauto="researchteam" id="researchteamInput"></select>
+						<select data-dest-noauto="researchteam" id="researchteamInput">
+							<option value=""></option>
+							<option value="Wiki Scholars">Wiki Scholars</option>
+							<option value="EBC">EBC</option>
+						</select>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>This section builds a predefined appearance sentence, it is not required.</p>
@@ -557,7 +561,7 @@
 			<div id="output" class="column is-full-mobile">
 				<div class="wikiText" id="fullArticle" data-link="page">
 					<div>{{Version|<output id="release" name="release"></output>}}</div>
-					<div>{{<output id="civStub"></output>}}</div>
+					<!-- <div>{{<output id="civStub"></output>}}</div> -->
 					<div>{{Starship infobox</div>
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image" name="image"></output></div>
@@ -582,7 +586,7 @@
 					<div>| cost = <output id="cost"></output></div>
 					<div>| discovered = <output id="discovered"></output></div>
 					<div>| discoveredlink = <output id="discoveredlink"></output></div>
-					<div>| civilized = <output id="civilized"></output></div>
+					<div>| civilized = Eisvana</div>
 					<div>| researchteam = <output id="researchteam"></output></div>
 					<div>| release = <output id="release1" name="release"></output></div>
 					<div>| maneuverB = <output id="maneuverB"></output></div>

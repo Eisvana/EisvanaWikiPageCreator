@@ -1,13 +1,9 @@
 import { toggleSection } from "../../common";
 import { albumDiscoverer, albumName, albumOther } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements"
-import { addInfo, appearance, generateCatalogue, locRegNr } from "./biofrig";
+import { addInfo, appearance, locRegNr } from "./biofrig";
 
 const frigateElementFunctions: ElementFunctions = [
-	{
-		element: 'civ',
-		func: () => { addInfo(); appearance(); locRegNr(); generateCatalogue() }
-	},
 	{
 		element: 'nameInput',
 		func: () => { albumName(); appearance() }

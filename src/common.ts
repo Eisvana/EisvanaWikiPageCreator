@@ -7,7 +7,7 @@ import { dataIntegrityObj, globalElements, globalFunctions, pageData, staticBool
 import { getDestElements } from './commonElements/elementBackend/elementStore';
 import { versions } from './variables/versions';
 import { assignElementFunctions, assignFunction } from './commonElements/elementBackend/elementFunctions';
-import { glyphInputOnChange, glyphRegion } from './modules/portalglyphs';
+import { glyphInputOnChange } from './modules/portalglyphs';
 import { explanation } from './modules/tooltip';
 import { planetMoonSentence } from './miscLogic/locationLogic';
 import { Datalist, SortObj } from './types/objects';
@@ -143,7 +143,6 @@ export function showAll() {
 	}
 
 	numberStats();
-	civ();
 	image(globalElements.input.fileUpload as HTMLInputElement);
 	galleryUpload();
 	try { glyphInputOnChange(globalElements.input.portalglyphsInput as HTMLInputElement) } catch { /*do nothing*/ }
@@ -158,6 +157,7 @@ export function showAll() {
  * @param {string} dest - The ID of the destination element(s) to update, specified in a data attribute on the source element.
  */
 export function wikiCode(element: InputElements | string, dest: string | undefined = (element as HTMLElement)?.dataset?.dest) {
+	console.log(dest)
 	const destElements = typeof dest === 'string' ? getDestElements(dest) : [];
 
 	// sanitize the source value or content
@@ -267,35 +267,6 @@ export function wikiCodeSimple(element: InputElements, dest: string = element.da
  */
 export function addStaticPageData(key: string, value: AnyPrimitive | Array<string>) {
 	Object.defineProperty(pageData, key, { configurable: false, writable: false, value: value });
-}
-
-/**
- * Extracts information based on the user's input about the civilization and saves it as an object.
- */
-export function civ() {
-	// Get the user's input from the DOM.
-	const inputElement = globalElements?.input?.civ as HTMLSelectElement;
-	const input = inputElement?.value;
-
-	// If the input is empty, exit the function.
-	if (!input) return;
-
-	// Update the research team dropdown and glyph region.
-	try {
-		updateCiv();
-	} catch (error) {
-		console.warn(error);
-	}
-}
-
-/**
- * Updates the research team and glyph region based on the current page data.
- */
-function updateCiv() {
-	researchTeamDropdown();
-	const glyphs = pageData.portalglyphs as string;
-	glyphRegion(glyphs);
-	docBy();
 }
 
 /**
@@ -458,7 +429,6 @@ export function toggleSection(sectionName: string = '', button: HTMLButtonElemen
  * Generates a dropdown for selecting a research team.
  *
  * @param {HTMLInputElement} [inputElement=globalElements.input.researchTeam] - The input element to generate the dropdown for.
- * @param {string} [civ=pageData.civShort] - The civilization to generate the dropdown for. Defaults to the current civilization.
  * @returns {void}
  */
 export function researchTeamDropdown(inputElement: HTMLSelectElement = globalElements.input.researchTeam as HTMLSelectElement) {

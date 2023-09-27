@@ -10,10 +10,6 @@ const MTElementFunctions: ElementFunctions = [
 		func: () => { albumName(); appearance() }
 	},
 	{
-		element: 'civ',
-		func: () => { addInfo(); appearance(); locRegNr() }
-	},
-	{
 		element: 'typeInput',
 		func: () => { addInfo(); autoMTLoc(); subtypeDropdown(); enPrefix(pageData.type as string, 'enPrefix'); albumItemType(); albumOther(); appearance() }
 	},

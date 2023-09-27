@@ -812,11 +812,6 @@ export function addTemplate(element: HTMLInputElement | undefined = undefined) {
 	outputElement.style.display = element.checked ? '' : 'none';
 }
 
-export function civCatalog() {
-	const civ = pageData.civShort as string;
-	wikiCode(civ, 'civShorter');
-}
-
 /**
  * Generates an array for the page gallery based on the faction of the current page.
  * If the faction is 'Uncharted' or includes 'Abandoned', the last element is removed.

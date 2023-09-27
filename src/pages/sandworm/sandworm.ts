@@ -2,7 +2,7 @@
  * @fileoverview Provides functions which can be used by the Sandworm page creator.
  */
 
-import { addInfoBullet, docByResearchteam, enableTextMarking, getWormAlbum, wikiCode } from "../../common";
+import { addInfoBullet, docByResearchteam, enableTextMarking, wikiCode } from "../../common";
 import { globalElements, pageData } from "../../variables/objects";
 
 /**
@@ -72,12 +72,9 @@ export function autoSpawn() {
  * @description Adds information to the wikiCode for a specific album after checking the pageData's civShort value.
  */
 export function catalogue() {
-	const research = docByResearchteam('GHEC');
+	const research = docByResearchteam();
 
-	const civShort = pageData.civShort as string;
-	const album = getWormAlbum(civShort);
-
-	const albumName = `${album} Album`;
+	const albumName = 'Eisvana Rare Fauna Album';
 	const output = `[[${albumName}]]${research}`;
 
 	wikiCode(output, 'addInfo');
