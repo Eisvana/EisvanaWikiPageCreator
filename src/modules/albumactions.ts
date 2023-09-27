@@ -127,23 +127,6 @@ export function albumDiscoverer() {
 }
 
 /**
- * Sets the name of the civilization in the heading.
- * @function
- * @name albumCiv
- * @returns {void}
- */
-export function albumCiv() {
-	const output = (() => {
-		if (typeof globalFunctions.albumCivExternal == 'function') {
-			return globalFunctions.albumCivExternal();
-		} else {
-			return 'Eisvana';
-		}
-	})() as string;
-	(globalElements.output.albumCiv as HTMLOutputElement).innerText = output;
-}
-
-/**
  * Sets the name of the album in the global output element.
  *
  * @function
@@ -226,7 +209,6 @@ export function albumFunctions() {
 	 */
 	function albumData() {
 		updateAlbumData();
-		albumCiv();
 		albumDiscoverer();
 		albumName();
 		albumOther();

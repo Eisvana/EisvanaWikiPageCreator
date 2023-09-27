@@ -4,7 +4,7 @@ import { albumFunctions } from "../../modules/albumactions";
 import sandwormElementFunctions from "./elementFunctions";
 import sandwormElements from "./elementStore";
 import { globalFunctions } from "../../variables/objects";
-import { generateGalleryArray, albumLinkGen, albumOtherExternal, albumNameExternal, albumCivExternal, albumItemTypeExternal, autoSpawn, catalogue, wormName } from "./sandworm";
+import { generateGalleryArray, albumLinkGen, albumOtherExternal, albumNameExternal, albumItemTypeExternal, autoSpawn, catalogue, wormName } from "./sandworm";
 import { addStaticPageData } from "../../common";
 import '../../startup';
 
@@ -12,7 +12,6 @@ globalFunctions.generateGalleryArray = () => generateGalleryArray();
 globalFunctions.albumLinkGen = () => albumLinkGen();
 globalFunctions.albumOtherExternal = () => albumOtherExternal();
 globalFunctions.albumNameExternal = () => albumNameExternal();
-globalFunctions.albumCivExternal = () => albumCivExternal();
 globalFunctions.albumItemTypeExternal = () => albumItemTypeExternal();
 
 addStaticPageData('galleryExplanationExternal', `
