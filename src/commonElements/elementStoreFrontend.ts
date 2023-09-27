@@ -9,7 +9,6 @@ import { ElementIds } from "../types/elements";
 const commonElements: ElementIds = {
 	input: {
 		version: 'versionInput',
-		civ: 'civInput',
 		fileInput: 'fileInput',
 		fileUpload: 'fileUpload',
 		portalglyphsInput: 'portalglyphsInput',

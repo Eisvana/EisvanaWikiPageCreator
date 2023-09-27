@@ -13,7 +13,7 @@ const celestialObjectElementFunctions: ElementFunctions = [
 		func: () => hideOrgName()
 	},
 	{
-		element: ['civ', 'portalglyphsInput'],
+		element: ['portalglyphsInput'],
 		func: () => locationSentence()
 	},
 ]

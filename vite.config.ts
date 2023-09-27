@@ -21,7 +21,6 @@ export default defineConfig({
 				about: resolve(__dirname, 'about.html'),
 				base: resolve(__dirname, 'base.html'),
 				biofrig: resolve(__dirname, 'biofrig.html'),
-				business: resolve(__dirname, 'business.html'),
 				derelict: resolve(__dirname, 'derelict.html'),
 				fauna: resolve(__dirname, 'fauna.html'),
 				flora: resolve(__dirname, 'flora.html'),

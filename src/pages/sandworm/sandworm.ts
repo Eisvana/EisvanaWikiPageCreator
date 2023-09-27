@@ -2,7 +2,7 @@
  * @fileoverview Provides functions which can be used by the Sandworm page creator.
  */
 
-import { addInfoBullet, docByResearchteam, enableTextMarking, getWormAlbum, wikiCode } from "../../common";
+import { addInfoBullet, docByResearchteam, enableTextMarking, wikiCode } from "../../common";
 import { globalElements, pageData } from "../../variables/objects";
 
 /**
@@ -70,18 +70,11 @@ export function autoSpawn() {
  * @function catalogue
  * @returns {void} No return value.
  * @description Adds information to the wikiCode for a specific album after checking the pageData's civShort value.
- *              If it's "GHub", it will add information to the "GHEC Sandworm Album".
- *              If it's "CalHub", it will add information to the "CalHub Rare Fauna Album#Sandworm" page.
- *              If it's "EisHub", it will add information to the "EisHub Shaihuluda Album" page.
- *              Also adds a "documented by GHEC" sentence to the output.
  */
 export function catalogue() {
-	const research = docByResearchteam('GHEC');
+	const research = docByResearchteam();
 
-	const civShort = pageData.civShort as string;
-	const album = getWormAlbum(civShort);
-
-	const albumName = `${album} Album`;
+	const albumName = 'Eisvana Rare Fauna Album';
 	const output = `[[${albumName}]]${research}`;
 
 	wikiCode(output, 'addInfo');

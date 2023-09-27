@@ -137,7 +137,7 @@ export function albumCiv() {
 		if (typeof globalFunctions.albumCivExternal == 'function') {
 			return globalFunctions.albumCivExternal();
 		} else {
-			return pageData.civShort;
+			return 'Eisvana';
 		}
 	})() as string;
 	(globalElements.output.albumCiv as HTMLOutputElement).innerText = output;
