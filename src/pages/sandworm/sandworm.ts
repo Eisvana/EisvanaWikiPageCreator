@@ -88,10 +88,6 @@ export function albumItemTypeExternal() {
 	return catalogue.split('|').at(-1);
 }
 
-export function albumCivExternal() {
-	return '';
-}
-
 export function albumNameExternal() {
 	enableTextMarking();
 	const { name, wormclass } = pageData;

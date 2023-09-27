@@ -316,10 +316,6 @@ export function albumTitle() {
 	(globalElements.output.album as HTMLOutputElement).innerText = pageData.catalogue as string;
 }
 
-export function albumCivExternal() {
-	return '';
-}
-
 /**
  * Replaces line breaks in an input element's value with a single space.
  * Then passes it to wikiCode function to generate wiki code.
