@@ -6,13 +6,12 @@ import { toggleRedirect } from "../../modules/actions";
 import { albumFunctions } from "../../modules/albumactions";
 import creatureElementFunctions from "./elementFunctions";
 import creatureElements from "./elementStore";
-import { albumOtherExternal, albumCivExternal, addInfo, albumDropdown, bundlePropFunctions, genderDropdown, genusDropdown, genusProduces, hideAlbumEntry, hideCreaturePrio, hideSecGenderProps, noLineBreak, pageName, specialNotes, specialNotesTextFunc, generateGalleryArray, resetExternal } from "./fauna";
+import { albumOtherExternal, addInfo, albumDropdown, bundlePropFunctions, genderDropdown, genusDropdown, genusProduces, hideAlbumEntry, hideCreaturePrio, hideSecGenderProps, noLineBreak, pageName, specialNotes, specialNotesTextFunc, generateGalleryArray, resetExternal } from "./fauna";
 import { globalFunctions } from "../../variables/objects";
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import '../../startup';
 
 globalFunctions.albumOtherExternal = () => albumOtherExternal();
-globalFunctions.albumCivExternal = () => albumCivExternal();
 globalFunctions.generateGalleryArray = () => generateGalleryArray();
 globalFunctions.resetExternal = () => resetExternal();
 

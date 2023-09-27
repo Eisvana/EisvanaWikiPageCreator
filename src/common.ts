@@ -157,7 +157,6 @@ export function showAll() {
  * @param {string} dest - The ID of the destination element(s) to update, specified in a data attribute on the source element.
  */
 export function wikiCode(element: InputElements | string, dest: string | undefined = (element as HTMLElement)?.dataset?.dest) {
-	console.log(dest)
 	const destElements = typeof dest === 'string' ? getDestElements(dest) : [];
 
 	// sanitize the source value or content
@@ -513,7 +512,6 @@ export function docBy() {
  * @returns {string} Returns a string that describes the research team
  */
 export function displayResearch() {
-	console.log(pageData)
 	const chapter = pageData.researchteam as string;
 	if (!chapter) return chapter;
 
