@@ -2,7 +2,7 @@
  * @fileoverview Provides location focused functions
  */
 
-import { sanitiseString, wikiCode } from "../common";
+import { sanitiseString } from "../common";
 import { globalElements, pageData } from "../variables/objects";
 import { regions } from "../variables/regions";
 
@@ -39,37 +39,13 @@ export function planetMoonSentence(planet: string = pageData.planet as string, m
 }
 
 /**
- * Generates the galaxy part of a location sentence based on the given civilization.
- *
- * @param {string} civ - The name of the civilization.
- * @returns {string} The location sentence for the given civilization.
- */
-export function HubGal(civ: string) {
-	switch (civ) {
-		case "GHub":
-			return '[[Galactic Hub]]';
-
-		case "CalHub":
-			return '[[Galactic Hub Calypso]], in the [[Calypso]] [[galaxy]]';
-
-		case "EisHub":
-			return '[[Galactic Hub Eissentam]], in the [[Eissentam]] [[galaxy]]';
-	}
-	return '';
-}
-
-/**
- * Returns the region number of a Hub region.
+ * Returns the region number of a region.
  * @param {string} regionName - The name of the region.
- * @returns {(number|string)} The region number of the Hub region, or 'Huburb' if the region is in GHub and has an index greater than 10.
+ * @returns {(number|string)} The region number of the region.
  */
-export function getHubNumber(regionName: string): string {
-	for (const Hub in regions) {
-		const hubRegions = regions[Hub];
-		const index = Object.values(hubRegions).indexOf(regionName);
-		if (Hub == 'GHub' && index > 10) return 'Huburb';	// NoSonar anything after region 11 (index 10) is a Huburb
-		if (index != -1) return (index + 1).toString();
-	}
+export function getRegNumber(regionName: string): string {
+	const index = Object.values(regions).indexOf(regionName);
+	if (index !== -1) return (index + 1).toString();
 	return '';
 }
 
@@ -80,22 +56,6 @@ export function getHubNumber(regionName: string): string {
  * @returns {string} - The sentence part for the location section including the region number
  */
 export function regNr(regionName: string): string {
-	const hubNr = getHubNumber(regionName);
-	if (hubNr == 'Huburb') {
-		return ', Huburb';
-	} else {
-		return ` (HUB${hubNr})`;
-	}
-}
-
-/**
- * Adds region to location sentence
- * @function
- * @name locGalaxy
- * @returns {void}
- */
-export function locGalaxy() {
-	const civ = pageData.civShort as string;	// The civilization short name
-	const text = HubGal(civ);	// The location galaxy text
-	wikiCode(text, 'locGalaxy');	// Adds the location galaxy text to the page with the section name 'locGalaxy'
+	const regNr = getRegNumber(regionName);
+	return ` (EV${regNr})`;
 }

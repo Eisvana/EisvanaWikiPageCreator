@@ -1,9 +1,8 @@
 import { enPrefix, image, toggleSection } from "../../common";
-import { locGalaxy } from "../../miscLogic/locationLogic";
 import { albumName, albumOther, albumDiscoverer, albumItemType } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements";
 import { pageData } from "../../variables/objects";
-import { acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo, appearance, autoMTLoc, autoSentinel, hideCost, hideLocName, hideSrLocName, locHubNr, subtypeDropdown } from "./multitool";
+import { acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo, appearance, autoMTLoc, autoSentinel, hideCost, hideLocName, hideSrLocName, locRegNr, subtypeDropdown } from "./multitool";
 
 const MTElementFunctions: ElementFunctions = [
 	{
@@ -12,7 +11,7 @@ const MTElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'civ',
-		func: () => { locGalaxy(); addInfo(); appearance(); locHubNr() }
+		func: () => { addInfo(); appearance(); locRegNr() }
 	},
 	{
 		element: 'typeInput',
@@ -57,7 +56,7 @@ const MTElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'portalglyphsInput',
-		func: () => locHubNr()
+		func: () => locRegNr()
 	},
 	{
 		element: ['discoveredInput', 'discoveredlinkInput'],

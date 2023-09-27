@@ -12,7 +12,7 @@ import { updateGlobalElements } from '../commonElements/elementBackend/elementSt
 import { buildDescriptor, initialiseSectionInputs, wikiCodePercentage } from './celestialobjectslogic';
 import { ElementFunctions, ElementIds } from '../types/elements';
 import { getResourceData, getSentinelData } from '../datalists/planetDatalists';
-import { HubGal, getHubNumber } from './locationLogic';
+import { getRegNumber } from './locationLogic';
 import creatureData from './creatureData';
 import { LinkObjValues, PlanetPropResourceLinks } from '../types/links';
 import { StdObj } from '../types/objects';
@@ -54,9 +54,9 @@ export function planetDescriptor(element: HTMLInputElement) {
 * @returns {string} - A string describing the location of the current star system.
 */
 export function locationSentence() {
-	const { system: systemName, region: regionName, civShort: civ } = pageData
+	const { system: systemName, region: regionName } = pageData
 
-	const output = `It can be found in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]] (HUB${getHubNumber(regionName as string)}) of the ${HubGal(civ as string)}.`;
+	const output = `It can be found in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]] (EV${getRegNumber(regionName as string)}) of [[Eisvana]], in the [[Eissentam]] [[galaxy]].`;
 
 	(globalElements.output.location as HTMLOutputElement).innerText = output;
 }
@@ -549,8 +549,7 @@ export function wormAutoSpawn() {
 }
 
 export function wormAlbumName() {
-	const civShort = pageData.civShort as string;
-	const output = getWormAlbum(civShort);
+	const output = getWormAlbum();
 	(globalElements.output.wormAlbumName as HTMLOutputElement).innerText = output;
 }
 

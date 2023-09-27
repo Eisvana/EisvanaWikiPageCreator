@@ -2,7 +2,7 @@
  * @fileoverview Generates the footer and handles theming, as well as user defined global default values.
  */
 
-import { addHuburbs, hideDiscoverer, sanitiseString, triggerEvent } from "../common";
+import { hideDiscoverer, sanitiseString, triggerEvent } from "../common";
 import { footerInputs, globalElements, pageData } from "../variables/objects";
 import { regions } from "../variables/regions";
 import { glyphError, validateGlyphs } from "./portalglyphs";
@@ -156,7 +156,6 @@ export function restoreDefaults() {
 export function validateGlyphSettings(input: HTMLInputElement) {
 	const glyphString = input.value;
 	const allRegions = structuredClone(regions);
-	addHuburbs(allRegions);
 	Object.freeze(allRegions);
 	const region = validateGlyphs(glyphString, (globalElements.input.civDefault as HTMLSelectElement).value, allRegions);
 	glyphError(region, input);

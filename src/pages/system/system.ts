@@ -2,11 +2,11 @@
  * @fileoverview Provides functions which can be used by the System page creator.
  */
 
-import { addDomAsElement, extractNumber, getChildIndex, hideInput, image, loadHTML, numberStats, oddEven, removeSection, removeSpecificSection, sanitiseString, shortenGHub, sortObj, storeData, toggleSection, wikiCode } from '../../common';
+import { addDomAsElement, extractNumber, getChildIndex, hideInput, image, loadHTML, numberStats, oddEven, removeSection, removeSpecificSection, sanitiseString, sortObj, storeData, toggleSection, wikiCode } from '../../common';
 import { assignFunction } from '../../commonElements/elementBackend/elementFunctions';
 import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
 import { autoInfested, buildDescriptor, initialiseSectionInputs } from '../../miscLogic/celestialobjectslogic';
-import { HubGal, getHubNumber, regNr } from '../../miscLogic/locationLogic';
+import { getRegNumber, regNr } from '../../miscLogic/locationLogic';
 import { addAllTooltips } from '../../modules/tooltip';
 import { ElementFunctions, ElementIds } from '../../types/elements';
 import { SortObj, StdObj } from '../../types/objects';
@@ -22,16 +22,15 @@ import { BiomeLinks, ResourceAndCreatureLinks } from '../../types/links';
  * @function
  */
 export function locationSentence() {
-	const { region, civShort: civ } = pageData;
-	const HubNr = regNr(region as string);
-	const galaxy = HubGal(civ as string);
+	const { region } = pageData;
+	const RegNr = regNr(region as string);
 
 	/**
 	 * The sentence describing the location of the page.
 	 *
 	 * @type {string}
 	 */
-	const output = `Located in the [[${region}]] [[region]]${HubNr} of the ${galaxy}.`;
+	const output = `Located in the [[${region}]] [[region]]${RegNr} of the [[Eissentam]] galaxy.`;
 
 	wikiCode(output, 'loc');
 }
@@ -615,14 +614,14 @@ function setBiomeText(obj: StdObj) {
 }
 
 /**
- * Updates the output element to display the expected hub tag for the current system, based on its region and glyphs.
+ * Updates the output element to display the expected system name prefix for the current system, based on its region and glyphs.
  *
  * @function
- * @name expectedHubTagSentence
+ * @name expectedPrefixSentence
  * @returns {void}
  */
-export function expectedHubTagSentence() {
-	const outputElement = globalElements.output.expectedHubTag as HTMLOutputElement;
+export function expectedPrefixSentence() {
+	const outputElement = globalElements.output.expectedPrefix as HTMLOutputElement;
 	const systemName = pageData.name as string;
 	const region = pageData.region as string;
 	const glyphs = pageData.portalglyphs as string;
@@ -630,19 +629,19 @@ export function expectedHubTagSentence() {
 		outputElement.innerHTML = '';
 		return;
 	};
-	const nr = getHubNumber(region);
+	const nr = getRegNumber(region);
 	const index = (() => {
 		const systemIndex = glyphs.substring(1, 4);		// NoSonar index 1-3 is the system index
 		// this removes leading zeros
-		const SIV = Number('0x' + systemIndex).toString(16).toUpperCase();		// NoSonar this is dec to hex conversion
+		const SIV = parseInt(systemIndex, 16).toString(16).toUpperCase();		// NoSonar this is dec to hex conversion to remove leading 0s
 		return SIV.replace('69', '68+1');	// replace 69 with 68+1, because the profanity filter flags it
 	})();
-	const expected = `HUB${nr}-${index}`;
+	const expected = `EV${nr}-${index}`;
 
 	outputElement.innerHTML = '';
 	if (systemName.includes(expected)) return;
 
-	outputElement.innerText = `The expected HUB Tag for this system is ${expected}.` + '\n\n';
+	outputElement.innerText = `The expected prefix for this system is ${expected}.` + '\n\n';
 }
 
 /**
@@ -814,7 +813,7 @@ export function addTemplate(element: HTMLInputElement | undefined = undefined) {
 }
 
 export function civCatalog() {
-	const civ = shortenGHub(pageData.civShort as string);
+	const civ = pageData.civShort as string;
 	wikiCode(civ, 'civShorter');
 }
 

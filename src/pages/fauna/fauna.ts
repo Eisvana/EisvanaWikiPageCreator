@@ -34,13 +34,11 @@ export function genusDropdown() {
  * @returns {void}
  */
 export function albumDropdown() {
-	// if civ is GHub, use GHEC instead. Otherwise use the Civ shortname
-	const civ = (pageData.civShort == "GHub") ? "GHEC" : pageData.civShort;
-	const galaxy = pageData.galaxy as string;
+	const civ = 'Eisvana';
 	const ecosystem = pageData.ecosystem as string;
 	const catalogueInput = globalElements.input.catalogueInput as HTMLSelectElement;
 
-	const albums = creatureData.catalogs[galaxy][ecosystem];
+	const albums = creatureData.catalogs[ecosystem];
 	const albumValues = [albums[0]];
 	const albumTexts = [albums[0]];
 	// ignore first index (empty option)
@@ -63,7 +61,7 @@ export function addInfo() {
 	const outputElement = globalElements.output.addInfo as HTMLOutputElement;
 
 	// only accept GHEC as researchteam and construct sentence based on that
-	const chapter = docByResearchteam('GHEC');
+	const chapter = docByResearchteam();
 
 	// get the catalogue from the page data
 	const catalogue = pageData.catalogue;

@@ -4,7 +4,6 @@
 
 import { errorMessage, triggerEvent, wikiCode } from "../common";
 import { getDestElements } from "../commonElements/elementBackend/elementStore";
-import { Regions } from "../types/regions";
 import { globalElements, pageData } from "../variables/objects";
 import { regions } from "../variables/regions";
 
@@ -139,16 +138,15 @@ export function validateGlyphInput(glyphString: string): string {
  * This function validates a string of glyphs and returns the region object.
  *
  * @param {string} glyphs - The string of glyphs to validate
- * @param {string} [civShort=pageData.civShort] - The short name of the civilization
  * @param {Object} [regionObj=regions] - The object containing the region data
  * @returns {Object|string} - The region object or an empty string if the input does not contain 12 glyphs
  */
-export function validateGlyphs(glyphs: string, civShort: string = pageData.civShort as string, regionObj: Regions = regions) {
+export function validateGlyphs(glyphs: string) {
 	// Checks if the input contains exactly 12 glyphs
 	if (glyphs.length != 12) return '';		// NoSonar 12 is the expected glyph length, because glyph strings are always 12 digits long
 
 	// Gets the region list based on the civilization short name and extracts the region glyphs
-	const regionList = regionObj[civShort];
+	const regionList = regions;
 	const regionGlyphs = glyphs.substring(4);	// NoSonar this extracts the region glyphs, which start at glyph index 4.
 
 	// Finds the corresponding region object based on the region glyphs and returns it
@@ -182,7 +180,7 @@ export function glyphRegion(glyphs: string) {
 export function glyphError(region: string | undefined, glyphElement: HTMLElement) {
 	errorMessage(glyphElement,
 		(region == undefined)
-			? 'No valid Hub region. See <a href="https://nomanssky.fandom.com/wiki/Galactic_Hub_Regions" target="_blank" rel="noopener noreferrer">Galactic Hub Regions</a> for a list of valid regions.'
+			? 'No valid Eisvana region. See <a href="https://nomanssky.fandom.com/wiki/Eisvana#Claimed_Regions" target="_blank" rel="noopener noreferrer">Eisvana Regions</a> for a list of valid regions.'
 			: '');
 }
 

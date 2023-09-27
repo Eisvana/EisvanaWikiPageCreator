@@ -29,9 +29,7 @@ export interface CreatureData {
 		}
 	},
 	catalogs: {
-		[key: string]: {
-			[key: string]: Array<string>;
-		}
+		[key: string]: Array<string>;
 	}
 }
 

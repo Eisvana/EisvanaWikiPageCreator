@@ -4,12 +4,12 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Hub Wiki Page Creator - Moon</title>
-	<meta name="application-name" content="Hub Wiki Page Creator">
+	<title>Eisvana Wiki Page Creator - Moon</title>
+	<meta name="application-name" content="Eisvana Wiki Page Creator">
 	<meta name="description"
-		content="Easily generate the wikicode to create a moon discovery page for the Galactic Hub on the No Man's Sky Wiki!">
+		content="Easily generate the wikicode to create a moon discovery page for Eisvana on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
-	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Moon">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, Moon">
 	<script src="./src/pages/moon" type="module"></script>
 </head>
 
@@ -19,7 +19,7 @@
 			<div><a href="./" title="Main page">&larr; Return to main page</a></div>
 			<div><a href="./planet.html" title="Planet">&#8624; Planet</a></div>
 		</nav>
-		<h1 class="title is-3">Hub Wiki Page Creator - Moon</h1>
+		<h1 class="title is-3">Eisvana Wiki Page Creator - Moon</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
@@ -30,16 +30,6 @@
 					</div>
 					<div class="tableCell data">
 						<select id="versionInput" data-dest="release"></select>
-					</div>
-					<div class="tableCell text">
-						<label>Which civ does this moon belong to?</label>
-					</div>
-					<div class="tableCell data">
-						<select id="civInput">
-							<option value="GHub">GHub</option>
-							<option value="CalHub">CalHub</option>
-							<option value="EisHub">EisHub</option>
-						</select>
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the moon:</label>
@@ -114,7 +104,8 @@
 							<data>Portalglyphs</data>
 							<data>
 								Found in Photo Mode. Glyphs are specific to each moon.
-								<object data="https://nmspar.vercel.app/" title="Glyph Reader" class="glyph-reader" width="450" height="300">Glyph Reader</object>
+								<object data="https://nmspar.vercel.app/" title="Glyph Reader" class="glyph-reader"
+									width="450" height="300">Glyph Reader</object>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -315,10 +306,11 @@
 							<data>Head Type</data>
 							<data>Head type of the worm. See the catalogs for examples of the different types:
 								<ul>
-									<li><a href="GHEC_Sandworm_Album" data-wiki>GHEC Sandworm Album</a></li>
-									<li><a href="CalHub_Rare_Fauna_Album#Sandworm" data-wiki>CalHub Rare Fauna Album</a>
+									<li>
+										<a href="Eisvana_Rare_Fauna_Album#Sandworm" data-wiki>
+											Eisvana Rare Fauna Album
+										</a>
 									</li>
-									<li><a href="EisHub_Shaihuluda_Album" data-wiki>EisHub Shaihuluda Album</a></li>
 								</ul>
 							</data>
 						</button>
@@ -347,8 +339,8 @@
 						</button>
 					</div>
 					<div class="tableCell data" data-section="sandworm">
-						<input type="text" id="wormmaxdepthInput" data-dest-number="1" data-dest-noauto="wormmaxdepth" maxlength="5"
-							placeholder="0.0">
+						<input type="text" id="wormmaxdepthInput" data-dest-number="1" data-dest-noauto="wormmaxdepth"
+							maxlength="5" placeholder="0.0">
 					</div>
 					<div class="tableCell text" data-section="sandworm">
 						<label>Stomach Contents:</label>

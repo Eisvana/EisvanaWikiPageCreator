@@ -1,13 +1,12 @@
 import { toggleSection } from "../../common";
-import { locGalaxy } from "../../miscLogic/locationLogic";
 import { albumDiscoverer, albumName, albumOther } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements"
-import { addInfo, appearance, generateCatalogue, locHubNr } from "./biofrig";
+import { addInfo, appearance, generateCatalogue, locRegNr } from "./biofrig";
 
 const frigateElementFunctions: ElementFunctions = [
 	{
 		element: 'civ',
-		func: () => { locGalaxy(); addInfo(); appearance(); locHubNr(); generateCatalogue() }
+		func: () => { addInfo(); appearance(); locRegNr(); generateCatalogue() }
 	},
 	{
 		element: 'nameInput',
@@ -15,7 +14,7 @@ const frigateElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'portalglyphsInput',
-		func: () => locHubNr()
+		func: () => locRegNr()
 	},
 	{
 		element: ['mainColourInput', 'secColourInput', 'tentacleInput'],

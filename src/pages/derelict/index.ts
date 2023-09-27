@@ -1,4 +1,4 @@
-import { addDomAsElement, addStaticPageData, loadHTML, researchTeamDropdown, triggerEvent } from "../../common";
+import { addDomAsElement, loadHTML, researchTeamDropdown, triggerEvent } from "../../common";
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
 import { globalElements, globalFunctions } from "../../variables/objects";
@@ -8,8 +8,6 @@ import derelictElements from "./elementStore";
 import { actionsDom } from "../../modules/albumactions";
 import derelictActionsElementFunctions from "./derelictActionsElementFunctions";
 import '../../startup';
-
-addStaticPageData('huburbs', true);
 
 globalFunctions.albumLinkGen = () => albumLinkGen();
 
