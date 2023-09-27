@@ -27,10 +27,6 @@ const creatureElementFunctions: ElementFunctions = [
 		func: () => { genderDropdown(); specialNotesTextFunc(); genusProduces() }
 	},
 	{
-		element: 'civ',
-		func: () => { albumDropdown(); hideAlbumEntry() }
-	},
-	{
 		element: 'notesInput',
 		func: () => { specialNotes(); specialNotesTextFunc() }
 	},

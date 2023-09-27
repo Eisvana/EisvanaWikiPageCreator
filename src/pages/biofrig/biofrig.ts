@@ -2,13 +2,13 @@
  * @fileoverview Provides functions which can be used by the Organic Frigate page creator.
  */
 
-import { docByResearchteam, enPrefix, shortenGHub, wikiCode } from "../../common";
+import { docByResearchteam, enPrefix, wikiCode } from "../../common";
 import { regNr } from "../../miscLogic/locationLogic";
 import { globalElements, pageData } from "../../variables/objects";
 
-export function locHubNr() {
+export function locRegNr() {
 	const region = pageData.region as string;
-	const outputElement = globalElements.output.HubNr as HTMLOutputElement;
+	const outputElement = globalElements.output.regNr as HTMLOutputElement;
 	outputElement.innerText = regNr(region);
 }
 
@@ -18,7 +18,7 @@ export function locHubNr() {
  * @returns {void}
  */
 export function addInfo() {
-	const researchteam = docByResearchteam('GHSH');
+	const researchteam = docByResearchteam();
 	const catalogue = pageData.catalogue;
 
 	const outputElement = globalElements.output.addInfo as HTMLOutputElement;
@@ -31,19 +31,7 @@ export function addInfo() {
  * @returns {void}
  */
 export function generateCatalogue() {
-	const { civShort, civilized: civ } = pageData;
-	const catalogueCiv = (() => {
-		switch (civShort) {
-			case 'GHub':
-			case 'EisHub':
-				return shortenGHub(civShort);
-
-			case 'CalHub':
-				return civ;
-		}
-		return '';
-	})();
-	pageData.catalogue = `${catalogueCiv} Organic Frigate Catalog`;
+	pageData.catalogue = 'Eisvana Organic Frigate Catalog';
 }
 
 /**

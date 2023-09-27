@@ -4,19 +4,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Hub Wiki Page Creator - Base</title>
-	<meta name="application-name" content="Hub Wiki Page Creator">
+	<title>Eisvana Wiki Page Creator - Base</title>
+	<meta name="application-name" content="Eisvana Wiki Page Creator">
 	<meta name="description"
-		content="Easily generate the wikicode to create a base page for the Galactic Hub on the No Man's Sky Wiki!">
+		content="Easily generate the wikicode to create a base page for Eisvana on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
-	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Base">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, Base">
 	<script src="./src/pages/base" type="module"></script>
 </head>
 
 <body>
 	<div class="container">
 		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
-		<h1 class="title is-3">Hub Wiki Page Creator - Base</h1>
+		<h1 class="title is-3">Eisvana Wiki Page Creator - Base</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
@@ -27,16 +27,6 @@
 					</div>
 					<div class="tableCell data">
 						<select id="versionInput" data-dest="release"></select>
-					</div>
-					<div class="tableCell text">
-						<label>Which civ does this base belong to?</label>
-					</div>
-					<div class="tableCell data">
-						<select id="civInput">
-							<option value="GHub">GHub</option>
-							<option value="CalHub">CalHub</option>
-							<option value="EisHub">EisHub</option>
-						</select>
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the base:</label>
@@ -229,7 +219,11 @@
 						<label>Do you belong to a chapter?</label>
 					</div>
 					<div class="tableCell data">
-						<select data-dest-noauto="researchteam" id="researchteamInput"></select>
+						<select data-dest-noauto="researchteam" id="researchteamInput">
+							<option value=""></option>
+							<option value="Wiki Scholars">Wiki Scholars</option>
+							<option value="EBC">EBC</option>
+						</select>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Census:</p>
@@ -282,7 +276,7 @@
 						<input type="text" data-dest-noauto="censusfriend" maxlength="15" id="censusFriendInput">
 					</div>
 					<div data-section="census" class="tableCell text">
-						<label for="censusArrivalInput">When did the player arrive in Hub space?</label>
+						<label for="censusArrivalInput">When did the player arrive in Eisvana space?</label>
 					</div>
 					<div data-section="census" class="tableCell data">
 						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput">
@@ -323,11 +317,11 @@
 			<div id="output" class="column is-full-mobile">
 				<div class="wikiText" id="fullArticle" data-link="page">
 					<div>{{Version|<output id="release" name="release"></output>}}</div>
-					<div>{{<output id="civStub"></output>}}</div>
+					<!-- <div>{{<output id="civStub"></output>}}</div> -->
 					<div>{{Base infobox</div>
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image"></output></div>
-					<div>| civilized = <output id="civilized"></output></div>
+					<div>| civilized = Eisvana</div>
 					<div>| researchteam = <output id="researchteam"></output></div>
 					<div>| builderlink = <output id="builderlink"></output></div>
 					<div>| builder = <output id="builder"></output></div>

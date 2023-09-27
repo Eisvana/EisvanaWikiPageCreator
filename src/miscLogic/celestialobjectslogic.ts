@@ -14,7 +14,7 @@ import { autoWorm, planetDescriptor } from "./planetMoonLogic";
  * @returns {void}
  */
 export function docByExternal() {
-	const { discovered, discoveredlink, docby: documenter, civilized } = pageData;
+	const { discovered, discoveredlink, docby: documenter } = pageData;
 	const platform = (pageData.platform == 'NS') ? 'Switch' : pageData.platform;
 
 	const discDate = formatDate(pageData.discDate as string);
@@ -29,7 +29,7 @@ export function docByExternal() {
 	 */
 	const research = (() => {
 		const chapterSentence = displayResearch();
-		if (chapterSentence && chapterSentence != civilized) return chapterSentence;
+		if (chapterSentence && chapterSentence != 'Eisvana') return chapterSentence;
 		return '';
 	})();
 

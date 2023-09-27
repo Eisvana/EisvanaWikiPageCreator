@@ -1,16 +1,12 @@
 import { image, toggleSection } from "../../common";
 import { wikiCodePercentage, docByExternal } from "../../miscLogic/celestialobjectslogic";
 import { ElementFunctions } from "../../types/elements";
-import { addTemplate, autoBH, autoPirate, civCatalog, combineEconConf, expectedHubTagSentence, planetInputs, regionLong, searchUpgrades, spaceStationSection, tradeables } from "./system";
+import { addTemplate, autoBH, autoPirate, combineEconConf, expectedPrefixSentence, planetInputs, regionLong, searchUpgrades, spaceStationSection, tradeables } from "./system";
 
 const systemElementFunctions: ElementFunctions = [
 	{
-		element: 'civ',
-		func: () => { regionLong(); expectedHubTagSentence(); civCatalog() }
-	},
-	{
 		element: 'portalglyphsInput',
-		func: () => { regionLong(); expectedHubTagSentence(); autoBH() }
+		func: () => { regionLong(); expectedPrefixSentence(); autoBH() }
 	},
 	{
 		element: ['planetInput', 'moonInput'],
@@ -18,7 +14,7 @@ const systemElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'nameInput',
-		func: () => expectedHubTagSentence()
+		func: () => expectedPrefixSentence()
 	},
 	{
 		element: 'factionInput',

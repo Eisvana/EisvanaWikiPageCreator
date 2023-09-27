@@ -9,8 +9,6 @@ import starshipElements from "./elementStore";
 import { subtypeDropdown, showHideStarshipSelects, shipStats, addInfo, appearanceDropdowns, calcS, introType, loc, albumTypeExternal, albumOtherExternal, albumLinkGen, generateGalleryArray, resetExternal } from "./starship";
 import '../../startup';
 
-addStaticPageData('huburbs', true);
-
 globalFunctions.albumTypeExternal = () => albumTypeExternal();
 globalFunctions.albumOtherExternal = () => albumOtherExternal();
 globalFunctions.albumLinkGen = () => albumLinkGen();

@@ -2,14 +2,14 @@
  * @fileoverview Provides functions which can be used by the Multi-Tool page creator.
  */
 
-import { docByResearchteam, enPrefix, errorMessage, hideInput, setDropdownOptions, shortenGHub, storeData, triggerEvent, validateCoords, wikiCode } from "../../common";
+import { docByResearchteam, enPrefix, errorMessage, hideInput, setDropdownOptions, storeData, triggerEvent, validateCoords, wikiCode } from "../../common";
 import { planetMoon, planetMoonSentence, regNr } from "../../miscLogic/locationLogic";
 import { albumDesc } from "../../modules/albumactions";
 import { PicObj, StdObj } from "../../types/objects";
 import { globalElements, pageData } from "../../variables/objects";
 
-export function locHubNr() {
-	const outputElement = globalElements.output.HubNr as HTMLOutputElement;
+export function locRegNr() {
+	const outputElement = globalElements.output.regNr as HTMLOutputElement;
 	outputElement.innerText = regNr(pageData.region as string);
 }
 
@@ -19,7 +19,7 @@ export function locHubNr() {
  * @returns {undefined}
  */
 export function addInfo() {
-	const researchteam = docByResearchteam('GHSH');
+	const researchteam = docByResearchteam();
 	const outputElement = globalElements.output.addInfo as HTMLOutputElement;
 
 	const catalogue = albumLinkGen();
@@ -367,10 +367,7 @@ export function albumTypeExternal(): string {
 }
 
 export function albumItemTypeExternal(): string {
-	if (pageData.civShort == 'CalHub') return 'Multi-Tool';
-	if (pageData.isStarter) return pageData.subtype as string;
-	if (pageData.isStandard) return 'Standard Multi-Tool';
-	return pageData.type + ' Multi-Tool';
+	return 'Multi-Tool';
 }
 
 export function albumOtherExternal(): string {
@@ -415,24 +412,7 @@ export function albumDescExternal() {
  * @returns {string} - Link for the multi-tool catalog album.
  */
 export function albumLinkGen() {
-	const civ = shortenGHub(pageData.civShort as string);
-	const { type, subtype } = pageData;
-
-	const catalogName = (() => {
-		if (civ == 'CalHub') return civ + ' Multi-Tool Catalog';
-		const isStandard = type == 'Rifle' || (type == 'Pistol' && subtype != 'Starter Pistol');
-		const isStarter = type == 'Pistol' && !isStandard;
-		pageData.isStandard = isStandard;
-		pageData.isStarter = isStarter;
-		const longType = (() => {
-			if (isStandard) return 'Standard Multi-Tool';
-			if (isStarter) return subtype;
-			return type;
-		})();
-		return civ + ' Multi-Tool Catalog - ' + longType;
-	})();
-
-	return catalogName;
+	return 'Eisvana Multi-Tool Catalog';
 }
 
 /**

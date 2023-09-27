@@ -3,7 +3,7 @@
  */
 
 import { docByResearchteam, enPrefix, hideInput, setDropdownOptions, triggerEvent, wikiCode } from "../../common";
-import { regNr, HubGal, planetMoonSentence } from "../../miscLogic/locationLogic";
+import { regNr, planetMoonSentence } from "../../miscLogic/locationLogic";
 import { StdObj } from "../../types/objects";
 import { Sections, ShipProp } from "../../types/starshipDataObjects";
 import { globalElements, pageData } from "../../variables/objects";
@@ -195,10 +195,10 @@ function shipType() {
  * @return {string} The completed location sentence.
  */
 export function loc() {
-	const { class: shipClass, system: systemName, region: regionName, civShort: civ, type } = pageData;
+	const { class: shipClass, system: systemName, region: regionName, type } = pageData;
 
 	// this output has a linebreak. This is intended, because we use .innerText to display this. If we used <br>, it would display '<br>', not the linebreak.
-	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName as string)} of the ${HubGal(civ as string)}.
+	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName as string)} of [[Eisvana]], in the [[Eissentam]] [[galaxy]].
 
 	${type == 'Interceptor' ? 'The {{Class|' + shipClass + '}} class version of this starship' : 'It'} can be found ${locText()}.`;
 
@@ -265,7 +265,7 @@ export function loc() {
  */
 export function addInfo() {
 	const catalogue = albumLinkGen();
-	const researchteam = docByResearchteam('GHSH');
+	const researchteam = docByResearchteam();
 
 	const output = '[[' + catalogue + ']]' + researchteam;
 
@@ -392,22 +392,7 @@ export function albumOtherExternal() {
  * @returns {string} The link to the appropriate starship catalog.
  */
 export function albumLinkGen() {
-	// The long version of the civilization name.
-	// The shortened version of the civilization name.
-	const civLong = pageData.civStub as string;
-	const civilized = pageData.civilized as string;
-	const subtype = pageData.subtype as string;
-	const { type, civShort } = pageData;
-	const civ = (() => {
-		if (civLong.split(' ').length > 1) return civShort;		// civLong = "GHub" ||"GHub Eissentam" || "GHub Calypso" => selects "GHub Eissentam" and "GHub Calypso" and returns "EisHub" or "CalHub" for "EisHub Starship Catalog"
-		return civilized.split(' ').slice(0, 2).join(' ');		// NoSonar outputs "Galactic Hub" for the catalog: "Galactic Hub Starship Catalog"
-	})();	// The civilization name, either the short version or the first two words of the long version. // But why??
-
-	// An object containing arrays of fighter subtypes, sorted by rarity.
-	const fighterSubtypes: Sections = {
-		Common: ['Barrel', 'Jet', 'Snowspeeder', 'Viper'],
-		Rare: ['Alpha', 'Long', 'Needle', 'Rasa', 'Stubby'],
-	}
+	const { type } = pageData;
 
 	/**
 	 * Returns the appropriate catalog name based on the properties of the pageData object.
@@ -415,17 +400,7 @@ export function albumLinkGen() {
 	 * @returns {string} The name of the corresponding starship catalog.
 	 */
 	function getCatalog() {
-		if (civShort == 'CalHub') return 'CalHub Starship Catalog';										// CalHub Freighter
-		if (type == 'Freighter') return civ + ' Freighter Catalog';										// GHub/EisHub Freighter
-		if (civShort != 'EisHub' || type != 'Fighter') return civ + ' Starship Catalog - ' + type;		// not EisHub Fighter
-		const rarity = (() => {
-			for (const rarity in fighterSubtypes) {
-				if (fighterSubtypes[rarity].includes(subtype)) return rarity;
-			}
-			return '';
-		})();	// The rarity of the fighter subtype, determined by checking the fighterSubtypes object.
-
-		return `${civ} Starship Catalog - ${type} (${rarity})`; 										// EisHub Fighter
+		return `Eisvana ${type} Catalog`;
 	}
 
 	return getCatalog();

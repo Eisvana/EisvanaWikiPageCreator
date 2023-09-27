@@ -1,11 +1,10 @@
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { albumFunctions } from "../../modules/albumactions";
 import { globalFunctions } from "../../variables/objects";
-import { addInfo, albumItemTypeExternal, albumOtherExternal, generateCatalogue, locHubNr } from './biofrig';
+import { addInfo, albumItemTypeExternal, albumOtherExternal, generateCatalogue, locRegNr } from './biofrig';
 import frigateElementFunctions from "./elementFunctions";
 import { addStaticPageData } from "../../common";
 import '../../startup';
-import { locGalaxy } from "../../miscLogic/locationLogic";
 
 globalFunctions.albumOtherExternal = () => albumOtherExternal();
 globalFunctions.albumItemTypeExternal = () => albumItemTypeExternal();
@@ -30,8 +29,7 @@ addStaticPageData('galleryArray', [
 assignElementFunctions(frigateElementFunctions);
 
 // startupFunctions
-locHubNr();
-locGalaxy();
+locRegNr();
 generateCatalogue();
 addInfo();
 albumFunctions();

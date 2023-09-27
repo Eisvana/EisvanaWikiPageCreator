@@ -1,15 +1,10 @@
-import { researchTeamDropdown } from "../../common";
 import { ElementFunctions } from "../../types/elements";
-import { discoverer, enemyCheckboxes, processGlyphs, updateGalaxyTableEntry } from "./derelict";
+import { discoverer, enemyCheckboxes, processGlyphs } from "./derelict";
 
 const derelictElementFunctions: ElementFunctions = [
 	{
 		element: 'portalglyphsInput',
 		func: function () { processGlyphs(this as unknown as HTMLInputElement) }
-	},
-	{
-		element: 'civInput',
-		func: function () { researchTeamDropdown(); updateGalaxyTableEntry() }
 	},
 	{
 		element: 'enemiesInput',

@@ -2,7 +2,7 @@
  * @fileoverview Generates the footer and handles theming, as well as user defined global default values.
  */
 
-import { addHuburbs, hideDiscoverer, sanitiseString, triggerEvent } from "../common";
+import { hideDiscoverer, sanitiseString, triggerEvent } from "../common";
 import { footerInputs, globalElements, pageData } from "../variables/objects";
 import { regions } from "../variables/regions";
 import { glyphError, validateGlyphs } from "./portalglyphs";
@@ -47,15 +47,7 @@ export function showSettings() {
 		const input: HTMLInputElement | HTMLSelectElement | null = dialog.querySelector(`.data [data-store="${setting}"]`);
 		if (!input) continue;
 		input.value = settings[setting];
-		switch (input.id) {
-			case 'civDefault':
-				triggerEvent(input, 'change')
-
-				break;
-			case 'portalglyphsDefault':
-				triggerEvent(input, 'input');
-				break;
-		}
+		if (input.id === 'portalglyphsDefault') triggerEvent(input, 'input');
 	}
 	hideDiscoverer();
 	delete pageData.restored;
@@ -107,7 +99,6 @@ export function readDefaultValues() {
 		(input as HTMLInputElement | HTMLSelectElement).value = settings[setting];
 
 		switch (setting.split(' ')[0]) {
-			case 'civInput':
 			case 'wealthInput':
 				triggerEvent(input, 'change');
 				break;
@@ -156,9 +147,8 @@ export function restoreDefaults() {
 export function validateGlyphSettings(input: HTMLInputElement) {
 	const glyphString = input.value;
 	const allRegions = structuredClone(regions);
-	addHuburbs(allRegions);
 	Object.freeze(allRegions);
-	const region = validateGlyphs(glyphString, (globalElements.input.civDefault as HTMLSelectElement).value, allRegions);
+	const region = validateGlyphs(glyphString);
 	glyphError(region, input);
 	const settingsElement = globalElements.input.settings as HTMLDialogElement;
 	const closeButton = settingsElement.querySelector('form button.is-primary') as HTMLButtonElement

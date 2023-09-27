@@ -10,10 +10,6 @@ const starshipElementFunctions: ElementFunctions = [
 		func: () => { appearanceSentence(); albumName(); toggleRedirect() }
 	},
 	{
-		element: 'civ',
-		func: () => { loc(); addInfo() }
-	},
-	{
 		element: 'systemInput',
 		func: () => loc()
 	},

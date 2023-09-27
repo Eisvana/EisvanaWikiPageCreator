@@ -9,19 +9,6 @@ import { dataIntegrityObj, globalElements, pageData } from "../../variables/obje
 export const galaxyTableEntry = `| [[File: <output name="image"></output>|150px]] || [[<output name="name"></output>]] || <output name="rooms"></output> || <output name="enemies"></output> || {{gl/Small|0000<output name="portalglyphs"></output>}} || <output name="discoverer"></output><br>
 |-`;
 
-export function updateGalaxyTableEntry() {
-	const tables = ['euclid', 'calypso', 'eissentam'];
-	const galaxy = (pageData.galaxy as string).toLowerCase();
-	const unusedGalaxies = tables.filter(table => table != galaxy);
-	const galaxyTable = globalElements.output[galaxy] as HTMLDivElement;
-
-	galaxyTable.style.display = '';
-
-	for (const table of unusedGalaxies) {
-		(globalElements.output[table] as HTMLDivElement).style.display = 'none';
-	}
-}
-
 export function enemyCheckboxes() {
 	const checkboxes = document.getElementsByName('enemiesInput') as NodeListOf<HTMLInputElement>;
 	const enemies: Array<string> = [];

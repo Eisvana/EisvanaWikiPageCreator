@@ -3,13 +3,11 @@
  */
 
 import { vowels, wikiLink } from './variables/simple';
-import { GHubHuburbRegions } from "./variables/regions";
-import { Regions } from "./types/regions";
 import { dataIntegrityObj, globalElements, globalFunctions, pageData, staticBooleans } from './variables/objects';
 import { getDestElements } from './commonElements/elementBackend/elementStore';
 import { versions } from './variables/versions';
 import { assignElementFunctions, assignFunction } from './commonElements/elementBackend/elementFunctions';
-import { glyphInputOnChange, glyphRegion } from './modules/portalglyphs';
+import { glyphInputOnChange } from './modules/portalglyphs';
 import { explanation } from './modules/tooltip';
 import { planetMoonSentence } from './miscLogic/locationLogic';
 import { Datalist, SortObj } from './types/objects';
@@ -17,21 +15,6 @@ import { AnyPrimitive } from './types/values';
 import { ElementFunction, ElementFunctions, InputElements } from './types/elements';
 import { galleryUpload } from './modules/gallery';
 import md5Hex from 'md5-hex';
-
-/**
- * Adds Galactic Hub huburb regions to an object.
- * GHub has additional ship and MT hunting grounds
- * @param {Object} object - The object to add Galactic Hub regions to
- * @returns {void}
- */
-export function addHuburbs(object: Regions) {
-	// If the object has no GHub property, create one
-	object.GHub ??= {};
-	// Add each region code and name pair to the GHub property
-	for (const regionCode in GHubHuburbRegions) {
-		object.GHub[regionCode] = GHubHuburbRegions[regionCode];
-	}
-}
 
 /**
  * Returns an object containing references to input elements on the page.
@@ -160,7 +143,6 @@ export function showAll() {
 	}
 
 	numberStats();
-	civ();
 	image(globalElements.input.fileUpload as HTMLInputElement);
 	galleryUpload();
 	try { glyphInputOnChange(globalElements.input.portalglyphsInput as HTMLInputElement) } catch { /*do nothing*/ }
@@ -175,6 +157,7 @@ export function showAll() {
  * @param {string} dest - The ID of the destination element(s) to update, specified in a data attribute on the source element.
  */
 export function wikiCode(element: InputElements | string, dest: string | undefined = (element as HTMLElement)?.dataset?.dest) {
+	console.log(dest)
 	const destElements = typeof dest === 'string' ? getDestElements(dest) : [];
 
 	// sanitize the source value or content
@@ -284,75 +267,6 @@ export function wikiCodeSimple(element: InputElements, dest: string = element.da
  */
 export function addStaticPageData(key: string, value: AnyPrimitive | Array<string>) {
 	Object.defineProperty(pageData, key, { configurable: false, writable: false, value: value });
-}
-
-/**
- * Extracts information based on the user's input about the civilization and saves it as an object.
- */
-export function civ() {
-	// Get the user's input from the DOM.
-	const inputElement = globalElements?.input?.civ as HTMLSelectElement;
-	const input = inputElement?.value;
-
-	// If the input is empty, exit the function.
-	if (!input) return;
-
-	// Create a new object to hold the civilization data.
-	const civData: {
-		[key: string]: string;
-		galaxy: string;
-		civilized: string;
-		civStub: string;
-	} = {
-		galaxy: '',
-		civilized: '',
-		civStub: '',
-	};
-
-	// Based on the input, set the values for the civData object.
-	switch (input) {
-		case 'GHub':
-			civData.galaxy = 'Euclid';
-			civData.civilized = 'Galactic Hub Project';
-			civData.civStub = 'GHub';
-			break;
-
-		case 'CalHub':
-			civData.galaxy = 'Calypso';
-			civData.civilized = 'Galactic Hub Calypso';
-			civData.civStub = 'GHub Calypso';
-			break;
-
-		case 'EisHub':
-			civData.galaxy = 'Eissentam';
-			civData.civilized = 'Galactic Hub Eissentam';
-			civData.civStub = 'GHub Eissentam';
-			break;
-	}
-
-	// Add the civData object to the main pageData object and generate the wikiCode for each property.
-	pageData.civShort = input;
-	for (const key in civData) {
-		pageData[key] = civData[key];
-		if (getDestElements(key).length) wikiCode(pageData[key] as string, key);
-	}
-
-	// Update the research team dropdown and glyph region.
-	try {
-		updateCiv();
-	} catch (error) {
-		console.warn(error);
-	}
-}
-
-/**
- * Updates the research team and glyph region based on the current page data.
- */
-function updateCiv() {
-	researchTeamDropdown();
-	const glyphs = pageData.portalglyphs as string;
-	glyphRegion(glyphs);
-	docBy();
 }
 
 /**
@@ -515,23 +429,13 @@ export function toggleSection(sectionName: string = '', button: HTMLButtonElemen
  * Generates a dropdown for selecting a research team.
  *
  * @param {HTMLInputElement} [inputElement=globalElements.input.researchTeam] - The input element to generate the dropdown for.
- * @param {string} [civ=pageData.civShort] - The civilization to generate the dropdown for. Defaults to the current civilization.
  * @returns {void}
  */
-export function researchTeamDropdown(inputElement: HTMLSelectElement = globalElements.input.researchTeam as HTMLSelectElement, civ = pageData.civShort) {
+export function researchTeamDropdown(inputElement: HTMLSelectElement = globalElements.input.researchTeam as HTMLSelectElement) {
 	if (!inputElement) return;
 	const prevSelect = inputElement.value;
-	const teams = ['', 'GHGS', 'GHEC', 'GHSH', 'GHDF', 'GHBG', 'GHSL', 'GHTD', 'HBS'];
+	const teams = ['', 'Wiki Scholars', 'EBC'];
 
-	switch (civ) {
-		case "CalHub":
-			teams.push('CalHub Archivists');
-			break;
-
-		case "EisHub":
-			teams.push('EisHub Scribes', 'EPC', 'The Eissentimes Press');
-			break;
-	}
 	setDropdownOptions(inputElement, teams);
 	inputElement.value = prevSelect;
 	if (!arguments.length) researchTeam();
@@ -550,19 +454,22 @@ export function researchTeamDropdown(inputElement: HTMLSelectElement = globalEle
 export function researchTeam() {
 	const researchteamInput = globalElements.input.researchTeam as HTMLSelectElement;
 	const { value: researchteamValue, dataset: { destNoauto: dest } } = researchteamInput;
-	pageData[dest as string] = researchteamValue;
-	const civ = pageData.civilized;
+	if (!dest) return;
+	pageData[dest] = researchteamValue;
 	const exceptions = ['base', 'racetrack'];
 	const researchteam = (() => {
-		if (researchteamValue.split(' ').length == 2) {		// NoSonar catch inputs like "EisHub Scribes" or "CalHub Archivists"
-			return civ + ' ' + researchteamValue.split(' ')[1];		// only take the last part, so "Scribes" or "Archivists"
-		} else if (!researchteamValue && !exceptions.includes(pageData.pageType as string)) {
-			return civ;
-		} else {
-			return researchteamValue;
+		switch (researchteamValue) {
+			case 'EBC':
+				return 'Eisvana Builder Collective';
+
+			case 'Wiki Scholars':
+				return 'Eisvana Wiki Scholars';
+
+			default:
+				return exceptions.includes(pageData.pageType as string) ? '' : 'Eisvana';
 		}
 	})();
-	const outputElement = globalElements.output[dest as string] as HTMLElement;
+	const outputElement = globalElements.output[dest] as HTMLElement;
 	outputElement.innerText = researchteam as string;
 }
 
@@ -606,27 +513,19 @@ export function docBy() {
  * @returns {string} Returns a string that describes the research team
  */
 export function displayResearch() {
+	console.log(pageData)
 	const chapter = pageData.researchteam as string;
 	if (!chapter) return chapter;
 
-	const researchteamInput = globalElements.input.researchTeam as HTMLElement;
-	const teamIDs = researchteamInput.children;
-	const teams: Array<string> = [];
-	for (const team of Array.from(teamIDs)) {
-		teams.push((team as HTMLOptionElement).value);
-	}
-	const pos = teams.indexOf(chapter);
-
 	const chapterSentence = (() => {
-		if (pos < 4) {		// NoSonar 0-3 are the research chapters or no chapter (GHSH, GHEC, GHGS)
-			return `[[${chapter}]] researcher`;
-		} else if (chapter.includes('Scribe')) {
-			return 'EisHub [[Galactic Hub Eissentam Scribes|Scribe]]';
-		} else if (chapter.includes('Archivist')) {
-			return 'CalHub [[Galactic Hub Calypso Archivists|Archivist]]';
-		} else {
-			return `[[${chapter}]] member`;
+		switch (chapter) {
+			case 'Wiki Scholars':
+				return '[[Eisvana Wiki Scholars|Eisvana Wiki Scholar]]';
+
+			case 'EBC':
+				return '[[EBC]] member';
 		}
+		throw new Error(`Unexpected researchteam: ${chapter}`)
 	})();
 	return chapterSentence;
 }
@@ -831,31 +730,11 @@ export function regexMatch(string: string, regex: RegExp): boolean {
 /**
  * Returns documentation text for a discovery page based on the research team that documented it.
  *
- * @param {string} expected - The expected research team abbreviation (e.g., 'GHSH' or 'GHEC').
  * @returns {string} - The documentation text, including the research team name if it matches the expected abbreviation.
  */
-export function docByResearchteam(expected: string) {
+export function docByResearchteam() {
 	const researchteam = pageData.researchteam;
-	const researchteamData: { [key: string]: string } = {
-		GHSH: 'Ship Hunters',
-		GHEC: 'Exobiology Corps',
-	}
-	if (researchteam == expected) {
-		return ` and documented by the [[Galactic Hub ${researchteamData[expected]}]]`;
-	} else {
-		return '';
-	}
-}
-
-/**
- * Shortens a civilization name if it matches a specific abbreviation.
- *
- * @param {string} civ - The civilization name to shorten.
- * @returns {string} - The shortened civilization name, or the original name if it doesn't match an abbreviation.
- */
-export function shortenGHub(civ: string): string {
-	if (civ == 'GHub' || civ == 'Galactic Hub Project') return 'Galactic Hub';
-	return civ;
+	return researchteam === 'Wiki Scholars' ? ` and documented by the [[Eisvana Wiki Scholars]]` : '';
 }
 
 /**
@@ -1227,18 +1106,8 @@ export function addDomAsElement(dom: Document, dest: HTMLElement, position: Inse
 	}
 }
 
-export function getWormAlbum(civShort: string): string {
-	switch (civShort) {
-		case "GHub":
-			return "GHEC Sandworm";
-
-		case "CalHub":
-			return "CalHub Rare Fauna Album#Sandworm|CalHub Rare Fauna";
-
-		case "EisHub":
-			return "EisHub Shaihuluda";
-	}
-	return '';
+export function getWormAlbum() {
+	return "Eisvana Rare Fauna Album#Sandworm|Eisvana Rare Fauna";
 }
 
 export function limitCreatureSize(input: HTMLInputElement) {

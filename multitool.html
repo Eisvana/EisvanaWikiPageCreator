@@ -4,19 +4,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Hub Wiki Page Creator - Multi-Tool</title>
-	<meta name="application-name" content="Hub Wiki Page Creator">
+	<title>Eisvana Wiki Page Creator - Multi-Tool</title>
+	<meta name="application-name" content="Eisvana Wiki Page Creator">
 	<meta name="description"
-		content="Easily generate the wikicode to create a multi-tool discovery page for the Galactic Hub on the No Man's Sky Wiki!">
+		content="Easily generate the wikicode to create a multi-tool discovery page for Eisvana on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#3cb4a9">
-	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Galactic Hub, Page Creator, Multi-Tool">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, Multi-Tool">
 	<script src="./src/pages/multitool" type="module"></script>
 </head>
 
 <body>
 	<div class="container">
 		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
-		<h1 class="title is-3">Hub Wiki Page Creator - Multi-Tool</h1>
+		<h1 class="title is-3">Eisvana Wiki Page Creator - Multi-Tool</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
@@ -27,16 +27,6 @@
 					</div>
 					<div class="tableCell data">
 						<select id="versionInput" data-dest="release"></select>
-					</div>
-					<div class="tableCell text">
-						<label>Which civ does this multi-tool belong to?</label>
-					</div>
-					<div class="tableCell data">
-						<select id="civInput">
-							<option value="GHub">GHub</option>
-							<option value="CalHub">CalHub</option>
-							<option value="EisHub">EisHub</option>
-						</select>
 					</div>
 					<div class="tableCell text">
 						<label for="nameInput">Name of the multi-tool:</label>
@@ -190,7 +180,8 @@
 							<data>Portalglyphs</data>
 							<data>
 								Found in Photo Mode. Glyphs are specific to each planet.
-								<object data="https://nmspar.vercel.app/" title="Glyph Reader" class="glyph-reader" width="450" height="300">Glyph Reader</object>
+								<object data="https://nmspar.vercel.app/" title="Glyph Reader" class="glyph-reader"
+									width="450" height="300">Glyph Reader</object>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -378,6 +369,9 @@
 					</div>
 					<div class="tableCell data">
 						<select id="researchteamInput" data-dest-noauto="researchteam">
+							<option value=""></option>
+							<option value="Wiki Scholars">Wiki Scholars</option>
+							<option value="EBC">EBC</option>
 						</select>
 					</div>
 					<div class="tableHeader text sectionToggle">
@@ -465,11 +459,11 @@
 			<div id="output" class="column is-full-mobile">
 				<div class="wikiText" id="fullArticle" data-link="page">
 					<div>{{Version|<output id="release" name="release"></output>}}</div>
-					<div>{{<output id="civStub"></output>}}</div>
+					<!-- <div>{{<output id="civStub"></output>}}</div> -->
 					<div>{{Multitool infobox</div>
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image" name="image"></output></div>
-					<div>| civilized = <output id="civilized"></output></div>
+					<div>| civilized = Eisvana</div>
 					<div>| galaxy = <output id="galaxy"></output></div>
 					<div>| region = <output id="region" name="region"></output></div>
 					<div>| system = <output id="system" name="system"></output></div>
@@ -508,7 +502,7 @@
 					<div>==Location==</div>
 					<div>This multi-tool is located in the [[<output id="system1" name="system"></output>]] [[star
 						system]] in the [[<output id="region1" name="region"></output>]] [[region]]<output
-							id="HubNr"></output> of the <output id="locGalaxy"></output>.</div>
+							id="regNr"></output> of [[Eisvana]], in the [[Eissentam]] [[galaxy]].</div>
 					<br>
 					<div>{{CoordGlyphConvert|<output id="portalglyphs2" name="portalglyphs"></output>}}</div>
 					<br>
