@@ -23,7 +23,7 @@ jobs:
 
       - name: Build App
         run: |
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          if [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
             sed -i 's_EisvanaWikiPageCreator_EisvanaWikiPageCreator/staging_g' vite.config.ts
             sed -i 's_EisvanaWikiPageCreator_EisvanaWikiPageCreator/staging_g' tsconfig.json
           fi
@@ -79,12 +79,6 @@ jobs:
         with:
           name: EisvanaWikiPageCreator
           path: dist
-
-      - name: Adjust Paths
-        run: |
-          cd dist
-          sed -i 's_EisvanaWikiPageCreator_EisvanaWikiPageCreator/staging_g' vite.config.ts
-          sed -i 's_EisvanaWikiPageCreator_EisvanaWikiPageCreator/staging_g' tsconfig.json
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
