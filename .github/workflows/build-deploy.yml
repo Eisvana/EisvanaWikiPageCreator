@@ -25,7 +25,6 @@ jobs:
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
             sed -i 's_EisvanaWikiPageCreator_EisvanaWikiPageCreator/staging_g' vite.config.ts
-            sed -i 's_EisvanaWikiPageCreator_EisvanaWikiPageCreator/staging_g' tsconfig.json
           fi
 
           npm ci
