@@ -30,7 +30,7 @@ export function locationSentence() {
 	 *
 	 * @type {string}
 	 */
-	const output = `Located in the [[${region}]] [[region]]${RegNr} of the [[Eissentam]] galaxy.`;
+	const output = `Located in the [[${region}]] [[region]]${RegNr} of [[Eisvana]] in the [[Eissentam]] galaxy.`;
 
 	wikiCode(output, 'loc');
 }
