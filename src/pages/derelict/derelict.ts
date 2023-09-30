@@ -21,8 +21,8 @@ export function enemyCheckboxes() {
 export function albumLinkGen() {
 	const type = dataIntegrityObj.link;
 	const { galaxy, class: freighterClass } = pageData;
-	if (type == 'album') return `${pageData.name}#${galaxy}`;
-	return `GHSH Derelict Freighter Catalog#${freighterClass}-Class`;
+	if (type === 'album') return `${pageData.name}#${galaxy}`;
+	return `Eisvana Derelict Freighter Catalog#${freighterClass}-Class`;
 }
 
 export function processGlyphs(element: HTMLInputElement) {

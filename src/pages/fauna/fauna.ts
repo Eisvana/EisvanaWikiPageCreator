@@ -59,7 +59,6 @@ export function addInfo() {
 	// get the HTML element where the output will be displayed
 	const outputElement = globalElements.output.addInfo as HTMLOutputElement;
 
-	// only accept GHEC as researchteam and construct sentence based on that
 	const chapter = docByResearchteam();
 
 	// get the catalogue from the page data
