@@ -2,7 +2,7 @@ import { enPrefix, image, toggleSection } from "../../common";
 import { albumName, albumOther, albumDiscoverer, albumItemType } from "../../modules/albumactions";
 import { ElementFunctions } from "../../types/elements";
 import { pageData } from "../../variables/objects";
-import { acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo, appearance, autoMTLoc, autoSentinel, hideCost, hideLocName, hideSrLocName, locRegNr, subtypeDropdown } from "./multitool";
+import { acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo, appearance, autoMTLoc, autoMTType, hideCost, hideLocName, hideSrLocName, locRegNr, subtypeDropdown } from "./multitool";
 
 const MTElementFunctions: ElementFunctions = [
 	{
@@ -23,7 +23,7 @@ const MTElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'locInput',
-		func: function () { acquirementBundle(); hideLocName(); hideCost(); autoSentinel(this as unknown as HTMLSelectElement) }
+		func: function () { acquirementBundle(); hideLocName(); hideCost(); autoMTType() }
 	},
 	{
 		element: 'srlocInput',

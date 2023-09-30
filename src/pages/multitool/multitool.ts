@@ -6,7 +6,7 @@ import { docByResearchteam, enPrefix, errorMessage, hideInput, setDropdownOption
 import { planetMoon, planetMoonSentence, regNr } from "../../miscLogic/locationLogic";
 import { albumDesc } from "../../modules/albumactions";
 import { PicObj, StdObj } from "../../types/objects";
-import { globalElements, pageData } from "../../variables/objects";
+import { globalElements, locsByType, pageData } from "../../variables/objects";
 
 export function locRegNr() {
 	const outputElement = globalElements.output.regNr as HTMLOutputElement;
@@ -209,18 +209,13 @@ export function acquirementGallery() {
 }
 
 /**
- * Automatically switches to Sentinel Pillar when Royal is selected.
+ * Automatically switches location when a specific type is selected.
  * @function
  * @returns {void}
  */
 export function autoMTLoc() {
 	const type = pageData.type as string;
 	const locElement = globalElements.input.locInput as HTMLSelectElement;
-
-	const locsByType: StdObj = {
-		Royal: 'Sentinel Pillar',
-		Sentinel: 'Harmonic Camp',
-	}
 
 	if (type in locsByType) {
 		hideInput(locElement, 'none');
@@ -229,6 +224,37 @@ export function autoMTLoc() {
 	} else {
 		hideInput(locElement, '');
 	}
+	hideCost();
+	hideAddons();
+	acquirementGallery();
+}
+
+/**
+ * Automatically switches type when a specific location is selected.
+ * @function
+ * @returns {void}
+ */
+export function autoMTType() {
+	const location = pageData.location;
+	const typeElement = globalElements.input.typeInput;
+	const subtypeInput = globalElements.input.subtypeInput;
+
+	if (typeof location !== 'string' || !(typeElement instanceof HTMLSelectElement) || !(subtypeInput instanceof HTMLSelectElement)) return;
+
+	const locsByTypeCopy = structuredClone(locsByType);
+	delete locsByTypeCopy.Royal;
+	const typeByLocs: StdObj = Object.fromEntries(Object.entries(locsByTypeCopy).map(item => item.reverse()))
+
+
+	if (location in typeByLocs) {
+		hideInput(typeElement, 'none');
+		hideInput(subtypeInput, 'none');
+		typeElement.value = typeByLocs[location];
+		wikiCode(typeElement);
+	} else {
+		hideInput(typeElement, '');
+	}
+
 	hideCost();
 	hideAddons();
 	acquirementGallery();
@@ -289,7 +315,7 @@ export function hideCost() {
 }
 
 /**
- * Hides the crystal addons input box if the page type is 'Royal' or 'Sentinel'
+ * Hides the crystal addons input box if the page type is 'Royal', 'Sentinel' or 'Atlantid'
  * @function
  * @returns {void}
  */
@@ -300,8 +326,8 @@ export function hideAddons() {
 	// Gets the crystal addons input box element
 	const addonInput = globalElements.input.crystalsInput as HTMLInputElement;
 
-	// If the MT type is 'Royal' or 'Sentinel'
-	if (type == 'Royal' || type == 'Sentinel') {
+	// If the MT type is 'Royal', 'Sentinel' or 'Atlantid'
+	if (['Royal', 'Sentinel', 'Atlantid'].includes(type)) {
 		// Gets all checkboxes in the same container as the addonInput
 		const checkboxes: NodeListOf<HTMLInputElement> = addonInput.closest('.checkboxes')!.querySelectorAll('input[type="checkbox"]');
 
@@ -313,28 +339,11 @@ export function hideAddons() {
 			checkbox.checked = false;
 			triggerEvent(checkbox, 'change');
 		})
-		// If the MT type is not 'Royal' or 'Sentinel'
+		// If the MT type is not 'Royal', 'Sentinel' or 'Atlantid'
 	} else {
 		// Shows the addonInput box
 		hideInput(addonInput, '');
 	}
-}
-
-/**
- * Automatically sets the type input of a global element to 'Sentinel'
- * and hides certain input elements depending on the value of 'input'.
- *
- * @function
- * @param {Object} input - The input element to be checked.
- * @returns {undefined}
- */
-export function autoSentinel(input: HTMLSelectElement) {
-	if (input.value != 'Harmonic Camp') return;
-	const typeInput = globalElements.input.typeInput as HTMLSelectElement;
-	typeInput.value = 'Sentinel';
-	triggerEvent(typeInput, 'change');
-	hideInput(typeInput, 'none');
-	hideInput(input, '');
 }
 
 export function subtypeDropdown() {
@@ -343,7 +352,7 @@ export function subtypeDropdown() {
 
 	// [[value], [display]]
 	const subtypes: {
-		[key: string]: Array<Array<string>>;
+		[key: string]: string[][];
 	} = {
 		Pistol: [['Pistol', 'Starter Pistol'], ['Standard', 'Starter Pistol']],
 		Rifle: [['Rifle', 'SMG'], ['Standard (Large)', 'SMG (Small)']],
@@ -436,12 +445,13 @@ export function generateGalleryArray() {
 		'Minor Settlement',
 		'Sentinel Pillar',
 		'Harmonic Camp',
-		'Tool in hand',
+		'Monolith',
+		'Tool in Hand',
 		'First Person View'
 	];
 
 	const location = pageData.location as string;
-	const locs = ['Minor Settlement', 'Sentinel Pillar', 'Harmonic Camp'];
+	const locs = ['Minor Settlement', 'Sentinel Pillar', 'Harmonic Camp', 'Monolith'];
 	if (locs.includes(location)) {
 		const rmLocs = locs.filter(loc => loc != location);
 		rmLocs.forEach(loc => {
