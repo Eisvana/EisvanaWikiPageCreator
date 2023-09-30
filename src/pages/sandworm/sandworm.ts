@@ -96,7 +96,7 @@ export function albumNameExternal() {
 }
 
 export function albumOtherExternal() {
-	return `(${pageData.wormmaxdepth}ku)`;
+	return `(${pageData.wormmaxdepth}ku)<br>Stomach: ${pageData.wormstomach}`;
 }
 
 export function albumLinkGen() {
