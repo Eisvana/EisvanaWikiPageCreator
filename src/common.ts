@@ -75,7 +75,7 @@ export function setDropdownOptions(element: HTMLSelectElement, values: Array<str
 	}
 	const dropdownHTML = dropdown.join('');
 	// dont't update the dropdown if content is identical
-	if (element.innerHTML != dropdownHTML) element.innerHTML = dropdownHTML;
+	if (element.innerHTML !== dropdownHTML) element.innerHTML = dropdownHTML;
 }
 
 /**
@@ -108,8 +108,8 @@ export function autoShow(): void {
 			const transformedFunctionObject: ElementFunction = {
 				element,
 				handler,
+				func,
 				prio: true,
-				func
 			}
 			transformedFunctionArray.push(transformedFunctionObject);
 		}
@@ -288,7 +288,7 @@ export function sanitiseString(input: string) {
 
 	// remove all wiki markup except for wiki links in each section.
 	for (let i = 0; i < markupSections.length; i++) {
-		const noMarkupText = removeAllMarkup(markupSections[i], i != 0);
+		const noMarkupText = removeAllMarkup(markupSections[i], i !== 0);
 		outputArray.push(noMarkupText);
 	}
 
@@ -304,7 +304,7 @@ export function sanitiseString(input: string) {
 	function removeAllMarkup(str: string, ignoreFirstBracket: boolean = false): string {
 		let noMarkupString = str;
 		for (const markup of doubleWikiMarkup) {
-			if (ignoreFirstBracket && markup == ']') {
+			if (ignoreFirstBracket && markup === ']') {
 				noMarkupString = skipFirst(noMarkupString, markup);
 			} else {
 				noMarkupString = removeSpecificMarkup(noMarkupString, markup);
@@ -389,7 +389,7 @@ export function toggleSection(sectionName: string = '', button: HTMLButtonElemen
 	const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('[data-button-id]');
 	const childindex = getChildIndex(Array.from(buttons), 'dataset.buttonId');
 
-	if (arguments.length == 0) {
+	if (!arguments.length) {
 		const buttonElements: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.sectionToggle button');
 		for (let i = 0; i < buttonElements.length; i++) {
 			const button = buttonElements[i];
@@ -409,8 +409,8 @@ export function toggleSection(sectionName: string = '', button: HTMLButtonElemen
 		const object = element.dataset;
 		let hide = false;
 		for (const key in object) {
-			if (!key.includes('display') || key == displayID) continue;
-			if (object[key] == 'none') {
+			if (!key.includes('display') || key === displayID) continue;
+			if (object[key] === 'none') {
 				hide = true;
 				break;
 			}
@@ -722,7 +722,7 @@ export function enPrefix(text: string, dest: string | undefined = undefined) {
  */
 export function regexMatch(string: string, regex: RegExp): boolean {
 	const stringMatches = RegExp(regex).exec(string);
-	return stringMatches?.length == 1 && stringMatches[0]?.length == string.length;
+	return stringMatches?.length === 1 && stringMatches[0]?.length === string.length;
 }
 
 /**
@@ -831,8 +831,8 @@ export function datalists(object: Datalist) {
  */
 export function forceDatalist(element: HTMLInputElement) {
 	const option = element.list?.querySelector(`[value="${element.value}"]`);
-	if (!option && element.value && element.id != 'currencyInput') {
-		errorMessage(element, 'Not a valid option. If you believe this is an error, submit a <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXFIaHbeCWVsiaeIvcJL0A3aWiB5tQQFf2ofg0dr7lOkDChQ/viewform" rel="noreferrer noopener" target="_blank">bug report</a>.');
+	if (!option && element.value) {
+		errorMessage(element, 'Not a valid option. If you believe this is an error, submit a <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">bug report</a>.');
 	} else {
 		errorMessage(element);
 	}
@@ -850,7 +850,7 @@ export function checkDataIntegrity(element: HTMLElement | null = null, simple: b
 	const savedText = dataIntegrityObj.text;
 	const { name, portalglyphs: glyphs, region } = pageData;
 
-	if (name && glyphs && region && ((currentText == savedText && dataIntegrityObj.link === element?.dataset?.link && dataIntegrityObj.copy) || simple)) {
+	if (name && glyphs && region && ((currentText === savedText && dataIntegrityObj.link === element?.dataset?.link && dataIntegrityObj.copy) || simple)) {
 		dataIntegrityObj.copy = false;
 		dataIntegrityObj.link = '';
 		return '';
@@ -896,7 +896,7 @@ export function getSelectedText(section: HTMLElement) {
 	})();
 
 	dataIntegrityObj.text = md5Hex(JSON.stringify(pageData));
-	dataIntegrityObj.copy = (sectionText == selected);
+	dataIntegrityObj.copy = (sectionText === selected);
 	dataIntegrityObj.link = wikiTextContainer?.dataset?.link as string;
 }
 
@@ -1030,7 +1030,7 @@ export function sortObj(obj: SortObj, number: boolean = false) {
 	const keys = Object.keys(sortObj(obj));
 	const numbers = keys.map(key => extractNumber(key)).map(Number).sort((a, b) => a - b);
 	for (const number of numbers) {
-		const keyIndex = keys.findIndex(element => extractNumber(element) == number.toString())
+		const keyIndex = keys.findIndex(element => extractNumber(element) === number)
 		const key = keys[keyIndex];
 		keys.splice(keyIndex, 1);
 		resultObj[key] = obj[key];
@@ -1039,11 +1039,12 @@ export function sortObj(obj: SortObj, number: boolean = false) {
 }
 
 /**
- * Returns a string containing all the integers in a given string.
+ * Returns a number containing all the integers in a given string.
  * This function only works for integers.
+ * If there are no integers, returns an empty string.
  *
  * @param {string} string - The string to extract integers from.
- * @returns {string} A string containing all the integers in the input string.
+ * @returns {string} A number containing all the integers in the input string. Returns an empty string if no integers were found.
  */
 export function extractNumber(string: string): string | number {
 	const matchString = string?.match(/[0-9]/g)?.join('');
@@ -1066,6 +1067,7 @@ export function oddEven(number: number) {
  * @async
  * @param {string} html - The string of HTML to be edited.
  * @param {Object} [varObj] - An object containing key-value pairs to replace in the loaded HTML.
+ * @param {Object} [funcArray] - An ElementFunctions array containing event listeners to put in the loaded HTML.
  * @returns {string|Document} - A string of the edited HTML or a dom with attached eventListeners, depending on the input arguments.
  */
 export function loadHTML(html: string, varObj: { [key: string]: string } = {}, funcArray: ElementFunctions = []): string | Document {
@@ -1073,7 +1075,7 @@ export function loadHTML(html: string, varObj: { [key: string]: string } = {}, f
 	for (const variable in varObj) {
 		processingHTML = processingHTML.replaceAll('${' + variable + '}', varObj[variable]);
 	}
-	if (funcArray.length == 0) return processingHTML;
+	if (!funcArray.length) return processingHTML;
 
 	const parser = new DOMParser();
 	const dom = parser.parseFromString(processingHTML, 'text/html');
@@ -1098,7 +1100,7 @@ export function getCurrentHTMLFile() {
 
 export function addDomAsElement(dom: Document, dest: HTMLElement, position: InsertPosition = 'afterbegin'): void {
 	const elements = Array.from(dom.body.children);
-	if (position == 'afterbegin' || position == 'afterend') elements.reverse();
+	if (position === 'afterbegin' || position === 'afterend') elements.reverse();
 	for (const element of elements) {
 		dest.insertAdjacentElement(position, element);
 	}

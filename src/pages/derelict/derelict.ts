@@ -4,9 +4,9 @@
 
 import { wikiCode } from "../../common";
 import { glyphs2Coords } from "../../modules/portalglyphs";
-import { dataIntegrityObj, globalElements, pageData } from "../../variables/objects";
+import { dataIntegrityObj, pageData } from "../../variables/objects";
 
-export const galaxyTableEntry = `| [[File: <output name="image"></output>|150px]] || [[<output name="name"></output>]] || <output name="rooms"></output> || <output name="enemies"></output> || {{gl/Small|0000<output name="portalglyphs"></output>}} || <output name="discoverer"></output><br>
+export const galaxyTableEntry = `| [[File:<output name="image"></output>|150px]] || [[<output name="system"></output>]] || <output name="rooms"></output> || <output name="enemies"></output> || {{gl/Small|<output name="portalglyphs"></output>}} || <output name="discoverer"></output><br>
 |-`;
 
 export function enemyCheckboxes() {
@@ -20,22 +20,19 @@ export function enemyCheckboxes() {
 
 export function albumLinkGen() {
 	const type = dataIntegrityObj.link;
-	const { galaxy, class: freighterClass } = pageData;
-	if (type === 'album') return `${pageData.name}#${galaxy}`;
+	const { class: freighterClass } = pageData;
+	if (type === 'album') return `${pageData.name}`;
 	return `Eisvana Derelict Freighter Catalog#${freighterClass}-Class`;
 }
 
 export function processGlyphs(element: HTMLInputElement) {
 	const glyphs = element.value;
 	const regionGlyphs = glyphs.substring(4);	// NoSonar this is the beginning of the region in the glyph sequence
-	const dest = element.dataset.destNoauto as string;
 
 	const regioncoords = glyphs2Coords(glyphs).slice(0, -5);	// NoSonar this is the system index in the coord string
 
-	wikiCode(regionGlyphs, dest);
+	wikiCode(regionGlyphs, 'regionglyphs');
 	wikiCode(regioncoords, 'coordinates');
-	const glyphPreviewElement = globalElements.output.portalglyphsPreview as HTMLOutputElement;
-	glyphPreviewElement.innerText = glyphs;
 }
 
 export function discoverer() {

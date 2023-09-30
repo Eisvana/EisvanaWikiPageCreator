@@ -62,7 +62,7 @@
 						<label for="systemInput">Name of the system:</label>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest-noauto="system" id="systemInput">
+						<input type="text" data-dest="system" id="systemInput">
 					</div>
 					<div class="tableCell text">
 						<div class="label-combo">
@@ -168,6 +168,22 @@
 						<input type="text" id="fuelInput" data-dest-number="0" data-dest-noauto="fuel" maxlength="2">
 					</div>
 					<div class="tableCell text">
+						<label for="otherStatInput">Other upgrades:</label>
+						<button class="tooltip">
+							<data>Stat of frigate upgrades that are not fuel or hyperdrive.</data>
+							<data>Other Frigate Upgrade Bonus</data>
+							<data>
+								Frigate upgrade stat for modules unrelated to hyperdrive and fuel consumption. This will
+								always be the same for a given freighter and its upgrade modules.
+							</data>
+							<data>derelict/fuel</data>
+						</button>
+					</div>
+					<div class="tableCell data">
+						<input type="text" id="otherStatInput" data-dest-number="0" data-dest-noauto="otherStats"
+							maxlength="2">
+					</div>
+					<div class="tableCell text">
 						<label for="discoveredlinkInput">Discoverer wiki name:</label>
 					</div>
 					<div class="tableCell data">
@@ -222,7 +238,7 @@
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image" name="image"></output></div>
 					<div>| coordinates = <output name="coordinates"></output>:xxxx</div>
-					<div>| portalglyphs = 0000<output name="portalglyphs"></output>
+					<div>| portalglyphs = 0000<output name="regionglyphs"></output>
 					</div>
 					<div>| type = Freighter</div>
 					<div>| subtype = Derelict</div>
@@ -249,9 +265,12 @@
 					<div>|-</div>
 					<div>! Procedural Rewards !! Value</div>
 					<div>|-</div>
-					<div>|{{class|S}} Hyperdrive || <output name="hyperdrive"></output> ly</div>
+					<div>|{{class|<output name="class"></output>}} Hyperdrive || <output name="hyperdrive"></output> ly
+					</div>
 					<div>|-</div>
-					<div>|{{class|S}} Fuel || <output name="fuel"></output></div>
+					<div>|{{class|<output name="class"></output>}} Fuel || <output name="fuel"></output></div>
+					<div>|-</div>
+					<div>|{{class|<output name="class"></output>}} Other || <output name="otherStats"></output></div>
 					<div>|}</div>
 					<br>
 
@@ -270,7 +289,8 @@
 					<br>
 
 					<div>==Location==</div>
-					<div>This freighter can be found in all galaxies at the coordinates of the entries above. Enemies and room layout may differ.</div>
+					<div>This freighter can be found in all galaxies at the coordinates of the entries above. Enemies
+						and room layout may differ.</div>
 					<br>
 
 					<div>==Additional Information==</div>
@@ -298,8 +318,9 @@
 					</h2>
 					<div id="classTableEntry" class="wikiText" data-link="classTableEntry">
 						| [[<output name="name"></output>]] || <output name="hyperdrive"></output> ly || +<output
-							name="fuel"></output>% || <output name="coordinates"></output>:xxxx ||
-						{{Gl/Small|0000<output name="portalglyphs"></output>}} || <output name="discoverer"></output>
+							name="fuel"></output>% || +<output name="otherStats"></output>% || <output
+							name="coordinates"></output>:xxxx || {{Gl/Small|0000<output name="regionglyphs"></output>}}
+						|| <output name="discoverer"></output>
 					</div>
 				</div>
 			</div>

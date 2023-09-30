@@ -19,14 +19,14 @@ const albumElements = {
 	}
 }
 
-const albumEntry = globalElements.output.albumEntry as HTMLDivElement;
-const albumActions = globalElements.output.albumActions as HTMLDivElement;
+const albumEntry = globalElements.output.albumEntry;
+const albumActions = globalElements.output.albumActions;
 
 // If the global albumEntry element exists, set its innerHTML to the wikitext.
-if (albumEntry) albumEntry.innerHTML = wikitext;
+if (albumEntry instanceof HTMLDivElement) albumEntry.innerHTML = wikitext;
 
 // If the global albumActions element exists, set its innerHTML to the actions.
-if (albumActions) {
+if (albumActions instanceof HTMLDivElement) {
 	addDomAsElement(actionsDom, albumActions, 'afterbegin');
 
 	// Update the global albumElements with their respective IDs.
