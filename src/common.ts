@@ -143,6 +143,7 @@ export function showAll() {
 	}
 
 	numberStats();
+	researchTeam();
 	image(globalElements.input.fileUpload as HTMLInputElement);
 	galleryUpload();
 	try { glyphInputOnChange(globalElements.input.portalglyphsInput as HTMLInputElement) } catch { /*do nothing*/ }
