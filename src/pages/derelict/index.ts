@@ -15,6 +15,7 @@ updateGlobalElements(derelictElements);
 assignElementFunctions(derelictElementFunctions);
 
 (globalElements.output.galaxyTable as HTMLOutputElement).innerHTML = galaxyTableEntry;
+(globalElements.output.albumText as HTMLOutputElement).innerHTML = galaxyTableEntry;
 
 /* Adding action buttons */
 
@@ -37,20 +38,26 @@ const newActionsDom = loadHTML(domBodyHtml, {}, derelictActionsElementFunctions)
 
 // change content and element IDs so they are still unique
 const noteElement = newActionsDom.getElementById(noteId);
-noteElement!.id = 'indexTableActionsNote';
-noteElement!.innerText = `If the page doesn't exist yet, add an entry to the catalogue as well`;
+if (noteElement) {
+	noteElement.id = 'indexTableActionsNote';
+	noteElement.innerText = `If the page doesn't exist yet, add an entry to the catalogue as well`;
+}
 
 // copy button
 const tableBtn = newActionsDom.getElementById('albumBtn');
-tableBtn!.id = 'tableBtn';
-tableBtn!.dataset.link = 'classTableEntry';
-tableBtn!.innerText = 'Copy Index Entry Code';
+if (tableBtn) {
+	tableBtn.id = 'tableBtn';
+	tableBtn.dataset.link = 'classTableEntry';
+	tableBtn.innerText = 'Copy Index Entry Code';
+}
 
 // open link button
 const pageLink = newActionsDom.getElementById('albumLink');
-pageLink!.id = 'pageLink';
-pageLink!.dataset.link = 'classTableEntry';
-pageLink!.innerText = 'Open Index Page';
+if (pageLink) {
+	pageLink.id = 'pageLink';
+	pageLink.dataset.link = 'classTableEntry';
+	pageLink.innerText = 'Open Index Page';
+}
 
 // add modified elements to real DOM
 addDomAsElement(newActionsDom, globalElements.input.classTableActions as HTMLDivElement, 'afterbegin');

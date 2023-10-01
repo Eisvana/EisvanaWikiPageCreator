@@ -66,6 +66,11 @@ const creatureElementFunctions: ElementFunctions = [
 		element: 'dmInput',
 		func: () => noLineBreak()
 	},
+	{
+		element: 'producesCheckboxInput',
+		handler: 'change',
+		func: () => genusProduces(),
+	},
 ]
 
 export default creatureElementFunctions;

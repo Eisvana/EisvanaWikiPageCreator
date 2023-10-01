@@ -23,6 +23,7 @@ export function planetMoon(moon = pageData.moon) {
  *
  * @param {string} [planet=pageData.planet] - The name of the planet to describe.
  * @param {string} [moon=pageData.moon] - The name of the moon to describe.
+ * @param {boolean} [link=false] - Whether to link the word "planet".
  *
  * @returns {string} - The description sentence, or "" if `globalElements.output.celestialBody`
  *                     is falsy.
@@ -30,11 +31,15 @@ export function planetMoon(moon = pageData.moon) {
 export function planetMoonSentence(planet: string = pageData.planet as string, moon: string = pageData.moon as string, link: boolean = false) {
 	const dest = globalElements.output.celestialBody as HTMLOutputElement;
 	const body = planetMoon(moon);
-	const text = body == 'Moon' ? `moon [[${sanitiseString(moon)}]]` : `planet [[${sanitiseString(planet)}]]`;
-	const linkedText = link ? `[[${text.split(' ')[0]}]] ${text.split(' ').slice(1).join(' ')}` : text;
+	const planetName = sanitiseString(planet);
+	const moonName = sanitiseString(moon);
+	const openLinkBrackets = link ? '[[' : '';
+	const closingLinkBrackets = link ? ']]' : '';
 
-	if (!dest) return linkedText;
-	dest.innerText = linkedText;
+	const text = body === 'Moon' ? `${openLinkBrackets}moon${closingLinkBrackets} [[${moonName}]] of the ${openLinkBrackets}planet${closingLinkBrackets} [[${planetName}]]` : `${openLinkBrackets}planet${closingLinkBrackets} [[${planetName}]]`;
+
+	if (!dest) return text;
+	dest.innerText = text;
 	return '';
 }
 

@@ -29,7 +29,7 @@ export function docByExternal() {
 	 */
 	const research = (() => {
 		const chapterSentence = displayResearch();
-		if (chapterSentence && chapterSentence != 'Eisvana') return chapterSentence;
+		if (chapterSentence && chapterSentence !== 'Eisvana') return chapterSentence;
 		return '';
 	})();
 
@@ -55,7 +55,7 @@ export function docByExternal() {
 		if (!documenter || documenter == discovered || documenter == discoveredlink) {
 			return `Discovered and uploaded by ${research} ${discoverer} on ${discDate}`
 		} else {
-			return `* Discovered and uploaded by ${platform} explorer ${discoverer} on ${discDate}
+			return `* Discovered and uploaded by ${platform ? platform + ' explorer' : ''} ${discoverer} on ${discDate}
 			* Explored and documented by ${research} ${documented} on ${docDate}`
 		}
 	})();

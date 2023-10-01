@@ -11,6 +11,7 @@ const derelictElements: ElementIds = {
 		galaxyTable: 'galaxyTable',
 		galaxyTableEntry: 'galaxyTableEntry',
 		indexEntry: 'indexEntry',
+		albumText: 'albumText',
 	}
 }
 
