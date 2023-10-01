@@ -134,7 +134,7 @@ export function albumDiscoverer() {
  */
 export function albumName() {
 	const output = (() => {
-		if ((typeof globalFunctions.albumNameExternal == 'function')) {
+		if ((typeof globalFunctions.albumNameExternal === 'function')) {
 			return globalFunctions.albumNameExternal();
 		} else {
 			return pageData.name;
@@ -167,7 +167,7 @@ export function albumOther() {
  */
 function albumType() {
 	const output = (() => {
-		if (typeof globalFunctions.albumTypeExternal == 'function') {
+		if (typeof globalFunctions.albumTypeExternal === 'function') {
 			return globalFunctions.albumTypeExternal();
 		} else {
 			return '';
@@ -199,15 +199,20 @@ function updateAlbumData() {
  * @returns {void}
  */
 export function albumFunctions() {
-	pageData.albumInitialised ? albumData() : document.addEventListener('albumLoaded', () => albumData());
-
+	if (pageData.albumInitialised) {
+		albumData();
+	} else {
+		document.addEventListener('albumLoaded', () => albumData());
+	}
 	/**
 	 * Calls all functions related to album creation and updating.
 	 * @function
 	 * @name albumData
 	 * @returns {void}
-	 */
+	*/
 	function albumData() {
+		console.log("executing")
+		console.trace()
 		updateAlbumData();
 		albumDiscoverer();
 		albumName();

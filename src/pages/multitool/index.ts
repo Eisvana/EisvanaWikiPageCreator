@@ -20,7 +20,7 @@ addStaticPageData('galleryExplanationExternal', `
 			<li>Discovery Menu</li>
 			<li>Price Page</li>
 			<li>Base Stats</li>
-			<li>Minor Settlement/Sentinel Pillar/Harmonic Camp</li>
+			<li>Minor Settlement/Sentinel Pillar/Harmonic Camp/Monolith</li>
 			<li>Tool in Hand</li>
 			<li>First Person View</li>
 		</ol>

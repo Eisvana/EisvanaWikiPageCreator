@@ -6,6 +6,7 @@ import sandwormElements from "./elementStore";
 import { globalFunctions } from "../../variables/objects";
 import { generateGalleryArray, albumLinkGen, albumOtherExternal, albumNameExternal, albumItemTypeExternal, autoSpawn, catalogue, wormName } from "./sandworm";
 import { addStaticPageData } from "../../common";
+import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import '../../startup';
 
 globalFunctions.generateGalleryArray = () => generateGalleryArray();
@@ -31,6 +32,7 @@ assignElementFunctions(sandwormElementFunctions);
 
 // startupFunctions
 wormName();
+planetMoonSentence(undefined, undefined, true);
 catalogue();
 autoSpawn();
 albumFunctions();

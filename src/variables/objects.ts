@@ -1,6 +1,6 @@
 import { GlobalElements } from "../types/elements";
 import { LinkObj } from "../types/links";
-import { TransformedElementFunctions } from "../types/objects";
+import { StdObj, TransformedElementFunctions } from "../types/objects";
 import { AnyPrimitive } from "../types/values";
 
 /**
@@ -50,3 +50,9 @@ export const footerInputs: Array<HTMLInputElement | HTMLSelectElement> = [];
 export const transformedElementFunctions: TransformedElementFunctions = {};
 
 export const staticBooleans: { [key: string]: boolean } = {};
+
+export const locsByType: StdObj = {
+	Royal: 'Sentinel Pillar',
+	Sentinel: 'Harmonic Camp',
+	Atlantid: 'Monolith',
+}

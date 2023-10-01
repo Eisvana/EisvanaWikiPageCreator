@@ -59,7 +59,6 @@ export function addInfo() {
 	// get the HTML element where the output will be displayed
 	const outputElement = globalElements.output.addInfo as HTMLOutputElement;
 
-	// only accept GHEC as researchteam and construct sentence based on that
 	const chapter = docByResearchteam();
 
 	// get the catalogue from the page data
@@ -107,16 +106,21 @@ export function pageName() {
  *
  */
 export function genusProduces() {
-	const genus = pageData.genus as string;
+	const genus = pageData.genus;
 	const ecosystems = Object.keys(creatureData.ecosystems);
-	const producesInputElement = globalElements.input.producesInput as HTMLSelectElement;
+	const producesInputElement = globalElements.input.producesSelectionInput;
+	const producesCheckboxElement = globalElements.input.producesCheckboxInput;
+	if (!(typeof genus === 'string' && producesInputElement instanceof HTMLSelectElement && producesCheckboxElement instanceof HTMLInputElement)) return;
+	const hasProduces = producesCheckboxElement.checked;
 	for (const ecosystem of ecosystems) {
 		if (!Object.keys(creatureData.ecosystems[ecosystem]).includes(genus)) continue;
 
 		const food = creatureData.ecosystems[ecosystem][genus].produces;
 		setDropdownOptions(producesInputElement, food);
 		hideInput(producesInputElement, food.length > 1 ? '' : 'none');
-		wikiCode(producesInputElement);
+		if (food.length > 1) producesCheckboxElement.checked = true;
+		hideInput(producesCheckboxElement, food.length > 1 ? 'none' : '');
+		wikiCode(hasProduces ? producesInputElement : '', producesInputElement.dataset.dest);
 	}
 }
 
@@ -132,7 +136,7 @@ export function hideSecGenderProps() {
 	const { weight2Input: gen2Weight, height2Input: gen2Height, gender2Input: gen2Input } = globalElements.input;
 	const gen2Props = [gen2Weight, gen2Height] as Array<HTMLInputElement | HTMLSelectElement>;
 
-	if (gen2 && gen1 != gen2) {
+	if (gen2 && gen1 !== gen2) {
 		gen2Props.forEach(prop => hideInput(prop, ''));
 	} else {
 		gen2Props.forEach(prop => hideInput(prop, 'none'));
@@ -177,16 +181,16 @@ export function specialNotesTextFunc() {
 	const addObservationElement = globalElements.output.addObservation as HTMLOutputElement;
 
 	wikiCodeSimple(notesElement, notesElement.dataset.destNoauto);
-	(addObservationElement.parentElement as HTMLElement).style.display = genus == 'Mechanoceris' ? 'none' : '';
-	if (!notes && genus != 'Mechanoceris') {
+	(addObservationElement.parentElement as HTMLElement).style.display = genus === 'Mechanoceris' ? 'none' : '';
+	if (!notes && genus !== 'Mechanoceris') {
 		addObservationElement.innerText = "'''Additional Observations''': ";
 		return;
 	}
 
 	const noteText = (() => {
-		if (genus == 'Mechanoceris') {
+		if (genus === 'Mechanoceris') {
 			return '';
-		} else if (!specialNotes || specialNotes == notes) {
+		} else if (!specialNotes || specialNotes === notes) {
 			return `'''Additional Observations''': ${notes}`;
 		} else {
 			return specialNotes;
@@ -240,7 +244,7 @@ export function genderProps(property1Name: string, property2Name: string) {
 
 	// adds .0
 	let property1Number, property2Number;
-	if (property1Name != 'gender') {
+	if (property1Name !== 'gender') {
 		const prependString1 = property1Value.startsWith('-') && !parseFloat(property1Value) ? '-' : '';
 		const prependString2 = property2Value.startsWith('-') && !parseFloat(property2Value) ? '-' : '';
 		property1Number = isNaN(parseFloat(property1Value)) ? '' : prependString1 + parseFloat(property1Value).toFixed(1);
@@ -254,11 +258,11 @@ export function genderProps(property1Name: string, property2Name: string) {
 
 	const result = (() => {
 		if (gender2) {
-			if (property1Data == property2Data || !property2Data) {
+			if (property1Data === property2Data || !property2Data) {
 				return property1Data;
 			} else if (!property1Data) {
 				return property2Data;
-			} else if (prioritise == 'gender1') {
+			} else if (prioritise === 'gender1') {
 				return property1Data + ' - ' + property2Data;
 			} else {
 				return property2Data + ' - ' + property1Data;
@@ -342,7 +346,7 @@ export function generateGalleryArray() {
 	let gender1, gender2;
 	if (pageData.gender2) {
 		const prio = creaturePrio();
-		if (prio == 'gender2') {
+		if (prio === 'gender2') {
 			gender1 = pageData.gender2;
 			gender2 = pageData.gender;
 		} else {
@@ -386,7 +390,7 @@ export function generateGalleryArray() {
  * @returns {string|undefined} Returns the updated page name if the page has been renamed, otherwise returns undefined.
  */
 export function redirectPage(): string {
-	if (pageData.oldName && pageData.oldName != pageData.newName) return pageData.newName as string;
+	if (pageData.oldName && pageData.oldName !== pageData.newName) return pageData.newName as string;
 	return '';
 }
 

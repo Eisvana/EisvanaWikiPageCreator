@@ -8,7 +8,7 @@
 	<meta name="application-name" content="Eisvana Wiki Page Creator">
 	<meta name="description"
 		content="Easily generate the wikicode to create a fauna discovery page for Eisvana on the No Man's Sky Wiki!">
-	<meta name="theme-color" content="#3cb4a9">
+	<meta name="theme-color" content="#280033">
 	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, Fauna">
 	<script src="./src/pages/fauna" type="module"></script>
 </head>
@@ -332,6 +332,18 @@
 							id="specialNotesInput">
 					</div>
 					<div class="tableCell text">
+						<label>Scan lists "Produces":</label>
+						<button class="tooltip">
+							<data>Found on the creature scan.</data>
+							<data>Produces</data>
+							<data>Found on the creature scan.</data>
+							<data>creature/creatureProduces</data>
+						</button>
+					</div>
+					<div class="tableCell data">
+						<input type="checkbox" data-dest-noauto="produces" id="producesCheckboxInput">
+					</div>
+					<div class="tableCell text">
 						<label>Produces:</label>
 						<button class="tooltip">
 							<data>Found on the creature scan.</data>
@@ -341,7 +353,7 @@
 						</button>
 					</div>
 					<div class="tableCell data">
-						<select data-dest="produces" id="producesInput">
+						<select data-dest="produces" id="producesSelectionInput">
 						</select>
 					</div>
 					<div class="tableHeader text">
