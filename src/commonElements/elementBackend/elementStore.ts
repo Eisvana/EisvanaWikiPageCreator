@@ -1,4 +1,4 @@
-import { ElementIds, ElementId } from "../../types/elements";
+import type { ElementIds, ElementId } from "../../types/elements";
 import { globalElements } from "../../variables/objects";
 import elementIds from "../elementStoreFrontend";
 

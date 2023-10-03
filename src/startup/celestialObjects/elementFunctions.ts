@@ -1,7 +1,7 @@
 import { hideOrgName } from "../../common";
 import { docByExternal } from "../../miscLogic/celestialobjectslogic";
 import { locationSentence } from "../../pages/system/system";
-import { ElementFunctions } from "../../types/elements";
+import type { ElementFunctions } from "../../types/elements";
 
 const celestialObjectElementFunctions: ElementFunctions = [
 	{

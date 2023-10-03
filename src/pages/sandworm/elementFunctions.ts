@@ -1,6 +1,6 @@
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import { albumName, albumOther, albumDiscoverer } from "../../modules/albumactions";
-import { ElementFunctions } from "../../types/elements";
+import type { ElementFunctions } from "../../types/elements";
 import { catalogue, wormName, autoSpawn } from "./sandworm";
 
 const sandwormElementFunctions: ElementFunctions = [

@@ -1,4 +1,4 @@
-import { ElementIds } from "../../types/elements";
+import type { ElementIds } from "../../types/elements";
 
 const starshipElements: ElementIds = {
 	input: {

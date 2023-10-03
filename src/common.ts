@@ -10,9 +10,9 @@ import { assignElementFunctions, assignFunction } from './commonElements/element
 import { glyphInputOnChange } from './modules/portalglyphs';
 import { explanation } from './modules/tooltip';
 import { planetMoonSentence } from './miscLogic/locationLogic';
-import { Datalist, SortObj } from './types/objects';
-import { AnyPrimitive } from './types/values';
-import { ElementFunction, ElementFunctions, InputElements } from './types/elements';
+import type { Datalist, SortObj } from './types/objects';
+import type { AnyPrimitive } from './types/values';
+import type { ElementFunction, ElementFunctions, InputElements } from './types/elements';
 import { useGalleryStore } from './modules/gallery/stores/gallery';
 import md5Hex from 'md5-hex';
 
@@ -1121,7 +1121,4 @@ export function capitaliseFirst(inputString: string) {
 export function resetGallery() {
 	const galleryStore = useGalleryStore()
 	galleryStore.$reset();
-
-	// const galleryElement = globalElements.output.galleryItems;
-	// if (galleryElement instanceof HTMLDivElement) galleryElement.innerHTML = '';
 }

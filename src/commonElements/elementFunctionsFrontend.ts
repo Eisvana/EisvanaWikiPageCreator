@@ -1,6 +1,6 @@
 import { docBy, enableTextMarking, hideDiscoverer, image, researchTeam, validateCoords } from "../common";
 import { deleteCharacter, displayGlyphs, glyphInputOnChange } from "../modules/portalglyphs";
-import { ElementFunctions } from "../types/elements";
+import type { ElementFunctions } from "../types/elements";
 import { staticBooleans } from "../variables/objects";
 
 /**

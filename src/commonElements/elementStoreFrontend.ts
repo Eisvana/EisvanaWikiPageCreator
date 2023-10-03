@@ -1,4 +1,4 @@
-import { ElementIds } from "../types/elements";
+import type { ElementIds } from "../types/elements";
 
 /**
  * An object that defines IDs and names for elements that are consistent across multiple pages.

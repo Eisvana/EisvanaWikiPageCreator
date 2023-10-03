@@ -1,6 +1,6 @@
 import { copyCode } from "../../modules/actions";
 import { albumLink } from "../../modules/albumactions";
-import { ElementFunctions } from "../../types/elements";
+import type { ElementFunctions } from "../../types/elements";
 
 const derelictActionsElementFunctions: ElementFunctions = [
 	{

@@ -1,4 +1,4 @@
-import { StdObj } from "./objects";
+import type { StdObj } from "./objects";
 
 export interface LinkObj {
 	[key: string]: ResourceAndCreatureLinks | PlanetPropResourceLinks | BiomeLinks | StdObj;

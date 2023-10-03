@@ -7,7 +7,7 @@
 import md5Hex from "md5-hex";
 import { checkDataIntegrity, errorMessage, showAll, resetGallery } from "../common";
 import { assignElementFunctions } from "../commonElements/elementBackend/elementFunctions";
-import { ElementFunctions } from "../types/elements";
+import type { ElementFunctions } from "../types/elements";
 import { dataIntegrityObj, globalElements, globalFunctions, links, pageData } from "../variables/objects";
 import { wikiLink } from "../variables/simple";
 import { readDefaultValues } from "./footer";

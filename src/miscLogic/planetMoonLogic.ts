@@ -10,12 +10,12 @@ import mineralInputs from '../htmlSnippets/mineralInputs.html?raw';
 import { addAllTooltips } from '../modules/tooltip';
 import { updateGlobalElements } from '../commonElements/elementBackend/elementStore';
 import { buildDescriptor, initialiseSectionInputs, wikiCodePercentage } from './celestialobjectslogic';
-import { ElementFunctions, ElementIds } from '../types/elements';
+import type { ElementFunctions, ElementIds } from '../types/elements';
 import { getResourceData, getSentinelData } from '../datalists/planetDatalists';
 import { getRegNumber } from './locationLogic';
 import creatureData from './creatureData';
-import { LinkObjValues, PlanetPropResourceLinks } from '../types/links';
-import { StdObj } from '../types/objects';
+import type { LinkObjValues, PlanetPropResourceLinks } from '../types/links';
+import type { StdObj } from '../types/objects';
 
 /**
  * Determines the appropriate verb to use based on the given number, and sends the output to the
@@ -26,7 +26,7 @@ import { StdObj } from '../types/objects';
  * @returns {string} Either "is" or "are," depending if the number is singular or plural.
  */
 export function plural(number: number, dest: string = ''): string | void {
-	const word = number == 1 ? 'is' : 'are';
+	const word = number === 1 ? 'is' : 'are';
 	if (!dest) return word;
 	wikiCode(word, dest);
 }
@@ -202,7 +202,7 @@ export function sentinelSentence() {
 	})();
 
 	// Constructs a sentence describing Sentinel activity on this page.
-	const output = `[[Sentinel]] activity on this ${(pageData.pageType as string).toLowerCase()} is classified as: ''${sentDescriptor}''. The sentinels ${(sentLevel == 'aggressive') ? '' : "don't"} present an immediate threat.`;
+	const output = `[[Sentinel]] activity on this ${(pageData.pageType as string).toLowerCase()} is classified as: ''${sentDescriptor}''. The sentinels ${(sentLevel === 'aggressive') ? '' : "don't"} present an immediate threat.`;
 
 	// Assigns the constructed sentence to the corresponding HTML element.
 	(globalElements.output.sentinelSentence as HTMLOutputElement).innerText = output;
@@ -421,7 +421,7 @@ function changeTableEntry(element: HTMLButtonElement) {
 	}
 	if (!parent.dataset[section]) return;
 
-	if (section == 'fauna') {
+	if (section === 'fauna') {
 		findAndRemove(links.genera);
 		addGenus();
 	} else {
@@ -434,7 +434,7 @@ function changeTableEntry(element: HTMLButtonElement) {
 		const subsection = parent.dataset[section] as string;
 		const sectionNumber = extractNumber(subsection);
 		const item = Object.keys(object);
-		const itemName = item.find(element => extractNumber(element) == sectionNumber) as string;
+		const itemName = item.find(element => extractNumber(element) === sectionNumber) as string;
 		delete object[itemName];
 	}
 }

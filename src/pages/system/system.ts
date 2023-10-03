@@ -8,13 +8,13 @@ import { updateGlobalElements } from '../../commonElements/elementBackend/elemen
 import { autoInfested, buildDescriptor, initialiseSectionInputs } from '../../miscLogic/celestialobjectslogic';
 import { getRegNumber, regNr } from '../../miscLogic/locationLogic';
 import { addAllTooltips } from '../../modules/tooltip';
-import { ElementFunctions, ElementIds } from '../../types/elements';
-import { SortObj, StdObj } from '../../types/objects';
+import type { ElementFunctions, ElementIds } from '../../types/elements';
+import type { SortObj, StdObj } from '../../types/objects';
 import { globalElements, links, pageData } from '../../variables/objects';
 import tradeableInputs from '../../htmlSnippets/tradeableInputs.html?raw';
 import planetInputHTML from '../../htmlSnippets/planetInputs.html?raw';
 import planetOutputHTML from '../../htmlSnippets/planetOutputs.html?raw';
-import { BiomeLinks, ResourceAndCreatureLinks } from '../../types/links';
+import type { BiomeLinks, ResourceAndCreatureLinks } from '../../types/links';
 
 /**
  * Generates a sentence that describes the location of the page.
@@ -79,7 +79,7 @@ export function planetInputs() {
 	const elementList: NodeListOf<HTMLDivElement> = document.querySelectorAll('[data-planet]');
 	let childIndex = getChildIndex(Array.from(elementList), 'dataset.planet');
 
-	while (diff() != 0) {
+	while (diff() !== 0) {
 		if (diff() > 0) {
 			addPlanet(childIndex);
 			childIndex++;
@@ -392,7 +392,7 @@ export function merchantUpgrades(group: string = '') {
 		wikiCode(code.join('\n'), group);
 		const wrapper = (globalElements.output[group] as HTMLOutputElement).closest('#scrapDealer') as HTMLDivElement;
 		if (!wrapper) return;		// return if not scrap dealer
-		if (code.length == 0) {
+		if (code.length === 0) {
 			wrapper.style.display = 'none';
 		} else {
 			wrapper.style.display = '';
@@ -507,7 +507,7 @@ export function resetExternal() {
 export function regionLong() {
 	const region = pageData.region as string;
 	const output = (() => {
-		if (region.split(' ').length == 1) return region + ' region';
+		if (region.split(' ').length === 1) return region + ' region';
 		return region;
 	})();
 	const outputElement = globalElements.output.regionLong as HTMLOutputElement;
@@ -677,7 +677,7 @@ export function spaceStationSection() {
 		const input = pageData.faction as string;
 		const wealth = pageData.wealth as string;
 		const conflict = pageData.conflict as string;
-		if (input == 'Uncharted') return 'uncharted';
+		if (input === 'Uncharted') return 'uncharted';
 		if (input.includes('Abandoned')) return 'abandoned';
 		if (wealth.includes('Black Market') || conflict.includes('Pirate')) return 'pirate';
 		return 'normal';
@@ -689,11 +689,11 @@ export function spaceStationSection() {
 		const section = stationSections[i];
 		const sectionName = section.dataset.station as string;
 		if (sectionDefinition[faction].includes(sectionName)) {
-			if ((sectionName == 'merchant' || sectionName == 'scrapDealer') && defaultDisplay(section)) {
+			if ((sectionName === 'merchant' || sectionName === 'scrapDealer') && defaultDisplay(section)) {
 				i++;	// NoSonar triggered by row with button, skip row with checkboxes
 			}
 
-			const isScrapDealer = section.id == 'scrapDealer' && !pageData.SDMerchant;
+			const isScrapDealer = section.id === 'scrapDealer' && !pageData.SDMerchant;
 			section.style.display = isScrapDealer ? 'none' : '';
 		} else {
 			section.style.display = 'none';
@@ -736,7 +736,7 @@ export function autoBH() {
 	const SIV = glyphs.substring(2, 4);		// NoSonar gets the last two characters of the SIV, because only those are relevant for checking for black holes
 
 	// Hides the input if SIV is 79, otherwise shows it and sets its value to an empty string.
-	if (SIV == '79') {
+	if (SIV === '79') {
 		hideInput(colorInput, 'none');
 		colorInput.value = 'Black Hole';
 	} else {
@@ -779,7 +779,7 @@ export function combineEconConf() {
 
 	const inputs = [wealth, economy, conflict];
 
-	if (faction.includes('Abandoned') || faction == 'Uncharted') {
+	if (faction.includes('Abandoned') || faction === 'Uncharted') {
 		for (const input of inputs) {
 			const value = (input.querySelector('optgroup:last-child option') as HTMLOptionElement).value;
 			input.value = value;
@@ -829,7 +829,7 @@ export function generateGalleryArray() {
 		'Default SS Multi-Tool',
 	];
 
-	if (pageData.faction == 'Uncharted' || (pageData.faction as string).includes('Abandoned')) {
+	if (pageData.faction === 'Uncharted' || (pageData.faction as string).includes('Abandoned')) {
 		array.pop();
 	}
 

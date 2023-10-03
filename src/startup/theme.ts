@@ -13,7 +13,7 @@ if (!localStorageTheme && window.matchMedia('(prefers-color-scheme: dark)').matc
 }
 
 // if dark theme is preferred, set document with a `data-theme` attribute
-if (theme == 'dark') document.documentElement.dataset.theme = 'dark';
+if (theme === 'dark') document.documentElement.dataset.theme = 'dark';
 
 if (!localStorageTheme) localStorage.setItem('theme', theme);
 
