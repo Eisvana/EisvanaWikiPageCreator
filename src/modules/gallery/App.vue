@@ -14,6 +14,8 @@ import { explanation } from "../tooltip";
 const galleryUpload = ref<HTMLInputElement | null>(null);
 const filePreview = ref<HTMLDivElement | null>(null);
 
+const isPreviewHidden = ref(false);
+
 onMounted(() => {
 	if (window.matchMedia("(pointer: coarse)").matches || !filePreview.value)
 		return;
@@ -137,18 +139,29 @@ function buildFileItem(files: File | File[], storeLoc: Ref<FileItem[]>) {
 function galleryFileItem(fileItem: FileItem) {
 	return fileItem.file.name + (fileItem.desc ? "|" + fileItem.desc : "");
 }
+
+function togglePreview() {
+	isPreviewHidden.value = !isPreviewHidden.value;
+}
 </script>
 
 <template>
 	<input ref="galleryUpload" accept="image/*" type="file" id="galleryUpload" multiple @change="addFilesToStoreGallery" />
 
 	<Teleport to="#galleryItems">
-		<div v-show="galleryFiles.length" ref="filePreview" class="gallery-preview">
-			<GalleryItem v-for="fileItem in galleryFiles" :key="fileItem.id" :file-item="fileItem" :is-loc="false" />
+		<div v-if="galleryFiles.length" class="gallery-preview-header">
+			<label class="has-text-weight-bold">Gallery Preview</label>
+			<button class="button" @click="togglePreview">{{ isPreviewHidden ?
+				'Show' : 'Hide' }}</button>
 		</div>
-		<div v-if="locationFiles.length" class="gallery-preview">
-			<label class="has-text-weight-bold">Location Files</label>
-			<GalleryItem v-for="fileItem in locationFiles" :key="fileItem.id" :file-item="fileItem" :is-loc="true" />
+		<div v-show="!isPreviewHidden">
+			<div v-show="galleryFiles.length" ref="filePreview" class="gallery-preview">
+				<GalleryItem v-for="fileItem in galleryFiles" :key="fileItem.id" :file-item="fileItem" :is-loc="false" />
+			</div>
+			<div v-if="locationFiles.length" class="gallery-preview">
+				<label class="has-text-weight-bold">Location Files</label>
+				<GalleryItem v-for="fileItem in locationFiles" :key="fileItem.id" :file-item="fileItem" :is-loc="true" />
+			</div>
 		</div>
 	</Teleport>
 
@@ -176,3 +189,13 @@ function galleryFileItem(fileItem: FileItem) {
 		</div>
 	</Teleport>
 </template>
+
+<style scoped lang="scss">
+.gallery-preview-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 1rem;
+	margin-block-end: .5rem;
+}
+</style>
