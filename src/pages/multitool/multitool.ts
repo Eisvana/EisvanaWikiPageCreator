@@ -372,7 +372,7 @@ export function subtypeDropdown() {
 
 // album functions
 export function albumTypeExternal(): string {
-	return 'Catalog';
+	return 'Album';
 }
 
 export function albumItemTypeExternal(): string {
@@ -415,13 +415,14 @@ export function albumDescExternal() {
 }
 
 /**
- * Generates a link for the multi-tool catalog album based on the pageData properties.
+ * Generates a link for the multi-tool album based on the pageData properties.
  *
  * @function
- * @returns {string} - Link for the multi-tool catalog album.
+ * @returns {string} - Link for the multi-tool album.
  */
 export function albumLinkGen() {
-	return 'Eisvana Multi-Tool Catalog';
+	const { type } = pageData;
+	return `Eisvana Multi-Tool Album - ${type}`;
 }
 
 /**

@@ -50,7 +50,7 @@ export function albumLink(element: HTMLAnchorElement) {
 		} else if (pageData.catalogue) {
 			return pageData.catalogue;
 		} else {
-			console.warn('No wiki page provided. Define the function `albumLinkGen()` and add it to the `globalFunctions` object or define a catalog in the `pageData.catalogue` property!');
+			console.warn('No wiki page provided. Define the function `albumLinkGen()` and add it to the `globalFunctions` object or define a catalogue in the `pageData.catalogue` property!');
 			element.style.pointerEvents = '';
 		}
 	})();
