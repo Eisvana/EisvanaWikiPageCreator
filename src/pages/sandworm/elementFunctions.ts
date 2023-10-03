@@ -6,7 +6,7 @@ import { catalogue, wormName, autoSpawn } from "./sandworm";
 const sandwormElementFunctions: ElementFunctions = [
 	{
 		element: ['planetInput', 'moonInput'],
-		func: () => { wormName(); planetMoonSentence(); albumName() }
+		func: () => { wormName(); planetMoonSentence(undefined, undefined, true); albumName() }
 	},
 	{
 		element: 'autoSpawn',

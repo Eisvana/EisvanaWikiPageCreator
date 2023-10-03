@@ -211,8 +211,6 @@ export function albumFunctions() {
 	 * @returns {void}
 	*/
 	function albumData() {
-		console.log("executing")
-		console.trace()
 		updateAlbumData();
 		albumDiscoverer();
 		albumName();

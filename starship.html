@@ -549,12 +549,9 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload">
-					</div>
+					<div class="tableCell data" id="galleryInput"></div>
 				</div>
-				<div id="galleryItems">
-				</div>
+				<div id="galleryItems"></div>
 				<div id="actions" class="buttons"></div>
 				<div id="albumActions" class="buttons"></div>
 			</div>
@@ -623,10 +620,7 @@
 					<div><span data-add-info="*"></span> <output id="docby"></output></div>
 					<br>
 
-					<div>==Gallery==</div>
-					<div>&lt;gallery&gt;</div>
-					<div><output id="galleryCode"></output></div>
-					<div>&lt;/gallery&gt;</div>
+					<div id="gallery"></div>
 					<br>
 
 					<div>==Reference Links==</div>

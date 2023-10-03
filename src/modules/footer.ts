@@ -14,7 +14,7 @@ import { glyphError, validateGlyphs } from "./portalglyphs";
  */
 export function switchTheme(): void {
 	document.documentElement.dataset.transition = 'true';
-	if (localStorage.getItem('theme') == 'light') {
+	if (localStorage.getItem('theme') === 'light') {
 		localStorage.setItem('theme', 'dark');
 		document.documentElement.dataset.theme = 'dark';
 	} else {
@@ -72,7 +72,7 @@ export function updateDefaultValues() {
 		const value = input?.value;
 		const store = input?.dataset?.store;
 		const selectInput = input as HTMLSelectElement
-		if ((selectInput?.options?.[selectInput.options.length - 1]?.value == value || value) && store) settings[store] = sanitiseString(value);
+		if ((selectInput?.options?.[selectInput.options.length - 1]?.value === value || value) && store) settings[store] = sanitiseString(value);
 	}
 
 	localStorage.setItem('defaultSettings', JSON.stringify(settings));
@@ -130,7 +130,7 @@ export function restoreDefaults() {
 	const inputs = Array.from(footerInputs);
 	for (const input of inputs) {
 		if (!input?.value) continue;
-		if (input.tagName.toLowerCase() == 'select') {
+		if (input.tagName.toLowerCase() === 'select') {
 			input.value = (input as HTMLSelectElement).options?.[0]?.value;
 		} else {
 			input.value = '';
@@ -152,5 +152,5 @@ export function validateGlyphSettings(input: HTMLInputElement) {
 	glyphError(region, input);
 	const settingsElement = globalElements.input.settings as HTMLDialogElement;
 	const closeButton = settingsElement.querySelector('form button.is-primary') as HTMLButtonElement
-	closeButton.disabled = region == undefined;
+	closeButton.disabled = region === undefined;
 }
