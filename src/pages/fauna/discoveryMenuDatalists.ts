@@ -10,10 +10,10 @@ function generateOption(value: string) {
 }
 
 export function setBiomeSentenceDatalist() {
-	const { biome, newName, planet } = pageData;
+	const { biome, newName, planet, moon } = pageData;
 
-	if (typeof biome !== 'string' || typeof newName !== 'string' || typeof planet !== 'string') return;
-	const biomeSentenceArray = getBiomeSentence(biome, newName, planet);
+	if (typeof biome !== 'string' || typeof newName !== 'string' || typeof planet !== 'string' || typeof moon !== 'string') return;
+	const biomeSentenceArray = getBiomeSentence(biome, newName, moon || planet);
 	addDataList('dmBiomeSentenceList', biomeSentenceArray)
 }
 
