@@ -387,27 +387,27 @@ export function albumOtherExternal() {
 }
 
 /**
- * Generates a link to a starship catalog based on the properties of the pageData object.
+ * Generates a link to a starship album based on the properties of the pageData object.
  * @function albumLinkGen
- * @returns {string} The link to the appropriate starship catalog.
+ * @returns {string} The link to the appropriate starship album.
  */
 export function albumLinkGen() {
 	const { type } = pageData;
 
 	/**
-	 * Returns the appropriate catalog name based on the properties of the pageData object.
+	 * Returns the appropriate album name based on the properties of the pageData object.
 	 * @function getCatalog
-	 * @returns {string} The name of the corresponding starship catalog.
+	 * @returns {string} The name of the corresponding starship album.
 	 */
 	function getCatalog() {
-		return `Eisvana ${type} Catalog`;
+		return `Eisvana Starship Album - ${type}`;
 	}
 
 	return getCatalog();
 }
 
 export function albumTypeExternal() {
-	return 'Catalog';
+	return 'Album';
 }
 
 /**
