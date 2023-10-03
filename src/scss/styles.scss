@@ -179,8 +179,12 @@ nav {
 		margin-block-end: 1rem;
 	}
 
-	.gallery-preview {
+	.gallery-items-wrapper {
 		margin-block-end: 2rem;
+
+		.gallery-preview {
+			margin-block-end: 1rem;
+		}
 	}
 }
 
