@@ -174,7 +174,7 @@ function togglePreview() {
 					{{ galleryFileItem(fileItem) }}
 				</div>
 			</div>
-			<div>&lt;gallery&gt;</div>
+			<div>&lt;/gallery&gt;</div>
 		</div>
 		<br />
 		<div id="locationGallery" v-if="locationFiles.length">
@@ -185,7 +185,7 @@ function togglePreview() {
 					{{ galleryFileItem(fileItem) }}
 				</div>
 			</div>
-			<div>&lt;gallery&gt;</div>
+			<div>&lt;/gallery&gt;</div>
 		</div>
 	</Teleport>
 </template>
