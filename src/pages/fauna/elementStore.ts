@@ -1,8 +1,13 @@
-import { ElementIds } from "../../types/elements";
+import type { ElementIds } from "../../types/elements";
 
-const creatureElements:ElementIds = {
+const creatureElements: ElementIds = {
 	input: {
 		gender: 'Gender',
+	},
+	output: {
+		dmBiomeSentenceList: 'dmBiomeSentenceList',
+		dmTemperamentSentenceList: 'dmTemperamentSentenceList',
+		dmDietSentenceList: 'dmDietSentenceList',
 	}
 }
 

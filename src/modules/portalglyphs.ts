@@ -142,7 +142,7 @@ export function validateGlyphInput(glyphString: string): string {
  */
 export function validateGlyphs(glyphs: string) {
 	// Checks if the input contains exactly 12 glyphs
-	if (glyphs.length != 12) return '';		// NoSonar 12 is the expected glyph length, because glyph strings are always 12 digits long
+	if (glyphs.length !== 12) return '';		// NoSonar 12 is the expected glyph length, because glyph strings are always 12 digits long
 
 	// Gets the region list based on the civilization short name and extracts the region glyphs
 	const regionList = regions;
@@ -178,7 +178,7 @@ export function glyphRegion(glyphs: string) {
  */
 export function glyphError(region: string | undefined, glyphElement: HTMLElement) {
 	errorMessage(glyphElement,
-		(region == undefined)
+		(region === undefined)
 			? 'No valid Eisvana region. See <a href="https://nomanssky.fandom.com/wiki/Eisvana#Claimed_Regions" target="_blank" rel="noopener noreferrer">Eisvana Regions</a> for a list of valid regions.'
 			: '');
 }

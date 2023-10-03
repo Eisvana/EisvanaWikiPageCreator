@@ -3,7 +3,7 @@
  */
 
 import { loadHTML } from "../common";
-import { ElementFunctions } from "../types/elements";
+import type { ElementFunctions } from "../types/elements";
 import { globalElements, globalFunctions, pageData } from "../variables/objects";
 import { wikiLink } from "../variables/simple";
 import { assignLink, copyCode } from "./actions";
@@ -50,7 +50,7 @@ export function albumLink(element: HTMLAnchorElement) {
 		} else if (pageData.catalogue) {
 			return pageData.catalogue;
 		} else {
-			console.warn('No wiki page provided. Define the function `albumLinkGen()` and add it to the `globalFunctions` object or define a catalog in the `pageData.catalogue` property!');
+			console.warn('No wiki page provided. Define the function `albumLinkGen()` and add it to the `globalFunctions` object or define a catalogue in the `pageData.catalogue` property!');
 			element.style.pointerEvents = '';
 		}
 	})();
@@ -211,8 +211,6 @@ export function albumFunctions() {
 	 * @returns {void}
 	*/
 	function albumData() {
-		console.log("executing")
-		console.trace()
 		updateAlbumData();
 		albumDiscoverer();
 		albumName();

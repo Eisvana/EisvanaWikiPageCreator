@@ -9,6 +9,7 @@ import creatureElements from "./elementStore";
 import { albumOtherExternal, addInfo, albumDropdown, bundlePropFunctions, genderDropdown, genusDropdown, genusProduces, hideAlbumEntry, hideCreaturePrio, hideSecGenderProps, noLineBreak, pageName, specialNotes, specialNotesTextFunc, generateGalleryArray, resetExternal } from "./fauna";
 import { globalFunctions } from "../../variables/objects";
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
+import { setTemperamentSentenceDatalist, setBiomeSentenceDatalist, setDietSentenceDatalist } from "./discoveryMenuDatalists";
 import '../../startup';
 
 globalFunctions.albumOtherExternal = () => albumOtherExternal();
@@ -54,3 +55,6 @@ hideAlbumEntry();
 noLineBreak();
 albumFunctions();
 toggleRedirect();
+setBiomeSentenceDatalist();
+setTemperamentSentenceDatalist();
+setDietSentenceDatalist();

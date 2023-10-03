@@ -10,10 +10,10 @@ import { assignElementFunctions, assignFunction } from './commonElements/element
 import { glyphInputOnChange } from './modules/portalglyphs';
 import { explanation } from './modules/tooltip';
 import { planetMoonSentence } from './miscLogic/locationLogic';
-import { Datalist, SortObj } from './types/objects';
-import { AnyPrimitive } from './types/values';
-import { ElementFunction, ElementFunctions, InputElements } from './types/elements';
-import { galleryUpload } from './modules/gallery';
+import type { Datalist, SortObj } from './types/objects';
+import type { AnyPrimitive } from './types/values';
+import type { ElementFunction, ElementFunctions, InputElements } from './types/elements';
+import { useGalleryStore } from './modules/gallery/stores/gallery';
 import md5Hex from 'md5-hex';
 
 /**
@@ -145,7 +145,6 @@ export function showAll() {
 	numberStats();
 	researchTeam();
 	image(globalElements.input.fileUpload as HTMLInputElement);
-	galleryUpload();
 	try { glyphInputOnChange(globalElements.input.portalglyphsInput as HTMLInputElement) } catch { /*do nothing*/ }
 	try { planetMoonSentence() } catch { /*do nothing*/ }
 	hideDiscoverer();
@@ -222,8 +221,7 @@ export function externalLinks() {
 	const isExternalURL = (url: string) => new URL(url).origin !== location.origin;
 	const a = document.getElementsByTagName('a');
 	for (const link of Array.from(a)) {
-		if (!link.href) continue;
-		if (!isExternalURL(link.href)) continue;
+		if (!link.href || !isExternalURL(link.href)) continue;
 		link.target ||= '_blank';
 		link.rel ||= 'noopener noreferrer';
 	}
@@ -1117,4 +1115,9 @@ export function limitCreatureSize(input: HTMLInputElement) {
 
 export function capitaliseFirst(inputString: string) {
 	return inputString.slice(0, 1).toUpperCase() + inputString.slice(1);
+}
+
+export function resetGallery() {
+	const galleryStore = useGalleryStore()
+	galleryStore.$reset();
 }

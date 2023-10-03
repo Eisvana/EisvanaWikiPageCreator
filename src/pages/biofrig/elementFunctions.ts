@@ -1,6 +1,6 @@
 import { toggleSection } from "../../common";
 import { albumDiscoverer, albumName, albumOther } from "../../modules/albumactions";
-import { ElementFunctions } from "../../types/elements"
+import type { ElementFunctions } from "../../types/elements"
 import { addInfo, appearance, locRegNr } from "./biofrig";
 
 const frigateElementFunctions: ElementFunctions = [

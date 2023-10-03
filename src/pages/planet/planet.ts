@@ -4,7 +4,7 @@
 
 import { addDomAsElement, getChildIndex, loadHTML, removeSpecificSection, sanitiseString, wikiCode } from "../../common";
 import { plural } from "../../miscLogic/planetMoonLogic";
-import { ElementFunctions } from "../../types/elements";
+import type { ElementFunctions } from "../../types/elements";
 import { globalElements, pageData } from "../../variables/objects";
 
 /**
@@ -87,7 +87,7 @@ export function moonList() {
 function moonSentence() {
 	const output = (() => {
 		const moons = pageData.moons as Array<string>;
-		if (!moons || moons.length == 0) {
+		if (!moons || moons.length === 0) {
 			return `This planet has no moons.`;
 		} else {
 			const moonCount = moons.length;

@@ -220,12 +220,9 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload">
-					</div>
+					<div class="tableCell data" id="galleryInput"></div>
 				</div>
-				<div id="galleryItems">
-				</div>
+				<div id="galleryItems" class="gallery-items-wrapper"></div>
 				<div id="actions" class="buttons"></div>
 				<div id="galaxyTableActions" class="buttons"></div>
 				<div id="classTableActions" class="buttons"></div>
@@ -249,14 +246,14 @@
 					<div>| researchteam = <output id="researchteam"></output></div>
 					<div>| release = <output name="release"></output></div>
 					<div>}}</div>
-					<div>'''<output id="name1" name="name"></output>''' is a visual catalog.</div>
+					<div>'''<output id="name1" name="name"></output>''' is a visual catalogue.</div>
 					<br>
 
 					<div>==Summary==</div>
 					<div>'''<output id="name2" name="name"></output>''' is a [[Starship Catalogue - Freighter#Derelict /
 						Undetermined|derelict freighter]].</div>
 					<br>
-					<div>For other derelict freighters, see [[Eisvana Derelict Freighter Catalog]].</div>
+					<div>For other derelict freighters, see [[Eisvana Derelict Freighter Album]].</div>
 					<br>
 
 					==Stats==
@@ -296,10 +293,7 @@
 					<div>==Additional Information==</div>
 					<br>
 
-					<div>==Gallery==</div>
-					<div>&lt;gallery&gt;</div>
-					<div><output id="galleryCode"></output></div>
-					<div>&lt;/gallery&gt;</div>
+					<div id="gallery"></div>
 					<br>
 
 					<div>[[Category:Derelict Freighter]]</div>
@@ -314,7 +308,7 @@
 				</div>
 				<div id="indexEntry">
 					<h2 class="title is-5 has-text-left has-text-weight-bold mb-2">
-						Eisvana Derelict Freighter Catalog entry for <output name="name"></output>:
+						Eisvana Derelict Freighter Album entry for <output name="name"></output>:
 					</h2>
 					<div id="classTableEntry" class="wikiText" data-link="classTableEntry">
 						| [[<output name="name"></output>]] || <output name="hyperdrive"></output> ly || +<output

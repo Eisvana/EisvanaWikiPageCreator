@@ -1,7 +1,6 @@
 import { docBy, enableTextMarking, hideDiscoverer, image, researchTeam, validateCoords } from "../common";
-import { galleryUpload } from "../modules/gallery";
 import { deleteCharacter, displayGlyphs, glyphInputOnChange } from "../modules/portalglyphs";
-import { ElementFunctions } from "../types/elements";
+import type { ElementFunctions } from "../types/elements";
 import { staticBooleans } from "../variables/objects";
 
 /**
@@ -48,11 +47,6 @@ const elementFunctions: ElementFunctions = [
 		element: 'glyphDeleteButton',
 		handler: 'click',
 		func: function () { deleteCharacter() }
-	},
-	{
-		element: 'galleryUpload',
-		handler: 'change',
-		func: function () { galleryUpload() }
 	},
 	{
 		element: 'fileUploadTooltip',

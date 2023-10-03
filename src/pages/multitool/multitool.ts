@@ -5,7 +5,7 @@
 import { docByResearchteam, enPrefix, errorMessage, hideInput, setDropdownOptions, storeData, triggerEvent, validateCoords, wikiCode } from "../../common";
 import { planetMoon, planetMoonSentence, regNr } from "../../miscLogic/locationLogic";
 import { albumDesc } from "../../modules/albumactions";
-import { PicObj, StdObj } from "../../types/objects";
+import type { PicObj, StdObj } from "../../types/objects";
 import { globalElements, locsByType, pageData } from "../../variables/objects";
 
 export function locRegNr() {
@@ -55,7 +55,7 @@ export function appearance() {
 	})();
 
 	// Constructs the final appearance string and assigns it to the input element.
-	const isStarter = subtype == 'starter pistol';
+	const isStarter = subtype === 'starter pistol';
 	const output = `${name} is ${mainColour} ${isStarter ? subtype : type} multi-tool${accentColour}.`;
 	appearance.value = output;
 	wikiCode(appearance);
@@ -101,7 +101,7 @@ export function acquirement() {
 		instructions = `fly to the ${loc}`;
 		savereload = `the ${srloc}`;
 
-		if (loc == srloc || !srName) {
+		if (loc === srloc || !srName) {
 			instructions = 'take from cabinet';
 		} else if (!srloc.includes('space')) {
 			savereload = `${srloc} [[${srName}]]`;
@@ -113,7 +113,7 @@ export function acquirement() {
 
 		if (srloc.toLowerCase().includes('space')) {
 			savereload = `the ${srloc}`;
-		} else if ((moon && srloc == 'moon' && srName == moon) || (!moon && srloc == 'planet' && srName == planet)) {
+		} else if ((moon && srloc === 'moon' && srName === moon) || (!moon && srloc === 'planet' && srName === planet)) {
 			instructions = `fly to ${coords}`;
 		} else if (!srName) {
 			savereload = `${body}`;
@@ -158,7 +158,7 @@ export function acquirementGallery() {
 	})();
 
 	const type = (() => {
-		if (loc == 'Sentinel Pillar') return 'Pillar';
+		if (loc === 'Sentinel Pillar') return 'Pillar';
 		return 'Cabinet';
 	})();
 
@@ -306,7 +306,7 @@ export function hideSrLocName() {
 export function hideCost() {
 	const location = pageData.location as string;
 	const costElement = globalElements.input.costInput as HTMLInputElement;
-	const isFree = location == 'Sentinel Pillar' || location == 'Harmonic Camp';
+	const isFree = location === 'Sentinel Pillar' || location === 'Harmonic Camp';
 	hideInput(costElement, isFree ? 'none' : '');
 	if (isFree) {
 		costElement.value = '';
@@ -372,7 +372,7 @@ export function subtypeDropdown() {
 
 // album functions
 export function albumTypeExternal(): string {
-	return 'Catalog';
+	return 'Album';
 }
 
 export function albumItemTypeExternal(): string {
@@ -415,13 +415,14 @@ export function albumDescExternal() {
 }
 
 /**
- * Generates a link for the multi-tool catalog album based on the pageData properties.
+ * Generates a link for the multi-tool album based on the pageData properties.
  *
  * @function
- * @returns {string} - Link for the multi-tool catalog album.
+ * @returns {string} - Link for the multi-tool album.
  */
 export function albumLinkGen() {
-	return 'Eisvana Multi-Tool Catalog';
+	const { type } = pageData;
+	return `Eisvana Multi-Tool Album - ${type}`;
 }
 
 /**
@@ -453,7 +454,7 @@ export function generateGalleryArray() {
 	const location = pageData.location as string;
 	const locs = ['Minor Settlement', 'Sentinel Pillar', 'Harmonic Camp', 'Monolith'];
 	if (locs.includes(location)) {
-		const rmLocs = locs.filter(loc => loc != location);
+		const rmLocs = locs.filter(loc => loc !== location);
 		rmLocs.forEach(loc => {
 			const index = array.indexOf(loc);
 			array.splice(index, 1);

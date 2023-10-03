@@ -536,12 +536,9 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
-						<input type="file" multiple accept="image/*" id="galleryUpload">
-					</div>
+					<div class="tableCell data" id="galleryInput"></div>
 				</div>
-				<div id="galleryItems">
-				</div>
+				<div id="galleryItems" class="gallery-items-wrapper"></div>
 				<div id="actions" class="buttons"></div>
 			</div>
 			<div id="output" class="column is-full-mobile">
@@ -698,10 +695,8 @@
 					<div>==Additional Information==</div>
 					<div><output id="addInfo"></output></div>
 					<br>
-					<div>==Gallery==</div>
-					<div>&lt;gallery&gt;</div>
-					<div><output id="galleryCode"></output></div>
-					<div>&lt;/gallery&gt;</div>
+
+					<div id="gallery"></div>
 				</div>
 			</div>
 		</main>

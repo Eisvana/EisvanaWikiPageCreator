@@ -1,4 +1,4 @@
-import { ElementFunctions } from "../../types/elements";
+import type { ElementFunctions } from "../../types/elements";
 import { addMoon } from "./planet";
 
 const planetElementFunctions: ElementFunctions = [

@@ -1,4 +1,4 @@
-import { Sections, ShipType } from "../../types/starshipDataObjects";
+import type { Sections, ShipType } from "../../types/starshipDataObjects";
 
 const defaultSections: Sections = {
 	subtypeInput: ['show'],

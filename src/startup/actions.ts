@@ -1,6 +1,6 @@
 import { addDomAsElement, enableTextMarking, loadHTML, triggerEvent } from "../common";
 import { copyCode, createPage, downloadFile, reset } from "../modules/actions";
-import { ElementFunctions } from "../types/elements";
+import type { ElementFunctions } from "../types/elements";
 import { globalElements, staticBooleans } from "../variables/objects";
 
 /**

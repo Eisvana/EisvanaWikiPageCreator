@@ -1,4 +1,4 @@
-import { Regions } from "../types/regions"
+import type { Regions } from "../types/regions"
 
 /**
  * An object representing discovery regions and their associated systems.

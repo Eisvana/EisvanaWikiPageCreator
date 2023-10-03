@@ -4,8 +4,8 @@
 
 import { docByResearchteam, enPrefix, hideInput, setDropdownOptions, triggerEvent, wikiCode } from "../../common";
 import { regNr, planetMoonSentence } from "../../miscLogic/locationLogic";
-import { StdObj } from "../../types/objects";
-import { Sections, ShipProp } from "../../types/starshipDataObjects";
+import type { StdObj } from "../../types/objects";
+import type { Sections, ShipProp } from "../../types/starshipDataObjects";
 import { globalElements, pageData } from "../../variables/objects";
 import shipData from "./shipData";
 
@@ -88,7 +88,7 @@ export function showHideStarshipSelects() {
 		hideInput(inputElement, showState[data[0]]);
 		if (data.length > 1) {
 			inputElement.value = data[1];
-		} else if (inputElement.tagName.toLowerCase() == 'select') {
+		} else if (inputElement.tagName.toLowerCase() === 'select') {
 			inputElement.value ||= (inputElement as HTMLSelectElement).options?.[0]?.value;
 		}
 		wikiCode(inputElement);
@@ -107,10 +107,10 @@ export function invDropdown() {
 	const type = pageData.type as string;
 	const subtype = pageData.subtype as string;
 	const inventory = globalElements.input.inventoryInput as HTMLSelectElement;
-	if (type == 'Hauler') {
+	if (type === 'Hauler') {
 		const subtypes = shipData.Hauler.subtypes as Sections;
 		setDropdownOptions(inventory, subtypes[subtype]);
-		if (subtypes[subtype].length == 1) inventory.value = subtypes[subtype][0];
+		if (subtypes[subtype].length === 1) inventory.value = subtypes[subtype][0];
 	} else {
 		setDropdownOptions(inventory, ['Small', 'Medium', 'Large']);
 	}
@@ -119,11 +119,11 @@ export function invDropdown() {
 
 export function toggleHaulerInvDropdown() {
 	const type = pageData.type as string;
-	if (type != 'Hauler') return;
+	if (type !== 'Hauler') return;
 	const subtype = pageData.subtype as string;
 	const inventory = globalElements.input.inventoryInput as HTMLSelectElement;
 	const subtypes = shipData.Hauler.subtypes as Sections;
-	if (subtypes[subtype].length == 1) {
+	if (subtypes[subtype].length === 1) {
 		hideInput(inventory, 'none');
 	} else {
 		hideInput(inventory, '');
@@ -182,7 +182,7 @@ export function introType() {
 }
 
 function shipType() {
-	if (pageData.type == 'Freighter') {
+	if (pageData.type === 'Freighter') {
 		return 'freighter';
 	} else {
 		return 'starship';
@@ -200,7 +200,7 @@ export function loc() {
 	// this output has a linebreak. This is intended, because we use .innerText to display this. If we used <br>, it would display '<br>', not the linebreak.
 	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName as string)} of [[Eisvana]], in the [[Eissentam]] [[galaxy]].
 
-	${type == 'Interceptor' ? 'The {{Class|' + shipClass + '}} class version of this starship' : 'It'} can be found ${locText()}.`;
+	${type === 'Interceptor' ? 'The {{Class|' + shipClass + '}} class version of this starship' : 'It'} can be found ${locText()}.`;
 
 	(globalElements.output.location as HTMLOutputElement).innerText = output;
 
@@ -211,7 +211,7 @@ export function loc() {
 	 */
 	function capitalDetection(): string | void {
 		const inventory = pageData.inventory;
-		if (inventory == 'Large') return 'Capital';
+		if (inventory === 'Large') return 'Capital';
 	}
 
 	/**
@@ -220,7 +220,7 @@ export function loc() {
 	 * @return {string} Returns a sentence describing the freighter spawn location.
 	 */
 	function freighterSpawn() {
-		if (capitalDetection() == 'Capital') {
+		if (capitalDetection() === 'Capital') {
 			return 'after warping into the star system if a space battle is triggered'
 		} else {
 			return 'randomly while pulsing around in the star system'
@@ -324,9 +324,9 @@ export function appearanceSentence() {
 		}
 		for (let i = 0; i < usedParts.length; i++) {
 			let prefix;
-			if (i == 0) {
+			if (i === 0) {
 				prefix = '';
-			} else if (i != usedParts.length - 1) {
+			} else if (i !== usedParts.length - 1) {
 				prefix = ', ';
 			} else {
 				prefix = ' and ';
@@ -361,7 +361,7 @@ export function albumOtherExternal() {
 	const loc = moon ? `[[${moon}]]` : `[[${planet}]]`;
 	const economy = (() => {
 		if (economyRaw.includes('Black')) return '{{BlackMarket}}';
-		if (economyRaw == 'Data Unavailable') return '★ Economy (Abandoned)';
+		if (economyRaw === 'Data Unavailable') return '★ Economy (Abandoned)';
 		return economyRaw.split(' ')[0] + ' Economy';
 	})();
 
@@ -387,27 +387,27 @@ export function albumOtherExternal() {
 }
 
 /**
- * Generates a link to a starship catalog based on the properties of the pageData object.
+ * Generates a link to a starship album based on the properties of the pageData object.
  * @function albumLinkGen
- * @returns {string} The link to the appropriate starship catalog.
+ * @returns {string} The link to the appropriate starship album.
  */
 export function albumLinkGen() {
 	const { type } = pageData;
 
 	/**
-	 * Returns the appropriate catalog name based on the properties of the pageData object.
+	 * Returns the appropriate album name based on the properties of the pageData object.
 	 * @function getCatalog
-	 * @returns {string} The name of the corresponding starship catalog.
+	 * @returns {string} The name of the corresponding starship album.
 	 */
 	function getCatalog() {
-		return `Eisvana ${type} Catalog`;
+		return `Eisvana Starship Album - ${type}`;
 	}
 
 	return getCatalog();
 }
 
 export function albumTypeExternal() {
-	return 'Catalog';
+	return 'Album';
 }
 
 /**
@@ -455,7 +455,7 @@ export function generateGalleryArray() {
 	// Loop through the array and remove images based on the type of page data
 	const type = pageData.type as string;
 	const deactivateArray = deactivate[type] ?? deactivate.default;
-	const lowerCase = structuredClone(array).map(item => item.toLowerCase());
+	const lowerCase = structuredClone(array).map((item: string) => item.toLowerCase());
 	for (let i = array.length - 1; i >= 0; i--) {
 		const element = lowerCase[i];
 		if (deactivateArray.some(item => element.includes(item))) {

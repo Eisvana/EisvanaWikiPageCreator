@@ -1,7 +1,7 @@
 import { image, toggleSection } from "../../common";
 import { autoInfested } from "../../miscLogic/celestialobjectslogic";
 import { addFauna, addFlora, addMineral, addResource, addSandwormTemplate, locationSentence, plural, sentinelSentence, wormAutoSpawn } from "../../miscLogic/planetMoonLogic";
-import { ElementFunctions } from "../../types/elements";
+import type { ElementFunctions } from "../../types/elements";
 import { pageData } from "../../variables/objects";
 
 const planetMoonElementFunctions: ElementFunctions = [

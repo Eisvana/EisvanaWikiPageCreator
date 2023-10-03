@@ -1,7 +1,7 @@
-import { GlobalElements } from "../types/elements";
-import { LinkObj } from "../types/links";
-import { StdObj, TransformedElementFunctions } from "../types/objects";
-import { AnyPrimitive } from "../types/values";
+import type { GlobalElements } from "../types/elements";
+import type { LinkObj } from "../types/links";
+import type { StdObj, TransformedElementFunctions } from "../types/objects";
+import type { AnyPrimitive } from "../types/values";
 
 /**
  * An object that contains links.
