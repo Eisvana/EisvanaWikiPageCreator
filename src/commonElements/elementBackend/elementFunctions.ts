@@ -1,5 +1,5 @@
 import { getCurrentHTMLFile } from '../../common';
-import { AnyHTMLElement, ElementFunction, ElementFunctions, GlobalElements } from '../../types/elements';
+import type { AnyHTMLElement, ElementFunction, ElementFunctions, GlobalElements } from '../../types/elements';
 import { globalElements, pageData, transformedElementFunctions } from '../../variables/objects';
 import { getDestElements } from './elementStore';
 import { hashElement } from './hashes';
@@ -47,10 +47,10 @@ function getListenerElement(elementId: string | HTMLElement) {
 
 function getEventHandler(handler: keyof HTMLElementEventMap | undefined, element: HTMLElement) {
 	const inputTag = element?.tagName?.toLowerCase();
-	const inputType: string = inputTag == 'input' ? (element as HTMLInputElement).type : '';
+	const inputType: string = inputTag === 'input' ? (element as HTMLInputElement).type : '';
 
 	return handler ?? (() => {
-		if (inputTag == 'select' || inputType == 'radio' || inputType == 'checkbox') {
+		if (inputTag === 'select' || inputType === 'radio' || inputType === 'checkbox') {
 			return 'change';
 		} else {
 			return 'input';

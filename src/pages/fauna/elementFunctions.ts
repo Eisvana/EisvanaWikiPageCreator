@@ -2,7 +2,7 @@ import { addInfoBullet, enableTextMarking, hideOrgName, limitCreatureSize, numbe
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import { toggleRedirect } from "../../modules/actions";
 import { albumDiscoverer, albumName, albumOther } from "../../modules/albumactions";
-import { ElementFunctions } from "../../types/elements"
+import type { ElementFunctions } from "../../types/elements"
 import { addInfo, albumDropdown, albumTitle, bundlePropFunctions, genderDropdown, genderProps, genusDropdown, genusProduces, hideAlbumEntry, hideCreaturePrio, hideSecGenderProps, noLineBreak, pageName, specialNotes, specialNotesTextFunc } from "./fauna"
 
 const creatureElementFunctions: ElementFunctions = [

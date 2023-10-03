@@ -6,7 +6,7 @@ const parser = new DOMParser();
 const dom = parser.parseFromString(footerHTMLRaw, 'text/html');
 const about = dom.getElementById('about');
 
-if ((about as HTMLAnchorElement).href == window.location.toString()) about?.remove();
+if ((about as HTMLAnchorElement).href === window.location.toString()) about?.remove();
 /**
  * If a global `globalElements` object exists, the `innerHTML` property of the `footer` key is set to `footerHTML`.
  * Otherwise, the `innerHTML` property of the element with an `id` of `footer` is set to `footerHTML`.

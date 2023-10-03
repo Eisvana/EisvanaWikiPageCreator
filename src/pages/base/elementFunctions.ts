@@ -1,7 +1,7 @@
 import { addInfoBullet, docBy, hideDiscoverer, toggleSection } from "../../common";
 import { processDate } from "../../miscLogic/dateLogic";
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
-import { ElementFunctions } from "../../types/elements";
+import type { ElementFunctions } from "../../types/elements";
 import { capitaliseFriendCode, createCensusEntry, validateDiscord, validateFriendcode, validateReddit } from "./base";
 
 const baseElementFunctions: ElementFunctions = [

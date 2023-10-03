@@ -3,7 +3,7 @@
  */
 
 import { loadHTML } from "../common";
-import { ElementFunctions } from "../types/elements";
+import type { ElementFunctions } from "../types/elements";
 import { globalElements, globalFunctions, pageData } from "../variables/objects";
 import { wikiLink } from "../variables/simple";
 import { assignLink, copyCode } from "./actions";
@@ -211,8 +211,6 @@ export function albumFunctions() {
 	 * @returns {void}
 	*/
 	function albumData() {
-		console.log("executing")
-		console.trace()
 		updateAlbumData();
 		albumDiscoverer();
 		albumName();

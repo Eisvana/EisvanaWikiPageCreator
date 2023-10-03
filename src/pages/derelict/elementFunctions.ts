@@ -1,4 +1,4 @@
-import { ElementFunctions } from "../../types/elements";
+import type { ElementFunctions } from "../../types/elements";
 import { discoverer, enemyCheckboxes, processGlyphs } from "./derelict";
 
 const derelictElementFunctions: ElementFunctions = [

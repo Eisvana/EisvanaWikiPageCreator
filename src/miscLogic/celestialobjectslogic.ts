@@ -15,7 +15,7 @@ import { autoWorm, planetDescriptor } from "./planetMoonLogic";
  */
 export function docByExternal() {
 	const { discovered, discoveredlink, docby: documenter } = pageData;
-	const platform = (pageData.platform == 'NS') ? 'Switch' : pageData.platform;
+	const platform = (pageData.platform === 'NS') ? 'Switch' : pageData.platform;
 
 	const discDate = formatDate(pageData.discDate as string);
 	const docDate = formatDate(pageData.docDate as string);
@@ -52,7 +52,7 @@ export function docByExternal() {
 	 * @returns {string} The final generated explorer string
 	 */
 	const explorer = (() => {
-		if (!documenter || documenter == discovered || documenter == discoveredlink) {
+		if (!documenter || documenter === discovered || documenter === discoveredlink) {
 			return `Discovered and uploaded by ${research} ${discoverer} on ${discDate}`
 		} else {
 			return `* Discovered and uploaded by ${platform ? platform + ' explorer' : ''} ${discoverer} on ${discDate}
@@ -111,7 +111,7 @@ export function autoInfested(element: HTMLInputElement = globalElements.input.de
 
 	// true: system. false: planet/moon
 	const isInfested = infestedDescriptors.includes(element.value.trim());
-	if (pageData.pageType == 'system') return isInfested;
+	if (pageData.pageType === 'system') return isInfested;
 
 	(globalElements.output.infested as HTMLOutputElement).innerText = isInfested ? '([[Biome Subtype - Infested|Infested]]) ' : '';
 	pageData.infested = isInfested;

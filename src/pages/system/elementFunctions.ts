@@ -1,6 +1,6 @@
 import { image, toggleSection } from "../../common";
 import { wikiCodePercentage, docByExternal } from "../../miscLogic/celestialobjectslogic";
-import { ElementFunctions } from "../../types/elements";
+import type { ElementFunctions } from "../../types/elements";
 import { addTemplate, autoBH, autoPirate, combineEconConf, expectedPrefixSentence, planetInputs, regionLong, searchUpgrades, spaceStationSection, tradeables } from "./system";
 
 const systemElementFunctions: ElementFunctions = [

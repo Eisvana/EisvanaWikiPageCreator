@@ -2,7 +2,7 @@ import { hideDiscoverer } from "../../common";
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { restoreDefaults, showSettings, switchTheme, updateDefaultValues, validateGlyphSettings } from "../../modules/footer";
 import { deleteCharacter, glyphInputOnChange, validateGlyphInput } from "../../modules/portalglyphs";
-import { ElementFunctions } from "../../types/elements";
+import type { ElementFunctions } from "../../types/elements";
 
 /**
  * Object containing functions to be called when certain settings elements in the footer dialog are changed.

@@ -1,6 +1,6 @@
 import { assignFunction } from "../../commonElements/elementBackend/elementFunctions";
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
-import { ElementFunction, ElementIds } from "../../types/elements";
+import type { ElementFunction, ElementIds } from "../../types/elements";
 import { pageData, footerInputs } from "../../variables/objects";
 
 const footerElements: ElementIds = {

@@ -4,7 +4,7 @@ import { addInputs, addOutputs, updateGlobalElements } from "../commonElements/e
 import elementFunctions from "../commonElements/elementFunctionsFrontend";
 import elementIds from "../commonElements/elementStoreFrontend";
 import { addAllTooltips, explanationContent } from "../modules/tooltip";
-import { ElementIds } from "../types/elements";
+import type { ElementIds } from "../types/elements";
 import { globalElements } from "../variables/objects";
 
 addInputs();

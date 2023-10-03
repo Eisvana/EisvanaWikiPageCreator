@@ -1,6 +1,6 @@
 import { enPrefix, image, toggleSection } from "../../common";
 import { albumName, albumOther, albumDiscoverer, albumItemType } from "../../modules/albumactions";
-import { ElementFunctions } from "../../types/elements";
+import type { ElementFunctions } from "../../types/elements";
 import { pageData } from "../../variables/objects";
 import { acquirementAlbumBundle, acquirementBundle, acquirementGallery, addInfo, appearance, autoMTLoc, autoMTType, hideCost, hideLocName, hideSrLocName, locRegNr, subtypeDropdown } from "./multitool";
 
