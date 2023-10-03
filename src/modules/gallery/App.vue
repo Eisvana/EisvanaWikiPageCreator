@@ -159,7 +159,7 @@ function togglePreview() {
 				<GalleryItem v-for="fileItem in galleryFiles" :key="fileItem.id" :file-item="fileItem" :is-loc="false" />
 			</div>
 			<div v-if="locationFiles.length" class="gallery-preview">
-				<label class="has-text-weight-bold">Location Files</label>
+				<label class="has-text-weight-bold is-block mb-1">Location Files</label>
 				<GalleryItem v-for="fileItem in locationFiles" :key="fileItem.id" :file-item="fileItem" :is-loc="true" />
 			</div>
 		</div>

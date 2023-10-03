@@ -221,8 +221,7 @@ export function externalLinks() {
 	const isExternalURL = (url: string) => new URL(url).origin !== location.origin;
 	const a = document.getElementsByTagName('a');
 	for (const link of Array.from(a)) {
-		if (!link.href) continue;
-		if (!isExternalURL(link.href)) continue;
+		if (!link.href || !isExternalURL(link.href)) continue;
 		link.target ||= '_blank';
 		link.rel ||= 'noopener noreferrer';
 	}

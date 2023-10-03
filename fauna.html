@@ -422,6 +422,76 @@
 						<textarea data-dest="appearance" id="appearanceInput"
 							placeholder="What does the creature look like?"></textarea>
 					</div>
+					<div class="tableHeader text">
+						<p>Discovery Menu Text Builder</p>
+					</div>
+
+					<div class="tableCell text">
+						<label>Which biome is this creature in?</label>
+					</div>
+					<div class="tableCell data">
+						<select data-dest-noauto="biome" id="biomeInput">
+							<option value="Lush">Lush</option>
+							<option value="Barren">Barren</option>
+							<option value="Dead">Dead</option>
+							<option value="Exotic">Exotic</option>
+							<option value="Mega Exotic">Mega Exotic</option>
+							<option value="Scorched">Scorched</option>
+							<option value="Frozen">Frozen</option>
+							<option value="Toxic">Toxic</option>
+							<option value="Irradiated">Irradiated</option>
+							<option value="Marsh">Marsh</option>
+							<option value="Volcanic">Volcanic</option>
+						</select>
+					</div>
+					<div class="tableCell text">
+						<label for="dmBiomeSentenceInput">Discovery menu biome sentence</label>
+						<button class="tooltip">
+							<data>Found in the Discovery Menu. Enter exactly as seen in game</data>
+							<data>Discovery Menu Text: Biome Sentence</data>
+							<data>
+								First sentence(s) of the Discovery Menu. Enter exactly as seen in game,
+								but ignore any linebreaks.
+							</data>
+							<data>creature/biomeSentence</data>
+						</button>
+					</div>
+					<div class="tableCell data">
+						<input type="text" id="dmBiomeSentenceInput" data-dest-noauto="dmBiomeSentence"
+							list="dmBiomeSentenceList">
+					</div>
+					<div class="tableCell text">
+						<label for="dmTemperamentSentenceInput">Discovery menu behaviour sentence</label>
+						<button class="tooltip">
+							<data>Found in the Discovery Menu. Enter exactly as seen in game</data>
+							<data>Discovery Menu Text: Behaviour Sentence</data>
+							<data>
+								Middle sentence(s) of the Discovery Menu. Enter exactly as seen in game,
+								but ignore any linebreaks.
+							</data>
+							<data>creature/behaviourSentence</data>
+						</button>
+					</div>
+					<div class="tableCell data">
+						<input type="text" id="dmTemperamentSentenceInput" data-dest-noauto="dmTemperamentSentence"
+							list="dmTemperamentSentenceList">
+					</div>
+					<div class="tableCell text">
+						<label for="dmDietSentenceInput">Discovery menu diet sentence</label>
+						<button class="tooltip">
+							<data>Found in the Discovery Menu. Enter exactly as seen in game</data>
+							<data>Discovery Menu Text: Diet Sentence</data>
+							<data>
+								Last sentence(s) of the Discovery Menu. Enter exactly as seen in game,
+								but ignore any linebreaks.
+							</data>
+							<data>creature/dietSentence</data>
+						</button>
+					</div>
+					<div class="tableCell data">
+						<input type="text" id="dmDietSentenceInput" data-dest-noauto="dmDietSentence"
+							list="dmDietSentenceList">
+					</div>
 					<div class="tableHeader data no-flex">
 						<label for="dmInput">Discovery Menu</label>
 						<button class="tooltip">
@@ -459,7 +529,7 @@
 					</div>
 					<div class="tableCell data" id="galleryInput"></div>
 				</div>
-				<div id="galleryItems"></div>
+				<div id="galleryItems" class="gallery-items-wrapper"></div>
 				<div id="actions" class="buttons"></div>
 				<div id="albumActions" class="buttons"></div>
 			</div>
@@ -544,6 +614,9 @@
 		</main>
 	</div>
 	<footer id="footer" class="footer"></footer>
+	<datalist id="dmBiomeSentenceList"></datalist>
+	<datalist id="dmTemperamentSentenceList"></datalist>
+	<datalist id="dmDietSentenceList"></datalist>
 </body>
 
 </html>

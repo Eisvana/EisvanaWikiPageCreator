@@ -3,12 +3,13 @@ import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import { toggleRedirect } from "../../modules/actions";
 import { albumDiscoverer, albumName, albumOther } from "../../modules/albumactions";
 import type { ElementFunctions } from "../../types/elements"
+import { buildDmSentence, setBiomeSentenceDatalist, setDietSentenceDatalist, setTemperamentSentenceDatalist } from "./discoveryMenuDatalists";
 import { addInfo, albumDropdown, albumTitle, bundlePropFunctions, genderDropdown, genderProps, genusDropdown, genusProduces, hideAlbumEntry, hideCreaturePrio, hideSecGenderProps, noLineBreak, pageName, specialNotes, specialNotesTextFunc } from "./fauna"
 
 const creatureElementFunctions: ElementFunctions = [
 	{
 		element: 'nameInput',
-		func: () => { pageName(); albumName(); toggleRedirect(); enableTextMarking() }
+		func: () => { pageName(); albumName(); toggleRedirect(); enableTextMarking(); setBiomeSentenceDatalist() }
 	},
 	{
 		element: 'oldNameInput',
@@ -16,7 +17,7 @@ const creatureElementFunctions: ElementFunctions = [
 	},
 	{
 		element: ['planetInput', 'moonInput'],
-		func: () => planetMoonSentence(undefined, undefined, true)
+		func: () => { planetMoonSentence(undefined, undefined, true); setBiomeSentenceDatalist() }
 	},
 	{
 		element: 'ecosystemInput',
@@ -68,8 +69,23 @@ const creatureElementFunctions: ElementFunctions = [
 	},
 	{
 		element: 'producesCheckboxInput',
-		handler: 'change',
 		func: () => genusProduces(),
+	},
+	{
+		element: 'biomeInput',
+		func: () => setBiomeSentenceDatalist(),
+	},
+	{
+		element: 'behaviourInput',
+		func: () => setTemperamentSentenceDatalist(),
+	},
+	{
+		element: 'dietInput',
+		func: () => setDietSentenceDatalist(),
+	},
+	{
+		element: ['dmBiomeSentenceInput', 'dmTemperamentSentenceInput', 'dmDietSentenceInput'],
+		func: () => buildDmSentence(),
 	},
 ]
 
