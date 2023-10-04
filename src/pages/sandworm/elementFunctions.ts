@@ -21,7 +21,7 @@ const sandwormElementFunctions: ElementFunctions = [
 		func: () => albumName()
 	},
 	{
-		element: 'wormmaxdepthInput',
+		element: ['wormmaxdepthInput', 'wormstomachInput'],
 		func: () => albumOther()
 	},
 	{

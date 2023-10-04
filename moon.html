@@ -70,6 +70,8 @@
 								Also try to only get the moon into the shot. Having the parent planet in the background
 								is allowed, but the contrast must be good.<br>
 								Disable the vignette.
+								<iframe src="https://nmscd.com/Image-Compressor/" title="Image Compressor"
+									class="explanation-embed" width="450" height="300">Image Compressor</iframe>
 							</data>
 							<data>planet/planetPic</data>
 						</button>
@@ -104,8 +106,9 @@
 							<data>Portalglyphs</data>
 							<data>
 								Found in Photo Mode. Glyphs are specific to each moon.
-								<object data="https://nmspar.vercel.app/" title="Glyph Reader" class="glyph-reader"
-									width="450" height="300">Glyph Reader</object>
+								<iframe src="https://nmspar.vercel.app/" sandbox="allow-scripts allow-same-origin"
+									title="Glyph Reader" class="explanation-embed" width="450" height="300">Glyph
+									Reader</iframe>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -270,6 +273,8 @@
 								image name. Maximum filesize is 10MB.
 								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
+								<iframe src="https://nmscd.com/Image-Compressor/" title="Image Compressor"
+									class="explanation-embed" width="450" height="300">Image Compressor</iframe>
 							</data>
 						</button>
 					</div>
@@ -515,30 +520,8 @@
 						<label for="addInfoInput">Additional Information:</label>
 						<textarea id="addInfoInput" data-dest="addInfo"></textarea>
 					</div>
-					<div class="tableCell text">
-						<label for="galleryUpload">Gallery files</label>
-						<button class="tooltip" name="galleryFileUploadTooltip">
-							<data>There is a preferred order of pictures.</data>
-							<data>Gallery</data>
-							<data>The preferred order of pictures is as follows:
-								<div class="dialog-center">
-									<ol class="dialog-list">
-										<li>Landscape</li>
-										<li>Night View</li>
-										<li>Cave System</li>
-										<li>Analysis Visor</li>
-										<li>Moon Exploration Guide</li>
-										<li>Moon Page</li>
-										<li>Planet Page</li>
-										<li>System Page</li>
-										<li>Galaxy Map</li>
-									</ol>
-								</div>
-							</data>
-						</button>
-					</div>
-					<div class="tableCell data" id="galleryInput"></div>
 				</div>
+				<div id="galleryInput"></div>
 				<div id="galleryItems" class="gallery-items-wrapper"></div>
 				<div id="actions" class="buttons"></div>
 			</div>

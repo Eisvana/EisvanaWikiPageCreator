@@ -51,6 +51,8 @@
 								image name. Maximum filesize is 10MB.
 								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
 									data-wiki>Special:Upload</a>
+								<iframe src="https://nmscd.com/Image-Compressor/" title="Image Compressor"
+									class="explanation-embed" width="450" height="300">Image Compressor</iframe>
 							</data>
 						</button>
 					</div>
@@ -123,7 +125,9 @@
 							<data>Portalglyphs</data>
 							<data>
 								Found in Photo Mode. Glyphs are specific to each planet.
-								<object data="https://nmspar.vercel.app/" title="Glyph Reader" class="glyph-reader" width="450" height="300">Glyph Reader</object>
+								<iframe src="https://nmspar.vercel.app/" sandbox="allow-scripts allow-same-origin"
+									title="Glyph Reader" class="explanation-embed" width="450" height="300">Glyph
+									Reader</iframe>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -303,11 +307,8 @@
 						<textarea id="addInfoInput" data-dest="addInfo"
 							placeholder="Any nearby resources, tourist traps, other bases."></textarea>
 					</div>
-					<div class="tableCell text">
-						<label for="galleryUpload">Gallery files</label>
-					</div>
-					<div class="tableCell data" id="galleryInput"></div>
 				</div>
+				<div id="galleryInput"></div>
 				<div id="galleryItems" class="gallery-items-wrapper"></div>
 				<div id="actions" class="buttons"></div>
 			</div>
