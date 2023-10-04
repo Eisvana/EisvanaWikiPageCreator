@@ -67,10 +67,10 @@ input {
 	}
 
 	&:focus {
-		border-color: var(--border-color-focus);
+		border-color: var(--border-color-focus) !important;
 
 		&:hover {
-			border-color: var(--border-color-focus-hover);
+			border-color: var(--border-color-focus-hover) !important;
 		}
 	}
 

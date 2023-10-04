@@ -360,7 +360,7 @@ export function image(element: HTMLInputElement) {
 	// throw error if file is bigger than 10MB (wiki upload limit)
 	const fileSizeLimit: number = 10000000;
 	const fileSizeExceeded = element.files![0].size > fileSizeLimit;
-	errorMessage(element, fileSizeExceeded ? 'This file is too big to be uploaded to the wiki. Maximum filesize is 10MB.' : '');
+	errorMessage(element, fileSizeExceeded ? 'This file is too big to be uploaded to the wiki. Maximum filesize is 10MB. Compress your file here: <a href="https://nmscd.com/Image-Compressor/" target="_blank" rel="noopener noreferrer">Image Compressor</a>' : '');
 
 	const fileInput = element.previousElementSibling as HTMLInputElement;
 	const sanitisedName = sanitiseString(filename);
