@@ -77,8 +77,11 @@ dialog {
 			padding-inline-start: 1rem;
 		}
 
-		.glyph-reader {
+		.explanation-embed {
 			max-width: 100%;
+			display: block;
+			margin-inline: auto;
+			margin-block: 1rem;
 		}
 	}
 }
