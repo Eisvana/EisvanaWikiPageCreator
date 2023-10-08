@@ -67,6 +67,9 @@ function getDietSentence(diet: string, searchDiet: string = diet) {
 		'Deepwater algae': [
 			'Scavengers, they feed upon the soft downward drift of plankton; feasting upon the dying remains of tiny organisms.'
 		],
+		'Deepwater spores': [
+			'Scavengers, they feed upon the soft downward drift of plankton; feasting upon the dying remains of tiny organisms.'
+		],
 		'Drifting plants': [
 			'Scavengers, they feed upon the soft downward drift of plankton; feasting upon the dying remains of tiny organisms.'
 		],
