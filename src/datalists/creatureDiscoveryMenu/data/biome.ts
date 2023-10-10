@@ -33,7 +33,7 @@ function getBiomeSentence(biome: string, creatureName: string, planetName: strin
 			`Encountered lurking in the endless fractal dreams of planet ${planetName}.`,
 			`Encountered roaming the fractured landscapes of planet ${planetName}.`,
 			`Encountered wandering the remains of an ancient civilisation on planet ${planetName}.`,
-			`First recorded blinking and lost amid the ethereal lights of planet ${planetName}.`,
+			`First recorded blinking and lost amid the ethereal lights of planet ${planetName}{{sic}}`,
 			`The host for this strange creature was found on planet ${planetName}, lurking in the endless mounds of discarded shells.`,
 			`This creature was refracted into existence in the broken glasscape of planet ${planetName}.`,
 		],
