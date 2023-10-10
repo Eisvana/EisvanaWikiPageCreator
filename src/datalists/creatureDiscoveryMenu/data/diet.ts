@@ -4,7 +4,13 @@ function getDietSentence(diet: string, searchDiet: string = diet) {
 		biomeMeat: [
 			`Carnivores, their desire for ${diet} knows no limits.`,
 			`Carnivores, their hunger for ${diet} is never-ending.`,
-			`Carnivores, their hunger for ${diet} knows no bounds.`
+			`Carnivores, their hunger for ${diet} knows no bounds.`,
+			`Gut analysis reveals a diet consisting almost entirely of ${diet}.`,
+			`A highly specialised digestive system allows them to eat the ${diet} that grow on their home planet.`,
+			`Their diet is rich in the ${diet} found in abundance on this planet.`,
+			`Always hungry, they seek out and consume the ${diet} that grow freely across this world.`,
+			`Their diet is varied, but they will gorge upon ${diet} at any opportunity.`,
+			`They feast upon ${diet}, and will travel vast distances to find it.`,
 		],
 		'Absorbed nutrients': [
 			'Though they have mouths, it seems their primary nutrient intake is via their skin, in a form of atmospheric mineral absorption.'
@@ -52,9 +58,6 @@ function getDietSentence(diet: string, searchDiet: string = diet) {
 			'Gut analysis reveals their diet consists primarily of vast numbers of partially rotted nuts.',
 			'Sharp vision allows them to detect seeds just as they begin to swell in their pods, giving them an edge over other foraging creatures.'
 		],
-		'[[Condensed Carbon]]': [
-			'They feast upon [[Condensed Carbon]], and will travel vast distances to find it.'
-		],
 		Corpses: [
 			"Carnivorous but opportunistic, these beasts will happily raid the corpse of some other hunter's prey."
 		],
@@ -82,9 +85,6 @@ function getDietSentence(diet: string, searchDiet: string = diet) {
 		],
 		'Drifting carcasses': [
 			'Aggressive hunters, they make a meal of any fish unfortunate enough to get caught in their jaws.'
-		],
-		'[[Echinocactus]]': [
-			'Their diet is rich in the Echinocactus found in abundance on this planet.'
 		],
 		Eggs: [
 			'While not adapted for open confrontation, they are nonetheless impressive hunters. Under the cover of darkness, they steal into nests and feast upon eggs and hatchlings alike.'
@@ -122,18 +122,6 @@ function getDietSentence(diet: string, searchDiet: string = diet) {
 		],
 		'Fresh meat': [
 			'Well-adapted to the hunt but poorly-adapted to digestion, these carnivores will only feast upon the freshest of meat.'
-		],
-		'[[Frostwort]]': [
-			'A highly specialised digestive system allows them to eat the [[Frostwort]] that grow on their home planet.',
-			'Gut analysis reveals a diet consisting almost entirely of [[Frostwort]].'
-		],
-		'[[Fungal Cluster]]': [
-			'A highly specialised digestive system allows them to eat the [[Fungal Cluster]] that grow on their home planet.',
-			'They feast upon [[Fungal Cluster]], and will travel vast distances to find it.'
-		],
-		'[[Gamma Weed]]': [
-			'Always hungry, they seek out and consume the [[Gamma Weed]] that grow freely across this world.',
-			'Their diet is rich in the [[Gamma Weed]] found in abundance on this planet.'
 		],
 		'Gelatinous chunks': [
 			'Aggressive hunters, they make a meal of any fish unfortunate enough to get caught in their jaws.'
@@ -202,9 +190,6 @@ function getDietSentence(diet: string, searchDiet: string = diet) {
 		],
 		'[[NipNip Buds|NipNip buds]]': [
 			'Their diet is largely conventional, consisting largely of local flora. But the scent of [[NipNip|Nip Nip]] drives them to a frenzy, and they will gorge upon its [[NipNip Buds|buds]].'
-		],
-		'Nitrous Oxide': [
-			'Always hungry, they seek out and consume the Nitrous Oxide that grow freely across this world.'
 		],
 		'Nutritious water weeds': [
 			'Scavengers, they feed upon the soft downward drift of plankton; feasting upon the dying remains of tiny organisms.'
@@ -280,10 +265,6 @@ function getDietSentence(diet: string, searchDiet: string = diet) {
 		Sinew: [
 			'Row after row of highly-polished teeth allow them to tear through flesh and sinew alike. They can strip a corpse to the bone in minutes.'
 		],
-		'[[Solar Vine]]': [
-			'A highly specialised digestive system allows them to eat the [[Solar Vine]] that grow on their home planet.',
-			'Their diet is varied, but they will gorge upon [[Solar Vine]] at any opportunity.'
-		],
 		'Small animals': [
 			'Ill-equipped to compete with large animals, they choose to prey upon smaller foes. Rodents, insects, nitrogen-rich plantlife - anything unlikely to fight back.',
 			'They prefer to acquire their meat from sources that will not fight back. Quick jaws and sharp eyes allow them to prey upon the small, darting creatures that other hunters leave behind.'
@@ -291,12 +272,6 @@ function getDietSentence(diet: string, searchDiet: string = diet) {
 		'Small trees': [
 			'Constantly hungry, their specially adapted teeth and guts allow them to consume entire trees, from leaf to sap to trunk.',
 			'They use their acidic tongues to burrow into trees, dissolving and then sucking out the soft and delicious inner wood.'
-		],
-		'[[Star Bramble]]': [
-			'A highly specialized digestive system allows them to eat the [[Star Bramble]] that grow on their home planet.',
-			'Always hungry, they seek out and consume the [[Star Bramble]] that grow freely across this world.',
-			'Gut analysis reveals a diet consisting almost entirely of [[Star Bramble]].',
-			'They feast upon [[Star Bramble]], and will travel vast distances to find it.'
 		],
 		'Steals from others': [
 			'Omnivorous and thieving, they eat whatever they find, wherever they find it. Frequently, this means consuming the hard-won stores of other animals.'
