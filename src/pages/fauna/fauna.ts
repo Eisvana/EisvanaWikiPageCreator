@@ -162,8 +162,9 @@ export function hideSecGenderProps() {
 export function specialNotes() {
 	const notes = pageData.notes as string;
 	const specialNotesElement = globalElements.input.specialNotesInput as HTMLInputElement;
-	specialNotesElement.value = notes;
-	const hasDifferentSpecialNote = notes === 'Evil' || notes === 'Sheds and regrows bones'
+	const isMechanoceris = pageData.genus === 'Mechanoceris';
+	specialNotesElement.value = isMechanoceris ? '' : notes;
+	const hasDifferentSpecialNote = notes === 'Evil' || notes === 'Sheds and regrows bones' || isMechanoceris;
 	hideInput(specialNotesElement, hasDifferentSpecialNote ? '' : 'none');
 	storeData(specialNotesElement);
 }
@@ -181,15 +182,14 @@ export function specialNotesTextFunc() {
 	const addObservationElement = globalElements.output.addObservation as HTMLOutputElement;
 
 	wikiCodeSimple(notesElement, notesElement.dataset.destNoauto);
-	(addObservationElement.parentElement as HTMLElement).style.display = genus === 'Mechanoceris' ? 'none' : '';
-	if (!notes && genus !== 'Mechanoceris') {
+	if (!notes) {
 		addObservationElement.innerText = "'''Additional Observations''': ";
 		return;
 	}
 
 	const noteText = (() => {
 		if (genus === 'Mechanoceris') {
-			return '';
+			return specialNotes;
 		} else if (!specialNotes || specialNotes === notes) {
 			return `'''Additional Observations''': ${notes}`;
 		} else {
