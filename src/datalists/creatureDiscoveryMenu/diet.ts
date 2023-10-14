@@ -339,7 +339,7 @@ function getDietSentenceData(diet: string) {
 					sentences: ['Though they have mouths, it seems their primary nutrient intake is via their skin, in a form of atmospheric mineral absorption.']
 				},
 				{
-					values: ['[[Star Bramble]]', '[[Fungal Cluster]]', '[[Solar Vine]]', '[[Gamma Weed]]', '[[Frostwort]]', '[[Echinocactus]]', '[[Mordite Root]]', '[[Nitrous Oxide]]', '[[Cadmium]]', '[[Emeril]]', '[[Indium]]', '[[Kelp Sac]]', '[[Condensed Carbon]]'],
+					values: ['[[Star Bramble]]', '[[Fungal Cluster]]', '[[Solar Vine]]', '[[Gamma Weed]]', '[[Frostwort]]', '[[Echinocactus]]', '[[Mordite Root]]', 'Nitrous Oxide', '[[Cadmium]]', '[[Emeril]]', '[[Indium]]', '[[Kelp Sac]]', '[[Condensed Carbon]]'],
 					sentences: [
 						`A highly specialised digestive system allows them to eat the ${diet} that grow on their home planet.`,
 						`Gut analysis reveals a diet consisting almost entirely of ${diet}.`,

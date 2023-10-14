@@ -378,7 +378,7 @@ const creatureDatalists = {
 		'[[Fungal Cluster]]',
 		'[[Gamma Weed]]',
 		'[[Mordite Root]]',
-		'[[Nitrous Oxide]]',
+		'Nitrous Oxide',
 		'[[Cadmium]]',
 		'[[Emeril]]',
 		'[[Indium]]',
