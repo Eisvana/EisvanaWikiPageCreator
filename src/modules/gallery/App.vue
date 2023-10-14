@@ -127,8 +127,8 @@ function togglePreview() {
 			</div>
 			<div>&lt;/gallery&gt;</div>
 		</div>
-		<br />
 		<div id="locationGallery" v-if="locationFiles.length">
+			<br />
 			<div>===Location===</div>
 			<div>&lt;gallery&gt;</div>
 			<div id="locationGalleryOutput">

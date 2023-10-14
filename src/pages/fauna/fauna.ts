@@ -109,18 +109,14 @@ export function genusProduces() {
 	const genus = pageData.genus;
 	const ecosystems = Object.keys(creatureData.ecosystems);
 	const producesInputElement = globalElements.input.producesSelectionInput;
-	const producesCheckboxElement = globalElements.input.producesCheckboxInput;
-	if (!(typeof genus === 'string' && producesInputElement instanceof HTMLSelectElement && producesCheckboxElement instanceof HTMLInputElement)) return;
-	const hasProduces = producesCheckboxElement.checked;
+	if (!(typeof genus === 'string' && producesInputElement instanceof HTMLSelectElement)) return;
 	for (const ecosystem of ecosystems) {
 		if (!Object.keys(creatureData.ecosystems[ecosystem]).includes(genus)) continue;
 
 		const food = creatureData.ecosystems[ecosystem][genus].produces;
 		setDropdownOptions(producesInputElement, food);
 		hideInput(producesInputElement, food.length > 1 ? '' : 'none');
-		if (food.length > 1) producesCheckboxElement.checked = true;
-		hideInput(producesCheckboxElement, food.length > 1 ? 'none' : '');
-		wikiCode(hasProduces ? producesInputElement : '', producesInputElement.dataset.dest);
+		wikiCode(producesInputElement);
 	}
 }
 
@@ -162,8 +158,9 @@ export function hideSecGenderProps() {
 export function specialNotes() {
 	const notes = pageData.notes as string;
 	const specialNotesElement = globalElements.input.specialNotesInput as HTMLInputElement;
-	specialNotesElement.value = notes;
-	const hasDifferentSpecialNote = notes === 'Evil' || notes === 'Sheds and regrows bones'
+	const isMechanoceris = pageData.genus === 'Mechanoceris';
+	specialNotesElement.value = isMechanoceris ? '' : notes;
+	const hasDifferentSpecialNote = notes === 'Evil' || notes === 'Sheds and regrows bones' || isMechanoceris;
 	hideInput(specialNotesElement, hasDifferentSpecialNote ? '' : 'none');
 	storeData(specialNotesElement);
 }
@@ -181,15 +178,14 @@ export function specialNotesTextFunc() {
 	const addObservationElement = globalElements.output.addObservation as HTMLOutputElement;
 
 	wikiCodeSimple(notesElement, notesElement.dataset.destNoauto);
-	(addObservationElement.parentElement as HTMLElement).style.display = genus === 'Mechanoceris' ? 'none' : '';
-	if (!notes && genus !== 'Mechanoceris') {
+	if (!notes) {
 		addObservationElement.innerText = "'''Additional Observations''': ";
 		return;
 	}
 
 	const noteText = (() => {
 		if (genus === 'Mechanoceris') {
-			return '';
+			return specialNotes;
 		} else if (!specialNotes || specialNotes === notes) {
 			return `'''Additional Observations''': ${notes}`;
 		} else {

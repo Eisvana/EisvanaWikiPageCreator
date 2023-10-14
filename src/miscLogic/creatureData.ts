@@ -52,7 +52,7 @@ const creatureData: CreatureData = {
 			},
 			Prionterrae: {
 				commonName: 'Ploughs',
-				produces: ['Dirty Meat']
+				produces: ['']
 			},
 			Procavya: {
 				commonName: 'Rodents',
@@ -102,7 +102,7 @@ const creatureData: CreatureData = {
 		Flying: {
 			Agnelis: {
 				commonName: 'Birds',
-				produces: ['Craw Milk']
+				produces: ['', 'Craw Milk']
 			},
 			Cycromys: {
 				commonName: 'Dragons',
@@ -118,7 +118,7 @@ const creatureData: CreatureData = {
 			},
 			Rhopalocera: {
 				commonName: 'Butterflies',
-				produces: ['Craw Milk']
+				produces: ['', 'Craw Milk']
 			}
 		},
 		Underwater: {
@@ -140,7 +140,7 @@ const creatureData: CreatureData = {
 			},
 			Prionace: {
 				commonName: 'Sharks',
-				produces: ['Wild Milk']
+				produces: ['', 'Wild Milk']
 			},
 			Prionacefda: {
 				commonName: 'Swimming cows',
@@ -162,7 +162,7 @@ const creatureData: CreatureData = {
 			},
 			Prototerrae: {
 				commonName: 'Protodiggers',
-				produces: ['Dirty Meat']
+				produces: ['']
 			}
 		}
 	},

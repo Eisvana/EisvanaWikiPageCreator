@@ -826,7 +826,7 @@ export function generateGalleryArray() {
 		'Analysis Visor',
 		'System Exploration Guide',
 		'System Page',
-		'Default SS Multi-Tool',
+		'Default Space Station Multi-Tool',
 	];
 
 	if (pageData.faction === 'Uncharted' || (pageData.faction as string).includes('Abandoned')) {

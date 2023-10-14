@@ -1,7 +1,7 @@
-import getBiomeSentence from "../../datalists/creatureDiscoveryMenu/data/biome";
+import getBiomeSentence from "../../datalists/creatureDiscoveryMenu/biome";
 import { pageData, globalElements } from "../../variables/objects";
-import temperamentSentences from "../../datalists/creatureDiscoveryMenu/data/temperament";
-import getDietSentence from "../../datalists/creatureDiscoveryMenu/data/diet";
+import getDietSentence, { robotSentences } from "../../datalists/creatureDiscoveryMenu/diet";
+import getTemperamentSentences from "../../datalists/creatureDiscoveryMenu/temperament";
 import { noLineBreak } from "./fauna";
 import { wikiCode } from "../../common";
 
@@ -10,24 +10,24 @@ function generateOption(value: string) {
 }
 
 export function setBiomeSentenceDatalist() {
-	const { biome, newName, planet, moon } = pageData;
+	const { biome, newName, planet, moon, genus } = pageData;
 
-	if (typeof biome !== 'string' || typeof newName !== 'string' || typeof planet !== 'string' || typeof moon !== 'string') return;
-	const biomeSentenceArray = getBiomeSentence(biome, newName, moon || planet);
+	if (typeof biome !== 'string' || typeof newName !== 'string' || typeof planet !== 'string' || typeof moon !== 'string' || typeof genus !== 'string') return;
+	const biomeSentenceArray = genus === 'Mechanoceris' ? robotSentences : getBiomeSentence(biome, newName, moon || planet);
 	addDataList('dmBiomeSentenceList', biomeSentenceArray)
 }
 
 export function setTemperamentSentenceDatalist() {
 	const { behaviour } = pageData;
 	if (typeof behaviour !== 'string') return;
-	const temperamentSentenceArray = temperamentSentences[behaviour];
+	const temperamentSentenceArray = getTemperamentSentences(behaviour);
 	addDataList('dmTemperamentSentenceList', temperamentSentenceArray)
 }
 
 export function setDietSentenceDatalist() {
 	const { diet } = pageData;
 	if (typeof diet !== 'string') return;
-	const dietSentenceArray = getDietSentence(diet) ?? getDietSentence(diet, 'biomeMeat');
+	const dietSentenceArray = getDietSentence(diet);
 	addDataList('dmDietSentenceList', diet ? dietSentenceArray : undefined)
 }
 
