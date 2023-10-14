@@ -109,18 +109,14 @@ export function genusProduces() {
 	const genus = pageData.genus;
 	const ecosystems = Object.keys(creatureData.ecosystems);
 	const producesInputElement = globalElements.input.producesSelectionInput;
-	const producesCheckboxElement = globalElements.input.producesCheckboxInput;
-	if (!(typeof genus === 'string' && producesInputElement instanceof HTMLSelectElement && producesCheckboxElement instanceof HTMLInputElement)) return;
-	const hasProduces = producesCheckboxElement.checked;
+	if (!(typeof genus === 'string' && producesInputElement instanceof HTMLSelectElement)) return;
 	for (const ecosystem of ecosystems) {
 		if (!Object.keys(creatureData.ecosystems[ecosystem]).includes(genus)) continue;
 
 		const food = creatureData.ecosystems[ecosystem][genus].produces;
 		setDropdownOptions(producesInputElement, food);
 		hideInput(producesInputElement, food.length > 1 ? '' : 'none');
-		if (food.length > 1) producesCheckboxElement.checked = true;
-		hideInput(producesCheckboxElement, food.length > 1 ? 'none' : '');
-		wikiCode(hasProduces ? producesInputElement : '', producesInputElement.dataset.dest);
+		wikiCode(producesInputElement);
 	}
 }
 

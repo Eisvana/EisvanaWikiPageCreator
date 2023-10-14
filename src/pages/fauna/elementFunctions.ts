@@ -68,10 +68,6 @@ const creatureElementFunctions: ElementFunctions = [
 		func: () => noLineBreak()
 	},
 	{
-		element: 'producesCheckboxInput',
-		func: () => genusProduces(),
-	},
-	{
 		element: 'biomeInput',
 		func: () => setBiomeSentenceDatalist(),
 	},

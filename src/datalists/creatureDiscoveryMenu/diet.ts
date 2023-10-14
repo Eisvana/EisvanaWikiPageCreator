@@ -139,7 +139,7 @@ function getDietSentenceData(diet: string) {
 				},
 				{
 					values: ['Large mammals'],
-					sentences: ['They seek out larger creatures, prefering to make the one occasional kill and then feast upon it for months.'],
+					sentences: ['They seek out larger creatures, prefering{{sic}} to make the one occasional kill and then feast upon it for months.'],
 				},
 				{
 					values: ['Flesh chunks'],
@@ -156,9 +156,9 @@ function getDietSentenceData(diet: string) {
 				{
 					values: ['Rotten meat', 'Toxic meat', 'Boiled meat', 'Radioactive meat', 'Frozen meat', 'Preserved meat', 'Hypnotises prey', 'Blood-drinker', '[[Venom Urchin]]s', 'Anything', 'Fetid meat', 'Charred meat',],
 					sentences: [
-						`Carnivores, their hunger for ${diet} knows no bounds.`,
-						`Carnivores, their desire for ${diet} knows no limits.`,
-						`Carnivores, their hunger for ${diet} is never-ending.`,
+						`Carnivores, their hunger for ${diet + (['Hypnotises prey', 'Blood-drinker'].includes(diet) ? ' {{sic}}' : '')} knows no bounds.`,
+						`Carnivores, their desire for ${diet + (['Hypnotises prey', 'Blood-drinker'].includes(diet) ? ' {{sic}}' : '')} knows no limits.`,
+						`Carnivores, their hunger for ${diet + (['Hypnotises prey', 'Blood-drinker'].includes(diet) ? ' {{sic}}' : '')} is never-ending.`,
 					],
 				},
 			],
@@ -181,7 +181,7 @@ function getDietSentenceData(diet: string) {
 				},
 				{
 					values: ['Faeces'],
-					sentences: ['Their adaptive sensory system temporarily shuts down their olfactory nerves as they snout through faecium deposits in search of undigested morsels.']
+					sentences: ['Their adaptive sensory system temporarily shuts down their olfactory nerves as they snout through [[faecium]] deposits in search of undigested morsels.']
 				},
 				{
 					values: ['Birds'],
@@ -205,7 +205,7 @@ function getDietSentenceData(diet: string) {
 				},
 				{
 					values: ['[[Venom Urchin]]s'],
-					sentences: ['Powerful, armour-plated tongues allow them to penetrate the toxic, spiny shells of Venom Urchins. The rich green yolk within provides ample nutrients.']
+					sentences: ['Powerful, armour-plated tongues allow them to penetrate the toxic, spiny shells of [[Venom Urchin]]s. The rich green yolk within provides ample nutrients.']
 				},
 				{
 					values: ['Foraged leftovers'],
@@ -242,7 +242,7 @@ function getDietSentenceData(diet: string) {
 				{
 					values: ['Small trees'],
 					sentences: [
-						'Diese Kreaturen sind immer hungrig und können dank ihrer speziellen Zähne und ihres angepassten Darms ganze Bäume von den Blättern bis zum Baumstamm verzehren.',
+						'Constantly hungry, their specially adapted teeth and guts allow them to consume entire trees, from leaf to sap to trunk.',
 						'They use their acidic tongues to burrow into trees, dissolving and then sucking out the soft and delicious inner wood.'
 					]
 				},
