@@ -324,7 +324,7 @@ function getDietSentenceData(diet: string) {
 				},
 				{
 					values: ['[[Di-hydrogen]] crystals'],
-					sentences: ['A plague upon stranded adventurers, as they feast upon di-hydrogen crystals.  Their highly reactive saliva dissolves the crystals without the need to chew.']
+					sentences: ['A plague upon stranded adventurers, as they feast upon [[di-hydrogen]] crystals.  Their highly reactive saliva dissolves the crystals without the need to chew.']
 				},
 				{
 					values: ['Processes dirt'],
