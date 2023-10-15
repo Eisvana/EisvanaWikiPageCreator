@@ -3,7 +3,7 @@ run-name: Check PR Branch
 
 on:
   pull_request:
-    types: [opened, edited]
+    types: [opened, edited, synchronize]
 
 jobs:
   Check-PR-Branch:
