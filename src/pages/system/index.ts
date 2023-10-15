@@ -15,7 +15,7 @@ There is a preferred order of pictures:
 		<ol class='dialog-list'>
 			<li>System Exploration Guide</li>
 			<li>System Page</li>
-			<li>Default SS Multi-Tool</li>
+			<li>Default Space Station Multi-Tool</li>
 		</ol>
 	</div>`)
 

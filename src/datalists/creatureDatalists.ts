@@ -1,3 +1,5 @@
+import { robotSentences } from "./creatureDiscoveryMenu/diet";
+
 /**
  * @fileoverview Provides data for creature datalists
  */
@@ -244,18 +246,25 @@ const creatureDatalists = {
 		'Evil',
 		'Sheds and regrows bones',
 		'But there is something particularly unsettling about this creature, some deep shadow hanging over them. They are to be treated with extreme caution.',
-		'Skeletal analysis reveals unusually supple bones, as if they had only recently grown: possible defense mechanism to shed and rapidly regrow body parts?'
+		'Skeletal analysis reveals unusually supple bones, as if they had only recently grown: possible defense mechanism to shed and rapidly regrow body parts?',
+		...robotSentences
 	],
 	behaviourData: [
 		'01100001 01101110 01100111 01110010 01111001',
 		'01110011 01100001 01100100',
 		'01100001 01101100 01101111 01101110 01100101',
 		'01101000 01100101 01101100 01110000',
-		'01101000 01100101 01101100 01110000',
 		'01110111 01100001 01101001 01110100',
 		'01101000 01110101 01101110 01110100',
 		'01101011 01101001 01101100 01101100',
 		'01100110 01100001 01101001 01101100',
+		'01100110 01110010 01101001 01100101 01101110 01100100',
+		'Sedate',
+		'Erratic',
+		'Active',
+		'Distinctive',
+		'Hibernator',
+		'Unintelligent',
 		'Careful hunter',
 		'Patient hunter',
 		'Cautious',
@@ -368,6 +377,13 @@ const creatureDatalists = {
 		'[[Frostwort]]',
 		'[[Fungal Cluster]]',
 		'[[Gamma Weed]]',
+		'[[Mordite Root]]',
+		'Nitrous Oxide',
+		'[[Cadmium]]',
+		'[[Emeril]]',
+		'[[Indium]]',
+		'[[Kelp Sac]]',
+		'[[Condensed Carbon]]',
 		'Vegetation',
 		'Foliage',
 		'Small trees',
@@ -443,6 +459,8 @@ const creatureDatalists = {
 		'Toxic meat',
 		'Rotten meat',
 		'Preserved meat',
+		'Fetid meat',
+		'Charred meat',
 		'Marine snow',
 		'Chemosynthesis',
 		'Vented minerals',
@@ -482,7 +500,7 @@ const creatureDatalists = {
 		'Wasteflesh',
 		'Pure Silicon',
 		'Siphoned Data',
-		'Nanite Clusters',
+		'[[Nanite Cluster]]s',
 		'Recycled Heat',
 		'Cosmic Rays',
 		'Decaying Atoms',
@@ -494,15 +512,15 @@ const creatureDatalists = {
 export function getGenderData(genus: string = '') {
 	const genderData = {
 		Mechanoceris: [
+			'Asynchronous',
+			'Circular',
 			'Electronic',
-			'Virtual',
+			'Mutable',
+			'Non-boolean',
+			'Non-Euclidean',
 			'Uninitialised',
 			'Unmeasurable',
-			'Circular',
-			'Non-boolean',
-			'Mutable',
-			'Asynchronous',
-			'Non-Euclidean'
+			'Virtual'
 		],
 		default: [
 			'Alpha',
@@ -511,6 +529,7 @@ export function getGenderData(genus: string = '') {
 			'Exotic',
 			'Female',
 			'Indeterminate',
+			'Male',
 			'Non-uniform',
 			'None',
 			'Orthogonal',
@@ -519,8 +538,7 @@ export function getGenderData(genus: string = '') {
 			'Rational',
 			'Symmetric',
 			'Unknown',
-			'Vectorised',
-			'Male'
+			'Vectorised'
 		]
 	}
 
