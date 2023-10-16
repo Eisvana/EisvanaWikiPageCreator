@@ -13,6 +13,7 @@ addStaticPageData('galleryExplanationExternal', `
 There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
+			<li>Analysis Visor</li>
 			<li>System Exploration Guide</li>
 			<li>System Page</li>
 			<li>Default Space Station Multi-Tool</li>
