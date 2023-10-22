@@ -180,7 +180,7 @@ function getDietSentenceData(diet: string) {
 					sentences: ['Opportunistic, they happily devour any food source they find: fruit, nuts, insects, old bones, occasional rocks.']
 				},
 				{
-					values: ['Faeces'],
+					values: ['[[Faecium|Faeces]]'],
 					sentences: ['Their adaptive sensory system temporarily shuts down their olfactory nerves as they snout through [[faecium]] deposits in search of undigested morsels.']
 				},
 				{
