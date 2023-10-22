@@ -1,1 +1,0 @@
-This folder hold images and other assets like fonts.
