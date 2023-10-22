@@ -418,7 +418,7 @@ const creatureDatalists = {
 		'Insects and grubs',
 		'Worms',
 		'Anything',
-		'Faeces',
+		'[[Faecium|Faeces]]',
 		'Birds',
 		'Scavenged remains',
 		'Partially-digested meat',
