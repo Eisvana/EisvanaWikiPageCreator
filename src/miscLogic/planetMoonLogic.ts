@@ -558,6 +558,7 @@ export function resetExternal() {
 	removeSection(Array.from(sections));
 
 	enableResourceAdd();
+	wormAlbumName();
 	if (typeof globalFunctions.enableMoonAdd == 'function') globalFunctions.enableMoonAdd();
 }
 

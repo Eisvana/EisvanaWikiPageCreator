@@ -96,3 +96,30 @@ function moonSentence() {
 	})();
 	wikiCode(output, 'moonSentence');
 }
+
+export function generateGalleryArray() {
+	const captions = [
+		'',
+		'Landscape',
+		'Night View',
+		'Cave System',
+		'Analysis Visor',
+		'Planet Exploration Guide',
+		'Planet Page',
+		'System Page',
+		'Galaxy Map'
+	]
+
+	const waterCaptions = [
+		'Coast Area',
+		'Underwater'
+	]
+
+	// add water pics before AV
+	if (pageData.terrain !== 'Pangean') {
+		const avIndex = captions.indexOf('Analysis Visor');
+		captions.splice(avIndex, 0, ...waterCaptions);
+	}
+
+	pageData.galleryArray = captions;
+}

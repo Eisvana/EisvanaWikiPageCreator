@@ -1,10 +1,13 @@
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
 import planetElements from "./elementStore";
-import { moonList } from "./planet";
+import { generateGalleryArray, moonList } from "./planet";
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import planetElementFunctions from "./elementFunctions";
 import { addStaticPageData } from "../../common";
+import { globalFunctions } from "../../variables/objects";
 import '../../startup/planetMoon';
+
+globalFunctions.generateGalleryArray = () => generateGalleryArray();
 
 updateGlobalElements(planetElements);
 assignElementFunctions(planetElementFunctions);
@@ -26,17 +29,3 @@ There is a preferred order of pictures:
 			<li>Galaxy Map</li>
 		</ol>
 	</div>`)
-
-addStaticPageData('galleryArray', [
-	'',
-	'Landscape',
-	'Night View',
-	'Cave System',
-	'Coast Area',
-	'Underwater',
-	'Analysis Visor',
-	'Planet Exploration Guide',
-	'Planet Page',
-	'System Page',
-	'Galaxy Map'
-])
