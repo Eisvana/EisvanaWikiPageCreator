@@ -175,14 +175,32 @@
 					<div class="tableCell text">
 						<label for="terrainInput">Terrain of the moon:</label>
 						<button class="tooltip">
-							<data>Can be found in the exploration guide.</data>
+							<data>The terrain type of the moon.</data>
 							<data>Moon Terrain</data>
-							<data>Can be found in the exploration guide.</data>
-							<data>planet/terrain</data>
+							<data>
+								The terrain type of the moon.
+								<div class="dialog-center">
+									<ul class="dialog-list">
+										<li><span class="has-text-weight-bold">Pangean</span> - No water on the moon
+										</li>
+										<li><span class="has-text-weight-bold">Continental</span> - Water on the moon,
+											but
+											also lots of land</li>
+										<li><span class="has-text-weight-bold">Ocean</span> - Mostly water on the moon
+										</li>
+									</ul>
+								</div>
+								See the <a href="Terrain" data-wiki>terrain wiki page</a> for a more detailed
+								description of the three types.
+							</data>
 						</button>
 					</div>
 					<div class="tableCell data">
-						<input type="text" data-dest="terrain" list="terrainData" id="terrainInput">
+						<select type="text" data-dest="terrain" id="terrainInput">
+							<option value="Pangean">Pangean</option>
+							<option value="Continental">Continental</option>
+							<option value="Ocean">Ocean</option>
+						</select>
 					</div>
 					<div class="tableCell text">
 						<label for="weatherInput">Weather of the moon:</label>
