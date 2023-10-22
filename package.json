@@ -11,7 +11,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "devDependencies": {
-    "@types/sortablejs": "^1.15.1",
+    "@types/sortablejs": "^1.15.4",
     "@vitest/browser": "^0.32.0",
     "npm-run-all": "^4.1.5",
     "playwright": "^1.35.0",
