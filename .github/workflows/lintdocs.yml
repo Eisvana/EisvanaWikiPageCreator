@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Lint JSDoc Comments
         uses: Lenni009/jsdoc2wiki-action/lint-doc@main
