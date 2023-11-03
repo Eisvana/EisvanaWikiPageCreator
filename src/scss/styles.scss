@@ -178,32 +178,6 @@ nav {
 		grid-template-columns: subgrid;
 		grid-column: 1 / span 2;
 		margin: 0;
-		padding: 0;
-		gap: 0;
-
-		&.border {
-			border: 1px solid grey;
-			border-radius: var(--border-radius);
-			background-color: var(--is-odd-background-color);
-			margin-block: .25rem;
-			padding-block: .25rem;
-			padding-inline: .5rem;
-			margin-inline: -.5rem;
-		}
-
-		&.indent {
-			// margin-block: 1rem;
-
-			p {
-				font-weight: bold;
-			}
-
-			&>.tableCell label {
-				// position: relative;
-				// left: 1.5rem;
-				font-weight: normal;
-			}
-		}
 	}
 }
 
@@ -273,16 +247,14 @@ div.checkboxes-grid {
 
 	&.is-odd,
 	&.is-even {
-		padding-inline: .5rem;
-		margin-inline: -.5rem;
+		padding-inline-start: .5rem;
+		padding-inline-end: .5rem;
+		margin-inline-start: -.5rem;
+		margin-inline-end: -.5rem;
 	}
 
 	&.no-flex {
 		display: block;
-	}
-
-	p {
-		font-weight: bold;
 	}
 }
 
@@ -316,6 +288,12 @@ div.column {
 
 .title {
 	text-align: center;
+}
+
+.tableCell>label,
+.tableHeader>label,
+.label-combo>label {
+	font-weight: bold;
 }
 
 .checkbox {
