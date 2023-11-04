@@ -169,7 +169,7 @@ const creatureData: CreatureData = {
 	catalogs: {
 		Ground: ['', 'Diplo', 'Mushroom Beetle', 'Mechanoceris', 'Common Fauna', 'Rare Fauna'],
 		Flying: ['', 'Common Fauna', 'Rare Fauna'],
-		Underwater: ['', 'Common Fauna', 'Rare Fauna'],
+		Underwater: ['', 'Mushroom Beetle', 'Common Fauna', 'Rare Fauna'],
 		Underground: ['', 'Mushroom Beetle', 'Common Fauna', 'Rare Fauna']
 	}
 }
