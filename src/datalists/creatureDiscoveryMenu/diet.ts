@@ -278,7 +278,7 @@ function getDietSentenceData(diet: string) {
 					values: ['Grass'],
 					sentences: [
 						'Perpetual grazers, they consume vast amounts of grass each day.',
-						'Primarily a grazing animal, the poor nutrient levels of their grass-based diet leads them to seek out and lick mineral rich rocks.'
+						'Primarily a grazing animal, the poor nutrient levels of their grass-based diet leads{{sic}} them to seek out and lick mineral rich rocks.'
 					]
 				},
 				{
