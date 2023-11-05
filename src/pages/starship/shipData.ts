@@ -64,7 +64,7 @@ const shipData: {
 		},
 		subtypes: [],
 		secParts: ['', 'Small Double Thruster', 'Large Double Thruster', 'Clam Shell Thruster', 'Single Thruster'],
-		accessories: ['', 'Side Wings', 'Side Booster'],
+		accessories: ['', 'Side Wings', 'Side Booster', 'V-Wings'],
 		miscParts: ['', 'Hexagon', 'Acanthus', 'Geometric Plate', 'Circles', 'Sergeant Stripes'],
 		sections: {
 			subtypeInput: ['hide', ''],
