@@ -180,6 +180,14 @@ nav {
 		margin: 0;
 		padding: 0;
 		gap: 0;
+		border: none;
+
+
+		&>:only-child {
+			grid-column: 1 / span 2;
+			width: 100%;
+			flex-wrap: wrap;
+		}
 	}
 }
 
@@ -208,7 +216,13 @@ div.checkboxes-grid {
 	margin-inline-start: 5px;
 }
 
-.tableCell {
+.table-cell {
+	height: 100%;
+
+	&>* {
+		width: 100%;
+	}
+
 	&.text {
 		padding-inline-end: 10px;
 	}
@@ -219,6 +233,11 @@ div.checkboxes-grid {
 		.error {
 			margin-block-start: .3rem;
 		}
+
+		.error-input {
+			background-color: red;
+		}
+
 	}
 
 	&.is-odd,
@@ -292,7 +311,7 @@ div.column {
 	text-align: center;
 }
 
-.tableCell>label,
+.table-cell>label,
 .tableHeader>label,
 .label-combo>label {
 	font-weight: bold;
@@ -478,7 +497,7 @@ label>input[type="radio"]~span,
 
 /* Container Queries */
 @container (max-width: 260px) {
-	div.tableCell div.checkboxes-grid {
+	div.table-cell div.checkboxes-grid {
 		grid-template-columns: 1fr;
 	}
 }
@@ -490,7 +509,7 @@ label>input[type="radio"]~span,
 }
 
 @container (max-width: 125px) {
-	div.tableCell div.radioButtons {
+	div.table-cell div.radioButtons {
 		display: block;
 	}
 }

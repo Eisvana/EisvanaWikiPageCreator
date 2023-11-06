@@ -565,7 +565,7 @@ export function hideDiscoverer(keepId: string = '', removeId: string = '') {
 		// builds the pair arrays and pushes them to inputPairs
 		for (const element of Array.from(elements)) {
 			if (usedElements.has(element)) continue;
-			const tableCell = element.closest('.tableCell');
+			const tableCell = element.closest('.table-cell');
 			const prev = tableCell?.previousElementSibling?.previousElementSibling?.querySelector('input');
 			const next = tableCell?.nextElementSibling?.nextElementSibling?.querySelector('input');
 			const siblingArray = [prev, next];
@@ -679,7 +679,7 @@ export function validateCoords(error: boolean = true) {
  * @returns {void}
  */
 export function hideInput(element: HTMLElement, displayValue: string = '') {
-	const inputCell = element.closest('.tableCell') as HTMLElement;
+	const inputCell = element.closest('.table-cell') as HTMLElement;
 	const labelCell = inputCell.previousElementSibling as HTMLElement;
 	const inputRow = [labelCell, inputCell];
 

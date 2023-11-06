@@ -3,7 +3,7 @@
 			name="planetName${i}"></output></p>
 	<button class="button" data-evt-id="hideButtonPlanet">Hide</button>
 </div>
-<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="planetName_input${i}">Planet name</label>
 	<button class="tooltip">
 		<data>Can be found in the discovery menu.</data>
@@ -13,10 +13,10 @@
 		<data>planet/planetName</data>
 	</button>
 </div>
-<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="planetName_input${i}" data-dest="planetName${i}">
 </div>
-<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="planetFile_input${i}">Planet file name</label>
 	<button class="tooltip">
 		<data>Should show the entire planet from space. Click for an example picture.</data>
@@ -32,22 +32,22 @@
 		<data>planet/planetPic</data>
 	</button>
 </div>
-<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="planetFile_input${i}" data-dest="planetFile${i}" data-default="NmsMisc_NotAvailable.png">
 	<input type="file" id="mainFileUpl${i}" accept="image/*" data-evt-id="fileInput">
 </div>
-<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="landscapeFile_input${i}">Landscape file name</label>
 	<button class="tooltip">
 		<data>Showcase the planet's landscape.</data>
 	</button>
 </div>
-<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="landscapeFile_input${i}" data-dest="landscapeFile${i}"
 		data-default="NmsMisc_NotAvailable.png">
 	<input type="file" id="secFileUpl${i}" accept="image/*" data-evt-id="fileInput">
 </div>
-<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label>Biome</label>
 	<button class="tooltip">
 		<data>Can be determined from the planetary features.</data>
@@ -60,7 +60,7 @@
 		</data>
 	</button>
 </div>
-<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<select id="biome_input${i}" data-dest-noauto="biome${i}" data-evt-id="biomeInput">
 		<option value="Lush">Lush</option>
 		<option value="Barren">Barren</option>
@@ -75,7 +75,7 @@
 		<option value="Volcanic">Volcanic</option>
 	</select>
 </div>
-<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="descriptor_input${i}">Planet description</label>
 	<button class="tooltip">
 		<data>Can be found in the exploration guide.</data>
@@ -84,14 +84,14 @@
 		<data>planet/planetDesc</data>
 	</button>
 </div>
-<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="descriptor_input${i}" list="planetDescriptors" data-dest-noauto="descriptor${i}"
 		data-evt-id="descriptorInput">
 </div>
-<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="moon_input${i}">Is moon</label>
 </div>
-<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="checkbox" id="moon_input${i}" data-dest-noauto="descriptor_input${i}" data-evt-id="moonCheckbox">
 </div>
 <div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}" data-section="planet${i}">
@@ -110,7 +110,7 @@
 	<button class="button is-primary" id="addResourceButton${i}" type="button" data-evt-id="addResourceButton">+ Add
 		Resource</button>
 </div>
-<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="weather_input${i}">Weather</label>
 	<button class="tooltip">
 		<data>Can be found in the discovery menu.</data>
@@ -119,11 +119,11 @@
 		<data>planet/weather</data>
 	</button>
 </div>
-<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="weather_input${i}" list="weatherData" data-dest-simple="weather${i}"
 		data-evt-id="weatherInput">
 </div>
-<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="sentinel_input${i}">Sentinels</label>
 	<button class="tooltip">
 		<data>Can be found in the discovery menu.</data>
@@ -132,10 +132,10 @@
 		<data>planet/sentinels</data>
 	</button>
 </div>
-<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="sentinel_input${i}" list="sentinels" data-dest="sentinel${i}">
 </div>
-<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="flora_input${i}">Flora</label>
 	<button class="tooltip">
 		<data>Can be found in the discovery menu.</data>
@@ -144,10 +144,10 @@
 		<data>planet/flora</data>
 	</button>
 </div>
-<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="flora_input${i}" list="rarity" data-dest="flora${i}">
 </div>
-<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="fauna_input${i}">Fauna</label>
 	<button class="tooltip">
 		<data>Can be found in the discovery menu.</data>
@@ -156,10 +156,10 @@
 		<data>planet/fauna</data>
 	</button>
 </div>
-<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="fauna_input${i}" list="rarity" data-dest="fauna${i}">
 </div>
-<div class="tableCell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="faunatotal_input${i}">Number of Fauna</label>
 	<button class="tooltip">
 		<data>Can be found in the discovery menu.</data>
@@ -168,7 +168,7 @@
 		<data>planet/faunaNum</data>
 	</button>
 </div>
-<div class="tableCell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
+<div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="text" id="faunatotal_input${i}" maxlength="2" data-dest-number="0" data-dest-noauto="FaunaTotal${i}"
 		data-evt-id="faunaTotalInput">
 </div>

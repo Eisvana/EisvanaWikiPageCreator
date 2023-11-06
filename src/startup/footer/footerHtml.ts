@@ -12,8 +12,8 @@ if ((about as HTMLAnchorElement).href === window.location.toString()) about?.rem
  * Otherwise, the `innerHTML` property of the element with an `id` of `footer` is set to `footerHTML`.
 */
 const footerHTML = dom.body.innerHTML;
-if (globalElements?.output?.footer) {
-	(globalElements.output.footer as HTMLElement).innerHTML = footerHTML;
+if (globalElements?.output?.footer instanceof HTMLElement) {
+	globalElements.output.footer.innerHTML = footerHTML;
 } else {
 	(document.getElementById('footer') as HTMLElement).innerHTML = footerHTML;
 }

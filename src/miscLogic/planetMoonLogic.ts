@@ -80,11 +80,11 @@ export function addResource(element: HTMLButtonElement = (globalElements.input.r
 	const sectionName = 'section' + childIndex;
 
 	// Creates HTML code for a new resource input section
-	const inputHTML = `<div class="tableCell text removable" data-resource="section${childIndex}">
+	const inputHTML = `<div class="table-cell text removable" data-resource="section${childIndex}">
 		<button class="button is-outlined is-danger icon is-small" title="Remove resource" type="button" disabled data-evt-id="removeButton">&#10006</button>
 		<label for="${resource_input}">Resource name:</label>
 	</div>
-	<div class="tableCell data" data-resource="section${childIndex}">
+	<div class="table-cell data" data-resource="section${childIndex}">
 		<input type="text" list="resources" id="${resource_input}" data-evt-id="resourceInput">
 	</div>`;
 

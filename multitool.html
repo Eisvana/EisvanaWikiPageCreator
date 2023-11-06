@@ -22,13 +22,13 @@
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
 				<div class="table">
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Current release:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="versionInput" data-dest="release"></select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="nameInput">Name of the multi-tool:</label>
 						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
@@ -37,10 +37,10 @@
 							<data>mt/MTName</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="fileInput">Main image name, including file extension:</label>
 						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
@@ -55,11 +55,11 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Type of the multi-tool:</label>
 						<button class="tooltip">
 							<data>MT Type is can be seen in the comparison screen.</data>
@@ -68,7 +68,7 @@
 							<data>mt/MTType</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="typeInput" data-dest="type">
 							<option value="Pistol">Pistol</option>
 							<option value="Rifle">Rifle</option>
@@ -79,7 +79,7 @@
 							<option value="Atlantid">Atlantid</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Subtype of the multi-tool:</label>
 						<button class="tooltip">
 							<data>MT subtype is defined by the shape of the tool.</data>
@@ -88,23 +88,23 @@
 							<data>mt/MultitoolDifferentiation</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="subtypeInput" data-dest-noauto="subtype">
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="systemInput">Name of the system:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Location:</label>
 						<button class="tooltip">
 							<data>Where the tool was found.</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="locInput" data-dest="location">
 							<option value="Minor Settlement">Minor Settlement</option>
 							<option value="Space Station">Space Station</option>
@@ -114,25 +114,25 @@
 							<option value="Space Anomaly">Space Anomaly</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="planetInput">Name of the planet:</label>
 						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the tool can be found.</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="moonInput">Name of the moon (if MT is on moon):</label>
 						<button class="tooltip">
 							<data>If the tool is located on a moon. Leave blank if the tool is on a planet.</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="moon" id="moonInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="axesInput">Planetary coords:</label>
 						<button class="tooltip">
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
@@ -141,10 +141,10 @@
 							<data>shared/axes</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" placeholder="+0.00, -0.00" data-dest="axes" id="axesInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Save/reload location type:</label>
 						<button class="tooltip">
 							<data>Where you have to reload in order to get the tool to load.</data>
@@ -157,7 +157,7 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="srlocInput" data-dest-noauto="srLoc">
 							<option value="Planet">Planet</option>
 							<option value="Moon">Moon</option>
@@ -165,13 +165,13 @@
 							<option value="Space Anomaly">Space Anomaly</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="srInput">Save/reload location name (if different):</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="srInput" data-dest-noauto="srLocName">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
@@ -189,17 +189,17 @@
 							<data>shared/glyphs</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
 					</div>
 					<div class="tableHeader data">
 						<div id="portalglyphButtons"></div>
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Class:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="classInput" data-dest="class">
 							<option value="S">S</option>
 							<option value="A">A</option>
@@ -207,7 +207,7 @@
 							<option value="C">C</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Add-ons:</label>
 						<button class="tooltip">
 							<data>Whether the tool has these features.</data>
@@ -221,7 +221,7 @@
 							<data>mt/addons</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<div class="checkboxes">
 							<label class="checkbox" for="crystalsInput"><input type="checkbox" id="crystalsInput"
 									value="Yes" data-dest-checkbox="crystals"><span
@@ -233,7 +233,7 @@
 									class="checkbox-label">Glowtubes</span></label>
 						</div>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="slotsInput">Slot count:</label>
 						<button class="tooltip">
 							<data>Can be found on the price page.</data>
@@ -242,10 +242,10 @@
 							<data>mt/slots</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="slotsInput" data-dest-number="0" data-dest-noauto="slots">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="costInput">Cost:</label>
 						<button class="tooltip">
 							<data>Can be found on the price page.</data>
@@ -254,10 +254,10 @@
 							<data>mt/price</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="costInput" data-dest-number="0" data-dest-noauto="cost">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="dmgInput">Base Damage Potential:</label>
 						<button class="tooltip">
 							<data>Base damage with no installed upgrades.</data>
@@ -270,10 +270,10 @@
 							<data>mt/baseDmg</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="dmgInput" placeholder="0.0" data-dest-number="1" data-dest-noauto="dmg">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="scanInput">Base Scanner Range:</label>
 						<button class="tooltip">
 							<data>Base scan range with no installed upgrades.</data>
@@ -286,7 +286,7 @@
 							<data>mt/baseScan</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="scanInput" placeholder="0.0" data-dest-number="1"
 							data-dest-noauto="scanRange">
 					</div>
@@ -296,7 +296,7 @@
 							menu (except coordinates)
 						</p>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="srImgInput"><output id="srImgInputLabel">Save/Reload Location</output></label>
 						<button class="tooltip">
 							<data>Click to see an example picture.</data>
@@ -305,11 +305,11 @@
 							<data>mt/srExample</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="srImgInput" data-dest-noauto="srPlanetImg">
 						<input type="file" id="srImgUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="sysImgInput"><output id="sysImgInputLabel">System (Cabinet location
 								highlighted)</output></label>
 						<button class="tooltip">
@@ -319,11 +319,11 @@
 							<data>mt/sysExample</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="sysImgInput" data-dest-noauto="sysImg">
 						<input type="file" id="sysImgUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="cabInput"><output id="cabInputLabel">Cabinet Planet/Moon</output></label>
 						<button class="tooltip">
 							<data>Click to see an example picture.</data>
@@ -332,11 +332,11 @@
 							<data>mt/srExample</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="cabInput" data-dest-noauto="cabinetPlanetImg">
 						<input type="file" id="cabUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="coordsInput"><output id="coordsInputLabel">Coordinates</output></label>
 						<button class="tooltip">
 							<data>Click to see an example picture.</data>
@@ -345,32 +345,32 @@
 							<data>mt/coordExample</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="coordsInput" data-dest-noauto="axesImg">
 						<input type="file" id="coordsUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="discoveredlinkInput">Discoverer wiki name:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="discoveredlinkInput" data-dest="discoveredlink">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="discoveredInput">Discoverer alias if no wiki:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="discoveredInput" data-dest="discovered">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="docbyInput">Documenter alias if not discoverer:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="docbyInput" data-dest-noauto="docby">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Do you belong to a chapter?</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="researchteamInput" data-dest-noauto="researchteam">
 							<option value=""></option>
 							<option value="Wiki Scholars">Wiki Scholars</option>
@@ -381,10 +381,10 @@
 						<p>This section builds a predefined appearance sentence, it is not required.</p>
 						<button class="button" id="hideAppearanceButton">Hide</button>
 					</div>
-					<div data-section="appearance" class="tableCell text">
+					<div data-section="appearance" class="table-cell text">
 						<label>Main Colour:</label>
 					</div>
-					<div data-section="appearance" class="tableCell data">
+					<div data-section="appearance" class="table-cell data">
 						<select id="mainColourInput" data-dest-noauto="mainColour">
 							<option value=" "></option>
 							<option value="blue">Blue</option>
@@ -402,10 +402,10 @@
 							<option value="yellow">Yellow</option>
 						</select>
 					</div>
-					<div data-section="appearance" class="tableCell text">
+					<div data-section="appearance" class="table-cell text">
 						<label>Secondary Colour:</label>
 					</div>
-					<div data-section="appearance" class="tableCell data">
+					<div data-section="appearance" class="table-cell data">
 						<select id="secColourInput" data-dest-noauto="secColour">
 							<option value=" "></option>
 							<option value="black">Black</option>

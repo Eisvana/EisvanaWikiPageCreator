@@ -18,11 +18,11 @@ export function addMoon(element: HTMLButtonElement) {
 	const childIndex = getChildIndex(Array.from(elementList), 'dataset.moon');
 	const moon_input = 'moon_input' + childIndex;
 
-	const inputHTML = `<div class="tableCell text removable" data-moon="section${childIndex}">
+	const inputHTML = `<div class="table-cell text removable" data-moon="section${childIndex}">
 		<button class="button is-outlined is-danger icon is-small" title="Remove moon" type="button" data-evt-id="removeButton">&#10006</button>
 		<label for="${moon_input}">Moon name:</label>
 	</div>
-	<div class="tableCell data" data-moon="section${childIndex}">
+	<div class="table-cell data" data-moon="section${childIndex}">
 		<input type="text" id="${moon_input}" data-evt-id="moonInput">
 	</div>`;
 
