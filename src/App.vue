@@ -24,18 +24,11 @@ import { usePageDataStore } from "./stores/pageData";
 import { storeToRefs } from "pinia";
 import { computed, onMounted, watchEffect } from "vue";
 import floraDatalists from "./datalists/floraDatalists";
-import { createApp } from "vue";
-import { createPinia } from "pinia";
-import App from "./modules/gallery/App.vue";
 
 onMounted(() => {
   // TODO: gallery should be integrated natively, not as separate Vue app
   oldPageData.galleryArray = ["", "Scanner view", "Discovery Menu"];
-  const app = createApp(App);
-
-  app.use(createPinia());
-
-  app.mount("#galleryInput");
+  import("./startup/gallery");
 });
 
 const pageData = usePageDataStore();
