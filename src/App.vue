@@ -2,32 +2,27 @@
 import InputColumn from "./components/structure/InputColumn.vue";
 import OutputColumn from "./components/structure/OutputColumn.vue";
 import ReleaseInput from "./components/inputs/ReleaseInput.vue";
-import NameInput from "./components/inputs/NameInput.vue";
+import SimpleInput from "./components/inputs/SimpleInput.vue";
 import InfoboxImageInput from "./components/inputs/InfoboxImageInput.vue";
 import DiscovererInputs from "./components/inputs/DiscovererInputs.vue";
-import OriginalNameInput from "./components/inputs/OriginalNameInput.vue";
-import SystemInput from "./components/inputs/SystemInput.vue";
-import PlanetInput from "./components/inputs/PlanetInput.vue";
-import MoonInput from "./components/inputs/MoonInput.vue";
 import GlyphInput from "./components/inputs/GlyphInput.vue";
 import BiomeInput from "./components/inputs/BiomeInput.vue";
 import DatalistWrapper from "./components/inputs/DatalistWrapper.vue";
 import FloraResourceInput from "./components/inputs/FloraResourceInput.vue";
 import ResearchteamInput from "./components/inputs/ResearchteamInput.vue";
 import InputRow from "./components/structure/InputRow.vue";
+import Subgrid from "./components/structure/Subgrid.vue";
 
-import { sanitiseString } from "./common";
-import { vowels } from "./variables/simple";
-import { pageData as oldPageData } from "./variables/objects";
+import { addStaticPageData, sanitiseString } from "./common";
+import floraDatalists from "./datalists/floraDatalists";
 
 import { usePageDataStore } from "./stores/pageData";
 import { storeToRefs } from "pinia";
 import { computed, onMounted, watchEffect } from "vue";
-import floraDatalists from "./datalists/floraDatalists";
 
 onMounted(() => {
   // TODO: gallery should be integrated natively, not as separate Vue app
-  oldPageData.galleryArray = ["", "Scanner view", "Discovery Menu"];
+  addStaticPageData("galleryArray", ["", "Scanner view", "Discovery Menu"]);
   import("./startup/gallery");
 });
 
@@ -54,6 +49,7 @@ const {
   discDate,
   docBy,
   researchteam,
+  appearance,
 } = storeToRefs(pageData);
 
 const plantName = computed(() => sanitiseString(name.value));
@@ -64,89 +60,60 @@ const planetName = computed(() => sanitiseString(planet.value));
 const moonName = computed(() => sanitiseString(moon.value));
 const originalName = computed(() => sanitiseString(orgName.value));
 
-const floraTypes = [
-  "Flower",
-  "Mushroom",
-  "Tree",
-  "Leafy Plant",
-  "Cactus",
-  "Coral",
-  "Seaweed",
-  "Infected",
-  "Exotic",
-];
-
 watchEffect(() => {
   if (elements.value[0] === elements.value[1]) elements.value[1] = "";
 });
+
+const filledElements = computed(() => elements.value.filter((el) => el));
 </script>
 
 <template>
   <InputColumn>
-    <div class="table">
+    <form class="table" @submit.prevent>
       <ReleaseInput />
-      <NameInput label="Plant name:" />
-      <OriginalNameInput />
+      <SimpleInput label="Plant name:" identifier="nameInput" v-model="name" />
+      <SimpleInput
+        label="Original name before uploading (if available):"
+        identifier="orgNameInput"
+        v-model="orgName"
+      />
       <InfoboxImageInput />
-      <SystemInput />
-      <PlanetInput />
-      <MoonInput />
+      <SimpleInput
+        label="Name of the System:"
+        identifier="systemInput"
+        v-model="system"
+      />
+      <SimpleInput
+        label="Name of the planet:"
+        identifier="planetInput"
+        v-model="planet"
+      />
+      <SimpleInput
+        label="Name of the moon (if plant is on moon):"
+        identifier="moonInput"
+        v-model="moon"
+      />
       <GlyphInput />
-      <InputRow>
-        <template #label>
-          <label>What type of plant is this?</label>
-        </template>
-
-        <template #input>
-          <select v-model="type">
-            <option v-for="floraType in floraTypes" :value="floraType">
-              {{ floraType }}
-            </option>
-          </select>
-        </template>
-      </InputRow>
       <BiomeInput />
-      <InputRow>
-        <template #label>
-          <label for="age">Age:</label>
-        </template>
-
-        <template #input>
-          <input v-model="age" list="ageData" id="age" type="text" />
-        </template>
-      </InputRow>
-      <InputRow>
-        <template #label>
-          <label for="roots">Root structure:</label>
-        </template>
-
-        <template #input>
-          <input v-model="roots" list="rootData" id="roots" type="text" />
-        </template>
-      </InputRow>
-      <InputRow>
-        <template #label>
-          <label for="nutSource">Nutrient source:</label>
-        </template>
-
-        <template #input>
-          <input
-            v-model="nutrients"
-            list="nutSourceData"
-            id="nutSource"
-            type="text"
-          />
-        </template>
-      </InputRow>
-      <InputRow>
-        <template #label>
-          <label for="notes">Notes:</label>
-        </template>
-
-        <template #input>
-          <input v-model="notes" list="floraNotesData" id="notes" type="text" />
-        </template>
-      </InputRow>
+      <SimpleInput label="Age:" identifier="age" list="ageData" v-model="age" />
+      <SimpleInput
+        label="Root structure:"
+        identifier="roots"
+        list="rootData"
+        v-model="roots"
+      />
+      <SimpleInput
+        label="Nutrient source:"
+        identifier="nutSource"
+        list="nutSourceData"
+        v-model="nutrients"
+      />
+      <SimpleInput
+        label="Notes:"
+        identifier="notes"
+        list="floraNotesData"
+        v-model="notes"
+      />
       <FloraResourceInput :index="0" />
       <FloraResourceInput :index="1" />
       <InputRow>
@@ -158,26 +125,31 @@ watchEffect(() => {
           <input v-model="discDate" id="discDate" type="date" />
         </template>
       </InputRow>
+      <Subgrid>
+        <InputRow>
+          <p>Information about the player.</p>
+        </InputRow>
+        <DiscovererInputs />
+        <SimpleInput
+          label="Documenter if not discoverer:"
+          identifier="docBy"
+          v-model="docBy"
+        />
+        <ResearchteamInput />
+      </Subgrid>
       <InputRow>
-        <p>Information about the player.</p>
+        <label for="appearance">Appearance:</label>
+        <textarea
+          v-model="appearance"
+          id="appearance"
+          placeholder="This flora is..."
+        ></textarea>
       </InputRow>
-      <DiscovererInputs type="Discoverer" />
-      <InputRow>
-        <template #label>
-          <label for="docBy">Documenter if not discoverer:</label>
-        </template>
-
-        <template #input>
-          <input v-model="docBy" id="docBy" type="text" />
-        </template>
-      </InputRow>
-      <ResearchteamInput />
-    </div>
+    </form>
 
     <div id="galleryInput"></div>
     <div id="galleryItems" class="gallery-items-wrapper"></div>
     <div id="actions" class="buttons"></div>
-    <div id="albumActions" class="buttons"></div>
   </InputColumn>
 
   <OutputColumn>
@@ -217,9 +189,7 @@ watchEffect(() => {
 
       <div>==Summary==</div>
       <div>
-        '''{{ plantName }}''' is a [[species]] of [[flora]], categorised as
-        {{ vowels.includes(type.toLowerCase().slice(0, 1)) ? "an" : "a" }}
-        {{ type }}.
+        '''{{ plantName }}''' is a [[species]] of [[flora]]. {{ appearance }}
       </div>
       <br />
       <div v-if="polymorphic">
@@ -253,15 +223,10 @@ watchEffect(() => {
       <br />
 
       <div>==Usage==</div>
-      <div v-if="elements.filter((el) => el).length">
+      <div v-if="filledElements.length">
         This flora provides the
-        {{ elements.filter((el) => el).length > 1 ? "resources" : "resource" }}
-        {{
-          elements
-            .filter((el) => el)
-            .map((el) => `[[${el}]]`)
-            .join(" and ")
-        }}
+        {{ filledElements.length > 1 ? "resources" : "resource" }}
+        {{ filledElements.map((el) => `[[${el}]]`).join(" and ") }}
         when harvested.
       </div>
       <div v-else>This flora provides no harvestable resources.</div>

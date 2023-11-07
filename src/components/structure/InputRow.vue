@@ -1,5 +1,9 @@
+<script setup lang="ts">
+import Subgrid from "./Subgrid.vue";
+</script>
+
 <template>
-  <div class="table">
+  <Subgrid>
     <template v-if="$slots.label && $slots.input">
       <div class="table-cell text">
         <slot name="label"></slot>
@@ -12,5 +16,5 @@
     <div v-else class="table-cell">
       <slot></slot>
     </div>
-  </div>
+  </Subgrid>
 </template>

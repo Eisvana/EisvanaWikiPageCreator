@@ -7,7 +7,7 @@ const pageData = usePageDataStore();
 const { discovered, discoveredlink } = storeToRefs(pageData);
 
 interface Props {
-  type: string;
+  type?: string;
 }
 
 withDefaults(defineProps<Props>(), {

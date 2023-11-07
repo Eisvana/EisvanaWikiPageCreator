@@ -219,10 +219,6 @@ div.checkboxes-grid {
 .table-cell {
 	height: 100%;
 
-	&>* {
-		width: 100%;
-	}
-
 	&.text {
 		padding-inline-end: 10px;
 	}
@@ -237,7 +233,6 @@ div.checkboxes-grid {
 		.error-input {
 			background-color: red;
 		}
-
 	}
 
 	&.is-odd,
@@ -376,6 +371,7 @@ label>input[type="radio"]~span,
 	display: grid;
 	grid-template-columns: repeat(8, 60px);
 	gap: 1px;
+	width: 100%;
 
 	.glyph.icon.is-small {
 		height: 1em;
@@ -384,6 +380,7 @@ label>input[type="radio"]~span,
 
 .portalglyphsPreview,
 #portalglyphsPreview {
+	width: 100%;
 	word-break: break-all;
 	text-align: left;
 }
