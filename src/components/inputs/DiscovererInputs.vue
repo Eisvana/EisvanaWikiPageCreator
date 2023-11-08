@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import InputRow from "../structure/InputRow.vue";
-import { usePageDataStore } from "../../stores/pageData";
-import { storeToRefs } from "pinia";
+import InputRow from '../structure/InputRow.vue';
+import { usePageDataStore } from '../../stores/pageData';
+import { storeToRefs } from 'pinia';
 
 const pageData = usePageDataStore();
 const { discovered, discoveredlink } = storeToRefs(pageData);
@@ -11,7 +11,7 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  type: "Discoverer",
+  type: 'Discoverer',
 });
 </script>
 
@@ -21,7 +21,11 @@ withDefaults(defineProps<Props>(), {
       <label for="discoveredlinkInput">{{ type }} wiki name:</label>
     </template>
     <template #input>
-      <input v-model="discoveredlink" type="text" id="discoveredlinkInput" />
+      <input
+        v-model="discoveredlink"
+        type="text"
+        id="discoveredlinkInput"
+      />
     </template>
   </InputRow>
 
@@ -30,7 +34,11 @@ withDefaults(defineProps<Props>(), {
       <label for="discoveredInput">{{ type }} alias if no wiki:</label>
     </template>
     <template #input>
-      <input v-model="discovered" type="text" id="discoveredInput" />
+      <input
+        v-model="discovered"
+        type="text"
+        id="discoveredInput"
+      />
     </template>
   </InputRow>
 </template>

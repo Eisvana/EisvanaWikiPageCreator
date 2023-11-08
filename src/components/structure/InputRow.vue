@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Subgrid from "./Subgrid.vue";
+import Subgrid from './Subgrid.vue';
 </script>
 
 <template>
@@ -13,7 +13,10 @@ import Subgrid from "./Subgrid.vue";
       </div>
     </template>
 
-    <div v-else class="table-cell">
+    <div
+      v-else
+      class="table-cell"
+    >
       <slot></slot>
     </div>
   </Subgrid>

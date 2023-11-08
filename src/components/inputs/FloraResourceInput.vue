@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import floraDatalists from "../../datalists/floraDatalists";
-import { usePageDataStore } from "../../stores/pageData";
-import InputRow from "../structure/InputRow.vue";
+import { storeToRefs } from 'pinia';
+import floraDatalists from '../../datalists/floraDatalists';
+import { usePageDataStore } from '../../stores/pageData';
+import InputRow from '../structure/InputRow.vue';
 
 const pageData = usePageDataStore();
 const { elements } = storeToRefs(pageData);
@@ -15,7 +15,7 @@ defineProps<{
 <template>
   <InputRow>
     <template #label>
-      <label>{{ index ? "Secondary" : "Primary" }} element</label>
+      <label>{{ index ? 'Secondary' : 'Primary' }} element</label>
     </template>
     <template #input>
       <select v-model="elements[index]">

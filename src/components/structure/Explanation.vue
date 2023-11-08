@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, ref } from "vue";
+import { nextTick, ref } from 'vue';
 
 /**
  * Explanation Modal
@@ -17,22 +17,22 @@ const dialogElement = ref<HTMLDialogElement | null>(null);
 const imgElement = ref<HTMLImageElement | null>(null);
 const linkElement = ref<HTMLAnchorElement | null>(null);
 
-const img = props.img?.trim() ?? "";
+const img = props.img?.trim() ?? '';
 
-const translate = ref("0 -100vh");
-const src = ref("");
+const translate = ref('0 -100vh');
+const src = ref('');
 const opacity = ref(0);
 const marginBlockStart = ref(0);
 
 function showModal() {
-  translate.value = "0 -100vh";
+  translate.value = '0 -100vh';
   src.value ||= img;
 
   // Show the modal with a slide-down animation
   nextTick(() => {
     if (dialogElement.value) {
       dialogElement.value.showModal();
-      translate.value = "0 0";
+      translate.value = '0 0';
       dialogElement.value.scrollTo(0, 0);
     }
   });
@@ -50,7 +50,10 @@ function imgOnload() {
     class="tooltip"
     @click="$slots.content && showModal"
   >
-    <img src="/assets/icons/help.svg" alt="Help" />
+    <img
+      src="/assets/icons/help.svg"
+      alt="Help"
+    />
     <p class="tooltiptext nms-font"><slot></slot></p>
   </button>
 
@@ -59,11 +62,17 @@ function imgOnload() {
     ref="dialogElement"
     :style="{ translate }"
   >
-    <h2 id="explanationHeading" class="explanationHeading title is-4">
+    <h2
+      id="explanationHeading"
+      class="explanationHeading title is-4"
+    >
       <slot name="heading"></slot>
     </h2>
 
-    <div id="explanationContent" class="explanationContent nms-font">
+    <div
+      id="explanationContent"
+      class="explanationContent nms-font"
+    >
       <slot name="content"></slot>
     </div>
     <a
@@ -97,7 +106,13 @@ function imgOnload() {
       </picture>
     </a>
     <form method="dialog">
-      <button class="button" type="submit" autofocus>Close</button>
+      <button
+        class="button"
+        type="submit"
+        autofocus
+      >
+        Close
+      </button>
     </form>
   </dialog>
 </template>

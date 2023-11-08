@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { usePageDataStore } from "../../stores/pageData";
-import { storeToRefs } from "pinia";
-import InputRow from "../structure/InputRow.vue";
-import ErrorMessage from "./ErrorMessage.vue";
-import { computed } from "vue";
+import { usePageDataStore } from '../../stores/pageData';
+import { storeToRefs } from 'pinia';
+import InputRow from '../structure/InputRow.vue';
+import ErrorMessage from './ErrorMessage.vue';
+import { computed } from 'vue';
 
 const validGlyphsRegex = /[0-9A-F]/;
 const maxGlyphLength = 12;
@@ -16,17 +16,12 @@ function addGlyph(e: Event) {
     !e.target ||
     !(
       e.target instanceof HTMLButtonElement ||
-      (e.target instanceof HTMLElement &&
-        e.target.parentElement instanceof HTMLButtonElement)
+      (e.target instanceof HTMLElement && e.target.parentElement instanceof HTMLButtonElement)
     )
   )
     return;
-  const buttonElement =
-    e.target instanceof HTMLButtonElement ? e.target : e.target.parentElement;
-  if (
-    buttonElement instanceof HTMLButtonElement &&
-    glyphs.value.length < maxGlyphLength
-  )
+  const buttonElement = e.target instanceof HTMLButtonElement ? e.target : e.target.parentElement;
+  if (buttonElement instanceof HTMLButtonElement && glyphs.value.length < maxGlyphLength)
     glyphs.value += buttonElement.value;
 }
 
@@ -37,22 +32,23 @@ function deleteGlyph() {
 function lintGlyphs() {
   glyphs.value = glyphs.value
     .toUpperCase()
-    .split("")
+    .split('')
     .filter((char: string) => validGlyphsRegex.test(char))
-    .join("");
+    .join('');
 }
 
 const numberToGlyph = (n: number) => n.toString(16).toUpperCase(); // NoSonar this is dec to hex
 
-const isInvalidGlyphs = computed(
-  () => glyphs.value.length === maxGlyphLength && !isValidGlyphs.value
-);
+const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength && !isValidGlyphs.value);
 </script>
 
 <template>
   <InputRow>
     <template #label>
-      <div :class="{ 'error-label': isInvalidGlyphs }" class="label-combo">
+      <div
+        :class="{ 'error-label': isInvalidGlyphs }"
+        class="label-combo"
+      >
         <label for="portalglyphsInput">Portalglyphs:</label>
         <button
           class="button is-small is-danger"
@@ -76,7 +72,9 @@ const isInvalidGlyphs = computed(
         @input="lintGlyphs"
       />
 
-      <ErrorMessage v-if="isInvalidGlyphs" class="error"
+      <ErrorMessage
+        v-if="isInvalidGlyphs"
+        class="error"
         >No valid Eisvana region. See
         <a
           href="https://nomanssky.fandom.com/wiki/Eisvana#Claimed_Regions"
@@ -102,9 +100,12 @@ const isInvalidGlyphs = computed(
       </button>
     </div>
 
-    <output name="portalglyphs" id="portalglyphsPreview" class="glyph">{{
-      glyphs
-    }}</output>
+    <output
+      name="portalglyphs"
+      id="portalglyphsPreview"
+      class="glyph"
+      >{{ glyphs }}</output
+    >
   </InputRow>
 </template>
 

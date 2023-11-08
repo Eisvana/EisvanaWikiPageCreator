@@ -7,6 +7,11 @@ defineProps<{
 
 <template>
   <datalist :id="identifier">
-    <option v-for="option in data" :value="option">{{ option }}</option>
+    <option
+      v-for="option in data"
+      :value="option"
+    >
+      {{ option }}
+    </option>
   </datalist>
 </template>
