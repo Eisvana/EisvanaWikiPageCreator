@@ -1,20 +1,10 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { usePageDataStore } from '../../stores/pageData';
-import { reactive } from 'vue';
-import { getCurrentHTMLFile } from '../../common';
+import { departments, usePageDataStore } from '../../stores/pageData';
 import InputRow from '../structure/InputRow.vue';
 
 const pageData = usePageDataStore();
 const { researchteam } = storeToRefs(pageData);
-
-const departments = reactive({
-  '': 'Eisvana',
-  'Wiki Scholars': 'Eisvana Wiki Scholars',
-  EBC: 'Eisvana Builder Collective',
-});
-
-if (getCurrentHTMLFile() === 'base') departments[''] = '';
 </script>
 
 <template>

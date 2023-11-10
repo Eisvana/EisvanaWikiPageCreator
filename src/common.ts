@@ -841,7 +841,7 @@ export function forceDatalist(element: HTMLInputElement) {
  * Checks the integrity of the page data and returns an error message if there's an issue.
  * @param {HTMLElement} [element=null] - The HTML element related to the data check.
  * @param {boolean} [simple=false] - Indicates whether to perform a simple data check.
- * @returns {string|false} A string with an error message if a data integrity issue was found, or false otherwise.
+ * @returns {string} A string with an error message if a data integrity issue was found, or an empty string otherwise.
  */
 export function checkDataIntegrity(element: HTMLElement | null = null, simple: boolean = false) {
 	if (staticBooleans.debug) return '';

@@ -1,11 +1,17 @@
 <script setup lang="ts">
+import { useStaticPageDataStore } from '@/stores/pageData';
+import { storeToRefs } from 'pinia';
+
+const staticPageData = useStaticPageDataStore();
+const { debug } = storeToRefs(staticPageData);
+
 const clearLocalStorage = () => localStorage.clear();
-//TODO implement the debug skip checkbox
 </script>
 
 <template>
   <label class="debug-skip-label"
     ><input
+      v-model="debug"
       class="checkbox"
       type="checkbox"
       id="skipCheck"

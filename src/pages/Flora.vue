@@ -12,16 +12,24 @@ import FloraResourceInput from '@/components/inputs/FloraResourceInput.vue';
 import ResearchteamInput from '@/components/inputs/ResearchteamInput.vue';
 import InputRow from '@/components/structure/InputRow.vue';
 import Subgrid from '@/components/structure/Subgrid.vue';
-import Actions from '@/components/structure/Actions.vue';
+import Actions from '@/components/actions/Actions.vue';
+import FloraInfobox from '@/components/infoboxes/FloraInfobox.vue';
+import WikiTemplate from '@/components/structure/WikiTemplate.vue';
 
 import { addStaticPageData, sanitiseString } from '@/common';
 import floraDatalists from '@/datalists/floraDatalists';
 
-import { usePageDataStore } from '@/stores/pageData';
+import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watchEffect } from 'vue';
 
+const staticPageData = useStaticPageDataStore();
+const { fullArticleElement } = storeToRefs(staticPageData);
+
+const wikiText = ref<HTMLDivElement | null>(null);
+
 onMounted(() => {
+  fullArticleElement.value = wikiText.value;
   // TODO: gallery should be integrated natively, not as separate Vue app
   addStaticPageData('galleryArray', ['', 'Scanner view', 'Discovery Menu']);
   import('../startup/gallery');
@@ -53,10 +61,6 @@ const {
   appearance,
 } = storeToRefs(pageData);
 
-const wikiText = ref<HTMLDivElement | null>();
-const triedCopy = ref<boolean>(false);
-const copiedSuccessful = ref<boolean>(false);
-
 const plantName = computed(() => sanitiseString(name.value));
 const discoveredName = computed(() => sanitiseString(discovered.value));
 const discoveredlinkName = computed(() => sanitiseString(discoveredlink.value));
@@ -71,18 +75,15 @@ watchEffect(() => {
 
 const filledElements = computed(() => elements.value.filter((el) => el));
 
-function copyArticle() {
-  triedCopy.value = true;
-  if (wikiText.value) {
-    const copyTextContent = wikiText.value.innerText.replaceAll('\n\n\n', '\n\n');
-    navigator.clipboard.writeText(copyTextContent);
-  }
-  copiedSuccessful.value = Boolean(wikiText.value); // checks if the wikitext value is set or null
-
-  setTimeout(() => {
-    triedCopy.value = false;
-  }, 1500); // NoSonar wait 1.5 seconds before resetting the button
-}
+const docBySentence = computed(() => {
+  const isLink = docBy.value.startsWith('{{');
+  const hasResearchteam = researchteam.value.split(' ').length > 1;
+  const documenter = isLink ? docBy.value : `''${docBy.value}''`;
+  const researchteamLink = researchteam.value.includes('Wiki')
+    ? '[[Eisvana Wiki Scholars|Eisvana Wiki Scholar]]'
+    : `[[${researchteam.value}]] member`;
+  return `${hasResearchteam ? researchteamLink : ''} ${documenter}`;
+});
 </script>
 
 <template>
@@ -144,6 +145,11 @@ function copyArticle() {
         list="floraNotesData"
         v-model="notes"
       />
+      <SimpleInput
+        label="Polymorphic (number of instances):"
+        identifier="polymorphic"
+        v-model="polymorphic"
+      />
       <FloraResourceInput :index="0" />
       <FloraResourceInput :index="1" />
       <InputRow>
@@ -187,11 +193,7 @@ function copyArticle() {
       class="gallery-items-wrapper"
     ></div>
 
-    <Actions
-      :copiedSuccessful="copiedSuccessful"
-      :triedCopy="triedCopy"
-      @copy="copyArticle"
-    />
+    <Actions />
   </InputColumn>
 
   <OutputColumn>
@@ -199,38 +201,32 @@ function copyArticle() {
       ref="wikiText"
       class="wikiText"
       id="fullArticle"
-      data-link="page"
     >
       <div>
-        <span v-pre>{{Version|</span>
-        <output>{{ release }}</output>
-        <span v-pre>}}</span>
+        <WikiTemplate template-name="Version">{{ release }}</WikiTemplate>
       </div>
-      <div v-pre>{{Flora infobox</div>
-      <div>| name = {{ plantName }}</div>
-      <div>| image = {{ picName || 'nmsMisc_NotAvailable.png' }}</div>
-      <div>| galaxy = Eissentam</div>
-      <div>| region =</div>
-      <div>| system = {{ systemName }}</div>
-      <div>| planet = {{ planetName }}</div>
-      <div>| moon = {{ moonName }}</div>
-      <div>| civilized = Eisvana</div>
-      <div>| type = {{ type }}</div>
-      <div>| biome = {{ biome }}</div>
-      <div>| polymorphic = {{ polymorphic }}</div>
-      <div>| age = {{ age }}</div>
-      <div>| roots = {{ roots }}</div>
-      <div>| nut_source = {{ nutrients }}</div>
-      <div>| notes = {{ notes }}</div>
-      <div>| element_primary = {{ elements[0] }}</div>
-      <div>| element_secondary = {{ elements[1] }}</div>
-      <div>| discoveredlink = {{ discoveredlinkName }}</div>
-      <div>| discovered = {{ discoveredName }}</div>
-      <div>| discovered_on = {{ discDate.replaceAll('-', '/') }}</div>
-      <div>| mode =</div>
-      <div>| researchteam = {{ researchteam }}</div>
-      <div>| release = {{ release }}</div>
-      <div v-pre>}}</div>
+      <FloraInfobox
+        :plantName="plantName"
+        :picName="picName"
+        region=""
+        :systemName="systemName"
+        :planetName="planetName"
+        :moonName="moonName"
+        :type="type"
+        :biome="biome"
+        :polymorphic="polymorphic"
+        :age="age"
+        :roots="roots"
+        :nutrients="nutrients"
+        :notes="polymorphic"
+        :elemPrimary="elements[0]"
+        :elemSecondary="elements[1]"
+        :discDate="discDate.replaceAll('-', '/')"
+        :discoveredName="discoveredName"
+        :discoveredlinkName="discoveredlinkName"
+        :researchteam="researchteam"
+        :release="release"
+      />
       <div>'''{{ plantName }}''' is a species of flora.</div>
       <br />
 
@@ -238,18 +234,16 @@ function copyArticle() {
       <div>'''{{ plantName }}''' is a [[species]] of [[flora]]. {{ appearance }}</div>
       <br />
       <div v-if="polymorphic">
-        <span v-pre>{{polymorphic|</span><output>{{ polymorphic }}</output
-        ><span v-pre>}}</span>
+        <WikiTemplate template-name="Polymorphic">{{ polymorphic }} </WikiTemplate>
+        <br />
       </div>
 
       <div>==Alias Names==</div>
       <div v-if="orgName">
-        <span v-pre>{{aliasc|text=Original|name=</span><output>{{ originalName }}</output
-        ><span v-pre>}}</span>
+        <WikiTemplate template-name="aliasc">text=Original|name={{ originalName }}</WikiTemplate>
       </div>
       <div>
-        <span v-pre>{{aliasc|text=Current|name=</span><output>{{ plantName }}</output
-        ><span v-pre>}}</span>
+        <WikiTemplate template-name="aliasc">text=Current|name={{ plantName }}</WikiTemplate>
       </div>
       <br />
 
@@ -261,8 +255,7 @@ function copyArticle() {
         }}]] [[star system]].
       </div>
       <div>
-        <span v-pre>{{CoordGlyphConvert|</span><output>{{ glyphs }}</output
-        ><span v-pre>}}</span>
+        <WikiTemplate template-name="CoordGlyphConvert">{{ glyphs }}</WikiTemplate>
       </div>
       <br />
 
@@ -277,7 +270,7 @@ function copyArticle() {
       <br />
 
       <div>==Additional Information==</div>
-      <div v-if="docBy">Documented by {{ docBy.startsWith('{{') ? docBy : `''${docBy}''` }}</div>
+      <div v-if="docBy">Documented by {{ docBySentence }}</div>
       <br />
 
       <div id="gallery"></div>
