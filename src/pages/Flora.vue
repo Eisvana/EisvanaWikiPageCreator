@@ -233,10 +233,12 @@ const docBySentence = computed(() => {
       <div>==Summary==</div>
       <div>'''{{ plantName }}''' is a [[species]] of [[flora]]. {{ appearance }}</div>
       <br />
-      <div v-if="polymorphic">
-        <WikiTemplate template-name="Polymorphic">{{ polymorphic }} </WikiTemplate>
+      <template v-if="polymorphic">
+        <div>
+          <WikiTemplate template-name="Polymorphic">{{ polymorphic }}</WikiTemplate>
+        </div>
         <br />
-      </div>
+      </template>
 
       <div>==Alias Names==</div>
       <div v-if="orgName">
