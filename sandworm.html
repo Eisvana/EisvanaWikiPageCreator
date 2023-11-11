@@ -25,13 +25,13 @@
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
 				<div class="table">
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Current release:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="versionInput" data-dest="release"></select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="fileInput">Main image name, including file extension:</label>
 						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
@@ -46,38 +46,38 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="systemInput">Name of the system:</label>
 						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="planetInput">Name of the planet:</label>
 						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the worm can be found.</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="moonInput">Name of the moon (if worm is on moon):</label>
 						<button class="tooltip">
 							<data>If the worm is located on a moon. Leave blank if the worm is on a planet.</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="moon" id="moonInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
@@ -95,14 +95,14 @@
 							<data>shared/glyphs</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
 					</div>
 					<div class="tableHeader data">
 						<div id="portalglyphButtons"></div>
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Class:</label>
 						<button class="tooltip">
 							<data>Found on the worm scan.</data>
@@ -111,7 +111,7 @@
 							<data>sandworm/class</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="wormclassInput" data-dest="wormclass">
 							<option value="Ceaseless Burrower">Ceaseless Burrower</option>
 							<option value="Colossal Being">Colossal Being</option>
@@ -123,7 +123,7 @@
 							<option value="Worm Lord">Worm Lord</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Max Depth:</label>
 						<button class="tooltip">
 							<data>Found on the worm scan.</data>
@@ -133,11 +133,11 @@
 							<data>sandworm/maxDepth</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="wormmaxdepthInput" data-dest-number="1" data-dest-noauto="wormmaxdepth"
 							maxlength="5" placeholder="0.0">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Stomach Contents:</label>
 						<button class="tooltip">
 							<data>Found on the worm scan.</data>
@@ -146,7 +146,7 @@
 							<data>sandworm/stomachContents</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="wormstomachInput" data-dest="wormstomach">
 							<option value="Consumed waypoints">Consumed waypoints</option>
 							<option value="Entire [[Trade Outpost|trade outpost]]">Entire trade outpost</option>
@@ -166,7 +166,7 @@
 							<option value="Unpleasant liquid">Unpleasant liquid</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Does this worm spawn on game reload?</label>
 						<button class="tooltip">
 							<data>Reload your game and observe.</data>
@@ -180,7 +180,7 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<div class="radioButtons">
 							<label for="autoSpawnInputY"><input type="radio" id="autoSpawnInputY" name="autoSpawnInput"
 									value="will"><span>Yes</span></label>
@@ -190,7 +190,7 @@
 									value="" checked><span>I don't know</span></label>
 						</div>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Gamemode:</label>
 						<button class="tooltip">
 							<data>Gamemode of the save on which this worm was discovered.</data>
@@ -200,7 +200,7 @@
 							<data>shared/gamemode</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest="mode" id="modeInput">
 							<option value="Normal">Normal</option>
 							<option value="Relaxed">Relaxed</option>
@@ -210,28 +210,28 @@
 							<option value="Custom">Custom</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="discoveredlinkInput">Discoverer wiki name:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="discoveredInput">Discoverer alias if no wiki:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="discovered" id="discoveredInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="docbyInput">Documenter alias if not discoverer:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Do you belong to a chapter?</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest-noauto="researchteam" id="researchteamInput">
 							<option value=""></option>
 							<option value="Wiki Scholars">Wiki Scholars</option>

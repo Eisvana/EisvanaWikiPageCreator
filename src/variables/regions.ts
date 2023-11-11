@@ -1,7 +1,7 @@
 import type { Regions } from "../types/regions"
 
 /**
- * An object representing discovery regions and their associated systems.
+ * An object representing discovery regions and their associated names.
  */
 export const regions: Regions = {
 	'A21117FF': 'Flinus',
@@ -13,5 +13,5 @@ export const regions: Regions = {
 	'A21117FE': 'Ziwananau',
 }
 
-// M1ake 'regions' read-only
+// Make 'regions' read-only
 Object.freeze(regions);

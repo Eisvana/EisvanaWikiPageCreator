@@ -17,4 +17,5 @@ if (theme === 'dark') document.documentElement.dataset.theme = 'dark';
 
 if (!localStorageTheme) localStorage.setItem('theme', theme);
 
+// this empty export statement is necessary to make this file a module
 export { };
