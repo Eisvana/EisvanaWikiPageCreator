@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import InputRow from '../structure/InputRow.vue';
 import Explanation from '../structure/Explanation.vue';
+import ErrorMessage from './ErrorMessage.vue';
 
 defineProps<{
   label: string;
@@ -8,6 +9,8 @@ defineProps<{
   list?: string;
   img?: string;
   modelValue: string;
+  error?: string;
+  maxlength?: string
 }>();
 const emit = defineEmits(['update:modelValue']);
 
@@ -44,12 +47,15 @@ function updateValue(e: Event) {
 
     <template #input>
       <input
+        :class="{ 'error-input': error }"
         :list="list"
         :value="modelValue"
         :id="identifier"
+        :maxlength="maxlength"
         type="text"
         @input="updateValue"
       />
+      <ErrorMessage v-if="error">{{ error }}</ErrorMessage>
     </template>
   </InputRow>
 </template>

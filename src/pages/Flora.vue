@@ -16,7 +16,7 @@ import Actions from '@/components/actions/Actions.vue';
 import FloraInfobox from '@/components/infoboxes/FloraInfobox.vue';
 import WikiTemplate from '@/components/structure/WikiTemplate.vue';
 import ExplanationError from '@/components/structure/ExplanationError.vue';
-import { addStaticPageData, hashPageData, removeNewlines, sanitiseString } from '@/common';
+import { addStaticPageData, getNumber, hashPageData, removeNewlines, sanitiseString } from '@/common';
 import floraDatalists from '@/datalists/floraDatalists';
 import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
@@ -85,6 +85,8 @@ const planetName = computed(() => sanitiseString(planet.value));
 const moonName = computed(() => sanitiseString(moon.value));
 const originalName = computed(() => sanitiseString(orgName.value));
 
+const isPolymorphicInvalid = computed(() => numberErrorComponent(polymorphic.value));
+
 watchEffect(() => {
   if (elements.value[0] === elements.value[1]) elements.value[1] = '';
 });
@@ -132,6 +134,12 @@ function getSelectedText(e: Event) {
 
   text.value = hashPageData();
   copy.value = sectionText === selectedText;
+}
+
+function numberErrorComponent(value: string, decimals: number | undefined = undefined, outputRaw: boolean = false) {
+  const number = getNumber(value, decimals, outputRaw);
+  const allowedSymbols = ['+', '-'];
+  return number || !value || allowedSymbols.includes(value) ? '' : 'Must only contain numbers';
 }
 </script>
 
@@ -224,9 +232,11 @@ function getSelectedText(e: Event) {
         <template #content>Found on the flora scan.</template>
       </SimpleInput>
       <SimpleInput
-        label="Polymorphic (number of instances):"
-        identifier="polymorphic"
         v-model="polymorphic"
+        :error="isPolymorphicInvalid"
+        identifier="polymorphic"
+        label="Polymorphic (number of instances):"
+        maxlength="2"
       >
         How many different models of this flora were discovered.
         <template #heading>Polymorphic</template>
@@ -319,7 +329,7 @@ function getSelectedText(e: Event) {
         :age="age"
         :roots="roots"
         :nutrients="nutrients"
-        :notes="polymorphic"
+        :notes="notes"
         :elemPrimary="elements[0]"
         :elemSecondary="elements[1]"
         :discDate="discDate.replaceAll('-', '/')"

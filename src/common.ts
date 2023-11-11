@@ -877,7 +877,7 @@ export function numberError(
  * @param {boolean} [outputRaw=false] - If true, returns the raw parsed value without formatting.
  * @returns {string|number} - The parsed number, formatted with commas and the specified number of decimal places (if decimals is non-null), or the raw parsed value (if outputRaw is true).
  */
-function getNumber(
+export function getNumber(
   number: string,
   decimals: number | undefined = undefined,
   outputRaw: boolean = false
