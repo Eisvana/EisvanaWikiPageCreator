@@ -3,17 +3,15 @@ import { computed, reactive, ref } from 'vue';
 import { useArticleText } from '../../composables/useArticleText';
 import { storeToRefs } from 'pinia';
 import { useDataValidationStore } from '@/stores/dataValidation';
-import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
-import md5Hex from 'md5-hex';
+import { useStaticPageDataStore } from '@/stores/pageData';
 import { useDataValidation } from '@/composables/useDataValidation';
+import { hashPageData } from '@/common';
 
 const dataValidationStore = useDataValidationStore();
 const { text, copy } = storeToRefs(dataValidationStore);
 
 const staticPageData = useStaticPageDataStore();
 const { fullArticleElement, debug } = storeToRefs(staticPageData);
-
-const pageData = usePageDataStore();
 
 const isValid = ref(true);
 const isClicked = ref(false);
@@ -26,7 +24,7 @@ const buttonStates = reactive({
 const buttonText = ref(buttonStates.idle);
 
 function copyArticle() {
-  text.value = md5Hex(JSON.stringify(pageData));
+  text.value = hashPageData();
   copy.value = true; // set to true to pass the validation check
 
   const { isValidData, message } = useDataValidation(debug.value); // sets `copy` to false again

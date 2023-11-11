@@ -25,8 +25,21 @@ function updateValue(e: Event) {
       <Explanation
         v-if="$slots.default"
         :img="img"
-        ><slot></slot
-      ></Explanation>
+      >
+        <slot></slot>
+        <template
+          #heading
+          v-if="$slots.heading"
+        >
+          <slot name="heading"></slot>
+        </template>
+        <template
+          #content
+          v-if="$slots.content"
+        >
+          <slot name="content"></slot>
+        </template>
+      </Explanation>
     </template>
 
     <template #input>

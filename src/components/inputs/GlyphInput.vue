@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import InputRow from '../structure/InputRow.vue';
 import ErrorMessage from './ErrorMessage.vue';
 import { computed } from 'vue';
+import Explanation from '../structure/Explanation.vue';
 
 const validGlyphsRegex = /[0-9A-F]/;
 const maxGlyphLength = 12;
@@ -59,6 +60,22 @@ const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength &&
           &larr; Delete
         </button>
       </div>
+      <Explanation img="shared/glyphs">
+        Found in Photo Mode. Glyphs are specific to each planet.
+        <template #heading>Portalglyphs</template>
+        <template #content>
+          Found in Photo Mode. Glyphs are specific to each planet.
+          <iframe
+            src="https://nmspar.vercel.app/"
+            sandbox="allow-scripts allow-same-origin"
+            title="Glyph Reader"
+            class="explanation-embed"
+            width="450"
+            height="300"
+            >Glyph Reader</iframe
+          >
+        </template>
+      </Explanation>
     </template>
 
     <template #input>

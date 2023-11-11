@@ -16,16 +16,14 @@ import Actions from '@/components/actions/Actions.vue';
 import FloraInfobox from '@/components/infoboxes/FloraInfobox.vue';
 import WikiTemplate from '@/components/structure/WikiTemplate.vue';
 import ExplanationError from '@/components/structure/ExplanationError.vue';
-
-import { addStaticPageData, removeNewlines, sanitiseString } from '@/common';
+import { addStaticPageData, hashPageData, removeNewlines, sanitiseString } from '@/common';
 import floraDatalists from '@/datalists/floraDatalists';
-
 import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watchEffect } from 'vue';
-import md5Hex from 'md5-hex';
 import { useDataValidationStore } from '@/stores/dataValidation';
 import { useMarker } from '@/composables/useMarker';
+import Explanation from '@/components/structure/Explanation.vue';
 
 const staticPageData = useStaticPageDataStore();
 const { fullArticleElement } = storeToRefs(staticPageData);
@@ -121,7 +119,7 @@ function getSelectedText(e: Event) {
     return text;
   })();
 
-  text.value = md5Hex(JSON.stringify(pageData));
+  text.value = hashPageData();
   copy.value = sectionText === selectedText;
 }
 </script>
@@ -137,7 +135,12 @@ function getSelectedText(e: Event) {
         label="Plant name:"
         identifier="nameInput"
         v-model="name"
-      />
+        img="flora/floraName"
+      >
+        Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
+        <template #heading>Plant Name</template>
+        <template #content>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</template>
+      </SimpleInput>
       <SimpleInput
         label="Original name before uploading (if available):"
         identifier="orgNameInput"
@@ -153,12 +156,16 @@ function getSelectedText(e: Event) {
         label="Name of the planet:"
         identifier="planetInput"
         v-model="planet"
-      />
+      >
+        Planet Name OR the planet circled by the moon where the plant can be found.
+      </SimpleInput>
       <SimpleInput
         label="Name of the moon (if plant is on moon):"
         identifier="moonInput"
         v-model="moon"
-      />
+      >
+        If the plant is located on a moon. Leave blank if the plant is on a planet.
+      </SimpleInput>
       <GlyphInput />
       <BiomeInput />
       <SimpleInput
@@ -166,35 +173,71 @@ function getSelectedText(e: Event) {
         identifier="age"
         list="ageData"
         v-model="age"
-      />
+        img="flora/age"
+      >
+        Found on the flora scan.
+        <template #heading>Age</template>
+        <template #content>Found on the flora scan.</template>
+      </SimpleInput>
       <SimpleInput
         label="Root structure:"
         identifier="roots"
         list="rootData"
         v-model="roots"
-      />
+        img="flora/roots"
+      >
+        Found on the flora scan.
+        <template #heading>Root Structure</template>
+        <template #content>Found on the flora scan.</template>
+      </SimpleInput>
       <SimpleInput
         label="Nutrient source:"
         identifier="nutSource"
         list="nutSourceData"
         v-model="nutrients"
-      />
+        img="flora/nutSource"
+      >
+        Found on the flora scan.
+        <template #heading>Nutrient Source</template>
+        <template #content>Found on the flora scan.</template>
+      </SimpleInput>
       <SimpleInput
         label="Notes:"
         identifier="notes"
         list="floraNotesData"
         v-model="notes"
-      />
+        img="flora/notes"
+      >
+        Found on the flora scan.
+        <template #heading>Notes</template>
+        <template #content>Found on the flora scan.</template>
+      </SimpleInput>
       <SimpleInput
         label="Polymorphic (number of instances):"
         identifier="polymorphic"
         v-model="polymorphic"
-      />
+      >
+        How many different models of this flora were discovered.
+        <template #heading>Polymorphic</template>
+        <template #content>
+          Sometimes multiple flora models have the same name. This is called "Polymorphism". Enter the number of how
+          many different flora models had this name.
+        </template>
+      </SimpleInput>
       <FloraResourceInput :index="0" />
       <FloraResourceInput :index="1" />
       <InputRow>
         <template #label>
           <label for="discDate">Discovery date:</label>
+          <Explanation img="flora/discDate">
+            Found on the flora scan.
+            <template #heading>Discovery Date</template>
+            <template #content>
+              Found on the flora scan.
+              <br />
+              The exact discovery timestamp is displayed on the top left.
+            </template>
+          </Explanation>
         </template>
 
         <template #input>

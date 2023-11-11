@@ -274,7 +274,6 @@ export function addFauna(element: HTMLButtonElement) {
 /**
  * Adds a flora element to the page.
  *
- * @async
  * @param {HTMLElement} element - The element to add the flora to.
  * @returns {Promise<void>}
  */

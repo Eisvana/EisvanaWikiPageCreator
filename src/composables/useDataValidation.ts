@@ -1,6 +1,6 @@
+import { hashPageData } from '@/common';
 import { useDataValidationStore } from '@/stores/dataValidation';
 import { usePageDataStore } from '@/stores/pageData';
-import md5Hex from 'md5-hex';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
@@ -14,7 +14,7 @@ export function useDataValidation(simple: boolean = false, override: boolean | u
   const isValidData = ref(false);
   const message = ref('');
 
-  const currentText = md5Hex(JSON.stringify(pageData));
+  const currentText = hashPageData();
 
   const condition = Boolean(
     (override && import.meta.env.DEV) ||

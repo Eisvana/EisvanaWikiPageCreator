@@ -24,9 +24,13 @@ const src = ref('');
 const opacity = ref(0);
 const marginBlockStart = ref(0);
 
+const openedOnce = ref(false);
+const loadFailed = ref(false);
+
 function showModal() {
   translate.value = '0 -100vh';
   src.value ||= img;
+  openedOnce.value ||= true;
 
   // Show the modal with a slide-down animation
   nextTick(() => {
@@ -48,7 +52,7 @@ function imgOnload() {
   <button
     :aria-disabled="!$slots.content || undefined"
     class="tooltip"
-    @click="$slots.content && showModal"
+    @click="$slots.content && showModal()"
   >
     <img
       src="/assets/icons/help.svg"
@@ -58,6 +62,7 @@ function imgOnload() {
   </button>
 
   <dialog
+    v-if="openedOnce"
     :style="{ translate }"
     class="explanation modal-content content"
     ref="dialogElement"
@@ -76,7 +81,7 @@ function imgOnload() {
       <slot name="content"></slot>
     </div>
     <a
-      v-if="img"
+      v-if="src && !loadFailed"
       :href="`./assets/images/jpg/${src}.jpg`"
       class="explanationLink loading"
       id="explanationLink"
@@ -101,7 +106,9 @@ function imgOnload() {
           class="explanationFallbackImg"
           id="explanationFallbackImg"
           ref="imgElement"
+          @loadstart="loadFailed = false"
           @load="imgOnload"
+          @error="loadFailed = true"
         />
       </picture>
     </a>
