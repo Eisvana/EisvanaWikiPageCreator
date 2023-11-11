@@ -87,6 +87,11 @@ const originalName = computed(() => sanitiseString(orgName.value));
 
 const isPolymorphicInvalid = computed(() => numberErrorComponent(polymorphic.value));
 
+const isAgeInvalid = ref('');
+const isRootsInvalid = ref('');
+const isNutrientsInvalid = ref('');
+const isNotesInvalid = ref('');
+
 watchEffect(() => {
   if (elements.value[0] === elements.value[1]) elements.value[1] = '';
 });
@@ -141,6 +146,13 @@ function numberErrorComponent(value: string, decimals: number | undefined = unde
   const allowedSymbols = ['+', '-'];
   return number || !value || allowedSymbols.includes(value) ? '' : 'Must only contain numbers';
 }
+
+function forceDatalistComponent(value: string, list: string[]) {
+  const option = list.includes(value);
+  return !option && value
+    ? 'Not a valid option. If you believe this is an error, submit a <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">bug report</a>.'
+    : '';
+}
 </script>
 
 <template>
@@ -188,44 +200,52 @@ function numberErrorComponent(value: string, decimals: number | undefined = unde
       <GlyphInput />
       <BiomeInput />
       <SimpleInput
+        v-model="age"
+        :error="isAgeInvalid"
         label="Age:"
         identifier="age"
         list="ageData"
-        v-model="age"
         img="flora/age"
+        @change="isAgeInvalid = forceDatalistComponent(age, floraDatalists.ageData)"
       >
         Found on the flora scan.
         <template #heading>Age</template>
         <template #content>Found on the flora scan.</template>
       </SimpleInput>
       <SimpleInput
+        v-model="roots"
+        :error="isRootsInvalid"
         label="Root structure:"
         identifier="roots"
         list="rootData"
-        v-model="roots"
         img="flora/roots"
+        @change="isRootsInvalid = forceDatalistComponent(roots, floraDatalists.rootData)"
       >
         Found on the flora scan.
         <template #heading>Root Structure</template>
         <template #content>Found on the flora scan.</template>
       </SimpleInput>
       <SimpleInput
+        v-model="nutrients"
+        :error="isNutrientsInvalid"
         label="Nutrient source:"
         identifier="nutSource"
         list="nutSourceData"
-        v-model="nutrients"
         img="flora/nutSource"
+        @change="isNutrientsInvalid = forceDatalistComponent(nutrients, floraDatalists.nutSourceData)"
       >
         Found on the flora scan.
         <template #heading>Nutrient Source</template>
         <template #content>Found on the flora scan.</template>
       </SimpleInput>
       <SimpleInput
+        v-model="notes"
+        :error="isNotesInvalid"
         label="Notes:"
         identifier="notes"
         list="floraNotesData"
-        v-model="notes"
         img="flora/notes"
+        @change="isNotesInvalid = forceDatalistComponent(notes, floraDatalists.floraNotesData)"
       >
         Found on the flora scan.
         <template #heading>Notes</template>

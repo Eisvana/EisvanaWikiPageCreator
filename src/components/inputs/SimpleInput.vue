@@ -10,9 +10,9 @@ defineProps<{
   img?: string;
   modelValue: string;
   error?: string;
-  maxlength?: string
+  maxlength?: string;
 }>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'change']);
 
 function updateValue(e: Event) {
   if (!(e.target instanceof HTMLInputElement)) return;
@@ -54,8 +54,12 @@ function updateValue(e: Event) {
         :maxlength="maxlength"
         type="text"
         @input="updateValue"
+        @change="$emit('change', $event)"
       />
-      <ErrorMessage v-if="error">{{ error }}</ErrorMessage>
+      <ErrorMessage
+        v-if="error"
+        v-html="error"
+      ></ErrorMessage>
     </template>
   </InputRow>
 </template>
