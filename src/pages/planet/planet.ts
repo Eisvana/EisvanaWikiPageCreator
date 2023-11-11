@@ -142,4 +142,5 @@ export function autoWater() {
 
 export function resetExternal() {
   moonList();
+  autoWater();
 }
