@@ -14,9 +14,7 @@ import { glyphError, validateGlyphs } from './portalglyphs';
  */
 export function switchTheme(): void {
   document.documentElement.dataset.transition = 'true';
-  const htmlTheme = document.documentElement.dataset.theme;
-  const localStorageTheme = localStorage.getItem('theme');
-  const theme = htmlTheme ?? localStorageTheme ?? 'light';
+  const theme = document.documentElement.dataset.theme ?? 'light';
   if (theme === 'light') {
     localStorage.setItem('theme', 'dark');
     document.documentElement.dataset.theme = 'dark';
