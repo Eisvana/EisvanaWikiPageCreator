@@ -37,7 +37,8 @@ dialog {
 		object-fit: contain;
 	}
 
-	#explanationLink {
+	#explanationLink,
+	.explanationLink {
 		display: block;
 		position: relative;
 
@@ -62,7 +63,8 @@ dialog {
 		}
 	}
 
-	#explanationContent {
+	#explanationContent,
+	.explanationContent {
 		.dialog-center {
 			display: flex;
 			justify-content: center;

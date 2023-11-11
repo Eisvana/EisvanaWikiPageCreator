@@ -23,5 +23,3 @@ jobs:
 
       - name: Test Build
         uses: Lenni009/test-build-vite-action@main
-        with:
-          node-version: 20

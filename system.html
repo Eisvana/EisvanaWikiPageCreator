@@ -22,13 +22,13 @@
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
 				<div class="table">
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Current release:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="versionInput" data-dest="release"></select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="nameInput">Name of the system:</label>
 						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
@@ -37,10 +37,10 @@
 							<data>system/systemName</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input data-dest="name" type="text" id="nameInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="oldNameInput">Original name before uploading (if available):</label>
 						<button class="tooltip">
 							<data>Hover over a different star in the galaxy map.</data>
@@ -53,10 +53,10 @@
 							<data>system/originalName</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input data-dest="oldName" type="text" id="oldNameInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="fileInput">Main image name, including file extension:</label>
 						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name. Should
@@ -80,26 +80,26 @@
 							<data>system/overview</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="navFileInput">Galaxy map image name, including file extension:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="navFileInput" data-dest="navImage"
 							data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="navFileUpload" accept="image/*">
 					</div>
-					<div class="tableCell text" data-station="img">
+					<div class="table-cell text" data-station="img">
 						<label for="ssFileInput">Space Station image name, including file extension:</label>
 					</div>
-					<div class="tableCell data" data-station="img">
+					<div class="table-cell data" data-station="img">
 						<input type="text" id="ssFileInput" data-dest="ssImage" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="ssFileUpload" accept="image/*">
 					</div>
-					<div class=" tableCell text">
+					<div class=" table-cell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
@@ -117,14 +117,14 @@
 							<data>shared/glyphs</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
 					</div>
 					<div class="tableHeader data">
 						<div id="portalglyphButtons"></div>
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Number of stars:</label>
 						<button class="tooltip">
 							<data>Number of visible local stars in space.</data>
@@ -140,14 +140,14 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="multiplestarsInput" data-dest="multiplestars">
 							<option value="">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Colour of (primary) star:</label>
 						<button class="tooltip">
 							<data>Colour as seen in the galaxy map.</data>
@@ -166,7 +166,7 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="colorInput" data-dest="color">
 							<option value="Yellow">Yellow</option>
 							<option value="Red">Red</option>
@@ -175,7 +175,7 @@
 							<option value="Black Hole" style="display:none">Black Hole</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="classInput">Stellar class:</label>
 						<button class="tooltip">
 							<data>Found in the galaxy map.</data>
@@ -186,10 +186,10 @@
 							<data>system/stellarClass</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="classInput" data-dest="class">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="distanceInput">Distance to centre:</label>
 						<button class="tooltip">
 							<data>Found on the galaxy map. Click here for a guide of how to get an accurate
@@ -209,10 +209,10 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="distanceInput" data-dest-number="0" data-dest-noauto="distance">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="planetNumInput">Number of planets:</label>
 						<button class="tooltip">
 							<data>Found in the discovery menu.</data>
@@ -221,11 +221,11 @@
 							<data>system/planetNumber</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" value="1" maxlength="1" id="planetNumInput" data-dest-number="0"
 							data-dest-noauto="planet" data-default="1">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="moonNumInput">Number of moons:</label>
 						<button class="tooltip">
 							<data>Found in the discovery menu. Put 0 if there are no moons.</data>
@@ -234,11 +234,11 @@
 							<data>system/moonNumber</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" value="0" maxlength="1" id="moonNumInput" data-dest-number="0"
 							data-dest-noauto="moon" data-default="0">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="waterInput">Water in the system?</label>
 						<button class="tooltip">
 							<data>Found in the galaxy map. If it doesn't display "Water", there is no water.</data>
@@ -247,11 +247,11 @@
 							<data>system/water</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="checkbox" id="waterInput" value="Yes" data-checkbox-unchecked="No"
 							data-dest-checkbox="water">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="waterInput">Dissonant system?</label>
 						<button class="tooltip">
 							<data>Found in the galaxy map. If it doesn't display "Dissonant", it is not
@@ -262,11 +262,11 @@
 							<data>system/dissonant</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="checkbox" id="dissonantInput" value="Yes" data-checkbox-unchecked="No"
 							data-dest-checkbox="dissonant">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>System Faction:</label>
 						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map. If it doesn't display anything, it's
@@ -280,7 +280,7 @@
 							<data>system/faction</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="factionInput" data-dest="faction">
 							<option value="Gek">Gek</option>
 							<option value="Korvax">Korvax</option>
@@ -291,7 +291,7 @@
 							<option value="Uncharted">Uncharted</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>System economy:</label>
 						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map. If it doesn't display anything, it's
@@ -305,7 +305,7 @@
 							<data>system/economy</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="economyInput" data-dest="economy">
 							<optgroup label="Advanced Materials">
 								<option value="Alchemical">Alchemical</option>
@@ -354,7 +354,7 @@
 							</optgroup>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="economysellInput">Economy sell:</label>
 						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map.</data>
@@ -367,10 +367,10 @@
 							<data>system/e-sell</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="economysellInput" data-dest-noauto="economysell" data-percentage-input>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="economybuyInput">Economy buy:</label>
 						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map.</data>
@@ -382,10 +382,10 @@
 							<data>system/e-buy</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="economybuyInput" data-dest-noauto="economybuy" data-percentage-input>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>System wealth:</label>
 						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map.</data>
@@ -400,7 +400,7 @@
 							<data>system/wealth</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest="wealth" id="wealthInput">
 							<optgroup label="T3">
 								<option value="★★★ (Advanced)">Advanced</option>
@@ -443,7 +443,7 @@
 							</optgroup>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>System conflict:</label>
 						<button class="tooltip">
 							<data>Found in the expanded view of the galaxy map.</data>
@@ -458,7 +458,7 @@
 							<data>system/conflict</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="conflictInput" data-dest="conflict">
 							<optgroup label="T3">
 								<option value="★★★ (Aggressive)">Aggressive</option>
@@ -504,7 +504,7 @@
 							</optgroup>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="discDateInput">When was this system discovered?</label>
 						<button class="tooltip">
 							<data>Found in the analysis visor in the space station.</data>
@@ -516,26 +516,26 @@
 							<data>system/discDate</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="date" id="discDateInput" data-dest-noauto="discDate">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="docDateInput">When was this system documented?</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="date" id="docDateInput" data-dest-noauto="docDate">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Do you belong to a chapter?</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest-noauto="researchteam" id="researchteamInput">
 							<option value=""></option>
 							<option value="Wiki Scholars">Wiki Scholars</option>
 							<option value="EBC">EBC</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Gamemode:</label>
 						<button class="tooltip">
 							<data>Gamemode of the save on which this system was documented.</data>
@@ -545,7 +545,7 @@
 							<data>shared/gamemode</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest="mode" id="modeInput">
 							<option value="Normal">Normal</option>
 							<option value="Relaxed">Relaxed</option>
@@ -555,10 +555,10 @@
 							<option value="Custom">Custom</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Discoverer platform:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest-noauto="platform" id="platformInput">
 							<option value="">I don't know</option>
 							<option value="PC">PC</option>
@@ -567,22 +567,22 @@
 							<option value="NS">Switch</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="discoveredlinkInput">Discoverer wiki name:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="discoveredInput">Discoverer alias if no wiki:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="discovered" id="discoveredInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="docbyInput">Documenter alias if not discoverer:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
 					<div class="tableHeader text no-flex" data-station="terminal">
@@ -947,10 +947,10 @@
 									class="checkbox-label">Suspicious Neutron Cannon Module</span></label>
 						</div>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Add optional templates:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="freightersCheckbox"><input type="checkbox" name="systemExtras"
 									value="Freighters" id="freightersCheckbox"><span
@@ -1061,8 +1061,8 @@
 						<div>! Type</div>
 						<div>! Discoverer</div>
 						<div>|-</div>
-						<div>| [[File:NmsMisc_NotAvailable.png|150px]] || [[freighterName]] || [[Starship Catalogue -
-							Freighter|subtype]] || DiscovererInfo</div>
+						<div>| [[File:NmsMisc_NotAvailable.png|150px]] || [[freighterName]] || subtype || DiscovererInfo
+						</div>
 						<div>|}</div>
 						<br>
 					</div>
@@ -1096,7 +1096,7 @@
 						<div>! Discoverer</div>
 						<div>|-</div>
 						<div>| [[File:NmsMisc_NotAvailable.png|150px]] || frigateName || {{Class|X}} ||
-							stylle="min-width:7rem" | Combat: ?&lt;br&gt;Exploration: ?&lt;br&gt;Industrial:
+							style="min-width:7rem" | Combat: ?&lt;br&gt;Exploration: ?&lt;br&gt;Industrial:
 							?&lt;br&gt;Trade: ? || ?t / 250 LY || DiscovererInfo</div>
 						<div>|}</div>
 						<br>

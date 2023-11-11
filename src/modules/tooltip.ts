@@ -45,7 +45,7 @@ export function explanation(heading: string = '', text: string = '', image: stri
 
 		linkElement.classList.toggle('loading', !isCached);
 
-		if (!isCached || imgElement.getAttribute('src') != `./assets/images/jpg/${img}.jpg`) {
+		if (!isCached || imgElement.getAttribute('src') !== `./assets/images/jpg/${img}.jpg`) {
 			const imageFormats = {
 				webp: webpImg,
 				jpg: imgElement
@@ -69,7 +69,7 @@ export function explanation(heading: string = '', text: string = '', image: stri
 			This results in the necessary wait time for the browser to update, and we get the intended result of no jumping images.
 			*/
 			for (const [format, element] of Object.entries(imageFormats)) {
-				const attribute = element.tagName == 'IMG' ? 'src' : 'srcset';
+				const attribute = element.tagName === 'IMG' ? 'src' : 'srcset';
 
 				// clear source attributes
 				element[attribute] = '';
@@ -154,7 +154,7 @@ export function addAllTooltips(dom = document) {
 		if (dataArr.length) {
 			assignFunction({ element, handler: 'click', func: () => explanation(...dataArr) });
 		} else {
-			element.setAttribute('aria-disabled', 'true');		// Firefox doesn't support the ariaDisabled method, so we need to use this method
+			element.ariaDisabled = 'true';
 		}
 
 		element.innerHTML = img.outerHTML;
