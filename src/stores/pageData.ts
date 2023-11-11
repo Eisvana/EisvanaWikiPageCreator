@@ -71,7 +71,7 @@ export const usePageDataStore = defineStore('pageData', {
     moon: '',
     glyphs: '',
     type: '',
-    biome: '',
+    biome: 'Lush',
     age: '',
     roots: '',
     nutrients: '',

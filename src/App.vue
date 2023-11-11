@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import type { Component } from 'vue';
+import { type Component, watch, nextTick } from 'vue';
 import Flora from './pages/Flora.vue';
-import { useStaticPageDataStore } from './stores/pageData';
+import { usePageDataStore, useStaticPageDataStore } from './stores/pageData';
 import { storeToRefs } from 'pinia';
+import { useMarker } from './composables/useMarker';
 
 const staticPageData = useStaticPageDataStore();
 const { route: currentRoute } = storeToRefs(staticPageData);
+
+const pageData = usePageDataStore();
+const { pageName, glyphs } = storeToRefs(pageData);
+
+// I have no idea why I have to use nextTick() here. It's just one character behind otherwise apparently for some reason
+watch([pageName, glyphs], () => nextTick(() => useMarker()), { immediate: true });
 
 const router: { [key: string]: Component } = {
   flora: Flora,

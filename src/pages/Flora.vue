@@ -15,16 +15,23 @@ import Subgrid from '@/components/structure/Subgrid.vue';
 import Actions from '@/components/actions/Actions.vue';
 import FloraInfobox from '@/components/infoboxes/FloraInfobox.vue';
 import WikiTemplate from '@/components/structure/WikiTemplate.vue';
+import ExplanationError from '@/components/structure/ExplanationError.vue';
 
-import { addStaticPageData, sanitiseString } from '@/common';
+import { addStaticPageData, removeNewlines, sanitiseString } from '@/common';
 import floraDatalists from '@/datalists/floraDatalists';
 
 import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watchEffect } from 'vue';
+import md5Hex from 'md5-hex';
+import { useDataValidationStore } from '@/stores/dataValidation';
+import { useMarker } from '@/composables/useMarker';
 
 const staticPageData = useStaticPageDataStore();
 const { fullArticleElement } = storeToRefs(staticPageData);
+
+const dataValidationStore = useDataValidationStore();
+const { copy, text } = storeToRefs(dataValidationStore);
 
 const wikiText = ref<HTMLDivElement | null>(null);
 
@@ -84,6 +91,39 @@ const docBySentence = computed(() => {
     : `[[${researchteam.value}]] member`;
   return `${hasResearchteam ? researchteamLink : ''} ${documenter}`;
 });
+
+const errorMessage = ref('');
+const openErrorModal = ref(false);
+
+function markCopy() {
+  const { isValidData, message } = useMarker();
+  errorMessage.value = message.value;
+  openErrorModal.value = !isValidData.value;
+}
+
+function getSelectedText(e: Event) {
+  // this is some stupid BS: Chrome selects the theme switch button text, despite it having user-select:none. #chromesucks
+  // I have no idea how to fix this, so I will just remove the button text from the string :shrug:
+  const buttonText = document.getElementById('switchTheme')?.innerText;
+
+  const element = e.target;
+  if (!(element instanceof HTMLElement && buttonText)) return;
+
+  const wikiTextContainer = element.closest('.wikiText');
+
+  if (!(wikiTextContainer instanceof HTMLDivElement)) return;
+
+  const sectionText = removeNewlines(wikiTextContainer.innerText).trim();
+  const selection = window.getSelection() ?? '';
+  const selectedText = (() => {
+    const text = removeNewlines(selection.toString()).trim();
+    if (text.endsWith(buttonText)) return text.replace(buttonText, '').trim();
+    return text;
+  })();
+
+  text.value = md5Hex(JSON.stringify(pageData));
+  copy.value = sectionText === selectedText;
+}
 </script>
 
 <template>
@@ -196,11 +236,18 @@ const docBySentence = computed(() => {
     <Actions />
   </InputColumn>
 
-  <OutputColumn>
+  <ExplanationError
+    v-model:open="openErrorModal"
+    :error-message="errorMessage"
+  />
+
+  <OutputColumn @mousedown="markCopy">
     <div
       ref="wikiText"
       class="wikiText"
       id="fullArticle"
+      @mouseup="getSelectedText"
+      @touchend="getSelectedText"
     >
       <div>
         <WikiTemplate template-name="Version">{{ release }}</WikiTemplate>

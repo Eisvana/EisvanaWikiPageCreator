@@ -868,7 +868,7 @@ export function checkDataIntegrity(element: HTMLElement | null = null, simple: b
  * @param {string} text - The text string to remove newlines from.
  * @return {string} - A modified string with all newlines replaced by empty spaces.
  */
-function removeNewlines(text: string): string {
+export function removeNewlines(text: string): string {
 	if (!text) return '';
 	const newlineRegex = /\r?\n|\r/g;
 	const textString = text.replace(newlineRegex, '');

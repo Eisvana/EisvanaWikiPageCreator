@@ -4,7 +4,7 @@ import md5Hex from 'md5-hex';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
-export function useDataValidation(override: boolean | undefined = false) {
+export function useDataValidation(simple: boolean = false, override: boolean | undefined = false) {
   const pageData = usePageDataStore();
   const { name, glyphs, regionNumber } = storeToRefs(pageData);
 
@@ -16,19 +16,29 @@ export function useDataValidation(override: boolean | undefined = false) {
 
   const currentText = md5Hex(JSON.stringify(pageData));
 
-  if (
+  const condition = Boolean(
     (override && import.meta.env.DEV) ||
-    (name.value && glyphs.value && regionNumber.value && currentText === savedText.value && copy.value)
-  ) {
-    copy.value = false;
-    isValidData.value = true;
-    message.value = '';
+      (name.value && glyphs.value && regionNumber.value && ((currentText === savedText.value && copy.value) || simple))
+  );
+
+  const messages = {
+    success: '',
+    noName: 'Missing Name!',
+    wrongGlyphs: 'Wrong Glyphs!',
+    notCopied: 'Copy Code First!',
+  };
+
+  isValidData.value = condition;
+  copy.value = false;
+
+  if (condition) {
+    message.value = messages.success;
   } else if (!name.value) {
-    message.value = 'Missing Name!';
+    message.value = messages.noName;
   } else if (!glyphs.value || !regionNumber.value) {
-    message.value = 'Wrong Glyphs!';
+    message.value = messages.wrongGlyphs;
   } else {
-    message.value = 'Copy Code First!';
+    message.value = messages.notCopied;
   }
 
   return { isValidData, message };

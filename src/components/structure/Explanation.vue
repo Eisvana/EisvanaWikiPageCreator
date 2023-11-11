@@ -58,9 +58,9 @@ function imgOnload() {
   </button>
 
   <dialog
+    :style="{ translate }"
     class="explanation modal-content content"
     ref="dialogElement"
-    :style="{ translate }"
   >
     <h2
       id="explanationHeading"

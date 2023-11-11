@@ -21,7 +21,7 @@ const buttonStates = reactive({
 const buttonText = ref(buttonStates.idle);
 
 function createPage() {
-  const { isValidData, message } = useDataValidation(debug.value);
+  const { isValidData, message } = useDataValidation(false, debug.value);
   pageLink.value = isValidData.value ? wikiLink + 'Special:EditPage/' + pageName.value : undefined;
 
   if (isValidData.value) return;
