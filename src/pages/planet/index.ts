@@ -1,19 +1,24 @@
-import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
-import planetElements from "./elementStore";
-import { generateGalleryArray, moonList } from "./planet";
-import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
-import planetElementFunctions from "./elementFunctions";
-import { addStaticPageData } from "../../common";
-import { globalFunctions } from "../../variables/objects";
+import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
+import planetElements from './elementStore';
+import { autoWater, generateGalleryArray, moonList, resetExternal } from './planet';
+import { assignElementFunctions } from '../../commonElements/elementBackend/elementFunctions';
+import planetElementFunctions from './elementFunctions';
+import { addStaticPageData } from '../../common';
+import { globalFunctions } from '../../variables/objects';
 import '../../startup/planetMoon';
 
 globalFunctions.generateGalleryArray = () => generateGalleryArray();
 
+document.addEventListener('pageReset', () => resetExternal());
+
 updateGlobalElements(planetElements);
 assignElementFunctions(planetElementFunctions);
 moonList();
+autoWater();
 
-addStaticPageData('galleryExplanationExternal', `
+addStaticPageData(
+  'galleryExplanationExternal',
+  `
 There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
@@ -28,4 +33,5 @@ There is a preferred order of pictures:
 			<li>System Page</li>
 			<li>Galaxy Map</li>
 		</ol>
-	</div>`)
+	</div>`
+);

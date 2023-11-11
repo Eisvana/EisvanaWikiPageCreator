@@ -16,7 +16,7 @@ import Actions from '@/components/actions/Actions.vue';
 import FloraInfobox from '@/components/infoboxes/FloraInfobox.vue';
 import WikiTemplate from '@/components/structure/WikiTemplate.vue';
 import ExplanationError from '@/components/structure/ExplanationError.vue';
-import { addStaticPageData, hashPageData, removeNewlines, sanitiseString } from '@/common';
+import { addStaticPageData, getNumber, hashPageData, removeNewlines, sanitiseString } from '@/common';
 import floraDatalists from '@/datalists/floraDatalists';
 import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
@@ -37,6 +37,17 @@ onMounted(() => {
   fullArticleElement.value = wikiText.value;
   // TODO: gallery should be integrated natively, not as separate Vue app
   addStaticPageData('galleryArray', ['', 'Scanner view', 'Discovery Menu']);
+  addStaticPageData(
+    'galleryExplanationExternal',
+    `
+	There is a preferred order of gallery pictures:
+	<div class='dialog-center'>
+		<ol class='dialog-list'>
+			<li>Scanner view</li>
+			<li>Discovery Menu</li>
+		</ol>
+ 	</div>`
+  );
   import('../startup/gallery');
 });
 
@@ -73,6 +84,13 @@ const systemName = computed(() => sanitiseString(system.value));
 const planetName = computed(() => sanitiseString(planet.value));
 const moonName = computed(() => sanitiseString(moon.value));
 const originalName = computed(() => sanitiseString(orgName.value));
+
+const isPolymorphicInvalid = computed(() => numberErrorComponent(polymorphic.value));
+
+const isAgeInvalid = ref('');
+const isRootsInvalid = ref('');
+const isNutrientsInvalid = ref('');
+const isNotesInvalid = ref('');
 
 watchEffect(() => {
   if (elements.value[0] === elements.value[1]) elements.value[1] = '';
@@ -122,6 +140,19 @@ function getSelectedText(e: Event) {
   text.value = hashPageData();
   copy.value = sectionText === selectedText;
 }
+
+function numberErrorComponent(value: string, decimals: number | undefined = undefined, outputRaw: boolean = false) {
+  const number = getNumber(value, decimals, outputRaw);
+  const allowedSymbols = ['+', '-'];
+  return number || !value || allowedSymbols.includes(value) ? '' : 'Must only contain numbers';
+}
+
+function forceDatalistComponent(value: string, list: string[]) {
+  const option = list.includes(value);
+  return !option && value
+    ? 'Not a valid option. If you believe this is an error, submit a <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">bug report</a>.'
+    : '';
+}
 </script>
 
 <template>
@@ -169,53 +200,63 @@ function getSelectedText(e: Event) {
       <GlyphInput />
       <BiomeInput />
       <SimpleInput
+        v-model="age"
+        :error="isAgeInvalid"
         label="Age:"
         identifier="age"
         list="ageData"
-        v-model="age"
         img="flora/age"
+        @change="isAgeInvalid = forceDatalistComponent(age, floraDatalists.ageData)"
       >
         Found on the flora scan.
         <template #heading>Age</template>
         <template #content>Found on the flora scan.</template>
       </SimpleInput>
       <SimpleInput
+        v-model="roots"
+        :error="isRootsInvalid"
         label="Root structure:"
         identifier="roots"
         list="rootData"
-        v-model="roots"
         img="flora/roots"
+        @change="isRootsInvalid = forceDatalistComponent(roots, floraDatalists.rootData)"
       >
         Found on the flora scan.
         <template #heading>Root Structure</template>
         <template #content>Found on the flora scan.</template>
       </SimpleInput>
       <SimpleInput
+        v-model="nutrients"
+        :error="isNutrientsInvalid"
         label="Nutrient source:"
         identifier="nutSource"
         list="nutSourceData"
-        v-model="nutrients"
         img="flora/nutSource"
+        @change="isNutrientsInvalid = forceDatalistComponent(nutrients, floraDatalists.nutSourceData)"
       >
         Found on the flora scan.
         <template #heading>Nutrient Source</template>
         <template #content>Found on the flora scan.</template>
       </SimpleInput>
       <SimpleInput
+        v-model="notes"
+        :error="isNotesInvalid"
         label="Notes:"
         identifier="notes"
         list="floraNotesData"
-        v-model="notes"
         img="flora/notes"
+        @change="isNotesInvalid = forceDatalistComponent(notes, floraDatalists.floraNotesData)"
       >
         Found on the flora scan.
         <template #heading>Notes</template>
         <template #content>Found on the flora scan.</template>
       </SimpleInput>
       <SimpleInput
-        label="Polymorphic (number of instances):"
-        identifier="polymorphic"
         v-model="polymorphic"
+        :error="isPolymorphicInvalid"
+        identifier="polymorphic"
+        label="Polymorphic (number of instances):"
+        maxlength="2"
       >
         How many different models of this flora were discovered.
         <template #heading>Polymorphic</template>
@@ -308,7 +349,7 @@ function getSelectedText(e: Event) {
         :age="age"
         :roots="roots"
         :nutrients="nutrients"
-        :notes="polymorphic"
+        :notes="notes"
         :elemPrimary="elements[0]"
         :elemSecondary="elements[1]"
         :discDate="discDate.replaceAll('-', '/')"

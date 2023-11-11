@@ -25,22 +25,24 @@ function openModal() {
 </script>
 
 <template>
-  <dialog
-    :style="{ translate }"
-    class="explanation modal-content content"
-    ref="dialogElement"
-    @close="$emit('update:open', false)"
-  >
-    <h2 class="explanation-heading">Missing/Incorrect Data</h2>
-    <div class="explanation-content">{{ errorMessage }}</div>
-    <form method="dialog">
-      <button
-        class="button"
-        type="submit"
-        autofocus
-      >
-        Close
-      </button>
-    </form>
-  </dialog>
+  <Teleport to="body">
+    <dialog
+      :style="{ translate }"
+      class="explanation modal-content content"
+      ref="dialogElement"
+      @close="$emit('update:open', false)"
+    >
+      <h2 class="explanation-heading">Missing/Incorrect Data</h2>
+      <div class="explanation-content">{{ errorMessage }}</div>
+      <form method="dialog">
+        <button
+          class="button"
+          type="submit"
+          autofocus
+        >
+          Close
+        </button>
+      </form>
+    </dialog>
+  </Teleport>
 </template>

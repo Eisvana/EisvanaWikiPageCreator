@@ -1,21 +1,21 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
 export interface FileItem {
-	file: File;
-	id: number;
-	desc: string;
+  file: File;
+  id: number;
+  desc: string;
 }
 
 interface State {
-	galleryFiles: FileItem[];
-	locationFiles: FileItem[];
+  galleryFiles: FileItem[];
+  locationFiles: FileItem[];
 }
 
-export const useGalleryStore = defineStore("gallery", {
-	state: (): State => {
-		return {
-			galleryFiles: [],
-			locationFiles: [],
-		};
-	},
+export const useGalleryStore = defineStore('gallery', {
+  state: (): State => {
+    return {
+      galleryFiles: [],
+      locationFiles: [],
+    };
+  },
 });
