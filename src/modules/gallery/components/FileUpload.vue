@@ -3,7 +3,8 @@ import { onMounted, ref, type Ref, nextTick } from 'vue';
 import { storeToRefs } from 'pinia';
 import { pageData, staticBooleans } from '../../../variables/objects';
 import { useGalleryStore, type FileItem } from '../stores/gallery';
-import { addAllTooltips, explanation } from '../../tooltip';
+import { explanation } from '../../tooltip';
+import Explanation from '@/components/structure/Explanation.vue';
 
 const galleryUpload = ref<HTMLInputElement | null>(null);
 const dragActive = ref(false);
@@ -14,9 +15,6 @@ onMounted(() => {
   nextTick(() => {
     if (!pageData.galleryExplanationExternal) return;
     tooltip.value = typeof pageData.galleryExplanationExternal === 'string' ? pageData.galleryExplanationExternal : '';
-    nextTick(() => {
-      if (tooltip.value) addAllTooltips();
-    });
   });
 });
 
@@ -84,17 +82,13 @@ function buildFileItem(files: File | File[], storeLoc: Ref<FileItem[]>) {
     @drop.prevent="dropFile"
     @dragover.prevent
   >
-    <div>
+    <div class="title-wrapper">
       <span class="drop-title">Drop gallery files here</span>
-      <button
-        v-if="tooltip"
-        class="tooltip"
-        name="galleryFileUploadTooltip"
-      >
-        <data>There is a preferred order of pictures.</data>
-        <data>Gallery</data>
-        <data v-html="tooltip"></data>
-      </button>
+      <Explanation v-if="tooltip">
+        There is a preferred order of pictures.
+        <template #heading>Gallery</template>
+        <template #content><div v-html="tooltip"></div></template>
+      </Explanation>
     </div>
     <input
       ref="galleryUpload"
@@ -153,23 +147,22 @@ function buildFileItem(files: File | File[], storeLoc: Ref<FileItem[]>) {
     }
   }
 
-  &.drag-active {
-    * {
-      pointer-events: none;
-    }
+  &.drag-active * {
+    pointer-events: none;
   }
 
   .error {
     background-color: red;
   }
 
-  .drop-title {
-    font-weight: bold;
-    text-align: center;
-  }
+  .title-wrapper {
+    display: flex;
+    gap: 0.5rem;
 
-  .tooltip {
-    margin-inline-start: 1rem;
+    .drop-title {
+      font-weight: bold;
+      text-align: center;
+    }
   }
 
   input {

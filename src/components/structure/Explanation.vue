@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
+import { nextTick, ref, watchEffect } from 'vue';
 
 /**
  * Explanation Modal
@@ -11,6 +11,7 @@ import { nextTick, ref } from 'vue';
 
 const props = defineProps<{
   img?: string;
+  open?: boolean;
 }>();
 
 const dialogElement = ref<HTMLDialogElement | null>(null);
@@ -26,6 +27,12 @@ const marginBlockStart = ref(0);
 
 const openedOnce = ref(false);
 const loadFailed = ref(false);
+
+defineEmits(['update:open']);
+
+watchEffect(() => {
+  if (props.open) showModal();
+});
 
 function showModal() {
   translate.value = '0 -100vh';
@@ -66,6 +73,7 @@ function imgOnload() {
     :style="{ translate }"
     class="explanation modal-content content"
     ref="dialogElement"
+    @close="$emit('update:open', false)"
   >
     <h2
       id="explanationHeading"
