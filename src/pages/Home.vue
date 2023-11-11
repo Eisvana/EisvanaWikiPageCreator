@@ -7,64 +7,64 @@ import type { BuiltByProps, CivImageProps, PageLinkProps } from '@/types/objects
 const links: PageLinkProps[] = [
   {
     text: 'Base',
-    url: 'base.html',
+    url: './base.html',
   },
   // {
   //   text: 'Racetrack',
-  //   url: '/racetrack.html',
+  //   url: './racetrack.html',
   // },
   // {
   //   text: 'Settlement',
-  //   url: '/settlement.html',
+  //   url: './settlement.html',
   // },
   {
     text: 'Fauna',
-    url: 'fauna.html',
+    url: './fauna.html',
   },
   {
     text: 'Sandworm',
-    url: 'sandworm.html',
+    url: './sandworm.html',
   },
   {
     text: 'Flora',
-    url: 'flora.html',
+    url: './flora.html',
   },
   {
     text: 'Starship',
-    url: 'starship.html',
+    url: './starship.html',
   },
   {
     text: 'Multi-Tool',
-    url: 'multitool.html',
+    url: './multitool.html',
   },
   {
     text: 'Mineral',
-    url: 'mineral.html',
+    url: './mineral.html',
     inactive: true,
   },
   {
     text: 'Derelict Freighter',
-    url: 'derelict.html',
+    url: './derelict.html',
   },
   {
     text: 'Organic Frigate',
-    url: 'biofrig.html',
+    url: './biofrig.html',
   },
   // {
   //   text: 'Artifact',
-  //   url: '/artifact.html',
+  //   url: './artifact.html',
   // },
   {
     text: 'System',
-    url: '/system.html',
+    url: './system.html',
   },
   {
     text: 'Planet',
-    url: '/planet.html',
+    url: './planet.html',
   },
   {
     text: 'Moon',
-    url: '/moon.html',
+    url: './moon.html',
   },
 ];
 
