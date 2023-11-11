@@ -222,7 +222,7 @@ function getSelectedText(e: Event) {
         <textarea
           v-model="appearance"
           id="appearance"
-          placeholder="This flora is..."
+          placeholder="This flora is a <size> <colour> <type>."
         ></textarea>
       </InputRow>
     </form>

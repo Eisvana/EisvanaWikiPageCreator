@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { type Component, watch, nextTick } from 'vue';
 import Flora from './pages/Flora.vue';
+import Home from './pages/Home.vue';
 import { usePageDataStore, useStaticPageDataStore } from './stores/pageData';
 import { storeToRefs } from 'pinia';
 import { useMarker } from './composables/useMarker';
@@ -20,5 +21,5 @@ const router: { [key: string]: Component } = {
 </script>
 
 <template>
-  <component :is="router[currentRoute]"></component>
+  <component :is="router[currentRoute] ?? Home"></component>
 </template>
