@@ -91,13 +91,13 @@ function imgOnload() {
     >
       <picture>
         <source
-          :srcset="`/assets/images/webp/${src}.webp`"
+          :srcset="`./assets/images/webp/${src}.webp`"
           class="explanationWebpImg"
           id="explanationWebpImg"
           type="image/webp"
         />
         <img
-          :src="`/assets/images/jpg/${src}.jpg`"
+          :src="`./assets/images/jpg/${src}.jpg`"
           :style="{
             opacity,
             'margin-block-start': marginBlockStart + 'rem',
