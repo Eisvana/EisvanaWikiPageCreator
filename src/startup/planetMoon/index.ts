@@ -10,16 +10,21 @@ import floraDatalists from '../../datalists/floraDatalists';
 import mineralDatalists from '../../datalists/mineralDatalists';
 import '../celestialObjects';
 
-globalFunctions.resetExternal = () => resetExternal();
+globalFunctions.resetExternal = () => document.dispatchEvent(new Event('pageReset'));
+
+document.addEventListener('pageReset', () => resetExternal());
 
 const datalistObjects = [floraDatalists, mineralDatalists];
 
-datalistObjects.forEach(obj => datalists(obj));
+datalistObjects.forEach((obj) => datalists(obj));
 
 updateGlobalElements(planetMoonElements);
 assignElementFunctions(planetMoonElementFunctions);
 
-triggerEvent((globalElements.input.resourceInputs as HTMLDivElement).querySelector('button') as HTMLButtonElement, 'click')
+triggerEvent(
+  (globalElements.input.resourceInputs as HTMLDivElement).querySelector('button') as HTMLButtonElement,
+  'click'
+);
 autoInfested();
 wormAutoSpawn();
 wormAlbumName();

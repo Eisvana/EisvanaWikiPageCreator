@@ -139,3 +139,7 @@ export function autoWater() {
   const waterValue = hasWaterTerrain ? 'Yes' : 'No';
   wikiCode(waterValue, 'water');
 }
+
+export function resetExternal() {
+  moonList();
+}
