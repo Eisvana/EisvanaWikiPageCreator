@@ -8,6 +8,7 @@ import {
   loadHTML,
   removeSpecificSection,
   sanitiseString,
+  triggerEvent,
   wikiCode,
 } from '../../common';
 import { plural } from '../../miscLogic/planetMoonLogic';
@@ -142,5 +143,6 @@ export function autoWater() {
 
 export function resetExternal() {
   moonList();
-  autoWater();
+  const terrainInput = globalElements.input.terrainInput;
+  if (terrainInput instanceof HTMLSelectElement) triggerEvent(terrainInput, 'change');
 }
