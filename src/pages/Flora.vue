@@ -37,6 +37,17 @@ onMounted(() => {
   fullArticleElement.value = wikiText.value;
   // TODO: gallery should be integrated natively, not as separate Vue app
   addStaticPageData('galleryArray', ['', 'Scanner view', 'Discovery Menu']);
+  addStaticPageData(
+    'galleryExplanationExternal',
+    `
+	There is a preferred order of gallery pictures:
+	<div class='dialog-center'>
+		<ol class='dialog-list'>
+			<li>Scanner view</li>
+			<li>Discovery Menu</li>
+		</ol>
+ 	</div>`
+  );
   import('../startup/gallery');
 });
 

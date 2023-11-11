@@ -28,7 +28,7 @@ const marginBlockStart = ref(0);
 const openedOnce = ref(false);
 const loadFailed = ref(false);
 
-defineEmits(['update:open']);
+const emit = defineEmits(['update:open']);
 
 watchEffect(() => {
   if (props.open) showModal();
@@ -38,6 +38,7 @@ function showModal() {
   translate.value = '0 -100vh';
   src.value ||= img;
   openedOnce.value ||= true;
+  emit('update:open', true);
 
   // Show the modal with a slide-down animation
   nextTick(() => {
@@ -68,66 +69,68 @@ function imgOnload() {
     <p class="tooltiptext nms-font"><slot></slot></p>
   </button>
 
-  <dialog
-    v-if="openedOnce"
-    :style="{ translate }"
-    class="explanation modal-content content"
-    ref="dialogElement"
-    @close="$emit('update:open', false)"
-  >
-    <h2
-      id="explanationHeading"
-      class="explanationHeading title is-4"
+  <Teleport to="body">
+    <dialog
+      v-if="openedOnce"
+      :style="{ translate }"
+      class="explanation modal-content content"
+      ref="dialogElement"
+      @close="$emit('update:open', false)"
     >
-      <slot name="heading"></slot>
-    </h2>
-
-    <div
-      id="explanationContent"
-      class="explanationContent nms-font"
-    >
-      <slot name="content"></slot>
-    </div>
-    <a
-      v-if="src && !loadFailed"
-      :href="`./assets/images/jpg/${src}.jpg`"
-      class="explanationLink loading"
-      id="explanationLink"
-      ref="linkElement"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <picture>
-        <source
-          :srcset="`./assets/images/webp/${src}.webp`"
-          class="explanationWebpImg"
-          id="explanationWebpImg"
-          type="image/webp"
-        />
-        <img
-          :src="`./assets/images/jpg/${src}.jpg`"
-          :style="{
-            opacity,
-            'margin-block-start': marginBlockStart + 'rem',
-          }"
-          alt="Explainer Image"
-          class="explanationFallbackImg"
-          id="explanationFallbackImg"
-          ref="imgElement"
-          @loadstart="loadFailed = false"
-          @load="imgOnload"
-          @error="loadFailed = true"
-        />
-      </picture>
-    </a>
-    <form method="dialog">
-      <button
-        class="button"
-        type="submit"
-        autofocus
+      <h2
+        id="explanationHeading"
+        class="explanationHeading title is-4"
       >
-        Close
-      </button>
-    </form>
-  </dialog>
+        <slot name="heading"></slot>
+      </h2>
+
+      <div
+        id="explanationContent"
+        class="explanationContent nms-font"
+      >
+        <slot name="content"></slot>
+      </div>
+      <a
+        v-if="src && !loadFailed"
+        :href="`./assets/images/jpg/${src}.jpg`"
+        class="explanationLink loading"
+        id="explanationLink"
+        ref="linkElement"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <picture>
+          <source
+            :srcset="`./assets/images/webp/${src}.webp`"
+            class="explanationWebpImg"
+            id="explanationWebpImg"
+            type="image/webp"
+          />
+          <img
+            :src="`./assets/images/jpg/${src}.jpg`"
+            :style="{
+              opacity,
+              'margin-block-start': marginBlockStart + 'rem',
+            }"
+            alt="Explainer Image"
+            class="explanationFallbackImg"
+            id="explanationFallbackImg"
+            ref="imgElement"
+            @loadstart="loadFailed = false"
+            @load="imgOnload"
+            @error="loadFailed = true"
+          />
+        </picture>
+      </a>
+      <form method="dialog">
+        <button
+          class="button"
+          type="submit"
+          autofocus
+        >
+          Close
+        </button>
+      </form>
+    </dialog>
+  </Teleport>
 </template>

@@ -18,6 +18,10 @@ watchEffect(() => {
   if (isAuto.value && !isOpen.value) isAuto.value = false;
 });
 
+watchEffect(() => {
+  if (!uploadNoticeShown.value && isOpen.value) uploadNoticeShown.value = true;
+});
+
 const maxUploadSize = 10000000;
 
 function addPicName(e: Event) {
@@ -27,7 +31,7 @@ function addPicName(e: Event) {
   picName.value = file?.name ?? '';
   isLargeFile.value = Boolean(file && file.size > maxUploadSize);
 
-  if (uploadNoticeShown.value) return;
+  if (uploadNoticeShown.value || isLargeFile.value) return;
   isOpen.value = true;
   isAuto.value = true;
   uploadNoticeShown.value = true;

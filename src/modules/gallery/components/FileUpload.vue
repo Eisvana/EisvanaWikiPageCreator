@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref, type Ref, nextTick } from 'vue';
+import { ref, type Ref, watchEffect } from 'vue';
 import { storeToRefs } from 'pinia';
-import { pageData, staticBooleans } from '../../../variables/objects';
+import { pageData } from '../../../variables/objects';
 import { useGalleryStore, type FileItem } from '../stores/gallery';
-import { explanation } from '../../tooltip';
 import Explanation from '@/components/structure/Explanation.vue';
 
 const galleryUpload = ref<HTMLInputElement | null>(null);
@@ -11,14 +10,22 @@ const dragActive = ref(false);
 const errors = ref<string[]>([]);
 const tooltip = ref('');
 
-onMounted(() => {
-  nextTick(() => {
-    if (!pageData.galleryExplanationExternal) return;
-    tooltip.value = typeof pageData.galleryExplanationExternal === 'string' ? pageData.galleryExplanationExternal : '';
-  });
+const isOpen = ref(false);
+const isAuto = ref(false);
+const uploadNoticeShown = ref(false);
+
+watchEffect(() => {
+  if (isAuto.value && !isOpen.value) isAuto.value = false;
 });
 
-let id = 0;
+watchEffect(() => {
+  if (!isOpen.value && !isAuto.value)
+    tooltip.value = typeof pageData.galleryExplanationExternal === 'string' ? pageData.galleryExplanationExternal : '';
+});
+
+watchEffect(() => {
+  if (!uploadNoticeShown.value && isOpen.value) uploadNoticeShown.value = true;
+});
 
 const galleryStore = useGalleryStore();
 const { galleryFiles } = storeToRefs(galleryStore);
@@ -47,19 +54,19 @@ function addFiles(files: FileList) {
 
   buildFileItem(Array.from(validFiles), galleryFiles);
 
-  // If galleryUploadShown is true, exit the function. Otherwise, show gallery explanation popup
-  if (staticBooleans.galleryUploadShown || !validFiles.length) return;
+  // If there are no valid pics, exit the function. Otherwise, show gallery explanation popup
+  if (uploadNoticeShown.value || typeof pageData.galleryExplanationExternal !== 'string' || !validFiles.length) return;
 
   // the galleryExplanationExternal() function should return string with the popup text. HTML is supported.
-  if (pageData.galleryExplanationExternal) {
-    explanation(
-      'Gallery',
-      `${pageData.galleryExplanationExternal}
-	<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the gallery upload button.</div>`
-    );
-  }
-  staticBooleans.galleryUploadShown = true;
+  tooltip.value =
+    pageData.galleryExplanationExternal +
+    `<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the gallery upload button.</div>`;
+  isOpen.value = true;
+  isAuto.value = true;
+  uploadNoticeShown.value = true;
 }
+
+let id = 0;
 
 function buildFileItem(files: File | File[], storeLoc: Ref<FileItem[]>) {
   for (const file of [files].flat()) {
@@ -84,7 +91,10 @@ function buildFileItem(files: File | File[], storeLoc: Ref<FileItem[]>) {
   >
     <div class="title-wrapper">
       <span class="drop-title">Drop gallery files here</span>
-      <Explanation v-if="tooltip">
+      <Explanation
+        v-if="tooltip"
+        v-model:open="isOpen"
+      >
         There is a preferred order of pictures.
         <template #heading>Gallery</template>
         <template #content><div v-html="tooltip"></div></template>
