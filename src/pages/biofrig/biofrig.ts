@@ -31,7 +31,7 @@ export function addInfo() {
  * @returns {void}
  */
 export function generateCatalogue() {
-	pageData.catalogue = 'Eisvana Organic Frigate Album';
+	pageData.catalogue = 'Eisvana Starship Album - Organic Frigate';
 }
 
 /**
@@ -80,5 +80,5 @@ export function albumOtherExternal() {
 }
 
 export function albumItemTypeExternal() {
-	return 'Organic Frigate Catalogue';
+	return 'Organic Frigate Album';
 }

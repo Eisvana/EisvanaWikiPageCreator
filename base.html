@@ -22,13 +22,13 @@
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
 				<div class="table">
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Current release:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="versionInput" data-dest="release"></select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="nameInput">Name of the base:</label>
 						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
@@ -37,10 +37,10 @@
 							<data>base/baseName</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="fileInput">Main image name, including file extension:</label>
 						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the
@@ -56,53 +56,53 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="builderlinkInput">Builder wiki name:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="builderlink" id="builderlinkInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="builderInput">Builder alias if no wiki:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="builder" id="builderInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="docbyInput">Documented by if not builder:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="systemInput">Name of the system:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="planetInput">Name of the planet:</label>
 						<button class="tooltip">
 							<data>Planet Name OR the planet circled by the moon where the base can be found.</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="moonInput">Name of the moon (if base is on moon):</label>
 						<button class="tooltip">
 							<data>If the base is located on a moon. Leave blank if the base is on a planet.</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="moon" id="moonInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="axesInput">Planetary coords:</label>
 						<button class="tooltip">
 							<data>Found using your analysis visor OR on your ship's dashboard.</data>
@@ -111,10 +111,10 @@
 							<data>shared/axes</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" placeholder="+0.00, -0.00" data-dest="axes" id="axesInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
@@ -132,14 +132,14 @@
 							<data>shared/glyphs</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
 					</div>
 					<div class="tableHeader data">
 						<div id="portalglyphButtons"></div>
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="typeInput">Type of the base:</label>
 						<button class="tooltip">
 							<data>Type and purpose of the base.</data>
@@ -159,10 +159,10 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="type" id="typeInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Gamemode:</label>
 						<button class="tooltip">
 							<data>Gamemode of the save on which this base was built.</data>
@@ -171,7 +171,7 @@
 							<data>shared/gamemode</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest="mode" id="modeInput">
 							<option value="Normal">Normal</option>
 							<option value="Relaxed">Relaxed</option>
@@ -181,10 +181,10 @@
 							<option value="Custom">Custom</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Platform:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest="platform" id="platformInput">
 							<option value="PC">PC</option>
 							<option value="PS">PlayStation</option>
@@ -192,10 +192,10 @@
 							<option value="NS">Switch</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Features:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="farmCheckbox"><input type="checkbox" id="farmCheckbox"
 									value="Yes" data-checkbox-unchecked="No" data-dest-checkbox="farm"><span
@@ -218,10 +218,10 @@
 									data-dest-checkbox="racetrack"><span class="checkbox-label">Racetrack</span></label>
 						</div>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Do you belong to a chapter?</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest-noauto="researchteam" id="researchteamInput">
 							<option value=""></option>
 							<option value="Wiki Scholars">Wiki Scholars</option>
@@ -232,7 +232,7 @@
 						<p>Census:</p>
 						<button class="button" id="censusHideButton">Hide</button>
 					</div>
-					<div data-section="census" class="tableCell text">
+					<div data-section="census" class="table-cell text">
 						<label for="censusPlayerInput">Ingame name of the player?</label>
 						<button class="tooltip">
 							<data>Your ingame name.</data>
@@ -241,28 +241,28 @@
 							<data>base/playerName</data>
 						</button>
 					</div>
-					<div data-section="census" class="tableCell data">
+					<div data-section="census" class="table-cell data">
 						<input type="text" data-dest="censusplayer" id="censusPlayerInput">
 					</div>
-					<div data-section="census" class="tableCell text">
+					<div data-section="census" class="table-cell text">
 						<label for="censusRedditInput">Reddit name of the player?</label>
 						<button class="tooltip">
 							<data>Your Reddit name. "u/" not necessary.</data>
 						</button>
 					</div>
-					<div data-section="census" class="tableCell data">
+					<div data-section="census" class="table-cell data">
 						<input type="text" data-dest-noauto="censusreddit" id="censusRedditInput">
 					</div>
-					<div data-section="census" class="tableCell text">
+					<div data-section="census" class="table-cell text">
 						<label for="censusDiscordInput">Discord name of the player?</label>
 						<button class="tooltip">
 							<data>Your Discord name. Please give your username, not your display name.</data>
 						</button>
 					</div>
-					<div data-section="census" class="tableCell data">
+					<div data-section="census" class="table-cell data">
 						<input type="text" data-dest="censusdiscord" id="censusDiscordInput">
 					</div>
-					<div data-section="census" class="tableCell text">
+					<div data-section="census" class="table-cell text">
 						<label for="censusFriendInput">NMS friend code of the player?</label>
 						<button class="tooltip">
 							<data>Can be found in the Options.</data>
@@ -275,19 +275,19 @@
 							<data>base/friendCode</data>
 						</button>
 					</div>
-					<div data-section="census" class="tableCell data">
+					<div data-section="census" class="table-cell data">
 						<input type="text" data-dest-noauto="censusfriend" maxlength="15" id="censusFriendInput">
 					</div>
-					<div data-section="census" class="tableCell text">
+					<div data-section="census" class="table-cell text">
 						<label for="censusArrivalInput">When did the player arrive in Eisvana space?</label>
 					</div>
-					<div data-section="census" class="tableCell data">
+					<div data-section="census" class="table-cell data">
 						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput">
 					</div>
-					<div data-section="census" class="tableCell text">
+					<div data-section="census" class="table-cell text">
 						<label for="censusShowInput">Create Census Entry:</label>
 					</div>
-					<div data-section="census" class="tableCell data">
+					<div data-section="census" class="table-cell data">
 						<input type="checkbox" id="censusShowInput" value="Y" data-checkbox-unchecked=""
 							data-dest-checkbox="censusshow">
 					</div>

@@ -92,7 +92,7 @@ export function deleteCharacter(button: HTMLButtonElement | undefined = undefine
 			return globalElements.input[input] as HTMLInputElement
 				?? document.getElementById(input) as HTMLInputElement;
 		} else if (button) {
-			return button.closest('.tableCell')?.nextElementSibling?.querySelector('input') as HTMLInputElement;
+			return button.closest('.table-cell')?.nextElementSibling?.querySelector('input') as HTMLInputElement;
 		} else {
 			return globalElements.input.portalglyphsInput as HTMLInputElement;
 		}

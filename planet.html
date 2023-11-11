@@ -25,13 +25,13 @@
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
 				<div class="table">
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Current release:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="versionInput" data-dest="release"></select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="nameInput">Name of the planet:</label>
 						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
@@ -40,16 +40,16 @@
 							<data>planet/planetName</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="oldNameInput">Original name before uploading (if available):</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input data-dest="oldName" type="text" id="oldNameInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="fileInput">Main image name, including file extension:</label>
 						<button class="tooltip" name="fileUploadTooltip">
 							<data>
@@ -76,14 +76,14 @@
 							<data>planet/planetPic</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="systemInput">Name of the system:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
 					<div class="tableHeader text no-flex">
@@ -92,7 +92,7 @@
 					<div id="moonInputs" class="tableHeader text">
 						<button class="button is-primary" type="button" id="addMoonButton">+ Add Moon</button>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
@@ -110,14 +110,14 @@
 							<data>shared/glyphs</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
 					</div>
 					<div class="tableHeader data">
 						<div id="portalglyphButtons"></div>
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="biomeInput">Biome of the planet:</label>
 						<button class="tooltip">
 							<data>Can be determined from the planetary features.</data>
@@ -130,7 +130,7 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="biomeInput" data-dest="biome">
 							<option value="Lush">Lush</option>
 							<option value="Barren">Barren</option>
@@ -145,7 +145,7 @@
 							<option value="Volcanic">Volcanic</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="descriptionInput">Description of the planet:</label>
 						<button class="tooltip">
 							<data>Can be found in the exploration guide.</data>
@@ -154,11 +154,11 @@
 							<data>planet/planetDesc</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="description" list="planetDescriptors"
 							id="descriptionInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="atmosphereInput">Atmosphere of the planet:</label>
 						<button class="tooltip">
 							<data>Found in the exploration guide.</data>
@@ -167,10 +167,10 @@
 							<data>planet/atmosphere</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="atmosphere" id="atmosphereInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="terrainInput">Terrain of the planet:</label>
 						<button class="tooltip">
 							<data>The terrain type of the planet.</data>
@@ -192,14 +192,14 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select type="text" data-dest="terrain" id="terrainInput">
 							<option value="Pangean">Pangean</option>
 							<option value="Continental">Continental</option>
 							<option value="Semi-Oceanic">Semi-Oceanic</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="weatherInput">Weather of the planet:</label>
 						<button class="tooltip">
 							<data>Can be found in the discovery menu.</data>
@@ -208,7 +208,7 @@
 							<data>planet/weather</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-simple="weather" list="weatherData" id="weatherInput">
 					</div>
 					<div class="tableHeader text no-flex">
@@ -224,7 +224,7 @@
 						<button class="button is-primary" type="button" id="addResourceButton">+ Add
 							Resource</button>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="sentinelInput">Sentinel level of the planet:</label>
 						<button class="tooltip">
 							<data>Can be found in the discovery menu.</data>
@@ -233,10 +233,10 @@
 							<data>planet/sentinels</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="sentinel" list="sentinels" id="sentinelInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="floraInput">Flora level of the planet:</label>
 						<button class="tooltip">
 							<data>Can be found in the discovery menu.</data>
@@ -245,10 +245,10 @@
 							<data>planet/flora</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="flora" list="rarity" id="floraInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="faunaInput">Fauna level of the planet:</label>
 						<button class="tooltip">
 							<data>Can be found in the discovery menu.</data>
@@ -257,10 +257,10 @@
 							<data>planet/fauna</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="fauna" list="rarity" id="faunaInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="faunaNumberInput">Number of Fauna:</label>
 						<button class="tooltip">
 							<data>Can be found in the discovery menu.</data>
@@ -269,16 +269,16 @@
 							<data>planet/faunaNum</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="faunaNumber" data-dest-number="0" id="faunaNumberInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="sandwormInput">Sandworm?</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="checkbox" id="sandwormInput" data-dest-noauto="sandworm">
 					</div>
-					<div class="tableCell text" data-section="sandworm">
+					<div class="table-cell text" data-section="sandworm">
 						<label for="sandwormImgInput">Sandworm image:</label>
 						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
@@ -293,12 +293,12 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data" data-section="sandworm">
+					<div class="table-cell data" data-section="sandworm">
 						<input type="text" id="sandwormImgInput" data-dest="sandwormImg"
 							data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="sandwormImgUpload" accept="image/*">
 					</div>
-					<div class="tableCell text" data-section="sandworm">
+					<div class="table-cell text" data-section="sandworm">
 						<label>Class:</label>
 						<button class="tooltip">
 							<data>Found on the worm scan.</data>
@@ -307,7 +307,7 @@
 							<data>sandworm/class</data>
 						</button>
 					</div>
-					<div class="tableCell data" data-section="sandworm">
+					<div class="table-cell data" data-section="sandworm">
 						<select id="wormclassInput" data-dest="wormclass">
 							<option value="Ceaseless Burrower">Ceaseless Burrower</option>
 							<option value="Colossal Being">Colossal Being</option>
@@ -319,7 +319,7 @@
 							<option value="Worm Lord">Worm Lord</option>
 						</select>
 					</div>
-					<div class="tableCell text" data-section="sandworm">
+					<div class="table-cell text" data-section="sandworm">
 						<label for="wormHeadInput">Head type:</label>
 						<button class="tooltip">
 							<data>Head type of the worm</data>
@@ -335,7 +335,7 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data" data-section="sandworm">
+					<div class="table-cell data" data-section="sandworm">
 						<select id="wormHeadInput" data-dest="wormHead">
 							<option value="Glowworm">Glowworm</option>
 							<option value="Arrakis">Arrakis</option>
@@ -348,7 +348,7 @@
 							<option value="Lips">Lips</option>
 						</select>
 					</div>
-					<div class="tableCell text" data-section="sandworm">
+					<div class="table-cell text" data-section="sandworm">
 						<label>Max Depth:</label>
 						<button class="tooltip">
 							<data>Found on the worm scan.</data>
@@ -358,11 +358,11 @@
 							<data>sandworm/maxDepth</data>
 						</button>
 					</div>
-					<div class="tableCell data" data-section="sandworm">
+					<div class="table-cell data" data-section="sandworm">
 						<input type="text" id="wormmaxdepthInput" data-dest-number="1" data-dest-noauto="wormmaxdepth"
 							maxlength="5" placeholder="0.0">
 					</div>
-					<div class="tableCell text" data-section="sandworm">
+					<div class="table-cell text" data-section="sandworm">
 						<label>Stomach Contents:</label>
 						<button class="tooltip">
 							<data>Found on the worm scan.</data>
@@ -371,7 +371,7 @@
 							<data>sandworm/stomachContents</data>
 						</button>
 					</div>
-					<div class="tableCell data" data-section="sandworm">
+					<div class="table-cell data" data-section="sandworm">
 						<select id="wormstomachInput" data-dest="wormstomach">
 							<option value="Consumed waypoints">Consumed waypoints</option>
 							<option value="Entire [[Trade Outpost|trade outpost]]">Entire trade outpost</option>
@@ -391,7 +391,7 @@
 							<option value="Unpleasant liquid">Unpleasant liquid</option>
 						</select>
 					</div>
-					<div class="tableCell text" data-section="sandworm">
+					<div class="table-cell text" data-section="sandworm">
 						<label>Does this worm spawn on game reload?</label>
 						<button class="tooltip">
 							<data>Reload your game and observe.</data>
@@ -405,7 +405,7 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data" data-section="sandworm">
+					<div class="table-cell data" data-section="sandworm">
 						<div class="radioButtons">
 							<label for="autoSpawnInputY"><input type="radio" id="autoSpawnInputY" name="autoSpawnInput"
 									value="Yes"><span>Yes</span></label>
@@ -415,13 +415,13 @@
 									value="" checked><span>I don't know</span></label>
 						</div>
 					</div>
-					<div class="tableCell text" data-section="sandworm">
+					<div class="table-cell text" data-section="sandworm">
 						<label for="wormDiscoveredInput">Discoverer:</label>
 						<button class="tooltip">
 							<data>If there are no previous posts of this worm anywhere, you are the discoverer.</data>
 						</button>
 					</div>
-					<div class="tableCell data" data-section="sandworm">
+					<div class="table-cell data" data-section="sandworm">
 						<input type="text" data-dest="wormDiscovered" id="wormDiscoveredInput">
 					</div>
 					<div class="tableHeader text sectionToggle">
@@ -448,7 +448,7 @@
 						<button class="button is-primary" type="button" data-dest-noauto="minerals"
 							id="addMineralButton">+ Add Mineral</button>
 					</div>
-					<div class="tableCell text ">
+					<div class="table-cell text ">
 						<label for="discDateInput">When was this planet discovered?</label>
 						<button class="tooltip">
 							<data>Found in the analysis visor.</data>
@@ -460,26 +460,26 @@
 							<data>planet/discDate</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="date" id="discDateInput" data-dest-noauto="discDate">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="docDateInput">When was this planet documented?</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="date" id="docDateInput" data-dest-noauto="docDate">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Do you belong to a chapter?</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest-noauto="researchteam" id="researchteamInput">
 							<option value=""></option>
 							<option value="Wiki Scholars">Wiki Scholars</option>
 							<option value="EBC">EBC</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Gamemode:</label>
 						<button class="tooltip">
 							<data>Gamemode of the save on which this planet was documented.</data>
@@ -491,7 +491,7 @@
 							<data>shared/gamemode</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest="mode" id="modeInput">
 							<option value="Normal">Normal</option>
 							<option value="Relaxed">Relaxed</option>
@@ -501,10 +501,10 @@
 							<option value="Custom">Custom</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Discoverer platform:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest-noauto="platform" id="platformInput">
 							<option value="">I don't know</option>
 							<option value="PC">PC</option>
@@ -513,22 +513,22 @@
 							<option value="NS">Switch</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="discoveredlinkInput">Discoverer wiki name:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="discoveredInput">Discoverer alias if no wiki:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="discovered" id="discoveredInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="docbyInput">Documenter alias if not discoverer:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
 					<div class="tableHeader data no-flex">

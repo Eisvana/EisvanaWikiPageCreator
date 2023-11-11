@@ -202,11 +202,11 @@ function addResourceInput(element: HTMLButtonElement, sectionTarget: number) {
 	const resource_input = 'resource_input' + childIndex;
 	const oddEvenClass = 'is-' + oddEven(sectionTarget);
 
-	const inputHTML = `<div class="tableCell text removable ${oddEvenClass}" data-section="resource${sectionTarget} planet${sectionTarget}" data-resource="section${childIndex}" data-planet="planet${sectionTarget}">
+	const inputHTML = `<div class="table-cell text removable ${oddEvenClass}" data-section="resource${sectionTarget} planet${sectionTarget}" data-resource="section${childIndex}" data-planet="planet${sectionTarget}">
 		<button class="button is-danger is-outlined icon is-small" title="Remove resource" type="button" disabled data-evt-id="removeButton">&#10006</button>
 		<label for="${resource_input}">Resource name:</label>
 	</div>
-	<div class="tableCell data ${oddEvenClass}" data-section="resource${sectionTarget} planet${sectionTarget}" data-resource="section${childIndex}" data-planet="planet${sectionTarget}">
+	<div class="table-cell data ${oddEvenClass}" data-section="resource${sectionTarget} planet${sectionTarget}" data-resource="section${childIndex}" data-planet="planet${sectionTarget}">
 		<input type="text" list="resources" id="${resource_input}" data-dest-noauto="${resource}" data-evt-id="addButton">
 	</div>`;
 

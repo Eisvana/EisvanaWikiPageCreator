@@ -352,6 +352,7 @@ const floraDatalists = {
 		'Grasping',
 	],
 	floraResources: [
+		'',
 		'Oxygen',
 		'Carbon',
 		'Sodium',

@@ -22,13 +22,13 @@
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
 				<div class="table">
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Current release:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="versionInput" data-dest="release"></select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="nameInput">Name of the frigate:</label>
 						<button class="tooltip">
 							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
@@ -37,10 +37,10 @@
 							<data>frigate/frigateName</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="fileInput">Main image name, including file extension:</label>
 						<button class="tooltip" name="fileUploadTooltip">
 							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
@@ -55,17 +55,17 @@
 							</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="systemInput">Name of the system:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<div class="label-combo">
 							<label for="portalglyphsInput">Portalglyphs:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
@@ -83,17 +83,17 @@
 							<data>shared/glyphs</data>
 						</button>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
 					</div>
 					<div class="tableHeader data">
 						<div id="portalglyphButtons"></div>
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Class:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select id="classInput" data-dest="class">
 							<option value="S">S</option>
 							<option value="A">A</option>
@@ -101,67 +101,67 @@
 							<option value="C">C</option>
 						</select>
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="costInput">Cost:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" id="costInput" data-dest-number="0" data-dest-noauto="cost">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="combatInput">Combat:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="combat" data-dest-number="0" maxlength="2"
 							id="combatInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="explorationInput">Exploration:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="exploration" data-dest-number="0" maxlength="2"
 							id="explorationInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="industrialInput">Industrial:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="industrial" data-dest-number="0" maxlength="2"
 							id="industrialInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="tradeInput">Trade:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="trade" data-dest-number="0" maxlength="2" id="tradeInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="fuelInput">Fuel:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="fuel" data-dest-number="0" maxlength="2" id="fuelInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="discoveredlinkInput">Discoverer wiki name:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="discoveredInput">Discoverer alias if no wiki:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest="discovered" id="discoveredInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label for="docbyInput">Documenter alias if not discoverer:</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
-					<div class="tableCell text">
+					<div class="table-cell text">
 						<label>Do you belong to a chapter?</label>
 					</div>
-					<div class="tableCell data">
+					<div class="table-cell data">
 						<select data-dest-noauto="researchteam" id="researchteamInput">
 							<option value=""></option>
 							<option value="Wiki Scholars">Wiki Scholars</option>
@@ -172,10 +172,10 @@
 						<p>This section builds a predefined appearance sentence, it is not required.</p>
 						<button class="button" id="hideAppearanceButton">Hide</button>
 					</div>
-					<div data-section="appearance" class="tableCell text">
+					<div data-section="appearance" class="table-cell text">
 						<label>Main Colour:</label>
 					</div>
-					<div data-section="appearance" class="tableCell data">
+					<div data-section="appearance" class="table-cell data">
 						<select id="mainColourInput" data-dest-noauto="mainColour">
 							<option value=" "></option>
 							<option value="blue">Blue</option>
@@ -193,10 +193,10 @@
 							<option value="yellow">Yellow</option>
 						</select>
 					</div>
-					<div data-section="appearance" class="tableCell text">
+					<div data-section="appearance" class="table-cell text">
 						<label>Secondary Colour:</label>
 					</div>
-					<div data-section="appearance" class="tableCell data">
+					<div data-section="appearance" class="table-cell data">
 						<select id="secColourInput" data-dest-noauto="secColour">
 							<option value=" "></option>
 							<option value="black">Black</option>
@@ -217,10 +217,10 @@
 							<option value="yellow">Yellow</option>
 						</select>
 					</div>
-					<div data-section="appearance" class="tableCell text">
+					<div data-section="appearance" class="table-cell text">
 						<label>Tentacle type:</label>
 					</div>
-					<div data-section="appearance" class="tableCell data">
+					<div data-section="appearance" class="table-cell data">
 						<select id="tentacleInput" data-dest-noauto="tentacles">
 							<option value=" "></option>
 							<option value="leviathan tentacles">Leviathan</option>
