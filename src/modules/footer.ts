@@ -114,8 +114,6 @@ export function readDefaultValues() {
       case 'discoveredInput':
       case 'builderlinkInput':
       case 'builderInput':
-      case 'ownerlinkInput':
-      case 'ownerInput':
         triggerEvent(input, 'input');
         break;
     }
