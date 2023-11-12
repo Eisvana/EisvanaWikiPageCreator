@@ -4,7 +4,7 @@ import WikiTemplate from '../structure/WikiTemplate.vue';
 defineProps<{
   plantName?: string;
   region?: string;
-  picName?: string;
+  image?: string;
   systemName?: string;
   planetName?: string;
   moonName?: string;
@@ -32,7 +32,7 @@ defineProps<{
     template-name="Flora infobox"
   >
     <div>| name = {{ plantName }}</div>
-    <div>| image = {{ picName || 'nmsMisc_NotAvailable.png' }}</div>
+    <div>| image = {{ image || 'nmsMisc_NotAvailable.png' }}</div>
     <div>| galaxy = Eissentam</div>
     <div>| region = {{ region }}</div>
     <div>| system = {{ systemName }}</div>

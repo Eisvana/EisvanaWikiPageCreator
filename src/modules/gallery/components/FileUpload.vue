@@ -4,10 +4,13 @@ import { storeToRefs } from 'pinia';
 import { pageData } from '../../../variables/objects';
 import { useGalleryStore, type FileItem } from '../stores/gallery';
 import Explanation from '@/components/structure/Explanation.vue';
+import { usePageDataStore } from '@/stores/pageData';
 
 const galleryUpload = ref<HTMLInputElement | null>(null);
 const dragActive = ref(false);
 const errors = ref<string[]>([]);
+const infoboxImage = ref('');
+const infoboxImageInGallery = ref(false);
 const tooltip = ref('');
 
 const isOpen = ref(false);
@@ -30,6 +33,9 @@ watchEffect(() => {
 const galleryStore = useGalleryStore();
 const { galleryFiles } = storeToRefs(galleryStore);
 
+const pageDataStore = usePageDataStore();
+const { image } = storeToRefs(pageDataStore);
+
 function dropFile(e: DragEvent) {
   dragActive.value = false;
   const uploadedFiles = e.dataTransfer?.files;
@@ -50,7 +56,10 @@ function addFiles(files: FileList) {
   const largeFiles = fileArray.filter((file) => file.size > uploadSizeLimit);
   errors.value = largeFiles.map((file) => file.name);
 
-  const validFiles = fileArray.filter((file) => !largeFiles.includes(file));
+  infoboxImage.value = typeof pageData.image === 'string' ? pageData.image : image.value;
+  infoboxImageInGallery.value = fileArray.map((file) => file.name).includes(infoboxImage.value);
+
+  const validFiles = fileArray.filter((file) => !largeFiles.includes(file) && file.name !== infoboxImage.value);
 
   buildFileItem(Array.from(validFiles), galleryFiles);
 
@@ -68,8 +77,8 @@ function addFiles(files: FileList) {
 
 let id = 0;
 
-function buildFileItem(files: File | File[], storeLoc: Ref<FileItem[]>) {
-  for (const file of [files].flat()) {
+function buildFileItem(files: File[], storeLoc: Ref<FileItem[]>) {
+  for (const file of files) {
     storeLoc.value.unshift({
       id: id++,
       desc: '',
@@ -102,7 +111,7 @@ function buildFileItem(files: File | File[], storeLoc: Ref<FileItem[]>) {
     </div>
     <input
       ref="galleryUpload"
-      :class="{ error: errors.length }"
+      :class="{ error: errors.length || infoboxImageInGallery }"
       accept="image/*"
       type="file"
       id="galleryUpload"
@@ -111,10 +120,13 @@ function buildFileItem(files: File | File[], storeLoc: Ref<FileItem[]>) {
     />
   </label>
   <div
-    v-if="errors.length"
+    v-if="errors.length || infoboxImageInGallery"
     class="error-list"
   >
-    <div>
+    <div v-if="infoboxImageInGallery">
+      {{ infoboxImage }} is already in the infobox and therefore wasn't added to the gallery.
+    </div>
+    <div v-if="errors.length">
       The following file(s) exceed the 10MB upload limit and couldn't be added. You can compress them with the
       <a
         href="https://nmscd.com/Image-Compressor/"

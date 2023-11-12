@@ -57,7 +57,7 @@ const {
   release,
   name,
   orgName,
-  picName,
+  image,
   discovered,
   discoveredlink,
   system,
@@ -356,7 +356,7 @@ function forceDatalistComponent(value: string, list: string[]) {
       </div>
       <FloraInfobox
         :plantName="plantName"
-        :picName="picName"
+        :image="image"
         region=""
         :systemName="systemName"
         :planetName="planetName"

@@ -37,7 +37,7 @@ const localStorageData = () => JSON.parse(localStorage.getItem('defaultSettings'
 interface PageData {
   release: string;
   name: string;
-  picName: string;
+  image: string;
   discovered: string;
   discoveredlink: string;
   orgName: string;
@@ -66,7 +66,7 @@ export const usePageDataStore = defineStore('pageData', {
   state: (): PageData => ({
     release: versions[0],
     name: '',
-    picName: '',
+    image: '',
     discovered: localStorageData()['discoveredInput builderInput'] ?? '',
     discoveredlink: localStorageData()['discoveredlinkInput builderlinkInput'] ?? '',
     orgName: '',
