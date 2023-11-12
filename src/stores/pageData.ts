@@ -32,7 +32,7 @@ export const useStaticPageDataStore = defineStore('staticPageData', {
   }),
 });
 
-const localStorageData = JSON.parse(localStorage.getItem('defaultSettings') ?? '{}');
+const localStorageData = () => JSON.parse(localStorage.getItem('defaultSettings') ?? '{}');
 
 interface PageData {
   release: string;
@@ -67,13 +67,13 @@ export const usePageDataStore = defineStore('pageData', {
     release: versions[0],
     name: '',
     picName: '',
-    discovered: localStorageData['discoveredInput builderInput'] ?? '',
-    discoveredlink: localStorageData['discoveredlinkInput builderlinkInput'] ?? '',
+    discovered: localStorageData()['discoveredInput builderInput'] ?? '',
+    discoveredlink: localStorageData()['discoveredlinkInput builderlinkInput'] ?? '',
     orgName: '',
-    system: localStorageData.systemInput ?? '',
-    planet: localStorageData.planetInput ?? '',
-    moon: localStorageData.moonInput ?? '',
-    glyphs: localStorageData.portalglyphsInput ?? '',
+    system: localStorageData().systemInput ?? '',
+    planet: localStorageData().planetInput ?? '',
+    moon: localStorageData().moonInput ?? '',
+    glyphs: localStorageData().portalglyphsInput ?? '',
     type: '',
     biome: 'Lush',
     age: '',
@@ -83,12 +83,12 @@ export const usePageDataStore = defineStore('pageData', {
     elements: [],
     polymorphic: '',
     discDate: '',
-    docBy: localStorageData.docbyInput ?? '',
-    researchteam: localStorageData.researchteamInput ?? departments[''],
+    docBy: localStorageData().docbyInput ?? '',
+    researchteam: localStorageData().researchteamInput ?? departments[''],
     appearance: '',
     pageName: '',
-    platform: localStorageData.platformInput ?? '',
-    wealth: localStorageData.wealthInput ?? '',
+    platform: localStorageData().platformInput ?? '',
+    wealth: localStorageData().wealthInput ?? '',
   }),
 
   getters: {
