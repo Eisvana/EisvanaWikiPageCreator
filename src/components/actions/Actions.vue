@@ -7,6 +7,7 @@ import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { sanitiseString } from '@/common';
 import { useArticleText } from '@/composables/useArticleText';
+import WikiLink from '../structure/WikiLink.vue';
 
 const pageData = usePageDataStore();
 const { name, pageName } = storeToRefs(pageData);
@@ -14,9 +15,9 @@ const { name, pageName } = storeToRefs(pageData);
 const staticPageData = useStaticPageDataStore();
 const { fullArticleElement } = storeToRefs(staticPageData);
 
-const floraPageName = computed(() => sanitiseString(name.value));
+const sanitisedPageName = computed(() => sanitiseString(name.value));
 
-watchEffect(() => (pageName.value = floraPageName.value));
+watchEffect(() => (pageName.value = sanitisedPageName.value));
 
 const downloadFileName = computed(() => pageName.value + '.txt');
 const downloadFileData = ref<string | undefined>();
@@ -45,14 +46,12 @@ const isDev = import.meta.env.DEV;
       @click="downloadFile"
       >Download File</a
     >
-    <a
+    <WikiLink
       class="button is-outlined is-primary"
-      href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true"
-      id="uploadLink"
-      rel="noopener noreferrer"
-      target="_blank"
-      >Upload Pictures</a
-    >
+      link="Special:Upload?multiple=true"
+      text="Upload Pictures"
+    />
+
     <CreatePageButton />
     <button
       class="button is-warning"

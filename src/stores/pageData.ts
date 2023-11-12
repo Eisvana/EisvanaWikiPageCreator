@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { versions } from '../variables/versions';
 import { regions } from '../variables/regions';
+import { sanitiseString } from '@/common';
 
 interface StaticPageData {
   route: string;
@@ -20,10 +21,6 @@ export const departments = {
 
 if (researchteamDefaultExceptions.includes(route)) departments[''] = '';
 
-function getRegionGlyphs(glyphs: string) {
-  return glyphs.substring(4); // NoSonar region glyphs start at index 4.
-}
-
 export const useStaticPageDataStore = defineStore('staticPageData', {
   state: (): StaticPageData => ({
     route,
@@ -32,10 +29,12 @@ export const useStaticPageDataStore = defineStore('staticPageData', {
   }),
 });
 
+const localStorageData = () => JSON.parse(localStorage.getItem('defaultSettings') ?? '{}');
+
 interface PageData {
   release: string;
   name: string;
-  picName: string;
+  image: string;
   discovered: string;
   discoveredlink: string;
   orgName: string;
@@ -56,20 +55,24 @@ interface PageData {
   researchteam: string;
   appearance: string;
   pageName: string;
+  platform: string;
+  wealth: string;
+  formation: string;
+  content: string;
 }
 
 export const usePageDataStore = defineStore('pageData', {
   state: (): PageData => ({
     release: versions[0],
     name: '',
-    picName: '',
-    discovered: '',
-    discoveredlink: '',
+    image: '',
+    discovered: localStorageData()['discoveredInput builderInput'] ?? '',
+    discoveredlink: localStorageData()['discoveredlinkInput builderlinkInput'] ?? '',
     orgName: '',
-    system: '',
-    planet: '',
-    moon: '',
-    glyphs: '',
+    system: localStorageData().systemInput ?? '',
+    planet: localStorageData().planetInput ?? '',
+    moon: localStorageData().moonInput ?? '',
+    glyphs: localStorageData().portalglyphsInput ?? '',
     type: '',
     biome: 'Lush',
     age: '',
@@ -79,22 +82,43 @@ export const usePageDataStore = defineStore('pageData', {
     elements: [],
     polymorphic: '',
     discDate: '',
-    docBy: '',
-    researchteam: departments[''],
+    docBy: localStorageData().docbyInput ?? '',
+    researchteam: localStorageData().researchteamInput ?? departments[''],
     appearance: '',
     pageName: '',
+    platform: localStorageData().platformInput ?? '',
+    wealth: localStorageData().wealthInput ?? '',
+    formation: '',
+    content: '',
   }),
 
   getters: {
-    isValidGlyphs: (state) => Object.keys(regions).includes(state.glyphs.substring(4)), // NoSonar region glyphs start at index 4. Tests if an address is valid for Eisvana
-    region: (state) => {
-      const regionGlyphs = getRegionGlyphs(state.glyphs);
-      return regions[regionGlyphs] ?? '';
+    regionGlyphs: (state) => state.glyphs.substring(4), // NoSonar region glyphs start at index 4
+    isValidGlyphs(): boolean {
+      return Object.keys(regions).includes(this.regionGlyphs); // Tests if an address is valid for Eisvana
     },
-    regionNumber: (state) => {
-      const regionGlyphs = getRegionGlyphs(state.glyphs);
-      const index = Object.keys(regions).indexOf(regionGlyphs);
+    region(): string {
+      return regions[this.regionGlyphs] ?? '';
+    },
+    regionNumber(): number {
+      const index = Object.keys(regions).indexOf(this.regionGlyphs);
       return index + 1;
+    },
+    sanitisedName: (state) => sanitiseString(state.name),
+    discoveredName: (state) => sanitiseString(state.discovered),
+    discoveredlinkName: (state) => sanitiseString(state.discoveredlink),
+    systemName: (state) => sanitiseString(state.system),
+    planetName: (state) => sanitiseString(state.planet),
+    moonName: (state) => sanitiseString(state.moon),
+    originalName: (state) => sanitiseString(state.orgName),
+    docBySentence: (state) => {
+      const isLink = state.docBy.startsWith('{{');
+      const hasResearchteam = state.researchteam.split(' ').length > 1;
+      const documenter = isLink ? state.docBy : `''${state.docBy}''`;
+      const researchteamLink = state.researchteam.includes('Wiki')
+        ? '[[Eisvana Wiki Scholars|Eisvana Wiki Scholar]]'
+        : `[[${state.researchteam}]] member`;
+      return `${hasResearchteam ? researchteamLink : ''} ${documenter}`;
     },
   },
 });

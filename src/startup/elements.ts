@@ -17,13 +17,13 @@ addAllTooltips();
 
 // handle dialog stuff
 const dialogElements: ElementIds = {
-	output: {
-		explanationHeading: 'explanationHeading',
-		explanationContent: 'explanationContent',
-		explanationLink: 'explanationLink',
-		explanationWebpImg: 'explanationWebpImg',
-		explanationFallbackImg: 'explanationFallbackImg',
-	}
+  output: {
+    explanationHeading: 'explanationHeading',
+    explanationContent: 'explanationContent',
+    explanationLink: 'explanationLink',
+    explanationWebpImg: 'explanationWebpImg',
+    explanationFallbackImg: 'explanationFallbackImg',
+  }
 }
 
 const explanationElement = globalElements.output.explanation as HTMLDialogElement;
@@ -33,17 +33,15 @@ updateGlobalElements(dialogElements);
 
 // mark player inputs
 const playerInputIds = [
-	'builderInput',
-	'builderlinkInput',
-	'ownerInput',
-	'ownerlinkInput',
-	'discoveredInput',
-	'discoveredlinkInput'
+  'builderInput',
+  'builderlinkInput',
+  'discoveredInput',
+  'discoveredlinkInput'
 ]
 for (const id of playerInputIds) {
-	const element = globalElements.input[id] as HTMLInputElement;
-	if (!element) continue;
-	element.dataset.player = '';
+  const element = globalElements.input[id] as HTMLInputElement;
+  if (!element) continue;
+  element.dataset.player = '';
 }
 
 toggleSection();

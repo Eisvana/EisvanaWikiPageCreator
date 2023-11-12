@@ -13,7 +13,7 @@ export function assignFunction(dataObject: ElementFunction): void {
 		}
 		return;
 	}
-	const simplePages = ['about', '', 'flora'];	// excludes the index and about pages from the advanced behaviour. flora is a temporary test for the vue app
+	const simplePages = ['about', '', 'flora', 'mineral'];	// excludes the index and about pages from the advanced behaviour. flora is a temporary test for the vue app
 	if (!pageData.eventListeners && !simplePages.includes(getCurrentHTMLFile())) {
 		transformListenerData(dataObject);
 		return;
@@ -79,7 +79,7 @@ export function transformListenerData(dataObj: ElementFunction | ElementFunction
 }
 
 export function attachTransformedListeners() {
-	for (const [, handlerObj] of Object.entries(transformedElementFunctions)) {
+	for (const handlerObj of Object.values(transformedElementFunctions)) {
 		for (const [handler, obj] of Object.entries(handlerObj)) {
 			for (const func of obj.func) {
 				const elementArray = [obj.element];
