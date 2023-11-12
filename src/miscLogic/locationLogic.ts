@@ -2,9 +2,9 @@
  * @fileoverview Provides location focused functions
  */
 
-import { sanitiseString } from "../common";
-import { globalElements, pageData } from "../variables/objects";
-import { regions } from "../variables/regions";
+import { sanitiseString } from '../common';
+import { globalElements, pageData } from '../variables/objects';
+import { regions } from '../variables/regions';
 
 /**
  * Returns the type of celestial body based on whether a moon is present or not.
@@ -13,7 +13,7 @@ import { regions } from "../variables/regions";
  * @returns {string} - A string indicating whether the celestial body is a moon or planet.
  */
 export function planetMoon(moon = pageData.moon) {
-	return moon ? 'Moon' : 'Planet';
+  return moon ? 'Moon' : 'Planet';
 }
 
 /**
@@ -28,19 +28,25 @@ export function planetMoon(moon = pageData.moon) {
  * @returns {string} - The description sentence, or "" if `globalElements.output.celestialBody`
  *                     is falsy.
  */
-export function planetMoonSentence(planet: string = pageData.planet as string, moon: string = pageData.moon as string, link: boolean = false) {
-	const dest = globalElements.output.celestialBody as HTMLOutputElement;
-	const body = planetMoon(moon);
-	const planetName = sanitiseString(planet);
-	const moonName = sanitiseString(moon);
-	const openLinkBrackets = link ? '[[' : '';
-	const closingLinkBrackets = link ? ']]' : '';
+export function planetMoonSentence(
+  planet: string = pageData.planet as string,
+  moon: string = pageData.moon as string,
+  link: boolean = false
+) {
+  const dest = globalElements.output.celestialBody as HTMLOutputElement;
+  const body = planetMoon(moon);
+  const planetName = sanitiseString(planet);
+  const moonName = sanitiseString(moon);
+  const openLinkBrackets = link ? '[[' : '';
+  const closingLinkBrackets = link ? ']]' : '';
 
-	const text = body === 'Moon' ? `${openLinkBrackets}moon${closingLinkBrackets} [[${moonName}]] of the ${openLinkBrackets}planet${closingLinkBrackets} [[${planetName}]]` : `${openLinkBrackets}planet${closingLinkBrackets} [[${planetName}]]`;
+  const text =
+    (body === 'Moon' ? `${openLinkBrackets}moon${closingLinkBrackets} [[${moonName}]] of the ` : '') +
+    `${openLinkBrackets}planet${closingLinkBrackets} [[${planetName}]]`;
 
-	if (!dest) return text;
-	dest.innerText = text;
-	return '';
+  if (!dest) return text;
+  dest.innerText = text;
+  return '';
 }
 
 /**
@@ -49,9 +55,9 @@ export function planetMoonSentence(planet: string = pageData.planet as string, m
  * @returns {(number|string)} The region number of the region.
  */
 export function getRegNumber(regionName: string): string {
-	const index = Object.values(regions).indexOf(regionName);
-	if (index !== -1) return (index + 1).toString();
-	return '';
+  const index = Object.values(regions).indexOf(regionName);
+  if (index !== -1) return (index + 1).toString();
+  return '';
 }
 
 /**
@@ -61,6 +67,6 @@ export function getRegNumber(regionName: string): string {
  * @returns {string} - The sentence part for the location section including the region number
  */
 export function regNr(regionName: string): string {
-	const regNr = getRegNumber(regionName);
-	return ` (EV${regNr})`;
+  const regNr = getRegNumber(regionName);
+  return ` (EV${regNr})`;
 }
