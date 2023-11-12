@@ -24,6 +24,7 @@ import { computed, onMounted, ref, watchEffect } from 'vue';
 import { useDataValidationStore } from '@/stores/dataValidation';
 import { useMarker } from '@/composables/useMarker';
 import Explanation from '@/components/structure/Explanation.vue';
+import { watchDebounced } from '@vueuse/core';
 
 const staticPageData = useStaticPageDataStore();
 const { fullArticleElement } = storeToRefs(staticPageData);
@@ -91,6 +92,27 @@ const isAgeInvalid = ref('');
 const isRootsInvalid = ref('');
 const isNutrientsInvalid = ref('');
 const isNotesInvalid = ref('');
+
+watchDebounced(age, () => (isAgeInvalid.value = forceDatalistComponent(age.value, floraDatalists.ageData)), {
+  debounce: 500,
+});
+watchDebounced(roots, () => (isRootsInvalid.value = forceDatalistComponent(roots.value, floraDatalists.rootData)), {
+  debounce: 500,
+});
+watchDebounced(
+  nutrients,
+  () => (isNutrientsInvalid.value = forceDatalistComponent(nutrients.value, floraDatalists.nutSourceData)),
+  {
+    debounce: 500,
+  }
+);
+watchDebounced(
+  notes,
+  () => (isNotesInvalid.value = forceDatalistComponent(notes.value, floraDatalists.floraNotesData)),
+  {
+    debounce: 500,
+  }
+);
 
 watchEffect(() => {
   if (elements.value[0] === elements.value[1]) elements.value[1] = '';
@@ -206,7 +228,6 @@ function forceDatalistComponent(value: string, list: string[]) {
         identifier="age"
         list="ageData"
         img="flora/age"
-        @change="isAgeInvalid = forceDatalistComponent(age, floraDatalists.ageData)"
       >
         Found on the flora scan.
         <template #heading>Age</template>
@@ -219,7 +240,6 @@ function forceDatalistComponent(value: string, list: string[]) {
         identifier="roots"
         list="rootData"
         img="flora/roots"
-        @change="isRootsInvalid = forceDatalistComponent(roots, floraDatalists.rootData)"
       >
         Found on the flora scan.
         <template #heading>Root Structure</template>
@@ -232,7 +252,6 @@ function forceDatalistComponent(value: string, list: string[]) {
         identifier="nutSource"
         list="nutSourceData"
         img="flora/nutSource"
-        @change="isNutrientsInvalid = forceDatalistComponent(nutrients, floraDatalists.nutSourceData)"
       >
         Found on the flora scan.
         <template #heading>Nutrient Source</template>
@@ -245,7 +264,6 @@ function forceDatalistComponent(value: string, list: string[]) {
         identifier="notes"
         list="floraNotesData"
         img="flora/notes"
-        @change="isNotesInvalid = forceDatalistComponent(notes, floraDatalists.floraNotesData)"
       >
         Found on the flora scan.
         <template #heading>Notes</template>
