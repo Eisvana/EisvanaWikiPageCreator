@@ -1234,3 +1234,22 @@ export function hashPageData() {
   const pageDataString = pageDataArray.join();
   return md5Hex(pageDataString);
 }
+
+// TODO: rename this function when the old one (numberError) is not used anymore
+export function numberErrorComponent(
+  value: string,
+  decimals: number | undefined = undefined,
+  outputRaw: boolean = false
+) {
+  const number = getNumber(value, decimals, outputRaw);
+  const allowedSymbols = ['+', '-'];
+  return number || !value || allowedSymbols.includes(value) ? '' : 'Must only contain numbers';
+}
+
+// TODO: rename this function when the old one (forceDatalist) is not used anymore
+export function forceDatalistComponent(value: string, list: string[]) {
+  const option = list.includes(value);
+  return !option && value
+    ? 'Not a valid option. If you believe this is an error, submit a <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">bug report</a>.'
+    : '';
+}

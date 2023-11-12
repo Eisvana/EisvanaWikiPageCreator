@@ -47,10 +47,7 @@ const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength &&
 <template>
   <InputRow>
     <template #label>
-      <div
-        :class="{ 'error-label': isInvalidGlyphs }"
-        class="label-combo"
-      >
+      <div class="label-combo">
         <label for="portalglyphsInput">Portalglyphs:</label>
         <button
           class="button is-small is-danger"
@@ -124,9 +121,3 @@ const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength &&
     >
   </InputRow>
 </template>
-
-<style scoped lang="scss">
-.error-label {
-  align-self: baseline;
-}
-</style>

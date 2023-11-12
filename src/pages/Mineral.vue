@@ -6,25 +6,24 @@ import SimpleInput from '@/components/inputs/SimpleInput.vue';
 import InfoboxImageInput from '@/components/inputs/InfoboxImageInput.vue';
 import DiscovererInputs from '@/components/inputs/DiscovererInputs.vue';
 import GlyphInput from '@/components/inputs/GlyphInput.vue';
-import BiomeInput from '@/components/inputs/BiomeInput.vue';
 import DatalistWrapper from '@/components/inputs/DatalistWrapper.vue';
 import ResourceInput from '@/components/inputs/ResourceInput.vue';
 import ResearchteamInput from '@/components/inputs/ResearchteamInput.vue';
 import InputRow from '@/components/structure/InputRow.vue';
 import Subgrid from '@/components/structure/Subgrid.vue';
 import Actions from '@/components/actions/Actions.vue';
-import FloraInfobox from '@/components/infoboxes/FloraInfobox.vue';
+import MineralInfobox from '@/components/infoboxes/MineralInfobox.vue';
 import WikiTemplate from '@/components/structure/WikiTemplate.vue';
 import ExplanationError from '@/components/structure/ExplanationError.vue';
 import { addStaticPageData, forceDatalistComponent, numberErrorComponent } from '@/common';
-import floraDatalists from '@/datalists/floraDatalists';
 import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watchEffect } from 'vue';
 import { useDataValidationStore } from '@/stores/dataValidation';
-import { useMarker } from '@/composables/useMarker';
 import Explanation from '@/components/structure/Explanation.vue';
 import { watchDebounced } from '@vueuse/core';
+import mineralDatalists from '@/datalists/mineralDatalists';
+import { useMarker } from '@/composables/useMarker';
 
 const staticPageData = useStaticPageDataStore();
 const { fullArticleElement } = storeToRefs(staticPageData);
@@ -63,52 +62,40 @@ const {
   planet,
   moon,
   glyphs,
-  type,
-  biome,
-  age,
-  roots,
-  nutrients,
+  content,
+  formation,
   notes,
   elements,
   polymorphic,
   discDate,
   docBy,
   researchteam,
-  appearance,
   region,
-  sanitisedName: plantName,
+  sanitisedName: mineralName,
   discoveredName,
   discoveredlinkName,
   systemName,
   planetName,
   moonName,
-  originalName,
   docBySentence,
 } = storeToRefs(pageData);
 
 const isPolymorphicInvalid = computed(() => numberErrorComponent(polymorphic.value));
+const isContentInvalid = computed(() => numberErrorComponent(content.value));
 
-const isAgeInvalid = ref('');
-const isRootsInvalid = ref('');
-const isNutrientsInvalid = ref('');
+const isFormationInvalid = ref('');
 const isNotesInvalid = ref('');
 
-watchDebounced(age, () => (isAgeInvalid.value = forceDatalistComponent(age.value, floraDatalists.ageData)), {
-  debounce: 500,
-});
-watchDebounced(roots, () => (isRootsInvalid.value = forceDatalistComponent(roots.value, floraDatalists.rootData)), {
-  debounce: 500,
-});
 watchDebounced(
-  nutrients,
-  () => (isNutrientsInvalid.value = forceDatalistComponent(nutrients.value, floraDatalists.nutSourceData)),
+  formation,
+  () => (isFormationInvalid.value = forceDatalistComponent(formation.value, mineralDatalists.formationData)),
   {
     debounce: 500,
   }
 );
 watchDebounced(
   notes,
-  () => (isNotesInvalid.value = forceDatalistComponent(notes.value, floraDatalists.floraNotesData)),
+  () => (isNotesInvalid.value = forceDatalistComponent(notes.value, mineralDatalists.mineralNotesData)),
   {
     debounce: 500,
   }
@@ -116,6 +103,12 @@ watchDebounced(
 
 watchEffect(() => {
   if (elements.value[0] === elements.value[1]) elements.value[1] = '';
+});
+
+const metalContent = computed(() => {
+  const contentNumber = parseInt(content.value);
+  if (isNaN(contentNumber)) return;
+  return contentNumber + '%';
 });
 
 const filledElements = computed(() => elements.value.filter((el) => el));
@@ -138,13 +131,13 @@ function markCopy() {
     >
       <ReleaseInput />
       <SimpleInput
-        label="Plant name:"
+        label="Mineral name:"
         identifier="nameInput"
         v-model="name"
-        img="flora/floraName"
+        img="mineral/mineralName"
       >
         Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
-        <template #heading>Plant Name</template>
+        <template #heading>Mineral Name</template>
         <template #content>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</template>
       </SimpleInput>
       <SimpleInput
@@ -163,64 +156,51 @@ function markCopy() {
         identifier="planetInput"
         v-model="planet"
       >
-        Planet Name OR the planet circled by the moon where the plant can be found.
+        Planet Name OR the planet circled by the moon where the mineral can be found.
       </SimpleInput>
       <SimpleInput
-        label="Name of the moon (if plant is on moon):"
+        label="Name of the moon (if mineral is on moon):"
         identifier="moonInput"
         v-model="moon"
       >
-        If the plant is located on a moon. Leave blank if the plant is on a planet.
+        If the mineral is located on a moon. Leave blank if the mineral is on a planet.
       </SimpleInput>
       <GlyphInput />
-      <BiomeInput />
       <SimpleInput
-        v-model="age"
-        :error="isAgeInvalid"
-        label="Age:"
-        identifier="age"
-        list="ageData"
-        img="flora/age"
+        v-model="content"
+        :error="isContentInvalid"
+        label="Metal content:"
+        identifier="content"
+        img="mineral/content"
+        maxlength="2"
       >
-        Found on the flora scan.
-        <template #heading>Age</template>
-        <template #content>Found on the flora scan.</template>
+        Found on the mineral scan.
+        <template #heading>Metal Content</template>
+        <template #content>Found on the mineral scan.</template>
       </SimpleInput>
       <SimpleInput
-        v-model="roots"
-        :error="isRootsInvalid"
-        label="Root structure:"
-        identifier="roots"
-        list="rootData"
-        img="flora/roots"
+        v-model="formation"
+        :error="isFormationInvalid"
+        label="Formation process:"
+        identifier="formation"
+        list="formationData"
+        img="mineral/formation"
       >
-        Found on the flora scan.
-        <template #heading>Root Structure</template>
-        <template #content>Found on the flora scan.</template>
-      </SimpleInput>
-      <SimpleInput
-        v-model="nutrients"
-        :error="isNutrientsInvalid"
-        label="Nutrient source:"
-        identifier="nutSource"
-        list="nutSourceData"
-        img="flora/nutSource"
-      >
-        Found on the flora scan.
-        <template #heading>Nutrient Source</template>
-        <template #content>Found on the flora scan.</template>
+        Found on the mineral scan.
+        <template #heading>Formation Process</template>
+        <template #content>Found on the mineral scan.</template>
       </SimpleInput>
       <SimpleInput
         v-model="notes"
         :error="isNotesInvalid"
         label="Notes:"
         identifier="notes"
-        list="floraNotesData"
-        img="flora/notes"
+        list="mineralNotesData"
+        img="mineral/notes"
       >
-        Found on the flora scan.
+        Found on the mineral scan.
         <template #heading>Notes</template>
-        <template #content>Found on the flora scan.</template>
+        <template #content>Found on the mineral scan.</template>
       </SimpleInput>
       <SimpleInput
         v-model="polymorphic"
@@ -229,31 +209,31 @@ function markCopy() {
         label="Polymorphic (number of instances):"
         maxlength="2"
       >
-        How many different models of this flora were discovered.
+        How many different models of this mineral were discovered.
         <template #heading>Polymorphic</template>
         <template #content>
-          Sometimes multiple flora models have the same name. This is called "Polymorphism". Enter the number of how
-          many different flora models had this name.
+          Sometimes multiple mineral models have the same name. This is called "Polymorphism". Enter the number of how
+          many different mineral models had this name.
         </template>
       </SimpleInput>
       <ResourceInput
         :index="0"
-        :resources="floraDatalists.floraResources"
-        item="flora"
+        :resources="mineralDatalists.mineralResources"
+        item="mineral"
       />
       <ResourceInput
         :index="1"
-        :resources="floraDatalists.floraResources"
-        item="flora"
+        :resources="mineralDatalists.mineralResources"
+        item="mineral"
       />
       <InputRow>
         <template #label>
           <label for="discDate">Discovery date:</label>
-          <Explanation img="flora/discDate">
-            Found on the flora scan.
+          <Explanation img="mineral/discDate">
+            Found on the mineral scan.
             <template #heading>Discovery Date</template>
             <template #content>
-              Found on the flora scan.
+              Found on the mineral scan.
               <br />
               The exact discovery timestamp is displayed on the top left.
             </template>
@@ -280,14 +260,6 @@ function markCopy() {
         />
         <ResearchteamInput />
       </Subgrid>
-      <InputRow>
-        <label for="appearance">Appearance:</label>
-        <textarea
-          v-model="appearance"
-          id="appearance"
-          placeholder="This flora is a <size> <colour> <type>."
-        ></textarea>
-      </InputRow>
     </form>
 
     <div id="galleryInput"></div>
@@ -315,49 +287,52 @@ function markCopy() {
       <div>
         <WikiTemplate template-name="Version">{{ release }}</WikiTemplate>
       </div>
-      <FloraInfobox
-        :plant-name="plantName"
+      <MineralInfobox
+        :mineral-name="mineralName"
         :image="image"
         :region="region"
-        :system-name="systemName"
-        :planet-name="planetName"
-        :moon-name="moonName"
-        :type="type"
-        :biome="biome"
-        :polymorphic="polymorphic"
-        :age="age"
-        :roots="roots"
-        :nutrients="nutrients"
+        :systemName="systemName"
+        :planetName="planetName"
+        :moonName="moonName"
+        :content="metalContent"
+        :formation="formation"
         :notes="notes"
         :elem-primary="elements[0]"
         :elem-secondary="elements[1]"
+        :polymorphic="polymorphic"
         :disc-date="discDate.replaceAll('-', '/')"
         :discovered-name="discoveredName"
         :discoveredlink-name="discoveredlinkName"
         :researchteam="researchteam"
         :release="release"
       />
-      <div>'''{{ plantName }}''' is a species of flora.</div>
+      <div>'''{{ mineralName }}''' is a variety of mineral.</div>
       <br />
 
       <div>==Summary==</div>
-      <div>'''{{ plantName }}''' is a [[species]] of [[flora]]. {{ appearance }}</div>
+      <div>'''{{ mineralName }}''' is a type of [[mineral]].</div>
       <br />
       <template v-if="polymorphic">
         <div>
-          <WikiTemplate template-name="Polymorphic">{{ polymorphic }}</WikiTemplate>
+          <WikiTemplate template-name="Polymorphicmineral">{{ polymorphic }}</WikiTemplate>
         </div>
         <br />
       </template>
 
-      <div>==Alias Names==</div>
+      <div>==Discovery Menu==</div>
+      <div>* Metal Content: {{ metalContent }}</div>
+      <div>* Formation Process: {{ formation }}</div>
+      <div>* Notes: {{ notes }}</div>
+      <br />
+
+      <!-- <div>==Alias Names==</div>
       <div v-if="orgName">
         <WikiTemplate template-name="aliasc">text=Original|name={{ originalName }}</WikiTemplate>
       </div>
       <div>
-        <WikiTemplate template-name="aliasc">text=Current|name={{ plantName }}</WikiTemplate>
+        <WikiTemplate template-name="aliasc">text=Current|name={{ mineralName }}</WikiTemplate>
       </div>
-      <br />
+      <br /> -->
 
       <div>==Location==</div>
       <div>
@@ -372,13 +347,12 @@ function markCopy() {
       <br />
 
       <div>==Usage==</div>
-      <div v-if="filledElements.length">
-        This flora provides the
+      <div>
+        This mineral provides the
         {{ filledElements.length > 1 ? 'resources' : 'resource' }}
         {{ filledElements.map((el) => `[[${el}]]`).join(' and ') }}
         when harvested.
       </div>
-      <div v-else>This flora provides no harvestable resources.</div>
       <br />
 
       <div>==Additional Information==</div>
@@ -389,7 +363,7 @@ function markCopy() {
     </div>
   </OutputColumn>
   <DatalistWrapper
-    v-for="(list, id) in floraDatalists"
+    v-for="(list, id) in mineralDatalists"
     :identifier="id"
     :data="list"
   />

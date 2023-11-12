@@ -15,9 +15,9 @@ const { name, pageName } = storeToRefs(pageData);
 const staticPageData = useStaticPageDataStore();
 const { fullArticleElement } = storeToRefs(staticPageData);
 
-const floraPageName = computed(() => sanitiseString(name.value));
+const sanitisedPageName = computed(() => sanitiseString(name.value));
 
-watchEffect(() => (pageName.value = floraPageName.value));
+watchEffect(() => (pageName.value = sanitisedPageName.value));
 
 const downloadFileName = computed(() => pageName.value + '.txt');
 const downloadFileData = ref<string | undefined>();

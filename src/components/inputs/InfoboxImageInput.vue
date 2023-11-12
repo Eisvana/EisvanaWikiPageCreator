@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia';
 import Explanation from '../structure/Explanation.vue';
 import { ref, watchEffect } from 'vue';
 import ErrorMessage from './ErrorMessage.vue';
-import type WikiLink from '../structure/WikiLink.vue';
+import WikiLink from '../structure/WikiLink.vue';
 
 const pageData = usePageDataStore();
 const { image } = storeToRefs(pageData);

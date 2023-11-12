@@ -40,7 +40,6 @@ const links: PageLinkProps[] = [
   {
     text: 'Mineral',
     url: './mineral.html',
-    inactive: true,
   },
   {
     text: 'Derelict Freighter',
