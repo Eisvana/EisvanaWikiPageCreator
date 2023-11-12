@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import floraDatalists from '../../datalists/floraDatalists';
 import { usePageDataStore } from '../../stores/pageData';
 import InputRow from '../structure/InputRow.vue';
 import Explanation from '../structure/Explanation.vue';
@@ -10,6 +9,8 @@ const { elements } = storeToRefs(pageData);
 
 defineProps<{
   index: number;
+  resources: string[];
+  item: string;
 }>();
 
 const verboseDescriptions = ['Primary', 'Secondary'];
@@ -19,11 +20,11 @@ const verboseDescriptions = ['Primary', 'Secondary'];
   <InputRow>
     <template #label>
       <label>{{ index ? 'Secondary' : 'Primary' }} element</label>
-      <Explanation :img="`flora/element${index.toString()}`">
-        Found on the flora scan.
+      <Explanation :img="`${item}/element` + index">
+        Found on the {{ item }} scan.
         <template #heading>{{ verboseDescriptions[index] }} Element</template>
         <template #content>
-          Found on the flora scan.
+          Found on the {{ item }} scan.
           <br />
           Leave empty if it isn't listed.
         </template>
@@ -32,7 +33,7 @@ const verboseDescriptions = ['Primary', 'Secondary'];
     <template #input>
       <select v-model="elements[index]">
         <option
-          v-for="resource in floraDatalists.floraResources"
+          v-for="resource in resources"
           :value="resource"
         >
           {{ resource }}

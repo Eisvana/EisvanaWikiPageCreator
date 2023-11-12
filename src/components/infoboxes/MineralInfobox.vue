@@ -2,21 +2,18 @@
 import WikiTemplate from '../structure/WikiTemplate.vue';
 
 defineProps<{
-  plantName?: string;
-  region?: string;
+  mineralName?: string;
   image?: string;
+  region?: string;
   systemName?: string;
   planetName?: string;
   moonName?: string;
-  type?: string;
-  biome?: string;
-  polymorphic?: string;
-  age?: string;
-  roots?: string;
-  nutrients?: string;
+  content?: string;
+  formation?: string;
   notes?: string;
   elemPrimary?: string;
   elemSecondary?: string;
+  polymorphic?: string;
   discoveredlinkName?: string;
   discoveredName?: string;
   discDate?: string;
@@ -29,25 +26,22 @@ defineProps<{
 <template>
   <WikiTemplate
     :is-single-line="false"
-    template-name="Flora infobox"
+    template-name="Mineral infobox"
   >
-    <div>| name = {{ plantName }}</div>
+    <div>| name = {{ mineralName }}</div>
     <div>| image = {{ image || 'nmsMisc_NotAvailable.png' }}</div>
     <div>| galaxy = Eissentam</div>
     <div>| region = {{ region }}</div>
     <div>| system = {{ systemName }}</div>
     <div>| planet = {{ planetName }}</div>
     <div>| moon = {{ moonName }}</div>
-    <div>| civilized = Eisvana</div>
-    <div>| type = {{ type }}</div>
-    <div>| biome = {{ biome }}</div>
-    <div>| polymorphic = {{ polymorphic }}</div>
-    <div>| age = {{ age }}</div>
-    <div>| roots = {{ roots }}</div>
-    <div>| nut_source = {{ nutrients }}</div>
+    <div>| content = {{ content }}</div>
+    <div>| formation = {{ formation }}</div>
     <div>| notes = {{ notes }}</div>
     <div>| element_primary = {{ elemPrimary }}</div>
     <div>| element_secondary = {{ elemSecondary }}</div>
+    <div>| polymorphic = {{ polymorphic }}</div>
+    <div>| civilized = Eisvana</div>
     <div>| discoveredlink = {{ discoveredlinkName }}</div>
     <div>| discovered = {{ discoveredName }}</div>
     <div>| discovered_on = {{ discDate }}</div>

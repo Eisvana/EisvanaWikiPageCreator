@@ -34,3 +34,17 @@ watchEffect(() => (document.documentElement.dataset.debug = debug.value.toString
   gap: 0.3rem;
 }
 </style>
+
+<style lang="scss">
+html[data-debug='true']::before {
+  display: block;
+  width: 100%;
+  content: 'Debug';
+  background-color: hsl(0, 50%, 50%);
+  position: fixed;
+  z-index: 2;
+  text-align: center;
+  font-size: 1.5rem;
+  color: white;
+}
+</style>

@@ -5,6 +5,7 @@ import InputRow from '../structure/InputRow.vue';
 import ErrorMessage from './ErrorMessage.vue';
 import { computed } from 'vue';
 import Explanation from '../structure/Explanation.vue';
+import WikiLink from '../structure/WikiLink.vue';
 
 const validGlyphsRegex = /[0-9A-F]/;
 const maxGlyphLength = 12;
@@ -46,10 +47,7 @@ const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength &&
 <template>
   <InputRow>
     <template #label>
-      <div
-        :class="{ 'error-label': isInvalidGlyphs }"
-        class="label-combo"
-      >
+      <div class="label-combo">
         <label for="portalglyphsInput">Portalglyphs:</label>
         <button
           class="button is-small is-danger"
@@ -93,12 +91,10 @@ const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength &&
         v-if="isInvalidGlyphs"
         class="error"
         >No valid Eisvana region. See
-        <a
-          href="https://nomanssky.fandom.com/wiki/Eisvana#Claimed_Regions"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Eisvana Claimed Regions</a
-        >
+        <WikiLink
+          link="Eisvana#Claimed_Regions"
+          text="Eisvana Claimed Regions"
+        />
         for a list of valid regions.</ErrorMessage
       >
     </template>
@@ -125,9 +121,3 @@ const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength &&
     >
   </InputRow>
 </template>
-
-<style scoped lang="scss">
-.error-label {
-  align-self: baseline;
-}
-</style>

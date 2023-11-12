@@ -5,9 +5,10 @@ import { storeToRefs } from 'pinia';
 import Explanation from '../structure/Explanation.vue';
 import { ref, watchEffect } from 'vue';
 import ErrorMessage from './ErrorMessage.vue';
+import WikiLink from '../structure/WikiLink.vue';
 
 const pageData = usePageDataStore();
-const { picName } = storeToRefs(pageData);
+const { image } = storeToRefs(pageData);
 
 const isOpen = ref(false);
 const isAuto = ref(false);
@@ -28,7 +29,7 @@ function addPicName(e: Event) {
   if (!e.target || !(e.target instanceof HTMLInputElement)) return;
 
   const file = e.target.files?.[0];
-  picName.value = file?.name ?? '';
+  image.value = file?.name ?? '';
   isLargeFile.value = Boolean(file && file.size > maxUploadSize);
 
   if (uploadNoticeShown.value || isLargeFile.value) return;
@@ -49,12 +50,10 @@ function addPicName(e: Event) {
           <template v-if="!isAuto">
             Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name. Maximum
             filesize is 10MB. You can upload your pictures to the wiki on
-            <a
-              href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true"
-              rel="noopener noreferrer"
-              target="_blank"
-              >Special:Upload</a
-            >.
+            <WikiLink
+              link="Special:Upload?multiple=true"
+              text="Special:Upload"
+            />.
 
             <iframe
               src="https://nmscd.com/Image-Compressor/"
@@ -68,12 +67,10 @@ function addPicName(e: Event) {
           <template v-else>
             <span>
               Don't forget to upload your picture to the wiki on
-              <a
-                href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true"
-                rel="noopener noreferrer"
-                target="_blank"
-                >Special:Upload</a
-              >. The upload button only auto-filled the image name into the code, it is not automatically uploaded to
+              <WikiLink
+                link="Special:Upload?multiple=true"
+                text="Special:Upload"
+              />. The upload button only auto-filled the image name into the code, it is not automatically uploaded to
               the wiki.
             </span>
             <div class="mt-3">
@@ -87,7 +84,7 @@ function addPicName(e: Event) {
 
     <template #input>
       <input
-        v-model="picName"
+        v-model="image"
         type="text"
         id="picInput"
       />
