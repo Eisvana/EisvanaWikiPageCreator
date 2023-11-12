@@ -76,6 +76,7 @@ const {
   docBy,
   researchteam,
   appearance,
+  region
 } = storeToRefs(pageData);
 
 const plantName = computed(() => sanitiseString(name.value));
@@ -357,7 +358,7 @@ function forceDatalistComponent(value: string, list: string[]) {
       <FloraInfobox
         :plantName="plantName"
         :image="image"
-        region=""
+        :region="region"
         :systemName="systemName"
         :planetName="planetName"
         :moonName="moonName"
