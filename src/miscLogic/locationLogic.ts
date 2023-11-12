@@ -44,9 +44,8 @@ export function planetMoonSentence(
     (body === 'Moon' ? `${openLinkBrackets}moon${closingLinkBrackets} [[${moonName}]] of the ` : '') +
     `${openLinkBrackets}planet${closingLinkBrackets} [[${planetName}]]`;
 
-  if (!dest) return text;
-  dest.innerText = text;
-  return '';
+  if (dest) dest.innerText = text;
+  return text;
 }
 
 /**
