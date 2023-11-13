@@ -27,7 +27,7 @@
     "@vue/tsconfig": "^0.4.0",
     "@vueuse/core": "^10.6.0",
     "bulma": "^0.9.4",
-    "md5-hex": "^4.0.0",
+    "md5-hex": "^5.0.0",
     "pinia": "^2.1.7",
     "sortablejs": "^1.15.0",
     "vue-tsc": "^1.8.15"
