@@ -574,7 +574,7 @@ function floraMineralResourceLinks(element: HTMLInputElement | undefined = undef
   for (const prop in linkedResources) {
     for (const outputElement in linkedResources[prop]) {
       const output = Object.values(linkedResources[prop][outputElement])
-        .filter((resource) => resource)
+        .filter(Boolean)
         .join(', '); // filters for truthy values
       (globalElements.output[outputElement] as HTMLOutputElement).innerText = output;
     }

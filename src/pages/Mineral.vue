@@ -114,7 +114,7 @@ const metalContent = computed(() => {
   return contentNumber + '%';
 });
 
-const filledElements = computed(() => elements.value.filter((el) => el));
+const filledElements = computed(() => elements.value.filter(Boolean);
 
 const errorMessage = ref('');
 const openErrorModal = ref(false);

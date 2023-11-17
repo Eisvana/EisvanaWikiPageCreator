@@ -119,7 +119,7 @@ watchEffect(() => {
   if (elements.value[0] === elements.value[1]) elements.value[1] = '';
 });
 
-const filledElements = computed(() => elements.value.filter((el) => el));
+const filledElements = computed(() => elements.value.filter(Boolean);
 
 const errorMessage = ref('');
 const openErrorModal = ref(false);
