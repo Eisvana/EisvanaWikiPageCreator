@@ -13,13 +13,11 @@ const isPreviewHidden = ref(false);
 
 onMounted(() => {
   if (window.matchMedia('(pointer: coarse)').matches || !filePreview.value) return;
-  // NoSonar (used by a library, not useless!)
-  new Sortable(filePreview.value, {
+  // prettier-ignore
+  new Sortable(filePreview.value, { // NoSonar (used by a library, not useless!)
     handle: '.handle', // handle's class
     animation: 250,
-    onUpdate: function (evt: SortableEvent) {
-      dragItem(evt);
-    },
+    onUpdate: dragItem,
   });
 });
 
