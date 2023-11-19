@@ -78,6 +78,9 @@ const {
   planetName,
   moonName,
   docBySentence,
+  originalName,
+  appearance,
+  appearanceSentence,
 } = storeToRefs(pageData);
 
 const isPolymorphicInvalid = computed(() => numberErrorComponent(polymorphic.value));
@@ -111,7 +114,7 @@ const metalContent = computed(() => {
   return contentNumber + '%';
 });
 
-const filledElements = computed(() => elements.value.filter((el) => el));
+const filledElements = computed(() => elements.value.filter(Boolean));
 
 const errorMessage = ref('');
 const openErrorModal = ref(false);
@@ -260,6 +263,14 @@ function markCopy() {
         />
         <ResearchteamInput />
       </Subgrid>
+      <InputRow>
+        <label for="appearance">Appearance:</label>
+        <textarea
+          v-model="appearance"
+          id="appearance"
+          placeholder="This mineral is a <size> <colour> <type>."
+        ></textarea>
+      </InputRow>
     </form>
 
     <div id="galleryInput"></div>
@@ -310,7 +321,7 @@ function markCopy() {
       <br />
 
       <div>==Summary==</div>
-      <div>'''{{ mineralName }}''' is a type of [[mineral]].</div>
+      <div>'''{{ mineralName }}''' is a type of [[mineral]]. {{ appearanceSentence }}</div>
       <br />
       <template v-if="polymorphic">
         <div>
@@ -319,20 +330,20 @@ function markCopy() {
         <br />
       </template>
 
-      <div>==Discovery Menu==</div>
-      <div>* Metal Content: {{ metalContent }}</div>
-      <div>* Formation Process: {{ formation }}</div>
-      <div>* Notes: {{ notes }}</div>
-      <br />
-
-      <!-- <div>==Alias Names==</div>
+      <div>==Alias Names==</div>
       <div v-if="orgName">
         <WikiTemplate template-name="aliasc">text=Original|name={{ originalName }}</WikiTemplate>
       </div>
       <div>
         <WikiTemplate template-name="aliasc">text=Current|name={{ mineralName }}</WikiTemplate>
       </div>
-      <br /> -->
+      <br />
+
+      <div>==Discovery Menu==</div>
+      <div>* Metal Content: {{ metalContent }}</div>
+      <div>* Formation Process: {{ formation }}</div>
+      <div>* Notes: {{ notes }}</div>
+      <br />
 
       <div>==Location==</div>
       <div>
@@ -346,12 +357,12 @@ function markCopy() {
       </div>
       <br />
 
-      <div>==Usage==</div>
+      <div>==Resources==</div>
       <div>
         This mineral provides the
         {{ filledElements.length > 1 ? 'resources' : 'resource' }}
         {{ filledElements.map((el) => `[[${el}]]`).join(' and ') }}
-        when harvested.
+        when mined.
       </div>
       <br />
 
