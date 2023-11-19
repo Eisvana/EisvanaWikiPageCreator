@@ -545,7 +545,7 @@ function addResource(element: HTMLInputElement | undefined = undefined) {
 	}
 
 	for (const key in linkedResources) {
-		const output = Object.values(linkedResources[key]).filter(resource => resource).join('<br>');
+		const output = Object.values(linkedResources[key]).filter(Boolean).join('<br>');
 		(globalElements.output[key] as HTMLOutputElement).innerText = output;
 	}
 }

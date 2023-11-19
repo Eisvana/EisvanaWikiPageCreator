@@ -84,6 +84,7 @@ const {
   moonName,
   originalName,
   docBySentence,
+  appearanceSentence,
 } = storeToRefs(pageData);
 
 const isPolymorphicInvalid = computed(() => numberErrorComponent(polymorphic.value));
@@ -118,7 +119,7 @@ watchEffect(() => {
   if (elements.value[0] === elements.value[1]) elements.value[1] = '';
 });
 
-const filledElements = computed(() => elements.value.filter((el) => el));
+const filledElements = computed(() => elements.value.filter(Boolean));
 
 const errorMessage = ref('');
 const openErrorModal = ref(false);
@@ -341,7 +342,7 @@ function markCopy() {
       <br />
 
       <div>==Summary==</div>
-      <div>'''{{ plantName }}''' is a [[species]] of [[flora]]. {{ appearance }}</div>
+      <div>'''{{ plantName }}''' is a [[species]] of [[flora]]. {{ appearanceSentence }}</div>
       <br />
       <template v-if="polymorphic">
         <div>
@@ -371,7 +372,7 @@ function markCopy() {
       </div>
       <br />
 
-      <div>==Usage==</div>
+      <div>==Resources==</div>
       <div v-if="filledElements.length">
         This flora provides the
         {{ filledElements.length > 1 ? 'resources' : 'resource' }}

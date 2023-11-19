@@ -111,6 +111,7 @@ export const usePageDataStore = defineStore('pageData', {
     planetName: (state) => sanitiseString(state.planet),
     moonName: (state) => sanitiseString(state.moon),
     originalName: (state) => sanitiseString(state.orgName),
+    appearanceSentence: (state) => sanitiseString(state.appearance),
     docBySentence: (state) => {
       const isLink = state.docBy.startsWith('{{');
       const hasResearchteam = state.researchteam.split(' ').length > 1;
