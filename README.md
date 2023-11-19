@@ -1,15 +1,15 @@
 # https://lenni009.github.io/EisvanaWikiPageCreator
 # No Man's Sky - Wiki page creation website!
 
-This is a website intended for making wiki page creation in the [No Man's Sky Wiki](https://nomanssky.fandom.com) easier.
+Este es un sitio web destinado a facilitar la creación de páginas wiki en [No Man's Sky Wiki](https://nomanssky.fandom.com).
 
-It was originally forked from seamonkey420 who made this in 2017 as a batch script.
+Originalmente fue bifurcado de seamonkey420, quien lo hizo en 2017 como un script por lotes.
 
-To make it more cross platform, with console gamers and other operating systems in mind, it has been ported to the web.
+Para hacerlo más multiplataforma, pensando en los jugadores de consola y otros sistemas operativos, se ha trasladado a la web.
 
-The website was created by [Lenni](https://nomanssky.fandom.com/wiki/User:Lenni009).
+El sitio web fue creado por [Lenni](https://nomanssky.fandom.com/wiki/User:Lenni009).
 
-It's also open for other civs/companies/players to make their own version of it. To do so, [create a GitHub account](https://github.com/signup), [fork the repo](https://github.com/Lenni009/EisvanaWikiPageCreator/fork), edit to fit your needs and create your own GitHub page from it with GitHub pages ([it's super easy to set up](https://docs.github.com/en/pages/quickstart)).
+También está abierto para que otras civilizaciones/empresas/jugadores creen su propia versión. Para hacerlo, [crea una cuenta de GitHub](https://github.com/signup), [bifurca el repositorio](https://github.com/Lenni009/EisvanaWikiPageCreator/fork), edita para adaptarlo a tus necesidades y crea su propia página de GitHub con páginas de GitHub ([es muy fácil de configurar](https://docs.github.com/en/pages/quickstart)).
 
-Special thanks:
-* [KhaozTopsy](https://github.com/Khaoz-Topsy) (Assistant for No Man's Sky; NMSCD): JavaScript help and page styling
+Gracias especiales:
+* [KhaozTopsy](https://github.com/Khaoz-Topsy) (Asistente de No Man's Sky; NMSCD): ayuda de JavaScript y estilo de página
