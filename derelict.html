@@ -4,19 +4,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Eisvana Wiki Page Creator - Derelict Freighter</title>
-	<meta name="application-name" content="Eisvana Wiki Page Creator">
+	<title>Creador de páginas Wiki - Derelict Freighter</title>
+	<meta name="application-name" content="Creador de páginas Wiki">
 	<meta name="description"
-		content="Easily generate the wikicode to create a derelict freighter discovery page for Eisvana on the No Man's Sky Wiki!">
+		content="Easily generate the wikicode to create a derelict freighter discovery page on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#280033">
-	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, Derelict Freighter">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Page Creator, Derelict Freighter">
 	<script src="./src/pages/derelict" type="module"></script>
 </head>
 
 <body>
 	<div class="container">
 		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
-		<h1 class="title is-3">Eisvana Wiki Page Creator - Derelict Freighter</h1>
+		<h1 class="title is-3">Creador de páginas Wiki - Derelict Freighter</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
@@ -230,7 +230,7 @@
 					<div>| class = <output name="class"></output></div>
 					<div>| discovered = <output id="discovered"></output></div>
 					<div>| discoveredlink = <output id="discoveredlink"></output></div>
-					<div>| civilized = Eisvana</div>
+					<div>| civilized = </div>
 					<div>| researchteam = <output id="researchteam"></output></div>
 					<div>| release = <output name="release"></output></div>
 					<div>}}</div>
@@ -240,8 +240,6 @@
 					<div>==Summary==</div>
 					<div>'''<output id="name2" name="name"></output>''' is a [[Starship Catalogue - Freighter#Derelict /
 						Undetermined|derelict freighter]].</div>
-					<br>
-					<div>For other derelict freighters, see [[Eisvana Starship Album - Derelict Freighter]].</div>
 					<br>
 
 					==Stats==
@@ -286,7 +284,6 @@
 
 					<div>[[Category:Derelict Freighter]]</div>
 					<div>[[Category:Album]]</div>
-					<div>[[Category:Eisvana Wiki Scholars]]</div>
 				</div>
 				<div id="galaxyTableEntry">
 					<h2 class="title is-5 has-text-left has-text-weight-bold mb-2">
@@ -294,15 +291,6 @@
 					</h2>
 					<div id="albumText" class="wikiText" data-link="album" data-entry></div>
 				</div>
-				<div id="indexEntry">
-					<h2 class="title is-5 has-text-left has-text-weight-bold mb-2">
-						Eisvana Derelict Freighter Album entry for <output name="name"></output>:
-					</h2>
-					<div id="classTableEntry" class="wikiText" data-link="classTableEntry">
-						| [[<output name="name"></output>]] || <output name="hyperdrive"></output> ly || +<output
-							name="fuel"></output>% || +<output name="otherStats"></output>% || <output
-							name="coordinates"></output>:xxxx || {{Gl/Small|0000<output name="regionglyphs"></output>}}
-						|| <output name="discoverer"></output>
 					</div>
 				</div>
 			</div>
