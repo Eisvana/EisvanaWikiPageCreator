@@ -1,66 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Eisvana Wiki Page Creator - Fauna</title>
-	<meta name="application-name" content="Eisvana Wiki Page Creator">
+	<title>Creador de páginas Wiki - Fauna</title>
+	<meta name="application-name" content="Creador de páginas Wiki">
 	<meta name="description"
-		content="Easily generate the wikicode to create a fauna discovery page for Eisvana on the No Man's Sky Wiki!">
+		content="Genere fácilmente el código wiki para crear una página de fauna en No Man's Sky Wiki!">
 	<meta name="theme-color" content="#280033">
-	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, Fauna">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Page Creator, Fauna">
 	<script src="./src/pages/fauna" type="module"></script>
 </head>
 
 <body>
 	<div class="container">
 		<nav>
-			<div><a href="./" title="Main page">&larr; Return to main page</a></div>
-			<div><a href="./sandworm.html" title="Sandworm">&#8627; Sandworm</a></div>
+			<div><a href="./" title="Pagina principal">&larr; Regresar a la página principal</a></div>
+			<div><a href="./sandworm.html" title="Gusano de Arena">&#8627; Gusano de Arena</a></div>
 		</nav>
-		<h1 class="title is-3">Eisvana Wiki Page Creator - Fauna</h1>
+		<h1 class="title is-3">Creador de páginas Wiki - Fauna</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
 				<div class="table">
 					<div class="table-cell text">
-						<label>Current release:</label>
+						<label>Versión:</label>
 					</div>
 					<div class="table-cell data">
 						<select id="versionInput" data-dest="release"></select>
 					</div>
 					<div class="table-cell text">
-						<label for="nameInput">Name of the creature:</label>
+						<label for="nameInput">Nombre de la criatura:</label>
 						<button class="tooltip">
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>Creature Name</data>
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
+							<data>Nombre de la criatura</data>
+							<data>Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
 							<data>creature/creatureName</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<input data-dest="newName" type="text" id="nameInput">
 					</div>
+          <div class="table-cell text">
+						<label for="hubInput">Nombre del Hub:</label>
+						<button class="tooltip">
+							<data>Escriba el nombre del Hub que represente</data>
+							<data>Nombre del Hub</data>
+              <data>Escriba el nombre del Hub que represente</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="hub" id="hubInput">
+					</div>
 					<div class="table-cell text">
-						<label for="oldNameInput">Original name before uploading (if available):</label>
+						<label for="oldNameInput">Nombre original antes de registrar (si está disponible):</label>
 					</div>
 					<div class="table-cell data">
 						<input data-dest="oldName" type="text" id="oldNameInput">
 					</div>
 					<div class="table-cell text">
-						<label for="fileInput">Main image name, including file extension:</label>
+						<label for="fileInput">Nombre de la imagen principal, incluida la extensión del archivo:</label>
 						<button class="tooltip" name="fileUploadTooltip">
-							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
-							<data>File Upload</data>
+							<data>La imagen no se subira en la wiki. Esto es sólo para autocompletar el nombre de la imagen.</data>
+							<data>Subir archivo</data>
 							<data>
-								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
-								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
-									data-wiki>Special:Upload</a>
-								<iframe src="https://nmscd.com/Image-Compressor/" title="Image Compressor"
-									class="explanation-embed" width="450" height="300">Image Compressor</iframe>
+                Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen. El
+                tamaño máximo del archivo es 10 MB. Puedes subir tus imágenes a la wiki en <a href="Special:Upload?multiple=true"
+                  data-wiki>Special:Upload</a>
+								<iframe src="https://nmscd.com/Image-Compressor/" title="Compresor de imagen"
+									class="explanation-embed" width="450" height="300">Compresor de imagen</iframe>
 							</data>
 						</button>
 					</div>
@@ -68,47 +78,52 @@
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
+          <div class="table-cell text">
+						<label for="galaxyInput">Galaxia:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="galaxy" id="galaxyInput">
+					</div>
 					<div class="table-cell text">
-						<label for="systemInput">Name of the system:</label>
+						<label for="systemInput">Nombre del sistema:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
 					<div class="table-cell text">
-						<label for="planetInput">Name of the planet:</label>
+						<label for="planetInput">Nombre del planeta.:</label>
 						<button class="tooltip">
-							<data>Planet Name OR the planet circled by the moon where the creature can be found.</data>
+							<data>Nombre del planeta O el planeta rodeado por la luna donde se puede encontrar la criatura.</data>
 						</button>
 					</div>
-					<div class="table-cell data">
-						<input type="text" data-dest="planet" id="planetInput">
-					</div>
-					<div class="table-cell text">
-						<label for="moonInput">Name of the moon (if creature is on moon):</label>
-						<button class="tooltip">
-							<data>
-								If the creature is located on a moon. Leave blank if the creature is on a
-								planet.
-							</data>
-						</button>
-					</div>
+          <div class="table-cell data">
+            <input type="text" data-dest="planet" id="planetInput">
+          </div>
+          <div class="table-cell text">
+            <label for="moonInput">Nombre de la luna (si la criatura está en la luna):</label>
+            <button class="tooltip">
+              <data>
+                Si la criatura se encuentra en una luna. Déjalo en blanco si la criatura está en un planeta.
+              </data>
+            </button>
+          </div>
 					<div class="table-cell data">
 						<input type="text" data-dest="moon" id="moonInput">
 					</div>
 					<div class="table-cell text">
 						<div class="label-combo">
-							<label for="portalglyphsInput">Portalglyphs:</label>
+							<label for="portalglyphsInput">Glifos:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
-								Delete</button>
+								Borrar</button>
 						</div>
 						<button class="tooltip">
-							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>Portalglyphs</data>
+							<data>Encontrado en modo foto. Los glifos son específicos de cada planeta.</data>
+							<data>Glifos</data>
 							<data>
-								Found in Photo Mode. Glyphs are specific to each planet.
+								Encontrado en modo foto. Los glifos son específicos de cada planeta.
 								<iframe src="https://nmspar.vercel.app/" sandbox="allow-scripts allow-same-origin"
-									title="Glyph Reader" class="explanation-embed" width="450" height="300">Glyph
-									Reader</iframe>
+									title="Glyph Reader" class="explanation-embed" width="450" height="300">Lector de glifos
+									</iframe>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -121,28 +136,28 @@
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
 					<div class="table-cell text">
-						<label>Genus:</label>
+						<label>Género:</label>
 						<button class="tooltip">
-							<data>See the wiki for a list of genera.</data>
-							<data>Genus</data>
-							<data>The genus is defined by the general appearance of a creature.<br>
-								See the wiki for a <a href="Genus#Genus_List" data-wiki>list of genera</a>.</data>
+							<data>Consulte la wiki para obtener una lista de géneros..</data>
+							<data>Género</data>
+							<data>El género se define por la apariencia general de una criatura..<br>
+								Consulte la wiki para obtener una <a href="Genus#Genus_List" data-wiki>lista de géneros</a>.</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select data-dest="genus" id="genusInput"></select>
 					</div>
 					<div class="tableHeader text">
-						<p>The following information can be found in the creature discovery menu.</p>
+						<p>La siguiente información se puede encontrar en el menú de descubrimiento de criaturas.</p>
 					</div>
 					<div class="table-cell text">
-						<label>Hemisphere:</label>
+						<label>Hemisferio:</label>
 						<button class="tooltip">
-							<data>Found in the creature discovery menu.</data>
-							<data>Hemisphere</data>
+							<data>Encontrado en el menú de descubrimiento de criaturas.</data>
+							<data>Hemisferio</data>
 							<data>
-								Found in the creature discovery menu.<br>
-								If no hemisphere is given, leave the input empty.
+                Encontrado en el menú de descubrimiento de criaturas.<br>
+                Si no se proporciona ningún hemisferio, deje la entrada vacía.
 							</data>
 							<data>creature/creatureHemisphere</data>
 						</button>
@@ -150,66 +165,66 @@
 					<div class="table-cell data">
 						<select data-dest="hemisphere" id="hemisphereInput">
 							<option value=""></option>
-							<option value="North">North</option>
-							<option value="South">South</option>
+							<option value="North">Norte</option>
+							<option value="South">Sur</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>Rarity:</label>
+						<label>Rareza:</label>
 						<button class="tooltip">
-							<data>Found in the creature discovery menu.</data>
-							<data>Rarity</data>
-							<data>Found in the creature discovery menu.</data>
+							<data>Encontrado en el menú de descubrimiento de criaturas.</data>
+							<data>Rareza</data>
+							<data>Encontrado en el menú de descubrimiento de criaturas.</data>
 							<data>creature/creatureRarity</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select data-dest="rarity" id="rarityInput">
-							<option value="Common">Common</option>
-							<option value="Uncommon">Uncommon</option>
-							<option value="Rare">Rare</option>
+							<option value="Common">Común</option>
+							<option value="Uncommon">No común</option>
+							<option value="Rare">Raro</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>Ecosystem:</label>
+						<label>Ecosistema:</label>
 						<button class="tooltip">
-							<data>Found in the creature discovery menu.</data>
-							<data>Ecosystem</data>
-							<data>Found in the creature discovery menu.</data>
+							<data>Encontrado en el menú de descubrimiento de criaturas.</data>
+							<data>Ecosistema</data>
+							<data>Encontrado en el menú de descubrimiento de criaturas.</data>
 							<data>creature/creatureEcosystem</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select data-dest="ecosystem" id="ecosystemInput">
-							<option value="Ground">Ground</option>
-							<option value="Flying">Flying</option>
-							<option value="Underwater">Underwater</option>
-							<option value="Underground">Underground</option>
+							<option value="Ground">Terrestre</option>
+							<option value="Flying">Voladora</option>
+							<option value="Underwater">Submarina</option>
+							<option value="Underground">Subterreánea</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>Activity:</label>
+						<label>Actividad:</label>
 						<button class="tooltip">
-							<data>Found in the creature discovery menu.</data>
-							<data>Activity</data>
-							<data>Found in the creature discovery menu.</data>
+							<data>Encontrado en el menú de descubrimiento de criaturas.</data>
+							<data>Actividad</data>
+							<data>Encontrado en el menú de descubrimiento de criaturas.</data>
 							<data>creature/creatureActivity</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select data-dest="activity" id="activityInput">
-							<option value="Always Active">Always Active</option>
-							<option value="Diurnal">Diurnal</option>
-							<option value="Nocturnal">Nocturnal</option>
-							<option value="Mostly Diurnal">Mostly Diurnal</option>
-							<option value="Mostly Nocturnal">Mostly Nocturnal</option>
+							<option value="Always Active">Siempre activa</option>
+							<option value="Diurnal">Diurna</option>
+							<option value="Nocturnal">Nocturna</option>
+							<option value="Mostly Diurnal">Generalmente Diurna</option>
+							<option value="Mostly Nocturnal">Generalmente Nocturna</option>
 						</select>
 					</div>
 					<div class="tableHeader text">
-						<p>The following information can be found on the creature scan.</p>
+						<p>La siguiente información se puede encontrar en el escaneo de criaturas.</p>
 					</div>
 					<div class="table-cell text">
-						<label>Which gender should be prioritised?</label>
+						<label>¿Qué género debería priorizarse?</label>
 					</div>
 					<div class="table-cell data radioButtons">
 						<div>
@@ -222,11 +237,11 @@
 						</div>
 					</div>
 					<div class="table-cell text">
-						<label>Gender:</label>
+						<label>Género:</label>
 						<button class="tooltip">
-							<data>Found on the creature scan.</data>
-							<data>Gender</data>
-							<data>Found on the creature scan.</data>
+							<data>Encontrado en el escaneo de criaturas.</data>
+							<data>Género</data>
+							<data>Encontrado en el escaneo de criaturas.</data>
 							<data>creature/creatureGender</data>
 						</button>
 					</div>
@@ -235,14 +250,14 @@
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>Second Gender:</label>
+						<label>Segundo Género:</label>
 						<button class="tooltip">
-							<data>Only applies to certain genera. Can be found on the creature scan.</data>
-							<data>Second Gender</data>
+							<data>Sólo se aplica a ciertos géneros. Se puede encontrar en el escaneo de criaturas.</data>
+							<data>Segundo Género</data>
 							<data>
-								Some genera have two genders, while others have only one gender.<br>
-								Birds, fish and weird/anomalous fauna for example have only one gender.<br>
-								They might show up as two genders, but will have the exact same appearance.
+                Algunos géneros tienen dos géneros, mientras que otros tienen un solo género.<br>
+                Las aves, los peces y la fauna rara/anómala, por ejemplo, tienen un solo género.<br>
+                Pueden aparecer como dos géneros, pero tendrán exactamente la misma apariencia.
 							</data>
 						</button>
 					</div>
@@ -251,11 +266,11 @@
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="behaviourInput">Behaviour:</label>
+						<label for="behaviourInput">Comportamiento:</label>
 						<button class="tooltip">
-							<data>Found on the creature scan.</data>
-							<data>Behaviour</data>
-							<data>Found on the creature scan.</data>
+							<data>Encontrado en el escaneo de criaturas.</data>
+							<data>Comportamiento</data>
+							<data>Encontrado en el escaneo de criaturas.</data>
 							<data>creature/creatureBehaviour</data>
 						</button>
 					</div>
@@ -263,11 +278,11 @@
 						<input data-dest="behaviour" type="text" list="behaviourData" id="behaviourInput">
 					</div>
 					<div class="table-cell text">
-						<label for="dietInput">Diet:</label>
+						<label for="dietInput">Dieta:</label>
 						<button class="tooltip">
-							<data>Found on the creature scan.</data>
-							<data>Diet</data>
-							<data>Found on the creature scan.</data>
+							<data>Encontrado en el escaneo de criaturas.</data>
+							<data>Dieta</data>
+							<data>Encontrado en el escaneo de criaturas.</data>
 							<data>creature/creatureDiet</data>
 						</button>
 					</div>
@@ -275,11 +290,11 @@
 						<input data-dest="diet" type="text" list="dietData" id="dietInput">
 					</div>
 					<div class="table-cell text">
-						<label for="weightInput">Weight in kg:</label>
+						<label for="weightInput">Peso en kg:</label>
 						<button class="tooltip">
-							<data>Found on the creature scan. No "kg" necessary.</data>
-							<data>Weight</data>
-							<data>Found on the creature scan.<br>No "kg" necessary.</data>
+							<data>Encontrado en el escaneo de criaturas. No se necesitan "kg".</data>
+							<data>Peso</data>
+							<data>Encontrado en el escaneo de criaturas. No se necesitan "kg".</data>
 							<data>creature/creatureWeight</data>
 						</button>
 					</div>
@@ -287,11 +302,11 @@
 						<input data-dest-noauto="weight" type="text" id="weightInput" maxlength="5" placeholder="0.0">
 					</div>
 					<div class="table-cell text">
-						<label for="heightInput">Height in m:</label>
+						<label for="heightInput">Altura en m:</label>
 						<button class="tooltip">
-							<data>Found on the creature scan. No "m" necessary.</data>
-							<data>Height</data>
-							<data>Found on the creature scan.<br>No "m" necessary.</data>
+							<data>Encontrado en el escaneo de criaturas. No es necesaria "m".</data>
+							<data>Altura</data>
+							<data>Encontrado en el escaneo de criaturas. No es necesaria "m".</data>
 							<data>creature/creatureHeight</data>
 						</button>
 					</div>
@@ -299,23 +314,23 @@
 						<input data-dest-noauto="height" type="text" id="heightInput" maxlength="3" placeholder="0.0">
 					</div>
 					<div class="table-cell text" style="display: none">
-						<label for="weight2Input">Gender 2 Weight in kg:</label>
+						<label for="weight2Input">Género 2 Peso en kg:</label>
 					</div>
 					<div class="table-cell data" style="display: none">
 						<input type="text" data-dest-noauto="weight2" id="weight2Input" maxlength="5" placeholder="0.0">
 					</div>
 					<div class="table-cell text" style="display: none">
-						<label for="height2Input">Gender 2 Height in m:</label>
+						<label for="height2Input">Género 2 Altura en m:</label>
 					</div>
 					<div class="table-cell data" style="display: none">
 						<input type="text" data-dest-noauto="height2" id="height2Input" maxlength="3" placeholder="0.0">
 					</div>
 					<div class="table-cell text">
-						<label for="notesInput">Notes:</label>
+						<label for="notesInput">Notas:</label>
 						<button class="tooltip">
-							<data>Found on the creature scan. Might differ from the discovery menu.</data>
-							<data>Notes</data>
-							<data>Found on the creature scan.</data>
+							<data>Encontrado en el escaneo de criaturas. Puede diferir del menú de descubrimiento.</data>
+							<data>Notas</data>
+							<data>Encontrado en el escaneo de criaturas.</data>
 							<data>creature/creatureNotes</data>
 						</button>
 					</div>
@@ -323,12 +338,12 @@
 						<input data-dest-noauto="notes" type="text" list="notesData" id="notesInput">
 					</div>
 					<div class="table-cell text" style="display: none">
-						<label for="specialNotesInput">Notes for discovery menu:</label>
+						<label for="specialNotesInput">Notas para el menú de descubrimiento:</label>
 						<button class="tooltip">
 							<data>creature/creatureDMNotes</data>
-							<data>Discovery Menu Notes</data>
-							<data>Found in the discovery menu.<br>This might differ from the creature scan.</data>
-							<data>This might differ from the scan. Please check in the discovery menu.</data>
+							<data>Notas del menú de descubrimiento</data>
+							<data>Se encuentra en el menú de descubrimiento.<br>Esto puede diferir del escaneo de criaturas.</data>
+							<data>Esto puede diferir del escaneo. Por favor consulte el menú de descubrimiento.</data>
 						</button>
 					</div>
 					<div class="table-cell data" style="display: none">
@@ -336,11 +351,11 @@
 							id="specialNotesInput">
 					</div>
 					<div class="table-cell text">
-						<label>Produces:</label>
+						<label>Produce:</label>
 						<button class="tooltip">
-							<data>Found on the creature scan.</data>
-							<data>Produces</data>
-							<data>Found on the creature scan.</data>
+							<data>Encontrado en el escaneo de criaturas.</data>
+							<data>Produce</data>
+							<data>Encontrado en el escaneo de criaturas.</data>
 							<data>creature/creatureProduces</data>
 						</button>
 					</div>
@@ -349,16 +364,16 @@
 						</select>
 					</div>
 					<div class="tableHeader text">
-						<p>Information about the player.</p>
+						<p>Información sobre el jugador.</p>
 					</div>
 					<div class="table-cell text">
-						<label>Gamemode:</label>
+						<label>Modo de juego:</label>
 						<button class="tooltip">
-							<data>Gamemode of the save on which this creature was discovered.</data>
-							<data>Gamemode</data>
+							<data>Modo de juego del guardado en el que se descubrió esta criatura.</data>
+							<data>Modo de juego</data>
 							<data>
-								Gamemode of the save on which this creature was discovered.<br>
-								Found in the main menu:
+								Modo de juego del guardado en el que se descubrió esta criatura.<br>
+								Encontrado en el menú principal:
 							</data>
 							<data>shared/gamemode</data>
 						</button>
@@ -366,82 +381,78 @@
 					<div class="table-cell data">
 						<select data-dest="mode" id="modeInput">
 							<option value="Normal">Normal</option>
-							<option value="Relaxed">Relaxed</option>
+							<option value="Relaxed">Relajado</option>
 							<option value="Survival">Survival</option>
-							<option value="Permadeath">Permadeath</option>
-							<option value="Creative">Creative</option>
-							<option value="Custom">Custom</option>
+							<option value="Permadeath">Muerte permanente</option>
+							<option value="Creative">Creativo</option>
+							<option value="Custom">Personalizada</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredlinkInput">Discoverer wiki name:</label>
+						<label for="discoveredlinkInput">Nombre en la wiki del descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredInput">Discoverer alias if no wiki:</label>
+						<label for="discoveredInput">Alias del ​​descubridor si no tiene wiki:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="discovered" id="discoveredInput">
 					</div>
 					<div class="table-cell text">
-						<label for="docbyInput">Documenter alias if not discoverer:</label>
+						<label for="docbyInput">Alias del documentador si no es el descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
 					<div class="table-cell text">
-						<label>Do you belong to a chapter?</label>
+						<label>¿Perteneces a un gremio?</label>
 					</div>
 					<div class="table-cell data">
-						<select data-dest-noauto="researchteam" id="researchteamInput">
-							<option value=""></option>
-							<option value="Wiki Scholars">Wiki Scholars</option>
-							<option value="EBC">EBC</option>
-						</select>
+						<input type="text" data-dest-noauto="researchteam" id="researchteamInput">
 					</div>
 					<div class="table-cell text">
-						<label>Into which album does this creature belong (if any)?</label>
+						<label>¿A qué álbum pertenece esta criatura (si corresponde)?</label>
 					</div>
 					<div class="table-cell data">
 						<select data-dest-noauto="catalogue" id="catalogueInput">
 						</select>
 					</div>
 					<div class="tableHeader data no-flex">
-						<label for="appearanceInput">Appearance</label>
+						<label for="appearanceInput">Apariencia</label>
 						<textarea data-dest="appearance" id="appearanceInput"
-							placeholder="What does the creature look like?"></textarea>
+							placeholder="¿Cómo es la criatura?"></textarea>
 					</div>
 					<div class="tableHeader text">
-						<p>Discovery Menu Text Builder</p>
+						<p>Generador de texto del menú de descubrimiento</p>
 					</div>
 
 					<div class="table-cell text">
-						<label>Which biome is this creature in?</label>
+						<label>¿En qué bioma se encuentra esta criatura?</label>
 					</div>
 					<div class="table-cell data">
 						<select data-dest-noauto="biome" id="biomeInput">
-							<option value="Lush">Lush</option>
-							<option value="Barren">Barren</option>
-							<option value="Exotic">Exotic</option>
-							<option value="Mega Exotic">Mega Exotic</option>
-							<option value="Scorched">Scorched</option>
-							<option value="Frozen">Frozen</option>
-							<option value="Toxic">Toxic</option>
-							<option value="Irradiated">Irradiated</option>
-							<option value="Marsh">Marsh</option>
-							<option value="Volcanic">Volcanic</option>
+							<option value="Lush">Rico</option>
+							<option value="Barren">Estéril</option>
+							<option value="Exotic">Exótico</option>
+							<option value="Mega Exotic">Mega Exótico</option>
+							<option value="Scorched">Quemado</option>
+							<option value="Frozen">Congelado</option>
+							<option value="Toxic">Tóxico</option>
+							<option value="Irradiated">Irradiado</option>
+							<option value="Marsh">Cenagal</option>
+							<option value="Volcanic">Volcánico</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="dmBiomeSentenceInput">Discovery menu biome sentence</label>
+						<label for="dmBiomeSentenceInput">Frase de bioma del menú de descubrimiento</label>
 						<button class="tooltip">
-							<data>Found in the Discovery Menu. Enter exactly as seen in game</data>
-							<data>Discovery Menu Text: Biome Sentence</data>
+							<data>Se encuentra en el menú Descubrimiento. Entra exactamente como se ve en el juego.</data>
+							<data>Texto del menú de descubrimiento: frase de bioma</data>
 							<data>
-								First sentence(s) of the Discovery Menu. Enter exactly as seen in game,
-								but ignore any linebreaks.
+								Primera(s) frase(es) del Menú Descubrimiento. Ingrese exactamente como se ve en el juego,
+								pero ignore los saltos de línea.
 							</data>
 							<data>creature/biomeSentence</data>
 						</button>
@@ -451,13 +462,13 @@
 							list="dmBiomeSentenceList">
 					</div>
 					<div class="table-cell text">
-						<label for="dmTemperamentSentenceInput">Discovery menu behaviour sentence</label>
+						<label for="dmTemperamentSentenceInput">Frase de comportamiento del menú de descubrimiento</label>
 						<button class="tooltip">
-							<data>Found in the Discovery Menu. Enter exactly as seen in game</data>
-							<data>Discovery Menu Text: Behaviour Sentence</data>
+							<data>Se encuentra en el menú Descubrimiento. Entra exactamente como se ve en el juego.</data>
+							<data>Texto del menú de descubrimiento: frase de comportamiento</data>
 							<data>
-								Middle sentence(s) of the Discovery Menu. Enter exactly as seen in game,
-								but ignore any linebreaks.
+								Frases intermedias del menú Discovery. Ingrese exactamente como se ve en el juego,
+								pero ignore los saltos de línea.
 							</data>
 							<data>creature/behaviourSentence</data>
 						</button>
@@ -467,13 +478,13 @@
 							list="dmTemperamentSentenceList">
 					</div>
 					<div class="table-cell text">
-						<label for="dmDietSentenceInput">Discovery menu diet sentence</label>
+						<label for="dmDietSentenceInput">Frase de dieta del menú descubrimiento.</label>
 						<button class="tooltip">
-							<data>Found in the Discovery Menu. Enter exactly as seen in game</data>
-							<data>Discovery Menu Text: Diet Sentence</data>
+							<data>Se encuentra en el menú Descubrimiento. Entra exactamente como se ve en el juego.</data>
+							<data>Texto del menú de descubrimiento: frase de dieta</data>
 							<data>
-								Last sentence(s) of the Discovery Menu. Enter exactly as seen in game,
-								but ignore any linebreaks.
+								Últimas frases del menú Discovery. Ingrese exactamente como se ve en el juego,
+								pero ignora cualquier salto de línea.
 							</data>
 							<data>creature/dietSentence</data>
 						</button>
@@ -483,13 +494,13 @@
 							list="dmDietSentenceList">
 					</div>
 					<div class="tableHeader data no-flex">
-						<label for="dmInput">Discovery Menu</label>
+						<label for="dmInput">Menú de descubrimiento</label>
 						<button class="tooltip">
-							<data>Found in the Discovery Menu. Enter exactly as seen in game</data>
-							<data>Discovery Menu Text</data>
+							<data>Se encuentra en el menú Descubrimiento. Entra exactamente como se ve en el juego.</data>
+							<data>Texto del menú de descubrimiento</data>
 							<data>
-								Found in the Discovery Menu. Enter exactly as seen in game,
-								but ignore any linebreaks.
+								Se encuentra en el menú Descubrimiento. Ingrese exactamente como se ve en el juego,
+								pero ignora cualquier salto de línea.
 							</data>
 							<data>creature/creatureDM</data>
 						</button>
@@ -508,7 +519,7 @@
 					<div>{{Creature infobox</div>
 					<div>| name = <output id="name" name="newName"></output></div>
 					<div>| image = <output id="image" name="image"></output></div>
-					<div>| galaxy = Eissentam</div>
+					<div>| galaxy = <output id="galaxy"></output></div>
 					<div>| region = <output id="region"></output></div>
 					<div>| system = <output id="system" name="system"></output></div>
 					<div>| planet = <output id="planet"></output></div>
@@ -527,7 +538,7 @@
 					<div>| notes = <output id="notes"></output></div>
 					<div>| produces = <output id="produces"></output></div>
 					<div>| genus = <output id="genus" name="genus"></output></div>
-					<div>| civilized = Eisvana</div>
+					<div>| civilized = <output id="hub" name="hub"></output></div>
 					<div>| discovered = <output id="discovered"></output></div>
 					<div>| discoveredlink = <output id="discoveredlink"></output></div>
 					<div>| researchteam = <output id="researchteam"></output></div>

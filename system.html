@@ -1,39 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Eisvana Wiki Page Creator - System</title>
-	<meta name="application-name" content="Eisvana Wiki Page Creator">
+	<title>Creador de páginas Wiki - Sistemas</title>
+	<meta name="application-name" content="Creador de páginas Wiki">
 	<meta name="description"
-		content="Easily generate the wikicode to create a star system discovery page for Eisvana on the No Man's Sky Wiki!">
+		content="¡Genera fácilmente el código wiki para crear una página de descubrimiento del sistema estelar en No Man's Sky Wiki!">
 	<meta name="theme-color" content="#280033">
-	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, System, Star System">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Page Creator, System, Star System">
 	<script src="./src/pages/system" type="module"></script>
 </head>
 
 <body>
 	<div class="container">
-		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
-		<h1 class="title is-3">Eisvana Wiki Page Creator - System</h1>
+		<nav><a href="./" title="Main page">&larr; Regresar a la página principal</a></nav>
+		<h1 class="title is-3">Creador de páginas Wiki - Sistemas</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
 				<div class="table">
 					<div class="table-cell text">
-						<label>Current release:</label>
+						<label>Version:</label>
 					</div>
 					<div class="table-cell data">
 						<select id="versionInput" data-dest="release"></select>
 					</div>
 					<div class="table-cell text">
-						<label for="nameInput">Name of the system:</label>
+						<label for="nameInput">Nombre del sistema:</label>
 						<button class="tooltip">
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>System Name</data>
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
+							<data>Nombre del sistema</data>
+							<data>Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
 							<data>system/systemName</data>
 						</button>
 					</div>
@@ -41,14 +41,14 @@
 						<input data-dest="name" type="text" id="nameInput">
 					</div>
 					<div class="table-cell text">
-						<label for="oldNameInput">Original name before uploading (if available):</label>
+						<label for="oldNameInput">Nombre original antes de registrar (si está disponible):</label>
 						<button class="tooltip">
-							<data>Hover over a different star in the galaxy map.</data>
-							<data>Original System Name</data>
+							<data>Coloca el cursor sobre una estrella diferente en el mapa de galaxias..</data>
+							<data>Nombre original del sistema</data>
 							<data>
-								If you don't have this info, there is a trick:<br>
-								Open the galaxy map, then hover over a different nearby star.<br>
-								Your current location should now be displayed with its original name.
+                Si no tienes esta información, hay un truco:<br>
+                Abre el mapa de galaxias y luego coloca el cursor sobre otra estrella cercana.<br>
+                Su ubicación actual ahora debería mostrarse con su nombre original.
 							</data>
 							<data>system/originalName</data>
 						</button>
@@ -56,24 +56,34 @@
 					<div class="table-cell data">
 						<input data-dest="oldName" type="text" id="oldNameInput">
 					</div>
+          <div class="table-cell text">
+						<label for="hubInput">Nombre del Hub:</label>
+						<button class="tooltip">
+							<data>Escriba el nombre del Hub que represente</data>
+							<data>Nombre del Hub</data>
+              <data>Escriba el nombre del Hub que represente</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="hub" id="hubInput">
+					</div>
 					<div class="table-cell text">
-						<label for="fileInput">Main image name, including file extension:</label>
+						<label for="fileInput">Nombre de la imagen principal, incluida la extensión del archivo:</label>
 						<button class="tooltip" name="fileUploadTooltip">
-							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name. Should
-								show the entire system from space. Click for an example picture.</data>
-							<data>File Upload</data>
+							<data>La imagen no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen. Debería
+                mostrar todo el sistema desde el espacio. Haga clic para ver una imagen de ejemplo.</data>
+							<data>Subir archivo</data>
 							<data>
-								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
-								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
-									data-wiki>Special:Upload</a>
+                Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imágen. El
+                tamaño máximo del archivo es 10 MB.
+                Puedes subir tus imágenes a la wiki en <a href="Special:Upload?multiple=true" data-wiki>Especial:Subir</a>
+                <br>
 								<br>
-								<br>
-								Make sure no asteroids/pulse lines/freighters are obstructing the picture.<br>
-								Point the sun directly at the planets, no weird angles.<br>
-								Also try to only get all planets into the shot, watch out that all moons are visible if
-								they exist.<br>
-								Disable the vignette.
+                Asegúrese de que no haya asteroides, líneas de pulso o aviones de carga que obstruyan la imagen.<br>
+                Apunta el sol directamente a los planetas, sin ángulos extraños.<br>
+                También trate de incluir solo todos los planetas en la toma, tenga cuidado de que todas las lunas sean visibles si
+                existen.<br>
+                Desactiva la viñeta.
 								<iframe src="https://nmscd.com/Image-Compressor/" title="Image Compressor"
 									class="explanation-embed" width="450" height="300">Image Compressor</iframe>
 							</data>
@@ -85,7 +95,7 @@
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="table-cell text">
-						<label for="navFileInput">Galaxy map image name, including file extension:</label>
+						<label for="navFileInput">Nombre de la imagen del mapa galactico, incluida la extensión del archivo:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" id="navFileInput" data-dest="navImage"
@@ -93,7 +103,7 @@
 						<input type="file" id="navFileUpload" accept="image/*">
 					</div>
 					<div class="table-cell text" data-station="img">
-						<label for="ssFileInput">Space Station image name, including file extension:</label>
+						<label for="ssFileInput">Nombre de la imagen de la estación espacial, incluida la extensión del archivo:</label>
 					</div>
 					<div class="table-cell data" data-station="img">
 						<input type="text" id="ssFileInput" data-dest="ssImage" data-default="NmsMisc_NotAvailable.png">
@@ -101,18 +111,18 @@
 					</div>
 					<div class=" table-cell text">
 						<div class="label-combo">
-							<label for="portalglyphsInput">Portalglyphs:</label>
+							<label for="portalglyphsInput">Glifos:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
-								Delete</button>
+								Borrar</button>
 						</div>
 						<button class="tooltip">
-							<data>Found in Photo Mode.</data>
-							<data>Portalglyphs</data>
+							<data>Encontrado en modo foto.</data>
+							<data>Glifos</data>
 							<data>
-								Found in Photo Mode.
+								Encontrado en modo foto.
 								<iframe src="https://nmspar.vercel.app/" sandbox="allow-scripts allow-same-origin"
-									title="Glyph Reader" class="explanation-embed" width="450" height="300">Glyph
-									Reader</iframe>
+									title="Glyph Reader" class="explanation-embed" width="450" height="300">LEctor de glifos
+									</iframe>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -124,16 +134,28 @@
 						<div id="portalglyphButtons"></div>
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
+          <div class="table-cell text">
+						<label for="galaxyInput">Galaxia:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="galaxy" id="galaxyInput">
+					</div>
+          <div class="table-cell text">
+						<label for="regionInput">Region:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="region" id="regionInput">
+					</div>
 					<div class="table-cell text">
-						<label>Number of stars:</label>
+						<label>Numero de estrellas:</label>
 						<button class="tooltip">
-							<data>Number of visible local stars in space.</data>
-							<data>Number of stars</data>
+							<data>Número de estrellas locales visibles en el espacio.</data>
+							<data>Numero de estrellas</data>
 							<data>
-								Number of visible local stars in space.<br>
-								Enter Photomode, then press the button to rotate the system star to your cursor.<br>
-								Enter the number of stars you see.<br>
-								This for example is 1 star:
+                Número de estrellas locales visibles en el espacio.<br>
+                Ingrese al modo Foto, luego presione el botón para rotar la estrella del sistema hacia su cursor.<br>
+                Ingresa el número de estrellas que ves.<br>
+                Este por ejemplo es 1 estrella:
 							</data>
 							<data>
 								system/numOfStars
@@ -148,19 +170,19 @@
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>Colour of (primary) star:</label>
+						<label>Color de la estrella (primaria):</label>
 						<button class="tooltip">
-							<data>Colour as seen in the galaxy map.</data>
-							<data>Star Colour</data>
-							<data>
-								Colour as seen in the galaxy map. Make sure you don&apos;t have any filters active.<br>
-								The colours usually correlate with the available stellar metal in the system:
+							<data>Color como se ve en el mapa galactico.</data>
+							<data>Color de estrella</data>
+              <data>
+                Color como se ve en el mapa de galaxias. Asegúrate de no tener ningún filtro activo.<br>
+                Los colores suelen correlacionarse con el metal estelar disponible en el sistema:
 								<div class="dialog-center">
 									<ul class="dialog-list">
-										<li>Copper: Yellow</li>
-										<li>Cadmium: Red</li>
-										<li>Emeril: Green</li>
-										<li>Indium: Blue</li>
+										<li>Cobre: Amarillo</li>
+										<li>Cadmio: Rojo</li>
+										<li>Emerilio: Verde</li>
+										<li>Indio: Azul</li>
 									</ul>
 								</div>
 							</data>
@@ -168,21 +190,21 @@
 					</div>
 					<div class="table-cell data">
 						<select id="colorInput" data-dest="color">
-							<option value="Yellow">Yellow</option>
-							<option value="Red">Red</option>
-							<option value="Green">Green</option>
-							<option value="Blue">Blue</option>
-							<option value="Black Hole" style="display:none">Black Hole</option>
+							<option value="Yellow">Amarillo</option>
+							<option value="Red">Rojo</option>
+							<option value="Green">Verde</option>
+							<option value="Blue">Azul</option>
+							<option value="Black Hole" style="display:none">Agujero Negro</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="classInput">Stellar class:</label>
+						<label for="classInput">Clase estelar:</label>
 						<button class="tooltip">
-							<data>Found in the galaxy map.</data>
-							<data>Stellar Class</data>
-							<data>Number of visible local stars in space.<br>
-								Enter Photomode, then press the button to rotate the system star to your cursor.<br>
-								Enter the number of stars you see.</data>
+							<data>Encontrado en el mapa galactico.</data>
+							<data>Clase estelar</data>
+							<data>Número de estrellas locales visibles en el espacio.<br>
+								Ingrese al modo Foto, luego presione el botón para rotar la estrella del sistema hacia su cursor.<br>
+								Introduce el número de estrellas que ves.</data>
 							<data>system/stellarClass</data>
 						</button>
 					</div>
@@ -190,22 +212,18 @@
 						<input type="text" id="classInput" data-dest="class">
 					</div>
 					<div class="table-cell text">
-						<label for="distanceInput">Distance to centre:</label>
+						<label for="distanceInput">Distancia al centro:</label>
 						<button class="tooltip">
-							<data>Found on the galaxy map. Click here for a guide of how to get an accurate
-								value.</data>
-							<data>Distance to Centre</data>
+							<data>Encontrado en el mapa de galaxias. Haga clic aquí para obtener una guía sobre cómo obtener un valor preciso.</data>
+							<data>Distancia al centro</data>
 							<data>
-								In the galaxy map, move the camera <span class="is-italic">very</span> close to the
-								star.<br>
-								You must unfocus the system in order to get close enough to the star. If you're
-								basically inside the star, that's the correct position.<br>
-								You can then read the distance to centre value on the top left.<br><br>
-								Background: This is the <span class="is-italic">camera</span> distance to centre, not
-								the actual <span class="is-italic">system</span> distance to centre.<br>
-								On PC, you can use the <a href="https://www.nexusmods.com/nomanssky/mods/2203"
-									rel="noopener noreferrer" target="_blank">GalaxyCenterDistance</a> mod to get the
-								distance to centre accurately on the top of the galaxy map.
+                En el mapa de galaxias, mueve la cámara <span class="is-italic">muy</span> cerca de la estrella.<br>
+                Debes desenfocar el sistema para poder acercarte lo suficiente a la estrella. Si básicamente estás dentro de la estrella, esa es la posición correcta.<br>
+                Luego podrá leer el valor de la distancia al centro en la parte superior izquierda.<br><br>
+                Antecedentes: esta es la distancia de la <span class="is-italic">cámara</span> al centro, no la distancia real del <span class="is-italic">sistema</span> al centro.<br>
+                En PC, puedes usar <a href="https://www.nexusmods.com/nomanssky/mods/2203"
+                rel="noopener noreferrer" target="_blank">GalaxiaCentroDistancia</a> mod para obtener la
+                distancia al centro con precisión en la parte superior del mapa de galaxias.
 							</data>
 						</button>
 					</div>
@@ -213,11 +231,11 @@
 						<input type="text" id="distanceInput" data-dest-number="0" data-dest-noauto="distance">
 					</div>
 					<div class="table-cell text">
-						<label for="planetNumInput">Number of planets:</label>
+						<label for="planetNumInput">Número de planetas:</label>
 						<button class="tooltip">
-							<data>Found in the discovery menu.</data>
-							<data>Number of Planets</data>
-							<data>Found in the discovery menu.</data>
+							<data>Encontrado en el menú de descubrimiento.</data>
+							<data>Número de planetas</data>
+							<data>Encontrado en el menú de descubrimiento..</data>
 							<data>system/planetNumber</data>
 						</button>
 					</div>
@@ -226,11 +244,11 @@
 							data-dest-noauto="planet" data-default="1">
 					</div>
 					<div class="table-cell text">
-						<label for="moonNumInput">Number of moons:</label>
+						<label for="moonNumInput">Número de Lunas:</label>
 						<button class="tooltip">
-							<data>Found in the discovery menu. Put 0 if there are no moons.</data>
-							<data>Number of Moons</data>
-							<data>Found in the discovery menu. Enter 0 if there are no moons.</data>
+							<data>Encontrado en el menú de descubrimiento. Pon 0 si no hay lunas.</data>
+							<data>Número de Lunas</data>
+							<data>Encontrado en el menú de descubrimiento. Pon 0 si no hay lunas</data>
 							<data>system/moonNumber</data>
 						</button>
 					</div>
@@ -239,11 +257,11 @@
 							data-dest-noauto="moon" data-default="0">
 					</div>
 					<div class="table-cell text">
-						<label for="waterInput">Water in the system?</label>
+						<label for="waterInput">¿Agua en el sistema?</label>
 						<button class="tooltip">
-							<data>Found in the galaxy map. If it doesn't display "Water", there is no water.</data>
-							<data>Water</data>
-							<data>Found in the galaxy map. If it doesn't display "Water", don't check the box.</data>
+							<data>Encontrado en el mapa de galaxias. Si no muestra "Agua", no hay agua.</data>
+							<data>Agua</data>
+							<data>Encontrado en el mapa de galaxias. Si no muestra "Agua", no hay agua.</data>
 							<data>system/water</data>
 						</button>
 					</div>
@@ -252,13 +270,13 @@
 							data-dest-checkbox="water">
 					</div>
 					<div class="table-cell text">
-						<label for="waterInput">Dissonant system?</label>
+						<label for="waterInput">¿Sistema disonante?</label>
 						<button class="tooltip">
-							<data>Found in the galaxy map. If it doesn't display "Dissonant", it is not
-								dissonant.</data>
-							<data>Dissonant</data>
-							<data>Found in the galaxy map. If it doesn't display "Dissonant", don't check the
-								box.</data>
+							<data>Encontrado en el mapa de galaxias. Si no muestra "Disonante", no es
+                disonante.</data>
+							<data>Disonante</data>
+							<data>Encontrado en el mapa de galaxias. Si no muestra "Disonante", no marque la
+                caja.</data>
 							<data>system/dissonant</data>
 						</button>
 					</div>
@@ -267,15 +285,15 @@
 							data-dest-checkbox="dissonant">
 					</div>
 					<div class="table-cell text">
-						<label>System Faction:</label>
+						<label>Facción del sistema:</label>
 						<button class="tooltip">
-							<data>Found in the expanded view of the galaxy map. If it doesn't display anything, it's
-								"Uncharted".</data>
-							<data>Faction</data>
+							<data>Encontrado en la vista ampliada del mapa de galaxias. Si no muestra nada, es
+                "Inexplorado".</data>
+							<data>Facción</data>
 							<data>
-								Found in the expanded view of the galaxy map.<br>
-								The button to enter expanded view is displayed below the box with the system
-								details.<br>If it doesn't display anything, it's "Uncharted"
+                Encontrado en la vista ampliada del mapa de galaxias.<br>
+                El botón para ingresar a la vista ampliada se muestra debajo del cuadro con el sistema
+                detalles.<br>Si no muestra nada, es "Inexplorado"
 							</data>
 							<data>system/faction</data>
 						</button>
@@ -285,84 +303,83 @@
 							<option value="Gek">Gek</option>
 							<option value="Korvax">Korvax</option>
 							<option value="Vy'keen">Vy'keen</option>
-							<option value="Gek Abandoned">Gek Abandoned</option>
-							<option value="Korvax Abandoned">Korvax Abandoned</option>
-							<option value="Vy'keen Abandoned">Vy'keen Abandoned</option>
-							<option value="Uncharted">Uncharted</option>
+							<option value="Gek Abandoned">Gek Abandonado</option>
+							<option value="Korvax Abandoned">Korvax Abandonado</option>
+							<option value="Vy'keen Abandoned">Vy'keen Abandonado</option>
+							<option value="Uncharted">Inexplorado</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>System economy:</label>
+						<label>Economía del sistema:</label>
 						<button class="tooltip">
-							<data>Found in the expanded view of the galaxy map. If it doesn't display anything, it's
-								"Uncharted".</data>
+							<data>Encontrado en la vista ampliada del mapa de galaxias. Si no muestra nada, es
+								"Inexplorado".</data>
 							<data>Economy</data>
 							<data>
-								Found in the expanded view of the galaxy map.<br>
-								The button to enter expanded view is displayed below the box with the system
-								details.<br>If it doesn't display anything, it's "Uncharted"
-							</data>
+                Encontrado en la vista ampliada del mapa de galaxias.<br>
+                El botón para ingresar a la vista ampliada se muestra debajo del cuadro con el sistema
+                detalles.<br>Si no muestra nada, es "Inexplorado"
+                </data>
 							<data>system/economy</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select id="economyInput" data-dest="economy">
-							<optgroup label="Advanced Materials">
-								<option value="Alchemical">Alchemical</option>
-								<option value="Material Fusion">Material Fusion</option>
-								<option value="Metal Processing">Metal Processing</option>
-								<option value="Ore Processing">Ore Processing</option>
+							<optgroup label="Materiales avanzados">
+								<option value="Alchemical">Alquímica</option>
+								<option value="Material Fusion">Fusión de materiales</option>
+								<option value="Metal Processing">Prceosamiento de metales</option>
+								<option value="Ore Processing">Procesamiento de mena</option>
 							</optgroup>
-							<optgroup label="Manufacturing">
-								<option value="Construction">Construction</option>
+							<optgroup label="Fabricación">
+								<option value="Construction">Construcción</option>
 								<option value="Industrial">Industrial</option>
-								<option value="Manufacturing">Manufacturing</option>
-								<option value="Mass Production">Mass Production</option>
+								<option value="Manufacturing">Fabricación</option>
+								<option value="Mass Production">Producción en serie</option>
 							</optgroup>
-							<optgroup label="Mining">
-								<option value="Minerals">Minerals</option>
-								<option value="Mining">Mining</option>
-								<option value="Ore Extraction">Ore Extraction</option>
-								<option value="Prospecting">Prospecting</option>
+							<optgroup label="Extracción">
+								<option value="Minerals">Minerales</option>
+								<option value="Mining">Extracción</option>
+								<option value="Ore Extraction">Extracción de mena</option>
+								<option value="Prospecting">Prospección</option>
 							</optgroup>
-							<optgroup label="Power Generation">
-								<option value="Energy Supply">Energy Supply</option>
-								<option value="Fuel Generation">Fuel Generation</option>
-								<option value="High Voltage">High Voltage</option>
-								<option value="Power Generation">Power Generation</option>
+							<optgroup label="Generación de energía">
+								<option value="Energy Supply">Suministro de energía</option>
+								<option value="Fuel Generation">Generación de combustible</option>
+								<option value="High Voltage">Alto voltaje</option>
+								<option value="Power Generation">Generación de energía</option>
 							</optgroup>
 							<optgroup label="Scientific">
 								<option value="Experimental">Experimental</option>
-								<option value="Mathematical">Mathematical</option>
-								<option value="Research">Research</option>
-								<option value="Mathematical">Mathematical</option>
+								<option value="Mathematical">Matemático</option>
+								<option value="Research">Investigación</option>
+								<option value="Mathematical">Matemático</option>
 							</optgroup>
-							<optgroup label="Technology">
-								<option value="Engineering">Engineering</option>
-								<option value="High Tech">High Tech</option>
-								<option value="Nano-construction">Nano-construction</option>
-								<option value="Technology">Technology</option>
+							<optgroup label="Tecnología">
+								<option value="Engineering">Ingeniería</option>
+								<option value="High Tech">Alta tecnología</option>
+								<option value="Nano-construction">Nanoconstrucción</option>
+								<option value="Technology">Tecnología</option>
 							</optgroup>
-							<optgroup label="Trading">
-								<option value="Commercial">Commercial</option>
-								<option value="Mercantile">Mercantile</option>
+							<optgroup label="Comercio">
+								<option value="Commercial">Comercial</option>
+								<option value="Mercantile">Mercantil</option>
 								<option value="Shipping">Shipping</option>
-								<option value="Trading">Trading</option>
+								<option value="Trading">Transporte</option>
 							</optgroup>
-							<optgroup label="Abandoned/Uncharted">
-								<option value="Data Unavailable">Data Unavailable</option>
+							<optgroup label="Abandonado/Inexplorado">
+								<option value="Data Unavailable">Datos no disponibles</option>
 							</optgroup>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="economysellInput">Economy sell:</label>
+						<label for="economysellInput">Economía Vender:</label>
 						<button class="tooltip">
-							<data>Found in the expanded view of the galaxy map.</data>
-							<data>Economy-Sell</data>
+							<data>Encontrado en la vista ampliada del mapa galactico.</data>
+							<data>Economía-vender</data>
 							<data>
-								Found in the expanded view of the galaxy map.<br>
-								The button to enter expanded view is displayed below the box with the system
-								details.
+                Encontrado en la vista ampliada del mapa galactico.<br>
+                El botón para ingresar a la vista ampliada se muestra debajo del cuadro con los detalles del sistema.
 							</data>
 							<data>system/e-sell</data>
 						</button>
@@ -371,13 +388,13 @@
 						<input type="text" id="economysellInput" data-dest-noauto="economysell" data-percentage-input>
 					</div>
 					<div class="table-cell text">
-						<label for="economybuyInput">Economy buy:</label>
+						<label for="economybuyInput">Economía comprar:</label>
 						<button class="tooltip">
-							<data>Found in the expanded view of the galaxy map.</data>
-							<data>Economy-Buy</data>
+							<data>Encontrado en la vista ampliada del mapa galactico.</data>
+							<data>Economía-Comprar</data>
 							<data>
-								Found in the expanded view of the galaxy map.<br>
-								The button to enter expanded view is displayed below the box with the system details.
+								Encontrado en la vista ampliada del mapa galactico.<br>
+                El botón para ingresar a la vista ampliada se muestra debajo del cuadro con los detalles del sistema.
 							</data>
 							<data>system/e-buy</data>
 						</button>
@@ -386,74 +403,71 @@
 						<input type="text" id="economybuyInput" data-dest-noauto="economybuy" data-percentage-input>
 					</div>
 					<div class="table-cell text">
-						<label>System wealth:</label>
+						<label>Riqueza del sistema:</label>
 						<button class="tooltip">
-							<data>Found in the expanded view of the galaxy map.</data>
-							<data>Wealth</data>
+							<data>Encontrado en la vista ampliada del mapa galactico.</data>
+							<data>Riqueza</data>
 							<data>
-								Found in the expanded view of the galaxy map.<br>
-								The button to enter expanded view is displayed below the box with the system
-								details.<br>
-								If it doesn't display anything, it's either "Abandoned" or "Uncharted". This can be
-								determined looking at the faction value.
+                Encontrado en la vista ampliada del mapa de galaxias.<br>
+                El botón para ingresar a la vista ampliada se muestra debajo del cuadro con los detalles del sistema.<br>
+                Si no muestra nada, es "Abandonado" o "Uncharted". Esto se puede determinar mirando el valor de la facción.
 							</data>
 							<data>system/wealth</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select data-dest="wealth" id="wealthInput">
-							<optgroup label="T3">
-								<option value="★★★ (Advanced)">Advanced</option>
-								<option value="★★★ (Affluent)">Affluent</option>
-								<option value="★★★ (Booming)">Booming</option>
-								<option value="★★★ (Flourishing)">Flourishing</option>
-								<option value="★★★ (High Supply)">High Supply</option>
-								<option value="★★★ (Opulent)">Opulent</option>
-								<option value="★★★ (Prosperous)">Prosperous</option>
-								<option value="★★★ (Wealthy)">Wealthy</option>
-							</optgroup><!-- here ends T3-->
-							<optgroup label="T2">
-								<!--here begins T2-->
-								<option value="★★ (Adequate)">Adequate</option>
-								<option value="★★ (Balanced)">Balanced</option>
-								<option value="★★ (Comfortable)">Comfortable</option>
-								<option value="★★ (Developing)">Developing</option>
-								<option value="★★ (Medium Supply)">Medium Supply</option>
-								<option value="★★ (Promising)">Promising</option>
-								<option value="★★ (Satisfactory)">Satisfactory</option>
-								<option value="★★ (Sustainable)">Sustainable</option>
-							</optgroup><!-- here ends T2-->
-							<optgroup label="T1">
-								<!--here begins T1-->
-								<option value="★ (Declining)">Declining</option>
-								<option value="★ (Destitute)">Destitute</option>
-								<option value="★ (Failing)">Failing</option>
-								<option value="★ (Fledgling)">Fledgling</option>
-								<option value="★ (Low Supply)">Low Supply</option>
-								<option value="★ (Struggling)">Struggling</option>
-								<option value="★ (Unsuccessful)">Unsuccessful</option>
-								<option value="★ (Unpromising)">Unpromising</option>
-							</optgroup>
-							<!--here ends T1-->
-							<optgroup label="Pirate">
-								<option value="💀 (Black Market)">Black Market</option>
-							</optgroup>
-							<optgroup label="Abandoned/Uncharted">
-								<option value="">Data Unavailable</option>
-							</optgroup>
+              <optgroup label="T3">
+                <option value="★★★ (Advanced)">Avanzada</option>
+                <option value="★★★ (Affluent)">Pudiente</option>
+                <option value="★★★ (Booming)">En auge</option>
+                <option value="★★★ (Flourishing)">Floreciente</option>
+                <option value="★★★ (High Supply)">High Supply</option>
+                <option value="★★★ (Opulent)">Opulento</option>
+                <option value="★★★ (Prosperous)">Próspero</option>
+                <option value="★★★ (Wealthy)">Rico</option>
+              </optgroup><!-- here ends T3-->
+              <optgroup label="T2">
+                <!--here begins T2-->
+                <option value="★★ (Adequate)">Adecuado</option>
+                <option value="★★ (Balanced)">Equilibrado</option>
+                <option value="★★ (Comfortable)">Holgado</option>
+                <option value="★★ (Developing)">En desarrollo</option>
+                <option value="★★ (Medium Supply)">Suministro medio</option>
+                <option value="★★ (Promising)">Prometedor</option>
+                <option value="★★ (Satisfactory)">Satisfactorio</option>
+                <option value="★★ (Sustainable)">Sostenible</option>
+              </optgroup><!-- here ends T2-->
+              <optgroup label="T1">
+                <!--here begins T1-->
+                <option value="★ (Declining)">En declive</option>
+                <option value="★ (Destitute)">Carente</option>
+                <option value="★ (Failing)">En quiebra</option>
+                <option value="★ (Fledgling)">Incipiente</option>
+                <option value="★ (Low Supply)">Pocos suministros</option>
+                <option value="★ (Struggling)">En apuros</option>
+                <option value="★ (Unsuccessful)">Infructuoso</option>
+                <option value="★ (Unpromising)">Poco prometedor</option>
+              </optgroup>
+              <!--here ends T1-->
+              <optgroup label="Pirate">
+                <option value="💀 (Black Market)">Mercado negro</option>
+              </optgroup>
+              <optgroup label="Abandoned/Uncharted">
+                <option value="">Datos no disponibles</option>
+              </optgroup>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>System conflict:</label>
+						<label>Conflicto del sistema:</label>
 						<button class="tooltip">
-							<data>Found in the expanded view of the galaxy map.</data>
-							<data>Conflict</data>
+							<data>Encontrado en la vista ampliada del mapa galactico.</data>
+							<data>Conflicto</data>
 							<data>
-								Found in the expanded view of the galaxy map.<br>
-								The button to enter expanded view is displayed below the box with the system
-								details.<br>
-								If it doesn't display anything, it's either "Abandoned" or
-								"Uncharted". This can be determined looking at the faction value.
+                Encontrado en la vista ampliada del mapa galactico.<br>
+                El botón para ingresar a la vista ampliada se muestra debajo del cuadro con los detalles del sistema..<br>
+                Si no muestra nada, es "Abandonado" o
+                "Inexplorado". Esto se puede determinar mirando el valor de la facción.
 							</data>
 							<data>system/conflict</data>
 						</button>
@@ -461,57 +475,57 @@
 					<div class="table-cell data">
 						<select id="conflictInput" data-dest="conflict">
 							<optgroup label="T3">
-								<option value="★★★ (Aggressive)">Aggressive</option>
-								<option value="★★★ (Alarming)">Alarming</option>
-								<option value="★★★ (At War)">At War</option>
-								<option value="★★★ (Critical)">Critical</option>
-								<option value="★★★ (Dangerous)">Dangerous</option>
-								<option value="★★★ (Destructive)">Destructive</option>
+								<option value="★★★ (Aggressive)">Agresivo</option>
+								<option value="★★★ (Alarming)">Inquietante</option>
+								<option value="★★★ (At War)">En guerra</option>
+								<option value="★★★ (Critical)">Crítico</option>
+								<option value="★★★ (Dangerous)">Peligroso</option>
+								<option value="★★★ (Destructive)">Destructivo</option>
 								<option value="★★★ (Formidable)">Formidable</option>
-								<option value="★★★ (High)">High</option>
-								<option value="★★★ (Lawless)">Lawless</option>
-								<option value="★★★ (Perilous)">Perilous</option>
+								<option value="★★★ (High)">Alto</option>
+								<option value="★★★ (Lawless)">Anárquico</option>
+								<option value="★★★ (Perilous)">Arriesgado</option>
 							</optgroup>
 							<optgroup label="T2">
-								<option value="★★ (Belligerent)">Belligerent</option>
-								<option value="★★ (Boisterous)">Boisterous</option>
-								<option value="★★ (Fractious)">Fractious</option>
-								<option value="★★ (Intermittent)">Intermittent</option>
-								<option value="★★ (Medium)">Medium</option>
-								<option value="★★ (Rowdy)">Rowdy</option>
-								<option value="★★ (Sporadic)">Sporadic</option>
-								<option value="★★ (Testy)">Testy</option>
-								<option value="★★ (Unruly)">Unruly</option>
-								<option value="★★ (Unstable)">Unstable</option>
+								<option value="★★ (Belligerent)">Beligerante</option>
+								<option value="★★ (Boisterous)">Tempestuoso</option>
+								<option value="★★ (Fractious)">Ingobernable</option>
+								<option value="★★ (Intermittent)">Intermitente</option>
+								<option value="★★ (Medium)">Medio</option>
+								<option value="★★ (Rowdy)">Tumultuoso</option>
+								<option value="★★ (Sporadic)">Esporádico</option>
+								<option value="★★ (Testy)">Alterable</option>
+								<option value="★★ (Unruly)">Alborotado</option>
+								<option value="★★ (Unstable)">Inestable</option>
 							</optgroup>
 							<optgroup label="T1">
-								<option value="★ (Gentle)">Gentle</option>
-								<option value="★ (Low)">Low</option>
-								<option value="★ (Mild)">Mild</option>
-								<option value="★ (Peaceful)">Peaceful</option>
-								<option value="★ (Relaxed)">Relaxed</option>
-								<option value="★ (Stable)">Stable</option>
-								<option value="★ (Tranquil)">Tranquil</option>
-								<option value="★ (Trivial)">Trivial</option>
-								<option value="★ (Unthreatening)">Unthreatening</option>
-								<option value="★ (Untroubled)">Untroubled</option>
+								<option value="★ (Gentle)">Moderado</option>
+								<option value="★ (Low)">Bajo</option>
+								<option value="★ (Mild)">Apacible</option>
+								<option value="★ (Peaceful)">Pacífico</option>
+								<option value="★ (Relaxed)">Relajado</option>
+								<option value="★ (Stable)">Estable</option>
+								<option value="★ (Tranquil)">Tranquilo</option>
+								<option value="★ (Trivial)">Insignificante</option>
+								<option value="★ (Unthreatening)">Sin amenazas</option>
+								<option value="★ (Untroubled)">Sin problemas</option>
 							</optgroup>
 							<optgroup label="Pirate">
-								<option value="💀 (Pirate Controlled)">Pirate Controlled</option>
+								<option value="💀 (Pirate Controlled)">Piratas bajo control</option>
 							</optgroup>
 							<optgroup label="Abandoned/Uncharted">
-								<option value="Data Unavailable">Data Unavailable</option>
+								<option value="Data Unavailable">Datos no disponibles</option>
 							</optgroup>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="discDateInput">When was this system discovered?</label>
+						<label for="discDateInput">¿Cuándo se descubrió este sistema?</label>
 						<button class="tooltip">
-							<data>Found in the analysis visor in the space station.</data>
-							<data>Discovery Date</data>
+							<data>Encontrado en el visor de análisis de la estación espacial.</data>
+							<data>Fecha del descubrimiento</data>
 							<data>
-								Found in the analysis visor in the space station.<br>
-								The exact discovery timestamp is displayed on the top left.
+								Encontrado en el visor de análisis de la estación espacial.<br>
+								La marca de tiempo exacta del descubrimiento se muestra en la parte superior izquierda.
 							</data>
 							<data>system/discDate</data>
 						</button>
@@ -520,67 +534,62 @@
 						<input type="date" id="discDateInput" data-dest-noauto="discDate">
 					</div>
 					<div class="table-cell text">
-						<label for="docDateInput">When was this system documented?</label>
+						<label for="docDateInput">¿Cuándo se documentó este sistema?</label>
 					</div>
 					<div class="table-cell data">
 						<input type="date" id="docDateInput" data-dest-noauto="docDate">
 					</div>
 					<div class="table-cell text">
-						<label>Do you belong to a chapter?</label>
+						<label>¿Perteneces a un gremio?</label>
 					</div>
-					<div class="table-cell data">
-						<select data-dest-noauto="researchteam" id="researchteamInput">
-							<option value=""></option>
-							<option value="Wiki Scholars">Wiki Scholars</option>
-							<option value="EBC">EBC</option>
-						</select>
+            <div class="table-cell data">
+            <input type="text" placeholder="Gremio que pertenezcas dentro de tu hub (si tiene)" data-dest="researchteam" id="researchteamInput">
 					</div>
 					<div class="table-cell text">
-						<label>Gamemode:</label>
+						<label>Modo de juego:</label>
 						<button class="tooltip">
-							<data>Gamemode of the save on which this system was documented.</data>
-							<data>Gamemode</data>
-							<data>Gamemode of the save on which this system was documented.<br>Found in the main
-								menu:</data>
+							<data>Modo de juego del guardado en el que se documentó este sistema.</data>
+							<data>Modo de juego</data>
+							<data>Modo de juego del guardado en el que se documentó este sistema.<br>Encontrado en el menú principal:</data>
 							<data>shared/gamemode</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select data-dest="mode" id="modeInput">
 							<option value="Normal">Normal</option>
-							<option value="Relaxed">Relaxed</option>
+							<option value="Relaxed">Relajado</option>
 							<option value="Survival">Survival</option>
-							<option value="Permadeath">Permadeath</option>
-							<option value="Creative">Creative</option>
-							<option value="Custom">Custom</option>
+							<option value="Permadeath">Muerte permanente</option>
+							<option value="Creative">Creativo</option>
+							<option value="Custom">Personalizada</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>Discoverer platform:</label>
+						<label>Plataforma:</label>
 					</div>
 					<div class="table-cell data">
-						<select data-dest-noauto="platform" id="platformInput">
-							<option value="">I don't know</option>
+						<select data-dest="platform" id="platformInput">
 							<option value="PC">PC</option>
 							<option value="PS">PlayStation</option>
 							<option value="XB">Xbox</option>
 							<option value="NS">Switch</option>
+              <option value="Mac">Mac</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredlinkInput">Discoverer wiki name:</label>
+						<label for="discoveredlinkInput">Nombre del descubridor en la wiki:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredInput">Discoverer alias if no wiki:</label>
+						<label for="discoveredInput">Alias del descubridor si no tiene wiki:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="discovered" id="discoveredInput">
 					</div>
 					<div class="table-cell text">
-						<label for="docbyInput">Documenter alias if not discoverer:</label>
+						<label for="docbyInput">Alias del documentador si no es el descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
@@ -588,389 +597,378 @@
 					<div class="tableHeader text no-flex" data-station="terminal">
 						<label>Tradeables:</label>
 						<button class="tooltip">
-							<data>Can be found on the space station.</data>
-							<data>Space Station Tradeables</data>
+							<data>Se pueden encontrar en la estación espacial.</data>
+							<data>Objetos comercializables de la estación espacial</data>
 							<data>
-								Can be found on the space station at the trade terminal.<br>
-								Only include tradeables (items with white background at the top)
+								Se pueden encontrar en la estación espacial en el Terminal de comercio..<br>
+								Incluya solo bienes comercializables (artículos con fondo blanco en la parte superior)
 							</data>
 							<data>system/tradeables</data>
 						</button>
 					</div>
 					<div id="terminalInputs" class="tableHeader text" data-station="terminal">
-						<button class="button is-primary" type="button" id="addTradeablesButton">+ Add
-							Tradeable</button>
+						<button class="button is-primary" type="button" id="addTradeablesButton">+ Añadir tradeable</button>
 					</div>
 					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
-							<p>S-class multi-tool merchant upgrades:</p>
+							<p>Mejoras de multiherramienta Clase-S:</p>
 							<button class="tooltip">
-								<data>Can be found on the space station.</data>
-								<data>Multi-Tool Merchant Upgrades</data>
+								<data>Se pueden encontrar en la estación espacial.</data>
+								<data>Comerciante de mejoras de multiherramienta</data>
 								<data>
-									Can be found on the space station at the multi-tool merchant.<br>
-									Only check upgrades available in S class.
+									Se pueden encontrar en la estación espacial en el comerciante de multiherramientas.<br>
+									Verifique solo las mejoras disponibles en clase S.
 								</data>
 								<data>system/MTU</data>
 							</button>
 						</div>
-						<button class="button" data-display-default="none" id="hideMTMerchantButton">Show</button>
+						<button class="button" data-display-default="none" id="hideMTMerchantButton">Mostrar</button>
 					</div>
 					<div class="tableHeader data" data-section="MTMerchant" style="display: none"
 						data-station="merchant">
-						<label for="mtSearch">Search:</label>
-						<input type="text" id="mtSearch" placeholder="🔎 Search" name="merchant-search"
+						<label for="mtSearch">Buscar:</label>
+						<input type="text" id="mtSearch" placeholder="🔎 Buscar" name="merchant-search"
 							class="input merchant-search">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="mtAVU"><input type="checkbox" id="mtAVU"
 									value="Analysis Visor Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Scanner Module</span></label>
+									class="checkbox-label">Módulo de escáner</span></label>
 
 							<label class="checkbox" for="mtBJU"><input type="checkbox" id="mtBJU"
 									value="Blaze Javelin Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Blaze Javelin Module</span></label>
+									class="checkbox-label">Módulo de jabalina ígnea</span></label>
 
 							<label class="checkbox" for="mtBU"><input type="checkbox" id="mtBU"
 									value="Boltcaster Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Boltcaster Module</span></label>
+									class="checkbox-label">Módulo de lanzarrayos</span></label>
 
 							<label class="checkbox" for="mtGCU"><input type="checkbox" id="mtGCU"
 									value="Geology Cannon Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Geology Cannon Module</span></label>
+									class="checkbox-label">Módulo de cañón geológico</span></label>
 
 							<label class="checkbox" for="mtMBU"><input type="checkbox" id="mtMBU"
 									value="Mining Beam Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Mining Beam Module</span></label>
+									class="checkbox-label">Módulo de láser de extracción</span></label>
 
 							<label class="checkbox" for="mtNCU"><input type="checkbox" id="mtNCU"
 									value="Neutron Cannon Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Neutron Cannon Module</span></label>
+									class="checkbox-label">Módulo de cañón de neutrones</span></label>
 
 							<label class="checkbox" for="mtPLU"><input type="checkbox" id="mtPLU"
 									value="Plasma Launcher Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Plasma Launcher Module</span></label>
+									class="checkbox-label">Módulo de lanzador de plasma</span></label>
 
 							<label class="checkbox" for="mtPSU"><input type="checkbox" id="mtPSU"
 									value="Pulse Spitter Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Pulse Spitter Module</span></label>
+									class="checkbox-label">Módulo de lanzador de pulso</span></label>
 
 							<label class="checkbox" for="mtSBU"><input type="checkbox" id="mtSBU"
 									value="Scatter Blaster Upgrade" data-dest-checkbox-group="MTMerchant"><span
-									class="checkbox-label">Scatter Blaster Module</span></label>
+									class="checkbox-label">Módulo de cañón de dispersión</span></label>
 						</div>
 					</div>
 					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
-							<p>S-class starship merchant upgrades:</p>
+							<p>Comerciante de modulos de nave Clase-S:</p>
 							<button class="tooltip">
-								<data>Can be found on the space station.</data>
-								<data>Starship Merchant Upgrades</data>
+								<data>Se pueden encontrar en la estación espacial.</data>
+								<data>Mejoras del comerciante de naves espaciales</data>
 								<data>
-									Can be found on the space station at the starship merchant.<br>
-									Only check upgrades available in S class.
+									Se pueden encontrar en la estación espacial en el comerciante de naves.<br>
+									Verifique solo las mejoras disponibles en clase S.
 								</data>
 								<data>system/SSU</data>
 							</button>
 						</div>
-						<button class="button" data-display-default="none" id="hideSSMerchantButton">Show</button>
+						<button class="button" data-display-default="none" id="hideSSMerchantButton">Mostrar</button>
 					</div>
 					<div class="tableHeader data" data-section="SSMerchant" style="display: none"
 						data-station="merchant">
-						<label for="ssSearch">Search:</label>
-						<input type="text" id="ssSearch" placeholder="🔎 Search" name="merchant-search"
+						<label for="ssSearch">Buscar:</label>
+						<input type="text" id="ssSearch" placeholder="🔎 Buscar" name="merchant-search"
 							class="input merchant-search">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="ssCBU"><input type="checkbox" id="ssCBU"
 									value="Cyclotron Ballista Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Cyclotron Module</span></label>
+									class="checkbox-label">Módulo de ciclotrones</span></label>
 
 							<label class="checkbox" for="ssDSU"><input type="checkbox" id="ssDSU"
 									value="Deflector Shield Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Starship Shield Module</span></label>
+									class="checkbox-label">Módulo de escudo de la nave</span></label>
 
 							<label class="checkbox" for="ssHU"><input type="checkbox" id="ssHU"
 									value="Hyperdrive Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Hyperdrive Module</span></label>
+									class="checkbox-label">Módulo de hiperturbo</span></label>
 
 							<label class="checkbox" for="ssIKAU"><input type="checkbox" id="ssIKAU"
 									value="Infra-Knife Accelerator Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Infra-Knife Module</span></label>
+									class="checkbox-label">Módulo de infracuchillo</span></label>
 
 							<label class="checkbox" for="ssLTU"><input type="checkbox" id="ssLTU"
 									value="Launch Thruster Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Launch Thrusters Module</span></label>
+									class="checkbox-label">Módulo de propulsores de lanzamiento</span></label>
 
 							<label class="checkbox" for="ssPBU"><input type="checkbox" id="ssPBU"
 									value="Phase Beam Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Phase Beam Module</span></label>
+									class="checkbox-label">Módulo de rayo de fase</span></label>
 
 							<label class="checkbox" for="ssPCU"><input type="checkbox" id="ssPCU"
 									value="Photon Cannon Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Photon Cannon Module</span></label>
+									class="checkbox-label">Módulo de cañón de fotones</span></label>
 
 							<label class="checkbox" for="ssPEU"><input type="checkbox" id="ssPEU"
 									value="Positron Ejector Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Positron Module</span></label>
+									class="checkbox-label">Módulo de positrones</span></label>
 
 							<label class="checkbox" for="ssPuEU"><input type="checkbox" id="ssPuEU"
 									value="Pulse Engine Upgrade" data-dest-checkbox-group="SSMerchant"><span
-									class="checkbox-label">Pulse Engine Module</span></label>
+									class="checkbox-label">Módulo de motor de pulso</span></label>
 						</div>
 					</div>
 					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
-							<p>S-class exocraft merchant upgrades:</p>
+							<p>Comerciante de modulos de exonave Clase-S:</p>
 							<button class="tooltip">
-								<data>Can be found on the space station.</data>
-								<data>Exocraft Merchant Upgrades</data>
+								<data>Se pueden encontrar en la estación espacial.</data>
+								<data>Mejoras del comerciante de exonaves</data>
 								<data>
-									Can be found on the space station at the Exocraft merchant.<br>
-									Only check upgrades available in S class.
+									Se pueden encontrar en la estación espacial en el comerciante de exonaves.<br>
+									Verifique solo las mejoras disponibles en clase S.
 								</data>
 								<data>system/ECU</data>
 							</button>
 						</div>
-						<button class="button" data-display-default="none" id="hideECMerchantButton">Show</button>
+						<button class="button" data-display-default="none" id="hideECMerchantButton">Mostrar</button>
 					</div>
 					<div class="tableHeader data" data-section="ECMerchant" style="display: none"
 						data-station="merchant">
-						<label for="ecSearch">Search:</label>
-						<input type="text" id="ecSearch" placeholder="🔎 Search" name="merchant-search"
+						<label for="ecSearch">Buscar:</label>
+						<input type="text" id="ecSearch" placeholder="🔎 Buscar" name="merchant-search"
 							class="input merchant-search">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="ecEAMU"><input type="checkbox" id="ecEAMU"
 									value="Exocraft Boosters Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Exocraft
-									Acceleration Module Upgrade</span></label>
+									class="checkbox-label">Mejora del módulo de aceleración de exonave</span></label>
 
 							<label class="checkbox" for="ecEMLU"><input type="checkbox" id="ecEMLU"
 									value="Exocraft Mining Laser Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Exocraft Laser Module</span></label>
+									class="checkbox-label">Módulo de láser de exonave</span></label>
 
 							<label class="checkbox" for="ecEMCU"><input type="checkbox" id="ecEMCU"
 									value="Mounted Cannon Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Exocraft Cannon Module</span></label>
+									class="checkbox-label">Módulo de cañón de exonave</span></label>
 
 							<label class="checkbox" for="ecFEU"><input type="checkbox" id="ecFEU"
 									value="Fusion Engine Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Exocraft Engine Module</span></label>
+									class="checkbox-label">Módulo de motor de exonave</span></label>
 
 							<label class="checkbox" for="ecEBU"><input type="checkbox" id="ecEBU"
 									value="Exocraft Boosters Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Exocraft Boost Module</span></label>
+									class="checkbox-label">Módulo de potencia de exonave</span></label>
 
 							<label class="checkbox" for="ecHDU"><input type="checkbox" id="ecHDU"
 									value="Humboldt Drive Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Humboldt Drive Module</span></label>
+									class="checkbox-label">Módulo de motor de Humboldt</span></label>
 
 							<label class="checkbox" for="ecMCU"><input type="checkbox" id="ecMCU"
 									value="Minotaur Cannon Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Minotaur Cannon Module</span></label>
+									class="checkbox-label">Módulo de cañón del Minotauro</span></label>
 
 							<label class="checkbox" for="ecMEU"><input type="checkbox" id="ecMEU"
 									value="Daedalus Engine Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Minotaur Engine Module</span></label>
+									class="checkbox-label">Módulo de motor del Minotauro</span></label>
 
 							<label class="checkbox" for="ecMLU"><input type="checkbox" id="ecMLU"
 									value="Minotaur Laser Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Minotaur Laser Module</span></label>
+									class="checkbox-label">Módulo de láser del Minotauro</span></label>
 
 							<label class="checkbox" for="ecNCU"><input type="checkbox" id="ecNCU"
 									value="Nautilon Cannon Upgrade" data-dest-checkbox-group="ECMerchant"><span
-									class="checkbox-label">Nautilon Cannon Module</span></label>
+									class="checkbox-label">Módulo de cañón de Nautilo</span></label>
 						</div>
 					</div>
 					<div class="tableHeader text sectionToggle" data-station="merchant">
 						<div class="label-combo is-flex-wrap-nowrap">
-							<p>S-class exosuit merchant upgrades:</p>
+							<p>Comerciante de modulos de exotraje Clase-S:</p>
 							<button class="tooltip">
-								<data>Can be found on the space station.</data>
-								<data>Exosuit Merchant Upgrades</data>
+								<data>Se pueden encontrar en la estación espacial.</data>
+								<data>Mejoras del comerciante de exotraje</data>
 								<data>
-									Can be found on the space station at the Exosuit merchant.<br>
-									Only check upgrades available in S class.
+									Se pueden encontrar en la estación espacial en el comerciante de exotraje.<br>
+									Verifique solo las mejoras disponibles en clase S.
 								</data>
 								<data>system/ESU</data>
 							</button>
 						</div>
-						<button class="button" data-display-default="none" id="hideESMerchantButton">Show</button>
+						<button class="button" data-display-default="none" id="hideESMerchantButton">Mostrar</button>
 					</div>
 					<div class="tableHeader data" data-section="ESMerchant" style="display: none"
 						data-station="merchant">
-						<label for="esSearch">Search:</label>
-						<input type="text" id="esSearch" placeholder="🔎 Search" name="merchant-search"
+						<label for="esSearch">Buscar:</label>
+						<input type="text" id="esSearch" placeholder="🔎 Buscar" name="merchant-search"
 							class="input merchant-search">
 						<div class="checkboxes-grid" style="width: 100%">
 							<label class="checkbox" for="esDSU"><input type="checkbox" id="esDSU"
 									value="Defence Systems Upgrade" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Shield Module</span></label>
+									class="checkbox-label">Módulo de escudo</span></label>
 
 							<label class="checkbox" for="esLSU"><input type="checkbox" id="esLSU"
 									value="Life Support Upgrade" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Life Support Module</span></label>
+									class="checkbox-label">Módulo de soporte vital</span></label>
 
 							<label class="checkbox" for="esMSU"><input type="checkbox" id="esMSU"
 									value="Movement System Upgrade" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Movement Module</span></label>
+									class="checkbox-label">Módulo de movimiento</span></label>
 
 							<label class="checkbox" for="esRPM"><input type="checkbox" id="esRPM"
 									value="Radiation Protection Module" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Radiation Protection Module</span></label>
+									class="checkbox-label">Módulo de protección radiactiva</span></label>
 
 							<label class="checkbox" for="esTPMC"><input type="checkbox" id="esTPMC"
 									value="Thermal Protection Module (Cold)" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Thermal Protection Module (Cold)</span></label>
+									class="checkbox-label">Módulo de protección térmica (Frio)</span></label>
 
 							<label class="checkbox" for="esTPMH"><input type="checkbox" id="esTPMH"
 									value="Thermal Protection Module (Heat)" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Thermal Protection Module (Heat)</span></label>
+									class="checkbox-label">Módulo de protección térmica (Calor)</span></label>
 
 							<label class="checkbox" for="esTPM"><input type="checkbox" id="esTPM"
 									value="Toxic Protection Module" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Toxic Protection Module</span></label>
+									class="checkbox-label">Módulo de protección tóxica</span></label>
 
 							<label class="checkbox" for="esUPM"><input type="checkbox" id="esUPM"
 									value="Underwater Protection Module" data-dest-checkbox-group="ESMerchant"><span
-									class="checkbox-label">Underwater Protection Module</span></label>
+									class="checkbox-label">Módulo de protección submarina</span></label>
 						</div>
 					</div>
 					<div class="tableHeader text sectionToggle" data-station="scrapDealer">
 						<div class="label-combo is-flex-wrap-nowrap">
-							<p>X-class scrapdealer upgrades:</p>
+							<p>Mejoras del chatarrero clase X:</p>
 							<button class="tooltip">
-								<data>Can be found on the space station.</data>
-								<data>Scrapdealer Merchant Upgrades</data>
-								<data>Can be found on the space station at the scrapdealer merchant.<br>
-									If they sell no upgrades, check the "Nothing" box.</data>
+								<data>Se pueden encontrar en la estación espacial.</data>
+								<data>Mejoras del chatarrero</data>
+								<data>Se pueden encontrar en la estación espacial en el comerciante de chatarra.<br>
+									Si no venden mejoras, marque la casilla "Nada".</data>
 								<data>system/SDU</data>
 							</button>
 						</div>
-						<button class="button" data-display-default="none" id="hideSDMerchantButton">Show</button>
+						<button class="button" data-display-default="none" id="hideSDMerchantButton">Mostrar</button>
 					</div>
 					<div class="tableHeader data" data-section="SDMerchant" style="display: none"
 						data-station="scrapDealer">
-						<label for="sdSearch">Search:</label>
-						<input type="text" id="sdSearch" placeholder="🔎 Search" name="merchant-search"
+						<label for="sdSearch">Buscar:</label>
+						<input type="text" id="sdSearch" placeholder="🔎 Buscar" name="merchant-search"
 							class="input merchant-search">
 						<div class="checkboxes-grid" style="width: 100%">
 							<label class="checkbox" for="sdN"><input type="checkbox" id="sdN" value=""
 									data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Nothing</span></label>
+									class="checkbox-label">Nada</span></label>
 
 							<label class="checkbox" for="sdLTU"><input type="checkbox" id="sdLTU"
 									value="Suspicious Launch Thrusters Module"
-									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Suspicious Launch
-									Thrusters Module</span></label>
+									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Módulo sospechoso de propulsores de lanzamiento</span></label>
 
 							<label class="checkbox" for="sdMBM"><input type="checkbox" id="sdMBM"
 									value="Suspicious Mining Beam Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Mining Beam Module</span></label>
+									class="checkbox-label">Módulo de láser de extracción sospechoso</span></label>
 
 							<label class="checkbox" for="sdSM"><input type="checkbox" id="sdSM"
 									value="Suspicious Scanner Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Scanner Module</span></label>
+									class="checkbox-label">Módulo de escáner sospechoso</span></label>
 
 							<label class="checkbox" for="sdLSM"><input type="checkbox" id="sdLSM"
 									value="Suspicious Life Support Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Life Support Module</span></label>
+									class="checkbox-label">Módulo de soporte vital sospechoso</span></label>
 
 							<label class="checkbox" for="sdBM"><input type="checkbox" id="sdBM"
 									value="Suspicious Boltcaster Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Boltcaster Module</span></label>
+									class="checkbox-label">Módulo de lanzarrayos sospechoso</span></label>
 
 							<label class="checkbox" for="sdHPM"><input type="checkbox" id="sdHPM"
 									value="Suspicious Hazard Protection Module"
-									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Suspicious Hazard
-									Protection Module</span></label>
+									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Módulo de soporte vital sospechoso</span></label>
 
 							<label class="checkbox" for="sdMM"><input type="checkbox" id="sdMM"
 									value="Suspicious Movement Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Movement Module</span></label>
+									class="checkbox-label">Módulo de movimiento sospechoso</span></label>
 
 							<label class="checkbox" for="sdShM"><input type="checkbox" id="sdShM"
 									value="Suspicious Shield Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Shield Module</span></label>
+									class="checkbox-label">Módulo de escudo sospechoso</span></label>
 
 							<label class="checkbox" for="sdHM"><input type="checkbox" id="sdHM"
 									value="Suspicious Hyperdrive Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Hyperdrive Module</span></label>
+									class="checkbox-label">Módulo de hiperturbo sospechoso</span></label>
 
 							<label class="checkbox" for="sdPEM"><input type="checkbox" id="sdPEM"
 									value="Suspicious Pulse Engine Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Pulse Engine Module</span></label>
+									class="checkbox-label">Módulo de motor de pulso sospechoso</span></label>
 
 							<label class="checkbox" for="sdSSM"><input type="checkbox" id="sdSSM"
 									value="Suspicious Starship Shield Module"
-									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Suspicious
-									Starship Shield Module</span></label>
+									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Módulo de escudo de la nave sospechoso</span></label>
 
 							<label class="checkbox" for="sdCM"><input type="checkbox" id="sdCM"
 									value="Suspicious Cyclotron Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Cyclotron Module</span></label>
+									class="checkbox-label">Módulo de ciclotrones sospechoso</span></label>
 
 							<label class="checkbox" for="sdIKM"><input type="checkbox" id="sdIKM"
 									value="Suspicious Infra-Knife Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Infra-Knife Module</span></label>
+									class="checkbox-label">Módulo de infracuchillo sospechoso</span></label>
 
 							<label class="checkbox" for="sdPM"><input type="checkbox" id="sdPM"
 									value="Suspicious Positron Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Positron Module</span></label>
+									class="checkbox-label">Módulo de positrones sospechoso</span></label>
 
 							<label class="checkbox" for="sdPCM"><input type="checkbox" id="sdPCM"
 									value="Suspicious Photon Cannon Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Photon Cannon Module</span></label>
+									class="checkbox-label">Módulo de cañón de fotones sospechoso</span></label>
 
 							<label class="checkbox" for="sdPSM"><input type="checkbox" id="sdPSM"
 									value="Suspicious Pulse Spitter Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Pulse Spitter Module</span></label>
+									class="checkbox-label">Módulo de lanzador de pulso sospechoso</span></label>
 
 							<label class="checkbox" for="sdSBM"><input type="checkbox" id="sdSBM"
 									value="Suspicious Scatter Blaster Module"
-									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Suspicious
-									Scatter Blaster Module</span></label>
+									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Módulo de cañón de dispersión sospechoso</span></label>
 
 							<label class="checkbox" for="sdBJM"><input type="checkbox" id="sdBJM"
 									value="Suspicious Blaze Javelin Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Blaze Javelin Module</span></label>
+									class="checkbox-label">Módulo de jabalina ígnea sospechoso</span></label>
 
 							<label class="checkbox" for="sdGCM"><input type="checkbox" id="sdGCM"
 									value="Suspicious Geology Cannon Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Geology Cannon Module</span></label>
+									class="checkbox-label">Módulo de cañón geológico sospechoso</span></label>
 
 							<label class="checkbox" for="sdPLM"><input type="checkbox" id="sdPLM"
 									value="Suspicious Plasma Launcher Module"
-									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Suspicious Plasma
-									Launcher Module</span></label>
+									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Módulo de lanzador de plasma sospechoso</span></label>
 
 							<label class="checkbox" for="sdNCM"><input type="checkbox" id="sdNCM"
 									value="Suspicious Neutron Cannon Module" data-dest-checkbox-group="SDMerchant"><span
-									class="checkbox-label">Suspicious Neutron Cannon Module</span></label>
+									class="checkbox-label">Módulo de cañón de neutrones sospechoso</span></label>
 						</div>
 					</div>
 					<div class="table-cell text">
-						<label>Add optional templates:</label>
+						<label>Añadir plantillas opcionales:</label>
 					</div>
 					<div class="table-cell data">
 						<div class="checkboxes-grid">
 							<label class="checkbox" for="freightersCheckbox"><input type="checkbox" name="systemExtras"
 									value="Freighters" id="freightersCheckbox"><span
-									class="checkbox-label">Freighters</span></label>
+									class="checkbox-label">Cargueros</span></label>
 							<label class="checkbox" for="derelictCheckbox"><input type="checkbox" name="systemExtras"
-									value="Derelict" id="derelictCheckbox"><span class="checkbox-label">Derelict
-									Freighter</span></label>
+									value="Derelict" id="derelictCheckbox"><span class="checkbox-label">Carguero estrellado</span></label>
 							<label class="checkbox" for="organicCheckbox"><input type="checkbox" name="systemExtras"
-									value="Organic" id="organicCheckbox"><span class="checkbox-label">Organic
-									Frigate</span></label>
+									value="Organic" id="organicCheckbox"><span class="checkbox-label">Fragata viva</span></label>
 							<label class="checkbox" for="starshipCheckbox"><input type="checkbox" name="systemExtras"
-									value="Starships" id="starshipCheckbox"><span class="checkbox-label">System Starship
-									Album</span></label>
+									value="Starships" id="starshipCheckbox"><span class="checkbox-label">Álbum de las naves del sistema</span></label>
 							<label class="checkbox" for="mtCheckbox"><input type="checkbox" name="systemExtras"
-									value="MTs" id="mtCheckbox"><span class="checkbox-label">System Multi-Tool
-									Album</span></label>
+									value="MTs" id="mtCheckbox"><span class="checkbox-label">Álbum de las multiherramientas del sistema</span></label>
 						</div>
 					</div>
 					<div class="tableHeader data no-flex">
-						<label for="addInfoInput">Additional Information:</label>
+						<label for="addInfoInput">Información Adicional:</label>
 						<textarea id="addInfoInput" data-dest="addInfo"></textarea>
 					</div>
 				</div>
@@ -986,7 +984,7 @@
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image"></output></div>
 					<div>| region = <output id="region" name="region"></output></div>
-					<div>| galaxy = Eissentam</output></div>
+					<div>| galaxy = <output id="galaxy"></output></div>
 					<div>| multiplestars = <output id="multiplestars"></output></div>
 					<div>| coordinates = <output id="portalglyphs" name="galacticCoords"></output></div>
 					<div>| color = <output id="color"></output></div>
@@ -1003,7 +1001,7 @@
 					<div>| wealth = <output id="wealth"></output></div>
 					<div>| conflict = <output id="conflict"></output></div>
 					<div>| mode = <output id="mode"></output></div>
-					<div>| civilized = Eisvana</div>
+					<div>| civilized = <output id="hub" name="hub"></output></div>
 					<div>| researchteam = <output id="researchteam"></output></div>
 					<div>| discoveredlink = <output id="discoveredlink"></output></div>
 					<div>| discovered = <output id="discovered" name="discovered"></output></div>
@@ -1012,8 +1010,7 @@
 					<div>'''<output id="name1" name="name"></output>''' is a star system.</div>
 					<br>
 					<div>==Summary==</div>
-					<div>'''<output id="name2" name="name"></output>''' is a [[star system]] in the <output
-							id="regionLong"></output>.</div>
+					<div>'''<output id="name2" name="name"></output>''' is a [[star system]] in the [[<output id="region" name="region"></output>]] region.</div>
 					<br>
 					<div>==Alias Names==</div>
 					<div>{{aliasc|text=Original|name=<output id="oldName"></output>}}</div>
@@ -1102,20 +1099,20 @@
 						<br>
 					</div>
 					<div>==Documented Starships==</div>
-					<div>{{CARGOShipSys|<output id="shipcoords" name="galacticCoords"></output>|Eissentam}}</div>
+					<div>{{CARGOShipSys|<output id="shipcoords" name="galacticCoords"></output>|<output name="galaxy"></output>}}</div>
 					<br>
 					<div style="display: none" id="Starships">
 						All Starships discovered in the system can be found in the [[<output name="name"></output> -
-						Starship Album]] and the respective [[Eisvana Starship Albums]].
+						Starship Album]].
 						<br>
 						<br>
 					</div>
 					<div>==Documented Multi-Tools==</div>
-					<div>{{CARGOMTCoord|<output id="mtcoords" name="galacticCoords"></output>|Eissentam}}</div>
+					<div>{{CARGOMTCoord|<output id="mtcoords" name="galacticCoords"></output>|<output name="galaxy"></output>}}</div>
 					<br>
 					<div style="display: none" id="MTs">
 						All Multi-Tools discovered in the system can be found in the [[<output name="name"></output> -
-						Multi-Tool Album]] and the respective [[Eisvana Multi-Tool Albums]].
+						Multi-Tool Album]].
 						<br>
 						<br>
 					</div>
@@ -1126,7 +1123,7 @@
 					<div>[[File:<output id="navImage"></output>|400px]]</div>
 					<br>
 					<div>===System Location===</div>
-					<div><output id="loc"></output></div>
+					<div>Located in the [[<output id="region" name="region"></output>]] [[region]] of [[<output id="hub" name="hub"></output>]] in the [[<output id="galaxy" name="galaxy"></output>]] galaxy.</div>
 					<br>
 					<div>==Space Station==</div>
 					<div data-station="img">[[File:<output id=ssImage></output>|thumb|System space station]]</div>

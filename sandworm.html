@@ -4,45 +4,44 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Eisvana Wiki Page Creator - Sandworm</title>
-	<meta name="application-name" content="Eisvana Wiki Page Creator">
+	<title>Creador de páginas Wiki - Sandworm</title>
+	<meta name="application-name" content="Creador de páginas Wiki">
 	<meta name="description"
-		content="Easily generate the wikicode to create a sandworm discovery page for Eisvana on the No Man's Sky Wiki!">
+		content="Easily generate the wikicode to create a sandworm discovery page on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#280033">
-	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Eisvana, Page Creator, Sandworm">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Page Creator, Sandworm">
 	<script src="./src/pages/sandworm" type="module"></script>
 </head>
 
 <body>
 	<div class="container">
 		<nav>
-			<div><a href="./" title="Main page">&larr; Return to main page</a></div>
+			<div><a href="./" title="Main page">&larr; Regresar a la página principal</a></div>
 			<div><a href="./fauna.html" title="Fauna">&#8624; Fauna</a></div>
 		</nav>
-		<h1 class="title is-3">Eisvana Wiki Page Creator - Sandworm</h1>
+		<h1 class="title is-3">Creador de páginas Wiki - Gusano de arena</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
 				<div class="table">
 					<div class="table-cell text">
-						<label>Current release:</label>
+						<label>Version:</label>
 					</div>
 					<div class="table-cell data">
 						<select id="versionInput" data-dest="release"></select>
 					</div>
 					<div class="table-cell text">
-						<label for="fileInput">Main image name, including file extension:</label>
+						<label for="fileInput">Nombre de la imagen principal, incluida la extensión del archivo:</label>
 						<button class="tooltip" name="fileUploadTooltip">
-							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
-							<data>File Upload</data>
+							<data>La imagen no se subira en la wiki. Esto es sólo para autocompletar el nombre de la imagen.</data>
+							<data>Subir archivo</data>
 							<data>
-								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
-								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
-									data-wiki>Special:Upload</a>
-								<iframe src="https://nmscd.com/Image-Compressor/" title="Image Compressor"
-									class="explanation-embed" width="450" height="300">Image Compressor</iframe>
+								Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen. El
+                tamaño máximo del archivo es 10 MB. Puedes subir tus imágenes a la wiki en <a href="Special:Upload?multiple=true"
+                  data-wiki>Special:Upload</a>
+								<iframe src="https://nmscd.com/Image-Compressor/" title="Compresor de imagen"
+									class="explanation-embed" width="450" height="300">Compresor de imagen</iframe>
 							</data>
 						</button>
 					</div>
@@ -50,28 +49,45 @@
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
-					<div class="table-cell text">
-						<label for="systemInput">Name of the system:</label>
+          <div class="table-cell text">
+						<label for="hubInput">Nombre del Hub:</label>
 						<button class="tooltip">
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>Escriba el nombre del Hub que represente</data>
+							<data>Nombre del Hub</data>
+              <data>Escriba el nombre del Hub que represente</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="hub" id="hubInput">
+					</div>
+          <div class="table-cell text">
+						<label for="galaxyInput">Galaxia:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="galaxy" id="galaxyInput">
+					</div>
+					<div class="table-cell text">
+						<label for="systemInput">Nombre del sistema:</label>
+						<button class="tooltip">
+							<data>Escribalo exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
 					<div class="table-cell text">
-						<label for="planetInput">Name of the planet:</label>
+						<label for="planetInput">Nombre del planeta.:</label>
 						<button class="tooltip">
-							<data>Planet Name OR the planet circled by the moon where the worm can be found.</data>
+							<data>Nombre del planeta O el planeta rodeado por la luna donde se puede encontrar el gusano.</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="table-cell text">
-						<label for="moonInput">Name of the moon (if worm is on moon):</label>
+						<label for="moonInput">Nombre de la luna (si el gusano está en la luna):</label>
 						<button class="tooltip">
-							<data>If the worm is located on a moon. Leave blank if the worm is on a planet.</data>
+							<data>Si el gusano se encuentra en una luna. Déjelo en blanco si el gusano está en un planeta.</data>
 						</button>
 					</div>
 					<div class="table-cell data">
@@ -79,18 +95,18 @@
 					</div>
 					<div class="table-cell text">
 						<div class="label-combo">
-							<label for="portalglyphsInput">Portalglyphs:</label>
+							<label for="portalglyphsInput">Glifos:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
-								Delete</button>
+								Borrar</button>
 						</div>
 						<button class="tooltip">
-							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>Portalglyphs</data>
+							<data>Encontrado en modo foto. Los glifos son específicos de cada planeta.</data>
+							<data>Glifos</data>
 							<data>
-								Found in Photo Mode. Glyphs are specific to each planet.
+								Encontrado en modo foto. Los glifos son específicos de cada planeta.
 								<iframe src="https://nmspar.vercel.app/" sandbox="allow-scripts allow-same-origin"
-									title="Glyph Reader" class="explanation-embed" width="450" height="300">Glyph
-									Reader</iframe>
+									title="Glyph Reader" class="explanation-embed" width="450" height="300">Lector de glifos
+									</iframe>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -103,33 +119,33 @@
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
 					<div class="table-cell text">
-						<label>Class:</label>
+						<label>Clase:</label>
 						<button class="tooltip">
-							<data>Found on the worm scan.</data>
-							<data>Class</data>
-							<data>Found on the worm scan.</data>
+							<data>Encontrado en el escaneo de gusanos.</data>
+							<data>Clase</data>
+							<data>Encontrado en el escaneo de gusanos.</data>
 							<data>sandworm/class</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select id="wormclassInput" data-dest="wormclass">
-							<option value="Ceaseless Burrower">Ceaseless Burrower</option>
-							<option value="Colossal Being">Colossal Being</option>
-							<option value="Gargantuan">Gargantuan</option>
-							<option value="Giant Parasite">Giant Parasite</option>
-							<option value="Planetary Maggot">Planetary Maggot</option>
-							<option value="The Consumer">The Consumer</option>
-							<option value="Unstoppable Nematode">Unstoppable Nematode</option>
-							<option value="Worm Lord">Worm Lord</option>
+							<option value="Ceaseless Burrower">Excavador incesante</option>
+							<option value="Colossal Being">Ser colosal</option>
+							<option value="Gargantuan">Pantagruélico</option>
+							<option value="Giant Parasite">Parásito gigante</option>
+							<option value="Planetary Maggot">Cresa planetaria</option>
+							<option value="The Consumer">El Consumidor</option>
+							<option value="Unstoppable Nematode">Nematodo imparable</option>
+							<option value="Worm Lord">Señor de los gusanos</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>Max Depth:</label>
+						<label>Máxima profundidad:</label>
 						<button class="tooltip">
-							<data>Found on the worm scan.</data>
-							<data>Max Depth</data>
-							<data>Found on the worm scan.<br>Give the full number, including the decimal.<br>No "ku"
-								necessary.</data>
+							<data>Encontrado en el escaneo de gusanos.</data>
+							<data>Máxima profundidad</data>
+							<data>Encontrado en el escaneo de gusanos.<br>Indique el número completo, incluido el decimal.<br>Sin "ku"
+                necesario.</data>
 							<data>sandworm/maxDepth</data>
 						</button>
 					</div>
@@ -138,110 +154,105 @@
 							maxlength="5" placeholder="0.0">
 					</div>
 					<div class="table-cell text">
-						<label>Stomach Contents:</label>
+						<label>Contenido del estómago:</label>
 						<button class="tooltip">
-							<data>Found on the worm scan.</data>
-							<data>Stomach Contents</data>
-							<data>Found on the worm scan.</data>
+							<data>Encontrado en el escaneo de gusanos.</data>
+							<data>Contenido del estómago</data>
+							<data>Encontrado en el escaneo de gusanos.</data>
 							<data>sandworm/stomachContents</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select id="wormstomachInput" data-dest="wormstomach">
-							<option value="Consumed waypoints">Consumed waypoints</option>
-							<option value="Entire [[Trade Outpost|trade outpost]]">Entire trade outpost</option>
-							<option value="[[Freighter]] components">Freighter components</option>
-							<option value="Horrific Eggs">Horrific Eggs</option>
-							<option value="Layers of teeth">Layers of teeth</option>
-							<option value="Lost [[starship]]s">Lost starships</option>
+							<option value="Consumed waypoints">Puntos de control consumidos</option>
+							<option value="Entire [[Trade Outpost|trade outpost]]">Puesto comercial entero</option>
+							<option value="[[Freighter]] components">Componentes de carguero</option>
+							<option value="Horrific Eggs">Huevos horrorosos</option>
+							<option value="Layers of teeth">Capas de dientes</option>
+							<option value="Lost [[starship]]s">Naves perdidas</option>
 							<option value="Magma">Magma</option>
-							<option value="Many [[Sentinel]]s">Many Sentinels</option>
-							<option value="Minerals">Minerals</option>
-							<option value="Mostly sand">Mostly sand</option>
-							<option value="Other gargantuans">Other gargantuans</option>
-							<option value="Planetary beacon">Planetary beacon</option>
-							<option value="Rubble">Rubble</option>
-							<option value="[[Sentinel Walker]]s">Sentinel Walkers</option>
-							<option value="Several [[Gek]]">Several Gek</option>
-							<option value="Unpleasant liquid">Unpleasant liquid</option>
+							<option value="Many [[Sentinel]]s">Muchos Centinelas</option>
+							<option value="Minerals">Minerales</option>
+							<option value="Mostly sand">Principalmente arena</option>
+							<option value="Other gargantuans">Otros seres pantagruélicos</option>
+							<option value="Planetary beacon">Baliza planetaria</option>
+							<option value="Rubble">Escombros</option>
+							<option value="[[Sentinel Walker]]s">Caminantes Centinelas</option>
+							<option value="Several [[Gek]]">Varios Gek</option>
+							<option value="Unpleasant liquid">Líquido desagradable</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>Does this worm spawn on game reload?</label>
+						<label>¿Este gusano aparece al recargar el juego?</label>
 						<button class="tooltip">
-							<data>Reload your game and observe.</data>
-							<data>Worm on Reload</data>
+							<data>Recarga tu juego y observa..</data>
+							<data>Gusano al recargar</data>
 							<data>
-								Some worms spawn immediately after you reload your game. To test this, make a manual
-								save by entering and exiting your starship,
-								then reload your latest save in the options.<br>If the worm doesn't spawn after 5-10
-								seconds, it doesn't spawn after reload.<br>
-								You can't really overlook a worm, they make a very loud sound and shake the ground.
+                Algunos gusanos aparecen inmediatamente después de recargar el juego. Para probar esto, guarde manualmente ingresando y
+                saliendo de su nave espacial, luego vuelva a cargar su último guardado en las opciones.<br>Si el gusano no aparece
+                después de 5 a 10 segundos, no aparece después de la recarga.<br>
+                Realmente no se puede pasar por alto un gusano, hacen un sonido muy fuerte y sacuden el suelo.
 							</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<div class="radioButtons">
 							<label for="autoSpawnInputY"><input type="radio" id="autoSpawnInputY" name="autoSpawnInput"
-									value="will"><span>Yes</span></label>
+									value="will"><span>Si</span></label>
 							<label for="autoSpawnInputN"><input type="radio" id="autoSpawnInputN" name="autoSpawnInput"
 									value="will not"><span>No</span></label>
 							<label for="autoSpawnInputA"><input type="radio" id="autoSpawnInputA" name="autoSpawnInput"
-									value="" checked><span>I don't know</span></label>
+									value="" checked><span>No se/span></label>
 						</div>
 					</div>
 					<div class="table-cell text">
-						<label>Gamemode:</label>
+						<label>Modo de juego:</label>
 						<button class="tooltip">
-							<data>Gamemode of the save on which this worm was discovered.</data>
-							<data>Gamemode</data>
-							<data>Gamemode of the save on which this worm was discovered.<br>Found in the main
-								menu:</data>
+              <data>Modo de juego del guardado en el que se descubrió este gusano.</data>
+              <data>Modo de juego</data>
+              <data>Modo de juego del guardado en el que se descubrió este gusano.<br>Encontrado en el menu principal:
+              </data>
 							<data>shared/gamemode</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select data-dest="mode" id="modeInput">
 							<option value="Normal">Normal</option>
-							<option value="Relaxed">Relaxed</option>
+							<option value="Relaxed">Relajado</option>
 							<option value="Survival">Survival</option>
-							<option value="Permadeath">Permadeath</option>
-							<option value="Creative">Creative</option>
-							<option value="Custom">Custom</option>
+							<option value="Permadeath">Muerte permanente</option>
+							<option value="Creative">Creativo</option>
+							<option value="Custom">Personalizada</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredlinkInput">Discoverer wiki name:</label>
+						<label for="discoveredlinkInput">Nombre de la wiki del descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredInput">Discoverer alias if no wiki:</label>
+						<label for="discoveredInput">Alias del ​​descubridor si no tiene wiki:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="discovered" id="discoveredInput">
 					</div>
 					<div class="table-cell text">
-						<label for="docbyInput">Documenter alias if not discoverer:</label>
+						<label for="docbyInput">Alias del documentador si no es el descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
 					<div class="table-cell text">
-						<label>Do you belong to a chapter?</label>
+						<label>¿Perteneces a un gremio?</label>
 					</div>
 					<div class="table-cell data">
-						<select data-dest-noauto="researchteam" id="researchteamInput">
-							<option value=""></option>
-							<option value="Wiki Scholars">Wiki Scholars</option>
-							<option value="EBC">EBC</option>
-						</select>
+          <input type="text" data-dest-noauto="researchteam" id="researchteamInput">
 					</div>
 					<div class="tableHeader data no-flex">
-						<label for="appearanceInput">Appearance</label>
+						<label for="appearanceInput">Apariencia</label>
 						<textarea data-dest="appearance" id="appearanceInput"
-							placeholder="What does the worm look like?"></textarea>
+							placeholder="¿Cómo se ve el gusano?"></textarea>
 					</div>
 				</div>
 				<div id="galleryInput"></div>
@@ -256,7 +267,7 @@
 					<div>{{Creature infobox</div>
 					<div>| name = Immortal Worm <output id="name" name="bodyName"></output></div>
 					<div>| image = <output id="image" name="image"></output></div>
-					<div>| galaxy = Eissentam</div>
+					<div>| galaxy = <output id="galaxy"></output></div>
 					<div>| region = <output id="region"></output></div>
 					<div>| system = <output id="system" name="system"></output></div>
 					<div>| planet = <output id="planet"></output></div>
@@ -267,7 +278,7 @@
 					<div>| wormclass = <output id="wormclass"></output></div>
 					<div>| wormmaxdepth = <output id="wormmaxdepth"></output></div>
 					<div>| wormstomach = <output id="wormstomach"></output></div>
-					<div>| civilized = Eisvana</div>
+					<div>| civilized = <output id="hub" name="hub"></output></div>
 					<div>| discovered = <output id="discovered"></output></div>
 					<div>| discoveredlink = <output id="discoveredlink"></output></div>
 					<div>| researchteam = <output id="researchteam"></output></div>
@@ -295,7 +306,6 @@
 
 					<div>==Additional Information==</div>
 					<div><span data-add-info="*"></span> <output id="autoSpawn"></output></div>
-					<div><span data-add-info="*"></span> Featured in the <output id="addInfo"></output></div>
 					<div><span data-add-info="*"></span> <output id="docby"></output></div>
 					<br>
 
