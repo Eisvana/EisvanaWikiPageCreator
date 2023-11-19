@@ -1,4 +1,3 @@
-# https://lenni009.github.io/EisvanaWikiPageCreator
 # No Man's Sky - Wiki page creation website!
 
 Este es un sitio web destinado a facilitar la creación de páginas wiki en [No Man's Sky Wiki](https://nomanssky.fandom.com).
