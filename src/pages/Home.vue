@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import PageLink from '@/components/structure/PageLink.vue';
-import BuiltBy from '@/components/structure/BuiltBy.vue';
 import CivImage from '@/components/structure/CivImage.vue';
-import type { BuiltByProps, CivImageProps, PageLinkProps } from '@/types/objects';
+import type {CivImageProps, PageLinkProps } from '@/types/objects';
 
 const links: PageLinkProps[] = [
   {
@@ -22,7 +21,7 @@ const links: PageLinkProps[] = [
     url: './fauna.html',
   },
   {
-    text: 'Sandworm',
+    text: 'Gusano de Arena',
     url: './sandworm.html',
   },
   {
@@ -30,11 +29,11 @@ const links: PageLinkProps[] = [
     url: './flora.html',
   },
   {
-    text: 'Starship',
+    text: 'Naves',
     url: './starship.html',
   },
   {
-    text: 'Multi-Tool',
+    text: 'Multiherramientas',
     url: './multitool.html',
   },
   {
@@ -42,11 +41,11 @@ const links: PageLinkProps[] = [
     url: './mineral.html',
   },
   {
-    text: 'Derelict Freighter',
+    text: 'Carguero estrellado',
     url: './derelict.html',
   },
   {
-    text: 'Organic Frigate',
+    text: 'Fragatas organicas',
     url: './biofrig.html',
   },
   // {
@@ -54,51 +53,32 @@ const links: PageLinkProps[] = [
   //   url: './artifact.html',
   // },
   {
-    text: 'System',
+    text: 'Sistemas',
     url: './system.html',
   },
   {
-    text: 'Planet',
+    text: 'Planetas',
     url: './planet.html',
   },
   {
-    text: 'Moon',
+    text: 'Lunas',
     url: './moon.html',
   },
 ];
 
-const builtByCredits: BuiltByProps[] = [
-  {
-    text: 'Eisvana Wiki Scholars',
-    // link: 'https://nomanssky.fandom.com/wiki/Eisvana_Wiki_Scholars',
-    // img: '',
-    // imgAlt: 'Eisvana Wiki Scholars logo',
-  },
-  {
-    text: "Assistant for No Man's Sky",
-    link: 'https://nmsassistant.com/',
-    img: 'https://cdn.assistantapps.com/assistantNMS.png',
-    imgAlt: 'Assistant for NMS logo',
-  },
-];
 
 const images: CivImageProps[] = [
   {
-    link: 'https://nomanssky.fandom.com/wiki/Eisvana',
-    imgAlt: 'Eisvana logo',
-    img: 'https://static.wikia.nocookie.net/nomanssky_gamepedia/images/8/85/Eisvana_Logo.png',
+    link: 'https://nomanssky.fandom.com/wiki/Royal_Space_Society',
+    imgAlt: 'Royal Space Society logo',
+    img: 'https://static.wikia.nocookie.net/nomanssky_gamepedia/images/5/51/RSS_Emblem_Hub.png',
   },
-  // {
-  //   link: 'https://nomanssky.fandom.com/wiki/Eisvana_Wiki_Scholars',
-  //   imgAlt: 'Eisvana Wiki Scholars logo',
-  //   img: '',
-  // },
 ];
 </script>
 
 <template>
-  <h1 class="title is-spaced">Eisvana Wiki Page Creator</h1>
-  <div class="subtitle is-4">Choose what page you want to create:</div>
+  <h1 class="title is-spaced">Creador de páginas Wiki</h1>
+  <div class="subtitle is-4">Elija qué página desea crear:</div>
   <nav
     aria-label="Subpages"
     class="page-options"
@@ -111,16 +91,9 @@ const images: CivImageProps[] = [
     />
   </nav>
   <div class="built-by">
-    <div>Brought to you by:</div>
-    <BuiltBy
-      v-for="credit in builtByCredits"
-      :link="credit.link"
-      :text="credit.text"
-      :img="credit.img"
-      :img-alt="credit.imgAlt"
-    />
+    <div>Traído a usted por:</div>
   </div>
-  <div class="eisvana-images">
+  <div class="images">
     <CivImage
       v-for="image in images"
       :img="image.img"
@@ -136,7 +109,7 @@ const images: CivImageProps[] = [
   font-size: 1.25rem;
 }
 
-.eisvana-images {
+.images {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
