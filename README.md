@@ -12,3 +12,4 @@ También está abierto para que otras civilizaciones/empresas/jugadores creen su
 
 Gracias especiales:
 * [KhaozTopsy](https://github.com/Khaoz-Topsy) (Asistente de No Man's Sky; NMSCD): ayuda de JavaScript y estilo de página
+* [Muhaddil](https://github.com/Muhaddil) : ayudo a traducir la pagina a español.
