@@ -3,9 +3,10 @@
  *
  * @constant
  */
-export const versions = {
-  [key: string]: string
-  } = {
+export function getVersionData() {
+        const versions: {
+                [key: string]: string
+        } = {
 	'Echoes': 'Echoes',
 	'Singularity': 'Singularidad',
 	'Interceptor': 'Interceptor',
