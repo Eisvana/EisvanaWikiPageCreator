@@ -4,7 +4,7 @@
  * @type {string[]}
  * @constant
  */
-export const versions = {
+const versions = {
 	Echoes: 'Echoes',
 	Singularity: 'Singularidad',
 	Interceptor: 'Interceptor',
