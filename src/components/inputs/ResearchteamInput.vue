@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { departments, usePageDataStore } from '../../stores/pageData';
+import { usePageDataStore } from '../../stores/pageData';
 import InputRow from '../structure/InputRow.vue';
 
 const pageData = usePageDataStore();
