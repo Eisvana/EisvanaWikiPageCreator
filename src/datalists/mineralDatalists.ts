@@ -2,7 +2,7 @@
  * @fileoverview Provides data for mineral datalists
  */
 
-const mineralDatalists = {
+const mineralDatalist = {
   formationData: [
     'Soil Compaction',
     'Water Transport',
