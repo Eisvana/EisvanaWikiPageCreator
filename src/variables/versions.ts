@@ -35,4 +35,6 @@ export function getVersionData() {
   'Foundation': 'Fundación',
   'Release': 'Lanzamiento',
 }
+          return versions;
+}
 
