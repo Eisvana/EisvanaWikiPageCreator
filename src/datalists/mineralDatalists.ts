@@ -1,6 +1,9 @@
 /**
  * @fileoverview Provides data for mineral datalists
  */
+const mineralDatalists = [formationData, mineralNotesData, mineralResources]
+const mineralDatalists = [formationData, mineralNotesData, Object.keys(mineralResources)]
+
 const mineralDatalists = {
   formationData: [
     'Soil Compaction',
