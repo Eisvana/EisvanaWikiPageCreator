@@ -2,11 +2,7 @@
 import { usePageDataStore } from '../../stores/pageData';
 import { storeToRefs } from 'pinia';
 import InputRow from '../structure/InputRow.vue';
-import ErrorMessage from './ErrorMessage.vue';
-import { computed } from 'vue';
 import Explanation from '../structure/Explanation.vue';
-import WikiLink from '../structure/WikiLink.vue';
-
 const validGlyphsRegex = /[0-9A-F]/;
 const maxGlyphLength = 12;
 
