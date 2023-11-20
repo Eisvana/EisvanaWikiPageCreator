@@ -1,0 +1,86 @@
+name: Build
+
+run-name: Build Code
+
+on:
+  push:
+    branches: ['main', 'staging']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "build-deploy"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Build App
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
+            sed -i 's_EisvanaWikiPageCreator_EisvanaWikiPageCreator/staging_g' vite.config.ts
+          fi
+
+          npm ci
+          npm run build
+          cd dist
+          touch .nojekyll
+
+      - name: Minify Code
+        uses: Lenni009/minify-js@main
+        with:
+          directory: dist
+          overwrite: true
+        
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: EisvanaWikiPageCreator
+          path: dist
+
+  deploy-prod:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: EisvanaWikiPageCreator
+          path: dist
+        
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist # The folder the action should deploy.
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/staging'
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: EisvanaWikiPageCreator
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist # The folder the action should deploy.
+          target-folder: staging # The folder the action should deploy to.
