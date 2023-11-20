@@ -22,8 +22,7 @@ import type { BiomeLinks, ResourceAndCreatureLinks } from '../../types/links';
  * @function
  */
 export function locationSentence() {
-	const { region } = pageData;
-	const RegNr = regNr(region as string);
+
 
 	/**
 	 * The sentence describing the location of the page.

@@ -41,7 +41,6 @@ function lintGlyphs() {
 
 const numberToGlyph = (n: number) => n.toString(16).toUpperCase(); // NoSonar this is dec to hex
 
-const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength && !isValidGlyphs.value);
 </script>
 
 <template>
