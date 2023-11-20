@@ -39,11 +39,11 @@ onMounted(() => {
   addStaticPageData(
     'galleryExplanationExternal',
     `
-	There is a preferred order of gallery pictures:
+    Hay un orden preferido de imágenes de la galería:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
-			<li>Scanner view</li>
-			<li>Discovery Menu</li>
+			<li>Vista de escáner</li>
+			<li>Menú de descubrimiento</li>
 		</ol>
  	</div>`
   );
@@ -78,9 +78,6 @@ const {
   planetName,
   moonName,
   docBySentence,
-  originalName,
-  appearance,
-  appearanceSentence,
 } = storeToRefs(pageData);
 
 const isPolymorphicInvalid = computed(() => numberErrorComponent(polymorphic.value));
@@ -114,7 +111,7 @@ const metalContent = computed(() => {
   return contentNumber + '%';
 });
 
-const filledElements = computed(() => elements.value.filter(Boolean));
+const filledElements = computed(() => elements.value.filter((el) => el));
 
 const errorMessage = ref('');
 const openErrorModal = ref(false);
@@ -134,39 +131,39 @@ function markCopy() {
     >
       <ReleaseInput />
       <SimpleInput
-        label="Mineral name:"
+        label="Nombre del mineral:"
         identifier="nameInput"
         v-model="name"
         img="mineral/mineralName"
       >
-        Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
-        <template #heading>Mineral Name</template>
-        <template #content>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</template>
+      Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).
+        <template #heading>Nombre del mineral</template>
+        <template #content>Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</template>
       </SimpleInput>
       <SimpleInput
-        label="Original name before uploading (if available):"
+        label="Nombre original antes de registrar (si está disponible):"
         identifier="orgNameInput"
         v-model="orgName"
       />
       <InfoboxImageInput />
       <SimpleInput
-        label="Name of the System:"
+        label="Nombre del sistema:"
         identifier="systemInput"
         v-model="system"
       />
       <SimpleInput
-        label="Name of the planet:"
+        label="Nombre del planeta:"
         identifier="planetInput"
         v-model="planet"
       >
-        Planet Name OR the planet circled by the moon where the mineral can be found.
+      Nombre del planeta O el planeta rodeado por la luna donde se puede encontrar el mineral.
       </SimpleInput>
       <SimpleInput
-        label="Name of the moon (if mineral is on moon):"
+        label="Nombre de la luna (si el mineral está en la luna):"
         identifier="moonInput"
         v-model="moon"
       >
-        If the mineral is located on a moon. Leave blank if the mineral is on a planet.
+      Si el mineral se encuentra en una luna. Déjelo en blanco si el mineral está en un planeta.
       </SimpleInput>
       <GlyphInput />
       <SimpleInput
@@ -177,46 +174,46 @@ function markCopy() {
         img="mineral/content"
         maxlength="2"
       >
-        Found on the mineral scan.
-        <template #heading>Metal Content</template>
-        <template #content>Found on the mineral scan.</template>
+      Encontrado en el escaneo de minerales.
+        <template #heading>Contenido metálico</template>
+        <template #content>Encontrado en el escaneo de minerales.</template>
       </SimpleInput>
       <SimpleInput
         v-model="formation"
         :error="isFormationInvalid"
-        label="Formation process:"
+        label="Proceso de formación:"
         identifier="formation"
         list="formationData"
         img="mineral/formation"
       >
-        Found on the mineral scan.
-        <template #heading>Formation Process</template>
-        <template #content>Found on the mineral scan.</template>
+      Encontrado en el escaneo de minerales.
+        <template #heading>Proceso de formación</template>
+        <template #content>Encontrado en el escaneo de minerales.</template>
       </SimpleInput>
       <SimpleInput
         v-model="notes"
         :error="isNotesInvalid"
-        label="Notes:"
+        label="Notas:"
         identifier="notes"
         list="mineralNotesData"
         img="mineral/notes"
       >
         Found on the mineral scan.
-        <template #heading>Notes</template>
-        <template #content>Found on the mineral scan.</template>
+        <template #heading>Notas</template>
+        <template #content>Encontrado en el escaneo de minerales.</template>
       </SimpleInput>
       <SimpleInput
         v-model="polymorphic"
         :error="isPolymorphicInvalid"
         identifier="polymorphic"
-        label="Polymorphic (number of instances):"
+        label="Polimórfico (número de instancias):"
         maxlength="2"
       >
-        How many different models of this mineral were discovered.
-        <template #heading>Polymorphic</template>
+      Cuántos modelos diferentes de este mineral se descubrieron.
+        <template #heading>Polimórfico</template>
         <template #content>
-          Sometimes multiple mineral models have the same name. This is called "Polymorphism". Enter the number of how
-          many different mineral models had this name.
+          A veces, varios modelos de minerales tienen el mismo nombre. Esto se llama "polimorfismo". Introduzca el número de
+          cuantos modelos minerales diferentes tenían este nombre.
         </template>
       </SimpleInput>
       <ResourceInput
@@ -231,14 +228,14 @@ function markCopy() {
       />
       <InputRow>
         <template #label>
-          <label for="discDate">Discovery date:</label>
+          <label for="discDate">Fecha del descubrimiento:</label>
           <Explanation img="mineral/discDate">
-            Found on the mineral scan.
-            <template #heading>Discovery Date</template>
+            Encontrado en el escaneo de minerales.
+            <template #heading>Fecha del descubrimiento</template>
             <template #content>
-              Found on the mineral scan.
+              Encontrado en el escaneo de minerales.
               <br />
-              The exact discovery timestamp is displayed on the top left.
+              La marca de tiempo exacta del descubrimiento se muestra en la parte superior izquierda.
             </template>
           </Explanation>
         </template>
@@ -253,24 +250,16 @@ function markCopy() {
       </InputRow>
       <Subgrid>
         <InputRow>
-          <p>Information about the player.</p>
+          <p>Información sobre el jugador.</p>
         </InputRow>
         <DiscovererInputs />
         <SimpleInput
-          label="Documenter if not discoverer:"
+          label="Documentador si no eres el descubridor:"
           identifier="docBy"
           v-model="docBy"
         />
         <ResearchteamInput />
       </Subgrid>
-      <InputRow>
-        <label for="appearance">Appearance:</label>
-        <textarea
-          v-model="appearance"
-          id="appearance"
-          placeholder="This mineral is a <size> <colour> <type>."
-        ></textarea>
-      </InputRow>
     </form>
 
     <div id="galleryInput"></div>
@@ -321,7 +310,7 @@ function markCopy() {
       <br />
 
       <div>==Summary==</div>
-      <div>'''{{ mineralName }}''' is a type of [[mineral]]. {{ appearanceSentence }}</div>
+      <div>'''{{ mineralName }}''' is a type of [[mineral]].</div>
       <br />
       <template v-if="polymorphic">
         <div>
@@ -330,20 +319,20 @@ function markCopy() {
         <br />
       </template>
 
-      <div>==Alias Names==</div>
+      <div>==Discovery Menu==</div>
+      <div>* Metal Content: {{ metalContent }}</div>
+      <div>* Formation Process: {{ formation }}</div>
+      <div>* Notes: {{ notes }}</div>
+      <br />
+
+      <!-- <div>==Alias Names==</div>
       <div v-if="orgName">
         <WikiTemplate template-name="aliasc">text=Original|name={{ originalName }}</WikiTemplate>
       </div>
       <div>
         <WikiTemplate template-name="aliasc">text=Current|name={{ mineralName }}</WikiTemplate>
       </div>
-      <br />
-
-      <div>==Discovery Menu==</div>
-      <div>* Metal Content: {{ metalContent }}</div>
-      <div>* Formation Process: {{ formation }}</div>
-      <div>* Notes: {{ notes }}</div>
-      <br />
+      <br /> -->
 
       <div>==Location==</div>
       <div>
@@ -357,12 +346,12 @@ function markCopy() {
       </div>
       <br />
 
-      <div>==Resources==</div>
+      <div>==Usage==</div>
       <div>
         This mineral provides the
         {{ filledElements.length > 1 ? 'resources' : 'resource' }}
         {{ filledElements.map((el) => `[[${el}]]`).join(' and ') }}
-        when mined.
+        when harvested.
       </div>
       <br />
 

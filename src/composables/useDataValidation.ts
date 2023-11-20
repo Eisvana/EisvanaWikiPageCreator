@@ -18,14 +18,14 @@ export function useDataValidation(simple: boolean = false, override: boolean | u
 
   const condition = Boolean(
     (override && import.meta.env.DEV) ||
-      (name.value && glyphs.value && regionNumber.value && ((currentText === savedText.value && copy.value) || simple))
+      (name.value && glyphs.value && ((currentText === savedText.value && copy.value) || simple))
   );
 
   const messages = {
     success: '',
-    noName: 'Missing Name!',
-    wrongGlyphs: 'Wrong Glyphs!',
-    notCopied: 'Copy Code First!',
+    noName: '¡Nombre faltante!',
+    wrongGlyphs: '¡Faltan los glifos!',
+    notCopied: '¡Copia el código primero!',
   };
 
   isValidData.value = condition;

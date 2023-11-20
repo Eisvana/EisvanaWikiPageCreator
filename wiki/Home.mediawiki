@@ -1,28 +1,28 @@
-==Eisvana Wiki Page Creator Documentation Index==
-Welcome to the documentation for the Eisvana Wiki Page Creator! This page serves as a starting point for understanding the purpose of this project, how to use it, and where to find additional resources.
+==Índice de documentación del creador de la página Wiki==
+¡Bienvenido a la documentación del creador de páginas Wiki! Esta página sirve como punto de partida para comprender el propósito de este proyecto, cómo usarlo y dónde encontrar recursos adicionales.
 
-===Overview===
-Eisvana Wiki Page Creator is a website project designed to make it easy to create new wiki pages for your discoveries in No Man's Sky. It provides an intuitive interface for creating wiki pages and automatically generates the necessary wikitext. 
+===Descripción general===
+Creador de páginas Wiki es un proyecto de sitio web diseñado para facilitar la creación de nuevas páginas wiki para sus descubrimientos en No Man's Sky. Proporciona una interfaz intuitiva para crear páginas wiki y genera automáticamente el wikitexto necesario.
 
-===Usage===
-For detailed information on how to use the Eisvana Wiki Page Creator, please refer to the [[User-Guide]].
+===Uso===
+Para obtener información detallada sobre cómo utilizar Creador de páginas Wiki, consulte la [[User-Guide]].
 
-===Contributing===
-Clone the repo, then run the following command:
-```bat
-npm i
+===Contribuyendo===
+Clona el repositorio y luego ejecuta el siguiente comando:
+```murciélago
+npm yo
 ```
-To start the development server, run this command:
-```bat
-npm run dev
+Para iniciar el servidor de desarrollo, ejecute este comando:
+```murciélago
+npm ejecutar desarrollador
 ```
 
-Community contributions are welcome! If you would like to contribute to the Eisvana Wiki Page Creator, please refer to the [https://github.com/example/EisvanaWikiPageCreator/blob/main/CONTRIBUTING.md contributing guidelines].
+¡Las contribuciones de la comunidad son bienvenidas! Si desea contribuir al Creador de páginas Wiki de Eisvana, consulte las [https://github.com/example/EisvanaWikiPageCreator/blob/main/CONTRIBUTING.md pautas de contribución].
 
-===Support===
-If you encounter any issues or have any questions about the Eisvana Wiki Page Creator, please contact Lenni#4423 on Discord or [https://www.reddit.com/user/Lenni009 u/Lenni009] on Reddit. for more information.
+===Apoyo===
+Si tiene algún problema o tiene alguna pregunta sobre Creador de páginas Wiki, comuníquese con Lenni#4423 en Discord o [https://www.reddit.com/user/Lenni009 u/Lenni009] en Reddit. para más información.
 
-===Code Documentation===
+===Documentación del código===
 * [[General Concepts]]
 * [[Pages]]
 * [[Functions]]

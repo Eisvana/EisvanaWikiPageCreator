@@ -18,8 +18,8 @@ const isClicked = ref(false);
 
 const buttonStates = reactive({
   fail: '',
-  idle: 'Copy Code',
-  success: 'Copied!',
+  idle: 'Copiar código',
+  success: '¡Copiado!',
 });
 const buttonText = ref(buttonStates.idle);
 

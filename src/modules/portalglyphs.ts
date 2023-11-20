@@ -179,7 +179,7 @@ export function glyphRegion(glyphs: string) {
 export function glyphError(region: string | undefined, glyphElement: HTMLElement) {
 	errorMessage(glyphElement,
 		(region === undefined)
-			? 'No valid Eisvana region. See <a href="https://nomanssky.fandom.com/wiki/Eisvana#Claimed_Regions" target="_blank" rel="noopener noreferrer">Eisvana Regions</a> for a list of valid regions.'
+			? ''
 			: '');
 }
 

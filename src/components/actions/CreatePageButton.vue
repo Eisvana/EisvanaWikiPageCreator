@@ -16,7 +16,7 @@ const isValid = ref(true);
 
 const buttonStates = reactive({
   fail: '',
-  idle: 'Create Page',
+  idle: 'Crear página',
 });
 const buttonText = ref(buttonStates.idle);
 

@@ -13,31 +13,39 @@ defineProps<{
   item: string;
 }>();
 
-const verboseDescriptions = ['Primary', 'Secondary'];
+const verboseDescriptions = ['Primario', 'Secundario'];
 </script>
 
 <template>
   <InputRow>
     <template #label>
-      <label>{{ index ? 'Secondary' : 'Primary' }} element</label>
+      <label>Elemento {{ index ? 'Secundario' : 'Primario' }}</label>
       <Explanation :img="`${item}/element` + index">
-        Found on the {{ item }} scan.
-        <template #heading>{{ verboseDescriptions[index] }} Element</template>
+        Encontrado en el {{ item }} escaneo.
+        <template #heading>{{ verboseDescriptions[index] }} Elemento</template>
         <template #content>
-          Found on the {{ item }} scan.
+          Encontrado en el {{ item }} escaneo.
           <br />
-          Leave empty if it isn't listed.
+          Dejar vacío si no está en la lista.
         </template>
       </Explanation>
     </template>
     <template #input>
       <select v-model="elements[index]">
-        <option
-          v-for="resource in resources"
-          :value="resource"
-        >
-          {{ resource }}
-        </option>
+        <option value="Ferrite dust">Polvo de Ferrita</option>
+        <option value="Pure ferrite">Ferrita pura</option>
+        <option value="Di-hydrogen">Dihidrogeno</option>
+        <option value="Chromatic Metal">Metal cromatico</option>
+        <option value="Sodium">Sodio</option>
+        <option value="Oxygen">Oxigeno</option>
+        <option value="Cobalt">Cobalto</option>
+        <option value="Ionised Cobalt">Cobalto ionizado</option>
+        <option value="Copper">Cobre</option>
+        <option value="Silver">Plata</option>
+        <option value="Tritium">Tritio</option>
+        <option value="Carbon">Carbono</option>
+        <option value="Salt">Sal</option>
+        <option value="Chlorine">Clorina</option>
       </select>
     </template>
   </InputRow>

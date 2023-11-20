@@ -30,7 +30,7 @@ export function locationSentence() {
 	 *
 	 * @type {string}
 	 */
-	const output = `Located in the [[${region}]] [[region]]${RegNr} of [[Eisvana]] in the [[Eissentam]] galaxy.`;
+	const output = ``;
 
 	wikiCode(output, 'loc');
 }
@@ -203,11 +203,44 @@ function addResourceInput(element: HTMLButtonElement, sectionTarget: number) {
 	const oddEvenClass = 'is-' + oddEven(sectionTarget);
 
 	const inputHTML = `<div class="table-cell text removable ${oddEvenClass}" data-section="resource${sectionTarget} planet${sectionTarget}" data-resource="section${childIndex}" data-planet="planet${sectionTarget}">
-		<button class="button is-danger is-outlined icon is-small" title="Remove resource" type="button" disabled data-evt-id="removeButton">&#10006</button>
-		<label for="${resource_input}">Resource name:</label>
+		<button class="button is-danger is-outlined icon is-small" title="Quitar recurso" type="button" disabled data-evt-id="removeButton">&#10006</button>
+		<label for="${resource_input}">Nombre del recurso:</label>
 	</div>
 	<div class="table-cell data ${oddEvenClass}" data-section="resource${sectionTarget} planet${sectionTarget}" data-resource="section${childIndex}" data-planet="planet${sectionTarget}">
-		<input type="text" list="resources" id="${resource_input}" data-dest-noauto="${resource}" data-evt-id="addButton">
+		<input type="text" list="${resource_input}-list" id="${resource_input}" data-dest-noauto="${resource}" data-evt-id="addButton" placeholder="Escribe el nombre en español y dale a la opcion de debajo">
+    <datalist id="${resource_input}-list" data-dest-noauto="${resource}" data-evt-id="addButton">
+    <option value="">Nada</option>
+    <option value="Cactus Flesh">Carne de cactus</option>
+    <option value="Frost Crystal">Cristal de escarcha</option>
+    <option value="Fungal Mould">Moho fúngico</option>
+    <option value="Gamma Root">Raíz de gamma</option>
+    <option value="Solanium">Solanio</option>
+    <option value="Star Bulb">Bulbo estelar</option>
+    <option value="Copper">Cobre</option>
+    <option value="Cadmium">Cadmio</option>
+    <option value="Emeril">Emerilio</option>
+    <option value="Indium">Indio</option>
+    <option value="Ammonia">Amonio</option>
+    <option value="Basalt">Basalto</option>
+    <option value="Dioxite">Dioxita</option>
+    <option value="Faecium">Hecesio</option>
+    <option value="Gold">Oro</option>
+    <option value="Mordite">Mordita</option>
+    <option value="Paraffinium">Parafinio</option>
+    <option value="Phosphorus">Fosforo</option>
+    <option value="Pyrite">Pirita</option>
+    <option value="Cobalt">Cobalto</option>
+    <option value="Rusted Metal">Metal oxidado</option>
+    <option value="Uranium">Uranio</option>
+    <option value="Silver">Plata</option>
+    <option value="Magnetised Ferrite">Ferrita imantada</option>
+    <option value="Silver">Plata</option>
+    <option value="Salt">Sal</option>
+    <option value="Sodium">Sodio</option>
+    <option value="Salvageable Scrap ">Chatarra recuperable</option>
+    <option value="Ancient Bones">Huesos antiguos</option>
+  </datalist>
+
 	</div>`;
 
 	const evtListeners: ElementFunctions = [
@@ -320,7 +353,7 @@ export function moonSwitch(element: HTMLInputElement) {
 	const descriptorInput = document.getElementById(element.dataset.destNoauto as string) as HTMLInputElement | null;
 	if (!descriptorInput) return;
 	const i = extractNumber(element.id);
-	const planetClass = element.checked ? 'Moon' : 'Planet';
+	const planetClass = element.checked ? 'Luna' : 'Planeta';
 
 	document.getElementById('planetClass' + i)!.innerText = planetClass;
 
@@ -337,7 +370,7 @@ export function moonSwitch(element: HTMLInputElement) {
 function expandDescriptor(element: HTMLInputElement, planetClass: string | undefined = undefined) {
 	const i = extractNumber(element.id);
 	if (!planetClass) {
-		planetClass = (document.getElementById('moon_input' + i) as HTMLInputElement).checked ? 'Moon' : 'Planet';
+		planetClass = (document.getElementById('moon_input' + i) as HTMLInputElement).checked ? 'Luna' : 'Planeta';
 	}
 	const descriptor = element.value;
 	const dest = element.dataset.destNoauto as string;
@@ -545,7 +578,7 @@ function addResource(element: HTMLInputElement | undefined = undefined) {
 	}
 
 	for (const key in linkedResources) {
-		const output = Object.values(linkedResources[key]).filter(Boolean).join('<br>');
+		const output = Object.values(linkedResources[key]).filter(resource => resource).join('<br>');
 		(globalElements.output[key] as HTMLOutputElement).innerText = output;
 	}
 }

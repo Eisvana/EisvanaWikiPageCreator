@@ -16,37 +16,37 @@ globalFunctions.generateGalleryArray = () => generateGalleryArray();
 globalFunctions.resetExternal = () => resetExternal();
 
 addStaticPageData('galleryExplanationExternal', `
-	There is a preferred order of gallery pictures, depending on ship type:
+Existe un orden preferido de imágenes de la galería, según el tipo de nave:
 	<div class='dialog-center is-flex-wrap-wrap mt-2' style='gap: 1rem'>
 		<div>
-			<div class='has-text-weight-bold'>Normal Ships:</div>
+			<div class='has-text-weight-bold'>Nave normal:</div>
 			<ol class='dialog-list mt-1'>
-				<li>Rear view of ship</li>
-				<li>Inventory screen</li>
-				<li>NPC Ship Pilot</li>
-				<li>Analysis Visor Scan</li>
-				<li>System Page</li>
+				<li>Vista trasera de la nave</li>
+				<li>Pantalla de inventario</li>
+				<li>Piloto NPC de la nave</li>
+				<li>Escaneo de visor de análisis</li>
+				<li>Página del sistema</li>
 			</ol>
 		</div>
 		<div>
 			<div class='has-text-weight-bold'>Living Ships/Interceptors:</div>
 			<ol class='dialog-list mt-1'>
-				<li>Rear view of ship</li>
-				<li>Inventory screen</li>
-				<li>Analysis Visor Scan</li>
-				<li>Crash site</li>
-				<li>Planet/Moon Page</li>
-				<li>System Page</li>
+				<li>Vista trasera de la nave</li>
+				<li>Pantalla de inventario</li>
+				<li>Escaneo de visor de análisis</li>
+				<li>Lugar del accidente</li>
+				<li>Página Planeta/Luna</li>
+				<li>Página del sistema</li>
 			</ol>
 		</div>
 		<div>
 			<div class='has-text-weight-bold'>Freighters:</div>
 			<ol class='dialog-list mt-1'>
-				<li>Rear view of freighter</li>
-				<li>Inventory screen</li>
-				<li>NPC freighter captain</li>
-				<li>Analysis Visor Scan</li>
-				<li>System Page</li>
+				<li>Vista trasera del carguero</li>
+				<li>Pantalla de inventario</li>
+				<li>Capitan NPC del carguero</li>
+				<li>Escaneo de visor de análisis</li>
+				<li>Página del sistema</li>
 			</ol>
 		</div>
 	</div>`)

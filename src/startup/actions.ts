@@ -14,11 +14,11 @@ import { globalElements, staticBooleans } from "../variables/objects";
 
 // Sets up buttons for copying, downloading, and creating pages.
 const actionsHTML = `
-<button class="button is-outlined is-primary" id="copy" type="button" data-link="page" data-evt-id="copyButton">Copy Wikicode</button>
-<a class="button is-outlined is-primary" id="download" data-evt-id="downloadButton">Download File</a>
-<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" id="uploadLink" rel="noopener noreferrer" target="_blank">Upload Pictures</a>
-<a class="button is-outlined is-primary" id="create" data-link="page" data-evt-id="createPageButton">Create Page</a>
-<button class="button is-warning" id="reset" type="reset" data-evt-id="resetButton">Reset Inputs</button>`;
+<button class="button is-outlined is-primary" id="copy" type="button" data-link="page" data-evt-id="copyButton">Copiar Wikicode</button>
+<a class="button is-outlined is-primary" id="download" data-evt-id="downloadButton">Descargar código</a>
+<a class="button is-outlined is-primary" href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" id="uploadLink" rel="noopener noreferrer" target="_blank">Subir imagenes</a>
+<a class="button is-outlined is-primary" id="create" data-link="page" data-evt-id="createPageButton">Crear página</a>
+<button class="button is-warning" id="reset" type="reset" data-evt-id="resetButton">Restablecer entradas</button>`;
 
 const evtListenerObj: ElementFunctions = [
 	{
@@ -46,7 +46,7 @@ const evtListenerObj: ElementFunctions = [
 const inputDom = loadHTML(actionsHTML, {}, evtListenerObj) as Document;
 
 // Adds a note reminding the user to upload any images they have added.
-const copyNote = `<p class="has-text-centered">You must copy the code first, then paste it into the wiki page.<br>Also don't forget to upload any images you have put here.</p>`;
+const copyNote = `<p class="has-text-centered">Primero debes copiar el código y luego pegarlo en la página wiki.<br />Además, no olvides cargar las imágenes que hayas puesto aquí.</p>`;
 
 // Inserts the actions and note into the HTML.
 const actions = globalElements.output.actions as HTMLElement;
@@ -61,7 +61,7 @@ actions.insertAdjacentHTML('beforebegin', copyNote);
 const isProd = import.meta.env.PROD
 
 const devTools = `
-<label style="display:flex; gap: .3rem"><input class="checkbox" type="checkbox" id="skipCheck" data-evt-id="skipCheck">Enable debug (no checks, no popups)</label>;
+<label style="display:flex; gap: .3rem"><input class="checkbox" type="checkbox" id="skipCheck" data-evt-id="skipCheck">Habilitar depuración (sin controles, sin ventanas emergentes)</label>;
 <button style="margin: 0 1rem" class="button is-danger is-small" id="clearCache" data-evt-id="clearCache">Clear Localstorage</button>`;
 
 const evtListners: ElementFunctions = [

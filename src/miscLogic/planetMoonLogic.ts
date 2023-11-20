@@ -36,9 +36,6 @@ import creatureData from './creatureData';
 import type { LinkObjValues, PlanetPropResourceLinks } from '../types/links';
 import type { StdObj } from '../types/objects';
 
-const minResourceSections = 3;
-const maxResourceSections = 5;
-
 /**
  * Determines the appropriate verb to use based on the given number, and sends the output to the
  * specified destination if provided.
@@ -148,16 +145,21 @@ export function addResource(
   const resourceInputSectionCount = resourceRemoveButtons.length;
 
   // Ensures that there are always at least three resource inputs present
-  // 3 resources is minimum
-  while (document.querySelectorAll('[data-resource] button').length < minResourceSections) {
+  while (document.querySelectorAll('[data-resource] button').length < 3) {
+    // NoSonar 3 resources is minimum
     addResource(element);
   }
 
-  // Disables the add resource button if the number of sections is more than 5
-  if (resourceInputSectionCount + 1 > maxResourceSections) element.disabled = true;
+  // Disables the add resource button if the number of sections is more than 6
+  // enter the number of sections you want to allow behind the ">" operator.
+  if (resourceInputSectionCount + 1 > 6) {
+    // NoSonar 6 resources is maximum. Maybe 5 is the max, but I'm not 100% sure
+    element.disabled = true;
+  }
 
   // Enables all remove buttons if more than 3 sections are present (every planet has at least 3 resources)
-  if (resourceInputSectionCount > minResourceSections) {
+  if (resourceInputSectionCount > 3) {
+    // NoSonar 3 resources is minimum
     for (const button of Array.from(resourceRemoveButtons)) {
       button.disabled = false;
     }
@@ -180,8 +182,8 @@ export function enableResourceAdd() {
   const resourceRemoveButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('[data-resource] button');
   const resourceInputSectionCount = resourceRemoveButtons.length;
 
-  // minimum resource number is 3, disable button when it's at 3
-  if (resourceInputSectionCount <= minResourceSections) {
+  if (resourceInputSectionCount < 4) {
+    // NoSonar minimum resource number is 3, disable button when it's at 3
     for (const button of Array.from(resourceRemoveButtons)) {
       button.disabled = true;
     }
@@ -571,7 +573,9 @@ function floraMineralResourceLinks(element: HTMLInputElement | undefined = undef
 
   for (const prop in linkedResources) {
     for (const outputElement in linkedResources[prop]) {
-      const output = Object.values(linkedResources[prop][outputElement]).filter(Boolean).join(', '); // filters for truthy values
+      const output = Object.values(linkedResources[prop][outputElement])
+        .filter((resource) => resource)
+        .join(', '); // filters for truthy values
       (globalElements.output[outputElement] as HTMLOutputElement).innerText = output;
     }
   }

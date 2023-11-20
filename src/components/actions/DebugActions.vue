@@ -18,14 +18,14 @@ watchEffect(() => (document.documentElement.dataset.debug = debug.value.toString
       class="checkbox"
       type="checkbox"
       id="skipCheck"
-    />Enable debug (no checks, no popups)</label
+    />Habilitar depuración (sin controles, sin ventanas emergentes)</label
   >
   <button
     class="button is-danger is-small mx-4"
     id="clearCache"
     @click="clearLocalStorage"
   >
-    Clear Localstorage
+  Borrar almacenamiento local
   </button>
 </template>
 

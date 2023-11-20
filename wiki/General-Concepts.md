@@ -1,18 +1,18 @@
 +## HTML
-The page body always starts with a container div.
+El cuerpo de la página siempre comienza con un div contenedor.
 
-The first element in that container is the `<nav>`, as well as the `<h1>` and `<dialog>` elements.
+El primer elemento en ese contenedor es `<nav>`, así como los elementos `<h1>` y `<dialog>`.
 
-The `<main>` element is a `main.columns` element, which has two `div.column` elements.
+El elemento `<main>` es un elemento `main.columns`, que tiene dos elementos `div.column`.
 
-The left one has a single `div.table`, with other `<div>` elements adding functionality like gallery or action buttons.
+El de la izquierda tiene una única `div.table`, con otros elementos `<div>` que agregan funcionalidad como galería o botones de acción.
 
-The right one only has `div.wikitext` children, which then contain the actual wikitext.
+El de la derecha solo tiene hijos `div.wikitext`, que luego contienen el wikitext real.
 
-Here's a table visualising the structure:
+Aquí hay una tabla que visualiza la estructura:
 
-| Left      | Right        |
+| Izquierda | Derecha |
 |-----------|--------------|
-| div.table | div.wikitext |
+| tabla.div | div.wikitexto |
 
-Any data that's directly related to user input should be wrapped in an `output` element, ideally with id or name attributes. The `name` attribute automatically distributes data to all output elements of the same name.
+Cualquier dato que esté directamente relacionado con la entrada del usuario debe incluirse en un elemento de "salida", idealmente con atributos de identificación o nombre. El atributo "nombre" distribuye automáticamente datos a todos los elementos de salida con el mismo nombre.

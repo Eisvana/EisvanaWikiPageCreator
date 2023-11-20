@@ -33,9 +33,7 @@ const isDev = import.meta.env.DEV;
 
 <template>
   <p class="has-text-centered">
-    You must copy the code first, then paste it into the wiki page.<br />Also don't forget to upload any images you have
-    put here.
-  </p>
+    Primero debes copiar el código y luego pegarlo en la página wiki.<br />Además, no olvides cargar las imágenes que hayas puesto aquí. </p>
   <div class="buttons">
     <CopyArticleButton />
     <a
@@ -44,12 +42,12 @@ const isDev = import.meta.env.DEV;
       class="button is-outlined is-primary"
       id="download"
       @click="downloadFile"
-      >Download File</a
+      >Descargar codigo</a
     >
     <WikiLink
       class="button is-outlined is-primary"
       link="Special:Upload?multiple=true"
-      text="Upload Pictures"
+      text="Subir fotos"
     />
 
     <CreatePageButton />
@@ -59,7 +57,7 @@ const isDev = import.meta.env.DEV;
       type="reset"
       @click="pageData.$reset()"
     >
-      Reset Inputs
+    Restablecer entradas
     </button>
     <DebugActions v-if="isDev" />
   </div>

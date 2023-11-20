@@ -1,1 +1,1 @@
-This folder holds the source code in the form of Javascript logic and CSS stylesheets.
+Esta carpeta contiene el código fuente en forma de lógica Javascript y hojas de estilo CSS.

@@ -48,21 +48,20 @@ const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength &&
   <InputRow>
     <template #label>
       <div class="label-combo">
-        <label for="portalglyphsInput">Portalglyphs:</label>
+        <label for="portalglyphsInput">Glifos:</label>
         <button
           class="button is-small is-danger"
           type="button"
           id="glyphDeleteButton"
           @click="deleteGlyph"
         >
-          &larr; Delete
+          &larr; Borrar
         </button>
       </div>
       <Explanation img="shared/glyphs">
-        Found in Photo Mode. Glyphs are specific to each planet.
-        <template #heading>Portalglyphs</template>
+        Encontrado en modo foto. Los glifos son específicos de cada planeta.        <template #heading>Portalglyphs</template>
         <template #content>
-          Found in Photo Mode. Glyphs are specific to each planet.
+          Encontrado en modo foto. Los glifos son específicos de cada planeta.
           <iframe
             src="https://nmspar.vercel.app/"
             sandbox="allow-scripts allow-same-origin"
@@ -70,7 +69,7 @@ const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength &&
             class="explanation-embed"
             width="450"
             height="300"
-            >Glyph Reader</iframe
+            >Lector de glifos</iframe
           >
         </template>
       </Explanation>
@@ -78,7 +77,6 @@ const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength &&
 
     <template #input>
       <input
-        :class="{ 'error-input': isInvalidGlyphs }"
         class="glyphs-input"
         id="portalglyphsInput"
         type="text"
@@ -86,17 +84,6 @@ const isInvalidGlyphs = computed(() => glyphs.value.length === maxGlyphLength &&
         v-model="glyphs"
         @input="lintGlyphs"
       />
-
-      <ErrorMessage
-        v-if="isInvalidGlyphs"
-        class="error"
-        >No valid Eisvana region. See
-        <WikiLink
-          link="Eisvana#Claimed_Regions"
-          text="Eisvana Claimed Regions"
-        />
-        for a list of valid regions.</ErrorMessage
-      >
     </template>
   </InputRow>
   <InputRow>

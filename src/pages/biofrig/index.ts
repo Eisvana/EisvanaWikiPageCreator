@@ -10,20 +10,20 @@ globalFunctions.albumOtherExternal = () => albumOtherExternal();
 globalFunctions.albumItemTypeExternal = () => albumItemTypeExternal();
 
 addStaticPageData('galleryExplanationExternal', `
-	There is a preferred order of gallery pictures:
+Hay un orden preferido de imágenes de la galería:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
-			<li>Rear view of frigate</li>
-			<li>Interaction screen</li>
-			<li>System Page</li>
+			<li>Vista trasera de la fragata</li>
+			<li>Pantalla de interacción</li>
+			<li>Página del sistema</li>
 		</ol>
  	</div>`)
 
 addStaticPageData('galleryArray', [
 	'',
-	'Rear view of frigate',
-	'Interaction screen',
-	'System Page'
+	'Vista trasera de la fragata',
+	'Pantalla de interacción',
+	'Página del sistema'
 ])
 
 assignElementFunctions(frigateElementFunctions);

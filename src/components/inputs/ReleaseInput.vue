@@ -12,7 +12,7 @@ const { release } = storeToRefs(pageData);
 <template>
   <InputRow>
     <template #label>
-      <label>Current release:</label>
+      <label>Version:</label>
     </template>
 
     <template #input>

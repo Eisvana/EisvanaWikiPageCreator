@@ -14,9 +14,7 @@ const route = window.location.pathname.split('/')!.at(-1)!.slice(0, -5); // NoSo
 const researchteamDefaultExceptions = ['base'];
 
 export const departments = {
-  '': 'Eisvana',
-  'Wiki Scholars': 'Eisvana Wiki Scholars',
-  EBC: 'Eisvana Builder Collective',
+  '': '',
 };
 
 if (researchteamDefaultExceptions.includes(route)) departments[''] = '';
@@ -111,7 +109,6 @@ export const usePageDataStore = defineStore('pageData', {
     planetName: (state) => sanitiseString(state.planet),
     moonName: (state) => sanitiseString(state.moon),
     originalName: (state) => sanitiseString(state.orgName),
-    appearanceSentence: (state) => sanitiseString(state.appearance),
     docBySentence: (state) => {
       const isLink = state.docBy.startsWith('{{');
       const hasResearchteam = state.researchteam.split(' ').length > 1;

@@ -24,17 +24,22 @@ const biomes = [
 <template>
   <InputRow>
     <template #label>
-      <label>In which biome is this plant?</label>
+      <label>¿En qué bioma se encuentra esta planta?</label>
     </template>
 
     <template #input>
       <select v-model="biome">
-        <option
-          v-for="biome in biomes"
-          :value="biome"
-        >
-          {{ biome }}
-        </option>
+        <option value="Lush">Rico </option>
+    <option value="Barren">Estéril</option>
+    <option value="Dead">Muerto</option>
+    <option value="Exotic">Exótico</option>
+    <option value="Mega Exotic">Mega Exótico</option>
+    <option value="Scorched">Quemado</option>
+    <option value="Frozen">Congelado</option>
+    <option value="Toxic">Tóxico</option>
+    <option value="Irradiated">Irradiado</option>
+    <option value="Marsh">Cenagal</option>
+    <option value="Volcanic">Volcanico</option>
       </select>
     </template>
   </InputRow>

@@ -13,11 +13,13 @@ const isPreviewHidden = ref(false);
 
 onMounted(() => {
   if (window.matchMedia('(pointer: coarse)').matches || !filePreview.value) return;
-  // prettier-ignore
-  new Sortable(filePreview.value, { // NoSonar (used by a library, not useless!)
+  new Sortable(filePreview.value, {
+    // NoSonar (used by a library, not useless!)
     handle: '.handle', // handle's class
     animation: 250,
-    onUpdate: dragItem,
+    onUpdate: function (evt: SortableEvent) {
+      dragItem(evt);
+    },
   });
 });
 
@@ -92,12 +94,12 @@ function togglePreview() {
       v-if="galleryFiles.length"
       class="gallery-preview-header"
     >
-      <label class="has-text-weight-bold">Gallery Preview</label>
+      <label class="has-text-weight-bold">Vista previa de la galería</label>
       <button
         class="button"
         @click="togglePreview"
       >
-        {{ isPreviewHidden ? 'Show' : 'Hide' }}
+        {{ isPreviewHidden ? 'Mostrar' : 'Ocultar' }}
       </button>
     </div>
     <div v-show="!isPreviewHidden">

@@ -10,19 +10,16 @@ const { researchteam } = storeToRefs(pageData);
 <template>
   <InputRow>
     <template #label>
-      <label>Do you belong to a department?</label>
+      <label>¿Perteneces a un gremio?</label>
     </template>
 
     <template #input>
-      <select v-model="researchteam">
-        <option
-          v-for="(name, short) in departments"
-          :value="name"
-          :key="short"
-        >
-          {{ short }}
-        </option>
-      </select>
+    <input
+        v-model="researchteam"
+        type="text"
+        id="researchTeam"
+        placeholder="Si es que si, di a cual"
+      />
     </template>
   </InputRow>
 </template>

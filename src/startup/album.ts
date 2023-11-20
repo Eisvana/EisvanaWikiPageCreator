@@ -1,4 +1,4 @@
-import { addDomAsElement, addStaticPageData } from "../common";
+/**import { addDomAsElement, addStaticPageData } from "../common";
 import { updateGlobalElements } from "../commonElements/elementBackend/elementStore";
 import wikitext from "../htmlSnippets/album.html?raw";
 import { actionsDom } from "../modules/albumactions";
@@ -37,10 +37,10 @@ if (albumActions instanceof HTMLDivElement) {
 
 	/**
 	 * Boolean flag indicating that the album has been initialised.
-	 * @type {boolean}
+	/** * @type {boolean}
 	 */
-	addStaticPageData('albumInitialised', true);
+	/**addStaticPageData('albumInitialised', true);
 
 	const albumNote = `<p style="width:100%" class="has-text-centered mb-3">Please don't forget to create an album entry!</p>`;
 	albumActions.insertAdjacentHTML('afterbegin', albumNote);
-}
+/**} */

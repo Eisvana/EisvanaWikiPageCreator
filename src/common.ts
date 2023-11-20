@@ -44,14 +44,16 @@ function getInputData() {
  * @returns {void}
  */
 export function versionDropdown() {
-  const texts = structuredClone(versions);
-  const index = texts.indexOf('SentinelUp');
-  texts.splice(index, 1, 'Sentinel');
+  const versionNames = Object.keys(versions);
+  const versionTexts = Object.values(versions);
   const dropdownElement = globalElements.input.version;
-  if (!dropdownElement) return;
+  if (!(dropdownElement instanceof HTMLSelectElement)) return;
 
-  setDropdownOptions(dropdownElement as HTMLSelectElement, versions, texts);
+  setDropdownOptions(dropdownElement, versionNames, versionTexts);
 }
+
+
+
 
 /**
  * Sets the options in a dropdown element based on an array
@@ -427,10 +429,10 @@ export function image(element: HTMLInputElement) {
   // this section handles an automatic notice about Special:Upload, since this is a big source of confusion for users
   if (staticBooleans.uploadShown) return; // ignore following code if we already alerted user about Special:Upload
   explanation(
-    'Upload your picture to the wiki!',
-    `Don't forget to upload your picture to the wiki on <a href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" target="_blank" rel="noopener noreferrer">Special:Upload</a>.
-	The upload button only auto-filled the image name into the code, it is not automatically uploaded to the wiki.
-	<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the main image upload button.</div>`
+    'Sube tu foto a la wiki!',
+    `No olvides subir tu imagen a la wiki en <a href="https://nomanssky.fandom.com/wiki/Special:Upload?multiple=true" target="_blank" rel="noopener noreferrer">Especial :Subir</a>.
+    El botón de carga solo completa automáticamente el nombre de la imagen en el código, no se carga automáticamente en la wiki.
+    <div class="mt-3"><span class="has-text-weight-bold">NOTA</span>: Puede acceder a esta ventana emergente en cualquier momento haciendo clic en "?" junto al botón de carga de la imagen principal.</div>`
   );
   staticBooleans.uploadShown = true;
 }
@@ -484,7 +486,7 @@ export function toggleSection(
     element.style.display = state ? '' : 'none';
     element.dataset[displayID] = state ? '' : 'none';
   }
-  button!.innerText = state ? 'Hide' : 'Show';
+  button!.innerText = state ? 'Ocultar' : 'Mostrar';
   button!.dataset[displayID] = state ? '' : 'none';
 }
 
@@ -499,7 +501,7 @@ export function researchTeamDropdown(
 ) {
   if (!inputElement) return;
   const prevSelect = inputElement.value;
-  const teams = ['', 'Wiki Scholars', 'EBC'];
+  const teams = ['', '', ''];
 
   setDropdownOptions(inputElement, teams);
   inputElement.value = prevSelect;
@@ -534,7 +536,7 @@ export function researchTeam() {
         return 'Eisvana Wiki Scholars';
 
       default:
-        return exceptions.includes(pageData.pageType as string) ? '' : 'Eisvana';
+        return exceptions.includes(pageData.pageType as string) ? '' : '';
     }
   })();
   const outputElement = globalElements.output[dest] as HTMLElement;
@@ -923,7 +925,7 @@ export function forceDatalist(element: HTMLInputElement) {
   if (!option && element.value) {
     errorMessage(
       element,
-      'Not a valid option. If you believe this is an error, submit a <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">bug report</a>.'
+      'No es una opción válida. Si cree que se trata de un error, envíe un <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">informe de error</a>.'
     );
   } else {
     errorMessage(element);
@@ -940,23 +942,25 @@ export function checkDataIntegrity(element: HTMLElement | null = null, simple: b
   if (staticBooleans.debug) return '';
   const currentText = md5Hex(JSON.stringify(pageData));
   const savedText = dataIntegrityObj.text;
-  const { name, portalglyphs: glyphs, region } = pageData;
+  const { name, portalglyphs: glyphs, hub} = pageData;
 
   if (
     name &&
     glyphs &&
-    region &&
+    hub &&
     ((currentText === savedText && dataIntegrityObj.link === element?.dataset?.link && dataIntegrityObj.copy) || simple)
   ) {
     dataIntegrityObj.copy = false;
     dataIntegrityObj.link = '';
     return '';
   } else if (!name) {
-    return 'Missing Name!';
+    return '¡Falta el nombre!';
   } else if (!glyphs || !region) {
-    return 'Wrong Glyphs!';
+    return '¡Glifos Incorrectos!';
+  } else if (!hub) {
+    return '¡Falta el Hub!';
   } else {
-    return 'Copy Code First!';
+    return '¡Copie el código primero!';
   }
 }
 
@@ -1014,7 +1018,7 @@ export function enableTextMarking() {
 export function preventCopy() {
   const error = checkDataIntegrity(null, true);
   if (error) {
-    explanation('Missing/Incorrect Data', error);
+    explanation('Datos faltantes/incorrectos', error);
     enableTextMarking();
   }
 }

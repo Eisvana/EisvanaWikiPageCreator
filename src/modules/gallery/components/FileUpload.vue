@@ -99,13 +99,13 @@ function buildFileItem(files: File[], storeLoc: Ref<FileItem[]>) {
     @dragover.prevent
   >
     <div class="title-wrapper">
-      <span class="drop-title">Drop gallery files here</span>
+      <span class="drop-title">Suelte los archivos de la galería aquí</span>
       <Explanation
         v-if="tooltip"
         v-model:open="isOpen"
       >
-        There is a preferred order of pictures.
-        <template #heading>Gallery</template>
+      Hay un orden preferido de imágenes.
+        <template #heading>Galería</template>
         <template #content><div v-html="tooltip"></div></template>
       </Explanation>
     </div>
@@ -124,15 +124,15 @@ function buildFileItem(files: File[], storeLoc: Ref<FileItem[]>) {
     class="error-list"
   >
     <div v-if="infoboxImageInGallery">
-      {{ infoboxImage }} is already in the infobox and therefore wasn't added to the gallery.
+      {{ infoboxImage }} ya está en la infobox y, por lo tanto, no se agregó a la galería.
     </div>
     <div v-if="errors.length">
-      The following file(s) exceed the 10MB upload limit and couldn't be added. You can compress them with the
+      Los siguientes archivos exceden el límite de carga de 10 MB y no se pudieron agregar. Puedes comprimirlos con el
       <a
         href="https://nmscd.com/Image-Compressor/"
         target="_blank"
         rel="noopener noreferrer"
-        >Image Compressor</a
+        >Compresor de imagen</a
       >.
     </div>
     <div

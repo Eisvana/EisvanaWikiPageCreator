@@ -1,15 +1,14 @@
 <div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}">
-	<p><output id=planetClass${i}>Planet</output> ${i}: <output class="has-text-weight-bold"
+	<p><output id=planetClass${i}>Planeta</output> ${i}: <output class="has-text-weight-bold"
 			name="planetName${i}"></output></p>
-	<button class="button" data-evt-id="hideButtonPlanet">Hide</button>
+	<button class="button" data-evt-id="hideButtonPlanet">Ocultar</button>
 </div>
 <div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<label for="planetName_input${i}">Planet name</label>
+	<label for="planetName_input${i}">Nombre del planeta</label>
 	<button class="tooltip">
-		<data>Can be found in the discovery menu.</data>
-		<data>Planet Name</data>
-		<data>Can be found in the planet discovery menu.<br>Enter exactly as seen in game. Watch out for 0 (zero) and O
-			(o).</data>
+		<data>Se puede encontrar en el menú de descubrimiento..</data>
+		<data>Nombre del planeta</data>
+		<data>Se puede encontrar en el menú de descubrimiento.<br>Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
 		<data>planet/planetName</data>
 	</button>
 </div>
@@ -17,17 +16,17 @@
 	<input type="text" id="planetName_input${i}" data-dest="planetName${i}">
 </div>
 <div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<label for="planetFile_input${i}">Planet file name</label>
+	<label for="planetFile_input${i}">Nombre del archivo del planeta</label>
 	<button class="tooltip">
-		<data>Should show the entire planet from space. Click for an example picture.</data>
-		<data>Planet Name</data>
+		<data>Debería mostrar todo el planeta desde el espacio. Haga clic para ver una imagen de ejemplo.</data>
+		<data>Nombre del planeta</data>
 		<data>
-			Should show the entire planet from space.<br>
-			Make sure no asteroids/pulse lines/freighters are obstructing the picture.
-			<br>Point the sun directly at the planet, no weird angles.
-			<br>Also try to only get the planet into the shot, no other planets.
-			Only exception to this are moons or rings, which should be included if they exist.
-			<br>Disable the vignette.
+			Debería mostrar todo el planeta desde el espacio.<br>
+			Asegúrese de que ningún asteroide, líneas de pulso o cargueros obstruyan la imagen.
+			<br>Apunta el sol directamente al planeta, sin ángulos extraños.
+			<br>También trate de incluir solo el planeta en la toma, ningún otro planeta.
+			La única excepción son las lunas o los anillos, que deberían incluirse si existen.
+			<br>Desactiva la viñeta.
 		</data>
 		<data>planet/planetPic</data>
 	</button>
@@ -37,9 +36,9 @@
 	<input type="file" id="mainFileUpl${i}" accept="image/*" data-evt-id="fileInput">
 </div>
 <div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<label for="landscapeFile_input${i}">Landscape file name</label>
+	<label for="landscapeFile_input${i}">Nombre del archivo de paisaje</label>
 	<button class="tooltip">
-		<data>Showcase the planet's landscape.</data>
+		<data>Muestra el paisaje del planeta.</data>
 	</button>
 </div>
 <div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
@@ -48,39 +47,36 @@
 	<input type="file" id="secFileUpl${i}" accept="image/*" data-evt-id="fileInput">
 </div>
 <div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<label>Biome</label>
+	<label>Bioma</label>
 	<button class="tooltip">
-		<data>Can be determined from the planetary features.</data>
-		<data>Planet Biome</data>
+		<data>Se puede determinar a partir de las características planetarias.</data>
+		<data>Bioma del planeta</data>
 		<data>
-			Can be determined from the planetary features such as the weather, harvestable plants or available
-			resources.<br>
-			See the <a href=https://nomanssky.fandom.com/wiki/Biome rel=noreferrer target=_blank>Biome wiki page</a> for
-			more information.
-		</data>
+			Puede determinarse a partir de características planetarias como el clima, las plantas cosechables o los recursos disponibles.<br>
+      Consulte la <a href=https://nomanssky.fandom.com/es/wiki/Bioma rel=noreferrer target=_blank>página wiki de Bioma</a> para obtener más información.		</data>
 	</button>
 </div>
 <div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<select id="biome_input${i}" data-dest-noauto="biome${i}" data-evt-id="biomeInput">
-		<option value="Lush">Lush</option>
-		<option value="Barren">Barren</option>
-		<option value="Dead">Dead</option>
-		<option value="Exotic">Exotic</option>
-		<option value="Mega Exotic">Mega Exotic</option>
-		<option value="Scorched">Scorched</option>
-		<option value="Frozen">Frozen</option>
-		<option value="Toxic">Toxic</option>
-		<option value="Irradiated">Irradiated</option>
-		<option value="Marsh">Marsh</option>
-		<option value="Volcanic">Volcanic</option>
+    <option value="Lush">Rico</option>
+    <option value="Barren">Estéril</option>
+    <option value="Dead">Muerto</option>
+    <option value="Exotic">Exótico</option>
+    <option value="Mega Exotic">Mega Exótico</option>
+    <option value="Scorched">Quemado</option>
+    <option value="Frozen">Congelado</option>
+    <option value="Toxic">Tóxico</option>
+    <option value="Irradiated">Irradiado</option>
+    <option value="Marsh">Cenagal</option>
+    <option value="Volcanic">Volcánico</option>
 	</select>
 </div>
 <div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<label for="descriptor_input${i}">Planet description</label>
+	<label for="descriptor_input${i}">Descripción del planeta</label>
 	<button class="tooltip">
-		<data>Can be found in the exploration guide.</data>
-		<data>Planet Description</data>
-		<data>Can be found in the exploration guide.</data>
+		<data>Se puede encontrar en la guía de exploración.</data>
+		<data>Descripción del planeta</data>
+		<data>Se puede encontrar en la guía de exploración.</data>
 		<data>planet/planetDesc</data>
 	</button>
 </div>
@@ -89,33 +85,37 @@
 		data-evt-id="descriptorInput">
 </div>
 <div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<label for="moon_input${i}">Is moon</label>
+	<label for="moon_input${i}">¿Es una luna?</label>
 </div>
 <div class="table-cell data ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<input type="checkbox" id="moon_input${i}" data-dest-noauto="descriptor_input${i}" data-evt-id="moonCheckbox">
 </div>
 <div class="tableHeader text ${oddEvenClass} sectionToggle" data-planet="planet${i}" data-section="planet${i}">
 	<div style="display:flex">
-		<p style="margin-right:1.5rem">Resources</p>
+		<p style="margin-right:1.5rem">Recursos</p>
 		<button class="tooltip">
-			<data>Found in the Discovery Menu or on the analysis visor.</data>
-			<data>Planet Resources</data>
-			<data>Found in the Discovery Menu or on the analysis visor.</data>
+			<data>Se encuentra en el menú de descubrimiento o en el visor de análisis.</data>
+			<data>Recursos del planeta</data>
+			<data>Se encuentra en el menú de descubrimiento o en el visor de análisis.</data>
 			<data>planet/resources</data>
 		</button>
+  </div>
+  <div>
+    <button class="warning">
+      <data>IMPORTANTE!! Escribe el nombre en español y dale a la opcion que salga debajo de donde escribes y se pondra automaticamente en ingles.</data>
+    </button>
 	</div>
-	<button class="button" data-evt-id="hideButtonResource">Hide</button>
+	<button class="button" data-evt-id="hideButtonResource">Ocultar</button>
 </div>
 <div class="tableHeader text ${oddEvenClass}" data-section="resource${i} planet${i}" data-planet="planet${i}">
-	<button class="button is-primary" id="addResourceButton${i}" type="button" data-evt-id="addResourceButton">+ Add
-		Resource</button>
+	<button class="button is-primary" id="addResourceButton${i}" type="button" data-evt-id="addResourceButton">+ Añadir recurso</button>
 </div>
 <div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<label for="weather_input${i}">Weather</label>
+	<label for="weather_input${i}">Tiempo/Clima</label>
 	<button class="tooltip">
-		<data>Can be found in the discovery menu.</data>
-		<data>Planet Weather</data>
-		<data>Can be found in the discovery menu.</data>
+		<data>Se puede encontrar en el menú de descubrimiento.</data>
+		<data>El tiempo del planeta</data>
+		<data>Se puede encontrar en el menú de descubrimiento.</data>
 		<data>planet/weather</data>
 	</button>
 </div>
@@ -124,11 +124,11 @@
 		data-evt-id="weatherInput">
 </div>
 <div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<label for="sentinel_input${i}">Sentinels</label>
+	<label for="sentinel_input${i}">Centinelas</label>
 	<button class="tooltip">
-		<data>Can be found in the discovery menu.</data>
-		<data>Planet Sentinel Level</data>
-		<data>Can be found in the discovery menu.</data>
+		<data>Se puede encontrar en el menú de descubrimiento.</data>
+		<data>Nivel planetario de los centinelas</data>
+		<data>Se puede encontrar en el menú de descubrimiento.</data>
 		<data>planet/sentinels</data>
 	</button>
 </div>
@@ -138,9 +138,9 @@
 <div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="flora_input${i}">Flora</label>
 	<button class="tooltip">
-		<data>Can be found in the discovery menu.</data>
-		<data>Planet Flora Level</data>
-		<data>Can be found in the discovery menu.</data>
+		<data>Se puede encontrar en el menú de descubrimiento.</data>
+		<data>Nivel de flora del planeta</data>
+		<data>Se puede encontrar en el menú de descubrimiento.</data>
 		<data>planet/flora</data>
 	</button>
 </div>
@@ -150,9 +150,9 @@
 <div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
 	<label for="fauna_input${i}">Fauna</label>
 	<button class="tooltip">
-		<data>Can be found in the discovery menu.</data>
-		<data>Planet Fauna Level</data>
-		<data>Can be found in the discovery menu.</data>
+		<data>Se puede encontrar en el menú de descubrimiento.</data>
+		<data>Nivel de fauna del planeta</data>
+		<data>Se puede encontrar en el menú de descubrimiento.</data>
 		<data>planet/fauna</data>
 	</button>
 </div>
@@ -160,11 +160,11 @@
 	<input type="text" id="fauna_input${i}" list="rarity" data-dest="fauna${i}">
 </div>
 <div class="table-cell text ${oddEvenClass}" data-planet="planet${i}" data-section="planet${i}">
-	<label for="faunatotal_input${i}">Number of Fauna</label>
+	<label for="faunatotal_input${i}">Numero de fauna</label>
 	<button class="tooltip">
-		<data>Can be found in the discovery menu.</data>
-		<data>Planet Fauna Number</data>
-		<data>Can be found in the discovery menu.</data>
+		<data>Se puede encontrar en el menú de descubrimiento.</data>
+		<data>Numero de fauna</data>
+		<data>Se puede encontrar en el menú de descubrimiento.</data>
 		<data>planet/faunaNum</data>
 	</button>
 </div>

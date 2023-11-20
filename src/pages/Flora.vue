@@ -40,11 +40,11 @@ onMounted(() => {
   addStaticPageData(
     'galleryExplanationExternal',
     `
-	There is a preferred order of gallery pictures:
+    Hay un orden preferido de imágenes de la galería:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
-			<li>Scanner view</li>
-			<li>Discovery Menu</li>
+			<li>Vista de escáner</li>
+			<li>Menú de descubrimiento</li>
 		</ol>
  	</div>`
   );
@@ -84,7 +84,6 @@ const {
   moonName,
   originalName,
   docBySentence,
-  appearanceSentence,
 } = storeToRefs(pageData);
 
 const isPolymorphicInvalid = computed(() => numberErrorComponent(polymorphic.value));
@@ -119,7 +118,7 @@ watchEffect(() => {
   if (elements.value[0] === elements.value[1]) elements.value[1] = '';
 });
 
-const filledElements = computed(() => elements.value.filter(Boolean));
+const filledElements = computed(() => elements.value.filter((el) => el));
 
 const errorMessage = ref('');
 const openErrorModal = ref(false);
@@ -139,77 +138,77 @@ function markCopy() {
     >
       <ReleaseInput />
       <SimpleInput
-        label="Plant name:"
+        label="Nombre de la Planta:"
         identifier="nameInput"
         v-model="name"
         img="flora/floraName"
       >
-        Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
+      Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).
         <template #heading>Plant Name</template>
-        <template #content>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</template>
+        <template #content>Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</template>
       </SimpleInput>
       <SimpleInput
-        label="Original name before uploading (if available):"
+        label="Nombre original antes de registrar (si está disponible):"
         identifier="orgNameInput"
         v-model="orgName"
       />
       <InfoboxImageInput />
       <SimpleInput
-        label="Name of the System:"
+        label="Nombre del sistema:"
         identifier="systemInput"
         v-model="system"
       />
       <SimpleInput
-        label="Name of the planet:"
+        label="Nombre del planeta:"
         identifier="planetInput"
         v-model="planet"
       >
-        Planet Name OR the planet circled by the moon where the plant can be found.
+      Nombre del planeta O el planeta rodeado por la luna donde se puede encontrar la planta.
       </SimpleInput>
       <SimpleInput
-        label="Name of the moon (if plant is on moon):"
+        label="Nombre de la luna (si la planta está en la luna):"
         identifier="moonInput"
         v-model="moon"
       >
-        If the plant is located on a moon. Leave blank if the plant is on a planet.
+      Si la planta está ubicada en una luna. Déjelo en blanco si la planta está en un planeta.
       </SimpleInput>
       <GlyphInput />
       <BiomeInput />
       <SimpleInput
         v-model="age"
         :error="isAgeInvalid"
-        label="Age:"
+        label="Edad:"
         identifier="age"
         list="ageData"
         img="flora/age"
       >
-        Found on the flora scan.
-        <template #heading>Age</template>
-        <template #content>Found on the flora scan.</template>
+      Encontrado en el escaneo de flora.
+        <template #heading>Edad</template>
+        <template #content>Encontrado en el escaneo de flora.</template>
       </SimpleInput>
       <SimpleInput
         v-model="roots"
         :error="isRootsInvalid"
-        label="Root structure:"
+        label="Estructura radical:"
         identifier="roots"
         list="rootData"
         img="flora/roots"
       >
-        Found on the flora scan.
-        <template #heading>Root Structure</template>
-        <template #content>Found on the flora scan.</template>
+      Encontrado en el escaneo de flora.
+        <template #heading>Estructura radical</template>
+        <template #content>Encontrado en el escaneo de flora.</template>
       </SimpleInput>
       <SimpleInput
         v-model="nutrients"
         :error="isNutrientsInvalid"
-        label="Nutrient source:"
+        label="Fuente de nutrientes:"
         identifier="nutSource"
         list="nutSourceData"
         img="flora/nutSource"
       >
-        Found on the flora scan.
-        <template #heading>Nutrient Source</template>
-        <template #content>Found on the flora scan.</template>
+      Encontrado en el escaneo de flora.
+        <template #heading>Fuente de nutrientes</template>
+        <template #content>Encontrado en el escaneo de flora.</template>
       </SimpleInput>
       <SimpleInput
         v-model="notes"
@@ -219,22 +218,22 @@ function markCopy() {
         list="floraNotesData"
         img="flora/notes"
       >
-        Found on the flora scan.
-        <template #heading>Notes</template>
-        <template #content>Found on the flora scan.</template>
+      Encontrado en el escaneo de flora.
+        <template #heading>Notas</template>
+        <template #content>Encontrado en el escaneo de flora.</template>
       </SimpleInput>
       <SimpleInput
         v-model="polymorphic"
         :error="isPolymorphicInvalid"
         identifier="polymorphic"
-        label="Polymorphic (number of instances):"
+        label="Polimórfico (number of instances):"
         maxlength="2"
       >
-        How many different models of this flora were discovered.
-        <template #heading>Polymorphic</template>
+      ¿Cuántos modelos diferentes de esta flora se descubrieron?
+        <template #heading>Polimórfico</template>
         <template #content>
-          Sometimes multiple flora models have the same name. This is called "Polymorphism". Enter the number of how
-          many different flora models had this name.
+          A veces, varios modelos de flora tienen el mismo nombre. Esto se llama "polimorfismo". Introduzca el número de
+          cuantos modelos de flora diferentes tenían este nombre.
         </template>
       </SimpleInput>
       <ResourceInput
@@ -249,14 +248,14 @@ function markCopy() {
       />
       <InputRow>
         <template #label>
-          <label for="discDate">Discovery date:</label>
+          <label for="discDate">Fecha del descubrimiento:</label>
           <Explanation img="flora/discDate">
-            Found on the flora scan.
-            <template #heading>Discovery Date</template>
+            Encontrado en el escaneo de flora.
+            <template #heading>Fecha del descubrimiento</template>
             <template #content>
-              Found on the flora scan.
+              Encontrado en el escaneo de flora.
               <br />
-              The exact discovery timestamp is displayed on the top left.
+              La marca de tiempo exacta del descubrimiento se muestra en la parte superior izquierda..
             </template>
           </Explanation>
         </template>
@@ -271,22 +270,22 @@ function markCopy() {
       </InputRow>
       <Subgrid>
         <InputRow>
-          <p>Information about the player.</p>
+          <p>Información sobre el jugador.</p>
         </InputRow>
         <DiscovererInputs />
         <SimpleInput
-          label="Documenter if not discoverer:"
+          label="Nombre del documentador si no es el descubridor:"
           identifier="docBy"
           v-model="docBy"
         />
         <ResearchteamInput />
       </Subgrid>
       <InputRow>
-        <label for="appearance">Appearance:</label>
+        <label for="appearance">Apariencia:</label>
         <textarea
           v-model="appearance"
           id="appearance"
-          placeholder="This flora is a <size> <colour> <type>."
+          placeholder="Esta flora es una <size> <colour> <type>."
         ></textarea>
       </InputRow>
     </form>
@@ -342,7 +341,7 @@ function markCopy() {
       <br />
 
       <div>==Summary==</div>
-      <div>'''{{ plantName }}''' is a [[species]] of [[flora]]. {{ appearanceSentence }}</div>
+      <div>'''{{ plantName }}''' is a [[species]] of [[flora]]. {{ appearance }}</div>
       <br />
       <template v-if="polymorphic">
         <div>
@@ -372,7 +371,7 @@ function markCopy() {
       </div>
       <br />
 
-      <div>==Resources==</div>
+      <div>==Usage==</div>
       <div v-if="filledElements.length">
         This flora provides the
         {{ filledElements.length > 1 ? 'resources' : 'resource' }}

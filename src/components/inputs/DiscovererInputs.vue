@@ -11,14 +11,14 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  type: 'Discoverer',
+  type: 'Descubridor',
 });
 </script>
 
 <template>
   <InputRow v-if="!discovered">
     <template #label>
-      <label for="discoveredlinkInput">{{ type }} wiki name:</label>
+      <label for="discoveredlinkInput">Nombre del {{ type }} en la wiki:</label>
     </template>
     <template #input>
       <input
@@ -31,7 +31,7 @@ withDefaults(defineProps<Props>(), {
 
   <InputRow v-if="!discoveredlink">
     <template #label>
-      <label for="discoveredInput">{{ type }} alias if no wiki:</label>
+      <label for="discoveredInput">Alias del {{ type }} si no tiene wiki:</label>
     </template>
     <template #input>
       <input
