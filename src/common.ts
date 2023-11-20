@@ -955,7 +955,7 @@ export function checkDataIntegrity(element: HTMLElement | null = null, simple: b
     return '';
   } else if (!name) {
     return '¡Falta el nombre!';
-  } else if (!glyphs) {
+  } else if (!glyphs || !region) {
     return '¡Glifos Incorrectos!';
   } else if (!hub) {
     return '¡Falta el Hub!';
