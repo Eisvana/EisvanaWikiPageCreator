@@ -1,8 +1,6 @@
 /**
  * @fileoverview Provides data for mineral datalists
  */
-const mineralDatalists = [formationData, mineralNotesData, mineralResources]
-const mineralDatalists = [formationData, mineralNotesData, Object.keys(mineralResources)]
 
 const mineralDatalists = {
   formationData: [
@@ -156,5 +154,7 @@ const mineralDatalists = {
     'Carbon': 'Carbono',
   },
 };
+
+const mineralDatalists = [formationData, mineralNotesData, Object.keys(mineralResources)]
 
 export default mineralDatalists;
