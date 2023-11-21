@@ -136,9 +136,12 @@ const mineralDatalists = {
     'Yeast Colony',
     'Proto Cellular Structure',
   ],
-  mineralResources: {
-    [key: string]: string
-    } = {
+ };
+
+    export function getmineralResourcesData() {
+        const mineralResources: {
+                [key: string]: string
+        } = {
     '':'',
     'Ferrite dust': 'Polvo de ferrita',
     'Pure Ferrite':'Ferrita pura',
@@ -157,8 +160,8 @@ const mineralDatalists = {
   },
         
         return mineralResources;
-}
 };
+
 
 
 export default mineralDatalists;
