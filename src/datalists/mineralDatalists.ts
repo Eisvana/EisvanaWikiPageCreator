@@ -159,7 +159,7 @@ const mineralDatalists = {
     'Carbon': 'Carbono',
   }
         
-        return mineralResources;
+        return mineralResources
 };
 
 
