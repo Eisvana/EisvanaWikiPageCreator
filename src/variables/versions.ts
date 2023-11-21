@@ -34,5 +34,3 @@ export const versions: {
   'Foundation': 'Fundación',
   'Release': 'Lanzamiento',
 }
-          return versions;
-}
