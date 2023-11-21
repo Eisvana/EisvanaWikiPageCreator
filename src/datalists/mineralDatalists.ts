@@ -157,7 +157,7 @@ const mineralDatalists = {
     'Silver': 'Plata',
     'Tritium': 'Tritio',
     'Carbon': 'Carbono',
-  },
+  }
         
         return mineralResources;
 };
