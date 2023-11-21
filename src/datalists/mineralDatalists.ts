@@ -155,6 +155,9 @@ const mineralDatalists = {
     'Tritium': 'Tritio',
     'Carbon': 'Carbono',
   },
+        
+        return mineralResources;
+}
 };
 
 
