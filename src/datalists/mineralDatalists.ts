@@ -136,9 +136,9 @@ const mineralDatalists = {
     'Yeast Colony',
     'Proto Cellular Structure',
   ],
-
+};
  
-    mineralResources: {
+   export const mineralDatalistsmineralResources: {
                 [key: string]: string
         } = {
     '':'',
@@ -159,7 +159,6 @@ const mineralDatalists = {
   }
         
   
-};
 
 
 
