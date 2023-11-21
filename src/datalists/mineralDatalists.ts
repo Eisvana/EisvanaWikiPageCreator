@@ -138,7 +138,7 @@ const mineralDatalists = {
   ],
 };
  
-   export const mineralDatalistsmineralResources: {
+   export const mineralDatalists.mineralResources: {
                 [key: string]: string
         } = {
     '':'',
