@@ -3,8 +3,7 @@
  *
  * @constant
  */
-export function getVersionData() {
-        const versions: {
+export const versions: {
                 [key: string]: string
         } = {
 	'Echoes': 'Echoes',
@@ -37,5 +36,3 @@ export function getVersionData() {
 }
           return versions;
 }
-
-export const versions
