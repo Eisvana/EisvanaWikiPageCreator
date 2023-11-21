@@ -136,7 +136,9 @@ const mineralDatalists = {
     'Yeast Colony',
     'Proto Cellular Structure',
   ],
-  mineralResources:[key: string]: string} = {
+  mineralResources:
+    [key: string]: string
+    } = {
     '':'',
     'Ferrite dust': 'Polvo de ferrita',
     'Pure Ferrite':'Ferrita pura',
