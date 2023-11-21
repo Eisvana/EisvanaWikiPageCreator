@@ -38,3 +38,4 @@ export function getVersionData() {
           return versions;
 }
 
+export const versions
