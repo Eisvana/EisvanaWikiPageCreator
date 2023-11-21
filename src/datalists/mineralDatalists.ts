@@ -136,10 +136,9 @@ const mineralDatalists = {
     'Yeast Colony',
     'Proto Cellular Structure',
   ],
- };
 
-    export function getmineralResourcesData() {
-        const mineralResources: {
+ 
+    mineralResources: {
                 [key: string]: string
         } = {
     '':'',
@@ -159,7 +158,7 @@ const mineralDatalists = {
     'Carbon': 'Carbono',
   }
         
-        return mineralResources
+  
 };
 
 
