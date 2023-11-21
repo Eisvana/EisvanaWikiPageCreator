@@ -1,4 +1,4 @@
-# No Man's Sky - Wiki page creation website!
+# No Man's Sky - Página para crear paginas en la wiki (valga la redundancia)!
 
 Este es un sitio web destinado a facilitar la creación de páginas wiki en [No Man's Sky Wiki](https://nomanssky.fandom.com).
 
