@@ -1,6 +1,7 @@
 /**
  * An array of version names for the game: No Man's Sky
  *
+<<<<<<< Updated upstream
  * @constant
  */
 export function getVersionData() {
@@ -37,4 +38,39 @@ export function getVersionData() {
 }
           return versions;
 }
+=======
+ * @type {string[]}
+ * @constant
+ */
+const versions = [
+	'Echoes',
+	'Singularity',
+	'Interceptor',
+	'Fractal',
+  'Waypoint',
+  'Endurance',
+  'Outlaws',
+  'SentinelUp',
+  'Frontiers',
+  'Prisms',
+  'Expeditions',
+  'Companions',
+  'NextGen',
+  'Origins',
+  'Desolation',
+  'Crossplay',
+  'ExoMech',
+  'Living Ship',
+  'Synthesis',
+  'Beyond',
+  'Visions',
+  'Abyss',
+  'NEXT',
+  'Atlas Rises',
+  'Pathfinder',
+  'Foundation',
+  'Release',
+]
+
+>>>>>>> Stashed changes
 
