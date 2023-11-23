@@ -24,7 +24,7 @@ import Explanation from '@/components/structure/Explanation.vue';
 import { watchDebounced } from '@vueuse/core';
 import mineralDatalists from '@/datalists/mineralDatalists';
 
-import mineralDatalists.mineralResources from '@/datalists/mineralDatalists';
+import mineralResources from '@/datalists/mineralDatalists';
 
 import { useMarker } from '@/composables/useMarker';
 
@@ -221,12 +221,12 @@ function markCopy() {
       </SimpleInput>
       <ResourceInput
         :index="0"
-        :resources="mineralDatalists.mineralResources"
+        :resources="mineralResources"
         item="mineral"
       />
       <ResourceInput
         :index="1"
-        :resources="mineralDatalists.mineralResources"
+        :resources="mineralResources"
         item="mineral"
       />
       <InputRow>

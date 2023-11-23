@@ -7,7 +7,7 @@ const validGlyphsRegex = /[0-9A-F]/;
 const maxGlyphLength = 12;
 
 const pageData = usePageDataStore();
-const { glyphs, isValidGlyphs } = storeToRefs(pageData);
+const { glyphs } = storeToRefs(pageData);
 
 function addGlyph(e: Event) {
   if (
