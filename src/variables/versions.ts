@@ -4,8 +4,8 @@
  * @constant
  */
 export const versions: {
-                [key: string]: string
-        } = {
+[key: string]: string
+} = {
 	'Echoes': 'Echoes',
 	'Singularity': 'Singularidad',
 	'Interceptor': 'Interceptor',

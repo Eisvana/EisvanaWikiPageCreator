@@ -221,12 +221,12 @@ function markCopy() {
       </SimpleInput>
       <ResourceInput
         :index="0"
-        :resources="Object.keys(mineralResourcesDatalist)"
+        :resources="mineralResourcesDatalist"
         item="mineral"
       />
       <ResourceInput
         :index="1"
-        :resources="Object.keys(mineralResourcesDatalist)"
+        :resources="mineralResourcesDatalist"
         item="mineral"
       />
       <InputRow>

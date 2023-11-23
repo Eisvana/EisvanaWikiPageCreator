@@ -350,18 +350,6 @@ const floraDatalists = {
 		'Obtuse',
 		'Unfathomable',
 		'Grasping',
-	],
-	floraResources: [
-		'',
-		'Oxygen',
-		'Carbon',
-		'Sodium',
-		'Condensed Carbon',
-		'Cyto-Phosphate',
-		'Marrow Bulb',
-		'Kelp Sac',
-		'Salt',
-	]
-}
-
+  ],
+  };
 export default floraDatalists;

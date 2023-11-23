@@ -9,7 +9,7 @@ const { elements } = storeToRefs(pageData);
 
 defineProps<{
   index: number;
-  resources: string[];
+  resources:{[key:string]: string};
   item: string;
 }>();
 
@@ -33,10 +33,10 @@ const verboseDescriptions = ['Primario', 'Secundario'];
     <template #input>
       <select v-model="elements[index]">
         <option
-          v-for="resource in resources"
-          :value="resource"
+        v-for="(esResource, enResource) in resources"
+          :value="enResource"
         >
-          {{ resource }}
+          {{ esResource }}
         </option>
       </select>
     </template>

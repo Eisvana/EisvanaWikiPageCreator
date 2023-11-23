@@ -18,6 +18,7 @@ import WikiTemplate from '@/components/structure/WikiTemplate.vue';
 import ExplanationError from '@/components/structure/ExplanationError.vue';
 import { addStaticPageData, forceDatalistComponent, numberErrorComponent } from '@/common';
 import floraDatalists from '@/datalists/floraDatalists';
+import floraResourcesDatalist from '@/datalists/floraDatalists2';
 import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watchEffect } from 'vue';
@@ -238,12 +239,12 @@ function markCopy() {
       </SimpleInput>
       <ResourceInput
         :index="0"
-        :resources="floraDatalists.floraResources"
+        :resources="floraResourcesDatalist"
         item="flora"
       />
       <ResourceInput
         :index="1"
-        :resources="floraDatalists.floraResources"
+        :resources="floraResourcesDatalist"
         item="flora"
       />
       <InputRow>
