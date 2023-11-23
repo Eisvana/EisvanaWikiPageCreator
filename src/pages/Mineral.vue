@@ -220,12 +220,8 @@ function markCopy() {
         </template>
       </SimpleInput>
       <ResourceInput
-        :index="0"
-        :resources="mineralDatalists.mineralResources"
-        item="mineral"
-      />
-      <ResourceInput
-        :index="1"
+        v-for="n in 2"
+        :index="n - 1"
         :resources="mineralDatalists.mineralResources"
         item="mineral"
       />

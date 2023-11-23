@@ -238,12 +238,8 @@ function markCopy() {
         </template>
       </SimpleInput>
       <ResourceInput
-        :index="0"
-        :resources="floraDatalists.floraResources"
-        item="flora"
-      />
-      <ResourceInput
-        :index="1"
+        v-for="n in 2"
+        :index="n - 1"
         :resources="floraDatalists.floraResources"
         item="flora"
       />
