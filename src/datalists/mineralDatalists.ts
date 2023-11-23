@@ -138,8 +138,7 @@ const mineralDatalists = {
   ],
 };
 
-   export function getMineralResource() {
-   const mineralResources: {
+  export const mineralResourcesDatalist: {
 [key: string]: string
 } = {
     '':'',
@@ -158,11 +157,7 @@ const mineralDatalists = {
     'Tritium': 'Tritio',
     'Carbon': 'Carbono',
 	}
-	return mineralResources;
-};
-
-
-
 
 
 export default mineralDatalists;
+
