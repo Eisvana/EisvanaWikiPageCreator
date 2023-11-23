@@ -5,20 +5,6 @@ import InputRow from '../structure/InputRow.vue';
 
 const pageData = usePageDataStore();
 const { biome } = storeToRefs(pageData);
-
-const biomes = [
-  'Lush',
-  'Barren',
-  'Dead',
-  'Exotic',
-  'Mega Exotic',
-  'Scorched',
-  'Frozen',
-  'Toxic',
-  'Irradiated',
-  'Marsh',
-  'Volcanic',
-];
 </script>
 
 <template>
