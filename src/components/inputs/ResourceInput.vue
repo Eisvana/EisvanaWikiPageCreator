@@ -32,20 +32,12 @@ const verboseDescriptions = ['Primario', 'Secundario'];
     </template>
     <template #input>
       <select v-model="elements[index]">
-        <option value="Ferrite dust">Polvo de Ferrita</option>
-        <option value="Pure ferrite">Ferrita pura</option>
-        <option value="Di-hydrogen">Dihidrogeno</option>
-        <option value="Chromatic Metal">Metal cromatico</option>
-        <option value="Sodium">Sodio</option>
-        <option value="Oxygen">Oxigeno</option>
-        <option value="Cobalt">Cobalto</option>
-        <option value="Ionised Cobalt">Cobalto ionizado</option>
-        <option value="Copper">Cobre</option>
-        <option value="Silver">Plata</option>
-        <option value="Tritium">Tritio</option>
-        <option value="Carbon">Carbono</option>
-        <option value="Salt">Sal</option>
-        <option value="Chlorine">Clorina</option>
+        <option
+          v-for="resource in resources"
+          :value="resource"
+        >
+          {{ resource }}
+        </option>
       </select>
     </template>
   </InputRow>
