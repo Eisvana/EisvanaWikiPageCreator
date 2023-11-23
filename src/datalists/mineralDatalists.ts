@@ -137,10 +137,10 @@ const mineralDatalists = {
     'Proto Cellular Structure',
   ],
 };
- 
-   export const mineralDatalists.mineralResources: {
-                [key: string]: string
-        } = {
+
+   export const mineralResources: {
+[key: string]: string
+} = {
     '':'',
     'Ferrite dust': 'Polvo de ferrita',
     'Pure Ferrite':'Ferrita pura',
@@ -157,8 +157,8 @@ const mineralDatalists = {
     'Tritium': 'Tritio',
     'Carbon': 'Carbono',
   }
-        
-  
+
+
 
 
 

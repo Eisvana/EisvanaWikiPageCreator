@@ -6,7 +6,7 @@ import { addDomAsElement, extractNumber, getChildIndex, hideInput, image, loadHT
 import { assignFunction } from '../../commonElements/elementBackend/elementFunctions';
 import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
 import { autoInfested, buildDescriptor, initialiseSectionInputs } from '../../miscLogic/celestialobjectslogic';
-import { getRegNumber, regNr } from '../../miscLogic/locationLogic';
+import { getRegNumber } from '../../miscLogic/locationLogic';
 import { addAllTooltips } from '../../modules/tooltip';
 import type { ElementFunctions, ElementIds } from '../../types/elements';
 import type { SortObj, StdObj } from '../../types/objects';
