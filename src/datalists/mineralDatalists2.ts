@@ -1,3 +1,6 @@
+
+
+
 const mineralResourcesDatalist: {
   [key: string]: string
   } = {
