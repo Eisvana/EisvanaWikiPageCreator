@@ -34,7 +34,7 @@ const verboseDescriptions = ['Primario', 'Secundario'];
       <select v-model="elements[index]">
         <option
           v-for="resource in resources"
-          [key: string]:value="resource"
+          :value="resource"
         >
           {{ resource }}
         </option>
