@@ -9,7 +9,7 @@ const { elements } = storeToRefs(pageData);
 
 defineProps<{
   index: number;
-  resources:{[key:string]: string};
+  resources: (esResource, enResource);
   item: string;
 }>();
 

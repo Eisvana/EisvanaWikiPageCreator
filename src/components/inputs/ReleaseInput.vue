@@ -18,10 +18,10 @@ const { release } = storeToRefs(pageData);
     <template #input>
       <select v-model="release">
         <option
-          v-for="version in versions"
-          :value="version"
+          v-for="(esVersion, enVersion) in versions"
+          :value="enVersion"
         >
-          {{ version }}
+          {{ esVersion }}
         </option>
       </select>
     </template>
