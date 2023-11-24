@@ -71,16 +71,9 @@ const {
   docBy,
   researchteam,
   region,
-  sanitisedName: mineralName,
-  discoveredName,
-  discoveredlinkName,
-  systemName,
-  planetName,
-  moonName,
+  sanitisedStrings,
   docBySentence,
-  originalName,
   appearance,
-  appearanceSentence,
 } = storeToRefs(pageData);
 
 const isPolymorphicInvalid = computed(() => numberErrorComponent(polymorphic.value));
@@ -295,12 +288,12 @@ function markCopy() {
         <WikiTemplate template-name="Version">{{ release }}</WikiTemplate>
       </div>
       <MineralInfobox
-        :mineral-name="mineralName"
+        :mineral-name="sanitisedStrings.name"
         :image="image"
         :region="region"
-        :systemName="systemName"
-        :planetName="planetName"
-        :moonName="moonName"
+        :systemName="sanitisedStrings.system"
+        :planetName="sanitisedStrings.planet"
+        :moonName="sanitisedStrings.moon"
         :content="metalContent"
         :formation="formation"
         :notes="notes"
@@ -308,16 +301,16 @@ function markCopy() {
         :elem-secondary="elements[1]"
         :polymorphic="polymorphic"
         :disc-date="discDate.replaceAll('-', '/')"
-        :discovered-name="discoveredName"
-        :discoveredlink-name="discoveredlinkName"
+        :discovered-name="sanitisedStrings.discovered"
+        :discoveredlink-name="sanitisedStrings.discoveredlink"
         :researchteam="researchteam"
         :release="release"
       />
-      <div>'''{{ mineralName }}''' is a variety of mineral.</div>
+      <div>'''{{ sanitisedStrings.name }}''' is a variety of mineral.</div>
       <br />
 
       <div>==Summary==</div>
-      <div>'''{{ mineralName }}''' is a type of [[mineral]]. {{ appearanceSentence }}</div>
+      <div>'''{{ sanitisedStrings.name }}''' is a type of [[mineral]]. {{ sanitisedStrings.appearance }}</div>
       <br />
       <template v-if="polymorphic">
         <div>
@@ -328,10 +321,10 @@ function markCopy() {
 
       <div>==Alias Names==</div>
       <div v-if="orgName">
-        <WikiTemplate template-name="aliasc">text=Original|name={{ originalName }}</WikiTemplate>
+        <WikiTemplate template-name="aliasc">text=Original|name={{ sanitisedStrings.orgName }}</WikiTemplate>
       </div>
       <div>
-        <WikiTemplate template-name="aliasc">text=Current|name={{ mineralName }}</WikiTemplate>
+        <WikiTemplate template-name="aliasc">text=Current|name={{ sanitisedStrings.name }}</WikiTemplate>
       </div>
       <br />
 
@@ -344,8 +337,8 @@ function markCopy() {
       <div>==Location==</div>
       <div>
         It can be found on the
-        <span v-if="moon">[[moon]] [[{{ moonName }}]] of the</span> [[planet]] [[{{ planetName }}]] in the [[{{
-          systemName
+        <span v-if="moon">[[moon]] [[{{ sanitisedStrings.moon }}]] of the</span> [[planet]] [[{{ sanitisedStrings.planet }}]] in the [[{{
+          sanitisedStrings.system
         }}]] [[star system]].
       </div>
       <div>
