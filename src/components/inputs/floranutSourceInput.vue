@@ -23,15 +23,10 @@ const { nutrients } = storeToRefs(pageData);
         </template>
       </Explanation>
     </template>
-
-
-
     <template #input>
       <select v-model="nutrients">
-        <option
-          v-for="(esfloranutSourceDatalist, enfloranutSourceDatalist) in floranutSourceDatalist"
-          :value="enfloranutSourceDatalist"
-        >
+        <option v-for="(esfloranutSourceDatalist, enfloranutSourceDatalist) in floranutSourceDatalist"
+          :value="enfloranutSourceDatalist">
           {{ esfloranutSourceDatalist }}
         </option>
       </select>
