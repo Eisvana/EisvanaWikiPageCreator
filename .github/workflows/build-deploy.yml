@@ -24,7 +24,7 @@ jobs:
       - name: Build App
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
-            sed -i 's_EisvanaWikiPageCreator_EisvanaWikiPageCreator/staging_g' vite.config.ts
+            sed -i 's_WikiPageCreator_WikiPageCreator/staging_g' vite.config.ts
           fi
 
           npm ci
@@ -33,7 +33,7 @@ jobs:
           touch .nojekyll
 
       - name: Minify Code
-        uses: Lenni009/minify-js@main
+        uses: Muhaddil/minify-js@main
         with:
           directory: dist
           overwrite: true
@@ -41,7 +41,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: EisvanaWikiPageCreator
+          name: WikiPageCreator
           path: dist
 
   deploy-prod:
@@ -56,7 +56,7 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
-          name: EisvanaWikiPageCreator
+          name: WikiPageCreator
           path: dist
         
       - name: Deploy to GitHub Pages
@@ -76,7 +76,7 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
-          name: EisvanaWikiPageCreator
+          name: WikiPageCreator
           path: dist
 
       - name: Deploy to GitHub Pages
