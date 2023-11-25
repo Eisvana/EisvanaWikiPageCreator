@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import InputRow from '../structure/InputRow.vue';
 import floranutSourceDatalist from '@/datalists/floraDatalists3';
-
+import Explanation from '../structure/Explanation.vue';
 import { usePageDataStore } from '../../stores/pageData';
 import { storeToRefs } from 'pinia';
 
@@ -11,9 +11,20 @@ const { nutrients } = storeToRefs(pageData);
 
 <template>
   <InputRow>
+
     <template #label>
-      <label>Fuente de nutrientes:</label>
+      <div class="label-combo">
+        <label>Fuente de nutrientes:</label>
+      </div>
+      <Explanation img="flora/nutSource">
+        Encontrado en el escaneo de flora. <template #heading>Fuente de nutrientes</template>
+        <template #content>
+          Encontrado en el escaneo de flora.
+        </template>
+      </Explanation>
     </template>
+
+
 
     <template #input>
       <select v-model="nutrients">

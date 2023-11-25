@@ -385,9 +385,5 @@ function markCopy() {
     :identifier="id"
     :data="list"
   />
-  <DatalistWrapper
-  :identifier="'floranutSourceDatalist'"
-  :data="Object.keys(floranutSourceDatalist)"
-/>
 
 </template>

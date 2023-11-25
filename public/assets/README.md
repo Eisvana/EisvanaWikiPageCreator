@@ -1,1 +1,1 @@
-This folder hold images and other assets like fonts.
+Esta carpeta contiene imágenes y otros recursos como fuentes.

@@ -54,7 +54,7 @@ const numberToGlyph = (n: number) => n.toString(16).toUpperCase(); // NoSonar th
         </button>
       </div>
       <Explanation img="shared/glyphs">
-        Encontrado en modo foto. Los glifos son específicos de cada planeta.        <template #heading>Portalglyphs</template>
+        Encontrado en modo foto. Los glifos son específicos de cada planeta.        <template #heading>Glifos del portal</template>
         <template #content>
           Encontrado en modo foto. Los glifos son específicos de cada planeta.
           <iframe
