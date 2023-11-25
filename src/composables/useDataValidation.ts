@@ -23,7 +23,7 @@ export function useDataValidation(simple: boolean = false, override: boolean | u
 
   const messages = {
     success: '',
-    noName: '¡Nombre faltante!',
+    noName: '¡Falta el nombre!',
     wrongGlyphs: '¡Faltan los glifos!',
     notCopied: '¡Copia el código primero!',
   };
