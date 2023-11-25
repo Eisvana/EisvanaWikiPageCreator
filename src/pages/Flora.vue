@@ -3,6 +3,7 @@ import InputColumn from '@/components/structure/InputColumn.vue';
 import OutputColumn from '@/components/structure/OutputColumn.vue';
 import ReleaseInput from '@/components/inputs/ReleaseInput.vue';
 import SimpleInput from '@/components/inputs/SimpleInput.vue';
+import floranutSourceInput from '@/components/inputs/floranutSourceInput.vue';
 import InfoboxImageInput from '@/components/inputs/InfoboxImageInput.vue';
 import DiscovererInputs from '@/components/inputs/DiscovererInputs.vue';
 import GlyphInput from '@/components/inputs/GlyphInput.vue';
@@ -19,6 +20,7 @@ import ExplanationError from '@/components/structure/ExplanationError.vue';
 import { addStaticPageData, forceDatalistComponent, numberErrorComponent } from '@/common';
 import floraDatalists from '@/datalists/floraDatalists';
 import floraResourcesDatalist from '@/datalists/floraDatalists2';
+import floranutSourceDatalist from '@/datalists/floraDatalists3';
 import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watchEffect } from 'vue';
@@ -102,11 +104,12 @@ watchDebounced(roots, () => (isRootsInvalid.value = forceDatalistComponent(roots
 });
 watchDebounced(
   nutrients,
-  () => (isNutrientsInvalid.value = forceDatalistComponent(nutrients.value, floraDatalists.nutSourceData)),
+  () => (isNutrientsInvalid.value = forceDatalistComponent(nutrients.value, Object.keys(floranutSourceDatalist))),
   {
     debounce: 500,
   }
 );
+
 watchDebounced(
   notes,
   () => (isNotesInvalid.value = forceDatalistComponent(notes.value, floraDatalists.floraNotesData)),
@@ -135,8 +138,7 @@ function markCopy() {
   <InputColumn>
     <form
       class="table"
-      @submit.prevent
-    >
+      @submit.prevent>
       <ReleaseInput />
       <SimpleInput
         label="Nombre de la Planta:"
@@ -199,18 +201,7 @@ function markCopy() {
         <template #heading>Estructura radical</template>
         <template #content>Encontrado en el escaneo de flora.</template>
       </SimpleInput>
-      <SimpleInput
-        v-model="nutrients"
-        :error="isNutrientsInvalid"
-        label="Fuente de nutrientes:"
-        identifier="nutSource"
-        list="nutSourceData"
-        img="flora/nutSource"
-      >
-      Encontrado en el escaneo de flora.
-        <template #heading>Fuente de nutrientes</template>
-        <template #content>Encontrado en el escaneo de flora.</template>
-      </SimpleInput>
+      <floranutSourceInput />
       <SimpleInput
         v-model="notes"
         :error="isNotesInvalid"
@@ -394,4 +385,9 @@ function markCopy() {
     :identifier="id"
     :data="list"
   />
+  <DatalistWrapper
+  :identifier="'floranutSourceDatalist'"
+  :data="Object.keys(floranutSourceDatalist)"
+/>
+
 </template>

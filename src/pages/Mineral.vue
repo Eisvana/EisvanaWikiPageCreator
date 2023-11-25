@@ -370,4 +370,5 @@ function markCopy() {
     :identifier="id"
     :data="list"
   />
+
 </template>
