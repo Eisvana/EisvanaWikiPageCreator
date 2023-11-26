@@ -57,10 +57,12 @@ const pageData = usePageDataStore();
 const {
   release,
   name,
+  hub,
   orgName,
   image,
   discovered,
   discoveredlink,
+  galaxy,
   system,
   planet,
   moon,
@@ -144,15 +146,30 @@ function markCopy() {
         <template #content>Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</template>
       </SimpleInput>
       <SimpleInput
+        label="Nombre del Hub:"
+        identifier="hubInput"
+        v-model="hub"
+      />
+      <SimpleInput
         label="Nombre original antes de registrar (si está disponible):"
         identifier="orgNameInput"
         v-model="orgName"
       />
       <InfoboxImageInput />
       <SimpleInput
+        label="Nombre de la Galaxia:"
+        identifier="galaxyInput"
+        v-model="galaxy"
+      />
+      <SimpleInput
         label="Nombre del sistema:"
         identifier="systemInput"
         v-model="system"
+      />
+      <SimpleInput
+        label="Nombre de la region:"
+        identifier="regionInput"
+        v-model="region"
       />
       <SimpleInput
         label="Nombre del planeta:"
@@ -293,6 +310,8 @@ function markCopy() {
       <MineralInfobox
         :mineral-name="mineralName"
         :image="image"
+        :hub="hub"
+        :galaxy="galaxy"
         :region="region"
         :systemName="systemName"
         :planetName="planetName"

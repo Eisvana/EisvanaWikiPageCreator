@@ -21,10 +21,10 @@ const verboseDescriptions = ['Primario', 'Secundario'];
     <template #label>
       <label>Elemento {{ index ? 'Secundario' : 'Primario' }}</label>
       <Explanation :img="`${item}/element` + index">
-        Encontrado en el {{ item }} escaneo.
-        <template #heading>{{ verboseDescriptions[index] }} Elemento</template>
+        Encontrado en el escaneo de {{ item }}.
+        <template #heading>Elemento {{ verboseDescriptions[index] }}</template>
         <template #content>
-          Encontrado en el {{ item }} escaneo.
+          Encontrado en el escaneo de {{ item }}.
           <br />
           Dejar vacío si no está en la lista.
         </template>

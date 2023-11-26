@@ -78,7 +78,7 @@ const images: CivImageProps[] = [
 
 <template>
   <h1 class="title is-spaced">Creador de páginas Wiki</h1>
-  <div class="subtitle is-4">Elija qué página desea crear:</div>
+  <div class="subtitle is-4">Elija qué tipo de página desea crear:</div>
   <nav
     aria-label="Subpages"
     class="page-options"
@@ -101,6 +101,7 @@ const images: CivImageProps[] = [
       :link="image.link"
     />
   </div>
+  <div><b>Royal Space Society</b></div>
 </template>
 
 <style scoped lang="scss">

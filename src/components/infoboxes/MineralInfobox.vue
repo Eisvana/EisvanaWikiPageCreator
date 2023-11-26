@@ -3,7 +3,9 @@ import WikiTemplate from '../structure/WikiTemplate.vue';
 
 defineProps<{
   mineralName?: string;
+  hub?: string;
   image?: string;
+  galaxy?: string;
   region?: string;
   systemName?: string;
   planetName?: string;
@@ -30,7 +32,7 @@ defineProps<{
   >
     <div>| name = {{ mineralName }}</div>
     <div>| image = {{ image || 'nmsMisc_NotAvailable.png' }}</div>
-    <div>| galaxy = Eissentam</div>
+    <div>| galaxy = {{ galaxy }}</div>
     <div>| region = {{ region }}</div>
     <div>| system = {{ systemName }}</div>
     <div>| planet = {{ planetName }}</div>
@@ -41,7 +43,7 @@ defineProps<{
     <div>| element_primary = {{ elemPrimary }}</div>
     <div>| element_secondary = {{ elemSecondary }}</div>
     <div>| polymorphic = {{ polymorphic }}</div>
-    <div>| civilized = Eisvana</div>
+    <div>| civilized = {{ hub }}</div>
     <div>| discoveredlink = {{ discoveredlinkName }}</div>
     <div>| discovered = {{ discoveredName }}</div>
     <div>| discovered_on = {{ discDate }}</div>

@@ -42,18 +42,17 @@ function addPicName(e: Event) {
 <template>
   <InputRow>
     <template #label>
-      <label for="picInput">Main image name, including file extension:</label>
+      <label for="picInput">Nombre de la imagen principal, incluida la extensión del archivo:</label>
       <Explanation v-model:open="isOpen">
-        Picture won't be uploaded to the wiki. This is only to autofill the image name.
-        <template #heading>File Upload</template>
+        La imagen no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen.
+        <template #heading>Subir archivo</template>
         <template #content>
-          <template v-if="!isAuto">
-            Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the image name. Maximum
-            filesize is 10MB. You can upload your pictures to the wiki on
-            <WikiLink
-              link="Special:Upload?multiple=true"
-              text="Special:Upload"
-            />.
+            <template v-if="!isAuto">
+              Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen. El tamaño máximo del archivo es 10 MB. Puedes subir tus fotos a la wiki en
+              <WikiLink
+                link="Special:Upload?multiple=true"
+                text="Especial:Subir"
+              />.
 
             <iframe
               src="https://nmscd.com/Image-Compressor/"
@@ -61,21 +60,19 @@ function addPicName(e: Event) {
               class="explanation-embed"
               width="450"
               height="300"
-              >Image Compressor</iframe
+              >Compresor de imagen</iframe
             >
           </template>
           <template v-else>
             <span>
-              Don't forget to upload your picture to the wiki on
+              No olvides subir tu foto a la wiki en
               <WikiLink
                 link="Special:Upload?multiple=true"
-                text="Special:Upload"
-              />. The upload button only auto-filled the image name into the code, it is not automatically uploaded to
-              the wiki.
+                text="Especial:Subir"
+              />. El botón de carga solo completa automáticamente el nombre de la imagen en el código, no se carga automáticamente en la wiki.
             </span>
             <div class="mt-3">
-              <span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the
-              "?" next to the main image upload button.
+              <span class="has-text-weight-bold">NOTA</span>: Puede acceder a esta ventana emergente en cualquier momento haciendo clic en "?" junto al botón de carga de la imagen principal.
             </div>
           </template>
         </template>
@@ -94,12 +91,12 @@ function addPicName(e: Event) {
         @change="addPicName"
       />
       <ErrorMessage v-if="isLargeFile"
-        >This file is too big to be uploaded to the wiki. Maximum filesize is 10MB. Compress your file here:
+        >Este archivo es demasiado grande para cargarlo en la wiki. El tamaño máximo del archivo es 10 MB. Comprime tu archivo aquí:
         <a
           href="https://nmscd.com/Image-Compressor/"
           target="_blank"
           rel="noopener noreferrer"
-          >Image Compressor</a
+          >Compresor de imagen</a
         ></ErrorMessage
       >
     </template>

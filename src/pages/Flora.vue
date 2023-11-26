@@ -4,11 +4,13 @@ import OutputColumn from '@/components/structure/OutputColumn.vue';
 import ReleaseInput from '@/components/inputs/ReleaseInput.vue';
 import SimpleInput from '@/components/inputs/SimpleInput.vue';
 import floranutSourceInput from '@/components/inputs/floranutSourceInput.vue';
+import floraNotesInput from '@/components/inputs/floraNotesInput.vue';
+import floraRootInput from '@/components/inputs/floraRootInput.vue';
+import floraAgeageInput from '@/components/inputs/floraAgeageInput.vue';
 import InfoboxImageInput from '@/components/inputs/InfoboxImageInput.vue';
 import DiscovererInputs from '@/components/inputs/DiscovererInputs.vue';
 import GlyphInput from '@/components/inputs/GlyphInput.vue';
 import BiomeInput from '@/components/inputs/BiomeInput.vue';
-import DatalistWrapper from '@/components/inputs/DatalistWrapper.vue';
 import ResourceInput from '@/components/inputs/ResourceInput.vue';
 import ResearchteamInput from '@/components/inputs/ResearchteamInput.vue';
 import InputRow from '@/components/structure/InputRow.vue';
@@ -18,9 +20,11 @@ import FloraInfobox from '@/components/infoboxes/FloraInfobox.vue';
 import WikiTemplate from '@/components/structure/WikiTemplate.vue';
 import ExplanationError from '@/components/structure/ExplanationError.vue';
 import { addStaticPageData, forceDatalistComponent, numberErrorComponent } from '@/common';
-import floraDatalists from '@/datalists/floraDatalists';
+import floraageDatalist from '@/datalists/floraDatalists';
 import floraResourcesDatalist from '@/datalists/floraDatalists2';
 import floranutSourceDatalist from '@/datalists/floraDatalists3';
+import florarootDatalist from '@/datalists/floraDatalists5'
+import floraNotesDatalist from '@/datalists/floraDatalists4'
 import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watchEffect } from 'vue';
@@ -58,6 +62,8 @@ const pageData = usePageDataStore();
 const {
   release,
   name,
+  galaxy,
+  hub,
   orgName,
   image,
   discovered,
@@ -96,10 +102,10 @@ const isRootsInvalid = ref('');
 const isNutrientsInvalid = ref('');
 const isNotesInvalid = ref('');
 
-watchDebounced(age, () => (isAgeInvalid.value = forceDatalistComponent(age.value, floraDatalists.ageData)), {
+watchDebounced(age, () => (isAgeInvalid.value = forceDatalistComponent(age.value, Object.keys(floraageDatalist))), {
   debounce: 500,
 });
-watchDebounced(roots, () => (isRootsInvalid.value = forceDatalistComponent(roots.value, floraDatalists.rootData)), {
+watchDebounced(roots, () => (isRootsInvalid.value = forceDatalistComponent(roots.value, Object.keys(florarootDatalist))), {
   debounce: 500,
 });
 watchDebounced(
@@ -112,7 +118,7 @@ watchDebounced(
 
 watchDebounced(
   notes,
-  () => (isNotesInvalid.value = forceDatalistComponent(notes.value, floraDatalists.floraNotesData)),
+  () => (isNotesInvalid.value = forceDatalistComponent(notes.value, Object.keys(floraNotesDatalist))),
   {
     debounce: 500,
   }
@@ -147,13 +153,28 @@ function markCopy() {
         img="flora/floraName"
       >
       Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).
-        <template #heading>Plant Name</template>
+        <template #heading>Nombre de la Planta</template>
         <template #content>Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</template>
       </SimpleInput>
+      <SimpleInput
+        label="Nombre del Hub:"
+        identifier="hubInput"
+        v-model="hub"
+      />
       <SimpleInput
         label="Nombre original antes de registrar (si está disponible):"
         identifier="orgNameInput"
         v-model="orgName"
+      />
+      <SimpleInput
+        label="Nombre de la Galaxia:"
+        identifier="galaxyInput"
+        v-model="galaxy"
+      />
+      <SimpleInput
+        label="Nombre de la region:"
+        identifier="regionInput"
+        v-model="region"
       />
       <InfoboxImageInput />
       <SimpleInput
@@ -177,48 +198,15 @@ function markCopy() {
       </SimpleInput>
       <GlyphInput />
       <BiomeInput />
-      <SimpleInput
-        v-model="age"
-        :error="isAgeInvalid"
-        label="Edad:"
-        identifier="age"
-        list="ageData"
-        img="flora/age"
-      >
-      Encontrado en el escaneo de flora.
-        <template #heading>Edad</template>
-        <template #content>Encontrado en el escaneo de flora.</template>
-      </SimpleInput>
-      <SimpleInput
-        v-model="roots"
-        :error="isRootsInvalid"
-        label="Estructura radical:"
-        identifier="roots"
-        list="rootData"
-        img="flora/roots"
-      >
-      Encontrado en el escaneo de flora.
-        <template #heading>Estructura radical</template>
-        <template #content>Encontrado en el escaneo de flora.</template>
-      </SimpleInput>
+      <floraAgeageInput />
+      <floraRootInput />
       <floranutSourceInput />
-      <SimpleInput
-        v-model="notes"
-        :error="isNotesInvalid"
-        label="Notes:"
-        identifier="notes"
-        list="floraNotesData"
-        img="flora/notes"
-      >
-      Encontrado en el escaneo de flora.
-        <template #heading>Notas</template>
-        <template #content>Encontrado en el escaneo de flora.</template>
-      </SimpleInput>
+      <floraNotesInput />
       <SimpleInput
         v-model="polymorphic"
         :error="isPolymorphicInvalid"
         identifier="polymorphic"
-        label="Polimórfico (number of instances):"
+        label="Polimórfico (número de instancias):"
         maxlength="2"
       >
       ¿Cuántos modelos diferentes de esta flora se descubrieron?
@@ -310,6 +298,8 @@ function markCopy() {
       <FloraInfobox
         :plant-name="plantName"
         :image="image"
+        :hub="hub"
+        :galaxy="galaxy"
         :region="region"
         :system-name="systemName"
         :planet-name="planetName"
@@ -380,10 +370,5 @@ function markCopy() {
       <div id="gallery"></div>
     </div>
   </OutputColumn>
-  <DatalistWrapper
-    v-for="(list, id) in floraDatalists"
-    :identifier="id"
-    :data="list"
-  />
-
 </template>
+@/datalists/floraDatalists0

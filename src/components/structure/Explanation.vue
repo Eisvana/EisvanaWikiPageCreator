@@ -128,7 +128,7 @@ function imgOnload() {
           type="submit"
           autofocus
         >
-          Close
+          Cerrar
         </button>
       </form>
     </dialog>

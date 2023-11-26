@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { versions } from '../variables/versions';
-import { regions } from '../variables/regions';
 import { sanitiseString } from '@/common';
 
 interface StaticPageData {
@@ -32,11 +31,14 @@ const localStorageData = () => JSON.parse(localStorage.getItem('defaultSettings'
 interface PageData {
   release: string;
   name: string;
+  hub: string;
   image: string;
   discovered: string;
   discoveredlink: string;
   orgName: string;
+  galaxy: string;
   system: string;
+  region: string;
   planet: string;
   moon: string;
   glyphs: string;
@@ -63,11 +65,14 @@ export const usePageDataStore = defineStore('pageData', {
   state: (): PageData => ({
     release: versions[0],
     name: '',
+    hub: '',
     image: '',
     discovered: localStorageData()['discoveredInput builderInput'] ?? '',
     discoveredlink: localStorageData()['discoveredlinkInput builderlinkInput'] ?? '',
     orgName: '',
+    galaxy: '',
     system: localStorageData().systemInput ?? '',
+    region: '',
     planet: localStorageData().planetInput ?? '',
     moon: localStorageData().moonInput ?? '',
     glyphs: localStorageData().portalglyphsInput ?? '',
@@ -91,17 +96,6 @@ export const usePageDataStore = defineStore('pageData', {
   }),
 
   getters: {
-    regionGlyphs: (state) => state.glyphs.substring(4), // NoSonar region glyphs start at index 4
-    isValidGlyphs(): boolean {
-      return Object.keys(regions).includes(this.regionGlyphs); // Tests if an address is valid for Eisvana
-    },
-    region(): string {
-      return regions[this.regionGlyphs] ?? '';
-    },
-    regionNumber(): number {
-      const index = Object.keys(regions).indexOf(this.regionGlyphs);
-      return index + 1;
-    },
     sanitisedName: (state) => sanitiseString(state.name),
     discoveredName: (state) => sanitiseString(state.discovered),
     discoveredlinkName: (state) => sanitiseString(state.discoveredlink),

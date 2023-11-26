@@ -75,6 +75,15 @@
 					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
+          <div class="table-cell text">
+						<label for="regionInput">Nombre de la región:</label>
+						<button class="tooltip">
+							<data>Escribalo exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="region" id="regionInput">
+					</div>
 					<div class="table-cell text">
 						<label for="planetInput">Nombre del planeta.:</label>
 						<button class="tooltip">
@@ -202,16 +211,18 @@
 							<label for="autoSpawnInputN"><input type="radio" id="autoSpawnInputN" name="autoSpawnInput"
 									value="will not"><span>No</span></label>
 							<label for="autoSpawnInputA"><input type="radio" id="autoSpawnInputA" name="autoSpawnInput"
-									value="" checked><span>No se/span></label>
+									value="" checked><span>No se </span></label>
 						</div>
 					</div>
 					<div class="table-cell text">
 						<label>Modo de juego:</label>
 						<button class="tooltip">
-              <data>Modo de juego del guardado en el que se descubrió este gusano.</data>
-              <data>Modo de juego</data>
-              <data>Modo de juego del guardado en el que se descubrió este gusano.<br>Encontrado en el menu principal:
-              </data>
+							<data>Modo de juego del guardado en el que se descubrió este gusano.</data>
+							<data>Modo de juego</data>
+							<data>
+								Modo de juego del guardado en el que se descubrió este gusano.<br>
+								Encontrado en el menú principal:
+							</data>
 							<data>shared/gamemode</data>
 						</button>
 					</div>
@@ -226,7 +237,7 @@
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredlinkInput">Nombre de la wiki del descubridor:</label>
+						<label for="discoveredlinkInput">Nombre en la wiki del descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
@@ -267,13 +278,12 @@
 					<div>{{Creature infobox</div>
 					<div>| name = Immortal Worm <output id="name" name="bodyName"></output></div>
 					<div>| image = <output id="image" name="image"></output></div>
-					<div>| galaxy = <output id="galaxy"></output></div>
-					<div>| region = <output id="region"></output></div>
+					<div>| galaxy = <output id="galaxy" name="galaxy"></output></div>
+					<div>| region = <output id="region" name="region"></output></div>
 					<div>| system = <output id="system" name="system"></output></div>
 					<div>| planet = <output id="planet"></output></div>
 					<div>| moon = <output id="moon"></output></div>
-					<div>| coordinates = {{Glyphs2Coords|<output id="portalglyphs" name="portalglyphs"></output>}}
-					</div>
+					<div>| coordinates = {{Glyphs2Coords|<output id="portalglyphs" name="portalglyphs"></output>}}</div>
 					<div>| genus = Shaihuluda</div>
 					<div>| wormclass = <output id="wormclass"></output></div>
 					<div>| wormmaxdepth = <output id="wormmaxdepth"></output></div>
@@ -281,7 +291,7 @@
 					<div>| civilized = <output id="hub" name="hub"></output></div>
 					<div>| discovered = <output id="discovered"></output></div>
 					<div>| discoveredlink = <output id="discoveredlink"></output></div>
-					<div>| researchteam = <output id="researchteam"></output></div>
+					<div>| researchteam = <output id="researchteam" name="researchteam"></output></div>
 					<div>| mode = <output id="mode"></output></div>
 					<div>| release = <output id="release1" name="release"></output></div>
 					<div>}}</div>
