@@ -5,7 +5,7 @@ defineProps<{
   plantName?: string;
   hub?: string;
   galaxy?: string;
-  region?: string;
+  regions?: string;
   image?: string;
   systemName?: string;
   planetName?: string;
@@ -36,7 +36,7 @@ defineProps<{
     <div>| name = {{ plantName }}</div>
     <div>| image = {{ image || 'nmsMisc_NotAvailable.png' }}</div>
     <div>| galaxy = {{ galaxy }}</div>
-    <div>| region = {{ region }}</div>
+    <div>| region = {{ regions }}</div>
     <div>| system = {{ systemName }}</div>
     <div>| planet = {{ planetName }}</div>
     <div>| moon = {{ moonName }}</div>

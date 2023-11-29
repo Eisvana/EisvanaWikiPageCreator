@@ -6,7 +6,7 @@ defineProps<{
   hub?: string;
   image?: string;
   galaxy?: string;
-  region?: string;
+  regions?: string;
   systemName?: string;
   planetName?: string;
   moonName?: string;
@@ -33,7 +33,7 @@ defineProps<{
     <div>| name = {{ mineralName }}</div>
     <div>| image = {{ image || 'nmsMisc_NotAvailable.png' }}</div>
     <div>| galaxy = {{ galaxy }}</div>
-    <div>| region = {{ region }}</div>
+    <div>| region = {{ regions }}</div>
     <div>| system = {{ systemName }}</div>
     <div>| planet = {{ planetName }}</div>
     <div>| moon = {{ moonName }}</div>
