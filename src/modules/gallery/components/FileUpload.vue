@@ -69,7 +69,7 @@ function addFiles(files: FileList) {
   // the galleryExplanationExternal() function should return string with the popup text. HTML is supported.
   tooltip.value =
     pageData.galleryExplanationExternal +
-    `<div class="mt-3"><span class="has-text-weight-bold">NOTE</span>: You can access this popup at any time by clicking on the "?" next to the gallery upload button.</div>`;
+    `<div class="mt-3"><span class="has-text-weight-bold">NOTA</span>: Puede acceder a esta ventana emergente en cualquier momento haciendo clic en "?" junto al botón de carga de la galería.</div>`;
   isOpen.value = true;
   isAuto.value = true;
   uploadNoticeShown.value = true;

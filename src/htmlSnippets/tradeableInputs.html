@@ -9,8 +9,8 @@
 	<label for="${text_input}">Nombre del tradeable:</label>
 </div>
 <div class="table-cell data ${oddEvenClass}" data-tradeable="section${childIndex}" data-station="terminal">
-  <input type="text" name="${text_input}" id="${text_input}" list="${text_input}-list" placeholder="Escribe el nombre en español y dale a la opcion de debajo">
-    <datalist id="${text_input}-list" data-dest-noauto="${text}" data-evt-id="addButton">
+<input type="text" name="${text_input}" id="${text_input}" list="${text_input}-list" data-dest="${text}" placeholder="Escribe el nombre en español y dale a la opcion de debajo">
+  <datalist id="${text_input}-list" data-dest="${text}" data-evt-id="addButton">
       <option value="Star Silk">Seda estelar</option>
       <option value="Comet Droplets">Gotas de cometa</option>
       <option value="Ion Sphere">Esfera de iones</option>

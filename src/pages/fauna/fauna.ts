@@ -4,7 +4,6 @@
 
 import { addInfoBullet, docByResearchteam, extractNumber, hideInput, setDropdownOptions, storeData, triggerEvent, wikiCode, wikiCodeSimple } from "../../common";
 import { globalElements, pageData } from "../../variables/objects";
-import { getGenderData } from "../../datalists/creatureDatalists";
 import creatureData from "../../miscLogic/creatureData";
 
 /**
@@ -42,7 +41,7 @@ export function albumDropdown() {
 	const albumTexts = [albums[0]];
 	// ignore first index (empty option)
 	for (let i = 1; i < albums.length; i++) {
-		const text = `Eisvana ${albums[i]}`;
+		const text = `Royal Space Society ${albums[i]}`;
 		albumValues.push(`${text} Album`);
 		albumTexts.push(text);
 	}
@@ -388,19 +387,6 @@ export function generateGalleryArray() {
 export function redirectPage(): string {
 	if (pageData.oldName && pageData.oldName !== pageData.newName) return pageData.newName as string;
 	return '';
-}
-
-export function genderDropdown() {
-	const genus = pageData.genus as string;
-	const genderInput = globalElements.input.genderInput as HTMLSelectElement;
-	const gender2Input = globalElements.input.gender2Input as HTMLSelectElement;
-	const genderArray = getGenderData(genus) as Array<string>;
-	const gender2Array = ['', ...genderArray];
-	setDropdownOptions(genderInput, genderArray);
-	setDropdownOptions(gender2Input, gender2Array);
-	for (const input of [genderInput, gender2Input]) {
-		triggerEvent(input, 'change');
-	}
 }
 
 export function resetExternal() {

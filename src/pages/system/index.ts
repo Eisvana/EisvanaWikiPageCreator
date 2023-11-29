@@ -10,13 +10,13 @@ import systemDatalists from '../../datalists/systemDatalists';
 import '../../startup/celestialObjects';
 
 addStaticPageData('galleryExplanationExternal', `
-There is a preferred order of pictures:
+Hay un orden preferido de imágenes:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
-			<li>Analysis Visor</li>
-			<li>System Exploration Guide</li>
-			<li>System Page</li>
-			<li>Default Space Station Multi-Tool</li>
+			<li>Visor de análisis</li>
+			<li>Guía de exploración del sistema</li>
+			<li>Página del sistema</li>
+			<li>Multiherramienta predeterminada de la estación espacial</li>
 		</ol>
 	</div>`)
 

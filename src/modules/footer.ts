@@ -110,6 +110,9 @@ export function readDefaultValues() {
 
       case 'portalglyphsInput':
       case 'systemInput':
+      case 'regionInput':
+      case 'galaxyInput':
+      case 'hubInput':
       case 'discoveredlinkInput':
       case 'discoveredInput':
       case 'builderlinkInput':

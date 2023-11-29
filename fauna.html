@@ -138,7 +138,7 @@
 					<div class="table-cell text">
 						<label>Género:</label>
 						<button class="tooltip">
-							<data>Consulte la wiki para obtener una lista de géneros..</data>
+							<data>Consulte la wiki para obtener una lista de géneros.</data>
 							<data>Género</data>
 							<data>El género se define por la apariencia general de una criatura..<br>
 								Consulte la wiki para obtener una <a href="Genus#Genus_List" data-wiki>lista de géneros</a>.</data>
@@ -275,7 +275,7 @@
 						</button>
 					</div>
 					<div class="table-cell data">
-						<input data-dest="behaviour" type="text" list="behaviourData" id="behaviourInput">
+						<input data-dest-noauto="behaviour" type="text" list="creatureBehavioursDatalist" id="behaviourInput">
 					</div>
 					<div class="table-cell text">
 						<label for="dietInput">Dieta:</label>
@@ -287,7 +287,7 @@
 						</button>
 					</div>
 					<div class="table-cell data">
-						<input data-dest="diet" type="text" list="dietData" id="dietInput">
+						<input data-dest="diet" type="text" list="creatureDietDatalist" id="dietInput">
 					</div>
 					<div class="table-cell text">
 						<label for="weightInput">Peso en kg:</label>
@@ -335,7 +335,7 @@
 						</button>
 					</div>
 					<div class="table-cell data">
-						<input data-dest-noauto="notes" type="text" list="notesData" id="notesInput">
+						<input data-dest-noauto="notes" type="text" list="creatureNotesDatalist" id="notesInput">
 					</div>
 					<div class="table-cell text" style="display: none">
 						<label for="specialNotesInput">Notas para el menú de descubrimiento:</label>
@@ -459,7 +459,7 @@
 					</div>
 					<div class="table-cell data">
 						<input type="text" id="dmBiomeSentenceInput" data-dest-noauto="dmBiomeSentence"
-							list="dmBiomeSentenceList">
+							list="dmBiomeSentenceList" placeholder="A poder ser, usad el traductor">
 					</div>
 					<div class="table-cell text">
 						<label for="dmTemperamentSentenceInput">Frase de comportamiento del menú de descubrimiento</label>
@@ -475,7 +475,7 @@
 					</div>
 					<div class="table-cell data">
 						<input type="text" id="dmTemperamentSentenceInput" data-dest-noauto="dmTemperamentSentence"
-							list="dmTemperamentSentenceList">
+							list="dmTemperamentSentenceList" placeholder="A poder ser, usad el traductor">
 					</div>
 					<div class="table-cell text">
 						<label for="dmDietSentenceInput">Frase de dieta del menú descubrimiento.</label>
@@ -491,7 +491,7 @@
 					</div>
 					<div class="table-cell data">
 						<input type="text" id="dmDietSentenceInput" data-dest-noauto="dmDietSentence"
-							list="dmDietSentenceList">
+							list="dmDietSentenceList" placeholder="A poder ser, usad el traductor">
 					</div>
 					<div class="tableHeader data no-flex">
 						<label for="dmInput">Menú de descubrimiento</label>

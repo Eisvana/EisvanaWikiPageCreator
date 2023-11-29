@@ -8,6 +8,7 @@ import type { StdObj } from "../../types/objects";
 import type { Sections, ShipProp } from "../../types/starshipDataObjects";
 import { globalElements, pageData } from "../../variables/objects";
 import shipData from "./shipData";
+import shipDatalist from "./shipDatalist"
 
 /**
  * Set subtype dropdown options based on selected ship type.
@@ -104,18 +105,32 @@ export function showHideStarshipSelects() {
  * @returns {void}
  */
 export function invDropdown() {
-	const type = pageData.type as string;
-	const subtype = pageData.subtype as string;
-	const inventory = globalElements.input.inventoryInput as HTMLSelectElement;
-	if (type === 'Hauler') {
-		const subtypes = shipData.Hauler.subtypes as Sections;
-		setDropdownOptions(inventory, subtypes[subtype]);
-		if (subtypes[subtype].length === 1) inventory.value = subtypes[subtype][0];
-	} else {
-		setDropdownOptions(inventory, ['Small', 'Medium', 'Large']);
-	}
-	wikiCode(inventory);
+  const type = pageData.type as string;
+  const subtype = pageData.subtype as string;
+  const inventory = globalElements.input.inventoryInput as HTMLSelectElement;
+
+  if (type === 'Hauler') {
+    const subtypes = shipData.Hauler.subtypes as Sections;
+    setDropdownOptions(inventory, subtypes[subtype]);
+    if (subtypes[subtype].length === 1) inventory.value = subtypes[subtype][0];
+  } else {
+    setDropdownOptions(inventory, Object.keys(shipDatalist));
+  }
+  wikiCode(inventory);
+
+  function setDropdownOptions(element: HTMLSelectElement, options: string[]) {
+    element.innerHTML = ''; // Limpiar las opciones existentes
+
+    options.forEach((key: string) => {
+      let option = document.createElement('option');
+      option.value = key; // Usar el valor original en inglés
+      option.text = shipDatalist[key]; // Mostrar el apodo en español
+      element.add(option);
+    });
+  }
 }
+
+
 
 export function toggleHaulerInvDropdown() {
 	const type = pageData.type as string;
@@ -195,10 +210,10 @@ function shipType() {
  * @return {string} The completed location sentence.
  */
 export function loc() {
-	const { class: shipClass, system: systemName, region: regionName, type } = pageData;
+	const { class: shipClass, system: systemName, regions: regionName, type, galaxy: galaxyName, hub: hubName } = pageData;
 
 	// this output has a linebreak. This is intended, because we use .innerText to display this. If we used <br>, it would display '<br>', not the linebreak.
-	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName as string)} of [[Eisvana]], in the [[Eissentam]] [[galaxy]].
+	const output = `This ${shipType()} was discovered in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]]${regNr(regionName as string)}of [[${hubName}]], in the [[${galaxyName}]] [[galaxy]].
 
 	${type === 'Interceptor' ? 'The {{Class|' + shipClass + '}} class version of this starship' : 'It'} can be found ${locText()}.`;
 

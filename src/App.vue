@@ -6,6 +6,7 @@ import Mineral from './pages/Mineral.vue';
 import { usePageDataStore, useStaticPageDataStore } from './stores/pageData';
 import { storeToRefs } from 'pinia';
 import { useMarker } from './composables/useMarker';
+import Fauna from './pages/Fauna.vue';
 
 const staticPageData = useStaticPageDataStore();
 const { route: currentRoute } = storeToRefs(staticPageData);
@@ -19,6 +20,7 @@ watch([pageName, glyphs], () => nextTick(() => useMarker()), { immediate: true }
 const router: { [key: string]: Component } = {
   flora: Flora,
   mineral: Mineral,
+  fauna: Fauna,
 };
 </script>
 

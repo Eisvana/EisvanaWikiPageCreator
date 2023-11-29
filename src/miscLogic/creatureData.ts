@@ -7,35 +7,35 @@ const creatureData: CreatureData = {
 	ecosystems: {
 		Ground: {
 			Anastomus: {
-				commonName: 'Striders',
+				commonName: 'Zancudos',
 				produces: ['Tall Eggs']
 			},
 			Anomalous: {
-				commonName: 'Exotic Biome Creatures',
+				commonName: 'Criaturas exóticas de los biomas Exoticos',
 				produces: ['', 'Fiendish Roe', 'Hexaberry', 'Latticed Sinew']
 			},
 			Bos: {
-				commonName: 'Beetles',
+				commonName: 'Escarabajos',
 				produces: ["Crab 'Apple'"]
 			},
 			Bosoptera: {
-				commonName: 'Flying Beetles',
+				commonName: 'Escarabajos voladores',
 				produces: ['Craw Milk']
 			},
 			Felidae: {
-				commonName: 'Cats',
+				commonName: 'Gatos',
 				produces: ['Leopard-Fruit']
 			},
 			Felihex: {
-				commonName: 'Sixlegged Cats',
+				commonName: 'Gatos de seis patas',
 				produces: ['Leopard-Fruit']
 			},
 			Hexungulatis: {
-				commonName: 'Sixlegged Cows',
+				commonName: 'Vacas de seis patas',
 				produces: ['Fresh Milk']
 			},
 			Lok: {
-				commonName: 'Blobs',
+				commonName: 'Masa amorfa',
 				produces: ["Sticky 'Honey'"]
 			},
 			Mechanoceris: {
@@ -47,23 +47,23 @@ const creatureData: CreatureData = {
 				produces: ['Warm Proto-Milk']
 			},
 			Osteofelidae: {
-				commonName: 'Bonecat',
+				commonName: 'Bolas de hueso',
 				produces: ['Bone Nuggets']
 			},
 			Prionterrae: {
-				commonName: 'Ploughs',
+				commonName: 'Arados',
 				produces: ['']
 			},
 			Procavya: {
-				commonName: 'Rodents',
+				commonName: 'Roedores',
 				produces: ['Wild Milk']
 			},
 			Protosphaeridae: {
-				commonName: 'Protoroller',
+				commonName: 'Protoroller (esferas)',
 				produces: ['Bone Nuggets']
 			},
 			Prototerrae: {
-				commonName: 'Protodiggers',
+				commonName: 'Protodiggers (Tentaculos)',
 				produces: ['Dirty Meat']
 			},
 			Rangifae: {
@@ -71,11 +71,11 @@ const creatureData: CreatureData = {
 				produces: ['Giant Egg']
 			},
 			Reococcyx: {
-				commonName: 'Bipedal Antelopes',
+				commonName: 'Antílopes bípedos',
 				produces: ['Wild Milk']
 			},
 			Spiralis: {
-				commonName: 'Drills',
+				commonName: 'Taladros',
 				produces: ['Latticed Sinew']
 			},
 			Talpidae: {
@@ -83,7 +83,7 @@ const creatureData: CreatureData = {
 				produces: ['Foraged Mushrooms']
 			},
 			Tetraceris: {
-				commonName: 'Antelopes',
+				commonName: 'Antílopes',
 				produces: ['Wild Milk']
 			},
 			Theroma: {
@@ -91,77 +91,77 @@ const creatureData: CreatureData = {
 				produces: ['Creature Egg']
 			},
 			Tyranocae: {
-				commonName: 'Tyrannosaurus',
+				commonName: 'Tiranosaurios',
 				produces: ['Regis Grease']
 			},
 			Ungulatis: {
-				commonName: 'Cow',
+				commonName: '"Vacas"',
 				produces: ['Fresh Milk']
 			}
 		},
 		Flying: {
 			Agnelis: {
-				commonName: 'Birds',
+				commonName: 'Pajaros',
 				produces: ['', 'Craw Milk']
 			},
 			Cycromys: {
-				commonName: 'Dragons',
+				commonName: 'Dragones',
 				produces: ['Craw Milk']
 			},
 			Oxyacta: {
-				commonName: 'Flying Snakes',
+				commonName: 'Serpientes voladoras',
 				produces: ['Craw Milk']
 			},
 			Protocaeli: {
-				commonName: 'Protoflyers',
+				commonName: 'Protoflyers (bolas raras voladoras)',
 				produces: ['Craw Milk']
 			},
 			Rhopalocera: {
-				commonName: 'Butterflies',
+				commonName: 'Mariposas',
 				produces: ['', 'Craw Milk']
 			}
 		},
 		Underwater: {
 			Procavaquatica: {
-				commonName: 'Swimming Rodents',
+				commonName: 'Roedores nadadores',
 				produces: ['Wild Milk']
 			},
 			Bosaquatica: {
-				commonName: 'Underwater Crabs',
+				commonName: 'Cangrejos submarinos',
 				produces: ["Crab 'Apple'"]
 			},
 			Chrysaora: {
-				commonName: 'Jellyfish',
+				commonName: 'Medusas',
 				produces: ['Wild Milk']
 			},
 			Ictaloris: {
-				commonName: 'Fish',
+				commonName: 'Peces',
 				produces: ['']
 			},
 			Prionace: {
-				commonName: 'Sharks',
+				commonName: 'Tiburones',
 				produces: ['', 'Wild Milk']
 			},
 			Prionacefda: {
-				commonName: 'Swimming cows',
+				commonName: 'Vacas nadadoras',
 				produces: ['Wild Milk']
 			}
 		},
 		Underground: {
 			Bos: {
-				commonName: 'Beetles',
+				commonName: 'Escarabajos',
 				produces: ["Crab 'Apple'"]
 			},
 			Lok: {
-				commonName: 'Blobs',
+				commonName: 'Masas amorfas',
 				produces: ["Sticky 'Honey'"]
 			},
 			Procavya: {
-				commonName: 'Rodents',
+				commonName: 'Roedores',
 				produces: ['Wild Milk']
 			},
 			Prototerrae: {
-				commonName: 'Protodiggers',
+				commonName: 'Protodiggers (tentaculos)',
 				produces: ['']
 			}
 		}

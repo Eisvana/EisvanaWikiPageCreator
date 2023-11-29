@@ -14,15 +14,15 @@ globalFunctions.generateGalleryArray = () => generateGalleryArray();
 globalFunctions.albumLinkGen = () => albumLinkGen();
 
 addStaticPageData('galleryExplanationExternal', `
-	There is a preferred order of pictures:
+Hay un orden preferido de imágenes:
 	<div class='is-flex is-justify-content-center'>
 		<ol class='has-text-left'>
-			<li>Discovery Menu</li>
-			<li>Price Page</li>
-			<li>Base Stats</li>
-			<li>Minor Settlement/Sentinel Pillar/Harmonic Camp/Monolith</li>
-			<li>Tool in Hand</li>
-			<li>First Person View</li>
+			<li>Menú de descubrimiento</li>
+			<li>Página de precios</li>
+			<li>Estadísticas base</li>
+			<li>Asentamiento menor/Pilar centinela/Campamento armónico/Monolito</li>
+			<li>Multiherramienta en mano</li>
+			<li>Vista en primera persona</li>
 		</ol>
 	</div>`)
 

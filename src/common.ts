@@ -16,6 +16,7 @@ import type { ElementFunction, ElementFunctions, InputElements } from './types/e
 import { useGalleryStore } from './modules/gallery/stores/gallery';
 import md5Hex from 'md5-hex';
 import { usePageDataStore } from './stores/pageData';
+import generalDatalists from '@/datalists/GeneralDatalists';
 
 /**
  * Returns an object containing references to input elements on the page.
@@ -137,7 +138,8 @@ export function autoShow(): void {
       elements: inputData.lists,
       handler: 'change',
       func: function () {
-        forceDatalist(this as unknown as HTMLInputElement);
+        forceDatalist(this as unknown as HTMLInputElement, generalDatalists);
+        forceDatalist2(this as unknown as HTMLInputElement);
       },
     },
   ];
@@ -199,6 +201,24 @@ export function showAll() {
   }
   hideDiscoverer();
 }
+
+/**
+ * Validates the option selected in a datalist element.
+ * @param {HTMLInputElement} element - The input element with the datalist.
+ * @returns {void}
+ */
+export function forceDatalist2(element: HTMLInputElement) {
+  const option = element.list?.querySelector(`[value="${element.value}"]`);
+  if (!option && element.value) {
+    errorMessage(
+      element,
+      'No es una opción válida. Si cree que se trata de un error, envíe un <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">informe de error</a>.'
+    );
+  } else {
+    errorMessage(element);
+  }
+}
+
 
 /**
  * Updates a destination element with the sanitized value of a source element's value or content.
@@ -418,7 +438,7 @@ export function image(element: HTMLInputElement) {
   errorMessage(
     element,
     fileSizeExceeded
-      ? 'This file is too big to be uploaded to the wiki. Maximum filesize is 10MB. Compress your file here: <a href="https://nmscd.com/Image-Compressor/" target="_blank" rel="noopener noreferrer">Image Compressor</a>'
+      ? 'Este archivo es demasiado grande para cargarlo en la wiki. El tamaño máximo de archivo es 10 MB. Comprime tu archivo aquí: <a href="https://nmscd.com/Image-Compressor/" target="_blank" rel="noopener noreferrer">Image Compressor</a>'
       : ''
   );
 
@@ -529,11 +549,11 @@ export function researchTeam() {
   const exceptions = ['base', 'racetrack'];
   const researchteam = (() => {
     switch (researchteamValue) {
-      case 'EBC':
-        return 'Eisvana Builder Collective';
+      case '':
+        return '';
 
-      case 'Wiki Scholars':
-        return 'Eisvana Wiki Scholars';
+      case '':
+        return '';
 
       default:
         return exceptions.includes(pageData.pageType as string) ? '' : '';
@@ -745,7 +765,7 @@ export function validateCoords(error: boolean = true) {
     errorMessage(element);
     return;
   }
-  if (error) errorMessage(element, 'Invalid coordinate format');
+  if (error) errorMessage(element, 'Formato de coordenadas no válido');
   return 'error';
 }
 
@@ -867,7 +887,7 @@ export function numberError(
   if (number || !value || allowedSymbols.includes(value)) {
     errorMessage(element);
   } else {
-    errorMessage(element, 'Must only contain numbers');
+    errorMessage(element, 'Sólo debe contener números');
   }
   return number;
 }
@@ -914,23 +934,108 @@ export function datalists(object: Datalist) {
     document.body.appendChild(datalist);
   }
 }
+/**
+ * Creates HTML5 datalists with the provided entries and appends them to the <body> tag.
+ * @param {Object} object - An object containing datalist IDs as keys with an array of entries as values.
+ * @example
+ * // Creates a datalist with ID datalist1 and two entries, "entry1" and "entry2"
+ * datalists2({datalist1: ["entry1", "entry2"]});
+ */
+export function datalists2(object: { [key: string]: string; }): string {
+  let selectedValue = '';
+  const datalist = document.createElement('datalist');
+  datalist.id = 'creatureNotesDatalist';
+  for (const id in object) {
+    const optionElement = document.createElement('option');
+    optionElement.value = object[id];
+    datalist.appendChild(optionElement);
+  }
+  document.body.appendChild(datalist);
+
+  const input = document.querySelector('input[list="creatureNotesDatalist"]');
+  if (input) {
+    input.addEventListener('input', function(e) {
+      const selectedOption = Object.keys(object).find(key => object[key] === (e.target as HTMLInputElement).value);
+      if (selectedOption) {
+        e.preventDefault();
+        (e.target as HTMLInputElement).value = selectedOption;
+        selectedValue = selectedOption;
+      }
+    });
+  }
+  return selectedValue;
+}
+
+export function datalists3(object: { [key: string]: string; }): string {
+  let selectedValue = '';
+  const datalist = document.createElement('datalist');
+  datalist.id = 'creatureBehavioursDatalist';
+  for (const id in object) {
+    const optionElement = document.createElement('option');
+    optionElement.value = object[id];
+    datalist.appendChild(optionElement);
+  }
+  document.body.appendChild(datalist);
+const input = document.querySelector('input[list="creatureBehavioursDatalist"]');
+if (input) {
+  input.addEventListener('input', function(e) {
+    const selectedOption = Object.keys(object).find(key => object[key] === (e.target as HTMLInputElement).value);
+    if (selectedOption) {
+      e.preventDefault();
+      (e.target as HTMLInputElement).value = selectedOption;
+      selectedValue = selectedOption;
+    }
+  });
+}
+return selectedValue;
+}
+
+export function datalists4(object: { [key: string]: string; }): string {
+  let selectedValue = '';
+  const datalist = document.createElement('datalist');
+  datalist.id = 'creatureDietDatalist';
+  for (const id in object) {
+    const optionElement = document.createElement('option');
+    optionElement.value = object[id];
+    datalist.appendChild(optionElement);
+  }
+  document.body.appendChild(datalist);
+const input = document.querySelector('input[list="creatureDietDatalist"]');
+if (input) {
+  input.addEventListener('input', function(e) {
+    const selectedOption = Object.keys(object).find(key => object[key] === (e.target as HTMLInputElement).value);
+    if (selectedOption) {
+      e.preventDefault();
+      (e.target as HTMLInputElement).value = selectedOption;
+      selectedValue = selectedOption;
+    }
+  });
+}
+return selectedValue;
+}
 
 /**
- * Validates the option selected in a datalist element.
- * @param {HTMLInputElement} element - The input element with the datalist.
+ * Valida la opción seleccionada en un elemento datalist.
+ * @param {HTMLInputElement} element - El elemento input con el datalist.
+ * @param {Object} datalists - El objeto que contiene todos tus objetos de datalist.
  * @returns {void}
  */
-export function forceDatalist(element: HTMLInputElement) {
-  const option = element.list?.querySelector(`[value="${element.value}"]`);
-  if (!option && element.value) {
-    errorMessage(
-      element,
-      'No es una opción válida. Si cree que se trata de un error, envíe un <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">informe de error</a>.'
-    );
-  } else {
-    errorMessage(element);
+export function forceDatalist(element: HTMLInputElement, datalists: {[key: string]: {[key: string]: string}}) {
+  const key = element.value;
+  const datalistId = element.getAttribute('list');
+  if (datalistId !== null) {
+    const datalistObject = datalists[datalistId];
+    if (datalistObject && !datalistObject[key] && key) {
+      errorMessage(
+        element,
+        'No es una opción válida. Si cree que se trata de un error, envíe un <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">informe de error</a> fauna.'
+      );
+    } else {
+      errorMessage(element);
+    }
   }
 }
+
 
 /**
  * Checks the integrity of the page data and returns an error message if there's an issue.
@@ -1247,13 +1352,13 @@ export function numberErrorComponent(
 ) {
   const number = getNumber(value, decimals, outputRaw);
   const allowedSymbols = ['+', '-'];
-  return number || !value || allowedSymbols.includes(value) ? '' : 'Must only contain numbers';
+  return number || !value || allowedSymbols.includes(value) ? '' : 'Sólo debe contener números';
 }
 
 // TODO: rename this function when the old one (forceDatalist) is not used anymore
 export function forceDatalistComponent(value: string, list: string[]) {
   const option = list.includes(value);
   return !option && value
-    ? 'Not a valid option. If you believe this is an error, submit a <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">bug report</a>.'
+    ? 'No es una opción válida. Si cree que se trata de un error, envíe un <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">reporte de bugs</a>.'
     : '';
 }

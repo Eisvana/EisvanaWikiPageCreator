@@ -84,7 +84,7 @@ const {
   docBy,
   researchteam,
   appearance,
-  region,
+  regions,
   sanitisedName: plantName,
   discoveredName,
   discoveredlinkName,
@@ -173,8 +173,8 @@ function markCopy() {
       />
       <SimpleInput
         label="Nombre de la region:"
-        identifier="regionInput"
-        v-model="region"
+        identifier="regionsInput"
+        v-model="regions"
       />
       <InfoboxImageInput />
       <SimpleInput
@@ -300,7 +300,7 @@ function markCopy() {
         :image="image"
         :hub="hub"
         :galaxy="galaxy"
-        :region="region"
+        :regions="regions"
         :system-name="systemName"
         :planet-name="planetName"
         :moon-name="moonName"
@@ -371,4 +371,3 @@ function markCopy() {
     </div>
   </OutputColumn>
 </template>
-@/datalists/floraDatalists0

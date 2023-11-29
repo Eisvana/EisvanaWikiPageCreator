@@ -13,6 +13,19 @@ const starshipElementFunctions: ElementFunctions = [
 		element: 'systemInput',
 		func: () => loc()
 	},
+  {
+		element: 'galaxyInput',
+		func: () => loc()
+	},
+  {
+		element: 'regionsInput',
+		func: () => loc()
+	},
+  {
+		element: 'hubInput',
+		func: () => loc()
+	},
+
 	{
 		element: ['planetInput', 'moonInput', 'axesInput'],
 		func: () => { loc(); albumOther() }

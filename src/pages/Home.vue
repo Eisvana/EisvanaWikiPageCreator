@@ -41,7 +41,7 @@ const links: PageLinkProps[] = [
     url: './mineral.html',
   },
   {
-    text: 'Carguero estrellado',
+    text: 'Carguero abandonado',
     url: './derelict.html',
   },
   {

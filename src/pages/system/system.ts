@@ -369,7 +369,7 @@ export function moonSwitch(element: HTMLInputElement) {
 function expandDescriptor(element: HTMLInputElement, planetClass: string | undefined = undefined) {
 	const i = extractNumber(element.id);
 	if (!planetClass) {
-		planetClass = (document.getElementById('moon_input' + i) as HTMLInputElement).checked ? 'Luna' : 'Planeta';
+		planetClass = (document.getElementById('moon_input' + i) as HTMLInputElement).checked ? 'Moon' : 'Planet';
 	}
 	const descriptor = element.value;
 	const dest = element.dataset.destNoauto as string;
@@ -655,7 +655,7 @@ function setBiomeText(obj: StdObj) {
 export function expectedPrefixSentence() {
 	const outputElement = globalElements.output.expectedPrefix as HTMLOutputElement;
 	const systemName = pageData.name as string;
-	const region = pageData.region as string;
+	const region = pageData.regions as string;
 	const glyphs = pageData.portalglyphs as string;
 	if (!systemName || !region) {
 		outputElement.innerHTML = '';

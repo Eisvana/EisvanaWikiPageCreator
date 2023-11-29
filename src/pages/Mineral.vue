@@ -5,8 +5,9 @@ import ReleaseInput from '@/components/inputs/ReleaseInput.vue';
 import SimpleInput from '@/components/inputs/SimpleInput.vue';
 import InfoboxImageInput from '@/components/inputs/InfoboxImageInput.vue';
 import DiscovererInputs from '@/components/inputs/DiscovererInputs.vue';
+import mineralNotesInput from '@/components/inputs/mineralNotesInput.vue';
+import mineralFormationInput from '@/components/inputs/mineralFormationInput.vue';
 import GlyphInput from '@/components/inputs/GlyphInput.vue';
-import DatalistWrapper from '@/components/inputs/DatalistWrapper.vue';
 import ResourceInput from '@/components/inputs/ResourceInput.vue';
 import ResearchteamInput from '@/components/inputs/ResearchteamInput.vue';
 import InputRow from '@/components/structure/InputRow.vue';
@@ -22,8 +23,8 @@ import { computed, onMounted, ref, watchEffect } from 'vue';
 import { useDataValidationStore } from '@/stores/dataValidation';
 import Explanation from '@/components/structure/Explanation.vue';
 import { watchDebounced } from '@vueuse/core';
-import mineralDatalists from '@/datalists/mineralDatalists';
-
+import mineralFormationDatalist from '@/datalists/mineralDatalists';
+import mineralNotesDatalist from '@/datalists/mineralDatalists3'
 import mineralResourcesDatalist from '@/datalists/mineralDatalists2';
 
 import { useMarker } from '@/composables/useMarker';
@@ -75,9 +76,10 @@ const {
   discDate,
   docBy,
   researchteam,
-  region,
+  regions,
   sanitisedName: mineralName,
   discoveredName,
+  originalName,
   discoveredlinkName,
   systemName,
   planetName,
@@ -93,14 +95,14 @@ const isNotesInvalid = ref('');
 
 watchDebounced(
   formation,
-  () => (isFormationInvalid.value = forceDatalistComponent(formation.value, mineralDatalists.formationData)),
+  () => (isFormationInvalid.value = forceDatalistComponent(formation.value, Object.keys(mineralFormationDatalist))),
   {
     debounce: 500,
   }
 );
 watchDebounced(
   notes,
-  () => (isNotesInvalid.value = forceDatalistComponent(notes.value, mineralDatalists.mineralNotesData)),
+  () => (isNotesInvalid.value = forceDatalistComponent(notes.value, Object.keys(mineralNotesDatalist))),
   {
     debounce: 500,
   }
@@ -168,8 +170,8 @@ function markCopy() {
       />
       <SimpleInput
         label="Nombre de la region:"
-        identifier="regionInput"
-        v-model="region"
+        identifier="regionsInput"
+        v-model="regions"
       />
       <SimpleInput
         label="Nombre del planeta:"
@@ -189,7 +191,7 @@ function markCopy() {
       <SimpleInput
         v-model="content"
         :error="isContentInvalid"
-        label="Metal content:"
+        label="Contenido de metales:"
         identifier="content"
         img="mineral/content"
         maxlength="2"
@@ -198,31 +200,31 @@ function markCopy() {
         <template #heading>Contenido metálico</template>
         <template #content>Encontrado en el escaneo de minerales.</template>
       </SimpleInput>
-      <SimpleInput
+      <mineralFormationInput
         v-model="formation"
         :error="isFormationInvalid"
         label="Proceso de formación:"
         identifier="formation"
-        list="formationData"
         img="mineral/formation"
       >
       Encontrado en el escaneo de minerales.
         <template #heading>Proceso de formación</template>
         <template #content>Encontrado en el escaneo de minerales.</template>
-      </SimpleInput>
-      <SimpleInput
-        v-model="notes"
+      </mineralFormationInput>
+      <mineralNotesInput
+      v-model="notes"
         :error="isNotesInvalid"
-        label="Notas:"
+        label="Notas del mineral:"
         identifier="notes"
-        list="mineralNotesData"
         img="mineral/notes"
-      >
-        Found on the mineral scan.
-        <template #heading>Notas</template>
-        <template #content>Encontrado en el escaneo de minerales.</template>
-      </SimpleInput>
-      <SimpleInput
+        >
+        Encontrado en el escaneo de minerales.
+        <template #heading>Notas del mineral</template>
+        <template #content>
+          Encontrado en el escaneo de minerales.
+        </template>
+      </mineralNotesInput>
+       <SimpleInput
         v-model="polymorphic"
         :error="isPolymorphicInvalid"
         identifier="polymorphic"
@@ -312,7 +314,7 @@ function markCopy() {
         :image="image"
         :hub="hub"
         :galaxy="galaxy"
-        :region="region"
+        :regions="regions"
         :systemName="systemName"
         :planetName="planetName"
         :moonName="moonName"
@@ -347,14 +349,14 @@ function markCopy() {
       <div>* Notes: {{ notes }}</div>
       <br />
 
-      <!-- <div>==Alias Names==</div>
+      <div>==Alias Names==</div>
       <div v-if="orgName">
         <WikiTemplate template-name="aliasc">text=Original|name={{ originalName }}</WikiTemplate>
       </div>
       <div>
         <WikiTemplate template-name="aliasc">text=Current|name={{ mineralName }}</WikiTemplate>
       </div>
-      <br /> -->
+      <br />
 
       <div>==Location==</div>
       <div>
@@ -384,10 +386,4 @@ function markCopy() {
       <div id="gallery"></div>
     </div>
   </OutputColumn>
-  <DatalistWrapper
-    v-for="(list, id) in mineralDatalists"
-    :identifier="id"
-    :data="list"
-  />
-
 </template>

@@ -68,7 +68,7 @@ export function validateFriendcode() {
 	if (!friendCode || regexMatch(friendCode, friendCodeRegex)) {
 		errorMessage(element);
 	} else {
-		errorMessage(element, 'Wrong friend code format');
+		errorMessage(element, 'Formato del código de amigo incorrecto');
 	}
 }
 

@@ -38,10 +38,12 @@ interface PageData {
   orgName: string;
   galaxy: string;
   system: string;
-  region: string;
+  regions: string;
   planet: string;
   moon: string;
   glyphs: string;
+  gender: string;
+  gender2: string;
   type: string;
   biome: string;
   age: string;
@@ -59,6 +61,11 @@ interface PageData {
   wealth: string;
   formation: string;
   content: string;
+  behaviours: string;
+  activity: string;
+  hemisphere: string;
+  rarity: string;
+  ecosystem: string;
 }
 
 export const usePageDataStore = defineStore('pageData', {
@@ -72,7 +79,7 @@ export const usePageDataStore = defineStore('pageData', {
     orgName: '',
     galaxy: '',
     system: localStorageData().systemInput ?? '',
-    region: '',
+    regions: '',
     planet: localStorageData().planetInput ?? '',
     moon: localStorageData().moonInput ?? '',
     glyphs: localStorageData().portalglyphsInput ?? '',
@@ -86,13 +93,20 @@ export const usePageDataStore = defineStore('pageData', {
     polymorphic: '',
     discDate: '',
     docBy: localStorageData().docbyInput ?? '',
-    researchteam: localStorageData().researchteamInput ?? departments[''],
+    researchteam: '',
     appearance: '',
     pageName: '',
     platform: localStorageData().platformInput ?? '',
     wealth: localStorageData().wealthInput ?? '',
     formation: '',
     content: '',
+    behaviours: '',
+    gender: '',
+    gender2: '',
+    activity: '',
+    hemisphere: '',
+    rarity: '',
+    ecosystem: '',
   }),
 
   getters: {
@@ -100,6 +114,9 @@ export const usePageDataStore = defineStore('pageData', {
     discoveredName: (state) => sanitiseString(state.discovered),
     discoveredlinkName: (state) => sanitiseString(state.discoveredlink),
     systemName: (state) => sanitiseString(state.system),
+    galaxyName: (state) => sanitiseString(state.galaxy),
+    hubName: (state) => sanitiseString(state.hub),
+    regionName: (state) => sanitiseString(state.regions),
     planetName: (state) => sanitiseString(state.planet),
     moonName: (state) => sanitiseString(state.moon),
     originalName: (state) => sanitiseString(state.orgName),

@@ -1,12 +1,16 @@
-import { addInfoBullet, addStaticPageData, datalists, hideOrgName } from "../../common";
+import { addInfoBullet, addStaticPageData, datalists, datalists2, datalists3, datalists4, hideOrgName } from "../../common";
 import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
 import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
 import creatureDatalists from "../../datalists/creatureDatalists";
+import creatureNotesDatalist from "../../datalists/creatureDatalists2";
+import creatureBehavioursDatalist from "../../datalists/creatureDatalists3";
+import creatureDietDatalist from "../../datalists/creatureDietDatalists";
 import { toggleRedirect } from "../../modules/actions";
 import { albumFunctions } from "../../modules/albumactions";
 import creatureElementFunctions from "./elementFunctions";
 import creatureElements from "./elementStore";
-import { albumOtherExternal, addInfo, albumDropdown, bundlePropFunctions, genderDropdown, genusDropdown, genusProduces, hideAlbumEntry, hideCreaturePrio, hideSecGenderProps, noLineBreak, pageName, specialNotes, specialNotesTextFunc, generateGalleryArray, resetExternal } from "./fauna";
+import { albumOtherExternal, addInfo, albumDropdown, bundlePropFunctions, genusDropdown, genusProduces, hideAlbumEntry, hideCreaturePrio, hideSecGenderProps, noLineBreak, pageName, specialNotes, specialNotesTextFunc, generateGalleryArray, resetExternal } from "./fauna";
+import { genderDropdown } from '@/pages/fauna/fauna2';
 import { globalFunctions } from "../../variables/objects";
 import { planetMoonSentence } from "../../miscLogic/locationLogic";
 import { setTemperamentSentenceDatalist, setBiomeSentenceDatalist, setDietSentenceDatalist } from "./discoveryMenuDatalists";
@@ -17,22 +21,25 @@ globalFunctions.generateGalleryArray = () => generateGalleryArray();
 globalFunctions.resetExternal = () => resetExternal();
 
 addStaticPageData('galleryExplanationExternal', `
-There is a preferred order of pictures:
+Hay un orden preferido de imágenes:
 <div class='dialog-center'>
 	<ol class='dialog-list'>
-		<li>Gender 1</li>
-		<li>Gender 2</li>
-		<li>Gender 1 scan</li>
-		<li>Gender 2 scan</li>
-		<li>Discovery Menu</li>
-		<li>Moon Page</li>
-		<li>Planet Page</li>
-		<li>System Page</li>
-		<li>Galaxy Map</li>
+		<li>Genero 1</li>
+		<li>Genero 2</li>
+		<li>Escaneo Genero 1 </li>
+		<li>Escaneo Genero 2 </li>
+		<li>Menu de descubrimiento</li>
+		<li>Página de la luna</li>
+		<li>Página del planeta</li>
+		<li>Página del sistema</li>
+		<li>Página de la galaxia</li>
 	</ol>
 </div>`)
 
 datalists(creatureDatalists);
+datalists2(creatureNotesDatalist);
+datalists3(creatureBehavioursDatalist);
+datalists4(creatureDietDatalist);
 
 updateGlobalElements(creatureElements);
 assignElementFunctions(creatureElementFunctions);

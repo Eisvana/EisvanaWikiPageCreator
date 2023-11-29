@@ -19,19 +19,19 @@ autoWater();
 addStaticPageData(
   'galleryExplanationExternal',
   `
-There is a preferred order of pictures:
+  Hay un orden preferido de imágenes.:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
-			<li>Landscape</li>
-			<li>Night View</li>
-			<li>Cave System</li>
-			<li>Coast Area</li>
-			<li>Underwater</li>
-			<li>Analysis Visor</li>
-			<li>Planet Exploration Guide</li>
-			<li>Planet Page</li>
-			<li>System Page</li>
-			<li>Galaxy Map</li>
+			<li>Paisaje</li>
+			<li>Vista nocturna</li>
+			<li>Sistema de cuevas</li>
+			<li>Zona Costera</li>
+			<li>Bajo el mar</li>
+			<li>Visor de análisis</li>
+			<li>Guía de exploración planetaria</li>
+			<li>Página del planeta</li>
+			<li>Página del sistema</li>
+			<li>Mapa galactico</li>
 		</ol>
 	</div>`
 );

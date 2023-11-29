@@ -14,7 +14,6 @@ import {
   albumDropdown,
   albumTitle,
   bundlePropFunctions,
-  genderDropdown,
   genderProps,
   genusDropdown,
   genusProduces,
@@ -26,6 +25,7 @@ import {
   specialNotes,
   specialNotesTextFunc,
 } from './fauna';
+import { genderDropdown } from '@/pages/fauna/fauna2'
 
 const creatureElementFunctions: ElementFunctions = [
   {
