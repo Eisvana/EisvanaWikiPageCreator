@@ -4,19 +4,22 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Creador de páginas Wiki - Multiherramientas</title>
-	<meta name="application-name" content="Creador de páginas Wiki">
+	<title>Royal Space Society Creador de páginas Wiki - Multiherramientas</title>
+  <div style="display: inline-block; text-align: center; width: 100%">
+    <div>Versión %VITE_VERSION%</div>
+  </div>
+	<meta name="application-name" content="Eisvana Wiki Page Creator">
 	<meta name="description"
 		content="Easily generate the wikicode to create a multi-tool discovery page on the No Man's Sky Wiki!">
 	<meta name="theme-color" content="#280033">
-	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Page Creator, Multi-Tool">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Muhaddil, Royal Space Society, Page Creator, Multi-Tool">
 	<script src="./src/pages/multitool" type="module"></script>
 </head>
 
 <body>
 	<div class="container">
 		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
-		<h1 class="title is-3">Creador de páginas Wiki - Multiherramientas</h1>
+		<h1 class="title is-3">Eisvana Wiki Page Creator - Multi-Tool</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
@@ -26,9 +29,8 @@
 						<label>Current release:</label>
 					</div>
 					<div class="table-cell data">
-            <div class="table-cell data">
-              <select id="versionInput" data-dest="release"></select>
-            </div>
+						<select id="versionInput" data-dest="release"></select>
+					</div>
 					<div class="table-cell text">
 						<label for="nameInput">Name of the multi-tool:</label>
 						<button class="tooltip">
@@ -380,7 +382,7 @@
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>This section builds a predefined appearance sentence, it is not required.</p>
-						<button class="button" id="hideAppearanceButton">Ocultar</button>
+						<button class="button" id="hideAppearanceButton">Hide</button>
 					</div>
 					<div data-section="appearance" class="table-cell text">
 						<label>Main Colour:</label>
