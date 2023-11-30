@@ -354,10 +354,10 @@ export function subtypeDropdown() {
 	const subtypes: {
 		[key: string]: string[][];
 	} = {
-		Pistol: [['Pistol', 'Starter Pistol'], ['Standard', 'Starter Pistol']],
-		Rifle: [['Rifle', 'SMG'], ['Standard (Large)', 'SMG (Small)']],
-		Experimental: [['Rifle', 'Pistol'], ['Rifle (Large)', 'Pistol (Small)']],
-		Alien: [['Rifle', 'SMG', 'Pistol'], ['Rifle (Large)', 'SMG (Medium)', 'Pistol (Small)']],
+		Pistol: [['Pistol', 'Starter Pistol'], ['Estandar', 'Pistola de inicio']],
+		Rifle: [['Rifle', 'SMG'], ['Estandar (Grande)', 'SMG (Small)']],
+		Experimental: [['Rifle', 'Pistol'], ['Rifle (Grande)', 'Pistola (Pequeña)']],
+		Alien: [['Rifle', 'SMG', 'Pistol'], ['Rifle (Grande)', 'SMG (Mediana)', 'Pistola (Pequeña)']],
 	}
 	const hasSubtypes = Object.keys(subtypes).includes(type);
 

@@ -19,42 +19,51 @@
 <body>
 	<div class="container">
 		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
-		<h1 class="title is-3">Eisvana Wiki Page Creator - Multi-Tool</h1>
+		<h1 class="title is-3">Creador de páginas Wiki - Multiherramientas</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
 			<div id="input" class="column is-full-mobile">
 				<div class="table">
 					<div class="table-cell text">
-						<label>Current release:</label>
+						<label>Versión:</label>
 					</div>
 					<div class="table-cell data">
 						<select id="versionInput" data-dest="release"></select>
 					</div>
 					<div class="table-cell text">
-						<label for="nameInput">Name of the multi-tool:</label>
+						<label for="nameInput">Nombre de la multiherramienta:</label>
 						<button class="tooltip">
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>Multi-Tool Name</data>
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>Escriba exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
+							<data>Nombre de la multiherramienta</data>
+							<data>Escriba exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
 							<data>mt/MTName</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
+          <div class="table-cell text">
+						<label for="hubInput">Nombre del Hub:</label>
+						<button class="tooltip">
+							<data>Escriba el nombre del Hub que represente</data>
+							<data>Nombre del Hub</data>
+              <data>Escriba el nombre del Hub que represente</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="hub" id="hubInput">
+					</div>
 					<div class="table-cell text">
-						<label for="fileInput">Main image name, including file extension:</label>
+						<label for="fileInput">Nombre de la imagen principal, incluida la extensión del archivo:</label>
 						<button class="tooltip" name="fileUploadTooltip">
-							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
-							<data>File Upload</data>
+							<data>La imagen no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen..</data>
+							<data>Subir archivo</data>
 							<data>
-								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
-								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
-									data-wiki>Special:Upload</a>
+								Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen. El tamaño máximo del archivo es 10 MB. Puedes subir tus imágenes a la wiki en <a href="Special:Upload?multiple=true"
+									data-wiki>Especial:Subir</a>
 								<iframe src="https://nmscd.com/Image-Compressor/" title="Image Compressor"
-									class="explanation-embed" width="450" height="300">Image Compressor</iframe>
+									class="explanation-embed" width="450" height="300">Compresor de imagen</iframe>
 							</data>
 						</button>
 					</div>
@@ -63,31 +72,31 @@
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="table-cell text">
-						<label>Type of the multi-tool:</label>
+						<label>Tipo de multiherramienta:</label>
 						<button class="tooltip">
-							<data>MT Type is can be seen in the comparison screen.</data>
-							<data>Multi-Tool Type</data>
-							<data>The Multi-Tool type can be seen in the comparison screen before buying.</data>
+							<data>El tipo de una multiherramienta se puede ver en la pantalla de comparación.</data>
+							<data>Tipo de multiherramienta</data>
+							<data>El tipo de una multiherramienta se puede ver en la pantalla de comparación.</data>
 							<data>mt/MTType</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select id="typeInput" data-dest="type">
-							<option value="Pistol">Pistol</option>
+							<option value="Pistol">Pístola</option>
 							<option value="Rifle">Rifle</option>
 							<option value="Experimental">Experimental</option>
 							<option value="Alien">Alien</option>
 							<option value="Royal">Royal</option>
-							<option value="Sentinel">Sentinel</option>
+							<option value="Sentinel">Centinela</option>
 							<option value="Atlantid">Atlantid</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>Subtype of the multi-tool:</label>
+						<label>Subtipo de multiherramienta:</label>
 						<button class="tooltip">
-							<data>MT subtype is defined by the shape of the tool.</data>
-							<data>Multi-Tool Subtype</data>
-							<data>The Multi-Tool subtype is defined by the shape of the tool.</data>
+							<data>El subtipo de una multiherramienta está definido por la forma de la herramienta.</data>
+							<data>Subtipo de multiherramienta</data>
+							<data>El subtipo de una multiherramienta está definido por la forma de la herramienta.</data>
 							<data>mt/MultitoolDifferentiation</data>
 						</button>
 					</div>
@@ -95,52 +104,64 @@
 						<select id="subtypeInput" data-dest-noauto="subtype">
 						</select>
 					</div>
+          <div class="table-cell text">
+						<label for="galaxyInput">Galaxia:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="galaxy" id="galaxyInput">
+					</div>
+          <div class="table-cell text">
+						<label for="regionsInput">Region:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="regions" id="regionsInput">
+					</div>
 					<div class="table-cell text">
-						<label for="systemInput">Name of the system:</label>
+						<label for="systemInput">Nombre del sistema:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
 					<div class="table-cell text">
-						<label>Location:</label>
+						<label>Localización:</label>
 						<button class="tooltip">
-							<data>Where the tool was found.</data>
+							<data>Dónde se encontró la herramienta.</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select id="locInput" data-dest="location">
-							<option value="Minor Settlement">Minor Settlement</option>
-							<option value="Space Station">Space Station</option>
-							<option value="Sentinel Pillar">Sentinel Pillar</option>
-							<option value="Harmonic Camp">Harmonic Camp</option>
-							<option value="Monolith">Monolith</option>
-							<option value="Space Anomaly">Space Anomaly</option>
+							<option value="Minor Settlement">Asentamiento Menor</option>
+							<option value="Space Station">Estación Espacial</option>
+							<option value="Sentinel Pillar">Pilar centinela</option>
+							<option value="Harmonic Camp">Campamento armónico</option>
+							<option value="Monolith">Monolito</option>
+							<option value="Space Anomaly">Anomalía espacial</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="planetInput">Name of the planet:</label>
+						<label for="planetInput">Nombre del planeta:</label>
 						<button class="tooltip">
-							<data>Planet Name OR the planet circled by the moon where the tool can be found.</data>
+							<data>Nombre del planeta O el planeta rodeado por la luna donde se puede encontrar la herramienta.</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="planet" id="planetInput">
 					</div>
 					<div class="table-cell text">
-						<label for="moonInput">Name of the moon (if MT is on moon):</label>
+						<label for="moonInput">Nombre de la luna (si la multiherramienta está en una luna):</label>
 						<button class="tooltip">
-							<data>If the tool is located on a moon. Leave blank if the tool is on a planet.</data>
+							<data>Si la herramienta está ubicada en una luna. Déjelo en blanco si la herramienta está en un planeta.</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="moon" id="moonInput">
 					</div>
 					<div class="table-cell text">
-						<label for="axesInput">Planetary coords:</label>
+						<label for="axesInput">Coordenadas planetarias:</label>
 						<button class="tooltip">
-							<data>Found using your analysis visor OR on your ship's dashboard.</data>
-							<data>Planetary Coordinates</data>
-							<data>Found using your analysis visor OR on your ship's dashboard.</data>
+							<data>Encontrado usando tu visor de análisis O en el tablero de tu nave.</data>
+							<data>Coordenadas planetarias</data>
+							<data>Encontrado usando tu visor de análisis O en el tablero de tu nave.</data>
 							<data>shared/axes</data>
 						</button>
 					</div>
@@ -148,46 +169,44 @@
 						<input type="text" placeholder="+0.00, -0.00" data-dest="axes" id="axesInput">
 					</div>
 					<div class="table-cell text">
-						<label>Save/reload location type:</label>
+						<label>Guardar/recargar tipo de ubicación:</label>
 						<button class="tooltip">
-							<data>Where you have to reload in order to get the tool to load.</data>
-							<data>Save/Reload Location</data>
+							<data>Dónde tienes que recargar para que se cargue la herramienta.</data>
+							<data>Guardar/recargar tipo de ubicación</data>
 							<data>
-								Where you have to reload in order to get the tool to load.<br>
-								If you are unsure what this means, please read this
-								<a href="https://www.reddit.com/r/NMSGlyphExchange/comments/zmp26o/multitool_spawning_mechanicshunting_guide_by/">guide on
-									multi-tool spawning mechanics</a>.
+								Dónde tienes que recargar para que se cargue la herramienta.<br>
+								Si no está seguro de lo que esto significa, lea esto
+								<a href="https://www.reddit.com/r/NMSGlyphExchange/comments/zmp26o/multitool_spawning_mechanicshunting_guide_by/">guía sobre la mecánica de generación de Multiherramientas</a>.
 							</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select id="srlocInput" data-dest-noauto="srLoc">
-							<option value="Planet">Planet</option>
-							<option value="Moon">Moon</option>
-							<option value="Space Station">Space Station</option>
-							<option value="Space Anomaly">Space Anomaly</option>
+							<option value="Planet">Planeta</option>
+							<option value="Moon">Luna</option>
+							<option value="Space Station">Estación espacial</option>
+							<option value="Space Anomaly">Anomalía espacial</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="srInput">Save/reload location name (if different):</label>
+						<label for="srInput">Guardar/recargar el nombre de la ubicación (si es diferente):</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" id="srInput" data-dest-noauto="srLocName">
 					</div>
 					<div class="table-cell text">
 						<div class="label-combo">
-							<label for="portalglyphsInput">Portalglyphs:</label>
+							<label for="portalglyphsInput">Glifos:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
-								Delete</button>
+							Borrar</button>
 						</div>
 						<button class="tooltip">
-							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
-							<data>Portalglyphs</data>
+							<data>Encontrado en modo foto. Los glifos son específicos de cada planeta.</data>
+							<data>Glifos</data>
 							<data>
-								Found in Photo Mode. Glyphs are specific to each planet.
+								Encontrado en modo foto. Los glifos son específicos de cada planeta.
 								<iframe src="https://nmspar.vercel.app/" sandbox="allow-scripts allow-same-origin"
-									title="Glyph Reader" class="explanation-embed" width="450" height="300">Glyph
-									Reader</iframe>
+									title="Glyph Reader" class="explanation-embed" width="450" height="300">Lector de Glifos</iframe>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -200,7 +219,7 @@
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
 					<div class="table-cell text">
-						<label>Class:</label>
+						<label>Clase:</label>
 					</div>
 					<div class="table-cell data">
 						<select id="classInput" data-dest="class">
@@ -213,13 +232,12 @@
 					<div class="table-cell text">
 						<label>Add-ons:</label>
 						<button class="tooltip">
-							<data>Whether the tool has these features.</data>
-							<data>Multi-Tool Add-ons</data>
+							<data>Si la herramienta tiene estas características.</data>
+							<data>Complementos de las Multiherramientas</data>
 							<data>
-								Check the boxes which apply to the tool.<br>
-								There are certain rules for some MT types in order to qualify for the add-on.<br>
-								<a href="Multi-Tool_Catalogue#Add-ons" data-wiki>Detailed info can be found on the
-									wiki</a>
+								Marque las casillas que se aplican a la herramienta.<br>
+								Existen ciertas reglas para algunos tipos de MT a fin de calificar para el complemento.<br>
+								<a href="Multi-Tool_Catalogue#Add-ons" data-wiki>La información detallada se puede encontrar en la wiki.</a>
 							</data>
 							<data>mt/addons</data>
 						</button>
@@ -228,20 +246,20 @@
 						<div class="checkboxes">
 							<label class="checkbox" for="crystalsInput"><input type="checkbox" id="crystalsInput"
 									value="Yes" data-dest-checkbox="crystals"><span
-									class="checkbox-label">Crystals</span></label>
+									class="checkbox-label">Cristañes</span></label>
 							<label class="checkbox" for="hornsInput"><input type="checkbox" id="hornsInput" value="Yes"
-									data-dest-checkbox="horns"><span class="checkbox-label">Horns</span></label>
+									data-dest-checkbox="horns"><span class="checkbox-label">Cuernos</span></label>
 							<label class="checkbox" for="glowtubesInput"><input type="checkbox" id="glowtubesInput"
 									value="Yes" data-dest-checkbox="glowtubes"><span
-									class="checkbox-label">Glowtubes</span></label>
+									class="checkbox-label">Tubos luminosos</span></label>
 						</div>
 					</div>
 					<div class="table-cell text">
-						<label for="slotsInput">Slot count:</label>
+						<label for="slotsInput">Número de slots:</label>
 						<button class="tooltip">
-							<data>Can be found on the price page.</data>
-							<data>Multi-Tool Slotcount</data>
-							<data>Slotcount of the tool. Can be found on the price page.</data>
+							<data>Se puede encontrar en la página de precios.</data>
+							<data>Número de slots</data>
+							<data>Número de ranuras de la herramienta. Se puede encontrar en la página de precios.</data>
 							<data>mt/slots</data>
 						</button>
 					</div>
@@ -249,11 +267,11 @@
 						<input type="text" id="slotsInput" data-dest-number="0" data-dest-noauto="slots">
 					</div>
 					<div class="table-cell text">
-						<label for="costInput">Cost:</label>
+						<label for="costInput">Precio:</label>
 						<button class="tooltip">
-							<data>Can be found on the price page.</data>
-							<data>Multi-Tool Cost</data>
-							<data>Can be found on the price page. Enter the Buy price, not the trade-in price.</data>
+							<data>Se puede encontrar en la página de precios.</data>
+							<data>Precio de la multiherramienta</data>
+							<data>Se puede encontrar en la página de precios. Ingrese el precio de compra, no el precio de intercambio.</data>
 							<data>mt/price</data>
 						</button>
 					</div>
@@ -261,14 +279,13 @@
 						<input type="text" id="costInput" data-dest-number="0" data-dest-noauto="cost">
 					</div>
 					<div class="table-cell text">
-						<label for="dmgInput">Base Damage Potential:</label>
+						<label for="dmgInput">Daño base de la multiherramienta:</label>
 						<button class="tooltip">
-							<data>Base damage with no installed upgrades.</data>
-							<data>Multi-Tool Base Damage</data>
+							<data>Daño base sin mejoras instaladas.</data>
+							<data>Daño base de la multiherramienta</data>
 							<data>
-								Base damage with no installed upgrades. Every tech except for the Scanner and the
-								Mining Beam needs to be dismantled.
-								Watch out that no supercharged slots (lightblue) are used.
+								Daño base sin mejoras instaladas. Es necesario desmantelar todas las tecnologías, excepto el escáner y el laser de extracción.
+								Tenga cuidado de que no se utilicen ranuras sobrecargadas (azul claro).
 							</data>
 							<data>mt/baseDmg</data>
 						</button>
@@ -277,14 +294,13 @@
 						<input type="text" id="dmgInput" placeholder="0.0" data-dest-number="1" data-dest-noauto="dmg">
 					</div>
 					<div class="table-cell text">
-						<label for="scanInput">Base Scanner Range:</label>
+						<label for="scanInput">Rango del Escanes base:</label>
 						<button class="tooltip">
-							<data>Base scan range with no installed upgrades.</data>
-							<data>Multi-Tool Base Scanner Range</data>
+							<data>Rango del escaner base sin mejoras instaladas.</data>
+							<data>Rango del Escanes base</data>
 							<data>
-								Base scanner range with no installed upgrades. Every tech except for the Scanner and the
-								Mining Beam needs to be dismantled.
-								Watch out that no supercharged slots (lightblue) are used.
+								Rango del escaner base sin mejoras instaladas. Es necesario desmantelar todas las tecnologías, excepto el escáner y el laser de extracción.
+								Tenga cuidado de que no se utilicen ranuras sobrecargadas (azul claro).
 							</data>
 							<data>mt/baseScan</data>
 						</button>
@@ -295,15 +311,14 @@
 					</div>
 					<div class="tableHeader text">
 						<p>
-							<span class="has-text-weight-bold">Note</span>: These pictures should be from the discovery
-							menu (except coordinates)
+							<span class="has-text-weight-bold">Notas</span>: Estas imágenes deben ser del menú de descubrimiento (excepto coordenadas)
 						</p>
 					</div>
 					<div class="table-cell text">
-						<label for="srImgInput"><output id="srImgInputLabel">Save/Reload Location</output></label>
+						<label for="srImgInput">Guardar/Recargar ubicación/<output id="srImgInputLabel"></output></label>
 						<button class="tooltip">
-							<data>Click to see an example picture.</data>
-							<data>Save/Reload Location Picture</data>
+							<data>Haga clic para ver una imagen de ejemplo.</data>
+							<data>Guardar/Recargar imagen de ubicación</data>
 							<data></data>
 							<data>mt/srExample</data>
 						</button>
@@ -313,11 +328,10 @@
 						<input type="file" id="srImgUpload" accept="image/*">
 					</div>
 					<div class="table-cell text">
-						<label for="sysImgInput"><output id="sysImgInputLabel">System (Cabinet location
-								highlighted)</output></label>
+						<label for="sysImgInput">Sistema/<output id="sysImgInputLabel"></output></label>
 						<button class="tooltip">
-							<data>Click to see an example picture.</data>
-							<data>Save/Reload Location Picture</data>
+							<data>Haga clic para ver una imagen de ejemplo.</data>
+							<data>Guardar/Recargar imagen de ubicación</data>
 							<data></data>
 							<data>mt/sysExample</data>
 						</button>
@@ -327,10 +341,10 @@
 						<input type="file" id="sysImgUpload" accept="image/*">
 					</div>
 					<div class="table-cell text">
-						<label for="cabInput"><output id="cabInputLabel">Cabinet Planet/Moon</output></label>
+						<label for="cabInput">Planeta/Luna del Gabinete/<output id="cabInputLabel"></output></label>
 						<button class="tooltip">
-							<data>Click to see an example picture.</data>
-							<data>Save/Reload Location Picture</data>
+							<data>Haga clic para ver una imagen de ejemplo.</data>
+							<data>Guardar/Recargar imagen de ubicación</data>
 							<data></data>
 							<data>mt/srExample</data>
 						</button>
@@ -340,10 +354,10 @@
 						<input type="file" id="cabUpload" accept="image/*">
 					</div>
 					<div class="table-cell text">
-						<label for="coordsInput"><output id="coordsInputLabel">Coordinates</output></label>
+						<label for="coordsInput">Coordenadas/<output id="coordsInputLabel"></output></label>
 						<button class="tooltip">
-							<data>Click to see an example picture.</data>
-							<data>Save/Reload Location Picture</data>
+							<data>Haga clic para ver una imagen de ejemplo.</data>
+							<data>Guardar/Recargar imagen de ubicación</data>
 							<data></data>
 							<data>mt/coordExample</data>
 						</button>
@@ -353,86 +367,82 @@
 						<input type="file" id="coordsUpload" accept="image/*">
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredlinkInput">Discoverer wiki name:</label>
+						<label for="discoveredlinkInput">Nombre en la wiki del descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" id="discoveredlinkInput" data-dest="discoveredlink">
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredInput">Discoverer alias if no wiki:</label>
+						<label for="discoveredInput">Alias ​​del descubridor si no tiene wiki:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" id="discoveredInput" data-dest="discovered">
 					</div>
 					<div class="table-cell text">
-						<label for="docbyInput">Documenter alias if not discoverer:</label>
+						<label for="docbyInput">Alias del documentador si no es el descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" id="docbyInput" data-dest-noauto="docby">
 					</div>
 					<div class="table-cell text">
-						<label>Do you belong to a chapter?</label>
+						<label>¿Perteneces a un gremio?</label>
 					</div>
-					<div class="table-cell data">
-						<select id="researchteamInput" data-dest-noauto="researchteam">
-							<option value=""></option>
-							<option value="Wiki Scholars">Wiki Scholars</option>
-							<option value="EBC">EBC</option>
-						</select>
+            <div class="table-cell data">
+            <input type="text" placeholder="Gremio que pertenezcas dentro de tu hub (si tiene)" data-dest="researchteam" id="researchteamInput">
 					</div>
 					<div class="tableHeader text sectionToggle">
-						<p>This section builds a predefined appearance sentence, it is not required.</p>
-						<button class="button" id="hideAppearanceButton">Hide</button>
+						<p>Esta sección crea una oración de apariencia predefinida, no es obligatoria.</p>
+						<button class="button" id="hideAppearanceButton">Ocultar</button>
 					</div>
 					<div data-section="appearance" class="table-cell text">
-						<label>Main Colour:</label>
+						<label>Color principal:</label>
 					</div>
 					<div data-section="appearance" class="table-cell data">
 						<select id="mainColourInput" data-dest-noauto="mainColour">
 							<option value=" "></option>
-							<option value="blue">Blue</option>
-							<option value="chrome">Chrome</option>
-							<option value="cream">Cream</option>
-							<option value="green">Green</option>
-							<option value="grey">Grey</option>
-							<option value="orange">Orange</option>
-							<option value="pink">Pink</option>
-							<option value="purple">Purple</option>
-							<option value="red">Red</option>
-							<option value="tan">Tan</option>
-							<option value="teal">Teal</option>
-							<option value="white">White</option>
-							<option value="yellow">Yellow</option>
+							<option value="blue">Azul</option>
+							<option value="chrome">Cromado</option>
+							<option value="cream">Crema</option>
+							<option value="green">Verde</option>
+							<option value="grey">Gris</option>
+							<option value="orange">Naranja</option>
+							<option value="pink">Rosa</option>
+							<option value="purple">Morado</option>
+							<option value="red">Rojo</option>
+							<option value="tan">Bronceado</option>
+							<option value="teal">Verde azulado</option>
+							<option value="white">Blanco</option>
+							<option value="yellow">Amarillo</option>
 						</select>
 					</div>
 					<div data-section="appearance" class="table-cell text">
-						<label>Secondary Colour:</label>
+						<label>Color secundario:</label>
 					</div>
 					<div data-section="appearance" class="table-cell data">
 						<select id="secColourInput" data-dest-noauto="secColour">
 							<option value=" "></option>
-							<option value="black">Black</option>
-							<option value="blue">Blue</option>
-							<option value="chrome">Chrome</option>
-							<option value="cream">Cream</option>
-							<option value="gold">Gold</option>
-							<option value="green">Green</option>
-							<option value="grey">Grey</option>
-							<option value="orange">Orange</option>
-							<option value="pink">Pink</option>
-							<option value="purple">Purple
-							<option value="red">Red</option>
-							<option value="silver">Silver</option>
-							<option value="tan">Tan</option>
-							<option value="teal">Teal</option>
-							<option value="white">White</option>
-							<option value="yellow">Yellow</option>
+							<option value="black">Negro</option>
+							<option value="blue">Azul</option>
+							<option value="chrome">Cromado</option>
+							<option value="cream">Crema</option>
+							<option value="gold">Dorado</option>
+							<option value="green">Verde</option>
+							<option value="grey">Gris</option>
+							<option value="orange">Naranja</option>
+							<option value="pink">Rosa</option>
+							<option value="purple">Morado</option>
+							<option value="red">Rojo</option>
+							<option value="silver">Plateado</option>
+							<option value="tan">Bronceado</option>
+							<option value="teal">Verde Azulado</option>
+							<option value="white">Blanco</option>
+							<option value="yellow">Amarillo</option>
 						</select>
 					</div>
 					<div class="tableHeader data no-flex">
-						<label for="appearanceInput">Appearance:</label>
+						<label for="appearanceInput">Apariencia:</label>
 						<textarea data-dest="appearance" id="appearanceInput"
-							placeholder="What does the multi-tool look like?"></textarea>
+							placeholder="¿Cómo se ve la multiherramienta?"></textarea>
 					</div>
 				</div>
 				<div id="galleryInput"></div>
@@ -447,16 +457,15 @@
 					<div>{{Multitool infobox</div>
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image" name="image"></output></div>
-					<div>| civilized = Eisvana</div>
-					<div>| galaxy = Eissentam</div>
-					<div>| region = <output id="region" name="region"></output></div>
+					<div>| civilized = <output id="hub" name="hub"></output></div>
+					<div>| galaxy = <output id="galaxy" name="galaxy"></output></div>
+					<div>| region = <output id="regions" name="regions"></output></div>
 					<div>| system = <output id="system" name="system"></output></div>
 					<div>| planet = <output id="planet"></output></div>
 					<div>| moon = <output id="moon"></output></div>
 					<div>| location = <output id="location"></output></div>
 					<div>| axes = <output id="axes"></output></div>
-					<div>| coordinates = {{Glyphs2Coords|<output id="portalglyphs1" name="portalglyphs"></output>}}
-					</div>
+					<div>| coordinates = {{Glyphs2Coords|<output id="portalglyphs1" name="portalglyphs"></output>}}</div>
 					<div>| portalglyphs = <output id="portalglyphs" name="portalglyphs"></output></div>
 					<div>| type = <output id="type" name="type"></output></div>
 					<div>| crystals = <output id="crystals"></output></div>
@@ -486,7 +495,7 @@
 					<div>==Location==</div>
 					<div>This multi-tool is located in the [[<output id="system1" name="system"></output>]] [[star
 						system]] in the [[<output id="region1" name="region"></output>]] [[region]]<output
-							id="regNr"></output> of [[Eisvana]], in the [[Eissentam]] [[galaxy]].</div>
+							id="regNr"></output> of [[<output id="hub" name="hub"></output>]], in the [[<output id="galaxy" name="galaxy"></output>]] [[galaxy]].</div>
 					<br>
 					<div>{{CoordGlyphConvert|<output id="portalglyphs2" name="portalglyphs"></output>}}</div>
 					<br>
@@ -506,7 +515,6 @@
 					<br>
 
 					<div>==Additional Information==</div>
-					<div><span data-add-info="*"></span> Featured in the <output id="addInfo"></output></div>
 					<div><span data-add-info="*"></span> <output id="docby"></output></div>
 					<br>
 
