@@ -69,7 +69,7 @@ const links: PageLinkProps[] = [
 
 const images: CivImageProps[] = [
   {
-    link: 'https://nomanssky.fandom.com/wiki/Royal_Space_Society',
+    link: 'https://nomanssky.fandom.com/es/wiki/Royal_Space_Society',
     imgAlt: 'Royal Space Society logo',
     img: 'https://static.wikia.nocookie.net/nomanssky_gamepedia/images/5/51/RSS_Emblem_Hub.png',
   },

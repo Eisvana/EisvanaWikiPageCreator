@@ -415,7 +415,7 @@ export function albumLinkGen() {
 	 * @returns {string} The name of the corresponding starship album.
 	 */
 	function getCatalog() {
-		return `Eisvana Starship Album - ${type}`;
+		return `Royal Space Society Starship Album - ${type}`;
 	}
 
 	return getCatalog();

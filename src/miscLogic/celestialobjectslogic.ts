@@ -29,7 +29,7 @@ export function docByExternal() {
 	 */
 	const research = (() => {
 		const chapterSentence = displayResearch();
-		if (chapterSentence && chapterSentence !== 'Eisvana') return chapterSentence;
+		if (chapterSentence && chapterSentence !== 'Royal Space Society') return chapterSentence;
 		return '';
 	})();
 

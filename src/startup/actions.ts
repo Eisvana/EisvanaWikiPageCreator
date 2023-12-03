@@ -4,7 +4,7 @@ import type { ElementFunctions } from "../types/elements";
 import { globalElements, staticBooleans } from "../variables/objects";
 
 /**
- * Sets actions and notes for the EisvanaWikiPageCreator. This function first sets up
+ * Sets actions and notes for the WikiPageCreator. This function first sets up
  * several buttons for copying, downloading, and creating pages. It then adds a note
  * reminding the user to upload any images they have added. Finally, it adds a debug
  * mode checkbox, and sets up a handler for toggling debug mode on and off.

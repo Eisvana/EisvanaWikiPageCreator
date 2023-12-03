@@ -125,7 +125,7 @@ export const usePageDataStore = defineStore('pageData', {
       const hasResearchteam = state.researchteam.split(' ').length > 1;
       const documenter = isLink ? state.docBy : `''${state.docBy}''`;
       const researchteamLink = state.researchteam.includes('Wiki')
-        ? '[[Eisvana Wiki Scholars|Eisvana Wiki Scholar]]'
+        ? '[[Wiki Scholars|Wiki Scholar]]'
         : `[[${state.researchteam}]] member`;
       return `${hasResearchteam ? researchteamLink : ''} ${documenter}`;
     },

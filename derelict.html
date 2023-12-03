@@ -18,7 +18,7 @@
 
 <body>
 	<div class="container">
-		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
+		<nav><a href="./" title="Main page">&larr; Regresar a la página principal</a></nav>
 		<h1 class="title is-3">Creador de páginas Wiki - Carguero Abandonado</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
@@ -26,17 +26,17 @@
 			<div id="input" class="column is-full-mobile">
 				<div class="table">
 					<div class="table-cell text">
-						<label>Current release:</label>
+						<label>Versión:</label>
 					</div>
 					<div class="table-cell data">
 						<select id="versionInput" data-dest="release"></select>
 					</div>
 					<div class="table-cell text">
-						<label for="nameInput">Name of the freighter:</label>
+						<label for="nameInput">Nombre del carguero:</label>
 						<button class="tooltip">
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>Freighter Name</data>
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o). Can be found in the
+							<data>Introduzca exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>Nombre del carguero</data>
+							<data>Introduzca exactly as seen in game. Watch out for 0 (zero) and O (o). Can be found in the
 								analysis visor.</data>
 							<data>derelict/freighterName</data>
 						</button>
@@ -44,18 +44,29 @@
 					<div class="table-cell data">
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
+          <div class="table-cell text">
+						<label for="hubInput">Nombre del Hub:</label>
+						<button class="tooltip">
+							<data>Escriba el nombre del Hub que represente</data>
+							<data>Nombre del Hub</data>
+              <data>Escriba el nombre del Hub que represente</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="hub" id="hubInput">
+					</div>
 					<div class="table-cell text">
-						<label for="fileInput">Main image name, including file extension:</label>
+						<label for="fileInput">Nombre de la imagen principal, incluida la extensión del archivo:</label>
 						<button class="tooltip" name="fileUploadTooltip">
-							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
-							<data>File Upload</data>
+							<data>La imagen no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen.</data>
+							<data>Subir archivo</data>
 							<data>
-								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
-								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
-									data-wiki>Especial:Subir</a>
-								<iframe src="https://nmscd.com/Image-Compressor/" title="Image Compressor"
-									class="explanation-embed" width="450" height="300">Image Compressor</iframe>
+                Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el
+                Nombre de la imágen. El tamaño máximo del archivo es 10 MB.
+                Puedes subir tus imágenes a la wiki en <a href="Special:Upload?multiple=true"
+                data-wiki>Especial:Subir</a>
+                <iframe src="https://nmscd.com/Image-Compressor/" title="Compresor de imágenes"
+                class="explanation-embed" width="450" height="300">Compresor de imágenes</iframe>
 							</data>
 						</button>
 					</div>
@@ -63,26 +74,25 @@
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
-					<div class="table-cell text">
-						<label for="systemInput">Name of the system:</label>
+          <div class="table-cell text">
+						<label for="systemInput">Nombre del sistema:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
 					<div class="table-cell text">
 						<div class="label-combo">
-							<label for="portalglyphsInput">Portalglyphs:</label>
+							<label for="portalglyphsInput">Glifos:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
-								Delete</button>
+								Borrar</button>
 						</div>
 						<button class="tooltip">
-							<data>Found in Photo Mode.</data>
-							<data>Portalglyphs</data>
+							<data>Encontrados en el modo foto.</data>
+							<data>Glifos</data>
 							<data>
-								Found in Photo Mode.
+								Encontrados en el modo foto.
 								<iframe src="https://nmspar.vercel.app/" sandbox="allow-scripts allow-same-origin"
-									title="Glyph Reader" class="explanation-embed" width="450" height="300">Glyph
-									Reader</iframe>
+									title="Glyph Reader" class="explanation-embed" width="450" height="300">Lector de Glifos</iframe>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -95,7 +105,7 @@
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
 					<div class="table-cell text">
-						<label>Class:</label>
+						<label>Clase:</label>
 					</div>
 					<div class="table-cell data">
 						<select id="classInput" data-dest="class">
@@ -106,12 +116,12 @@
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>Enemies:</label>
+						<label>Enemigos:</label>
 						<button class="tooltip">
-							<data>Whether the freighter has these enemies.</data>
-							<data>Derelict Freighter Enemies</data>
+							<data>Si el carguero tiene estos enemigos.</data>
+							<data>Enemigos de cargueros abandonados</data>
 							<data>
-								Check the boxes which apply to the derelict freighter.
+								Marque las casillas que se aplican al carguero abandonado.
 							</data>
 							<data>derelict/enemies</data>
 						</button>
@@ -119,24 +129,22 @@
 					<div class="table-cell data">
 						<div class="checkboxes">
 							<label class="checkbox" for="rogueAIInput"><input type="checkbox" id="rogueAIInput"
-									value="Rogue AI" name="enemiesInput"><span class="checkbox-label">Rogue
-									AI</span></label>
+									value="Rogue AI" name="enemiesInput"><span class="checkbox-label">Seguridad Automatica</span></label>
 							<label class="checkbox" for="minifiendInput"><input type="checkbox" id="minifiendInput"
 									value="[[Minifiend]]" name="enemiesInput"><span
-									class="checkbox-label">Minifiend</span></label>
+									class="checkbox-label">Minifiend / Horrores Biologicos</span></label>
 							<label class="checkbox" for="greenJellyfishInput"><input type="checkbox"
 									id="greenJellyfishInput" value="[[Green Jellyfish]]" name="enemiesInput"><span
-									class="checkbox-label">Green Jellyfish</span></label>
+									class="checkbox-label">Horror Abisal</span></label>
 						</div>
 					</div>
 					<div class="table-cell text">
-						<label for="roomInput">Number of rooms:</label>
+						<label for="roomInput">Número de habitaciones:</label>
 						<button class="tooltip">
-							<data>Number of rooms as seen at the bottom right.</data>
-							<data>Number of Rooms</data>
+							<data>Número de habitaciones como se ve en la parte inferior derecha.</data>
+							<data>Número de habitaciones</data>
 							<data>
-								Number of rooms in the freighter. It can be seen on the bottom right of the screen. You
-								can get the overlay by pressing H.
+								Número de habitaciones en el carguero. Se puede ver en la parte inferior derecha de la pantalla. Puede obtener la superposición presionando H.
 							</data>
 							<data>derelict/zones</data>
 						</button>
@@ -145,12 +153,12 @@
 						<input type="text" id="roomInput" data-dest-number="0" data-dest-noauto="rooms" maxlength="2">
 					</div>
 					<div class="table-cell text">
-						<label for="hyperdriveInput">Hyperdrive:</label>
+						<label for="hyperdriveInput">Hiperturbo:</label>
 						<button class="tooltip">
-							<data>Stat of the hyperdrive upgrade.</data>
-							<data>Hyperdrive Upgrade Bonus</data>
+							<data>Estadística de la mejora del hiperturbo.</data>
+							<data>Hiperturbo Upgrade Bonus</data>
 							<data>
-								Hyperdrive upgrade distance stat. This will always be the same for a given freighter.
+								Estadística de distancia de mejora del hiperturbo. Esto siempre será el mismo para un carguero determinado.
 							</data>
 							<data>derelict/hyperdrive</data>
 						</button>
@@ -160,12 +168,12 @@
 							maxlength="3">
 					</div>
 					<div class="table-cell text">
-						<label for="fuelInput">Fuel:</label>
+						<label for="fuelInput">Combustible:</label>
 						<button class="tooltip">
-							<data>Stat of the frigate fuel upgrade.</data>
-							<data>Frigate Fuel Upgrade Bonus</data>
+							<data>Estadísticas de la mejora del combustible de la fragata.</data>
+							<data>Bonificación por la mejora de combustible de fragata</data>
 							<data>
-								Frigate fuel upgrade stat. This will always be the same for a given freighter.
+								Estadística de la mejora del combustible de la fragata. Esto siempre será el mismo para un carguero determinado.
 							</data>
 							<data>derelict/fuel</data>
 						</button>
@@ -174,13 +182,12 @@
 						<input type="text" id="fuelInput" data-dest-number="0" data-dest-noauto="fuel" maxlength="2">
 					</div>
 					<div class="table-cell text">
-						<label for="otherStatInput">Other upgrades:</label>
+						<label for="otherStatInput">Otras mejoras:</label>
 						<button class="tooltip">
-							<data>Stat of frigate upgrades that are not fuel or hyperdrive.</data>
+							<data>Estadísticas de las mejoras de fragatas que no son combustible ni el hiperturbo.</data>
 							<data>Other Frigate Upgrade Bonus</data>
 							<data>
-								Frigate upgrade stat for modules unrelated to hyperdrive and fuel consumption. This will
-								always be the same for a given freighter and its upgrade modules.
+								Estadística de las mejoras de fragata para módulos no relacionados con el hiperturbo y el consumo de combustible. Esto siempre será lo mismo para un carguero determinado y sus módulos de mejora.
 							</data>
 							<data>derelict/fuel</data>
 						</button>
@@ -190,28 +197,24 @@
 							maxlength="2">
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredlinkInput">Discoverer wiki name:</label>
+						<label for="discoveredlinkInput">Nombre en la wiki del descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" id="discoveredlinkInput" data-dest="discoveredlink">
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredInput">Discoverer alias if no wiki:</label>
+						<label for="discoveredInput">Alias ​del ​descubridor si tiene hay wiki:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" id="discoveredInput" data-dest="discovered">
 					</div>
 					<div class="table-cell text">
-						<label>Do you belong to a chapter?</label>
+						<label>¿Perteneces a un gremio?</label>
 					</div>
 					<div class="table-cell data">
-						<select id="researchteamInput" data-dest-noauto="researchteam">
-							<option value=""></option>
-							<option value="Wiki Scholars">Wiki Scholars</option>
-							<option value="EBC">EBC</option>
-						</select>
+          <input type="text" data-dest="researchteam" id="researchteamInput">
 					</div>
-				</div>
+        </div>
 				<div id="galleryInput"></div>
 				<div id="galleryItems" class="gallery-items-wrapper"></div>
 				<div id="actions" class="buttons"></div>
@@ -226,14 +229,13 @@
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image" name="image"></output></div>
 					<div>| coordinates = <output name="coordinates"></output>:xxxx</div>
-					<div>| portalglyphs = 0000<output name="regionglyphs"></output>
-					</div>
+					<div>| portalglyphs = 0000<output name="regionglyphs"></output></div>
 					<div>| type = Freighter</div>
 					<div>| subtype = Derelict</div>
 					<div>| class = <output name="class"></output></div>
 					<div>| discovered = <output id="discovered"></output></div>
 					<div>| discoveredlink = <output id="discoveredlink"></output></div>
-					<div>| civilized = </div>
+					<div>| civilized = <output id="hub" name="hub"></output></div>
 					<div>| researchteam = <output id="researchteam"></output></div>
 					<div>| release = <output name="release"></output></div>
 					<div>}}</div>

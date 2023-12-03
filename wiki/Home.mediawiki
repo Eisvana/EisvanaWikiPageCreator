@@ -17,7 +17,7 @@ Para iniciar el servidor de desarrollo, ejecute este comando:
 npm ejecutar desarrollador
 ```
 
-¡Las contribuciones de la comunidad son bienvenidas! Si desea contribuir al Creador de páginas Wiki de Eisvana, consulte las [https://github.com/example/EisvanaWikiPageCreator/blob/main/CONTRIBUTING.md pautas de contribución].
+¡Las contribuciones de la comunidad son bienvenidas! Si desea contribuir al Creador de páginas Wiki, consulte las [https://github.com/example/WikiPageCreator/blob/main/CONTRIBUTING.md pautas de contribución].
 
 ===Apoyo===
 Si tiene algún problema o tiene alguna pregunta sobre Creador de páginas Wiki, comuníquese con Lenni#4423 en Discord o [https://www.reddit.com/user/Lenni009 u/Lenni009] en Reddit. para más información.

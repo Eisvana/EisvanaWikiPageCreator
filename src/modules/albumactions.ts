@@ -14,11 +14,11 @@ import { assignLink, copyCode } from "./actions";
 */
 const actionsHTML = `<button id="albumBtn" class="button is-outlined is-primary"
 	   data-link="album" data-evt-id="copyButton">
-	   Copy Album Wikicode
+	   Copiar el wikicódigo del album
 	   </button>
 	   <a class="button is-outlined is-primary" id="albumLink"
 	   data-link="album" data-evt-id="openAlbumButton">
-	   Open Album
+	   Abrir Album
 	   </a>`;
 
 const eventListeners: ElementFunctions = [
@@ -50,7 +50,7 @@ export function albumLink(element: HTMLAnchorElement) {
 		} else if (pageData.catalogue) {
 			return pageData.catalogue;
 		} else {
-			console.warn('No wiki page provided. Define the function `albumLinkGen()` and add it to the `globalFunctions` object or define a catalogue in the `pageData.catalogue` property!');
+			console.warn('¡No se proporciona ninguna página wiki. Defina la función `albumLinkGen()` y agréguela al objeto `globalFunctions` o defina un catálogo en la propiedad `pageData.catalogue`!');
 			element.style.pointerEvents = '';
 		}
 	})();

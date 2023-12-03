@@ -422,7 +422,7 @@ export function albumDescExternal() {
  */
 export function albumLinkGen() {
 	const { type } = pageData;
-	return `Eisvana Multi-Tool Album - ${type}`;
+	return `Royal Space Society Multi-Tool Album - ${type}`;
 }
 
 /**

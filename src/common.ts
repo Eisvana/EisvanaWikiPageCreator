@@ -609,7 +609,7 @@ export function displayResearch() {
   const chapterSentence = (() => {
     switch (chapter) {
       case 'Wiki Scholars':
-        return '[[Eisvana Wiki Scholars|Eisvana Wiki Scholar]]';
+        return '[[Royal Space Society Wiki Scholars|Royal Space Society Wiki Scholar]]';
 
       case 'EBC':
         return '[[EBC]] member';
@@ -830,7 +830,7 @@ export function regexMatch(string: string, regex: RegExp): boolean {
  */
 export function docByResearchteam() {
   const researchteam = pageData.researchteam;
-  return researchteam === 'Wiki Scholars' ? ` and documented by the [[Eisvana Wiki Scholars]]` : '';
+  return researchteam === 'Wiki Scholars' ? ` and documented by the [[Royal Space Society Wiki Scholars]]` : '';
 }
 
 /**
@@ -1321,7 +1321,7 @@ export function addDomAsElement(dom: Document, dest: HTMLElement, position: Inse
 }
 
 export function getWormAlbum() {
-  return 'Eisvana Rare Fauna Album#Sandworm|Eisvana Rare Fauna';
+  return 'Royal Space Society Rare Fauna Album#Sandworm|Royal Space Society Rare Fauna';
 }
 
 export function limitCreatureSize(input: HTMLInputElement) {

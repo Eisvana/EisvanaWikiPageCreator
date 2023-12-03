@@ -22,7 +22,7 @@ export function albumLinkGen() {
 	const type = dataIntegrityObj.link;
 	const { class: freighterClass } = pageData;
 	if (type === 'album') return `${pageData.name}`;
-	return `Eisvana Starship Album - Derelict Freighter#${freighterClass}-Class`;
+	return `Royal Space Society - Derelict Freighter#${freighterClass}-Class`;
 }
 
 export function processGlyphs(element: HTMLInputElement) {

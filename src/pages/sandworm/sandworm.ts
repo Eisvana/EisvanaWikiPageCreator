@@ -74,7 +74,7 @@ export function autoSpawn() {
 export function catalogue() {
   const research = docByResearchteam();
 
-  const albumName = 'Eisvana Rare Fauna Album';
+  const albumName = 'Royal Space Society Rare Fauna Album';
   const output = `[[${albumName}]]${research}`;
 
   wikiCode(output, 'addInfo');

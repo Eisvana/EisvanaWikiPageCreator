@@ -12,7 +12,7 @@
 	<meta name="description"
 		content="Genere fácilmente el código wiki para crear una página de una base en No Man's Sky Wiki!">
 	<meta name="theme-color" content="#280033">
-	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Lenni, Page Creator, Base">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Muhaddil, Page Creator, Base">
 	<script src="./src/pages/base" type="module"></script>
 </head>
 
@@ -34,7 +34,7 @@
             </div>
 					</div>
           <div class="table-cell text">
-						<label for="hubInput">Nombre del Hub:</label>
+             <label for="hubInput">Nombre del Hub:</label>
 						<button class="tooltip">
 							<data>Escriba el nombre del Hub que represente</data>
 							<data>Nombre del Hub</data>
@@ -93,7 +93,7 @@
 						<input type="text" data-dest="builder" id="builderInput">
 					</div>
 					<div class="table-cell text">
-						<label for="docbyInput">Documentado por si no es el constructor:</label>
+						<label for="docbyInput">Documentado por (en caso de no ser el constructor):</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
@@ -252,7 +252,7 @@
 						<button class="button" id="censusHideButton">Ocultar</button>
 					</div>
 					<div data-section="census" class="table-cell text">
-						<label for="censusPlayerInput">¿Nombre del jugador en el juego?</label>
+						<label for="censusPlayerInput">¿Nombre del jugador en NMS?</label>
 						<button class="tooltip">
 							<data>Tu nombre en el juego.</data>
 							<data>Nombre del jugador</data>
@@ -264,7 +264,7 @@
 						<input type="text" data-dest="censusplayer" id="censusPlayerInput">
 					</div>
 					<div data-section="census" class="table-cell text">
-						<label for="censusRedditInput">¿Nombre de Reddit del jugador?</label>
+						<label for="censusRedditInput">¿Nombre del jugador en Reddit?</label>
 						<button class="tooltip">
 							<data>Tu nombre en Reddit. "u/" no es necesario.</data>
 						</button>
@@ -273,7 +273,7 @@
 						<input type="text" data-dest-noauto="censusreddit" id="censusRedditInput">
 					</div>
 					<div data-section="census" class="table-cell text">
-						<label for="censusDiscordInput">¿Nombre de discord del jugador?</label>
+						<label for="censusDiscordInput">¿Nombre del jugador en Discord?</label>
 						<button class="tooltip">
 							<data>Tu nombre de Discord. Por favor proporcione su nombre de usuario, no su apodo.</data>
 						</button>
@@ -312,6 +312,11 @@
 					</div>
 					<div class="tableHeader data no-flex">
 						<label for="layoutInput">Plano de la Base:</label>
+            <button clase="tooltip">
+							<data>
+								Se recomienda usar el traductor de Google ya que esta parte tiene que estar en Inglés y no puede ser predefinida.
+							</data>
+						</button>
 						<textarea id="layoutInput" data-dest="layout"
 							placeholder="¿Cómo es la base?"></textarea>
 					</div>

@@ -21,7 +21,7 @@ assignElementFunctions(derelictElementFunctions);
 
 // save noteId for later
 const noteId = 'galaxyTableActionsNote';
-const note = `<p id="${noteId}">If the page already exists, just add an entry for the derelict freighter from your system</p>`;
+const note = `<p id="${noteId}">Si la página ya existe, simplemente agregue una entrada para el carguero abandonado desde su sistema</p>`;
 // add note to DOM
 actionsDom.body.insertAdjacentHTML('afterbegin', note);
 
@@ -40,7 +40,7 @@ const newActionsDom = loadHTML(domBodyHtml, {}, derelictActionsElementFunctions)
 const noteElement = newActionsDom.getElementById(noteId);
 if (noteElement) {
 	noteElement.id = 'indexTableActionsNote';
-	noteElement.innerText = `If the page doesn't exist yet, add an entry to the catalogue as well`;
+	noteElement.innerText = `Si la página aún no existe, agregue también una entrada al catálogo.`;
 }
 
 // copy button
@@ -48,7 +48,7 @@ const tableBtn = newActionsDom.getElementById('albumBtn');
 if (tableBtn) {
 	tableBtn.id = 'tableBtn';
 	tableBtn.dataset.link = 'classTableEntry';
-	tableBtn.innerText = 'Copy Index Entry Code';
+	tableBtn.innerText = 'Copiar código de entrada de índice';
 }
 
 // open link button
@@ -56,7 +56,7 @@ const pageLink = newActionsDom.getElementById('albumLink');
 if (pageLink) {
 	pageLink.id = 'pageLink';
 	pageLink.dataset.link = 'classTableEntry';
-	pageLink.innerText = 'Open Index Page';
+	pageLink.innerText = 'Abrir página de índice';
 }
 
 // add modified elements to real DOM
