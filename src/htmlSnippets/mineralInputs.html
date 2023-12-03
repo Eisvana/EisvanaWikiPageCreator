@@ -1,96 +1,262 @@
 <div class="tableHeader text sectionToggle" data-mineral="section${i}" data-section="mineral">
-	<p style="margin-right:auto">Mineral: <output class="has-text-weight-bold" name="mineralName${i}"></output></p>
-	<button class="button is-danger is-outlined" type="button" data-evt-id="removeButton">Borrar</button>
-	<button class="button" data-evt-id="hideButton">Ocultar</button>
-</div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralNameInput${i}">Nombre del mineral:</label>
-	<button class="tooltip">
-		<data>Encontrado en el visor de análisis.</data>
-		<data>Nombre del mineral</data>
-		<data>Encontrado en el visor de análisis.</data>
-		<data>mineral/mineralName</data>
-	</button>
-</div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input type="text" data-dest="mineralName${i}" id="mineralNameInput${i}">
-</div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralFile_input${i}">Nombre de la foto del mineral:</label>
-</div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input type="text" id="mineralFile_input${i}" data-dest="mineralFile${i}" data-default="NmsMisc_NotAvailable.png">
-	<input type="file" id="mineralFileUpl${i}" accept="image/*" data-evt-id="fileInput">
-</div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralMetalInput${i}">Contenido de metal:</label>
-	<button class="tooltip">
-		<data>Encontrado en el visor de análisis.</data>
-		<data>Contenido metalico del mineral</data>
-		<data>Encontrado en el visor de análisis.</data>
-		<data>mineral/content</data>
-	</button>
-</div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input type="text" data-dest-noauto="mineralMetal${i}" id="mineralMetalInput${i}" maxlength="2"
-		data-evt-id="metalInput">
-</div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralFormationInput${i}">Proceso de formación:</label>
-	<button class="tooltip">
-		<data>Encontrado en el visor de análisis.</data>
-		<data>Proceso de formación del mineral</data>
-		<data>Encontrado en el visor de análisis.</data>
-		<data>mineral/formation</data>
-	</button>
-</div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input type="text" data-dest="mineralFormation${i}" list="formationData" id="mineralFormationInput${i}">
-</div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralNoteInput${i}">Notas:</label>
-	<button class="tooltip">
-		<data>Encontrado en el visor de análisis.</data>
-		<data>Notas del mineral</data>
-		<data>Encontrado en el visor de análisis.</data>
-		<data>mineral/notes</data>
-	</button>
-</div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input type="text" data-dest="mineralNote${i}" list="mineralNotesData" id="mineralNoteInput${i}">
-</div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralResourcePrimInput${i}">Elemento primario:</label>
-	<button class="tooltip">
-		<data>Encontrado en el visor de análisis.</data>
-		<data>Elemento primario del mineral</data>
-		<data>Encontrado en el visor de análisis.</data>
-		<data>mineral/primEl</data>
-	</button>
-</div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input data-dest-noauto="mineralElements${i}" type="text" list="mineralResourcesDatalist" id="mineralResourcePrimInput${i}"
-		data-evt-id="mineralResourceInput">
-</div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralResourceSecInput${i}">Elemento secundario:</label>
-	<button class="tooltip">
-		<data>Encontrado en el visor de análisis.</data>
-		<data>Elemento secundario del mineral</data>
-		<data>Encontrado en el visor de análisis. Dejar en blanco si no hay elemento secundario.</data>
-		<data>mineral/secEl</data>
-	</button>
-</div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input data-dest-noauto="mineralElements${i}" type="text" list="mineralResourcesDatalist" id="mineralResourceSecInput${i}"
-		data-evt-id="mineralResourceInput">
-</div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralDiscovererInput${i}">Descubridor:</label>
-</div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input data-dest="mineralDiscoverer${i}" type="text" id="mineralDiscovererInput${i}">
-</div>
+  <p style="margin-right:auto">Mineral: <output class="has-text-weight-bold" name="mineralName${i}"></output></p>
+  <button class="button is-danger is-outlined" type="button" data-evt-id="removeButton">Borrar</button>
+  <button class="button" data-evt-id="hideButton">Ocultar</button>
+  </div>
+  <div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <label for="mineralNameInput${i}">Nombre del mineral:</label>
+    <button class="tooltip">
+      <data>Encontrado en el visor de análisis.</data>
+      <data>Nombre del mineral</data>
+      <data>Encontrado en el visor de análisis.</data>
+      <data>mineral/mineralName</data>
+    </button>
+  </div>
+  <div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <input type="text" data-dest="mineralName${i}" id="mineralNameInput${i}">
+  </div>
+  <div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <label for="mineralFile_input${i}">Nombre de la foto del mineral:</label>
+  </div>
+  <div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <input type="text" id="mineralFile_input${i}" data-dest="mineralFile${i}" data-default="NmsMisc_NotAvailable.png">
+    <input type="file" id="mineralFileUpl${i}" accept="image/*" data-evt-id="fileInput">
+  </div>
+  <div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <label for="mineralMetalInput${i}">Contenido de metal:</label>
+    <button class="tooltip">
+      <data>Encontrado en el visor de análisis.</data>
+      <data>Contenido metalico del mineral</data>
+      <data>Encontrado en el visor de análisis.</data>
+      <data>mineral/content</data>
+    </button>
+  </div>
+  <div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <input type="text" data-dest-noauto="mineralMetal${i}" id="mineralMetalInput${i}" maxlength="2"
+      data-evt-id="metalInput">
+  </div>
+  <div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <label for="mineralFormationInput${i}">Proceso de formación:</label>
+    <button class="tooltip">
+      <data>Encontrado en el visor de análisis.</data>
+      <data>Proceso de formación del mineral</data>
+      <data>Encontrado en el visor de análisis.</data>
+      <data>mineral/formation</data>
+    </button>
+  </div>
+  <div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <select type="text" data-dest="mineralFormation${i}" list="formationData" id="mineralFormationInput${i}">
+      <option value=""></option>
+      <option value="Soil Compaction">Compactación del suelo</option>
+      <option value="Water Transport">Transporte de agua</option>
+      <option value="Atmospheric Metal">Metal atmosférico</option>
+      <option value="Plant Deposits">Depósitos botánicos</option>
+      <option value="Living Stone">Piedra viva</option>
+      <option value="Evaporation">Evaporación</option>
+      <option value="Wind Erosion">Erosión eólica</option>
+      <option value="Gravitational">Gravitacional</option>
+      <option value="Volcanic">Volcánico</option>
+      <option value="High-Pressure">Alta presión</option>
+      <option value="Gas Humidity">Humedad del gas</option>
+      <option value="Sublimation">Sublimación</option>
+      <option value="Calcified Fauna">Fauna calcificada</option>
+      <option value="Salt Bonding">Conexión salina</option>
+      <option value="Low Energy Reaction">Reacción de baja energía</option>
+      <option value="Magnetic Attraction">Atracción magnética</option>
+      <option value="Reductive Boiling">Ebullición reductiva</option>
+      <option value="Salt Baked">Tostado a la sal</option>
+      <option value="Soil Amalgamation">Amalgamamiento del suelo</option>
+      <option value="Ancient Tidal Erosion">Erosión mareal ancestral</option>
+      <option value="Metamorphic">Metamórfico</option>
+      <option value="Polymerisation">Polimerización</option>
+      <option value="Coalescence">Coalescencia</option>
+      <option value="Slow Drips">Goteo lento</option>
+      <option value="Photonic">Fotónico</option>
+      <option value="Ground up Shells">Conchas molidas</option>
+      <option value="Old Bones">Huesos viejos</option>
+      <option value="Tectonic">Tectónico</option>
+      <option value="Spontaneous">Espontáneo</option>
+      <option value="Calcium Secretion">Secreción de calcio</option>
+      <option value="Hydrothermal">Hidrotermal</option>
+      <option value="Vented Minerals">Minerales agujereados</option>
+      <option value="Explosive Magma">Magma explosivo</option>
+      <option value="Pyroclastic">Piroclástico</option>
+      <option value="Jet Pressure">Presión a chorro</option>
+      <option value="Gas Bubbles">Burbujas de gas</option>
+      <option value="Diagenesis">Diagénesis</option>
+      <option value="Metal Vapour">Vapor metálico</option>
+      <option value="Ammonia Groundwater">Agua amoniacal subterránea</option>
+      <option value="Lithification">Litificación</option>
+      <option value="Cementation">Cementación</option>
+      <option value="Bedrock Expulsion">Expulsión del lecho de roca</option>
+      <option value="Petrifaction">Petrificación</option>
+      <option value="Fossilisation">Fosilización</option>
+      <option value="Sedimentation">Sedimentación</option>
+      <option value="Celestial">Celestial</option>
+      <option value="Meteorite Impact">Impacto de meteorito</option>
+      <option value="Localised Black Hole">Agujero negro localizado</option>
+      <option value="Comet Fragment">Fragmento de cometa</option>
+      <option value="Animal Deposits">Depósitos animales</option>
+    </select>
+  </div>
+  <div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <label for="mineralNoteInput${i}">Notas:</label>
+    <button class="tooltip">
+      <data>Encontrado en el visor de análisis.</data>
+      <data>Notas del mineral</data>
+      <data>Encontrado en el visor de análisis.</data>
+      <data>mineral/notes</data>
+    </button>
+  </div>
+  <div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <input type="text" data-dest="mineralNote${i}" list="notesmineralSnippetDatalist" id="mineralNoteInput${i}" placeholder="Escriba en nombre en español y autocompletelo.">
+    <datalist data-dest="mineralNote${i}" id="notesmineralSnippetDatalist">
+      <option value=""></option>
+      <option value="Extreme Salt Content">Contenido en sal extremo</option>
+      <option value="High Surface Temperature">Temperatura superficial elevada</option>
+      <option value="Audiophobic">Audiofóbico</option>
+      <option value="Hydrophobic">Hidrofóbico</option>
+      <option value="Liquid Centre">Centro líquido</option>
+      <option value="Slow Moving">De movimiento lento</option>
+      <option value="High Viscosity">Viscosidad elevada</option>
+      <option value="Molten Core">Núcleo fundido</option>
+      <option value="Frozen in Time">Congelado en el tiempo</option>
+      <option value="Fragile Crust">Corteza frágil</option>
+      <option value="Toxic Dust">Polvo tóxico</option>
+      <option value="Ancient">Ancestral</option>
+      <option value="Slow-Forming">De formación lenta</option>
+      <option value="Unnaturally Sculpted">Esculpido extrañamente</option>
+      <option value="Radioactive">Radiactivo</option>
+      <option value="Shatter Resistant">Resistente a la fractura</option>
+      <option value="Porous">Poroso</option>
+      <option value="Unusually Soft">Inusualmente blando</option>
+      <option value="Strong Odour">Olor fuerte</option>
+      <option value="Sulphurous">Sulfuroso</option>
+      <option value="Faintly Luminous">Ligeramente luminoso</option>
+      <option value="Hard Wearing">Resistente</option>
+      <option value="High Density">Alta densidad</option>
+      <option value="Buoyant">Flotante</option>
+      <option value="Silicate">Silicato</option>
+      <option value="Extrusive">Extrusivo</option>
+      <option value="Abrasive">Abrasivo</option>
+      <option value="Pyroclastic">Piroclástico</option>
+      <option value="Feldspar">Feldespato</option>
+      <option value="Quasi-Ferrous">Cuasi-ferroso</option>
+      <option value="Igneous">Ígneo</option>
+      <option value="Exfoliating">Exfoliante</option>
+      <option value="High Phosphate">Alto fosfato</option>
+      <option value="Low Specific Gravity">Gravedad específica baja</option>
+      <option value="Superconductive">Superconductor</option>
+      <option value="Quantum Instability">Inestabilidad cuántica</option>
+      <option value="Vacuum Core">Núcleo de vacío</option>
+      <option value="Musical When Struck">Musical al golpearlo</option>
+      <option value="Inedible">No comestible</option>
+      <option value="Soft">Blando</option>
+      <option value="Unexpectedly Buoyant">Inesperadamente flotante</option>
+      <option value="Elastic">Elástico</option>
+      <option value="Biologically Active">Biológicamente activo</option>
+      <option value="Parasite Host">Huésped de parásitos</option>
+      <option value="Polyp Colony">Colonia de pólipos</option>
+      <option value="Partially Invisible">Parcialmente invisible</option>
+      <option value="Quartz Core">Núcleo de cuarzo</option>
+      <option value="Complex Crystals">Cristales complejos</option>
+      <option value="Electromagnetic">Electromagnético</option>
+      <option value="Gravitational Bonds">Conexiones gravitacionales</option>
+      <option value="Potentially Synthetic">Potencialmente sintético</option>
+      <option value="Infested">Infestado</option>
+      <option value="Mimic">Mímico</option>
+      <option value="Inert">Inerte</option>
+      <option value="Eroded">Erosionado</option>
+      <option value="Durable">Duradero</option>
+      <option value="Geode Rich">Rico en geodas</option>
+      <option value="Conductive">Conductor</option>
+      <option value="Recently Formed">Recientemente formado</option>
+      <option value="Industrially Valuable">Valioso para la industria</option>
+      <option value="Bonelike">Aspecto óseo</option>
+      <option value="Water Resistant">Resistente al agua</option>
+      <option value="Oily Coating">Cubierta aceitosa</option>
+      <option value="Artificial">Artificial</option>
+      <option value="Misleading Structure">Estructura engañosa</option>
+      <option value="Potentially Explosive">Potencialmente explosivo</option>
+      <option value="Multi-Layered">Multicapa</option>
+      <option value="Contains Dark Matter">Contiene materia oscura</option>
+      <option value="Contains Water">Contiene agua</option>
+      <option value="Contains Organic Matter">Contiene materia orgánica</option>
+      <option value="Faint Life Signs">Signos vitales débiles</option>
+      <option value="Moss Habitat">Hábitat musgoso</option>
+      <option value="Frozen Centre">Centro congelado</option>
+      <option value="Melts Easily">Fácilmente fundible</option>
+      <option value="Powerful Heat Source">Fuente de calor potente</option>
+      <option value="Mollusc Habitat">Hábitat de moluscos</option>
+      <option value="Nutrient Rich">Rico en nutrientes</option>
+      <option value="Yeast Colony">Colonia de levaduras</option>
+      <option value="Proto Cellular Structure">Estructura protocelular</option>
+    </datalist>
+  </div>
+  <div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <label for="mineralResourcePrimInput${i}">Elemento primario:</label>
+    <button class="tooltip">
+      <data>Encontrado en el visor de análisis.</data>
+      <data>Elemento primario del mineral</data>
+      <data>Encontrado en el visor de análisis.</data>
+      <data>mineral/primEl</data>
+    </button>
+  </div>
+  <div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <select data-dest-noauto="mineralElements${i}" type="text" list="mineralResourcesDatalist"
+      id="mineralResourcePrimInput${i}" data-evt-id="mineralResourceInput">
+      <option value=""></option>
+      <option value="Ferrite dust">Polvo de ferrita</option>
+      <option value="Pure Ferrite">Ferrita pura</option>
+      <option value="Di-hydrogen">Dihidrogeno</option>
+      <option value="Chromatic Metal">Metal cromatico</option>
+      <option value="Sodium">Sodio</option>
+      <option value="Oxygen">Oxigeno</option>
+      <option value="Cobalt">Cobalto</option>
+      <option value="Salt">Sal</option>
+      <option value="Chlorine">Clorina</option>
+      <option value="Ionised Cobalt">Cobalto ionizado</option>
+      <option value="Copper">Cobre</option>
+      <option value="Silver">Plata</option>
+      <option value="Tritium">Tritio</option>
+      <option value="Carbon">Carbono</option>
+    </select>
+  </div>
+  <div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <label for="mineralResourceSecInput${i}">Elemento secundario:</label>
+    <button class="tooltip">
+      <data>Encontrado en el visor de análisis.</data>
+      <data>Elemento secundario del mineral</data>
+      <data>Encontrado en el visor de análisis. Dejar en blanco si no hay elemento secundario.</data>
+      <data>mineral/secEl</data>
+    </button>
+  </div>
+  <div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <select data-dest-noauto="mineralElements${i}" type="text" list="mineralResourcesDatalist"
+      id="mineralResourceSecInput${i}" data-evt-id="mineralResourceInput">
+      <option value=""></option>
+      <option value="Ferrite dust">Polvo de ferrita</option>
+      <option value="Pure Ferrite">Ferrita pura</option>
+      <option value="Di-hydrogen">Dihidrogeno</option>
+      <option value="Chromatic Metal">Metal cromatico</option>
+      <option value="Sodium">Sodio</option>
+      <option value="Oxygen">Oxigeno</option>
+      <option value="Cobalt">Cobalto</option>
+      <option value="Salt">Sal</option>
+      <option value="Chlorine">Clorina</option>
+      <option value="Ionised Cobalt">Cobalto ionizado</option>
+      <option value="Copper">Cobre</option>
+      <option value="Silver">Plata</option>
+      <option value="Tritium">Tritio</option>
+      <option value="Carbon">Carbono</option>
+    </select>
+  </div>
+  <div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <label for="mineralDiscovererInput${i}">Descubridor:</label>
+  </div>
+  <div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
+    <input data-dest="mineralDiscoverer${i}" type="text" id="mineralDiscovererInput${i}">
+  </div>
 <div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
 	<label for="mineralLinkCheckbox${i}">Link del item:</label>
 </div>

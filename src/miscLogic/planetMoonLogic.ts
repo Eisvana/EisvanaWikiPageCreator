@@ -31,7 +31,6 @@ import { updateGlobalElements } from '../commonElements/elementBackend/elementSt
 import { buildDescriptor, initialiseSectionInputs, wikiCodePercentage } from './celestialobjectslogic';
 import type { ElementFunctions, ElementIds } from '../types/elements';
 import { getResourceData, getSentinelData } from '../datalists/planetDatalists';
-import { getRegNumber } from './locationLogic';
 import creatureData from './creatureData';
 import type { LinkObjValues, PlanetPropResourceLinks } from '../types/links';
 import type { StdObj } from '../types/objects';
@@ -75,9 +74,7 @@ export function planetDescriptor(element: HTMLInputElement) {
 export function locationSentence() {
   const { system: systemName, regions: regionName, galaxy: galaxyName, hub: hubName } = pageData;
 
-  const output = `It can be found in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]] (EV${getRegNumber(
-    regionName as string
-  )}) of [[${hubName}]], in the [[${galaxyName}]] [[galaxy]].`;
+  const output = `It can be found in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]] of [[${hubName}]], in the [[${galaxyName}]] [[galaxy]].`;
 
   (globalElements.output.location as HTMLOutputElement).innerText = output;
 }
@@ -107,7 +104,7 @@ export function addResource(
   // Creates HTML code for a new resource input section
   const inputHTML = `<div class="table-cell text removable" data-resource="section${childIndex}">
 		<button class="button is-outlined is-danger icon is-small" title="Remove resource" type="button" disabled data-evt-id="removeButton">&#10006</button>
-		<label for="${resource_input}">Resource name:</label>
+		<label for="${resource_input}">Nombre del recúrso:</label>
 	</div>
 	<div class="table-cell data" data-resource="section${childIndex}">
 		<input type="text" list="resources" id="${resource_input}" data-evt-id="resourceInput">
@@ -232,7 +229,7 @@ export function sentinelSentence() {
   // Identifies the level of sentinel activity on this page.
   const sentLevel = (() => {
     for (const level in sentinels) {
-      if (sentinels[level].includes(sentDescriptor)) return level;
+      if (sentinels[level]) return level;
     }
     return '';
   })();

@@ -19,8 +19,8 @@
 <body>
 	<div class="container">
 		<nav>
-			<div><a href="./" title="Main page">&larr; Return to main page</a></div>
-			<div><a href="./planet.html" title="Planet">&#8624; Planet</a></div>
+			<div><a href="./" title="Main page">&larr; Volver al menu principal</a></div>
+			<div><a href="./planet.html" title="Planet">&#8624; Planetas</a></div>
 		</nav>
 		<h1 class="title is-3">Creador de páginas Wiki - Luna</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
@@ -35,11 +35,11 @@
 						<select id="versionInput" data-dest="release"></select>
 					</div>
 					<div class="table-cell text">
-						<label for="nameInput">Name of the moon:</label>
+						<label for="nameInput">Nombre de la luna:</label>
 						<button class="tooltip">
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
-							<data>moon Name</data>
-							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+							<data>Entra exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
+							<data>Nombre de la luna</data>
+							<data>Entra exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
 							<data>planet/planetName</data>
 						</button>
 					</div>
@@ -47,32 +47,40 @@
 						<input type="text" data-dest="name" id="nameInput">
 					</div>
 					<div class="table-cell text">
-						<label for="oldNameInput">Original name before uploading (if available):</label>
+						<label for="oldNameInput">Nombre original antes de cargar (si está disponible):</label>
 					</div>
 					<div class="table-cell data">
 						<input data-dest="oldName" type="text" id="oldNameInput">
 					</div>
+          <div class="table-cell text">
+						<label for="hubInput">Nombre del Hub:</label>
+						<button class="tooltip">
+							<data>Escriba el nombre del Hub que represente</data>
+							<data>Nombre del Hub</data>
+              <data>Escriba el nombre del Hub que represente</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="hub" id="hubInput">
+					</div>
 					<div class="table-cell text">
-						<label for="fileInput">Main image name, including file extension:</label>
+						<label for="fileInput">Nombre de la imagen principal, incluida la extensión del archivo:</label>
 						<button class="tooltip" name="fileUploadTooltip">
 							<data>
-								Picture won't be uploaded to the wiki. This is only to autofill the image name. Should
-								show the entire moon from space. Click for an example picture.
+								La imagen no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen. Debería mostrar todo el planeta desde el espacio. Haga clic para ver una imagen de ejemplo.
 							</data>
-							<data>File Upload</data>
+							<data>Subir archivo</data>
 							<data>
-								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
-								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
-									data-wiki>Special:Upload</a>
-								<br>
-								<br>
-								Should show the entire moon from space.<br>
-								Make sure no asteroids/pulse lines/freighters are obstructing the picture.<br>
-								Point the sun directly at the moon, no weird angles.<br>
-								Also try to only get the moon into the shot. Having the parent planet in the background
-								is allowed, but the contrast must be good.<br>
-								Disable the vignette.
+                Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen. El tamaño máximo del archivo es 10 MB.
+                Puedes subir tus imágenes a la wiki en <a href="Special:Upload?multiple=true"
+                data-wiki>Especial:Subir</a>
+                <br>
+                <br>
+                Debería mostrar la luna entera desde el espacio.<br>
+                Asegúrese de que no haya asteroides, líneas de pulso o aviones de carga que obstruyan la imagen.<br>
+                Apunta el sol directamente a la luna, sin ángulos extraños.<br>
+                También trate de incluir solo la luna en la toma. Se permite tener el planeta principal de fondo, pero el contraste debe ser bueno.<br>
+                Desactiva la viñeta.
 								<iframe src="https://nmscd.com/Image-Compressor/" title="Image Compressor"
 									class="explanation-embed" width="450" height="300">Image Compressor</iframe>
 							</data>
@@ -83,16 +91,28 @@
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
-					<div class="table-cell text">
-						<label for="systemInput">Name of the system:</label>
+          <div class="table-cell text">
+						<label for="galaxyInput">Galaxia:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="galaxy" id="galaxyInput">
+					</div>
+          <div class="table-cell text">
+						<label for="regionsInput">Region:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="regions" id="regionsInput">
+					</div>
+          <div class="table-cell text">
+						<label for="systemInput">Nombre del sistema:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
 					<div class="table-cell text">
-						<label for="systemInput">Name of the moon's planet:</label>
+						<label for="systemInput">Nombre del planeta de la luna.:</label>
 						<button class="tooltip">
-							<data>Which planet the moon orbits.</data>
+							<data>¿Qué planeta orbita la luna?</data>
 						</button>
 					</div>
 					<div class="table-cell data">
@@ -100,18 +120,17 @@
 					</div>
 					<div class="table-cell text">
 						<div class="label-combo">
-							<label for="portalglyphsInput">Portalglyphs:</label>
+							<label for="portalglyphsInput">Glifos:</label>
 							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
-								Delete</button>
+								Borrar</button>
 						</div>
 						<button class="tooltip">
-							<data>Found in Photo Mode. Glyphs are specific to each moon.</data>
-							<data>Portalglyphs</data>
+							<data>Encontrado en modo foto. Los glifos son específicos de cada luna.</data>
+              <datos>Glifos del portal</data>
 							<data>
-								Found in Photo Mode. Glyphs are specific to each moon.
+								Encontrado en modo foto. Los glifos son específicos de cada luna.
 								<iframe src="https://nmspar.vercel.app/" sandbox="allow-scripts allow-same-origin"
-									title="Glyph Reader" class="explanation-embed" width="450" height="300">Glyph
-									Reader</iframe>
+									title="Glyph Reader" class="explanation-embed" width="450" height="300">Lector de glifos</iframe>
 							</data>
 							<data>shared/glyphs</data>
 						</button>
@@ -124,124 +143,774 @@
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
 					<div class="table-cell text">
-						<label for="biomeInput">Biome of the moon:</label>
+						<label for="biomeInput">Bioma de la luna:</label>
 						<button class="tooltip">
-							<data>Can be determined from the planetary features.</data>
-							<data>Moon Biome</data>
+              <data>Se puede determinar a partir de las características planetarias.</data>
+              <data>Bioma lunar</data>
 							<data>
-								Can be determined from the planetary features such as the weather, harvestable
-								plants or available resources.<br>
-								See the <a href="Biome" data-wiki>Biome wiki page</a> for more information.
+                Puede determinarse a partir de características planetarias como el clima, las plantas cosechables o los recursos
+                disponibles.<br>
+                Consulte la <a href="Biome" data-wiki>página wiki de Biome</a> para obtener más información.
 							</data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<select id="biomeInput" data-dest="biome">
-							<option value="Lush">Lush</option>
-							<option value="Barren">Barren</option>
-							<option value="Dead">Dead</option>
-							<option value="Exotic">Exotic</option>
-							<option value="Mega Exotic">Mega Exotic</option>
-							<option value="Scorched">Scorched</option>
-							<option value="Frozen">Frozen</option>
-							<option value="Toxic">Toxic</option>
-							<option value="Irradiated">Irradiated</option>
-							<option value="Marsh">Marsh</option>
-							<option value="Volcanic">Volcanic</option>
+							<option value="Lush">Exuberante/Rico</option>
+							<option value="Barren">Seco</option>
+							<option value="Dead">Muerto</option>
+							<option value="Exotic">Éxotico</option>
+							<option value="Mega Exotic">Mega Éxotico</option>
+							<option value="Scorched">Abrasado</option>
+							<option value="Frozen">Congelado</option>
+							<option value="Toxic">Tóxico</option>
+							<option value="Irradiated">Irradiado</option>
+							<option value="Marsh">Cenagal</option>
+							<option value="Volcanic">Volcánico</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="descriptionInput">Description of the moon:</label>
-						<button class="tooltip">
-							<data>Can be found in the exploration guide.</data>
-							<data>Moon Description</data>
-							<data>Can be found in the exploration guide.</data>
-							<data>planet/planetDesc</data>
-						</button>
+            <label for="descriptionInput">Descripción de la luna:</label>
+            <button class="tooltip">
+            <data>Se puede encontrar en la guía de exploración.</data>
+            <data>Descripción de la Luna</data>
+            <data>Se puede encontrar en la guía de exploración.</data>
+            <data>planet/planetDesc</data>
+            </button>
 					</div>
 					<div class="table-cell data">
-						<input type="text" data-dest-noauto="description" list="planetDescriptors"
-							id="descriptionInput">
+            <input type="text" id="descriptionInput" list="descriptionInputDatalist" data-dest-noauto="description" placeholder="Escribe el nombre en español y dale a la opcion de debajo">
+            <datalist type="text" id="descriptionInputDatalist">
+              <option value="Dead Moon">Luna muerta</option>
+							<option value="Empty Moon">Luna vacia</option>
+							<option value="Desolate Moon">Luna sin habitantes</option>
+							<option value="Lifeless Moon">Luna sin vida</option>
+							<option value="Forsaken Moon">Luna olvidada</option>
+							<option value="Life-Incompatible Moon">Luna incompatible con la vida</option>
+							<option value="Low Atmosphere Moon">Luna de atmósfera baja</option>
+							<option value="Airless Moon">Luna sin aire</option>
+							<option value="Abandoned Moon">Luna abandonada</option>
+							<option value="Terraforming Catastrophe">Catástrofe de terraformación</option>
+							<option value="Rainy Moon">Luna lluviosa</option>
+							<option value="Verdant Moon">Luna verde</option>
+							<option value="Tropical Moon">Luna tropical</option>
+							<option value="Viridescent Moon">Luna verdusca</option>
+							<option value="Grassy Moon">Luna herbosa</option>
+							<option value="Temperate Moon">Luna templada</option>
+							<option value="Humid Moon">Luna húmeda</option>
+							<option value="Overgrown Moon">Luna abundante en flora</option>
+							<option value="Flourishing Moon">Luna floreciente</option>
+							<option value="Bountiful Moon">Luna abundante</option>
+							<option value="Paradise Moon">Luna paradisíaca</option>
+							<option value="Shattered Moon">Luna en pedazos</option>
+							<option value="Fractured Moon">Luna con fracturas</option>
+              <option value="Fragmented Moon">Luna en fragmentación</option>
+							<option value="Contoured Moon">Luna con contornos</option>
+							<option value="Cabled Moon">Luna con cableado</option>
+							<option value="Webbed Moon">Luna en red</option>
+							<option value="Rattling Moon">Luna traqueteante</option>
+							<option value="Spined Moon">Luna vertebral</option>
+							<option value="Skeletal Moon">Luna de estructura esquelética</option>
+							<option value="Finned Moon">Luna de aleta</option>
+							<option value="Bladed Moon">Luna de cuchilla</option>
+							<option value="Shell-Strewn Moon">Luna con conchas</option>
+							<option value="Fungal Moon">Luna con hongos</option>
+							<option value="Sporal Moon">Luna de esporas</option>
+							<option value="Capped Moon">Luna con cubierta</option>
+							<option value="Ossified Moon">Luna de hueso</option>
+							<option value="Petrified Moon">Luna en petrificación</option>
+							<option value="Calcified Moon">Luna en calcificación</option>
+							<option value="Fissured Moon">Luna con fisuras</option>
+							<option value="Breached Moon">Luna con brecha</option>
+							<option value="Hexagonal Moon">Luna hexagonal</option>
+							<option value="Plated Moon">Luna con coraza</option>
+							<option value="Scaly Moon">Luna en escamación</option>
+							<option value="Mechanical Moon">Luna con mecánica</option>
+							<option value="Metallic Moon">Luna de metal</option>
+							<option value="Metallurgic Moon">Luna con metales</option>
+							<option value="Bubbling Moon">Luna burbujeante</option>
+							<option value="Frothing Moon">Luna con espuma</option>
+							<option value="Foaming Moon">Luna espumante</option>
+							<option value="Columned Moon">Luna con columnas</option>
+							<option value="Sharded Moon">Luna en fragmentos</option>
+							<option value="Pillared Moon">Luna en pilares</option>
+							<option value="Moon of Light">Luna de luz</option>
+							<option value="Crimson Moon">Luna carmesí</option>
+							<option value="Malfunctioning Moon">Luna disfuncional</option>
+							<option value="Breached Moon">Luna con brecha</option>
+							<option value="Infected Moon">Luna infectado</option>
+							<option value="[REDACTED] Moon">Luna [EDITADO]</option>
+							<option value="Glassy Moon">Luna vidrioso</option>
+							<option value="Thirsty Moon">Luna sediento</option>
+							<option value="Doomed Moon">Luna condenado</option>
+							<option value="Erased Moon">Luna exterminado</option>
+							<option value="Temporary Moon">Luna temporal</option>
+							<option value="Corrupted Moon">Luna corrompido</option>
+							<option value="Planetary Anomaly">Anomalía planetaria </option>
+							<option value="Charred Moon">Luna carbonizado</option>
+							<option value="Arid Moon">Luna árido</option>
+							<option value="Scorched Moon">Luna abrasado</option>
+							<option value="Hot Moon">Luna caluroso</option>
+							<option value="Fiery Moon">Luna tórrido</option>
+							<option value="Boiling Moon">Luna sofocante</option>
+							<option value="High Temperature Moon">Luna de altas temperaturas</option>
+							<option value="Torrid Moon">Luna caliente</option>
+							<option value="Incandescent Moon">Luna incandescente</option>
+							<option value="Scalding Moon">Luna hirviente</option>
+							<option value="Frozen Moon">Luna congelado</option>
+							<option value="Icebound Moon">Luna escarchado</option>
+							<option value="Arctic Moon">Luna ártico</option>
+							<option value="Glacial Moon">Luna glacial</option>
+							<option value="Sub-zero Moon">Luna subcero</option>
+							<option value="Icy Moon">Luna algente</option>
+							<option value="Frostbound Moon">Luna con escarcha</option>
+							<option value="Freezing Moon">Luna inclemente</option>
+							<option value="Hiemal Moon">Luna hiemal</option>
+							<option value="Hyperborean Moon">Luna septentrional</option>
+							<option value="Irradiated Moon">Luna irradiado</option>
+							<option value="Radioactive Moon">Luna radiactivo</option>
+							<option value="Contaminated Moon">Luna contaminado</option>
+							<option value="Nuclear Moon">Luna nuclear</option>
+							<option value="Isotopic Moon">Luna molecular</option>
+							<option value="Decaying Nuclear Moon">Luna nuclear decadente</option>
+							<option value="Gamma-Intensive Moon">Luna de intensidad gamma</option>
+							<option value="High Radio Source Moon">Luna de alta radiación</option>
+							<option value="Supercritical Moon">Luna bullente</option>
+							<option value="High Energy Moon">Luna de gran energía</option>
+							<option value="Toxic Moon">Luna tóxica</option>
+							<option value="Poisonous Moon">Luna venenosa</option>
+							<option value="Noxious Moon">Luna nociva</option>
+							<option value="Corrosive Moon">Luna corrosiva</option>
+							<option value="Acidic Moon">Luna de clima ácido</option>
+							<option value="Caustic Moon">Luna ardiente</option>
+							<option value="Acrid Moon">Luna acre</option>
+							<option value="Blighted Moon">Luna en la ruina</option>
+							<option value="Miasmatic Moon">Luna emanante</option>
+							<option value="Rotting Moon">Luna débil</option>
+							<option value="Barren Moon">Luna estéril</option>
+							<option value="Desert Moon">Luna desierta</option>
+							<option value="Rocky Moon">Luna rocosa</option>
+							<option value="Bleak Moon">Luna inhóspita</option>
+							<option value="Parched Moon">Luna reseca</option>
+							<option value="Abandoned Moon">Luna de aspecto abandonado</option>
+							<option value="Dusty Moon">Luna con mucho polvo</option>
+							<option value="Desolate Moon">Luna sin habitantes</option>
+							<option value="Wind-swept Moon">Luna de vientos salvajes</option>
+							<option value="Marshy Moon">Luna marismeña</option>
+							<option value="Swamp Moon">Luna pantanosa</option>
+							<option value="Tropical Moon">Luna tropical</option>
+							<option value="Foggy Moon">Luna neblinosa</option>
+							<option value="Misty Moon">Luna brumosa</option>
+							<option value="Boggy Moon">Luna cenagosa</option>
+							<option value="Quagmire Moon">Luna fangosa</option>
+							<option value="Hazy Moon">Luna borrosa</option>
+							<option value="Cloudy Moon">Luna nublada</option>
+							<option value="Vapour Moon">Luna vaporosa</option>
+							<option value="Reeking Moon">Luna apestosa</option>
+							<option value="Murky Moon">Luna turbia</option>
+							<option value="Damp Moon">Luna pegajosa</option>
+							<option value="Endless Morass">Cenagal infinito </option>
+							<option value="Lava Moon">Luna lávica</option>
+							<option value="Magma Moon">Luna magmática</option>
+							<option value="Erupting Moon">Luna en erupción</option>
+							<option value="Volcanic Moon">Luna volcánica</option>
+							<option value="Ash-Shrouded Moon">Luna envuelto en ceniza</option>
+							<option value="Ashen Moon">Luna cenizo</option>
+							<option value="Tectonic Moon">Luna tectónica</option>
+							<option value="Unstable Moon">Luna inestable</option>
+							<option value="Violent Moon">Luna violenta</option>
+              <option value="Molten Moon">Luna derretida</option>
+							<option value="Flame-Ruptured Moon">Luna quebrado por las llamas</option>
+							<option value="Basalt Moon">Luna basáltica</option>
+							<option value="Imminent Core Detonation">Detonación del núcleo inminente</option>
+							<option value="Obsidian Bead">Goteo de obsidiana</option>
+							<option value="Lost Red Moon">Luna rojo perdida</option>
+							<option value="Chromatic Fog Moon">Luna niebla cromática</option>
+							<option value="Scarlet Moon">Luna escarlata</option>
+							<option value="Blood Moon">Luna sangre</option>
+							<option value="Wine Dark Moon">Luna vino tinto</option>
+							<option value="Lost Green Moon">Luna verde perdido</option>
+							<option value="Doomed Jade Moon">Luna jade maldito</option>
+							<option value="Haunted Emeril Moon">Luna emerilio encantado</option>
+							<option value="Lost Blue Moon">Luna azul perdido</option>
+							<option value="Azure Moon">Luna azul celeste</option>
+							<option value="Cerulean Moon">Luna azul cerúleo</option>
+							<option value="Ultramarine Moon">Luna azul ultramarino</option>
+							<option value="Stellar Corruption Detected">Corrupción estelar detectada</option>
+							<option value="Vermillion Globe">Globo bermellón</option>
+							<option value="Vile Anomaly">Anomalía malvada</option>
+							<option value="Toxic Anomaly">Anomalía tóxica</option>
+							<option value="Deathly Green Anomaly">Anomalía mortal verde</option>
+							<option value="Harsh Blue Globe">Globo azul chillón</option>
+							<option value="Frozen Anomaly">Anomalía helada</option>
+							<option value="Drowning Moon">Luna ahogada</option>
+							<option value="Oceanic Moon">Luna oceánica</option>
+							<option value="Tidal Moon">Luna de mareas</option>
+							<option value="Waterlocked Moon">Luna anegada</option>
+							<option value="Aquatic Moon">Luna acuática</option>
+							<option value="Marine Moon">Luna marina</option>
+							<option value="Waterworld">Mundo acuático </option>
+							<option value="Endless Seas">Mares infinito</option>
+							<option value="Infested Moon">Luna infestado</option>
+							<option value="Worm-ridden Moon">Luna infestado de gusanos</option>
+							<option value="Tainted Moon">Luna manchado</option>
+							<option value="Mutated Moon">Luna mutado</option>
+							<option value="Corrupted Moon">Luna corrompido</option>
+							<option value="Infested Paradise">Paraíso infestado</option>
+							<option value="Toxic Horror">Horror tóxico</option>
+							<option value="Boiling Doom">Destrucción hirviente</option>
+							<option value="Radioactive Abomination">Abominación radioactiva</option>
+							<option value="Icy Abhorrence">Aberración gélida</option>
+							<option value="Xeno-Colony">Xenocolonia</option>
+							<option value="Caustic Nightmare">Pesadilla cáustica</option>
+							<option value="Fiery Dreadworld">Mundo terrorífico fogoso</option>
+							<option value="Frozen Hell">Infierno congelado</option>
+							<option value="Infected Dustbowl">Tierra desértica infectada</option>
+							<option value="The Nest">El Nido</option>
+							<option value="Terrorsphere">Terrorfera</option>
+            </datalist>
 					</div>
 					<div class="table-cell text">
-						<label for="atmosphereInput">Atmosphere of the moon:</label>
+						<label for="atmosphereInput">Atmosfera de la Luna:</label>
 						<button class="tooltip">
-							<data>Found in the exploration guide.</data>
-							<data>Moon Atmosphere</data>
-							<data>Found in the exploration guide.</data>
-							<data>planet/atmosphere</data>
+              <data>Encontrado en la guía de exploración.</data>
+              <data>Atmósfera lunar</data>
+              <data>Encontrado en la guía de exploración.</data>
+              <datos>planet/atmosphere</datos>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="atmosphere" id="atmosphereInput">
 					</div>
-					<div class="table-cell text">
-						<label for="weatherInput">Weather of the moon:</label>
-						<button class="tooltip">
-							<data>Can be found in the discovery menu.</data>
-							<data>Moon Weather</data>
-							<data>Can be found in the discovery menu.</data>
+          <div class="texto de celda de tabla">
+            <label for="weatherInput">Clima de la luna:</label>
+            <button class="tooltip">
+            <data>Se puede encontrar en el menú de descubrimiento.</data>
+            <data>Clima lunar</data>
+            <data>Se puede encontrar en el menú de descubrimiento.</data>
 							<data>planet/weather</data>
 						</button>
 					</div>
 					<div class="table-cell data">
-						<input type="text" data-dest-simple="weather" list="weatherData" id="weatherInput">
-					</div>
+            <input type="text" data-dest-simple="weather" list="weather1Datalist" id="weatherInput">
+            <datalist type="text" id="weather1Datalist">
+              <option value="Tropical Storms">Tormentas tropicales</option>
+              <option value="Occasional Boiling Fog">Bruma hirviente ocasional</option>
+              <option value="Superheated Mists">Neblina sobrecalentada</option>
+              <option value="Painful Mist">Bruma dolorosa</option>
+              <option value="Infrequent Torrents">Torrentes poco frecuentes</option>
+              <option value="Oppressive">Opresivo</option>
+              <option value="Soggy Danger">Peligro empapado</option>
+              <option value="Sticky Heat">Calor pegajoso</option>
+              <option value="Clammy Menace">Amenaza sudada</option>
+              <option value="Hazardous Moisture">Peligro humectado</option>
+              <option value="Gentle Mist">Bruma suave</option>
+              <option value="Humid">Húmedo</option>
+              <option value="Tropical Winds">Vientos tropicales</option>
+              <option value="Warm Fog">Niebla cálida</option>
+              <option value="Temperate Murk">Neblina moderada</option>
+              <option value="Mild Damp">Llovizna suave</option>
+              <option value="Warm Dewdrops">Gotas de rocío calientes</option>
+              <option value="Tepid Damp">Vaho tibio</option>
+              <option value="Sweaty Drizzle">Llovizna sudorosa</option>
+              <option value="Muggy Haze">Neblina húmeda</option>
+              <option value="Death Fog">Niebla mortal</option>
+              <option value="Sultry Disaster">Desastre sofocante</option>
+              <option value="Cataclysmic Monsoons">Monzones catastróficos</option>
+              <option value="Mists of Annihilation">Neblina de aniquilación</option>
+              <option value="All-Consuming Fog">Niebla absorbente</option>
+              <option value="Liquid Hell">Infierno líquido</option>
+              <option value="Storms of Desolation">Tormentas desoladoras</option>
+              <option value="Melting Deluges">Diluvios de fundición</option>
+              <option value="Boiling Catastrophe">Catástrofe hirviente</option>
+              <option value="Damp Misery">Miseria pegajosa</option>
+              <option value="Heated Gas Pockets">Bolsas de gas calientes</option>
+              <option value="Occasional Firestorms">Tormentas de fuego ocasionales</option>
+              <option value="Incendiary Winds">Vientos incendiarios</option>
+              <option value="Unpredictable Conflagrations">Conflagraciones impredecibles</option>
+              <option value="Drifting Firestorms">Tormentas de fuego a la deriva</option>
+              <option value="Pillars of Flame">Pilares de llamas</option>
+              <option value="Magma Geysers">Géiseres de magma</option>
+              <option value="Plumes of Fire">Columnas de fuego</option>
+              <option value="Molten Rain">Lluvia de lava</option>
+              <option value="Tectonic Storms">Tormentas tectónicas</option>
+              <option value="Smothering Ash">Ceniza irrespirable</option>
+              <option value="Sulphurous Haze">Neblina sulfurosa</option>
+              <option value="Ash Wisps">Volutas de ceniza</option>
+              <option value="Drifting Smog">Niebla tóxica a la deriva</option>
+              <option value="Cinderfalls">Carbonilla</option>
+              <option value="Ash Plumes">Columnas de ceniza</option>
+              <option value="Choking Ash">Ceniza asfixiante</option>
+              <option value="Burning Mists">Neblinas abrasadoras</option>
+              <option value="Sulfur Fumes">Gases sulfurosos</option>
+              <option value="Enveloping Ash">Ceniza envolvente</option>
+              <option value="Ashen Winds">Vientos cenizos</option>
+              <option value="Frequent Firestorms">Tormentas de fuego frecuentes</option>
+              <option value="Walls of Flame">Paredes de llamas</option>
+              <option value="Clouds of Fire">Nubes de fuego</option>
+              <option value="Ashen Destruction">Destrucción cenizosa</option>
+              <option value="Magma Rain">Lluvia de magma</option>
+              <option value="Basalt Hail">Granizo basáltico</option>
+              <option value="Explosive Gas Eruptions">Erupciones explosivas de gas</option>
+              <option value="Lethal Ash Storms">Tormentas de ceniza letales</option>
+              <option value="Sulphurous Inferno">Infierno sulfuroso</option>
+              <option value="Colossal Firestorms">Tormentas de fuego colosales</option>
+              <option value="Obsidian Doom">Catástrofe de obsidiana</option>
+              <option value="Infrequent Heat Storms">Tormentas de calor inusuales</option>
+              <option value="Rare Firestorms">Lluvias de fuego raras</option>
+              <option value="Superheated Gas Pockets">Bolsas de gas supercalientes</option>
+              <option value="Wandering Hot Spots">Zonas calientes ambulantes</option>
+              <option value="Atmospheric Heat Instabilities">Inestabilidades de calor</option>
+              <option value="Direct Sunlight">Exposición directa al sol</option>
+              <option value="Heated Atmosphere">Atmósfera ardiente</option>
+              <option value="Occasional Ash Storms">Lluvias de ceniza ocasionales</option>
+              <option value="Dangerously Hot">Peligrosamente caliente</option>
+              <option value="Burning Air">Aire abrasador</option>
+              <option value="Parched">Reseco</option>
+              <option value="Overly Warm">Excesivamente cálido</option>
+              <option value="Sunny">Soleado</option>
+              <option value="Dehydrated">Deshidratado</option>
+              <option value="Unending Sunlight">Luz solar infinita</option>
+              <option value="Sweltering">Caldeado</option>
+              <option value="Extreme Heat">Calor extremo</option>
+              <option value="Burning Gas Clouds">Nubes de gas ardiente</option>
+              <option value="Intense Heat">Calor intenso</option>
+              <option value="Superheated Air">Aire sobrecalentado</option>
+              <option value="Scalding Heat">Calor escaldado</option>
+              <option value="Inferno Winds">Vientos infernales</option>
+              <option value="Firestorms">Lluvias de fuego</option>
+              <option value="Combustible Dust">Polvo combustible</option>
+              <option value="Incendiary Dust">Polvo incendiario</option>
+              <option value="Self-Igniting Storms">Tormentas autoinflamables</option>
+              <option value="Howling Blizzards">Ventiscas huracanadas</option>
+              <option value="Intense Cold">Frío intenso</option>
+              <option value="Icy Tempests">Tempestad gélida</option>
+              <option value="Supercooled Storms">Tormentas sobreenfriadas</option>
+              <option value="Raging Snowstorms">Tormentas de nieve violentas</option>
+              <option value="Ice Storms">Tormentas de hielo</option>
+              <option value="Deep Freeze">Congelante</option>
+              <option value="Roaring Ice Storms">Tormentas de hielo violentas</option>
+              <option value="Frequent Blizzards">Ventiscas frecuentes</option>
+              <option value="Hazardous Whiteouts">Heladas peligrosas</option>
+              <option value="Frozen Clouds">Nubes congeladas</option>
+              <option value="Occasional Snowfall">Nevadas ocasionales</option>
+              <option value="Infrequent Blizzards">Ventiscas poco frecuentes</option>
+              <option value="Outbreaks of Frozen Rain">Estallidos de lluvia gélida</option>
+              <option value="Harsh, Icy Winds">Vientos gélidos fuertes</option>
+              <option value="Drifting Snowstorms">Tormentas de nieve errantes</option>
+              <option value="Migratory Blizzards">Ventiscas migratorias</option>
+              <option value="Icy Blasts">Ráfagas de hielo</option>
+              <option value="Wandering Frosts">Escarchas errantes</option>
+              <option value="Powder Snow">Nieve polvo</option>
+              <option value="Wintry">Invernal</option>
+              <option value="Snowy">Nevoso</option>
+              <option value="Icy">Gélido</option>
+              <option value="Crisp">Vigorizante</option>
+              <option value="Frost">Escarcha</option>
+              <option value="Freezing">Freezing</option>
+              <option value="Permafrost">Eternamente congelado</option>
+              <option value="Frequent Toxic Floods">Riadas tóxicas frecuentes</option>
+              <option value="Toxic Superstorms">Supertormentas tóxicas</option>
+              <option value="Acidic Deluges">Diluvios ácidos</option>
+              <option value="Corrosive Cyclones">Ciclones corrosivos</option>
+              <option value="Caustic Floods">Inundaciones cáusticas</option>
+              <option value="Corrosive Storms">Tormentas corrosivas</option>
+              <option value="Torrential Acid">Ácido torrencial</option>
+              <option value="Noxious Gas Storms">Tormentas de gas nocivo</option>
+              <option value="Toxic Monsoons">Monzones tóxicos</option>
+              <option value="Bone-Stripping Acid Storms">Tormentas ácidas dolorosas</option>
+              <option value="Corrosive Rainstorms">Tempestades corrosivas</option>
+              <option value="Pouring Toxic Rain">Lluvia tóxica torrencial</option>
+              <option value="Occasional Acid Storms">Tormentas ácidas ocasionales</option>
+              <option value="Atmospheric Corruption">Corrupción atmosférica</option>
+              <option value="Poison Flurries">Chaparrones venenosos</option>
+              <option value="Toxic Outbreaks">Estallidos tóxicos</option>
+              <option value="Acidic Dust Pockets">Bolsas de polvo ácido</option>
+              <option value="Passing Toxic Fronts">Frentes tóxicos superficiales</option>
+              <option value="Caustic Winds">Vientos cáusticos</option>
+              <option value="Alkaline Cloudbursts">Chaparrones alcalinos</option>
+              <option value="Dangerously Toxic Rain">Lluvia peligrosamente tóxica</option>
+              <option value="Corrosive Sleet Storms">Tormentas corrosivas</option>
+              <option value="Lethal Atmosphere">Atmósfera letal</option>
+              <option value="Infrequent Toxic Drizzle">Lloviznas tóxicas inusuales</option>
+              <option value="Acid Rain">Lluvia ácida</option>
+              <option value="Toxic Clouds">Nubes tóxicas</option>
+              <option value="Poison Rain">Lluvia venenosa</option>
+              <option value="Choking Clouds">Nubes asfixiantes</option>
+              <option value="Caustic Moisture">Humedad cáustica</option>
+              <option value="Poisonous Gas">Gas venenoso</option>
+              <option value="Stinging Atmosphere">Atmósfera urticante</option>
+              <option value="Toxic Damp">Vaho tóxico</option>
+              <option value="Corrosive Damp">Vaho corrosivo</option>
+              <option value="Stinging Puddles">Charcos urticantes</option>
+              <option value="Extreme Radioactivity">Radiactividad extrema</option>
+              <option value="Irradiated Thunderstorms">Tormentas irradiadas</option>
+              <option value="Planet-Wide Radiation Storms">Tormentas radiactivas</option>
+              <option value="Extreme Atmospheric Decay">Extreme Atmospheric Decay</option>
+              <option value="Roaring Nuclear Wind">Atmósfera en desintegración</option>
+              <option value="Gamma Cyclones">Ciclones gamma</option>
+              <option value="Contaminated Squalls">Chubascos contaminados</option>
+              <option value="Extreme Thermonuclear Fog">Niebla termonuclear extrema</option>
+              <option value="Frequent Particle Eruptions">Partículas en erupción</option>
+              <option value="Enormous Nuclear Storms">Tormentas nucleares enormes</option>
+              <option value="Particulate Winds">Vientos de partículas</option>
+              <option value="Energetic Storms">Tormentas energéticas</option>
+              <option value="Irradiated Downpours">Diluvios irradiados</option>
+              <option value="Radioactive Dust Storms">Tormentas de polvo radiactivo</option>
+              <option value="Volatile Windstorms">Vendaval volátil</option>
+              <option value="Occasional Radiation Outbursts">Descargas radiactivas casuales</option>
+              <option value="Irradiated Storms">Tormentas irradiadas</option>
+              <option value="Unstable Fog">Niebla inestable</option>
+              <option value="Reactive Rain">Reactive Rain</option>
+              <option value="Radioactive Humidity">Radioactive Humidity</option>
+              <option value="Radioactive Damp">Radioactive Damp</option>
+              <option value="Irradiated Winds">Lluvia reactiva</option>
+              <option value="Contaminated Puddles">Charcos contaminados</option>
+              <option value="Volatile Winds">Vientos volátiles</option>
+              <option value="Unstable Atmosphere">Atmósfera inestable</option>
+              <option value="Gamma Dust">Polvo gamma</option>
+              <option value="Nuclidic Atmosphere">Atmósfera nucléidica</option>
+              <option value="Boiling Superstorms">Supertormentas asfixiantes</option>
+              <option value="Intense Heatbursts">Estallidos de calor intenso</option>
+              <option value="Superheated Rain">Lluvia sobrecalentada</option>
+              <option value="Boiling Monsoons">Monzones asfixiantes</option>
+              <option value="Broiling Humidity">Humedad achicharrante</option>
+              <option value="Painfully Hot Rain">Lluvia abrasadora</option>
+              <option value="Torrential Heat">Calor torrencial</option>
+              <option value="Blistering Floods">Inundaciones abrasadoras</option>
+              <option value="Scalding Rainstorms">Temporales abrasadores</option>
+              <option value="Torrid Deluges">Diluvios tórridos</option>
+              <option value="Boiling Puddles">Charcos asfixiantes</option>
+              <option value="Sweltering Damp">Vaho caldeado</option>
+              <option value="Superheated Drizzle">Llovizna sobrecalentada</option>
+              <option value="Dangerously Hot Fog">Peligrosa niebla caliente</option>
+              <option value="Choking Humidity">Humedad asfixiante</option>
+              <option value="Mostly Calm">En su mayoría calmado</option>
+              <option value="Occasional Scalding Cloudbursts">Lluvia abrasadora ocasional</option>
+              <option value="Usually Mild">Normalmente apacible</option>
+              <option value="Blistering Damp">Vaho abrasador</option>
+              <option value="Lethal Humidity Outbreaks">Estallidos de humedad letal</option>
+              <option value="Temperate">Moderado</option>
+              <option value="Light Showers">Lluvias leves</option>
+              <option value="Mild Rain">Llovizna</option>
+              <option value="Refreshing Breeze">Brisa refrescante</option>
+              <option value="Pleasant">Agradable</option>
+              <option value="Balmy">Sereno</option>
+              <option value="Mellow">Apacible</option>
+              <option value="Beautiful">Precioso</option>
+              <option value="Blissful">Maravilloso</option>
+              <option value="Billowing Dust Storms">Tormentas de polvo ondulante</option>
+              <option value="Choking Sandstorms">Tormentas de arena opresivas</option>
+              <option value="Hazardous Temperature Extremes">Temperaturas extremas peligrosas</option>
+              <option value="Lung-Burning Night Wind">Viento nocturno abrasador</option>
+              <option value="Extreme Wind Blasting">Ráfagas de viento extremo</option>
+              <option value="Planetwide Desiccation">Desecación planetaria</option>
+              <option value="Sand Blizzards">Ventiscas de arena</option>
+              <option value="Howling Gales">Vendaval huracanado</option>
+              <option value="Dead Wastes">Páramos muertos</option>
+              <option value="Occasional Sandstorms">Tormentas de arena casuales</option>
+              <option value="Infrequent Dust Storms">Tormentas de polvo inusuales</option>
+              <option value="Intermittent Wind Blasting">Ráfagas de viento casuales</option>
+              <option value="Parched Sands">Arenas resecas</option>
+              <option value="Sporadic Grit Storms">Tormentas de arena fortuitas</option>
+              <option value="Dust-Choked Winds">Vientos de polvo asfixiantes</option>
+              <option value="Highly Variable Temperatures">Temperaturas muy variables</option>
+              <option value="Blasted Atmosphere">Atmósfera arruinada</option>
+              <option value="Freezing Night Winds">Vientos nocturnos gélidos</option>
+              <option value="Ceaseless Drought">Sequía incesante</option>
+              <option value="Moistureless">Desaguado</option>
+              <option value="Baked">Reseco</option>
+              <option value="Sterile">Estéril</option>
+              <option value="Unclouded Skies">Cielos despejados</option>
+              <option value="Dry Gusts">Ráfagas secas</option>
+              <option value="Withered">Mustio</option>
+              <option value="Icy Nights">Noches heladas</option>
+              <option value="Perfectly Clear">Totalmente despejado</option>
+              <option value="Absent">Ausente</option>
+              <option value="No Atmosphere">Sin atmósfera</option>
+              <option value="Utterly Still">Totalmente calmado</option>
+              <option value="Peaceful">Pacífico</option>
+              <option value="Eerily Calm">Misteriosamente calmado</option>
+              <option value="Airless">Sin viento</option>
+              <option value="Silent">Silencioso</option>
+              <option value="Inert">Inerte</option>
+              <option value="Clear">Despejado</option>
+              <option value="Invisible Mist">Niebla invisible</option>
+              <option value="Internal Rain">Lluvia interna</option>
+              <option value="Lost Clouds">Nubes perdidas</option>
+              <option value="Crimson Heat">Calor carmesí</option>
+              <option value="Winds of Glass">Vientos vidriosos</option>
+              <option value="Thirsty Clouds">Nubes sedientas</option>
+              <option value="Obsidian Heat">Calor de obsidiana</option>
+              <option value="Memories of Frost">Recuerdos de escarcha</option>
+              <option value="Haunted Frost">Escarcha angustiosa</option>
+              <option value="Indetectable Burning">Fuego indetectable</option>
+              <option value="[REDACTED]">[EDITADO]</option>
+              <option value="Anomalous">Anómalo</option>
+              <option value="Burning Crimson">Carmesí abrasador</option>
+              <option value="Scarlet Rain">Lluvia escarlata</option>
+              <option value="Fevered Clouds">Nubes agitadas</option>
+              <option value="Carmine Winds">Vientos de carmín</option>
+              <option value="Red Mist">Neblina roja</option>
+              <option value="Flaming Hail">Granizo llameante</option>
+              <option value="Vermillion Storms">Tormentas bermellonas</option>
+              <option value="Rain of Atlas">Lluvia del Atlas</option>
+              <option value="Angered Clouds">Nubes enfurecidas</option>
+              <option value="Blood Rain">Lluvia de sangre</option>
+              <option value="Bilious Storms">Tormentas biliosas</option>
+              <option value="Deadly Pressure Variations">Variaciones de presión mortales</option>
+              <option value="Harsh Toxic Wind">Viento tóxico fuerte</option>
+              <option value="Corrupted Blood">Sangre corrompida</option>
+              <option value="Infinite Toxic Mist">Neblina tóxica infinita</option>
+              <option value="Echoes of Acid">Ecos de ácido</option>
+              <option value="Poison Cyclones">Ciclones venenosos</option>
+              <option value="Inescapable Toxins">Toxinas inevitables</option>
+              <option value="Clouds of Haunted Green">Nubes de verde encantado</option>
+              <option value="Invisible Jade Winds">Vientos de jade invisibles</option>
+              <option value="Frozen Mists">Neblinas congeladas</option>
+              <option value="Electric Rain">Lluvia eléctrica</option>
+              <option value="Azure Storms">Tormentas de azul celeste</option>
+              <option value="Extreme Low Pressure">Presión extremadamente baja</option>
+              <option value="All-Consuming Cold">Frío absorbente</option>
+              <option value="Winds from Beyond">Vientos del más allá</option>
+              <option value="Unfathomable Storms">Tormentas insondables</option>
+              <option value="Unimaginable Blue">Azul inimaginable</option>
+              <option value="Ultramarine Wind">Viento azul ultramarino</option>
+              <option value="Inverted Superstorms">Supertormentas invertidas</option>
+              <option value="Coastal Storms">Tormentas costeras</option>
+            </datalist>
+          </div>
 					<div class="tableHeader text no-flex">
-						<p style="display: inline; margin-right: 1.5rem">Resources:</p>
-						<button class="tooltip">
-							<data>Found in the Discovery Menu or on the analysis visor.</data>
-							<data>Moon Resources</data>
-							<data>Found in the Discovery Menu or on the analysis visor.</data>
+            <p style="display: inline; margin-right: 1.5rem">Recursos:</p>
+            <button class="tooltip">
+            <data>Se puede encontrar en el menú de descubrimiento o en el visor de análisis.</data>
+            <data>Recursos lunares</data>
+            <data>Se puede encontrar en el menú de descubrimiento o en el visor de análisis.</data>
 							<data>planet/resources</data>
 						</button>
 					</div>
 					<div id="resourceInputs" class="tableHeader text">
-						<button class="button is-primary" type="button" id="addResourceButton">+ Add
-							Resource</button>
+						<button class="button is-primary" type="button" id="addResourceButton">+ Agregar recurso</button>
 					</div>
 					<div class="table-cell text">
-						<label for="sentinelInput">Sentinel level of the moon:</label>
-						<button class="tooltip">
-							<data>Can be found in the discovery menu.</data>
-							<data>Moon Sentinel Level</data>
-							<data>Can be found in the discovery menu.</data>
+            <label for="sentinelInput">Nivel de los centinelas de la luna:</label>
+            <button class="tooltip">
+              <data>Se puede encontrar en el menú de descubrimiento.</data>
+            <data>Nivel de los centinelas de la luna</data>
+            <data>Se puede encontrar en el menú de descubrimiento.</data>
 							<data>planet/sentinels</data>
 						</button>
 					</div>
 					<div class="table-cell data">
-						<input type="text" data-dest="sentinel" list="sentinels" id="sentinelInput">
-					</div>
+            <select type="text" id="sentinelInput" data-dest="sentinel" placeholder="Escribe el nombre en español y dale a la opcion de debajo">
+              <optgroup label="Bajo">
+                <option value="Absent">Ausentes</option>
+                <option value="Few">Exiguo</option>
+                <option value="Infrequent">Poco frecuente</option>
+                <option value="Intermittent">Intermitente</option>
+                <option value="Irregular Patrols">Patrullas irregulares</option>
+                <option value="Isolated">Aislado</option>
+                <option value="Limited">Limitados</option>
+                <option value="Low">Bajo</option>
+                <option value="Low Security">Seguridad baja</option>
+                <option value="Minimal">Mínimo</option>
+                <option value="Missing">Desaparecido</option>
+                <option value="None">Ninguno</option>
+                <option value="None Present">Ninguno presente</option>
+                <option value="Not Present">No presente</option>
+                <option value="Remote">Remoto</option>
+                <option value="Sparse">Disperso</option>
+                <option value="Spread Thin">Abarca demasiado</option>
+              </optgroup>
+              <optgroup label="Alto">
+                <option value="Attentive">Atento</option>
+                <option value="Enforcing">Ejecutor</option>
+                <option value="Ever-present">Constante</option>
+                <option value="Frequent">Frecuente</option>
+                <option value="Observant">Observador</option>
+                <option value="Regular Patrols">Patrullas regulares</option>
+                <option value="Require Obedience">Requieren obediencia</option>
+                <option value="Require Orthodoxy">Requieren ortodoxia</option>
+                <option value="Unwavering">Inquebrantable</option>
+              </optgroup>
+              <optgroup label="Agresivo">
+                <option value="Aggressive">Agresivo</option>
+                <option value="Frenzied">Enloquecido</option>
+                <option value="Hateful">Detestable</option>
+                <option value="High Security">Seguridad alta</option>
+                <option value="Hostile Patrols">Patrullas hostiles</option>
+                <option value="Inescapable">Inevitable</option>
+                <option value="Malicious">Malicioso</option>
+                <option value="Threatening">Amenazante</option>
+                <option value="Zealous">Fervoroso</option>
+              </optgroup>
+              <optgroup label="Corruptos">
+                <option value="Corrupted">Corrupto</option>
+                <option value="Forsaken">Abandonado</option>
+                <option value="Rebellious">Rebelde</option>
+                <option value="Answer To None">Responder a nadie</option>
+                <option value="Sharded from the Atlas">Fragmentado del Atlas</option>
+                <option value="Dissonant">Disonante</option>
+                <option value="De-Harmonised">Desarmonizado</option>
+              </optgroup>
+              </select>
+  					</div>
+            <div class="table-cell text">
+              <label>¿Como se categoriza la actividad centinela?</label>
+              <button class="tooltip">
+                <data>Dependiendo de que categoria haya elegido.</data>
+                <data>¿Como se categoriza la actividad centinela?</data>
+                <data>
+                Dependiendo de que categoria haya elegido en la pregunta anterior, seleccione la misma aqui.
+                </data>
+              </button>
+            </div>
+            <div class="table-cell data">
+              <select type="text" id="sentinelCategoryInput" data-dest="sentinelCategory">
+                <option value="The sentinels don't present an immediate threat.">Baja</option>
+                <option value="The sentinels don't present an immediate threat.">Alta</option>
+                <option value="The sentinels present an immediate threat.">Agresiva</option>
+                <option value="The sentinels don't present an immediate threat.">Corrupta</option>
+              </select>
+            </div>
 					<div class="table-cell text">
-						<label for="floraInput">Flora level of the moon:</label>
-						<button class="tooltip">
-							<data>Can be found in the discovery menu.</data>
-							<data>Moon Flora Level</data>
-							<data>Can be found in the discovery menu.</data>
+            <label for="floraInput">Nivel de flora de la luna:</label>
+            <button class="tooltip">
+              <data>Se puede encontrar en el menú de descubrimiento.</data>
+            <data>Nivel de flora de la luna</data>
+            <data>Se puede encontrar en el menú de descubrimiento.</data>
 							<data>planet/flora</data>
 						</button>
 					</div>
 					<div class="table-cell data">
-						<input type="text" data-dest="flora" list="rarity" id="floraInput">
-					</div>
+            <input type="text" id="floraInput" list="rarity2Datalist" data-dest="flora" placeholder="Escribe el nombre en español y dale a la opcion de debajo">
+						<datalist type="text" id="rarity2Datalist">
+              <option value="Abundant">Abundante</option>
+              <option value="High">Alta</option>
+              <option value="Ample">Rebosante</option>
+              <option value="Frequent">Frecuente</option>
+              <option value="Full">Lleno</option>
+              <option value="Generous">Generoso</option>
+              <option value="Average">Medio</option>
+              <option value="Regular">Regular</option>
+              <option value="Common">Común</option>
+              <option value="Typical">Típico</option>
+              <option value="Ordinary">Corriente</option>
+              <option value="Occasional">Ocasional</option>
+              <option value="Low">Bajo</option>
+              <option value="Scarce">Escaso</option>
+              <option value="Infrequent">Poco frecuente</option>
+              <option value="Rare">Raro</option>
+              <option value="Limited">Limitado</option>
+              <option value="Sporadic">Esporádico</option>
+              <option value="None">Nulo</option>
+              <option value="Deficient">Deficiente</option>
+              <option value="Undetected">No detectado</option>
+              <option value="Lacking">Carente</option>
+              <option value="Absent">Ausente</option>
+              <option value="Nonexistent">Inexistente</option>
+              <option value="Unusual">Inusual</option>
+              <option value="Lost">Perdido</option>
+              <option value="Displaced">Desplazado</option>
+              <option value="From Elsewhere">De otro lugar</option>
+              <option value="Uprooted">Desarraigado</option>
+              <option value="Misplaced">Extraviado</option>
+              <option value="Forfeited">Abandonado</option>
+              <option value="Between Worlds">Entre mundos</option>
+              <option value="Infected">Infectado</option>
+              <option value="Diseased">Enfermo</option>
+              <option value="Twisted">Retorcido</option>
+              <option value="Screaming">Chillón</option>
+              <option value="Viral">Viral</option>
+              <option value="Invasive">Invasivo</option>
+              <option value="Bountiful">Profusa</option>
+              <option value="Copious">Copioso</option>
+              <option value="Rich">Rico</option>
+              <option value="Numerous">Numeroso</option>
+              <option value="Moderate">Moderado</option>
+              <option value="Fair">Frugal</option>
+              <option value="Medium">Habitual</option>
+              <option value="Intermittent">Intermitente</option>
+              <option value="Uncommon">Atípico</option>
+              <option value="Sparse">Exiguo</option>
+              <option value="Empty">Disperso</option>
+              <option value="Not Present">Agotado</option>
+              <option value="Devoid">Falto</option>
+              <option value="Barren">Seco</option>
+            </datalist>
+          	</div>
 					<div class="table-cell text">
-						<label for="faunaInput">Fauna level of the moon:</label>
+						<label for="faunaInput">Nivel de fauna de la luna:</label>
 						<button class="tooltip">
-							<data>Can be found in the discovery menu.</data>
-							<data>Moon Fauna Level</data>
-							<data>Can be found in the discovery menu.</data>
+							<data>Se puede encontrar en el menú de descubrimiento.</data>
+							<data>Nivel de fauna de la luna</data>
+							<data>Se puede encontrar en el menú de descubrimiento.</data>
 							<data>planet/fauna</data>
 						</button>
 					</div>
 					<div class="table-cell data">
-						<input type="text" data-dest="fauna" list="rarity" id="faunaInput">
+            <input type="text" id="faunaInput" list="rarity1Datalist" data-dest="fauna" placeholder="Escribe el nombre en español y dale a la opcion de debajo">
+						<datalist type="text" id="rarity1Datalist">
+              <option value="Abundant">Abundante</option>
+              <option value="High">Alta</option>
+              <option value="Ample">Rebosante</option>
+              <option value="Frequent">Frecuente</option>
+              <option value="Full">Lleno</option>
+              <option value="Generous">Generoso</option>
+              <option value="Average">Medio</option>
+              <option value="Regular">Regular</option>
+              <option value="Common">Común</option>
+              <option value="Typical">Típico</option>
+              <option value="Ordinary">Corriente</option>
+              <option value="Occasional">Ocasional</option>
+              <option value="Low">Bajo</option>
+              <option value="Scarce">Escaso</option>
+              <option value="Infrequent">Poco frecuente</option>
+              <option value="Rare">Raro</option>
+              <option value="Limited">Limitado</option>
+              <option value="Sporadic">Esporádico</option>
+              <option value="None">Nulo</option>
+              <option value="Deficient">Deficiente</option>
+              <option value="Undetected">No detectado</option>
+              <option value="Lacking">Carente</option>
+              <option value="Absent">Ausente</option>
+              <option value="Nonexistent">Inexistente</option>
+              <option value="Unusual">Inusual</option>
+              <option value="Lost">Perdido</option>
+              <option value="Displaced">Desplazado</option>
+              <option value="From Elsewhere">De otro lugar</option>
+              <option value="Uprooted">Desarraigado</option>
+              <option value="Misplaced">Extraviado</option>
+              <option value="Forfeited">Abandonado</option>
+              <option value="Between Worlds">Entre mundos</option>
+              <option value="Infected">Infectado</option>
+              <option value="Diseased">Enfermo</option>
+              <option value="Twisted">Retorcido</option>
+              <option value="Screaming">Chillón</option>
+              <option value="Viral">Viral</option>
+              <option value="Invasive">Invasivo</option>
+              <option value="Bountiful">Profusa</option>
+              <option value="Copious">Copioso</option>
+              <option value="Rich">Rico</option>
+              <option value="Numerous">Numeroso</option>
+              <option value="Moderate">Moderado</option>
+              <option value="Fair">Frugal</option>
+              <option value="Medium">Habitual</option>
+              <option value="Intermittent">Intermitente</option>
+              <option value="Uncommon">Atípico</option>
+              <option value="Sparse">Exiguo</option>
+              <option value="Empty">Disperso</option>
+              <option value="Not Present">Agotado</option>
+              <option value="Devoid">Falto</option>
+              <option value="Barren">Seco</option>
+            </datalist>
 					</div>
 					<div class="table-cell text">
-						<label for="faunaNumberInput">Number of Fauna:</label>
+						<label for="faunaNumberInput">Número de fauna de la luna:</label>
 						<button class="tooltip">
-							<data>Can be found in the discovery menu.</data>
-							<data>Moon Fauna Number</data>
-							<data>Can be found in the discovery menu.</data>
+							<data>Se puede encontrar en el menú de descubrimiento.</data>
+							<data>Número de fauna de la luna</data>
+							<data>Se puede encontrar en el menú de descubrimiento.</data>
 							<data>planet/faunaNum</data>
 						</button>
 					</div>
@@ -249,23 +918,22 @@
 						<input type="text" data-dest-noauto="faunaNumber" data-dest-number="0" id="faunaNumberInput">
 					</div>
 					<div class="table-cell text">
-						<label for="sandwormInput">Sandworm?</label>
+						<label for="sandwormInput">¿Gusano de arena?</label>
 					</div>
 					<div class="table-cell data">
 						<input type="checkbox" id="sandwormInput" data-dest-noauto="sandworm">
 					</div>
 					<div class="table-cell text" data-section="sandworm">
-						<label for="sandwormImgInput">Sandworm image:</label>
+						<label for="sandwormImgInput">Imagen del Gusano de Arena:</label>
 						<button class="tooltip" name="fileUploadTooltip">
-							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
-							<data>File Upload</data>
+							<data>La imagen no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen..</data>
+							<data>Subir archivo</data>
 							<data>
-								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
-								image name. Maximum filesize is 10MB.
-								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
-									data-wiki>Special:Upload</a>
-								<iframe src="https://nmscd.com/Image-Compressor/" title="Image Compressor"
-									class="explanation-embed" width="450" height="300">Image Compressor</iframe>
+                Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen. El
+                tamaño máximo del archivo es 10 MB.
+                Puedes subir tus imágenes a la wiki en <a href="Special:Upload?multiple=true" data-wiki>Especial:Subir</a>
+                <iframe src="https://nmscd.com/Image-Compressor/" title="Compresor de imágenes" class="explanation-embed" width="450"
+                  height="300">Compresor de imágenes</iframe>
 							</data>
 						</button>
 					</div>
@@ -275,55 +943,54 @@
 						<input type="file" id="sandwormImgUpload" accept="image/*">
 					</div>
 					<div class="table-cell text" data-section="sandworm">
-						<label>Class:</label>
+						<label>Clase:</label>
 						<button class="tooltip">
-							<data>Found on the worm scan.</data>
-							<data>Class</data>
-							<data>Found on the worm scan.</data>
+							<data>Encontrado en el escaneo de gusanos.</data>
+							<data>Clase</data>
+							<data>Encontrado en el escaneo de gusanos.</data>
 							<data>sandworm/class</data>
 						</button>
 					</div>
 					<div class="table-cell data" data-section="sandworm">
 						<select id="wormclassInput" data-dest="wormclass">
-							<option value="Ceaseless Burrower">Ceaseless Burrower</option>
-							<option value="Colossal Being">Colossal Being</option>
-							<option value="Gargantuan">Gargantuan</option>
-							<option value="Giant Parasite">Giant Parasite</option>
-							<option value="Planetary Maggot">Planetary Maggot</option>
-							<option value="The Consumer">The Consumer</option>
-							<option value="Unstoppable Nematode">Unstoppable Nematode</option>
-							<option value="Worm Lord">Worm Lord</option>
+							<option value="Ceaseless Burrower">Excavador incesante</option>
+							<option value="Colossal Being">Ser colosal</option>
+							<option value="Gargantuan">Pantagruélico</option>
+							<option value="Giant Parasite">Parásito gigante</option>
+							<option value="Planetary Maggot">Cresa planetaria</option>
+							<option value="The Consumer">El Consumidor</option>
+							<option value="Unstoppable Nematode">Nematodo imparable</option>
+							<option value="Worm Lord">Señor de los gusanos</option>
 						</select>
 					</div>
 					<div class="table-cell text" data-section="sandworm">
-						<label for="wormHeadInput">Head type:</label>
+						<label for="wormHeadInput">Tipo de cabeza:</label>
 						<button class="tooltip">
-							<data>Head type of the worm</data>
-							<data>Head Type</data>
-							<data>Head type of the worm.
+							<data>Tipo de cabeza del gusano.</data>
+							<data>Tipo de cabeza</data>
+							<data>Tipo de cabeza del gusano.
 							</data>
 						</button>
 					</div>
 					<div class="table-cell data" data-section="sandworm">
 						<select id="wormHeadInput" data-dest="wormHead">
-							<option value="Glowworm">Glowworm</option>
+							<option value="Glowworm">Luciérnaga</option>
 							<option value="Arrakis">Arrakis</option>
-							<option value="Stubby">Stubby</option>
-							<option value="Fangs">Fangs</option>
-							<option value="Dragon">Dragon</option>
-							<option value="Fish">Fish</option>
-							<option value="Round Mouth">Round Mouth</option>
+							<option value="Stubby">Achaparrada</option>
+							<option value="Fangs">Colmillos</option>
+							<option value="Dragon">Dragón</option>
+							<option value="Fish">Pez</option>
+							<option value="Round Mouth">Boca Redonda</option>
 							<option value="Sarlacc">Sarlacc</option>
-							<option value="Lips">Lips</option>
+							<option value="Lips">Labios</option>
 						</select>
 					</div>
 					<div class="table-cell text" data-section="sandworm">
-						<label>Max Depth:</label>
+						<label>Profundidad maxima:</label>
 						<button class="tooltip">
-							<data>Found on the worm scan.</data>
-							<data>Max Depth</data>
-							<data>Found on the worm scan.<br>Give the full number, including the decimal.<br>No "ku"
-								necessary.</data>
+							<data>Encontrado en el escaneo de gusanos.</data>
+							<data>Profundidad maxima</data>
+							<data>Encontrado en el escaneo de gusanos.<br>Indique el número completo, incluido el decimal.<br>No es necesario "ku".</data>
 							<data>sandworm/maxDepth</data>
 						</button>
 					</div>
@@ -332,62 +999,61 @@
 							maxlength="5" placeholder="0.0">
 					</div>
 					<div class="table-cell text" data-section="sandworm">
-						<label>Stomach Contents:</label>
+						<label>Contenido del estómago:</label>
 						<button class="tooltip">
-							<data>Found on the worm scan.</data>
-							<data>Stomach Contents</data>
-							<data>Found on the worm scan.</data>
+							<data>Encontrado en el escaneo de gusanos.</data>
+							<data>Contenido del estómago</data>
+							<data>Encontrado en el escaneo de gusanos.</data>
 							<data>sandworm/stomachContents</data>
 						</button>
 					</div>
 					<div class="table-cell data" data-section="sandworm">
 						<select id="wormstomachInput" data-dest="wormstomach">
-							<option value="Consumed waypoints">Consumed waypoints</option>
-							<option value="Entire [[Trade Outpost|trade outpost]]">Entire trade outpost</option>
-							<option value="[[Freighter]] components">Freighter components</option>
-							<option value="Horrific Eggs">Horrific Eggs</option>
-							<option value="Layers of teeth">Layers of teeth</option>
-							<option value="Lost [[starship]]s">Lost starships</option>
+							<option value="Consumed waypoints">Puntos de control consumidos</option>
+							<option value="Entire [[Trade Outpost|trade outpost]]">Puesto comercial entero</option>
+							<option value="[[Freighter]] components">Componentes de carguero</option>
+							<option value="Horrific Eggs">Huevos horrorosos</option>
+							<option value="Layers of teeth">Capas de dientes</option>
+							<option value="Lost [[starship]]s">Naves perdidas</option>
 							<option value="Magma">Magma</option>
-							<option value="Many Sentinels">Many Sentinels</option>
-							<option value="Minerals">Minerals</option>
-							<option value="Mostly sand">Mostly sand</option>
-							<option value="Other gargantuans">Other gargantuans</option>
-							<option value="Planetary beacon">Planetary beacon</option>
-							<option value="Rubble">Rubble</option>
-							<option value="[[Sentinel Walker]]s">Sentinel Walkers</option>
-							<option value="Several [[Gek]]">Several Gek</option>
-							<option value="Unpleasant liquid">Unpleasant liquid</option>
+							<option value="Many [[Sentinel]]s">Muchos Centinelas</option>
+							<option value="Minerals">Minerales</option>
+							<option value="Mostly sand">Principalmente arena</option>
+							<option value="Other gargantuans">Otros seres pantagruélicos</option>
+							<option value="Planetary beacon">Baliza planetaria</option>
+							<option value="Rubble">Escombros</option>
+							<option value="[[Sentinel Walker]]s">Caminantes Centinelas</option>
+							<option value="Several [[Gek]]">Varios Gek</option>
+							<option value="Unpleasant liquid">Líquido desagradable</option>
 						</select>
 					</div>
 					<div class="table-cell text" data-section="sandworm">
-						<label>Does this worm spawn on game reload?</label>
+						<label>¿Este gusano aparece al recargar el juego?</label>
 						<button class="tooltip">
-							<data>Reload your game and observe.</data>
-							<data>Worm on Reload</data>
+							<data>Recargue el juego y observe.</data>
+							<data>¿Sale al recargar?</data>
 							<data>
-								Some worms spawn immediately after you reload your game. To test this, make a manual
-								save by entering and exiting your starship,
-								then reload your latest save in the options.<br>If the worm doesn't spawn after 5-10
-								seconds, it doesn't spawn after reload.<br>
-								You can't really overlook a worm, they make a very loud sound and shake the ground.
+                Algunos gusanos aparecen inmediatamente después de recargar el juego. Para probar esto, guarde manualmente ingresando y
+                saliendo de su nave espacial, luego vuelva a cargar su último guardado en las opciones.<br>Si el gusano no aparece
+                después de 5 a 10 segundos, no aparece después de la recarga.<br>
+                Realmente no se puede pasar por alto un gusano, hacen un sonido muy fuerte y sacuden el suelo.
 							</data>
 						</button>
 					</div>
 					<div class="table-cell data" data-section="sandworm">
 						<div class="radioButtons">
 							<label for="autoSpawnInputY"><input type="radio" id="autoSpawnInputY" name="autoSpawnInput"
-									value="Yes"><span>Yes</span></label>
+									value="Yes"><span>Si</span></label>
 							<label for="autoSpawnInputN"><input type="radio" id="autoSpawnInputN" name="autoSpawnInput"
 									value="No"><span>No</span></label>
 							<label for="autoSpawnInputA"><input type="radio" id="autoSpawnInputA" name="autoSpawnInput"
-									value="" checked><span>I don't know</span></label>
+									value="" checked><span>No se</span></label>
 						</div>
 					</div>
 					<div class="table-cell text" data-section="sandworm">
-						<label for="wormDiscoveredInput">Discoverer:</label>
+						<label for="wormDiscoveredInput">Descubridor:</label>
 						<button class="tooltip">
-							<data>If there are no previous posts of this worm anywhere, you are the discoverer.</data>
+							<data>Si no hay publicaciones anteriores de este gusano en ninguna parte, usted es el descubridor.</data>
 						</button>
 					</div>
 					<div class="table-cell data" data-section="sandworm">
@@ -399,7 +1065,7 @@
 					</div>
 					<div id="faunaInputs" class="tableHeader text" data-section="fauna">
 						<button class="button is-primary" type="button" data-dest-noauto="creatures"
-							id="addFaunaButton">+ Add Fauna</button>
+							id="addFaunaButton">+ Añadir fauna</button>
 					</div>
 					<div class="tableHeader text sectionToggle">
 						<p>Flora:</p>
@@ -407,24 +1073,24 @@
 					</div>
 					<div id="floraInputs" class="tableHeader text" data-section="flora">
 						<button class="button is-primary" type="button" data-dest-noauto="plants" id="addFloraButton">+
-							Add Flora</button>
+							Añadir flora</button>
 					</div>
 					<div class="tableHeader text sectionToggle">
-						<p>Minerals:</p>
+						<p>Minerales:</p>
 						<button class="button" id="mineralToggleButton">Ocultar</button>
 					</div>
 					<div id="mineralInputs" class="tableHeader text" data-section="mineral">
 						<button class="button is-primary" type="button" data-dest-noauto="minerals"
-							id="addMineralButton">+ Add Mineral</button>
+							id="addMineralButton">+ Añadir mineral</button>
 					</div>
 					<div class="table-cell text ">
-						<label for="discDateInput">When was this moon discovered?</label>
+						<label for="discDateInput">¿Cuándo se descubrió esta luna?</label>
 						<button class="tooltip">
-							<data>Found in the analysis visor in the space station.</data>
+							<data>Encontrado en el visor de análisis de la estación espacial.</data>
 							<data>Discovery Date</data>
 							<data>
-								Found in the analysis visor in the space station.<br>
-								The exact discovery timestamp is displayed on the top left.
+								Encontrado en el visor de análisis de la estación espacial.<br>
+								La marca de tiempo exacta del descubrimiento se muestra en la parte superior izquierda.
 							</data>
 							<data>planet/discDate</data>
 						</button>
@@ -433,75 +1099,71 @@
 						<input type="date" id="discDateInput" data-dest-noauto="discDate">
 					</div>
 					<div class="table-cell text">
-						<label for="docDateInput">When was this moon documented?</label>
+						<label for="docDateInput">¿Cuándo se documentó esta luna?</label>
 					</div>
 					<div class="table-cell data">
 						<input type="date" id="docDateInput" data-dest-noauto="docDate">
 					</div>
 					<div class="table-cell text">
-						<label>Do you belong to a chapter?</label>
+						<label>¿Perteneces a un gremio?</label>
 					</div>
 					<div class="table-cell data">
-						<select data-dest-noauto="researchteam" id="researchteamInput">
-							<option value=""></option>
-							<option value="Wiki Scholars">Wiki Scholars</option>
-							<option value="EBC">EBC</option>
-						</select>
+          <input type="text" data-dest="researchteam" id="researchteamInput">
 					</div>
 					<div class="table-cell text">
-						<label>Gamemode:</label>
-						<button class="tooltip">
-							<data>Gamemode of the save on which this moon was documented.</data>
-							<data>Gamemode</data>
-							<data>
-								Gamemode of the save on which this moon was documented.<br>Found in the main
-								menu:
-							</data>
-							<data>shared/gamemode</data>
-						</button>
-					</div>
+            <label>Modo de juego:</label>
+            <button class="tooltip">
+              <data>Modo de juego del guardado en el que se documentó esta luna.</data>
+              <data>Modo de juego</data>
+              <data>
+                Modo de juego del guardado en el que se documentó esta luna.<br>Encontrado en el menú principal:
+              </data>
+              <data>shared/gamemode</data>
+            </button>
+            </div>
 					<div class="table-cell data">
 						<select data-dest="mode" id="modeInput">
 							<option value="Normal">Normal</option>
-							<option value="Relaxed">Relaxed</option>
+							<option value="Relaxed">Relajado</option>
 							<option value="Survival">Survival</option>
-							<option value="Permadeath">Permadeath</option>
-							<option value="Creative">Creative</option>
-							<option value="Custom">Custom</option>
+							<option value="Permadeath">Muerte permanente</option>
+							<option value="Creative">Creativo</option>
+							<option value="Custom">Personalizada</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label>Discoverer platform:</label>
+						<label>Plataforma del descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<select data-dest-noauto="platform" id="platformInput">
-							<option value="">I don't know</option>
+							<option value="">No se</option>
 							<option value="PC">PC</option>
 							<option value="PS">PlayStation</option>
 							<option value="XB">Xbox</option>
 							<option value="NS">Switch</option>
+              <option value="Mac">Mac</option>
 						</select>
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredlinkInput">Discoverer wiki name:</label>
+						<label for="discoveredlinkInput">Nombre en la wiki del descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
 					</div>
 					<div class="table-cell text">
-						<label for="discoveredInput">Discoverer alias if no wiki:</label>
+						<label for="discoveredInput">Alias del ​​descubridor si no tiene wiki:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="discovered" id="discoveredInput">
 					</div>
 					<div class="table-cell text">
-						<label for="docbyInput">Documenter alias if not discoverer:</label>
+						<label for="docbyInput">Alias del documentador si no es el descubridor:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest-noauto="docby" id="docbyInput">
 					</div>
 					<div class="tableHeader data no-flex">
-						<label for="addInfoInput">Additional Information:</label>
+						<label for="addInfoInput">Información adicional:</label>
 						<textarea id="addInfoInput" data-dest="addInfo"></textarea>
 					</div>
 				</div>
@@ -516,8 +1178,8 @@
 					<div>{{Moon infobox</div>
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image"></output></div>
-					<div>| region = <output id="region" name="region"></output></div>
-					<div>| galaxy = Eissentam</output></div>
+					<div>| region = <output id="regions" name="regions"></output></div>
+					<div>| galaxy = <output id="galaxy" name="galaxy"></output></div>
 					<div>| system = <output id="system" name="system"></div>
 					<div>| planet = <output id="planet" name="planet"></output></div>
 					<div>| coordinates = {{Glyphs2Coords|<output id="portalglyphs" name="portalglyphs"></output>}}</div>
@@ -529,10 +1191,9 @@
 					<div>| resources = <output id="resourceList"></output></div>
 					<div>| sentinel = <output id="sentinel" name="sentinel"></output></div>
 					<div>| flora = <output id="flora"></output></div>
-					<div>| fauna = <output id="fauna"></output> (<output id="faunaNumber" name="faunaNumber"></output>)
-					</div>
+					<div>| fauna = <output id="fauna"></output> (<output id="faunaNumber" name="faunaNumber"></output>)</div>
 					<div>| mode = <output id="mode"></output></div>
-					<div>| civilized = </div>
+					<div>| civilized = <output id="hub" name="hub"></output></div>
 					<div>| researchteam = <output id="researchteam"></output></div>
 					<div>| discoveredlink = <output id="discoveredlink"></output></div>
 					<div>| discovered = <output id="discovered" name="discovered"></output></div>
@@ -563,7 +1224,7 @@
 					<br>
 
 					<div>==Location==</div>
-					<div><output id="location"></output></div>
+					<div>It can be found in the [[<output id="system" name="system"></output>]] [[star system]] in the [[<output id="regions" name="regions"></output>}]] [[region]] of [[<output id="hub" name="hub"></output>]], in the [[<output id="galaxy" name="galaxy"></output>]] [[galaxy]].</div>
 					<br>
 					<div>{{CoordGlyphConvert|<output id="portalglyphs1" name="portalglyphs"></output>}}</div>
 					<br>

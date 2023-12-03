@@ -1,5 +1,5 @@
 <div class="tableHeader text sectionToggle" data-flora="section${i}" data-section="flora">
-	<p style="margin-right:auto">Plant: <output class="has-text-weight-bold" name="floraName${i}"></output></p>
+	<p style="margin-right:auto">Planta: <output class="has-text-weight-bold" name="floraName${i}"></output></p>
 	<button class="button is-danger is-outlined" type="button" data-evt-id="removeButton">Borrar</button>
 	<button class="button" data-evt-id="hideButton">Ocultar</button>
 </div>
@@ -23,7 +23,7 @@
 	<input type="file" id="floraFileUpl${i}" accept="image/*" data-evt-id="fileInput">
 </div>
 <div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
-	<label for="floraAgeInput${i}">Age:</label>
+	<label for="floraAgeInput${i}">Edad:</label>
 	<button class="tooltip">
 		<data>Encontrado en el visor de análisis.</data>
 		<data>Edad de la planta</data>
@@ -32,7 +32,36 @@
 	</button>
 </div>
 <div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input type="text" data-dest="floraAge${i}" list="ageData" id="floraAgeInput${i}">
+	<select type="text" data-dest="floraAge${i}" id="floraAgeInput${i}">
+<option value="Ancient">Ancestral</option>
+<option value="Old">Vieja</option>
+<option value="Timeless">Intemporal</option>
+<option value="Millenia">Milenios</option>
+<option value="Centuries">Siglos</option>
+<option value="Fresh">Reciente</option>
+<option value="Sproutling">Germinando</option>
+<option value="Sapling">Retoño</option>
+<option value="Young">Joven</option>
+<option value="Decades">Décadas</option>
+<option value="Moderate">Moderada</option>
+<option value="Mature">Madura</option>
+<option value="Seasoned">Desarrollada</option>
+<option value="Juvenile">Juvenil</option>
+<option value="Fully Grown">Totalmente desarrollada</option>
+<option value="Youthful">Tierna</option>
+<option value="Advanced">Avanzada</option>
+<option value="Unknown">Desconocida</option>
+<option value="Indeterminate">Indeterminada</option>
+<option value="Regenerating">En regeneración</option>
+<option value="Perpetual">Perpetua</option>
+<option value="Cyclical">Cíclica</option>
+<option value="Several Days">Varios días</option>
+<option value="Still Growing">En crecimiento</option>
+<option value="Infant">Recién nacida</option>
+<option value="Immature">Verde</option>
+<option value="Fully Developed">Plenamente desarrollada</option>
+<option value="Dying">Decadente</option>
+  </select>
 </div>
 <div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraRootInput${i}">Estructura de la raiz:</label>
@@ -44,7 +73,58 @@
 	</button>
 </div>
 <div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input type="text" data-dest="floraRoot${i}" list="rootData" id="floraRootInput${i}">
+	<select type="text" data-dest="floraRoot${i}" id="floraRootInput${i}">
+    <option value="Complex">Compleja</option>
+<option value="Fractal">Fractal</option>
+<option value="Widespread">Extendida</option>
+<option value="Stunted">Atrofiada</option>
+<option value="Swamped">Inundada</option>
+<option value="Desiccated">Desecada</option>
+<option value="Extensive">Extensa</option>
+<option value="Concentrated">Concentrada</option>
+<option value="Symbiotic">Simbiótica</option>
+<option value="Fungal">Fúngica</option>
+<option value="Localised">Localizada</option>
+<option value="Bi-directional">Bidireccional</option>
+<option value="Many-Limbed">Multirradicular</option>
+<option value="Gravitational">Gravitacional</option>
+<option value="Unsupported">Sin sujeción</option>
+<option value="Inorganic">Inorgánica</option>
+<option value="Significant">Considerable</option>
+<option value="Efficient">Eficaz</option>
+<option value="Far Reaching">De largo alcance</option>
+<option value="Capacious">Grande</option>
+<option value="Limited">Limitada</option>
+<option value="Narrow">Estrecha</option>
+<option value="Restricted">Restringida</option>
+<option value="Parasitic">Parasitaria</option>
+<option value="Invasive">Invasiva</option>
+<option value="Extendable">Extensible</option>
+<option value="Voluminous">Voluminosa</option>
+<option value="Global">Global</option>
+<option value="Knotted">Anudada</option>
+<option value="Linear">Lineal</option>
+<option value="Branching">Ramificada</option>
+<option value="Substantial">Sólida</option>
+<option value="Conventional">Convencional</option>
+<option value="Circular">Circular</option>
+<option value="Independent">Independiente</option>
+<option value="Sentient">Sensible</option>
+<option value="Heat Seeking">Termodirigida</option>
+<option value="Simple">Simple</option>
+<option value="Regular">Regular</option>
+<option value="Polygonal">Poligonal</option>
+<option value="Not Present">Ausente</option>
+<option value="Hidden">Impenetrable</option>
+<option value="Balanced">Equilibrada</option>
+<option value="Omni-Directional">Omnidireccional</option>
+<option value="Irregular">Irregular</option>
+<option value="Transferrable">Transferible</option>
+<option value="Mobile">Móvil</option>
+<option value="Obtuse">Obtusa</option>
+<option value="Unfathomable">Insondable</option>
+<option value="Grasping">Agarradiza</option>
+  </select>
 </div>
 <div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraNutInput${i}">Fuente de nutrientes:</label>
@@ -56,7 +136,92 @@
 	</button>
 </div>
 <div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input type="text" data-dest="floraNut${i}" list="floranutSourceDatalist" id="floraNutInput${i}">
+	<select type="text" data-dest="floraNut${i}" id="floraNutInput${i}">
+    <option value=""></option>
+    <option value="[NOT DETERMINED]">[INDETERMINADO]</option>
+    <option value="[UNKNOWN]">[DESCONOCIDO]</option>
+    <option value="Aerobic Digestion">Digestión aeróbica</option>
+    <option value="Air Leaching">Lixiviación de aire</option>
+    <option value="Anaerobic Digestion">Digestión anaeróbica</option>
+    <option value="Anomalous Nutrients">Nutrientes anómalos</option>
+    <option value="Atmospheric Moisture">Humedad atmosférica</option>
+    <option value="Autotrophic">Autotrófica</option>
+    <option value="Buried Carbon">Carbono enterrado</option>
+    <option value="Buried Nitrogen">Nitrógeno enterrado</option>
+    <option value="Buried Treasure">Tesoro enterrado</option>
+    <option value="Carbon Absorption">Absorción de carbono</option>
+    <option value="Carnivorous Roots">Raíces carnívoras</option>
+    <option value="Carnivorous">Carnívoro</option>
+    <option value="Conjuration">Invocación</option>
+    <option value="Cosmic Radiation">Radiación cósmica</option>
+    <option value="Dark Energy">Energía oscura</option>
+    <option value="Dark Matter">Materia oscura</option>
+    <option value="Decomposition">Putrefacción</option>
+    <option value="Doomed Wanderers">Nómadas condenados</option>
+    <option value="Electron Donors">Donantes de electrones</option>
+    <option value="Entrapment">Trampa</option>
+    <option value="External Maintenance">Mantenimiento externo</option>
+    <option value="Fermented Corpses">Cadáveres fermentados</option>
+    <option value="Free Radicals">Radicales libres</option>
+    <option value="Fungal Harvest">Recolecta fúngica</option>
+    <option value="Fungal Reclamation">Reciclaje fúngico</option>
+    <option value="Fungal Symbiosis">Simbiosis micótica</option>
+    <option value="Gamma Rays">Rayos gamma</option>
+    <option value="Gas Clouds">Nubes de gas</option>
+    <option value="Geological Energy">Energía geológica</option>
+    <option value="Gravitational Waves">Ondas gravitacionales</option>
+    <option value="Heat Recycling">Reciclaje calórico</option>
+    <option value="Heavy Metals">Metales pesados</option>
+    <option value="Heavy Rain">Lluvia torrencial</option>
+    <option value="Infrared Radiation">Radiación infrarroja</option>
+    <option value="Liquid Ammonia">Amoniaco líquido</option>
+    <option value="Lost Insects">Insectos perdidos</option>
+    <option value="Lost Travellers">Viajeros perdidos</option>
+    <option value="Meditation">Meditación</option>
+    <option value="Membrane Compression">Comprensión de membrana</option>
+    <option value="Moonlight">Luz lunar</option>
+    <option value="Natural Carbon">Carbono natural</option>
+    <option value="Nitrogen Fixation">Fijación de nitrógeno</option>
+    <option value="Non-existent Insects">Insectos inexistentes</option>
+    <option value="Nutrient Source">Fuente de nutrientes</option>
+    <option value="Osmosis">Ósmosis</option>
+    <option value="Other Plants">Otras plantas</option>
+    <option value="Parasitic Leaching">Lixiviación parasitaria</option>
+    <option value="Photosynthesis">Fotosíntesis</option>
+    <option value="Predatory">Depredador</option>
+    <option value="Proton Recycling">Reciclaje de protones</option>
+    <option value="Radio Waves">Ondas de radio</option>
+    <option value="Radiotrophic">Radiotrófica</option>
+    <option value="Rock Enzymes">Enzimas de roca</option>
+    <option value="Salt Fusion">Fusión salina</option>
+    <option value="Self-Sustaining">Autosostenible</option>
+    <option value="Soil Bacteria">Bacterias del suelo</option>
+    <option value="Soil Recycling">Reciclaje del suelo</option>
+    <option value="Stardust">Polvo de estrellas</option>
+    <option value="Stray Particles">Partículas extraviadas</option>
+    <option value="Sublimated Nitrogen">Nitrógeno sublimado</option>
+    <option value="Sunlight">Luz solar</option>
+    <option value="Synthesised from Fire">Sintetizado a partir de fuego</option>
+    <option value="The Lost">Los perdidos</option>
+    <option value="The Unfortunate">Los desafortunados</option>
+    <option value="Theft">Robo</option>
+    <option value="Thermal Capture">Captura térmica</option>
+    <option value="Time Bubbles">Burbujas de tiempo</option>
+    <option value="Time Threads">Hilos temporales</option>
+    <option value="Ultraviolet Radiation">Radiación ultravioleta</option>
+    <option value="Underground Bubbles">Burbujas subterráneas</option>
+    <option value="Algal particulates">Partículas de algas</option>
+    <option value="Coral Microcolony">Microcolonia de coral</option>
+    <option value="Ensnares Fish">Atrapa peces</option>
+    <option value="Feeds on Failure">Transmisiones de fracasos</option>
+    <option value="Hydrosynthesis">Hidrosíntesis</option>
+    <option value="Mineral Filtration">Filtrado de minerales</option>
+    <option value="Oxygen Filtration">Filtrado de oxígeno</option>
+    <option value="Plankton Symbiotes">Simbiontes de plancton</option>
+    <option value="Plankton">Plancton</option>
+    <option value="Salt Absorption">Absorción de sal</option>
+    <option value="Vented minerals">Minerales agujereados</option>
+  </select>
 </div>
 <div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraNoteInput${i}">Notas:</label>
@@ -68,7 +233,189 @@
 	</button>
 </div>
 <div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input type="text" data-dest="floraNote${i}" list="floraNotesData" id="floraNoteInput${i}">
+	<input type="text" data-dest="floraNote${i}" list="notesSnippetDatalist" id="floraNoteInput${i}" placeholder="Escriba en nombre en español y autocompletelo.">
+  <datalist data-dest="floraNote${i}" id="notesSnippetDatalist">
+    <option value="Mono-Seasonal">Monotemporal</option>
+<option value="Sensitive to Light">Sensible a la luz</option>
+<option value="Potentially Medicinal">Potencialmente medicinal</option>
+<option value="Hollow">Hueca</option>
+<option value="Insect Habitation">Morada de insectos</option>
+<option value="Toxic Bark">Corteza tóxica</option>
+<option value="Bitter Stems">Tallos amargos</option>
+<option value="Unpollinated">No polinizada</option>
+<option value="Bioluminescent">Bioluminiscente</option>
+<option value="Succulent Tubers">Tubérculos carnosos</option>
+<option value="Waxy Fruit">Fruto ceroso</option>
+<option value="Infrequent Flowering">Floración poco frecuente</option>
+<option value="Edible Seeds">Semillas comestibles</option>
+<option value="Inconsistent Blossom">Flores irregulares</option>
+<option value="Inedible Petals">Pétalos no comestibles</option>
+<option value="Pungent">Acre</option>
+<option value="Nocturnal Pollinators">Polinizadores nocturnos</option>
+<option value="Parasite Host">Huésped de parásitos</option>
+<option value="Omni-Seasonal">Omnitemporal</option>
+<option value="Bi-Seasonal">Bitemporal</option>
+<option value="Caustic Sap">Savia cáustica</option>
+<option value="Psychotropic Leaves">Hojas psicotrópicas</option>
+<option value="Hallucogenic Bark">Corteza alucinógena</option>
+<option value="Extendible Fronds">Frondas extensibles</option>
+<option value="Stinging Hairs">Pelos urticantes</option>
+<option value="Annual Spore Clouds">Nubes de esporas anuales</option>
+<option value="Sentient Fruit">Fruto sensible</option>
+<option value="Hidden Tentacles">Tentáculos ocultos</option>
+<option value="Itchy Pollen">Polen urticante</option>
+<option value="Hypnotic Perfume">Perfume hipnótico</option>
+<option value="Calming Scent">Aroma tranquilizador</option>
+<option value="Pheromone Sacs">Bolsas de feromonas</option>
+<option value="Translucent Nuts">Nueces translúcidas</option>
+<option value="Crepuscular Fruit">Fruto crepuscular</option>
+<option value="Self-Healing Bark">Corteza autorregenerativa</option>
+<option value="Delicate Stems">Tallos delicados</option>
+<option value="Irresistible Seeds">Semillas irresistibles</option>
+<option value="Wailing Roots">Raíces quejumbrosas</option>
+<option value="Umbral Sprouts">Brotes en umbral</option>
+<option value="Movement Prone">Propensa al movimiento</option>
+<option value="Airborne Seeds">Semillas aéreas</option>
+<option value="Multicolour Wood">Madera multicolor</option>
+<option value="Photosensitive Tendrils">Zarcillos fotosensibles</option>
+<option value="Iridescent Seed Pods">Vainas de semillas iridiscentes</option>
+<option value="Retractable Fronds">Frondas retráctiles</option>
+<option value="Metallic Nodules">Nódulos metálicos</option>
+<option value="Partially Developed Eyes">Ojos parcialmente desarrollados</option>
+<option value="Sneaky">Furtiva</option>
+<option value="Whispering Leaves">Hojas susurrantes</option>
+<option value="Haunted Nests">Nidos angustiosos</option>
+<option value="Nesting Moths">Nidos de polillas</option>
+<option value="Unripe Fruit">Fruto verde</option>
+<option value="Inner Beauty">Belleza interior</option>
+<option value="Hibernating">Hibernadora</option>
+<option value="Biologically Inert">Biológicamente inerte</option>
+<option value="Self-Pollinating">Autopolinizadora</option>
+<option value="Inaudible">Inaudible</option>
+<option value="Frost Resistant">Resistente al frío</option>
+<option value="Carbon Dense">Densidad de carbono</option>
+<option value="Delicious">Deliciosa</option>
+<option value="Proto-Skeletal">Protoesqueleto</option>
+<option value="Ticklish Stamen">Estambre irritante</option>
+<option value="Four Dimensional">Cuatridimensional</option>
+<option value="Ocular Irritant">Irritante ocular</option>
+<option value="Mist-Based Defences">Defensas lacrimales</option>
+<option value="Cloud Generator">Productora de nubes</option>
+<option value="Pharmacologically Active">Farmacológicamente activa</option>
+<option value="Altitude Tolerant">Resistente a la altitud</option>
+<option value="Drought Resistant">Resistente a la sequía</option>
+<option value="Tidal Sap">Savia mareal</option>
+<option value="Easily Startled">Asustadiza</option>
+<option value="Meaty Roots">Raíces carnosas</option>
+<option value="True Neutral">Totalmente neutral</option>
+<option value="All Colours">Todos los colores</option>
+<option value="Blight Resistant">Resistente a la roya</option>
+<option value="Water Laden">Cargada de agua</option>
+<option value="Durable Fruit">Fruto duradero</option>
+<option value="Wind-Blown Seeds">Semillas al viento</option>
+<option value="Mobile">Móvil</option>
+<option value="Genetically Diverse">Genéticamente diversa</option>
+<option value="Cloned">Clonada</option>
+<option value="Rapidly Mutating">De mutación rápida</option>
+<option value="Faintly Singing">De canturreo débil</option>
+<option value="Pleasing Aroma">Aroma embriagador</option>
+<option value="Slowly Rotting">De putrefacción lenta</option>
+<option value="Extremely Poisonous">Extremadamente venenosa</option>
+<option value="High Metal Content">Alto contenido en metal</option>
+<option value="Liquidises Soil">Licua el suelo</option>
+<option value="High Internal Pressure">Alta presión interna</option>
+<option value="Unstable Fruit">Fruto inestable</option>
+<option value="Covered in Tiny Eggs">Cubierta de huevos diminutos</option>
+<option value="Aggressive">Agresiva</option>
+<option value="Golden Sap">Savia dorada</option>
+<option value="Flakey Coating">Cubierta escamosa</option>
+<option value="Suspicious Odour">Olor sospechoso</option>
+<option value="Vigorous">Vigorosa</option>
+<option value="Hydrophilic">Hidrófila</option>
+<option value="Ericaceous">Ericácea</option>
+<option value="Calcifuge">Calcífuga</option>
+<option value="Calcicole">Calcícola</option>
+<option value="Odourless">Inodora</option>
+<option value="Spongy Coating">Capa esponjosa</option>
+<option value="Parasitic Leaves">Hojas parasitarias</option>
+<option value="Tiny Hairs">Pelos diminutos</option>
+<option value="Sticky Coating">Cubierta pegajosa</option>
+<option value="Nanite Sap">Savia de nanites</option>
+<option value="Water Resistant">Resistente al agua</option>
+<option value="Choking Scent">Aroma asfixiante</option>
+<option value="Flowers Once">Florece una vez</option>
+<option value="Infectious Spores">Esporas infecciosas</option>
+<option value="Hive Mind">Mente de colmena</option>
+<option value="Extraterrestrial">Extraterrestre</option>
+<option value="Migratory">Migratoria</option>
+<option value="Perennial">Perenne</option>
+<option value="Self-Propagating">Autopropagadora</option>
+<option value="Rapid Reproduction">Reproducción rápida</option>
+<option value="Self-Replicating">Autorreplicante</option>
+<option value="Slow Growing">De crecimiento lento</option>
+<option value="Fragile Stems">Tallos frágiles</option>
+<option value="Delicate Flowers">Flores delicadas</option>
+<option value="Paralysing Spores">Esporas paralizantes</option>
+<option value="Neurotoxic Pollen">Polen neurotóxico</option>
+<option value="Oily Seeds">Semillas aceitosas</option>
+<option value="Stinging Fruit">Fruto urticante</option>
+<option value="Crimson Seeds">Semillas carmesí</option>
+<option value="Fireproof Nuts">Nueces ignífugas</option>
+<option value="Crystalline Flowers">Flores cristalinas</option>
+<option value="Shadow Petals">Pétalos sombríos</option>
+<option value="Combustible Fruit">Fruto combustible</option>
+<option value="Glasslike Seeds">Semillas vidriosas</option>
+<option value="Fragile Bulbs">Bulbos frágiles</option>
+<option value="Mouldy Bulbs">Bulbos mohosos</option>
+<option value="Semi-Liquid Bulbs">Bulbos semilíquidos</option>
+<option value="Luminous Bulbs">Bulbos luminosos</option>
+<option value="Glowing Tubers">Tubérculos brillantes</option>
+<option value="Spreading Tubers">Bulbos extensibles</option>
+<option value="Toxic Thorns">Espinas tóxicas</option>
+<option value="Launchable Thorns">Espinas lanzables</option>
+<option value="Invisible Bristles">Púas invisibles</option>
+<option value="Internal Branches">Ramas internas</option>
+<option value="Inaudible Singing">Canturreo inaudible</option>
+<option value="Haunted Roots">Raíces encantadas</option>
+<option value="Internal Teeth">Dentadura interna</option>
+<option value="Fungal Soul">Alma fúngica</option>
+<option value="Must Not Be Touched">No tocar</option>
+<option value="Favoured by Atlas">Preferido del Atlas</option>
+<option value="Enraged at Fate">Enfurecido por el destino</option>
+<option value="Doomed">Condenado</option>
+<option value="Lost in Time">Perdido en el tiempo</option>
+<option value="Already Dying">Agonizando</option>
+<option value="Hungry for Stars">Hambriento de estrellas</option>
+<option value="Thirsting for Glass">Sediento de cristal</option>
+<option value="Howls When Alone">Aullando en solitario</option>
+<option value="Unbound Seeds">Semillas sueltas</option>
+<option value="Rooted in the Beyond">Enraizado en el más allá</option>
+<option value="Yearning">Anhelante</option>
+<option value="Blood Sap">Savia sangrienta</option>
+<option value="Crimson Spores">Esporas carmesí</option>
+<option value="Infinite Branches">Ramas infinitas</option>
+<option value="Complex Nervous System">Sistema nervioso complejo</option>
+<option value="Partially Skeletal">Parcialmente esquelético</option>
+<option value="Sees in the Dark">Visión en la oscuridad</option>
+<option value="Lonely">Solitario</option>
+<option value="Searching for a Host">Buscando un huésped</option>
+<option value="Nightstalker">Acechador nocturno</option>
+<option value="Sap Binds Permanently">Savia unida de forma permanente</option>
+<option value="Roots can Talk">Raíces habladoras</option>
+<option value="Decentralised Mind">Mente descentralizada</option>
+<option value="Senses Beyond the Soil">Sentidos más allá del suelo</option>
+<option value="Longs to be Consumed">Deseando ser consumido</option>
+<option value="Can Sense You">Puede sentirte</option>
+<option value="Lacks Spirit">Falta de espíritu</option>
+<option value="Invasive">Invasivo</option>
+<option value="Searches For The Light">Buscando la luz</option>
+<option value="Diseased">Enfermo</option>
+<option value="[BREACH POINT]">[PUNTO DE BRECHA]</option>
+<option value="[BOUNDARY FAILURE]">[FALLO FRONTERIZO]</option>
+<option value="[ANOMALOUS]">[ANÓMALO]</option>
+<option value="[ITERATION ERROR]">[ERROR DE ITERACIÓN]</option>
+<option value="[CORRUPTED ENTITY]">[ENTIDAD CORRUPTA]</option>
+  </datalist>
 </div>
 <div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraResourcePrimInput${i}">Elemento primario:</label>
@@ -80,8 +427,17 @@
 	</button>
 </div>
 <div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input data-dest-noauto="floraElements${i}" type="text" list="floraResourcesDatalist" id="floraResourcePrimInput${i}"
-		data-evt-id="floraElements">
+  <select data-dest-noauto="floraElements${i}" type="text" id="floraResourcePrimInput${i}" data-evt-id="floraElements">
+    <option value=""></option>
+    <option value="Oxygen">Oxigeno</option>
+    <option value="Carbon">Carbono</option>
+    <option value="Sodium">Sodio</option>
+    <option value="Condensed Carbon">Carbono condensado</option>
+    <option value="Cyto-Phosphate">Citofosfato</option>
+    <option value="Marrow Bulb">Bulbo de médula</option>
+    <option value="Kelp Sac">Saco de algas marinas</option>
+    <option value="Salt">Sal</option>
+  </select>
 </div>
 <div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraResourceSecInput${i}">Elemento secundario:</label>
@@ -93,8 +449,17 @@
 	</button>
 </div>
 <div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input data-dest-noauto="floraElements${i}" type="text" list="floraResourcesDatalist" id="floraResourceSecInput${i}"
-		data-evt-id="floraElements">
+	<select data-dest-noauto="floraElements${i}" type="text" list="floraResourcesDatalist" id="floraResourceSecInput${i}" data-evt-id="floraElements">
+    <option value=""></option>
+    <option value="Oxygen">Oxigeno</option>
+    <option value="Carbon">Carbono</option>
+    <option value="Sodium">Sodio</option>
+    <option value="Condensed Carbon">Carbono condensado</option>
+    <option value="Cyto-Phosphate">Citofosfato</option>
+    <option value="Marrow Bulb">Bulbo de médula</option>
+    <option value="Kelp Sac">Saco de algas marinas</option>
+    <option value="Salt">Sal</option>
+  </select>
 </div>
 <div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
 	<label for="floraDiscovererInput${i}">Descubridor:</label>

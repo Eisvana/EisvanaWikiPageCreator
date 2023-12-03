@@ -1028,7 +1028,7 @@ export function forceDatalist(element: HTMLInputElement, datalists: {[key: strin
     if (datalistObject && !datalistObject[key] && key) {
       errorMessage(
         element,
-        'No es una opción válida. Si cree que se trata de un error, envíe un <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">informe de error</a> fauna.'
+        'No es una opción válida. Si cree que se trata de un error, envíe un <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">informe de error</a>.'
       );
     } else {
       errorMessage(element);
@@ -1359,6 +1359,6 @@ export function numberErrorComponent(
 export function forceDatalistComponent(value: string, list: string[]) {
   const option = list.includes(value);
   return !option && value
-    ? 'No es una opción válida. Si cree que se trata de un error, envíe un <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">reporte de bugs</a>.'
+    ? 'No es una opción válida. Si cree que se trata de un error, envíe un <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">reporte de bugs</a> aaa.'
     : '';
 }

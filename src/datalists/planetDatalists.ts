@@ -1,100 +1,112 @@
 /**
  * @fileoverview Provides data for planet datalists
  */
-export function getSentinelData() {
-	const sentinels: {
-		[key: string]: Array<string>;
-	} = {
-		low: [
-			'Absent',
-			'Few',
-			'Infrequent',
-			'Intermittent',
-			'Irregular Patrols',
-			'Isolated',
-			'Limited',
-			'Low',
-			'Low Security',
-			'Minimal',
-			'Missing',
-			'None',
-			'None Present',
-			'Not Present',
-			'Remote',
-			'Sparse',
-			'Spread Thin',
-		],
-		high: [
-			'Attentive',
-			'Enforcing',
-			'Ever-present',
-			'Frequent',
-			'Observant',
-			'Regular Patrols',
-			'Require Obedience',
-			'Require Orthodoxy',
-			'Unwavering',
-		],
-		aggressive: [
-			'Aggressive',
-			'Frenzied',
-			'Hateful',
-			'High Security',
-			'Hostile Patrols',
-			'Inescapable',
-			'Malicious',
-			'Threatening',
-			'Zealous',
-		],
-		corrupted: [
-			'Corrupted',
-			'Forsaken',
-			'Rebellious',
-			'Answer To None',
-			'Sharded from the Atlas',
-			'Dissonant',
-			'De-Harmonised',
-		]
-	}
-	return sentinels;
+interface Sentinel {
+  [key: string]: string;
+}
+
+interface Sentinels {
+  [key: string]: Sentinel;
+}
+
+export function getSentinelData(): Sentinels {
+  const sentinels: Sentinels = {
+      low: {
+          'Absent': 'Ausentes',
+          'Few':'Exiguo',
+          'Infrequent':'Poco frecuente',
+          'Intermittent':'Intermitente',
+          'Irregular Patrols':'Patrullas irregulares',
+          'Isolated':'Aislado',
+          'Limited':'Limitados',
+          'Low':'Bajo',
+          'Low Security':'Seguridad baja',
+          'Minimal':'Mínimo',
+          'Missing':'Desaparecido',
+          'None':'Ninguno',
+          'None Present':'Ninguno presente',
+          'Not Present':'No presente',
+          'Remote':'Remoto',
+          'Sparse':'Disperso',
+          'Spread Thin':'Abarca demasiado',
+          // Agrega aquí el resto de tus traducciones para la categoría 'low'
+      },
+      high: {
+        'Attentive':'Atento',
+        'Enforcing':'Ejecutor',
+        'Ever-present':'Constante',
+        'Frequent':'Frecuente',
+        'Observant':'Observador',
+        'Regular Patrols':'Patrullas regulares',
+        'Require Obedience':'Requieren obediencia',
+        'Require Orthodoxy':'Requieren ortodoxia',
+        'Unwavering':'Inquebrantable',
+          // Agrega aquí tus traducciones para la categoría 'high'
+      },
+      aggressive: {
+        'Aggressive':'Agresivo',
+        'Frenzied':'Enloquecido',
+        'Hateful':'Detestable',
+        'High Security':'Seguridad alta',
+        'Hostile Patrols':'Patrullas hostiles',
+        'Inescapable':'Inevitable',
+        'Malicious':'Malicioso',
+        'Threatening':'Amenazante',
+        'Zealous':'Fervoroso',
+          // Agrega aquí tus traducciones para la categoría 'aggressive'
+      },
+      corrupted: {
+        'Corrupted':'Corrupto',
+        'Forsaken':'Abandonado',
+        'Rebellious':'Rebelde',
+        'Answer To None':'Responder a nadie',
+        'Sharded from the Atlas':'Fragmentado del Atlas',
+        'Dissonant':'Disonante',
+        'De-Harmonised':'Desarmonizado',
+          // Agrega aquí tus traducciones para la categoría 'corrupted'
+      }
+      // Agrega aquí cualquier otra categoría que necesites
+  };
+
+  return sentinels;
 }
 
 export function getResourceData() {
 	const resources: {
 		[key: string]: string
 	} = {
-		'Copper': 'Cu',
-		'Cadmium': 'Cd',
-		'Emeril': 'Em',
-		'Indium': 'In',
-		'Activated Copper': 'Cu+',
-		'Activated Cadmium': 'Cd+',
-		'Activated Emeril': 'Em+',
-		'Activated Indium': 'In+',
-		'Ammonia': 'NH3',
-		'Dioxite': 'CO2',
-		'Paraffinium': 'Pf',
-		'Phosphorus': 'P',
-		'Pyrite': 'Py',
-		'Uranium': 'U',
-		'Silver': 'Ag',
-		'Gold': 'Au',
-		'Magnetised Ferrite': 'Fe++',
-		'Sodium': 'Na',
-		'Cobalt': 'Co',
-		'Salt': 'NaCl',
-		'Star Bulb': 'Sb',
-		'Cactus Flesh': 'Cc',
-		'Gamma Root': 'Gr',
-		'Fungal Mould': 'Ml',
-		'Frost Crystal': 'Fc',
-		'Solanium': 'So',
-		'Mordite': 'Mo',
-		'Faecium': 'Fa',
-		'Ancient Bones': 'Ab',
-		'Salvageable Scrap': 'Sa',
-		'Rusted Metal': 'Jn',
-		'Basalt': 'B',
+		'Cobre': 'Cu',
+		'Cadmio': 'Cd',
+		'Emerilio': 'Em',
+		'Indio': 'In',
+		'Cobre Activado': 'Cu+',
+		'Cadmio Activado': 'Cd+',
+		'Emerilio Activado': 'Em+',
+		'Indio Activado': 'In+',
+		'Amonio': 'NH3',
+		'Dioxita': 'CO2',
+		'Parafinio': 'Pf',
+		'Fósforo': 'P',
+		'Pirita': 'Py',
+		'Uránio': 'U',
+		'Plata': 'Ag',
+		'Oro': 'Au',
+		'Ferrita Imantada': 'Fe++',
+		'Sodio': 'Na',
+		'Cobalto': 'Co',
+		'Sal': 'NaCl',
+		'Bulbo estelar': 'Sb',
+		'Carne de cactus': 'Cc',
+		'Raíz de gamma': 'Gr',
+		'Moho fúngico': 'Ml',
+		'Cristal de escarcha': 'Fc',
+		'Solanio': 'So',
+		'Mordita': 'Mo',
+		'Hecesio': 'Fa',
+		'Huesos antiguos': 'Ab',
+		'Chatarra recuperable': 'Sa',
+		'Metal oxidado': 'Jn',
+		'Basalto': 'B',
 	}
 	return resources;
 };
@@ -372,6 +384,7 @@ export function getDescriptorData() {
 	}
 	return planetDescriptors;
 }
+
 
 const planetDatalists: {
 	[key: string]: Array<string>;
@@ -662,69 +675,188 @@ const planetDatalists: {
 		'Inverted Superstorms',
 		'Coastal Storms'
 	],
-	rarity: [
-		'Abundant',
-		'High',
-		'Ample',
-		'Frequent',
-		'Full',
-		'Generous',
-		'Average',
-		'Regular',
-		'Common',
-		'Typical',
-		'Ordinary',
-		'Occasional',
-		'Low',
-		'Scarce',
-		'Infrequent',
-		'Rare',
-		'Limited',
-		'Sporadic',
-		'None',
-		'Deficient',
-		'Undetected',
-		'Lacking',
-		'Absent',
-		'Nonexistent',
-		'Unusual',
-		'Lost',
-		'Displaced',
-		'From Elsewhere',
-		'Uprooted',
-		'Misplaced',
-		'Forfeited',
-		'Between Worlds',
-		'Infected',
-		'Diseased',
-		'Twisted',
-		'Screaming',
-		'Viral',
-		'Invasive',
-		'Bountiful',
-		'Copious',
-		'Rich',
-		'Numerous',
-		'Moderate',
-		'Fair',
-		'Medium',
-		'Intermittent',
-		'Uncommon',
-		'Few',
-		'Sparse',
-		'Empty',
-		'Not Present',
-		'Devoid',
-		'Barren',
-	]
+};
+
+
+interface Rareza {
+  [key: string]: string;
 }
+
+interface Rarezas {
+  [key: string]: Rareza;
+}
+
+export function getRarezaData(): Rarezas {
+  const rarezas: Rarezas = {
+	rarity: {
+		'Abundant':'Abundante',
+		'High':'Alta',
+		'Ample':'Rebosante',
+		'Frequent':'Frecuente',
+		'Full':'Lleno',
+		'Generous':'Generoso',
+		'Average':'Medio',
+		'Regular':'Regular',
+		'Common':'Común',
+		'Typical':'Típico',
+		'Ordinary':'Corriente',
+		'Occasional':'Ocasional',
+		'Low':'Bajo',
+		'Scarce':'Escaso',
+		'Infrequent':'Poco frecuente',
+		'Rare':'Raro',
+		'Limited':'Limitado',
+		'Sporadic':'Esporádico',
+		'None':'Nulo',
+		'Deficient':'Deficiente',
+		'Undetected':'No detectado',
+		'Lacking':'Carente',
+		'Absent':'Ausente',
+		'Nonexistent':'Inexistente',
+		'Unusual':'Inusual',
+		'Lost':'Perdido',
+		'Displaced':'Desplazado',
+		'From Elsewhere':'De otro lugar',
+		'Uprooted':'Desarraigado',
+		'Misplaced':'Extraviado',
+		'Forfeited':'Abandonado',
+		'Between Worlds':'Entre mundos',
+		'Infected':'Infectado',
+		'Diseased':'Enfermo',
+		'Twisted':'Retorcido',
+		'Screaming':'Chillón',
+		'Viral':'Viral',
+		'Invasive':'Invasivo',
+		'Bountiful':'Profusa',
+		'Copious':'Copioso',
+		'Rich':'Rico',
+		'Numerous':'Numeroso',
+		'Moderate':'Moderado',
+		'Fair':'Frugal',
+		'Medium':'Habitual',
+		'Intermittent':'Intermitente',
+		'Uncommon':'Atípico',
+		'Few':'Exiguo',
+		'Sparse':'Disperso',
+		'Empty':'Vacío',
+		'Not Present':'Agotado',
+		'Devoid':'Falto',
+		'Barren':'Seco',
+  }
+};
+  return rarezas;
+}
+
+interface Rareza2 {
+  [key: string]: string;
+}
+
+interface Rarezas2 {
+  [key: string]: Rareza2;
+}
+
+export function getRareza2Data(): Rarezas2 {
+  const rarezas2: Rarezas2 = {
+	rarity: {
+		'Abundant':'Abundante',
+		'High':'Alta',
+		'Ample':'Rebosante',
+		'Frequent':'Frecuente',
+		'Full':'Lleno',
+		'Generous':'Generoso',
+		'Average':'Medio',
+		'Regular':'Regular',
+		'Common':'Común',
+		'Typical':'Típico',
+		'Ordinary':'Corriente',
+		'Occasional':'Ocasional',
+		'Low':'Bajo',
+		'Scarce':'Escaso',
+		'Infrequent':'Poco frecuente',
+		'Rare':'Raro',
+		'Limited':'Limitado',
+		'Sporadic':'Esporádico',
+		'None':'Nulo',
+		'Deficient':'Deficiente',
+		'Undetected':'No detectado',
+		'Lacking':'Carente',
+		'Absent':'Ausente',
+		'Nonexistent':'Inexistente',
+		'Unusual':'Inusual',
+		'Lost':'Perdido',
+		'Displaced':'Desplazado',
+		'From Elsewhere':'De otro lugar',
+		'Uprooted':'Desarraigado',
+		'Misplaced':'Extraviado',
+		'Forfeited':'Abandonado',
+		'Between Worlds':'Entre mundos',
+		'Infected':'Infectado',
+		'Diseased':'Enfermo',
+		'Twisted':'Retorcido',
+		'Screaming':'Chillón',
+		'Viral':'Viral',
+		'Invasive':'Invasivo',
+		'Bountiful':'Profusa',
+		'Copious':'Copioso',
+		'Rich':'Rico',
+		'Numerous':'Numeroso',
+		'Moderate':'Moderado',
+		'Fair':'Frugal',
+		'Medium':'Habitual',
+		'Intermittent':'Intermitente',
+		'Uncommon':'Atípico',
+		'Few':'Exiguo',
+		'Sparse':'Disperso',
+		'Empty':'Vacío',
+		'Not Present':'Agotado',
+		'Devoid':'Falto',
+		'Barren':'Seco',
+  }
+};
+  return rarezas2;
+}
+
 
 // Populates `planetDatalists.sentinels` with the data from `getSentinelData()`.
 planetDatalists.sentinels = [];
 const sentinels = getSentinelData();
+const keyToValueMap: Record<string, string> = {};
+
 for (const level in sentinels) {
-	planetDatalists.sentinels.push(...sentinels[level]);
+    for (const key in sentinels[level]) {
+        const value = sentinels[level][key];
+        if (value) {
+            planetDatalists.sentinels.push(key);
+            keyToValueMap[key] = value;
+        }
+    }
 }
+
+export function datalists5(object: { [key: string]: string; }): string {
+  let selectedValue = '';
+  const datalist = document.createElement('datalist');
+  datalist.id = 'sentinelsDatalist';
+  for (const id in object) {
+    const optionElement = document.createElement('option');
+    optionElement.value = object[id];
+    datalist.appendChild(optionElement);
+  }
+  document.body.appendChild(datalist);
+const input = document.querySelector('input[list="sentinelsDatalist"]');
+if (input) {
+  input.addEventListener('input', function(e) {
+    const selectedOption = Object.keys(object).find(key => object[key] === (e.target as HTMLInputElement).value);
+    if (selectedOption) {
+      e.preventDefault();
+      (e.target as HTMLInputElement).value = selectedOption;
+      selectedValue = selectedOption;
+    }
+  });
+}
+return selectedValue;
+}
+
+datalists5(keyToValueMap);
 
 // Populates `planetDatalists.planetDescriptors` with the unique descriptors in `getDescriptorData()`.
 const descriptors: Set<string> = new Set()
@@ -738,5 +870,92 @@ planetDatalists.planetDescriptors = Array.from(descriptors);
 
 // Populates `planetDatalists.resources` with the keys from `getResourceData()`.
 planetDatalists.resources = Object.keys(getResourceData());
+
+
+
+
+// Populates `planetDatalists.sentinels` with the data from `getSentinelData()`.
+planetDatalists.rarezas = [];
+const rarezas = getRarezaData();
+const keyToValueMap2: Record<string, string> = {};
+
+for (const level in rarezas) {
+    for (const key in rarezas[level]) {
+        const value = rarezas[level][key];
+        if (value) {
+            planetDatalists.rarezas.push(key);
+            keyToValueMap2[key] = value;
+        }
+    }
+}
+export function datalists6(object: { [key: string]: string; }): string {
+  let selectedValue = '';
+  const datalist = document.createElement('datalist');
+  datalist.id = 'rarezasDatalist';
+  for (const id in object) {
+    const optionElement = document.createElement('option');
+    optionElement.value = object[id];
+    datalist.appendChild(optionElement);
+  }
+  document.body.appendChild(datalist);
+const input = document.querySelector('input[list="rarezasDatalist"]');
+if (input) {
+  input.addEventListener('input', function(e) {
+    const selectedOption = Object.keys(object).find(key => object[key] === (e.target as HTMLInputElement).value);
+    if (selectedOption) {
+      e.preventDefault();
+      (e.target as HTMLInputElement).value = selectedOption;
+      selectedValue = selectedOption;
+    }
+  });
+}
+return selectedValue;
+}
+
+datalists6(keyToValueMap2);
+
+
+// Populates `planetDatalists.sentinels` with the data from `getSentinelData()`.
+planetDatalists.rarezas2 = [];
+const rarezas2 = getRareza2Data();
+const keyToValueMap3: Record<string, string> = {};
+
+for (const level in rarezas2) {
+    for (const key in rarezas2[level]) {
+        const value = rarezas2[level][key];
+        if (value) {
+            planetDatalists.rarezas2.push(key);
+            keyToValueMap3[key] = value;
+        }
+    }
+}
+
+export function datalists7(object: { [key: string]: string; }): string {
+  let selectedValue = '';
+  const datalist = document.createElement('datalist');
+  datalist.id = 'rarezas2Datalist';
+  for (const id in object) {
+    const optionElement = document.createElement('option');
+    optionElement.value = object[id];
+    datalist.appendChild(optionElement);
+  }
+  document.body.appendChild(datalist);
+const input = document.querySelector('input[list="rarezas2Datalist"]');
+if (input) {
+  input.addEventListener('input', function(e) {
+    const selectedOption = Object.keys(object).find(key => object[key] === (e.target as HTMLInputElement).value);
+    if (selectedOption) {
+      e.preventDefault();
+      (e.target as HTMLInputElement).value = selectedOption;
+      selectedValue = selectedOption;
+    }
+  });
+}
+return selectedValue;
+}
+
+datalists7(keyToValueMap3);
+
+
 
 export default planetDatalists;
