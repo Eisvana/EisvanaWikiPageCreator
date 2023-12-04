@@ -23,7 +23,7 @@
     "vue": "^3.3.9"
   },
   "dependencies": {
-    "@vitejs/plugin-vue": "^4.5.0",
+    "@vitejs/plugin-vue": "^4.5.1",
     "@vue/tsconfig": "^0.4.0",
     "@vueuse/core": "^10.6.1",
     "bulma": "^0.9.4",
