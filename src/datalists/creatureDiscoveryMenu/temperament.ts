@@ -180,7 +180,7 @@ const temperamentSentences: { [key: string]: { [key: string]: string[] } } = {
 		Cruel: ['A cruel and dangerous predator, it has evolved a remarkably muscular jaw. It occasionally crushes even its own teeth.'],
 		Hyperviolent: ['Sense organs appear unusually undeveloped for an apex predator. It seems to compensate by lashing out with extreme and indiscriminate violence.'],
 		'Excited by violence': ['Exceptionally strong, they appear to take delight in dismembering their prey. Is this emotion an illusion, or a sign of deeper intelligence?'],
-		Angry: ['They appear to possess some sort of genetic or collective memory, harbouring deep grudges against species that wronged them in the distance past.'],
+		Angry: ['They appear to possess some sort of genetic or collective memory, harbouring deep grudges against species that wronged them in the distance{{sic}} past.'],
 		'Easily enraged': ['A dangerous predator, their fast-response adrenal glands allow them to go from rest to rage in mere moments.'],
 		'Warlike': ['A highly territorial predator, their excellent memory and long-range vision allow them to hunt across vast distances.'],
 		'Apex predator': ['A tireless predator, they have no natural enemies. Their ferocity knows no bounds.'],
