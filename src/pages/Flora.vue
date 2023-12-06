@@ -76,15 +76,8 @@ const {
   researchteam,
   appearance,
   region,
-  sanitisedName: plantName,
-  discoveredName,
-  discoveredlinkName,
-  systemName,
-  planetName,
-  moonName,
-  originalName,
   docBySentence,
-  appearanceSentence,
+  sanitisedStrings,
 } = storeToRefs(pageData);
 
 const isPolymorphicInvalid = computed(() => numberErrorComponent(polymorphic.value));
@@ -238,12 +231,8 @@ function markCopy() {
         </template>
       </SimpleInput>
       <ResourceInput
-        :index="0"
-        :resources="floraDatalists.floraResources"
-        item="flora"
-      />
-      <ResourceInput
-        :index="1"
+        v-for="n in 2"
+        :index="n - 1"
         :resources="floraDatalists.floraResources"
         item="flora"
       />
@@ -317,12 +306,12 @@ function markCopy() {
         <WikiTemplate template-name="Version">{{ release }}</WikiTemplate>
       </div>
       <FloraInfobox
-        :plant-name="plantName"
+        :plant-name="sanitisedStrings.name"
         :image="image"
         :region="region"
-        :system-name="systemName"
-        :planet-name="planetName"
-        :moon-name="moonName"
+        :system-name="sanitisedStrings.system"
+        :planet-name="sanitisedStrings.planet"
+        :moon-name="sanitisedStrings.moon"
         :type="type"
         :biome="biome"
         :polymorphic="polymorphic"
@@ -333,16 +322,16 @@ function markCopy() {
         :elem-primary="elements[0]"
         :elem-secondary="elements[1]"
         :disc-date="discDate.replaceAll('-', '/')"
-        :discovered-name="discoveredName"
-        :discoveredlink-name="discoveredlinkName"
+        :discovered-name="sanitisedStrings.discovered"
+        :discoveredlink-name="sanitisedStrings.discoveredlink"
         :researchteam="researchteam"
         :release="release"
       />
-      <div>'''{{ plantName }}''' is a species of flora.</div>
+      <div>'''{{ sanitisedStrings.name }}''' is a species of flora.</div>
       <br />
 
       <div>==Summary==</div>
-      <div>'''{{ plantName }}''' is a [[species]] of [[flora]]. {{ appearanceSentence }}</div>
+      <div>'''{{ sanitisedStrings.name }}''' is a [[species]] of [[flora]]. {{ sanitisedStrings.appearance }}</div>
       <br />
       <template v-if="polymorphic">
         <div>
@@ -353,19 +342,19 @@ function markCopy() {
 
       <div>==Alias Names==</div>
       <div v-if="orgName">
-        <WikiTemplate template-name="aliasc">text=Original|name={{ originalName }}</WikiTemplate>
+        <WikiTemplate template-name="aliasc">text=Original|name={{ sanitisedStrings.orgName }}</WikiTemplate>
       </div>
       <div>
-        <WikiTemplate template-name="aliasc">text=Current|name={{ plantName }}</WikiTemplate>
+        <WikiTemplate template-name="aliasc">text=Current|name={{ sanitisedStrings.name }}</WikiTemplate>
       </div>
       <br />
 
       <div>==Location==</div>
       <div>
         It can be found on the
-        <span v-if="moon">[[moon]] [[{{ moonName }}]] of the</span> [[planet]] [[{{ planetName }}]] in the [[{{
-          systemName
-        }}]] [[star system]].
+        <span v-if="moon">[[moon]] [[{{ sanitisedStrings.moon }}]] of the</span> [[planet]] [[{{
+          sanitisedStrings.planet
+        }}]] in the [[{{ sanitisedStrings.system }}]] [[star system]].
       </div>
       <div>
         <WikiTemplate template-name="CoordGlyphConvert">{{ glyphs }}</WikiTemplate>
