@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import InputRow from '../structure/InputRow.vue';
 import { versions } from '../../variables/versions';
-
 import { usePageDataStore } from '../../stores/pageData';
 import { storeToRefs } from 'pinia';
 

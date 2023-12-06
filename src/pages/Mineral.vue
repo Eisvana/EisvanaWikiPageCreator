@@ -147,11 +147,11 @@ function markCopy() {
         <template #heading>Nombre del mineral</template>
         <template #content>Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</template>
       </SimpleInput>
-      <SimpleInput
+   <!-- <SimpleInput
         label="Nombre del Hub:"
         identifier="hubInput"
         v-model="hub"
-      />
+      />-->
       <SimpleInput
         label="Nombre original antes de registrar (si está disponible):"
         identifier="orgNameInput"

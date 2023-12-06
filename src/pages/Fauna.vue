@@ -148,7 +148,7 @@ function markCopy() {
         <template #heading>Nombre de la Planta</template>
         <template #content>Introduzca exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</template>
       </SimpleInput>
-      <SimpleInput label="Nombre del Hub:" identifier="hubInput" v-model="hub" />
+    <!--  <SimpleInput label="Nombre del Hub:" identifier="hubInput" v-model="hub" />-->
       <SimpleInput label="Nombre original antes de registrar (si está disponible):" identifier="orgNameInput"
         v-model="orgName" />
       <SimpleInput label="Nombre de la Galaxia:" identifier="galaxyInput" v-model="galaxy" />

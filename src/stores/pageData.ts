@@ -72,7 +72,7 @@ export const usePageDataStore = defineStore('pageData', {
   state: (): PageData => ({
     release: versions[0],
     name: '',
-    hub: '',
+    hub: 'Royal Space Society',
     image: '',
     discovered: localStorageData()['discoveredInput builderInput'] ?? '',
     discoveredlink: localStorageData()['discoveredlinkInput builderlinkInput'] ?? '',
