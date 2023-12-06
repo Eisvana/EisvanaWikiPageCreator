@@ -104,14 +104,16 @@ export const usePageDataStore = defineStore('pageData', {
       const index = Object.keys(regions).indexOf(this.regionGlyphs);
       return index + 1;
     },
-    sanitisedName: (state) => sanitiseString(state.name),
-    discoveredName: (state) => sanitiseString(state.discovered),
-    discoveredlinkName: (state) => sanitiseString(state.discoveredlink),
-    systemName: (state) => sanitiseString(state.system),
-    planetName: (state) => sanitiseString(state.planet),
-    moonName: (state) => sanitiseString(state.moon),
-    originalName: (state) => sanitiseString(state.orgName),
-    appearanceSentence: (state) => sanitiseString(state.appearance),
+    sanitisedStrings: (state) => ({
+      name: sanitiseString(state.name),
+      discovered: sanitiseString(state.discovered),
+      discoveredlink: sanitiseString(state.discoveredlink),
+      system: sanitiseString(state.system),
+      planet: sanitiseString(state.planet),
+      moon: sanitiseString(state.moon),
+      orgName: sanitiseString(state.orgName),
+      appearance: sanitiseString(state.appearance),
+    }),
     docBySentence: (state) => {
       const isLink = state.docBy.startsWith('{{');
       const hasResearchteam = state.researchteam.split(' ').length > 1;
