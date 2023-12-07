@@ -1047,12 +1047,12 @@ export function checkDataIntegrity(element: HTMLElement | null = null, simple: b
   if (staticBooleans.debug) return '';
   const currentText = md5Hex(JSON.stringify(pageData));
   const savedText = dataIntegrityObj.text;
-  const { name, portalglyphs: glyphs, hub} = pageData;
+  const { name, portalglyphs: glyphs, /**hub */} = pageData;
 
   if (
     name &&
     glyphs &&
-    hub &&
+   /** hub &&*/
     ((currentText === savedText && dataIntegrityObj.link === element?.dataset?.link && dataIntegrityObj.copy) || simple)
   ) {
     dataIntegrityObj.copy = false;
@@ -1062,8 +1062,8 @@ export function checkDataIntegrity(element: HTMLElement | null = null, simple: b
     return '¡Falta el nombre!';
   } else if (!glyphs) {
     return '¡Glifos Incorrectos!';
-  } else if (!hub) {
-    return '¡Falta el Hub!';
+ /** } else if (!hub) {
+    return '¡Falta el Hub!';*/
   } else {
     return '¡Copie el código primero!';
   }
