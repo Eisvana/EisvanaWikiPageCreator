@@ -7,7 +7,7 @@ const props = defineProps<PageLinkProps>();
 const title = computed(() => {
   const vowels = 'aeiou';
   const firstLetter = props.text.slice(0, 1).toLowerCase();
-  return `Create ${vowels.includes(firstLetter) ? 'an' : 'a'} ${props.text} page`;
+  return `Crea ${vowels.includes(firstLetter) ? 'un' : 'una'} página de ${props.text}`;
 });
 </script>
 

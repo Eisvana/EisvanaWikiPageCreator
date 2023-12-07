@@ -60,16 +60,16 @@
 						<label for="fileInput">Nombre de la imagen principal, incluida la extensión del archivo:</label>
 						<button class="tooltip" name="fileUploadTooltip">
 							<data>La imagen no se cargará en la wiki. Esto es sólo para autocompletar el
-              Nombre de la imágen.</data>
+              Nombre de la imagen.</data>
 							<data>Subir archivo</data>
 							<data>
 								Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el
-                Nombre de la imágen. El tamaño máximo del archivo es 10 MB.
+                Nombre de la imagen. El tamaño máximo del archivo es 10 MB.
                 Puedes subir tus fotos a la wiki en <a href="Special:Upload?multiple=true"
 									data-wiki>Especial:Subir</a>
                   <div>
-                  <i>Para comprimir las fotos usa esto, esta en ingles pero solo le dais al boton de examinar, elegis la foto y le dais al
-                  boton de comprimir. Por ultimo, la descargais y listo!</i>
+                  <i>Para comprimir las fotos usa esto, esta en ingles pero solo le dais al botón de examinar, elegís la foto y le dais al
+                  botón de comprimir. Por ultimo, la descargáis y listo!</i>
                   <iframe src="https://nmscd.com/Image-Compressor/" title="Compresor de imagen"
 									class="explanation-embed" width="450" height="300">Compresor de imagen</iframe>
                 </div>
@@ -130,6 +130,17 @@
 					</div>
           <div class="table-cell text">
 						<label for="regionsInput">Region:</label>
+            <button class="tooltip">
+							<data>Escriba el nombre en ingles.</data>
+							<data>Region</data>
+							<data>Escriba el nombre en ingles. Para mas información revise la Wikipedia inglesa.
+                <ul>
+                <li><a
+                  href="https://nomanssky.fandom.com/wiki/Regions_RSS">Regiones</a>
+              </li>
+            </ul>
+              </data>
+						</button>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="regions" id="regionsInput">
@@ -228,14 +239,14 @@
 									class="checkbox-label">Geobahía</span></label>
 							<label class="checkbox" for="landingPadCheckbox"><input type="checkbox"
 									id="landingPadCheckbox" value="Yes" data-checkbox-unchecked="No"
-									data-dest-checkbox="landingpad"><span class="checkbox-label">Plataforma de aterizaje
+									data-dest-checkbox="landingpad"><span class="checkbox-label">Plataforma de aterrizaje
 								  </span></label>
 							<label class="checkbox" for="arenaCheckbox"><input type="checkbox" id="arenaCheckbox"
 									value="Yes" data-checkbox-unchecked="No" data-dest-checkbox="arena"><span
 									class="checkbox-label">Arena</span></label>
 							<label class="checkbox" for="terminalCheckbox"><input type="checkbox" id="terminalCheckbox"
 									value="Yes" data-checkbox-unchecked="No" data-dest-checkbox="terminal"><span
-									class="checkbox-label">Terminal de comercio galactico</span></label>
+									class="checkbox-label">Terminal de comercio galáctico</span></label>
 							<label class="checkbox" for="racetrackCheckbox"><input type="checkbox"
 									id="racetrackCheckbox" value="Yes" data-checkbox-unchecked="No"
 									data-dest-checkbox="racetrack"><span class="checkbox-label">Circuito</span></label>

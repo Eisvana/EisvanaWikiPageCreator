@@ -210,7 +210,7 @@ function markCopy() {
         maxlength="2"
       >
       ¿Cuántos modelos diferentes de esta flora se descubrieron?
-        <template #heading>Polimórfico</template>
+        <template #heading>Polimorfismo</template>
         <template #content>
           A veces, varios modelos de flora tienen el mismo nombre. Esto se llama "polimorfismo". Introduzca el número de
           cuantos modelos de flora diferentes tenían este nombre.

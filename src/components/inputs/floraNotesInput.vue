@@ -16,7 +16,7 @@ const { notes } = storeToRefs(pageData);
         <label>Notas:</label>
       </div>
       <Warning img="">
-        <i>Usar el autocompletado para el cambio automatico a inglés.</i>
+        <i>Usar el autocompletado para el cambio automático a inglés.</i>
       </Warning>
       <Explanation img="flora/notes">
         Encontrado en el escaneo de flora. <template #heading>Notas</template>

@@ -25,7 +25,7 @@ const { biome } = storeToRefs(pageData);
     <option value="Toxic">Tóxico</option>
     <option value="Irradiated">Irradiado</option>
     <option value="Marsh">Cenagal</option>
-    <option value="Volcanic">Volcanico</option>
+    <option value="Volcanic">Volcánico</option>
       </select>
     </template>
   </InputRow>

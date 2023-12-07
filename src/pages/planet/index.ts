@@ -31,7 +31,7 @@ addStaticPageData(
 			<li>Guía de exploración planetaria</li>
 			<li>Página del planeta</li>
 			<li>Página del sistema</li>
-			<li>Mapa galactico</li>
+			<li>Mapa galáctico</li>
 		</ol>
 	</div>`
 );

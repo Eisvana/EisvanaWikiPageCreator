@@ -13,7 +13,7 @@ Hay un orden preferido de imágenes:
 			<li>Página de la luna</li>
 			<li>Página del planeta</li>
 			<li>Página del sistema</li>
-			<li>Mapa galactico</li>
+			<li>Mapa galáctico</li>
 		</ol>
 	</div>`)
 
@@ -23,10 +23,10 @@ addStaticPageData('galleryArray', [
 	'Paisaje',
 	'Vista nocturna',
 	'Sistema de cuevas',
-	'Visor de analisis',
+	'Visor de análisis',
 	'Guía de exploración de la luna',
 	'Página de la luna',
 	'Página del planeta',
 	'Página del sistema',
-	'Mapa galactico'
+	'Mapa galáctico'
 ])

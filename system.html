@@ -77,7 +77,7 @@
                 mostrar todo el sistema desde el espacio. Haga clic para ver una imagen de ejemplo.</data>
 							<data>Subir archivo</data>
 							<data>
-                Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imágen. El
+                Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen. El
                 tamaño máximo del archivo es 10 MB.
                 Puedes subir tus imágenes a la wiki en <a href="Special:Upload?multiple=true" data-wiki>Especial:Subir</a>
                 <br>
@@ -98,7 +98,7 @@
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
 					<div class="table-cell text">
-						<label for="navFileInput">Nombre de la imagen del mapa galactico, incluida la extensión del archivo:</label>
+						<label for="navFileInput">Nombre de la imagen del mapa galáctico, incluida la extensión del archivo:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" id="navFileInput" data-dest="navImage"
@@ -124,7 +124,7 @@
 							<data>
 								Encontrado en modo foto.
 								<iframe src="https://nmspar.vercel.app/" sandbox="allow-scripts allow-same-origin"
-									title="Glyph Reader" class="explanation-embed" width="450" height="300">LEctor de glifos
+									title="Glyph Reader" class="explanation-embed" width="450" height="300">Lector de glifos
 									</iframe>
 							</data>
 							<data>shared/glyphs</data>
@@ -145,6 +145,17 @@
 					</div>
           <div class="table-cell text">
 						<label for="regionsInput">Region:</label>
+            <button class="tooltip">
+							<data>Escriba el nombre en ingles.</data>
+							<data>Region</data>
+							<data>Escriba el nombre en ingles. Para mas información revise la Wikipedia inglesa.
+                <ul>
+                <li><a
+                  href="https://nomanssky.fandom.com/wiki/Regions_RSS">Regiones</a>
+              </li>
+            </ul>
+              </data>
+						</button>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="regions" id="regionsInput">
@@ -175,7 +186,7 @@
 					<div class="table-cell text">
 						<label>Color de la estrella (primaria):</label>
 						<button class="tooltip">
-							<data>Color como se ve en el mapa galactico.</data>
+							<data>Color como se ve en el mapa galáctico.</data>
 							<data>Color de estrella</data>
               <data>
                 Color como se ve en el mapa de galaxias. Asegúrate de no tener ningún filtro activo.<br>
@@ -203,7 +214,7 @@
 					<div class="table-cell text">
 						<label for="classInput">Clase estelar:</label>
 						<button class="tooltip">
-							<data>Encontrado en el mapa galactico.</data>
+							<data>Encontrado en el mapa galáctico.</data>
 							<data>Clase estelar</data>
 							<data>Número de estrellas locales visibles en el espacio.<br>
 								Ingrese al modo Foto, luego presione el botón para rotar la estrella del sistema hacia su cursor.<br>
@@ -331,7 +342,7 @@
 							<optgroup label="Materiales avanzados">
 								<option value="Alchemical">Alquímica</option>
 								<option value="Material Fusion">Fusión de materiales</option>
-								<option value="Metal Processing">Prceosamiento de metales</option>
+								<option value="Metal Processing">Procesamiento de metales</option>
 								<option value="Ore Processing">Procesamiento de mena</option>
 							</optgroup>
 							<optgroup label="Fabricación">
@@ -378,10 +389,10 @@
 					<div class="table-cell text">
 						<label for="economysellInput">Economía Vender:</label>
 						<button class="tooltip">
-							<data>Encontrado en la vista ampliada del mapa galactico.</data>
+							<data>Encontrado en la vista ampliada del mapa galáctico.</data>
 							<data>Economía-vender</data>
 							<data>
-                Encontrado en la vista ampliada del mapa galactico.<br>
+                Encontrado en la vista ampliada del mapa galáctico.<br>
                 El botón para ingresar a la vista ampliada se muestra debajo del cuadro con los detalles del sistema.
 							</data>
 							<data>system/e-sell</data>
@@ -393,10 +404,10 @@
 					<div class="table-cell text">
 						<label for="economybuyInput">Economía comprar:</label>
 						<button class="tooltip">
-							<data>Encontrado en la vista ampliada del mapa galactico.</data>
+							<data>Encontrado en la vista ampliada del mapa galáctico.</data>
 							<data>Economía-Comprar</data>
 							<data>
-								Encontrado en la vista ampliada del mapa galactico.<br>
+								Encontrado en la vista ampliada del mapa galáctico.<br>
                 El botón para ingresar a la vista ampliada se muestra debajo del cuadro con los detalles del sistema.
 							</data>
 							<data>system/e-buy</data>
@@ -408,12 +419,12 @@
 					<div class="table-cell text">
 						<label>Riqueza del sistema:</label>
 						<button class="tooltip">
-							<data>Encontrado en la vista ampliada del mapa galactico.</data>
+							<data>Encontrado en la vista ampliada del mapa galáctico.</data>
 							<data>Riqueza</data>
 							<data>
                 Encontrado en la vista ampliada del mapa de galaxias.<br>
                 El botón para ingresar a la vista ampliada se muestra debajo del cuadro con los detalles del sistema.<br>
-                Si no muestra nada, es "Abandonado" o "Uncharted". Esto se puede determinar mirando el valor de la facción.
+                Si no muestra nada, es "Abandonado" o "Inexplorado". Esto se puede determinar mirando el valor de la facción.
 							</data>
 							<data>system/wealth</data>
 						</button>
@@ -464,10 +475,10 @@
 					<div class="table-cell text">
 						<label>Conflicto del sistema:</label>
 						<button class="tooltip">
-							<data>Encontrado en la vista ampliada del mapa galactico.</data>
+							<data>Encontrado en la vista ampliada del mapa galáctico.</data>
 							<data>Conflicto</data>
 							<data>
-                Encontrado en la vista ampliada del mapa galactico.<br>
+                Encontrado en la vista ampliada del mapa galáctico.<br>
                 El botón para ingresar a la vista ampliada se muestra debajo del cuadro con los detalles del sistema..<br>
                 Si no muestra nada, es "Abandonado" o
                 "Inexplorado". Esto se puede determinar mirando el valor de la facción.
