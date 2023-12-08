@@ -77,7 +77,7 @@ const {
   gender,
   gender2,
   roots,
-  regions,
+  region,
   nutrients,
   notes,
   elements,
@@ -152,7 +152,7 @@ function markCopy() {
       <SimpleInput label="Nombre original antes de registrar (si está disponible):" identifier="orgNameInput"
         v-model="orgName" />
       <SimpleInput label="Nombre de la Galaxia:" identifier="galaxyInput" v-model="galaxy" />
-      <SimpleInput label="Nombre de la region:" identifier="regionInput" v-model="regions" />
+      <SimpleInput label="Nombre de la region:" identifier="regionInput" v-model="region" />
       <InfoboxImageInput />
       <SimpleInput label="Nombre del sistema:" identifier="systemInput" v-model="system" />
       <SimpleInput label="Nombre del planeta:" identifier="planetInput" v-model="planet">
@@ -414,7 +414,7 @@ function markCopy() {
       <div>
         <WikiTemplate template-name="Version">{{ release }}</WikiTemplate>
       </div>
-      <FaunaInfobox :creatureName="creatureName" :image="image" :hub="hub" :galaxy="galaxy" :region="regions"
+      <FaunaInfobox :creatureName="creatureName" :image="image" :hub="hub" :galaxy="galaxy" :region="region"
         :system-name="systemName" :planet-name="planetName" :moon-name="moonName" :type="type" :glyphs="glyphs"
         :behaviours="behaviours" :polymorphic="polymorphic" :age="age" :gender="gender" :gender2="gender2" :roots="roots"
         :nutrients="nutrients" :notes="notes" :rarity="rarity" :ecosystem="ecosystem" :activity="activity"

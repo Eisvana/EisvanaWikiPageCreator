@@ -72,9 +72,9 @@ export function planetDescriptor(element: HTMLInputElement) {
  * @returns {string} - A string describing the location of the current star system.
  */
 export function locationSentence() {
-  const { system: systemName, regions: regionName, galaxy: galaxyName, hub: hubName } = pageData;
+  const { system: systemName, region: regionName } = pageData;
 
-  const output = `It can be found in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]] of [[${hubName}]], in the [[${galaxyName}]] [[galaxy]].`;
+  const output = `It can be found in the [[${systemName}]] [[star system]] in the [[${regionName}]] [[region]] of [[Royal Space Society]], in the [[Euclid]] [[galaxy]].`;
 
   (globalElements.output.location as HTMLOutputElement).innerText = output;
 }

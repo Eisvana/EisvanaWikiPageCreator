@@ -76,7 +76,7 @@ const {
   discDate,
   docBy,
   researchteam,
-  regions,
+  region,
   sanitisedName: mineralName,
   discoveredName,
   originalName,
@@ -158,21 +158,21 @@ function markCopy() {
         v-model="orgName"
       />
       <InfoboxImageInput />
-      <SimpleInput
+   <!--     <SimpleInput
         label="Nombre de la Galaxia:"
         identifier="galaxyInput"
         v-model="galaxy"
-      />
+      />-->
       <SimpleInput
         label="Nombre del sistema:"
         identifier="systemInput"
         v-model="system"
       />
-      <SimpleInput
+  <!--    <SimpleInput
         label="Nombre de la region:"
         identifier="regionsInput"
         v-model="regions"
-      />
+      />-->
       <SimpleInput
         label="Nombre del planeta:"
         identifier="planetInput"
@@ -314,7 +314,7 @@ function markCopy() {
         :image="image"
         :hub="hub"
         :galaxy="galaxy"
-        :regions="regions"
+        :region="region"
         :systemName="systemName"
         :planetName="planetName"
         :moonName="moonName"

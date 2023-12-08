@@ -92,14 +92,14 @@
 						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
 						<input type="file" id="fileUpload" accept="image/*">
 					</div>
-          <div class="table-cell text">
+      <!--   <div class="table-cell text">
 						<label for="galaxyInput">Galaxia:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="galaxy" id="galaxyInput">
-					</div>
-          <div class="table-cell text">
-						<label for="regionsInput">Region:</label>
+					</div> -->
+      <!--       <div class="table-cell text">
+						<label for="regionsInput">Región:</label>
             <button class="tooltip">
 							<data>Escriba el nombre en ingles.</data>
 							<data>Region</data>
@@ -114,7 +114,7 @@
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="regions" id="regionsInput">
-					</div>
+					</div> -->
 					<div class="table-cell text">
 						<label for="systemInput">Nombre del sistema:</label>
 					</div>
@@ -191,7 +191,7 @@
             <input type="text" name="descriptionInput" id="descriptionInput" list="descriptionInputDatalist" data-dest-noauto="description" placeholder="Escribe el nombre en español y dale a la opcion de debajo">
 						<datalist type="text" id="descriptionInputDatalist">
               <option value="Dead Planet">Planeta muerto</option>
-							<option value="Empty Planet">Planeta vació</option>
+							<option value="Empty Planet">Planeta vacío</option>
 							<option value="Desolate Planet">Planeta sin habitantes</option>
 							<option value="Lifeless Planet">Planeta sin vida</option>
 							<option value="Forsaken Planet">Planeta olvidado</option>
@@ -1215,8 +1215,8 @@
 					<div>{{Planet infobox</div>
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image"></output></div>
-					<div>| region = <output id="regions" name="regions"></output></div>
-					<div>| galaxy = <output id="galaxy" name="galaxy"></output></div>
+					<div>| region = <output id="region"></output></div>
+					<div>| galaxy = Euclid<output id="galaxy" name="galaxy"></output></div>
 					<div>| system = <output id="system" name="system"></output></div>
 					<div>| moon = <output id="moonList"></output></div>
 					<div>| coordinates = {{Glyphs2Coords|<output id="portalglyphs" name="portalglyphs"></output>}}</div>
@@ -1264,7 +1264,7 @@
 					<br>
 
 					<div>==Location==</div>
-					<div>It can be found in the [[<output id="system" name="system"></output>]] [[star system]] in the [[<output id="regions" name="regions"></output>}]] [[region]] of [[<output id="hub" name="hub"></output>Royal Space Society]], in the [[<output id="galaxy" name="galaxy"></output>]] [[galaxy]].</div>
+					<div><output id="location"></output></div>
 					<br>
 					<div>{{CoordGlyphConvert|<output id="portalglyphs1" name="portalglyphs"></output>}}</div>
 					<br>

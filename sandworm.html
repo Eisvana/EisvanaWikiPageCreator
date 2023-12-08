@@ -63,12 +63,12 @@
 					<div class="table-cell data">
 						<input type="text" data-dest="hub" id="hubInput">
 					</div> -->
-          <div class="table-cell text">
+        <!--   <div class="table-cell text">
 						<label for="galaxyInput">Galaxia:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="galaxy" id="galaxyInput">
-					</div>
+					</div>-->
 					<div class="table-cell text">
 						<label for="systemInput">Nombre del sistema:</label>
 						<button class="tooltip">
@@ -78,17 +78,25 @@
 					<div class="table-cell data">
 						<input type="text" data-dest="system" id="systemInput">
 					</div>
-          <div class="table-cell text">
-						<label for="regionsInput">Nombre de la región:</label>
-						<button class="tooltip">
-							<data>Escribalo exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
+      <!--       <div class="table-cell text">
+						<label for="regionsInput">Región:</label>
+            <button class="tooltip">
+							<data>Escriba el nombre en ingles.</data>
+							<data>Region</data>
+							<data>Escriba el nombre en ingles. Para mas información revise la Wikipedia inglesa.
+                <ul>
+                <li><a
+                  href="https://nomanssky.fandom.com/wiki/Regions_RSS">Regiones</a>
+              </li>
+            </ul>
+              </data>
 						</button>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="regions" id="regionsInput">
-					</div>
+					</div> -->
 					<div class="table-cell text">
-						<label for="planetInput">Nombre del planeta.:</label>
+						<label for="planetInput">Nombre del planeta:</label>
 						<button class="tooltip">
 							<data>Nombre del planeta O el planeta rodeado por la luna donde se puede encontrar el gusano.</data>
 						</button>
@@ -281,8 +289,8 @@
 					<div>{{Creature infobox</div>
 					<div>| name = Immortal Worm <output id="name" name="bodyName"></output></div>
 					<div>| image = <output id="image" name="image"></output></div>
-					<div>| galaxy = <output id="galaxy" name="galaxy"></output></div>
-					<div>| region = <output id="regions" name="regions"></output></div>
+					<div>| galaxy = Euclid<output id="galaxy" name="galaxy"></output></div>
+					<div>| region = <output id="region"></output></div>
 					<div>| system = <output id="system" name="system"></output></div>
 					<div>| planet = <output id="planet"></output></div>
 					<div>| moon = <output id="moon"></output></div>

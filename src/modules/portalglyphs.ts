@@ -179,7 +179,7 @@ export function glyphRegion(glyphs: string) {
 export function glyphError(region: string | undefined, glyphElement: HTMLElement) {
 	errorMessage(glyphElement,
 		(region === undefined)
-			? ''
+			? 'No es una región válida de la Royal Space Society. Consulte <a href="https://nomanssky.fandom.com/es/wiki/Regiones_RSS" target="_blank" rel="noopener noreferrer">regiones de la Royal Space Society</a> para obtener una lista de regiones válidas.'
 			: '');
 }
 

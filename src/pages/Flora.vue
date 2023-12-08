@@ -84,7 +84,7 @@ const {
   docBy,
   researchteam,
   appearance,
-  regions,
+  region,
   sanitisedName: plantName,
   discoveredName,
   discoveredlinkName,
@@ -166,16 +166,16 @@ function markCopy() {
         identifier="orgNameInput"
         v-model="orgName"
       />
-      <SimpleInput
+   <!--     <SimpleInput
         label="Nombre de la Galaxia:"
         identifier="galaxyInput"
         v-model="galaxy"
-      />
-      <SimpleInput
+      />-->
+  <!--    <SimpleInput
         label="Nombre de la region:"
         identifier="regionsInput"
         v-model="regions"
-      />
+      />-->
       <InfoboxImageInput />
       <SimpleInput
         label="Nombre del sistema:"
@@ -300,7 +300,7 @@ function markCopy() {
         :image="image"
         :hub="hub"
         :galaxy="galaxy"
-        :regions="regions"
+        :region="region"
         :system-name="systemName"
         :planet-name="planetName"
         :moon-name="moonName"

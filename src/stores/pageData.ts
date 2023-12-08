@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { versions } from '../variables/versions';
+import { regions } from '../variables/regions';
 import { sanitiseString } from '@/common';
 
 interface StaticPageData {
@@ -38,7 +39,6 @@ interface PageData {
   orgName: string;
   galaxy: string;
   system: string;
-  regions: string;
   planet: string;
   moon: string;
   glyphs: string;
@@ -77,9 +77,8 @@ export const usePageDataStore = defineStore('pageData', {
     discovered: localStorageData()['discoveredInput builderInput'] ?? '',
     discoveredlink: localStorageData()['discoveredlinkInput builderlinkInput'] ?? '',
     orgName: '',
-    galaxy: '',
+    galaxy: 'Euclid',
     system: localStorageData().systemInput ?? '',
-    regions: '',
     planet: localStorageData().planetInput ?? '',
     moon: localStorageData().moonInput ?? '',
     glyphs: localStorageData().portalglyphsInput ?? '',
@@ -110,13 +109,23 @@ export const usePageDataStore = defineStore('pageData', {
   }),
 
   getters: {
+    regionGlyphs: (state) => state.glyphs.substring(4), // NoSonar region glyphs start at index 4
+    isValidGlyphs(): boolean {
+      return Object.keys(regions).includes(this.regionGlyphs); // Tests if an address is valid for Eisvana
+    },
+    region(): string {
+      return regions[this.regionGlyphs] ?? '';
+    },
+    regionNumber(): number {
+      const index = Object.keys(regions).indexOf(this.regionGlyphs);
+      return index + 1;
+    },
     sanitisedName: (state) => sanitiseString(state.name),
     discoveredName: (state) => sanitiseString(state.discovered),
     discoveredlinkName: (state) => sanitiseString(state.discoveredlink),
     systemName: (state) => sanitiseString(state.system),
     galaxyName: (state) => sanitiseString(state.galaxy),
     hubName: (state) => sanitiseString(state.hub),
-    regionName: (state) => sanitiseString(state.regions),
     planetName: (state) => sanitiseString(state.planet),
     moonName: (state) => sanitiseString(state.moon),
     originalName: (state) => sanitiseString(state.orgName),

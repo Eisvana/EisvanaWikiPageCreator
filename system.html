@@ -46,7 +46,7 @@
 					<div class="table-cell text">
 						<label for="oldNameInput">Nombre original antes de registrar (si está disponible):</label>
 						<button class="tooltip">
-							<data>Coloca el cursor sobre una estrella diferente en el mapa de galaxias..</data>
+							<data>Coloca el cursor sobre una estrella diferente en el mapa de galaxias.</data>
 							<data>Nombre original del sistema</data>
 							<data>
                 Si no tienes esta información, hay un truco:<br>
@@ -137,14 +137,14 @@
 						<div id="portalglyphButtons"></div>
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
-          <div class="table-cell text">
+      <!--   <div class="table-cell text">
 						<label for="galaxyInput">Galaxia:</label>
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="galaxy" id="galaxyInput">
-					</div>
-          <div class="table-cell text">
-						<label for="regionsInput">Region:</label>
+					</div> -->
+      <!--       <div class="table-cell text">
+						<label for="regionsInput">Región:</label>
             <button class="tooltip">
 							<data>Escriba el nombre en ingles.</data>
 							<data>Region</data>
@@ -159,7 +159,7 @@
 					</div>
 					<div class="table-cell data">
 						<input type="text" data-dest="regions" id="regionsInput">
-					</div>
+					</div> -->
 					<div class="table-cell text">
 						<label>Numero de estrellas:</label>
 						<button class="tooltip">
@@ -997,8 +997,8 @@
 					<div>{{System infobox</div>
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image"></output></div>
-					<div>| region = <output id="regions" name="regions"></output></div>
-					<div>| galaxy = <output id="galaxy" name="galaxy"></output></div>
+					<div>| region = <output id="region" name="region"></output></div>
+					<div>| galaxy = Euclid<output id="galaxy" name="galaxy"></output></div>
 					<div>| multiplestars = <output id="multiplestars"></output></div>
 					<div>| coordinates = <output id="portalglyphs" name="galacticCoords"></output></div>
 					<div>| color = <output id="color"></output></div>
@@ -1024,7 +1024,8 @@
 					<div>'''<output id="name1" name="name"></output>''' is a star system.</div>
 					<br>
 					<div>==Summary==</div>
-					<div>'''<output id="name2" name="name"></output>''' is a [[star system]] in the [[<output id="region" name="region"></output>]] region.</div>
+					<div>'''<output id="name2" name="name"></output>''' is a [[star system]] in the <output
+							id="regionLong"></output>.</div>
 					<br>
 					<div>==Alias Names==</div>
 					<div>{{aliasc|text=Original|name=<output id="oldName"></output>}}</div>
@@ -1137,7 +1138,7 @@
 					<div>[[File:<output id="navImage"></output>|400px]]</div>
 					<br>
 					<div>===System Location===</div>
-					<div>Located in the [[<output id="region" name="region"></output>]] [[region]] of [[<output id="hub" name="hub"></output>Royal Space Society]] in the [[<output id="galaxy" name="galaxy"></output>]] galaxy.</div>
+					<div>Located in the [[<output id="region" name="region"></output>]] [[region]] of [[<output id="hub" name="hub"></output>Royal Space Society]] in the [[Euclid<output id="galaxy" name="galaxy"></output>]] galaxy.</div>
 					<br>
 					<div>==Space Station==</div>
 					<div data-station="img">[[File:<output id=ssImage></output>|thumb|System space station]]</div>
