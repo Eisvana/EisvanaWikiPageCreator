@@ -94,7 +94,7 @@ export function validateSocial() {
   const element = globalElements.input.censusSocialInput;
   const link = pageData.censussocial;
   if (typeof link !== 'string' || !(element instanceof HTMLInputElement)) return;
-  const isValid = !link || isValidHttpUrl(link);
+  const isValid = !link || isValidHttpUrl(link) || link.startsWith('{{');
   errorMessage(element, isValid ? undefined : 'Please provide the full link');
 }
 
