@@ -305,6 +305,9 @@ function markCopy() {
       <div>
         <WikiTemplate template-name="Version">{{ release }}</WikiTemplate>
       </div>
+      <div>
+        <WikiTemplate template-name="Eisvana" />
+      </div>
       <FloraInfobox
         :plant-name="sanitisedStrings.name"
         :image="image"

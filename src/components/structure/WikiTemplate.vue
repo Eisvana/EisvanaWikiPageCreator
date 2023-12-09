@@ -14,7 +14,7 @@ const wrapperElement = props.isSingleLine ? 'span' : 'div';
 <template>
   <component :is="wrapperElement">
     <span v-pre>{{</span>
-    <span>{{ templateName }}{{ isSingleLine ? '|' : '' }}</span></component
+    <span>{{ templateName }}{{ $slots.default && isSingleLine ? '|' : '' }}</span></component
   ><span><slot></slot></span>
   <component :is="wrapperElement">
     <span v-pre>}}</span>
