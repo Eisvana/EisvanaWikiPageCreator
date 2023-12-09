@@ -287,6 +287,9 @@ function markCopy() {
       <div>
         <WikiTemplate template-name="Version">{{ release }}</WikiTemplate>
       </div>
+      <div>
+        <WikiTemplate template-name="Eisvana" />
+      </div>
       <MineralInfobox
         :mineral-name="sanitisedStrings.name"
         :image="image"
@@ -337,9 +340,9 @@ function markCopy() {
       <div>==Location==</div>
       <div>
         It can be found on the
-        <span v-if="moon">[[moon]] [[{{ sanitisedStrings.moon }}]] of the</span> [[planet]] [[{{ sanitisedStrings.planet }}]] in the [[{{
-          sanitisedStrings.system
-        }}]] [[star system]].
+        <span v-if="moon">[[moon]] [[{{ sanitisedStrings.moon }}]] of the</span> [[planet]] [[{{
+          sanitisedStrings.planet
+        }}]] in the [[{{ sanitisedStrings.system }}]] [[star system]].
       </div>
       <div>
         <WikiTemplate template-name="CoordGlyphConvert">{{ glyphs }}</WikiTemplate>
