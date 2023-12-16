@@ -6,7 +6,7 @@ import { addDomAsElement, extractNumber, getChildIndex, hideInput, image, loadHT
 import { assignFunction } from '../../commonElements/elementBackend/elementFunctions';
 import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
 import { autoInfested, buildDescriptor, initialiseSectionInputs } from '../../miscLogic/celestialobjectslogic';
-import { getRegNumber, regNr } from '../../miscLogic/locationLogic';
+import { getRegNumber } from '../../miscLogic/locationLogic';
 import { addAllTooltips } from '../../modules/tooltip';
 import type { ElementFunctions, ElementIds } from '../../types/elements';
 import type { SortObj, StdObj } from '../../types/objects';
@@ -22,15 +22,13 @@ import type { BiomeLinks, ResourceAndCreatureLinks } from '../../types/links';
  * @function
  */
 export function locationSentence() {
-	const { region } = pageData;
-	const RegNr = regNr(region as string);
-
+	const { region, galaxy } = pageData;
 	/**
 	 * The sentence describing the location of the page.
 	 *
 	 * @type {string}
 	 */
-	const output = `Located in the [[${region}]] [[region]]${RegNr} of [[Royal Space Society]] in the [[Euclid]] galaxy.`;
+	const output = `Located in the [[${region}]] [[region]] of [[Royal Space Society]] in the [[[${galaxy}]] galaxy.`;
 
 	wikiCode(output, 'loc');
 }

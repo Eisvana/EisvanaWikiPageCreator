@@ -137,12 +137,16 @@
 						<div id="portalglyphButtons"></div>
 						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
 					</div>
-      <!--   <div class="table-cell text">
+			<!--	<div class="table-cell text">
 						<label for="galaxyInput">Galaxia:</label>
 					</div>
 					<div class="table-cell data">
-						<input type="text" data-dest="galaxy" id="galaxyInput">
-					</div> -->
+						<select data-dest="galaxy" id="galaxyInput">
+              <option value="Euclid">Euclides</option>
+							<option value="Hilbert">Dimensión de Hilbert</option>
+							<option value="Eissentam">Eissentam</option>
+            </select>
+					</div>-->
       <!--       <div class="table-cell text">
 						<label for="regionsInput">Región:</label>
             <button class="tooltip">
@@ -900,7 +904,7 @@
 
 							<label class="checkbox" for="sdHPM"><input type="checkbox" id="sdHPM"
 									value="Suspicious Hazard Protection Module"
-									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Módulo de soporte vital sospechoso</span></label>
+									data-dest-checkbox-group="SDMerchant"><span class="checkbox-label">Módulo de protección contra peligros</span></label>
 
 							<label class="checkbox" for="sdMM"><input type="checkbox" id="sdMM"
 									value="Suspicious Movement Module" data-dest-checkbox-group="SDMerchant"><span
@@ -998,7 +1002,7 @@
 					<div>| name = <output id="name" name="name"></output></div>
 					<div>| image = <output id="image"></output></div>
 					<div>| region = <output id="region" name="region"></output></div>
-					<div>| galaxy = Euclid<output id="galaxy" name="galaxy"></output></div>
+					<div>| galaxy = <output id="galaxy" name="galaxy"></output></div>
 					<div>| multiplestars = <output id="multiplestars"></output></div>
 					<div>| coordinates = <output id="portalglyphs" name="galacticCoords"></output></div>
 					<div>| color = <output id="color"></output></div>
@@ -1138,7 +1142,7 @@
 					<div>[[File:<output id="navImage"></output>|400px]]</div>
 					<br>
 					<div>===System Location===</div>
-					<div>Located in the [[<output id="region" name="region"></output>]] [[region]] of [[<output id="hub" name="hub"></output>Royal Space Society]] in the [[Euclid<output id="galaxy" name="galaxy"></output>]] galaxy.</div>
+					<div><output id="loc"></output></div>
 					<br>
 					<div>==Space Station==</div>
 					<div data-station="img">[[File:<output id=ssImage></output>|thumb|System space station]]</div>

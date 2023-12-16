@@ -1061,6 +1061,8 @@ export function checkDataIntegrity(element: HTMLElement | null = null, simple: b
     return '';
   } else if (!name) {
     return '¡Falta el nombre!';
+  } else if (!glyphs) {
+    return '¡Faltan los Glifos!';
   } else if (!glyphs || !region) {
     return '¡Glifos Incorrectos!';
  /** } else if (!hub) {

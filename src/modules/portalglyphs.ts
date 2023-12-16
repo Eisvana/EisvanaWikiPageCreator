@@ -5,7 +5,7 @@
 import { errorMessage, triggerEvent, wikiCode } from "../common";
 import { getDestElements } from "../commonElements/elementBackend/elementStore";
 import { globalElements, pageData } from "../variables/objects";
-import { regions } from "../variables/regions";
+import { regions, galaxies } from "../variables/regions";
 
 const validPortalKeys = '0123456789ABCDEF';
 
@@ -76,6 +76,7 @@ export function displayGlyphs() {
 	const dest = input.dataset.destNoauto;
 	wikiCode(glyphString, dest);
 	glyphRegion(glyphString);
+  glyphRegion2(glyphString);
 	if (getDestElements('galacticCoords').length) wikiCode(glyphs2Coords(glyphString), 'galacticCoords')
 }
 
@@ -179,7 +180,50 @@ export function glyphRegion(glyphs: string) {
 export function glyphError(region: string | undefined, glyphElement: HTMLElement) {
 	errorMessage(glyphElement,
 		(region === undefined)
-			? 'No es una región válida de la Royal Space Society. Consulte <a href="https://nomanssky.fandom.com/es/wiki/Regiones_RSS" target="_blank" rel="noopener noreferrer">regiones de la Royal Space Society</a> para obtener una lista de regiones válidas.'
+    ? 'Los glifos introducidos no forman parte de la RSS. Consulte <i><a href="https://nomanssky.fandom.com/es/wiki/Regiones_RSS" target="_blank" rel="noopener noreferrer">regiones RSS</a></i> para obtener una lista de regiones válidas'
+    : '');
+}
+
+export function validateGlyphs2(glyphs: string) {
+	// Checks if the input contains exactly 12 glyphs
+	if (glyphs.length !== 12) return '';		// NoSonar 12 is the expected glyph length, because glyph strings are always 12 digits long
+
+	// Gets the galaxy list based on the civilization short name and extracts the galaxy glyphs
+	const galaxyList = galaxies;
+	const galaxyGlyphs = glyphs.substring(4);	// NoSonar this extracts the region glyphs, which start at glyph index 4.
+
+	// Finds the corresponding region object based on the region glyphs and returns it
+	const galaxy = galaxyList[galaxyGlyphs];
+	return galaxy;
+}
+
+/**
+ * Validates whether a set of glyphs is a valid region and outputs the corresponding Wiki code for it.
+ * @param {Array<string>} glyphs - An array of Portal Glyph strings.
+ * @returns {string} The corresponding Wiki code for the valid region, or an empty string if the region is invalid.
+ */
+export function glyphRegion2(glyphs: string) {
+	const glyphElement = globalElements.input.portalglyphsInput;
+	let galaxy = '';
+	if (glyphs?.length == 12) {		// NoSonar this is the normal expected glyph string length
+		galaxy = validateGlyphs2(glyphs);
+	}
+	glyphError(galaxy, glyphElement as HTMLElement);
+	wikiCode(galaxy ?? '', 'galaxy');
+}
+
+/**
+ * Displays an error message for a glyph element with an optional invalid region message.
+ *
+ * @param {string} galaxy - The region to validate. If undefined, the error message will display a link to a list of valid regions.
+ * @param {HTMLElement} glyphElement - The HTML element representing the incorrect glyph.
+ *
+ * @returns {void}
+ */
+export function glyphError2(galaxy: string | undefined, glyphElement: HTMLElement) {
+	errorMessage(glyphElement,
+		(galaxy === undefined)
+			? 'Los glifos introducidos no son parte de la RSS. Consulte <a href="https://nomanssky.fandom.com/es/wiki/Regiones_RSS" target="_blank" rel="noopener noreferrer">regiones RSS</a> para obtener una lista de regiones válidas'
 			: '');
 }
 

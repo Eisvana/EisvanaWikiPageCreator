@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { versions } from '../variables/versions';
-import { regions } from '../variables/regions';
+import { regions, galaxies } from '../variables/regions';
 import { sanitiseString } from '@/common';
 
 interface StaticPageData {
@@ -37,7 +37,6 @@ interface PageData {
   discovered: string;
   discoveredlink: string;
   orgName: string;
-  galaxy: string;
   system: string;
   planet: string;
   moon: string;
@@ -77,7 +76,6 @@ export const usePageDataStore = defineStore('pageData', {
     discovered: localStorageData()['discoveredInput builderInput'] ?? '',
     discoveredlink: localStorageData()['discoveredlinkInput builderlinkInput'] ?? '',
     orgName: '',
-    galaxy: 'Euclid',
     system: localStorageData().systemInput ?? '',
     planet: localStorageData().planetInput ?? '',
     moon: localStorageData().moonInput ?? '',
@@ -111,10 +109,13 @@ export const usePageDataStore = defineStore('pageData', {
   getters: {
     regionGlyphs: (state) => state.glyphs.substring(4), // NoSonar region glyphs start at index 4
     isValidGlyphs(): boolean {
-      return Object.keys(regions).includes(this.regionGlyphs); // Tests if an address is valid for Eisvana
+      return Object.keys(regions).includes(this.regionGlyphs); // Tests if an address is valid for Royal Space Society
     },
     region(): string {
       return regions[this.regionGlyphs] ?? '';
+    },
+    galaxy(): string {
+      return galaxies[this.regionGlyphs] ?? '';
     },
     regionNumber(): number {
       const index = Object.keys(regions).indexOf(this.regionGlyphs);
@@ -124,7 +125,6 @@ export const usePageDataStore = defineStore('pageData', {
     discoveredName: (state) => sanitiseString(state.discovered),
     discoveredlinkName: (state) => sanitiseString(state.discoveredlink),
     systemName: (state) => sanitiseString(state.system),
-    galaxyName: (state) => sanitiseString(state.galaxy),
     hubName: (state) => sanitiseString(state.hub),
     planetName: (state) => sanitiseString(state.planet),
     moonName: (state) => sanitiseString(state.moon),
