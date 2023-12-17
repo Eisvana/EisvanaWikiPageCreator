@@ -22,16 +22,16 @@ addStaticPageData(
   Hay un orden preferido de imágenes.:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
-			<li>Paisaje</li>
-			<li>Vista nocturna</li>
-			<li>Sistema de cuevas</li>
-			<li>Zona Costera</li>
-			<li>Bajo el mar</li>
-			<li>Visor de análisis</li>
-			<li>Guía de exploración planetaria</li>
-			<li>Página del planeta</li>
-			<li>Página del sistema</li>
-			<li>Mapa galáctico</li>
+			<li>Paisaje/Landscape</li>
+			<li>Vista nocturna/Night View</li>
+			<li>Sistema de cuevas/Cave System</li>
+			<li>Zona Costera/Coast Area</li>
+			<li>Bajo el mar/Underwater</li>
+			<li>Visor de análisis/Analysis Visor</li>
+			<li>Guía de exploración planetaria/Planet Exploration Guide</li>
+			<li>Página del planeta/Planet Page</li>
+			<li>Página del sistema/System Page</li>
+			<li>Mapa galáctico/Galaxy Map</li>
 		</ol>
 	</div>`
 );

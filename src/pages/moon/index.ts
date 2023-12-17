@@ -5,28 +5,28 @@ addStaticPageData('galleryExplanationExternal', `
 Hay un orden preferido de imágenes:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
-			<li>Paisaje</li>
-			<li>Vista nocturna</li>
-			<li>Sistema de cuevas</li>
-			<li>Visor de analisis</li>
-			<li>Guía de exploración de la luna</li>
-			<li>Página de la luna</li>
-			<li>Página del planeta</li>
-			<li>Página del sistema</li>
-			<li>Mapa galáctico</li>
+			<li>Paisaje/Landscape</li>
+			<li>Vista nocturna/Night View</li>
+			<li>Sistema de cuevas/Cave System</li>
+			<li>Visor de analisis/Analysis Visor</li>
+			<li>Guía de exploración de la luna/Moon Exploration Guide</li>
+			<li>Página de la luna/Moon Page</li>
+			<li>Página del planeta/Planet Page</li>
+			<li>Página del sistema/System Page</li>
+			<li>Mapa galáctico/Galaxy Map</li>
 		</ol>
 	</div>`)
 
 
 addStaticPageData('galleryArray', [
 	'',
-	'Paisaje',
-	'Vista nocturna',
-	'Sistema de cuevas',
-	'Visor de análisis',
-	'Guía de exploración de la luna',
-	'Página de la luna',
-	'Página del planeta',
-	'Página del sistema',
-	'Mapa galáctico'
+	'Landscape',
+	'Night View',
+	'Cave System',
+	'Analysis Visor',
+	'Moon Exploration Guide',
+	'Moon Page',
+	'Planet Page',
+	'System Page',
+	'Galaxy Map'
 ])

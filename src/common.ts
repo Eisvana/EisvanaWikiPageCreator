@@ -341,6 +341,11 @@ export function addStaticPageData(key: string, value: AnyPrimitive | Array<strin
   Object.defineProperty(pageData, key, { configurable: false, writable: false, value: value });
 }
 
+export function addStaticPageData2(key: string, value: any) {
+  Object.defineProperty(pageData, key, { configurable: false, writable: false, value: value });
+}
+
+
 /**
  * Sanitizes a given string by removing all non-link wiki markup, and trimming the result.
  *

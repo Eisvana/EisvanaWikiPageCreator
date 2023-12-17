@@ -16,15 +16,15 @@ globalFunctions.albumNameExternal = () => albumNameExternal();
 globalFunctions.albumItemTypeExternal = () => albumItemTypeExternal();
 
 addStaticPageData('galleryExplanationExternal', `
-	The preferred order of pictures is as follows:
-	<div class='dialog-center'>
-		<ol class='dialog-list'>
-			<li>Worm scan</li>
-			<li>Moon Page</li>
-			<li>Planet Page</li>
-			<li>System Page</li>
-			<li>Galaxy Map</li>
-		</ol>
+El orden preferido de las imágenes es el siguiente:
+<div class='dialog-center'>
+<ol class='dialog-list'>
+<li>Escaneo de gusanos</li>
+<li>Página de la Luna</li>
+<li>Página del planeta</li>
+<li>Página del sistema</li>
+<li>Mapa de galaxias</li>
+</ol>
 	</div>`)
 
 updateGlobalElements(sandwormElements);

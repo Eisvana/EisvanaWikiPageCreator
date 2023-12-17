@@ -13,17 +13,17 @@ addStaticPageData('galleryExplanationExternal', `
 Hay un orden preferido de imágenes de la galería:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
-			<li>Vista trasera de la fragata</li>
-			<li>Pantalla de interacción</li>
-			<li>Página del sistema</li>
+			<li>Vista trasera de la fragata/Rear view of frigate</li>
+			<li>Pantalla de interacción/Interaction screen</li>
+			<li>Página del sistema/System Page</li>
 		</ol>
  	</div>`)
 
 addStaticPageData('galleryArray', [
 	'',
-	'Vista trasera de la fragata',
-	'Pantalla de interacción',
-	'Página del sistema'
+	'Rear view of frigate',
+	'Interaction screen',
+	'System Page'
 ])
 
 assignElementFunctions(frigateElementFunctions);
