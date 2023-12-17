@@ -107,7 +107,7 @@ export function addResource(
 		<label for="${resource_input}">Nombre del recúrso:</label>
 	</div>
 	<div class="table-cell data" data-resource="section${childIndex}">
-		<input type="text" list="resources" id="${resource_input}" data-evt-id="resourceInput">
+		<input type="text" list="resources" id="${resource_input}" data-evt-id="resourceInput" placeholder="Traducción de los recursos en el ?">
 	</div>`;
 
   const eventListeners: ElementFunctions = [
