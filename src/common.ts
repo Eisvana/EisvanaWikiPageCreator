@@ -438,7 +438,7 @@ export function image(element: HTMLInputElement) {
   errorMessage(
     element,
     fileSizeExceeded
-      ? 'Este archivo es demasiado grande para cargarlo en la wiki. El tamaño máximo de archivo es 10 MB. Comprime tu archivo aquí: <a href="https://nmscd.com/Image-Compressor/" target="_blank" rel="noopener noreferrer">Image Compressor</a>'
+      ? 'Este archivo es demasiado grande para cargarlo en la wiki. El tamaño máximo de archivo es 10 MB. Comprime tu archivo aquí: <a href="https://nmscd.com/Image-Compressor/" target="_blank" rel="noopener noreferrer">Compresor de imagen</a>'
       : ''
   );
 

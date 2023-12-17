@@ -56,7 +56,7 @@ function addPicName(e: Event) {
 
             <iframe
               src="https://nmscd.com/Image-Compressor/"
-              title="Image Compressor"
+              title="Compresor de imagen"
               class="explanation-embed"
               width="450"
               height="300"

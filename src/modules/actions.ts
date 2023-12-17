@@ -111,7 +111,7 @@ export function copyCode(input: HTMLButtonElement, wikiCodeId: string) {
 	dataIntegrityObj.link = dataLink as string;
 
 	// Updates the button text to show that the code has been copied and resets it after a delay.
-	input.innerText = 'Copied!';
+	input.innerText = '¡Copiado!';
 	setTimeout(() => {
 		input.innerText = buttonText;
 		input.style.pointerEvents = '';
