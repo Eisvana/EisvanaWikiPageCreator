@@ -1,5 +1,0 @@
-/dist
-/node_modules
-.eslintrc.js
-babel.config.js
-vite.config.ts
