@@ -9,11 +9,11 @@ const links: PageLinkProps[] = [
     url: './base.html',
   },
    {
-     text: 'Racetrack',
+     text: 'Circuitos',
      url: './racetrack.html',
    },
    {
-     text: 'Settlement',
+     text: 'Asentamientos',
      url: './settlement.html',
    },
   {
