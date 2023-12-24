@@ -187,7 +187,6 @@ export function showAll() {
   }
 
   numberStats();
-  researchTeam();
   image(globalElements.input.fileUpload as HTMLInputElement);
   try {
     glyphInputOnChange(globalElements.input.portalglyphsInput as HTMLInputElement);
@@ -587,14 +586,18 @@ export function docBy() {
   const discoveredlink = pageData.discoveredlink ?? pageData.builderlink;
   const dest = docByElement.dataset.destNoauto;
   if (!dest) return;
-  const chapter = displayResearch();
+  const chapter = pageData.researchteam as string;
   const formattedDocumenter = formatName(documenter);
   const discArray = [discoverer, discoveredlink];
 
   const outputElement = globalElements.output[dest] as HTMLElement;
   if (documenter && !discArray.includes(documenter)) {
     outputElement.style.display = '';
-    outputElement.innerText = `Documented by ${chapter} ${formattedDocumenter}`;
+    if(chapter) {
+      outputElement.innerText = `Documented by ${chapter} ${formattedDocumenter}`;
+    } else {
+      outputElement.innerText = `Documented by ${formattedDocumenter}`;
+    }
   } else {
     outputElement.style.display = 'none';
   }

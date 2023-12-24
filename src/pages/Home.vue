@@ -8,14 +8,14 @@ const links: PageLinkProps[] = [
     text: 'Base',
     url: './base.html',
   },
-  // {
-  //   text: 'Racetrack',
-  //   url: './racetrack.html',
-  // },
-  // {
-  //   text: 'Settlement',
-  //   url: './settlement.html',
-  // },
+   {
+     text: 'Racetrack',
+     url: './racetrack.html',
+   },
+   {
+     text: 'Settlement',
+     url: './settlement.html',
+   },
   {
     text: 'Fauna',
     url: './fauna.html',

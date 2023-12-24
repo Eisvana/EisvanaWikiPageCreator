@@ -5,6 +5,18 @@
 import { checkboxWikiCode, errorMessage, regexMatch, wikiCode } from "../../common";
 import { globalElements } from "../../variables/objects";
 
+export const exocraftTableEntry = `<output name="exocrafts"></output>`;
+
+
+export function exocraftCheckboxes() {
+	const checkboxes = document.getElementsByName('exocraftInput') as NodeListOf<HTMLInputElement>;
+	const exocrafts: Array<string> = [];
+	for (const checkbox of Array.from(checkboxes)) {
+		if (checkbox.checked) exocrafts.push(checkbox.value);
+	}
+	wikiCode(exocrafts.join(', '), 'exocrafts');
+}
+
 /**
  * Validates Discord tags.
  *
@@ -16,7 +28,7 @@ export function validateDiscord() {
 
 	const hasValidNewTag = /^[a-z0-9._]+$/.test(tag);
 
-	errorMessage(element, !tag || hasValidNewTag ? '' : 'Etiqueta de Discord no válida. Por favor proporcione su nombre de usuario, no su nombre para mostrar.');
+	errorMessage(element, !tag || hasValidNewTag ? '' : 'Invalid Discord tag. Please give your username, not your display name.');
 }
 
 /**
@@ -36,7 +48,7 @@ export function validateReddit() {
 		}
 	})();
 	if (redditName.includes(' ')) {
-		errorMessage(element, 'El nombre de Reddit no debe incluir espacios.');
+		errorMessage(element, 'Reddit name must not include spaces');
 		return;
 	} else {
 		errorMessage(element);
