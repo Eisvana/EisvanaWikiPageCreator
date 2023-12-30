@@ -65,7 +65,7 @@ function moveItem(fileItem: FileItem, direction: 'up' | 'down') {
       />
     </a>
     <div class="gallery-meta">
-      <p style="word-break: break-all"><span class="has-text-weight-bold">Name: </span>{{ fileItem.file.name }}</p>
+      <p style="word-break: break-all"><span class="has-text-weight-bold">Nombre: </span>{{ fileItem.file.name }}</p>
       <div v-show="galleryDropdownItems.length">
         <select
           v-model="fileItem.desc"
