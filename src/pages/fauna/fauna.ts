@@ -361,7 +361,7 @@ export function generateGalleryArray() {
 		'Moon Page',
 		'Planet Page',
 		'System Page',
-		'Galaxy Map'
+		'Mapa de galaxias'
 	];
 
 	if (!pageData.moon) {

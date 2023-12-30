@@ -11,11 +11,11 @@ export const explanationContent: string = `
 	<a id="explanationLink" target="_blank" rel="noopener noreferrer">
 		<picture>
 			<source type="image/webp" id="explanationWebpImg">
-			<img id="explanationFallbackImg" alt="Explainer Image">
+			<img id="explanationFallbackImg" alt="Imagen explicativa">
 		</picture>
 	</a>
 	<form method="dialog">
-		<button class="button" type="submit" autofocus>Close</button>
+		<button class="button" type="submit" autofocus>Cerrar</button>
 	</form>`;
 
 /**

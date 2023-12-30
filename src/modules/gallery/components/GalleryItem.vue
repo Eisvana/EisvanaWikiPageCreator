@@ -84,7 +84,7 @@ function moveItem(fileItem: FileItem, direction: 'up' | 'down') {
       <div>
         <input
           type="text"
-          placeholder="Description"
+          placeholder="Descripción"
           v-model="fileItem.desc"
         />
       </div>
@@ -92,7 +92,7 @@ function moveItem(fileItem: FileItem, direction: 'up' | 'down') {
     <div class="controlButtons">
       <button
         class="delete-icon is-clickable"
-        title="Remove picture from gallery"
+        title="Eliminar imagen de la galería"
         @click="removeItem(fileItem)"
       >
         ❌
@@ -101,13 +101,13 @@ function moveItem(fileItem: FileItem, direction: 'up' | 'down') {
         v-show="!isLoc"
         class="handle"
         src="/assets/icons/arrow.svg"
-        title="Move picture up or down"
-        alt="Move image via drag'n'drop"
+        title="Mover imagen hacia arriba o hacia abajo"
+        alt="Mover imagen arrastrando y soltando"
       />
       <button
         v-show="!isLoc"
         class="button moveButton"
-        title="Move up"
+        title="Subir"
         data-move="up"
         @click="moveItem(fileItem, 'up')"
       >
@@ -121,7 +121,7 @@ function moveItem(fileItem: FileItem, direction: 'up' | 'down') {
       <button
         v-show="!isLoc"
         class="button moveButton"
-        title="Move down"
+        title="Mover hacia abajo"
         data-move="down"
         @click="moveItem(fileItem, 'down')"
       >

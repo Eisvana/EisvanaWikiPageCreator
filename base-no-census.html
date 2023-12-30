@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Creador de páginas Wiki - Bases Censo</title>
+	<title>Creador de páginas Wiki - Bases</title>
   <div style="display: inline-block; text-align: center; width: 100%">
     <div>Versión Alpha %VITE_VERSION%</div>
   </div>
@@ -19,7 +19,7 @@
 <body>
 	<div class="container">
 		<nav><a href="./" title="Página principal">&larr; Regresar a la página principal</a></nav>
-		<h1 class="title is-3">Creador de páginas Wiki - Bases Censo</h1>
+		<h1 class="title is-3">Creador de páginas Wiki - Bases</h1>
 		<dialog id="explanation" class="modal-content content"></dialog>
 
 		<main class="columns is-desktop">
@@ -261,69 +261,6 @@
 					</div>
             <div class="table-cell data">
             <input type="text" placeholder="Gremio que pertenezcas dentro de tu hub (si tiene)" data-dest="researchteam" id="researchteamInput">
-					</div>
-					<div class="tableHeader text sectionToggle">
-						<p>Censo:</p>
-						<button class="button" id="censusHideButton">Ocultar</button>
-          </div>
-					<div data-section="census" class="table-cell text">
-						<label for="censusPlayerInput">¿Nombre del jugador en NMS?</label>
-						<button class="tooltip">
-							<data>Tu nombre en el juego.</data>
-							<data>Nombre del jugador</data>
-							<data>Tu nombre dentro del juego. No incluyas ningún título dentro del juego.</data>
-							<data>base/playerName</data>
-						</button>
-					</div>
-					<div data-section="census" class="table-cell data">
-						<input type="text" data-dest="censusplayer" id="censusPlayerInput">
-					</div>
-					<div data-section="census" class="table-cell text">
-						<label for="censusRedditInput">¿Nombre del jugador en Reddit?</label>
-						<button class="tooltip">
-							<data>Tu nombre en Reddit. "u/" no es necesario.</data>
-						</button>
-					</div>
-					<div data-section="census" class="table-cell data">
-						<input type="text" data-dest-noauto="censusreddit" id="censusRedditInput">
-					</div>
-					<div data-section="census" class="table-cell text">
-						<label for="censusDiscordInput">¿Nombre del jugador en Discord?</label>
-						<button class="tooltip">
-							<data>Tu nombre de Discord. Por favor proporcione su nombre de usuario, no su apodo.</data>
-						</button>
-					</div>
-					<div data-section="census" class="table-cell data">
-						<input type="text" data-dest="censusdiscord" id="censusDiscordInput">
-					</div>
-					<div data-section="census" class="table-cell text">
-						<label for="censusFriendInput">¿Código de amigo del NMS del jugador?</label>
-						<button class="tooltip">
-							<data>Se puede encontrar en las Opciones.</data>
-							<data>Código de amigo de NMS</data>
-							<data>
-								Puedes encontrar tu código de amigo en las Opciones. &rarr; Red  &rarr; Ver No Man's Sky
-								Lista de Amigos &rarr; Mostrar Mi Código de Amigo del No
-								Man's Sky
-							</data>
-							<data>base/friendCode</data>
-						</button>
-					</div>
-					<div data-section="census" class="table-cell data">
-						<input type="text" data-dest-noauto="censusfriend" maxlength="15" id="censusFriendInput">
-					</div>
-					<div data-section="census" class="table-cell text">
-						<label for="censusArrivalInput">Cuando llegaste a formar parte de tu Hub?</label>
-					</div>
-					<div data-section="census" class="table-cell data">
-						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput">
-					</div>
-					<div data-section="census" class="table-cell text">
-						<label for="censusShowInput">Crear entrada en el censo:</label>
-					</div>
-					<div data-section="census" class="table-cell data">
-						<input type="checkbox" id="censusShowInput" value="Y" data-checkbox-unchecked=""
-							data-dest-checkbox="censusshow">
 					</div>
 					<div class="tableHeader data no-flex">
 						<label for="layoutInput">Plano de la Base:</label>

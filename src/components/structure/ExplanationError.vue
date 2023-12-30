@@ -32,7 +32,7 @@ function openModal() {
       ref="dialogElement"
       @close="$emit('update:open', false)"
     >
-      <h2 class="explanation-heading">Missing/Incorrect Data</h2>
+      <h2 class="explanation-heading">Datos faltantes/incorrectos</h2>
       <div class="explanation-content">{{ errorMessage }}</div>
       <form method="dialog">
         <button
@@ -40,7 +40,7 @@ function openModal() {
           type="submit"
           autofocus
         >
-          Close
+          Cerrar
         </button>
       </form>
     </dialog>

@@ -5,8 +5,12 @@ import type {CivImageProps, PageLinkProps } from '@/types/objects';
 
 const links: PageLinkProps[] = [
   {
-    text: 'Base',
+    text: 'Bases Censo',
     url: './base.html',
+  },
+  {
+    text: 'Bases Normales',
+    url: './base-no-census.html',
   },
    {
      text: 'Circuitos',
@@ -41,11 +45,11 @@ const links: PageLinkProps[] = [
     url: './mineral.html',
   },
   {
-    text: 'Carguero abandonado',
+    text: 'Carguero Abandonado',
     url: './derelict.html',
   },
   {
-    text: 'Fragatas organicas',
+    text: 'Fragatas Organicas',
     url: './biofrig.html',
   },
   // {
