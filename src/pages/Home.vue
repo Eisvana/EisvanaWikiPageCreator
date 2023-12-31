@@ -10,7 +10,7 @@ const links: PageLinkProps[] = [
   },
   {
     text: 'Bases Normales',
-    url: './base-no-census.html',
+    url: './basenocensus.html',
   },
    {
      text: 'Circuitos',

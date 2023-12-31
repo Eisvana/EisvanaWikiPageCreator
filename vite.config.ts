@@ -22,6 +22,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         about: resolve(__dirname, 'about.html'),
         base: resolve(__dirname, 'base.html'),
+        basenocensus: resolve(__dirname, 'basenocensus.html'),
         biofrig: resolve(__dirname, 'biofrig.html'),
         derelict: resolve(__dirname, 'derelict.html'),
         fauna: resolve(__dirname, 'fauna.html'),
