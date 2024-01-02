@@ -51,7 +51,7 @@ function addPicName(e: Event) {
               Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el nombre de la imagen. El tamaño máximo del archivo es 10 MB. Puedes subir tus fotos a la wiki en
               <WikiLink
                 link="Special:Upload?multiple=true"
-                text="Especial:Subir"
+                text="Subir Archivos"
               />.
 
             <iframe
@@ -68,7 +68,7 @@ function addPicName(e: Event) {
               No olvides subir tu foto a la wiki en
               <WikiLink
                 link="Special:Upload?multiple=true"
-                text="Especial:Subir"
+                text="Subir Archivos"
               />. El botón de carga solo completa automáticamente el nombre de la imagen en el código, no se carga automáticamente en la wiki.
             </span>
             <div class="mt-3">

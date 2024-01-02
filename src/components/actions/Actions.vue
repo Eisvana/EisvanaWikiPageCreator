@@ -47,7 +47,7 @@ const isDev = import.meta.env.DEV;
     <WikiLink
       class="button is-outlined is-primary"
       link="Special:Upload?multiple=true"
-      text="Especial:Subir"
+      text="Subir Archivos"
     />
 
     <CreatePageButton />
