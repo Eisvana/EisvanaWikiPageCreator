@@ -550,21 +550,10 @@ export function researchTeam() {
   } = researchteamInput;
   if (!dest) return;
   pageData[dest] = researchteamValue;
-  const exceptions = ['base', 'racetrack'];
-  const researchteam = (() => {
-    switch (researchteamValue) {
-      case '':
-        return '';
-
-      case '':
-        return '';
-
-      default:
-        return exceptions.includes(pageData.pageType as string) ? '' : '';
-    }
-  })();
+  // Asignar directamente el valor de researchteamInput a researchteam
+  const researchteam = researchteamValue;
   const outputElement = globalElements.output[dest] as HTMLElement;
-  outputElement.innerText = researchteam as string;
+  outputElement.innerText = researchteam;
 }
 
 /**
@@ -586,18 +575,14 @@ export function docBy() {
   const discoveredlink = pageData.discoveredlink ?? pageData.builderlink;
   const dest = docByElement.dataset.destNoauto;
   if (!dest) return;
-  const chapter = pageData.researchteam as string;
+  const chapter = displayResearch();
   const formattedDocumenter = formatName(documenter);
   const discArray = [discoverer, discoveredlink];
 
   const outputElement = globalElements.output[dest] as HTMLElement;
   if (documenter && !discArray.includes(documenter)) {
     outputElement.style.display = '';
-    if(chapter) {
-      outputElement.innerText = `Documented by ${chapter} ${formattedDocumenter}`;
-    } else {
-      outputElement.innerText = `Documented by ${formattedDocumenter}`;
-    }
+    outputElement.innerText = `Documented by ${chapter} ${formattedDocumenter}`;
   } else {
     outputElement.style.display = 'none';
   }
@@ -614,16 +599,7 @@ export function displayResearch() {
   const chapter = pageData.researchteam as string;
   if (!chapter) return chapter;
 
-  const chapterSentence = (() => {
-    switch (chapter) {
-      case 'Wiki Scholars':
-        return '[[Royal Space Society Wiki Scholars|Royal Space Society Wiki Scholar]]';
-
-      case 'EBC':
-        return '[[EBC]] member';
-    }
-    throw new Error(`Unexpected researchteam: ${chapter}`);
-  })();
+  const chapterSentence = `[[${chapter}]] member`;
   return chapterSentence;
 }
 
