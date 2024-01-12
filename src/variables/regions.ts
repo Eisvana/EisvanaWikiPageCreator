@@ -16,6 +16,8 @@ export const regions: Regions = {
 	'F6EC0D23': 'Juhalbe Cluster',
   '0AAEBB96': 'Larinar Boundary',
   '0266CF95': 'Skitco',
+  'F7EBFD24': 'Udrupi Shallows',
+  'F7EBFD2D': 'Jiessl Shallows'
 };
 
 // Make 'regions' read-only
@@ -37,6 +39,8 @@ export const galaxies: Galaxies = {
   'F6EC0D23': 'Euclid',
   '0AAEBB96': 'Euclid',
   '0266CF95': 'Hilbert Dimension',
+  'F7EBFD24': 'Euclid',
+  'F7EBFD2D': 'Euclid',
 };
 // Make 'galaxies' read-only
 Object.freeze(galaxies);
