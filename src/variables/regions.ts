@@ -17,7 +17,7 @@ export const regions: Regions = {
   '0AAEBB96': 'Larinar Boundary',
   '0266CF95': 'Skitco',
   'F7EBFD24': 'Udrupi Shallows',
-  'F7EBFD2D': 'Jiessl Shallows'
+  'F7EBFD25': 'Jiessl Shallows'
 };
 
 // Make 'regions' read-only
