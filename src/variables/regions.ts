@@ -40,7 +40,7 @@ export const galaxies: Galaxies = {
   '0AAEBB96': 'Euclid',
   '0266CF95': 'Hilbert Dimension',
   'F7EBFD24': 'Euclid',
-  'F7EBFD2D': 'Euclid',
+  'F7EBFD25': 'Euclid',
 };
 // Make 'galaxies' read-only
 Object.freeze(galaxies);
