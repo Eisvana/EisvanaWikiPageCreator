@@ -23,11 +23,14 @@ footer {
       color: var(--link-color);
       cursor: pointer;
       margin: 0 !important;
-      transition: var(--theme-transition);
 
       &:hover {
         color: var(--link-hover-color);
       }
     }
   }
+}
+
+html[data-transition] footer .footerLinks button {
+  transition: var(--theme-transition);
 }
