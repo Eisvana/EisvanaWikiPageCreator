@@ -12,6 +12,10 @@ const links: PageLinkProps[] = [
     text: 'Bases Normales',
     url: './basenocensus.html',
   },
+  // {
+  //   text: 'Bases (TESTING)',
+  //   url: './basepruebas.html',
+  // },
    {
      text: 'Circuitos',
      url: './racetrack.html',
