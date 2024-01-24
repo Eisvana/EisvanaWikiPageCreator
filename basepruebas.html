@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Creador de páginas Wiki - Bases Censo</title>
+  <div style="display: inline-block; text-align: center; width: 100%">
+    <div>Versión Alpha %VITE_VERSION%</div>
+  </div>
+	<meta name="application-name" content="Creador de páginas Wiki">
+	<meta name="description"
+		content="Genere fácilmente el código wiki para crear una página de una base en No Man's Sky Wiki!">
+	<meta name="theme-color" content="#280033">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Muhaddil, Page Creator, Base">
+	<script src="./src/pages/base" type="module"></script>
+  <!-- <style>
+    body {
+        background-image: url("https://github.com/NMSCD/About/blob/master/banner/current-large-white-text.png?raw=true");
+        background-repeat: no-repeat;
+        background-size:12%;
+        background-position:right 70% top 3%;
+    }
+</style> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script>
+  $(document).ready(function() {
+      $('#featuresInput').select2();
+  });
+
+$(document).ready(function() {
+    $('#featuresInput').select2().on('change', function() {
+        var selectedOptions = $(this).val();
+        var bulletList = selectedOptions.map(function(option) {
+            return '* [[' + option + ']]';
+        }).join('<br>');
+        $('#features').html(bulletList);
+    });
+
+    // Manually fire the 'change' event to update the <output> element
+    $('#featuresInput').trigger('change');
+});
+
+  </script>
+</head>
+
+<body>
+	<div class="container">
+		<nav><a href="./" title="Página principal">&larr; Regresar a la página principal</a></nav>
+		<h1 class="title is-3">Creador de páginas Wiki - Bases Censo</h1>
+		<dialog id="explanation" class="modal-content content"></dialog>
+    <!-- <div style="height: 4px; background-color: white;"></div><br>
+    <div style="display: flex; justify-content: center;">
+      <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/gZ_u5eETLrk?si=9Idy8oiFdGbkm-Pa" title="Guía Creador de Páginas Wiki - Bases Censo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+  <br>
+  <div style="height: 4px; background-color: white;"></div> -->
+
+    <main class="columns is-desktop">
+			<div id="input" class="column is-full-mobile">
+				<div class="table">
+					<div class="table-cell text">
+						<label>Versión Actual:</label>
+					</div>
+          <div>
+            <div class="table-cell data">
+              <select id="versionInput" data-dest="release"></select>
+            </div>
+					</div>
+   <!--       <div class="table-cell text">
+             <label for="hubInput">Nombre del Hub:</label>
+						<button class="tooltip">
+							<data>Escriba el nombre del Hub que represente</data>
+							<data>Nombre del Hub</data>
+              <data>Escriba el nombre del Hub que represente</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="hub" id="hubInput">
+					</div> -->
+					<div class="table-cell text">
+						<label for="nameInput">Nombre de la base:</label>
+						<button class="tooltip">
+							<data>Escriba exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
+							<data>Nombre de la base</data>
+							<data>Escriba exactamente como se ve en el juego. Cuidado con 0 (cero) y O (o).</data>
+							<data>base/baseName</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="name" id="nameInput">
+					</div>
+					<div class="table-cell text">
+						<label for="fileInput">Nombre de la imagen principal, incluida la extensión del archivo:</label>
+						<button class="tooltip" name="fileUploadTooltip">
+							<data>La imagen no se cargará en la wiki. Esto es sólo para autocompletar el
+              Nombre de la imagen.</data>
+							<data>Subir archivo</data>
+							<data>
+								Cualquier imagen que cargue aquí no se cargará en la wiki. Esto es sólo para autocompletar el
+                Nombre de la imagen. El tamaño máximo del archivo es 10 MB.
+                Puedes subir tus fotos a la wiki en <a href="Special:Upload?multiple=true"
+									data-wiki>Subir Archivos</a>
+                  <div>
+                  <i>Para comprimir las fotos usa esto, esta en ingles pero solo le dais al botón de examinar, elegís la foto y le dais al
+                  botón de comprimir. Por ultimo, la descargáis y listo!</i>
+                  <iframe src="https://nmscd.com/Image-Compressor/" title="Compresor de imagen"
+									class="explanation-embed" width="450" height="300">Compresor de imagen</iframe>
+                </div>
+							</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
+						<input type="file" id="fileUpload" accept="image/*">
+					</div>
+					<div class="table-cell text">
+						<label for="builderlinkInput">Nombre del constructor en la wiki:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="builderlink" id="builderlinkInput">
+					</div>
+					<div class="table-cell text">
+						<label for="builderInput">Nombre del constructor si no tiene wiki:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="builder" id="builderInput">
+					</div>
+					<div class="table-cell text">
+						<label for="docbyInput">Documentado por (en caso de no ser el constructor):</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest-noauto="docby" id="docbyInput">
+					</div>
+					<div class="table-cell text">
+						<label for="systemInput">Nombre del sistema:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="system" id="systemInput">
+					</div>
+					<div class="table-cell text">
+						<label for="planetInput">Nombre del planeta:</label>
+						<button class="tooltip">
+							<data>Nombre del planeta O el planeta rodeado por la luna donde se puede encontrar la base.</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="planet" id="planetInput">
+					</div>
+					<div class="table-cell text">
+						<label for="moonInput">Nombre de la luna (si la base está en la luna):</label>
+						<button class="tooltip">
+							<data>Si la base está ubicada en una luna. Déjelo en blanco si la base está en un planeta.</data>
+						</button>
+					</div>
+          <div class="table-cell data">
+						<input type="text" data-dest="moon" id="moonInput">
+					</div>
+			<!--	<div class="table-cell text">
+						<label for="galaxyInput">Galaxia:</label>
+					</div>
+					<div class="table-cell data">
+						<select data-dest="galaxy" id="galaxyInput">
+              <option value="Euclid">Euclides</option>
+							<option value="Hilbert">Dimensión de Hilbert</option>
+							<option value="Eissentam">Eissentam</option>
+            </select>
+					</div>-->
+      <!--       <div class="table-cell text">
+						<label for="regionsInput">Región:</label>
+            <button class="tooltip">
+							<data>Escriba el nombre en ingles.</data>
+							<data>Region</data>
+							<data>Escriba el nombre en ingles. Para mas información revise la Wikipedia inglesa.
+                <ul>
+                <li><a
+                  href="https://nomanssky.fandom.com/wiki/Regions_RSS">Regiones</a>
+              </li>
+            </ul>
+              </data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="regions" id="regionsInput">
+					</div> -->
+					<div class="table-cell text">
+						<label for="axesInput">Coordenadas planetarias:</label>
+						<button class="tooltip">
+							<data>Encontrado usando su visor de análisis O en el tablero de su nave.</data>
+							<data>Coordenadas planetarias</data>
+							<data>Encontrado usando tu visor de análisis O en el tablero de tu nave.</data>
+							<data>shared/axes</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" placeholder="+0.00, -0.00" data-dest="axes" id="axesInput">
+					</div>
+					<div class="table-cell text">
+						<div class="label-combo">
+							<label for="portalglyphsInput">Glifos:</label>
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
+								Borrar</button>
+						</div>
+						<button class="tooltip">
+							<data>Encontrado en modo foto. Los glifos son específicos de cada planeta.</data>
+							<data>Glifos</data>
+							<data>
+								Encontrado en modo foto. Los glifos son específicos de cada planeta.
+								<iframe src="https://nmspar.vercel.app/" sandbox="allow-scripts allow-same-origin"
+									title="Lector de Glifos" class="explanation-embed" width="450" height="300">Lector de Glifos</iframe>
+							</data>
+							<data>shared/glyphs</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
+					</div>
+					<div class="tableHeader data">
+						<div id="portalglyphButtons"></div>
+						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
+					</div>
+					<div class="table-cell text">
+						<label for="typeInput">Tipo de base:</label>
+            </div>
+          <div class="table-cell data">
+						<select data-dest="type" id="typeInput">
+							<option value="Artistic">Artística</option>
+							<option value="Embassy">Embajada</option>
+							<option value="Farm">Granja</option>
+							<option value="Headquarters">Cuartel general</option>
+							<option value="Industrial">Industrial</option>
+							<option value="Memorial">Memorial</option>
+              <option value="Residential">Residencial</option>
+						</select>
+					</div>
+					<div class="table-cell text">
+						<label>Modo de juego:</label>
+						<button class="tooltip">
+							<data>Modo de juego del guardado sobre el que se construyó esta base.</data>
+							<data>Modo de juego</data>
+							<data>Modo de juego del guardado en el que se construyó esta base.<br>Encontrado en el menú principal:</data>
+							<data>shared/gamemode</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<select data-dest="mode" id="modeInput">
+							<option value="Normal">Normal</option>
+							<option value="Relaxed">Relajado</option>
+							<option value="Survival">Survival</option>
+							<option value="Permadeath">Muerte permanente</option>
+							<option value="Creative">Creativo</option>
+							<option value="Custom">Personalizada</option>
+						</select>
+					</div>
+					<div class="table-cell text">
+						<label>Plataforma:</label>
+					</div>
+					<div class="table-cell data">
+						<select data-dest="platform" id="platformInput">
+							<option value="PC">PC</option>
+							<option value="PS">PlayStation</option>
+							<option value="XB">Xbox</option>
+							<option value="NS">Switch</option>
+              <option value="Mac">Mac</option>
+						</select>
+					</div>
+					<div class="table-cell text">
+						<label>Características:</label>
+					</div>
+					<div class="table-cell data">
+						<div class="checkboxes-grid">
+							<label class="checkbox" for="farmCheckbox"><input type="checkbox" id="farmCheckbox"
+									value="Yes" data-checkbox-unchecked="No" data-dest-checkbox="farm"><span
+									class="checkbox-label">Granja</span></label>
+							<label class="checkbox" for="geobayCheckbox"><input type="checkbox" id="geobayCheckbox"
+									value="Yes" data-checkbox-unchecked="No" data-dest-checkbox="geobay"><span
+									class="checkbox-label">Geobahía</span></label>
+							<label class="checkbox" for="landingPadCheckbox"><input type="checkbox"
+									id="landingPadCheckbox" value="Yes" data-checkbox-unchecked="No"
+									data-dest-checkbox="landingpad"><span class="checkbox-label">Plataforma de aterrizaje
+								  </span></label>
+							<label class="checkbox" for="arenaCheckbox"><input type="checkbox" id="arenaCheckbox"
+									value="Yes" data-checkbox-unchecked="No" data-dest-checkbox="arena"><span
+									class="checkbox-label">Arena</span></label>
+							<label class="checkbox" for="terminalCheckbox"><input type="checkbox" id="terminalCheckbox"
+									value="Yes" data-checkbox-unchecked="No" data-dest-checkbox="terminal"><span
+									class="checkbox-label">Terminal de comercio galáctico</span></label>
+							<label class="checkbox" for="racetrackCheckbox"><input type="checkbox"
+									id="racetrackCheckbox" value="Yes" data-checkbox-unchecked="No"
+									data-dest-checkbox="racetrack"><span class="checkbox-label">Circuito</span></label>
+						</div>
+					</div>
+					<div class="table-cell text">
+						<label>¿Perteneces a un gremio?</label>
+					</div>
+            <div class="table-cell data">
+            <input type="text" placeholder="Gremio que pertenezcas dentro de tu hub (si tiene)" data-dest="researchteam" id="researchteamInput">
+					</div>
+					<div class="tableHeader text sectionToggle">
+						<p>Censo:</p>
+						<button class="button" id="censusHideButton">Ocultar</button>
+          </div>
+					<div data-section="census" class="table-cell text">
+						<label for="censusPlayerInput">¿Nombre del jugador en NMS?</label>
+						<button class="tooltip">
+							<data>Tu nombre en el juego.</data>
+							<data>Nombre del jugador</data>
+							<data>Tu nombre dentro del juego. No incluyas ningún título dentro del juego.</data>
+							<data>base/playerName</data>
+						</button>
+					</div>
+					<div data-section="census" class="table-cell data">
+						<input type="text" data-dest="censusplayer" id="censusPlayerInput">
+					</div>
+					<div data-section="census" class="table-cell text">
+						<label for="censusRedditInput">¿Nombre del jugador en Reddit?</label>
+						<button class="tooltip">
+							<data>Tu nombre en Reddit. "u/" no es necesario.</data>
+						</button>
+					</div>
+					<div data-section="census" class="table-cell data">
+						<input type="text" data-dest-noauto="censusreddit" id="censusRedditInput">
+					</div>
+					<div data-section="census" class="table-cell text">
+						<label for="censusDiscordInput">¿Nombre del jugador en Discord?</label>
+						<button class="tooltip">
+							<data>Tu nombre de Discord. Por favor proporcione su nombre de usuario, no su apodo.</data>
+						</button>
+					</div>
+					<div data-section="census" class="table-cell data">
+						<input type="text" data-dest="censusdiscord" id="censusDiscordInput">
+					</div>
+					<div data-section="census" class="table-cell text">
+						<label for="censusFriendInput">¿Código de amigo del NMS del jugador?</label>
+						<button class="tooltip">
+							<data>Se puede encontrar en las Opciones.</data>
+							<data>Código de amigo de NMS</data>
+							<data>
+								Puedes encontrar tu código de amigo en las Opciones. &rarr; Red  &rarr; Ver No Man's Sky
+								Lista de Amigos &rarr; Mostrar Mi Código de Amigo del No
+								Man's Sky
+							</data>
+							<data>base/friendCode</data>
+						</button>
+					</div>
+					<div data-section="census" class="table-cell data">
+						<input type="text" data-dest-noauto="censusfriend" maxlength="15" id="censusFriendInput">
+					</div>
+					<div data-section="census" class="table-cell text">
+						<label for="censusArrivalInput">Cuando llegaste a formar parte de tu Hub?</label>
+					</div>
+					<div data-section="census" class="table-cell data">
+						<input type="date" data-dest-noauto="censusarrival" id="censusArrivalInput">
+					</div>
+					<div data-section="census" class="table-cell text">
+						<label for="censusShowInput">Crear entrada en el censo:</label>
+					</div>
+					<div data-section="census" class="table-cell data">
+						<input type="checkbox" id="censusShowInput" value="Y" data-checkbox-unchecked=""
+							data-dest-checkbox="censusshow">
+					</div>
+					<div class="tableHeader data no-flex">
+						<label for="layoutInput">Plano de la Base:</label>
+            <button clase="tooltip">
+							<data>
+								Se recomienda usar el traductor de Google ya que esta parte tiene que estar en Inglés y no puede ser predefinida.
+							</data>
+						</button>
+						<textarea id="layoutInput" data-dest="layout"
+							placeholder="¿Cómo es la base?"></textarea>
+					</div>
+					<div class="tableHeader data no-flex">
+						<label for="featuresInput">Features:</label>
+            <select id="featuresInput" data-dest="features" multiple>
+              <option value="Exocraft Summoning Station">Exocraft Summoning Station</option>
+              <option value="Pilgrim Geobay">Pilgrim Geobay</option>
+              <option value="Nomad Geobay">Nomad Geobay</option>
+              <option value="Roamer Geobay">Roamer Geobay</option>
+              <option value="Colossus Geobay">Colossus Geobay</option>
+              <option value="Message Module">Message Module</option>
+              <option value="Signal Booster">Signal Booster</option>
+              <option value="Save Beacon">Save Beacon</option>
+              <option value="Save Point">Save Point</option>
+              <option value="Communications Station">Communications Station</option>
+              <option value="Atmosphere Harvester">Atmosphere Harvester</option>
+              <option value="Autonomous Mining Unit">Autonomous Mining Unit</option>
+              <option value="Portable Refiner">Portable Refiner</option>
+              <option value="Base Computer">Base Computer</option>
+              <option value="Oxygen Harvester">Oxygen Harvester</option>
+              <option value="Blueprint Analyser">Blueprint Analyser</option>
+              <option value="Marine Shelter">Marine Shelter</option>
+              <option value="Landing Pad">Landing Pad</option>
+              <option value="Base Teleport Module">Base Teleport Module</option>
+              <option value="Base Salvage Capsule">Base Salvage Capsule</option>
+              <option value="Galactic Trade Terminal">Galactic Trade Terminal</option>
+              <option value="Health Station">Health Station</option>
+              <option value="Hazard Protection Unit">Hazard Protection Unit</option>
+              <option value="Medium Refiner">Medium Refiner</option>
+              <option value="Large Refiner">Large Refiner</option>
+              <option value="Appearance Modifier">Appearance Modifier</option>
+              <option value="Albumen Pearl Orb">Albumen Pearl Orb</option>
+              <option value="Albumen Pearl">Albumen Pearl</option>
+              <option value="Echinocactus">Echinocactus</option>
+              <option value="Cactus Flesh">Cactus Flesh</option>
+              <option value="Gutrot Flower">Gutrot Flower</option>
+              <option value="Faecium">Faecium</option>
+              <option value="Frostwort">Frostwort</option>
+              <option value="Frost Crystal">Frost Crystal</option>
+              <option value="Fungal Cluster">Fungal Cluster</option>
+              <option value="Fungal Mould">Fungal Mould</option>
+              <option value="Gamma Weed">Gamma Weed</option>
+              <option value="Gamma Root">Gamma Root</option>
+              <option value="Gravitino Host">Gravitino Host</option>
+              <option value="Gravitino Ball">Gravitino Ball</option>
+              <option value="Mordite Root">Mordite Root</option>
+              <option value="Mordite">Mordite</option>
+              <option value="NipNip">NipNip</option>
+              <option value="NipNip Buds">NipNip Buds</option>
+              <option value="Solar Vine">Solar Vine</option>
+              <option value="Solanium">Solanium</option>
+              <option value="Star Bramble">Star Bramble</option>
+              <option value="Star Bulb">Star Bulb</option>
+              <option value="Venom Urchin">Venom Urchin</option>
+              <option value="Sac Venom">Sac Venom</option>
+              <option value="Weapons Terminal">Weapons Terminal</option>
+              <option value="Science Terminal">Science Terminal</option>
+              <option value="Exocraft Terminal">Exocraft Terminal</option>
+              <option value="Construction Terminal">Construction Terminal</option>
+              <option value="Agricultural Terminal">Agricultural Terminal</option>
+            </select>
+					</div>
+					<div class="tableHeader data no-flex">
+						<label for="addInfoInput">Información Adicional:</label>
+						<textarea id="addInfoInput" data-dest="addInfo"
+							placeholder="Cualquier recurso cercano, trampas para turistas, otras bases."></textarea>
+					</div>
+				</div>
+				<div id="galleryInput"></div>
+				<div id="galleryItems" class="gallery-items-wrapper"></div>
+				<div id="actions" class="buttons"></div>
+			</div>
+			<div id="output" class="column is-full-mobile">
+				<div class="wikiText" id="fullArticle" data-link="page">
+					<div>{{Version|<output id="release" name="release"></output>}}</div>
+					<!-- <div>{{<output id="civStub"></output>}}</div> -->
+					<div>{{Base infobox</div>
+					<div>| name = <output id="name" name="name"></output></div>
+					<div>| image = <output id="image"></output></div>
+					<div>| civilized = Royal Space Society<output id="hub" name="hub"></output></div>
+					<div>| researchteam = <output id="researchteam"></output></div>
+					<div>| builderlink = <output id="builderlink"></output></div>
+					<div>| builder = <output id="builder"></output></div>
+					<div>| galaxy = <output id="galaxy" name="galaxy"></output></div>
+					<div>| region = <output id="region"></output></div>
+					<div>| system = <output id="system" name="system"></output></div>
+					<div>| planet = <output id="planet"></output></div>
+					<div>| moon = <output id="moon"></output></div>
+					<div>| axes = <output id="axes"></output></div>
+					<div>| coordinates = {{Glyphs2Coords|<output id="portalglyphs" name="portalglyphs"></output>}}</div>
+					<div>| portalglyphs = <output id="portalglyphs1" name="portalglyphs"></output></div>
+					<div>| type = <output id="type"></output></div>
+					<div>| mode = <output id="mode"></output></div>
+					<div>| platform = <output id="platform"></output></div>
+					<div>| release = <output id="release1" name="release"></output></div>
+					<div>| farm = <output id="farm"></output></div>
+					<div>| geobay = <output id="geobay"></output></div>
+					<div>| landingpad = <output id="landingpad"></output></div>
+					<div>| arena = <output id="arena"></output></div>
+					<div>| terminal = <output id="terminal"></output></div>
+					<div>| racetrack = <output id="racetrack"></output></div>
+					<div>| censusplayer = <output id="censusplayer"></output></div>
+					<div>| censusreddit = <output id="censusreddit"></output></div>
+					<div>| censusdiscord = <output id="censusdiscord"></output></div>
+					<div>| censusfriend = <output id="censusfriend"></output></div>
+					<div>| censusarrival = <output id="censusarrival"></output></div>
+					<div>| censusrenewal = <output id="censusrenewal"></output></div>
+					<div>| censusshow = <output id="censusshow"></output></div>
+					<div>}}</div>
+					<div>'''<output id="name1" name="name"></output>''' is a player base.</div>
+					<br>
+
+					<div>==Summary==</div>
+					<div>'''<output id="name2" name="name"></output>''' is a [[Habitable Base|player base]], located
+						on the <output id="celestialBody"></output> in the [[<output id="system1"
+							name="system"></output>]] system.
+					</div>
+					<br>
+					<div>==Layout==</div>
+					<div><output id="layout"></output></div>
+					<br>
+
+					<div>==Features==</div>
+					<div><output id="features"></output></div>
+					<br>
+
+					<div>==Additional Information==</div>
+					<div><span data-add-info=""></span><output id="addInfo"></output></div>
+					<div><span data-add-info="<br>"></span><output id="docby"></output></div>
+					<br>
+
+					<div id="gallery"></div>
+				</div>
+			</div>
+		</main>
+	</div>
+	<footer id="footer" class="footer"></footer>
+</body>
+</html>
