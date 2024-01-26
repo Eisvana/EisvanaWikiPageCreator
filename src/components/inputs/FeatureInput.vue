@@ -76,13 +76,13 @@ watchEffect(() => {
 
 <template>
   <Multiselect
-    class="select-multi"
     v-model="value"
     :options="options"
     :multiple="true"
     :close-on-select="false"
     :label="'spanish'"
     :track-by="'english'"
+    :selectedLabel="'Seleccionado'"
     :select-label="'Presiona enter para seleccionar'"
     :deselect-label="'Presiona enter para eliminar'"
     placeholder="Seleccionar"
