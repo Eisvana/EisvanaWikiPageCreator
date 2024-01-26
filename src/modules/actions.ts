@@ -200,7 +200,7 @@ export function toggleRedirect() {
 	const redirectNote = document.createElement('p');
 	redirectNote.id = 'redirectNote';
 	redirectNote.classList.add('has-text-centered');
-	redirectNote.innerText = 'Please create a redirect for your page!';
+	redirectNote.innerText = '¡Por favor crea una redirección para tu página!';
 
 	if (!globalFunctions.redirectPage()) {
 		redirectIDs.forEach(() => {
@@ -211,7 +211,7 @@ export function toggleRedirect() {
 		return;
 	}
 	const copyRedirect = document.createElement('button');
-	copyRedirect.innerText = 'Copy Redirect Code';
+	copyRedirect.innerText = 'Copiar código de redireccionamiento';
 	copyRedirect.type = 'button';
 
 	const createRedirect = document.createElement('a');

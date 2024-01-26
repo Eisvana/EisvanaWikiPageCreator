@@ -4,6 +4,13 @@
 
 import { checkboxWikiCode, errorMessage, regexMatch, wikiCode } from "../../common";
 import { globalElements } from "../../variables/objects";
+import { createApp } from 'vue';
+import App from '../../components/inputs/FeatureInput.vue';
+
+const app = createApp(App);
+
+app.mount('#featuresInput');
+
 
 /**
  * Validates Discord tags.

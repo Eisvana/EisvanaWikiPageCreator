@@ -28,7 +28,7 @@ export function validateDiscord() {
 
 	const hasValidNewTag = /^[a-z0-9._]+$/.test(tag);
 
-	errorMessage(element, !tag || hasValidNewTag ? '' : 'Invalid Discord tag. Please give your username, not your display name.');
+	errorMessage(element, !tag || hasValidNewTag ? '' : 'Etiqueta de Discord no válida. Por favor proporcione su nombre de usuario, no su apodo.');
 }
 
 /**
@@ -48,7 +48,7 @@ export function validateReddit() {
 		}
 	})();
 	if (redditName.includes(' ')) {
-		errorMessage(element, 'Reddit name must not include spaces');
+		errorMessage(element, 'El nombre de Reddit no debe incluir espacios.');
 		return;
 	} else {
 		errorMessage(element);
