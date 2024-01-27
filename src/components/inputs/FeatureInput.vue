@@ -20,7 +20,7 @@ const options: Option[] = [
   { english: 'Atmosphere Harvester', spanish: 'Recolector de atmósfera' },
   { english: 'Autonomous Mining Unit', spanish: 'Unidad de Extracción Autónoma' },
   { english: 'Portable Refiner', spanish: 'Refinería portátil' },
-  { english: 'Base Computer', spanish: 'Ordenador de base' },
+  // { english: 'Base Computer', spanish: 'Ordenador de base' },
   { english: 'Oxygen Harvester', spanish: 'Recolector de oxígeno' },
   { english: 'Blueprint Analyser', spanish: 'Analizador de planos' },
   { english: 'Marine Shelter', spanish: 'Refugio marino' },
