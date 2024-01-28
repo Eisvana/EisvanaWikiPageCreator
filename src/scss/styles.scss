@@ -81,6 +81,11 @@ article img {
   gap: 1rem;
 }
 
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 // .select2.select2-container {
 //   width: 100% !important;
 // }

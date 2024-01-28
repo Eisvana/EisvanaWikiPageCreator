@@ -154,7 +154,7 @@ export function validateGlyphSettings(input: HTMLInputElement) {
   const glyphString = input.value;
   const allRegions = structuredClone(regions);
   Object.freeze(allRegions);
-  const region = validateGlyphs(glyphString);
+  const region = validateGlyphs(glyphString, regions);
   glyphError(region, input);
   const settingsElement = globalElements.input.settings as HTMLDialogElement;
   const closeButton = settingsElement.querySelector('form button.is-primary') as HTMLButtonElement;

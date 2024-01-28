@@ -9,6 +9,20 @@ import { regions, galaxies } from "../variables/regions";
 
 const validPortalKeys = '0123456789ABCDEF';
 
+const portalglyphsInput = document.getElementById('portalglyphsInput');
+const glyphDeleteButton = document.getElementById('glyphDeleteButton');
+
+function updateButtonVisibility() {
+  if (!(portalglyphsInput instanceof HTMLInputElement) || !(glyphDeleteButton instanceof HTMLButtonElement)) return;
+  glyphDeleteButton.style.display = portalglyphsInput.value ? 'block' : 'none';
+}
+
+// Updates button visibility when input field value changes
+portalglyphsInput?.addEventListener('input', updateButtonVisibility);
+
+// Update button visibility on page loads
+updateButtonVisibility();
+
 /**
  * Adds portal glyph buttons to a specified element.
  * @param {HTMLElement} element - The element to which the buttons should be added.
@@ -76,7 +90,7 @@ export function displayGlyphs() {
 	const dest = input.dataset.destNoauto;
 	wikiCode(glyphString, dest);
 	glyphRegion(glyphString);
-  glyphRegion2(glyphString);
+  glyphGalaxy(glyphString);
 	if (getDestElements('galacticCoords').length) wikiCode(glyphs2Coords(glyphString), 'galacticCoords')
 }
 
@@ -135,96 +149,35 @@ export function validateGlyphInput(glyphString: string): string {
 		.substring(0, 12);		// NoSonar max glyph length
 }
 
-/**
- * This function validates a string of glyphs and returns the region object.
- *
- * @param {string} glyphs - The string of glyphs to validate
- * @returns {Object|string} - The region object or an empty string if the input does not contain 12 glyphs
- */
-export function validateGlyphs(glyphs: string) {
-	// Checks if the input contains exactly 12 glyphs
-	if (glyphs.length !== 12) return '';		// NoSonar 12 is the expected glyph length, because glyph strings are always 12 digits long
-
-	// Gets the region list based on the civilization short name and extracts the region glyphs
-	const regionList = regions;
-	const regionGlyphs = glyphs.substring(4);	// NoSonar this extracts the region glyphs, which start at glyph index 4.
-
-	// Finds the corresponding region object based on the region glyphs and returns it
-	const region = regionList[regionGlyphs];
-	return region;
+export function validateGlyphs(glyphs: string, list: any) {
+	if (glyphs.length !== 12) return '';
+	const glyphsExtracted = glyphs.substring(4);
+	return list[glyphsExtracted];
 }
 
-/**
- * Validates whether a set of glyphs is a valid region and outputs the corresponding Wiki code for it.
- * @param {Array<string>} glyphs - An array of Portal Glyph strings.
- * @returns {string} The corresponding Wiki code for the valid region, or an empty string if the region is invalid.
- */
-export function glyphRegion(glyphs: string) {
+export function glyphHandler(glyphs: string, list: any, type: string) {
 	const glyphElement = globalElements.input.portalglyphsInput;
-	let region = '';
-	if (glyphs?.length == 12) {		// NoSonar this is the normal expected glyph string length
-		region = validateGlyphs(glyphs);
+	let item = '';
+	if (glyphs?.length == 12) {
+		item = validateGlyphs(glyphs, list);
 	}
-	glyphError(region, glyphElement as HTMLElement);
-	wikiCode(region ?? '', 'region');
+	glyphError(item, glyphElement as HTMLElement);
+	wikiCode(item ?? '', type);
 }
 
-/**
- * Displays an error message for a glyph element with an optional invalid region message.
- *
- * @param {string} region - The region to validate. If undefined, the error message will display a link to a list of valid regions.
- * @param {HTMLElement} glyphElement - The HTML element representing the incorrect glyph.
- *
- * @returns {void}
- */
-export function glyphError(region: string | undefined, glyphElement: HTMLElement) {
+export function glyphRegion(glyphs: string) {
+	glyphHandler(glyphs, regions, 'region');
+}
+
+export function glyphGalaxy(glyphs: string) {
+	glyphHandler(glyphs, galaxies, 'galaxy');
+}
+
+export function glyphError(item: string | undefined, glyphElement: HTMLElement) {
 	errorMessage(glyphElement,
-		(region === undefined)
+		(item === undefined)
     ? 'Los glifos introducidos no forman parte de la RSS. Consulte <i><a href="https://nomanssky.fandom.com/es/wiki/Regiones_RSS" target="_blank" rel="noopener noreferrer">regiones RSS</a></i> para obtener una lista de regiones válidas'
     : '');
-}
-
-export function validateGlyphs2(glyphs: string) {
-	// Checks if the input contains exactly 12 glyphs
-	if (glyphs.length !== 12) return '';		// NoSonar 12 is the expected glyph length, because glyph strings are always 12 digits long
-
-	// Gets the galaxy list based on the civilization short name and extracts the galaxy glyphs
-	const galaxyList = galaxies;
-	const galaxyGlyphs = glyphs.substring(4);	// NoSonar this extracts the region glyphs, which start at glyph index 4.
-
-	// Finds the corresponding region object based on the region glyphs and returns it
-	const galaxy = galaxyList[galaxyGlyphs];
-	return galaxy;
-}
-
-/**
- * Validates whether a set of glyphs is a valid region and outputs the corresponding Wiki code for it.
- * @param {Array<string>} glyphs - An array of Portal Glyph strings.
- * @returns {string} The corresponding Wiki code for the valid region, or an empty string if the region is invalid.
- */
-export function glyphRegion2(glyphs: string) {
-	const glyphElement = globalElements.input.portalglyphsInput;
-	let galaxy = '';
-	if (glyphs?.length == 12) {		// NoSonar this is the normal expected glyph string length
-		galaxy = validateGlyphs2(glyphs);
-	}
-	glyphError(galaxy, glyphElement as HTMLElement);
-	wikiCode(galaxy ?? '', 'galaxy');
-}
-
-/**
- * Displays an error message for a glyph element with an optional invalid region message.
- *
- * @param {string} galaxy - The region to validate. If undefined, the error message will display a link to a list of valid regions.
- * @param {HTMLElement} glyphElement - The HTML element representing the incorrect glyph.
- *
- * @returns {void}
- */
-export function glyphError2(galaxy: string | undefined, glyphElement: HTMLElement) {
-	errorMessage(glyphElement,
-		(galaxy === undefined)
-			? 'Los glifos introducidos no son parte de la RSS. Consulte <a href="https://nomanssky.fandom.com/es/wiki/Regiones_RSS" target="_blank" rel="noopener noreferrer">regiones RSS</a> para obtener una lista de regiones válidas'
-			: '');
 }
 
 /**
