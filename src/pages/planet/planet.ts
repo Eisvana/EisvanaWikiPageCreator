@@ -125,7 +125,7 @@ export function generateGalleryArray() {
   const waterCaptions = ['Coast Area', 'Underwater'];
 
   // add water pics before AV
-  if (pageData.terrain !== 'Pangean') {
+  if (pageData.terrain !== 'Waterless') {
     const avIndex = captions.indexOf('Analysis Visor');
     captions.splice(avIndex, 0, ...waterCaptions);
   }
@@ -136,7 +136,7 @@ export function generateGalleryArray() {
 export function autoWater() {
   const terrain = pageData.terrain;
   if (typeof terrain !== 'string') return;
-  const hasWaterTerrain = terrain !== 'Pangean';
+  const hasWaterTerrain = terrain !== 'Waterless';
   const waterValue = hasWaterTerrain ? 'Yes' : 'No';
   wikiCode(waterValue, 'water');
 }
