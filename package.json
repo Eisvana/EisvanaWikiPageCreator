@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
-    "@vueuse/core": "^10.7.2",
+    "@vueuse/core": "^10.8.0",
     "bulma": "^0.9.4",
     "md5-hex": "^5.0.0",
     "pinia": "^2.1.7",
