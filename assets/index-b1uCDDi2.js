@@ -1,0 +1,1 @@
+import"./links-Ch0PFcvJ.js";import"./main-cafsoV0A.js";import"./Explanation.vue_vue_type_script_setup_true_lang-C1cKpsuW.js";import"./mineralDatalists-D0bIAFGk.js";const i="wiki.eisvana.com"===window.location.host,o=document.querySelector('a[href=".."]');o&&i&&(o.href="https://eisvana.com");
