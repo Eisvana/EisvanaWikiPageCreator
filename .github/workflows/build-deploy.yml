@@ -24,7 +24,7 @@ jobs:
       - name: Build App
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
-            sed -i 's_EisvanaWikiPageCreator_EisvanaWikiPageCreator/staging_g' vite.config.ts
+            echo 'VITE_BASE_PATH=/staging/' > .env
           fi
 
           npm ci
