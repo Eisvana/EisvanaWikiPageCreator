@@ -4,12 +4,12 @@ import { regions } from '../variables/regions';
 import { sanitiseString } from '@/common';
 
 interface StaticPageData {
-  route: string;
+  route: string | undefined;
   fullArticleElement: HTMLDivElement | null;
   debug: boolean;
 }
 
-const route = window.location.pathname.split('/')!.at(-1)!.slice(0, -5); // NoSonar getting the current filename without the "html" ending
+const route = window.location.pathname.split('/')!.at(-1)?.slice(0, -5); // NoSonar getting the current filename without the "html" ending
 
 const researchteamDefaultExceptions = ['base'];
 
@@ -19,7 +19,7 @@ export const departments = {
   EBC: 'Eisvana Builder Collective',
 };
 
-if (researchteamDefaultExceptions.includes(route)) departments[''] = '';
+if (route && researchteamDefaultExceptions.includes(route)) departments[''] = '';
 
 export const useStaticPageDataStore = defineStore('staticPageData', {
   state: (): StaticPageData => ({
