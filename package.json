@@ -16,7 +16,7 @@
     "playwright": "^1.42.1",
     "prettier": "^3.2.5",
     "sass": "^1.72.0",
-    "typescript": "^5.4.2",
+    "typescript": "^5.4.3",
     "vite": "^5.2.6",
     "vitest": "^1.2.2",
     "vue": "^3.4.21"
