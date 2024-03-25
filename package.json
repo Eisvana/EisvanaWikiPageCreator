@@ -24,7 +24,7 @@
   "dependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
     "@vueuse/core": "^10.9.0",
-    "bulma": "^0.9.4",
+    "bulma": "^1.0.0",
     "md5-hex": "^5.0.0",
     "pinia": "^2.1.7",
     "sortablejs": "^1.15.2",
