@@ -5,6 +5,7 @@
  * @constant
  */
 export const versions = [
+	'Orbital',
 	'Omega',
 	'Echoes',
 	'Singularity',
