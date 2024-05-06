@@ -10,7 +10,7 @@
     "format": "prettier --write src/"
   },
   "devDependencies": {
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.12.8",
     "@types/sortablejs": "^1.15.1",
     "@vitest/browser": "^1.5.2",
     "playwright": "^1.43.1",
