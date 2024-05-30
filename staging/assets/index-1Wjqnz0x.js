@@ -1,1 +1,0 @@
-import"./links-B74d3Ke3.js";import"./main-DkhY98nZ.js";import"./runtime-dom.esm-bundler-KGZqn012.js";const i="wiki.eisvana.com"===window.location.host,o=document.querySelector('a[href=".."]');o&&i&&(o.href="https://eisvana.com");
