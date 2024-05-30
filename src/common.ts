@@ -46,7 +46,7 @@ function getInputData() {
 export function versionDropdown() {
   const texts = structuredClone(versions);
   const index = texts.indexOf('SentinelUp');
-  texts.splice(index, 1, 'Sentinel');
+  if (index !== -1) texts.splice(index, 1, 'Sentinel');
   const dropdownElement = globalElements.input.version;
   if (!dropdownElement) return;
 
