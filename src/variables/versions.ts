@@ -4,34 +4,8 @@
  * @type {string[]}
  * @constant
  */
-export const versions = [
+export const versions: string[] = [
+	'Adrift',
 	'Orbital',
 	'Omega',
-	'Echoes',
-	'Singularity',
-	'Interceptor',
-	'Fractal',
-	'Waypoint',
-	'Endurance',
-	'Outlaws',
-	'SentinelUp',
-	'Frontiers',
-	'Prisms',
-	'Expeditions',
-	'Companions',
-	'NextGen',
-	'Origins',
-	'Desolation',
-	'Crossplay',
-	'ExoMech',
-	'Living Ship',
-	'Synthesis',
-	'Beyond',
-	'Visions',
-	'Abyss',
-	'NEXT',
-	'Atlas Rises',
-	'Pathfinder',
-	'Foundation',
-	'Release',
 ]
