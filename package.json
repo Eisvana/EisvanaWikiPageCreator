@@ -12,7 +12,7 @@
     "test-ci": "vitest run"
   },
   "devDependencies": {
-    "@types/node": "^20.12.12",
+    "@types/node": "^20.14.0",
     "@types/sortablejs": "^1.15.1",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitest/browser": "^1.6.0",
