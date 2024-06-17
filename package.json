@@ -14,7 +14,7 @@
   "devDependencies": {
     "@types/node": "^20.14.2",
     "@types/sortablejs": "^1.15.1",
-    "@vitejs/plugin-vue": "^5.0.4",
+    "@vitejs/plugin-vue": "^5.0.5",
     "@vitest/browser": "^1.6.0",
     "@vitest/coverage-v8": "^1.6.0",
     "@vue/test-utils": "^2.4.6",
