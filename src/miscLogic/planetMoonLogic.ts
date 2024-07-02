@@ -39,18 +39,10 @@ import type { StdObj } from '../types/objects';
 const minResourceSections = 3;
 const maxResourceSections = 5;
 
-/**
- * Determines the appropriate verb to use based on the given number, and sends the output to the
- * specified destination if provided.
- *
- * @param {number} number - The number used to decide which verb to use.
- * @param {string} [dest] - An optional destination to send the output of the wikiCode() function to.
- * @returns {string} Either "is" or "are," depending if the number is singular or plural.
- */
-export function plural(number: number, dest: string = ''): string | void {
-  const word = number === 1 ? 'is' : 'are';
-  if (!dest) return word;
-  wikiCode(word, dest);
+export function faunaSentencePlural() {
+  const creatureCount = pageData.faunaNumber; // this is a number in a string
+  const sentence = creatureCount === '1' ? `is ${creatureCount} creature` : `are ${creatureCount} creatures`;
+  wikiCode(sentence, 'faunaNumberSentence');
 }
 
 /**
