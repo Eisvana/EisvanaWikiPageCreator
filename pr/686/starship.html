@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Eisvana Wiki Page Creator - Starship</title>
+	<meta name="application-name" content="Eisvana Wiki Page Creator">
+	<meta name="description"
+		content="Easily generate the wikicode to create a starship discovery page for Eisvana on the No Man's Sky Wiki!">
+	<meta name="theme-color" content="#280033">
+	<meta name="keywords" content="No Man's Sky, NMS, Wiki, Fandom, Eisvana, Page Creator, Starship">
+	<script src="./src/pages/starship" type="module"></script>
+</head>
+
+<body>
+	<div class="container">
+		<nav><a href="./" title="Main page">&larr; Return to main page</a></nav>
+		<h1 class="title is-3">Eisvana Wiki Page Creator - Starship</h1>
+		<dialog id="explanation" class="modal-content content"></dialog>
+
+		<main class="columns is-desktop">
+			<div id="input" class="column is-full-mobile">
+				<div class="table">
+					<div class="table-cell text">
+						<label>Current release:</label>
+					</div>
+					<div class="table-cell data">
+						<select id="versionInput" data-dest="release"></select>
+					</div>
+					<div class="table-cell text">
+						<label for="nameInput">Name of the starship:</label>
+						<button class="tooltip">
+							<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o). Click here to view
+								Greek characters.</data>
+							<data>Ship Name</data>
+							<data>
+								Enter exactly as seen in game. Watch out for 0 (zero) and O (o). Also put Greek
+								characters exactly as they are in game when documenting interceptors. You can copy from
+								this list:
+								<div>
+									<span title="Alpha">α</span>,
+									<span title="Beta">β</span>,
+									<span title="Gamma">γ</span>,
+									<span title="Delta">δ</span>,
+									<span title="Epsilon">ε</span>,
+									<span title="Zeta">ζ</span>,
+									<span title="Eta">η</span>,
+									<span title="Theta">θ</span>,
+									<span title="Iota">ι</span>,
+									<span title="Kappa">κ</span>,
+									<span title="Lambda">λ</span>,
+									<span title="Mu">μ</span>,
+									<span title="Nu">ν</span>,
+									<span title="Xi">ξ</span>,
+									<span title="Omicron">ο</span>,
+									<span title="Pi">π</span>,
+									<span title="Rho">ρ</span>,
+									<span title="Sigma">σ/ς/ϲ</span>,
+									<span title="Tau">τ</span>,
+									<span title="Upsilon">υ</span>,
+									<span title="Phi">φ</span>,
+									<span title="Chi">χ</span>,
+									<span title="Psi">ψ</span>,
+									<span title="Omega">ω</span>
+								</div>
+								Please also create a redirect with the Greek letter written out (for example from
+								"Beta-Hope" to "β-Hope").
+								For more detailed information, see <a
+									href="No_Mans_Sky_Wiki:Explained_-_Interceptor_Ship_Names" data-wiki>No Mans Sky
+									Wiki:Explained - Interceptor Ship Names</a>
+								<div class="mt-2 has-text-weight-bold">Important for Interceptors:</div>
+								You must reload your game after claiming the interceptor in order to get the correct
+								name!
+							</data>
+							<data>ship/shipName</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="name" id="nameInput">
+					</div>
+					<div class="table-cell text">
+						<label for="fileInput">Main image name, including file extension:</label>
+						<button class="tooltip" name="fileUploadTooltip">
+							<data>Picture won't be uploaded to the wiki. This is only to autofill the image name.</data>
+							<data>File Upload</data>
+							<data>
+								Any pictures you upload here won't be uploaded to the wiki. This is only to autofill the
+								image name. Maximum filesize is 10MB.
+								You can upload your pictures to the wiki on <a href="Special:Upload?multiple=true"
+									data-wiki>Special:Upload</a>
+								<iframe src="https://nmscd.com/Image-Compressor/" title="Image Compressor"
+									class="explanation-embed" width="450" height="300">Image Compressor</iframe>
+							</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" id="fileInput" data-dest="image" data-default="NmsMisc_NotAvailable.png">
+						<input type="file" id="fileUpload" accept="image/*">
+					</div>
+					<div class="table-cell text">
+						<label>Type of the starship:</label>
+						<button class="tooltip">
+							<data>The starship type can be seen on the ship scan.</data>
+							<data>Ship Type</data>
+							<data>The starship type can be seen on the ship scan. Living Ships are displayed as
+								"Alien"</data>
+							<data>ship/shipType</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<select data-dest="type" id="typeInput">
+							<option value="Fighter">Fighter</option>
+							<option value="Explorer">Explorer</option>
+							<option value="Hauler">Hauler</option>
+							<option value="Shuttle">Shuttle</option>
+							<option value="Solar">Solar</option>
+							<option value="Exotic">Exotic</option>
+							<option value="Interceptor">Interceptor</option>
+							<option value="Living Ship">Living Ship</option>
+							<option value="Freighter">Freighter</option>
+						</select>
+					</div>
+					<div class="table-cell text">
+						<label for="systemInput">Name of the system:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="system" id="systemInput">
+					</div>
+					<div class="table-cell text">
+						<label for="planetInput">Name of the planet:</label>
+						<button class="tooltip">
+							<data>Planet Name OR the planet circled by the moon where the starship can be found.</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="planet" id="planetInput">
+					</div>
+					<div class="table-cell text">
+						<label for="moonInput">Name of the moon (if ship is on moon):</label>
+						<button class="tooltip">
+							<data>If the ship is located on a moon. Leave blank if the starship is on a planet.</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="moon" id="moonInput">
+					</div>
+					<div class="table-cell text">
+						<label for="axesInput">Planetary coords:</label>
+						<button class="tooltip">
+							<data>Found using your analysis visor OR on your ship's dashboard.</data>
+							<data>Planetary Coordinates</data>
+							<data>Found using your analysis visor OR on your ship's dashboard.</data>
+							<data>shared/axes</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" id="axesInput" data-dest="axes" placeholder="+0.00, -0.00">
+					</div>
+					<div class="table-cell text">
+						<label>System economy:</label>
+						<button class="tooltip">
+							<data>Found in the exploration guide under "Economy".</data>
+							<data>Economy</data>
+							<data>Found in the exploration guide under "Economy".</data>
+							<data>ship/economy</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<select data-dest="economy" id="wealthInput">
+							<optgroup label="T3">
+								<option value="★★★ (Advanced)">Advanced</option>
+								<option value="★★★ (Affluent)">Affluent</option>
+								<option value="★★★ (Booming)">Booming</option>
+								<option value="★★★ (Flourishing)">Flourishing</option>
+								<option value="★★★ (High Supply)">High Supply</option>
+								<option value="★★★ (Opulent)">Opulent</option>
+								<option value="★★★ (Prosperous)">Prosperous</option>
+								<option value="★★★ (Wealthy)">Wealthy</option>
+							</optgroup><!-- here ends T3-->
+							<optgroup label="T2">
+								<!--here begins T2-->
+								<option value="★★ (Adequate)">Adequate</option>
+								<option value="★★ (Balanced)">Balanced</option>
+								<option value="★★ (Comfortable)">Comfortable</option>
+								<option value="★★ (Developing)">Developing</option>
+								<option value="★★ (Medium Supply)">Medium Supply</option>
+								<option value="★★ (Promising)">Promising</option>
+								<option value="★★ (Satisfactory)">Satisfactory</option>
+								<option value="★★ (Sustainable)">Sustainable</option>
+							</optgroup><!-- here ends T2-->
+							<optgroup label="T1">
+								<!--here begins T1-->
+								<option value="★ (Declining)">Declining</option>
+								<option value="★ (Destitute)">Destitute</option>
+								<option value="★ (Failing)">Failing</option>
+								<option value="★ (Fledgling)">Fledgling</option>
+								<option value="★ (Low Supply)">Low Supply</option>
+								<option value="★ (Struggling)">Struggling</option>
+								<option value="★ (Unsuccessful)">Unsuccessful</option>
+								<option value="★ (Unpromising)">Unpromising</option>
+							</optgroup>
+							<!--here ends T1-->
+							<optgroup label="Pirate">
+								<option value="💀 (Black Market)">Black Market</option>
+							</optgroup>
+							<!--here ends Pirate-->
+							<optgroup label="Abandoned">
+								<option value="Data Unavailable">Data Unavailable</option>
+							</optgroup>
+						</select>
+					</div>
+					<div class="table-cell text">
+						<div class="label-combo">
+							<label for="portalglyphsInput">Portalglyphs:</label>
+							<button class="button is-small is-danger" type="button" id="glyphDeleteButton">&larr;
+								Delete</button>
+						</div>
+						<button class="tooltip">
+							<data>Found in Photo Mode. Glyphs are specific to each planet.</data>
+							<data>Portalglyphs</data>
+							<data>
+								Found in Photo Mode. Glyphs are specific to each planet.
+								<iframe src="https://nmspar.vercel.app/" sandbox="allow-scripts allow-same-origin"
+									title="Glyph Reader" class="explanation-embed" width="450" height="300">Glyph
+									Reader</iframe>
+							</data>
+							<data>shared/glyphs</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" id="portalglyphsInput" data-dest-noauto="portalglyphs" maxlength="12">
+					</div>
+					<div class="tableHeader data">
+						<div id="portalglyphButtons"></div>
+						<output name="portalglyphs" id="portalglyphsPreview" class="glyph"></output>
+					</div>
+					<div class="table-cell text">
+						<label>Subtype:</label>
+						<button class="tooltip">
+							<data>Subtypes are defined by specific hull features of a ship.</data>
+							<data>Ship Subtype</data>
+							<data>
+								Subtypes are defined by specific hull features of a ship.<br>See the specific naming
+								conventions for your ship type:
+								<div class="dialog-center">
+									<ul class="dialog-list">
+										<li><a
+												href="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/c/c7/NmsStarship_FighterParts2.jpg">Fighter</a>
+										</li>
+										<li><a
+												href="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/2/2c/Explorer-parts-names.png">Explorer</a>
+										</li>
+										<li><a
+												href="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/1/13/NmsStarship_HaulerWings.png">Hauler</a>
+										</li>
+										<li><a
+												href="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/e/e4/Shuttle_Big_parts.png">Shuttle</a>
+										</li>
+										<li><a
+												href="https://static.wikia.nocookie.net/nomanssky_gamepedia/images/4/47/SolarBodies.png">Solar</a>
+										</li>
+										<li><a href="https://i.redd.it/8iwt7rmcg3d61.png">Living Ship</a></li>
+										<li><a href="Freighter_Types" data-wiki>Freighter</a></li>
+									</ul>
+								</div>
+							</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<select data-dest="subtype" id="subtypeInput">
+						</select>
+					</div>
+					<div class="table-cell text">
+						<label>Exotic type:</label>
+						<button class="tooltip">
+							<data>Subtypes are defined by specific hull features of the ship.</data>
+							<data>Exotic Subtype</data>
+							<data>
+								Subtypes are defined by specific hull features of the ship.<br>
+								See this <a
+									href="https://www.reddit.com/r/NMSGlyphExchange/comments/106qako/exotic_parts_naming_conventions_and_part_combo/">Reddit
+									post</a> for explanations of the different exotic subtypes.
+							</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<select data-dest="exotic" id="exoticInput">
+							<option value="Squid">Squid
+							<option value="Guppy">Guppy
+							<option value="Royal">Royal
+							<option value="Mosquito">Mosquito
+						</select>
+					</div>
+					<div class="table-cell text">
+						<label>Pilot faction:</label>
+					</div>
+					<div class="table-cell data">
+						<select data-dest="pilot" id="pilotInput">
+							<option value="Gek">Gek
+							<option value="Korvax">Korvax
+							<option value="Vy'keen">Vy'keen
+						</select>
+					</div>
+					<div class="table-cell text">
+						<label>Inventory:</label>
+						<button class="tooltip">
+							<data>Inventory sizes can be seen from certain ship parts.</data>
+							<data>Inventory Size</data>
+							<data>
+								Inventory sizes can be seen from certain ship parts. See the <a
+									href="Template:Ship_Parts_Catalogue" data-wiki>part catalogues</a> for the
+								individual ship types.<br>
+								Alternatively, you can compare your ship's inventory size to the inventory tables on the
+								<a href="Starship" data-wiki>Starship</a> wiki page to get your ship's inventory size.
+							</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<select data-dest="inventory" id="inventoryInput">
+						</select>
+					</div>
+					<div class="table-cell text">
+						<label>Class:</label>
+					</div>
+					<div class="table-cell data">
+						<select id="classInput" data-dest="class">
+							<option value="S">S</option>
+							<option value="A">A</option>
+							<option value="B">B</option>
+							<option value="C">C</option>
+						</select>
+					</div>
+					<div class="table-cell text">
+						<label for="damageBInput">Damage Potential:</label>
+						<button class="tooltip">
+							<data>Enter the "Core" value as seen on the ship's scan.</data>
+							<data>Damage</data>
+							<data>
+								Enter the "Core" value exactly as seen in the scan of the ship.<br>
+								It is preferred to enter the values as seen after buying, as they might change.<br>
+								If there is no core value, use the regular one.
+								<div class="mt-2 has-text-weight-bold">Important for Interceptors:</div>
+								You must reload your game after claiming the interceptor in order to get the correct
+								stats!
+							</data>
+							<data>ship/damage</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest-noauto="damageB" data-dest-number="1" maxlength="5"
+							placeholder="0.0" id="damageBInput">
+					</div>
+					<div class="table-cell text">
+						<label for="shieldBInput">Shield Strength:</label>
+						<button class="tooltip">
+							<data>Enter the "Core" value as seen on the ship's scan.</data>
+							<data>Maneuverability</data>
+							<data>
+								Enter the "Core" value exactly as seen in the scan of the ship.<br>
+								It is preferred to enter the values as seen after buying, as they might change.<br>
+								If there is no core value, use the regular one.
+								<div class="mt-2 has-text-weight-bold">Important for Interceptors:</div>
+								You must reload your game after claiming the interceptor in order to get the correct
+								stats!
+							</data>
+							<data>ship/shield</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest-noauto="shieldB" data-dest-number="1" maxlength="5"
+							placeholder="0.0" id="shieldBInput">
+					</div>
+					<div class="table-cell text">
+						<label for="warpBInput">Hyperdrive Range:</label>
+						<button class="tooltip">
+							<data>Enter the "Core" value as seen on the ship's scan.</data>
+							<data>Warp</data>
+							<data>
+								Enter the "Core" value exactly as seen in the scan of the ship.<br>
+								It is preferred to enter the values as seen after buying, as they might change.<br>
+								If there is no core value, use the regular one.
+								<div class="mt-2 has-text-weight-bold">Important for Interceptors:</div>
+								You must reload your game after claiming the interceptor in order to get the correct
+								stats!
+							</data>
+							<data>ship/hyperdrive</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest-noauto="warpB" data-dest-number="1" maxlength="5" placeholder="0.0"
+							id="warpBInput">
+					</div>
+					<div class="table-cell text">
+						<label for="maneuverBInput">Maneuverability:</label>
+						<button class="tooltip">
+							<data>Enter the "Core" value as seen on the ship's scan.</data>
+							<data>Maneuverability</data>
+							<data>
+								Enter the "Core" value exactly as seen in the scan of the ship.<br>
+								It is preferred to enter the values as seen after buying, as they might change.<br>
+								If there is no core value, use the regular one.
+								<div class="mt-2 has-text-weight-bold">Important for Interceptors:</div>
+								You must reload your game after claiming the interceptor in order to get the correct
+								stats!
+							</data>
+							<data>ship/maneuverability</data>
+						</button>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest-noauto="maneuverB" data-dest-number="1" maxlength="5"
+							placeholder="0.0" id="maneuverBInput">
+					</div>
+					<div class="table-cell text">
+						<label for="discoveredlinkInput">Discoverer wiki name:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="discoveredlink" id="discoveredlinkInput">
+					</div>
+					<div class="table-cell text">
+						<label for="discoveredInput">Discoverer alias if no wiki:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest="discovered" id="discoveredInput">
+					</div>
+					<div class="table-cell text">
+						<label for="docbyInput">Documenter alias if not discoverer:</label>
+					</div>
+					<div class="table-cell data">
+						<input type="text" data-dest-noauto="docby" id="docbyInput">
+					</div>
+					<div class="table-cell text">
+						<label>Do you belong to a chapter?</label>
+					</div>
+					<div class="table-cell data">
+						<select data-dest-noauto="researchteam" id="researchteamInput">
+							<option value=""></option>
+							<option value="Wiki Scholars">Wiki Scholars</option>
+							<option value="EBC">EBC</option>
+						</select>
+					</div>
+					<div class="tableHeader text sectionToggle">
+						<p>This section builds a predefined appearance sentence, it is not required.</p>
+						<button class="button" id="hideAppearanceButton">Hide</button>
+					</div>
+					<div data-section="appearance" class="table-cell text">
+						<label>Main Colour:</label>
+					</div>
+					<div data-section="appearance" class="table-cell data">
+						<select id="mainColourInput">
+							<option value=" "></option>
+							<option value="blue">Blue</option>
+							<option value="chrome">Chrome</option>
+							<option value="cream">Cream</option>
+							<option value="green">Green</option>
+							<option value="grey">Grey</option>
+							<option value="orange">Orange</option>
+							<option value="pink">Pink</option>
+							<option value="purple">Purple</option>
+							<option value="red">Red</option>
+							<option value="tan">Tan</option>
+							<option value="teal">Teal</option>
+							<option value="white">White</option>
+							<option value="yellow">Yellow</option>
+						</select>
+					</div>
+					<div data-section="appearance" class="table-cell text">
+						<label>Secondary Colour:</label>
+					</div>
+					<div data-section="appearance" class="table-cell data">
+						<select id="secColourInput">
+							<option value=" "></option>
+							<option value="black">Black</option>
+							<option value="blue">Blue</option>
+							<option value="chrome">Chrome</option>
+							<option value="cream">Cream</option>
+							<option value="gold">Gold</option>
+							<option value="green">Green</option>
+							<option value="grey">Grey</option>
+							<option value="orange">Orange</option>
+							<option value="pink">Pink</option>
+							<option value="purple">Purple</option>
+							<option value="red">Red</option>
+							<option value="silver">Silver</option>
+							<option value="tan">Tan</option>
+							<option value="teal">Teal</option>
+							<option value="white">White</option>
+							<option value="yellow">Yellow</option>
+						</select>
+					</div>
+					<div data-section="appearance" class="table-cell text">
+						<label>Secondary parts:</label>
+					</div>
+					<div data-section="appearance" class="table-cell data">
+						<select id="secPartsInput">
+						</select>
+					</div>
+					<div data-section="appearance" class="table-cell text">
+						<label>Accessories:</label>
+					</div>
+					<div data-section="appearance" class="table-cell data">
+						<select id="accessoriesInput">
+						</select>
+					</div>
+					<div data-section="appearance" class="table-cell text">
+						<label>Misc part:</label>
+					</div>
+					<div data-section="appearance" class="table-cell data">
+						<select id="miscPartsInput">
+						</select>
+					</div>
+					<div class="tableHeader data no-flex">
+						<label for="appearanceInput">Appearance:</label>
+						<textarea data-dest="appearance" id="appearanceInput"
+							placeholder="What does the starship look like?"></textarea>
+					</div>
+				</div>
+				<div id="galleryInput"></div>
+				<div id="galleryItems" class="gallery-items-wrapper"></div>
+				<div id="actions" class="buttons"></div>
+				<div id="albumActions" class="buttons"></div>
+			</div>
+			<div id="output" class="column is-full-mobile">
+				<div class="wikiText" id="fullArticle" data-link="page">
+					<div>{{Version|<output id="release" name="release"></output>}}</div>
+          <div>{{Eisvana}}</div>
+					<div>{{Starship infobox</div>
+					<div>| name = <output id="name" name="name"></output></div>
+					<div>| image = <output id="image" name="image"></output></div>
+					<div>| galaxy = Eissentam</div>
+					<div>| region = <output id="region"></output></div>
+					<div>| system = <output id="system"></output></div>
+					<div>| planet = <output id="planet"></output></div>
+					<div>| moon = <output id="moon"></output></div>
+					<div>| axes = <output id="axes" name="axes"></output></div>
+					<div>| economy = <output id="economy"></output></div>
+					<div>| pilot = <output id="pilot"></output></div>
+					<div>| coordinates = {{Glyphs2Coords|<output id="portalglyphs1" name="portalglyphs"></output>}}
+					</div>
+					<div>| portalglyphs = <output id="portalglyphs" name="portalglyphs"></output></div>
+					<div>| type = <output id="type" name="type"></output></div>
+					<div>| subtype = <output id="subtype"></output></div>
+					<div>| exotic = <output id="exotic"></output></div>
+					<div>| class = <output id="class"></output></div>
+					<div>| inventory = <output id="inventory"></output></div>
+					<div>| slots = <output id="slots"></output></div>
+					<div>| techslots = <output id="techslots"></output></div>
+					<div>| cost = <output id="cost"></output></div>
+					<div>| discovered = <output id="discovered"></output></div>
+					<div>| discoveredlink = <output id="discoveredlink"></output></div>
+					<div>| civilized = Eisvana</div>
+					<div>| researchteam = <output id="researchteam"></output></div>
+					<div>| release = <output id="release1" name="release"></output></div>
+					<div>| maneuverB = <output id="maneuverB"></output></div>
+					<div>| damageB = <output id="damageB"></output></div>
+					<div>| shieldB = <output id="shieldB"></output></div>
+					<div>| warpB = <output id="warpB"></output></div>
+					<div>}}</div>
+					<div>'''<output id="name1" name="name"></output>''' is a <output name="archetype"></output>.</div>
+					<br>
+
+					<div>==Summary==</div>
+					<div>'''<output id="name2" name="name"></output>''' is <output id="enPrefix"></output>
+						[[Starship Catalogue - <output id="type1" name="type"></output>|<output id="type2"
+							name="type"></output>]]-type [[starship]].</div>
+					<br>
+					<div>This <output name="archetype"></output> <output id="sChance"></output> in S-class.</div>
+					<br>
+
+					<div>==Appearance==</div>
+					<div><output id="appearance"></output></div>
+					<br>
+
+					<div>==Stats==</div>
+					<div>{{<output id="stats"></output>Stats}}</div>
+					<br>
+
+					<div>==Location==</div>
+					<div><output id="location"></output></div>
+					<br>
+
+					<div>==Additional Information==</div>
+					<div><span data-add-info="*"></span> Featured in the <output id="addInfo"></output></div>
+					<div><span data-add-info="*"></span> <output id="docby"></output></div>
+					<br>
+
+					<div id="gallery"></div>
+					<br>
+
+					<div>==Reference Links==</div>
+					<div>{{StarshipRefLinks|type=<output name="type" id="refLinks"></output>}}</div>
+				</div>
+				<div id="albumEntry" data-link="album"></div>
+			</div>
+		</main>
+	</div>
+	<footer id="footer" class="footer"></footer>
+</body>
+
+</html>

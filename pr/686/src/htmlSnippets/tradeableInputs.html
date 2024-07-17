@@ -1,0 +1,16 @@
+<div class="tableHeader text sectionToggle" data-tradeable="section${childIndex}" data-station="terminal">
+	<span class="has-text-weight-bold">Tradeable</span>
+	<button class="button is-danger is-outlined" type="button" data-evt-id="removeButton">Remove</button>
+</div>
+<div class="table-cell text" data-tradeable="section${childIndex}" data-station="terminal">
+	<label for="${text_input}">Tradeable name:</label>
+</div>
+<div class="table-cell data" data-tradeable="section${childIndex}" data-station="terminal">
+	<input type="text" list="terminal" id="${text_input}" data-dest="${text}">
+</div>
+<div class="table-cell text" data-tradeable="section${childIndex}" data-station="terminal">
+	<label for="${price_input}">Tradeable price:</label>
+</div>
+<div class="table-cell data" data-tradeable="section${childIndex}" data-station="terminal">
+	<input type="text" id="${price_input}" data-dest-number="0" data-dest-noauto="${price}">
+</div>

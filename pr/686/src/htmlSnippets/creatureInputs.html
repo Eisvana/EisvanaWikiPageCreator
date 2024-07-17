@@ -1,0 +1,145 @@
+<div class="tableHeader text sectionToggle" data-fauna="section${i}" data-section="fauna">
+	<p style="margin-right:auto">Creature: <output class="has-text-weight-bold" name="faunaName${i}"></output></p>
+	<button class="button is-danger is-outlined" type="button" data-evt-id="removeButton">Remove</button>
+	<button class="button" data-evt-id="hideButton">Hide</button>
+</div>
+<div class="table-cell text" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<label for="faunaNameInput${i}">Creature name:</label>
+	<button class="tooltip">
+		<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+		<data>Creature Name</data>
+		<data>Enter exactly as seen in game. Watch out for 0 (zero) and O (o).</data>
+		<data>creature/creatureName</data>
+	</button>
+</div>
+<div class="table-cell data" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<input type="text" data-dest="faunaName${i}" id="faunaNameInput${i}">
+</div>
+<div class="table-cell text" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<label for="faunaFile_input${i}">Creature file name:</label>
+</div>
+<div class="table-cell data" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<input type="text" id="faunaFile_input${i}" data-dest="faunaFile${i}" data-default="NmsMisc_NotAvailable.png">
+	<input type="file" id="faunaFileUpl${i}" accept="image/*" data-evt-id="fileInput">
+</div>
+<div class="table-cell text" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<label>Hemisphere:</label>
+	<button class="tooltip">
+		<data>Found in the creature discovery menu.</data>
+		<data>Hemisphere</data>
+		<data>
+			Found in the creature discovery menu.<br>
+			If no hemisphere is given, leave the input empty.
+		</data>
+		<data>creature/creatureHemisphere</data>
+	</button>
+</div>
+<div class="table-cell data" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<select data-dest="faunaHemisphere${i}" id="faunaHemisphereInput${i}">
+		<option value=""></option>
+		<option value="/ Found in the North">North</option>
+		<option value="/ Found in the South">South</option>
+	</select>
+</div>
+<div class="table-cell text" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<label>Rarity:</label>
+	<button class="tooltip">
+		<data>Found in the creature discovery menu.</data>
+		<data>Rarity</data>
+		<data>Found in the creature discovery menu.</data>
+		<data>creature/creatureRarity</data>
+	</button>
+</div>
+<div class="table-cell data" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<select data-dest="faunaRarity${i}" id="faunaRarityInput${i}">
+		<option value="Common">Common</option>
+		<option value="Uncommon">Uncommon</option>
+		<option value="Rare">Rare</option>
+	</select>
+</div>
+<div class="table-cell text" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<label>Ecosystem:</label>
+	<button class="tooltip">
+		<data>Found in the creature discovery menu.</data>
+		<data>Ecosystem</data>
+		<data>Found in the creature discovery menu.</data>
+		<data>creature/creatureEcosystem</data>
+	</button>
+</div>
+<div class="table-cell data" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<select data-dest="faunaEcosystem${i}" id="faunaEcosystemInput${i}" data-evt-id="ecosystemInput">
+		<option value="Ground">Ground</option>
+		<option value="Flying">Flying</option>
+		<option value="Underwater">Underwater</option>
+		<option value="Underground">Underground</option>
+	</select>
+</div>
+<div class="table-cell text" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<label>Activity:</label>
+	<button class="tooltip">
+		<data>Found in the creature discovery menu.</data>
+		<data>Activity</data>
+		<data>Found in the creature discovery menu.</data>
+		<data>creature/creatureActivity</data>
+	</button>
+</div>
+<div class="table-cell data" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<select data-dest="faunaActivity${i}" id="faunaActivityInput${i}">
+		<option value="Always Active">Always Active</option>
+		<option value="Diurnal">Diurnal</option>
+		<option value="Nocturnal">Nocturnal</option>
+		<option value="Mostly Diurnal">Mostly Diurnal</option>
+		<option value="Mostly Nocturnal">Mostly Nocturnal</option>
+	</select>
+</div>
+<div class="table-cell text" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<label>Genus:</label>
+	<button class="tooltip">
+		<data>See the wiki for a list of genera.</data>
+		<data>Genus</data>
+		<data>The genus is defined by the general appearance of a creature.<br>
+			See the wiki for a <a href="https://nomanssky.fandom.com/wiki/Genus#Genus_List" target="_blank"
+				rel="noopener noreferrer">list of genera</a>.</data>
+	</button>
+</div>
+<div class="table-cell data" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<select data-dest-noauto="faunaGenus${i}" id="faunaGenusInput${i}" data-evt-id="genusInput"></select>
+</div>
+<div class="table-cell text" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<label for="faunaWeightInput${i}">Weight in kg:</label>
+	<button class="tooltip">
+		<data>Found on the creature scan. No "kg" necessary.</data>
+		<data>Weight</data>
+		<data>Found on the creature scan.<br>No "kg" necessary.</data>
+		<data>creature/creatureWeight</data>
+	</button>
+</div>
+<div class="table-cell data" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<input data-dest-noauto="faunaWeight${i}" data-dest-number="1" type="text" id="faunaWeightInput${i}" maxlength="5"
+		placeholder="0.0">
+</div>
+<div class="table-cell text" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<label for="faunaHeightInput${i}">Height in m:</label>
+	<button class="tooltip">
+		<data>Found on the creature scan. No "m" necessary.</data>
+		<data>Height</data>
+		<data>Found on the creature scan.<br>No "m" necessary.</data>
+		<data>creature/creatureHeight</data>
+	</button>
+</div>
+<div class="table-cell data" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<input data-dest-noauto="faunaHeight${i}" data-dest-number="1" type="text" id="faunaHeightInput${i}" maxlength="3"
+		placeholder="0.0" data-evt-id="creatureHeightInput">
+</div>
+<div class="table-cell text" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<label for="faunaDiscovererInput${i}">Discoverer:</label>
+</div>
+<div class="table-cell data" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<input data-dest="faunaDiscoverer${i}" type="text" id="faunaDiscovererInput${i}">
+</div>
+<div class="table-cell text" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<label for="faunaLinkCheckbox${i}">Link item:</label>
+</div>
+<div class="table-cell data" data-fauna="section${i}" data-section="fauna fauna${i}">
+	<input data-dest-noauto="faunaLink${i}" type="checkbox" id="faunaLinkCheckbox${i}" data-evt-id="creatureLink">
+</div>

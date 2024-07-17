@@ -1,0 +1,29 @@
+==Eisvana Wiki Page Creator Documentation Index==
+Welcome to the documentation for the Eisvana Wiki Page Creator! This page serves as a starting point for understanding the purpose of this project, how to use it, and where to find additional resources.
+
+===Overview===
+Eisvana Wiki Page Creator is a website project designed to make it easy to create new wiki pages for your discoveries in No Man's Sky. It provides an intuitive interface for creating wiki pages and automatically generates the necessary wikitext. 
+
+===Usage===
+For detailed information on how to use the Eisvana Wiki Page Creator, please refer to the [[User-Guide]].
+
+===Contributing===
+Clone the repo, then run the following command:
+```bat
+npm i
+```
+To start the development server, run this command:
+```bat
+npm run dev
+```
+
+Community contributions are welcome! If you would like to contribute to the Eisvana Wiki Page Creator, please refer to the [https://github.com/example/EisvanaWikiPageCreator/blob/main/CONTRIBUTING.md contributing guidelines].
+
+===Support===
+If you encounter any issues or have any questions about the Eisvana Wiki Page Creator, please contact Lenni#4423 on Discord or [https://www.reddit.com/user/Lenni009 u/Lenni009] on Reddit. for more information.
+
+===Code Documentation===
+* [[General Concepts]]
+* [[Pages]]
+* [[Functions]]
+* [[Variables]]
