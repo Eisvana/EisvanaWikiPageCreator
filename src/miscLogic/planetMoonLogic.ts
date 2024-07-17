@@ -650,3 +650,12 @@ function linkItem(element: HTMLInputElement) {
     }
   }
 }
+
+export function autoDissonant() {
+  const sentinelLevel = pageData.sentinel;
+  if (typeof sentinelLevel !== 'string') return;
+  const { corrupted } = getSentinelData();
+  const isCorruptedSentinels = corrupted.includes(sentinelLevel);
+  const dissonantValue = isCorruptedSentinels ? 'Yes' : 'No';
+  wikiCode(dissonantValue, 'dissonant');
+}

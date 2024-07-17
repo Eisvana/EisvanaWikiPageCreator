@@ -6,6 +6,7 @@ import {
   addMineral,
   addResource,
   addSandwormTemplate,
+  autoDissonant,
   faunaSentencePlural,
   locationSentence,
   sentinelSentence,
@@ -24,7 +25,10 @@ const planetMoonElementFunctions: ElementFunctions = [
   },
   {
     element: 'sentinelInput',
-    func: () => sentinelSentence(),
+    func: () => {
+      sentinelSentence();
+      autoDissonant();
+    },
   },
   {
     element: ['descriptionInput', 'wormmaxdepthInput'],
