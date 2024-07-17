@@ -11,7 +11,6 @@ import {
   triggerEvent,
   wikiCode,
 } from '../../common';
-import { plural } from '../../miscLogic/planetMoonLogic';
 import type { ElementFunctions } from '../../types/elements';
 import { globalElements, pageData } from '../../variables/objects';
 
@@ -92,9 +91,23 @@ export function moonList() {
 }
 
 /**
+ * Determines the appropriate verb to use based on the given number, and sends the output to the
+ * specified destination if provided.
+ *
+ * @param {number} number - The number used to decide which verb to use.
+ * @param {string} [dest] - An optional destination to send the output of the wikiCode() function to.
+ * @returns {string} Either "is" or "are," depending if the number is singular or plural.
+ */
+export function plural(number: number, dest: string = ''): string | void {
+  const word = number === 1 ? 'is' : 'are';
+  if (!dest) return word;
+  wikiCode(word, dest);
+}
+
+/**
  * Generates a sentence describing the moons of the current planet.
  * @function
- * @returns {string} - Sentence describing the planet's moons.
+ * @returns {void} - Sentence describing the planet's moons.
  */
 function moonSentence() {
   const output = (() => {

@@ -13,6 +13,7 @@ export default defineConfig({
   test: {
     environment: 'happy-dom',
     browser: {
+      provider: 'webdriverio',
       enabled: true,
       headless: true,
       name: 'chrome',

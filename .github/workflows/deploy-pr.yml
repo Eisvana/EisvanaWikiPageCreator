@@ -1,0 +1,47 @@
+name: Deploy PR
+
+run-name: Deploy PR
+
+on:
+  pull_request:
+    types: ["opened", "synchronize"]
+    branches: ["main"]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Build App
+        run: |
+          echo 'VITE_BASE_PATH=/pr/${{ github.event.number }}/' > .env
+          npm ci
+          npm run build
+
+      - name: Minify Code
+        uses: Lenni009/minify-js@main
+        with:
+          directory: dist
+          overwrite: true
+
+      - name: Get GH Pages URL
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          target-folder: "pr/${{ github.event.number }}" # The folder the action should deploy to.
+
+      - name: Add PR Comment
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: "Deployed to ${{ steps.pages.outputs.base_url }}/pr/${{ github.event.number }}/"
