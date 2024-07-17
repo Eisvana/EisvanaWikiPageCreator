@@ -38,7 +38,7 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: .
+          folder: dist
           target-folder: "pr/${{ github.event.number }}" # The folder the action should deploy to.
 
       - name: Add PR Comment
