@@ -5,7 +5,7 @@
 import { vowels, wikiLink } from './variables/simple';
 import { dataIntegrityObj, globalElements, globalFunctions, pageData, staticBooleans } from './variables/objects';
 import { getDestElements } from './commonElements/elementBackend/elementStore';
-import { versions } from './variables/versions';
+import parseMediawikiTemplate from 'parse-mediawiki-template';
 import { assignElementFunctions, assignFunction } from './commonElements/elementBackend/elementFunctions';
 import { glyphInputOnChange } from './modules/portalglyphs';
 import { explanation } from './modules/tooltip';
@@ -16,6 +16,7 @@ import type { ElementFunction, ElementFunctions, InputElements } from './types/e
 import { useGalleryStore } from './modules/gallery/stores/gallery';
 import md5Hex from 'md5-hex';
 import { usePageDataStore } from './stores/pageData';
+import { fetchSectionWikiText } from './miscLogic/api';
 
 /**
  * Returns an object containing references to input elements on the page.
@@ -43,14 +44,11 @@ function getInputData() {
  * @name versionDropdown
  * @returns {void}
  */
-export function versionDropdown() {
-  const texts = structuredClone(versions);
-  const index = texts.indexOf('SentinelUp');
-  if (index !== -1) texts.splice(index, 1, 'Sentinel');
-  const dropdownElement = globalElements.input.version;
-  if (!dropdownElement) return;
-
-  setDropdownOptions(dropdownElement as HTMLSelectElement, versions, texts);
+export async function getRelease() {
+  const section = await fetchSectionWikiText('Template:Base preload', 0);
+  const version = parseMediawikiTemplate(section ?? '', 'Version')[0]['1']; // unnamed parameters are 1-indexed
+  wikiCode(version, 'release');
+  return version;
 }
 
 /**

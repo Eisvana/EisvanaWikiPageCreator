@@ -33,6 +33,7 @@
   "dependencies": {
     "bulma": "^0.9.4",
     "md5-hex": "^5.0.0",
+    "parse-mediawiki-template": "^0.2.2",
     "sortablejs": "^1.15.2"
   }
 }

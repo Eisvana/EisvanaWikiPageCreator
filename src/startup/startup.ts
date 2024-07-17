@@ -1,4 +1,4 @@
-import { addStaticPageData, autoShow, enableTextMarking, getCurrentHTMLFile, getSelectedText, preventCopy, showAll, triggerEvent, versionDropdown } from "../common";
+import { addStaticPageData, autoShow, enableTextMarking, getCurrentHTMLFile, getSelectedText, preventCopy, showAll, triggerEvent, getRelease } from "../common";
 import { attachTransformedListeners } from "../commonElements/elementBackend/elementFunctions";
 import { readDefaultValues } from "../modules/footer";
 import { globalElements, staticBooleans } from "../variables/objects";
@@ -8,7 +8,7 @@ addStaticPageData('pageType', currentHTMLFile);
 
 autoShow();
 readDefaultValues();
-versionDropdown();
+getRelease();
 staticBooleans.uploadShown = true;
 staticBooleans.galleryUploadShown = true;
 showAll();
