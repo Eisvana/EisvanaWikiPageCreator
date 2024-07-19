@@ -5,7 +5,7 @@ describe('DOM check', () => {
 	const parser = new DOMParser();
 	const dom = parser.parseFromString(baseHtml, 'text/html');
 
-  it('element with id "versionInput" should exist', () => {
-    expect(dom.getElementById('versionInput')).toBeTruthy()
+  it('element with id "nameInput" should exist', () => {
+    expect(dom.getElementById('nameInput')).toBeTruthy()
   })
 })
