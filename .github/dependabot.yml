@@ -10,6 +10,10 @@ updates:
     target-branch: 'web-dev'
     schedule:
       interval: 'weekly'
+    groups:
+      vitest:
+        patterns:
+          - '*vitest*'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
