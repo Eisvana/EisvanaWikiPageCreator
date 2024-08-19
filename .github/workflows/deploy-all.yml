@@ -22,7 +22,6 @@ env:
 
 jobs:
   build-main:
-    environment: github-pages
     runs-on: ubuntu-latest
 
     steps:
