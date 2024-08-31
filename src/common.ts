@@ -50,11 +50,11 @@ export async function getRelease() {
   try {
     const section = await fetchSectionWikiText('Template:Base preload', 0);
     const version = parseMediawikiTemplate(section ?? '', 'Version')[0]['1']; // unnamed parameters are 1-indexed
-    if (version !== storedVersion) {
+    if (version && version !== storedVersion) {
       localStorage.setItem('release', version);
       wikiCode(version, 'release');
     }
-    return version;
+    return version || storedVersion;
   } catch (e) {
     console.error(e);
     return storedVersion;
