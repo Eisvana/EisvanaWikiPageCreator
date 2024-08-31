@@ -86,7 +86,7 @@ const creatureData: CreatureData = {
         commonName: 'Drills',
         produces: ['Latticed Sinew'],
       },
-      Stucturae: {
+      Structurae: {
         commonName: 'Walking Buildings',
         produces: ['Chewy Wires'],
       },
