@@ -45,10 +45,20 @@ function getInputData() {
  * @returns {void}
  */
 export async function getRelease() {
-  const section = await fetchSectionWikiText('Template:Base preload', 0);
-  const version = parseMediawikiTemplate(section ?? '', 'Version')[0]['1']; // unnamed parameters are 1-indexed
-  wikiCode(version, 'release');
-  return version;
+  const storedVersion = localStorage.getItem('release') ?? '';
+  wikiCode(storedVersion, 'release');
+  try {
+    const section = await fetchSectionWikiText('Template:Base preload', 0);
+    const version = parseMediawikiTemplate(section ?? '', 'Version')[0]['1']; // unnamed parameters are 1-indexed
+    if (version && version !== storedVersion) {
+      localStorage.setItem('release', version);
+      wikiCode(version, 'release');
+    }
+    return version || storedVersion;
+  } catch (e) {
+    console.error(e);
+    return storedVersion;
+  }
 }
 
 /**
