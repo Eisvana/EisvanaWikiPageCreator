@@ -16,7 +16,7 @@ const creatureData: CreatureData = {
       },
       Arthropodae: {
         commonName: 'Arthropods',
-        produces: ['Nourshing Slime'],
+        produces: ['Nourishing Slime'],
       },
       Bos: {
         commonName: 'Beetles',
