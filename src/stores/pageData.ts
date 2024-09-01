@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import { regions } from '../variables/regions';
-import { sanitiseString } from '@/common';
+import { fetchSectionWikiText } from '@/helper/api';
+import parseMediawikiTemplate from 'parse-mediawiki-template';
 
 interface StaticPageData {
   route: string | undefined;
@@ -8,6 +8,7 @@ interface StaticPageData {
   debug: boolean;
 }
 
+// TODO: gh-pages supports fancy endings as well, so for example wiki.eisvana.com/base would correctly resolve to the base.html file. This needs to be handled!
 const route = window.location.pathname.split('/')!.at(-1)?.slice(0, -5); // NoSonar getting the current filename without the "html" ending
 
 const researchteamDefaultExceptions = ['base'];
@@ -91,36 +92,20 @@ export const usePageDataStore = defineStore('pageData', {
     content: '',
   }),
 
-  getters: {
-    regionGlyphs: (state) => state.glyphs.substring(4), // NoSonar region glyphs start at index 4
-    isValidGlyphs(): boolean {
-      return Object.keys(regions).includes(this.regionGlyphs); // Tests if an address is valid for Eisvana
-    },
-    region(): string {
-      return regions[this.regionGlyphs] ?? '';
-    },
-    regionNumber(): number {
-      const index = Object.keys(regions).indexOf(this.regionGlyphs);
-      return index + 1;
-    },
-    sanitisedStrings: (state) => ({
-      name: sanitiseString(state.name),
-      discovered: sanitiseString(state.discovered),
-      discoveredlink: sanitiseString(state.discoveredlink),
-      system: sanitiseString(state.system),
-      planet: sanitiseString(state.planet),
-      moon: sanitiseString(state.moon),
-      orgName: sanitiseString(state.orgName),
-      appearance: sanitiseString(state.appearance),
-    }),
-    docBySentence: (state) => {
-      const isLink = state.docBy.startsWith('{{');
-      const hasResearchteam = state.researchteam.split(' ').length > 1;
-      const documenter = isLink ? state.docBy : `''${state.docBy}''`;
-      const researchteamLink = state.researchteam.includes('Wiki')
-        ? '[[Eisvana Wiki Scholars|Eisvana Wiki Scholar]]'
-        : `[[${state.researchteam}]] member`;
-      return `${hasResearchteam ? researchteamLink : ''} ${documenter}`;
+  getters: {},
+  actions: {
+    async getRelease() {
+      const storedVersion = localStorage.getItem('release') ?? '';
+      this.release = storedVersion;
+      try {
+        const section = await fetchSectionWikiText('Template:Base preload', 0);
+        const version = parseMediawikiTemplate(section ?? '', 'Version')[0]['1']; // unnamed parameters are 1-indexed
+        if (!version || version === storedVersion) return;
+        localStorage.setItem('release', version);
+        this.release = version || storedVersion;
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
 });

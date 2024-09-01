@@ -2,19 +2,15 @@
 import { defineAsyncComponent, type Component, onMounted } from 'vue';
 import { usePageDataStore, useStaticPageDataStore } from './stores/pageData';
 import { storeToRefs } from 'pinia';
-import { getRelease } from './common';
 
 const staticPageData = useStaticPageDataStore();
 const { route } = storeToRefs(staticPageData);
 
 const pageData = usePageDataStore();
-const { release } = storeToRefs(pageData);
 
-onMounted(async () => {
-  const currentRelease = await getRelease();
-  release.value = currentRelease;
-});
+onMounted(async () => pageData.getRelease());
 
+// build a custom "fake router" instead of using client-side routing to avoid 404 pages on direct navigation
 const router: Record<string, string> = {
   flora: 'Flora',
   mineral: 'Mineral',
@@ -27,11 +23,43 @@ function getRouteComponent() {
   return router[currentRoute];
 }
 
+const componentName = getRouteComponent();
+
 const RouteComponent = defineAsyncComponent<Component>({
-  loader: () => import(`./pages/${getRouteComponent()}.vue`),
+  loader: () => import(`./pages/${componentName}.vue`),
 });
 </script>
 
 <template>
-  <RouteComponent />
+  <QLayout view="hhh lpR fFf">
+    <QHeader class="bg-primary text-white">
+      <QToolbar>
+        <div>this is the back nav</div>
+        <QToolbarTitle>
+          <h1>Eisvana Wiki Page Creator{{ componentName === 'Home' ? '' : ` - ${componentName}` }}</h1>
+        </QToolbarTitle>
+        <div>this is the theme toggle button</div>
+      </QToolbar>
+    </QHeader>
+
+    <QPageContainer>
+      <QPage>
+        <RouteComponent />
+      </QPage>
+    </QPageContainer>
+
+    <QFooter class="bg-grey-8 text-white">
+      <QToolbar>
+        <QToolbarTitle>
+          <div>Copy your stuff!!</div>
+        </QToolbarTitle>
+      </QToolbar>
+    </QFooter>
+  </QLayout>
 </template>
+
+<style scoped lang="scss">
+h1 {
+  all: unset;
+}
+</style>
