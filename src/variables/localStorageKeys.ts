@@ -1,2 +1,2 @@
 export const defaultValuesKey = 'defaultSettings';
-export const currentReleaseKey = 'defaultSettings';
+export const currentReleaseKey = 'release';
