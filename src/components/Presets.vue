@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { defaultValuesKey } from '@/variables/localStorageKeys';
-import { reactive, ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import GlyphInput from './GlyphInput.vue';
+import { mappedDepartmentOptions } from '@/variables/departments';
+import { mappedPlatformOptions } from '@/variables/platforms';
+import QSelectWithSeparator from './QSelectWithSeparator.vue';
+import { wealth } from '@/variables/wealth';
+import { capitalize } from '@/helper/typography';
 
 const isOpen = ref(false);
 
@@ -41,6 +46,13 @@ function storeData() {
 function restoreDefaults() {
   loadData(structuredClone(defaultData));
 }
+
+const mappedWealthOptions = computed(() =>
+  Object.entries(wealth).flatMap((item) => [
+    { group: capitalize(item[0]), disable: true },
+    ...item[1].map((option) => ({ label: option, value: option })),
+  ])
+);
 </script>
 
 <template>
@@ -96,18 +108,27 @@ function restoreDefaults() {
         />
         <QSelect
           v-model="presetData.platform"
+          :options="mappedPlatformOptions"
           label="Platform"
           outlined
+          emit-value
+          map-options
         />
         <QSelect
           v-model="presetData.department"
+          :options="mappedDepartmentOptions"
           label="Department"
           outlined
+          emit-value
+          map-options
         />
-        <QSelect
+        <QSelectWithSeparator
           v-model="presetData.wealth"
+          :options="mappedWealthOptions"
           label="System wealth"
           outlined
+          emit-value
+          map-options
         />
         <GlyphInput v-model="presetData.glyphs" />
       </QCardSection>
