@@ -7,16 +7,11 @@ const env = loadEnv('', process.cwd());
 // https://vitejs.dev/config/
 export default defineConfig({
   base: env.VITE_BASE_PATH,
-  // base: '/EisvanaWikiPageCreator/',
   plugins: [vue()],
   test: {
+    // options for vitest
+    globals: true,
     environment: 'happy-dom',
-    browser: {
-      provider: 'webdriverio',
-      enabled: true,
-      headless: true,
-      name: 'chrome',
-    },
     coverage: {
       include: ['src/**.{ts,vue}', 'src/**/**.{ts,vue}'],
       exclude: ['src/api/**/**.ts', 'src/**/**.d.ts'],
