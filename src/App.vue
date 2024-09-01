@@ -24,9 +24,9 @@ function getRouteComponent() {
 
 const componentName = getRouteComponent();
 
-// const RouteComponent = defineAsyncComponent<Component>({
-//   loader: () => import(`./pages/${componentName}.vue`),
-// });
+const RouteComponent = defineAsyncComponent<Component>({
+  loader: () => import(`./pages/${componentName}.vue`),
+});
 </script>
 
 <template>
@@ -43,11 +43,14 @@ const componentName = getRouteComponent();
 
     <QPageContainer>
       <QPage>
-        <!-- <RouteComponent /> -->
+        <RouteComponent />
       </QPage>
     </QPageContainer>
 
-    <QFooter class="bg-grey-8 text-white">
+    <QFooter
+      v-if="componentName !== 'Home'"
+      class="bg-grey-8 text-white"
+    >
       <QToolbar>
         <QToolbarTitle>
           <div class="row q-gutter-x-md">
