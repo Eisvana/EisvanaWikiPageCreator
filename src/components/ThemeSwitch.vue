@@ -18,7 +18,7 @@ function switchTheme(theme?: boolean) {
     icon="settings_brightness"
     title="Switch Theme"
     flat
-    fab
+    fab-mini
     @click="switchTheme()"
   >
   </QBtn>

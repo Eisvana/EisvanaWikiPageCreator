@@ -2,8 +2,8 @@
 import { defineAsyncComponent, type Component, onMounted } from 'vue';
 import { usePageDataStore } from './stores/pageData';
 import { route } from './variables/route';
-import ThemeSwitch from './components/ThemeSwitch.vue';
 import NavBar from './components/NavBar.vue';
+import Settings from './components/Settings.vue';
 
 const pageData = usePageDataStore();
 
@@ -14,6 +14,7 @@ const router: Record<string, string> = {
   flora: 'Flora',
   mineral: 'Mineral',
   home: 'Home',
+  base: 'Base',
 };
 
 function getRouteComponent() {
@@ -36,7 +37,7 @@ const componentName = getRouteComponent();
         <QToolbarTitle class="text-center">
           <h1>Eisvana Wiki Page Creator{{ componentName === 'Home' ? '' : ` - ${componentName}` }}</h1>
         </QToolbarTitle>
-        <ThemeSwitch />
+        <Settings />
       </QToolbar>
     </QHeader>
 
@@ -49,7 +50,16 @@ const componentName = getRouteComponent();
     <QFooter class="bg-grey-8 text-white">
       <QToolbar>
         <QToolbarTitle>
-          <div>Copy your stuff!!</div>
+          <div class="row q-gutter-x-md">
+            <QBtn
+              color="secondary"
+              label="Copy"
+            />
+            <QBtn
+              color="secondary"
+              label="Create"
+            />
+          </div>
         </QToolbarTitle>
       </QToolbar>
     </QFooter>
