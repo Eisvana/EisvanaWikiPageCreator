@@ -2,6 +2,8 @@
 import { defineAsyncComponent, type Component, onMounted } from 'vue';
 import { usePageDataStore, useStaticPageDataStore } from './stores/pageData';
 import { storeToRefs } from 'pinia';
+import ThemeSwitch from './components/ThemeSwitch.vue';
+import NavBar from './components/NavBar.vue';
 
 const staticPageData = useStaticPageDataStore();
 const { route } = storeToRefs(staticPageData);
@@ -25,26 +27,26 @@ function getRouteComponent() {
 
 const componentName = getRouteComponent();
 
-const RouteComponent = defineAsyncComponent<Component>({
-  loader: () => import(`./pages/${componentName}.vue`),
-});
+// const RouteComponent = defineAsyncComponent<Component>({
+//   loader: () => import(`./pages/${componentName}.vue`),
+// });
 </script>
 
 <template>
   <QLayout view="hhh lpR fFf">
     <QHeader class="bg-primary text-white">
       <QToolbar>
-        <div>this is the back nav</div>
-        <QToolbarTitle>
+        <NavBar />
+        <QToolbarTitle class="text-center">
           <h1>Eisvana Wiki Page Creator{{ componentName === 'Home' ? '' : ` - ${componentName}` }}</h1>
         </QToolbarTitle>
-        <div>this is the theme toggle button</div>
+        <ThemeSwitch />
       </QToolbar>
     </QHeader>
 
     <QPageContainer>
       <QPage>
-        <RouteComponent />
+        <!-- <RouteComponent /> -->
       </QPage>
     </QPageContainer>
 
