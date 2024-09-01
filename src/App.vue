@@ -42,7 +42,7 @@ const RouteComponent = defineAsyncComponent<Component>({
     </QHeader>
 
     <QPageContainer>
-      <QPage>
+      <QPage class="q-px-md">
         <RouteComponent />
       </QPage>
     </QPageContainer>
