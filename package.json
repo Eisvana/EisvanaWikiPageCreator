@@ -31,6 +31,7 @@
     "vue-tsc": "^2.0.26"
   },
   "dependencies": {
+    "@nmscd/coordinate-conversion": "^1.2.4",
     "parse-mediawiki-template": "^0.2.2",
     "vuedraggable": "^4.1.0"
   }
