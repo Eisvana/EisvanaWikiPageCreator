@@ -7,7 +7,7 @@ import Settings from './components/Settings.vue';
 
 const pageData = usePageDataStore();
 
-onMounted(async () => pageData.getRelease());
+onMounted(async () => pageData.initStore());
 
 // build a custom "fake router" instead of using client-side routing to avoid 404 pages on direct navigation
 const router: Record<string, string> = {
