@@ -111,8 +111,9 @@ function restoreDefaults() {
         />
         <GlyphInput v-model="presetData.glyphs" />
       </QCardSection>
-      <QCardSection class="q-gutter-x-md">
+      <QCardActions class="q-mb-md q-gutter-x-md">
         <QBtn
+          class="q-ml-lg"
           color="positive"
           label="Set"
           text-color="dark"
@@ -130,7 +131,7 @@ function restoreDefaults() {
           text-color="dark"
           @click="restoreDefaults"
         />
-      </QCardSection>
+      </QCardActions>
     </QCard>
   </QDialog>
 </template>
