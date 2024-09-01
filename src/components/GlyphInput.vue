@@ -1,52 +1,73 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { maxGlyphLength } from '@/variables/glyphData';
+import { availableGlyphs, maxGlyphLength } from '@/variables/glyphData';
 
-const glyphs = ref('');
+const model = defineModel<string>({ required: true });
 
-const validGlyphs = Array.from({ length: 16 }, (_v, k) => k.toString(16).toUpperCase());
+const validGlyphs = Array.from({ length: availableGlyphs }, (_value, index) => index.toString(16).toUpperCase());
 
 function addGlyph(glyph: string) {
-  if (glyphs.value.length >= 16) return;
-  glyphs.value += glyph;
+  if (model.value.length >= maxGlyphLength) return;
+  model.value += glyph;
 }
 
 function removeGlyph() {
-  glyphs.value = glyphs.value.slice(0, -1);
+  model.value = model.value.slice(0, -1);
 }
 </script>
 
 <template>
-  <div class="column">
-  <div class="row">
-    <QInput
-      v-model="glyphs"
-      label="Glyphs"
-      :maxlength="maxGlyphLength"
-    />
-    <QBtn
-      color="negative"
-      label="&larr; Delete"
-      @click="removeGlyph"
-    />
+  <div class="column q-gutter-y-sm q-pl-md full-width glyph-input-wrapper">
+    <div class="row q-gutter-md items-center">
+      <QInput
+        v-model="model"
+        :maxlength="maxGlyphLength"
+        label="Glyphs"
+        outlined
+      />
+      <div>
+        <QBtn
+          color="negative"
+          icon="keyboard_backspace"
+          label="Delete"
+          @click="removeGlyph"
+        />
+      </div>
+    </div>
+    <div class="glyph-grid">
+      <QBtn
+        v-for="glyph in validGlyphs"
+        :label="glyph"
+        class="glyphs glyph-button"
+        padding="none"
+        outline
+        @click="addGlyph(glyph)"
+      />
+    </div>
+    <output class="glyphs">{{ model }}</output>
   </div>
-  <div class="glyph-grid">
-    <QBtn
-      v-for="glyph in validGlyphs"
-      :label="glyph"
-      class="glyphs"
-      dense
-      @click="addGlyph(glyph)"
-    />
-  </div>
-  <output class="glyphs">{{ glyphs }}</output>
-</div>
 </template>
 
 <style scoped lang="scss">
 .glyph-grid {
+  --glyph-button-width: 70px;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  font-family: NMS-Glyphs-Tight;
+  grid-template-columns: repeat(8, var(--glyph-button-width));
+  gap: 2px;
+
+  .glyph-button {
+    line-height: initial;
+    width: var(--glyph-button-width);
+  }
+}
+
+.glyph-input-wrapper {
+  container-type: inline-size;
+}
+
+@container (max-width: 500px) {
+  .glyph-grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 </style>
