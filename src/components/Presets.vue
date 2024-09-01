@@ -58,7 +58,9 @@ function restoreDefaults() {
     @before-show="loadData()"
   >
     <QCard class="card-wrapper">
-      <QCardSection>Global Preload Values</QCardSection>
+      <QCardSection>
+        <h2 class="text-h4 no-margin">Global Preload Values</h2>
+      </QCardSection>
       <QCardSection class="q-gutter-md row wrap input-grid">
         <QInput
           v-if="!presetData.discovered"
@@ -69,45 +71,45 @@ function restoreDefaults() {
         <QInput
           v-if="!presetData.discoveredlink"
           v-model="presetData.discovered"
-          label="Discoverer alias if no wiki:"
+          label="Discoverer alias if no wiki"
           outlined
         />
         <QInput
           v-model="presetData.documenterName"
-          label="Documenter alias if not discoverer:"
+          label="Documenter alias if not discoverer"
           outlined
         />
         <QInput
           v-model="presetData.system"
-          label="Name of the system:"
+          label="Name of the system"
           outlined
         />
         <QInput
           v-model="presetData.planet"
-          label="Name of the planet:"
+          label="Name of the planet"
           outlined
         />
         <QInput
           v-model="presetData.moon"
-          label="Name of the moon:"
+          label="Name of the moon"
           outlined
         />
         <QSelect
           v-model="presetData.platform"
-          label="Platform:"
+          label="Platform"
           outlined
         />
         <QSelect
           v-model="presetData.department"
-          label="Department:"
+          label="Department"
           outlined
         />
         <QSelect
           v-model="presetData.wealth"
-          label="System wealth:"
+          label="System wealth"
           outlined
         />
-        <GlyphInput />
+        <GlyphInput v-model="presetData.glyphs" />
       </QCardSection>
       <QCardSection class="q-gutter-x-md">
         <QBtn
@@ -139,13 +141,11 @@ function restoreDefaults() {
 }
 
 .input-grid {
-  display: flex;
-  flex-wrap: wrap;
-  flex-basis: 40%;
-  gap: 1rem;
+  gap: 0.5rem;
 
   & > * {
     flex-grow: 1;
+    min-width: 40%;
   }
 }
 </style>
