@@ -1,8 +1,7 @@
-import type { ParsedWikitextObject } from "@/types/api";
+import type { ParsedWikitextObject } from '@/types/api';
+import { is } from 'quasar';
 
-function isObject(obj: unknown): obj is object {
-  return Boolean(obj) && typeof obj === 'object';
-}
+const { object: isObject } = is;
 
 export function isWikitext(wikitextObject: unknown): wikitextObject is ParsedWikitextObject {
   if (!isObject(wikitextObject) || !('parse' in wikitextObject)) return false;
@@ -12,3 +11,5 @@ export function isWikitext(wikitextObject: unknown): wikitextObject is ParsedWik
   if (!isObject(wikitext) || !('*' in wikitext)) return false;
   return typeof wikitext['*'] === 'string';
 }
+
+export { isObject };
