@@ -1,0 +1,483 @@
+@use 'components/fonts';
+@use 'components/variables' as *;
+@use 'components/tooltip';
+@use 'components/dialog';
+@use 'components/footer';
+@use 'components/gallery';
+@use 'components/inputs';
+
+html,
+body {
+  font-family: Nunito, sans-serif;
+  background-color: var(--body-backgroundcolor);
+  color: var(--text-color);
+  transition: filter 0.15s;
+
+  &[data-mark='false'] #output {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  &[data-transition] {
+    &,
+    *,
+    input::file-selector-button,
+    input[type='date']::-webkit-calendar-picker-indicator,
+    input::placeholder,
+    textarea::placeholder,
+    label {
+      -moz-transition: var(--theme-transition);
+      -webkit-transition: var(--theme-transition);
+      -o-transition: var(--theme-transition);
+      transition: var(--theme-transition);
+    }
+  }
+}
+
+// TODO: remove this when ported to Vue
+html[data-debug='true']::before {
+  display: block;
+  width: 100%;
+  content: 'Debug';
+  background-color: hsl(0, 50%, 50%);
+  position: fixed;
+  z-index: 2;
+  text-align: center;
+  font-size: 1.5rem;
+  color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+.title,
+.subtitle {
+  color: var(--heading-color) !important;
+}
+
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(max(50%, 300px), 1fr));
+  text-align: center;
+}
+
+article img {
+  width: 170px;
+  border-radius: 10%;
+  object-fit: cover;
+  float: right;
+  margin-inline-start: 1rem;
+}
+
+.profile-wrapper {
+  margin-block-end: 1.5rem;
+}
+
+.linklist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.content li {
+  list-style-position: inside;
+}
+
+a {
+  color: var(--link-color);
+
+  &:hover {
+    color: var(--link-hover-color);
+  }
+}
+
+picture,
+img {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.nms-font {
+  font-family: Roboto, sans-serif;
+}
+
+/* Homepage */
+.home {
+  text-align: center;
+}
+
+nav {
+  margin-block: 1rem;
+  font-size: larger;
+}
+
+.container {
+  margin-block-end: 5em;
+  margin-block-start: 2em;
+}
+
+.no-flex > label {
+  margin-inline-end: 1rem;
+}
+
+/* Input table */
+.table {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: transparent;
+  color: var(--text-color);
+
+  & > * {
+    padding: 5px 0;
+    border-block-end: 1px dashed;
+    border-color: var(--table-border-color);
+    display: flex;
+    column-gap: 1em;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  & > .table {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / span 2;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    border: none;
+
+    & > :only-child {
+      grid-column: 1 / span 2;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+#input {
+  & > .table {
+    margin-block-end: 1rem;
+  }
+
+  .gallery-items-wrapper {
+    margin-block-end: 2rem;
+
+    .gallery-preview {
+      margin-block-end: 1rem;
+    }
+  }
+}
+
+div.checkboxes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 5px;
+  width: 100%;
+}
+
+.checkbox-label {
+  margin-inline-start: 5px;
+}
+
+.table-cell {
+  height: 100%;
+
+  &.text {
+    padding-inline-end: 10px;
+  }
+
+  &.data {
+    flex-wrap: wrap;
+
+    .error {
+      margin-block-start: 0.3rem;
+    }
+
+    .error-input {
+      background-color: red;
+    }
+  }
+
+  &:has(.error-input) {
+    align-items: baseline;
+  }
+
+  &.is-odd,
+  &.is-even {
+    &.text {
+      padding-inline-start: 0.5rem;
+      margin-inline-start: -0.5rem;
+    }
+
+    &.data {
+      padding-inline-end: 0.5rem;
+      margin-inline-end: -0.5rem;
+    }
+  }
+}
+
+.tableHeader {
+  grid-column: 1 / span 2;
+  flex-wrap: wrap;
+
+  & > *:not(.tooltip) {
+    width: 100%;
+  }
+
+  &:empty {
+    display: none;
+  }
+
+  &.is-odd,
+  &.is-even {
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
+    margin-inline-start: -0.5rem;
+    margin-inline-end: -0.5rem;
+  }
+
+  &.no-flex {
+    display: block;
+  }
+}
+
+.glyph {
+  font-family: NMS-Glyphs-Mono;
+  font-size: 2.5rem;
+}
+
+div.column {
+  padding: 2rem;
+
+  & > *:last-child {
+    margin-block-end: 1rem;
+  }
+}
+
+#output {
+  border-inline-start: 1px dashed;
+  border-color: var(--column-divider-color);
+  padding-block-end: 3rem;
+
+  & > *:nth-child(n + 2) {
+    margin-block-start: 5rem;
+  }
+}
+
+.wikiText {
+  font-family: consolas, monospace;
+  color: var(--code-color);
+}
+
+.title {
+  text-align: center;
+}
+
+.table-cell > label,
+.tableHeader > label,
+.label-combo > label {
+  font-weight: bold;
+}
+
+.checkbox {
+  display: flex;
+  margin: 3px 0;
+  align-items: center;
+
+  &,
+  input {
+    cursor: default;
+  }
+
+  label {
+    margin-inline-start: 3px;
+  }
+}
+
+input[type='radio'] ~ label,
+label > input[type='radio'] ~ span,
+.radioButtons label:not(:has(input ~ span)) {
+  margin-inline-start: 5px;
+  font-weight: normal;
+}
+
+.radioButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+  column-gap: 5px;
+  width: 100%;
+
+  & > * {
+    display: flex;
+  }
+}
+
+.buttons {
+  justify-content: center;
+  padding-block: 0.5rem;
+
+  p {
+    width: 100%;
+    text-align: center;
+    margin-block-end: 0.5rem;
+  }
+}
+
+.label-combo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1rem;
+  row-gap: 0.3rem;
+}
+
+.portalglyphButtons,
+#portalglyphButtons {
+  display: grid;
+  grid-template-columns: repeat(8, 60px);
+  gap: 1px;
+  width: 100%;
+
+  .glyph.icon.is-small {
+    height: 1em;
+  }
+}
+
+.portalglyphsPreview,
+#portalglyphsPreview {
+  width: 100%;
+  word-break: break-all;
+  text-align: left;
+}
+
+.sectionToggle {
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+
+  & > * {
+    width: unset !important;
+  }
+}
+
+.is-even {
+  background-color: var(--is-even-background-color) !important;
+}
+
+.is-odd {
+  background-color: var(--is-odd-background-color) !important;
+}
+
+.removable {
+  display: flex;
+  justify-content: start;
+  gap: 0.5rem;
+}
+
+/* Media Queries */
+@media only screen and (max-width: 550px) {
+  div.column {
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+  }
+
+  main.columns {
+    width: 100%;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+}
+
+@media only screen and (max-width: 550px), (1024px <=width <=1215px) {
+  .portalglyphButtons,
+  #portalglyphButtons {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .container {
+    margin-inline-start: 1rem;
+    margin-inline-end: 1rem;
+  }
+
+  #gallery_descs {
+    margin: 0 0.65em;
+  }
+
+  #output {
+    border-inline-start: none !important;
+  }
+}
+
+@media (pointer: coarse) {
+  .tooltip {
+    width: 20px;
+    min-width: 20px;
+  }
+
+  .checkbox {
+    margin: 10px 0;
+  }
+
+  .checkboxes-grid {
+    row-gap: 10px;
+  }
+
+  .handle {
+    display: none;
+  }
+
+  .moveButton {
+    display: flex !important;
+  }
+
+  .gallery-item .controlButtons .delete-icon {
+    align-self: end;
+  }
+
+  .tooltip:not([aria-disabled]) {
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover .tooltiptext {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}
+
+.no-interaction {
+  pointer-events: none;
+}
+
+.table > *:has(.checkboxes-grid, .radioButtons, #portalglyphButtons) {
+  container-type: inline-size;
+}
+
+.mark {
+  background-color: #ffff006e;
+}
+
+/* Container Queries */
+@container (max-width: 260px) {
+  div.table-cell div.checkboxes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@container (max-width: 450px) {
+  div.tableHeader div.checkboxes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@container (max-width: 125px) {
+  div.table-cell div.radioButtons {
+    display: block;
+  }
+}

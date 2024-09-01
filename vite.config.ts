@@ -1,13 +1,25 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 
 const env = loadEnv('', process.cwd());
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: env.VITE_BASE_PATH,
-  plugins: [vue()],
+  plugins: [
+    vue({
+      template: { transformAssetUrls },
+    }),
+
+    // @quasar/plugin-vite options list:
+    // https://github.com/quasarframework/quasar/blob/dev/vite-plugin/index.d.ts
+    quasar({
+      autoImportComponentCase: 'pascal',
+      sassVariables: 'src/css/quasar-variables.scss',
+    }),
+  ],
   test: {
     // options for vitest
     globals: true,
