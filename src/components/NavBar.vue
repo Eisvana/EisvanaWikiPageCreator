@@ -4,7 +4,7 @@ const isEisvanaHost = eisvanaHosts.includes(window.location.host);
 </script>
 
 <template>
-  <QItem :href="isEisvanaHost ? 'https://nmscd.com' : '/'">
+  <QItem :href="isEisvanaHost ? 'https://eisvana.com' : '/'">
     <QItemSection>
       <QIcon name="arrow_back" />
     </QItemSection>
