@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { fetchSectionWikiText } from '@/helper/api';
 import parseMediawikiTemplate from 'parse-mediawiki-template';
 import { currentReleaseKey, defaultValuesKey } from '@/variables/localStorageKeys';
+import { civName } from '@/variables/civilization';
 
 const researchteamDefaultExceptions = ['base'];
 
@@ -59,7 +60,7 @@ export const usePageDataStore = defineStore('pageData', {
     polymorphic: '',
     discDate: '',
     documenterName: localStorageData().docbyInput ?? '',
-    researchteam: localStorageData().researchteamInput ?? departments[''],
+    researchteam: localStorageData().researchteamInput ?? civName,
     appearance: '',
     pageName: '',
     platform: localStorageData().platformInput ?? '',
