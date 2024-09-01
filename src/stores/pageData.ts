@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { fetchSectionWikiText } from '@/helper/api';
 import parseMediawikiTemplate from 'parse-mediawiki-template';
-
+import { currentReleaseKey, defaultValuesKey } from '@/variables/localStorageKeys';
 
 const researchteamDefaultExceptions = ['base'];
 
@@ -11,7 +11,7 @@ export const departments = {
   EBC: 'Eisvana Builder Collective',
 };
 
-const localStorageData = () => JSON.parse(localStorage.getItem('defaultSettings') ?? '{}');
+const localStorageData = () => JSON.parse(localStorage.getItem(defaultValuesKey) ?? '{}');
 
 interface PageData {
   release: string;
@@ -19,7 +19,7 @@ interface PageData {
   image: string;
   discovered: string;
   discoveredlink: string;
-  orgName: string;
+  department: string;
   system: string;
   planet: string;
   moon: string;
@@ -33,7 +33,7 @@ interface PageData {
   elements: string[];
   polymorphic: string;
   discDate: string;
-  docBy: string;
+  documenterName: string;
   researchteam: string;
   appearance: string;
   pageName: string;
@@ -50,7 +50,7 @@ export const usePageDataStore = defineStore('pageData', {
     image: '',
     discovered: localStorageData()['discoveredInput builderInput'] ?? '',
     discoveredlink: localStorageData()['discoveredlinkInput builderlinkInput'] ?? '',
-    orgName: '',
+    department: '',
     system: localStorageData().systemInput ?? '',
     planet: localStorageData().planetInput ?? '',
     moon: localStorageData().moonInput ?? '',
@@ -64,7 +64,7 @@ export const usePageDataStore = defineStore('pageData', {
     elements: [],
     polymorphic: '',
     discDate: '',
-    docBy: localStorageData().docbyInput ?? '',
+    documenterName: localStorageData().docbyInput ?? '',
     researchteam: localStorageData().researchteamInput ?? departments[''],
     appearance: '',
     pageName: '',
@@ -76,17 +76,31 @@ export const usePageDataStore = defineStore('pageData', {
 
   getters: {},
   actions: {
+    initStore() {
+      this.getRelease();
+      this.applyDefaults();
+    },
     async getRelease() {
-      const storedVersion = localStorage.getItem('release') ?? '';
+      const storedVersion = localStorage.getItem(currentReleaseKey) ?? '';
       this.release = storedVersion;
       try {
         const section = await fetchSectionWikiText('Template:Base preload', 0);
         const version = parseMediawikiTemplate(section ?? '', 'Version')[0]['1']; // unnamed parameters are 1-indexed
         if (!version || version === storedVersion) return;
-        localStorage.setItem('release', version);
+        localStorage.setItem(currentReleaseKey, version);
         this.release = version || storedVersion;
       } catch (e) {
         console.error(e);
+      }
+    },
+    applyDefaults() {
+      const isValidKey = (item: unknown): item is keyof typeof this.$state =>
+        typeof item === 'string' && item in this.$state;
+
+      const localStorageData = localStorage.getItem(defaultValuesKey) ?? '{}';
+      const jsonData = JSON.parse(localStorageData);
+      for (const item in jsonData) {
+        if (isValidKey(item)) this.$state[item] = jsonData[item];
       }
     },
   },
