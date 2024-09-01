@@ -5,12 +5,6 @@ import { currentReleaseKey, defaultValuesKey } from '@/variables/localStorageKey
 
 const researchteamDefaultExceptions = ['base'];
 
-export const departments = {
-  '': 'Eisvana',
-  'Wiki Scholars': 'Eisvana Wiki Scholars',
-  EBC: 'Eisvana Builder Collective',
-};
-
 const localStorageData = () => JSON.parse(localStorage.getItem(defaultValuesKey) ?? '{}');
 
 interface PageData {
