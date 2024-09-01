@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { defineAsyncComponent, type Component, onMounted } from 'vue';
-import { usePageDataStore, useStaticPageDataStore } from './stores/pageData';
-import { storeToRefs } from 'pinia';
+import { usePageDataStore } from './stores/pageData';
+import { route } from './variables/route';
 import ThemeSwitch from './components/ThemeSwitch.vue';
 import NavBar from './components/NavBar.vue';
-
-const staticPageData = useStaticPageDataStore();
-const { route } = storeToRefs(staticPageData);
 
 const pageData = usePageDataStore();
 
@@ -20,9 +17,8 @@ const router: Record<string, string> = {
 };
 
 function getRouteComponent() {
-  const currentRoute = route.value;
-  if (!currentRoute || !router[currentRoute]) return router.home;
-  return router[currentRoute];
+  if (!route || !router[route]) return router.home;
+  return router[route];
 }
 
 const componentName = getRouteComponent();

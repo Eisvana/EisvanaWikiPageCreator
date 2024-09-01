@@ -2,14 +2,6 @@ import { defineStore } from 'pinia';
 import { fetchSectionWikiText } from '@/helper/api';
 import parseMediawikiTemplate from 'parse-mediawiki-template';
 
-interface StaticPageData {
-  route: string | undefined;
-  fullArticleElement: HTMLDivElement | null;
-  debug: boolean;
-}
-
-// TODO: gh-pages supports fancy endings as well, so for example wiki.eisvana.com/base would correctly resolve to the base.html file. This needs to be handled!
-const route = window.location.pathname.split('/')!.at(-1)?.slice(0, -5); // NoSonar getting the current filename without the "html" ending
 
 const researchteamDefaultExceptions = ['base'];
 
@@ -18,16 +10,6 @@ export const departments = {
   'Wiki Scholars': 'Eisvana Wiki Scholars',
   EBC: 'Eisvana Builder Collective',
 };
-
-if (route && researchteamDefaultExceptions.includes(route)) departments[''] = '';
-
-export const useStaticPageDataStore = defineStore('staticPageData', {
-  state: (): StaticPageData => ({
-    route,
-    fullArticleElement: null,
-    debug: false,
-  }),
-});
 
 const localStorageData = () => JSON.parse(localStorage.getItem('defaultSettings') ?? '{}');
 
