@@ -3,6 +3,7 @@ import { fetchSectionWikiText } from '@/helper/api';
 import parseMediawikiTemplate from 'parse-mediawiki-template';
 import { currentReleaseKey, defaultValuesKey } from '@/variables/localStorageKeys';
 import { civName } from '@/variables/civilization';
+import { Notify } from 'quasar';
 
 const researchteamDefaultExceptions = ['base'];
 
@@ -85,6 +86,11 @@ export const usePageDataStore = defineStore('pageData', {
         localStorage.setItem(currentReleaseKey, version);
         this.release = version || storedVersion;
       } catch (e) {
+        Notify.create({
+          type: 'negative',
+          message: 'Failed to fetch release!',
+          actions: [{ label: 'Retry', color: 'light-blue', handler: this.getRelease }],
+        });
         console.error(e);
       }
     },
