@@ -67,7 +67,7 @@ const {
     label="Type of the base"
   />
   <div>Features</div>
-  <div>
+  <div class="features-input full-width">
     <CheckboxInput
       v-model="farm"
       label="Farm"
@@ -125,3 +125,10 @@ const {
     label="Create census entry"
   />
 </template>
+
+<style scoped lang="scss">
+.features-input {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(max(50%, 175px), 1fr));
+}
+</style>
