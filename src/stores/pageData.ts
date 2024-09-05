@@ -9,8 +9,6 @@ import { maxGlyphLength } from '@/variables/glyphData';
 
 const researchteamDefaultExceptions = ['base'];
 
-const localStorageData = () => JSON.parse(localStorage.getItem(defaultValuesKey) ?? '{}');
-
 interface PageData {
   release: string;
   name: string;
@@ -52,7 +50,7 @@ interface PageData {
   censusdiscord: string;
   censusfriend: string;
   censusarrival: string;
-  censusshow: string;
+  censusshow: boolean;
   gallery: {
     id: number;
     image: string;
@@ -60,51 +58,53 @@ interface PageData {
   }[];
 }
 
+const defaultState: PageData = {
+  release: '',
+  name: '',
+  image: '',
+  discovered: '',
+  discoveredlink: '',
+  system: '',
+  planet: '',
+  moon: '',
+  glyphs: '',
+  type: '',
+  biome: 'Lush',
+  age: '',
+  roots: '',
+  nutrients: '',
+  notes: '',
+  elements: [],
+  polymorphic: '',
+  discDate: '',
+  documenterName: '',
+  researchteam: civName,
+  appearance: '',
+  pageName: '',
+  platform: '',
+  mode: '',
+  wealth: '',
+  formation: '',
+  content: '',
+  axes: '',
+  farm: 'No',
+  geobay: 'No',
+  landingpad: 'No',
+  arena: 'No',
+  terminal: 'No',
+  racetrack: 'No',
+  censusplayer: '',
+  censussocial: '',
+  censusreddit: '',
+  censusdiscord: '',
+  censusfriend: '',
+  censusarrival: '',
+  censusshow: false,
+  gallery: [],
+};
+
 export const usePageDataStore = defineStore('pageData', {
-  state: (): PageData => ({
-    release: '',
-    name: '',
-    image: '',
-    discovered: localStorageData()['discoveredInput builderInput'] ?? '',
-    discoveredlink: localStorageData()['discoveredlinkInput builderlinkInput'] ?? '',
-    system: localStorageData().systemInput ?? '',
-    planet: localStorageData().planetInput ?? '',
-    moon: localStorageData().moonInput ?? '',
-    glyphs: localStorageData().portalglyphsInput ?? '',
-    type: '',
-    biome: 'Lush',
-    age: '',
-    roots: '',
-    nutrients: '',
-    notes: '',
-    elements: [],
-    polymorphic: '',
-    discDate: '',
-    documenterName: localStorageData().docbyInput ?? '',
-    researchteam: localStorageData().researchteamInput ?? civName,
-    appearance: '',
-    pageName: '',
-    platform: localStorageData().platformInput ?? '',
-    mode: '',
-    wealth: localStorageData().wealthInput ?? '',
-    formation: '',
-    content: '',
-    axes: '',
-    farm: 'No',
-    geobay: 'No',
-    landingpad: 'No',
-    arena: 'No',
-    terminal: 'No',
-    racetrack: 'No',
-    censusplayer: '',
-    censussocial: '',
-    censusreddit: '',
-    censusdiscord: '',
-    censusfriend: '',
-    censusarrival: '',
-    censusshow: '',
-    gallery: [],
-  }),
+  state: (): PageData => structuredClone(defaultState),
 
   getters: {
     regionData: (state): { region: string; regionNumber: string } => {
@@ -148,6 +148,11 @@ export const usePageDataStore = defineStore('pageData', {
       const localStorageData = localStorage.getItem(defaultValuesKey) ?? '{}';
       const jsonData = JSON.parse(localStorageData);
       this.$patch(jsonData);
+    },
+
+    resetStore() {
+      this.$patch(structuredClone(defaultState));
+      this.initStore();
     },
   },
 });
