@@ -4,6 +4,8 @@ import parseMediawikiTemplate from 'parse-mediawiki-template';
 import { currentReleaseKey, defaultValuesKey } from '@/variables/localStorageKeys';
 import { civName } from '@/variables/civilization';
 import { Notify } from 'quasar';
+import { regions } from '@/variables/regions';
+import { maxGlyphLength } from '@/variables/glyphData';
 
 const researchteamDefaultExceptions = ['base'];
 
@@ -15,7 +17,6 @@ interface PageData {
   image: string;
   discovered: string;
   discoveredlink: string;
-  department: string;
   system: string;
   planet: string;
   moon: string;
@@ -34,9 +35,29 @@ interface PageData {
   appearance: string;
   pageName: string;
   platform: string;
+  mode: string;
   wealth: string;
   formation: string;
   content: string;
+  axes: string;
+  farm: boolean;
+  geobay: boolean;
+  landingpad: boolean;
+  arena: boolean;
+  terminal: boolean;
+  racetrack: boolean;
+  censusplayer: string;
+  censussocial: string;
+  censusreddit: string;
+  censusdiscord: string;
+  censusfriend: string;
+  censusarrival: string;
+  censusshow: string;
+  gallery: {
+    id: number;
+    image: string;
+    description: string;
+  }[];
 }
 
 export const usePageDataStore = defineStore('pageData', {
@@ -46,7 +67,6 @@ export const usePageDataStore = defineStore('pageData', {
     image: '',
     discovered: localStorageData()['discoveredInput builderInput'] ?? '',
     discoveredlink: localStorageData()['discoveredlinkInput builderlinkInput'] ?? '',
-    department: '',
     system: localStorageData().systemInput ?? '',
     planet: localStorageData().planetInput ?? '',
     moon: localStorageData().moonInput ?? '',
@@ -65,12 +85,42 @@ export const usePageDataStore = defineStore('pageData', {
     appearance: '',
     pageName: '',
     platform: localStorageData().platformInput ?? '',
+    mode: '',
     wealth: localStorageData().wealthInput ?? '',
     formation: '',
     content: '',
+    axes: '',
+    farm: false,
+    geobay: false,
+    landingpad: false,
+    arena: false,
+    terminal: false,
+    racetrack: false,
+    censusplayer: '',
+    censussocial: '',
+    censusreddit: '',
+    censusdiscord: '',
+    censusfriend: '',
+    censusarrival: '',
+    censusshow: '',
+    gallery: [],
   }),
 
-  getters: {},
+  getters: {
+    regionData: (state): { region: string; regionNumber: string } => {
+      if (state.glyphs.length !== maxGlyphLength) return { region: '', regionNumber: '' };
+      const regionGlyphs = state.glyphs.slice(4);
+      const eisvanaRegionGlyphs = Object.keys(regions);
+      const regionIndex = eisvanaRegionGlyphs.indexOf(regionGlyphs);
+      const regionNames = Object.values(regions);
+      const currentRegion = regionNames[regionIndex];
+      return {
+        region: currentRegion,
+        regionNumber: `EV${regionIndex + 1}`,
+      };
+    },
+  },
+
   actions: {
     initStore() {
       this.getRelease();
@@ -95,14 +145,9 @@ export const usePageDataStore = defineStore('pageData', {
       }
     },
     applyDefaults() {
-      const isValidKey = (item: unknown): item is keyof typeof this.$state =>
-        typeof item === 'string' && item in this.$state;
-
       const localStorageData = localStorage.getItem(defaultValuesKey) ?? '{}';
       const jsonData = JSON.parse(localStorageData);
-      for (const item in jsonData) {
-        if (isValidKey(item)) this.$state[item] = jsonData[item];
-      }
+      this.$patch(jsonData);
     },
   },
 });
