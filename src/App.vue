@@ -4,6 +4,7 @@ import { usePageDataStore } from './stores/pageData';
 import { route } from './variables/route';
 import NavBar from './components/NavBar.vue';
 import Settings from './components/Settings.vue';
+import ActionButtons from './components/ActionButtons.vue';
 
 const pageData = usePageDataStore();
 
@@ -53,16 +54,7 @@ const RouteComponent = defineAsyncComponent<Component>({
     >
       <QToolbar>
         <QToolbarTitle>
-          <div class="row q-gutter-x-md">
-            <QBtn
-              color="secondary"
-              label="Copy"
-            />
-            <QBtn
-              color="secondary"
-              label="Create"
-            />
-          </div>
+         <ActionButtons />
         </QToolbarTitle>
       </QToolbar>
     </QFooter>
