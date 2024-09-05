@@ -11,7 +11,7 @@ const wikiPageLink = computed(() => `${wikiLink}Special:EditPage/${name.value}`)
 </script>
 
 <template>
-  <div class="row q-gutter-x-md">
+  <div class="row q-gutter-x-md justify-center">
     <QBtn
       color="secondary"
       label="Copy Code"
