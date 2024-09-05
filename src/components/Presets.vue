@@ -4,9 +4,8 @@ import { computed, reactive, ref } from 'vue';
 import GlyphInput from './GlyphInput.vue';
 import { mappedDepartmentOptions } from '@/variables/departments';
 import { mappedPlatformOptions } from '@/variables/platforms';
-import QSelectWithSeparator from './QSelectWithSeparator.vue';
 import { wealth } from '@/variables/wealth';
-import { capitalize } from '@/helper/typography';
+import QSelectPreset from './QSelectPreset.vue';
 
 const isOpen = ref(false);
 
@@ -48,10 +47,20 @@ function restoreDefaults() {
 }
 
 const mappedWealthOptions = computed(() =>
-  Object.entries(wealth).flatMap((item) => [
-    { group: capitalize(item[0]), disable: true },
-    ...item[1].map((option) => ({ label: option, value: option })),
-  ])
+  Object.entries(wealth)
+    .flatMap((item) => item[1].map((option) => ({ label: option, value: option })))
+    .toSorted((a, b) => {
+      const nameA = a.label.toUpperCase(); // ignore upper and lowercase
+      const nameB = b.label.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      } else if (nameA > nameB) {
+        return 1;
+      } else {
+        // names must be equal
+        return 0;
+      }
+    })
 );
 </script>
 
@@ -106,29 +115,21 @@ const mappedWealthOptions = computed(() =>
           label="Name of the moon"
           outlined
         />
-        <QSelect
+        <QSelectPreset
           v-model="presetData.platform"
           :options="mappedPlatformOptions"
           label="Platform"
-          outlined
-          emit-value
-          map-options
         />
-        <QSelect
+        <QSelectPreset
           v-model="presetData.department"
           :options="mappedDepartmentOptions"
           label="Department"
-          outlined
-          emit-value
-          map-options
         />
-        <QSelectWithSeparator
+        <QSelectPreset
           v-model="presetData.wealth"
           :options="mappedWealthOptions"
           label="System wealth"
-          outlined
-          emit-value
-          map-options
+          use-input
         />
         <GlyphInput v-model="presetData.glyphs" />
       </QCardSection>
