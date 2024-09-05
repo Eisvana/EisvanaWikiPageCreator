@@ -36,7 +36,7 @@ watchEffect(lintGlyphs);
   <div class="column q-gutter-y-sm full-width glyph-input-wrapper">
     <div class="row q-gutter-md items-center">
       <QInput
-        v-model="model"
+        v-model.trim="model"
         :error="isError"
         :maxlength="maxGlyphLength"
         error-message="No valid Eisvana region"
