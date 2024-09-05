@@ -1,5 +1,5 @@
 export const wealth = {
-  high: ['Declining', 'Destitute', 'Failing', 'Fledgling', 'Low Supply', 'Struggling', 'Unsuccessful', 'Unpromising'],
+  high: ['Advanced', 'Affluent', 'Booming', 'Flourishing', 'High Supply', 'Opulent', 'Prosperous', 'Wealthy'],
   medium: [
     'Adequate',
     'Balanced',
@@ -10,6 +10,6 @@ export const wealth = {
     'Satisfactory',
     'Sustainable',
   ],
-  low: ['Advanced', 'Affluent', 'Booming', 'Flourishing', 'High Supply', 'Opulent', 'Prosperous', 'Wealthy'],
+  low: ['Declining', 'Destitute', 'Failing', 'Fledgling', 'Low Supply', 'Struggling', 'Unsuccessful', 'Unpromising'],
   outlaw: ['Black Market'],
 } as const;
