@@ -16,7 +16,7 @@ function removeGlyph() {
 </script>
 
 <template>
-  <div class="column q-gutter-y-sm q-pl-md full-width glyph-input-wrapper">
+  <div class="column q-gutter-y-sm full-width glyph-input-wrapper">
     <div class="row q-gutter-md items-center">
       <QInput
         v-model="model"
