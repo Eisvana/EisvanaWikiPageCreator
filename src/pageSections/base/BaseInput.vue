@@ -115,4 +115,13 @@ const {
     v-model="censusfriend"
     label="Friend code"
   />
+  <WikiDataTextInput
+    v-model="censusarrival"
+    label="Day of arrival in Eisvana"
+    type="date"
+  />
+  <QCheckbox
+    v-model="censusshow"
+    label="Create census entry"
+  />
 </template>
