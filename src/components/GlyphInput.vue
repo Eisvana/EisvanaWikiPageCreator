@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { availableGlyphs, maxGlyphLength } from '@/variables/glyphData';
+import { regions } from '@/variables/regions';
+import { computed, watchEffect } from 'vue';
 
 const model = defineModel<string>({ required: true });
+
+const validRegionGlyphs = Object.keys(regions);
+const isError = computed(
+  () => model.value.length === maxGlyphLength && !validRegionGlyphs.some((item) => model.value.endsWith(item))
+);
 
 const validGlyphs = Array.from({ length: availableGlyphs }, (_value, index) => index.toString(16).toUpperCase());
 
@@ -13,6 +20,16 @@ function addGlyph(glyph: string) {
 function removeGlyph() {
   model.value = model.value.slice(0, -1);
 }
+
+function lintGlyphs() {
+  model.value = model.value
+    .toUpperCase()
+    .split('')
+    .filter((char) => validGlyphs.includes(char))
+    .join('');
+}
+
+watchEffect(lintGlyphs);
 </script>
 
 <template>
@@ -20,8 +37,11 @@ function removeGlyph() {
     <div class="row q-gutter-md items-center">
       <QInput
         v-model="model"
+        :error="isError"
         :maxlength="maxGlyphLength"
+        error-message="No valid Eisvana region"
         label="Glyphs"
+        hide-bottom-space
         outlined
       />
       <div>
