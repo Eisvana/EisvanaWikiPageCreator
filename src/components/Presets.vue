@@ -78,59 +78,61 @@ const mappedWealthOptions = computed(() =>
     no-backdrop-dismiss
     @before-show="loadData()"
   >
-    <QCard class="card-wrapper">
+    <QCard class="card-wrapper full-width">
       <QCardSection>
         <h2 class="text-h4 no-margin">Global Preload Values</h2>
       </QCardSection>
-      <QCardSection class="q-gutter-md row wrap input-grid">
-        <QInput
-          v-if="!presetData.discovered"
-          v-model="presetData.discoveredlink"
-          label="Discoverer wiki name"
-          outlined
-        />
-        <QInput
-          v-if="!presetData.discoveredlink"
-          v-model="presetData.discovered"
-          label="Discoverer alias if no wiki"
-          outlined
-        />
-        <QInput
-          v-model="presetData.documenterName"
-          label="Documenter alias if not discoverer"
-          outlined
-        />
-        <QInput
-          v-model="presetData.system"
-          label="Name of the system"
-          outlined
-        />
-        <QInput
-          v-model="presetData.planet"
-          label="Name of the planet"
-          outlined
-        />
-        <QInput
-          v-model="presetData.moon"
-          label="Name of the moon"
-          outlined
-        />
-        <QSelectPreset
-          v-model="presetData.platform"
-          :options="mappedPlatformOptions"
-          label="Platform"
-        />
-        <QSelectPreset
-          v-model="presetData.department"
-          :options="mappedDepartmentOptions"
-          label="Department"
-        />
-        <QSelectPreset
-          v-model="presetData.wealth"
-          :options="mappedWealthOptions"
-          label="System wealth"
-          use-input
-        />
+      <QCardSection>
+        <div class="input-grid q-mb-md">
+          <QInput
+            v-if="!presetData.discovered"
+            v-model="presetData.discoveredlink"
+            label="Discoverer wiki name"
+            outlined
+          />
+          <QInput
+            v-if="!presetData.discoveredlink"
+            v-model="presetData.discovered"
+            label="Discoverer alias if no wiki"
+            outlined
+          />
+          <QInput
+            v-model="presetData.documenterName"
+            label="Documenter alias if not discoverer"
+            outlined
+          />
+          <QInput
+            v-model="presetData.system"
+            label="Name of the system"
+            outlined
+          />
+          <QInput
+            v-model="presetData.planet"
+            label="Name of the planet"
+            outlined
+          />
+          <QInput
+            v-model="presetData.moon"
+            label="Name of the moon"
+            outlined
+          />
+          <QSelectPreset
+            v-model="presetData.platform"
+            :options="mappedPlatformOptions"
+            label="Platform"
+          />
+          <QSelectPreset
+            v-model="presetData.department"
+            :options="mappedDepartmentOptions"
+            label="Department"
+          />
+          <QSelectPreset
+            v-model="presetData.wealth"
+            :options="mappedWealthOptions"
+            label="System wealth"
+            use-input
+          />
+        </div>
         <GlyphInput v-model="presetData.glyphs" />
       </QCardSection>
       <QCardActions class="q-mb-md q-gutter-x-md">
@@ -164,6 +166,8 @@ const mappedWealthOptions = computed(() =>
 }
 
 .input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(max(40%, 200px), 1fr));
   gap: 0.5rem;
 
   & > * {
