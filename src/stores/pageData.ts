@@ -40,12 +40,12 @@ interface PageData {
   formation: string;
   content: string;
   axes: string;
-  farm: boolean;
-  geobay: boolean;
-  landingpad: boolean;
-  arena: boolean;
-  terminal: boolean;
-  racetrack: boolean;
+  farm: string;
+  geobay: string;
+  landingpad: string;
+  arena: string;
+  terminal: string;
+  racetrack: string;
   censusplayer: string;
   censussocial: string;
   censusreddit: string;
@@ -90,12 +90,12 @@ export const usePageDataStore = defineStore('pageData', {
     formation: '',
     content: '',
     axes: '',
-    farm: false,
-    geobay: false,
-    landingpad: false,
-    arena: false,
-    terminal: false,
-    racetrack: false,
+    farm: 'No',
+    geobay: 'No',
+    landingpad: 'No',
+    arena: 'No',
+    terminal: 'No',
+    racetrack: 'No',
     censusplayer: '',
     censussocial: '',
     censusreddit: '',
