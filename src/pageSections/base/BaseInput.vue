@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CheckboxInput from '@/components/CheckboxInput.vue';
+import CheckboxSection from '@/components/CheckboxSection.vue';
 import GlyphInput from '@/components/GlyphInput.vue';
 import WikiDataTextInput from '@/components/WikiDataTextInput.vue';
 import { usePageDataStore } from '@/stores/pageData';
@@ -67,7 +68,7 @@ const {
     label="Type of the base"
   />
   <div>Features</div>
-  <div class="features-input full-width">
+  <CheckboxSection>
     <CheckboxInput
       v-model="farm"
       label="Farm"
@@ -92,7 +93,7 @@ const {
       v-model="racetrack"
       label="Racetrack"
     />
-  </div>
+  </CheckboxSection>
 
   <div>Census</div>
   <WikiDataTextInput
@@ -125,10 +126,3 @@ const {
     label="Create census entry"
   />
 </template>
-
-<style scoped lang="scss">
-.features-input {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(max(50%, 175px), 1fr));
-}
-</style>
