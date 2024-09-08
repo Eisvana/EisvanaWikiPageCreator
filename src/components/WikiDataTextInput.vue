@@ -13,9 +13,10 @@ const props = defineProps<{
   tooltip?: string;
 }>();
 
-const model = defineModel<string>({ required: true });
+const model = defineModel<string>();
+const dirtyModel = defineModel<string>('dirty');
 
-watchEffect(() => (model.value = sanitiseString(model.value)));
+watchEffect(() => (model.value = sanitiseString(dirtyModel.value ?? '')));
 
 const isOpen = ref(false);
 
@@ -24,7 +25,7 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
 
 <template>
   <QInput
-    v-model.trim="model"
+    v-model.trim="dirtyModel"
     :error
     :error-message
     :label
