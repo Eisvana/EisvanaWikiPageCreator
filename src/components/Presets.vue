@@ -2,10 +2,10 @@
 import { defaultValuesKey } from '@/variables/localStorageKeys';
 import { computed, reactive, ref } from 'vue';
 import GlyphInput from './GlyphInput.vue';
-import { mappedDepartmentOptions } from '@/variables/departments';
-import { mappedPlatformOptions } from '@/variables/platforms';
 import { wealth } from '@/variables/wealth';
 import QSelectPreset from './QSelectPreset.vue';
+import PlatformSelect from './PlatformSelect.vue';
+import DepartmentSelect from './DepartmentSelect.vue';
 
 const isOpen = ref(false);
 
@@ -116,16 +116,8 @@ const mappedWealthOptions = computed(() =>
             label="Name of the moon"
             outlined
           />
-          <QSelectPreset
-            v-model="presetData.platform"
-            :options="mappedPlatformOptions"
-            label="Platform"
-          />
-          <QSelectPreset
-            v-model="presetData.department"
-            :options="mappedDepartmentOptions"
-            label="Department"
-          />
+          <PlatformSelect v-model="presetData.platform" />
+          <DepartmentSelect v-model="presetData.department" />
           <QSelectPreset
             v-model="presetData.wealth"
             :options="mappedWealthOptions"
