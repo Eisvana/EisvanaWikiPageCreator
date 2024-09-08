@@ -9,6 +9,13 @@ import { maxGlyphLength } from '@/variables/glyphData';
 
 const researchteamDefaultExceptions = ['base'];
 
+interface GalleryFileItem {
+  file: File;
+  id: number;
+  desc: string;
+}
+
+
 interface PageData {
   release: string;
   name: string;
@@ -51,11 +58,8 @@ interface PageData {
   censusfriend: string;
   censusarrival: string;
   censusshow: boolean;
-  gallery: {
-    id: number;
-    image: string;
-    description: string;
-  }[];
+  galleryFiles: GalleryFileItem[];
+  locationFiles: GalleryFileItem[];
 }
 
 const defaultState: PageData = {
@@ -100,7 +104,8 @@ const defaultState: PageData = {
   censusfriend: '',
   censusarrival: '',
   censusshow: false,
-  gallery: [],
+  galleryFiles: [],
+  locationFiles: [],
 };
 
 export const usePageDataStore = defineStore('pageData', {
