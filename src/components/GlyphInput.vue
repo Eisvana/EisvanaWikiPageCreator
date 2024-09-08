@@ -42,6 +42,7 @@ watchEffect(lintGlyphs);
         error-message="No valid Eisvana region"
         label="Glyphs"
         hide-bottom-space
+        dense
         outlined
       />
       <div>
