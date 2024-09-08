@@ -45,14 +45,12 @@ watchEffect(lintGlyphs);
         dense
         outlined
       />
-      <div>
-        <QBtn
-          color="negative"
-          icon="keyboard_backspace"
-          label="Delete"
-          @click="removeGlyph"
-        />
-      </div>
+      <QBtn
+        color="negative"
+        icon="keyboard_backspace"
+        label="Delete"
+        @click="removeGlyph"
+      />
     </div>
     <div class="glyph-grid">
       <QBtn
