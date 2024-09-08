@@ -15,7 +15,6 @@ interface GalleryFileItem {
   desc: string;
 }
 
-
 interface PageData {
   release: string;
   name: string;
@@ -57,7 +56,10 @@ interface PageData {
   censusdiscord: string;
   censusfriend: string;
   censusarrival: string;
-  censusshow: boolean;
+  censusshow: string;
+  layout: string;
+  features: string;
+  additionalInfo: string;
   galleryFiles: GalleryFileItem[];
   locationFiles: GalleryFileItem[];
 }
@@ -103,7 +105,10 @@ const defaultState: PageData = {
   censusdiscord: '',
   censusfriend: '',
   censusarrival: '',
-  censusshow: false,
+  censusshow: '',
+  layout: '',
+  features: '',
+  additionalInfo: '',
   galleryFiles: [],
   locationFiles: [],
 };
