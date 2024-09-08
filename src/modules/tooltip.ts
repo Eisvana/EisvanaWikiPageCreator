@@ -59,6 +59,13 @@ export function explanation(heading: string = '', text: string = '', image: stri
 			Since we serve optimised images, we use a <picture> element.
 			This picture element behaves differently from the <img> element:
 			It doesn't display the picture line by line when they are ready, but it instead waits for the entire thing to load, and then displays it all at once.
+
+      Hi, future Lenni here from September 2024. I'd just like to interject for a moment.
+      What you're referring to as "behaving differently from the <img> element", is in fact related to the avif format.
+      avif displays fully once it's loaded instead of progressively like webp and jpg.
+      Honestly, we should just abolish avif and jpg from this codebase and just focus on webp.
+      This will be done in the new version that is fully written in Vue.
+   
 			It also keeps the aspect ratio of the previous picture until the new one is loaded. This is the big pain point.
 			In order to not have the <dialog> jump around during load, we're clearing the source attributes and then re-assigning them.
 			So why the setTimeout() you might ask?
