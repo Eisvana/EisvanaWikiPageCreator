@@ -50,6 +50,7 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
           v-if="tooltip"
           :offset="[0, 0]"
           anchor="top middle"
+          class="tooltip"
           max-width="150px"
           self="bottom middle"
           >{{ tooltip }}</QTooltip
