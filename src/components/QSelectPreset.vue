@@ -11,6 +11,7 @@ const props = defineProps<{
         value: string;
       }
   )[];
+  spaced?: boolean;
 }>();
 
 const options = ref(props.options);
@@ -39,6 +40,7 @@ function filterFn(val: string, update: (ref: () => void) => void) {
 <template>
   <QSelect
     v-model="model"
+    :dense="!spaced"
     :label
     :options
     :use-input
