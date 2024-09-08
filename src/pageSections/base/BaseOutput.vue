@@ -51,7 +51,7 @@ const locationSentence = computed(() => {
 
 <template>
   <div><span v-pre>{{Version|</span>{{ release }}<span v-pre>}}</span></div>
-  <div v-pre>{{ Eisvana }}</div>
+  <div><span v-pre>{{</span>Eisvana<span v-pre>}}</span></div>
   <div v-pre>{{Base infobox</div>
   <div>| name = {{ name }}</div>
   <div>| image = {{ image }}</div>
