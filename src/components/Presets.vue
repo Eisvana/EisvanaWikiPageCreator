@@ -116,16 +116,26 @@ const mappedWealthOptions = computed(() =>
             label="Name of the moon"
             outlined
           />
-          <PlatformSelect v-model="presetData.platform" />
-          <DepartmentSelect v-model="presetData.department" />
+          <PlatformSelect
+            v-model="presetData.platform"
+            spaced
+          />
+          <DepartmentSelect
+            v-model="presetData.department"
+            spaced
+          />
           <QSelectPreset
             v-model="presetData.wealth"
             :options="mappedWealthOptions"
             label="System wealth"
+            spaced
             use-input
           />
         </div>
-        <GlyphInput v-model="presetData.glyphs" />
+        <GlyphInput
+          v-model="presetData.glyphs"
+          spaced
+        />
       </QCardSection>
       <QCardActions class="q-mb-md q-gutter-x-md justify-center">
         <QBtn
