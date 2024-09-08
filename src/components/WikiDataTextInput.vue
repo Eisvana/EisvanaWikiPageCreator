@@ -13,6 +13,7 @@ const props = defineProps<{
   tooltip?: string;
 }>();
 
+// TODO: This isn't auto-populated at startup anymore if there are defaults set. Fix this.
 const model = defineModel<string>();
 const dirtyModel = defineModel<string>('dirty');
 
@@ -71,6 +72,8 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
               <QImg
                 :src="helperImage"
                 alt="Explainer Image"
+                class="help-img"
+                fit="contain"
               />
             </a>
           </QCardSection>
@@ -108,5 +111,9 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
   display: block;
   text-align: center;
   padding-block-start: 0.5rem;
+}
+
+.help-img {
+  max-height: 500px;
 }
 </style>
