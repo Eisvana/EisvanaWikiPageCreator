@@ -3,6 +3,10 @@ import { availableGlyphs, maxGlyphLength } from '@/variables/glyphData';
 import { regions } from '@/variables/regions';
 import { computed, watchEffect } from 'vue';
 
+defineProps<{
+  spaced?: boolean;
+}>();
+
 const model = defineModel<string>({ required: true });
 
 const validRegionGlyphs = Object.keys(regions);
@@ -37,12 +41,12 @@ watchEffect(lintGlyphs);
     <div class="row q-gutter-md items-center">
       <QInput
         v-model.trim="model"
+        :dense="!spaced"
         :error="isError"
         :maxlength="maxGlyphLength"
         error-message="No valid Eisvana region"
         label="Glyphs"
         hide-bottom-space
-        dense
         outlined
       />
       <QBtn

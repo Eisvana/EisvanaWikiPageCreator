@@ -2,6 +2,10 @@
 import QSelectPreset from './QSelectPreset.vue';
 import { mappedPlatformOptions } from '@/variables/platforms';
 
+defineProps<{
+  spaced?: boolean;
+}>();
+
 const model = defineModel<string>({ required: true });
 </script>
 
@@ -9,6 +13,7 @@ const model = defineModel<string>({ required: true });
   <QSelectPreset
     v-model="model"
     :options="mappedPlatformOptions"
+    :spaced
     label="Platform"
   />
 </template>
