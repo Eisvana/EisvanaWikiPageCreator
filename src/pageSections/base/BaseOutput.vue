@@ -34,6 +34,9 @@ const {
   censusfriend,
   censusarrival,
   censusshow,
+  features,
+  layout,
+  additionalInfo,
   gallery,
 } = storeToRefs(pageData);
 
@@ -48,7 +51,7 @@ const locationSentence = computed(() => {
 
 <template>
   <div><span v-pre>{{Version|</span>{{ release }}<span v-pre>}}</span></div>
-  <div v-pre>{{Eisvana}}</div>
+  <div v-pre>{{ Eisvana }}</div>
   <div v-pre>{{Base infobox</div>
   <div>| name = {{ name }}</div>
   <div>| image = {{ image }}</div>
@@ -93,10 +96,13 @@ const locationSentence = computed(() => {
   </div>
   <br />
   <div>==Layout==</div>
+  <div class="keep-linebreaks">{{ layout }}</div>
   <br />
   <div>==Features==</div>
+  <div class="keep-linebreaks">{{ features }}</div>
   <br />
   <div>==Additional Information==</div>
+  <div class="keep-linebreaks">{{ additionalInfo }}</div>
   <br />
   <div>==Gallery==</div>
   <div>&lt;gallery&gt;</div>
