@@ -14,3 +14,17 @@
 .monospace {
   font-family: monospace;
 }
+
+body {
+  font-size: 1rem;
+}
+
+.link {
+  color: $blue-7;
+  text-decoration: none;
+  transition: color var(--q-transition-duration);
+
+  &:hover {
+    color: $blue-4;
+  }
+}
