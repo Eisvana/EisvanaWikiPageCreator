@@ -80,7 +80,7 @@ const mappedWealthOptions = computed(() =>
   >
     <QCard class="card-wrapper full-width">
       <QCardSection>
-        <h2 class="text-h4 no-margin">Global Preload Values</h2>
+        <h2 class="text-h4 no-margin text-center">Global Preload Values</h2>
       </QCardSection>
       <QCardSection>
         <div class="input-grid q-mb-md">
@@ -135,7 +135,7 @@ const mappedWealthOptions = computed(() =>
         </div>
         <GlyphInput v-model="presetData.glyphs" />
       </QCardSection>
-      <QCardActions class="q-mb-md q-gutter-x-md">
+      <QCardActions class="q-mb-md q-gutter-x-md justify-center">
         <QBtn
           class="q-ml-lg"
           color="positive"
