@@ -4,6 +4,8 @@ import { usePageDataStore, useStaticPageDataStore } from './stores/pageData';
 import { storeToRefs } from 'pinia';
 import { useMarker } from './composables/useMarker';
 import { getRelease } from './common';
+// import MainToolbar from './primevueComponents/MainToolbar.vue';
+import Home from './views/Home.vue';
 
 const staticPageData = useStaticPageDataStore();
 const { route } = storeToRefs(staticPageData);
@@ -37,5 +39,6 @@ const RouteComponent = defineAsyncComponent<Component>({
 </script>
 
 <template>
-  <RouteComponent />
+  <Home />
+  <!-- <RouteComponent /> -->
 </template>
