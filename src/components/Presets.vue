@@ -87,7 +87,7 @@ function hideDialog() {
     @show="loadData()"
   >
     <template #header>
-      <h2 class="title is-4 has-text-centered mb-0 heading">Global Preload Values</h2>
+      <h2 class="title is-4 has-text-centered mb-0 full-width">Global Preload Values</h2>
     </template>
 
     <Fluid class="input-grid mt-5">
@@ -166,10 +166,6 @@ function hideDialog() {
 </template>
 
 <style scoped>
-.heading {
-  width: 100%;
-}
-
 .input-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(max(40%, 200px), 1fr));

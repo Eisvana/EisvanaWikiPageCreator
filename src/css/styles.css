@@ -1,6 +1,11 @@
 @import './fonts.css';
 @import './variables.css';
 
+.glyphs {
+  font-family: NMS-Glyphs-Mono;
+  font-size: 2.5rem;
+}
+
 .full-width {
   width: 100%;
 }

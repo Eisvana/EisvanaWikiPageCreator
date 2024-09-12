@@ -11,6 +11,6 @@ const isEisvanaHost = eisvanaHosts.includes(window.location.host);
     as="a"
     icon="pi pi-arrow-left"
     label="View other pages"
-    text
+    link
   />
 </template>

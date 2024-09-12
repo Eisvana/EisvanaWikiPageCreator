@@ -145,11 +145,7 @@ export const usePageDataStore = defineStore('pageData', {
         localStorage.setItem(currentReleaseKey, version);
         this.release = version || storedVersion;
       } catch (e) {
-        Notify.create({
-          type: 'negative',
-          message: 'Failed to fetch release!',
-          actions: [{ label: 'Retry', color: 'light-blue', handler: this.getRelease }],
-        });
+        // toast.add({ severity: 'error', summary: 'Failed to fetch release!' });
         console.error(e);
       }
     },

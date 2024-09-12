@@ -1,23 +1,23 @@
 <script setup lang="ts">
+import { usePageDataStore } from '@/stores/pageData';
 import { useToast } from 'primevue/usetoast';
-import { ref } from 'vue';
+import { onMounted } from 'vue';
 
 const toast = useToast();
-const isVisible = ref(false);
+
+const pageData = usePageDataStore();
 
 const showTemplate = () => {
-  if (isVisible.value) return;
   toast.add({ severity: 'error', summary: 'Failed to fetch release!' });
-  isVisible.value = true;
 };
 
-const onReply = () => {
+onMounted(showTemplate);
+
+const onClose = () => {
   toast.removeGroup('bc');
-  isVisible.value = false;
 };
-
-const onClose = () => (isVisible.value = false);
 </script>
+
 <template>
   <Toast
     position="bottom-center"
@@ -27,10 +27,10 @@ const onClose = () => (isVisible.value = false);
       <div>
         <div>{{ slotProps.message.summary }}</div>
         <Button
-          size="small"
           label="Retry"
           severity="info"
-          @click="onReply()"
+          size="small"
+          @click="pageData.getRelease"
         />
       </div>
     </template>

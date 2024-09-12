@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import MainToolbar from '@/components/MainToolbar.vue';
 import { componentName } from '@/variables/route';
-import { defineAsyncComponent, type Component } from 'vue';
+import { defineAsyncComponent, onMounted, type Component } from 'vue';
 import Button from 'primevue/button';
 import Toolbar from 'primevue/toolbar';
+import { usePageDataStore } from './stores/pageData';
+
+const pageData = usePageDataStore();
+
+onMounted(async () => pageData.initStore());
 
 const RouteComponent = defineAsyncComponent<Component>({
   loader: () => import(`./pages/${componentName}.vue`),
@@ -14,34 +19,13 @@ const RouteComponent = defineAsyncComponent<Component>({
   <header>
     <MainToolbar />
   </header>
-  <main class="container">
-    <!-- <RouteComponent /> -->
-    <div>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
-      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
-    </div>
-    <div>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
-      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
-    </div>
-    <div>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
-      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
-    </div>
-    <div>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
-      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
-    </div>
-    <div>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
-      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
-    </div>
-    <div>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
-      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
-    </div>
+  <main class="container main-page-content pt-4 my-5">
+    <RouteComponent />
   </main>
-  <footer class="full-width">
+  <footer
+    v-if="componentName !== 'Home'"
+    class="full-width"
+  >
     <Toolbar>
       <template #center>
         <div class="footer-toolbar">
@@ -66,7 +50,6 @@ const RouteComponent = defineAsyncComponent<Component>({
 }
 
 footer {
-  width: 100%;
   position: fixed;
   bottom: 0;
 
@@ -77,7 +60,7 @@ footer {
   }
 }
 
-.container {
-  font-size: 5rem;
+.main-page-content {
+  padding-block-end: 5rem;
 }
 </style>

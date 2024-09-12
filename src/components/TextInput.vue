@@ -5,6 +5,8 @@ import { useId } from '@/helpers/id';
 
 defineProps<{
   label: string;
+  maxlength?: string | number;
+  invalid?: boolean;
 }>();
 
 const id = useId('input-');
@@ -17,6 +19,8 @@ const model = defineModel<string>({ required: true });
     <InputText
       v-model="model"
       :id
+      :invalid
+      :maxlength
     />
     <label :for="id">{{ label }}</label>
   </FloatLabel>

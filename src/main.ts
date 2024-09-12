@@ -7,6 +7,7 @@ import PrimeVue from 'primevue/config';
 import 'primeicons/primeicons.css';
 import { eisvanaColours } from './css/stylePreset';
 import Tooltip from 'primevue/tooltip';
+import ToastService from 'primevue/toastservice';
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -20,6 +21,7 @@ app.use(PrimeVue, {
     },
   },
 });
+app.use(ToastService);
 app.directive('tooltip', Tooltip);
 
 app.mount('#app');
