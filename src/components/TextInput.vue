@@ -15,6 +15,7 @@ const model = defineModel<string>({ required: true });
 </script>
 
 <template>
+  <!--This comment prevents a model desync bug. Do not remove it!!-->
   <FloatLabel>
     <InputText
       v-model="model"
