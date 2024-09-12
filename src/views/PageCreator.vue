@@ -8,7 +8,7 @@ import Fluid from 'primevue/fluid';
     <Card class="column is-full-mobile p-0">
       <template #content>
         <Fluid>
-        <slot name="input"></slot>
+          <slot name="input"></slot>
         </Fluid>
       </template>
     </Card>

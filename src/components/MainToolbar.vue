@@ -7,7 +7,7 @@ import Presets from './Presets.vue';
 </script>
 
 <template>
-  <Toolbar class="toolbar">
+  <Toolbar class="toolbar is-radiusless">
     <template #start>
       <NavBar />
     </template>
@@ -29,5 +29,9 @@ import Presets from './Presets.vue';
 .settings-buttons {
   display: flex;
   gap: 0.5rem;
+}
+
+.toolbar {
+  border: none;
 }
 </style>

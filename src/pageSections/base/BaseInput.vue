@@ -10,6 +10,10 @@ import { storeToRefs } from 'pinia';
 import Divider from 'primevue/divider';
 import Panel from 'primevue/panel';
 import Checkbox from 'primevue/checkbox';
+import { ref } from 'vue';
+import TextareaInput from '@/components/TextareaInput.vue';
+import DatePicker from 'primevue/datepicker';
+import InputTableItem from '@/components/InputTableItem.vue';
 
 const pageData = usePageDataStore();
 const {
@@ -41,6 +45,8 @@ const {
   features,
   additionalInfo,
 } = storeToRefs(pageData);
+
+const isCollapsed = ref(false);
 </script>
 
 <template>
@@ -111,9 +117,13 @@ const {
   <Divider />
 
   <Panel
+    v-model:collapsed="isCollapsed"
     header="Census"
     toggleable
   >
+    <template #toggleicon>
+      <span :class="`pi pi-chevron-${isCollapsed ? 'down' : 'up'}`"></span>
+    </template>
     <TextInput
       v-model="censusplayer"
       help-img="base/playerName"
@@ -147,36 +157,61 @@ const {
       You can find your friend code in the Options &rarr; Network &rarr; View No Man's Sky Friends List &rarr; Show My
       No Man's Sky Friend Code
     </TextInput>
-    <TextInput
-      v-model="censusarrival"
-      label="Day of arrival in Eisvana"
-      type="date"
-    />
-    <Checkbox
-      v-model="censusshow"
-      false-value=""
-      label="Create census entry"
-      true-value="Y"
-    />
+    <InputTableItem>
+      <template #label>
+        <label for="date-input">Day of arrival in Eisvana</label>
+      </template>
+      <template #input>
+        <DatePicker
+          v-model="censusarrival"
+          date-format="yy-mm-dd"
+          icon-display="input"
+          input-id="date-input"
+          show-icon
+        />
+      </template>
+    </InputTableItem>
+    <InputTableItem>
+      <template #label>
+        <label for="census-checkbox">Create census entry</label>
+      </template>
+      <template #input>
+        <Checkbox
+          v-model="censusshow"
+          false-value=""
+          input-id="census-checkbox"
+          true-value="Y"
+          binary
+        />
+      </template>
+    </InputTableItem>
   </Panel>
 
   <Divider />
 
-  <TextInput
-    v-model="layout"
-    label="Base Layout"
-    type="textarea"
-  />
-  <TextInput
-    v-model="features"
-    label="Base Features"
-    type="textarea"
-  />
-  <TextInput
-    v-model="additionalInfo"
-    label="Additional Information"
-    type="textarea"
-  />
+  <div class="is-flex is-flex-direction-column textareas">
+    <TextareaInput
+      v-model="layout"
+      label="Base Layout"
+      type="TextareaInput"
+    />
+    <TextareaInput
+      v-model="features"
+      label="Base Features"
+      type="TextareaInput"
+    />
+    <TextareaInput
+      v-model="additionalInfo"
+      label="Additional Information"
+      type="TextareaInput"
+    />
+  </div>
 
   <Divider />
 </template>
+
+<style scoped>
+.textareas {
+  gap: 1rem;
+}
+</style>

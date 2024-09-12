@@ -6,6 +6,7 @@ import { defaultValuesKey } from '@/variables/localStorageKeys';
 import { wealth } from '@/variables/wealth';
 import TextInput from './TextInput.vue';
 import Fluid from 'primevue/fluid';
+import GlyphInput from './GlyphInput.vue';
 
 const isOpen = ref(false);
 
@@ -81,7 +82,7 @@ function hideDialog() {
     v-model:visible="isOpen"
     :closable="false"
     :draggable="false"
-    pt:root:class="preset-dialog-wrapper mx-4"
+    pt:root:class="dialog-wrapper mx-4"
     pt:footer:class="is-flex-wrap-wrap is-justify-content-center action-buttons"
     modal
     @show="loadData()"
@@ -139,28 +140,25 @@ function hideDialog() {
             use-input
           />-->
     </Fluid>
-    <!--
-        <GlyphInput
-          v-model="presetData.glyphs"
-          spaced
-        /> -->
+
+    <GlyphInput v-model="presetData.glyphs" />
 
     <template #footer>
-        <Button
-          severity="success"
-          label="Set"
-          @click="storeData"
-        />
-        <Button
-          severity="danger"
-          label="Cancel"
-          @click="hideDialog"
-        />
-        <Button
-          severity="warn"
-          label="Restore Defaults"
-          @click="restoreDefaults"
-        />
+      <Button
+        severity="success"
+        label="Set"
+        @click="storeData"
+      />
+      <Button
+        severity="danger"
+        label="Cancel"
+        @click="hideDialog"
+      />
+      <Button
+        severity="warn"
+        label="Restore Defaults"
+        @click="restoreDefaults"
+      />
     </template>
   </Dialog>
 </template>
@@ -179,11 +177,5 @@ function hideDialog() {
 
 .action-buttons {
   gap: 0.5rem;
-}
-</style>
-
-<style>
-.preset-dialog-wrapper {
-  width: min(100%, 640px);
 }
 </style>

@@ -2,9 +2,8 @@
 import MainToolbar from '@/components/MainToolbar.vue';
 import { componentName } from '@/variables/route';
 import { defineAsyncComponent, onMounted, type Component } from 'vue';
-import Button from 'primevue/button';
-import Toolbar from 'primevue/toolbar';
 import { usePageDataStore } from './stores/pageData';
+import FooterToolbar from './components/FooterToolbar.vue';
 
 const pageData = usePageDataStore();
 
@@ -16,7 +15,7 @@ const RouteComponent = defineAsyncComponent<Component>({
 </script>
 
 <template>
-  <header>
+  <header class="header">
     <MainToolbar />
   </header>
   <main class="container main-page-content pt-4 my-5">
@@ -26,38 +25,19 @@ const RouteComponent = defineAsyncComponent<Component>({
     v-if="componentName !== 'Home'"
     class="full-width"
   >
-    <Toolbar>
-      <template #center>
-        <div class="footer-toolbar">
-          <Button label="Copy" />
-          <Button
-            as="a"
-            label="Create"
-          />
-          <Button
-            label="Reset"
-            severity="warn"
-          />
-        </div>
-      </template>
-    </Toolbar>
+    <FooterToolbar />
   </footer>
 </template>
 
 <style scoped>
-* {
-  --p-toolbar-border-radius: 0;
+.header {
+  border-block-end: 1px solid var(--p-toolbar-border-color);
 }
 
 footer {
   position: fixed;
   bottom: 0;
-
-  .footer-toolbar {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-  }
+  border-block-start: 1px solid var(--p-toolbar-border-color);
 }
 
 .main-page-content {

@@ -2,8 +2,8 @@
 import { availableGlyphs, maxGlyphLength } from '@/variables/glyphData';
 import { regions } from '@/variables/regions';
 import { computed, watchEffect } from 'vue';
-import TextInput from './TextInput.vue';
 import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
 
 const model = defineModel<string>({ required: true });
 
@@ -37,26 +37,44 @@ watchEffect(lintGlyphs);
 </script>
 
 <template>
-  <div class="is-flex is-flex-direction-column glyph-input-wrapper mt-5">
-    <div class="is-flex input-wrapper mt-3">
-      <TextInput
-        v-model.trim="model"
-        :invalid="isError"
-        :maxlength="maxGlyphLength"
-        label="Glyphs"
-      />
-      <div>
-        <Button
-          icon="pi pi-arrow-left"
-          label="Delete"
-          severity="danger"
-          @click="removeGlyph"
+  <div class="is-flex is-flex-direction-column glyph-input-wrapper full-width pb-3">
+    <div class="columns is-mobile mb-0">
+      <div class="column is-flex is-align-items-center is-justify-content-space-between glyph-label-wrapper">
+        <div class="is-flex is-flex-wrap-wrap label-button-wrapper">
+          <label for="glyph-input">Glyphs</label>
+          <div>
+            <Button
+              icon="pi pi-arrow-left"
+              label="Delete"
+              severity="danger"
+              size="small"
+              @click="removeGlyph"
+            />
+          </div>
+        </div>
+        <div>
+          <span
+            v-tooltip.top="{
+              value: 'Found in Photo Mode. Glyphs are specific to each planet.',
+              class: 'tooltip has-text-centered',
+            }"
+            class="pi pi-question-circle"
+          ></span>
+        </div>
+      </div>
+      <div class="column is-flex is-align-items-center">
+        <InputText
+          v-model.trim="model"
+          :invalid="isError"
+          :maxlength="maxGlyphLength"
+          id="glyph-input"
         />
       </div>
     </div>
     <div class="glyph-grid full-width">
       <Button
         v-for="glyph in validGlyphs"
+        :fluid="false"
         class="glyph-button"
         severity="secondary"
         outlined
@@ -86,10 +104,10 @@ watchEffect(lintGlyphs);
 
 .glyph-input-wrapper {
   container-type: inline-size;
-  gap: 0.5rem;
 
-  .input-wrapper {
-    gap: 1rem;
+  .glyph-label-wrapper,
+  .label-button-wrapper {
+    gap: .5rem 1rem;
   }
 }
 
@@ -101,6 +119,10 @@ watchEffect(lintGlyphs);
   .glyph-grid {
     display: flex;
     flex-wrap: wrap;
+
+    .glyphs {
+      width: 3.5rem;
+    }
   }
 }
 </style>

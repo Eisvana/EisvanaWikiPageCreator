@@ -9,3 +9,7 @@
 .full-width {
   width: 100%;
 }
+
+.dialog-wrapper {
+  width: min(100%, 640px);
+}
