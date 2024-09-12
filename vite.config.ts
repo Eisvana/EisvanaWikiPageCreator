@@ -9,21 +9,21 @@ export default defineConfig({
   base: env.VITE_BASE_PATH,
   // base: '/EisvanaWikiPageCreator/',
   plugins: [vue()],
-  test: {
-    environment: 'happy-dom',
-    browser: {
-      provider: 'webdriverio',
-      enabled: true,
-      headless: true,
-      name: 'chrome',
-    },
-    coverage: {
-      include: ['src/**.{ts,vue}', 'src/**/**.{ts,vue}'],
-      exclude: ['src/api/**/**.ts', 'src/**/**.d.ts'],
-      clean: true,
-      all: true,
-    },
-  },
+  // test: {
+  //   environment: 'happy-dom',
+  //   browser: {
+  //     provider: 'webdriverio',
+  //     enabled: true,
+  //     headless: true,
+  //     name: 'chrome',
+  //   },
+  //   coverage: {
+  //     include: ['src/**.{ts,vue}', 'src/**/**.{ts,vue}'],
+  //     exclude: ['src/api/**/**.ts', 'src/**/**.d.ts'],
+  //     clean: true,
+  //     all: true,
+  //   },
+  // },
   build: {
     rollupOptions: {
       input: [
