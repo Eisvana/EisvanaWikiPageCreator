@@ -45,7 +45,7 @@ export function explanation(heading: string = '', text: string = '', image: stri
 
 		linkElement.classList.toggle('loading', !isCached);
 
-		if (!isCached || imgElement.getAttribute('src') !== `./assets/images/jpg/${img}.jpg`) {
+		if (!isCached || imgElement.getAttribute('src') !== `/src/assets/images/jpg/${img}.jpg`) {
 			const imageFormats = {
 				webp: webpImg,
 				jpg: imgElement
@@ -65,7 +65,7 @@ export function explanation(heading: string = '', text: string = '', image: stri
       avif displays fully once it's loaded instead of progressively like webp and jpg.
       Honestly, we should just abolish avif and jpg from this codebase and just focus on webp.
       This will be done in the new version that is fully written in Vue.
-   
+
 			It also keeps the aspect ratio of the previous picture until the new one is loaded. This is the big pain point.
 			In order to not have the <dialog> jump around during load, we're clearing the source attributes and then re-assigning them.
 			So why the setTimeout() you might ask?
@@ -83,11 +83,11 @@ export function explanation(heading: string = '', text: string = '', image: stri
 
 				// wait for everything else to update, then set the new image sources
 				setTimeout(() => {
-					element[attribute] = `./assets/images/${format}/${img}.${format}`;
+					element[attribute] = `/src/assets/images/${format}/${img}.${format}`;
 				}, 0);
 			}
 
-			linkElement.href = `./assets/images/jpg/${img}.jpg`;
+			linkElement.href = `/src/assets/images/jpg/${img}.jpg`;
 
 			if (!isCached) {
 				imgElement.style.opacity = '0';
@@ -146,7 +146,7 @@ export function addAllTooltips(dom = document) {
 		}
 
 		const img = document.createElement('img');
-		img.src = './assets/icons/help.svg';
+		img.src = '/src/assets/icons/help.svg';
 		img.alt = 'Help';
 
 		const tooltip = document.createElement('p');

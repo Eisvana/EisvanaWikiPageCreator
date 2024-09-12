@@ -63,7 +63,7 @@ function imgOnload() {
     @click="$slots.content && showModal()"
   >
     <img
-      src="/assets/icons/help.svg"
+      src="/src/assets/icons/help.svg"
       alt="Help"
     />
     <p class="tooltiptext nms-font"><slot></slot></p>
@@ -92,7 +92,7 @@ function imgOnload() {
       </div>
       <a
         v-if="src && !loadFailed"
-        :href="`./assets/images/jpg/${src}.jpg`"
+        :href="`/src/assets/images/jpg/${src}.jpg`"
         class="explanationLink loading"
         id="explanationLink"
         ref="linkElement"
@@ -101,13 +101,13 @@ function imgOnload() {
       >
         <picture>
           <source
-            :srcset="`./assets/images/webp/${src}.webp`"
+            :srcset="`/src/assets/images/webp/${src}.webp`"
             class="explanationWebpImg"
             id="explanationWebpImg"
             type="image/webp"
           />
           <img
-            :src="`./assets/images/jpg/${src}.jpg`"
+            :src="`/src/assets/images/jpg/${src}.jpg`"
             :style="{
               opacity,
               'margin-block-start': marginBlockStart + 'rem',

@@ -100,7 +100,7 @@ function moveItem(fileItem: FileItem, direction: 'up' | 'down') {
       <img
         v-show="!isLoc"
         class="handle"
-        src="/assets/icons/arrow.svg"
+        src="/src/assets/icons/arrow.svg"
         title="Move picture up or down"
         alt="Move image via drag'n'drop"
       />
