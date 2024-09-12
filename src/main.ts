@@ -1,11 +1,11 @@
 import 'bulma';
-// import '../css/styles.css';
+import '@/css/styles.css';
 import App from './App.vue';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import PrimeVue from 'primevue/config';
 import 'primeicons/primeicons.css';
-import { eisvanaColours } from './scss/stylePreset';
+import { eisvanaColours } from './css/stylePreset';
 import Tooltip from 'primevue/tooltip';
 
 const app = createApp(App);

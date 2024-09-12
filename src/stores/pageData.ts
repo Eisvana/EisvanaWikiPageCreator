@@ -1,34 +1,18 @@
 import { defineStore } from 'pinia';
-import { regions } from '../variables/regions';
-import { sanitiseString } from '@/common';
-
-interface StaticPageData {
-  route: string | undefined;
-  fullArticleElement: HTMLDivElement | null;
-  debug: boolean;
-}
-
-const route = window.location.pathname.split('/')!.at(-1)?.slice(0, -5); // NoSonar getting the current filename without the "html" ending
+import { fetchSectionWikiText } from '@/helpers/api';
+import parseMediawikiTemplate from 'parse-mediawiki-template';
+import { currentReleaseKey, defaultValuesKey } from '@/variables/localStorageKeys';
+import { civName } from '@/variables/civilization';
+import { regions } from '@/variables/regions';
+import { maxGlyphLength } from '@/variables/glyphData';
 
 const researchteamDefaultExceptions = ['base'];
 
-export const departments = {
-  '': 'Eisvana',
-  'Wiki Scholars': 'Eisvana Wiki Scholars',
-  EBC: 'Eisvana Builder Collective',
-};
-
-if (route && researchteamDefaultExceptions.includes(route)) departments[''] = '';
-
-export const useStaticPageDataStore = defineStore('staticPageData', {
-  state: (): StaticPageData => ({
-    route,
-    fullArticleElement: null,
-    debug: false,
-  }),
-});
-
-const localStorageData = () => JSON.parse(localStorage.getItem('defaultSettings') ?? '{}');
+interface GalleryFileItem {
+  file: File;
+  id: number;
+  desc: string;
+}
 
 interface PageData {
   release: string;
@@ -36,7 +20,6 @@ interface PageData {
   image: string;
   discovered: string;
   discoveredlink: string;
-  orgName: string;
   system: string;
   planet: string;
   moon: string;
@@ -50,77 +33,135 @@ interface PageData {
   elements: string[];
   polymorphic: string;
   discDate: string;
-  docBy: string;
+  documenterName: string;
   researchteam: string;
   appearance: string;
   pageName: string;
   platform: string;
+  mode: string;
   wealth: string;
   formation: string;
   content: string;
+  axes: string;
+  farm: string;
+  geobay: string;
+  landingpad: string;
+  arena: string;
+  terminal: string;
+  racetrack: string;
+  censusplayer: string;
+  censussocial: string;
+  censusreddit: string;
+  censusdiscord: string;
+  censusfriend: string;
+  censusarrival: string;
+  censusshow: string;
+  layout: string;
+  features: string;
+  additionalInfo: string;
+  galleryFiles: GalleryFileItem[];
+  locationFiles: GalleryFileItem[];
 }
 
+const defaultState: PageData = {
+  release: '',
+  name: '',
+  image: '',
+  discovered: '',
+  discoveredlink: '',
+  system: '',
+  planet: '',
+  moon: '',
+  glyphs: '',
+  type: '',
+  biome: 'Lush',
+  age: '',
+  roots: '',
+  nutrients: '',
+  notes: '',
+  elements: [],
+  polymorphic: '',
+  discDate: '',
+  documenterName: '',
+  researchteam: civName,
+  appearance: '',
+  pageName: '',
+  platform: '',
+  mode: '',
+  wealth: '',
+  formation: '',
+  content: '',
+  axes: '',
+  farm: 'No',
+  geobay: 'No',
+  landingpad: 'No',
+  arena: 'No',
+  terminal: 'No',
+  racetrack: 'No',
+  censusplayer: '',
+  censussocial: '',
+  censusreddit: '',
+  censusdiscord: '',
+  censusfriend: '',
+  censusarrival: '',
+  censusshow: '',
+  layout: '',
+  features: '',
+  additionalInfo: '',
+  galleryFiles: [],
+  locationFiles: [],
+};
+
 export const usePageDataStore = defineStore('pageData', {
-  state: (): PageData => ({
-    release: '',
-    name: '',
-    image: '',
-    discovered: localStorageData()['discoveredInput builderInput'] ?? '',
-    discoveredlink: localStorageData()['discoveredlinkInput builderlinkInput'] ?? '',
-    orgName: '',
-    system: localStorageData().systemInput ?? '',
-    planet: localStorageData().planetInput ?? '',
-    moon: localStorageData().moonInput ?? '',
-    glyphs: localStorageData().portalglyphsInput ?? '',
-    type: '',
-    biome: 'Lush',
-    age: '',
-    roots: '',
-    nutrients: '',
-    notes: '',
-    elements: [],
-    polymorphic: '',
-    discDate: '',
-    docBy: localStorageData().docbyInput ?? '',
-    researchteam: localStorageData().researchteamInput ?? departments[''],
-    appearance: '',
-    pageName: '',
-    platform: localStorageData().platformInput ?? '',
-    wealth: localStorageData().wealthInput ?? '',
-    formation: '',
-    content: '',
-  }),
+  state: (): PageData => structuredClone(defaultState),
 
   getters: {
-    regionGlyphs: (state) => state.glyphs.substring(4), // NoSonar region glyphs start at index 4
-    isValidGlyphs(): boolean {
-      return Object.keys(regions).includes(this.regionGlyphs); // Tests if an address is valid for Eisvana
+    regionData: (state): { region: string; regionNumber: string } => {
+      if (state.glyphs.length !== maxGlyphLength) return { region: '', regionNumber: '' };
+      const regionGlyphs = state.glyphs.slice(4);
+      const eisvanaRegionGlyphs = Object.keys(regions);
+      const regionIndex = eisvanaRegionGlyphs.indexOf(regionGlyphs);
+      const regionNames = Object.values(regions);
+      const currentRegion = regionNames[regionIndex];
+      return {
+        region: currentRegion,
+        regionNumber: `EV${regionIndex + 1}`,
+      };
     },
-    region(): string {
-      return regions[this.regionGlyphs] ?? '';
+  },
+
+  actions: {
+    initStore() {
+      this.getRelease();
+      this.applyDefaults();
     },
-    regionNumber(): number {
-      const index = Object.keys(regions).indexOf(this.regionGlyphs);
-      return index + 1;
+    async getRelease() {
+      const storedVersion = localStorage.getItem(currentReleaseKey) ?? '';
+      this.release = storedVersion;
+      try {
+        const section = await fetchSectionWikiText('Template:Base preload', 0);
+        const version = parseMediawikiTemplate(section ?? '', 'Version')[0]['1']; // unnamed parameters are 1-indexed
+        if (!version || version === storedVersion) return;
+        localStorage.setItem(currentReleaseKey, version);
+        this.release = version || storedVersion;
+      } catch (e) {
+        Notify.create({
+          type: 'negative',
+          message: 'Failed to fetch release!',
+          actions: [{ label: 'Retry', color: 'light-blue', handler: this.getRelease }],
+        });
+        console.error(e);
+      }
     },
-    sanitisedStrings: (state) => ({
-      name: sanitiseString(state.name),
-      discovered: sanitiseString(state.discovered),
-      discoveredlink: sanitiseString(state.discoveredlink),
-      system: sanitiseString(state.system),
-      planet: sanitiseString(state.planet),
-      moon: sanitiseString(state.moon),
-      orgName: sanitiseString(state.orgName),
-      appearance: sanitiseString(state.appearance),
-    }),
-    docBySentence: (state) => {
-      const isLink = state.docBy.startsWith('{{');
-      const hasResearchteam = state.researchteam.split(' ').length > 1;
-      const documenter = isLink ? state.docBy : `''${state.docBy}''`;
-      const researchteamLink = state.researchteam.includes('Wiki')
-        ? '[[Eisvana Wiki Scholars|Eisvana Wiki Scholar]]'
-        : `[[${state.researchteam}]] member`;
-      return `${hasResearchteam ? researchteamLink : ''} ${documenter}`;
+    applyDefaults() {
+      const localStorageData = localStorage.getItem(defaultValuesKey) ?? '{}';
+      const jsonData = JSON.parse(localStorageData);
+      this.$patch(jsonData);
+    },
+
+    resetStore() {
+      this.$patch(structuredClone(defaultState));
+      this.initStore();
     },
   },
 });

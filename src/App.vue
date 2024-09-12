@@ -1,44 +1,83 @@
 <script setup lang="ts">
-import { watch, nextTick, defineAsyncComponent, type Component, onMounted } from 'vue';
-import { usePageDataStore, useStaticPageDataStore } from './stores/pageData';
-import { storeToRefs } from 'pinia';
-import { useMarker } from './composables/useMarker';
-import { getRelease } from './common';
-// import MainToolbar from './primevueComponents/MainToolbar.vue';
-import Home from './views/Home.vue';
-
-const staticPageData = useStaticPageDataStore();
-const { route } = storeToRefs(staticPageData);
-
-const pageData = usePageDataStore();
-const { pageName, glyphs, release } = storeToRefs(pageData);
-
-onMounted(async () => {
-  const currentRelease = await getRelease();
-  release.value = currentRelease;
-});
-
-// I have no idea why I have to use nextTick() here. It's just one character behind otherwise apparently for some reason
-watch([pageName, glyphs], () => nextTick(() => useMarker()), { immediate: true });
-
-const router: Record<string, string> = {
-  flora: 'Flora',
-  mineral: 'Mineral',
-  home: 'Home',
-};
-
-function getRouteComponent() {
-  const currentRoute = route.value;
-  if (!currentRoute || !router[currentRoute]) return router.home;
-  return router[currentRoute];
-}
+import MainToolbar from '@/components/MainToolbar.vue';
+import { componentName } from '@/variables/route';
+import { defineAsyncComponent, type Component } from 'vue';
+import Button from 'primevue/button';
+import Toolbar from 'primevue/toolbar';
 
 const RouteComponent = defineAsyncComponent<Component>({
-  loader: () => import(`./pages/${getRouteComponent()}.vue`),
+  loader: () => import(`./pages/${componentName}.vue`),
 });
 </script>
 
 <template>
-  <Home />
-  <!-- <RouteComponent /> -->
+  <header>
+    <MainToolbar />
+  </header>
+  <main class="container">
+    <!-- <RouteComponent /> -->
+    <div>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
+      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
+    </div>
+    <div>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
+      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
+    </div>
+    <div>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
+      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
+    </div>
+    <div>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
+      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
+    </div>
+    <div>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
+      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
+    </div>
+    <div>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ex, laudantium debitis eum molestias quis
+      soluta enim, non nemo totam delectus iusto commodi corporis odio officiis aperiam natus ab voluptatum.
+    </div>
+  </main>
+  <footer class="full-width">
+    <Toolbar>
+      <template #center>
+        <div class="footer-toolbar">
+          <Button label="Copy" />
+          <Button
+            as="a"
+            label="Create"
+          />
+          <Button
+            label="Reset"
+            severity="warn"
+          />
+        </div>
+      </template>
+    </Toolbar>
+  </footer>
 </template>
+
+<style scoped>
+* {
+  --p-toolbar-border-radius: 0;
+}
+
+footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+  .footer-toolbar {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}
+
+.container {
+  font-size: 5rem;
+}
+</style>
