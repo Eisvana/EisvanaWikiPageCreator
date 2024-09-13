@@ -5,7 +5,7 @@
 import GlyphInput from '@/components/GlyphInput.vue';
 // import PlatformSelect from '@/components/PlatformSelect.vue';
 import InputTableItem from '@/components/InputTableItem.vue';
-import SanitisedTextInput from '@/components/SanitisedTextInput.vue';
+import SmallSanitisedTextInput from '@/components/SmallSanitisedTextInput.vue';
 import SingleFileUpload from '@/components/SingleFileUpload.vue';
 import TextareaInput from '@/components/TextareaInput.vue';
 import { usePageDataStore } from '@/stores/pageData';
@@ -51,7 +51,7 @@ const isCollapsed = ref(false);
 </script>
 
 <template>
-  <SanitisedTextInput
+  <SmallSanitisedTextInput
     v-model="name"
     label="Name"
   />
@@ -59,24 +59,24 @@ const isCollapsed = ref(false);
     v-model="image"
     label="Main image"
   />
-  <SanitisedTextInput
+  <SmallSanitisedTextInput
     v-model="system"
     label="System"
   />
-  <SanitisedTextInput
+  <SmallSanitisedTextInput
     v-model="planet"
     label="Planet"
   />
-  <SanitisedTextInput
+  <SmallSanitisedTextInput
     v-model="moon"
     label="Moon"
   />
-  <SanitisedTextInput
+  <SmallSanitisedTextInput
     v-model="axes"
     label="Planetary Coords"
   />
   <GlyphInput v-model="glyphs" />
-  <SanitisedTextInput
+  <SmallSanitisedTextInput
     v-model="type"
     label="Type of the base"
   />
@@ -107,11 +107,11 @@ const isCollapsed = ref(false);
     />
   </CheckboxSection> -->
 
-  <SanitisedTextInput
+  <SmallSanitisedTextInput
     v-model="discoveredlink"
     label="Builder wiki name"
   />
-  <SanitisedTextInput
+  <SmallSanitisedTextInput
     v-model="discovered"
     label="Builder alias if no wiki"
   />
@@ -128,30 +128,30 @@ const isCollapsed = ref(false);
     <template #toggleicon>
       <span :class="`pi pi-chevron-${isCollapsed ? 'down' : 'up'}`"></span>
     </template>
-    <SanitisedTextInput
+    <SmallSanitisedTextInput
       v-model="censusplayer"
       help-img="base/playerName"
       help-title="Player Name"
       label="Ingame name"
       tooltip="Your ingame name"
       >Your ingame name. Don't include any ingame titles.
-    </SanitisedTextInput>
-    <SanitisedTextInput
+    </SmallSanitisedTextInput>
+    <SmallSanitisedTextInput
       v-model="censusreddit"
       label="Reddit name"
       tooltip='Your Reddit name. "u/" not necessary'
     />
-    <SanitisedTextInput
+    <SmallSanitisedTextInput
       v-model="censussocial"
       label="Social media name"
       tooltip="Social Media profile if you don't have Reddit (Facebook, Instagram, Wiki, etc). Put the full link here"
     />
-    <SanitisedTextInput
+    <SmallSanitisedTextInput
       v-model="censusdiscord"
       label="Discord name"
       tooltip="Your Discord name. Please enter your username, not your display name"
     />
-    <SanitisedTextInput
+    <SmallSanitisedTextInput
       v-model="censusfriend"
       help-img="base/friendCode"
       help-title="NMS Friend Code"
@@ -160,7 +160,7 @@ const isCollapsed = ref(false);
     >
       You can find your friend code in the Options &rarr; Network &rarr; View No Man's Sky Friends List &rarr; Show My
       No Man's Sky Friend Code
-    </SanitisedTextInput>
+    </SmallSanitisedTextInput>
     <InputTableItem>
       <template #label>
         <label for="date-input">Day of arrival in Eisvana</label>
