@@ -3,11 +3,13 @@ import InputText from 'primevue/inputtext';
 import { useId } from '@/helpers/id';
 import InputTableItem from './InputTableItem.vue';
 import Explainer from './Explainer.vue';
+import InvalidInput from './InvalidInput.vue';
 
 defineProps<{
   label: string;
   maxlength?: string | number;
   invalid?: boolean;
+  errorMessage: string;
   size?: 'small' | 'large';
   helpTitle?: string;
   helpImg?: string;
@@ -35,13 +37,18 @@ const model = defineModel<string>({ required: true });
       </div>
     </template>
     <template #input>
-      <InputText
-        v-model="model"
-        :id
+      <InvalidInput
+        :error-message
         :invalid
-        :maxlength
-        :size
-      />
+      >
+        <InputText
+          v-model="model"
+          :id
+          :invalid
+          :maxlength
+          :size
+        />
+      </InvalidInput>
     </template>
   </InputTableItem>
 </template>

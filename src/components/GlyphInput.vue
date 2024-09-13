@@ -8,6 +8,7 @@ import Explainer from './Explainer.vue';
 import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { route } from '@/variables/route';
+import InvalidInput from './InvalidInput.vue';
 
 const pageData = usePageDataStore();
 const { moon } = storeToRefs(pageData);
@@ -79,12 +80,18 @@ const activeCelestialBody = computed(() => (moon.value || route === 'moon' ? 'mo
         </Explainer>
       </div>
       <div class="column is-flex is-align-items-center">
-        <InputText
-          v-model.trim="model"
+        <InvalidInput
           :invalid="isError"
-          :maxlength="maxGlyphLength"
-          id="glyph-input"
-        />
+          error-message="Not in Eisvana"
+          class="full-width"
+        >
+          <InputText
+            v-model.trim="model"
+            :invalid="isError"
+            :maxlength="maxGlyphLength"
+            id="glyph-input"
+          />
+        </InvalidInput>
       </div>
     </div>
     <div class="glyph-grid full-width">
