@@ -10,6 +10,7 @@ import { storeToRefs } from 'pinia';
 import { route } from '@/variables/route';
 import InvalidInput from './InvalidInput.vue';
 import WikiLink from './WikiLink.vue';
+import { useId } from '@/helpers/id';
 
 const pageData = usePageDataStore();
 const { moon } = storeToRefs(pageData);
@@ -45,6 +46,8 @@ function lintGlyphs() {
 watchEffect(lintGlyphs);
 
 const activeCelestialBody = computed(() => (moon.value || route === 'moon' ? 'moon' : 'planet'));
+
+const id = useId('glyph-input-');
 </script>
 
 <template>
@@ -52,7 +55,7 @@ const activeCelestialBody = computed(() => (moon.value || route === 'moon' ? 'mo
     <div class="columns is-mobile mb-0">
       <div class="column is-flex is-align-items-center is-justify-content-space-between glyph-label-wrapper">
         <div class="is-flex is-flex-wrap-wrap label-button-wrapper">
-          <label for="glyph-input">Glyphs</label>
+          <label :for="id">Glyphs</label>
           <div>
             <Button
               icon="pi pi-arrow-left"
@@ -83,14 +86,14 @@ const activeCelestialBody = computed(() => (moon.value || route === 'moon' ? 'mo
       <div class="column is-flex is-align-items-center">
         <InvalidInput
           :invalid="isError"
-          error-message="Not in Eisvana"
           class="full-width"
+          error-message="Not in Eisvana"
         >
           <InputText
             v-model.trim="model"
+            :id
             :invalid="isError"
             :maxlength="maxGlyphLength"
-            id="glyph-input"
           />
           <template #errorMessage>
             No valid Eisvana region. See
