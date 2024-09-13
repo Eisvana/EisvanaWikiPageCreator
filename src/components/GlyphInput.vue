@@ -79,12 +79,12 @@ const id = useId('glyph-input-');
           :invalid="isError"
           class="full-width"
         >
-          <!--this comment is a bugfix-->
           <InputText
             v-model.trim="model"
             :id
             :invalid="isError"
             :maxlength="maxGlyphLength"
+            size="small"
           />
           <template #errorMessage>
             No valid Eisvana region. See
