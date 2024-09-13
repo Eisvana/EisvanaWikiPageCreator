@@ -4,6 +4,7 @@ import ThemeSwitch from './ThemeSwitch.vue';
 import NavBar from './NavBar.vue';
 import { componentName } from '@/variables/route';
 import Presets from './Presets.vue';
+import Tools from './Tools.vue';
 </script>
 
 <template>
@@ -18,6 +19,7 @@ import Presets from './Presets.vue';
 
     <template #end>
       <div class="settings-buttons">
+        <Tools />
         <Presets />
         <ThemeSwitch />
       </div>
