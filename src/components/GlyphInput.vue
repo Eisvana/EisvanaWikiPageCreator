@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { availableGlyphs, maxGlyphLength } from '@/variables/glyphData';
 import { regions } from '@/variables/regions';
-import { computed, watchEffect } from 'vue';
+import { computed, watchPostEffect } from 'vue';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import Explainer from './Explainer.vue';
@@ -43,7 +43,7 @@ function lintGlyphs() {
     .join('');
 }
 
-watchEffect(lintGlyphs);
+watchPostEffect(lintGlyphs);
 
 const activeCelestialBody = computed(() => (moon.value || route === 'moon' ? 'moon' : 'planet'));
 
@@ -78,8 +78,8 @@ const id = useId('glyph-input-');
         <InvalidInput
           :invalid="isError"
           class="full-width"
-          error-message="Not in Eisvana"
         >
+          <!--this comment is a bugfix-->
           <InputText
             v-model.trim="model"
             :id

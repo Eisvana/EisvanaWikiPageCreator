@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { ref, watchPostEffect } from 'vue';
 import TextInput from './TextInput.vue';
 import { sanitiseString } from '@/helpers/inputSanitisation';
 
@@ -21,7 +21,7 @@ const model = defineModel<string>({ required: true });
 // raw input used by the component to not disturb the user
 const dirtyModel = ref(model.value);
 
-watchEffect(() => (model.value = sanitiseString(dirtyModel.value)));
+watchPostEffect(() => (model.value = sanitiseString(dirtyModel.value)));
 </script>
 
 <template>
