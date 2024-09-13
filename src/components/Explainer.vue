@@ -80,7 +80,7 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
   overflow: visible;
   aspect-ratio: 1;
   /* This is the highest value I can go with the padding before changing the box size */
-  padding: 0.47rem;
+  padding: 0.46rem;
 
   &[aria-disabled='true'] {
     cursor: default;
