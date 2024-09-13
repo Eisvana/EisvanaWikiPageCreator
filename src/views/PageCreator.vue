@@ -4,7 +4,7 @@ import Fluid from 'primevue/fluid';
 </script>
 
 <template>
-  <div class="columns is-tablet page-wrapper">
+  <div class="columns is-tablet page-wrapper mx-2">
     <Card class="column is-full-mobile p-0">
       <template #content>
         <Fluid>
