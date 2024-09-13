@@ -11,9 +11,9 @@ import TextareaInput from '@/components/TextareaInput.vue';
 import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import Checkbox from 'primevue/checkbox';
-import DatePicker from 'primevue/datepicker';
 import Panel from 'primevue/panel';
 import { ref } from 'vue';
+import DateSelect from '@/components/DateSelect.vue';
 
 const pageData = usePageDataStore();
 const {
@@ -161,20 +161,10 @@ const isCollapsed = ref(false);
       You can find your friend code in the Options &rarr; Network &rarr; View No Man's Sky Friends List &rarr; Show My
       No Man's Sky Friend Code
     </SmallSanitisedTextInput>
-    <InputTableItem>
-      <template #label>
-        <label for="date-input">Day of arrival in Eisvana</label>
-      </template>
-      <template #input>
-        <DatePicker
-          v-model="censusarrival"
-          date-format="yy-mm-dd"
-          icon-display="input"
-          input-id="date-input"
-          show-icon
-        />
-      </template>
-    </InputTableItem>
+    <DateSelect
+      v-model="censusarrival"
+      label="Date of arrival in Eisvana"
+    />
     <InputTableItem>
       <template #label>
         <label for="census-checkbox">Create census entry</label>
