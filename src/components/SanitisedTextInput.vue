@@ -2,17 +2,9 @@
 import { ref, watchPostEffect } from 'vue';
 import TextInput from './TextInput.vue';
 import { sanitiseString } from '@/helpers/inputSanitisation';
+import type { TextInputProps } from '@/types/textInputProps';
 
-defineProps<{
-  label: string;
-  maxlength?: string | number;
-  invalid?: boolean;
-  errorMessage?: string;
-  size?: 'small' | 'large';
-  helpTitle?: string;
-  helpImg?: string;
-  tooltip?: string;
-}>();
+defineProps<TextInputProps>();
 
 // sanitised model
 const model = defineModel<string>({ required: true });
@@ -26,14 +18,14 @@ watchPostEffect(() => (model.value = sanitiseString(dirtyModel.value)));
 <template>
   <TextInput
     v-model="dirtyModel"
-    :maxlength
-    :invalid
     :errorMessage
-    :size
-    :helpTitle
     :helpImg
-    :tooltip
+    :helpTitle
+    :invalid
     :label
+    :maxlength
+    :size
+    :tooltip
   >
     <slot></slot>
 

@@ -4,17 +4,9 @@ import { useId } from '@/helpers/id';
 import InputTableItem from './InputTableItem.vue';
 import Explainer from './Explainer.vue';
 import InvalidInput from './InvalidInput.vue';
+import type { TextInputProps } from '@/types/textInputProps';
 
-defineProps<{
-  label: string;
-  maxlength?: string | number;
-  invalid?: boolean;
-  errorMessage?: string;
-  size?: 'small' | 'large';
-  helpTitle?: string;
-  helpImg?: string;
-  tooltip?: string;
-}>();
+defineProps<TextInputProps>();
 
 const id = useId('input-');
 
