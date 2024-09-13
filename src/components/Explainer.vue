@@ -56,7 +56,7 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
           :class="{ 'no-opacity': !imageHasLoaded }"
           :href="helperImage"
           as="a"
-          class="image-wrapper mt-3 is-flex is-flex-direction-column"
+          class="image-wrapper link mt-3 is-flex is-flex-direction-column"
           rel="noopener noreferrer"
           tabindex="0"
           target="_blank"
@@ -90,6 +90,8 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
     visibility: visible;
     opacity: 1;
   }
+
+  /* these css variables are undefined without a tooltip on the page! */
 
   .tooltip-text {
     --width: var(--p-tooltip-max-width);
@@ -140,10 +142,6 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
     &::after {
       content: 'Click to enlarge';
       display: block;
-    }
-
-    &:hover {
-      text-decoration: underline;
     }
 
     .help-img {

@@ -13,3 +13,11 @@
 .dialog-wrapper {
   width: min(100%, 640px);
 }
+
+.link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

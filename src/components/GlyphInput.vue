@@ -91,6 +91,17 @@ const activeCelestialBody = computed(() => (moon.value || route === 'moon' ? 'mo
             :maxlength="maxGlyphLength"
             id="glyph-input"
           />
+          <template #errorMessage>
+            No valid Eisvana region. See
+            <a
+              class="link"
+              href="https://nomanssky.fandom.com/Eisvana#Claimed_Regions"
+              rel="noopener noreferrer"
+              target="_blank"
+              >Eisvana Claimed Regions</a
+            >
+            for a list of valid regions.
+          </template>
         </InvalidInput>
       </div>
     </div>
