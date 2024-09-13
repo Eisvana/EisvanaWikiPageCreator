@@ -72,15 +72,6 @@ const id = useId('glyph-input-');
           help-title="Portalglyphs"
         >
           Found in Photo Mode. Glyphs are specific to each {{ activeCelestialBody }}.
-          <iframe
-            class="mt-4"
-            height="300"
-            sandbox="allow-scripts allow-same-origin"
-            src="https://nmspar.vercel.app/"
-            title="Glyph Reader"
-            width="450"
-            >Glyph Reader</iframe
-          >
         </Explainer>
       </div>
       <div class="column is-flex is-align-items-center">
