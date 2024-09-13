@@ -4,21 +4,23 @@
 // import DepartmentSelect from '@/components/DepartmentSelect.vue';
 import GlyphInput from '@/components/GlyphInput.vue';
 // import PlatformSelect from '@/components/PlatformSelect.vue';
+import InputTableItem from '@/components/InputTableItem.vue';
+import SingleFileUpload from '@/components/SingleFileUpload.vue';
+import TextareaInput from '@/components/TextareaInput.vue';
 import TextInput from '@/components/TextInput.vue';
 import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
+import Checkbox from 'primevue/checkbox';
+import DatePicker from 'primevue/datepicker';
 import Divider from 'primevue/divider';
 import Panel from 'primevue/panel';
-import Checkbox from 'primevue/checkbox';
 import { ref } from 'vue';
-import TextareaInput from '@/components/TextareaInput.vue';
-import DatePicker from 'primevue/datepicker';
-import InputTableItem from '@/components/InputTableItem.vue';
 
 const pageData = usePageDataStore();
 const {
   name,
   discovered,
+  image,
   glyphs,
   type,
   discoveredlink,
@@ -53,6 +55,10 @@ const isCollapsed = ref(false);
   <TextInput
     v-model="name"
     label="Name"
+  />
+  <SingleFileUpload
+    v-model="image"
+    label="Main image"
   />
   <TextInput
     v-model="system"
