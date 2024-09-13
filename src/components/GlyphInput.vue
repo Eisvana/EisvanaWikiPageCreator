@@ -9,6 +9,7 @@ import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { route } from '@/variables/route';
 import InvalidInput from './InvalidInput.vue';
+import WikiLink from './WikiLink.vue';
 
 const pageData = usePageDataStore();
 const { moon } = storeToRefs(pageData);
@@ -93,13 +94,10 @@ const activeCelestialBody = computed(() => (moon.value || route === 'moon' ? 'mo
           />
           <template #errorMessage>
             No valid Eisvana region. See
-            <a
-              class="link"
-              href="https://nomanssky.fandom.com/Eisvana#Claimed_Regions"
-              rel="noopener noreferrer"
-              target="_blank"
-              >Eisvana Claimed Regions</a
-            >
+            <WikiLink
+              link="Eisvana#Claimed_Regions"
+              text="Eisvana Claimed Regions"
+            />
             for a list of valid regions.
           </template>
         </InvalidInput>
