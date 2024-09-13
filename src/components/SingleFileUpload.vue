@@ -32,6 +32,7 @@ const id = useId('file-upload-');
         v-model="model"
         :id
         class="mb-2"
+        size="small"
       />
       <FileUpload
         :maxFileSize
