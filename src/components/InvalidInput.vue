@@ -14,12 +14,12 @@ defineProps<{
       <slot></slot>
       <InputIcon
         v-if="invalid"
-        class="pi pi-exclamation-circle error-icon"
+        class="pi pi-exclamation-circle is-error"
       />
     </IconField>
     <p
       v-if="invalid"
-      class="help is-danger"
+      class="help is-error"
     >
       <slot name="errorMessage">{{ errorMessage }}</slot>
     </p>
@@ -27,7 +27,7 @@ defineProps<{
 </template>
 
 <style scoped>
-.error-icon {
+.is-error {
   color: var(--p-red-400);
 }
 </style>
