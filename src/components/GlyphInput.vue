@@ -62,9 +62,9 @@ const activeCelestialBody = computed(() => (moon.value || route === 'moon' ? 'mo
           </div>
         </div>
         <Explainer
+          :tooltip="`Found in Photo Mode. Glyphs are specific to each ${activeCelestialBody}.`"
           help-img="shared/glyphs"
           help-title="Portalglyphs"
-          tooltip="Found in Photo Mode. Glyphs are specific to each planet."
         >
           Found in Photo Mode. Glyphs are specific to each {{ activeCelestialBody }}.
           <iframe
