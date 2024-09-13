@@ -21,3 +21,7 @@
     text-decoration: underline;
   }
 }
+
+.keep-linebreaks {
+  white-space: pre;
+}
