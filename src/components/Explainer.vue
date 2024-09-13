@@ -20,18 +20,20 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
 </script>
 
 <template>
-  <Button
-    :aria-disabled="!helpTitle"
-    :fluid="false"
-    class="tooltip p-2"
-    severity="secondary"
-    rounded
-    text
-    @click="openModal"
-  >
-    <span class="pi pi-question-circle"></span>
-    <span class="tooltip-text has-text-centered">{{ tooltip }}</span>
-  </Button>
+  <div>
+    <Button
+      :aria-disabled="!helpTitle"
+      :fluid="false"
+      class="tooltip p-2"
+      severity="secondary"
+      rounded
+      text
+      @click="openModal"
+    >
+      <span class="pi pi-question-circle"></span>
+      <span class="tooltip-text has-text-centered">{{ tooltip }}</span>
+    </Button>
+  </div>
 
   <Dialog
     v-model:visible="isHelpModalVisible"
