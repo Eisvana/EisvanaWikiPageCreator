@@ -1,18 +1,27 @@
 <script setup lang="ts">
 import { useId } from '@/helpers/id';
+import { sanitiseString } from '@/helpers/inputSanitisation';
 import Textarea from 'primevue/textarea';
+import { ref, watchEffect } from 'vue';
 
 defineProps<{
   label: string;
 }>();
 
 const id = useId('textarea-');
+
+const model = defineModel<string>({ required: true });
+
+const dirtyModel = ref(model.value);
+
+watchEffect(() => (model.value = sanitiseString(dirtyModel.value)));
 </script>
 
 <template>
   <div class="is-flex is-flex-direction-column textarea-wrapper">
     <label :for="id">{{ label }}</label>
     <Textarea
+      v-model="dirtyModel"
       :id
       class="textarea"
     />
