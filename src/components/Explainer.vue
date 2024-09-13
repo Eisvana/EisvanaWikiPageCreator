@@ -58,7 +58,6 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
           as="a"
           class="image-wrapper link mt-3 is-flex is-flex-direction-column"
           rel="noopener noreferrer"
-          tabindex="0"
           target="_blank"
           link
         >
@@ -94,6 +93,13 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
   /* these css variables are undefined without a tooltip on the page! */
 
   .tooltip-text {
+    --p-tooltip-max-width: 12.5rem;
+    --p-tooltip-background: var(--p-surface-700);
+    --p-tooltip-shadow: var(--p-overlay-popover-shadow);
+    --p-tooltip-border-radius: var(--p-overlay-popover-border-radius);
+    --p-tooltip-color: var(--p-surface-0);
+    --p-tooltip-padding: 0.5rem 0.75rem;
+
     --width: var(--p-tooltip-max-width);
     background: var(--p-tooltip-background);
     box-shadow: var(--p-tooltip-shadow);
