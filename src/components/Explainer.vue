@@ -13,25 +13,25 @@ const props = defineProps<{
 const imageHasLoaded = ref(false);
 const isHelpModalVisible = ref(false);
 
-const openModal = () => (isHelpModalVisible.value = true);
+const openModal = () => {
+  if (props.helpTitle) isHelpModalVisible.value = true;
+};
 const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
 </script>
 
 <template>
   <Button
-    v-tooltip.top="{
-      value: tooltip,
-      class: 'has-text-centered',
-    }"
-    :disabled="!helpTitle"
     :aria-disabled="!helpTitle"
-    class="full-opacity"
-    icon="pi pi-question-circle"
+    :fluid="false"
+    class="tooltip p-2"
     severity="secondary"
     rounded
     text
     @click="openModal"
-  />
+  >
+    <span class="pi pi-question-circle"></span>
+    <span class="tooltip-text has-text-centered">{{ tooltip }}</span>
+  </Button>
 
   <Dialog
     v-model:visible="isHelpModalVisible"
@@ -53,11 +53,12 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
         <ProgressSpinner />
 
         <Button
-          :class="imageHasLoaded ? 'full-opacity' : 'no-opacity'"
+          :class="{ 'no-opacity': !imageHasLoaded }"
           :href="helperImage"
           as="a"
           class="image-wrapper mt-3 is-flex is-flex-direction-column"
           rel="noopener noreferrer"
+          tabindex="0"
           target="_blank"
           link
         >
@@ -74,8 +75,51 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
 </template>
 
 <style scoped>
-.full-opacity {
-  opacity: 1 !important;
+.tooltip {
+  overflow: visible;
+  aspect-ratio: 1;
+
+  &[aria-disabled='true'] {
+    cursor: default;
+    background-color: transparent !important;
+    outline: none;
+  }
+
+  &:hover .tooltip-text,
+  &:focus-visible .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .tooltip-text {
+    --width: var(--p-tooltip-max-width);
+    background: var(--p-tooltip-background);
+    box-shadow: var(--p-tooltip-shadow);
+    border-radius: var(--p-tooltip-border-radius);
+    bottom: 110%;
+    color: var(--p-tooltip-color);
+    left: 50%;
+    margin-inline-start: calc(var(--width) * -0.5);
+    opacity: 0;
+    padding: var(--p-tooltip-padding);
+    position: absolute;
+    text-wrap: balance;
+    transition: opacity 0.3s !important;
+    visibility: hidden;
+    width: var(--width);
+    z-index: 1;
+
+    &::after {
+      --arrow-width: 6px;
+      border: var(--arrow-width) solid transparent;
+      border-block-start-color: var(--p-tooltip-background);
+      content: '';
+      left: 50%;
+      margin-inline-start: calc(var(--arrow-width) * -1);
+      position: absolute;
+      top: 100%;
+    }
+  }
 }
 
 .no-opacity {
