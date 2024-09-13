@@ -24,7 +24,7 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
     <Button
       :aria-disabled="!helpTitle"
       :fluid="false"
-      class="tooltip p-2"
+      class="tooltip"
       severity="secondary"
       rounded
       text
@@ -79,6 +79,8 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
 .tooltip {
   overflow: visible;
   aspect-ratio: 1;
+  /* This is the highest value I can go with the padding before changing the box size */
+  padding: 0.47rem;
 
   &[aria-disabled='true'] {
     cursor: default;
