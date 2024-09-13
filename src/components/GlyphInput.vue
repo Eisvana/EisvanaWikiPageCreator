@@ -4,6 +4,13 @@ import { regions } from '@/variables/regions';
 import { computed, watchEffect } from 'vue';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
+import Explainer from './Explainer.vue';
+import { usePageDataStore } from '@/stores/pageData';
+import { storeToRefs } from 'pinia';
+import { route } from '@/variables/route';
+
+const pageData = usePageDataStore();
+const { moon } = storeToRefs(pageData);
 
 const model = defineModel<string>({ required: true });
 
@@ -34,6 +41,8 @@ function lintGlyphs() {
 }
 
 watchEffect(lintGlyphs);
+
+const activeCelestialBody = computed(() => (moon.value || route === 'moon' ? 'moon' : 'planet'));
 </script>
 
 <template>
@@ -52,15 +61,22 @@ watchEffect(lintGlyphs);
             />
           </div>
         </div>
-        <div>
-          <span
-            v-tooltip.top="{
-              value: 'Found in Photo Mode. Glyphs are specific to each planet.',
-              class: 'tooltip has-text-centered',
-            }"
-            class="pi pi-question-circle"
-          ></span>
-        </div>
+        <Explainer
+          help-img="shared/glyphs"
+          help-title="Portalglyphs"
+          tooltip="Found in Photo Mode. Glyphs are specific to each planet."
+        >
+          Found in Photo Mode. Glyphs are specific to each {{ activeCelestialBody }}.
+          <iframe
+            class="mt-4"
+            height="300"
+            sandbox="allow-scripts allow-same-origin"
+            src="https://nmspar.vercel.app/"
+            title="Glyph Reader"
+            width="450"
+            >Glyph Reader</iframe
+          >
+        </Explainer>
       </div>
       <div class="column is-flex is-align-items-center">
         <InputText
@@ -107,7 +123,7 @@ watchEffect(lintGlyphs);
 
   .glyph-label-wrapper,
   .label-button-wrapper {
-    gap: .5rem 1rem;
+    gap: 0.5rem 1rem;
   }
 }
 
