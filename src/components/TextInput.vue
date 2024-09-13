@@ -9,7 +9,7 @@ defineProps<{
   label: string;
   maxlength?: string | number;
   invalid?: boolean;
-  errorMessage: string;
+  errorMessage?: string;
   size?: 'small' | 'large';
   helpTitle?: string;
   helpImg?: string;
