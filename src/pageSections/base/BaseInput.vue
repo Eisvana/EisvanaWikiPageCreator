@@ -149,7 +149,7 @@ const isCollapsed = ref(false);
     <SanitisedTextInput
       v-model="censusdiscord"
       label="Discord name"
-      tooltip="Your Discord name. Please give your username, not your display name"
+      tooltip="Your Discord name. Please enter your username, not your display name"
     />
     <SanitisedTextInput
       v-model="censusfriend"
