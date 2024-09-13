@@ -22,7 +22,7 @@ const model = defineModel<string>({ required: true });
 <template>
   <InputTableItem>
     <template #label>
-      <div class="is-flex is-justify-content-space-between">
+      <div class="is-flex is-justify-content-space-between full-width">
         <label :for="id">{{ label }}</label>
         <Explainer
           v-if="tooltip"
