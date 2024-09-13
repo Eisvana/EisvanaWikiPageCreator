@@ -3,9 +3,8 @@ import { ref, watchPostEffect } from 'vue';
 import TextInput from './TextInput.vue';
 import { sanitiseString } from '@/helpers/inputSanitisation';
 
-const props = defineProps<{
+defineProps<{
   label: string;
-  initialValue?: string;
   maxlength?: string | number;
   invalid?: boolean;
   errorMessage?: string;
@@ -27,7 +26,14 @@ watchPostEffect(() => (model.value = sanitiseString(dirtyModel.value)));
 <template>
   <TextInput
     v-model="dirtyModel"
-    v-bind="props"
+    :maxlength
+    :invalid
+    :errorMessage
+    :size
+    :helpTitle
+    :helpImg
+    :tooltip
+    :label
   >
     <slot></slot>
 
