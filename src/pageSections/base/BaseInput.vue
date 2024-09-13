@@ -5,14 +5,13 @@
 import GlyphInput from '@/components/GlyphInput.vue';
 // import PlatformSelect from '@/components/PlatformSelect.vue';
 import InputTableItem from '@/components/InputTableItem.vue';
+import SanitisedTextInput from '@/components/SanitisedTextInput.vue';
 import SingleFileUpload from '@/components/SingleFileUpload.vue';
 import TextareaInput from '@/components/TextareaInput.vue';
-import TextInput from '@/components/TextInput.vue';
 import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import Checkbox from 'primevue/checkbox';
 import DatePicker from 'primevue/datepicker';
-import Divider from 'primevue/divider';
 import Panel from 'primevue/panel';
 import { ref } from 'vue';
 
@@ -52,7 +51,7 @@ const isCollapsed = ref(false);
 </script>
 
 <template>
-  <TextInput
+  <SanitisedTextInput
     v-model="name"
     label="Name"
   />
@@ -60,24 +59,24 @@ const isCollapsed = ref(false);
     v-model="image"
     label="Main image"
   />
-  <TextInput
+  <SanitisedTextInput
     v-model="system"
     label="System"
   />
-  <TextInput
+  <SanitisedTextInput
     v-model="planet"
     label="Planet"
   />
-  <TextInput
+  <SanitisedTextInput
     v-model="moon"
     label="Moon"
   />
-  <TextInput
+  <SanitisedTextInput
     v-model="axes"
     label="Planetary Coords"
   />
   <GlyphInput v-model="glyphs" />
-  <TextInput
+  <SanitisedTextInput
     v-model="type"
     label="Type of the base"
   />
@@ -108,11 +107,11 @@ const isCollapsed = ref(false);
     />
   </CheckboxSection> -->
 
-  <TextInput
+  <SanitisedTextInput
     v-model="discoveredlink"
     label="Builder wiki name"
   />
-  <TextInput
+  <SanitisedTextInput
     v-model="discovered"
     label="Builder alias if no wiki"
   />
@@ -120,40 +119,39 @@ const isCollapsed = ref(false);
   <!-- <PlatformSelect v-model="platform" />
   <DepartmentSelect v-model="researchteam" /> -->
 
-  <Divider />
-
   <Panel
     v-model:collapsed="isCollapsed"
+    class="my-4"
     header="Census"
     toggleable
   >
     <template #toggleicon>
       <span :class="`pi pi-chevron-${isCollapsed ? 'down' : 'up'}`"></span>
     </template>
-    <TextInput
+    <SanitisedTextInput
       v-model="censusplayer"
       help-img="base/playerName"
       help-title="Player Name"
       label="Ingame name"
       tooltip="Your ingame name"
       >Your ingame name. Don't include any ingame titles.
-    </TextInput>
-    <TextInput
+    </SanitisedTextInput>
+    <SanitisedTextInput
       v-model="censusreddit"
       label="Reddit name"
       tooltip='Your Reddit name. "u/" not necessary'
     />
-    <TextInput
+    <SanitisedTextInput
       v-model="censussocial"
       label="Social media name"
       tooltip="Social Media profile if you don't have Reddit (Facebook, Instagram, Wiki, etc). Put the full link here"
     />
-    <TextInput
+    <SanitisedTextInput
       v-model="censusdiscord"
       label="Discord name"
       tooltip="Your Discord name. Please give your username, not your display name"
     />
-    <TextInput
+    <SanitisedTextInput
       v-model="censusfriend"
       help-img="base/friendCode"
       help-title="NMS Friend Code"
@@ -162,7 +160,7 @@ const isCollapsed = ref(false);
     >
       You can find your friend code in the Options &rarr; Network &rarr; View No Man's Sky Friends List &rarr; Show My
       No Man's Sky Friend Code
-    </TextInput>
+    </SanitisedTextInput>
     <InputTableItem>
       <template #label>
         <label for="date-input">Day of arrival in Eisvana</label>
@@ -193,8 +191,6 @@ const isCollapsed = ref(false);
     </InputTableItem>
   </Panel>
 
-  <Divider />
-
   <div class="is-flex is-flex-direction-column textareas">
     <TextareaInput
       v-model="layout"
@@ -212,8 +208,6 @@ const isCollapsed = ref(false);
       type="TextareaInput"
     />
   </div>
-
-  <Divider />
 </template>
 
 <style scoped>
