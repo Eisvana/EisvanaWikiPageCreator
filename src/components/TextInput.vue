@@ -48,6 +48,9 @@ const model = defineModel<string>({ required: true });
           :maxlength
           :size
         />
+        <template #errorMessage>
+          <slot name="errorMessage"></slot>
+        </template>
       </InvalidInput>
     </template>
   </InputTableItem>
