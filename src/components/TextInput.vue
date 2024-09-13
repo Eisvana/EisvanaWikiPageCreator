@@ -71,7 +71,7 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
                 :class="imageHasLoaded ? 'full-opacity' : 'no-opacity'"
                 :href="helperImage"
                 as="a"
-                class="image-wrapper mt-3"
+                class="image-wrapper mt-3 is-flex is-flex-direction-column"
                 rel="noopener noreferrer"
                 target="_blank"
                 link
@@ -118,22 +118,24 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
   }
 
   .image-wrapper {
-    display: flex;
-    flex-direction: column;
     transition: opacity 0.5s;
 
     &::after {
       content: 'Click to enlarge';
       display: block;
     }
-  }
-}
 
-.help-img {
-  aspect-ratio: auto;
-  max-height: 500px;
-  max-width: 450px;
-  min-height: 110px;
-  object-fit: contain;
+    &:hover {
+      text-decoration: underline;
+    }
+
+    .help-img {
+      aspect-ratio: auto;
+      max-height: 500px;
+      max-width: 450px;
+      min-height: 110px;
+      object-fit: contain;
+    }
+  }
 }
 </style>
