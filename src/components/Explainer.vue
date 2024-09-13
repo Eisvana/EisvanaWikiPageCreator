@@ -90,8 +90,6 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
     opacity: 1;
   }
 
-  /* these css variables are undefined without a tooltip on the page! */
-
   .tooltip-text {
     --p-tooltip-max-width: 12.5rem;
     --p-tooltip-background: var(--p-surface-700);
