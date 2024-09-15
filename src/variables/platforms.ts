@@ -1,4 +1,4 @@
-import { mapOptions } from "@/helper/selectMapping";
+import { mapOptions } from "@/helpers/selectMapping";
 
 export const platforms = {
   PC: 'PC',
