@@ -145,6 +145,7 @@ export const usePageDataStore = defineStore('pageData', {
         localStorage.setItem(currentReleaseKey, version);
         this.release = version || storedVersion;
       } catch (e) {
+        // TODO: make this toast message work with PrimeVue
         // toast.add({ severity: 'error', summary: 'Failed to fetch release!' });
         console.error(e);
       }
@@ -155,6 +156,7 @@ export const usePageDataStore = defineStore('pageData', {
       this.$patch(jsonData);
     },
 
+    // TODO: this action resets only the JS state, it does not reset the inputs because they are decoupled
     resetStore() {
       this.$patch(structuredClone(defaultState));
       this.initStore();
