@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import Toolbar from 'primevue/toolbar';
 import Button from 'primevue/button';
+import { usePageDataStore } from '@/stores/pageData';
+
+const pageData = usePageDataStore();
 </script>
 
 <template>
@@ -15,6 +18,7 @@ import Button from 'primevue/button';
         <Button
           label="Reset"
           severity="warn"
+          @click="pageData.resetStore"
         />
       </div>
     </template>
