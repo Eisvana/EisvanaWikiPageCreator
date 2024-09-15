@@ -1,4 +1,5 @@
-import { mapOptions } from "@/helpers/selectMapping";
+import { mapOptions } from '@/helpers/selectMapping';
+import type { SelectOption } from '@/types/selectInputOptions';
 
 export const platforms = {
   PC: 'PC',
@@ -7,4 +8,4 @@ export const platforms = {
   Switch: 'NS',
 } as const;
 
-export const mappedPlatformOptions = mapOptions(platforms)
+export const mappedPlatformOptions: SelectOption[] = mapOptions(platforms);
