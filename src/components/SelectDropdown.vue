@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { isObject } from '@/helpers/typeAssertions';
 import type { SelectOption, SelectOptionGroup } from '@/types/selectInputOptions';
+import { useEventListener } from '@vueuse/core';
 import Select from 'primevue/select';
-import { computed, watchEffect } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 
 const props = defineProps<{
   options: (SelectOption | SelectOptionGroup | string)[];
+  initialValue?: string | null;
 }>();
 
-const model = defineModel<string>({ required: true });
+const model = defineModel<string | null>({ required: true });
 
 const flattenedOptions = computed(() =>
   props.options.flatMap((item) => {
@@ -30,7 +32,18 @@ const flattenedOptions = computed(() =>
   })
 );
 
-model.value ||= flattenedOptions.value[0]?.value ?? '';
+const initialState = ref(
+  props.initialValue === undefined ? (flattenedOptions.value[0]?.value ?? '') : props.initialValue
+);
+model.value ||= initialState.value;
+
+watchEffect(() => {
+  if (props.initialValue !== undefined) initialState.value = props.initialValue;
+});
+
+useEventListener(document, 'reset', () => {
+  model.value = initialState.value;
+});
 
 const maxUnsearchableItemCount = 6;
 const amountOfOptions = computed(() => flattenedOptions.value.length);

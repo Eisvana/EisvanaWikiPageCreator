@@ -6,8 +6,9 @@ import { civName } from '@/variables/civilization';
 import { regions } from '@/variables/regions';
 import { maxGlyphLength } from '@/variables/glyphData';
 import { emitGlobalEvent } from '@/helpers/event';
+import { route } from '@/variables/route';
 
-const researchteamDefaultExceptions = ['base'];
+const researchteamDefaultExceptions: string[] = ['base'];
 
 interface GalleryFileItem {
   file: File;
@@ -35,7 +36,7 @@ interface PageData {
   polymorphic: string;
   discDate: string;
   documenterName: string;
-  researchteam: string;
+  researchteam: string | null;
   appearance: string;
   pageName: string;
   platform: string;
@@ -84,7 +85,7 @@ const defaultState: PageData = {
   polymorphic: '',
   discDate: '',
   documenterName: '',
-  researchteam: civName,
+  researchteam: null,
   appearance: '',
   pageName: '',
   platform: '',
@@ -129,6 +130,7 @@ export const usePageDataStore = defineStore('pageData', {
         regionNumber: `EV${regionIndex + 1}`,
       };
     },
+    researchteamValue: (state) => state.researchteam ?? (researchteamDefaultExceptions.includes(route) ? '' : civName),
   },
 
   actions: {
