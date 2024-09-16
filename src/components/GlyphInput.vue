@@ -58,7 +58,7 @@ const id = useId('glyph-input-');
   <div class="is-flex is-flex-direction-column glyph-input-wrapper full-width pb-3">
     <div class="columns is-mobile mb-0">
       <div class="column is-flex is-align-items-center is-justify-content-space-between glyph-label-wrapper">
-        <div class="is-flex is-flex-wrap-wrap label-button-wrapper">
+        <div class="is-flex is-flex-wrap-wrap is-align-items-center label-button-wrapper">
           <label :for="id">Glyphs</label>
           <div>
             <Button
