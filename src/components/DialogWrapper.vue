@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { syncRefs, useElementBounding, useScrollLock, useWindowSize } from '@vueuse/core';
+import { useElementBounding, useScrollLock, useWindowSize } from '@vueuse/core';
 import Dialog from 'primevue/dialog';
 import { computed, ref, watch, watchEffect } from 'vue';
 
