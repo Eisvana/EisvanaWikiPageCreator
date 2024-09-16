@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Button from 'primevue/button';
-import Dialog from 'primevue/dialog';
 import { reactive, ref } from 'vue';
 import { defaultValuesKey } from '@/variables/localStorageKeys';
 import { mappedWealthOptions } from '@/variables/wealth';
@@ -10,6 +9,7 @@ import GlyphInput from './GlyphInput.vue';
 import WealthSelect from './WealthSelect.vue';
 import PlatformSelect from './PlatformSelect.vue';
 import DepartmentSelect from './DepartmentSelect.vue';
+import DialogWrapper from './DialogWrapper.vue';
 
 const isOpen = ref(false);
 
@@ -64,13 +64,10 @@ function hideDialog() {
     @click="isOpen = true"
   />
 
-  <Dialog
-    v-model:visible="isOpen"
+  <DialogWrapper
+    v-model="isOpen"
     :closable="false"
-    :draggable="false"
-    pt:root:class="dialog-wrapper mx-4"
     pt:footer:class="is-flex-wrap-wrap is-justify-content-center action-buttons"
-    modal
     @show="loadData()"
   >
     <template #header>
@@ -119,7 +116,11 @@ function hideDialog() {
       />
     </Fluid>
 
-    <GlyphInput v-model="presetData.glyphs" />
+    <!--that no-explain is necessary, otherwise this would cause a bug with the layout-shift-prevention logic in the DialogWrapper-->
+    <GlyphInput
+      v-model="presetData.glyphs"
+      no-explain
+    />
 
     <template #footer>
       <Button
@@ -138,7 +139,7 @@ function hideDialog() {
         @click="restoreDefaults"
       />
     </template>
-  </Dialog>
+  </DialogWrapper>
 </template>
 
 <style scoped>

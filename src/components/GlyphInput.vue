@@ -12,6 +12,10 @@ import InvalidInput from './InvalidInput.vue';
 import WikiLink from './WikiLink.vue';
 import { useId } from '@/helpers/id';
 
+defineProps<{
+  noExplain?: boolean;
+}>();
+
 const pageData = usePageDataStore();
 const { moon } = storeToRefs(pageData);
 
@@ -67,6 +71,7 @@ const id = useId('glyph-input-');
           </div>
         </div>
         <Explainer
+          v-if="!noExplain"
           :tooltip="`Found in Photo Mode. Glyphs are specific to each ${activeCelestialBody}.`"
           help-img="shared/glyphs"
           help-title="Portalglyphs"

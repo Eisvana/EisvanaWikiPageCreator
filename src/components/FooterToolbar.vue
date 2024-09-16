@@ -33,6 +33,7 @@ const pageData = usePageDataStore();
     display: flex;
     justify-content: center;
     gap: 0.5rem;
+    padding-inline-end: var(--p-scrollbar-width);
   }
 }
 </style>

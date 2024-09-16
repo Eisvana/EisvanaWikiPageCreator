@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 import ProgressSpinner from 'primevue/progressspinner';
 import Button from 'primevue/button';
-import Dialog from 'primevue/dialog';
+import DialogWrapper from './DialogWrapper.vue';
 
 const props = defineProps<{
   helpTitle?: string;
@@ -35,12 +35,10 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
     </Button>
   </div>
 
-  <Dialog
-    v-model:visible="isHelpModalVisible"
-    :draggable="false"
-    pt:root:class="dialog-wrapper mx-4"
+  <DialogWrapper
+    v-model="isHelpModalVisible"
     dismissable-mask
-    modal
+    closable
   >
     <template #header>
       <h2 class="title is-4 has-text-centered full-width mb-0">{{ helpTitle }}</h2>
@@ -72,7 +70,7 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
         </Button>
       </div>
     </div>
-  </Dialog>
+  </DialogWrapper>
 </template>
 
 <style scoped>
