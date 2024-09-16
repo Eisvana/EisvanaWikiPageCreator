@@ -1,13 +1,26 @@
 <script setup lang="ts">
+import { useId } from '@/helpers/id';
+import InputTableItem from './InputTableItem.vue';
 import SelectDropdown from './SelectDropdown.vue';
 import { mappedPlatformOptions } from '@/variables/platforms';
 
 const model = defineModel<string>({ required: true });
+
+const id = useId('platform-');
 </script>
 
 <template>
-  <SelectDropdown
-    v-model="model"
-    :options="mappedPlatformOptions"
-  />
+  <InputTableItem>
+    <template #label>
+      <label :id>Platform</label>
+    </template>
+
+    <template #input>
+      <SelectDropdown
+        v-model="model"
+        :aria-labelledby="id"
+        :options="mappedPlatformOptions"
+      />
+    </template>
+  </InputTableItem>
 </template>
