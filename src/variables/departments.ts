@@ -1,5 +1,4 @@
 import { mapOptions } from '@/helpers/selectMapping';
-import { civName } from './civilization';
 import type { SelectOption } from '@/types/selectInputOptions';
 
 export const departments = {
@@ -7,4 +6,4 @@ export const departments = {
   EBC: 'Eisvana Builder Collective',
 } as const;
 
-export const mappedDepartmentOptions: SelectOption[] = [{ label: '', value: civName }, ...mapOptions(departments)];
+export const mappedDepartmentOptions: SelectOption[] = mapOptions(departments);
