@@ -3,13 +3,13 @@ import Button from 'primevue/button';
 import { reactive, ref } from 'vue';
 import { defaultValuesKey } from '@/variables/localStorageKeys';
 import { mappedWealthOptions } from '@/variables/wealth';
-import TextInput from './TextInput.vue';
 import Fluid from 'primevue/fluid';
 import GlyphInput from './GlyphInput.vue';
 import WealthSelect from './WealthSelect.vue';
 import PlatformSelect from './PlatformSelect.vue';
 import DepartmentSelect from './DepartmentSelect.vue';
 import DialogWrapper from './DialogWrapper.vue';
+import SmallSanitisedTextInput from './SmallSanitisedTextInput.vue';
 
 const isOpen = ref(false);
 
@@ -74,38 +74,32 @@ function hideDialog() {
       <h2 class="title is-4 has-text-centered mb-0 full-width">Global Preload Values</h2>
     </template>
 
-    <Fluid class="input-grid mt-5">
-      <TextInput
+    <Fluid class="mt-5">
+      <SmallSanitisedTextInput
         v-if="!presetData.discovered"
         v-model="presetData.discoveredlink"
         label="Discoverer wiki name"
-        outlined
       />
-      <TextInput
+      <SmallSanitisedTextInput
         v-if="!presetData.discoveredlink"
         v-model="presetData.discovered"
         label="Discoverer alias if no wiki"
-        outlined
       />
-      <TextInput
+      <SmallSanitisedTextInput
         v-model="presetData.documenterName"
         label="Documenter alias if not discoverer"
-        outlined
       />
-      <TextInput
+      <SmallSanitisedTextInput
         v-model="presetData.system"
         label="Name of the system"
-        outlined
       />
-      <TextInput
+      <SmallSanitisedTextInput
         v-model="presetData.planet"
         label="Name of the planet"
-        outlined
       />
-      <TextInput
+      <SmallSanitisedTextInput
         v-model="presetData.moon"
         label="Name of the moon"
-        outlined
       />
       <PlatformSelect v-model="presetData.platform" />
       <DepartmentSelect v-model="presetData.department" />
@@ -114,13 +108,13 @@ function hideDialog() {
         v-model="presetData.wealth"
         :options="mappedWealthOptions"
       />
-    </Fluid>
 
-    <!--that no-explain is necessary, otherwise this would cause a bug with the layout-shift-prevention logic in the DialogWrapper-->
-    <GlyphInput
-      v-model="presetData.glyphs"
-      no-explain
-    />
+      <!--that no-explain is necessary, otherwise this would cause a bug with the layout-shift-prevention logic in the DialogWrapper-->
+      <GlyphInput
+        v-model="presetData.glyphs"
+        no-explain
+      />
+    </Fluid>
 
     <template #footer>
       <Button
@@ -143,17 +137,6 @@ function hideDialog() {
 </template>
 
 <style scoped>
-.input-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(max(40%, 200px), 1fr));
-  gap: 1.5rem;
-
-  & > * {
-    flex-grow: 1;
-    min-width: 40%;
-  }
-}
-
 .action-buttons {
   gap: 0.5rem;
 }
