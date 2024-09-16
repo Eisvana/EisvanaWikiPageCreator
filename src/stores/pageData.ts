@@ -5,6 +5,7 @@ import { currentReleaseKey, defaultValuesKey } from '@/variables/localStorageKey
 import { civName } from '@/variables/civilization';
 import { regions } from '@/variables/regions';
 import { maxGlyphLength } from '@/variables/glyphData';
+import { emitGlobalEvent } from '@/helpers/event';
 
 const researchteamDefaultExceptions = ['base'];
 
@@ -159,6 +160,7 @@ export const usePageDataStore = defineStore('pageData', {
     // TODO: this action resets only the JS state, it does not reset the inputs because they are decoupled
     resetStore() {
       this.$patch(structuredClone(defaultState));
+      emitGlobalEvent('reset');
       this.initStore();
     },
   },
