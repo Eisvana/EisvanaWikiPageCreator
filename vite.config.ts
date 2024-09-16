@@ -28,7 +28,6 @@ export default defineConfig({
     rollupOptions: {
       input: [
         'index.html',
-        'about.html',
         'base.html',
         'biofrig.html',
         'derelict.html',
