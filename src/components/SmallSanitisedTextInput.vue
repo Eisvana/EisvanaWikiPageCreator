@@ -10,13 +10,19 @@ const model = defineModel<string>({ required: true });
 <template>
   <SanitisedTextInput
     v-model="model"
-    :errorMessage
-    :helpImg
-    :helpTitle
+    :error-message
+    :help-img
+    :help-title
     :invalid
     :label
     :maxlength
     :tooltip
     size="small"
-  />
+  >
+    <slot></slot>
+
+    <template #errorMessage>
+      <slot name="errorMessage"></slot>
+    </template>
+  </SanitisedTextInput>
 </template>

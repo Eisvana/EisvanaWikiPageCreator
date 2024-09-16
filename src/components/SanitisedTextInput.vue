@@ -29,9 +29,9 @@ useEventListener(document, 'reset', () => {
 <template>
   <TextInput
     v-model="dirtyModel"
-    :errorMessage
-    :helpImg
-    :helpTitle
+    :error-message
+    :help-img
+    :help-title
     :invalid
     :label
     :maxlength
