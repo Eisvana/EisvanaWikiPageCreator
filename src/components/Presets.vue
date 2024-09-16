@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
-import { computed, reactive, ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { defaultValuesKey } from '@/variables/localStorageKeys';
-import { wealth } from '@/variables/wealth';
+import { mappedWealthOptions } from '@/variables/wealth';
 import TextInput from './TextInput.vue';
 import Fluid from 'primevue/fluid';
 import GlyphInput from './GlyphInput.vue';
+import WealthSelect from './WealthSelect.vue';
+import PlatformSelect from './PlatformSelect.vue';
+import DepartmentSelect from './DepartmentSelect.vue';
 
 const isOpen = ref(false);
 
@@ -47,23 +50,6 @@ function storeData() {
 function restoreDefaults() {
   loadData(structuredClone(defaultData));
 }
-
-const mappedWealthOptions = computed(() =>
-  Object.entries(wealth)
-    .flatMap((item) => item[1].map((option) => ({ label: option, value: option })))
-    .toSorted((a, b) => {
-      const nameA = a.label.toUpperCase(); // ignore upper and lowercase
-      const nameB = b.label.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      } else if (nameA > nameB) {
-        return 1;
-      } else {
-        // names must be equal
-        return 0;
-      }
-    })
-);
 
 function hideDialog() {
   isOpen.value = false;
@@ -124,21 +110,13 @@ function hideDialog() {
         label="Name of the moon"
         outlined
       />
-      <!-- <PlatformSelect
-            v-model="presetData.platform"
-            spaced
-          />
-          <DepartmentSelect
-            v-model="presetData.department"
-            spaced
-          />
-          <QSelectPreset
-            v-model="presetData.wealth"
-            :options="mappedWealthOptions"
-            label="System wealth"
-            spaced
-            use-input
-          />-->
+      <PlatformSelect v-model="presetData.platform" />
+      <DepartmentSelect v-model="presetData.department" />
+
+      <WealthSelect
+        v-model="presetData.wealth"
+        :options="mappedWealthOptions"
+      />
     </Fluid>
 
     <GlyphInput v-model="presetData.glyphs" />

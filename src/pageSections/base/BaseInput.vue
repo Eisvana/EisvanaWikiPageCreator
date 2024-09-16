@@ -1,9 +1,9 @@
 <script setup lang="ts">
 // import CheckboxInput from '@/components/CheckboxInput.vue';
 // import CheckboxSection from '@/components/CheckboxSection.vue';
-// import DepartmentSelect from '@/components/DepartmentSelect.vue';
+import DepartmentSelect from '@/components/DepartmentSelect.vue';
 import GlyphInput from '@/components/GlyphInput.vue';
-// import PlatformSelect from '@/components/PlatformSelect.vue';
+import PlatformSelect from '@/components/PlatformSelect.vue';
 import InputTableItem from '@/components/InputTableItem.vue';
 import SmallSanitisedTextInput from '@/components/SmallSanitisedTextInput.vue';
 import SingleFileUpload from '@/components/SingleFileUpload.vue';
@@ -116,8 +116,8 @@ const isCollapsed = ref(false);
     label="Builder alias if no wiki"
   />
 
-  <!-- <PlatformSelect v-model="platform" />
-  <DepartmentSelect v-model="researchteam" /> -->
+  <PlatformSelect v-model="platform" />
+  <DepartmentSelect v-model="researchteam" />
 
   <Panel
     v-model:collapsed="isCollapsed"
