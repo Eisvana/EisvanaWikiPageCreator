@@ -7,4 +7,5 @@ export interface TextInputProps {
   helpTitle?: string;
   helpImg?: string;
   tooltip?: string;
+  initialValue?: string;
 }
