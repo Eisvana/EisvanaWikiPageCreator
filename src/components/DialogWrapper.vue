@@ -37,8 +37,8 @@ watchEffect(() => (isLocked.value ||= model.value));
     :draggable="false"
     pt:root:class="dialog-wrapper mx-4"
     modal
-    @show="emit('show')"
     @after-hide="isLocked = false"
+    @show="emit('show')"
   >
     <template #header>
       <slot name="header"></slot>
