@@ -1,8 +1,9 @@
 import { mapWealth } from '@/helpers/selectMapping';
 
+// the keys are capitalised because they will appear as section headings
 export const wealth = {
-  high: ['Advanced', 'Affluent', 'Booming', 'Flourishing', 'High Supply', 'Opulent', 'Prosperous', 'Wealthy'],
-  medium: [
+  High: ['Advanced', 'Affluent', 'Booming', 'Flourishing', 'High Supply', 'Opulent', 'Prosperous', 'Wealthy'],
+  Medium: [
     'Adequate',
     'Balanced',
     'Comfortable',
@@ -12,8 +13,8 @@ export const wealth = {
     'Satisfactory',
     'Sustainable',
   ],
-  low: ['Declining', 'Destitute', 'Failing', 'Fledgling', 'Low Supply', 'Struggling', 'Unsuccessful', 'Unpromising'],
-  outlaw: ['Black Market'],
+  Low: ['Declining', 'Destitute', 'Failing', 'Fledgling', 'Low Supply', 'Struggling', 'Unsuccessful', 'Unpromising'],
+  Outlaw: ['Black Market'],
 } as const satisfies Record<string, string[]>;
 
 export const mappedWealthOptions = mapWealth(wealth);
