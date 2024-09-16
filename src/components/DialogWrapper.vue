@@ -26,9 +26,7 @@ watch(isLocked, (newVal) =>
   doc.value.style.setProperty('--p-scrollbar-width', `${newVal ? scrollBarWidth.value : 0}px`)
 );
 
-watchEffect(() => {
-  if (model.value) isLocked.value = true;
-});
+watchEffect(() => (isLocked.value ||= model.value));
 </script>
 
 <template>
