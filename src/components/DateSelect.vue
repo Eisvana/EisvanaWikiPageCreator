@@ -39,7 +39,7 @@ watchEffect(() => {
         :input-id="id"
         date-format="yy-mm-dd"
         icon-display="input"
-        inputClass="p-inputtext-sm"
+        input-class="p-inputtext-sm"
         pt:inputIconContainer:class="mt-0"
         pt:inputIconContainer:style="top: 5px"
         show-icon
