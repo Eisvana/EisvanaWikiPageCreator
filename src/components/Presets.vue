@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Button from 'primevue/button';
-import { onMounted, ref, toRaw, watch, type Ref } from 'vue';
+import { ref, toRaw, watch, type Ref } from 'vue';
 import { defaultValuesKey } from '@/variables/localStorageKeys';
 import { mappedWealthOptions } from '@/variables/wealth';
 import Fluid from 'primevue/fluid';
