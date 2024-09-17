@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Button from 'primevue/button';
-import { reactive, ref } from 'vue';
+import { onMounted, ref, toRaw, watch, type Ref } from 'vue';
 import { defaultValuesKey } from '@/variables/localStorageKeys';
 import { mappedWealthOptions } from '@/variables/wealth';
 import Fluid from 'primevue/fluid';
@@ -10,40 +10,38 @@ import PlatformSelect from './PlatformSelect.vue';
 import DepartmentSelect from './DepartmentSelect.vue';
 import DialogWrapper from './DialogWrapper.vue';
 import SmallSanitisedTextInput from './SmallSanitisedTextInput.vue';
+import { usePageDataStore } from '@/stores/pageData';
+import { defaultData } from '@/variables/preset';
+import type { PresetData } from '@/types/preset';
+import { storeToRefs } from 'pinia';
+import { toReactive } from '@vueuse/core';
 
 const isOpen = ref(false);
 
-const defaultData = {
-  discovered: '',
-  discoveredlink: '',
-  documenterName: '',
-  system: '',
-  planet: '',
-  moon: '',
-  platform: '',
-  department: '',
-  glyphs: '',
-  wealth: '',
-};
+const pageData = usePageDataStore();
+const { presetData: storedPresetData } = storeToRefs(pageData);
 
-const presetData = reactive(structuredClone(defaultData));
+// TODO: the inputs don't reset because we can't control their dirty model
 
-const isValidKey = (item: unknown): item is keyof typeof presetData => typeof item === 'string' && item in presetData;
+function cloneRef(obj: Ref) {
+  const reactiveObj = toReactive(obj);
+  const rawObj = toRaw(reactiveObj);
+  const clonedObj = structuredClone(rawObj);
+  return clonedObj;
+}
 
-function loadData(data?: typeof defaultData) {
-  const localStorageData = localStorage.getItem(defaultValuesKey) ?? '{}';
-  const jsonData = JSON.parse(localStorageData);
+const presetData = ref<PresetData>(cloneRef(storedPresetData));
 
-  const useData = data ?? jsonData;
+watch(isOpen, () => loadData());
 
-  for (const item in useData) {
-    if (isValidKey(item)) presetData[item] = useData[item];
-  }
+function loadData(data?: PresetData) {
+  presetData.value = data ?? cloneRef(storedPresetData);
 }
 
 function storeData() {
-  const jsonString = JSON.stringify(presetData);
+  const jsonString = JSON.stringify(presetData.value);
   localStorage.setItem(defaultValuesKey, jsonString);
+  pageData.$patch({ presetData: presetData.value });
   hideDialog();
 }
 
@@ -68,7 +66,6 @@ function hideDialog() {
     v-model="isOpen"
     :closable="false"
     pt:footer:class="is-flex-wrap-wrap is-justify-content-center action-buttons"
-    @show="loadData()"
   >
     <template #header>
       <h2 class="title is-4 has-text-centered mb-0 full-width">Global Preload Values</h2>
@@ -78,31 +75,37 @@ function hideDialog() {
       <SmallSanitisedTextInput
         v-if="!presetData.discovered"
         v-model="presetData.discoveredlink"
+        initial-value=""
         label="Discoverer wiki name"
       />
       <SmallSanitisedTextInput
         v-if="!presetData.discoveredlink"
         v-model="presetData.discovered"
+        initial-value=""
         label="Discoverer alias if no wiki"
       />
       <SmallSanitisedTextInput
         v-model="presetData.documenterName"
+        initial-value=""
         label="Documenter alias if not discoverer"
       />
       <SmallSanitisedTextInput
         v-model="presetData.system"
+        initial-value=""
         label="Name of the system"
       />
       <SmallSanitisedTextInput
         v-model="presetData.planet"
+        initial-value=""
         label="Name of the planet"
       />
       <SmallSanitisedTextInput
         v-model="presetData.moon"
+        initial-value=""
         label="Name of the moon"
       />
       <PlatformSelect v-model="presetData.platform" />
-      <DepartmentSelect v-model="presetData.department" />
+      <DepartmentSelect v-model="presetData.researchteam" />
 
       <WealthSelect
         v-model="presetData.wealth"

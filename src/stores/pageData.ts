@@ -7,6 +7,8 @@ import { regions } from '@/variables/regions';
 import { maxGlyphLength } from '@/variables/glyphData';
 import { emitGlobalEvent } from '@/helpers/event';
 import { route } from '@/variables/route';
+import type { PresetData } from '@/types/preset';
+import { defaultData } from '@/variables/preset';
 
 const researchteamDefaultExceptions: string[] = ['base'];
 
@@ -63,6 +65,7 @@ interface PageData {
   additionalInfo: string;
   galleryFiles: GalleryFileItem[];
   locationFiles: GalleryFileItem[];
+  presetData: PresetData;
 }
 
 const defaultState: PageData = {
@@ -112,6 +115,7 @@ const defaultState: PageData = {
   additionalInfo: '',
   galleryFiles: [],
   locationFiles: [],
+  presetData: structuredClone(defaultData),
 };
 
 export const usePageDataStore = defineStore('pageData', {
@@ -156,7 +160,7 @@ export const usePageDataStore = defineStore('pageData', {
     applyDefaults() {
       const localStorageData = localStorage.getItem(defaultValuesKey) ?? '{}';
       const jsonData = JSON.parse(localStorageData);
-      this.$patch(jsonData);
+      this.$patch({ ...jsonData, presetData: jsonData });
     },
 
     // TODO: this action resets only the JS state, it does not reset the inputs because they are decoupled
