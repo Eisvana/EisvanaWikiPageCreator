@@ -5,7 +5,7 @@
 /// <reference types="vite/client" />
 
 import md5Hex from "md5-hex";
-import { checkDataIntegrity, errorMessage, showAll, resetGallery } from "../common";
+import { checkDataIntegrity, errorMessage, showAll, resetGallery, getRelease } from "../common";
 import { assignElementFunctions } from "../commonElements/elementBackend/elementFunctions";
 import type { ElementFunctions } from "../types/elements";
 import { dataIntegrityObj, globalElements, globalFunctions, links, pageData } from "../variables/objects";
@@ -67,6 +67,7 @@ export function reset() {
 	// allow an external function to add reset logic. This external function has to be created when needed.
 	if (typeof globalFunctions.resetExternal == 'function') globalFunctions.resetExternal();
 	readDefaultValues();
+  getRelease();
 	showAll();
 }
 
