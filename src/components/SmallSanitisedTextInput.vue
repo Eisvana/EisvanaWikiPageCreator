@@ -13,6 +13,7 @@ const model = defineModel<string>({ required: true });
     :error-message
     :help-img
     :help-title
+    :initial-value
     :invalid
     :label
     :maxlength
