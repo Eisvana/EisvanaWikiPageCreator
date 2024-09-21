@@ -12,7 +12,7 @@ const {
   discovered,
   discoveredlink,
   axes,
-  researchteamValue,
+  researchteamValue: researchteam,
   system,
   planet,
   moon,
@@ -56,7 +56,7 @@ const locationSentence = computed(() => {
   <div>| name = {{ name }}</div>
   <div>| image = {{ image }}</div>
   <div>| civilized = {{ civilized }}</div>
-  <div>| researchteam = {{ researchteamValue }}</div>
+  <div>| researchteam = {{ researchteam }}</div>
   <div>| builderlink = {{ discoveredlink }}</div>
   <div>| builder = {{ discovered }}</div>
   <div>| galaxy = Eissentam</div>
