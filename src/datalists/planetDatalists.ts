@@ -716,6 +716,7 @@ const planetDatalists: {
 		'Not Present',
 		'Devoid',
 		'Barren',
+    'Synthetic',
 	]
 }
 
