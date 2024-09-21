@@ -1,20 +1,32 @@
 <script setup lang="ts">
 import { useId } from '@/helpers/id';
 import { sanitiseString } from '@/helpers/inputSanitisation';
+import { useEventListener } from '@vueuse/core';
 import Textarea from 'primevue/textarea';
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect, watchPostEffect } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   label: string;
+  initialValue?: string;
 }>();
 
 const id = useId('textarea-');
 
 const model = defineModel<string>({ required: true });
 
-const dirtyModel = ref(model.value);
+const initialState = ref(props.initialValue ?? model.value);
 
-watchEffect(() => (model.value = sanitiseString(dirtyModel.value)));
+const dirtyModel = ref(initialState.value);
+
+watchEffect(() => {
+  if (props.initialValue !== undefined) initialState.value = props.initialValue;
+});
+
+watchPostEffect(() => (model.value = sanitiseString(dirtyModel.value)));
+
+useEventListener(document, 'reset', () => {
+  dirtyModel.value = initialState.value;
+});
 </script>
 
 <template>

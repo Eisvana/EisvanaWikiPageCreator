@@ -8,6 +8,7 @@ import { computed, ref, watchEffect } from 'vue';
 const props = defineProps<{
   options: (SelectOption | SelectOptionGroup | string)[];
   initialValue?: string | null;
+  resetEvent?: string;
 }>();
 
 const model = defineModel<string | null>({ required: true });
@@ -41,7 +42,7 @@ watchEffect(() => {
   if (props.initialValue !== undefined) initialState.value = props.initialValue;
 });
 
-useEventListener(document, 'reset', () => {
+useEventListener(document, props.resetEvent ?? 'reset', () => {
   model.value = initialState.value;
 });
 

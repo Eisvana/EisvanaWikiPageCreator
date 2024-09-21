@@ -4,14 +4,7 @@ import SelectDropdown from './SelectDropdown.vue';
 import { mappedDepartmentOptions } from '@/variables/departments';
 import InputTableItem from './InputTableItem.vue';
 
-withDefaults(
-  defineProps<{
-    initialValue?: string | null;
-  }>(),
-  {
-    initialValue: null,
-  }
-);
+defineProps<{ resetEvent?: string }>();
 
 const model = defineModel<string | null>({ required: true });
 
@@ -27,8 +20,9 @@ const id = useId('department-');
       <SelectDropdown
         v-model="model"
         :aria-labelledby="id"
-        :initial-value
+        :initial-value="null"
         :options="mappedDepartmentOptions"
+        :reset-event
         show-clear
       />
     </template>

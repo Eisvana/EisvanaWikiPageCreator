@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Button from 'primevue/button';
-import { ref, toRaw, watch, type Ref } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 import { defaultValuesKey } from '@/variables/localStorageKeys';
 import { mappedWealthOptions } from '@/variables/wealth';
 import Fluid from 'primevue/fluid';
@@ -11,32 +11,42 @@ import DepartmentSelect from './DepartmentSelect.vue';
 import DialogWrapper from './DialogWrapper.vue';
 import SmallSanitisedTextInput from './SmallSanitisedTextInput.vue';
 import { usePageDataStore } from '@/stores/pageData';
-import { defaultData } from '@/variables/preset';
-import type { PresetData } from '@/types/preset';
 import { storeToRefs } from 'pinia';
-import { toReactive } from '@vueuse/core';
+import { syncRefs, useCloned } from '@vueuse/core';
+import { emitGlobalEvent } from '@/helpers/event';
 
 const isOpen = ref(false);
+
+/*
+intended behaviour:
+user enters data
+user clicks "Set"
+dialog closes
+When dialog is reopened after pageload, the data is still there.
+
+Inputs are sanitised when clicking "Set".
+
+When clicking "Reset", empty strings or the first item of a select element are used
+
+to achieve this:
+we need a temporary store that can also be reset to an initial value -> refDefault
+this object should be loaded at app startup with the relevant data from localstorage -> pageData store retrieves initial data
+*/
+
+//  TODO: Test whether this now works as intended
 
 const pageData = usePageDataStore();
 const { presetData: storedPresetData } = storeToRefs(pageData);
 
-// TODO: the inputs don't reset because we can't control their dirty model
+const { cloned: clonedPresetData, sync } = useCloned(storedPresetData);
 
-function cloneRef(obj: Ref) {
-  const reactiveObj = toReactive(obj);
-  const rawObj = toRaw(reactiveObj);
-  const clonedObj = structuredClone(rawObj);
-  return clonedObj;
-}
+const presetData = ref(clonedPresetData.value);
 
-const presetData = ref<PresetData>(cloneRef(storedPresetData));
+syncRefs(clonedPresetData, presetData);
 
-watch(isOpen, () => loadData());
+watch(isOpen, sync);
 
-function loadData(data?: PresetData) {
-  presetData.value = data ?? cloneRef(storedPresetData);
-}
+const resetEvent = 'preset-reset';
 
 function storeData() {
   const jsonString = JSON.stringify(presetData.value);
@@ -46,7 +56,7 @@ function storeData() {
 }
 
 function restoreDefaults() {
-  loadData(structuredClone(defaultData));
+  emitGlobalEvent(resetEvent);
 }
 
 function hideDialog() {
@@ -77,39 +87,53 @@ function hideDialog() {
         v-model="presetData.discoveredlink"
         initial-value=""
         label="Discoverer wiki name"
+        :reset-event
       />
       <SmallSanitisedTextInput
         v-if="!presetData.discoveredlink"
         v-model="presetData.discovered"
         initial-value=""
         label="Discoverer alias if no wiki"
+        :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.documenterName"
         initial-value=""
         label="Documenter alias if not discoverer"
+        :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.system"
         initial-value=""
         label="Name of the system"
+        :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.planet"
         initial-value=""
         label="Name of the planet"
+        :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.moon"
         initial-value=""
         label="Name of the moon"
+        :reset-event
       />
-      <PlatformSelect v-model="presetData.platform" />
-      <DepartmentSelect v-model="presetData.researchteam" />
+      <PlatformSelect
+        v-model="presetData.platform"
+        :reset-event
+      />
+
+      <DepartmentSelect
+        v-model="presetData.researchteam"
+        :reset-event
+      />
 
       <WealthSelect
         v-model="presetData.wealth"
         :options="mappedWealthOptions"
+        :reset-event
       />
 
       <!--that no-explain is necessary, otherwise this would cause a bug with the layout-shift-prevention logic in the DialogWrapper-->

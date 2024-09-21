@@ -4,6 +4,8 @@ import InputTableItem from './InputTableItem.vue';
 import SelectDropdown from './SelectDropdown.vue';
 import { mappedPlatformOptions } from '@/variables/platforms';
 
+defineProps<{ resetEvent?: string }>();
+
 const model = defineModel<string>({ required: true });
 
 const id = useId('platform-');
@@ -20,6 +22,7 @@ const id = useId('platform-');
         v-model="model"
         :aria-labelledby="id"
         :options="mappedPlatformOptions"
+        :reset-event
       />
     </template>
   </InputTableItem>
