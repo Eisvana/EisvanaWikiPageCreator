@@ -9,6 +9,7 @@ import { emitGlobalEvent } from '@/helpers/event';
 import { route } from '@/variables/route';
 import type { PresetData } from '@/types/preset';
 import { defaultData } from '@/variables/preset';
+import { nextTick } from 'vue';
 
 const researchteamDefaultExceptions: string[] = ['base'];
 
@@ -163,11 +164,13 @@ export const usePageDataStore = defineStore('pageData', {
       this.$patch({ ...jsonData, presetData: jsonData });
     },
 
-    // TODO: this action resets only the JS state, it does not reset the inputs because they are decoupled
     resetStore() {
       this.$patch(structuredClone(defaultState));
-      emitGlobalEvent('reset');
-      this.initStore();
+      // waiting for the DOM to update before changing the state again
+      nextTick(() => {
+        emitGlobalEvent('reset');
+        this.initStore();
+      });
     },
   },
 });
