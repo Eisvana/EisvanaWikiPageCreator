@@ -75,7 +75,7 @@ const images: CivImageProps[] = [
   <p class="subtitle is-4 has-text-centered">Choose what page you want to create:</p>
   <nav
     aria-label="Subpages"
-    class="page-options mx-auto mb-6"
+    class="page-options is-gap-3 mx-auto mb-6"
   >
     <Button
       v-for="link in links"
@@ -87,7 +87,7 @@ const images: CivImageProps[] = [
       outlined
     />
   </nav>
-  <div class="eisvana-images">
+  <div class="is-flex is-flex-wrap-wrap is-justify-content-center is-gap-5">
     <CivImage
       v-for="image in images"
       :img="image.img"
@@ -98,17 +98,9 @@ const images: CivImageProps[] = [
 </template>
 
 <style scoped>
-.eisvana-images {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2.5rem;
-}
-
 .page-options {
   max-width: 800px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.5em;
 }
 </style>

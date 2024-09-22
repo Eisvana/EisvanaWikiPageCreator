@@ -19,12 +19,12 @@ const defaultFalseValue = 'No';
 <template>
   <div
     v-for="checkboxArray in paginatedCheckboxes"
-    class="columns is-mobile mb-0"
+    class="columns is-mobile mb-0 checkbox-row"
   >
     <div
       v-for="checkbox in checkboxArray"
       :key="checkbox.label"
-      class="column is-flex is-align-items-center"
+      class="column is-flex is-align-items-center checkbox-wrapper"
     >
       <CompactCheckbox
         v-model="checkbox.model"
@@ -35,3 +35,9 @@ const defaultFalseValue = 'No';
     </div>
   </div>
 </template>
+
+<style scoped>
+.checkbox-row:last-child .checkbox-wrapper {
+  padding-block-end: 0;
+}
+</style>

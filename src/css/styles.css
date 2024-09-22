@@ -25,3 +25,7 @@
 .keep-linebreaks {
   white-space: pre;
 }
+
+.is-borderless {
+  border: none !important;
+}

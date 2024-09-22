@@ -8,7 +8,7 @@ import Tools from './Tools.vue';
 </script>
 
 <template>
-  <Toolbar class="toolbar is-radiusless">
+  <Toolbar class="is-borderless is-radiusless">
     <template #start>
       <NavBar />
     </template>
@@ -18,7 +18,7 @@ import Tools from './Tools.vue';
     </template>
 
     <template #end>
-      <div class="settings-buttons">
+      <div class="is-flex is-gap-1">
         <Tools />
         <Presets />
         <ThemeSwitch />
@@ -26,14 +26,3 @@ import Tools from './Tools.vue';
     </template>
   </Toolbar>
 </template>
-
-<style scoped>
-.settings-buttons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.toolbar {
-  border: none;
-}
-</style>

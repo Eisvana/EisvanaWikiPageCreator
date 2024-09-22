@@ -57,8 +57,8 @@ const id = useId('glyph-input-');
 <template>
   <div class="is-flex is-flex-direction-column glyph-input-wrapper full-width pb-3">
     <div class="columns is-mobile mb-0">
-      <div class="column is-flex is-align-items-center is-justify-content-space-between glyph-label-wrapper">
-        <div class="is-flex is-flex-wrap-wrap is-align-items-center label-button-wrapper">
+      <div class="column is-flex is-align-items-center is-justify-content-space-between is-row-gap-1 is-column-gap-2">
+        <div class="is-flex is-flex-wrap-wrap is-align-items-center is-row-gap-1 is-column-gap-2">
           <label :for="id">Glyphs</label>
           <div>
             <Button
@@ -106,7 +106,7 @@ const id = useId('glyph-input-');
       <Button
         v-for="glyph in validGlyphs"
         :fluid="false"
-        class="glyph-button"
+        class="p-0"
         severity="secondary"
         outlined
         @click="addGlyph(glyph)"
@@ -124,22 +124,13 @@ const id = useId('glyph-input-');
   grid-template-columns: repeat(8, 60px);
   gap: 1px;
 
-  .glyph-button {
-    padding: 0;
-
-    .glyphs.icon.is-small {
-      height: 1em;
-    }
+  .glyphs.icon.is-small {
+    height: 1em;
   }
 }
 
 .glyph-input-wrapper {
   container-type: inline-size;
-
-  .glyph-label-wrapper,
-  .label-button-wrapper {
-    gap: 0.5rem 1rem;
-  }
 }
 
 .preview {

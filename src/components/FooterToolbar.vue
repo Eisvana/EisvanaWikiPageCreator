@@ -7,9 +7,9 @@ const pageData = usePageDataStore();
 </script>
 
 <template>
-  <Toolbar class="toolbar is-radiusless">
+  <Toolbar class="is-borderless is-radiusless">
     <template #center>
-      <div class="footer-toolbar">
+      <div class="is-gap-1 is-flex is-justify-content-center footer-toolbar">
         <Button label="Copy" />
         <Button
           as="a"
@@ -26,14 +26,7 @@ const pageData = usePageDataStore();
 </template>
 
 <style scoped>
-.toolbar {
-  border: none;
-
-  .footer-toolbar {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    padding-inline-end: var(--p-scrollbar-width);
-  }
+.footer-toolbar {
+  padding-inline-end: var(--p-scrollbar-width);
 }
 </style>

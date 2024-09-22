@@ -61,7 +61,7 @@ function hideDialog() {
   <DialogWrapper
     v-model="isOpen"
     :closable="false"
-    pt:footer:class="is-flex-wrap-wrap is-justify-content-center action-buttons"
+    pt:footer:class="is-flex-wrap-wrap is-justify-content-center is-gap-1"
   >
     <template #header>
       <h2 class="title is-4 has-text-centered mb-0 full-width">Global Preload Values</h2>
@@ -148,9 +148,3 @@ function hideDialog() {
     </template>
   </DialogWrapper>
 </template>
-
-<style scoped>
-.action-buttons {
-  gap: 0.5rem;
-}
-</style>
