@@ -25,11 +25,9 @@ const { presetData: storedPresetData } = storeToRefs(pageData);
 
 const { cloned: clonedPresetData, sync } = useCloned(storedPresetData);
 
-const initialValues = ref(clonedPresetData.value);
-
 const presetData = ref(clonedPresetData.value);
 
-syncRefs(clonedPresetData, [presetData, initialValues]);
+syncRefs(clonedPresetData, presetData);
 
 watch(isOpen, sync);
 
@@ -43,8 +41,7 @@ function storeData() {
 }
 
 function restoreDefaults() {
-  initialValues.value = structuredClone(defaultData);
-  presetData.value.glyphs = '';
+  presetData.value = structuredClone(defaultData);
   nextTick(() => emitGlobalEvent(resetEvent));
 }
 
@@ -74,38 +71,38 @@ function hideDialog() {
       <SmallSanitisedTextInput
         v-if="!presetData.discovered"
         v-model="presetData.discoveredlink"
-        :initial-value="initialValues.discoveredlink"
+        :initial-value="presetData.discoveredlink"
         label="Discoverer wiki name"
         :reset-event
       />
       <SmallSanitisedTextInput
         v-if="!presetData.discoveredlink"
         v-model="presetData.discovered"
-        :initial-value="initialValues.discovered"
+        :initial-value="presetData.discovered"
         label="Discoverer alias if no wiki"
         :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.documenterName"
-        :initial-value="initialValues.documenterName"
+        :initial-value="presetData.documenterName"
         label="Documenter alias if not discoverer"
         :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.system"
-        :initial-value="initialValues.system"
+        :initial-value="presetData.system"
         label="Name of the system"
         :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.planet"
-        :initial-value="initialValues.planet"
+        :initial-value="presetData.planet"
         label="Name of the planet"
         :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.moon"
-        :initial-value="initialValues.moon"
+        :initial-value="presetData.moon"
         label="Name of the moon"
         :reset-event
       />
