@@ -18,6 +18,8 @@ import { defaultData } from '@/variables/preset';
 
 const isOpen = ref(false);
 
+// I spent hours trying to figure out how to get this working. Now it works. Don't touch it.
+
 const pageData = usePageDataStore();
 const { presetData: storedPresetData } = storeToRefs(pageData);
 
