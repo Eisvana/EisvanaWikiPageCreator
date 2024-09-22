@@ -19,7 +19,6 @@ import { defaultData } from '@/variables/preset';
 const isOpen = ref(false);
 
 // I spent hours trying to figure out how to get this working. Now it works. Don't touch it.
-// FIXME: open popup -> enter some random data -> click reset without saving -> UI doesn't reset
 const pageData = usePageDataStore();
 const { presetData: storedPresetData } = storeToRefs(pageData);
 
@@ -41,7 +40,8 @@ function storeData() {
 }
 
 function restoreDefaults() {
-  presetData.value = structuredClone(defaultData);
+  // This must be Object.assign(), it cannot be `presetData.value = structuredClone(defaultData)`. I tested it. Believe me.
+  Object.assign(presetData.value, structuredClone(defaultData));
   nextTick(() => emitGlobalEvent(resetEvent));
 }
 
