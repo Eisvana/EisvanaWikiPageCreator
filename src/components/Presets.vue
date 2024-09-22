@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Button from 'primevue/button';
-import { ref, watch } from 'vue';
+import { nextTick, ref, watch } from 'vue';
 import { defaultValuesKey } from '@/variables/localStorageKeys';
 import { mappedWealthOptions } from '@/variables/wealth';
 import Fluid from 'primevue/fluid';
@@ -14,35 +14,20 @@ import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { syncRefs, useCloned } from '@vueuse/core';
 import { emitGlobalEvent } from '@/helpers/event';
+import { defaultData } from '@/variables/preset';
 
 const isOpen = ref(false);
-
-/*
-intended behaviour:
-user enters data
-user clicks "Set"
-dialog closes
-When dialog is reopened after pageload, the data is still there.
-
-Inputs are sanitised when clicking "Set".
-
-When clicking "Reset", empty strings or the first item of a select element are used
-
-to achieve this:
-we need a temporary store that can also be reset to an initial value -> refDefault
-this object should be loaded at app startup with the relevant data from localstorage -> pageData store retrieves initial data
-*/
-
-//  TODO: Test whether this now works as intended
 
 const pageData = usePageDataStore();
 const { presetData: storedPresetData } = storeToRefs(pageData);
 
 const { cloned: clonedPresetData, sync } = useCloned(storedPresetData);
 
+const initialValues = ref(clonedPresetData.value);
+
 const presetData = ref(clonedPresetData.value);
 
-syncRefs(clonedPresetData, presetData);
+syncRefs(clonedPresetData, [presetData, initialValues]);
 
 watch(isOpen, sync);
 
@@ -56,7 +41,9 @@ function storeData() {
 }
 
 function restoreDefaults() {
-  emitGlobalEvent(resetEvent);
+  initialValues.value = structuredClone(defaultData);
+  presetData.value.glyphs = '';
+  nextTick(() => emitGlobalEvent(resetEvent));
 }
 
 function hideDialog() {
@@ -85,38 +72,38 @@ function hideDialog() {
       <SmallSanitisedTextInput
         v-if="!presetData.discovered"
         v-model="presetData.discoveredlink"
-        initial-value=""
+        :initial-value="initialValues.discoveredlink"
         label="Discoverer wiki name"
         :reset-event
       />
       <SmallSanitisedTextInput
         v-if="!presetData.discoveredlink"
         v-model="presetData.discovered"
-        initial-value=""
+        :initial-value="initialValues.discovered"
         label="Discoverer alias if no wiki"
         :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.documenterName"
-        initial-value=""
+        :initial-value="initialValues.documenterName"
         label="Documenter alias if not discoverer"
         :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.system"
-        initial-value=""
+        :initial-value="initialValues.system"
         label="Name of the system"
         :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.planet"
-        initial-value=""
+        :initial-value="initialValues.planet"
         label="Name of the planet"
         :reset-event
       />
       <SmallSanitisedTextInput
         v-model="presetData.moon"
-        initial-value=""
+        :initial-value="initialValues.moon"
         label="Name of the moon"
         :reset-event
       />
