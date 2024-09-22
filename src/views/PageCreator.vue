@@ -4,7 +4,7 @@ import Fluid from 'primevue/fluid';
 </script>
 
 <template>
-  <div class="columns is-tablet page-wrapper mx-2">
+  <div class="columns is-tablet is-gap-2 mx-2">
     <Card class="column is-full-mobile p-0">
       <template #content>
         <Fluid>
@@ -23,9 +23,3 @@ import Fluid from 'primevue/fluid';
   <!--This is for extra content like album entry or category modules-->
   <slot></slot>
 </template>
-
-<style scoped>
-.page-wrapper {
-  gap: 1rem;
-}
-</style>

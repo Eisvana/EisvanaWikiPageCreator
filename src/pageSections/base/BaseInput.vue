@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// import CheckboxInput from '@/components/CheckboxInput.vue';
-// import CheckboxSection from '@/components/CheckboxSection.vue';
 import DepartmentSelect from '@/components/DepartmentSelect.vue';
 import GlyphInput from '@/components/GlyphInput.vue';
 import PlatformSelect from '@/components/PlatformSelect.vue';
@@ -12,8 +10,11 @@ import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import Checkbox from 'primevue/checkbox';
 import Panel from 'primevue/panel';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import DateSelect from '@/components/DateSelect.vue';
+import Fieldset from 'primevue/fieldset';
+import type { CheckboxData } from '@/types/checkboxTypes';
+import GridCheckboxWrapper from '@/components/GridCheckboxWrapper.vue';
 
 const pageData = usePageDataStore();
 const {
@@ -46,6 +47,15 @@ const {
   features,
   additionalInfo,
 } = storeToRefs(pageData);
+
+const featureCheckboxes: CheckboxData[] = reactive([
+  { model: farm, label: 'Farm' },
+  { model: geobay, label: 'Geobay' },
+  { model: landingpad, label: 'Landing Pad' },
+  { model: terminal, label: 'Terminal' },
+  { model: arena, label: 'Arena' },
+  { model: racetrack, label: 'Racetrack' },
+]);
 
 const isCollapsed = ref(false);
 </script>
@@ -80,32 +90,13 @@ const isCollapsed = ref(false);
     v-model="type"
     label="Type of the base"
   />
-  <!-- <CheckboxSection>
-    <CheckboxInput
-      v-model="farm"
-      label="Farm"
-    />
-    <CheckboxInput
-      v-model="geobay"
-      label="Geobay"
-    />
-    <CheckboxInput
-      v-model="landingpad"
-      label="Landing Pad"
-    />
-    <CheckboxInput
-      v-model="arena"
-      label="Arena"
-    />
-    <CheckboxInput
-      v-model="terminal"
-      label="Trade Terminal"
-    />
-    <CheckboxInput
-      v-model="racetrack"
-      label="Racetrack"
-    />
-  </CheckboxSection> -->
+
+  <Fieldset
+    class="mb-4"
+    legend="Features"
+  >
+    <GridCheckboxWrapper :checkboxes="featureCheckboxes" />
+  </Fieldset>
 
   <SmallSanitisedTextInput
     v-model="discoveredlink"
@@ -115,6 +106,8 @@ const isCollapsed = ref(false);
     v-model="discovered"
     label="Builder alias if no wiki"
   />
+
+  <!--gamemode select-->
 
   <PlatformSelect v-model="platform" />
   <DepartmentSelect v-model="researchteam" />
@@ -181,7 +174,7 @@ const isCollapsed = ref(false);
     </InputTableItem>
   </Panel>
 
-  <div class="is-flex is-flex-direction-column textareas">
+  <div class="is-flex is-flex-direction-column is-gap-2">
     <TextareaInput
       v-model="layout"
       label="Base Layout"
@@ -199,9 +192,3 @@ const isCollapsed = ref(false);
     />
   </div>
 </template>
-
-<style scoped>
-.textareas {
-  gap: 1rem;
-}
-</style>
