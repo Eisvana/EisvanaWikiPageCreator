@@ -15,20 +15,22 @@ import DateSelect from '@/components/DateSelect.vue';
 import Fieldset from 'primevue/fieldset';
 import type { CheckboxData } from '@/types/checkboxTypes';
 import GridCheckboxWrapper from '@/components/GridCheckboxWrapper.vue';
+import GameModeSelect from '@/components/GameModeSelect.vue';
 
 const pageData = usePageDataStore();
 const {
   name,
   discovered,
+  discoveredlink,
   image,
   glyphs,
   type,
-  discoveredlink,
   system,
   planet,
   moon,
   axes,
   platform,
+  mode,
   researchteam,
   farm,
   geobay,
@@ -107,8 +109,7 @@ const isCollapsed = ref(false);
     label="Builder alias if no wiki"
   />
 
-  <!--gamemode select-->
-
+  <GameModeSelect v-model="mode" />
   <PlatformSelect v-model="platform" />
   <DepartmentSelect v-model="researchteam" />
 
