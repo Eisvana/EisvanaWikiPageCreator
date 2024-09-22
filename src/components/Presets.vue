@@ -72,39 +72,39 @@ function hideDialog() {
         v-if="!presetData.discovered"
         v-model="presetData.discoveredlink"
         :initial-value="presetData.discoveredlink"
-        label="Discoverer wiki name"
         :reset-event
+        label="Discoverer wiki name"
       />
       <SmallSanitisedTextInput
         v-if="!presetData.discoveredlink"
         v-model="presetData.discovered"
         :initial-value="presetData.discovered"
-        label="Discoverer alias if no wiki"
         :reset-event
+        label="Discoverer alias if no wiki"
       />
       <SmallSanitisedTextInput
         v-model="presetData.documenterName"
         :initial-value="presetData.documenterName"
-        label="Documenter alias if not discoverer"
         :reset-event
+        label="Documenter alias if not discoverer"
       />
       <SmallSanitisedTextInput
         v-model="presetData.system"
         :initial-value="presetData.system"
-        label="Name of the system"
         :reset-event
+        label="Name of the system"
       />
       <SmallSanitisedTextInput
         v-model="presetData.planet"
         :initial-value="presetData.planet"
-        label="Name of the planet"
         :reset-event
+        label="Name of the planet"
       />
       <SmallSanitisedTextInput
         v-model="presetData.moon"
         :initial-value="presetData.moon"
-        label="Name of the moon"
         :reset-event
+        label="Name of the moon"
       />
       <PlatformSelect
         v-model="presetData.platform"
