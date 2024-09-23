@@ -73,5 +73,13 @@ const dataIsPlain = computed(() => {
     :option-label="dataIsPlain ? undefined : 'label'"
     :option-value="dataIsPlain ? undefined : 'value'"
     class="full-width"
+    label-class="small-select"
   />
 </template>
+
+<style scoped>
+:deep(.small-select) {
+  padding: calc(var(--p-inputtext-sm-padding-y) - 1px) calc(var(--p-inputtext-sm-padding-x) - 1px);
+  font-size: var(--p-inputtext-sm-font-size);
+}
+</style>
