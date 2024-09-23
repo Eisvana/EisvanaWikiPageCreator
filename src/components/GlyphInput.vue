@@ -66,6 +66,7 @@ const id = useId('glyph-input-');
               label="Delete"
               severity="danger"
               size="small"
+              outlined
               @click="removeGlyph"
             />
           </div>
