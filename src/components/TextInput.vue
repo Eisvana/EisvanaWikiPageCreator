@@ -38,7 +38,7 @@ const model = defineModel<string>({ required: true });
           :id
           :invalid
           :maxlength
-          :size
+          size="small"
         />
         <template #errorMessage>
           <slot name="errorMessage"></slot>

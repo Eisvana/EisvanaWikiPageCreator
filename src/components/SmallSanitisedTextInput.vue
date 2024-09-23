@@ -18,7 +18,6 @@ const model = defineModel<string>({ required: true });
     :label
     :maxlength
     :tooltip
-    size="small"
   >
     <slot></slot>
 
