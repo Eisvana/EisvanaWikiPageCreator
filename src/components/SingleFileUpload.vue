@@ -5,6 +5,9 @@ import type { FileUploadSelectEvent } from 'primevue/fileupload';
 import FileUpload from 'primevue/fileupload';
 import InputText from 'primevue/inputtext';
 import InputTableItem from './InputTableItem.vue';
+import { useDropZone } from '@vueuse/core';
+import InputGroup from 'primevue/inputgroup';
+import { ref, type Component } from 'vue';
 
 defineProps<{
   label: string;
@@ -18,7 +21,25 @@ function onUpload(e: FileUploadSelectEvent) {
   model.value = fileName;
 }
 
+function onDrop(files: File[] | null) {
+  const fileName = files?.[0]?.name;
+  if (!fileName) return;
+  model.value = fileName;
+}
+
 const id = useId('file-upload-');
+
+const dropzone = ref<HTMLDivElement | null>(null);
+
+const { isOverDropZone } = useDropZone(dropzone, {
+  onDrop,
+  // specify the types of data to be received.
+  dataTypes: (types) => types.every((type) => type.startsWith('image/')),
+  // control multi-file drop
+  multiple: false,
+  // whether to prevent default behavior for unhandled events
+  preventDefaultForUnhandled: true,
+});
 </script>
 
 <template>
@@ -28,21 +49,31 @@ const id = useId('file-upload-');
     </template>
 
     <template #input>
-      <InputText
-        v-model="model"
-        :id
-        class="mb-2"
-        size="small"
-      />
-      <FileUpload
-        :maxFileSize
-        accept="image/*"
-        class="p-button-outlined p-button-sm"
-        mode="basic"
-        auto
-        customUpload
-        @select="onUpload"
-      />
+      <div ref="dropzone">
+        <InputGroup>
+          <InputText
+            v-model="model"
+            :id
+            size="small"
+          />
+          <FileUpload
+            :maxFileSize
+            accept="image/*"
+            class="p-button-sm upload-button"
+            :class="{ 'p-button-outlined': !isOverDropZone }"
+            mode="basic"
+            auto
+            customUpload
+            @select="onUpload"
+          />
+        </InputGroup>
+      </div>
     </template>
   </InputTableItem>
 </template>
+
+<style scoped>
+:deep(.upload-button) {
+  --p-inputgroup-addon-border-radius: 0;
+}
+</style>
