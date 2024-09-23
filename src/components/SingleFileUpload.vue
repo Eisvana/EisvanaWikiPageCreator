@@ -7,7 +7,7 @@ import InputText from 'primevue/inputtext';
 import InputTableItem from './InputTableItem.vue';
 import { useDropZone } from '@vueuse/core';
 import InputGroup from 'primevue/inputgroup';
-import { ref, type Component } from 'vue';
+import { ref } from 'vue';
 
 defineProps<{
   label: string;
