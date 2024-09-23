@@ -37,7 +37,7 @@ const id = useId('file-upload-');
       <FileUpload
         :maxFileSize
         accept="image/*"
-        class="p-button-outlined"
+        class="p-button-outlined p-button-sm"
         mode="basic"
         auto
         customUpload
