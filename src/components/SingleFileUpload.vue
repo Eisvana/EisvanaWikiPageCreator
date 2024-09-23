@@ -57,10 +57,10 @@ const { isOverDropZone } = useDropZone(dropzone, {
             size="small"
           />
           <FileUpload
+            :class="{ 'p-button-outlined': !isOverDropZone }"
             :maxFileSize
             accept="image/*"
             class="p-button-sm upload-button"
-            :class="{ 'p-button-outlined': !isOverDropZone }"
             mode="basic"
             auto
             customUpload
