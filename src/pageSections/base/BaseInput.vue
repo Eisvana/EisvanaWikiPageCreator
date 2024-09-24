@@ -16,6 +16,7 @@ import Fieldset from 'primevue/fieldset';
 import type { CheckboxData } from '@/types/checkboxTypes';
 import GridCheckboxWrapper from '@/components/GridCheckboxWrapper.vue';
 import GameModeSelect from '@/components/GameModeSelect.vue';
+import CoordinateInput from '@/components/CoordinateInput.vue';
 
 const pageData = usePageDataStore();
 const {
@@ -83,10 +84,7 @@ const isCollapsed = ref(false);
     v-model="moon"
     label="Moon"
   />
-  <SmallSanitisedTextInput
-    v-model="axes"
-    label="Planetary Coords"
-  />
+  <CoordinateInput v-model="axes" />
   <GlyphInput v-model="glyphs" />
   <SmallSanitisedTextInput
     v-model="type"
