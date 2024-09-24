@@ -38,6 +38,7 @@ const model = defineModel<string>({ required: true });
           :id
           :invalid
           :maxlength
+          :pt:root:placeholder="placeholder"
           size="small"
         />
         <template #errorMessage>

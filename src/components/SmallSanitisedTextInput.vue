@@ -2,7 +2,7 @@
 import type { TextInputProps } from '@/types/textInputProps';
 import SanitisedTextInput from './SanitisedTextInput.vue';
 
-defineProps<Omit<TextInputProps, 'size'>>();
+defineProps<TextInputProps>();
 
 const model = defineModel<string>({ required: true });
 </script>
@@ -17,6 +17,7 @@ const model = defineModel<string>({ required: true });
     :invalid
     :label
     :maxlength
+    :placeholder
     :tooltip
   >
     <slot></slot>

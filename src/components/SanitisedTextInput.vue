@@ -35,6 +35,7 @@ useEventListener(document, props.resetEvent ?? 'reset', () => {
     :invalid
     :label
     :maxlength
+    :placeholder
     :tooltip
   >
     <slot></slot>
