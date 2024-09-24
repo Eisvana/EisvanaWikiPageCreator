@@ -16,7 +16,7 @@ const id = useId('checkbox-');
 </script>
 
 <template>
-  <div class="is-flex is-align-items-end is-gap-1">
+  <div class="is-flex is-align-items-end is-gap-1 is-flex-grow-1">
     <Checkbox
       v-model="model"
       :false-value
