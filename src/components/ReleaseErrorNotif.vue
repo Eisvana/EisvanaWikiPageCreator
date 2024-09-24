@@ -1,38 +1,19 @@
 <script setup lang="ts">
 import { usePageDataStore } from '@/stores/pageData';
-import { useToast } from 'primevue/usetoast';
-import { onMounted } from 'vue';
-
-const toast = useToast();
+import Button from 'primevue/button';
 
 const pageData = usePageDataStore();
-
-const showTemplate = () => {
-  toast.add({ severity: 'error', summary: 'Failed to fetch release!' });
-};
-
-onMounted(showTemplate);
-
-const onClose = () => {
-  toast.removeGroup('bc');
-};
 </script>
 
 <template>
-  <Toast
-    position="bottom-center"
-    @close="onClose"
-  >
-    <template #message="slotProps">
-      <div>
-        <div>{{ slotProps.message.summary }}</div>
-        <Button
-          label="Retry"
-          severity="info"
-          size="small"
-          @click="pageData.getRelease"
-        />
-      </div>
-    </template>
-  </Toast>
+  <div class="is-flex is-gap-1 is-align-items-center">
+    <div>{{ 'Failed to fetch release!' }}</div>
+    <Button
+      label="Retry"
+      severity="danger"
+      size="small"
+      raised
+      @click="pageData.getRelease"
+    />
+  </div>
 </template>

@@ -157,8 +157,7 @@ export const usePageDataStore = defineStore('pageData', {
         localStorage.setItem(currentReleaseKey, version);
         this.release = version || storedVersion;
       } catch (e) {
-        // TODO: make this toast message work with PrimeVue
-        toast.error('Failed to fetch release!');
+        toast.error(ReleaseErrorNotif);
         console.error(e);
       }
     },
