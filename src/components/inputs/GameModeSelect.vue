@@ -1,29 +1,28 @@
 <script setup lang="ts">
 import { useId } from '@/helpers/id';
+import InputTableItem from '../InputTableItem.vue';
 import SelectDropdown from './SelectDropdown.vue';
-import { mappedDepartmentOptions } from '@/variables/departments';
-import InputTableItem from './InputTableItem.vue';
+import { mappedModeOptions } from '@/variables/gamemodes';
 
 defineProps<{ resetEvent?: string }>();
 
-const model = defineModel<string | null>({ required: true });
+const model = defineModel<string>({ required: true });
 
-const id = useId('department-');
+const id = useId('gamemode-');
 </script>
 
 <template>
   <InputTableItem>
     <template #label>
-      <label :id>Department</label>
+      <label :id>Gamemode</label>
     </template>
+
     <template #input>
       <SelectDropdown
         v-model="model"
         :aria-labelledby="id"
-        :initial-value="null"
-        :options="mappedDepartmentOptions"
+        :options="mappedModeOptions"
         :reset-event
-        show-clear
       />
     </template>
   </InputTableItem>

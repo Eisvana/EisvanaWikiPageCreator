@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import DepartmentSelect from '@/components/DepartmentSelect.vue';
-import GlyphInput from '@/components/GlyphInput.vue';
-import PlatformSelect from '@/components/PlatformSelect.vue';
+import DepartmentSelect from '@/components/inputs/DepartmentSelect.vue';
+import GlyphInput from '@/components/inputs/GlyphInput.vue';
+import PlatformSelect from '@/components/inputs/PlatformSelect.vue';
 import InputTableItem from '@/components/InputTableItem.vue';
-import SmallSanitisedTextInput from '@/components/SmallSanitisedTextInput.vue';
-import SingleFileUpload from '@/components/SingleFileUpload.vue';
-import TextareaInput from '@/components/TextareaInput.vue';
+import SmallSanitisedTextInput from '@/components/inputs/SmallSanitisedTextInput.vue';
+import SingleFileUpload from '@/components/inputs/SingleFileUpload.vue';
+import TextareaInput from '@/components/inputs/TextareaInput.vue';
 import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import Checkbox from 'primevue/checkbox';
 import Panel from 'primevue/panel';
 import { reactive, ref } from 'vue';
-import DateSelect from '@/components/DateSelect.vue';
+import DateSelect from '@/components/inputs/DateSelect.vue';
 import Fieldset from 'primevue/fieldset';
 import type { CheckboxData } from '@/types/checkboxTypes';
 import GridCheckboxWrapper from '@/components/GridCheckboxWrapper.vue';
-import GameModeSelect from '@/components/GameModeSelect.vue';
-import CoordinateInput from '@/components/CoordinateInput.vue';
+import GameModeSelect from '@/components/inputs/GameModeSelect.vue';
+import CoordinateInput from '@/components/inputs/CoordinateInput.vue';
 
 const pageData = usePageDataStore();
 const {

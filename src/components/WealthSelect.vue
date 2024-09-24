@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SelectDropdown from './SelectDropdown.vue';
+import SelectDropdown from './inputs/SelectDropdown.vue';
 import { mappedWealthOptions } from '@/variables/wealth';
 import InputTableItem from './InputTableItem.vue';
 import { useId } from '@/helpers/id';

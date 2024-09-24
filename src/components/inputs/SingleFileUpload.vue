@@ -4,7 +4,7 @@ import { maxFileSize } from '@/variables/wikiLimits';
 import type { FileUploadSelectEvent } from 'primevue/fileupload';
 import FileUpload from 'primevue/fileupload';
 import InputText from 'primevue/inputtext';
-import InputTableItem from './InputTableItem.vue';
+import InputTableItem from '../InputTableItem.vue';
 import { useDropZone } from '@vueuse/core';
 import InputGroup from 'primevue/inputgroup';
 import { ref } from 'vue';

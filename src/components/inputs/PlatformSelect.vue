@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useId } from '@/helpers/id';
-import InputTableItem from './InputTableItem.vue';
+import InputTableItem from '../InputTableItem.vue';
 import SelectDropdown from './SelectDropdown.vue';
 import { mappedPlatformOptions } from '@/variables/platforms';
 
