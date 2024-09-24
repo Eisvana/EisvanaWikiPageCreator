@@ -6,7 +6,8 @@ import { createPinia } from 'pinia';
 import PrimeVue from 'primevue/config';
 import 'primeicons/primeicons.css';
 import { eisvanaColours } from './css/stylePreset';
-import ToastService from 'primevue/toastservice';
+import Toast from 'vue-toastification';
+import 'vue-toastification/dist/index.css';
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -20,6 +21,8 @@ app.use(PrimeVue, {
     },
   },
 });
-app.use(ToastService);
+app.use(Toast, {
+  position: 'bottom-center',
+});
 
 app.mount('#app');

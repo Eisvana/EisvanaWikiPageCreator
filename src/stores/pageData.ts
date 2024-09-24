@@ -10,6 +10,10 @@ import { route } from '@/variables/route';
 import type { PresetData } from '@/types/preset';
 import { defaultData } from '@/variables/preset';
 import { nextTick } from 'vue';
+import ReleaseErrorNotif from '@/components/ReleaseErrorNotif.vue';
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
 
 const researchteamDefaultExceptions: string[] = ['base'];
 
@@ -154,7 +158,7 @@ export const usePageDataStore = defineStore('pageData', {
         this.release = version || storedVersion;
       } catch (e) {
         // TODO: make this toast message work with PrimeVue
-        // toast.add({ severity: 'error', summary: 'Failed to fetch release!' });
+        toast.error('Failed to fetch release!');
         console.error(e);
       }
     },
