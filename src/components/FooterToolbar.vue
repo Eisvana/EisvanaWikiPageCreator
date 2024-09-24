@@ -2,15 +2,25 @@
 import Toolbar from 'primevue/toolbar';
 import Button from 'primevue/button';
 import { usePageDataStore } from '@/stores/pageData';
+import { useToast } from 'vue-toastification';
 
 const pageData = usePageDataStore();
+
+const toast = useToast();
+
+function copyPage() {
+  toast.error('Button is not yet functional!');
+}
 </script>
 
 <template>
   <Toolbar class="is-borderless is-radiusless">
     <template #center>
       <div class="is-gap-1 is-flex is-justify-content-center footer-toolbar">
-        <Button label="Copy" />
+        <Button
+          label="Copy"
+          @click="copyPage"
+        />
         <Button
           as="a"
           label="Create"
