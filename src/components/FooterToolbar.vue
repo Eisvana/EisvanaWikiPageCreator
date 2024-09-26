@@ -2,14 +2,21 @@
 import Toolbar from 'primevue/toolbar';
 import Button from 'primevue/button';
 import { usePageDataStore } from '@/stores/pageData';
-import { useToast } from 'vue-toastification';
+import { useToast, POSITION } from 'vue-toastification';
 
 const pageData = usePageDataStore();
 
 const toast = useToast();
 
 function copyPage() {
-  toast.error('Button is not yet functional!');
+  const randomBool = Math.random() > 0.5;
+  if (randomBool) {
+    toast.error('Button is not yet functional!');
+  } else {
+    toast.success('Copied!', {
+      position: POSITION.BOTTOM_RIGHT,
+    });
+  }
 }
 </script>
 
