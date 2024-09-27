@@ -12,16 +12,11 @@ import { defaultData } from '@/variables/preset';
 import { nextTick } from 'vue';
 import ReleaseErrorNotif from '@/components/ReleaseErrorNotif.vue';
 import { useToast } from 'vue-toastification';
+import type { GalleryFileItem } from '@/types/gallery';
 
 const toast = useToast();
 
 const researchteamDefaultExceptions: string[] = ['base'];
-
-interface GalleryFileItem {
-  file: File;
-  id: number;
-  desc: string;
-}
 
 interface PageData {
   release: string;
