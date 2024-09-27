@@ -17,6 +17,7 @@ import type { CheckboxData } from '@/types/checkboxTypes';
 import GridCheckboxWrapper from '@/components/GridCheckboxWrapper.vue';
 import GameModeSelect from '@/components/inputs/GameModeSelect.vue';
 import CoordinateInput from '@/components/inputs/CoordinateInput.vue';
+import GalleryInput from '@/components/inputs/gallery/GalleryInput.vue';
 
 const pageData = usePageDataStore();
 const {
@@ -190,4 +191,6 @@ const isCollapsed = ref(false);
       type="TextareaInput"
     />
   </div>
+
+  <GalleryInput />
 </template>
