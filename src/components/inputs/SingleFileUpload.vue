@@ -5,9 +5,9 @@ import type { FileUploadSelectEvent } from 'primevue/fileupload';
 import FileUpload from 'primevue/fileupload';
 import InputText from 'primevue/inputtext';
 import InputTableItem from '../InputTableItem.vue';
-import { useDropZone } from '@vueuse/core';
+import { useDropZone, useElementBounding } from '@vueuse/core';
 import InputGroup from 'primevue/inputgroup';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 defineProps<{
   label: string;
@@ -30,6 +30,7 @@ function onDrop(files: File[] | null) {
 const id = useId('file-upload-');
 
 const dropzone = ref<HTMLDivElement | null>(null);
+const inputWrapper = ref<HTMLDivElement | null>(null);
 
 const { isOverDropZone } = useDropZone(dropzone, {
   onDrop,
@@ -40,36 +41,45 @@ const { isOverDropZone } = useDropZone(dropzone, {
   // whether to prevent default behavior for unhandled events
   preventDefaultForUnhandled: true,
 });
+
+const { width } = useElementBounding(inputWrapper);
+const smallContainerWidth = 200;
+const isSmallScreen = computed(() => width.value <= smallContainerWidth);
 </script>
 
 <template>
-  <InputTableItem>
-    <template #label>
-      <label :for="id">{{ label }}</label>
-    </template>
+  <div ref="dropzone">
+    <InputTableItem>
+      <template #label>
+        <label :for="id">{{ label }}</label>
+      </template>
 
-    <template #input>
-      <div ref="dropzone">
-        <InputGroup>
-          <InputText
-            v-model="model"
-            :id
-            size="small"
-          />
-          <FileUpload
-            :class="{ 'p-button-outlined': !isOverDropZone }"
-            :maxFileSize
-            accept="image/*"
-            class="p-button-sm upload-button"
-            mode="basic"
-            auto
-            customUpload
-            @select="onUpload"
-          />
-        </InputGroup>
-      </div>
-    </template>
-  </InputTableItem>
+      <template #input>
+        <div ref="inputWrapper">
+          <component
+            :class="{ 'is-flex is-flex-direction-column is-gap-1': isSmallScreen }"
+            :is="isSmallScreen ? 'div' : InputGroup"
+          >
+            <InputText
+              v-model="model"
+              :id
+              size="small"
+            />
+            <FileUpload
+              :class="{ 'p-button-outlined': !isOverDropZone }"
+              :maxFileSize
+              accept="image/*"
+              class="p-button-sm upload-button"
+              mode="basic"
+              auto
+              custom-upload
+              @select="onUpload"
+            />
+          </component>
+        </div>
+      </template>
+    </InputTableItem>
+  </div>
 </template>
 
 <style scoped>
