@@ -132,17 +132,14 @@ const featureCheckboxes: CheckboxData[] = reactive([
     <TextareaInput
       v-model="layout"
       label="Base Layout"
-      type="TextareaInput"
     />
     <TextareaInput
       v-model="features"
       label="Base Features"
-      type="TextareaInput"
     />
     <TextareaInput
       v-model="additionalInfo"
       label="Additional Information"
-      type="TextareaInput"
     />
   </div>
 
