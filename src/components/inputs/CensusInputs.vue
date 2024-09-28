@@ -80,6 +80,7 @@ watchDebounced(
       >Your ingame name. Don't include any ingame titles.
     </SanitisedTextInput>
     <SanitisedTextInput
+      v-if="!censussocial"
       v-model="censusreddit"
       :invalid="!isRedditValid"
       error-message="Reddit name must not include spaces"
@@ -87,6 +88,7 @@ watchDebounced(
       tooltip='Your Reddit name. "u/" not necessary'
     />
     <SanitisedTextInput
+      v-if="!censusreddit"
       v-model="censussocial"
       :invalid="!isSocialLinkValid"
       error-message="Please provide the full link"
