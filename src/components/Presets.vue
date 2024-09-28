@@ -9,7 +9,7 @@ import WealthSelect from './WealthSelect.vue';
 import PlatformSelect from './inputs/PlatformSelect.vue';
 import DepartmentSelect from './inputs/DepartmentSelect.vue';
 import DialogWrapper from './DialogWrapper.vue';
-import SmallSanitisedTextInput from './inputs/SmallSanitisedTextInput.vue';
+import SanitisedTextInput from './inputs/SanitisedTextInput.vue';
 import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { syncRefs, useCloned } from '@vueuse/core';
@@ -68,39 +68,39 @@ function hideDialog() {
     </template>
 
     <Fluid class="mt-5">
-      <SmallSanitisedTextInput
+      <SanitisedTextInput
         v-if="!presetData.discovered"
         v-model="presetData.discoveredlink"
         :initial-value="presetData.discoveredlink"
         :reset-event
         label="Discoverer wiki name"
       />
-      <SmallSanitisedTextInput
+      <SanitisedTextInput
         v-if="!presetData.discoveredlink"
         v-model="presetData.discovered"
         :initial-value="presetData.discovered"
         :reset-event
         label="Discoverer alias if no wiki"
       />
-      <SmallSanitisedTextInput
+      <SanitisedTextInput
         v-model="presetData.documenterName"
         :initial-value="presetData.documenterName"
         :reset-event
         label="Documenter alias if not discoverer"
       />
-      <SmallSanitisedTextInput
+      <SanitisedTextInput
         v-model="presetData.system"
         :initial-value="presetData.system"
         :reset-event
         label="Name of the system"
       />
-      <SmallSanitisedTextInput
+      <SanitisedTextInput
         v-model="presetData.planet"
         :initial-value="presetData.planet"
         :reset-event
         label="Name of the planet"
       />
-      <SmallSanitisedTextInput
+      <SanitisedTextInput
         v-model="presetData.moon"
         :initial-value="presetData.moon"
         :reset-event

@@ -2,16 +2,12 @@
 import DepartmentSelect from '@/components/inputs/DepartmentSelect.vue';
 import GlyphInput from '@/components/inputs/GlyphInput.vue';
 import PlatformSelect from '@/components/inputs/PlatformSelect.vue';
-import InputTableItem from '@/components/InputTableItem.vue';
-import SmallSanitisedTextInput from '@/components/inputs/SmallSanitisedTextInput.vue';
+import SanitisedTextInput from '@/components/inputs/SanitisedTextInput.vue';
 import SingleFileUpload from '@/components/inputs/SingleFileUpload.vue';
 import TextareaInput from '@/components/inputs/TextareaInput.vue';
 import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
-import Checkbox from 'primevue/checkbox';
-import Panel from 'primevue/panel';
-import { reactive, ref } from 'vue';
-import DateSelect from '@/components/inputs/DateSelect.vue';
+import { reactive } from 'vue';
 import Fieldset from 'primevue/fieldset';
 import type { CheckboxData } from '@/types/checkboxTypes';
 import GridCheckboxWrapper from '@/components/GridCheckboxWrapper.vue';
@@ -19,6 +15,7 @@ import GameModeSelect from '@/components/inputs/GameModeSelect.vue';
 import CoordinateInput from '@/components/inputs/CoordinateInput.vue';
 import GalleryInput from '@/components/inputs/gallery/GalleryInput.vue';
 import FileUploadNotice from '@/components/FileUploadNotice.vue';
+import CensusInputs from '@/components/inputs/CensusInputs.vue';
 
 const pageData = usePageDataStore();
 const {
@@ -41,13 +38,6 @@ const {
   terminal,
   arena,
   racetrack,
-  censusplayer,
-  censussocial,
-  censusreddit,
-  censusdiscord,
-  censusfriend,
-  censusarrival,
-  censusshow,
   layout,
   features,
   additionalInfo,
@@ -61,12 +51,10 @@ const featureCheckboxes: CheckboxData[] = reactive([
   { model: arena, label: 'Arena' },
   { model: racetrack, label: 'Racetrack' },
 ]);
-
-const isCollapsed = ref(false);
 </script>
 
 <template>
-  <SmallSanitisedTextInput
+  <SanitisedTextInput
     v-model="name"
     help-img="base/baseName"
     help-title="Base Name"
@@ -74,7 +62,7 @@ const isCollapsed = ref(false);
     tooltip="Enter exactly as seen in game. Watch out for 0 (zero) and O (o)."
   >
     Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
-  </SmallSanitisedTextInput>
+  </SanitisedTextInput>
   <SingleFileUpload
     v-model="image"
     label="Main image"
@@ -83,23 +71,23 @@ const isCollapsed = ref(false);
   >
     <FileUploadNotice />
   </SingleFileUpload>
-  <SmallSanitisedTextInput
+  <SanitisedTextInput
     v-model="system"
     label="System"
   />
-  <SmallSanitisedTextInput
+  <SanitisedTextInput
     v-model="planet"
     label="Planet"
     tooltip="Planet Name OR the planet circled by the moon where the base can be found."
   />
-  <SmallSanitisedTextInput
+  <SanitisedTextInput
     v-model="moon"
     label="Moon"
     tooltip="If the base is located on a moon. Leave blank if the base is on a planet."
   />
   <CoordinateInput v-model="axes" />
   <GlyphInput v-model="glyphs" />
-  <SmallSanitisedTextInput
+  <SanitisedTextInput
     v-model="type"
     label="Type of the base"
     tooltip="Type and purpose of the base."
@@ -116,7 +104,7 @@ const isCollapsed = ref(false);
         <li>Residential</li>
       </ul>
     </div>
-  </SmallSanitisedTextInput>
+  </SanitisedTextInput>
 
   <Fieldset
     class="mb-4"
@@ -125,11 +113,11 @@ const isCollapsed = ref(false);
     <GridCheckboxWrapper :checkboxes="featureCheckboxes" />
   </Fieldset>
 
-  <SmallSanitisedTextInput
+  <SanitisedTextInput
     v-model="discoveredlink"
     label="Builder wiki name"
   />
-  <SmallSanitisedTextInput
+  <SanitisedTextInput
     v-model="discovered"
     label="Builder alias if no wiki"
   />
@@ -138,67 +126,7 @@ const isCollapsed = ref(false);
   <PlatformSelect v-model="platform" />
   <DepartmentSelect v-model="researchteam" />
 
-  <Panel
-    v-model:collapsed="isCollapsed"
-    class="my-4"
-    header="Census"
-    toggleable
-  >
-    <template #toggleicon>
-      <span :class="`pi pi-chevron-${isCollapsed ? 'down' : 'up'}`"></span>
-    </template>
-    <SmallSanitisedTextInput
-      v-model="censusplayer"
-      help-img="base/playerName"
-      help-title="Player Name"
-      label="Ingame name"
-      tooltip="Your ingame name"
-      >Your ingame name. Don't include any ingame titles.
-    </SmallSanitisedTextInput>
-    <SmallSanitisedTextInput
-      v-model="censusreddit"
-      label="Reddit name"
-      tooltip='Your Reddit name. "u/" not necessary'
-    />
-    <SmallSanitisedTextInput
-      v-model="censussocial"
-      label="Social media name"
-      tooltip="Social Media profile if you don't have Reddit (Facebook, Instagram, Wiki, etc). Put the full link here"
-    />
-    <SmallSanitisedTextInput
-      v-model="censusdiscord"
-      label="Discord name"
-      tooltip="Your Discord name. Please enter your username, not your display name"
-    />
-    <SmallSanitisedTextInput
-      v-model="censusfriend"
-      help-img="base/friendCode"
-      help-title="NMS Friend Code"
-      label="Friend code"
-      tooltip="Can be found in the Options"
-    >
-      You can find your friend code in the Options &rarr; Network &rarr; View No Man's Sky Friends List &rarr; Show My
-      No Man's Sky Friend Code
-    </SmallSanitisedTextInput>
-    <DateSelect
-      v-model="censusarrival"
-      label="Date of arrival in Eisvana"
-    />
-    <InputTableItem>
-      <template #label>
-        <label for="census-checkbox">Create census entry</label>
-      </template>
-      <template #input>
-        <Checkbox
-          v-model="censusshow"
-          false-value=""
-          input-id="census-checkbox"
-          true-value="Y"
-          binary
-        />
-      </template>
-    </InputTableItem>
-  </Panel>
+  <CensusInputs />
 
   <div class="is-flex is-flex-direction-column is-gap-2">
     <TextareaInput

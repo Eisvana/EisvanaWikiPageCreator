@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import SmallSanitisedTextInput from './SmallSanitisedTextInput.vue';
+import SanitisedTextInput from './SanitisedTextInput.vue';
 import { validateCoords } from '@/helpers/inputValidation';
 import { watchDebounced } from '@vueuse/core';
 import { debounceDelay } from '@/variables/debounce';
@@ -13,7 +13,7 @@ watchDebounced(model, (newVal) => (invalid.value = !validateCoords(newVal)), { d
 </script>
 
 <template>
-  <SmallSanitisedTextInput
+  <SanitisedTextInput
     v-model="model"
     :invalid
     error-message="Invalid coordinate format"
@@ -25,5 +25,5 @@ watchDebounced(model, (newVal) => (invalid.value = !validateCoords(newVal)), { d
     help-img="shared/axes"
   >
     Found using your analysis visor OR on your ship's dashboard.
-  </SmallSanitisedTextInput>
+  </SanitisedTextInput>
 </template>
