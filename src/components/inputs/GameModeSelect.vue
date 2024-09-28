@@ -19,8 +19,8 @@ const id = useId('gamemode-');
         <label :id>Gamemode</label>
         <Explainer
           tooltip="Gamemode of the save on which this base was built."
-          help-title="Gamemode"
           help-img="shared/gamemode"
+          help-title="Gamemode"
         >
           Gamemode of the save on which this base was built.<br />Found in the main menu:
         </Explainer>
