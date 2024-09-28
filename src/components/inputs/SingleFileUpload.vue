@@ -26,7 +26,7 @@ const hasFileEnding = ref(true);
 
 const isInvalid = computed(() => isTooLarge.value || !hasFileEnding.value);
 
-watchDebounced(model, (newVal) => (hasFileEnding.value = !Boolean(newVal) || newVal.includes('.')), {
+watchDebounced(model, (newVal) => (hasFileEnding.value = !newVal || newVal.includes('.')), {
   debounce: debounceDelay,
 });
 
