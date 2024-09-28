@@ -18,6 +18,7 @@ import GridCheckboxWrapper from '@/components/GridCheckboxWrapper.vue';
 import GameModeSelect from '@/components/inputs/GameModeSelect.vue';
 import CoordinateInput from '@/components/inputs/CoordinateInput.vue';
 import GalleryInput from '@/components/inputs/gallery/GalleryInput.vue';
+import FileUploadNotice from '@/components/FileUploadNotice.vue';
 
 const pageData = usePageDataStore();
 const {
@@ -67,12 +68,21 @@ const isCollapsed = ref(false);
 <template>
   <SmallSanitisedTextInput
     v-model="name"
+    help-img="base/baseName"
+    help-title="Base Name"
     label="Name"
-  />
+    tooltip="Enter exactly as seen in game. Watch out for 0 (zero) and O (o)."
+  >
+    Enter exactly as seen in game. Watch out for 0 (zero) and O (o).
+  </SmallSanitisedTextInput>
   <SingleFileUpload
     v-model="image"
     label="Main image"
-  />
+    help-title="File Upload"
+    tooltip="Picture won't be uploaded to the wiki. This is only to autofill the image name."
+  >
+    <FileUploadNotice />
+  </SingleFileUpload>
   <SmallSanitisedTextInput
     v-model="system"
     label="System"
