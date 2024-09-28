@@ -55,7 +55,7 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
 
 <template>
   <Panel class="gallery-item">
-    <div class="is-flex full-width">
+    <div class="gallery-wrapper is-flex full-width">
       <a
         class="gallery-media is-flex is-justify-content-center"
         :href="fileObjectUrl"
@@ -68,7 +68,7 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
           class="mx-auto"
         />
       </a>
-      <div class="is-flex is-flex-direction-column is-flex-grow-1 is-gap-1 p-2 is-relative">
+      <div class="input-section is-flex is-flex-direction-column is-flex-grow-1 is-gap-1 p-2">
         <p style="word-break: break-all"><span class="has-text-weight-bold">Name: </span>{{ fileItem.file.name }}</p>
         <div v-show="galleryDropdownItems.length">
           <Select v-model="fileItem.desc">
@@ -89,7 +89,9 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
           />
         </div>
       </div>
-      <div class="is-flex is-flex-direction-column is-justify-content-space-between is-align-items-center is-gap-1 p-2">
+      <div
+        class="is-flex is-flex-direction-column is-justify-content-space-between is-align-items-center is-gap-1 p-2 ml-auto"
+      >
         <!--Delete icon-->
         <Button
           class="delete-icon is-clickable"
@@ -134,7 +136,6 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
   width: 200px;
 
   img {
-    border-radius: 0.5em;
     max-height: 150px;
     min-width: 100px;
     object-fit: contain;
@@ -175,8 +176,26 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
   display: none;
 }
 
-.gallery-item:only-child :is(.handle, .button-wrapper) {
-  visibility: hidden;
+.gallery-item {
+  container-type: inline-size;
+
+  &:only-child :is(.handle, .button-wrapper) {
+    visibility: hidden;
+  }
+}
+
+@container (width < 350px) {
+  .gallery-wrapper {
+    flex-wrap: wrap;
+
+    .input-section {
+      order: 2;
+    }
+
+    .gallery-media {
+      max-width: 60%;
+    }
+  }
 }
 
 @media (pointer: coarse) {
