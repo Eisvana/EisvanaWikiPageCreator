@@ -89,9 +89,7 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
           />
         </div>
       </div>
-      <div
-        class="is-flex is-flex-direction-column is-justify-content-space-between is-align-items-center is-gap-1 p-2 pl-0"
-      >
+      <div class="is-flex is-flex-direction-column is-justify-content-space-between is-align-items-center is-gap-1 p-2">
         <!--Delete icon-->
         <Button
           class="delete-icon is-clickable"
