@@ -92,6 +92,7 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
       <div
         class="is-flex is-flex-direction-column is-justify-content-space-between is-align-items-center is-gap-1 p-2 pl-0"
       >
+        <!--Delete icon-->
         <Button
           class="delete-icon is-clickable"
           severity="danger"
@@ -100,31 +101,31 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
         >
           ❌
         </Button>
-        <img
+        <!--Move handle (only if input is mouse)-->
+        <span
           v-show="!isLocationFile"
-          class="handle"
-          src="/src/assets/icons/arrow.svg"
+          class="handle pi pi-arrows-v"
           title="Move picture up or down"
-          alt="Move via drag'n'drop"
-        />
-        <Button
-          v-show="!isLocationFile"
-          class="move-button"
-          icon="pi pi-sort-up-fill"
-          severity="secondary"
-          title="Move up"
-          outlined
-          @click="moveItem(fileItem, 'up')"
-        />
-        <Button
-          v-show="!isLocationFile"
-          class="move-button"
-          icon="pi pi-sort-down-fill"
-          severity="secondary"
-          title="Move down"
-          outlined
-          @click="moveItem(fileItem, 'down')"
-        />
+        ></span>
+        <!--Move buttons (only if input is touch)-->
+        <div class="button-wrapper is-flex-direction-column is-gap-1">
+          <Button
+            v-show="!isLocationFile"
+            icon="pi pi-sort-up-fill"
+            severity="secondary"
+            title="Move up"
+            outlined
+            @click="moveItem(fileItem, 'up')"
+          />
+          <Button
+            v-show="!isLocationFile"
+            icon="pi pi-sort-down-fill"
+            severity="secondary"
+            title="Move down"
+            outlined
+            @click="moveItem(fileItem, 'down')"
+          />
+        </div>
       </div>
     </div>
   </Panel>
@@ -161,8 +162,7 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
 }
 
 .handle {
-  filter: invert(var(--invert));
-  width: 33px;
+  font-size: 2.5rem;
 
   &:hover {
     cursor: grab;
@@ -173,11 +173,11 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
   }
 }
 
-.move-button {
+.button-wrapper {
   display: none;
 }
 
-.gallery-item:only-child :is(.handle, .move-button) {
+.gallery-item:only-child :is(.handle, .button-wrapper) {
   visibility: hidden;
 }
 
@@ -186,7 +186,7 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
     display: none;
   }
 
-  .move-button {
+  .button-wrapper {
     display: flex;
   }
 }
