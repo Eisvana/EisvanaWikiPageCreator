@@ -15,7 +15,7 @@ const id = useId('gamemode-');
 <template>
   <InputTableItem>
     <template #label>
-      <div class="is-flex is-justify-content-space-between full-width">
+      <div class="is-flex is-justify-content-space-between is-align-items-center full-width">
         <label :id>Gamemode</label>
         <Explainer
           tooltip="Gamemode of the save on which this base was built."

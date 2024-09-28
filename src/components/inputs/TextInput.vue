@@ -16,7 +16,7 @@ const model = defineModel<string>({ required: true });
 <template>
   <InputTableItem>
     <template #label>
-      <div class="is-flex is-justify-content-space-between full-width">
+      <div class="is-flex is-justify-content-space-between is-align-items-center full-width">
         <label :for="id">{{ label }}</label>
         <Explainer
           v-if="tooltip"

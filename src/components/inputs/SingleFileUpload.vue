@@ -71,7 +71,7 @@ const isSmallScreen = computed(() => width.value <= smallContainerWidth);
   <div ref="dropzone">
     <InputTableItem>
       <template #label>
-        <div class="is-flex is-justify-content-space-between full-width">
+        <div class="is-flex is-justify-content-space-between is-align-items-center full-width">
           <label :for="id">{{ label }}</label>
           <Explainer
             v-if="tooltip"
