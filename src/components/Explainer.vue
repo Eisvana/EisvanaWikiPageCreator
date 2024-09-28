@@ -49,7 +49,10 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
         <slot></slot>
       </div>
 
-      <div class="transition-container">
+      <div
+        v-if="helpImg"
+        class="transition-container"
+      >
         <ProgressSpinner />
 
         <Button
