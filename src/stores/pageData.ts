@@ -65,6 +65,7 @@ interface PageData {
   additionalInfo: string;
   galleryFiles: GalleryFileItem[];
   locationFiles: GalleryFileItem[];
+  galleryDescriptions: string[];
   presetData: PresetData;
 }
 
@@ -115,6 +116,7 @@ const defaultState: PageData = {
   additionalInfo: '',
   galleryFiles: [],
   locationFiles: [],
+  galleryDescriptions: [],
   presetData: structuredClone(defaultData),
 };
 
