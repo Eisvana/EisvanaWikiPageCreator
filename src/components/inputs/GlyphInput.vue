@@ -62,7 +62,7 @@ const id = useId('glyph-input-');
           <label :for="id">Glyphs</label>
           <div>
             <Button
-              icon="pi pi-arrow-left"
+              icon="pi pi-delete-left"
               label="Delete"
               severity="danger"
               size="small"
