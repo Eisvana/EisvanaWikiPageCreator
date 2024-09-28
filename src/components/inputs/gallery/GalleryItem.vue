@@ -88,7 +88,6 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
             v-model="fileItem.desc"
           />
         </div>
-        <p>{{ activeBreakpoint }}</p>
       </div>
       <div
         class="is-flex is-flex-direction-column is-justify-content-space-between is-align-items-center is-gap-1 p-2 pl-0"
