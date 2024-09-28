@@ -4,9 +4,8 @@ import type { GalleryFileItem } from '@/types/gallery';
 import { storeToRefs } from 'pinia';
 import InputText from 'primevue/inputtext';
 import Panel from 'primevue/panel';
-import { ref } from 'vue';
-import Select from 'primevue/select';
 import Button from 'primevue/button';
+import SmallSelect from '../SmallSelect.vue';
 
 const props = defineProps<{
   fileItem: GalleryFileItem;
@@ -14,14 +13,7 @@ const props = defineProps<{
 }>();
 
 const pageData = usePageDataStore();
-const { galleryFiles, locationFiles } = storeToRefs(pageData);
-
-const galleryDropdownItems = ref<string[]>([]);
-
-// function updateGalleryDropdown() {
-//   if (typeof globalFunctions.generateGalleryArray === 'function') globalFunctions.generateGalleryArray();
-//   galleryDropdownItems.value = Array.isArray(pageData.galleryArray) ? pageData.galleryArray : [];
-// }
+const { galleryFiles, locationFiles, galleryDescriptions } = storeToRefs(pageData);
 
 const fileObjectUrl = URL.createObjectURL(props.fileItem.file);
 
@@ -34,21 +26,21 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
   const galleryIndex = galleryFiles.value.indexOf(fileItem);
   const locGalleryIndex = locationFiles.value.indexOf(fileItem);
 
-  const activeStore = (() => {
+  const activeStoreProp = (() => {
     if (galleryIndex !== -1) return galleryFiles;
     if (locGalleryIndex !== -1) return locationFiles;
     throw new Error("Couldn't find item!");
   })();
 
-  const indexInStore = activeStore.value.indexOf(fileItem);
+  const indexInStore = activeStoreProp.value.indexOf(fileItem);
   if (direction === 'up' && indexInStore) {
-    activeStore.value.splice(indexInStore - 1, 0, fileItem);
-    activeStore.value.splice(indexInStore + 1, 1);
-  } else if (direction === 'down' && indexInStore !== activeStore.value.length - 1) {
+    activeStoreProp.value.splice(indexInStore - 1, 0, fileItem);
+    activeStoreProp.value.splice(indexInStore + 1, 1);
+  } else if (direction === 'down' && indexInStore !== activeStoreProp.value.length - 1) {
     // for some reason I cannot splice this together like I can when moving up
-    const filteredArray = activeStore.value.filter((item) => item !== fileItem);
+    const filteredArray = activeStoreProp.value.filter((item) => item !== fileItem);
     filteredArray.splice(indexInStore + 1, 0, fileItem);
-    activeStore.value = filteredArray;
+    activeStoreProp.value = filteredArray;
   }
 }
 </script>
@@ -70,22 +62,17 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
       </a>
       <div class="input-section is-flex is-flex-direction-column is-flex-grow-1 is-gap-1 p-2">
         <p style="word-break: break-all"><span class="has-text-weight-bold">Name: </span>{{ fileItem.file.name }}</p>
-        <div v-show="galleryDropdownItems.length">
-          <Select v-model="fileItem.desc">
-            <option
-              v-for="desc in galleryDropdownItems"
-              :key="desc"
-              :value="desc"
-            >
-              {{ desc }}
-            </option>
-          </Select>
+        <div v-show="galleryDescriptions.length">
+          <SmallSelect
+            v-model="fileItem.desc"
+            :options="galleryDescriptions"
+          />
         </div>
         <div>
           <InputText
-            type="text"
-            placeholder="Description"
             v-model="fileItem.desc"
+            placeholder="Description"
+            size="small"
           />
         </div>
       </div>
