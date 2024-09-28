@@ -78,8 +78,7 @@ const locationSentence = computed(() => {
   <div>| terminal = {{ terminal }}</div>
   <div>| racetrack = {{ racetrack }}</div>
   <div>| censusplayer = {{ censusplayer }}</div>
-  <div>| censussocial = {{ censussocial }}</div>
-  <div>| censusreddit = {{ censusreddit }}</div>
+  <div>| {{ censusreddit ? 'censusreddit' : 'censussocial' }} = {{ censussocial || censusreddit }}</div>
   <div>| censusdiscord = {{ censusdiscord }}</div>
   <div>| censusfriend = {{ censusfriend }}</div>
   <div>| censusarrival = {{ censusarrival }}</div>
