@@ -79,7 +79,6 @@ const { isOverDropZone } = useDropZone(dropzone, {
           />
         </div>
       </template>
-      <template #content> </template>
       <template #empty>
         <div class="is-flex is-justify-content-center is-align-items-center my-5">
           <p>Drop gallery files here</p>
