@@ -2,7 +2,7 @@
 import { isObject } from '@/helpers/typeAssertions';
 import type { SelectOption, SelectOptionGroup } from '@/types/selectInputOptions';
 import { useEventListener } from '@vueuse/core';
-import Select from 'primevue/select';
+import SmallSelect from './SmallSelect.vue';
 import { computed, ref, watchEffect } from 'vue';
 
 const props = defineProps<{
@@ -64,7 +64,7 @@ const dataIsPlain = computed(() => {
 </script>
 
 <template>
-  <Select
+  <SmallSelect
     v-model="model"
     :filter="showFilter"
     :options
@@ -72,14 +72,5 @@ const dataIsPlain = computed(() => {
     :option-group-label="dataHasGroups ? 'groupLabel' : undefined"
     :option-label="dataIsPlain ? undefined : 'label'"
     :option-value="dataIsPlain ? undefined : 'value'"
-    class="full-width"
-    label-class="small-select"
   />
 </template>
-
-<style scoped>
-:deep(.small-select) {
-  padding: calc(var(--p-inputtext-sm-padding-y) - 1px) calc(var(--p-inputtext-sm-padding-x) - 1px);
-  font-size: var(--p-inputtext-sm-font-size);
-}
-</style>
