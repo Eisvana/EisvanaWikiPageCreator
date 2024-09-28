@@ -90,17 +90,33 @@ const isCollapsed = ref(false);
   <SmallSanitisedTextInput
     v-model="planet"
     label="Planet"
+    tooltip="Planet Name OR the planet circled by the moon where the base can be found."
   />
   <SmallSanitisedTextInput
     v-model="moon"
     label="Moon"
+    tooltip="If the base is located on a moon. Leave blank if the base is on a planet."
   />
   <CoordinateInput v-model="axes" />
   <GlyphInput v-model="glyphs" />
   <SmallSanitisedTextInput
     v-model="type"
     label="Type of the base"
-  />
+    tooltip="Type and purpose of the base."
+    help-title="Base Type"
+  >
+    <div class="dialog-center">
+      <ul class="dialog-list">
+        <li>Artistic</li>
+        <li>Embassy</li>
+        <li>Farm</li>
+        <li>Headquarters</li>
+        <li>Industrial</li>
+        <li>Memorial</li>
+        <li>Residential</li>
+      </ul>
+    </div>
+  </SmallSanitisedTextInput>
 
   <Fieldset
     class="mb-4"

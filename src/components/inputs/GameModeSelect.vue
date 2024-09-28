@@ -3,6 +3,7 @@ import { useId } from '@/helpers/id';
 import InputTableItem from '../InputTableItem.vue';
 import SelectDropdown from './SelectDropdown.vue';
 import { mappedModeOptions } from '@/variables/gamemodes';
+import Explainer from '../Explainer.vue';
 
 defineProps<{ resetEvent?: string }>();
 
@@ -14,7 +15,16 @@ const id = useId('gamemode-');
 <template>
   <InputTableItem>
     <template #label>
-      <label :id>Gamemode</label>
+      <div class="is-flex is-justify-content-space-between full-width">
+        <label :id>Gamemode</label>
+        <Explainer
+          tooltip="Gamemode of the save on which this base was built."
+          help-title="Gamemode"
+          help-img="shared/gamemode"
+        >
+          Gamemode of the save on which this base was built.<br />Found in the main menu:
+        </Explainer>
+      </div>
     </template>
 
     <template #input>
