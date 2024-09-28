@@ -7,15 +7,11 @@ import Panel from 'primevue/panel';
 import { ref } from 'vue';
 import Select from 'primevue/select';
 import Button from 'primevue/button';
-import { useBulmaBreakpoints } from '@/composables/useBulmaBreakpoints';
 
 const props = defineProps<{
   fileItem: GalleryFileItem;
   isLocationFile: boolean;
 }>();
-
-const breakpoints= useBulmaBreakpoints();
-const activeBreakpoint = breakpoints.active()
 
 const pageData = usePageDataStore();
 const { galleryFiles, locationFiles } = storeToRefs(pageData);
@@ -87,12 +83,12 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
         </div>
         <div>
           <InputText
-          type="text"
-          placeholder="Description"
-          v-model="fileItem.desc"
+            type="text"
+            placeholder="Description"
+            v-model="fileItem.desc"
           />
         </div>
-        <p>{{activeBreakpoint}}</p>
+        <p>{{ activeBreakpoint }}</p>
       </div>
       <div
         class="is-flex is-flex-direction-column is-justify-content-space-between is-align-items-center is-gap-1 p-2 pl-0"
