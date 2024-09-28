@@ -10,6 +10,7 @@ import InputGroup from 'primevue/inputgroup';
 import { computed, ref } from 'vue';
 import Explainer from '../Explainer.vue';
 import { debounceDelay } from '@/variables/debounce';
+import ExternalLink from '../ExternalLink.vue';
 
 defineProps<{
   label: string;
