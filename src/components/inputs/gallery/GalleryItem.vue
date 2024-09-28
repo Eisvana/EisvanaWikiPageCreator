@@ -110,33 +110,21 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
         <Button
           v-show="!isLocationFile"
           class="move-button"
+          icon="pi pi-sort-up-fill"
+          severity="secondary"
           title="Move up"
           outlined
-          severity="secondary"
           @click="moveItem(fileItem, 'up')"
-        >
-          <svg
-            width="36"
-            height="36"
-          >
-            <path d="M2 25h32L18 9 2 25Z"></path>
-          </svg>
-        </Button>
+        />
         <Button
           v-show="!isLocationFile"
           class="move-button"
-          title="Move down"
+          icon="pi pi-sort-down-fill"
           severity="secondary"
+          title="Move down"
           outlined
           @click="moveItem(fileItem, 'down')"
-        >
-          <svg
-            width="36"
-            height="36"
-          >
-            <path d="M2 11h32L18 27 2 11Z"></path>
-          </svg>
-        </Button>
+        />
       </div>
     </div>
   </Panel>
