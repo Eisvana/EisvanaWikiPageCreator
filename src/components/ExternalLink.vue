@@ -10,7 +10,7 @@ defineProps<{
 <template>
   <Button
     :href="link"
-    class="link is-inline external-link p-0 m-0"
+    class="link is-inline external-link is-borderless p-0 m-0"
     as="a"
     target="_blank"
     link
@@ -21,5 +21,6 @@ defineProps<{
 <style scoped>
 .external-link {
   font-size: inherit;
+  user-select: unset;
 }
 </style>
