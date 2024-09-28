@@ -86,7 +86,7 @@ const id = useId('glyph-input-');
           class="full-width"
         >
           <InputText
-            v-model.trim="model"
+            v-model="model"
             :id
             :invalid="isError"
             :maxlength="maxGlyphLength"
