@@ -5,10 +5,11 @@ import type { FileUploadSelectEvent } from 'primevue/fileupload';
 import FileUpload from 'primevue/fileupload';
 import InputText from 'primevue/inputtext';
 import InputTableItem from '../InputTableItem.vue';
-import { useDropZone, useElementBounding } from '@vueuse/core';
+import { useDropZone, useElementBounding, watchDebounced } from '@vueuse/core';
 import InputGroup from 'primevue/inputgroup';
 import { computed, ref } from 'vue';
 import Explainer from '../Explainer.vue';
+import { debounceDelay } from '@/variables/debounce';
 
 defineProps<{
   label: string;
@@ -19,15 +20,29 @@ defineProps<{
 
 const model = defineModel<string>({ required: true });
 
+const isTooLarge = ref(false);
+const hasFileEnding = ref(true);
+
+const isInvalid = computed(() => isTooLarge.value || !hasFileEnding.value);
+
+watchDebounced(model, (newVal) => (hasFileEnding.value = !Boolean(newVal) || newVal.includes('.')), {
+  debounce: debounceDelay,
+});
+
 function onUpload(e: FileUploadSelectEvent) {
-  const fileName = e.files[0]?.name;
-  if (!fileName) return;
-  model.value = fileName;
+  const file = e.files[0];
+  if (!(file instanceof File)) return;
+  updateFile([file]);
 }
 
-function onDrop(files: File[] | null) {
-  const fileName = files?.[0]?.name;
-  if (!fileName) return;
+function updateFile(files: File[] | null) {
+  const file = files?.[0];
+  if (!file) return;
+  const fileSize = file.size;
+  const fileIsTooBig = fileSize > maxFileSize;
+  isTooLarge.value = fileIsTooBig;
+  if (fileIsTooBig) return;
+  const fileName = file.name;
   model.value = fileName;
 }
 
@@ -37,7 +52,7 @@ const dropzone = ref<HTMLDivElement | null>(null);
 const inputWrapper = ref<HTMLDivElement | null>(null);
 
 const { isOverDropZone } = useDropZone(dropzone, {
-  onDrop,
+  onDrop: updateFile,
   // specify the types of data to be received.
   dataTypes: (types) => types.every((type) => type.startsWith('image/')),
   // control multi-file drop
@@ -81,7 +96,6 @@ const isSmallScreen = computed(() => width.value <= smallContainerWidth);
             />
             <FileUpload
               :class="{ 'p-button-outlined': !isOverDropZone }"
-              :maxFileSize
               accept="image/*"
               class="p-button-sm upload-button"
               mode="basic"
@@ -90,6 +104,20 @@ const isSmallScreen = computed(() => width.value <= smallContainerWidth);
               @select="onUpload"
             />
           </component>
+          <p
+            v-if="isInvalid"
+            class="help is-error"
+          >
+            <template v-if="isTooLarge">
+              This file is too big to be uploaded to the wiki. Maximum filesize is 10MB. Compress your file here:
+              <ExternalLink
+                link="https://nmscd.com/Image-Compressor/"
+                text="Image Compressor"
+              />
+            </template>
+
+            <template v-else-if="!hasFileEnding">File has no file extension (i. e. .jpg, .png)!</template>
+          </p>
         </div>
       </template>
     </InputTableItem>
