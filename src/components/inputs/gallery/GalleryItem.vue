@@ -69,6 +69,7 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
           />
         </div>
         <div>
+          <!--TODO: Add input sanitisation-->
           <InputText
             v-model="fileItem.desc"
             placeholder="Description"
