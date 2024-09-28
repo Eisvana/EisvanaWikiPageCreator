@@ -118,7 +118,7 @@ watchDebounced(
       v-model="censusarrival"
       label="Date of arrival in Eisvana"
     />
-    <InputTableItem>
+    <InputTableItem class="census-row">
       <template #label>
         <label for="census-checkbox">Create census entry</label>
       </template>
@@ -134,3 +134,9 @@ watchDebounced(
     </InputTableItem>
   </Panel>
 </template>
+
+<style scoped>
+.census-row :deep(.column) {
+  padding-block-end: 0;
+}
+</style>
