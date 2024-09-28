@@ -43,6 +43,8 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
     activeStoreProp.value = filteredArray;
   }
 }
+
+const directions = ['up', 'down'] as const;
 </script>
 
 <template>
@@ -99,20 +101,13 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
         <!--Move buttons (only if input is touch)-->
         <div class="button-wrapper is-flex-direction-column is-gap-1">
           <Button
+            v-for="direction in directions"
             v-show="!isLocationFile"
-            icon="pi pi-sort-up-fill"
+            :icon="`pi pi-sort-${direction}-fill`"
+            :title="`Move ${direction}`"
             severity="secondary"
-            title="Move up"
             outlined
-            @click="moveItem(fileItem, 'up')"
-          />
-          <Button
-            v-show="!isLocationFile"
-            icon="pi pi-sort-down-fill"
-            severity="secondary"
-            title="Move down"
-            outlined
-            @click="moveItem(fileItem, 'down')"
+            @click="moveItem(fileItem, direction)"
           />
         </div>
       </div>
