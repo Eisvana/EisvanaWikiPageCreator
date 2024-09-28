@@ -125,6 +125,7 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
   width: 200px;
 
   img {
+    border-radius: 5px;
     max-height: 150px;
     min-width: 100px;
     object-fit: contain;
