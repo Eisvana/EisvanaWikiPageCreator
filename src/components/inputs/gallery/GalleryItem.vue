@@ -106,6 +106,7 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
           v-show="!isLocationFile"
           class="handle pi pi-arrows-v"
           title="Move picture up or down"
+          draggable="true"
         ></span>
         <!--Move buttons (only if input is touch)-->
         <div class="button-wrapper is-flex-direction-column is-gap-1">
