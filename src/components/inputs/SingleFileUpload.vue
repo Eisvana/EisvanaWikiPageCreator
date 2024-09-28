@@ -5,7 +5,7 @@ import type { FileUploadSelectEvent } from 'primevue/fileupload';
 import FileUpload from 'primevue/fileupload';
 import InputText from 'primevue/inputtext';
 import InputTableItem from '../InputTableItem.vue';
-import { useDropZone, useElementBounding, watchDebounced } from '@vueuse/core';
+import { useDropZone, useElementBounding, useEventListener, watchDebounced } from '@vueuse/core';
 import InputGroup from 'primevue/inputgroup';
 import { computed, ref } from 'vue';
 import Explainer from '../Explainer.vue';
@@ -26,6 +26,8 @@ const isTooLarge = ref(false);
 const hasFileEnding = ref(true);
 
 const isInvalid = computed(() => isTooLarge.value || !hasFileEnding.value);
+
+useEventListener(document, 'reset', () => (isTooLarge.value = false));
 
 watchDebounced(model, (newVal) => (hasFileEnding.value = !newVal || newVal.includes('.')), {
   debounce: debounceDelay,
