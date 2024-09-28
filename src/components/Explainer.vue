@@ -44,8 +44,8 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
       <h2 class="title is-4 has-text-centered full-width mb-0">{{ helpTitle }}</h2>
     </template>
 
-    <div class="is-flex is-flex-direction-column has-text-centered explanation-content">
-      <div>
+    <div class="is-flex is-flex-direction-column has-text-centered">
+      <div class="explanation-content">
         <slot></slot>
       </div>
 
@@ -107,6 +107,7 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
     background: var(--p-tooltip-background);
     box-shadow: var(--p-tooltip-shadow);
     border-radius: var(--p-tooltip-border-radius);
+    font-family: Roboto, sans-serif;
     bottom: 110%;
     color: var(--p-tooltip-color);
     left: 50%;
@@ -161,5 +162,9 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
       object-fit: contain;
     }
   }
+}
+
+.explanation-content {
+  font-family: Roboto, sans-serif;
 }
 </style>
