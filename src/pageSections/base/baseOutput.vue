@@ -3,6 +3,7 @@ import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { civName as civilized } from '@/variables/civilization';
 import { computed } from 'vue';
+import GalleryOutput from '@/components/inputs/gallery/GalleryOutput.vue';
 
 const pageData = usePageDataStore();
 const {
@@ -37,7 +38,6 @@ const {
   features,
   layout,
   additionalInfo,
-  gallery,
 } = storeToRefs(pageData);
 
 const censusrenewal = new Date().getUTCFullYear();
@@ -89,7 +89,6 @@ const locationSentence = computed(() => {
   <div>'''{{ name }}''' is a player base.</div>
   <br />
   <div>==Summary==</div>
-  <!--TODO: Add moon sentence-->
   <div>
     '''{{ name }}''' is a [[Habitable Base|player base]], located on the {{ locationSentence }} in the [[{{ system }}]]
     system.
@@ -105,7 +104,5 @@ const locationSentence = computed(() => {
   <div class="keep-linebreaks">{{ additionalInfo }}</div>
   <br />
   <div>==Gallery==</div>
-  <div>&lt;gallery&gt;</div>
-  <div>{{ gallery }}</div>
-  <div>&lt;/gallery&gt;</div>
+  <GalleryOutput />
 </template>
