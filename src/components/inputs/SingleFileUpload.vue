@@ -8,9 +8,13 @@ import InputTableItem from '../InputTableItem.vue';
 import { useDropZone, useElementBounding } from '@vueuse/core';
 import InputGroup from 'primevue/inputgroup';
 import { computed, ref } from 'vue';
+import Explainer from '../Explainer.vue';
 
 defineProps<{
   label: string;
+  tooltip?: string;
+  helpImg?: string;
+  helpTitle?: string;
 }>();
 
 const model = defineModel<string>({ required: true });
@@ -51,7 +55,17 @@ const isSmallScreen = computed(() => width.value <= smallContainerWidth);
   <div ref="dropzone">
     <InputTableItem>
       <template #label>
-        <label :for="id">{{ label }}</label>
+        <div class="is-flex is-justify-content-space-between full-width">
+          <label :for="id">{{ label }}</label>
+          <Explainer
+            v-if="tooltip"
+            :help-img
+            :help-title
+            :tooltip
+          >
+            <slot></slot>
+          </Explainer>
+        </div>
       </template>
 
       <template #input>
