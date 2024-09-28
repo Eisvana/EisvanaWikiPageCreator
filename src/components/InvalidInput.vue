@@ -5,6 +5,8 @@ import IconField from 'primevue/iconfield';
 defineProps<{
   invalid?: boolean;
   errorMessage?: string;
+  moveLeft?: string;
+  top?: string;
 }>();
 </script>
 
@@ -14,6 +16,7 @@ defineProps<{
       <slot></slot>
       <InputIcon
         v-if="invalid"
+        :style="{ 'margin-inline-end': moveLeft, top }"
         class="pi pi-exclamation-circle is-error"
       />
     </IconField>

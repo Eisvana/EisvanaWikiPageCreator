@@ -11,6 +11,7 @@ import { computed, ref } from 'vue';
 import Explainer from '../Explainer.vue';
 import { debounceDelay } from '@/variables/debounce';
 import ExternalLink from '../ExternalLink.vue';
+import InvalidInput from '../InvalidInput.vue';
 
 defineProps<{
   label: string;
@@ -51,6 +52,7 @@ const id = useId('file-upload-');
 
 const dropzone = ref<HTMLDivElement | null>(null);
 const inputWrapper = ref<HTMLDivElement | null>(null);
+const textInput = ref();
 
 const { isOverDropZone } = useDropZone(dropzone, {
   onDrop: updateFile,
@@ -61,6 +63,9 @@ const { isOverDropZone } = useDropZone(dropzone, {
   // whether to prevent default behavior for unhandled events
   preventDefaultForUnhandled: true,
 });
+
+const { height } = useElementBounding(textInput);
+const halfHeight = computed(() => height.value / 2);
 
 const { width } = useElementBounding(inputWrapper);
 const smallContainerWidth = 200;
@@ -86,30 +91,37 @@ const isSmallScreen = computed(() => width.value <= smallContainerWidth);
 
       <template #input>
         <div ref="inputWrapper">
-          <component
-            :class="{ 'is-flex is-flex-direction-column is-gap-1': isSmallScreen }"
-            :is="isSmallScreen ? 'div' : InputGroup"
+          <InvalidInput
+            :invalid="isInvalid"
+            :top="`${halfHeight}px`"
+            :move-left="isSmallScreen ? undefined : '5.5rem'"
           >
-            <InputText
-              v-model="model"
-              :id
-              size="small"
-            />
-            <FileUpload
-              :class="{ 'p-button-outlined': !isOverDropZone }"
-              accept="image/*"
-              class="p-button-sm upload-button"
-              mode="basic"
-              auto
-              custom-upload
-              @select="onUpload"
-            />
-          </component>
-          <p
-            v-if="isInvalid"
-            class="help is-error"
-          >
-            <template v-if="isTooLarge">
+            <component
+              :class="{ 'is-flex is-flex-direction-column is-gap-1': isSmallScreen }"
+              :is="isSmallScreen ? 'div' : InputGroup"
+            >
+              <InputText
+                v-model="model"
+                :id
+                :invalid="isInvalid"
+                ref="textInput"
+                size="small"
+              />
+              <FileUpload
+                :class="{ 'p-button-outlined': !isOverDropZone }"
+                accept="image/*"
+                class="p-button-sm upload-button"
+                mode="basic"
+                auto
+                custom-upload
+                @select="onUpload"
+              />
+            </component>
+
+            <template
+              #errorMessage
+              v-if="isTooLarge"
+            >
               This file is too big to be uploaded to the wiki. Maximum filesize is 10MB. Compress your file here:
               <ExternalLink
                 link="https://nmscd.com/Image-Compressor/"
@@ -117,8 +129,12 @@ const isSmallScreen = computed(() => width.value <= smallContainerWidth);
               />
             </template>
 
-            <template v-else-if="!hasFileEnding">File has no file extension (i. e. .jpg, .png)!</template>
-          </p>
+            <template
+              #errorMessage
+              v-else-if="!hasFileEnding"
+              >File has no file extension (i. e. .jpg, .png)!</template
+            >
+          </InvalidInput>
         </div>
       </template>
     </InputTableItem>
