@@ -57,7 +57,7 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
   <Panel class="gallery-item">
     <div class="gallery-wrapper is-flex full-width">
       <a
-        class="gallery-media is-flex is-justify-content-center"
+        class="gallery-media is-flex is-unselectable is-justify-content-center"
         :href="fileObjectUrl"
         target="_blank"
         rel="noopener noreferrer"
