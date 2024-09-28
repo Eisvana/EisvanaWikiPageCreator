@@ -18,3 +18,12 @@ export function validateCoords(axes: string) {
   const axesRegex = new RegExp(/[+-](?:[0-9]{1,3})\.(?:[0-9]{2}), [+-](?:[0-9]{1,3})\.(?:[0-9]{2})/);
   return !axes || regexMatch(axes, axesRegex);
 }
+
+export function isValidHttpUrl(string: string) {
+  try {
+    const url = new URL(string);
+    return url.protocol === 'http:' || url.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
