@@ -154,7 +154,7 @@ function moveItem(fileItem: GalleryFileItem, direction: 'up' | 'down') {
 .delete-icon,
 .handle {
   opacity: 0.7;
-  user-select: none;
+  user-select: none !important;
 
   &:hover {
     opacity: 1;
