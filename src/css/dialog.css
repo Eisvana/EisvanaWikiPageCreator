@@ -1,0 +1,19 @@
+.dialog-wrapper {
+  width: min(100%, 640px);
+}
+
+.explanation-content {
+  .dialog-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .dialog-list {
+    text-align: left;
+  }
+
+  ul,
+  ol {
+    list-style: unset;
+  }
+}

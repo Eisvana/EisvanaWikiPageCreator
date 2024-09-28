@@ -44,7 +44,7 @@ const helperImage = computed(() => `/src/assets/images/${props.helpImg}.webp`);
       <h2 class="title is-4 has-text-centered full-width mb-0">{{ helpTitle }}</h2>
     </template>
 
-    <div class="is-flex is-flex-direction-column has-text-centered">
+    <div class="is-flex is-flex-direction-column has-text-centered explanation-content">
       <div>
         <slot></slot>
       </div>

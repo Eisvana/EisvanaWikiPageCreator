@@ -1,5 +1,6 @@
 @import './fonts.css';
 @import './variables.css';
+@import './dialog.css';
 
 .glyphs {
   font-family: NMS-Glyphs-Mono;
@@ -8,10 +9,6 @@
 
 .full-width {
   width: 100%;
-}
-
-.dialog-wrapper {
-  width: min(100%, 640px);
 }
 
 .link {
