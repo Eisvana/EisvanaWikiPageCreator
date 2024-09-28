@@ -32,5 +32,6 @@ defineProps<{
 <style scoped>
 .is-error {
   color: var(--p-red-400);
+  z-index: 2;
 }
 </style>
