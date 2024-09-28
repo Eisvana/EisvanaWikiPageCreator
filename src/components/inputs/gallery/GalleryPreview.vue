@@ -4,14 +4,12 @@ import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import GalleryItem from './GalleryItem.vue';
 import Panel from 'primevue/panel';
-import Draggable from 'vuedraggable';
+import { VueDraggable } from 'vue-draggable-plus';
 
 const pageData = usePageDataStore();
 const { galleryFiles, locationFiles } = storeToRefs(pageData);
 
 const isPreviewHidden = ref(false);
-
-const drag = ref(false);
 </script>
 
 <template>
@@ -21,22 +19,19 @@ const drag = ref(false);
     header="Gallery Preview"
     toggleable
   >
-    <Draggable
+    <VueDraggable
       v-model="galleryFiles"
-      animation="250"
+      :animation="250"
       class="is-flex is-flex-direction-column is-gap-1"
       handle=".handle"
-      item-key="id"
-      @end="drag = false"
-      @start="drag = true"
     >
-      <template #item="{ element }">
-        <GalleryItem
-          :file-item="element"
-          :is-location-file="false"
-        />
-      </template>
-    </Draggable>
+      <GalleryItem
+        v-for="fileItem in galleryFiles"
+        :file-item
+        :key="fileItem.id"
+        :is-location-file="false"
+      />
+    </VueDraggable>
     <div
       v-if="locationFiles.length"
       class="is-flex is-flex-direction-column is-gap-1"

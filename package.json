@@ -37,6 +37,6 @@
     "parse-mediawiki-template": "^0.2.2",
     "primeicons": "^7.0.0",
     "primevue": "^4.0.7",
-    "vuedraggable": "^4.1.0"
+    "vue-draggable-plus": "^0.5.3"
   }
 }
