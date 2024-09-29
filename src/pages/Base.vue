@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import PageCreator from '@/views/PageCreator.vue';
-import BaseOutput from '@/pageSections/base/BaseOutput.vue';
+import BaseOutput from '@/pageSections/base/baseOutput.vue';
 import BaseInput from '@/pageSections/base/BaseInput.vue';
 </script>
 
