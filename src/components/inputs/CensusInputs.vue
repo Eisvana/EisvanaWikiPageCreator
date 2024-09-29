@@ -30,8 +30,10 @@ watchDebounced(
 );
 
 // fix reddit input (remove leading 'u/')
+const dirtyCensusreddit = ref(censusreddit.value);
 watchEffect(() => {
-  if (censusreddit.value.toLowerCase().startsWith('u/')) censusreddit.value = censusreddit.value.substring(2);
+  const isCensusRedditBadFormat = dirtyCensusreddit.value.toLowerCase().startsWith('u/');
+  censusreddit.value = isCensusRedditBadFormat ? dirtyCensusreddit.value.substring(2) : dirtyCensusreddit.value;
 });
 
 // validate Reddit name format
@@ -81,14 +83,14 @@ watchDebounced(
     </SanitisedTextInput>
     <SanitisedTextInput
       v-if="!censussocial"
-      v-model="censusreddit"
+      v-model="dirtyCensusreddit"
       :invalid="!isRedditValid"
       error-message="Reddit name must not include spaces"
       label="Reddit name"
       tooltip='Your Reddit name. "u/" not necessary'
     />
     <SanitisedTextInput
-      v-if="!censusreddit"
+      v-if="!dirtyCensusreddit"
       v-model="censussocial"
       :invalid="!isSocialLinkValid"
       error-message="Please provide the full link"
