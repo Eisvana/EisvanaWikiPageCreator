@@ -10,11 +10,11 @@ import { storeToRefs } from 'pinia';
 import { reactive } from 'vue';
 import Fieldset from 'primevue/fieldset';
 import type { CheckboxData } from '@/types/checkboxTypes';
-import GridCheckboxWrapper from '@/components/GridCheckboxWrapper.vue';
+import GridCheckboxWrapper from '@/components/structure/GridCheckboxWrapper.vue';
 import GameModeSelect from '@/components/inputs/GameModeSelect.vue';
 import CoordinateInput from '@/components/inputs/CoordinateInput.vue';
 import GalleryInput from '@/components/gallery/GalleryInput.vue';
-import FileUploadNotice from '@/components/FileUploadNotice.vue';
+import FileUploadNotice from '@/components/structure/FileUploadNotice.vue';
 import CensusInputs from '@/components/inputs/CensusInputs.vue';
 
 const pageData = usePageDataStore();

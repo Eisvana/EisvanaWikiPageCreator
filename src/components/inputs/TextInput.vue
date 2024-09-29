@@ -3,7 +3,7 @@ import InputText from 'primevue/inputtext';
 import { useId } from '@/helpers/id';
 import InputTableItem from '../structure/InputTableItem.vue';
 import Explainer from '../structure/Explainer.vue';
-import InvalidInput from '../InvalidInput.vue';
+import InvalidInput from '../structure/InvalidInput.vue';
 import type { TextInputProps } from '@/types/textInputProps';
 
 defineProps<TextInputProps>();

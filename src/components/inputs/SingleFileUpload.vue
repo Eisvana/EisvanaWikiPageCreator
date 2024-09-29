@@ -11,7 +11,7 @@ import { computed, ref } from 'vue';
 import Explainer from '../structure/Explainer.vue';
 import { debounceDelay } from '@/variables/debounce';
 import ExternalLink from '../structure/ExternalLink.vue';
-import InvalidInput from '../InvalidInput.vue';
+import InvalidInput from '../structure/InvalidInput.vue';
 
 defineProps<{
   label: string;

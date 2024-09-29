@@ -8,7 +8,7 @@ import Explainer from '../structure/Explainer.vue';
 import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { route } from '@/variables/route';
-import InvalidInput from '../InvalidInput.vue';
+import InvalidInput from '../structure/InvalidInput.vue';
 import WikiLink from '../structure/WikiLink.vue';
 import { useId } from '@/helpers/id';
 
