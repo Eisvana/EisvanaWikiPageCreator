@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import MainToolbar from '@/components/MainToolbar.vue';
+import MainToolbar from '@/components/structure/MainToolbar.vue';
 import { componentName } from '@/variables/route';
 import { defineAsyncComponent, onMounted, type Component } from 'vue';
 import { usePageDataStore } from './stores/pageData';
-import FooterToolbar from './components/FooterToolbar.vue';
+import FooterToolbar from './components/structure/FooterToolbar.vue';
 
 const pageData = usePageDataStore();
 

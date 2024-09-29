@@ -4,13 +4,13 @@ import { maxFileSize } from '@/variables/wikiLimits';
 import type { FileUploadSelectEvent } from 'primevue/fileupload';
 import FileUpload from 'primevue/fileupload';
 import InputText from 'primevue/inputtext';
-import InputTableItem from '../InputTableItem.vue';
+import InputTableItem from '../structure/InputTableItem.vue';
 import { useDropZone, useElementBounding, useEventListener, watchDebounced } from '@vueuse/core';
 import InputGroup from 'primevue/inputgroup';
 import { computed, ref } from 'vue';
-import Explainer from '../Explainer.vue';
+import Explainer from '../structure/Explainer.vue';
 import { debounceDelay } from '@/variables/debounce';
-import ExternalLink from '../ExternalLink.vue';
+import ExternalLink from '../structure/ExternalLink.vue';
 import InvalidInput from '../InvalidInput.vue';
 
 defineProps<{

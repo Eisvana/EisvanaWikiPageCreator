@@ -4,12 +4,12 @@ import { regions } from '@/variables/regions';
 import { computed, watchPostEffect } from 'vue';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
-import Explainer from '../Explainer.vue';
+import Explainer from '../structure/Explainer.vue';
 import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { route } from '@/variables/route';
 import InvalidInput from '../InvalidInput.vue';
-import WikiLink from '../WikiLink.vue';
+import WikiLink from '../structure/WikiLink.vue';
 import { useId } from '@/helpers/id';
 
 defineProps<{

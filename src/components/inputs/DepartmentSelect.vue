@@ -2,7 +2,7 @@
 import { useId } from '@/helpers/id';
 import SelectDropdown from './SelectDropdown.vue';
 import { mappedDepartmentOptions } from '@/variables/departments';
-import InputTableItem from '../InputTableItem.vue';
+import InputTableItem from '../structure/InputTableItem.vue';
 
 defineProps<{ resetEvent?: string }>();
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
-import InputTableItem from '../InputTableItem.vue';
+import InputTableItem from '../structure/InputTableItem.vue';
 import DatePicker from 'primevue/datepicker';
 import { useId } from '@/helpers/id';
 

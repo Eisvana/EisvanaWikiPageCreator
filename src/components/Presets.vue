@@ -8,7 +8,7 @@ import GlyphInput from './inputs/GlyphInput.vue';
 import WealthSelect from './WealthSelect.vue';
 import PlatformSelect from './inputs/PlatformSelect.vue';
 import DepartmentSelect from './inputs/DepartmentSelect.vue';
-import DialogWrapper from './DialogWrapper.vue';
+import DialogWrapper from './structure/DialogWrapper.vue';
 import SanitisedTextInput from './inputs/SanitisedTextInput.vue';
 import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';

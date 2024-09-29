@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useId } from '@/helpers/id';
-import InputTableItem from '../InputTableItem.vue';
+import InputTableItem from '../structure/InputTableItem.vue';
 import SelectDropdown from './SelectDropdown.vue';
 import { mappedModeOptions } from '@/variables/gamemodes';
-import Explainer from '../Explainer.vue';
+import Explainer from '../structure/Explainer.vue';
 
 defineProps<{ resetEvent?: string }>();
 

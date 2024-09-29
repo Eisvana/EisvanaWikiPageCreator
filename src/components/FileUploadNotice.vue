@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import WikiLink from './WikiLink.vue';
-import ExternalLink from './ExternalLink.vue';
+import WikiLink from './structure/WikiLink.vue';
+import ExternalLink from './structure/ExternalLink.vue';
 </script>
 
 <template>

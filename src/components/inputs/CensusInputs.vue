@@ -5,7 +5,7 @@ import DateSelect from '@/components/inputs/DateSelect.vue';
 import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { computed, ref, watchEffect } from 'vue';
-import InputTableItem from '@/components/InputTableItem.vue';
+import InputTableItem from '@/components/structure/InputTableItem.vue';
 import SanitisedTextInput from './SanitisedTextInput.vue';
 import { watchDebounced } from '@vueuse/core';
 import { debounceDelay } from '@/variables/debounce';
