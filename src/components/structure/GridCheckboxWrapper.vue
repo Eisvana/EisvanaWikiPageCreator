@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { CheckboxData } from '@/types/checkboxTypes';
 import { computed } from 'vue';
-import CompactCheckbox from './inputs/CompactCheckbox.vue';
+import CompactCheckbox from '../inputs/CompactCheckbox.vue';
 import { paginate } from '@/helpers/pagination';
 
 // TODO: find a way to get this component to also be able to handle checkbox groups with the `name` attribute. They just use a `value` attribute and output an array with all checked values.
