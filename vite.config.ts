@@ -31,7 +31,7 @@ export default defineConfig({
         'base.html',
         // 'biofrig.html',
         // 'derelict.html',
-        // 'fauna.html',
+        'fauna.html',
         // 'flora.html',
         // 'mineral.html',
         // 'moon.html',

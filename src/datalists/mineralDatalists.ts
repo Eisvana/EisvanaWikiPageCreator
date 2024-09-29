@@ -1,0 +1,61 @@
+/**
+ * @fileoverview Provides data for mineral datalists
+ */
+
+const mineralFormationDatalist: {
+  [key: string]: string
+  } = {
+    'Soil Compaction':'Compactación del suelo',
+    'Water Transport':'Transporte de agua',
+    'Atmospheric Metal':'Metal atmosférico',
+    'Plant Deposits':'Depósitos botánicos',
+    'Living Stone':'Piedra viva',
+    'Evaporation':'Evaporación',
+    'Wind Erosion':'Erosión eólica',
+    'Gravitational':'Gravitacional',
+    'Volcanic':'Volcánico',
+    'High-Pressure':'Alta presión',
+    'Gas Humidity':'Humedad del gas',
+    'Sublimation':'Sublimación',
+    'Calcified Fauna':'Fauna calcificada',
+    'Salt Bonding':'Conexión salina',
+    'Low Energy Reaction':'Reacción de baja energía',
+    'Magnetic Attraction':'Atracción magnética',
+    'Reductive Boiling':'Ebullición reductiva',
+    'Salt Baked':'Tostado a la sal',
+    'Soil Amalgamation':'Amalgamamiento del suelo',
+    'Ancient Tidal Erosion':'Erosión mareal ancestral',
+    'Metamorphic':'Metamórfico',
+    'Polymerisation':'Polimerización',
+    'Coalescence':'Coalescencia',
+    'Slow Drips':'Goteo lento',
+    'Photonic':'Fotónico',
+    'Ground up Shells':'Conchas molidas',
+    'Old Bones':'Huesos viejos',
+    'Tectonic':'Tectónico',
+    'Spontaneous':'Espontáneo',
+    'Calcium Secretion':'Secreción de calcio',
+    'Hydrothermal':'Hidrotermal',
+    'Vented Minerals':'Minerales agujereados',
+    'Explosive Magma':'Magma explosivo',
+    'Pyroclastic':'Piroclástico',
+    'Jet Pressure':'Presión a chorro',
+    'Gas Bubbles':'Burbujas de gas',
+    'Diagenesis':'Diagénesis',
+    'Metal Vapour':'Vapor metálico',
+    'Ammonia Groundwater':'Agua amoniacal subterránea',
+    'Lithification':'Litificación',
+    'Cementation':'Cementación',
+    'Bedrock Expulsion':'Expulsión del lecho de roca',
+    'Petrifaction':'Petrificación',
+    'Fossilisation':'Fosilización',
+    'Sedimentation':'Sedimentación',
+    'Celestial':'Celestial',
+    'Meteorite Impact':'Impacto de meteorito',
+    'Localised Black Hole':'Agujero negro localizado',
+    'Comet Fragment':'Fragmento de cometa',
+    'Animal Deposits':'Depósitos animales',
+};
+
+export default mineralFormationDatalist;
+
