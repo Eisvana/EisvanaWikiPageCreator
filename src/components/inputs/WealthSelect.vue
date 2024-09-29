@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import SelectDropdown from './inputs/SelectDropdown.vue';
+import SelectDropdown from './SelectDropdown.vue';
 import { mappedWealthOptions } from '@/variables/wealth';
-import InputTableItem from './structure/InputTableItem.vue';
+import InputTableItem from '../structure/InputTableItem.vue';
 import { useId } from '@/helpers/id';
 
 defineProps<{ resetEvent?: string }>();

@@ -3,7 +3,7 @@ import Toolbar from 'primevue/toolbar';
 import ThemeSwitch from './ThemeSwitch.vue';
 import NavBar from './NavBar.vue';
 import { componentName } from '@/variables/route';
-import Presets from './Presets.vue';
+import Presets from '../Presets.vue';
 import Tools from './Tools.vue';
 </script>
 

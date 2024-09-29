@@ -3,7 +3,7 @@ import { usePageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { civName as civilized } from '@/variables/civilization';
 import { computed } from 'vue';
-import GalleryOutput from '@/components/inputs/gallery/GalleryOutput.vue';
+import GalleryOutput from '@/components/gallery/GalleryOutput.vue';
 
 const pageData = usePageDataStore();
 const {

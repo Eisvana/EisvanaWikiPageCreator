@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia';
 import InputText from 'primevue/inputtext';
 import Panel from 'primevue/panel';
 import Button from 'primevue/button';
-import SmallSelect from '../SmallSelect.vue';
+import SmallSelect from '../inputs/SmallSelect.vue';
 
 const props = defineProps<{
   fileItem: GalleryFileItem;
