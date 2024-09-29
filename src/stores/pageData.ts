@@ -179,6 +179,15 @@ export const usePageDataStore = defineStore('pageData', {
       };
     },
     researchteamValue: (state) => state.researchteam ?? (researchteamDefaultExceptions.includes(route) ? '' : civName),
+    docBySentence: (state) => {
+      const isLink = state.docBy.startsWith('{{');
+      const hasResearchteam = state.researchteam.split(' ').length > 1;
+      const documenter = isLink ? state.docBy : `''${state.docBy}''`;
+      const researchteamLink = state.researchteam.includes('Wiki')
+        ? '[[Eisvana Wiki Scholars|Eisvana Wiki Scholar]]'
+        : `[[${state.researchteam}]] member`;
+      return `${hasResearchteam ? researchteamLink : ''} ${documenter}`;
+    },
   },
 
   actions: {
