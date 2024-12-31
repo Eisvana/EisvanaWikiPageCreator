@@ -7,6 +7,7 @@ export const router: Record<string, string> = {
   mineral: 'Mineral',
   home: 'Home',
   base: 'Base',
+  fauna: 'Fauna',
 };
 
 export const route = getCurrentRoute();
