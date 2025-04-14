@@ -33,5 +33,5 @@ try {
   const list = await listPullRequests(token, repoOwner, repo, state);
   outputRefs(list);
 } catch (error) {
-  core.setFailed(error.message);
+  core.setFailed(Error.isError(error) ? error.message : 'Error');
 }
