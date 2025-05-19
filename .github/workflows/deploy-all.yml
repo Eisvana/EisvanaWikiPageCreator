@@ -59,7 +59,7 @@ jobs:
       - name: Get PR Data
         id: data
         run: |
-          data=$(deno run --allow-net .github/workflows/getPRs.ts ${{ github.repository }} ${{ secrets.GITHUB_TOKEN }}) # output: pullRequestData: {ref: string, number: number}[]
+          data=$(deno run --allow-net --allow-env .github/workflows/getPRs.ts ${{ github.repository }} ${{ secrets.GITHUB_TOKEN }}) # output: pullRequestData: {ref: string, number: number}[]
           echo "pullRequestData=$data" >> "$GITHUB_OUTPUT"
 
   build-pr:
