@@ -27,7 +27,7 @@
     "vite": "^7.0.6",
     "vitest": "^3.0.5",
     "vue": "^3.5.18",
-    "vue-tsc": "^3.0.4",
+    "vue-tsc": "^3.0.5",
     "webdriverio": "^9.18.4"
   },
   "dependencies": {
