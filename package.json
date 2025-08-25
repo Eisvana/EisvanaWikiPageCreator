@@ -28,7 +28,7 @@
     "vitest": "^3.0.5",
     "vue": "^3.5.18",
     "vue-tsc": "^3.0.5",
-    "webdriverio": "^9.19.1"
+    "webdriverio": "^9.19.2"
   },
   "dependencies": {
     "bulma": "^0.9.4",
