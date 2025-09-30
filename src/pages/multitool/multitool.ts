@@ -134,10 +134,10 @@ export function acquirement() {
 export function acquirementGallery() {
 	const srName = pageData.srLocName as string;
 	const loc = pageData.location as string;
-	const srImg = pageData.srPlanetImg as string || 'nmsMisc_notAvailable.png';
-	const sysImg = pageData.sysImg as string || 'nmsMisc_notAvailable.png';
-	const cabinetPlanetImg = pageData.cabinetPlanetImg as string || 'nmsMisc_notAvailable.png';
-	const axesImg = pageData.axesImg as string || 'nmsMisc_notAvailable.png';
+	const srImg = pageData.srPlanetImg as string || 'nmsMisc_NotAvailable.png';
+	const sysImg = pageData.sysImg as string || 'nmsMisc_NotAvailable.png';
+	const cabinetPlanetImg = pageData.cabinetPlanetImg as string || 'nmsMisc_NotAvailable.png';
+	const axesImg = pageData.axesImg as string || 'nmsMisc_NotAvailable.png';
 
 	const InputElementIds = [
 		'srImgInput',
