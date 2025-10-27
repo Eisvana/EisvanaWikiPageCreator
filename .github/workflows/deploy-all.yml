@@ -38,7 +38,7 @@ jobs:
           overwrite: true
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: main
           path: ${{ env.buildOutput }}
@@ -91,7 +91,7 @@ jobs:
           overwrite: true
 
       - name: Upload App
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ matrix.data.number }}
           path: ${{ env.buildOutput }}
