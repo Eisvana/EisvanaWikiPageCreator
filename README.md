@@ -1,4 +1,3 @@
-# https://lenni009.github.io/EisvanaWikiPageCreator
 # No Man's Sky - Wiki page creation website!
 
 This is a website intended for making wiki page creation in the [No Man's Sky Wiki](https://nomanssky.fandom.com) easier.
@@ -11,5 +10,23 @@ The website was created by [Lenni](https://nomanssky.fandom.com/wiki/User:Lenni0
 
 It's also open for other civs/companies/players to make their own version of it. To do so, [create a GitHub account](https://github.com/signup), [fork the repo](https://github.com/Eisvana/EisvanaWikiPageCreator/fork), edit to fit your needs and create your own GitHub page from it with GitHub pages ([it's super easy to set up](https://docs.github.com/en/pages/quickstart)).
 
-Special thanks:
+## Special Thanks
 * [KhaozTopsy](https://github.com/Khaoz-Topsy) (Assistant for No Man's Sky; NMSCD): JavaScript help and page styling
+
+## Project Setup
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Type-Check, Compile and Minify for Production
+
+```sh
+npm run build
+```
