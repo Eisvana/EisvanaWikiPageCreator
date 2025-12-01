@@ -18,7 +18,7 @@
     "@vitest/browser-webdriverio": "^4.0.13",
     "@vitest/coverage-v8": "^4.0.13",
     "@vue/test-utils": "^2.4.6",
-    "@vueuse/core": "^14.0.0",
+    "@vueuse/core": "^14.1.0",
     "happy-dom": "^20.0.11",
     "pinia": "^3.0.4",
     "prettier": "^3.6.2",
