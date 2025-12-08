@@ -1,4 +1,4 @@
-import { externalLinks, openWikiLinksExternally } from "../common";
+import { externalLinks, openWikiLinksExternally } from '../common';
 
 externalLinks();
 openWikiLinksExternally();

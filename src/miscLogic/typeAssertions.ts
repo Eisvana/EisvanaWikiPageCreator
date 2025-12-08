@@ -1,4 +1,4 @@
-import type { ParsedWikitextObject } from "@/types/api";
+import type { ParsedWikitextObject } from '@/types/api';
 
 function isObject(obj: unknown): obj is object {
   return Boolean(obj) && typeof obj === 'object';

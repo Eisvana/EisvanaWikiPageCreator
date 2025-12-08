@@ -1,9 +1,4 @@
-import type {
-  BasicQueryApiData,
-  BasicQueryData,
-  RawQueryObject,
-  SectionContentQueryObject,
-} from '@/types/api';
+import type { BasicQueryApiData, BasicQueryData, RawQueryObject, SectionContentQueryObject } from '@/types/api';
 import { isWikitext } from './typeAssertions';
 
 const apiPath = 'https://nomanssky.fandom.com/api.php';

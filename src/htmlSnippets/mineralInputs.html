@@ -1,99 +1,240 @@
-<div class="tableHeader text sectionToggle" data-mineral="section${i}" data-section="mineral">
-	<p style="margin-right:auto">Mineral: <output class="has-text-weight-bold" name="mineralName${i}"></output></p>
-	<button class="button is-danger is-outlined" type="button" data-evt-id="removeButton">Remove</button>
-	<button class="button" data-evt-id="hideButton">Hide</button>
+<div
+  class="tableHeader text sectionToggle"
+  data-mineral="section${i}"
+  data-section="mineral"
+>
+  <p style="margin-right: auto">
+    Mineral:
+    <output
+      class="has-text-weight-bold"
+      name="mineralName${i}"
+    ></output>
+  </p>
+  <button
+    class="button is-danger is-outlined"
+    type="button"
+    data-evt-id="removeButton"
+  >
+    Remove
+  </button>
+  <button
+    class="button"
+    data-evt-id="hideButton"
+  >
+    Hide
+  </button>
 </div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralNameInput${i}">Mineral name:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Mineral Name</data>
-		<data>Found in the analysis visor.</data>
-		<data>mineral/mineralName</data>
-	</button>
+<div
+  class="table-cell text"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <label for="mineralNameInput${i}">Mineral name:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Mineral Name</data>
+    <data>Found in the analysis visor.</data>
+    <data>mineral/mineralName</data>
+  </button>
 </div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input type="text" data-dest="mineralName${i}" id="mineralNameInput${i}">
+<div
+  class="table-cell data"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <input
+    type="text"
+    data-dest="mineralName${i}"
+    id="mineralNameInput${i}"
+  />
 </div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralFile_input${i}">Mineral file name:</label>
+<div
+  class="table-cell text"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <label for="mineralFile_input${i}">Mineral file name:</label>
 </div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input type="text" id="mineralFile_input${i}" data-dest="mineralFile${i}" data-default="NmsMisc_NotAvailable.png">
-	<input type="file" id="mineralFileUpl${i}" accept="image/*" data-evt-id="fileInput">
+<div
+  class="table-cell data"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <input
+    type="text"
+    id="mineralFile_input${i}"
+    data-dest="mineralFile${i}"
+    data-default="NmsMisc_NotAvailable.png"
+  />
+  <input
+    type="file"
+    id="mineralFileUpl${i}"
+    accept="image/*"
+    data-evt-id="fileInput"
+  />
 </div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralMetalInput${i}">Metal Content:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Mineral Metal Content</data>
-		<data>Found in the analysis visor.</data>
-		<data>mineral/content</data>
-	</button>
+<div
+  class="table-cell text"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <label for="mineralMetalInput${i}">Metal Content:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Mineral Metal Content</data>
+    <data>Found in the analysis visor.</data>
+    <data>mineral/content</data>
+  </button>
 </div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input type="text" data-dest-noauto="mineralMetal${i}" id="mineralMetalInput${i}" maxlength="2"
-		data-evt-id="metalInput">
+<div
+  class="table-cell data"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <input
+    type="text"
+    data-dest-noauto="mineralMetal${i}"
+    id="mineralMetalInput${i}"
+    maxlength="2"
+    data-evt-id="metalInput"
+  />
 </div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralFormationInput${i}">Formation Process:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Mineral Formation Process</data>
-		<data>Found in the analysis visor.</data>
-		<data>mineral/formation</data>
-	</button>
+<div
+  class="table-cell text"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <label for="mineralFormationInput${i}">Formation Process:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Mineral Formation Process</data>
+    <data>Found in the analysis visor.</data>
+    <data>mineral/formation</data>
+  </button>
 </div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input type="text" data-dest="mineralFormation${i}" list="formationData" id="mineralFormationInput${i}">
+<div
+  class="table-cell data"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <input
+    type="text"
+    data-dest="mineralFormation${i}"
+    list="formationData"
+    id="mineralFormationInput${i}"
+  />
 </div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralNoteInput${i}">Notes:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Mineral Notes</data>
-		<data>Found in the analysis visor.</data>
-		<data>mineral/notes</data>
-	</button>
+<div
+  class="table-cell text"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <label for="mineralNoteInput${i}">Notes:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Mineral Notes</data>
+    <data>Found in the analysis visor.</data>
+    <data>mineral/notes</data>
+  </button>
 </div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input type="text" data-dest="mineralNote${i}" list="mineralNotesData" id="mineralNoteInput${i}">
+<div
+  class="table-cell data"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <input
+    type="text"
+    data-dest="mineralNote${i}"
+    list="mineralNotesData"
+    id="mineralNoteInput${i}"
+  />
 </div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralResourcePrimInput${i}">Primary element:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Mineral Primary Element</data>
-		<data>Found in the analysis visor.</data>
-		<data>mineral/primEl</data>
-	</button>
+<div
+  class="table-cell text"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <label for="mineralResourcePrimInput${i}">Primary element:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Mineral Primary Element</data>
+    <data>Found in the analysis visor.</data>
+    <data>mineral/primEl</data>
+  </button>
 </div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input data-dest-noauto="mineralElements${i}" type="text" list="mineralResources" id="mineralResourcePrimInput${i}"
-		data-evt-id="mineralResourceInput">
+<div
+  class="table-cell data"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <input
+    data-dest-noauto="mineralElements${i}"
+    type="text"
+    list="mineralResources"
+    id="mineralResourcePrimInput${i}"
+    data-evt-id="mineralResourceInput"
+  />
 </div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralResourceSecInput${i}">Secondary element:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Mineral Secondary Element</data>
-		<data>Found in the analysis visor. Leave empty if there is no secondary element.</data>
-		<data>mineral/secEl</data>
-	</button>
+<div
+  class="table-cell text"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <label for="mineralResourceSecInput${i}">Secondary element:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Mineral Secondary Element</data>
+    <data>Found in the analysis visor. Leave empty if there is no secondary element.</data>
+    <data>mineral/secEl</data>
+  </button>
 </div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input data-dest-noauto="mineralElements${i}" type="text" list="mineralResources" id="mineralResourceSecInput${i}"
-		data-evt-id="mineralResourceInput">
+<div
+  class="table-cell data"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <input
+    data-dest-noauto="mineralElements${i}"
+    type="text"
+    list="mineralResources"
+    id="mineralResourceSecInput${i}"
+    data-evt-id="mineralResourceInput"
+  />
 </div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralDiscovererInput${i}">Discoverer:</label>
+<div
+  class="table-cell text"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <label for="mineralDiscovererInput${i}">Discoverer:</label>
 </div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input data-dest="mineralDiscoverer${i}" type="text" id="mineralDiscovererInput${i}">
+<div
+  class="table-cell data"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <input
+    data-dest="mineralDiscoverer${i}"
+    type="text"
+    id="mineralDiscovererInput${i}"
+  />
 </div>
-<div class="table-cell text" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<label for="mineralLinkCheckbox${i}">Link item:</label>
+<div
+  class="table-cell text"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <label for="mineralLinkCheckbox${i}">Link item:</label>
 </div>
-<div class="table-cell data" data-mineral="section${i}" data-section="mineral mineral${i}">
-	<input data-dest-noauto="mineralLink${i}" type="checkbox" id="mineralLinkCheckbox${i}" data-evt-id="mineralLink">
+<div
+  class="table-cell data"
+  data-mineral="section${i}"
+  data-section="mineral mineral${i}"
+>
+  <input
+    data-dest-noauto="mineralLink${i}"
+    type="checkbox"
+    id="mineralLinkCheckbox${i}"
+    data-evt-id="mineralLink"
+  />
 </div>

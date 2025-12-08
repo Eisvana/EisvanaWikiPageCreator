@@ -2,16 +2,16 @@
  * @fileoverview Provides functions needed for the album actions (copy album code, open album...) to work.
  */
 
-import { loadHTML } from "../common";
-import type { ElementFunctions } from "../types/elements";
-import { globalElements, globalFunctions, pageData } from "../variables/objects";
-import { wikiLink } from "../variables/simple";
-import { assignLink, copyCode } from "./actions";
+import { loadHTML } from '../common';
+import type { ElementFunctions } from '../types/elements';
+import { globalElements, globalFunctions, pageData } from '../variables/objects';
+import { wikiLink } from '../variables/simple';
+import { assignLink, copyCode } from './actions';
 
 /**
-* Represents the album actions HTML code.
-* @type {string}
-*/
+ * Represents the album actions HTML code.
+ * @type {string}
+ */
 const actionsHTML = `<button id="albumBtn" class="button is-outlined is-primary"
 	   data-link="album" data-evt-id="copyButton">
 	   Copy Album Wikicode
@@ -22,17 +22,21 @@ const actionsHTML = `<button id="albumBtn" class="button is-outlined is-primary"
 	   </a>`;
 
 const eventListeners: ElementFunctions = [
-	{
-		element: 'copyButton',
-		handler: 'click',
-		func: function () { copyCode(this as unknown as HTMLButtonElement, 'albumText') }
-	},
-	{
-		element: 'openAlbumButton',
-		handler: 'click',
-		func: function () { albumLink(this as unknown as HTMLAnchorElement) }
-	},
-]
+  {
+    element: 'copyButton',
+    handler: 'click',
+    func: function () {
+      copyCode(this as unknown as HTMLButtonElement, 'albumText');
+    },
+  },
+  {
+    element: 'openAlbumButton',
+    handler: 'click',
+    func: function () {
+      albumLink(this as unknown as HTMLAnchorElement);
+    },
+  },
+];
 
 export const actionsDom = loadHTML(actionsHTML, {}, eventListeners) as Document;
 
@@ -43,18 +47,20 @@ export const actionsDom = loadHTML(actionsHTML, {}, eventListeners) as Document;
  * @returns {void}
  */
 export function albumLink(element: HTMLAnchorElement) {
-	element.style.pointerEvents = 'none';
-	const catalogue = (() => {
-		if (typeof globalFunctions.albumLinkGen == 'function') {
-			return globalFunctions.albumLinkGen();
-		} else if (pageData.catalogue) {
-			return pageData.catalogue;
-		} else {
-			console.warn('No wiki page provided. Define the function `albumLinkGen()` and add it to the `globalFunctions` object or define a catalogue in the `pageData.catalogue` property!');
-			element.style.pointerEvents = '';
-		}
-	})();
-	if (catalogue) assignLink(element, wikiLink + catalogue);
+  element.style.pointerEvents = 'none';
+  const catalogue = (() => {
+    if (typeof globalFunctions.albumLinkGen == 'function') {
+      return globalFunctions.albumLinkGen();
+    } else if (pageData.catalogue) {
+      return pageData.catalogue;
+    } else {
+      console.warn(
+        'No wiki page provided. Define the function `albumLinkGen()` and add it to the `globalFunctions` object or define a catalogue in the `pageData.catalogue` property!'
+      );
+      element.style.pointerEvents = '';
+    }
+  })();
+  if (catalogue) assignLink(element, wikiLink + catalogue);
 }
 
 /**
@@ -68,14 +74,14 @@ export function albumLink(element: HTMLAnchorElement) {
  * @returns {string} The type of album item.
  */
 export function albumItemType() {
-	const output = (() => {
-		if (typeof globalFunctions.albumItemTypeExternal == 'function') {
-			return globalFunctions.albumItemTypeExternal();
-		} else {
-			return pageData.type;
-		}
-	})() as string;
-	(globalElements.output.album as HTMLOutputElement).innerText = output;
+  const output = (() => {
+    if (typeof globalFunctions.albumItemTypeExternal == 'function') {
+      return globalFunctions.albumItemTypeExternal();
+    } else {
+      return pageData.type;
+    }
+  })() as string;
+  (globalElements.output.album as HTMLOutputElement).innerText = output;
 }
 
 /**
@@ -86,16 +92,16 @@ export function albumItemType() {
  * @returns {undefined}
  */
 export function albumDesc() {
-	const output = (() => {
-		if (typeof globalFunctions.albumDescExternal == 'function') {
-			return globalFunctions.albumDescExternal() as string;
-		} else {
-			return '';
-		}
-	})();
-	const outputElement = globalElements.output.albumDesc as HTMLElement;
-	if (!outputElement) return;
-	outputElement.innerText = output;
+  const output = (() => {
+    if (typeof globalFunctions.albumDescExternal == 'function') {
+      return globalFunctions.albumDescExternal() as string;
+    } else {
+      return '';
+    }
+  })();
+  const outputElement = globalElements.output.albumDesc as HTMLElement;
+  if (!outputElement) return;
+  outputElement.innerText = output;
 }
 
 /**
@@ -109,21 +115,21 @@ export function albumDesc() {
  * albumDiscoverer();
  */
 export function albumDiscoverer() {
-	const output = (() => {
-		if (typeof globalFunctions.albumDiscovererExternal == 'function') {
-			return globalFunctions.albumDiscovererExternal() as string;
-		} else {
-			const { discovered, discoveredlink } = pageData;
-			if (discoveredlink) {
-				return `wiki=${discoveredlink}`;
-			} else {
-				return `discoverer=${discovered}`;
-			}
-		}
-	})();
-	const outputElement = globalElements.output.albumDiscoverer as HTMLOutputElement;
-	if (!outputElement) return;
-	outputElement.innerText = output;
+  const output = (() => {
+    if (typeof globalFunctions.albumDiscovererExternal == 'function') {
+      return globalFunctions.albumDiscovererExternal() as string;
+    } else {
+      const { discovered, discoveredlink } = pageData;
+      if (discoveredlink) {
+        return `wiki=${discoveredlink}`;
+      } else {
+        return `discoverer=${discovered}`;
+      }
+    }
+  })();
+  const outputElement = globalElements.output.albumDiscoverer as HTMLOutputElement;
+  if (!outputElement) return;
+  outputElement.innerText = output;
 }
 
 /**
@@ -133,14 +139,14 @@ export function albumDiscoverer() {
  * @returns {void}
  */
 export function albumName() {
-	const output = (() => {
-		if ((typeof globalFunctions.albumNameExternal === 'function')) {
-			return globalFunctions.albumNameExternal();
-		} else {
-			return pageData.name;
-		}
-	})() as string;
-	(globalElements.output.albumName as HTMLOutputElement).innerText = output;
+  const output = (() => {
+    if (typeof globalFunctions.albumNameExternal === 'function') {
+      return globalFunctions.albumNameExternal();
+    } else {
+      return pageData.name;
+    }
+  })() as string;
+  (globalElements.output.albumName as HTMLOutputElement).innerText = output;
 }
 
 /**
@@ -148,16 +154,16 @@ export function albumName() {
  * @returns {void}
  */
 export function albumOther() {
-	const output = (() => {
-		if (typeof globalFunctions.albumOtherExternal == 'function') {
-			return globalFunctions.albumOtherExternal();
-		} else {
-			return '';
-		}
-	})();
-	const outputElement = globalElements.output.albumOther as HTMLOutputElement;
-	if (!outputElement) return;
-	outputElement.innerText = output as string;
+  const output = (() => {
+    if (typeof globalFunctions.albumOtherExternal == 'function') {
+      return globalFunctions.albumOtherExternal();
+    } else {
+      return '';
+    }
+  })();
+  const outputElement = globalElements.output.albumOther as HTMLOutputElement;
+  if (!outputElement) return;
+  outputElement.innerText = output as string;
 }
 
 /**
@@ -166,29 +172,29 @@ export function albumOther() {
  * @returns {string} The album type.
  */
 function albumType() {
-	const output = (() => {
-		if (typeof globalFunctions.albumTypeExternal === 'function') {
-			return globalFunctions.albumTypeExternal();
-		} else {
-			return '';
-		}
-	})() as string;
-	(globalElements.output.albumType as HTMLOutputElement).innerText = output;
+  const output = (() => {
+    if (typeof globalFunctions.albumTypeExternal === 'function') {
+      return globalFunctions.albumTypeExternal();
+    } else {
+      return '';
+    }
+  })() as string;
+  (globalElements.output.albumType as HTMLOutputElement).innerText = output;
 }
 
 /**
  * Updates the album data in the UI based on the page data.
  */
 function updateAlbumData() {
-	const dataLinks: { [key: string]: string } = {
-		albumHeaderName: 'name',
-		albumImage: 'image',
-		albumGlyphs: 'portalglyphs'
-	};
-	for (const id in dataLinks) {
-		const element = globalElements.output[id] as HTMLOutputElement;
-		element.innerText = pageData[dataLinks[id]] as string;
-	}
+  const dataLinks: { [key: string]: string } = {
+    albumHeaderName: 'name',
+    albumImage: 'image',
+    albumGlyphs: 'portalglyphs',
+  };
+  for (const id in dataLinks) {
+    const element = globalElements.output[id] as HTMLOutputElement;
+    element.innerText = pageData[dataLinks[id]] as string;
+  }
 }
 
 /**
@@ -199,24 +205,24 @@ function updateAlbumData() {
  * @returns {void}
  */
 export function albumFunctions() {
-	if (pageData.albumInitialised) {
-		albumData();
-	} else {
-		document.addEventListener('albumLoaded', () => albumData());
-	}
-	/**
-	 * Calls all functions related to album creation and updating.
-	 * @function
-	 * @name albumData
-	 * @returns {void}
-	*/
-	function albumData() {
-		updateAlbumData();
-		albumDiscoverer();
-		albumName();
-		albumOther();
-		albumType();
-		albumItemType();
-		albumDesc();
-	}
+  if (pageData.albumInitialised) {
+    albumData();
+  } else {
+    document.addEventListener('albumLoaded', () => albumData());
+  }
+  /**
+   * Calls all functions related to album creation and updating.
+   * @function
+   * @name albumData
+   * @returns {void}
+   */
+  function albumData() {
+    updateAlbumData();
+    albumDiscoverer();
+    albumName();
+    albumOther();
+    albumType();
+    albumItemType();
+    albumDesc();
+  }
 }

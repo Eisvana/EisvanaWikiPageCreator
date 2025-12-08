@@ -1,12 +1,21 @@
-import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
-import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
-import { albumFunctions } from "../../modules/albumactions";
-import sandwormElementFunctions from "./elementFunctions";
-import sandwormElements from "./elementStore";
-import { globalFunctions } from "../../variables/objects";
-import { generateGalleryArray, albumLinkGen, albumOtherExternal, albumNameExternal, albumItemTypeExternal, autoSpawn, catalogue, wormName } from "./sandworm";
-import { addStaticPageData } from "../../common";
-import { planetMoonSentence } from "../../miscLogic/locationLogic";
+import { assignElementFunctions } from '../../commonElements/elementBackend/elementFunctions';
+import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
+import { albumFunctions } from '../../modules/albumactions';
+import sandwormElementFunctions from './elementFunctions';
+import sandwormElements from './elementStore';
+import { globalFunctions } from '../../variables/objects';
+import {
+  generateGalleryArray,
+  albumLinkGen,
+  albumOtherExternal,
+  albumNameExternal,
+  albumItemTypeExternal,
+  autoSpawn,
+  catalogue,
+  wormName,
+} from './sandworm';
+import { addStaticPageData } from '../../common';
+import { planetMoonSentence } from '../../miscLogic/locationLogic';
 import '../../startup';
 
 globalFunctions.generateGalleryArray = () => generateGalleryArray();
@@ -15,7 +24,9 @@ globalFunctions.albumOtherExternal = () => albumOtherExternal();
 globalFunctions.albumNameExternal = () => albumNameExternal();
 globalFunctions.albumItemTypeExternal = () => albumItemTypeExternal();
 
-addStaticPageData('galleryExplanationExternal', `
+addStaticPageData(
+  'galleryExplanationExternal',
+  `
 	The preferred order of pictures is as follows:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
@@ -25,7 +36,8 @@ addStaticPageData('galleryExplanationExternal', `
 			<li>System Page</li>
 			<li>Galaxy Map</li>
 		</ol>
-	</div>`)
+	</div>`
+);
 
 updateGlobalElements(sandwormElements);
 assignElementFunctions(sandwormElementFunctions);

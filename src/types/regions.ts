@@ -1,3 +1,3 @@
 export interface Regions {
-	[key: string]: string;
+  [key: string]: string;
 }

@@ -21,7 +21,7 @@ import { computed, onMounted, ref, watchEffect } from 'vue';
 import { useDataValidationStore } from '@/stores/dataValidation';
 import Explanation from '@/components/structure/Explanation.vue';
 import { watchDebounced } from '@vueuse/core';
-import {mineralDatalists} from '@/datalists/mineralDatalists';
+import { mineralDatalists } from '@/datalists/mineralDatalists';
 import { useMarker } from '@/composables/useMarker';
 
 const staticPageData = useStaticPageDataStore();

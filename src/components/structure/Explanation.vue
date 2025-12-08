@@ -14,7 +14,7 @@ const props = defineProps<{
   open?: boolean;
 }>();
 
-const dialogElement = useTemplateRef("dialog-element");
+const dialogElement = useTemplateRef('dialog-element');
 
 const img = props.img?.trim() ?? '';
 
