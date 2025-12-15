@@ -106,7 +106,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download App
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           path: dist/pr
 
