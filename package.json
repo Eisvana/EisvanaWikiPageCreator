@@ -19,7 +19,7 @@
     "@vitest/coverage-v8": "^4.0.18",
     "@vue/test-utils": "^2.4.6",
     "@vueuse/core": "^14.2.0",
-    "happy-dom": "^20.4.0",
+    "happy-dom": "^20.5.3",
     "pinia": "^3.0.4",
     "prettier": "^3.8.1",
     "sass": "^1.97.3",
