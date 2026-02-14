@@ -1,110 +1,264 @@
-<div class="tableHeader text sectionToggle" data-flora="section${i}" data-section="flora">
-	<p style="margin-right:auto">Plant: <output class="has-text-weight-bold" name="floraName${i}"></output></p>
-	<button class="button is-danger is-outlined" type="button" data-evt-id="removeButton">Remove</button>
-	<button class="button" data-evt-id="hideButton">Hide</button>
+<div
+  class="tableHeader text sectionToggle"
+  data-flora="section${i}"
+  data-section="flora"
+>
+  <p style="margin-right: auto">
+    Plant:
+    <output
+      class="has-text-weight-bold"
+      name="floraName${i}"
+    ></output>
+  </p>
+  <button
+    class="button is-danger is-outlined"
+    type="button"
+    data-evt-id="removeButton"
+  >
+    Remove
+  </button>
+  <button
+    class="button"
+    data-evt-id="hideButton"
+  >
+    Hide
+  </button>
 </div>
-<div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
-	<label for="floraNameInput${i}">Plant name:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Flora Name</data>
-		<data>Found in the analysis visor.</data>
-		<data>flora/floraName</data>
-	</button>
+<div
+  class="table-cell text"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <label for="floraNameInput${i}">Plant name:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Flora Name</data>
+    <data>Found in the analysis visor.</data>
+    <data>flora/floraName</data>
+  </button>
 </div>
-<div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input type="text" data-dest="floraName${i}" id="floraNameInput${i}">
+<div
+  class="table-cell data"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <input
+    type="text"
+    data-dest="floraName${i}"
+    id="floraNameInput${i}"
+  />
 </div>
-<div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
-	<label for="floraFile_input${i}">Plant file name:</label>
+<div
+  class="table-cell text"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <label for="floraFile_input${i}">Plant file name:</label>
 </div>
-<div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input type="text" id="floraFile_input${i}" data-dest="floraFile${i}" data-default="NmsMisc_NotAvailable.png">
-	<input type="file" id="floraFileUpl${i}" accept="image/*" data-evt-id="fileInput">
+<div
+  class="table-cell data"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <input
+    type="text"
+    id="floraFile_input${i}"
+    data-dest="floraFile${i}"
+    data-default="NmsMisc_NotAvailable.png"
+  />
+  <input
+    type="file"
+    id="floraFileUpl${i}"
+    accept="image/*"
+    data-evt-id="fileInput"
+  />
 </div>
-<div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
-	<label for="floraAgeInput${i}">Age:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Flora Age</data>
-		<data>Found in the analysis visor.</data>
-		<data>flora/age</data>
-	</button>
+<div
+  class="table-cell text"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <label for="floraAgeInput${i}">Age:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Flora Age</data>
+    <data>Found in the analysis visor.</data>
+    <data>flora/age</data>
+  </button>
 </div>
-<div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input type="text" data-dest="floraAge${i}" list="ageData" id="floraAgeInput${i}">
+<div
+  class="table-cell data"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <input
+    type="text"
+    data-dest="floraAge${i}"
+    list="ageData"
+    id="floraAgeInput${i}"
+  />
 </div>
-<div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
-	<label for="floraRootInput${i}">Root structure:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Flora Root Structure</data>
-		<data>Found in the analysis visor.</data>
-		<data>flora/roots</data>
-	</button>
+<div
+  class="table-cell text"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <label for="floraRootInput${i}">Root structure:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Flora Root Structure</data>
+    <data>Found in the analysis visor.</data>
+    <data>flora/roots</data>
+  </button>
 </div>
-<div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input type="text" data-dest="floraRoot${i}" list="rootData" id="floraRootInput${i}">
+<div
+  class="table-cell data"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <input
+    type="text"
+    data-dest="floraRoot${i}"
+    list="rootData"
+    id="floraRootInput${i}"
+  />
 </div>
-<div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
-	<label for="floraNutInput${i}">Nutrient source:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Flora Nutrient Source</data>
-		<data>Found in the analysis visor.</data>
-		<data>flora/nutSource</data>
-	</button>
+<div
+  class="table-cell text"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <label for="floraNutInput${i}">Nutrient source:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Flora Nutrient Source</data>
+    <data>Found in the analysis visor.</data>
+    <data>flora/nutSource</data>
+  </button>
 </div>
-<div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input type="text" data-dest="floraNut${i}" list="nutSourceData" id="floraNutInput${i}">
+<div
+  class="table-cell data"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <input
+    type="text"
+    data-dest="floraNut${i}"
+    list="nutSourceData"
+    id="floraNutInput${i}"
+  />
 </div>
-<div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
-	<label for="floraNoteInput${i}">Notes:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Flora Notes</data>
-		<data>Found in the analysis visor.</data>
-		<data>flora/notes</data>
-	</button>
+<div
+  class="table-cell text"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <label for="floraNoteInput${i}">Notes:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Flora Notes</data>
+    <data>Found in the analysis visor.</data>
+    <data>flora/notes</data>
+  </button>
 </div>
-<div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input type="text" data-dest="floraNote${i}" list="floraNotesData" id="floraNoteInput${i}">
+<div
+  class="table-cell data"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <input
+    type="text"
+    data-dest="floraNote${i}"
+    list="floraNotesData"
+    id="floraNoteInput${i}"
+  />
 </div>
-<div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
-	<label for="floraResourcePrimInput${i}">Primary element:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Flora Primary Element</data>
-		<data>Found in the analysis visor.</data>
-		<data>flora/primEl</data>
-	</button>
+<div
+  class="table-cell text"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <label for="floraResourcePrimInput${i}">Primary element:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Flora Primary Element</data>
+    <data>Found in the analysis visor.</data>
+    <data>flora/primEl</data>
+  </button>
 </div>
-<div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input data-dest-noauto="floraElements${i}" type="text" list="floraResources" id="floraResourcePrimInput${i}"
-		data-evt-id="floraElements">
+<div
+  class="table-cell data"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <input
+    data-dest-noauto="floraElements${i}"
+    type="text"
+    list="floraResources"
+    id="floraResourcePrimInput${i}"
+    data-evt-id="floraElements"
+  />
 </div>
-<div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
-	<label for="floraResourceSecInput${i}">Secondary element:</label>
-	<button class="tooltip">
-		<data>Found in the analysis visor.</data>
-		<data>Flora Secondary Element</data>
-		<data>Found in the analysis visor. Leave empty if there is no secondary element.</data>
-		<data>flora/secEl</data>
-	</button>
+<div
+  class="table-cell text"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <label for="floraResourceSecInput${i}">Secondary element:</label>
+  <button class="tooltip">
+    <data>Found in the analysis visor.</data>
+    <data>Flora Secondary Element</data>
+    <data>Found in the analysis visor. Leave empty if there is no secondary element.</data>
+    <data>flora/secEl</data>
+  </button>
 </div>
-<div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input data-dest-noauto="floraElements${i}" type="text" list="floraResources" id="floraResourceSecInput${i}"
-		data-evt-id="floraElements">
+<div
+  class="table-cell data"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <input
+    data-dest-noauto="floraElements${i}"
+    type="text"
+    list="floraResources"
+    id="floraResourceSecInput${i}"
+    data-evt-id="floraElements"
+  />
 </div>
-<div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
-	<label for="floraDiscovererInput${i}">Discoverer:</label>
+<div
+  class="table-cell text"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <label for="floraDiscovererInput${i}">Discoverer:</label>
 </div>
-<div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input data-dest="floraDiscoverer${i}" type="text" id="floraDiscovererInput${i}">
+<div
+  class="table-cell data"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <input
+    data-dest="floraDiscoverer${i}"
+    type="text"
+    id="floraDiscovererInput${i}"
+  />
 </div>
-<div class="table-cell text" data-flora="section${i}" data-section="flora flora${i}">
-	<label for="floraLinkCheckbox${i}">Link item:</label>
+<div
+  class="table-cell text"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <label for="floraLinkCheckbox${i}">Link item:</label>
 </div>
-<div class="table-cell data" data-flora="section${i}" data-section="flora flora${i}">
-	<input data-dest-noauto="floraLink${i}" type="checkbox" id="floraLinkCheckbox${i}" data-evt-id="floraLink">
+<div
+  class="table-cell data"
+  data-flora="section${i}"
+  data-section="flora flora${i}"
+>
+  <input
+    data-dest-noauto="floraLink${i}"
+    type="checkbox"
+    id="floraLinkCheckbox${i}"
+    data-evt-id="floraLink"
+  />
 </div>

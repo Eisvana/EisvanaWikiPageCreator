@@ -1,7 +1,7 @@
 /**
  * @fileoverview Provides data for mineral datalists
  */
-const mineralDatalists = {
+export const mineralDatalists = {
   formationData: [
     'Soil Compaction',
     'Water Transport',
@@ -153,5 +153,3 @@ const mineralDatalists = {
     'Carbon',
   ],
 };
-
-export default mineralDatalists;

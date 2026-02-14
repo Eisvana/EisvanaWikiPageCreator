@@ -1,12 +1,26 @@
-import { addStaticPageData, enPrefix } from "../../common";
-import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
-import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
-import { toggleRedirect } from "../../modules/actions";
-import { albumFunctions } from "../../modules/albumactions";
-import { globalElements, globalFunctions } from "../../variables/objects";
-import starshipElementFunctions from "./elementFunctions";
-import starshipElements from "./elementStore";
-import { subtypeDropdown, showHideStarshipSelects, shipStats, addInfo, appearanceDropdowns, calcS, introType, loc, albumTypeExternal, albumOtherExternal, albumLinkGen, generateGalleryArray, resetExternal } from "./starship";
+import { addStaticPageData, enPrefix } from '../../common';
+import { assignElementFunctions } from '../../commonElements/elementBackend/elementFunctions';
+import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
+import { toggleRedirect } from '../../modules/actions';
+import { albumFunctions } from '../../modules/albumactions';
+import { globalElements, globalFunctions } from '../../variables/objects';
+import starshipElementFunctions from './elementFunctions';
+import starshipElements from './elementStore';
+import {
+  subtypeDropdown,
+  showHideStarshipSelects,
+  shipStats,
+  addInfo,
+  appearanceDropdowns,
+  calcS,
+  introType,
+  loc,
+  albumTypeExternal,
+  albumOtherExternal,
+  albumLinkGen,
+  generateGalleryArray,
+  resetExternal,
+} from './starship';
 import '../../startup';
 
 globalFunctions.albumTypeExternal = () => albumTypeExternal();
@@ -15,7 +29,9 @@ globalFunctions.albumLinkGen = () => albumLinkGen();
 globalFunctions.generateGalleryArray = () => generateGalleryArray();
 globalFunctions.resetExternal = () => resetExternal();
 
-addStaticPageData('galleryExplanationExternal', `
+addStaticPageData(
+  'galleryExplanationExternal',
+  `
 	There is a preferred order of gallery pictures, depending on ship type:
 	<div class='dialog-center is-flex-wrap-wrap mt-2' style='gap: 1rem'>
 		<div>
@@ -49,9 +65,10 @@ addStaticPageData('galleryExplanationExternal', `
 				<li>System Page</li>
 			</ol>
 		</div>
-	</div>`)
+	</div>`
+);
 
-updateGlobalElements(starshipElements)
+updateGlobalElements(starshipElements);
 assignElementFunctions(starshipElementFunctions);
 
 // startupFunctions
@@ -63,6 +80,6 @@ introType();
 loc();
 addInfo();
 appearanceDropdowns();
-enPrefix((globalElements.input.typeInput as HTMLSelectElement).value, "enPrefix");
+enPrefix((globalElements.input.typeInput as HTMLSelectElement).value, 'enPrefix');
 albumFunctions();
 toggleRedirect();

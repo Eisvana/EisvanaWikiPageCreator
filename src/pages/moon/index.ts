@@ -1,7 +1,9 @@
-import { addStaticPageData } from "../../common";
+import { addStaticPageData } from '../../common';
 import '../../startup/planetMoon';
 
-addStaticPageData('galleryExplanationExternal', `
+addStaticPageData(
+  'galleryExplanationExternal',
+  `
 There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
@@ -15,18 +17,18 @@ There is a preferred order of pictures:
 			<li>System Page</li>
 			<li>Galaxy Map</li>
 		</ol>
-	</div>`)
-
+	</div>`
+);
 
 addStaticPageData('galleryArray', [
-	'',
-	'Landscape',
-	'Night View',
-	'Cave System',
-	'Analysis Visor',
-	'Moon Exploration Guide',
-	'Moon Page',
-	'Planet Page',
-	'System Page',
-	'Galaxy Map'
-])
+  '',
+  'Landscape',
+  'Night View',
+  'Cave System',
+  'Analysis Visor',
+  'Moon Exploration Guide',
+  'Moon Page',
+  'Planet Page',
+  'System Page',
+  'Galaxy Map',
+]);

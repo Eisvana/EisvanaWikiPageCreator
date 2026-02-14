@@ -1,7 +1,7 @@
-import type { GlobalElements } from "../types/elements";
-import type { LinkObj } from "../types/links";
-import type { StdObj, TransformedElementFunctions } from "../types/objects";
-import type { AnyPrimitive } from "../types/values";
+import type { GlobalElements } from '../types/elements';
+import type { LinkObj } from '../types/links';
+import type { StdObj, TransformedElementFunctions } from '../types/objects';
+import type { AnyPrimitive } from '../types/values';
 
 /**
  * An object that contains links.
@@ -14,7 +14,7 @@ export const links: LinkObj = {};
  * @type {Object}
  */
 export const pageData: {
-	[key: string]: AnyPrimitive | Array<string>;
+  [key: string]: AnyPrimitive | Array<string>;
 } = {};
 
 /**
@@ -32,13 +32,13 @@ export const dataIntegrityObj = { text: '', copy: false, link: '' };
  * @property {Object} output - An object that contains output elements.
  */
 export const globalElements: GlobalElements = {
-	input: {},
-	output: {},
-}
+  input: {},
+  output: {},
+};
 
 export const globalFunctions: {
-	[key: string]: () => (void | string | number | boolean);
-} = {}
+  [key: string]: () => void | string | number | boolean;
+} = {};
 
 /**
  * Array of input elements inside the footer dialog's "data" container.
@@ -52,7 +52,7 @@ export const transformedElementFunctions: TransformedElementFunctions = {};
 export const staticBooleans: { [key: string]: boolean } = {};
 
 export const locsByType: StdObj = {
-	Royal: 'Sentinel Pillar',
-	Sentinel: 'Harmonic Camp',
-	Atlantid: 'Monolith',
-}
+  Royal: 'Sentinel Pillar',
+  Sentinel: 'Harmonic Camp',
+  Atlantid: 'Monolith',
+};

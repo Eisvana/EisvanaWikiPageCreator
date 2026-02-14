@@ -2,10 +2,10 @@
  * @fileoverview Inserts portalglyph buttons into the page and handles all logic surrounding them.
  */
 
-import { errorMessage, triggerEvent, wikiCode } from "../common";
-import { getDestElements } from "../commonElements/elementBackend/elementStore";
-import { globalElements, pageData } from "../variables/objects";
-import { regions } from "../variables/regions";
+import { errorMessage, triggerEvent, wikiCode } from '../common';
+import { getDestElements } from '../commonElements/elementBackend/elementStore';
+import { globalElements, pageData } from '../variables/objects';
+import { regions } from '../variables/regions';
 
 const validPortalKeys = '0123456789ABCDEF';
 
@@ -16,33 +16,35 @@ const validPortalKeys = '0123456789ABCDEF';
  * @returns {void}
  */
 export function addPortalGlyphButtons(element: HTMLElement, glyphInputBindId: string) {
-	if (!element) return;
-	const glyphs: Array<HTMLButtonElement> = [];
-	for (const letter of validPortalKeys) {
-		const glyph = generateButton(letter);
-		glyphs.push(glyph);
-	}
-	element.innerHTML = '';
-	for (const glyph of glyphs) {
-		element.appendChild(glyph);
-	}
+  if (!element) return;
+  const glyphs: Array<HTMLButtonElement> = [];
+  for (const letter of validPortalKeys) {
+    const glyph = generateButton(letter);
+    glyphs.push(glyph);
+  }
+  element.innerHTML = '';
+  for (const glyph of glyphs) {
+    element.appendChild(glyph);
+  }
 
-	function generateButton(letter: string) {
-		const button = document.createElement('button');
-		const span = document.createElement('span');
+  function generateButton(letter: string) {
+    const button = document.createElement('button');
+    const span = document.createElement('span');
 
-		button.type = 'button';
-		button.dataset.inputBind = glyphInputBindId;
-		button.classList.add('button');
-		button.value = letter;
-		button.addEventListener('click', function () { glyphOnClick(this as unknown as HTMLButtonElement) });
+    button.type = 'button';
+    button.dataset.inputBind = glyphInputBindId;
+    button.classList.add('button');
+    button.value = letter;
+    button.addEventListener('click', function () {
+      glyphOnClick(this as unknown as HTMLButtonElement);
+    });
 
-		span.classList.add('glyph', 'icon', 'is-small');
-		span.innerText = letter;
+    span.classList.add('glyph', 'icon', 'is-small');
+    span.innerText = letter;
 
-		button.appendChild(span);
-		return button;
-	}
+    button.appendChild(span);
+    return button;
+  }
 }
 
 /**
@@ -52,16 +54,18 @@ export function addPortalGlyphButtons(element: HTMLElement, glyphInputBindId: st
  * @returns {void}
  */
 function glyphOnClick(button: HTMLButtonElement) {
-	const glyphInputBindId: string = button?.dataset?.inputBind ?? '';
-	const input = globalElements.input[glyphInputBindId] as HTMLInputElement
-		?? document.getElementById(glyphInputBindId) as HTMLInputElement
-		?? button?.closest('.tableHeader')?.previousElementSibling?.querySelector('input') as HTMLInputElement;
-	const portalCode = input.value;
+  const glyphInputBindId: string = button?.dataset?.inputBind ?? '';
+  const input =
+    (globalElements.input[glyphInputBindId] as HTMLInputElement) ??
+    (document.getElementById(glyphInputBindId) as HTMLInputElement) ??
+    (button?.closest('.tableHeader')?.previousElementSibling?.querySelector('input') as HTMLInputElement);
+  const portalCode = input.value;
 
-	if (portalCode.length < 12) {	// NoSonar complete portal glyph length
-		(input).value += button.value;
-	}
-	triggerEvent(input, 'input');
+  if (portalCode.length < 12) {
+    // NoSonar complete portal glyph length
+    input.value += button.value;
+  }
+  triggerEvent(input, 'input');
 }
 
 /**
@@ -70,13 +74,13 @@ function glyphOnClick(button: HTMLButtonElement) {
  * @returns {void}
  */
 export function displayGlyphs() {
-	const input = globalElements.input.portalglyphsInput as HTMLInputElement;
-	const glyphString = input.value;
-	pageData.portalglyphs = glyphString;
-	const dest = input.dataset.destNoauto;
-	wikiCode(glyphString, dest);
-	glyphRegion(glyphString);
-	if (getDestElements('galacticCoords').length) wikiCode(glyphs2Coords(glyphString), 'galacticCoords')
+  const input = globalElements.input.portalglyphsInput as HTMLInputElement;
+  const glyphString = input.value;
+  pageData.portalglyphs = glyphString;
+  const dest = input.dataset.destNoauto;
+  wikiCode(glyphString, dest);
+  glyphRegion(glyphString);
+  if (getDestElements('galacticCoords').length) wikiCode(glyphs2Coords(glyphString), 'galacticCoords');
 }
 
 /**
@@ -86,22 +90,21 @@ export function displayGlyphs() {
  * @returns {void} - This function does not return a value.
  */
 export function deleteCharacter(button: HTMLButtonElement | undefined = undefined) {
-	const input = button?.dataset?.inputBind ?? '';
-	const glyphInput = (() => {
-		if (input) {
-			return globalElements.input[input] as HTMLInputElement
-				?? document.getElementById(input) as HTMLInputElement;
-		} else if (button) {
-			return button.closest('.table-cell')?.nextElementSibling?.querySelector('input') as HTMLInputElement;
-		} else {
-			return globalElements.input.portalglyphsInput as HTMLInputElement;
-		}
-	})();
-	const enteredGlyphs = glyphInput.value?.split('');
-	enteredGlyphs.pop();
-	const newString = enteredGlyphs.join('');
-	(glyphInput).value = newString;
-	triggerEvent(glyphInput, 'input');
+  const input = button?.dataset?.inputBind ?? '';
+  const glyphInput = (() => {
+    if (input) {
+      return (globalElements.input[input] as HTMLInputElement) ?? (document.getElementById(input) as HTMLInputElement);
+    } else if (button) {
+      return button.closest('.table-cell')?.nextElementSibling?.querySelector('input') as HTMLInputElement;
+    } else {
+      return globalElements.input.portalglyphsInput as HTMLInputElement;
+    }
+  })();
+  const enteredGlyphs = glyphInput.value?.split('');
+  enteredGlyphs.pop();
+  const newString = enteredGlyphs.join('');
+  glyphInput.value = newString;
+  triggerEvent(glyphInput, 'input');
 }
 
 /**
@@ -111,12 +114,12 @@ export function deleteCharacter(button: HTMLButtonElement | undefined = undefine
  * @returns {void}
  */
 export function glyphInputOnChange(input: HTMLInputElement) {
-	// Converts the value of the input field to uppercase
-	const newValue = input?.value?.toUpperCase?.();
-	if (newValue == null) return;
+  // Converts the value of the input field to uppercase
+  const newValue = input?.value?.toUpperCase?.();
+  if (newValue == null) return;
 
-	// Sets the input field value to the validated glyph value
-	input.value = validateGlyphInput(newValue);
+  // Sets the input field value to the validated glyph value
+  input.value = validateGlyphInput(newValue);
 }
 
 /**
@@ -126,12 +129,12 @@ export function glyphInputOnChange(input: HTMLInputElement) {
  * @returns {string} The validated string of portal glyphs
  */
 export function validateGlyphInput(glyphString: string): string {
-	// Filters out invalid characters and truncates the result to 12 characters or less
-	return glyphString
-		.split('')
-		.filter(char => validPortalKeys.includes(char))
-		.join('')
-		.substring(0, 12);		// NoSonar max glyph length
+  // Filters out invalid characters and truncates the result to 12 characters or less
+  return glyphString
+    .split('')
+    .filter((char) => validPortalKeys.includes(char))
+    .join('')
+    .substring(0, 12); // NoSonar max glyph length
 }
 
 /**
@@ -141,16 +144,16 @@ export function validateGlyphInput(glyphString: string): string {
  * @returns {Object|string} - The region object or an empty string if the input does not contain 12 glyphs
  */
 export function validateGlyphs(glyphs: string) {
-	// Checks if the input contains exactly 12 glyphs
-	if (glyphs.length !== 12) return '';		// NoSonar 12 is the expected glyph length, because glyph strings are always 12 digits long
+  // Checks if the input contains exactly 12 glyphs
+  if (glyphs.length !== 12) return ''; // NoSonar 12 is the expected glyph length, because glyph strings are always 12 digits long
 
-	// Gets the region list based on the civilization short name and extracts the region glyphs
-	const regionList = regions;
-	const regionGlyphs = glyphs.substring(4);	// NoSonar this extracts the region glyphs, which start at glyph index 4.
+  // Gets the region list based on the civilization short name and extracts the region glyphs
+  const regionList = regions;
+  const regionGlyphs = glyphs.substring(4); // NoSonar this extracts the region glyphs, which start at glyph index 4.
 
-	// Finds the corresponding region object based on the region glyphs and returns it
-	const region = regionList[regionGlyphs];
-	return region;
+  // Finds the corresponding region object based on the region glyphs and returns it
+  const region = regionList[regionGlyphs];
+  return region;
 }
 
 /**
@@ -159,13 +162,14 @@ export function validateGlyphs(glyphs: string) {
  * @returns {string} The corresponding Wiki code for the valid region, or an empty string if the region is invalid.
  */
 export function glyphRegion(glyphs: string) {
-	const glyphElement = globalElements.input.portalglyphsInput;
-	let region = '';
-	if (glyphs?.length == 12) {		// NoSonar this is the normal expected glyph string length
-		region = validateGlyphs(glyphs);
-	}
-	glyphError(region, glyphElement as HTMLElement);
-	wikiCode(region ?? '', 'region');
+  const glyphElement = globalElements.input.portalglyphsInput;
+  let region = '';
+  if (glyphs?.length == 12) {
+    // NoSonar this is the normal expected glyph string length
+    region = validateGlyphs(glyphs);
+  }
+  glyphError(region, glyphElement as HTMLElement);
+  wikiCode(region ?? '', 'region');
 }
 
 /**
@@ -177,10 +181,12 @@ export function glyphRegion(glyphs: string) {
  * @returns {void}
  */
 export function glyphError(region: string | undefined, glyphElement: HTMLElement) {
-	errorMessage(glyphElement,
-		(region === undefined)
-			? 'No valid Eisvana region. See <a href="https://nomanssky.fandom.com/wiki/Eisvana#Claimed_Regions" target="_blank" rel="noopener noreferrer">Eisvana Regions</a> for a list of valid regions.'
-			: '');
+  errorMessage(
+    glyphElement,
+    region === undefined
+      ? 'No valid Eisvana region. See <a href="https://nomanssky.fandom.com/wiki/Eisvana#Claimed_Regions" target="_blank" rel="noopener noreferrer">Eisvana Regions</a> for a list of valid regions.'
+      : ''
+  );
 }
 
 /**
@@ -189,48 +195,49 @@ export function glyphError(region: string | undefined, glyphElement: HTMLElement
  * @returns {string} A string of coordinates in the format "XXXX:YYYY:ZZZZ:SSSS".
  */
 export function glyphs2Coords(glyphs: string) {
-	if (glyphs.length != 12) return '';		// NoSonar complete portal glyph length
+  if (glyphs.length != 12) return ''; // NoSonar complete portal glyph length
 
-	const X_Z_POS_SHIFT = 2049;
-	const X_Z_NEG_SHIFT = 2047;
-	const Y_POS_SHIFT = 129;
-	const Y_NEG_SHIFT = 127;
+  const X_Z_POS_SHIFT = 2049;
+  const X_Z_NEG_SHIFT = 2047;
+  const Y_POS_SHIFT = 129;
+  const Y_NEG_SHIFT = 127;
 
-	const x_glyphs = parseInt(glyphs.substring(9, 12), 16);		// NoSonar X coordinate part
-	const y_glyphs = parseInt(glyphs.substring(4, 6), 16);		// NoSonar Y coordinate part
-	const z_glyphs = parseInt(glyphs.substring(6, 9), 16);		// NoSonar Z coordinate part
-	const system_idx = glyphs.substring(1, 4);					// NoSonar system index part
+  const x_glyphs = parseInt(glyphs.substring(9, 12), 16); // NoSonar X coordinate part
+  const y_glyphs = parseInt(glyphs.substring(4, 6), 16); // NoSonar Y coordinate part
+  const z_glyphs = parseInt(glyphs.substring(6, 9), 16); // NoSonar Z coordinate part
+  const system_idx = glyphs.substring(1, 4); // NoSonar system index part
 
-	let coords_x = 0;
-	let coords_y = 0;
-	let coords_z = 0;
+  let coords_x = 0;
+  let coords_y = 0;
+  let coords_z = 0;
 
-	if (x_glyphs >= X_Z_POS_SHIFT) {
-		coords_x = x_glyphs - X_Z_POS_SHIFT;
-	} else {
-		coords_x = x_glyphs + X_Z_NEG_SHIFT;
-	}
+  if (x_glyphs >= X_Z_POS_SHIFT) {
+    coords_x = x_glyphs - X_Z_POS_SHIFT;
+  } else {
+    coords_x = x_glyphs + X_Z_NEG_SHIFT;
+  }
 
-	if (z_glyphs >= X_Z_POS_SHIFT) {
-		coords_z = z_glyphs - X_Z_POS_SHIFT;
-	} else {
-		coords_z = z_glyphs + X_Z_NEG_SHIFT;
-	}
+  if (z_glyphs >= X_Z_POS_SHIFT) {
+    coords_z = z_glyphs - X_Z_POS_SHIFT;
+  } else {
+    coords_z = z_glyphs + X_Z_NEG_SHIFT;
+  }
 
-	if (y_glyphs >= Y_POS_SHIFT) {
-		coords_y = y_glyphs - Y_POS_SHIFT;
-	} else {
-		coords_y = y_glyphs + Y_NEG_SHIFT;
-	}
+  if (y_glyphs >= Y_POS_SHIFT) {
+    coords_y = y_glyphs - Y_POS_SHIFT;
+  } else {
+    coords_y = y_glyphs + Y_NEG_SHIFT;
+  }
 
-	const coordinates: Array<string> = [];
-	const coordData = [coords_x, coords_y, coords_z];
+  const coordinates: Array<string> = [];
+  const coordData = [coords_x, coords_y, coords_z];
 
-	for (let i = 0; i < 3; i++) {		// NoSonar the 3 is to only get indices 0-2, since the logic for index 3 is different.
-		coordinates[i] = coordData[i].toString(16).toUpperCase().padStart(4, '0');	// NoSonar the 16 is to convert to hex, the 4 is to bump it to a length of 4
-	}
+  for (let i = 0; i < 3; i++) {
+    // NoSonar the 3 is to only get indices 0-2, since the logic for index 3 is different.
+    coordinates[i] = coordData[i].toString(16).toUpperCase().padStart(4, '0'); // NoSonar the 16 is to convert to hex, the 4 is to bump it to a length of 4
+  }
 
-	coordinates[3] = system_idx.padStart(4, '0');	// NoSonar the 4 is to bump it to a length of 4
+  coordinates[3] = system_idx.padStart(4, '0'); // NoSonar the 4 is to bump it to a length of 4
 
-	return coordinates.join(':');
+  return coordinates.join(':');
 }

@@ -18,7 +18,7 @@ export function useDataValidation(simple: boolean = false, override: boolean | u
 
   const condition = Boolean(
     (override && import.meta.env.DEV) ||
-      (name.value && glyphs.value && regionNumber.value && ((currentText === savedText.value && copy.value) || simple))
+    (name.value && glyphs.value && regionNumber.value && ((currentText === savedText.value && copy.value) || simple))
   );
 
   const messages = {

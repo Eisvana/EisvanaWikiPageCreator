@@ -1,54 +1,104 @@
-<button class="button" id="switchTheme">Switch light/dark mode</button>
+<button
+  class="button"
+  id="switchTheme"
+>
+  Switch light/dark mode
+</button>
 <div class="footerLinks">
-  <button type="button" id="openSettingsBtn">Global Defaults</button>
-  <a href="./about.html" id="about">About</a>
-  <a href="https://forms.gle/LRhzWjMRkXoKd9CcA" rel="noreferrer noopener" target="_blank">Feedback Form</a>
+  <button
+    type="button"
+    id="openSettingsBtn"
+  >
+    Global Defaults
+  </button>
+  <a
+    href="./about.html"
+    id="about"
+    >About</a
+  >
+  <a
+    href="https://forms.gle/LRhzWjMRkXoKd9CcA"
+    rel="noreferrer noopener"
+    target="_blank"
+    >Feedback Form</a
+  >
 </div>
-<dialog id="settings" class="modal-content content">
-  <h2 class="title is-4">Global Preload Values</h2> <!-- //NOSONAR
-		(this is fine since this snippet is inserted somewhere else)-->
+<dialog
+  id="settings"
+  class="modal-content content"
+>
+  <h2 class="title is-4">Global Preload Values</h2> <!-- //NOSONAR this is fine since this snippet is inserted somewhere else -->
   <div class="table">
     <div class="table-cell text">
       <label for="discoveredlinkDefault">Discoverer wiki name:</label>
     </div>
     <div class="table-cell data">
-      <input id="discoveredlinkDefault" type="text" data-store="discoveredlinkInput builderlinkInput" data-player>
+      <input
+        id="discoveredlinkDefault"
+        type="text"
+        data-store="discoveredlinkInput builderlinkInput"
+        data-player
+      />
     </div>
     <div class="table-cell text">
       <label for="discoveredDefault">Discoverer alias if no wiki:</label>
     </div>
     <div class="table-cell data">
-      <input id="discoveredDefault" type="text" data-store="discoveredInput builderInput" data-player>
+      <input
+        id="discoveredDefault"
+        type="text"
+        data-store="discoveredInput builderInput"
+        data-player
+      />
     </div>
     <div class="table-cell text">
       <label for="docbyDefault">Documenter alias if not discoverer:</label>
     </div>
     <div class="table-cell data">
-      <input id="docbyDefault" type="text" data-store="docbyInput">
+      <input
+        id="docbyDefault"
+        type="text"
+        data-store="docbyInput"
+      />
     </div>
     <div class="table-cell text">
       <label for="systemDefault">Name of the system:</label>
     </div>
     <div class="table-cell data">
-      <input id="systemDefault" type="text" data-store="systemInput">
+      <input
+        id="systemDefault"
+        type="text"
+        data-store="systemInput"
+      />
     </div>
     <div class="table-cell text">
       <label for="planetDefault">Name of the planet:</label>
     </div>
     <div class="table-cell data">
-      <input id="planetDefault" type="text" data-store="planetInput">
+      <input
+        id="planetDefault"
+        type="text"
+        data-store="planetInput"
+      />
     </div>
     <div class="table-cell text">
       <label for="moonDefault">Name of the moon:</label>
     </div>
     <div class="table-cell data">
-      <input id="moonDefault" type="text" data-store="moonInput">
+      <input
+        id="moonDefault"
+        type="text"
+        data-store="moonInput"
+      />
     </div>
     <div class="table-cell text">
       <label>Platform:</label>
     </div>
     <div class="table-cell data">
-      <select id="platformDefault" data-store="platformInput">
+      <select
+        id="platformDefault"
+        data-store="platformInput"
+      >
         <option value="">I don't know</option>
         <option value="PC">PC</option>
         <option value="PS">PlayStation</option>
@@ -60,7 +110,10 @@
       <label>Chapter:</label>
     </div>
     <div class="table-cell data">
-      <select id="researchteamDefault" data-store="researchteamInput">
+      <select
+        id="researchteamDefault"
+        data-store="researchteamInput"
+      >
         <option value=""></option>
         <option value="Wiki Scholars">Wiki Scholars</option>
         <option value="EBC">EBC</option>
@@ -69,22 +122,42 @@
     <div class="table-cell text">
       <div class="label-combo">
         <label for="portalglyphsDefault">Portalglyphs:</label>
-        <button class="button is-small is-danger" type="button" id="glyphDeleteDefault"
-          data-input-bind="portalglyphsDefault">&larr; Delete</button>
+        <button
+          class="button is-small is-danger"
+          type="button"
+          id="glyphDeleteDefault"
+          data-input-bind="portalglyphsDefault"
+        >
+          &larr; Delete
+        </button>
       </div>
     </div>
     <div class="table-cell data">
-      <input type="text" id="portalglyphsDefault" maxlength="12" data-store="portalglyphsInput">
+      <input
+        type="text"
+        id="portalglyphsDefault"
+        maxlength="12"
+        data-store="portalglyphsInput"
+      />
     </div>
     <div class="tableHeader data">
-      <div id="settingsPortalglyphButtons" class="portalglyphButtons"></div>
-      <output id="settingsPortalglyphsPreview" class="glyph portalglyphsPreview"></output>
+      <div
+        id="settingsPortalglyphButtons"
+        class="portalglyphButtons"
+      ></div>
+      <output
+        id="settingsPortalglyphsPreview"
+        class="glyph portalglyphsPreview"
+      ></output>
     </div>
     <div class="table-cell text">
       <label>System wealth:</label>
     </div>
     <div class="table-cell data">
-      <select id="wealthDefault" data-store="wealthInput">
+      <select
+        id="wealthDefault"
+        data-store="wealthInput"
+      >
         <optgroup label="T3">
           <option value="★★★ (Advanced)">Advanced</option>
           <option value="★★★ (Affluent)">Affluent</option>
@@ -94,7 +167,8 @@
           <option value="★★★ (Opulent)">Opulent</option>
           <option value="★★★ (Prosperous)">Prosperous</option>
           <option value="★★★ (Wealthy)">Wealthy</option>
-        </optgroup><!-- here ends T3-->
+        </optgroup>
+        <!-- here ends T3-->
         <optgroup label="T2">
           <!--here begins T2-->
           <option value="★★ (Adequate)">Adequate</option>
@@ -105,7 +179,8 @@
           <option value="★★ (Promising)">Promising</option>
           <option value="★★ (Satisfactory)">Satisfactory</option>
           <option value="★★ (Sustainable)">Sustainable</option>
-        </optgroup><!-- here ends T2-->
+        </optgroup>
+        <!-- here ends T2-->
         <optgroup label="T1">
           <!--here begins T1-->
           <option value="★ (Declining)">Declining</option>
@@ -126,12 +201,29 @@
         </optgroup>
       </select>
     </div>
-
   </div>
   <p>If you experience weird behaviour, restore the defaults and click "Set".</p>
   <form method="dialog">
-    <button class="button is-primary" type="submit" id="submitDefault">Set</button>
-    <button class="button is-danger" type="submit" autofocus>Cancel</button>
-    <button class="button is-warning" type="reset" id="resetDefault">Restore Defaults</button>
+    <button
+      class="button is-primary"
+      type="submit"
+      id="submitDefault"
+    >
+      Set
+    </button>
+    <button
+      class="button is-danger"
+      type="submit"
+      autofocus
+    >
+      Cancel
+    </button>
+    <button
+      class="button is-warning"
+      type="reset"
+      id="resetDefault"
+    >
+      Restore Defaults
+    </button>
   </form>
 </dialog>

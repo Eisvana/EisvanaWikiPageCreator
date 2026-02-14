@@ -6,7 +6,6 @@ import { useGalleryStore, type FileItem } from '../stores/gallery';
 import Explanation from '@/components/structure/Explanation.vue';
 import { usePageDataStore } from '@/stores/pageData';
 
-const galleryUpload = ref<HTMLInputElement | null>(null);
 const dragActive = ref(false);
 const errors = ref<string[]>([]);
 const infoboxImage = ref('');
@@ -110,7 +109,6 @@ function buildFileItem(files: File[], storeLoc: Ref<FileItem[]>) {
       </Explanation>
     </div>
     <input
-      ref="galleryUpload"
       :class="{ error: errors.length || infoboxImageInGallery }"
       accept="image/*"
       type="file"
@@ -158,7 +156,9 @@ function buildFileItem(files: File[], storeLoc: Ref<FileItem[]>) {
   border: 2px dashed var(--border-color);
   cursor: pointer;
   margin-block-end: 1rem;
-  transition: background-color 0.2s ease-in-out, border 0.2s ease-in-out;
+  transition:
+    background-color 0.2s ease-in-out,
+    border 0.2s ease-in-out;
 
   &:hover,
   &.drag-active {

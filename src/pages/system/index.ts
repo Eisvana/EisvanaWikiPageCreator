@@ -4,12 +4,26 @@ import { wikiCodePercentage } from '../../miscLogic/celestialobjectslogic';
 import { globalElements, globalFunctions } from '../../variables/objects';
 import systemElementFunctions from './elementFunctions';
 import systemElements from './elementStore';
-import { generateGalleryArray, addTemplate, autoPirate, combineEconConf, expectedPrefixSentence, merchantUpgrades, planetInputs, regionLong, resetExternal, searchUpgrades, spaceStationSection } from './system';
+import {
+  generateGalleryArray,
+  addTemplate,
+  autoPirate,
+  combineEconConf,
+  expectedPrefixSentence,
+  merchantUpgrades,
+  planetInputs,
+  regionLong,
+  resetExternal,
+  searchUpgrades,
+  spaceStationSection,
+} from './system';
 import { addStaticPageData, datalists } from '../../common';
 import systemDatalists from '../../datalists/systemDatalists';
 import '../../startup/celestialObjects';
 
-addStaticPageData('galleryExplanationExternal', `
+addStaticPageData(
+  'galleryExplanationExternal',
+  `
 There is a preferred order of pictures:
 	<div class='dialog-center'>
 		<ol class='dialog-list'>
@@ -18,7 +32,8 @@ There is a preferred order of pictures:
 			<li>System Page</li>
 			<li>Default Space Station Multi-Tool</li>
 		</ol>
-	</div>`)
+	</div>`
+);
 
 globalFunctions.resetExternal = () => resetExternal();
 globalFunctions.generateGalleryArray = () => generateGalleryArray();
@@ -38,4 +53,6 @@ expectedPrefixSentence();
 addTemplate();
 wikiCodePercentage();
 autoPirate(globalElements.input.wealthInput as HTMLSelectElement);
-(globalElements.input.merchantSearch as Array<HTMLInputElement>).forEach((element: HTMLInputElement) => searchUpgrades(element));
+(globalElements.input.merchantSearch as Array<HTMLInputElement>).forEach((element: HTMLInputElement) =>
+  searchUpgrades(element)
+);

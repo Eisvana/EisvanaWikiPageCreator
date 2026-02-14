@@ -1,12 +1,11 @@
-import type { ElementIds } from "../../types/elements";
+import type { ElementIds } from '../../types/elements';
 
 const planetElements: ElementIds = {
-	input: {
-		moonInputs: 'moonInputs',
-		addMoonButton: 'addMoonButton',
-	},
-	output: {
-	}
-}
+  input: {
+    moonInputs: 'moonInputs',
+    addMoonButton: 'addMoonButton',
+  },
+  output: {},
+};
 
 export default planetElements;

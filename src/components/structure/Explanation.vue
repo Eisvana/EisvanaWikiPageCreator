@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, ref, watchEffect } from 'vue';
+import { nextTick, ref, useTemplateRef, watchEffect } from 'vue';
 
 /**
  * Explanation Modal
@@ -14,9 +14,7 @@ const props = defineProps<{
   open?: boolean;
 }>();
 
-const dialogElement = ref<HTMLDialogElement | null>(null);
-const imgElement = ref<HTMLImageElement | null>(null);
-const linkElement = ref<HTMLAnchorElement | null>(null);
+const dialogElement = useTemplateRef('dialog-element');
 
 const img = props.img?.trim() ?? '';
 
@@ -74,7 +72,7 @@ function imgOnload() {
       v-if="openedOnce"
       :style="{ translate }"
       class="explanation modal-content content"
-      ref="dialogElement"
+      ref="dialog-element"
       @close="$emit('update:open', false)"
     >
       <h2
@@ -95,7 +93,6 @@ function imgOnload() {
         :href="`./assets/images/jpg/${src}.jpg`"
         class="explanationLink loading"
         id="explanationLink"
-        ref="linkElement"
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -115,7 +112,6 @@ function imgOnload() {
             alt="Explainer Image"
             class="explanationFallbackImg"
             id="explanationFallbackImg"
-            ref="imgElement"
             @loadstart="loadFailed = false"
             @load="imgOnload"
             @error="loadFailed = true"

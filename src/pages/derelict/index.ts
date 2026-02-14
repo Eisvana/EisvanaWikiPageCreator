@@ -1,12 +1,12 @@
-import { addDomAsElement, loadHTML, researchTeamDropdown, triggerEvent } from "../../common";
-import { assignElementFunctions } from "../../commonElements/elementBackend/elementFunctions";
-import { updateGlobalElements } from "../../commonElements/elementBackend/elementStore";
-import { globalElements, globalFunctions } from "../../variables/objects";
-import { albumLinkGen, discoverer, enemyCheckboxes, galaxyTableEntry } from "./derelict";
-import derelictElementFunctions from "./elementFunctions";
-import derelictElements from "./elementStore";
-import { actionsDom } from "../../modules/albumactions";
-import derelictActionsElementFunctions from "./derelictActionsElementFunctions";
+import { addDomAsElement, loadHTML, researchTeamDropdown, triggerEvent } from '../../common';
+import { assignElementFunctions } from '../../commonElements/elementBackend/elementFunctions';
+import { updateGlobalElements } from '../../commonElements/elementBackend/elementStore';
+import { globalElements, globalFunctions } from '../../variables/objects';
+import { albumLinkGen, discoverer, enemyCheckboxes, galaxyTableEntry } from './derelict';
+import derelictElementFunctions from './elementFunctions';
+import derelictElements from './elementStore';
+import { actionsDom } from '../../modules/albumactions';
+import derelictActionsElementFunctions from './derelictActionsElementFunctions';
 import '../../startup';
 
 globalFunctions.albumLinkGen = () => albumLinkGen();
@@ -39,24 +39,24 @@ const newActionsDom = loadHTML(domBodyHtml, {}, derelictActionsElementFunctions)
 // change content and element IDs so they are still unique
 const noteElement = newActionsDom.getElementById(noteId);
 if (noteElement) {
-	noteElement.id = 'indexTableActionsNote';
-	noteElement.innerText = `If the page doesn't exist yet, add an entry to the catalogue as well`;
+  noteElement.id = 'indexTableActionsNote';
+  noteElement.innerText = `If the page doesn't exist yet, add an entry to the catalogue as well`;
 }
 
 // copy button
 const tableBtn = newActionsDom.getElementById('albumBtn');
 if (tableBtn) {
-	tableBtn.id = 'tableBtn';
-	tableBtn.dataset.link = 'classTableEntry';
-	tableBtn.innerText = 'Copy Index Entry Code';
+  tableBtn.id = 'tableBtn';
+  tableBtn.dataset.link = 'classTableEntry';
+  tableBtn.innerText = 'Copy Index Entry Code';
 }
 
 // open link button
 const pageLink = newActionsDom.getElementById('albumLink');
 if (pageLink) {
-	pageLink.id = 'pageLink';
-	pageLink.dataset.link = 'classTableEntry';
-	pageLink.innerText = 'Open Index Page';
+  pageLink.id = 'pageLink';
+  pageLink.dataset.link = 'classTableEntry';
+  pageLink.innerText = 'Open Index Page';
 }
 
 // add modified elements to real DOM

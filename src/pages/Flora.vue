@@ -16,7 +16,7 @@ import FloraInfobox from '@/components/infoboxes/FloraInfobox.vue';
 import WikiTemplate from '@/components/structure/WikiTemplate.vue';
 import ExplanationError from '@/components/structure/ExplanationError.vue';
 import { addStaticPageData, forceDatalistComponent, numberErrorComponent } from '@/common';
-import floraDatalists from '@/datalists/floraDatalists';
+import { floraDatalists } from '@/datalists/floraDatalists';
 import { usePageDataStore, useStaticPageDataStore } from '@/stores/pageData';
 import { storeToRefs } from 'pinia';
 import { computed, onMounted, ref, watchEffect } from 'vue';

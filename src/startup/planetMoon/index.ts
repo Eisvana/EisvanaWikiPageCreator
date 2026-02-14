@@ -6,8 +6,8 @@ import { resetExternal, wormAlbumName, wormAutoSpawn } from '../../miscLogic/pla
 import { globalElements, globalFunctions } from '../../variables/objects';
 import planetMoonElementFunctions from './elementFunctions';
 import planetMoonElements from './elementStore';
-import floraDatalists from '../../datalists/floraDatalists';
-import mineralDatalists from '../../datalists/mineralDatalists';
+import { floraDatalists } from '../../datalists/floraDatalists';
+import { mineralDatalists } from '../../datalists/mineralDatalists';
 import '../celestialObjects';
 
 globalFunctions.resetExternal = () => document.dispatchEvent(new Event('pageReset'));

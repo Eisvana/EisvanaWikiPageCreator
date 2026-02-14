@@ -1,9 +1,9 @@
-import type { ElementIds } from "../../types/elements";
+import type { ElementIds } from '../../types/elements';
 
 const sandwormElements: ElementIds = {
-	input: {
-		autoSpawn: 'autoSpawnInput',
-	}
-}
+  input: {
+    autoSpawn: 'autoSpawnInput',
+  },
+};
 
 export default sandwormElements;
