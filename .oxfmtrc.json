@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "singleQuote": true,
+  "semi": true,
+  "bracketSpacing": true,
+  "tabWidth": 2,
+  "printWidth": 120,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity": "css",
+  "useTabs": false,
+  "vueIndentScriptAndStyle": false,
+  "singleAttributePerLine": true,
+  "ignorePatterns": ["/dist"]
+}
