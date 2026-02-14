@@ -20,7 +20,7 @@ jobs:
       - name: Run Tests
         run: |
           npm ci
-          npm run test-ci
+          npm run test:ci
 
       - name: Test Build
         uses: Lenni009/test-build-vite-action@main
