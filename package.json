@@ -21,7 +21,7 @@
     "@vitest/browser-webdriverio": "^4.0.18",
     "@vitest/coverage-v8": "^4.0.18",
     "@vue/test-utils": "^2.4.6",
-    "@vueuse/core": "^14.2.0",
+    "@vueuse/core": "^14.2.1",
     "happy-dom": "^20.5.3",
     "oxfmt": "^0.32.0",
     "oxlint": "^1.47.0",
