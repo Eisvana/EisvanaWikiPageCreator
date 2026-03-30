@@ -31,7 +31,7 @@
     "vite": "^8.0.2",
     "vitest": "^4.0.4",
     "vue": "^3.5.30",
-    "vue-tsc": "^3.2.5"
+    "vue-tsc": "^3.2.6"
   },
   "dependencies": {
     "bulma": "^0.9.4",
