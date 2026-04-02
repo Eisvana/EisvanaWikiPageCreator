@@ -30,7 +30,6 @@
     "no-duplicate-imports": "warn",
     "no-empty": "warn",
     "no-empty-character-class": "warn",
-    "no-empty-functions": "warn",
     "no-empty-pattern": "warn",
     "no-empty-static-block": "warn",
     "no-eq-null": "warn",
