@@ -30,7 +30,7 @@
     "typescript": "^6.0.2",
     "vite": "^8.0.3",
     "vitest": "^4.0.4",
-    "vue": "^3.5.30",
+    "vue": "^3.5.32",
     "vue-tsc": "^3.2.6"
   },
   "dependencies": {
