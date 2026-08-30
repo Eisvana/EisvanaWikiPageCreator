@@ -18,7 +18,7 @@
     "@types/node": "^26.1.1",
     "@types/sortablejs": "^1.15.9",
     "@vitejs/plugin-vue": "^6.0.8",
-    "@vitest/browser-webdriverio": "^4.1.10",
+    "@vitest/browser-webdriverio": "^4.1.11",
     "@vitest/coverage-v8": "^4.1.2",
     "@vue/test-utils": "^2.4.11",
     "@vueuse/core": "^14.4.0",
