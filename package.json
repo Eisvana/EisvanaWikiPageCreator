@@ -17,7 +17,7 @@
   "devDependencies": {
     "@types/node": "^26.2.0",
     "@types/sortablejs": "^1.15.9",
-    "@vitejs/plugin-vue": "^6.0.8",
+    "@vitejs/plugin-vue": "^6.0.9",
     "@vitest/browser-webdriverio": "^5.0.0",
     "@vitest/coverage-v8": "^5.0.0",
     "@vue/test-utils": "^2.5.0",
