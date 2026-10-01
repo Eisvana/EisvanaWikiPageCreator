@@ -20,7 +20,7 @@
     "@vitejs/plugin-vue": "^6.0.9",
     "@vitest/browser-webdriverio": "^5.0.0",
     "@vitest/coverage-v8": "^5.0.1",
-    "@vue/test-utils": "^2.5.0",
+    "@vue/test-utils": "^2.5.1",
     "@vueuse/core": "^14.4.0",
     "happy-dom": "^20.14.3",
     "oxfmt": "^0.67.0",
