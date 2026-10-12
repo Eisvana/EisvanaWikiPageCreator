@@ -23,7 +23,7 @@
     "@vue/test-utils": "^2.5.1",
     "@vueuse/core": "^14.4.0",
     "happy-dom": "^20.14.5",
-    "oxfmt": "^0.70.0",
+    "oxfmt": "^0.72.0",
     "oxlint": "^1.81.0",
     "pinia": "^4.0.3",
     "sass": "^1.105.1",
